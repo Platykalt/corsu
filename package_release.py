@@ -19,6 +19,13 @@ def main():
         raise RuntimeError('Official installer checksum mismatch.')
     if not (ROOT / 'Vencord/dist/patcher.js').exists():
         raise RuntimeError('Build the custom Vencord plugin first.')
+    # The dictionary is compiled into the bundle, so a stale build ships old Discord labels.
+    build = min(path.stat().st_mtime for path in (ROOT / 'Vencord/dist').glob('*.js'))
+    stale = [name for name in ('lexicon.tsv', 'plugin/index.ts', 'plugin/translate.ts')
+             if (ROOT / name).stat().st_mtime > build]
+    if stale:
+        print('Warning: Vencord build predates ' + ', '.join(stale)
+              + '. Rebuild it so Discord receives the current translations.')
     files = [ROOT / name for name in ('corsu.py', 'engine.py', 'installer.py', 'coverage.py', 'package_release.py',
                                      'lexicon.tsv', 'README.md', 'CONTRIBUTING.md', 'LICENSE', 'release.json',
                                      'install.sh', '.gitignore', 'test_corsu.py', 'test_installer.py',
