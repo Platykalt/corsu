@@ -49,6 +49,16 @@ def run(command, **kwargs):
     subprocess.run(list(map(str, command)), check=True, **kwargs)
 
 
+def stale_build(source):
+    """The dictionary is compiled into the bundle, so lexicon changes need a rebuild."""
+    builds = list((source / 'dist').glob('*.js'))
+    if not builds:
+        return True
+    built = min(path.stat().st_mtime for path in builds)
+    return any((ROOT / name).stat().st_mtime > built
+               for name in ('lexicon.tsv', 'plugin/index.ts', 'plugin/translate.ts'))
+
+
 def prepare_build():
     source = ROOT / 'Vencord'
     manifest = json.loads((ROOT / 'release.json').read_text())
@@ -56,12 +66,19 @@ def prepare_build():
         run(['git', 'clone', 'https://github.com/Vendicated/Vencord.git', source])
         run(['git', 'checkout', '--detach', manifest['vencord_revision']], cwd=source)
     corsu.generate()
-    if not (source / 'dist/patcher.js').exists():
-        if not shutil.which('node') or not shutil.which('pnpm'):
-            raise RuntimeError('Building requires Node.js >=22 and pnpm. Use the bundled Linux release to install without building.')
+    if not stale_build(source):
+        return
+    if not shutil.which('node'):
+        if not (source / 'dist/patcher.js').exists():
+            raise RuntimeError('Building requires Node.js >=22. Use the bundled Linux release to install without building.')
+        print('Warning: the Vencord bundle is older than the lexicon; Discord keeps the previous labels.', flush=True)
+        return
+    if not (source / 'node_modules/esbuild').exists():
+        if not shutil.which('pnpm'):
+            raise RuntimeError('Installing Vencord dependencies requires pnpm. Use the bundled Linux release instead.')
         run(['pnpm', 'install', '--frozen-lockfile'], cwd=source)
-        run(['node', 'scripts/build/build.mjs', '--dev', '--disable-updater'], cwd=source,
-            env={**os.environ, 'VENCORD_HASH': manifest['vencord_revision'][:7]})
+    run(['node', 'scripts/build/build.mjs', '--dev', '--disable-updater'], cwd=source,
+        env={**os.environ, 'VENCORD_HASH': manifest['vencord_revision'][:7]})
 
 
 def deploy_release():
