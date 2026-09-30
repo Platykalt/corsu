@@ -1,0 +1,160 @@
+import gettext
+import io
+import json
+from pathlib import Path
+import tempfile
+import unittest
+from contextlib import redirect_stdout
+from unittest.mock import patch
+
+import corsu
+
+
+class TranslationTests(unittest.TestCase):
+    def test_firefox_install_default_and_explicit_selection(self):
+        with tempfile.TemporaryDirectory() as directory:
+            home = Path(directory)
+            base = home / '.config/mozilla/firefox'
+            (base / 'release').mkdir(parents=True)
+            (base / 'other').mkdir()
+            (base / 'profiles.ini').write_text(
+                '[InstallABC]\nDefault=release\n[Profile0]\nPath=other\nDefault=1\n')
+            with patch.object(corsu, 'HOME', home):
+                self.assertEqual(corsu.firefox_profile(), base / 'release')
+                self.assertEqual(corsu.firefox_arguments(['https://example.com']),
+                                 ['-profile', str(base / 'release'), '-UILocale', 'en-US', 'https://example.com'])
+                for selection in (['-P', 'work'], ['--profile=/tmp/custom'], ['-ProfileManager']):
+                    self.assertEqual(corsu.firefox_arguments(selection), ['-UILocale', 'en-US', *selection])
+
+    def test_firefox_legacy_absolute_and_missing_profiles(self):
+        with tempfile.TemporaryDirectory() as directory:
+            home = Path(directory)
+            base = home / '.mozilla/firefox'
+            base.mkdir(parents=True)
+            profile = home / 'custom'
+            profile.mkdir()
+            with patch.object(corsu, 'HOME', home):
+                for content in (f'[Profile0]\nDefault=1\nIsRelative=0\nPath={profile}\n',
+                                f'[InstallABC]\nDefault={profile}\n'):
+                    (base / 'profiles.ini').write_text(content)
+                    self.assertEqual(corsu.firefox_profile(), profile)
+                (base / 'profiles.ini').write_text('[InstallABC]\nDefault=missing\n')
+                self.assertEqual(corsu.firefox_arguments([]), ['-ProfileManager', '-UILocale', 'en-US'])
+                (base / 'profiles.ini').write_text('[InstallABC]\nDefault=one\n[InstallDEF]\nDefault=two\n')
+                self.assertIsNone(corsu.firefox_profile())
+
+    def test_status_checks_owned_settings_without_writes(self):
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory)
+            with patch.object(corsu, 'DATA', root / 'data'), patch.object(corsu, 'STATE', root / 'data/state.json'), patch.object(corsu, 'HOME', root):
+                settings = root / 'settings.json'
+                corsu.Installer().json_settings(settings, {'plugins/Corsu/enabled': True})
+                document = json.loads(settings.read_text())
+                document['windowWidth'] = 1200
+                settings.write_text(json.dumps(document))
+                before = corsu.STATE.read_bytes()
+                output = io.StringIO()
+                with redirect_stdout(output):
+                    corsu.status()
+                self.assertEqual(json.loads(output.getvalue())['installation']['changed'], [])
+                self.assertEqual(corsu.STATE.read_bytes(), before)
+                document['plugins']['Corsu']['enabled'] = False
+                settings.write_text(json.dumps(document))
+                output = io.StringIO()
+                with redirect_stdout(output):
+                    corsu.status()
+                self.assertEqual(json.loads(output.getvalue())['installation']['changed'],
+                                 [f'{settings}: plugins/Corsu/enabled'])
+
+    def test_disable_reverts_switches_and_enable_restores_them(self):
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory)
+            with patch.object(corsu, 'DATA', root / 'data'), patch.object(corsu, 'STATE', root / 'data/state.json'):
+                language = root / 'plasma-localerc'
+                language.write_text('[Translations]\nLANGUAGE=fr\n')
+                catalog = root / 'catalog.mo'
+                settings = root / 'settings.json'
+                installer = corsu.Installer()
+                installer.write(language, '[Translations]\nLANGUAGE=co:fr\n', toggle=True)
+                installer.write(catalog, b'catalog data')
+                installer.json_settings(settings, {'plugins/Corsu/enabled': True, 'autoUpdate': False}, toggle=True)
+                corsu.STATE.write_text(json.dumps({**installer.state, 'components': ['desktop']}, indent=2))
+
+                output = io.StringIO()
+                with redirect_stdout(output):
+                    corsu.disable()
+                self.assertEqual(language.read_text(), '[Translations]\nLANGUAGE=fr\n')
+                self.assertEqual(json.loads(settings.read_text())['plugins']['Corsu']['enabled'], False)
+                self.assertEqual(json.loads(settings.read_text())['autoUpdate'], False)
+                # Built catalogs stay in place, so switching back needs no rebuild.
+                self.assertEqual(catalog.read_bytes(), b'catalog data')
+                self.assertTrue(corsu.disabled_marker().exists())
+                self.assertFalse(json.loads(corsu.STATE.read_text())['enabled'])
+
+                with patch.object(corsu, 'kde') as kde, patch.object(corsu, 'desktop'), redirect_stdout(io.StringIO()):
+                    kde.return_value = {'catalogs': 1}
+                    corsu.enable()
+                self.assertFalse(corsu.disabled_marker().exists())
+                self.assertTrue(json.loads(corsu.STATE.read_text())['enabled'])
+
+    def test_exact_labels_only(self):
+        self.assertEqual(corsu.translate('  &Save…  '), '  &Salvà…  ')
+        self.assertEqual(corsu.translate('_Save'), '_Salvà')
+        self.assertEqual(corsu.translate('Save my private message'), 'Save my private message')
+        self.assertEqual(corsu.translate('Nonexistent %1'), 'Nonexistent %1')
+
+    def test_fluent_expressions_and_keys_preserved(self):
+        source = 'save =\n    .label = Save\n    .accesskey = S\ncount = { $count } files\n'
+        translated, count = corsu.patch_ftl(source)
+        self.assertEqual(count, 1)
+        self.assertIn('.label = Salvà', translated)
+        self.assertIn('.accesskey = S', translated)
+        self.assertIn('count = { $count } files', translated)
+
+    def test_gettext_context_and_fallback(self):
+        data = corsu.make_mo({'': 'Content-Type: text/plain; charset=UTF-8\nLanguage: co\n',
+                              'Save': 'Salvà', 'button\x04Close': 'Chjode'})
+        loaded = gettext.GNUTranslations(io.BytesIO(data))
+        self.assertEqual(loaded.gettext('Save'), 'Salvà')
+        self.assertEqual(loaded.pgettext('button', 'Close'), 'Chjode')
+        self.assertEqual(loaded.gettext('Unknown'), 'Unknown')
+
+    def test_backup_reinstall_restore_and_user_changes(self):
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory)
+            state = root / 'data/state.json'
+            with patch.object(corsu, 'DATA', root / 'data'), patch.object(corsu, 'STATE', state):
+                existing = root / 'settings.json'
+                existing.write_text('original')
+                created = root / 'new'
+                installer = corsu.Installer()
+                installer.write(existing, 'installed')
+                installer.write(created, 'new file')
+                corsu.Installer().write(existing, 'updated')
+                self.assertEqual(Path(json.loads(state.read_text())['files'][str(existing)]['backup']).read_text(), 'original')
+                created.write_text('user edit')
+                with self.assertRaises(RuntimeError):
+                    corsu.Installer().write(created, 'overwrite')
+                corsu.uninstall()
+                self.assertEqual(existing.read_text(), 'original')
+                self.assertEqual(created.read_text(), 'user edit')
+
+    def test_restore_app_settings_preserves_later_changes(self):
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory)
+            with patch.object(corsu, 'DATA', root / 'data'), patch.object(corsu, 'STATE', root / 'data/state.json'):
+                settings = root / 'settings.json'
+                settings.write_text(json.dumps({'windowWidth': 800, 'autoUpdate': True}))
+                corsu.Installer().json_settings(settings, {'autoUpdate': False, 'plugins/Corsu/enabled': True})
+                changed = json.loads(settings.read_text())
+                changed['windowWidth'] = 1200
+                settings.write_text(json.dumps(changed))
+                corsu.uninstall()
+                restored = json.loads(settings.read_text())
+                self.assertEqual(restored['windowWidth'], 1200)
+                self.assertTrue(restored['autoUpdate'])
+                self.assertNotIn('enabled', restored['plugins']['Corsu'])
+
+
+if __name__ == '__main__':
+    unittest.main()

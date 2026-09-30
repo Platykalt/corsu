@@ -1,0 +1,7 @@
+__pycache__/
+*.pyc
+Vencord/
+vendor/*.xpi
+vendor/VencordInstallerCli-linux
+releases/
+missing-labels.json

@@ -1,0 +1,988 @@
+# English | French | Corsican — draft interface translations, review welcomed
+# Current Firefox, Discord and Plasma spelling variants
+Learn more|En savoir plus|Amparà di più
+Dismiss|Ignorer|Ignurà
+Not now|Plus tard|Più tardi
+Got it|J’ai compris|Aghju capitu
+View protections|Voir les protections|Vede e prutezzioni
+Open tabs|Onglets ouverts|Tabulazioni aperte
+Make default|Définir par défaut|Definisce per difettu
+Clear|Effacer|Sguassà
+Allow|Autoriser|Permette
+Value|Valeur|Valore
+State|État|Statu
+Open menu|Ouvrir le menu|Apre u menù
+No thanks|Non merci|Innò, grazie
+Advanced settings|Paramètres avancés|Paràmetri avanzati
+Remove all|Tout supprimer|Sguassà tuttu
+Previous page|Page précédente|Pagina precedente
+Next page|Page suivante|Pagina seguente
+New|Nouveau|Novu
+Mute tab|Couper le son de l’onglet|Taglià u sonu di a tabulazione
+Unmute tab|Réactiver le son de l’onglet|Riattivà u sonu di a tabulazione
+Chats|Discussions|Discussioni
+Tracking content|Contenu utilisé pour le pistage|Cuntenutu adupratu per u tracciamentu
+Search or enter address|Rechercher ou saisir une adresse|Circà o scrive un indirizzu
+More options|Options supplémentaires|Altre opzioni
+Enabled|Activées|Attivate
+Disabled|Désactivées|Disattivate
+Create a new profile|Créer un nouveau profil|Creà un prufilu novu
+Comment|Commenter|Cummentà
+Delete from history|Supprimer de l’historique|Sguassà da a storia
+Open in new container tab|Ouvrir dans un nouvel onglet conteneur|Apre in una tabulazione cuntenidore nova
+Open in new window|Ouvrir dans une nouvelle fenêtre|Apre in una finestra nova
+Open in new private window|Ouvrir dans une nouvelle fenêtre privée|Apre in una finestra privata nova
+Customize sidebar|Personnaliser le panneau latéral|Persunalizà u pannellu laterale
+Sidebars|Panneaux latéraux|Pannelli laterali
+Cryptominers|Mineurs de cryptomonnaies|Minatori di criptumunete
+Search the web|Rechercher sur le Web|Circà nant'à u Web
+Connect another device|Connecter un autre appareil|Cunnette un altru dispusitivu
+Cross-site tracking cookies|Cookies de pistage intersites|Cookies di tracciamentu trà siti
+Start browsing|Commencer la navigation|Principià a navigazione
+Payment methods|Moyens de paiement|Mezzi di pagamentu
+Manage exceptions|Gérer les exceptions|Gestisce l'eccezzioni
+Show password|Afficher le mot de passe|Affissà a parolla d'intrata
+Don't allow|Ne pas autoriser|Ùn permette micca
+Add-ons|Modules complémentaires|Moduli cumplementarii
+Privacy policy|Politique de confidentialité|Pulitica di cunfidenzialità
+Addresses|Adresses|Indirizzi
+Text|Texte|Testu
+Change color|Modifier la couleur|Mudificà u culore
+Unknown|Inconnu|Scunnisciutu
+Home|Accueil|Accolta
+Search|Recherche|Ricerca
+Username|Nom d’utilisateur|Nome d'utilizatore
+Highlight|Surligner|Mette in risaltu
+Close sidebar|Fermer le panneau latéral|Chjode u pannellu laterale
+Image|Image|Ritrattu
+Manage extension|Gérer l’extension|Gestisce l'estensione
+Translations|Traductions|Traduzzioni
+Copied|Copié|Cupiatu
+Bookmark this page|Marquer cette page|Aghjunghje sta pagina à i segnalibri
+Edit bookmark|Modifier le marque-page|Mudificà u segnalibru
+Add search engine|Ajouter un moteur de recherche|Aghjunghje un mutore di ricerca
+Enhanced Tracking Protection|Protection renforcée contre le pistage|Prutezzione rinfurzata contr'à u tracciamentu
+Tabs|Onglets|Tabulazioni
+Manage settings|Gérer les paramètres|Gestisce i paràmetri
+Enter search terms|Saisissez les termes à rechercher|Scrivite e parolle da circà
+Sign in to sync|Se connecter pour synchroniser|Cunnettassi per sincrunizà
+Open VPN|Ouvrir le VPN|Apre u VPN
+Try it|Essayer|Pruvà
+Create account|Créer un compte|Creà un contu
+Get started|Commencer|Principià
+Add password|Ajouter un mot de passe|Aghjunghje una parolla d'intrata
+Choose wallpaper|Choisir un fond d’écran|Sceglie un fondu di screnu
+To-do list|Liste de tâches|Lista di travagli
+Add item|Ajouter un élément|Aghjunghje un elementu
+Add new container|Ajouter un nouveau conteneur|Aghjunghje un cuntenidore novu
+Show details|Afficher les détails|Affissà i ditagli
+Permissions and data|Autorisations et données|Permessi è dati
+Host|Hôte|Òspite
+Change password|Changer le mot de passe|Cambià a parolla d'intrata
+Web compatibility|Compatibilité web|Cumpatibilità Web
+Navigation|Navigation|Navigazione
+Graphics acceleration|Accélération graphique|Accelerazione grafica
+Number|Nombre|Numeru
+Blocked|Bloqué|Bluccatu
+Private browsing|Navigation privée|Navigazione privata
+Debugging|Débogage|Currezzione di l'errori
+Timer|Minuteur|Cronumetru
+Open link|Ouvrir le lien|Apre u ligame
+Subtitles|Sous-titres|Sottutituli
+Picture-in-Picture|Incrustation vidéo|Videò in finestra
+Open file|Ouvrir le fichier|Apre u schedariu
+Draw|Dessiner|Disegnà
+Add image|Ajouter une image|Aghjunghje un ritrattu
+Exit full screen|Quitter le mode plein écran|Esce da u screnu sanu
+Don't show again|Ne plus afficher|Ùn affissà più
+Tab groups|Groupes d’onglets|Gruppi di tabulazioni
+Clock|Horloge|Rilogiu
+Search tabs|Rechercher dans les onglets|Circà in e tabulazioni
+Manage passwords|Gérer les mots de passe|Gestisce e parolle d'intrata
+Open in new tab|Ouvrir dans un nouvel onglet|Apre in una tabulazione nova
+Recommended|Recommandé|Ricumandatu
+New chat|Nouvelle discussion|Discussione nova
+Social media trackers|Traqueurs de réseaux sociaux|Tracciatori di e rete suciale
+Fingerprinters|Détecteurs d’empreinte numérique|Rilevatori d'impronta numerica
+Recent browsing|Navigation récente|Navigazione recente
+Don't show this message again|Ne plus afficher ce message|Ùn affissà più stu messaghju
+Enable backup|Activer la sauvegarde|Attivà a copia di salvezza
+Save and continue|Enregistrer et continuer|Salvà è cuntinuà
+Manage account|Gérer le compte|Gestisce u contu
+This cannot be undone.|Cette action est irréversible.|St'azzione ùn si pò annullà.
+Default configuration|Configuration par défaut|Cunfigurazione per difettu
+Pin this tab|Épingler cet onglet|Appuntà sta tabulazione
+Recent activity|Activité récente|Attività recente
+Weather|Météo|Tempu
+Edit list name|Modifier le nom de la liste|Mudificà u nome di a lista
+Edit address|Modifier l’adresse|Mudificà l'indirizzu
+Add language|Ajouter une langue|Aghjunghje una lingua
+Plugins|Plugins|Moduli
+Themes|Thèmes|Temi
+Updater|Mise à jour|Attualizazione
+Check for updates|Vérifier les mises à jour|Verificà l'attualizazioni
+Experiments|Expériences|Esperimenti
+Accessibility|Accessibilité|Accessibilità
+My Account|Mon compte|U mo contu
+Profiles|Profils|Prufili
+Data & Privacy|Données et confidentialité|Dati è cunfidenzialità
+Family Center|Centre familial|Centru di famiglia
+Authorized Apps|Applications autorisées|Appiecazioni auturizate
+Devices|Appareils|Dispusitivi
+Friend Requests|Demandes d'ami|Dumande d'amicizia
+Content & Social|Contenu et social|Cuntenutu è suciale
+Voice & Video|Voix et vidéo|Voce è videò
+Game Overlay|Overlay de jeu|Soprapusizione di ghjocu
+Registered Games|Jeux enregistrés|Ghjochi arregistrati
+Activity Privacy|Confidentialité des activités|Cunfidenzialità di l'attività
+What's New|Quoi de neuf|Chì ci hè di novu
+Log Out|Déconnexion|Scunnette
+Display Name|Nom d'affichage|Nome affissatu
+Edit User Profile|Modifier le profil utilisateur|Mudificà u prufilu d'utilizatore
+Enable|Activer|Attivà
+Disable|Désactiver|Disattivà
+All Plugins|Tous les plugins|Tutti i moduli
+Enabled Plugins|Plugins activés|Moduli attivati
+Search plugins|Rechercher des plugins|Circà i moduli
+Search settings|Rechercher dans les paramètres|Circà in i paràmetri
+File|Fichier|Schedariu
+Files|Fichiers|Schedarii
+Folder|Dossier|Cartulare
+Folders|Dossiers|Cartulari
+New Folder|Nouveau dossier|Cartulare novu
+New File|Nouveau fichier|Schedariu novu
+Open|Ouvrir|Apre
+Open File|Ouvrir un fichier|Apre un schedariu
+Open Folder|Ouvrir un dossier|Apre un cartulare
+Open With|Ouvrir avec|Apre cù
+Close|Fermer|Chjode
+Close All|Tout fermer|Chjode tuttu
+Save|Enregistrer|Salvà
+Save As|Enregistrer sous|Salvà cum'è
+Save All|Tout enregistrer|Salvà tuttu
+Cancel|Annuler|Annullà
+Apply|Appliquer|Appiecà
+OK|OK|Va bè
+Yes|Oui|Iè
+No|Non|Innò
+Continue|Continuer|Cuntinuà
+Next|Suivant|Seguente
+Previous|Précédent|Precedente
+Back|Retour|Vultà
+Forward|Avancer|Avanzà
+Finish|Terminer|Compie
+Done|Terminé|Fattu
+Confirm|Confirmer|Cunfirmà
+Delete|Supprimer|Sguassà
+Remove|Retirer|Caccià
+Add|Ajouter|Aghjunghje
+Create|Créer|Creà
+Edit|Modifier|Mudificà
+Rename|Renommer|Rinuminà
+Copy|Copier|Cupià
+Cut|Couper|Taglià
+Paste|Coller|Incollà
+Undo|Annuler la dernière action|Annullà l'azzione
+Redo|Rétablir|Rifà
+Select All|Tout sélectionner|Selezziunà tuttu
+Deselect|Désélectionner|Deselezziunà
+Select|Sélectionner|Selezziunà
+Search|Rechercher|Circà
+Find|Chercher|Truvà
+Replace|Remplacer|Rimpiazzà
+Refresh|Actualiser|Rinfrescà
+Reload|Recharger|Ricaricà
+Stop|Arrêter|Piantà
+Start|Démarrer|Avvià
+Pause|Pause|Pausa
+Resume|Reprendre|Ripiglià
+Reset|Réinitialiser|Reinizializà
+Restore|Restaurer|Ristabilisce
+Default|Par défaut|Predefinitu
+Defaults|Valeurs par défaut|Valori predefiniti
+Settings|Paramètres|Paràmetri
+Preferences|Préférences|Preferenze
+Configure|Configurer|Cunfigurà
+Configuration|Configuration|Cunfigurazione
+Options|Options|Ozzioni
+General|Général|Generale
+Advanced|Avancé|Avanzatu
+Appearance|Apparence|Aspettu
+Themes|Thèmes|Temi
+Theme|Thème|Tema
+Colors|Couleurs|Culori
+Colour|Couleur|Culore
+Color|Couleur|Culore
+Fonts|Polices|Caratteri
+Font|Police|Caratteru
+Icons|Icônes|Icone
+Icon|Icône|Icona
+Style|Style|Stile
+Language|Langue|Lingua
+Languages|Langues|Lingue
+Region|Région|Regione
+Accessibility|Accessibilité|Accessibilità
+Keyboard|Clavier|Tastiera
+Mouse|Souris|Topu
+Touchpad|Pavé tactile|Pannellu tattile
+Shortcuts|Raccourcis|Accurtatoghji
+Keyboard Shortcuts|Raccourcis clavier|Accurtatoghji di tastiera
+Notifications|Notifications|Nutificazioni
+Notification|Notification|Nutificazione
+Sound|Son|Sonu
+Sounds|Sons|Soni
+Audio|Audio|Audiò
+Volume|Volume|Vulume
+Microphone|Microphone|Micrufonu
+Camera|Caméra|Videocamera
+Display|Affichage|Affissaghju
+Screen|Écran|Screnu
+Screens|Écrans|Screni
+Brightness|Luminosité|Luminosità
+Resolution|Résolution|Risuluzione
+Scale|Échelle|Scala
+Network|Réseau|Rete
+Networks|Réseaux|Reti
+Connections|Connexions|Cunnessioni
+Connection|Connexion|Cunnessione
+Connect|Connecter|Cunnette
+Disconnect|Déconnecter|Scunnette
+Connected|Connecté|Cunnessu
+Disconnected|Déconnecté|Scunnessu
+Connecting|Connexion en cours|Cunnessione in corsu
+Devices|Périphériques|Dispusitivi
+Device|Périphérique|Dispusitivu
+Battery|Batterie|Batteria
+Power|Énergie|Energia
+Power Management|Gestion de l'énergie|Gestione di l'energia
+Power and Battery|Énergie et batterie|Energia è batteria
+Charging|En charge|In carica
+Fully Charged|Complètement chargée|Carica cumpleta
+Desktop|Bureau|Scagnu
+Desktop and Wallpaper|Bureau et fond d’écran|Scagnu è fondu di screnu
+Wallpaper|Fond d'écran|Fondu di screnu
+Panel|Tableau de bord|Pannellu
+Widgets|Composants graphiques|Elementi grafichi
+Add Widgets|Ajouter des composants graphiques|Aghjunghje elementi grafichi
+Activities|Activités|Attività
+Activity|Activité|Attività
+Windows|Fenêtres|Finestre
+Window|Fenêtre|Finestra
+Minimize|Réduire|Minimizà
+Maximize|Maximiser|Massimizà
+Move|Déplacer|Spustà
+Resize|Redimensionner|Ridimensiunà
+Always on Top|Toujours au-dessus|Sempre in cima
+Full Screen|Plein écran|Screnu sanu
+Fullscreen|Plein écran|Screnu sanu
+Exit Full Screen|Quitter le plein écran|Esce da u screnu sanu
+Help|Aide|Aiutu
+About|À propos|À prupositu
+Quit|Quitter|Esce
+Exit|Sortir|Esce
+Log Out|Se déconnecter|Chjode a sessione
+Log out|Se déconnecter|Chjode a sessione
+Logout|Déconnexion|Chjusura di sessione
+Shut Down|Éteindre|Spenghje
+Shutdown|Extinction|Spegnimentu
+Restart|Redémarrer|Riavvià
+Reboot|Redémarrage|Riavviamentu
+Sleep|Mettre en veille|Mette in veghja
+Suspend|Suspendre|Suspende
+Hibernate|Hiberner|Ibernà
+Lock|Verrouiller|Bluccà
+Lock Screen|Verrouiller l'écran|Bluccà u screnu
+Switch User|Changer d'utilisateur|Cambià utilizatore
+User|Utilisateur|Utilizatore
+Users|Utilisateurs|Utilizatori
+Account|Compte|Contu
+Accounts|Comptes|Conti
+Password|Mot de passe|Parolla d'accessu
+Username|Nom d'utilisateur|Nome d'utilizatore
+Name|Nom|Nome
+Description|Description|Discrizzione
+Details|Détails|Ditaglii
+Properties|Propriétés|Pruprietà
+Permissions|Permissions|Permessi
+Security|Sécurité|Sicurità
+Privacy|Vie privée|Vita privata
+Privacy & Security|Vie privée et sécurité|Vita privata è sicurità
+Location|Emplacement|Lucalizazione
+Size|Taille|Dimensione
+Type|Type|Tipu
+Date|Date|Data
+Time|Heure|Ora
+Date and Time|Date et heure|Data è ora
+Today|Aujourd'hui|Oghje
+Yesterday|Hier|Eri
+Tomorrow|Demain|Dumane
+Never|Jamais|Mai
+Always|Toujours|Sempre
+Automatic|Automatique|Autumaticu
+Manual|Manuel|Manuale
+Enabled|Activé|Attivatu
+Disabled|Désactivé|Disattivatu
+Enable|Activer|Attivà
+Disable|Désactiver|Disattivà
+On|Activé|Attivatu
+Off|Désactivé|Disattivatu
+Show|Afficher|Affissà
+Hide|Masquer|Piattà
+All|Tout|Tuttu
+None|Aucun|Nisunu
+Other|Autre|Altru
+More|Plus|Di più
+Less|Moins|Di menu
+Loading|Chargement|Caricamentu
+Please wait|Veuillez patienter|Aspettate per piacè
+Error|Erreur|Errore
+Warning|Avertissement|Avertimentu
+Information|Information|Infurmazione
+Success|Succès|Riuscita
+Try Again|Réessayer|Pruvà torna
+Retry|Réessayer|Pruvà torna
+Download|Télécharger|Scaricà
+Downloads|Téléchargements|Scaricamenti
+Upload|Envoyer un fichier|Mandà un schedariu
+Install|Installer|Installà
+Uninstall|Désinstaller|Disinstallà
+Update|Mettre à jour|Aghjurnà
+Updates|Mises à jour|Aghjurnamenti
+Check for Updates|Rechercher des mises à jour|Circà l'aghjurnamenti
+Applications|Applications|Appiecazioni
+Application|Application|Appiecazione
+System|Système|Sistema
+System Settings|Configuration du système|Paràmetri di u sistema
+System Information|Informations système|Infurmazioni di u sistema
+About this System|À propos de ce système|À prupositu di stu sistema
+About This System|À propos de ce système|À prupositu di stu sistema
+Home|Dossier personnel|Cartulare persunale
+Home Folder|Dossier personnel|Cartulare persunale
+Documents|Documents|Ducumenti
+Pictures|Images|Ritratti
+Music|Musique|Musica
+Videos|Vidéos|Videò
+Trash|Corbeille|Curbella
+Empty Trash|Vider la corbeille|Viutà a curbella
+Move to Trash|Mettre à la corbeille|Mette in a curbella
+Recent Files|Fichiers récents|Schedarii recenti
+Recent Documents|Documents récents|Ducumenti recenti
+Recent Applications|Applications récentes|Appiecazioni recenti
+Favorites|Favoris|Favuriti
+Places|Emplacements|Lochi
+Computer|Ordinateur|Ordinatore
+Storage|Stockage|Almacenamentu
+Disks|Disques|Dischi
+Print|Imprimer|Stampà
+Printer|Imprimante|Stampatrice
+Printers|Imprimantes|Stampatrici
+Print Preview|Aperçu avant impression|Anteprima di stampa
+Page Setup|Mise en page|Impostazione di pagina
+Page|Page|Pagina
+Pages|Pages|Pagine
+View|Affichage|Vista
+Tools|Outils|Arnesi
+Bookmarks|Marque-pages|Segnalibri
+History|Historique|Storia
+New Tab|Nouvel onglet|Linguetta nova
+New tab|Nouvel onglet|Linguetta nova
+New Window|Nouvelle fenêtre|Finestra nova
+New Private Window|Nouvelle fenêtre de navigation privée|Finestra privata nova
+Close Tab|Fermer l’onglet|Chjode a linguetta
+Close Window|Fermer la fenêtre|Chjode a finestra
+Open Location|Ouvrir un emplacement|Apre una lucalizazione
+Save Page As|Enregistrer sous|Salvà a pagina cum'è
+Email Link|Envoyer un lien vers la page par e-mail|Mandà u ligame per email
+Share|Partager|Sparte
+Generate QR Code|Générer un code QR|Generà un codice QR
+Work Offline|Travailler hors connexion|Travaglià senza cunnessione
+Find in Page|Rechercher dans la page|Circà in a pagina
+Find Again|Rechercher de nouveau|Circà torna
+Toolbars|Barres d’outils|Barre d'arnesi
+Customize Toolbar|Personnaliser la barre d’outils|Persunalizà a barra d'arnesi
+Sidebar|Panneau latéral|Pannellu laterale
+Synced Tabs|Onglets synchronisés|Linguette sincrunizate
+Zoom In|Zoom avant|Ingrandà
+Zoom Out|Zoom arrière|Riduce
+Actual Size|Taille réelle|Dimensione vera
+Zoom Text Only|Zoom texte seulement|Ingrandà solu u testu
+Page Style|Style de la page|Stile di a pagina
+No Style|Aucun style|Nisun stile
+Basic Page Style|Style de base de la page|Stile di basa di a pagina
+Repair Text Encoding|Réparer l’encodage du texte|Riparà a cudificazione di u testu
+Enter Full Screen|Passer en plein écran|Passà à screnu sanu
+Enter Reader View|Activer le mode lecture|Attivà u modu di lettura
+Close Reader View|Quitter le mode lecture|Chjode u modu di lettura
+Show All Tabs|Afficher tous les onglets|Affissà tutte e linguette
+Show All History|Afficher tout l’historique|Affissà tutta a storia
+Clear Recent History|Effacer l’historique récent|Sguassà a storia recente
+Tabs From Other Devices|Onglets d’autres appareils|Linguette d'altri dispusitivi
+Restore Previous Session|Restaurer la session précédente|Ristabilisce a sessione precedente
+Hidden Tabs|Onglets masqués|Linguette piattate
+Recently Closed Tabs|Onglets récemment fermés|Linguette chjose pocu fà
+Recently Closed Windows|Fenêtres récemment fermées|Finestre chjose pocu fà
+Search History|Rechercher dans l’historique|Circà in a storia
+Manage Bookmarks|Gérer les marque-pages|Gestisce i segnalibri
+Sync Bookmarks to Mobile|Synchroniser les marque-pages avec un mobile|Sincrunizà i segnalibri cù u telefuninu
+Bookmark Current Tab|Marquer l’onglet courant|Aghjunghje a linguetta à i segnalibri
+Edit This Bookmark|Modifier ce marque-page|Mudificà stu segnalibru
+Search Bookmarks|Rechercher dans les marque-pages|Circà in i segnalibri
+Bookmark All Tabs|Marquer tous les onglets|Aghjunghje tutte e linguette à i segnalibri
+Bookmarks Toolbar|Barre personnelle|Barra di segnalibri
+Other Bookmarks|Autres marque-pages|Altri segnalibri
+Mobile Bookmarks|Marque-pages du téléphone|Segnalibri di u telefuninu
+Profiles|Profils|Prufili
+Profile|Profil|Prufilu
+Manage Profiles|Gérer les profils|Gestisce i prufili
+New Profile|Nouveau profil|Prufilu novu
+Add-ons and Themes|Extensions et thèmes|Estensioni è temi
+Extensions|Extensions|Estensioni
+Passwords|Mots de passe|Parolle d'accessu
+Browser Tools|Outils du navigateur|Arnesi di u navigatore
+Web Developer Tools|Outils de développement web|Arnesi di sviluppu web
+Page Source|Code source de la page|Codice surghjente di a pagina
+Page Info|Informations sur la page|Infurmazioni di a pagina
+Troubleshoot Mode|Mode de dépannage|Modu di riparazione
+Report Broken Site|Signaler un site non fonctionnel|Signalà un situ chì ùn viaghja micca
+Import From Another Browser|Importer depuis un autre navigateur|Impurtà da un altru navigatore
+New Container Tab|Nouvel onglet conteneur|Linguetta cuntenidore nova
+Open Link in New Tab|Ouvrir le lien dans un nouvel onglet|Apre u ligame in una linguetta nova
+Open Link in New Window|Ouvrir le lien dans une nouvelle fenêtre|Apre u ligame in una finestra nova
+Open Link in New Private Window|Ouvrir le lien dans une fenêtre de navigation privée|Apre u ligame in una finestra privata nova
+Copy Link|Copier le lien|Cupià u ligame
+Copy Link Address|Copier l’adresse du lien|Cupià l'indirizzu di u ligame
+Save Link As|Enregistrer la cible du lien sous|Salvà u ligame cum'è
+Copy Image|Copier l’image|Cupià u ritrattu
+Save Image As|Enregistrer l’image sous|Salvà u ritrattu cum'è
+Copy Image Link|Copier le lien de l’image|Cupià u ligame di u ritrattu
+Open Image in New Tab|Ouvrir l’image dans un nouvel onglet|Apre u ritrattu in una linguetta nova
+Inspect|Examiner|Esaminà
+Take Screenshot|Effectuer une capture d’écran|Fà una cattura di screnu
+Personal|Personnel|Persunale
+Work|Travail|Travagliu
+Banking|Banque|Banca
+Shopping|Achats|Cumpre
+Blue|Bleu|Turchinu
+Green|Vert|Verde
+Yellow|Jaune|Giallu
+Orange|Orange|Aranciu
+Red|Rouge|Rossu
+Pink|Rose|Rusulinu
+Purple|Pourpre|Purpurinu
+Violet|Violet|Viulettu
+Gray|Gris|Grisgiu
+Light|Clair|Chjaru
+Dark|Sombre|Scuru
+System Default|Paramètre système|Predefinitu di u sistema
+Friends|Amis|Amichi
+Add Friend|Ajouter un ami|Aghjunghje un amicu
+Add Friends|Ajouter des amis|Aghjunghje amichi
+Online|En ligne|Cunnessu
+Offline|Hors ligne|Scunnessu
+Pending|En attente|In attesa
+Blocked|Bloqués|Bluccati
+Direct Messages|Messages privés|Messaghji privati
+Message Requests|Demandes de messages|Dumande di messaghji
+Inbox|Boîte de réception|Scatula di ricezzione
+Mentions|Mentions|Menzioni
+Unreads|Non lus|Micca letti
+Mark As Read|Marquer comme lu|Marcà cum'è lettu
+Mark as Read|Marquer comme lu|Marcà cum'è lettu
+Mark All as Read|Tout marquer comme lu|Marcà tuttu cum'è lettu
+User Settings|Paramètres utilisateur|Paràmetri di l'utilizatore
+My Account|Mon compte|U mo contu
+Profiles|Profils|Prufili
+Content & Social|Contenu et social|Cuntenutu è suciale
+Data & Privacy|Données et confidentialité|Dati è cunfidenzialità
+Authorized Apps|Applications autorisées|Appiecazioni auturizate
+Devices|Appareils|Dispusitivi
+Connections|Connexions|Cunnessioni
+Family Center|Centre familial|Centru famigliale
+Billing|Facturation|Fatturazione
+Subscriptions|Abonnements|Abbunamenti
+Gift Inventory|Inventaire des cadeaux|Inventariu di rigali
+Server Boost|Boost de serveur|Rinfurzamentu di u servore
+App Settings|Paramètres de l'application|Paràmetri di l'appiecazione
+Chat|Discussion|Chjachjarata
+Voice & Video|Voix & Vidéo|Voce è videò
+Text & Images|Texte & Images|Testu è ritratti
+Keybinds|Raccourcis clavier|Accurtatoghji di tastiera
+Streamer Mode|Mode streamer|Modu di diffusione
+Activity Privacy|Confidentialité des activités|Cunfidenzialità di l'attività
+Registered Games|Jeux enregistrés|Ghjochi arregistrati
+Game Overlay|Overlay de jeu|Suvrappusizione di ghjocu
+Activity Settings|Paramètres d'activité|Paràmetri di l'attività
+What's New|Quoi de neuf|Novità
+HypeSquad|HypeSquad|HypeSquad
+Support|Assistance|Assistenza
+Switch Accounts|Changer de compte|Cambià contu
+Server Settings|Paramètres du serveur|Paràmetri di u servore
+Create Channel|Créer un salon|Creà un salottu
+Create Category|Créer une catégorie|Creà una categuria
+Invite People|Inviter des gens|Invità ghjente
+Invite Friends|Inviter des amis|Invità amichi
+Notification Settings|Paramètres de notification|Paràmetri di nutificazione
+Privacy Settings|Paramètres de confidentialité|Paràmetri di cunfidenzialità
+Edit Server Profile|Modifier le profil de serveur|Mudificà u prufilu di u servore
+Leave Server|Quitter le serveur|Lascià u servore
+Delete Server|Supprimer le serveur|Sguassà u servore
+Mute Server|Rendre le serveur muet|Ammutulì u servore
+Unmute Server|Réactiver les notifications du serveur|Riattivà e nutificazioni di u servore
+Text Channels|Salons textuels|Salotti di testu
+Voice Channels|Salons vocaux|Salotti vucali
+Edit Channel|Modifier le salon|Mudificà u salottu
+Delete Channel|Supprimer le salon|Sguassà u salottu
+Channel Settings|Paramètres du salon|Paràmetri di u salottu
+Overview|Vue d'ensemble|Vista generale
+Roles|Rôles|Roli
+Members|Membres|Membri
+Invites|Invitations|Inviti
+Bans|Bannissements|Esclusioni
+Audit Log|Logs du serveur|Ghjurnale di u servore
+Integrations|Intégrations|Integrazioni
+Moderation|Modération|Muderazione
+Community|Communauté|Cumunità
+Discovery|Découverte|Scuperta
+Events|Événements|Evenimenti
+Create Event|Créer un événement|Creà un evenimentu
+Channels & Roles|Salons et rôles|Salotti è roli
+Browse Channels|Parcourir les salons|Sfuglià i salotti
+Voice Connected|Voix connectée|Voce cunnessa
+Mute|Rendre muet|Ammutulì
+Unmute|Réactiver le micro|Riattivà u micrufonu
+Deafen|Mettre en sourdine|Disattivà l'ascoltu
+Undeafen|Réactiver le son|Riattivà l'ascoltu
+Disconnect|Déconnexion|Scunnette
+Share Your Screen|Partager ton écran|Sparte u to screnu
+Screen Share|Partage d'écran|Spartera di screnu
+Turn On Camera|Activer la caméra|Attivà a videocamera
+Turn Off Camera|Désactiver la caméra|Disattivà a videocamera
+Start Voice Call|Démarrer un appel vocal|Principià una chjama vucale
+Start Video Call|Démarrer un appel vidéo|Principià una videochjama
+Answer|Répondre|Risponde
+Decline|Refuser|Ricusà
+Accept|Accepter|Accettà
+Send|Envoyer|Mandà
+Message|Message|Messaghju
+Messages|Messages|Messaghji
+Reply|Répondre|Risponde
+Edit Message|Modifier le message|Mudificà u messaghju
+Delete Message|Supprimer le message|Sguassà u messaghju
+Copy Message Link|Copier le lien du message|Cupià u ligame di u messaghju
+Copy Message ID|Copier l'identifiant du message|Cupià l'identificatore di u messaghju
+Pin Message|Épingler le message|Appuntà u messaghju
+Unpin Message|Désépingler le message|Staccà u messaghju
+Pinned Messages|Messages épinglés|Messaghji appuntati
+Add Reaction|Ajouter une réaction|Aghjunghje una reazzione
+Reactions|Réactions|Reazzioni
+Create Thread|Créer un fil|Creà una discussione
+Threads|Fils|Discussioni
+Edit Profile|Modifier le profil|Mudificà u prufilu
+View Profile|Voir le profil|Vede u prufilu
+Remove Friend|Retirer l'ami|Caccià l'amicu
+Block|Bloquer|Bluccà
+Unblock|Débloquer|Sbluccà
+Report|Signaler|Signalà
+Set Status|Définir le statut|Definisce u statutu
+Idle|Inactif|Inattivu
+Do Not Disturb|Ne pas déranger|Ùn disturbà micca
+Invisible|Invisible|Invisibile
+Set Custom Status|Définir un statut personnalisé|Definisce un statutu persunalizatu
+Save Changes|Enregistrer les modifications|Salvà e mudificazioni
+Reset Changes|Réinitialiser les modifications|Annullà e mudificazioni
+Input Device|Périphérique d'entrée|Dispusitivu d'entrata
+Output Device|Périphérique de sortie|Dispusitivu di surtita
+Input Volume|Volume d'entrée|Vulume d'entrata
+Output Volume|Volume de sortie|Vulume di surtita
+Voice Activity|Détection de la voix|Rilevazione di a voce
+Push to Talk|Appuyer pour parler|Appughjà per parlà
+Noise Suppression|Suppression du bruit|Riduzzione di u rimore
+Echo Cancellation|Annulation de l'écho|Annullamentu di l'ecu
+Log In|Se connecter|Cunnettassi
+Login|Connexion|Cunnessione
+Register|S'inscrire|Iscrivesi
+Email|E-mail|Indirizzu email
+Welcome Back|Bon retour|Benturnatu
+Show All|Tout afficher|Affissà tuttu
+Hide Others|Masquer les autres|Piattà l'altri
+Services|Services|Servizii
+Set { -brand-shorter-name } as Default Browser|Définir { -brand-shorter-name } comme navigateur par défaut|Definisce { -brand-shorter-name } cum'è navigatore predefinitu
+Share { -brand-shorter-name }|Recommander { -brand-shorter-name }|Ricumandà { -brand-shorter-name }
+Hide { -brand-shorter-name }|Masquer { -brand-shorter-name }|Piattà { -brand-shorter-name }
+Customize Touch Bar|Personnaliser la Touch Bar|Persunalizà a Touch Bar
+Quit { -brand-shorter-name }|Quitter { -brand-shorter-name }|Esce da { -brand-shorter-name }
+About { -brand-shorter-name }|À propos de { -brand-shorter-name }|À prupositu di { -brand-shorter-name }
+New Private Window|Nouvelle fenêtre privée|Finestra privata nova
+Open Location|Ouvrir l’emplacement|Apre una lucalizazione
+Close { $tabCount } Tabs|Fermer { $tabCount } onglets|Chjode { $tabCount } linguette
+Email Link|Envoyer par e-mail un lien vers la page|Mandà u ligame per email
+Edit|Édition|Mudificà
+Find Again|Rechercher le suivant|Circà u seguente
+Switch Text Direction|Changer le sens du texte|Cambià u sensu di u testu
+Zoom Text Only|Agrandir uniquement le texte|Ingrandà solu u testu
+Enter Full Screen|Passer en mode Plein écran|Passà à screnu sanu
+Exit Full Screen|Quitter le mode Plein écran|Esce da u screnu sanu
+Enter Reader View|Passer en mode lecture|Attivà u modu di lettura
+Switch Page Direction|Changer le sens de la page|Cambià u sensu di a pagina
+Show All History|Afficher l’historique|Affissà a storia
+Clear Recent History|Supprimer l’historique récent|Sguassà a storia recente
+Manage Bookmarks|Organiser les marque-pages|Gestisce i segnalibri
+Sync Bookmarks to Mobile|Synchronisez les marque-pages avec votre mobile|Sincrunizà i segnalibri cù u telefuninu
+Search Bookmarks|Rechercher des marque-pages|Circà i segnalibri
+Mobile Bookmarks|Marque-pages des appareils mobiles|Segnalibri di i dispusitivi mobili
+{ $profileName } (current)|{ $profileName } (actuel)|{ $profileName } (attuale)
+Turn On Sync|Activer la synchronisation|Attivà a sincrunizazione
+Sync Now|Synchroniser maintenant|Sincrunizà avà
+Reconnect to { -brand-product-name }|Se reconnecter à { -brand-product-name }|Cunnettassi torna à { -brand-product-name }
+Task Manager|Gestionnaire de tâches|Gestore di i travagli
+Edit a PDF|Modifier un PDF|Mudificà un PDF
+Layout Debugger|Débogueur de mise en page|Strumentu di currezzione di a pagina
+Bring All to Front|Tout amener à l’avant-plan|Mette tuttu in primu pianu
+Get Help|Obtenir de l’aide|Ottene aiutu
+More Troubleshooting Information|Plus d’informations de dépannage|Altre infurmazioni di riparazione
+Share Ideas and Feedback|Partager des idées et des commentaires|Sparte idee è cummenti
+Turn Troubleshoot Mode Off|Désactiver le mode de dépannage|Disattivà u modu di riparazione
+Switch to a New Device|Passer à un nouvel appareil|Passà à un dispusitivu novu
+Report Deceptive Site|Signaler un site trompeur|Signalà un situ ingannatore
+This Isn’t a Deceptive Site|Ce site n’est pas trompeur|Stu situ ùn hè micca ingannatore
+Report Broken Site|Signaler des problèmes avec ce site|Signalà prublemi cù stu situ
+Keep Open|Garder ouvert|Mantene apertu
+Open user settings|Ouvrir les paramètres utilisateur|Apre i paràmetri di l'utilizatore
+Configure Search Plugins|Configurer les modules de recherche|Cunfigurà i moduli di ricerca
+Remove icon|Supprimer l'icône|Caccià l'icona
+Edit Applications|Modifier les applications|Mudificà l'appiecazioni
+No matches|Aucune correspondance|Nisuna currispundenza
+Choose|Choisir|Sceglie
+Reset to default icon|Rétablir l'icône par défaut|Ristabilisce l'icona predefinita
+Newly-installed application|Application nouvellement installée|Appiecazione appena installata
+New!|Nouveau !|Novu!
+Power and session|Énergie et session|Energia è sessione
+Session|Session|Sessione
+Session and Power|Session et énergie|Sessione è energia
+Left|Gauche|Manca
+Right|Droite|Diritta
+Top|Haut|Cima
+Bottom|Bas|Fondu
+Center|Centre|Centru
+Add to Favorites|Ajouter aux favoris|Aghjunghje à i favuriti
+Remove from Favorites|Retirer des favoris|Caccià da i favuriti
+Show in Favorites|Afficher dans les favoris|Affissà in i favuriti
+On All Activities|Sur toutes les activités|Nant'à tutte l'attività
+On the Current Activity|Sur l'activité courante|Nant'à l'attività attuale
+Frequently Used|Fréquemment utilisés|Aduprati à spessu
+Launch|Lancer|Lancià
+Open category|Ouvrir la catégorie|Apre a categuria
+Often used|Souvent utilisés|Aduprati à spessu
+Recently used|Récemment utilisés|Aduprati pocu fà
+In a grid|Dans une grille|In una griglia
+In a list|Dans une liste|In una lista
+Apply Settings|Appliquer les paramètres|Appiecà i paràmetri
+Most Used|Les plus utilisés|I più aduprati
+No items matching your search|Aucun élément ne correspond à votre recherche|Nisun elementu currisponde à a vostra ricerca
+Show menu|Afficher le menu|Affissà u menù
+Info Center|Centre d'informations|Centru d'infurmazioni
+Add Action|Ajouter une action|Aghjunghje un'azzione
+Apply Now|Appliquer maintenant|Appiecà avà
+Copy to Clipboard|Copier dans le presse-papiers|Cupià in l'appunti
+Exit Edit Mode|Quitter le mode d'édition|Esce da u modu di mudificazione
+Get New Widgets|Obtenir de nouveaux composants graphiques|Ottene elementi grafichi novi
+Get New Plugins|Obtenir de nouveaux modules|Ottene moduli novi
+Read License|Lire la licence|Leghje a licenza
+Next track|Piste suivante|Branu seguente
+Previous track|Piste précédente|Branu precedente
+Play or Pause media|Lire ou mettre en pause le média|Leghje o mette in pausa u media
+Clone Panel|Cloner le tableau de bord|Duplicà u pannellu
+Delete Panel|Supprimer le tableau de bord|Sguassà u pannellu
+Unlock|Déverrouiller|Sbluccà
+Add New|Ajouter un nouvel élément|Aghjunghje un elementu novu
+All Widgets|Tous les composants graphiques|Tutti l'elementi grafichi
+Create activity|Créer une activité|Creà un'attività
+Categories|Catégories|Categurie
+Report an issue|Signaler un problème|Signalà un prublema
+Remove Desktop|Supprimer le bureau|Sguassà u scagnu
+Remove Panel|Supprimer le panneau|Sguassà u pannellu
+No title|Aucun titre|Nisun titulu
+No media playing|Aucun média en lecture|Nisun media in lettura
+Unlocking failed|Échec du déverrouillage|Sbluccamentu fiascatu
+Caps Lock is on|Le verrouillage des majuscules est activé|E maiuscule sò bluccate
+Adaptive|Adaptatif|Adattativu
+Always visible|Toujours visible|Sempre visibile
+Auto hide|Masquage automatique|Piattà autumaticamente
+Opaque|Opaque|Opacu
+Translucent|Translucide|Traslucidu
+Custom|Personnalisé|Persunalizatu
+Alignment|Alignement|Alliniamentu
+Authors|Auteurs|Autori
+Credits|Remerciements|Ringraziamenti
+Opacity|Opacité|Opacità
+Position|Position|Pusizione
+Translators|Traducteurs|Traduttori
+Visibility|Visibilité|Visibilità
+Website|Site web|Situ web
+Floating|Flottant|Fluttante
+Height|Hauteur|Altezza
+Width|Largeur|Larghezza
+Mouse Actions|Actions de la souris|Azzioni di u topu
+Panel Settings|Configuration du tableau de bord|Paràmetri di u pannellu
+Manage Panels and Desktops|Gérer les panneaux et les bureaux|Gestisce i pannelli è i scagni
+Virtual Keyboard|Clavier virtuel|Tastiera virtuale
+Alternative Widgets|Composants graphiques alternatifs|Elementi grafichi alternativi
+Fill height|Remplir la hauteur|Empie l'altezza
+Fill width|Remplir la largeur|Empie a larghezza
+Fit content|Adapter au contenu|Adattà à u cuntenutu
+Layout|Disposition|Dispusizione
+Wallpaper type|Type de fond d'écran|Tipu di fondu di screnu
+Panel Height|Hauteur du panneau|Altezza di u pannellu
+Panel Width|Largeur du panneau|Larghezza di u pannellu
+Session is exiting|Fermeture de la session|Chjusura di a sessione
+# Qt and KDE framework dialogs, Firefox chrome, common status labels (0.3.0)
+Invalid response content type|Type de contenu non valable pour la réponse|Tipu di cuntenutu micca validu per a risposta
+Unknown error|Erreur inconnue|Errore scunnisciutu
+Form|Formulaire|Furmulariu
+Medium|Moyen|Mediu
+Filter|Filtre|Filtru
+|Filtrer|Filtrà
+Active|Actif|Attivu
+Normal|Normal|Normale
+Small|Petit|Chjucu
+Large|Grand|Grande
+Unable to commit transaction|Impossible de soumettre la transaction|Impussibule di suttumette a transazzione
+Unable to rollback transaction|Impossible d'annuler la transaction|Impussibule d'annullà a transazzione
+Unable to execute statement|Impossible d'exécuter la requête|Impussibule d'eseguisce a richiesta
+Unable to prepare statement|Impossible de préparer la requête|Impussibule di preparà a richiesta
+Unable to begin transaction|Impossible de démarrer la transaction|Impussibule di principià a transazzione
+Unable to connect|Impossible de se connecter|Impussibule di cunnettesi
+Dialog|Boite de dialogue|Finestra di dialogu
+Actions|Actions|Azzioni
+Maintainer|Mainteneur|Mantenitore
+Export|Exporter|Espurtà
+Preview|Aperçu|Previsualizazione
+Italic|Italique|Corsivu
+Shift|Maj|Maiusc
+Arabic|Arabe|Àrabu
+Bold|Gras|Grassu
+Hebrew|Hébreu|Ebraicu
+Thai|Thaï|Tailandese
+Author|Auteur|Autore
+Video|Vidéo|Videò
+Cu&t|Co&uper|Ta&glià
+Version|Version|Versione
+Shortcut|Raccourci|Accurtatoia
+Title|Titre|Titulu
+Group|Groupe|Gruppu
+Menu|Menu|Menù
+Japanese|Japonais|Giappunese
+Korean|Coréen|Cureanu
+Translation|Traduction|Traduzzione
+Destination|Destination|Destinazione
+Used|Utilisé|Adupratu
+False|Faux|Falsu
+True|Vrai|Veru
+Gateway|Passerelle|Passarella
+Restart %1|Redémarrer %1|Rilancià %1
+Running|En cours d'exécution|In corsu d'esecuzione
+Just now|À l'instant|Appena avà
+Background|Arrière-plan|Fondu
+Selection|Sélection|Selezzione
+Source|Source|Fonte
+Cyrillic|Cyrillique|Cirillicu
+Greek|Grec|Grecu
+Authentication|Authentification|Autenticazione
+Underline|Souligner|Suttolineà
+Random|Aléatoire|Aleatoriu
+%1 and %2|%1 et %2|%1 è %2
+Address|Adresse|Indirizzu
+Tab|Tabulation|Tabulazione
+Play|Lecture|Lettura
+Landscape|Paysage|Orizzontale
+Portrait|Portrait|Verticale
+Horizontal|Horizontal|Orizzontale
+Vertical|Vertical|Verticale
+Untitled|Sans titre|Senza titulu
+Do not ask again|Ne plus poser la question|Ùn dumandà più
+Page %1 of %2|Page %1 de %2|Pagina %1 di %2
+Rating|Note|Valutazione
+Tags|Étiquettes|Etichette
+Input|Entrée|Entrata
+Miscellaneous|Divers|Varii
+Armenian|Arménien|Armenu
+Georgian|Géorgien|Georgianu
+Centered|Centré|Centratu
+Grid|Grille|Griglia
+Import|Importer|Impurtà
+Button|Bouton|Buttone
+&Go|A&ller|&Andà
+Documentation|Documentation|Ducumentazione
+Behavior|Comportement|Cumpurtamentu
+Domain|Domaine|Duminiu
+Telugu|Télougou|Telugu
+Tibetan|Tibétain|Tibetanu
+Turkish|Turque|Turcu
+Any|Quelconque|Qualunque
+Element|Élément|Elementu
+Delay|Délai|Ritardu
+Install from File…|Installer à partir d'un fichier…|Installà da un schedariu
+C&lear|E&ffacer|S&guassà
+Action|Action|Azzione
+Memory|Mémoire|Memoria
+Unlimited|Illimitée|Illimitatu
+Peek at Desktop|Coup d'œil sur le bureau|Ochjata à u scagnu
+Show more|Afficher plus|Affissà di più
+Compression|Compression|Cumpressione
+Owner|Propriétaire|Pruprietariu
+Descending|Décroissant|Discendente
+Ascending|Croissant|Ascendente
+Hue|Tonalité|Tonalità
+Saturation|Saturation|Saturazione
+Invalid|Invalide|Invalidu
+Created|Créé|Creatu
+Load|Charger|Caricà
+Main|Principal|Principale
+Timestamp|Horodatage|Marca tempurale
+Refresh %1|Réparer %1|Ripristinà %1
+Finish setup|Terminer la configuration|Finisce a cunfigurazione
+Get %1|Obtenir %1|Ottene %1
+More from %1|Autres produits de %1|Altri prudutti di %1
+Usage|Syntaxe|Sintassi
+Developer|Développeur|Sviluppatore
+Low|Faible|Bassu
+Skip|Sauter|Salta
+Full|Plein|Pienu
+Performance|Performances|Prestazioni
+Output|Sortie|Esciuta
+Homepage|Page d'accueil|Pagina d'accolta
+Terminal|Terminal|Terminale
+High|Haute|Alta
+Family|Famille|Famiglia
+Wide|Large|Largu
+Note|Note|Nota
+Connection refused|Connexion refusée|Cunnessione righjittata
+Stopped|Stoppé|Firmatu
+Find &Next|Chercher le &suivant|Circà u &seguente
+Country|Pays|Paese
+Failed|Échec|Fiascu
+Printing|Impression|Stampa
+Unavailable|Non disponible|Micca dispunibile
+Free|Libre|Liberu
+Unsupported mode %1|Mode %1 non pris en charge|Modu %1 micca supportatu
+Could not open file: %1|Impossible d'ouvrir le fichier : %1|Impussibule d'apre u schedariu : %1
+&Family|&Famille|&Famiglia
+Click here to close this window.|Cliquez ici pour fermer cette fenêtre|Cliccate quì per chjode sta finestra
+What's This?|Qu'est-ce que c'est ?|Cosa è quessa ?
+Connection closed|La connexion est fermée|A cunnessione è chjosa
+Error opening database|Erreur lors de l'ouverture de la base de données|Errore à l'apertura di a basa di dati
+Camera not ready|La caméra n'est pas prête|A camera ùn è pronta
+Crop|Recadrer|Ritaglià
+Data|Données|Dati
+Day|Jour|Ghjornu
+Results|Résultats|Risultati
+Phone|Téléphone|Telefonu
+Connection timed out|Connexion terminée par expiration du délai d'attente|Cunnessione compia per scadenza
+Suspended|Suspendu|Suspesu
+End|Fin|Fine
+Locked|Verrouillé|Chjuvatu
+Pressure|Pression|Pressione
+Monospace|Chasse fixe|Passu fissu
+Health|Santé|Salute
+Total|Total|Totale
+link|lien|ligame
+License|Licence|Licenza
+Available|Disponible|Dispunibile
+Browse…|Naviguer…|Navigà
+Last page|Dernière page|Ultima pagina
+Permission denied|Autorisation refusée|Auturizazione righjittata
+Context|Contexte|Cuntestu
+Symbols|Symboles|Simboli
+Symbol|Symbole|Simbulu
+Fast|Rapide|Rapidu
+Black|Noir|Neru
+Property|Propriété|Pruprietà
+Mongolian|Mongol|Mongolu
+Info|Informations|Infurmazioni
+Not specified|Non spécifié|Micca specificatu
+Method|Méthode|Metudu
+Modified|Modifié|Mudificatu
+To|Vers|Versu
+Create a profile|Créer un profil|Creà un prufilu
+Model|Modèle|Mudellu
+Vendor|Fabricant|Fabricante
+Processor|Processeur|Prucessore
+Cursor|Curseur|Cursore
+Vietnamese|Vietnamien|Vietnamianu
+%1 does not exist|%1 n'existe pas|%1 ùn esiste micca
+F&ull Screen Mode|&Mode plein écran|&Modu à screnu sanu
+Quit application|Quitter l'application|Chjude l'applicazione
+Repeat|Répétition|Ripetizione
+Thickness|Épaisseur|Grossezza
+Ma&ximize|Ma&ximiser|Ma&ssimizà
+Mi&nimize|Réd&uire|Mi&nimizà
+Ask|Demander|Dumandà
+File not found|Fichier introuvable|Schedariu micca trovu
+All files (*)|Tous les fichiers (*)|Tutti i schedarii (*)
+Decrease|Réduction|Diminuzione
+Empty|Vide|Viotu
+Increase|Augmentation|Aumentu
+Origin|Origine|Origine
+Show &Toolbar|Afficher la barre d'&outils|Affissà a barra di l'&attrezzi
+Latin|Latin|Latinu
+Escape|Échap|Esc
+Middle|Central|Centrale
+Unable to create a temporary file.|Impossible de créer un fichier temporaire|Impussibule di creà un schedariu timpurariu
+Keep above other windows|Conserver au dessus des autres fenêtres|Mantene sopra à l'altre finestre
+Keep below other windows|Conserver en dessous des autres fenêtres|Mantene sottu à l'altre finestre
+Regular expression|Expression rationnelle|Espressione regulare
+Extreme|Extrême|Estremu
+Up|Vers le haut|Versu l'altu
+Down|Vers le bas|Versu u bassu
+Spelling|Orthographe|Ortugrafia
+Desktop %1|Bureau %1|Scagnu %1
+Finger count|Nombre de doigts|Numeru di dite
+Show less|Afficher moins|Affissà di menu
+Unregister|Désinscrire|Disiscrive
+Features|Fonctionnalités|Funziunalità
+Refresh %1…|Réparer %1…|Ripristinà %1…
+Remove password?|Supprimer le mot de passe ?|Sguassà a parolla d'accessu ?
+Looks like there's a problem with this site|Il semble y avoir un problème sur ce site|Pare ch'ellu ci sia un prublema cù stu situ
+Try again in a few minutes.|Réessayez dans quelques minutes|Ripruvate in qualchì minuta
+Digital signature properties|Propriétés de la signature numérique|Pruprietà di a firma numerica
+Playback speed|Vitesse de lecture|Velucità di lettura
+Show me how|Me montrer comment|Mustratemi cumu fà
+Don't See Your Device?|Vous ne voyez pas votre appareil ?|Ùn vedete micca u vostru dispusitivu ?
+Add bookmark|Ajouter un marque-page|Aghjunghje un segnalibru
+Sponsored|Sponsorisé|Spunsurizatu
+Last visited %1|Dernière visite %1|Ultima visita %1
+Find out how|Découvrir comment|Scuprite cumu fà
+Create task|Créer une tâche|Creà un travagliu
+VPN is off for this site|Le VPN est désactivé pour ce site|U VPN è disattivatu per stu situ
+Recommendation|Recommandation|Raccumandazione
+Open my links with %1|Ouvrir mes liens avec %1|Apre i mei ligami cù %1
+Remind me later|Me le rappeler plus tard|Rammintàmila più tardi
+See what's new|Découvrir les nouveautés|Scuprite e nuvità
+Hide password|Masquer le mot de passe|Piattà a parolla d'accessu
+Try it now|Essayer maintenant|Pruvate avà
+Set %1 as default browser|Faire de %1 mon navigateur par défaut|Definisce %1 cum'è navigatore per difettu
+How it works|Mode d'emploi|Cumu funziona
+Mode|Mode|Modu
+Function|Fonction|Funzione
+Sync|Synchroniser|Sincronizà
+Markup|Texte balisé|Testu marcatu
+Myanmar|Birman|Birmanu
+Screenshot|Capture d'écran|Cattura di screnu
+Select file|Sélectionnez un fichier|Selezziunate un schedariu
+Close message|Fermer le message|Chjode u messaghju
+Cache|Cache|Cache
+More actions|Plus d'actions|Altre azzioni
+Calendar|Calendrier|Calendariu
+From|Depuis|Da
+Interface|Interface|Interfaccia
+Clipboard|Presse-papiers|Preme-papei
+No error|Pas d'erreur|Nisun errore
+Confidential|Confidentiel|Cunfidenziale
+Backspace|Retour arrière|Ritornu
+Media|Média|Media
+Outline|Contour|Cuntornu
+separator|séparateur|separatore
+Statistics|Statistiques|Statistiche
+Strong|Fort|Forte
+Temperature|Température|Temperatura
+Baltic|Baltique|Balticu
