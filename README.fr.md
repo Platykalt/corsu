@@ -8,28 +8,24 @@ traduit aussi le bureau KDE Plasma. Il fonctionne sous Windows, macOS et Linux, 
 
 ## Télécharger
 
-| | |
-| --- | --- |
-| Windows | [corsu-windows.zip](https://github.com/Platykalt/corsu/releases/latest/download/corsu-windows.zip) |
-| macOS | [corsu-macos.tar.gz](https://github.com/Platykalt/corsu/releases/latest/download/corsu-macos.tar.gz) |
-| Linux | [corsu-linux.tar.gz](https://github.com/Platykalt/corsu/releases/latest/download/corsu-linux.tar.gz) |
+| Système | Téléchargement | Ensuite | Pas à pas |
+| --- | --- | --- | --- |
+| Windows | [corsu-windows.zip](https://github.com/Platykalt/corsu/releases/latest/download/corsu-windows.zip) | décompressez-le, double-cliquez sur `Install for Windows.cmd` | [docs/install-windows.md](docs/install-windows.md#en-français) |
+| macOS | [corsu-macos.tar.gz](https://github.com/Platykalt/corsu/releases/latest/download/corsu-macos.tar.gz) | double-cliquez sur `Install for macOS.command` | [docs/install-macos.md](docs/install-macos.md#en-français) |
+| Linux | [corsu-linux.tar.gz](https://github.com/Platykalt/corsu/releases/latest/download/corsu-linux.tar.gz) | lancez `./"Install for Linux.sh"` | [docs/install-linux.md](docs/install-linux.md#en-français) |
 
-Sous Windows, décompressez le fichier zip (clic droit, Extraire tout), ouvrez le dossier `corsu` et
-double-cliquez sur `install.cmd`. Windows peut vous demander si vous voulez vraiment lancer un fichier
-téléchargé. Si Python n'est pas installé, le script propose de l'installer.
+Corsu a besoin de Python 3.10 ou plus récent. Sous Windows, l'installeur propose de l'installer pour vous.
 
-Sous macOS et Linux, décompressez l'archive et lancez `./install.sh` depuis le dossier `corsu`.
-
-On peut aussi tout faire en une ligne. Dans PowerShell, sous Windows :
+On peut aussi installer en une ligne. Dans PowerShell, sous Windows :
 
 ```powershell
-irm https://raw.githubusercontent.com/Platykalt/corsu/main/get.ps1 | iex
+irm https://raw.githubusercontent.com/Platykalt/corsu/main/tools/get.ps1 | iex
 ```
 
-Dans un terminal, sous macOS ou Linux :
+Dans le Terminal, sous macOS ou Linux :
 
 ```sh
-curl -fsSL https://raw.githubusercontent.com/Platykalt/corsu/main/get.sh | sh
+curl -fsSL https://raw.githubusercontent.com/Platykalt/corsu/main/tools/get.sh | sh
 ```
 
 ## Utilisation
@@ -52,7 +48,7 @@ français ou retirer Corsu. Il garde une copie de chaque fichier qu'il modifie :
 dans l'état où il était.
 
 Firefox et Discord marchent sur les trois systèmes. Chrome, Opera GX, Edge, Brave et Vivaldi marchent sous
-Windows et Linux ; ils ne sont pas encore pris en charge sur macOS. [docs/components.md](docs/components.md)
+Windows et Linux ; ils ne sont pas encore pris en charge sur macOS. [docs/what-corsu-changes.md](docs/what-corsu-changes.md)
 détaille ce que Corsu change pour chaque logiciel.
 
 Seul le logiciel est traduit, jamais les sites web ni les messages. Le texte qui n'a pas encore de traduction
@@ -77,7 +73,7 @@ comment s'en servir.
 
 ## Autres documents
 
-[docs/development.md](docs/development.md) décrit le code, les tests et la publication d'une version.
+[docs/developers.md](docs/developers.md) décrit le code, les tests et la publication d'une version.
 [CHANGELOG.md](CHANGELOG.md) liste les changements de chaque version.
 
 Corsu est un logiciel libre, publié sous [licence GNU GPL](LICENSE), version 3 ou ultérieure. Les traductions

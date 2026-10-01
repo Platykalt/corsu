@@ -1,11 +1,11 @@
 #!/bin/sh
 # Download the latest Corsu release for this computer, check its SHA-256 and start the installer.
-#   curl -fsSL https://raw.githubusercontent.com/Platykalt/corsu/main/get.sh | sh
+#   curl -fsSL https://raw.githubusercontent.com/Platykalt/corsu/main/tools/get.sh | sh
 set -eu
 case "$(uname -s)" in
-    Linux) name=corsu-linux.tar.gz ;;
-    Darwin) name=corsu-macos.tar.gz ;;
-    *) echo "Corsu supports Linux, macOS and Windows. On Windows, use get.ps1." >&2; exit 1 ;;
+    Linux) name=corsu-linux.tar.gz; installer="Install for Linux.sh" ;;
+    Darwin) name=corsu-macos.tar.gz; installer="Install for macOS.command" ;;
+    *) echo "Corsu supports Linux, macOS and Windows. On Windows, use tools/get.ps1." >&2; exit 1 ;;
 esac
 base=https://github.com/Platykalt/corsu/releases/latest/download
 dir=$(mktemp -d "${TMPDIR:-/tmp}/corsu.XXXXXX")
@@ -20,6 +20,6 @@ fi
 tar xzf "$dir/$name" -C "$dir"
 # The installer asks questions: read the answers from the terminal, not from this piped script.
 if (: </dev/tty) 2>/dev/null; then
-    exec "$dir/corsu/install.sh" "$@" </dev/tty
+    exec "$dir/corsu/$installer" "$@" </dev/tty
 fi
-exec "$dir/corsu/install.sh" "$@"
+exec "$dir/corsu/$installer" "$@"

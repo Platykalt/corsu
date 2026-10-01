@@ -8,28 +8,24 @@ at any time.
 
 ## Download
 
-| | |
-| --- | --- |
-| Windows | [corsu-windows.zip](https://github.com/Platykalt/corsu/releases/latest/download/corsu-windows.zip) |
-| macOS | [corsu-macos.tar.gz](https://github.com/Platykalt/corsu/releases/latest/download/corsu-macos.tar.gz) |
-| Linux | [corsu-linux.tar.gz](https://github.com/Platykalt/corsu/releases/latest/download/corsu-linux.tar.gz) |
+| System | Download | Then | Step by step |
+| --- | --- | --- | --- |
+| Windows | [corsu-windows.zip](https://github.com/Platykalt/corsu/releases/latest/download/corsu-windows.zip) | extract it, double-click `Install for Windows.cmd` | [docs/install-windows.md](docs/install-windows.md) |
+| macOS | [corsu-macos.tar.gz](https://github.com/Platykalt/corsu/releases/latest/download/corsu-macos.tar.gz) | double-click `Install for macOS.command` | [docs/install-macos.md](docs/install-macos.md) |
+| Linux | [corsu-linux.tar.gz](https://github.com/Platykalt/corsu/releases/latest/download/corsu-linux.tar.gz) | run `./"Install for Linux.sh"` | [docs/install-linux.md](docs/install-linux.md) |
 
-On Windows, extract the zip (right-click, Extract All), open the `corsu` folder and double-click `install.cmd`.
-Windows may ask whether you really want to run a downloaded file. If Python is not installed, the script offers
-to install it.
+Corsu needs Python 3.10 or newer. On Windows the installer offers to install it for you.
 
-On macOS and Linux, extract the archive and run `./install.sh` from the `corsu` folder.
-
-You can also do it in one line. In PowerShell on Windows:
+You can also install in one line. In PowerShell on Windows:
 
 ```powershell
-irm https://raw.githubusercontent.com/Platykalt/corsu/main/get.ps1 | iex
+irm https://raw.githubusercontent.com/Platykalt/corsu/main/tools/get.ps1 | iex
 ```
 
-In a terminal on macOS or Linux:
+In Terminal on macOS or Linux:
 
 ```sh
-curl -fsSL https://raw.githubusercontent.com/Platykalt/corsu/main/get.sh | sh
+curl -fsSL https://raw.githubusercontent.com/Platykalt/corsu/main/tools/get.sh | sh
 ```
 
 ## Using it
@@ -51,7 +47,7 @@ The installer adds a shortcut called Corsu Setup. Open it later to add another p
 or to remove Corsu. It keeps a copy of every file it changes, so removing it puts your computer back as it was.
 
 Firefox and Discord work on all three systems. Chrome, Opera GX, Edge, Brave and Vivaldi work on Windows and
-Linux; macOS support for them is not done yet. [docs/components.md](docs/components.md) explains what Corsu
+Linux; macOS support for them is not done yet. [docs/what-corsu-changes.md](docs/what-corsu-changes.md) explains what Corsu
 changes for each program.
 
 Only the program itself is translated, never websites or messages. Text that has no Corsican translation yet
@@ -76,7 +72,7 @@ them.
 
 ## Other documents
 
-[docs/development.md](docs/development.md) describes the code, the tests and how a release is made.
+[docs/developers.md](docs/developers.md) describes the code, the tests and how a release is made.
 [CHANGELOG.md](CHANGELOG.md) lists the changes in each version.
 
 Corsu is free software, released under the [GNU GPL](LICENSE), version 3 or later. Translations taken from other

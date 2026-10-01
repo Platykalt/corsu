@@ -12,9 +12,9 @@ import zipfile
 ROOT = Path(__file__).resolve().parent.parent
 # Stable names, so https://github.com/<owner>/corsu/releases/latest/download/<name> always works.
 ARCHIVES = {'linux': 'corsu-linux.tar.gz', 'windows': 'corsu-windows.zip', 'macos': 'corsu-macos.tar.gz'}
-SOURCES = ('README.md', 'README.fr.md', 'CHANGELOG.md', 'CONTRIBUTING.md', 'LICENSE', 'release.json',
-           'install.sh', 'install.cmd', 'get.sh', 'get.ps1')
-SOURCE_DIRECTORIES = ('src', 'lexicon', 'discord-plugin', 'docs', 'tests', 'tools', 'ci')
+SOURCES = ('README.md', 'README.fr.md', 'CHANGELOG.md', 'CONTRIBUTING.md', 'LICENSE',
+           'Install for Windows.cmd', 'Install for macOS.command', 'Install for Linux.sh')
+SOURCE_DIRECTORIES = ('src', 'lexicon', 'docs', 'tests', 'tools')
 
 
 def vencord_installer(manifest, name):
@@ -38,7 +38,7 @@ def collect(manifest):
     # The dictionary is compiled into the bundle, so a stale build ships old Discord labels.
     build = min(path.stat().st_mtime for path in (ROOT / 'Vencord/dist').glob('*.js'))
     stale = [name for name in ('lexicon/lexicon.tsv', 'lexicon/lexicon-mozilla.tsv', 'lexicon/lexicon-upstream.tsv',
-                               'discord-plugin/index.ts', 'discord-plugin/translate.ts')
+                               'src/discord-plugin/index.ts', 'src/discord-plugin/translate.ts')
              if (ROOT / name).stat().st_mtime > build]
     if stale:
         raise RuntimeError('Vencord build predates ' + ', '.join(stale) + '. Rebuild it before packaging.')
@@ -62,7 +62,7 @@ def collect(manifest):
 def package(manifest, name, files, output):
     files = [*files, vencord_installer(manifest, name)]
     stem = 'corsu'
-    executable = {'install.sh', manifest['installers'][name]['file']}
+    executable = {'Install for Linux.sh', 'Install for macOS.command', 'get.sh', manifest['installers'][name]['file']}
     if name == 'windows':
         archive = output / ARCHIVES[name]
         with zipfile.ZipFile(archive, 'w', zipfile.ZIP_DEFLATED) as bundle:
@@ -92,7 +92,7 @@ def main():
     parser.add_argument('--platforms', nargs='+', choices=sorted(ARCHIVES), default=sorted(ARCHIVES))
     parser.add_argument('--output', type=Path, default=ROOT / 'releases')
     args = parser.parse_args()
-    manifest = json.loads((ROOT / 'release.json').read_text(encoding='utf-8'))
+    manifest = json.loads((ROOT / 'src/release.json').read_text(encoding='utf-8'))
     files = collect(manifest)
     args.output.mkdir(parents=True, exist_ok=True)
     for name in args.platforms:

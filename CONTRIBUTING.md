@@ -38,7 +38,7 @@ untranslated. It only reads program files, not your documents or messages.
 
 ## Code
 
-Run the tests with `python3 -m unittest discover -s tests -t .`. [docs/development.md](docs/development.md)
+Run the tests with `python3 -m unittest discover -s tests -t .`. [docs/developers.md](docs/developers.md)
 explains the layout, the end-to-end checks and how releases are made. Tests must never change a real
 installation: use a temporary home folder, and `CORSU_FIREFOX` or `CORSU_CHROMIUM` to point at a test copy of a
 browser.

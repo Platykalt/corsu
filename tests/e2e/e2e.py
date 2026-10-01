@@ -18,6 +18,7 @@ import sys
 import tempfile
 
 HERE = Path(__file__).resolve().parent
+PROJECT = HERE.parent.parent
 PLATFORM = 'windows' if sys.platform == 'win32' else 'macos' if sys.platform == 'darwin' else 'linux'
 
 
@@ -136,7 +137,7 @@ def check_chromium(root, home, environment):
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('check', choices=['firefox', 'discord', 'chromium'])
-    parser.add_argument('--root', type=Path, default=HERE.parent)
+    parser.add_argument('--root', type=Path, default=PROJECT)
     args = parser.parse_args()
     with tempfile.TemporaryDirectory(prefix='corsu-home-', ignore_cleanup_errors=True) as directory:
         home = Path(directory)

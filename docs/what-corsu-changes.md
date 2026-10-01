@@ -52,7 +52,7 @@ Corsu uses Vencord, an open-source modification of the Discord app, with a small
 interface. Messages, server names and user names are never translated.
 
 The Discord app is patched with the official Vencord installer, after Corsu has checked its checksum against
-the one recorded in `release.json`. Vesktop, a Discord app that already includes Vencord, only needs a setting.
+the one recorded in `src/release.json`. Vesktop, a Discord app that already includes Vencord, only needs a setting.
 Vencord's automatic updates are turned off because they would remove the plugin.
 
 A Discord update can undo the patch. If Discord is back in French after an update, open Corsu Setup again.

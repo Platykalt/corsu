@@ -56,7 +56,8 @@ class InstallerTests(unittest.TestCase):
             (root / 'vendor').mkdir()
             (root / 'vendor/VencordInstallerCli').write_bytes(b'bad binary')
             entry = {'file': 'VencordInstallerCli', 'sha256': 'invalid'}
-            (root / 'release.json').write_text(json.dumps({
+            (root / 'src').mkdir()
+            (root / 'src/release.json').write_text(json.dumps({
                 'installer_base_url': 'https://invalid/', 'installers': {name: entry for name in ('linux', 'windows', 'macos')}}))
             with patch.object(installer, 'ROOT', root), patch.object(installer, 'run') as run, \
                  patch.object(installer.platform, 'machine', return_value='x86_64'):
@@ -97,7 +98,7 @@ class InstallerTests(unittest.TestCase):
                 self.assertEqual(installer.discord_archive(root), root / 'resources/app.asar')
 
     def test_release_pins_an_installer_for_every_platform(self):
-        manifest = json.loads((installer.ROOT / 'release.json').read_text(encoding='utf-8'))
+        manifest = json.loads((installer.ROOT / 'src/release.json').read_text(encoding='utf-8'))
         for name in ('linux', 'windows', 'macos'):
             self.assertRegex(manifest['installers'][name]['sha256'], r'^[0-9a-f]{64}$')
 

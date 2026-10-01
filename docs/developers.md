@@ -3,19 +3,20 @@
 ## Layout
 
 ```
-src/              Python code: installer.py (setup), corsu.py (Firefox, KDE, Discord, launchers),
-                  chromium.py (Chromium browsers), engine.py (lexicon lookup and file formats)
-lexicon/          the translations: lexicon.tsv (drafts), lexicon-mozilla.tsv and lexicon-upstream.tsv
-                  (reviewed translations from other projects, loaded first)
-discord-plugin/   the Vencord plugin that translates Discord's interface
-tests/            unit tests (python -m unittest discover -s tests -t .)
-ci/               end-to-end checks used by the CI, also runnable locally
-tools/            packaging, coverage report, import of upstream translations
-docs/             documentation
-vendor/           pinned third-party files (Vencord installer source)
-install.sh, install.cmd   start the installer from an extracted release
-get.sh, get.ps1           one-line download-and-install scripts
-release.json      version, pinned Vencord revision and installer checksums
+Install for Windows.cmd     what Windows users double-click
+Install for macOS.command   what macOS users double-click
+Install for Linux.sh        what Linux users run
+docs/                       installation guides and documentation
+lexicon/                    the translations: lexicon.tsv (written for Corsu), lexicon-mozilla.tsv and
+                            lexicon-upstream.tsv (reviewed translations from other projects, loaded first)
+src/                        the program: installer.py (setup and menu), corsu.py (Firefox, KDE, Discord,
+                            shortcuts), chromium.py (Chromium browsers), engine.py (lookup and file formats),
+                            release.json (version, pinned Vencord revision, installer checksums)
+src/discord-plugin/         the Vencord plugin that translates Discord
+tests/                      unit tests; tests/e2e/ holds the end-to-end checks the CI runs on each system
+tools/                      get.sh and get.ps1 (one-line installs), packaging, coverage report, import of
+                            translations from other projects
+vendor/                     pinned third-party files
 ```
 
 Only Python's standard library is used. Building the Discord plugin needs Node.js 22 or newer and pnpm.
@@ -39,9 +40,9 @@ computer.
 
 ```sh
 python3 -m unittest discover -s tests -t .
-python3 ci/e2e.py firefox     # installs in a throwaway home, starts Firefox and reads its menus
-python3 ci/e2e.py discord     # patches a stand-in Discord with the official Vencord installer
-CORSU_CHROMIUM=/path/to/chrome-for-testing python3 ci/e2e.py chromium
+python3 tests/e2e/e2e.py firefox     # installs in a throwaway home, starts Firefox and reads its menus
+python3 tests/e2e/e2e.py discord     # patches a stand-in Discord with the official Vencord installer
+CORSU_CHROMIUM=/path/to/chrome-for-testing python3 tests/e2e/e2e.py chromium
 ```
 
 `CORSU_CHROMIUM` replaces every installed Chromium browser with the given folder, so the test never touches a
@@ -57,12 +58,12 @@ real browser. `CORSU_FIREFOX` does the same for Firefox.
    read their interface text, switch off, switch on, uninstall, and check that nothing is left behind; then
    patch a stand-in Discord with the official Vencord installer and check that it is restored.
 
-Pushing a tag `vX.Y.Z` that matches `release.json` publishes a GitHub release with the archives, but only when
+Pushing a tag `vX.Y.Z` that matches `src/release.json` publishes a GitHub release with the archives, but only when
 all of the above passes.
 
 ## Making a release
 
-1. Update `version` in `release.json` and add an entry to `CHANGELOG.md`.
+1. Update `version` in `src/release.json` and add an entry to `CHANGELOG.md`.
 2. Commit, then `git tag vX.Y.Z && git push origin vX.Y.Z`.
 
 To build the archives locally instead: check out Vencord at the pinned revision into `Vencord/`, build it

@@ -94,12 +94,12 @@ def stale_build(source):
     built = min(path.stat().st_mtime for path in builds)
     return any((ROOT / name).stat().st_mtime > built
                for name in ('lexicon/lexicon.tsv', 'lexicon/lexicon-mozilla.tsv', 'lexicon/lexicon-upstream.tsv',
-                            'discord-plugin/index.ts', 'discord-plugin/translate.ts'))
+                            'src/discord-plugin/index.ts', 'src/discord-plugin/translate.ts'))
 
 
 def prepare_build():
     source = ROOT / 'Vencord'
-    manifest = json.loads((ROOT / 'release.json').read_text(encoding='utf-8'))
+    manifest = json.loads((ROOT / 'src/release.json').read_text(encoding='utf-8'))
     if not source.exists():
         run(['git', 'clone', 'https://github.com/Vendicated/Vencord.git', source])
         run(['git', 'checkout', '--detach', manifest['vencord_revision']], cwd=source)
@@ -119,8 +119,9 @@ def prepare_build():
         env={**os.environ, 'VENCORD_HASH': manifest['vencord_revision'][:7]})
 
 
-DEPLOYED_FILES = ('LICENSE', 'README.md', 'README.fr.md', 'CONTRIBUTING.md', 'release.json', 'install.sh', 'install.cmd')
-DEPLOYED_DIRECTORIES = ('src', 'lexicon', 'discord-plugin', 'vendor', 'Vencord')
+DEPLOYED_FILES = ('LICENSE', 'README.md', 'README.fr.md', 'CONTRIBUTING.md', 'Install for Windows.cmd',
+                  'Install for macOS.command', 'Install for Linux.sh')
+DEPLOYED_DIRECTORIES = ('src', 'lexicon', 'vendor', 'Vencord')
 
 
 def deploy_release():
@@ -130,7 +131,7 @@ def deploy_release():
     if ROOT.is_relative_to((corsu.DATA / 'releases').resolve()) or os.environ.get('CORSU_DEPLOYED') == str(ROOT):
         return ROOT
     fingerprint = hashlib.sha256()
-    for path in sorted([*(ROOT / 'src').glob('*.py'), *(ROOT / 'discord-plugin').glob('*.ts'),
+    for path in sorted([*(ROOT / 'src').glob('*.py'), *(ROOT / 'src').glob('*.json'), *(ROOT / 'src/discord-plugin').glob('*.ts'),
                         *(ROOT / name for name in DEPLOYED_FILES if (ROOT / name).is_file()),
                         *(ROOT / 'lexicon').glob('*.tsv'), *(ROOT / 'Vencord/dist').glob('*.*')]):
         fingerprint.update(path.relative_to(ROOT).as_posix().encode() + b'\0' + path.read_bytes())
@@ -156,7 +157,7 @@ def deploy_release():
 
 def vencord_installer():
     """Return the checksum-verified official Vencord installer, downloading the pinned build if absent."""
-    manifest = json.loads((ROOT / 'release.json').read_text(encoding='utf-8'))
+    manifest = json.loads((ROOT / 'src/release.json').read_text(encoding='utf-8'))
     entry = manifest['installers'][corsu.PLATFORM]
     binary = ROOT / 'vendor' / entry['file']
     if corsu.PLATFORM == 'linux' and platform.machine().lower() not in ('x86_64', 'amd64'):

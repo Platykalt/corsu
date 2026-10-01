@@ -1,15 +1,17 @@
-Download the file for your system, extract it, and start the installer:
-
-| System | File | Then |
+| System | Download | Then |
 | --- | --- | --- |
-| Windows 10 or 11 | `corsu-windows.zip` | double-click `install.cmd` |
-| macOS | `corsu-macos.tar.gz` | run `./install.sh` in Terminal |
-| Linux | `corsu-linux.tar.gz` | run `./install.sh` |
+| Windows 10 or 11 | `corsu-windows.zip` | extract it and double-click `Install for Windows.cmd` |
+| macOS | `corsu-macos.tar.gz` | double-click `Install for macOS.command` |
+| Linux | `corsu-linux.tar.gz` | run `./"Install for Linux.sh"` |
 
-Or install in one line: `irm https://raw.githubusercontent.com/Platykalt/corsu/main/get.ps1 | iex` on Windows
-(PowerShell), `curl -fsSL https://raw.githubusercontent.com/Platykalt/corsu/main/get.sh | sh` on macOS and Linux.
+The [installation guides](https://github.com/Platykalt/corsu/tree/main/docs) explain each step and the warnings
+Windows and macOS show for downloaded scripts.
 
-Each file has a `.sha256` checksum next to it. Python 3.10 or newer is required; on Windows `install.cmd` offers to
-install it. Every archive here was installed and tested on its own system before this release was published.
+To install in one line: `irm https://raw.githubusercontent.com/Platykalt/corsu/main/tools/get.ps1 | iex` in
+PowerShell on Windows, or `curl -fsSL https://raw.githubusercontent.com/Platykalt/corsu/main/tools/get.sh | sh` in
+Terminal on macOS and Linux.
 
-See [CHANGELOG.md](https://github.com/Platykalt/corsu/blob/main/CHANGELOG.md) for what changed.
+Each file has a `.sha256` checksum next to it. Corsu needs Python 3.10 or newer; on Windows the installer offers to
+install it. Every archive was installed and tested on its own system before this release was published.
+
+[CHANGELOG.md](https://github.com/Platykalt/corsu/blob/main/CHANGELOG.md) lists what changed.

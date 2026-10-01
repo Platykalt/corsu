@@ -580,7 +580,7 @@ def generate():
     plugin.mkdir(parents=True, exist_ok=True)
     (plugin / 'dictionary.json').write_text(json.dumps(WORDS, ensure_ascii=False, indent=2), encoding='utf-8')
     for name in ('index.ts', 'translate.ts'):
-        shutil.copy2(ROOT / 'discord-plugin' / name, plugin / name)
+        shutil.copy2(SRC / 'discord-plugin' / name, plugin / name)
 
 
 def firefox_profile_roots():
@@ -782,7 +782,7 @@ def install(components=None, qt_system=False):
 
 def vencord_installer():
     """The official Vencord installer for this platform and its pinned SHA-256."""
-    manifest = json.loads((ROOT / 'release.json').read_text(encoding='utf-8'))
+    manifest = json.loads((SRC / 'release.json').read_text(encoding='utf-8'))
     entry = manifest['installers'][PLATFORM]
     return ROOT / 'vendor' / entry['file'], entry['sha256']
 

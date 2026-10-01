@@ -8,6 +8,9 @@
 - The README, the guides and the installer messages were rewritten in plainer language.
 - The installer says in plain words what it will change before asking.
 - CI now also tries the one-line installers against each published release.
+- Simpler layout: `Install for Windows.cmd`, `Install for macOS.command` and `Install for Linux.sh` at the top,
+  a guide per system in `docs/`, the one-line installers in `tools/`, the code in `src/`.
+- On macOS the installer can be opened by double-clicking.
 
 ## 0.6.0 (2026-10-01)
 

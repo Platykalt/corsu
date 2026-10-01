@@ -10,6 +10,6 @@ where winget >nul 2>nul || (echo Install Python from https://www.python.org/down
 set /p answer=Install Python 3 now with winget? [y/N] 
 if /i not "%answer%"=="y" goto :end
 winget install --id Python.Python.3.13 --exact --accept-source-agreements --accept-package-agreements || goto :end
-echo Python installed. Run install.cmd again from a new window.
+echo Python installed. Double-click "Install for Windows.cmd" again.
 :end
 if not defined CI pause

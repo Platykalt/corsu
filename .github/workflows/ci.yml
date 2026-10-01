@@ -40,7 +40,7 @@ jobs:
           python-version: '3.13'
       - name: Check out the pinned Vencord revision
         run: |
-          revision=$(python -c "import json; print(json.load(open('release.json'))['vencord_revision'])")
+          revision=$(python -c "import json; print(json.load(open('src/release.json'))['vencord_revision'])")
           git init -q Vencord
           # Vencord's build reads the `origin` remote for its user agent.
           git -C Vencord remote add origin https://github.com/Vendicated/Vencord.git
@@ -114,9 +114,9 @@ jobs:
         if: runner.os == 'macOS'
         run: test -d /Applications/Firefox.app || brew install --cask firefox
       - name: Firefox — install, launch the translated build, disable, enable, uninstall
-        run: python ci/e2e.py firefox --root "${{ env.CORSU_RELEASE }}"
+        run: python tests/e2e/e2e.py firefox --root "${{ env.CORSU_RELEASE }}"
       - name: Discord — patch with the official Vencord installer, then restore
-        run: python ci/e2e.py discord --root "${{ env.CORSU_RELEASE }}"
+        run: python tests/e2e/e2e.py discord --root "${{ env.CORSU_RELEASE }}"
       - name: Chromium — translate Chrome for Testing, read it in Corsican, switch off/on, restore
         if: runner.os != 'macOS'
         shell: bash
@@ -126,7 +126,7 @@ jobs:
             | python -c "import json,sys; d=json.load(sys.stdin)['channels']['Stable']['downloads']['chrome']; print([x['url'] for x in d if x['platform']=='$platform'][0])")
           curl -fsSL -o cft.zip "$url" && unzip -q cft.zip -d "$RUNNER_TEMP/cft"
           export CORSU_CHROMIUM="$RUNNER_TEMP/cft/chrome-$platform"
-          python ci/e2e.py chromium --root "${{ env.CORSU_RELEASE }}"
+          python tests/e2e/e2e.py chromium --root "${{ env.CORSU_RELEASE }}"
 
   release:
     name: Publish GitHub release
@@ -141,8 +141,8 @@ jobs:
         with:
           name: releases
           path: dist
-      - name: Check the tag matches release.json
-        run: test "v$(python3 -c "import json; print(json.load(open('release.json'))['version'])")" = "$GITHUB_REF_NAME"
+      - name: Check the tag matches src/release.json
+        run: test "v$(python3 -c "import json; print(json.load(open('src/release.json'))['version'])")" = "$GITHUB_REF_NAME"
       - name: Create the release
         env:
           GH_TOKEN: ${{ github.token }}
@@ -168,12 +168,12 @@ jobs:
           curl -fsSL -o firefox.tar.xz "https://download.mozilla.org/?product=firefox-latest-ssl&os=linux64&lang=en-US"
           mkdir -p "$RUNNER_TEMP/mozilla" && tar xf firefox.tar.xz -C "$RUNNER_TEMP/mozilla"
           export CORSU_FIREFOX="$RUNNER_TEMP/mozilla/firefox"
-          sh get.sh --dry-run --components firefox | tee out.txt
+          sh tools/get.sh --dry-run --components firefox | tee out.txt
           grep -q "make a translated copy of Firefox" out.txt
       - name: get.ps1 downloads, checks and starts the installer
         if: runner.os == 'Windows'
         shell: pwsh
         run: |
           if (-not (Test-Path "$env:ProgramFiles\Mozilla Firefox\firefox.exe")) { choco install firefox -y --no-progress }
-          ./get.ps1 --dry-run --components firefox | Tee-Object out.txt
+          ./tools/get.ps1 --dry-run --components firefox | Tee-Object out.txt
           if (-not (Select-String -Path out.txt -Pattern 'make a translated copy of Firefox' -Quiet)) { exit 1 }
