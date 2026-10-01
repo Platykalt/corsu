@@ -605,6 +605,9 @@ def firefox_runtime():
                             lines.append(line)
                         data = ''.join(lines).encode()
                     output.writestr(info.filename, data)
+                if prefix:
+                    for module_name, module_data in google_modules().items():
+                        output.writestr('modules/corsu/' + module_name, module_data)
         locale = stats.setdefault('locale', 'en-US')
         # Keep the normal profile and extension signature checks; do not relax security.
         prefs = app / install.resources / 'defaults/pref/corsu.js'
@@ -646,16 +649,27 @@ GOOGLE_DOMAINS = ('google.com', 'google.fr', 'google.it', 'google.be', 'google.c
 
 
 def google_labels(resources):
-    """Install the module that puts Corsican on Google's buttons and menus, where Google's own Corsican
-    interface falls back to French or English. Search results are left alone."""
+    """Write the autoconfig file that starts the Google module (kept in browser/omni.ja, see google_modules)."""
     config = (SRC / 'firefox/corsu.cfg').read_text(encoding='utf-8').replace('HOSTS', json.dumps(list(GOOGLE_DOMAINS)))
     (resources / 'corsu.cfg').write_text(config, encoding='utf-8')
-    module = resources / 'corsu'
-    module.mkdir(exist_ok=True)
-    shutil.copy2(SRC / 'firefox/CorsuChild.sys.mjs', module / 'CorsuChild.sys.mjs')
-    labels = {key: value for key, value in WORDS.items() if len(key) <= 100}
-    (module / 'dictionary.mjs').write_text('export const words = ' + json.dumps(labels, ensure_ascii=False, separators=(',', ':'))
-                                           + ';\n', encoding='utf-8')
+
+
+def google_modules():
+    """The module that puts Corsican on Google's buttons and menus where Google's own Corsican interface falls
+    back to French or English, with its dictionary. Search results and other websites are left alone."""
+    # Only Google's own labels: every page process loads this file, so it stays a few kilobytes.
+    labels = {}
+    for line in (SRC / 'firefox/google-labels.txt').read_text(encoding='utf-8').splitlines():
+        if line and not line.startswith('#') and WORDS.get(line, line) != line:
+            labels[line] = WORDS[line]
+    section = LEXICON.read_text(encoding='utf-8').split('\n# Google:', 1)
+    for line in (section[1].splitlines()[1:] if len(section) == 2 else []):
+        fields = line.split('|')
+        if len(fields) == 3 and not line.startswith('#'):
+            labels.update({key: WORDS.get(key, fields[2]) for key in fields[:2] if key})
+    return {'CorsuChild.sys.mjs': (SRC / 'firefox/CorsuChild.sys.mjs').read_bytes(),
+            'dictionary.mjs': ('export const words = ' + json.dumps(labels, ensure_ascii=False, separators=(',', ':'))
+                               + ';\n').encode('utf-8')}
 
 
 def firefox_directory(runtime):

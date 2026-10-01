@@ -1,5 +1,15 @@
 # Changelog
 
+## 0.12.0 (2026-10-01)
+
+- Firefox: Google pages load as fast as before. The Google module now carries only Google's own labels (11 KB instead
+  of the whole 11 MB lexicon) and lives inside the Firefox copy, so it is ready in every tab, including after clicking
+  Images, News or Short videos.
+- Firefox: about 100 more Google labels in Corsican: date and type filters, tools, map and weather labels, translation
+  tool buttons, error messages, "About N results" and ratings. Buttons inside the results, such as "Show more", are
+  left alone so they keep working.
+- Firefox and Discord: text is translated before it is drawn, so French no longer flashes for a moment.
+
 ## 0.11.0 (2026-10-01)
 
 - Discord: much more of the interface is translated: Friends, Shop, the settings menu, member list headings and other

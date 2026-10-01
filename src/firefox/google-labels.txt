@@ -1,0 +1,124 @@
+# Source texts of Google's own buttons and menus that Firefox Corsu completes in Corsican, one per line.
+# Translations come from the lexicon; labels in the '# Google' section of lexicon/lexicon.tsv are added too.
+AI Mode
+Actualités
+Actualités locales
+Advanced search
+Advertising
+Afficher toutes les vidéos
+Aide
+All
+Any time
+Arrêter
+Autres questions
+Autres questions posées
+Back
+Carte
+Chargement en cours…
+Clear
+Close
+Color
+Commentaires
+Compte Google
+Confidentialité
+Connexion
+Copier
+Copier le lien
+Copy
+Copy link
+Corse
+Couleur
+Dark theme
+Date
+Dismiss
+Effacer
+En savoir plus
+Entreprise
+Entrez du texte
+Envoyer
+Envoyer des commentaires
+Feedback
+Fermer
+Finance
+Google Search
+Help
+Historique
+History
+Ignorer
+Images
+Language
+Languages
+Langue
+Langues
+Learn more
+Liens
+Lire
+Listen
+Loading…
+Merci
+Micro
+Mode IA
+Moins d'un mois
+More
+Météo
+News
+Next
+Nuageux
+Open
+Outils
+Ouvrir
+Paramètres
+Paramètres de recherche
+Partager
+Paysage
+People also ask
+Plus
+Plus de résultats
+Posez une question
+Première
+Previous
+Privacy
+Précédent
+Publicité
+Recherche Google
+Recherche avancée
+Recherche vocale
+Rechercher
+Rechercher par image
+Recherches associées
+Retour
+Réessayer
+Se connecter
+Search
+Search by voice
+Search settings
+Send
+Send feedback
+Settings
+Share
+Shopping
+Short videos
+Show all
+Sign in
+Signaler un contenu inapproprié
+Size
+Stop
+Suivant
+Sécurité
+Taille
+Thème sombre
+Tools
+Tous
+Tout afficher
+Toutes les dates
+Try again
+Type
+Videos
+Vidéos
+Vidéos courtes
+Voir plus
+Vols
+À faire
+À propos de ce résultat
+À propos de la source
+Écouter

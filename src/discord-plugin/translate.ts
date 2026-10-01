@@ -94,7 +94,7 @@ export function createTranslator(doc: Document) {
     const originalText = new WeakMap<Text, { original: string; translated: string; }>();
     const originalAttrs = new WeakMap<Element, Map<string, { original: string; translated: string; }>>();
     const pending = new Set<Node>();
-    let timer: ReturnType<typeof setTimeout> | undefined;
+    let scheduled = false;
     let running = false;
 
     function text(node: Text) {
@@ -145,7 +145,8 @@ export function createTranslator(doc: Document) {
     }
 
     function flush() {
-        timer = undefined;
+        scheduled = false;
+        if (!running) { pending.clear(); return; }
         const roots = Array.from(pending);
         pending.clear();
         for (const root of roots) {
@@ -159,7 +160,8 @@ export function createTranslator(doc: Document) {
                 for (const node of record.addedNodes) pending.add(node);
             } else pending.add(record.target);
         }
-        if (pending.size && timer === undefined) timer = setTimeout(flush, 32);
+        // A microtask runs before the next paint, so the original text never shows.
+        if (pending.size && !scheduled) { scheduled = true; queueMicrotask(flush); }
     });
 
     return {
@@ -176,8 +178,6 @@ export function createTranslator(doc: Document) {
             if (!running) return;
             running = false;
             observer.disconnect();
-            if (timer !== undefined) clearTimeout(timer);
-            timer = undefined;
             pending.clear();
             const walker = doc.createTreeWalker(doc.documentElement, NodeFilter.SHOW_ELEMENT | NodeFilter.SHOW_TEXT);
             let node: Node | null;
