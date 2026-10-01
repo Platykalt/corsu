@@ -3,6 +3,8 @@ setlocal
 rem Corsu installer for Windows. Requires Python 3.10 or newer.
 set PYTHONUTF8=1
 cd /d "%~dp0"
+rem At the top of a release archive, or in the install folder of the source code.
+if not exist "src\installer.py" cd ..
 where py >nul 2>nul && (py -3 src\installer.py %* & goto :end)
 python -c "import sys; sys.exit(sys.version_info < (3, 10))" >nul 2>nul && (python src\installer.py %* & goto :end)
 echo Python 3 is required to install Corsu.

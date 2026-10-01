@@ -5,7 +5,7 @@
 The quickest way is one line in a terminal:
 
 ```sh
-curl -fsSL https://raw.githubusercontent.com/Platykalt/corsu/main/tools/get.sh | sh
+curl -fsSL https://raw.githubusercontent.com/Platykalt/corsu/main/install/get.sh | sh
 ```
 
 It downloads the latest release, checks its SHA-256 checksum and starts the installer.
@@ -38,7 +38,7 @@ Open Corsu Setup from the application menu to add a program, go back to French, 
 Le plus simple est une ligne dans un terminal :
 
 ```sh
-curl -fsSL https://raw.githubusercontent.com/Platykalt/corsu/main/tools/get.sh | sh
+curl -fsSL https://raw.githubusercontent.com/Platykalt/corsu/main/install/get.sh | sh
 ```
 
 Elle télécharge la dernière version, vérifie sa somme SHA-256 et lance l'installeur.

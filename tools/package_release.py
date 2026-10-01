@@ -12,9 +12,8 @@ import zipfile
 ROOT = Path(__file__).resolve().parent.parent
 # Stable names, so https://github.com/<owner>/corsu/releases/latest/download/<name> always works.
 ARCHIVES = {'linux': 'corsu-linux.tar.gz', 'windows': 'corsu-windows.zip', 'macos': 'corsu-macos.tar.gz'}
-SOURCES = ('README.md', 'README.fr.md', 'CHANGELOG.md', 'CONTRIBUTING.md', 'LICENSE',
-           'Install for Windows.cmd', 'Install for macOS.command', 'Install for Linux.sh')
-SOURCE_DIRECTORIES = ('src', 'lexicon', 'docs', 'tests', 'tools')
+SOURCES = ('README.md', 'README.fr.md', 'CHANGELOG.md', 'CONTRIBUTING.md', 'LICENSE')
+SOURCE_DIRECTORIES = ('src', 'lexicon', 'docs', 'install', 'tests', 'tools')
 
 
 def vencord_installer(manifest, name):
@@ -59,6 +58,14 @@ def collect(manifest):
     return sorted(set(files))
 
 
+def archive_name(path):
+    """Where a file goes in the archive: the installers sit at the top, where people double-click them."""
+    relative = path.relative_to(ROOT).as_posix()
+    if relative.startswith('install/Install for '):
+        return relative[len('install/'):]
+    return relative
+
+
 def package(manifest, name, files, output):
     files = [*files, vencord_installer(manifest, name)]
     stem = 'corsu'
@@ -67,7 +74,7 @@ def package(manifest, name, files, output):
         archive = output / ARCHIVES[name]
         with zipfile.ZipFile(archive, 'w', zipfile.ZIP_DEFLATED) as bundle:
             for path in files:
-                bundle.write(path, f'{stem}/{path.relative_to(ROOT).as_posix()}')
+                bundle.write(path, f'{stem}/{archive_name(path)}')
     else:
         archive = output / ARCHIVES[name]
 
@@ -79,7 +86,7 @@ def package(manifest, name, files, output):
 
         with tarfile.open(archive, 'w:gz') as bundle:
             for path in files:
-                bundle.add(path, arcname=f'{stem}/{path.relative_to(ROOT).as_posix()}', recursive=False,
+                bundle.add(path, arcname=f'{stem}/{archive_name(path)}', recursive=False,
                            filter=normalize)
     checksum = hashlib.sha256(archive.read_bytes()).hexdigest()
     (output / f'{archive.name}.sha256').write_text(f'{checksum}  {archive.name}\n', encoding='utf-8')

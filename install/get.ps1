@@ -1,5 +1,5 @@
 # Download the latest Corsu release for Windows, check its SHA-256 and start the installer.
-#   irm https://raw.githubusercontent.com/Platykalt/corsu/main/tools/get.ps1 | iex
+#   irm https://raw.githubusercontent.com/Platykalt/corsu/main/install/get.ps1 | iex
 $ErrorActionPreference = 'Stop'
 $ProgressPreference = 'SilentlyContinue'
 $base = 'https://github.com/Platykalt/corsu/releases/latest/download'

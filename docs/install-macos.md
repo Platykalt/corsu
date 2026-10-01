@@ -5,7 +5,7 @@
 The simplest way is to open Terminal (in Applications, then Utilities) and paste this line:
 
 ```sh
-curl -fsSL https://raw.githubusercontent.com/Platykalt/corsu/main/tools/get.sh | sh
+curl -fsSL https://raw.githubusercontent.com/Platykalt/corsu/main/install/get.sh | sh
 ```
 
 It downloads the latest release, checks its SHA-256 checksum and starts the installer. Every program found is selected; type a number to leave one out, then press Enter and type `y` to confirm.
@@ -30,7 +30,7 @@ Open Corsu Setup from your Applications folder to add a program, go back to Fren
 Le plus simple est d'ouvrir le Terminal (dans Applications, puis Utilitaires) et d'y coller cette ligne :
 
 ```sh
-curl -fsSL https://raw.githubusercontent.com/Platykalt/corsu/main/tools/get.sh | sh
+curl -fsSL https://raw.githubusercontent.com/Platykalt/corsu/main/install/get.sh | sh
 ```
 
 Elle télécharge la dernière version, vérifie sa somme SHA-256 et lance l'installeur. Tous les logiciels trouvés sont sélectionnés ; tapez un numéro pour en retirer un, puis appuyez sur Entrée et tapez `y` pour confirmer.

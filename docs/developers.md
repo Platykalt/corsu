@@ -3,20 +3,19 @@
 ## Layout
 
 ```
-Install for Windows.cmd     what Windows users double-click
-Install for macOS.command   what macOS users double-click
-Install for Linux.sh        what Linux users run
-docs/                       installation guides and documentation
-lexicon/                    the translations: lexicon.tsv (written for Corsu), lexicon-mozilla.tsv and
-                            lexicon-upstream.tsv (reviewed translations from other projects, loaded first)
-src/                        the program: installer.py (setup and menu), corsu.py (Firefox, KDE, Discord,
-                            shortcuts), chromium.py (Chromium browsers), engine.py (lookup and file formats),
-                            release.json (version, pinned Vencord revision, installer checksums)
-src/discord-plugin/         the Vencord plugin that translates Discord
-tests/                      unit tests; tests/e2e/ holds the end-to-end checks the CI runs on each system
-tools/                      get.sh and get.ps1 (one-line installs), packaging, coverage report, import of
-                            translations from other projects
-vendor/                     pinned third-party files
+.github/            CI workflow, issue templates, release notes
+docs/               installation guides and documentation
+install/            Install for Windows.cmd, Install for macOS.command, Install for Linux.sh (placed at the
+                    top of each release archive), and get.sh / get.ps1 for one-line installs
+lexicon/            the translations: lexicon.tsv (written for Corsu), lexicon-mozilla.tsv and
+                    lexicon-upstream.tsv (reviewed translations from other projects, loaded first)
+src/                the program: installer.py (setup), app.py (the Corsu window), corsu.py (Firefox, KDE,
+                    Discord, shortcuts), chromium.py (Chromium browsers), engine.py (lookup and file formats),
+                    release.json (version, pinned Vencord revision, installer checksums)
+src/discord-plugin/ the Vencord plugin that translates Discord
+tests/              unit tests; tests/e2e/ holds the end-to-end checks the CI runs on each system
+tools/              packaging, coverage report, import of translations from other projects
+vendor/             pinned third-party files
 ```
 
 Only Python's standard library is used. Building the Discord plugin needs Node.js 22 or newer and pnpm.

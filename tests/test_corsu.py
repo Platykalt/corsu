@@ -146,6 +146,29 @@ class TranslationTests(unittest.TestCase):
                 'chrome/en-US/locale/en-US/global/': 'chrome/fr/locale/fr/global/',
                 'chrome/en-US/locale/en-US/global-platform/win/': 'chrome/fr/win/'})
 
+    def test_system_catalogs_never_overwrite_package_files(self):
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory)
+            user = root / 'home/.local/share/locale/co/LC_MESSAGES'
+            user.mkdir(parents=True)
+            (user / 'gtk30.mo').write_bytes(b'ours')
+            (user / 'packaged.mo').write_bytes(b'ours')
+            system = root / 'usr/share/locale/co/LC_MESSAGES'
+            system.mkdir(parents=True)
+            (system / 'packaged.mo').write_bytes(b'from a package')
+            qt = root / 'qt'
+            qt.mkdir()
+            with patch.object(corsu, 'HOME', root / 'home'), patch.object(corsu, 'DATA', root / 'data'), \
+                    patch.object(corsu, 'STATE', root / 'data/state.json'), patch.object(corsu, 'SYSTEM_LOCALE', system), \
+                    patch.object(corsu, 'QT_TRANSLATIONS', qt), redirect_stdout(io.StringIO()):
+                installer = corsu.Installer()
+                self.assertEqual(corsu.system_catalogs(installer), ['gtk30.mo'])
+                self.assertEqual((system / 'gtk30.mo').read_bytes(), b'ours')
+                self.assertEqual((system / 'packaged.mo').read_bytes(), b'from a package')
+                corsu.uninstall()
+                self.assertFalse((system / 'gtk30.mo').exists())
+                self.assertTrue((system / 'packaged.mo').exists())
+
     def test_gettext_context_and_fallback(self):
         data = corsu.make_mo({'': 'Content-Type: text/plain; charset=UTF-8\nLanguage: co\n',
                               'Save': 'Arregistrà', 'button\x04Close': 'Chjode'})

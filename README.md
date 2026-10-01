@@ -19,13 +19,13 @@ Corsu needs Python 3.10 or newer. On Windows the installer offers to install it 
 You can also install in one line. In PowerShell on Windows:
 
 ```powershell
-irm https://raw.githubusercontent.com/Platykalt/corsu/main/tools/get.ps1 | iex
+irm https://raw.githubusercontent.com/Platykalt/corsu/main/install/get.ps1 | iex
 ```
 
 In Terminal on macOS or Linux:
 
 ```sh
-curl -fsSL https://raw.githubusercontent.com/Platykalt/corsu/main/tools/get.sh | sh
+curl -fsSL https://raw.githubusercontent.com/Platykalt/corsu/main/install/get.sh | sh
 ```
 
 ## Using it

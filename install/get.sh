@@ -1,11 +1,11 @@
 #!/bin/sh
 # Download the latest Corsu release for this computer, check its SHA-256 and start the installer.
-#   curl -fsSL https://raw.githubusercontent.com/Platykalt/corsu/main/tools/get.sh | sh
+#   curl -fsSL https://raw.githubusercontent.com/Platykalt/corsu/main/install/get.sh | sh
 set -eu
 case "$(uname -s)" in
     Linux) name=corsu-linux.tar.gz; installer="Install for Linux.sh" ;;
     Darwin) name=corsu-macos.tar.gz; installer="Install for macOS.command" ;;
-    *) echo "Corsu supports Linux, macOS and Windows. On Windows, use tools/get.ps1." >&2; exit 1 ;;
+    *) echo "Corsu supports Linux, macOS and Windows. On Windows, use install/get.ps1." >&2; exit 1 ;;
 esac
 base=https://github.com/Platykalt/corsu/releases/latest/download
 dir=$(mktemp -d "${TMPDIR:-/tmp}/corsu.XXXXXX")

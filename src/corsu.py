@@ -194,6 +194,16 @@ class Installer:
         self.state['files'][str(path)]['json_changes'] = saved
         STATE.write_text(json.dumps(self.state, indent=2), encoding='utf-8')
 
+    def add_line(self, path, line):
+        """Add one line to a file the user owns, such as ~/.bashrc. Uninstall removes only that line."""
+        path = Path(path)
+        text = path.read_text(encoding='utf-8') if path.exists() else ''
+        if line not in text.splitlines():
+            path.parent.mkdir(parents=True, exist_ok=True)
+            path.write_text(text + ('' if not text or text.endswith('\n') else '\n') + line + '\n', encoding='utf-8')
+        self.state['files'][str(path)] = {'backup': None, 'mode': None, 'toggle': False, 'line': line}
+        STATE.write_text(json.dumps(self.state, indent=2), encoding='utf-8')
+
     def tree(self, path, source):
         """Install a whole directory, such as a macOS application bundle. Uninstall removes it."""
         path = Path(path)
@@ -300,6 +310,44 @@ def qt_catalogs(installer, stats, sources, target, rename=None):
         stats['qt_translated_entries'] += len(messages)
 
 
+TERMINAL_OFF = 'terminal-off'
+POSIX_HOOK = """# Corsu: Corsu Setup can switch the terminal back to French, for a while or until switched on again.
+corsu_off="{off}"
+if [ -f "$corsu_off" ]; then
+    corsu_until=$(cat "$corsu_off" 2>/dev/null)
+    if [ -z "$corsu_until" ] || [ "$(date +%s)" -lt "$corsu_until" ]; then
+        LANGUAGE=$(printf '%s' "${{LANGUAGE:-}}" | sed -e 's/^co://' -e 's/:co:/:/g' -e 's/:co$//'); export LANGUAGE
+    else
+        rm -f "$corsu_off"
+    fi
+fi
+unset corsu_off corsu_until
+"""
+FISH_HOOK = """# Corsu: Corsu Setup can switch the terminal back to French, for a while or until switched on again.
+set -l corsu_off "{off}"
+if test -f $corsu_off
+    set -l corsu_until (cat $corsu_off 2>/dev/null)
+    if test -z "$corsu_until"; or test (date +%s) -lt $corsu_until
+        set -gx LANGUAGE (string replace -r '^co:' '' -- "$LANGUAGE")
+    else
+        rm -f $corsu_off
+    end
+end
+"""
+
+
+def terminal_hooks(installer):
+    """Let new terminals follow the terminal switch in Corsu Setup (bash, zsh and fish)."""
+    off = DATA / TERMINAL_OFF
+    hook = DATA / 'terminal.sh'
+    installer.write(hook, POSIX_HOOK.format(off=off))
+    installer.write(CONFIG / 'fish/conf.d/corsu.fish', FISH_HOOK.format(off=off))
+    line = f'[ -f {shlex.quote(str(hook))} ] && . {shlex.quote(str(hook))}  # Corsu'
+    for name in ('.bashrc', '.zshrc'):
+        if (HOME / name).exists():
+            installer.add_line(HOME / name, line)
+
+
 def kde(installer, qt_system=False):
     stats = {'catalogs': 0, 'translated_entries': 0, 'source_entries': 0, 'desktop_entries': 0,
              'qt_catalogs': 0, 'qt_translated_entries': 0, 'qt_source_entries': 0}
@@ -321,6 +369,7 @@ def kde(installer, qt_system=False):
     installer.write(locale, buffer.getvalue(), toggle=True)
     installer.write(HOME / '.config/plasma-workspace/env/corsu.sh',
                     '#!/bin/sh\nexport LANGUAGE=co:fr\n', 0o755, toggle=True)
+    terminal_hooks(installer)
     for source in sorted(Path('/usr/share/applications').glob('*.desktop')):
         target = HOME / '.local/share/applications' / source.name
         text = (target if target.exists() else source).read_text(encoding='utf-8')
@@ -630,7 +679,7 @@ def status():
         path = Path(name)
         if not path.exists():
             counts['missing'].append(name)
-        elif record.get('tree'):
+        elif record.get('tree') or record.get('line'):
             continue
         elif record.get('json_changes'):
             document = json.loads(path.read_text(encoding='utf-8'))
@@ -767,6 +816,7 @@ def install(components=None, qt_system=False):
         chromium_stats = chromium.install(installer)
     installer.state['components'] = sorted(set(installer.state.get('components', [])) | components)
     installer.state['qt_system'] = qt_system or installer.state.get('qt_system', False)
+    installer.state['disabled'] = sorted(set(installer.state.get('disabled', [])) - components)
     installer.state['enabled'] = True
     STATE.write_text(json.dumps(installer.state, indent=2), encoding='utf-8')
     disabled_marker().unlink(missing_ok=True)
@@ -791,6 +841,64 @@ def disabled_marker():
     return DATA / 'disabled'
 
 
+COMPONENT_LABELS = {
+    'firefox': 'Firefox', 'chromium': 'Chrome, Opera GX and other Chromium browsers', 'discord': 'Discord',
+    'vesktop': 'Vesktop', 'desktop': 'KDE Plasma desktop and programs', 'terminal': 'Terminal commands',
+}
+
+
+def load_state():
+    return json.loads(STATE.read_text(encoding='utf-8')) if STATE.exists() else {'files': {}}
+
+
+def switchable(state=None):
+    """The parts that can be switched on and off one by one, in display order."""
+    state = state or load_state()
+    installed = set(state.get('components', []))
+    parts = [name for name in ('firefox', 'chromium', 'discord', 'vesktop', 'desktop') if name in installed]
+    if 'desktop' in installed and PLATFORM == 'linux':
+        parts.append('terminal')
+    return parts
+
+
+def terminal_paused_until():
+    """None when the terminal is in Corsican, 0 when switched off, else the time it comes back on."""
+    path = DATA / TERMINAL_OFF
+    if not path.exists():
+        return None
+    text = path.read_text(encoding='utf-8').strip()
+    if text and int(text) <= __import__('time').time():
+        path.unlink(missing_ok=True)
+        return None
+    return int(text) if text else 0
+
+
+def is_disabled(component, state=None):
+    if disabled_marker().exists():
+        return True
+    if component == 'terminal':
+        return terminal_paused_until() is not None
+    return component in (state or load_state()).get('disabled', [])
+
+
+def component_of(name, record):
+    """Which switchable part a managed file belongs to."""
+    if record.get('component'):
+        return record['component']
+    if record.get('chromium'):
+        return 'chromium'
+    lower = name.replace('\\', '/').lower()
+    if 'vencord/settings' in lower:
+        return 'discord'
+    if 'vesktop' in lower:
+        return 'vesktop'
+    if 'firefox' in lower:
+        return 'firefox'
+    if 'local state' in lower or any(word in lower for word in ('chrome', 'chromium', 'opera', 'brave', 'edge', 'vivaldi')):
+        return 'chromium'
+    return 'desktop'
+
+
 def restore(path, record):
     """Return one managed file to its pre-installation content. False when the user changed it."""
     if path.exists() and digest(path.read_bytes()) != record['installed_sha256']:
@@ -804,24 +912,32 @@ def restore(path, record):
     return True
 
 
-def disable():
-    """Return every application to its previous language, keeping the built catalogs.
+def disable(components=None, hours=None):
+    """Return applications to their previous language, keeping everything Corsu built.
 
+    With no list, every part is switched off. `hours` pauses the terminal only for that long.
     Only the switches are reverted, so `enable` is fast and needs no rebuild.
     """
     if not STATE.exists():
         print('No installation recorded.')
         return
     installer = Installer()
+    everything = components is None
+    targets = set(switchable(installer.state)) if everything else set(components)
+    if 'terminal' in targets:
+        DATA.mkdir(parents=True, exist_ok=True)
+        until = '' if not hours else str(int(__import__('time').time() + hours * 3600))
+        (DATA / TERMINAL_OFF).write_text(until, encoding='utf-8')
     preserved = []
-    packs = {name: record for name, record in installer.state['files'].items() if record.get('chromium')}
+    packs = {name: record for name, record in installer.state['files'].items()
+             if record.get('chromium') and 'chromium' in targets}
     if packs:
         import chromium
         chromium.restore(packs)
         for name in packs:
             installer.state['files'].pop(name)
     for name, record in list(installer.state['files'].items()):
-        if not record.get('toggle'):
+        if not record.get('toggle') or component_of(name, record) not in targets:
             continue
         path = Path(name)
         if record.get('json_changes'):
@@ -833,27 +949,45 @@ def disable():
             installer.state['files'].pop(name)
         else:
             preserved.append(name)
-    installer.state['enabled'] = False
+    installer.state['disabled'] = sorted(set(installer.state.get('disabled', [])) | (targets - {'terminal'}))
+    installer.state['enabled'] = not everything and installer.state.get('enabled', True)
     STATE.write_text(json.dumps(installer.state, indent=2), encoding='utf-8')
-    DATA.mkdir(parents=True, exist_ok=True)
-    disabled_marker().write_text('Corsu is disabled. Run: python3 corsu.py enable\n', encoding='utf-8')
+    if everything:
+        disabled_marker().write_text('Corsu is switched off. Open Corsu Setup to switch it on again.\n', encoding='utf-8')
     for name in preserved:
-        print(f'Preserved changed file: {name}')
-    print('Corsu disabled. Restart applications; log out and back in for Plasma.\n'
-          'Catalogs and builds are kept for a fast: python3 corsu.py enable')
+        print(f'Left alone because you changed it: {name}')
+    names = ', '.join(COMPONENT_LABELS.get(name, name) for name in sorted(targets))
+    print(f'Back to the previous language: {names}. Restart these programs'
+          + ('; log out and back in for the desktop.' if 'desktop' in targets else '.'))
 
 
-def enable():
-    """Switch Corsican back on using the components recorded at installation."""
+def enable(components=None):
+    """Switch Corsican back on, for every part or for the ones listed."""
     if not STATE.exists():
         print('No installation recorded.')
         return
-    state = json.loads(STATE.read_text(encoding='utf-8'))
-    components = set(state.get('components') or ['firefox', 'desktop', 'vesktop'])
-    if 'vesktop' in components and not (ROOT / 'Vencord/dist/vencordDesktopRenderer.js').exists():
-        components.discard('vesktop')
-    install(components, qt_system=state.get('qt_system', False))
-    print('Corsu enabled. Restart applications; log out and back in for Plasma.')
+    state = load_state()
+    parts = set(switchable(state))
+    targets = parts if components is None else set(components) & parts
+    disabled = set(state.get('disabled', []))
+    if disabled_marker().exists():
+        # Everything was off: the parts not switched on now stay off.
+        disabled |= parts - targets - {'terminal'}
+        if 'terminal' not in targets and 'terminal' in parts:
+            (DATA / TERMINAL_OFF).write_text('', encoding='utf-8')
+        disabled_marker().unlink()
+    if 'terminal' in targets:
+        (DATA / TERMINAL_OFF).unlink(missing_ok=True)
+    state['disabled'] = sorted(disabled - targets)
+    STATE.write_text(json.dumps(state, indent=2), encoding='utf-8')
+    rebuild = targets - {'terminal'}
+    if 'vesktop' in rebuild and not (ROOT / 'Vencord/dist/vencordDesktopRenderer.js').exists():
+        rebuild.discard('vesktop')
+    if rebuild:
+        install(rebuild, qt_system=state.get('qt_system', False) and 'desktop' in rebuild)
+    names = ', '.join(COMPONENT_LABELS.get(name, name) for name in sorted(targets))
+    print(f'In Corsican again: {names}. Restart these programs'
+          + ('; log out and back in for the desktop.' if 'desktop' in targets else '.'))
 
 
 def uninstall():
@@ -869,6 +1003,11 @@ def uninstall():
     for name, record in state['files'].items():
         path = Path(name)
         if record.get('chromium'):
+            continue
+        if record.get('line'):
+            if path.exists():
+                lines = path.read_text(encoding='utf-8').splitlines(keepends=True)
+                path.write_text(''.join(line for line in lines if line.rstrip('\n') != record['line']), encoding='utf-8')
             continue
         if record.get('tree'):
             shutil.rmtree(path, ignore_errors=True)
@@ -915,25 +1054,36 @@ def uninstall():
             leftover.unlink()
     STATE.write_text(json.dumps({'files': remaining}, indent=2), encoding='utf-8')
     disabled_marker().unlink(missing_ok=True)
+    (DATA / TERMINAL_OFF).unlink(missing_ok=True)
     print('Restored unchanged managed settings. Local builds retained in ' + str(DATA))
 
 
-def system_catalogs(installer):
-    """Copy generated Qt catalogs into Qt's own translation directory.
+SYSTEM_LOCALE = Path('/usr/share/locale/co/LC_MESSAGES')
 
-    Qt reads its standard dialog strings only from a system directory, so this step asks for
-    administrator authentication. Every file is recorded and removed again by `--uninstall`.
+
+def system_catalogs(installer):
+    """Copy the generated catalogs where programs outside KDE look for them.
+
+    KDE programs read `~/.local/share/locale`, but GTK programs, terminal commands and Qt's own
+    dialogs only read system directories, so this step asks for administrator rights once. Files that
+    belong to an installed package are never overwritten. `--uninstall` removes everything copied.
     """
-    files = sorted((DATA / 'qt6/translations').glob('*_co.qm'))
-    if not files:
-        return []
-    command = ['cp', '-f', *map(str, files), str(QT_TRANSLATIONS)]
-    if not os.access(QT_TRANSLATIONS, os.W_OK):
-        command = ['pkexec', *command]
-    subprocess.run(command, check=True)
+    pairs = [(file, QT_TRANSLATIONS / file.name) for file in sorted((DATA / 'qt6/translations').glob('*_co.qm'))]
+    for file in sorted((HOME / '.local/share' / CATALOG_SUFFIX).glob('*.mo')):
+        target = SYSTEM_LOCALE / file.name
+        if target.exists() and str(target) not in installer.state['files']:
+            continue
+        pairs.append((file, target))
+    pairs = [(source, target) for source, target in pairs
+             if not target.exists() or digest(target.read_bytes()) != digest(source.read_bytes())]
+    if pairs:
+        script = 'set -e; mkdir -p "$1"; shift; while [ "$#" -gt 1 ]; do cp -f -- "$1" "$2"; chmod 644 "$2"; shift 2; done'
+        command = ['sh', '-c', script, 'corsu', str(SYSTEM_LOCALE), *[str(path) for pair in pairs for path in pair]]
+        if not (os.access(QT_TRANSLATIONS, os.W_OK) and os.access(SYSTEM_LOCALE.parent.parent, os.W_OK)):
+            command = ['pkexec', *command]
+        subprocess.run(command, check=True)
     installed = []
-    for file in files:
-        target = QT_TRANSLATIONS / file.name
+    for source, target in pairs:
         installer.state['files'][str(target)] = {
             'backup': None, 'mode': 0o644, 'toggle': False, 'system': True,
             'installed_sha256': digest(target.read_bytes())}
@@ -943,7 +1093,7 @@ def system_catalogs(installer):
 
 
 def system_remove(paths):
-    """Remove root-owned Qt catalogs this installation added, asking for authentication."""
+    """Remove the system-wide catalogs this installation added, asking for authentication."""
     existing = [str(path) for path in paths if path.exists()]
     if not existing:
         return
@@ -955,7 +1105,7 @@ def system_remove(paths):
 
 def launch_firefox(rest):
     """Run the translated build, or the ordinary system Firefox while Corsu is disabled."""
-    if disabled_marker().exists():
+    if is_disabled('firefox'):
         install = firefox_install()
         command = [str(install.root / install.binary), *rest]
     else:

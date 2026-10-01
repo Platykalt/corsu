@@ -119,9 +119,8 @@ def prepare_build():
         env={**os.environ, 'VENCORD_HASH': manifest['vencord_revision'][:7]})
 
 
-DEPLOYED_FILES = ('LICENSE', 'README.md', 'README.fr.md', 'CONTRIBUTING.md', 'Install for Windows.cmd',
-                  'Install for macOS.command', 'Install for Linux.sh')
-DEPLOYED_DIRECTORIES = ('src', 'lexicon', 'vendor', 'Vencord')
+DEPLOYED_FILES = ('LICENSE', 'README.md', 'README.fr.md', 'CONTRIBUTING.md')
+DEPLOYED_DIRECTORIES = ('src', 'lexicon', 'install', 'vendor', 'Vencord')
 
 
 def deploy_release():
@@ -211,7 +210,7 @@ def install_discord(location):
 DESCRIPTIONS = {
     'firefox': 'Firefox: menus, settings and error pages',
     'desktop': 'KDE Plasma: desktop, KDE apps and application menu',
-    'qt': 'Qt dialogs: standard buttons and file choosers (asks for administrator rights)',
+    'qt': 'System translations: GTK programs, terminal commands and Qt dialogs (asks for your password)',
     'discord': 'Discord: interface through Vencord',
     'vesktop': 'Vesktop: interface through Vencord',
     'chromium': 'Chrome, Opera GX and other Chromium browsers',
@@ -251,17 +250,21 @@ def main(argv=None):
     parser.add_argument('--yes', action='store_true', help='Accept the displayed installation plan')
     parser.add_argument('--dry-run', action='store_true', help='Display the plan without downloading or changing anything')
     parser.add_argument('--uninstall', action='store_true')
-    parser.add_argument('--disable', action='store_true',
-                        help='Return every application to its previous language, keeping the built catalogs')
-    parser.add_argument('--enable', action='store_true', help='Switch Corsican back on after --disable')
+    parts = ['firefox', 'chromium', 'discord', 'vesktop', 'desktop', 'terminal']
+    parser.add_argument('--disable', nargs='*', choices=parts, metavar='PART',
+                        help='Go back to the previous language, for everything or for the parts listed: ' + ', '.join(parts))
+    parser.add_argument('--enable', nargs='*', choices=parts, metavar='PART', help='Switch Corsican back on, for everything or the parts listed')
+    parser.add_argument('--hours', type=float, help='With --disable terminal: switch the terminal back on after this many hours')
     args = parser.parse_args(argv)
-    if args.disable and args.enable:
+    if args.disable is not None and args.enable is not None:
         parser.error('Choose either --disable or --enable.')
-    if args.disable or args.enable:
-        print('Switching Corsican back on.' if args.enable else 'Switching back to French. Corsu Setup can turn Corsican on again.')
+    if args.disable is not None or args.enable is not None:
         if args.dry_run:
             return 0
-        corsu.enable() if args.enable else corsu.disable()
+        if args.enable is not None:
+            corsu.enable(args.enable or None)
+        else:
+            corsu.disable(args.disable or None, hours=args.hours)
         return 0
     if args.uninstall:
         print('This puts back the original files and settings. Files you changed yourself since are left alone.')
@@ -308,7 +311,9 @@ def main(argv=None):
         print('  KDE Plasma: add Corsican translation files to your home folder and set the language to Corsican,'
               ' with French for anything not yet translated. Log out and back in afterwards.')
     if 'qt' in components:
-        print(f'  Qt dialogs: copy Corsican files into {corsu.QT_TRANSLATIONS} (asks for your password).')
+        print(f'  System translations: copy the Corsican files into {corsu.SYSTEM_LOCALE.parent.parent} and'
+              f' {corsu.QT_TRANSLATIONS}, so GTK programs, terminal commands and Qt dialogs use them too.'
+              ' This asks for your password once.')
     print(f'\nA copy of every file Corsu changes is kept in {corsu.DATA}, and Corsu Setup can undo everything.')
     print('Text without a Corsican translation yet stays in French. Websites and messages are never changed.\n')
     if args.dry_run:

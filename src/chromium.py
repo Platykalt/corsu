@@ -212,7 +212,7 @@ def restore(records):
 
 def refresh():
     """Re-translate packs replaced by browser updates. Run at login and by the launchers."""
-    if corsu.disabled_marker().exists() or not corsu.STATE.exists():
+    if not corsu.STATE.exists() or corsu.is_disabled('chromium'):
         return []
     installer = corsu.Installer()
     wanted = set(installer.state.get('chromium', []))
@@ -246,17 +246,17 @@ def launch(identifier, arguments):
     browser = next((browser for browser in browsers() if browser.id == identifier), None)
     if browser is None:
         raise SystemExit(f'{identifier} is not installed.')
-    if not corsu.disabled_marker().exists():
+    if not corsu.is_disabled('chromium'):
         try:
             installer = corsu.Installer()
             apply(installer, browser)
         except (OSError, RuntimeError, subprocess.CalledProcessError) as error:
             print(f'Corsu could not update the translation: {error}', file=sys.stderr)
     environment = dict(os.environ)
-    if not corsu.disabled_marker().exists():
+    if not corsu.is_disabled('chromium'):
         environment['LANGUAGE'] = 'co:fr'
     executable = browser.executable()
-    extra = ['--lang=fr'] if browser.id.startswith('opera') and not corsu.disabled_marker().exists() else []
+    extra = ['--lang=fr'] if browser.id.startswith('opera') and not corsu.is_disabled('chromium') else []
     os.execve(executable, [executable, *extra, *arguments], environment)
 
 

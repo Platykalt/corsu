@@ -20,7 +20,7 @@ shortcut.
 To install without downloading the zip yourself, open PowerShell and run:
 
 ```powershell
-irm https://raw.githubusercontent.com/Platykalt/corsu/main/tools/get.ps1 | iex
+irm https://raw.githubusercontent.com/Platykalt/corsu/main/install/get.ps1 | iex
 ```
 
 ## Changing your mind later

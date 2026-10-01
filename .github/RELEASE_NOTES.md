@@ -7,8 +7,8 @@
 The [installation guides](https://github.com/Platykalt/corsu/tree/main/docs) explain each step and the warnings
 Windows and macOS show for downloaded scripts.
 
-To install in one line: `irm https://raw.githubusercontent.com/Platykalt/corsu/main/tools/get.ps1 | iex` in
-PowerShell on Windows, or `curl -fsSL https://raw.githubusercontent.com/Platykalt/corsu/main/tools/get.sh | sh` in
+To install in one line: `irm https://raw.githubusercontent.com/Platykalt/corsu/main/install/get.ps1 | iex` in
+PowerShell on Windows, or `curl -fsSL https://raw.githubusercontent.com/Platykalt/corsu/main/install/get.sh | sh` in
 Terminal on macOS and Linux.
 
 Each file has a `.sha256` checksum next to it. Corsu needs Python 3.10 or newer; on Windows the installer offers to
