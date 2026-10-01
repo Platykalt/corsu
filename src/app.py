@@ -1,37 +1,257 @@
 #!/usr/bin/env python3
-"""The Corsu window: switch each part of the translation on or off, pause the terminal, add programs.
+"""Corsu Setup: install Corsu, switch each part on or off, pause the terminal, remove everything.
 
-Uses Tk when Python has it (Windows, macOS), otherwise the desktop's own dialogs (kdialog on KDE, zenity
-elsewhere), otherwise a menu in the terminal.
+The window is a local page opened in the browser, served on 127.0.0.1 only and protected by a random key, so it
+works the same way on Windows, macOS and Linux without extra libraries. `--text` gives a menu in the terminal.
 """
+import json
 import os
 from pathlib import Path
-import shutil
+import secrets
 import subprocess
 import sys
+import threading
+import time
+import urllib.request
+from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
+import webbrowser
 
 import corsu
+import installer
 from installer import t
 
-LABELS = {
-    'firefox': ('Firefox', 'Firefox'),
-    'chromium': ('Chrome, Opera GX and other browsers', 'Chrome, Opera GX et autres navigateurs'),
-    'discord': ('Discord', 'Discord'),
-    'vesktop': ('Vesktop', 'Vesktop'),
-    'desktop': ('KDE desktop and programs', 'Bureau et programmes KDE'),
-    'terminal': ('Terminal commands', 'Commandes du terminal'),
+PAGE = Path(__file__).resolve().parent / 'app/index.html'
+# The page asks for news every few seconds; without any for this long, the window was closed.
+IDLE_SECONDS = 600
+
+COMPONENTS = {
+    'firefox': {'en': ('Firefox', 'Menus, settings, error pages, and the labels Google leaves untranslated.'),
+                'fr': ('Firefox', 'Menus, réglages, pages d\'erreur, et les libellés que Google laisse non traduits.')},
+    'chromium': {'en': ('Chrome, Opera GX and other browsers', 'Menus and settings of Chromium-based browsers.'),
+                 'fr': ('Chrome, Opera GX et autres navigateurs', 'Menus et réglages des navigateurs basés sur Chromium.')},
+    'discord': {'en': ('Discord', 'The interface, through Vencord. Messages are never changed.'),
+                'fr': ('Discord', 'L\'interface, grâce à Vencord. Les messages ne sont jamais modifiés.')},
+    'vesktop': {'en': ('Vesktop', 'The interface of this Discord app, through Vencord.'),
+                'fr': ('Vesktop', 'L\'interface de cette application Discord, grâce à Vencord.')},
+    'desktop': {'en': ('KDE Plasma desktop', 'The desktop, KDE programs and the application menu.'),
+                'fr': ('Bureau KDE Plasma', 'Le bureau, les programmes KDE et le menu des applications.')},
+    'qt': {'en': ('System translations', 'GTK programs, terminal commands and Qt dialogs. Asks for your password.'),
+           'fr': ('Traductions système', 'Programmes GTK, commandes du terminal et boîtes de dialogue Qt. '
+                  'Demande votre mot de passe.')},
+    'terminal': {'en': ('Terminal commands', 'Can go back to French for an hour, in new terminal windows.'),
+                 'fr': ('Commandes du terminal', 'Peut repasser en français pendant une heure, dans les nouveaux '
+                        'terminaux.')},
 }
+ORDER = ['firefox', 'chromium', 'discord', 'vesktop', 'desktop', 'qt', 'terminal']
 
 
-def parts():
-    """(name, label, is in Corsican) for every part that can be switched."""
+class Job:
+    """One installer run at a time; its output is shown live in the page."""
+
+    def __init__(self):
+        self.lock = threading.Lock()
+        self.title = ''
+        self.lines = []
+        self.running = False
+        self.ok = None
+
+    def start(self, title, arguments, language):
+        with self.lock:
+            if self.running:
+                return False
+            self.title, self.lines, self.running, self.ok = title, [], True, None
+        environment = {**os.environ, 'CORSU_LANG': language, 'PYTHONUNBUFFERED': '1', 'PYTHONIOENCODING': 'utf-8',
+                       'CORSU_SETUP_WINDOW': '1'}
+        command = [sys.executable, str(corsu.SRC / 'installer.py'), *arguments]
+        threading.Thread(target=self.run, args=(command, environment), daemon=True).start()
+        return True
+
+    def run(self, command, environment):
+        try:
+            process = subprocess.Popen(command, stdin=subprocess.DEVNULL, stdout=subprocess.PIPE,
+                                       stderr=subprocess.STDOUT, text=True, encoding='utf-8', errors='replace',
+                                       env=environment)
+            for line in process.stdout:
+                # Commands the installer runs are echoed with "+ "; they are noise for most people.
+                if not line.startswith('+ '):
+                    self.lines.append(line.rstrip('\n'))
+            ok = process.wait() == 0
+        except OSError as error:
+            self.lines.append(str(error))
+            ok = False
+        with self.lock:
+            self.running, self.ok = False, ok
+
+    def snapshot(self):
+        return {'title': self.title, 'lines': self.lines[-400:], 'running': self.running, 'ok': self.ok}
+
+
+DETECTED = {'time': 0.0, 'names': set()}
+
+
+def detected():
+    """The programs found on this computer, looked up again at most every 20 seconds."""
+    if time.monotonic() - DETECTED['time'] > 20:
+        DETECTED['names'], DETECTED['time'] = set(installer.available_components()), time.monotonic()
+    return DETECTED['names']
+
+
+def snapshot():
+    """Everything the page shows, read fresh each time."""
     state = corsu.load_state()
-    return [(name, t(*LABELS[name]), not corsu.is_disabled(name, state)) for name in corsu.switchable(state)]
+    installed = set(state.get('components', [])) if corsu.STATE.exists() else set()
+    if state.get('qt_system'):
+        installed.add('qt')
+    available = detected()
+    switchable = set(corsu.switchable(state)) if corsu.STATE.exists() else set()
+    paused = corsu.terminal_paused_until() if 'terminal' in switchable else None
+    items = []
+    for name in ORDER:
+        if name == 'terminal' and name not in switchable:
+            continue
+        if name not in available | installed | switchable:
+            continue
+        items.append({'name': name, 'text': COMPONENTS[name], 'installed': name in installed or name in switchable,
+                      'switchable': name in switchable,
+                      'on': name in switchable and not corsu.is_disabled(name, state)})
+    profile = corsu.firefox_profile() if 'firefox' in installed else None
+    return {
+        'version': json.loads((corsu.SRC / 'release.json').read_text(encoding='utf-8')).get('version'),
+        'platform': corsu.PLATFORM,
+        'language': 'fr' if corsu.french() else 'en',
+        'installed': bool(installed),
+        'everything_off': corsu.disabled_marker().exists(),
+        'items': items,
+        'terminal_paused_until': paused,
+        'firefox_profile': str(profile) if profile else None,
+        'lexicon_entries': len(corsu.WORDS),
+    }
+
+
+def make_handler(key, job, activity):
+    page = PAGE.read_bytes()
+
+    class Handler(BaseHTTPRequestHandler):
+        def log_message(self, *arguments):
+            pass
+
+        def send(self, status, body, content_type='application/json; charset=utf-8'):
+            data = body if isinstance(body, bytes) else json.dumps(body, ensure_ascii=False).encode('utf-8')
+            self.send_response(status)
+            self.send_header('Content-Type', content_type)
+            self.send_header('Content-Length', str(len(data)))
+            self.send_header('Cache-Control', 'no-store')
+            self.send_header('X-Content-Type-Options', 'nosniff')
+            self.send_header('Content-Security-Policy', "default-src 'self'; style-src 'self' 'unsafe-inline'; "
+                                                        "script-src 'self' 'unsafe-inline'; frame-ancestors 'none'")
+            self.end_headers()
+            self.wfile.write(data)
+
+        def allowed(self):
+            # Other pages open in the browser cannot read the key, so they cannot drive Corsu.
+            host = self.headers.get('Host', '')
+            return host.startswith(('127.0.0.1:', 'localhost:')) and secrets.compare_digest(
+                self.headers.get('X-Corsu-Key', ''), key)
+
+        def do_GET(self):
+            activity[0] = time.monotonic()
+            if self.path.split('?')[0] == '/':
+                return self.send(200, page, 'text/html; charset=utf-8')
+            if self.path == '/api/state' and self.allowed():
+                return self.send(200, {**snapshot(), 'job': job.snapshot()})
+            self.send(404, {'error': 'not found'})
+
+        def do_POST(self):
+            activity[0] = time.monotonic()
+            if not self.allowed():
+                return self.send(403, {'error': 'forbidden'})
+            length = min(int(self.headers.get('Content-Length') or 0), 65536)
+            try:
+                request = json.loads(self.rfile.read(length) or b'{}')
+            except ValueError:
+                return self.send(400, {'error': 'bad request'})
+            language = 'fr' if request.get('language') == 'fr' else 'en'
+            names = [name for name in request.get('components', []) if name in COMPONENTS]
+            if self.path == '/api/plan':
+                if not names:
+                    return self.send(400, {'error': 'nothing selected'})
+                result = subprocess.run([sys.executable, str(corsu.SRC / 'installer.py'), '--dry-run', '--components', *names],
+                                        capture_output=True, text=True, encoding='utf-8', errors='replace',
+                                        env={**os.environ, 'CORSU_LANG': language})
+                return self.send(200, {'plan': (result.stdout + result.stderr).strip(), 'ok': result.returncode == 0})
+            if self.path in ('/api/install', '/api/uninstall'):
+                DETECTED['time'] = 0.0
+            if self.path == '/api/install' and names:
+                arguments = ['--yes', '--components', *[name for name in names if name != 'terminal']]
+                started = job.start('install', arguments, language)
+            elif self.path == '/api/switch' and names:
+                started = job.start('switch', ['--enable' if request.get('on') else '--disable', *names], language)
+            elif self.path == '/api/all':
+                started = job.start('switch', ['--enable' if request.get('on') else '--disable'], language)
+            elif self.path == '/api/pause':
+                hours = request.get('hours')
+                arguments = ['--disable', 'terminal'] + (['--hours', str(float(hours))] if hours else [])
+                started = job.start('switch', arguments, language)
+            elif self.path == '/api/uninstall':
+                started = job.start('uninstall', ['--uninstall', '--yes'], language)
+            else:
+                return self.send(404, {'error': 'not found'})
+            self.send(200 if started else 409, {'started': started})
+
+    return Handler
+
+
+SESSION = corsu.DATA / 'setup-session.json'
+
+
+def running_session():
+    """The address of a Corsu Setup already open, so a second click shows it instead of starting another."""
+    try:
+        url = json.loads(SESSION.read_text(encoding='utf-8'))['url']
+        request = urllib.request.Request(url.split('#')[0] + 'api/state', headers={'X-Corsu-Key': url.split('#')[1]})
+        with urllib.request.urlopen(request, timeout=2) as response:
+            return url if response.status == 200 else None
+    except (OSError, ValueError, KeyError, IndexError):
+        return None
+
+
+def serve(open_browser=True):
+    existing = running_session()
+    if existing:
+        if open_browser:
+            webbrowser.open(existing)
+        return
+    key = secrets.token_urlsafe(24)
+    job = Job()
+    activity = [time.monotonic()]
+    server = ThreadingHTTPServer(('127.0.0.1', 0), make_handler(key, job, activity))
+    url = f'http://127.0.0.1:{server.server_address[1]}/#{key}'
+    threading.Thread(target=server.serve_forever, daemon=True).start()
+    try:
+        corsu.DATA.mkdir(parents=True, exist_ok=True)
+        SESSION.write_text(json.dumps({'url': url}), encoding='utf-8')
+        if corsu.PLATFORM != 'windows':
+            SESSION.chmod(0o600)
+    except OSError:
+        pass
+    print(t(f'Corsu Setup is open in your browser. If not, open this address:\n  {url}\nClose this window to stop.',
+            f'Corsu Setup est ouvert dans votre navigateur. Sinon, ouvrez cette adresse :\n  {url}\n'
+            'Fermez cette fenêtre pour arrêter.'), flush=True)
+    if open_browser:
+        webbrowser.open(url)
+    try:
+        while job.running or time.monotonic() - activity[0] < IDLE_SECONDS:
+            time.sleep(2)
+    except KeyboardInterrupt:
+        pass
+    server.shutdown()
+    SESSION.unlink(missing_ok=True)
 
 
 def apply(wanted):
     """Switch on what is in `wanted`, off what is not. Returns a short report."""
-    current = {name: on for name, _, on in parts()}
+    state = corsu.load_state()
+    current = {name: not corsu.is_disabled(name, state) for name in corsu.switchable(state)}
     turn_on = [name for name, on in current.items() if name in wanted and not on]
     turn_off = [name for name, on in current.items() if name not in wanted and on]
     if turn_off:
@@ -43,166 +263,43 @@ def apply(wanted):
     return t('Done. Restart the programs concerned.', 'C\'est fait. Redémarrez les logiciels concernés.')
 
 
-def pause_terminal(hours=1):
-    corsu.disable(['terminal'], hours=hours)
-    return t(f'The terminal is back in French for {hours} hour(s), in new windows.',
-             f'Le terminal repasse en français pendant {hours} heure(s), dans les nouvelles fenêtres.')
-
-
-def open_setup():
-    """Start the installer menu in a terminal window, to add or remove programs."""
-    command = [sys.executable, str(corsu.SRC / 'installer.py')]
-    if corsu.PLATFORM == 'windows':
-        python = Path(sys.executable).with_name('python.exe')
-        subprocess.Popen(['cmd', '/c', 'start', 'Corsu', str(python if python.exists() else sys.executable),
-                          str(corsu.SRC / 'installer.py')])
-    elif corsu.PLATFORM == 'macos':
-        script = ' '.join(f"'{part}'" for part in command)
-        subprocess.Popen(['osascript', '-e', f'tell application "Terminal" to do script "{script}"',
-                          '-e', 'tell application "Terminal" to activate'])
-    else:
-        for terminal in (['konsole', '-e'], ['gnome-terminal', '--'], ['xfce4-terminal', '-x'],
-                         ['x-terminal-emulator', '-e'], ['xterm', '-e']):
-            if shutil.which(terminal[0]):
-                subprocess.Popen([*terminal, *command])
-                return
-        subprocess.Popen(command)
-
-
-def uninstall_in_terminal():
-    command = [sys.executable, str(corsu.SRC / 'installer.py'), '--uninstall']
-    if corsu.PLATFORM == 'linux':
-        for terminal in (['konsole', '-e'], ['gnome-terminal', '--'], ['x-terminal-emulator', '-e'], ['xterm', '-e']):
-            if shutil.which(terminal[0]):
-                subprocess.Popen([*terminal, *command])
-                return
-    subprocess.Popen(command)
-
-
-def run_tk():
-    import tkinter
-    from tkinter import ttk, messagebox
-
-    window = tkinter.Tk()
-    window.title('Corsu')
-    frame = ttk.Frame(window, padding=16)
-    frame.grid()
-    ttk.Label(frame, text=t('In Corsican:', 'En corse :'), font=('', 12, 'bold')).grid(sticky='w')
-    variables = {}
-    for name, label, on in parts():
-        variables[name] = tkinter.BooleanVar(value=on)
-        ttk.Checkbutton(frame, text=label, variable=variables[name]).grid(sticky='w', pady=2)
-    status = ttk.Label(frame, text='', wraplength=360)
-
-    def report(text):
-        status.configure(text=text)
-
-    def run(action):
-        try:
-            report(action())
-        except Exception as error:  # Shown to the person instead of a silent failure.
-            messagebox.showerror('Corsu', str(error))
-        for name, _, on in parts():
-            variables[name].set(on)
-
-    buttons = ttk.Frame(frame)
-    buttons.grid(sticky='we', pady=(12, 0))
-    ttk.Button(buttons, text=t('Apply', 'Appliquer'),
-               command=lambda: run(lambda: apply({name for name, var in variables.items() if var.get()}))).grid(row=0, column=0)
-    if 'terminal' in variables:
-        ttk.Button(buttons, text=t('Terminal in French for 1 hour', 'Terminal en français 1 heure'),
-                   command=lambda: run(pause_terminal)).grid(row=0, column=1, padx=6)
-    ttk.Button(frame, text=t('Add or remove programs…', 'Ajouter ou retirer des logiciels…'),
-               command=open_setup).grid(sticky='w', pady=(12, 0))
-    ttk.Button(frame, text=t('Remove Corsu…', 'Retirer Corsu…'), command=uninstall_in_terminal).grid(sticky='w', pady=(4, 0))
-    status.grid(sticky='w', pady=(12, 0))
-    window.mainloop()
-
-
-def run_dialogs(tool):
-    """kdialog or zenity: a menu of actions, then a checklist."""
-    while True:
-        actions = [('switch', t('Choose what is in Corsican', 'Choisir ce qui est en corse'))]
-        if 'terminal' in corsu.switchable():
-            actions.append(('pause', t('Terminal in French for 1 hour', 'Terminal en français pendant 1 heure')))
-        actions += [('setup', t('Add or remove programs', 'Ajouter ou retirer des logiciels')),
-                    ('remove', t('Remove Corsu', 'Retirer Corsu'))]
-        if tool == 'kdialog':
-            command = ['kdialog', '--title', 'Corsu', '--menu', 'Corsu', *[item for pair in actions for item in pair]]
-        else:
-            command = ['zenity', '--list', '--title', 'Corsu', '--column', 'id', '--column', 'Corsu',
-                       '--hide-column', '1', '--print-column', '1', *[item for pair in actions for item in pair]]
-        choice = subprocess.run(command, capture_output=True, text=True).stdout.strip()
-        if not choice:
-            return
-        if choice == 'switch':
-            items = parts()
-            if tool == 'kdialog':
-                command = ['kdialog', '--title', 'Corsu', '--checklist', t('In Corsican:', 'En corse :'),
-                           *[value for name, label, on in items for value in (name, label, 'on' if on else 'off')]]
-            else:
-                command = ['zenity', '--list', '--checklist', '--title', 'Corsu', '--text', t('In Corsican:', 'En corse :'),
-                           '--column', '', '--column', 'id', '--column', '', '--hide-column', '2', '--print-column', '2',
-                           '--separator', ' ', *[value for name, label, on in items for value in ('TRUE' if on else 'FALSE', name, label)]]
-            result = subprocess.run(command, capture_output=True, text=True)
-            if result.returncode != 0:
-                continue
-            message = apply(set(result.stdout.replace('"', ' ').split()))
-        elif choice == 'pause':
-            message = pause_terminal()
-        elif choice == 'setup':
-            open_setup()
-            return
-        else:
-            uninstall_in_terminal()
-            return
-        if tool == 'kdialog':
-            subprocess.run(['kdialog', '--title', 'Corsu', '--msgbox', message])
-        else:
-            subprocess.run(['zenity', '--info', '--title', 'Corsu', '--text', message])
-
-
 def run_text():
+    if not corsu.STATE.exists():
+        os.execv(sys.executable, [sys.executable, str(corsu.SRC / 'installer.py')])
+    language = 'fr' if installer.french() else 'en'
     while True:
+        state = corsu.load_state()
+        items = [(name, COMPONENTS[name][language][0], not corsu.is_disabled(name, state)) for name in corsu.switchable(state)]
         print('\nCorsu')
-        items = parts()
         for number, (name, label, on) in enumerate(items, 1):
             print(f'  [{"x" if on else " "}] {number}. {label}')
-        print(t('  p. Terminal in French for 1 hour   s. Add or remove programs   q. Quit',
-                '  p. Terminal en français 1 heure   s. Ajouter ou retirer des logiciels   q. Quitter'))
-        answer = input(t('Type a number to switch it, or a letter: ', 'Tapez un numéro pour l\'inverser, ou une lettre : ')).strip().lower()
+        print(t('  p. Terminal in French for 1 hour   s. Add programs   q. Quit',
+                '  p. Terminal en français 1 heure   s. Ajouter des logiciels   q. Quitter'))
+        answer = input(t('Type a number to switch it, or a letter: ',
+                         'Tapez un numéro pour l\'inverser, ou une lettre : ')).strip().lower()
         if answer in ('q', ''):
             return
         if answer == 'p':
-            print(pause_terminal())
+            corsu.disable(['terminal'], hours=1)
         elif answer == 's':
             os.execv(sys.executable, [sys.executable, str(corsu.SRC / 'installer.py')])
         elif answer.isdigit() and 1 <= int(answer) <= len(items):
-            name, _, on = items[int(answer) - 1]
-            wanted = {n for n, _, o in items if o}
-            wanted.symmetric_difference_update({name})
+            name = items[int(answer) - 1][0]
+            wanted = {n for n, _, o in items if o} ^ {name}
             print(apply(wanted))
 
 
 def main():
-    if not corsu.STATE.exists():
-        # Nothing installed yet: go straight to the installer.
-        os.execv(sys.executable, [sys.executable, str(corsu.SRC / 'installer.py'), *[a for a in sys.argv[1:] if a != '--text']])
-    if '--text' not in sys.argv:
-        try:
-            import tkinter  # noqa: F401
-            tkinter.Tk().destroy()
-            return run_tk()
-        except Exception:
-            pass
-        for tool in ('kdialog', 'zenity'):
-            if shutil.which(tool) and os.environ.get('DISPLAY', os.environ.get('WAYLAND_DISPLAY')):
-                return run_dialogs(tool)
-        if not sys.stdin.isatty() and corsu.PLATFORM == 'linux':
-            for terminal in (['konsole', '-e'], ['gnome-terminal', '--'], ['x-terminal-emulator', '-e'], ['xterm', '-e']):
-                if shutil.which(terminal[0]):
-                    os.execvp(terminal[0], [*terminal, sys.executable, str(Path(__file__).resolve()), '--text'])
-    return run_text()
+    for name in ('stdout', 'stderr'):
+        # pythonw.exe, used by the Windows shortcut, has no console at all.
+        stream = getattr(sys, name)
+        if stream is None:
+            setattr(sys, name, open(os.devnull, 'w', encoding='utf-8'))
+        else:
+            stream.reconfigure(errors='replace')
+    if '--text' in sys.argv:
+        return run_text()
+    serve(open_browser='--no-browser' not in sys.argv)
 
 
 if __name__ == '__main__':

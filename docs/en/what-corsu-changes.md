@@ -87,6 +87,12 @@ installed package are never overwritten, and uninstalling removes what Corsu cop
 New terminals follow a small switch read by bash, zsh and fish, so the terminal can go back to French on its own,
 for an hour or until you switch it on again.
 
+## Corsu Setup
+
+The Corsu Setup window is a page served by Corsu itself at a local address (`127.0.0.1`) that only your computer can
+reach, protected by a key drawn at random each time it opens. Nothing is sent to the internet apart from the downloads
+described above. It stops by itself ten minutes after you close the page.
+
 ## Going back to French
 
 Each part can be switched off on its own: Firefox, the Chromium browsers, Discord, Vesktop, the desktop, the

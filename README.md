@@ -1,5 +1,9 @@
 # Corsu
 
+[![CI](https://github.com/Platykalt/corsu/actions/workflows/ci.yml/badge.svg)](https://github.com/Platykalt/corsu/actions/workflows/ci.yml)
+[![Release](https://img.shields.io/github/v/release/Platykalt/corsu?label=version)](https://github.com/Platykalt/corsu/releases/latest)
+[![License: GPL-3.0-or-later](https://img.shields.io/badge/license-GPL--3.0--or--later-blue)](LICENSE)
+
 **[Français](#français) · [English](#english)**
 
 Corsu met en corse les logiciels de tous les jours. Corsu puts everyday software in Corsican.
@@ -50,9 +54,12 @@ La version longue : [Pourquoi Corsu](docs/fr/pourquoi-corsu.md).
 Ou en une ligne, dans PowerShell sous Windows : `irm https://raw.githubusercontent.com/Platykalt/corsu/main/install/get.ps1 | iex`
 Dans le Terminal sous macOS ou Linux : `curl -fsSL https://raw.githubusercontent.com/Platykalt/corsu/main/install/get.sh | sh`
 
-L'installeur affiche ce qu'il a trouvé, tout coché d'avance : Entrée installe tout. Il dit ce qu'il va changer avant
-de le faire et garde une copie de chaque fichier modifié. Le raccourci Corsu Setup permet ensuite d'ajouter un
-logiciel, de mettre une partie en pause (le terminal pendant une heure, par exemple) ou de tout retirer.
+La fenêtre Corsu Setup s'ouvre dans votre navigateur avec les logiciels trouvés, tous cochés. Elle montre ce qui va
+changer avant de le faire, et Corsu garde une copie de chaque fichier modifié. Rouvrez-la ensuite depuis le menu des
+applications pour ajouter un logiciel, remettre une partie dans sa langue d'origine (le terminal pendant une heure,
+par exemple) ou tout retirer.
+
+<img src="docs/images/corsu-setup-fr.png" alt="La fenêtre Corsu Setup : Firefox, Discord et le bureau KDE Plasma en corse, chacun avec son interrupteur" width="570">
 
 Discord : réglez sa langue sur Français ou English, voir [Discord en corse](docs/fr/discord.md).
 Google en corse : choisissez Corsu dans la langue de votre compte Google, voir [ce guide](docs/fr/compatibilite.md#google-et-les-autres-sites). Dans Firefox Corsu, les boutons que Google laisse en français ou en anglais sont complétés en corse.
@@ -67,8 +74,8 @@ Les autres ont été écrites pour Corsu avec le même vocabulaire. Une traducti
 [Ouvrez un ticket](https://github.com/Platykalt/corsu/issues/new?template=translation.yml) ou voyez
 [CONTRIBUTING.md](CONTRIBUTING.md).
 
-Pour aller plus loin : [ce que Corsu modifie](docs/fr/ce-que-corsu-modifie.md), [développement](docs/fr/developpeurs.md),
-[CHANGELOG.md](CHANGELOG.md).
+Pour aller plus loin : [toute la documentation](docs/README.md), [ce que Corsu modifie](docs/fr/ce-que-corsu-modifie.md),
+[développement](docs/fr/developpeurs.md), [sécurité](SECURITY.md), [CHANGELOG.md](CHANGELOG.md).
 
 ---
 
@@ -115,9 +122,11 @@ The long version: [Why Corsu](docs/en/why-corsu.md).
 Or in one line, in PowerShell on Windows: `irm https://raw.githubusercontent.com/Platykalt/corsu/main/install/get.ps1 | iex`
 In Terminal on macOS or Linux: `curl -fsSL https://raw.githubusercontent.com/Platykalt/corsu/main/install/get.sh | sh`
 
-The installer shows what it found, with everything ticked: Enter installs it all. It says what it will change before
-doing it and keeps a copy of every file it changes. The Corsu Setup shortcut then lets you add a program, pause a part
-(the terminal for an hour, for example) or remove everything.
+The Corsu Setup window opens in your browser with the programs found, all ticked. It shows what will change before
+doing it, and Corsu keeps a copy of every file it changes. Open it again from the applications menu to add a program,
+put a part back in its original language (the terminal for an hour, for example) or remove everything.
+
+<img src="docs/images/corsu-setup-en.png" alt="The Corsu Setup window: Firefox, Discord and the KDE Plasma desktop in Corsican, each with its own switch" width="570">
 
 Discord: set its language to Français or English, see [Discord in Corsican](docs/en/discord.md).
 Google in Corsican: choose Corsu as your Google account language, see [this guide](docs/en/compatibility.md#google-and-other-websites). In Firefox Corsu, the buttons Google leaves in French or English are completed in Corsican.
@@ -132,8 +141,8 @@ were written for Corsu with the same vocabulary. Does a translation look wrong?
 [Open an issue](https://github.com/Platykalt/corsu/issues/new?template=translation.yml) or see
 [CONTRIBUTING.md](CONTRIBUTING.md).
 
-More: [what Corsu changes](docs/en/what-corsu-changes.md), [development](docs/en/developers.md),
-[CHANGELOG.md](CHANGELOG.md).
+More: [all the documentation](docs/README.md), [what Corsu changes](docs/en/what-corsu-changes.md),
+[development](docs/en/developers.md), [security](SECURITY.md), [CHANGELOG.md](CHANGELOG.md).
 
 ---
 

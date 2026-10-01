@@ -38,7 +38,9 @@ and [iPhone](phone/iphone.md).
 
 ## Google and other websites
 
-Corsu does not translate websites, but Firefox and the Chromium browsers tell websites that you prefer Corsican.
+Corsu does not translate websites, with one exception: in Firefox Corsu, the buttons and menus Google leaves in
+French or English are completed in Corsican. Firefox and the Chromium browsers also tell websites that you prefer
+Corsican.
 Sites that offer Corsican, Google among them, then show it, unless your account says otherwise. Google uses your
 account's language first, and that also decides the language of its AI. To get Google in Corsican:
 
@@ -46,3 +48,8 @@ account's language first, and that also decides the language of its AI. To get G
    language.
 2. Without a Google account, open [search settings](https://www.google.com/preferences?hl=co#languages) and choose
    **Corsu**.
+
+Answers from Google's AI (AI Overview, AI Mode, Gemini) are written by Google at search time. Corsu cannot choose
+their language, and Corsican is not among the languages Google guarantees for these answers: they sometimes start in
+Corsican and then switch to French. Asking in Corsican and adding "rispondi in corsu" makes a Corsican answer more
+likely. For an AI that speaks Corsican, see [LIV](https://liv.corsica) and [Astutu](https://astutu.corsica).

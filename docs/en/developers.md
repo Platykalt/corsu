@@ -16,13 +16,20 @@ lexicon/            the translations: lexicon.tsv (written for Corsu), lexicon-m
 src/                the program: installer.py (setup), app.py (the Corsu window), corsu.py (Firefox, KDE,
                     Discord, shortcuts), chromium.py (Chromium browsers), engine.py (lookup and file formats),
                     release.json (version, pinned Vencord revision, installer checksums)
+src/app/            the Corsu Setup page (index.html) and its icon
 src/discord-plugin/ the Vencord plugin that translates Discord
+src/firefox/        corsu.cfg (Firefox autoconfig) and the module that completes Google's labels
 tests/              unit tests; tests/e2e/ holds the end-to-end checks the CI runs on each system
 tools/              packaging, coverage report, import of translations from other projects
 vendor/             pinned third-party files
 ```
 
 Only Python's standard library is used. Building the Discord plugin needs Node.js 22 or newer and pnpm.
+
+Corsu Setup (`src/app.py`) is a small web server bound to 127.0.0.1 on a random port. The page gets a random key in
+the address fragment and sends it with every request; requests without it, or with another `Host`, are refused, so
+other pages open in the browser cannot drive it. Every action runs `installer.py` in a child process and the page
+shows its output. The server stops ten minutes after the page was last open. `app.py --text` is the terminal menu.
 
 ## Lexicon
 

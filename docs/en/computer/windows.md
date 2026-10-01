@@ -7,8 +7,8 @@ Windows 10 and 11 (64-bit).
 1. Download [corsu-windows.zip](https://github.com/Platykalt/corsu/releases/latest/download/corsu-windows.zip).
 2. Right-click the file, choose Extract All, and open the `corsu` folder.
 3. Double-click `Install for Windows.cmd`.
-4. Everything Corsu found is ticked. Press Enter to install it all, or type a number to untick one first (`a` ticks
-   everything again). Type `y` to confirm.
+4. The Corsu Setup window opens in your browser and lists the programs found, all ticked. Untick what you do not want,
+   click Continue, read what Corsu will change, then click Install.
 
 Windows may warn you that the file comes from the internet. Choose Run, or More info and then Run anyway. The file
 is a short text script, and Windows shows this warning for any downloaded script that is not signed.

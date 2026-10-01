@@ -8,8 +8,9 @@ The simplest way is to open Terminal (Applications, then Utilities) and paste:
 curl -fsSL https://raw.githubusercontent.com/Platykalt/corsu/main/install/get.sh | sh
 ```
 
-It downloads the latest release, checks its SHA-256 checksum and starts the installer. Press Enter to install
-everything listed, or type a number to untick one first. Type `y` to confirm.
+It downloads the latest release, checks its SHA-256 checksum and opens the Corsu Setup window in your browser. The
+programs found are all ticked: untick what you do not want, click Continue, read what Corsu will change, then click
+Install.
 
 You can also download [corsu-macos.tar.gz](https://github.com/Platykalt/corsu/releases/latest/download/corsu-macos.tar.gz), open the `corsu` folder and double-click
 `Install for macOS.command`. macOS will probably refuse the first time because the file is not signed by a

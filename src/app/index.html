@@ -1,0 +1,476 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Corsu Setup</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%23134e6f'/%3E%3Ctext x='16' y='22' font-family='Georgia,serif' font-size='18' font-weight='700' fill='white' text-anchor='middle'%3Eco%3C/text%3E%3C/svg%3E">
+<style>
+:root {
+  --bg: #f4f6f5; --surface: #ffffff; --surface-2: #eef2f1; --text: #17201d; --muted: #5b6763;
+  --line: #d9e0dd; --accent: #134e6f; --accent-text: #ffffff; --accent-soft: #e2edf3; --ok: #2f6b3a;
+  --warn: #8a5a00; --danger: #a12d2d; --danger-soft: #f8e7e7; --focus: #3b82c4;
+  --radius: 12px; --shadow: 0 1px 2px rgba(0,0,0,.05), 0 2px 8px rgba(0,0,0,.04);
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #121615; --surface: #1a201e; --surface-2: #222a27; --text: #e7ecea; --muted: #9aa8a3;
+    --line: #2e3734; --accent: #6fb3d9; --accent-text: #0d1a22; --accent-soft: #1d2f39; --ok: #7cc48a;
+    --warn: #e2b04a; --danger: #ef8a8a; --danger-soft: #3a2222; --focus: #8cc6ea; --shadow: none;
+  }
+}
+* { box-sizing: border-box; }
+html, body { margin: 0; background: var(--bg); color: var(--text); }
+body { font: 15px/1.5 system-ui, -apple-system, "Segoe UI", "Noto Sans", Roboto, sans-serif; }
+a { color: var(--accent); }
+:focus-visible { outline: 2px solid var(--focus); outline-offset: 2px; }
+.wrap { max-width: 760px; margin: 0 auto; padding: 24px 16px 64px; }
+header { display: flex; align-items: center; gap: 14px; margin-bottom: 20px; }
+.logo { width: 44px; height: 44px; border-radius: 11px; background: #134e6f; color: #fff; display: grid; place-items: center;
+  font: 700 22px/1 Georgia, "Times New Roman", serif; flex: none; }
+header h1 { font-size: 21px; margin: 0; line-height: 1.2; }
+header p { margin: 2px 0 0; color: var(--muted); font-size: 13.5px; }
+.lang { margin-left: auto; display: flex; border: 1px solid var(--line); border-radius: 8px; overflow: hidden; }
+.lang button { border: 0; background: var(--surface); color: var(--muted); padding: 6px 10px; font: inherit; font-size: 13px; cursor: pointer; }
+.lang button[aria-pressed="true"] { background: var(--accent-soft); color: var(--text); font-weight: 600; }
+nav.tabs { display: flex; gap: 4px; border-bottom: 1px solid var(--line); margin-bottom: 20px; overflow-x: auto; overflow-y: hidden; scrollbar-width: none; }
+nav.tabs button { border: 0; background: none; color: var(--muted); font: inherit; font-weight: 500; padding: 10px 12px;
+  border-bottom: 2px solid transparent; margin-bottom: -1px; cursor: pointer; white-space: nowrap; }
+nav.tabs button[aria-selected="true"] { color: var(--text); border-bottom-color: var(--accent); }
+section[hidden] { display: none; }
+h2 { font-size: 16px; margin: 28px 0 10px; }
+h2:first-child { margin-top: 0; }
+.card { background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); box-shadow: var(--shadow); }
+.list > .row + .row { border-top: 1px solid var(--line); }
+.row { display: flex; align-items: center; gap: 14px; padding: 14px 16px; }
+.row .text { flex: 1; min-width: 0; }
+.row .name { font-weight: 600; }
+.row .detail { color: var(--muted); font-size: 13.5px; }
+.badge { font-size: 12px; padding: 2px 8px; border-radius: 99px; background: var(--surface-2); color: var(--muted); white-space: nowrap; }
+.badge.on { color: var(--ok); }
+.switch { position: relative; width: 44px; height: 26px; flex: none; }
+.switch input { position: absolute; inset: 0; opacity: 0; margin: 0; cursor: pointer; }
+.switch span { position: absolute; inset: 0; border-radius: 99px; background: var(--line); transition: background .15s; pointer-events: none; }
+.switch span::after { content: ""; position: absolute; top: 3px; left: 3px; width: 20px; height: 20px; border-radius: 50%;
+  background: #fff; box-shadow: 0 1px 2px rgba(0,0,0,.3); transition: transform .15s; }
+.switch input:checked + span { background: var(--accent); }
+.switch input:checked + span::after { transform: translateX(18px); }
+.switch input:focus-visible + span { outline: 2px solid var(--focus); outline-offset: 2px; }
+.switch input:disabled { cursor: default; }
+.switch input:disabled + span { opacity: .5; }
+input[type="checkbox"].pick { width: 18px; height: 18px; accent-color: var(--accent); flex: none; margin: 0; }
+.btn { border: 1px solid var(--line); background: var(--surface); color: var(--text); font: inherit; font-weight: 500;
+  padding: 8px 14px; border-radius: 9px; cursor: pointer; }
+.btn:hover { background: var(--surface-2); }
+.btn.primary { background: var(--accent); border-color: var(--accent); color: var(--accent-text); }
+.btn.primary:hover { filter: brightness(1.08); }
+.btn.danger { color: var(--danger); border-color: var(--danger); background: transparent; }
+.btn.danger:hover { background: var(--danger-soft); }
+.btn:disabled { opacity: .5; cursor: default; filter: none; }
+.actions { display: flex; flex-wrap: wrap; gap: 8px; padding: 14px 16px; border-top: 1px solid var(--line); }
+.note { color: var(--muted); font-size: 13.5px; margin: 10px 2px 0; }
+.notice { padding: 12px 16px; border-radius: var(--radius); background: var(--accent-soft); margin-bottom: 16px; font-size: 14px; }
+.notice.warn { background: var(--danger-soft); }
+pre.plan, pre.log { margin: 0; padding: 14px 16px; white-space: pre-wrap; word-break: break-word;
+  font: 12.5px/1.5 ui-monospace, "SFMono-Regular", Menlo, Consolas, monospace; max-height: 340px; overflow: auto; }
+.job { margin-top: 16px; }
+.job header { margin: 0; padding: 12px 16px; border-bottom: 1px solid var(--line); gap: 10px; }
+.job header strong { font-size: 14px; }
+.spinner { width: 14px; height: 14px; border: 2px solid var(--line); border-top-color: var(--accent); border-radius: 50%;
+  animation: spin .8s linear infinite; }
+@keyframes spin { to { transform: rotate(360deg); } }
+@media (prefers-reduced-motion: reduce) { .spinner { animation: none; } .switch span, .switch span::after { transition: none; } }
+.grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 10px; }
+.link { display: block; padding: 14px 16px; text-decoration: none; color: var(--text); }
+.link:hover { background: var(--surface-2); }
+.link strong { display: block; color: var(--accent); font-weight: 600; }
+.link span { color: var(--muted); font-size: 13.5px; }
+dl.facts { display: grid; grid-template-columns: max-content 1fr; gap: 6px 16px; margin: 0; padding: 14px 16px; font-size: 14px; }
+dl.facts dt { color: var(--muted); }
+dl.facts dd { margin: 0; word-break: break-all; }
+.empty { padding: 16px; color: var(--muted); }
+.closed { text-align: center; padding: 64px 16px; color: var(--muted); }
+@media (max-width: 520px) { header .lang { margin-left: 0; } header { flex-wrap: wrap; } .row { padding: 12px; } }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <div class="logo" aria-hidden="true">co</div>
+    <div>
+      <h1>Corsu</h1>
+      <p data-t="tagline"></p>
+    </div>
+    <div class="lang" role="group" aria-label="Langue / Language">
+      <button type="button" data-lang="fr">Français</button>
+      <button type="button" data-lang="en">English</button>
+    </div>
+  </header>
+
+  <div id="app">
+    <nav class="tabs" role="tablist">
+      <button type="button" role="tab" data-tab="parts" data-t="tab_parts"></button>
+      <button type="button" role="tab" data-tab="add" data-t="tab_add"></button>
+      <button type="button" role="tab" data-tab="help" data-t="tab_help"></button>
+      <button type="button" role="tab" data-tab="about" data-t="tab_about"></button>
+    </nav>
+
+    <section id="parts" role="tabpanel">
+      <div id="off-notice" class="notice warn" hidden></div>
+      <div class="card list" id="switches"></div>
+      <div id="terminal-actions" class="card" hidden style="margin-top:12px">
+        <div class="row">
+          <div class="text">
+            <div class="name" data-t="terminal_title"></div>
+            <div class="detail" id="terminal-state"></div>
+          </div>
+        </div>
+        <div class="actions">
+          <button type="button" class="btn" id="pause-hour" data-t="pause_hour"></button>
+          <button type="button" class="btn" id="pause-off" data-t="pause_off"></button>
+        </div>
+      </div>
+      <p class="note" data-t="restart_note"></p>
+      <div class="actions" style="padding:14px 0 0;border:0">
+        <button type="button" class="btn" id="all-off" data-t="all_off"></button>
+        <button type="button" class="btn" id="all-on" data-t="all_on"></button>
+      </div>
+    </section>
+
+    <section id="add" role="tabpanel" hidden>
+      <div id="welcome" class="notice" hidden data-t="welcome"></div>
+      <div class="card">
+        <div class="list" id="choices"></div>
+        <div class="actions">
+          <button type="button" class="btn" id="select-all" data-t="select_all"></button>
+          <button type="button" class="btn primary" id="show-plan" data-t="continue"></button>
+        </div>
+      </div>
+      <div class="card job" id="plan-card" hidden>
+        <header><strong data-t="plan_title"></strong></header>
+        <pre class="plan" id="plan"></pre>
+        <div class="actions">
+          <button type="button" class="btn primary" id="install" data-t="install"></button>
+          <button type="button" class="btn" id="cancel-plan" data-t="cancel"></button>
+        </div>
+      </div>
+      <p class="note" data-t="missing_note"></p>
+    </section>
+
+    <section id="help" role="tabpanel" hidden>
+      <h2 data-t="help_guides"></h2>
+      <div class="grid" id="guides"></div>
+      <h2 data-t="help_practice"></h2>
+      <p class="note" style="margin-top:0" data-t="help_practice_text"></p>
+      <div class="grid" id="practice" style="margin-top:10px"></div>
+    </section>
+
+    <section id="about" role="tabpanel" hidden>
+      <div class="card"><dl class="facts" id="facts"></dl></div>
+      <h2 data-t="remove_title"></h2>
+      <div class="card">
+        <div class="row"><div class="text detail" data-t="remove_text"></div></div>
+        <div class="actions"><button type="button" class="btn danger" id="uninstall" data-t="remove"></button></div>
+      </div>
+    </section>
+
+    <div class="card job" id="job" hidden aria-live="polite">
+      <header><span class="spinner" id="job-spinner"></span><strong id="job-title"></strong></header>
+      <pre class="log" id="job-log"></pre>
+    </div>
+  </div>
+</div>
+
+<script>
+"use strict";
+const key = location.hash.slice(1);
+const strings = {
+  fr: {
+    tagline: "Mettre en corse les logiciels de tous les jours",
+    tab_parts: "En corse", tab_add: "Ajouter", tab_help: "Aide", tab_about: "Corsu",
+    on: "En corse", off: "Langue d'origine", installed: "Installé",
+    terminal_title: "Pause du terminal",
+    terminal_on: "Le terminal est en corse.",
+    terminal_off: "Le terminal est en français jusqu'à ce que vous le réactiviez.",
+    terminal_until: "Le terminal est en français jusqu'à {time}.",
+    pause_hour: "Français pendant 1 heure", pause_off: "Français jusqu'à nouvel ordre",
+    restart_note: "Après un changement, redémarrez le logiciel concerné. Pour le bureau, déconnectez-vous puis reconnectez-vous.",
+    all_off: "Tout remettre dans la langue d'origine", all_on: "Tout remettre en corse",
+    everything_off: "Corsu est en pause : tout est dans la langue d'origine.",
+    nothing_installed: "Rien n'est encore installé. Ouvrez l'onglet Ajouter pour commencer.",
+    welcome: "Bienvenue. Voici les logiciels trouvés sur cet ordinateur, tous cochés. Corsu vous montre ce qu'il va changer avant de le faire, et tout peut être annulé.",
+    select_all: "Tout cocher", continue: "Continuer", plan_title: "Ce que Corsu va faire",
+    install: "Installer", cancel: "Annuler",
+    missing_note: "Un logiciel n'apparaît pas ? Corsu ne propose que ce qu'il trouve sur cet ordinateur. Installez-le, puis rouvrez Corsu Setup.",
+    nothing_to_add: "Tout ce que Corsu a trouvé ici est déjà installé.",
+    pick_one: "Cochez au moins un logiciel.",
+    help_guides: "Guides", help_practice: "Pratiquer le corse",
+    help_practice_text: "Une interface traduite ne remplace pas la conversation. Pour lire, écrire et dialoguer en corse :",
+    remove_title: "Retirer Corsu",
+    remove_text: "Remet chaque fichier et réglage d'origine. Ce que vous avez modifié vous-même depuis l'installation n'est pas touché.",
+    remove: "Retirer Corsu…", confirm_remove: "Retirer Corsu et remettre tous les fichiers d'origine ?",
+    job_install: "Installation", job_switch: "Changement de langue", job_uninstall: "Désinstallation",
+    job_done: "Terminé", job_failed: "Arrêté avec une erreur",
+    version: "Version", system: "Système", profile: "Profil Firefox", lexicon: "Traductions",
+    lexicon_count: "{n} phrases", closed: "Corsu Setup est fermé. Rouvrez-le depuis le menu des applications.",
+    busy: "Une opération est déjà en cours.",
+    guide_computer: "Installer sur cet ordinateur", guide_computer_text: "Pas à pas, avec le dépannage",
+    guide_discord: "Discord en corse", guide_discord_text: "Réglez Discord en français ou en anglais",
+    guide_phone: "Téléphone et clavier", guide_phone_text: "Android, iPhone, clavier corse",
+    guide_changes: "Ce que Corsu modifie", guide_changes_text: "Chaque fichier, et comment l'annuler",
+    guide_report: "Signaler une traduction", guide_report_text: "Proposer une meilleure formulation",
+    guide_why: "Pourquoi Corsu", guide_why_text: "Les raisons du projet",
+    sapienzia: "Traduction, dictionnaire, conjugaison et conversation", astutu: "Un assistant qui répond en corse",
+    liv: "Une intelligence artificielle qui parle corse",
+  },
+  en: {
+    tagline: "Everyday software in Corsican",
+    tab_parts: "In Corsican", tab_add: "Add", tab_help: "Help", tab_about: "Corsu",
+    on: "In Corsican", off: "Original language", installed: "Installed",
+    terminal_title: "Terminal pause",
+    terminal_on: "The terminal is in Corsican.",
+    terminal_off: "The terminal is in French until you switch it back on.",
+    terminal_until: "The terminal is in French until {time}.",
+    pause_hour: "French for 1 hour", pause_off: "French until I switch it back",
+    restart_note: "After a change, restart the program concerned. For the desktop, log out and back in.",
+    all_off: "Put everything back in the original language", all_on: "Put everything back in Corsican",
+    everything_off: "Corsu is paused: everything is in its original language.",
+    nothing_installed: "Nothing is installed yet. Open the Add tab to start.",
+    welcome: "Welcome. These are the programs found on this computer, all ticked. Corsu shows what it will change before doing it, and everything can be undone.",
+    select_all: "Tick all", continue: "Continue", plan_title: "What Corsu will do",
+    install: "Install", cancel: "Cancel",
+    missing_note: "A program is missing? Corsu only offers what it finds on this computer. Install it, then open Corsu Setup again.",
+    nothing_to_add: "Everything Corsu found here is already installed.",
+    pick_one: "Tick at least one program.",
+    help_guides: "Guides", help_practice: "Practise Corsican",
+    help_practice_text: "A translated interface is no substitute for conversation. To read, write and talk in Corsican:",
+    remove_title: "Remove Corsu",
+    remove_text: "Puts back every original file and setting. Anything you changed yourself since installing is left alone.",
+    remove: "Remove Corsu…", confirm_remove: "Remove Corsu and put back all the original files?",
+    job_install: "Installing", job_switch: "Changing language", job_uninstall: "Removing",
+    job_done: "Done", job_failed: "Stopped with an error",
+    version: "Version", system: "System", profile: "Firefox profile", lexicon: "Translations",
+    lexicon_count: "{n} phrases", closed: "Corsu Setup is closed. Open it again from the applications menu.",
+    busy: "Something is already running.",
+    guide_computer: "Install on this computer", guide_computer_text: "Step by step, with troubleshooting",
+    guide_discord: "Discord in Corsican", guide_discord_text: "Set Discord to French or English",
+    guide_phone: "Phone and keyboard", guide_phone_text: "Android, iPhone, Corsican keyboard",
+    guide_changes: "What Corsu changes", guide_changes_text: "Every file, and how to undo it",
+    guide_report: "Report a translation", guide_report_text: "Suggest a better wording",
+    guide_why: "Why Corsu", guide_why_text: "The reasons behind the project",
+    sapienzia: "Translation, dictionary, conjugation and conversation", astutu: "An assistant that answers in Corsican",
+    liv: "An artificial intelligence that speaks Corsican",
+  },
+};
+const repo = "https://github.com/Platykalt/corsu/blob/main/docs/";
+const systems = { windows: "Windows", macos: "macOS", linux: "Linux" };
+let language = null;
+try { language = localStorage.getItem("corsu-language"); } catch (error) {}
+language = language || ((navigator.language || "fr").toLowerCase().startsWith("en") ? "en" : "fr");
+let chosen = false;
+try { chosen = !!localStorage.getItem("corsu-language"); } catch (error) {}
+let state = null, tab = null, picks = null, closed = false;
+
+const $ = id => document.getElementById(id);
+const say = (name, values = {}) => (strings[language][name] || name).replace(/\{(\w+)\}/g, (_, k) => values[k]);
+function element(tag, attributes = {}, ...children) {
+  const node = document.createElement(tag);
+  for (const [name, value] of Object.entries(attributes)) {
+    if (name === "text") node.textContent = value;
+    else if (name.startsWith("on")) node.addEventListener(name.slice(2), value);
+    else if (value !== false && value !== null && value !== undefined) node.setAttribute(name, value === true ? "" : value);
+  }
+  node.append(...children);
+  return node;
+}
+
+async function call(path, body) {
+  const response = await fetch(path, {
+    method: body ? "POST" : "GET",
+    headers: { "X-Corsu-Key": key, "Content-Type": "application/json" },
+    body: body ? JSON.stringify({ language, ...body }) : undefined,
+  });
+  if (response.status === 409) { alert(say("busy")); return null; }
+  if (!response.ok) throw new Error(response.status);
+  return response.json();
+}
+
+function translateStatic() {
+  document.documentElement.lang = language;
+  for (const node of document.querySelectorAll("[data-t]")) node.textContent = say(node.dataset.t);
+  for (const button of document.querySelectorAll("[data-lang]")) button.setAttribute("aria-pressed", button.dataset.lang === language);
+}
+
+function selectTab(name) {
+  tab = name;
+  for (const button of document.querySelectorAll("[data-tab]")) {
+    const selected = button.dataset.tab === name;
+    button.setAttribute("aria-selected", selected);
+    button.tabIndex = selected ? 0 : -1;
+  }
+  for (const section of document.querySelectorAll("section[role=tabpanel]")) section.hidden = section.id !== name;
+}
+
+function renderParts() {
+  const list = $("switches");
+  list.replaceChildren();
+  const parts = state.items.filter(item => item.switchable && item.name !== "terminal");
+  const busy = state.job.running;
+  if (!state.installed) list.append(element("div", { class: "empty", text: say("nothing_installed") }));
+  for (const item of parts) {
+    const [name, detail] = item.text[language];
+    const id = "switch-" + item.name;
+    const input = element("input", { type: "checkbox", role: "switch", id, checked: item.on, disabled: busy,
+      onchange: event => call("/api/switch", { components: [item.name], on: event.target.checked }).then(refresh) });
+    list.append(element("div", { class: "row" },
+      element("div", { class: "text" }, element("label", { class: "name", for: id, text: name }), element("div", { class: "detail", text: detail })),
+      element("span", { class: "badge" + (item.on ? " on" : ""), text: say(item.on ? "on" : "off") }),
+      element("div", { class: "switch" }, input, element("span"))));
+  }
+  for (const item of state.items.filter(item => item.installed && !item.switchable && item.name !== "terminal")) {
+    const [name, detail] = item.text[language];
+    list.append(element("div", { class: "row" },
+      element("div", { class: "text" }, element("div", { class: "name", text: name }), element("div", { class: "detail", text: detail })),
+      element("span", { class: "badge on", text: say("installed") })));
+  }
+  const terminal = state.items.find(item => item.name === "terminal");
+  $("terminal-actions").hidden = !terminal;
+  if (terminal) {
+    const until = state.terminal_paused_until;
+    $("terminal-state").textContent = until === null ? say("terminal_on") : until === 0 ? say("terminal_off")
+      : say("terminal_until", { time: new Date(until * 1000).toLocaleTimeString(language, { hour: "2-digit", minute: "2-digit" }) });
+    $("pause-hour").disabled = $("pause-off").disabled = busy;
+  }
+  $("off-notice").hidden = !state.everything_off;
+  $("off-notice").textContent = say("everything_off");
+  $("all-off").hidden = !state.installed || state.everything_off;
+  $("all-on").hidden = !state.installed || !(state.everything_off || parts.some(item => !item.on));
+  $("all-off").disabled = $("all-on").disabled = busy;
+}
+
+function renderAdd() {
+  const candidates = state.items.filter(item => !item.installed && item.name !== "terminal");
+  if (picks === null) picks = new Set(candidates.map(item => item.name));
+  $("welcome").hidden = state.installed;
+  const list = $("choices");
+  list.replaceChildren();
+  if (!candidates.length) list.append(element("div", { class: "empty", text: say("nothing_to_add") }));
+  for (const item of candidates) {
+    const [name, detail] = item.text[language];
+    const id = "pick-" + item.name;
+    list.append(element("div", { class: "row" },
+      element("input", { type: "checkbox", class: "pick", id, checked: picks.has(item.name),
+        onchange: event => { event.target.checked ? picks.add(item.name) : picks.delete(item.name); $("plan-card").hidden = true; } }),
+      element("div", { class: "text" }, element("label", { class: "name", for: id, text: name }), element("div", { class: "detail", text: detail }))));
+  }
+  $("select-all").hidden = $("show-plan").hidden = !candidates.length;
+  $("show-plan").disabled = $("install").disabled = state.job.running;
+}
+
+function renderHelp() {
+  const docs = language === "fr"
+    ? { computer: `fr/ordinateur/${state.platform}.md`, discord: "fr/discord.md", phone: "fr/telephone/android.md", changes: "fr/ce-que-corsu-modifie.md", why: "fr/pourquoi-corsu.md" }
+    : { computer: `en/computer/${state.platform}.md`, discord: "en/discord.md", phone: "en/phone/android.md", changes: "en/what-corsu-changes.md", why: "en/why-corsu.md" };
+  const card = (href, title, text) => element("a", { class: "card link", href, target: "_blank", rel: "noopener" },
+    element("strong", { text: title }), element("span", { text }));
+  $("guides").replaceChildren(
+    card(repo + docs.computer, say("guide_computer"), say("guide_computer_text")),
+    card(repo + docs.discord, say("guide_discord"), say("guide_discord_text")),
+    card(repo + docs.phone, say("guide_phone"), say("guide_phone_text")),
+    card(repo + docs.changes, say("guide_changes"), say("guide_changes_text")),
+    card("https://github.com/Platykalt/corsu/issues/new?template=translation.yml", say("guide_report"), say("guide_report_text")),
+    card(repo + docs.why, say("guide_why"), say("guide_why_text")));
+  $("practice").replaceChildren(
+    card("https://www.sapienzia.io", "Sapienzia", say("sapienzia")),
+    card("https://astutu.corsica", "Astutu", say("astutu")),
+    card("https://liv.corsica", "LIV", say("liv")));
+}
+
+function renderAbout() {
+  const facts = [[say("version"), state.version], [say("system"), systems[state.platform] || state.platform],
+    [say("lexicon"), say("lexicon_count", { n: state.lexicon_entries.toLocaleString(language) })]];
+  if (state.firefox_profile) facts.push([say("profile"), state.firefox_profile]);
+  $("facts").replaceChildren(...facts.flatMap(([term, value]) => [element("dt", { text: term }), element("dd", { text: value })]));
+  $("uninstall").disabled = !state.installed || state.job.running;
+}
+
+function renderJob() {
+  const job = state.job;
+  $("job").hidden = !job.title;
+  if (!job.title) return;
+  $("job-spinner").hidden = !job.running;
+  $("job-title").textContent = say("job_" + job.title) + (job.running ? "…" : " — " + say(job.ok ? "job_done" : "job_failed"));
+  const log = $("job-log");
+  const atBottom = log.scrollTop + log.clientHeight >= log.scrollHeight - 8;
+  log.textContent = job.lines.join("\n");
+  if (atBottom) log.scrollTop = log.scrollHeight;
+}
+
+function render() {
+  translateStatic();
+  renderParts(); renderAdd(); renderHelp(); renderAbout(); renderJob();
+}
+
+async function refresh() {
+  try {
+    const next = await call("/api/state");
+    const finished = state && state.job.running && !next.job.running;
+    state = next;
+    if (!chosen) language = state.language;
+    if (tab === null) selectTab(state.installed ? "parts" : "add");
+    if (finished) picks = null;
+    render();
+  } catch (error) {
+    if (!closed) {
+      closed = true;
+      $("app").replaceChildren(element("div", { class: "closed", text: say("closed") }));
+    }
+  }
+}
+
+for (const button of document.querySelectorAll("[data-tab]")) button.addEventListener("click", () => selectTab(button.dataset.tab));
+document.querySelector("nav.tabs").addEventListener("keydown", event => {
+  const tabs = [...document.querySelectorAll("[data-tab]")];
+  const index = tabs.findIndex(button => button.dataset.tab === tab);
+  const next = event.key === "ArrowRight" ? index + 1 : event.key === "ArrowLeft" ? index - 1 : null;
+  if (next === null) return;
+  const target = tabs[(next + tabs.length) % tabs.length];
+  selectTab(target.dataset.tab); target.focus();
+});
+for (const button of document.querySelectorAll("[data-lang]")) button.addEventListener("click", () => {
+  language = button.dataset.lang;
+  chosen = true;
+  try { localStorage.setItem("corsu-language", language); } catch (error) {}
+  if (state) render(); else translateStatic();
+});
+$("pause-hour").addEventListener("click", () => call("/api/pause", { hours: 1 }).then(refresh));
+$("pause-off").addEventListener("click", () => call("/api/pause", {}).then(refresh));
+$("all-off").addEventListener("click", () => call("/api/all", { on: false }).then(refresh));
+$("all-on").addEventListener("click", () => call("/api/all", { on: true }).then(refresh));
+$("select-all").addEventListener("click", () => {
+  picks = new Set(state.items.filter(item => !item.installed && item.name !== "terminal").map(item => item.name));
+  renderAdd();
+});
+$("show-plan").addEventListener("click", async () => {
+  if (!picks.size) { alert(say("pick_one")); return; }
+  const result = await call("/api/plan", { components: [...picks] });
+  $("plan").textContent = result.plan;
+  $("install").hidden = !result.ok;
+  $("plan-card").hidden = false;
+  $("install").focus();
+});
+$("cancel-plan").addEventListener("click", () => { $("plan-card").hidden = true; });
+$("install").addEventListener("click", () => {
+  $("plan-card").hidden = true;
+  call("/api/install", { components: [...picks] }).then(refresh);
+});
+$("uninstall").addEventListener("click", () => {
+  if (confirm(say("confirm_remove"))) call("/api/uninstall", {}).then(refresh);
+});
+
+translateStatic();
+refresh();
+setInterval(() => { if (!closed) refresh(); }, 1500);
+</script>
+</body>
+</html>

@@ -34,6 +34,18 @@ else:
     DATA = HOME / '.local/share/corsu'
     CONFIG = Path(os.environ.get('XDG_CONFIG_HOME', HOME / '.config'))
 STATE = DATA / 'installation.json'
+
+
+def french():
+    """Speak French when the computer does; CORSU_LANG=en or fr overrides."""
+    import locale
+    choice = os.environ.get('CORSU_LANG') or os.environ.get('LANGUAGE') or os.environ.get('LC_ALL') \
+        or os.environ.get('LC_MESSAGES') or os.environ.get('LANG') or (locale.getlocale()[0] or '')
+    return choice.lower().startswith(('fr', 'co', 'french'))
+
+
+def t(english, francais):
+    return francais if french() else english
 LEXICON = engine.LEXICON
 FRENCH_CATALOGS = Path('/usr/share/locale/fr/LC_MESSAGES')
 QT_TRANSLATIONS = Path('/usr/share/qt6/translations')
@@ -1016,7 +1028,7 @@ def setup_shortcut(installer):
                         '[Desktop Entry]\nType=Application\nName=Corsu Setup\nName[co]=Cunfigurazione di Corsu\n'
                         'Name[fr]=Réglages de Corsu\n'
                         'Comment=Choose what is in Corsican\nComment[fr]=Choisir ce qui est en corse\n'
-                        f'Exec=python3 {shlex.quote(str(app))}\nTerminal=false\nIcon=preferences-desktop-locale\n'
+                        f'Exec=python3 {shlex.quote(str(app))}\nTerminal=false\nIcon={SRC / "app/corsu.svg"}\n'
                         'Categories=Settings;\n')
 
 
@@ -1088,7 +1100,7 @@ def install(components=None, qt_system=False):
               'components': sorted(components), 'enabled': True,
               'scope': 'Interface labels only; no translation of messages or arbitrary websites.'}
     (DATA / 'report.json').write_text(json.dumps(report, ensure_ascii=False, indent=2), encoding='utf-8')
-    print(json.dumps(report, ensure_ascii=False, indent=2))
+    print(t('Installed: ', 'Installé : ') + component_names(components & set(COMPONENT_LABELS)))
 
 
 def vencord_installer():
@@ -1103,9 +1115,16 @@ def disabled_marker():
 
 
 COMPONENT_LABELS = {
-    'firefox': 'Firefox', 'chromium': 'Chrome, Opera GX and other Chromium browsers', 'discord': 'Discord',
-    'vesktop': 'Vesktop', 'desktop': 'KDE Plasma desktop and programs', 'terminal': 'Terminal commands',
+    'firefox': ('Firefox', 'Firefox'),
+    'chromium': ('Chrome, Opera GX and other Chromium browsers', 'Chrome, Opera GX et autres navigateurs Chromium'),
+    'discord': ('Discord', 'Discord'), 'vesktop': ('Vesktop', 'Vesktop'),
+    'desktop': ('KDE Plasma desktop and programs', 'Bureau et programmes KDE Plasma'),
+    'terminal': ('Terminal commands', 'Commandes du terminal'),
 }
+
+
+def component_names(names):
+    return ', '.join(t(*COMPONENT_LABELS[name]) if name in COMPONENT_LABELS else name for name in sorted(names))
 
 
 def load_state():
@@ -1180,7 +1199,7 @@ def disable(components=None, hours=None):
     Only the switches are reverted, so `enable` is fast and needs no rebuild.
     """
     if not STATE.exists():
-        print('No installation recorded.')
+        print(t('Corsu is not installed.', 'Corsu n\'est pas installé.'))
         return
     installer = Installer()
     everything = components is None
@@ -1218,16 +1237,18 @@ def disable(components=None, hours=None):
     if everything:
         disabled_marker().write_text('Corsu is switched off. Open Corsu Setup to switch it on again.\n', encoding='utf-8')
     for name in preserved:
-        print(f'Left alone because you changed it: {name}')
-    names = ', '.join(COMPONENT_LABELS.get(name, name) for name in sorted(targets))
-    print(f'Back to the previous language: {names}. Restart these programs'
-          + ('; log out and back in for the desktop.' if 'desktop' in targets else '.'))
+        print(t(f'Left alone because you changed it: {name}', f'Laissé tel quel car vous l\'avez modifié : {name}'))
+    names = component_names(targets)
+    print(t(f'Back to the original language: {names}. Restart these programs'
+            + ('; log out and back in for the desktop.' if 'desktop' in targets else '.'),
+            f'Retour à la langue d\'origine : {names}. Redémarrez ces logiciels'
+            + (' ; déconnectez-vous et reconnectez-vous pour le bureau.' if 'desktop' in targets else '.')))
 
 
 def enable(components=None):
     """Switch Corsican back on, for every part or for the ones listed."""
     if not STATE.exists():
-        print('No installation recorded.')
+        print(t('Corsu is not installed.', 'Corsu n\'est pas installé.'))
         return
     state = load_state()
     parts = set(switchable(state))
@@ -1248,14 +1269,16 @@ def enable(components=None):
         rebuild.discard('vesktop')
     if rebuild:
         install(rebuild, qt_system=state.get('qt_system', False) and 'desktop' in rebuild)
-    names = ', '.join(COMPONENT_LABELS.get(name, name) for name in sorted(targets))
-    print(f'In Corsican again: {names}. Restart these programs'
-          + ('; log out and back in for the desktop.' if 'desktop' in targets else '.'))
+    names = component_names(targets)
+    print(t(f'In Corsican again: {names}. Restart these programs'
+            + ('; log out and back in for the desktop.' if 'desktop' in targets else '.'),
+            f'De nouveau en corse : {names}. Redémarrez ces logiciels'
+            + (' ; déconnectez-vous et reconnectez-vous pour le bureau.' if 'desktop' in targets else '.')))
 
 
 def uninstall():
     if not STATE.exists():
-        print('No installation recorded.')
+        print(t('Corsu is not installed.', 'Corsu n\'est pas installé.'))
         return
     state = json.loads(STATE.read_text(encoding='utf-8'))
     remaining = {}
@@ -1291,7 +1314,8 @@ def uninstall():
             continue
         if path.exists() and digest(path.read_bytes()) != record['installed_sha256']:
             remaining[name] = record
-            print(f'Preserved changed file; original backup: {record["backup"]}: {name}')
+            print(t(f'Left alone because you changed it: {name} (original copy: {record["backup"]})',
+                    f'Laissé tel quel car vous l\'avez modifié : {name} (copie d\'origine : {record["backup"]})'))
             continue
         if record.get('system'):
             system_remove([path])
@@ -1318,7 +1342,9 @@ def uninstall():
     STATE.write_text(json.dumps({'files': remaining}, indent=2), encoding='utf-8')
     disabled_marker().unlink(missing_ok=True)
     (DATA / TERMINAL_OFF).unlink(missing_ok=True)
-    print('Restored unchanged managed settings. Local builds retained in ' + str(DATA))
+    print(t(f'Original files and settings are back. Corsu\'s own files stay in {DATA}; you can delete that folder.',
+            f'Les fichiers et réglages d\'origine sont remis. Les fichiers de Corsu restent dans {DATA} ; '
+            'vous pouvez supprimer ce dossier.'))
 
 
 SYSTEM_LOCALE = Path('/usr/share/locale/co/LC_MESSAGES')

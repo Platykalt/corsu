@@ -13,6 +13,7 @@ import tempfile
 import urllib.request
 
 import corsu
+from corsu import french, t  # noqa: F401  (app.py and tests use them from here)
 
 ROOT = Path(__file__).resolve().parent.parent
 
@@ -148,7 +149,7 @@ def deploy_release():
     if ROOT.is_relative_to((corsu.DATA / 'releases').resolve()) or os.environ.get('CORSU_DEPLOYED') == str(ROOT):
         return ROOT
     fingerprint = hashlib.sha256()
-    for path in sorted([*(ROOT / 'src').glob('*.py'), *(ROOT / 'src').glob('*.json'), *(ROOT / 'src/discord-plugin').glob('*.ts'),
+    for path in sorted([*(path for path in (ROOT / 'src').rglob('*') if path.is_file() and '__pycache__' not in path.parts),
                         *(ROOT / name for name in DEPLOYED_FILES if (ROOT / name).is_file()),
                         *(ROOT / 'lexicon').glob('*.tsv'), *(ROOT / 'Vencord/dist').glob('*.*')]):
         fingerprint.update(path.relative_to(ROOT).as_posix().encode() + b'\0' + path.read_bytes())
@@ -216,6 +217,7 @@ def install_discord(location):
         raise RuntimeError('The official installer did not inject the expected custom build.')
     installer.external_file(app, original)
     installer.state['files'][str(app)]['discord_location'] = str(location)
+    installer.state['components'] = sorted(set(installer.state.get('components', [])) | {'discord'})
     corsu.STATE.write_text(json.dumps(installer.state, indent=2), encoding='utf-8')
     installer.json_settings(corsu.CONFIG / 'Vencord/settings/settings.json', {
         'plugins/Corsu/enabled': True, 'autoUpdate': False, 'autoUpdateNotification': False})
@@ -223,18 +225,6 @@ def install_discord(location):
     report = json.loads(report_path.read_text(encoding='utf-8')) if report_path.exists() else {}
     report['discord_native'] = {'location': str(location), 'plugin': 'Corsu', 'partial': True}
     report_path.write_text(json.dumps(report, ensure_ascii=False, indent=2), encoding='utf-8')
-
-
-def french():
-    """Speak French when the computer does; CORSU_LANG=en or fr overrides."""
-    import locale
-    choice = os.environ.get('CORSU_LANG') or os.environ.get('LANGUAGE') or os.environ.get('LC_ALL') \
-        or os.environ.get('LC_MESSAGES') or os.environ.get('LANG') or (locale.getlocale()[0] or '')
-    return choice.lower().startswith(('fr', 'co', 'french'))
-
-
-def t(english, francais):
-    return francais if french() else english
 
 
 DESCRIPTIONS = {
@@ -278,6 +268,44 @@ def choose(available):
         print()
 
 
+def show_plan(components, location):
+    print(t('Corsu will make these changes:\n', 'Corsu va faire ces changements :\n'))
+    if 'firefox' in components:
+        where = {'windows': t('a "Firefox Corsu" shortcut in the Start menu', 'un raccourci "Firefox Corsu" du menu Démarrer'),
+                 'macos': t('a "Firefox Corsu" app in ~/Applications', 'une application "Firefox Corsu" dans ~/Applications')
+                 }.get(corsu.PLATFORM, t('your Firefox menu entry', 'votre entrée Firefox habituelle du menu'))
+        print(t(f'  Firefox: make a translated copy of Firefox, opened from {where}. It uses your usual profile.',
+                f'  Firefox : faire une copie traduite de Firefox, ouverte depuis {where}. Elle utilise votre profil habituel.'))
+    if 'chromium' in components:
+        import chromium
+        names = ', '.join(browser.label for browser in chromium.browsers()) or 'none found'
+        print(t(f'  {names}: replace the French language file with a Corsican one.'
+                ' Browsers installed for all users will ask for administrator rights, now and after each update.',
+                f'  {names} : remplacer le fichier de langue française par un fichier corse.'
+                ' Les navigateurs installés pour tous les utilisateurs demanderont les droits administrateur, maintenant et après chaque mise à jour.'))
+    if 'discord' in components:
+        print(t(f'  Discord: patch {location} with the official Vencord installer and turn on the Corsu plugin.'
+                ' Vencord updates are turned off so they do not remove it. Set Discord to French or English.',
+                f'  Discord : modifier {location} avec l\'installeur officiel de Vencord et activer le plugin Corsu.'
+                ' Les mises à jour de Vencord sont coupées pour ne pas l\'effacer. Réglez Discord en français ou en anglais.'))
+    if 'vesktop' in components:
+        print(t('  Vesktop: use the Vencord build that includes the Corsu plugin.',
+                '  Vesktop : utiliser la version de Vencord qui contient le plugin Corsu.'))
+    if 'desktop' in components:
+        print(t('  KDE Plasma: add Corsican translation files to your home folder and set the language to Corsican,'
+                ' with French for anything not yet translated. Log out and back in afterwards.',
+                '  KDE Plasma : ajouter les fichiers de traduction corse dans votre dossier personnel et passer la langue en corse,'
+                ' avec le français pour ce qui n\'est pas encore traduit. Déconnectez-vous et reconnectez-vous ensuite.'))
+    if 'qt' in components:
+        print(f'  System translations: copy the Corsican files into {corsu.SYSTEM_LOCALE.parent.parent} and'
+              f' {corsu.QT_TRANSLATIONS}, so GTK programs, terminal commands and Qt dialogs use them too.'
+              ' This asks for your password once.')
+    print(t(f'\nA copy of every file Corsu changes is kept in {corsu.DATA}, and Corsu Setup can undo everything.',
+            f'\nUne copie de chaque fichier modifié est gardée dans {corsu.DATA}, et Corsu Setup peut tout annuler.'))
+    print(t('Text without a Corsican translation yet stays in French. Messages are never changed.\n',
+            'Le texte sans traduction corse reste en français. Les messages ne sont jamais modifiés.\n'))
+
+
 def main(argv=None):
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('--components', nargs='+', choices=['firefox', 'chromium', 'desktop', 'discord', 'vesktop', 'qt'],
@@ -287,6 +315,8 @@ def main(argv=None):
     parser.add_argument('--yes', action='store_true', help='Accept the displayed installation plan')
     parser.add_argument('--dry-run', action='store_true', help='Display the plan without downloading or changing anything')
     parser.add_argument('--uninstall', action='store_true')
+    # The Windows launcher cannot drop its own --text option before passing the rest on.
+    parser.add_argument('--text', action='store_true', help=argparse.SUPPRESS)
     parts = ['firefox', 'chromium', 'discord', 'vesktop', 'desktop', 'terminal']
     parser.add_argument('--disable', nargs='*', choices=parts, metavar='PART',
                         help='Go back to the previous language, for everything or for the parts listed: ' + ', '.join(parts))
@@ -330,41 +360,9 @@ def main(argv=None):
             if component in ('desktop', 'qt') and corsu.PLATFORM != 'linux':
                 parser.error(f'{component} is for KDE Plasma on Linux.')
             parser.error(f'{component} was not found on this computer.')
-    print(t('Corsu will make these changes:\n', 'Corsu va faire ces changements :\n'))
-    if 'firefox' in components:
-        where = {'windows': t('a "Firefox Corsu" shortcut in the Start menu', 'un raccourci "Firefox Corsu" du menu Démarrer'),
-                 'macos': t('a "Firefox Corsu" app in ~/Applications', 'une application "Firefox Corsu" dans ~/Applications')
-                 }.get(corsu.PLATFORM, t('your Firefox menu entry', 'votre entrée Firefox habituelle du menu'))
-        print(t(f'  Firefox: make a translated copy of Firefox, opened from {where}. It uses your usual profile.',
-                f'  Firefox : faire une copie traduite de Firefox, ouverte depuis {where}. Elle utilise votre profil habituel.'))
-    if 'chromium' in components:
-        import chromium
-        names = ', '.join(browser.label for browser in chromium.browsers()) or 'none found'
-        print(t(f'  {names}: replace the French language file with a Corsican one.'
-                ' Browsers installed for all users will ask for administrator rights, now and after each update.',
-                f'  {names} : remplacer le fichier de langue française par un fichier corse.'
-                ' Les navigateurs installés pour tous les utilisateurs demanderont les droits administrateur, maintenant et après chaque mise à jour.'))
-    if 'discord' in components:
-        print(t(f'  Discord: patch {location} with the official Vencord installer and turn on the Corsu plugin.'
-                ' Vencord updates are turned off so they do not remove it. Set Discord to French or English.',
-                f'  Discord : modifier {location} avec l\'installeur officiel de Vencord et activer le plugin Corsu.'
-                ' Les mises à jour de Vencord sont coupées pour ne pas l\'effacer. Réglez Discord en français ou en anglais.'))
-    if 'vesktop' in components:
-        print(t('  Vesktop: use the Vencord build that includes the Corsu plugin.',
-                '  Vesktop : utiliser la version de Vencord qui contient le plugin Corsu.'))
-    if 'desktop' in components:
-        print(t('  KDE Plasma: add Corsican translation files to your home folder and set the language to Corsican,'
-                ' with French for anything not yet translated. Log out and back in afterwards.',
-                '  KDE Plasma : ajouter les fichiers de traduction corse dans votre dossier personnel et passer la langue en corse,'
-                ' avec le français pour ce qui n\'est pas encore traduit. Déconnectez-vous et reconnectez-vous ensuite.'))
-    if 'qt' in components:
-        print(f'  System translations: copy the Corsican files into {corsu.SYSTEM_LOCALE.parent.parent} and'
-              f' {corsu.QT_TRANSLATIONS}, so GTK programs, terminal commands and Qt dialogs use them too.'
-              ' This asks for your password once.')
-    print(t(f'\nA copy of every file Corsu changes is kept in {corsu.DATA}, and Corsu Setup can undo everything.',
-            f'\nUne copie de chaque fichier modifié est gardée dans {corsu.DATA}, et Corsu Setup peut tout annuler.'))
-    print(t('Text without a Corsican translation yet stays in French. Messages are never changed.\n',
-            'Le texte sans traduction corse reste en français. Les messages ne sont jamais modifiés.\n'))
+    # Corsu Setup shows the plan before starting; its log only needs what happens next.
+    if not os.environ.get('CORSU_SETUP_WINDOW'):
+        show_plan(components, location)
     if args.dry_run:
         return 0
     if not args.yes and input(t('Go ahead? [y/N] ', 'On y va ? [o/N] ')).strip().lower() not in ('y', 'yes', 'o', 'oui'):
@@ -393,6 +391,10 @@ def main(argv=None):
     if corsu.PLATFORM == 'linux' and shutil.which('update-desktop-database') and applications.is_dir():
         # Only refreshes the menu cache; menus still update on the next login when it fails.
         subprocess.run(['update-desktop-database', str(applications)], check=False)
+    if os.environ.get('CORSU_SETUP_WINDOW'):
+        print(t('\nDone. Close Firefox, your browsers and Discord completely, then open them again.',
+                '\nC\'est fait. Fermez complètement Firefox, vos navigateurs et Discord, puis rouvrez-les.'))
+        return 0
     print(t('\nDone. Close Firefox, your browsers and Discord completely, then open them again.'
             + (' Log out and back in for the Plasma desktop.' if 'desktop' in components else '')
             + '\nTo add programs, go back to French or uninstall, open Corsu Setup.',

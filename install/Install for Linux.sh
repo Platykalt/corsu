@@ -8,4 +8,9 @@ if ! command -v python3 >/dev/null 2>&1 || ! python3 -c 'import sys; sys.exit(sy
     echo 'Corsu needs Python 3.10 or newer. Install it with your distribution package manager.' >&2
     exit 1
 fi
+# Without options, in a graphical session, open the Corsu Setup window; --text keeps everything in the terminal.
+if [ $# -eq 0 ] && { [ -n "${DISPLAY:-}" ] || [ -n "${WAYLAND_DISPLAY:-}" ]; }; then
+    exec python3 "$corsu_dir/src/app.py"
+fi
+[ "${1:-}" = --text ] && shift
 exec python3 "$corsu_dir/src/installer.py" "$@"

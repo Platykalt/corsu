@@ -1,5 +1,17 @@
 # Changelog
 
+## 0.10.0 (2026-10-01)
+
+- Corsu Setup is now a window that opens in your browser, on Windows, macOS and Linux alike, with no extra library.
+  It installs Corsu (showing what will change first), switches each part on and off, pauses the terminal, links to the
+  guides and to Sapienzia, Astutu and LIV, and removes Corsu. The install scripts open it; `--text` keeps the terminal
+  installer.
+- Discord installed by Corsu now appears among the parts that can be switched on and off.
+- Firefox: Google's AI Overview heading and warning, "Short videos" and similar labels are translated, including inside
+  the results area. Links and page text are still never changed.
+- Messages from Corsu itself are in French or English, following the computer.
+- The repository has a security policy, a pull request template, a documentation index and screenshots.
+
 ## 0.9.2 (2026-10-01)
 
 - Firefox: the copy always opens your usual profile, with your home page, extensions and settings, even when it is

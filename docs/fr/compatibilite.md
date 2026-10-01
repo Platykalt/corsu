@@ -38,8 +38,9 @@ et [iPhone](telephone/iphone.md).
 
 ## Google et les autres sites
 
-Corsu ne traduit pas les sites web, mais Firefox et les navigateurs Chromium annoncent le corse comme langue
-préférée. Les sites qui proposent le corse, comme Google, l'affichent alors, sauf si votre compte en a décidé
+Corsu ne traduit pas les sites web, à une exception près : dans Firefox Corsu, les boutons et menus que Google laisse
+en français ou en anglais sont complétés en corse. Firefox et les navigateurs Chromium annoncent aussi le corse comme
+langue préférée. Les sites qui proposent le corse, comme Google, l'affichent alors, sauf si votre compte en a décidé
 autrement. Google applique d'abord la langue de votre compte, et c'est elle aussi qui décide de la langue de son IA.
 Pour avoir Google en corse :
 
@@ -47,3 +48,9 @@ Pour avoir Google en corse :
    préférée.
 2. Sans compte Google, ouvrez [les paramètres de recherche](https://www.google.com/preferences?hl=co#languages) et
    choisissez **Corsu**.
+
+Les réponses de l'IA de Google (Aperçu IA, Mode IA, Gemini) sont écrites par Google au moment de la recherche. Corsu
+ne peut pas en choisir la langue, et le corse ne fait pas partie des langues que Google garantit pour ces réponses :
+elles commencent parfois en corse et passent ensuite en français. Posez la question en corse et ajoutez « rispondi in
+corsu » pour augmenter les chances d'une réponse en corse. Pour une IA qui parle corse, voir [LIV](https://liv.corsica)
+et [Astutu](https://astutu.corsica).

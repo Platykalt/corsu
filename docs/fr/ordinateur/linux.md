@@ -12,8 +12,10 @@ Elle télécharge la dernière version, vérifie sa somme SHA-256 et lance l'ins
 [corsu-linux.tar.gz](https://github.com/Platykalt/corsu/releases/latest/download/corsu-linux.tar.gz), décompressez-le et lancez `./"Install for Linux.sh"` depuis le dossier
 `corsu`.
 
-Tout ce que Corsu a trouvé est coché. Appuyez sur Entrée pour tout installer, tapez un numéro pour décocher un
-élément, `a` pour tout recocher, puis `o` pour confirmer. Certaines étapes demandent votre mot de passe : traduire un
+La fenêtre Corsu Setup s'ouvre dans votre navigateur. Les logiciels trouvés sont tous cochés : décochez ce que vous
+ne voulez pas, cliquez sur Continuer, lisez ce que Corsu va changer, puis cliquez sur Installer. Sans interface
+graphique, ou avec `--text`, l'installation se fait dans le terminal : Entrée installe tout ce qui est coché, un
+numéro coche ou décoche un élément. Certaines étapes demandent votre mot de passe : traduire un
 navigateur installé par la distribution, et les traductions système utilisées par les programmes GTK et les commandes
 du terminal.
 
