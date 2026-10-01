@@ -42,7 +42,9 @@ jobs:
         run: |
           revision=$(python -c "import json; print(json.load(open('release.json'))['vencord_revision'])")
           git init -q Vencord
-          git -C Vencord fetch -q --depth 1 https://github.com/Vendicated/Vencord.git "$revision"
+          # Vencord's build reads the `origin` remote for its user agent.
+          git -C Vencord remote add origin https://github.com/Vendicated/Vencord.git
+          git -C Vencord fetch -q --depth 1 origin "$revision"
           git -C Vencord checkout -q FETCH_HEAD
       - uses: pnpm/action-setup@v4
         with:
