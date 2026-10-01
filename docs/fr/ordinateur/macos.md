@@ -8,7 +8,7 @@ Le plus simple est d'ouvrir le Terminal (Applications, puis Utilitaires) et d'y 
 curl -fsSL https://raw.githubusercontent.com/Platykalt/corsu/main/install/get.sh | sh
 ```
 
-La commande télécharge la dernière version, vérifie sa somme SHA-256 et ouvre la fenêtre Corsu Setup dans votre
+La commande télécharge la dernière version, vérifie sa somme SHA-256 et ouvre l'application Corsu dans votre
 navigateur. Les logiciels trouvés sont tous cochés : décochez ce que vous ne voulez pas, cliquez sur Continuer, lisez
 ce que Corsu va changer, puis cliquez sur Installer.
 
@@ -27,4 +27,4 @@ leurs fichiers casse leur signature et leur accès aux mots de passe enregistré
 
 ## Changer d'avis
 
-Ouvrez Corsu Setup dans le dossier Applications pour ajouter un logiciel, mettre une partie en pause ou retirer Corsu.
+Ouvrez l'application Corsu dans le dossier Applications pour ajouter un logiciel, mettre une partie en pause ou retirer Corsu.

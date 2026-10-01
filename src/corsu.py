@@ -323,7 +323,7 @@ def qt_catalogs(installer, stats, sources, target, rename=None):
 
 
 TERMINAL_OFF = 'terminal-off'
-POSIX_HOOK = """# Corsu: Corsu Setup can switch the terminal back to French, for a while or until switched on again.
+POSIX_HOOK = """# Corsu: the Corsu app can switch the terminal back to French, for a while or until switched on again.
 corsu_off="{off}"
 if [ -f "$corsu_off" ]; then
     corsu_until=$(cat "$corsu_off" 2>/dev/null)
@@ -335,7 +335,7 @@ if [ -f "$corsu_off" ]; then
 fi
 unset corsu_off corsu_until
 """
-FISH_HOOK = """# Corsu: Corsu Setup can switch the terminal back to French, for a while or until switched on again.
+FISH_HOOK = """# Corsu: the Corsu app can switch the terminal back to French, for a while or until switched on again.
 set -l corsu_off "{off}"
 if test -f $corsu_off
     set -l corsu_until (cat $corsu_off 2>/dev/null)
@@ -349,7 +349,7 @@ end
 
 
 def terminal_hooks(installer):
-    """Let new terminals follow the terminal switch in Corsu Setup (bash, zsh and fish)."""
+    """Let new terminals follow the terminal switch in the Corsu app (bash, zsh and fish)."""
     off = DATA / TERMINAL_OFF
     hook = DATA / 'terminal.sh'
     installer.write(hook, POSIX_HOOK.format(off=off))
@@ -1013,21 +1013,28 @@ def macos_application(installer):
 
 
 def setup_shortcut(installer):
-    """A `Corsu Setup` entry that opens the Corsu window: switch parts on and off, add programs, uninstall."""
+    """The Corsu entry in the applications menu: switch parts on and off, add programs, uninstall."""
     app = SRC / 'app.py'
+    # Versions before 0.11 called the entry "Corsu Setup"; take the old shortcut away so only one remains.
+    for old in (START_MENU / 'Corsu Setup.lnk', HOME / 'Applications/Corsu Setup.app'):
+        record = installer.state['files'].pop(str(old), None)
+        if record and record.get('tree'):
+            shutil.rmtree(old, ignore_errors=True)
+        elif record:
+            restore(old, record)
     if PLATFORM == 'windows':
-        windows_link(installer, START_MENU / 'Corsu Setup.lnk', python_launcher(), f'"{app}"')
+        windows_link(installer, START_MENU / 'Corsu.lnk', python_launcher(), f'"{app}"')
     elif PLATFORM == 'macos':
         command = f'exec {shlex.quote(sys.executable)} {shlex.quote(str(app))} >/dev/null 2>&1 &'
         with tempfile.TemporaryDirectory() as directory:
-            applet = Path(directory) / 'Corsu Setup.app'
+            applet = Path(directory) / 'Corsu.app'
             subprocess.run(['osacompile', '-o', str(applet), '-e', 'do shell script ' + json.dumps(command)], check=True)
-            installer.tree(HOME / 'Applications/Corsu Setup.app', applet)
+            installer.tree(HOME / 'Applications/Corsu.app', applet)
     else:
         installer.write(HOME / '.local/share/applications/corsu-setup.desktop',
-                        '[Desktop Entry]\nType=Application\nName=Corsu Setup\nName[co]=Cunfigurazione di Corsu\n'
-                        'Name[fr]=Réglages de Corsu\n'
-                        'Comment=Choose what is in Corsican\nComment[fr]=Choisir ce qui est en corse\n'
+                        '[Desktop Entry]\nType=Application\nName=Corsu\n'
+                        'GenericName=Corsican language\nGenericName[fr]=Langue corse\nGenericName[co]=Lingua corsa\n'
+                        'Comment=Choose which programs are in Corsican\nComment[fr]=Choisir les logiciels en corse\n'
                         f'Exec=python3 {shlex.quote(str(app))}\nTerminal=false\nIcon={SRC / "app/corsu.svg"}\n'
                         'Categories=Settings;\n')
 
@@ -1235,7 +1242,7 @@ def disable(components=None, hours=None):
     installer.state['enabled'] = not everything and installer.state.get('enabled', True)
     STATE.write_text(json.dumps(installer.state, indent=2), encoding='utf-8')
     if everything:
-        disabled_marker().write_text('Corsu is switched off. Open Corsu Setup to switch it on again.\n', encoding='utf-8')
+        disabled_marker().write_text('Corsu is switched off. Open the Corsu app to switch it on again.\n', encoding='utf-8')
     for name in preserved:
         print(t(f'Left alone because you changed it: {name}', f'Laissé tel quel car vous l\'avez modifié : {name}'))
     names = component_names(targets)

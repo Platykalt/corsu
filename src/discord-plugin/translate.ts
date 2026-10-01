@@ -7,15 +7,19 @@
 import dictionary from "./dictionary.json";
 
 const words: Record<string, string> = dictionary;
+// What people write is never translated: messages, names of people, servers, channels and roles, statuses,
+// bios, embeds, and the text being typed. Everything else is interface; a text is replaced only when it matches a
+// lexicon entry as a whole, so ordinary words inside content are left alone.
 const protectedArea = [
-    "script", "style", "pre", "code", "textarea", "[contenteditable]",
-    '[id^="chat-messages"]', '[id^="message-content"]',
-    '[class*="messageContent"]', '[class*="markup"]', '[class*="username"]',
-    '[class*="displayName"]', '[class*="channelName"]', '[class*="guildName"]',
-    '[class*="activityName"]', '[class*="customStatus"]', '[data-corsu-ignore]'
+    "script", "style", "pre", "code", "textarea", "input", "[contenteditable]", "[data-corsu-ignore]",
+    '[id^="chat-messages"]', '[id^="message-content"]', '[id^="message-accessories"]', '[id^="message-reply-context"]',
+    '[class*="messageContent"]', '[class*="markup"]', '[class*="embed"]', '[class*="attachment"]',
+    '[class*="username"]', '[class*="displayName"]', '[class*="nickname"]', '[class*="globalName"]',
+    '[class*="channelName"]', '[class*="guildName"]', '[class*="roleName"]', '[class*="topic"]',
+    '[class*="activity"]', '[class*="customStatus"]', '[class*="bio"]', '[class*="aboutMe"]',
+    '[class*="member"] [class*="name"]', 'a[href^="/channels/"]:not([href="/channels/@me"])',
+    '[class*="threadName"]', '[class*="forumPost"]', '[class*="searchResult"]'
 ].join(",");
-// Translate UI controls, never arbitrary page text, channel names, or chat posts.
-const uiArea = 'button,[role="button"],[role="tab"],[role="menuitem"],[role="menuitemcheckbox"],[role="menuitemradio"],[role="checkbox"],[role="switch"],label,h1,h2,h3,[role="heading"],[class*="formTitle"],[class*="formText"]';
 
 // Kept in step with engine.py: placeholders, trailing punctuation, letter case and
 // composed labels. Placeholders always survive translation unchanged.
@@ -95,7 +99,7 @@ export function createTranslator(doc: Document) {
 
     function text(node: Text) {
         const parent = node.parentElement;
-        if (!parent || parent.closest(protectedArea) || !parent.closest(uiArea)) return;
+        if (!parent || parent.closest(protectedArea)) return;
         const value = node.data;
         const previous = originalText.get(node);
         if (previous && previous.translated === value) return;
@@ -106,8 +110,7 @@ export function createTranslator(doc: Document) {
     }
 
     function attributes(element: Element) {
-        if (element.closest(protectedArea)) return;
-        if (!element.matches(uiArea + ",input,select")) return;
+        if (element.closest(protectedArea) && !element.matches("input,textarea")) return;
         for (const name of ["aria-label", "title", "placeholder"]) {
             const value = element.getAttribute(name);
             if (!value) continue;

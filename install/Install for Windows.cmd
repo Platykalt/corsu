@@ -5,7 +5,7 @@ set PYTHONUTF8=1
 cd /d "%~dp0"
 rem At the top of a release archive, or in the install folder of the source code.
 if not exist "src\installer.py" cd ..
-rem Without options, open the Corsu Setup window; --text keeps everything in this window.
+rem Without options, open the Corsu app; --text keeps everything in this window.
 set "script=src\installer.py"
 if "%~1"=="" set "script=src\app.py"
 if "%~1"=="--text" shift

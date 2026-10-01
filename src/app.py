@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Corsu Setup: install Corsu, switch each part on or off, pause the terminal, remove everything.
+"""The Corsu app: install Corsu, switch each part on or off, pause the terminal, remove everything.
 
 The window is a local page opened in the browser, served on 127.0.0.1 only and protected by a random key, so it
 works the same way on Windows, macOS and Linux without extra libraries. `--text` gives a menu in the terminal.
@@ -24,23 +24,23 @@ PAGE = Path(__file__).resolve().parent / 'app/index.html'
 # The page asks for news every few seconds; without any for this long, the window was closed.
 IDLE_SECONDS = 600
 
+# Names stay general (what the part is); the detail line says what changes.
 COMPONENTS = {
-    'firefox': {'en': ('Firefox', 'Menus, settings, error pages, and the labels Google leaves untranslated.'),
-                'fr': ('Firefox', 'Menus, réglages, pages d\'erreur, et les libellés que Google laisse non traduits.')},
-    'chromium': {'en': ('Chrome, Opera GX and other browsers', 'Menus and settings of Chromium-based browsers.'),
-                 'fr': ('Chrome, Opera GX et autres navigateurs', 'Menus et réglages des navigateurs basés sur Chromium.')},
-    'discord': {'en': ('Discord', 'The interface, through Vencord. Messages are never changed.'),
-                'fr': ('Discord', 'L\'interface, grâce à Vencord. Les messages ne sont jamais modifiés.')},
-    'vesktop': {'en': ('Vesktop', 'The interface of this Discord app, through Vencord.'),
-                'fr': ('Vesktop', 'L\'interface de cette application Discord, grâce à Vencord.')},
-    'desktop': {'en': ('KDE Plasma desktop', 'The desktop, KDE programs and the application menu.'),
-                'fr': ('Bureau KDE Plasma', 'Le bureau, les programmes KDE et le menu des applications.')},
-    'qt': {'en': ('System translations', 'GTK programs, terminal commands and Qt dialogs. Asks for your password.'),
-           'fr': ('Traductions système', 'Programmes GTK, commandes du terminal et boîtes de dialogue Qt. '
-                  'Demande votre mot de passe.')},
-    'terminal': {'en': ('Terminal commands', 'Can go back to French for an hour, in new terminal windows.'),
-                 'fr': ('Commandes du terminal', 'Peut repasser en français pendant une heure, dans les nouveaux '
-                        'terminaux.')},
+    'firefox': {'en': ('Firefox', 'Menus, settings and error pages. On Google, also the buttons Google leaves untranslated.'),
+                'fr': ('Firefox', 'Menus, réglages et pages d\'erreur. Sur Google, aussi les boutons que Google ne traduit pas.')},
+    'chromium': {'en': ('Chromium browsers', 'Menus and settings.'),
+                 'fr': ('Navigateurs Chromium', 'Menus et réglages.')},
+    'discord': {'en': ('Discord', 'The app\'s interface, through Vencord. Messages are not changed.'),
+                'fr': ('Discord', 'L\'interface de l\'application, avec Vencord. Les messages ne changent pas.')},
+    'vesktop': {'en': ('Vesktop', 'The app\'s interface. Messages are not changed.'),
+                'fr': ('Vesktop', 'L\'interface de l\'application. Les messages ne changent pas.')},
+    'desktop': {'en': ('Desktop', 'KDE Plasma: the desktop, the application menu and KDE programs.'),
+                'fr': ('Bureau', 'KDE Plasma : le bureau, le menu des applications et les programmes KDE.')},
+    'qt': {'en': ('System translations', 'GTK programs, command output and Qt dialogs. Needs the administrator password.'),
+           'fr': ('Traductions du système', 'Programmes GTK, messages des commandes et fenêtres Qt. Demande le mot de '
+                  'passe administrateur.')},
+    'terminal': {'en': ('Terminal', 'Command messages, in new terminal windows.'),
+                 'fr': ('Terminal', 'Les messages des commandes, dans les nouveaux terminaux.')},
 }
 ORDER = ['firefox', 'chromium', 'discord', 'vesktop', 'desktop', 'qt', 'terminal']
 
@@ -111,7 +111,13 @@ def snapshot():
             continue
         if name not in available | installed | switchable:
             continue
-        items.append({'name': name, 'text': COMPONENTS[name], 'installed': name in installed or name in switchable,
+        text = COMPONENTS[name]
+        if name == 'chromium':
+            import chromium
+            found = ', '.join(browser.label for browser in chromium.browsers())
+            if found:
+                text = {language: (label, f'{found}. {detail}') for language, (label, detail) in text.items()}
+        items.append({'name': name, 'text': text, 'installed': name in installed or name in switchable,
                       'switchable': name in switchable,
                       'on': name in switchable and not corsu.is_disabled(name, state)})
     profile = corsu.firefox_profile() if 'firefox' in installed else None
@@ -130,6 +136,7 @@ def snapshot():
 
 def make_handler(key, job, activity):
     page = PAGE.read_bytes()
+    icon = (PAGE.parent / 'corsu.svg').read_bytes()
 
     class Handler(BaseHTTPRequestHandler):
         def log_message(self, *arguments):
@@ -157,6 +164,8 @@ def make_handler(key, job, activity):
             activity[0] = time.monotonic()
             if self.path.split('?')[0] == '/':
                 return self.send(200, page, 'text/html; charset=utf-8')
+            if self.path == '/corsu.svg':
+                return self.send(200, icon, 'image/svg+xml')
             if self.path == '/api/state' and self.allowed():
                 return self.send(200, {**snapshot(), 'job': job.snapshot()})
             self.send(404, {'error': 'not found'})
@@ -178,7 +187,12 @@ def make_handler(key, job, activity):
                 result = subprocess.run([sys.executable, str(corsu.SRC / 'installer.py'), '--dry-run', '--components', *names],
                                         capture_output=True, text=True, encoding='utf-8', errors='replace',
                                         env={**os.environ, 'CORSU_LANG': language})
-                return self.send(200, {'plan': (result.stdout + result.stderr).strip(), 'ok': result.returncode == 0})
+                lines = (result.stdout + result.stderr).strip().splitlines()
+                # The dialog has its own title; drop the installer's heading line.
+                if lines and lines[0].rstrip().endswith(':'):
+                    lines = lines[1:]
+                plan = '\n'.join(line.strip() for line in lines).strip()
+                return self.send(200, {'plan': plan, 'ok': result.returncode == 0})
             if self.path in ('/api/install', '/api/uninstall'):
                 DETECTED['time'] = 0.0
             if self.path == '/api/install' and names:
@@ -205,7 +219,7 @@ SESSION = corsu.DATA / 'setup-session.json'
 
 
 def running_session():
-    """The address of a Corsu Setup already open, so a second click shows it instead of starting another."""
+    """The address of a Corsu window already open, so a second click shows it instead of starting another."""
     try:
         url = json.loads(SESSION.read_text(encoding='utf-8'))['url']
         request = urllib.request.Request(url.split('#')[0] + 'api/state', headers={'X-Corsu-Key': url.split('#')[1]})
@@ -234,8 +248,8 @@ def serve(open_browser=True):
             SESSION.chmod(0o600)
     except OSError:
         pass
-    print(t(f'Corsu Setup is open in your browser. If not, open this address:\n  {url}\nClose this window to stop.',
-            f'Corsu Setup est ouvert dans votre navigateur. Sinon, ouvrez cette adresse :\n  {url}\n'
+    print(t(f'Corsu is open in your browser. If not, open this address:\n  {url}\nClose this window to stop.',
+            f'Corsu est ouvert dans votre navigateur. Sinon, ouvrez cette adresse :\n  {url}\n'
             'Fermez cette fenêtre pour arrêter.'), flush=True)
     if open_browser:
         webbrowser.open(url)

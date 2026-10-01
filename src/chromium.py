@@ -184,7 +184,7 @@ def write_files(pairs):
     elevated_copy(protected)
     for source, target in pairs:
         if corsu.digest(target.read_bytes()) != corsu.digest(source.read_bytes()):
-            raise RuntimeError(f'Could not write {target}. Close the browser and run Corsu Setup again.')
+            raise RuntimeError(f'Could not write {target}. Close the browser and open the Corsu app again.')
 
 
 def apply(installer, browser):

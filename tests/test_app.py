@@ -31,7 +31,7 @@ class SetupWindowTests(unittest.TestCase):
     def test_page_is_served_without_the_key(self):
         status, body = self.request('GET', '/')
         self.assertEqual(status, 200)
-        self.assertIn(b'<title>Corsu Setup</title>', body)
+        self.assertIn(b'<title>Corsu</title>', body)
 
     def test_actions_need_the_key_and_a_local_host(self):
         with patch.object(self.job, 'start', return_value=True) as start:

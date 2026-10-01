@@ -54,12 +54,12 @@ La version longue : [Pourquoi Corsu](docs/fr/pourquoi-corsu.md).
 Ou en une ligne, dans PowerShell sous Windows : `irm https://raw.githubusercontent.com/Platykalt/corsu/main/install/get.ps1 | iex`
 Dans le Terminal sous macOS ou Linux : `curl -fsSL https://raw.githubusercontent.com/Platykalt/corsu/main/install/get.sh | sh`
 
-La fenêtre Corsu Setup s'ouvre dans votre navigateur avec les logiciels trouvés, tous cochés. Elle montre ce qui va
+L'application Corsu s'ouvre dans votre navigateur avec les logiciels trouvés, tous cochés. Elle montre ce qui va
 changer avant de le faire, et Corsu garde une copie de chaque fichier modifié. Rouvrez-la ensuite depuis le menu des
 applications pour ajouter un logiciel, remettre une partie dans sa langue d'origine (le terminal pendant une heure,
 par exemple) ou tout retirer.
 
-<img src="docs/images/corsu-setup-fr.png" alt="La fenêtre Corsu Setup : Firefox, Discord et le bureau KDE Plasma en corse, chacun avec son interrupteur" width="570">
+<img src="docs/images/corsu-setup-fr.png" alt="L'application Corsu : Firefox, Discord et le bureau KDE Plasma en corse, chacun avec son interrupteur" width="570">
 
 Discord : réglez sa langue sur Français ou English, voir [Discord en corse](docs/fr/discord.md).
 Google en corse : choisissez Corsu dans la langue de votre compte Google, voir [ce guide](docs/fr/compatibilite.md#google-et-les-autres-sites). Dans Firefox Corsu, les boutons que Google laisse en français ou en anglais sont complétés en corse.
@@ -122,11 +122,11 @@ The long version: [Why Corsu](docs/en/why-corsu.md).
 Or in one line, in PowerShell on Windows: `irm https://raw.githubusercontent.com/Platykalt/corsu/main/install/get.ps1 | iex`
 In Terminal on macOS or Linux: `curl -fsSL https://raw.githubusercontent.com/Platykalt/corsu/main/install/get.sh | sh`
 
-The Corsu Setup window opens in your browser with the programs found, all ticked. It shows what will change before
+The Corsu app opens in your browser with the programs found, all ticked. It shows what will change before
 doing it, and Corsu keeps a copy of every file it changes. Open it again from the applications menu to add a program,
 put a part back in its original language (the terminal for an hour, for example) or remove everything.
 
-<img src="docs/images/corsu-setup-en.png" alt="The Corsu Setup window: Firefox, Discord and the KDE Plasma desktop in Corsican, each with its own switch" width="570">
+<img src="docs/images/corsu-setup-en.png" alt="The Corsu app: Firefox, Discord and the KDE Plasma desktop in Corsican, each with its own switch" width="570">
 
 Discord: set its language to Français or English, see [Discord in Corsican](docs/en/discord.md).
 Google in Corsican: choose Corsu as your Google account language, see [this guide](docs/en/compatibility.md#google-and-other-websites). In Firefox Corsu, the buttons Google leaves in French or English are completed in Corsican.

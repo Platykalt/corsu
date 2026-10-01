@@ -70,7 +70,7 @@ The Discord app is patched with the official Vencord installer, after Corsu has 
 the one recorded in `src/release.json`. Vesktop, a Discord app that already includes Vencord, only needs a setting.
 Vencord's automatic updates are turned off because they would remove the plugin.
 
-A Discord update can undo the patch. If Discord is back in French after an update, open Corsu Setup again.
+A Discord update can undo the patch. If Discord is back in French after an update, open the Corsu app again.
 
 ## KDE Plasma
 
@@ -87,9 +87,9 @@ installed package are never overwritten, and uninstalling removes what Corsu cop
 New terminals follow a small switch read by bash, zsh and fish, so the terminal can go back to French on its own,
 for an hour or until you switch it on again.
 
-## Corsu Setup
+## The Corsu app
 
-The Corsu Setup window is a page served by Corsu itself at a local address (`127.0.0.1`) that only your computer can
+The Corsu app is a page served by Corsu itself at a local address (`127.0.0.1`) that only your computer can
 reach, protected by a key drawn at random each time it opens. Nothing is sent to the internet apart from the downloads
 described above. It stops by itself ten minutes after you close the page.
 

@@ -16,7 +16,7 @@ lexicon/            les traductions : lexicon.tsv (écrit pour Corsu), lexicon-m
 src/                le programme : installer.py (installation), app.py (la fenêtre Corsu), corsu.py (Firefox, KDE,
                     Discord, raccourcis), chromium.py (navigateurs Chromium), engine.py (recherche et formats de
                     fichiers), release.json (version, révision de Vencord, sommes de contrôle des installeurs)
-src/app/            la page Corsu Setup (index.html) et son icône
+src/app/            la page de l'application Corsu (index.html) et son icône
 src/discord-plugin/ le plugin Vencord qui traduit Discord
 src/firefox/        corsu.cfg (configuration automatique de Firefox) et le module qui complète les libellés de Google
 tests/              tests unitaires ; tests/e2e/ contient les vérifications de bout en bout lancées par la CI
@@ -26,7 +26,7 @@ vendor/             fichiers tiers figés
 
 Seule la bibliothèque standard de Python est utilisée. Construire le plugin Discord demande Node.js 22 ou plus et pnpm.
 
-Corsu Setup (`src/app.py`) est un petit serveur web lié à 127.0.0.1, sur un port au hasard. La page reçoit une clé
+L'application Corsu (`src/app.py`) est un petit serveur web lié à 127.0.0.1, sur un port au hasard. La page reçoit une clé
 aléatoire dans la partie de l'adresse après `#` et l'envoie à chaque requête ; une requête sans elle, ou avec un autre
 `Host`, est refusée, si bien que les autres pages ouvertes dans le navigateur ne peuvent pas le piloter. Chaque action
 lance `installer.py` dans un processus à part et la page affiche ce qu'il écrit. Le serveur s'arrête dix minutes

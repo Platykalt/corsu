@@ -8,7 +8,7 @@ The simplest way is to open Terminal (Applications, then Utilities) and paste:
 curl -fsSL https://raw.githubusercontent.com/Platykalt/corsu/main/install/get.sh | sh
 ```
 
-It downloads the latest release, checks its SHA-256 checksum and opens the Corsu Setup window in your browser. The
+It downloads the latest release, checks its SHA-256 checksum and opens the Corsu app in your browser. The
 programs found are all ticked: untick what you do not want, click Continue, read what Corsu will change, then click
 Install.
 
@@ -26,4 +26,4 @@ files breaks their signature and their access to saved passwords. For Discord, s
 
 ## Changing your mind
 
-Open Corsu Setup from the Applications folder to add a program, switch a part off, or remove Corsu.
+Open the Corsu app from the Applications folder to add a program, switch a part off, or remove Corsu.

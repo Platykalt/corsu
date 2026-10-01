@@ -1,5 +1,17 @@
 # Changelog
 
+## 0.11.0 (2026-10-01)
+
+- Discord: much more of the interface is translated: Friends, Shop, the settings menu, member list headings and other
+  labels that the plugin skipped because they are not buttons. Any text that matches a lexicon entry as a whole is now
+  translated, except in what people write: messages, names of people, servers, channels and roles, statuses, bios
+  and embeds.
+- The Corsu app has a new layout, closer to a settings window: a sidebar, grouped lists, no duplicated status labels,
+  confirmation dialogs for installing and uninstalling, and the log folded under "Show details".
+- Plainer names: "Corsu Setup" is now the Corsu app; parts are called Firefox, Chromium browsers (with the browsers
+  found), Discord, Vesktop, Desktop, System translations and Terminal. The old "Corsu Setup" shortcut is replaced.
+- The installer's plan for system translations is in French too.
+
 ## 0.10.0 (2026-10-01)
 
 - Corsu Setup is now a window that opens in your browser, on Windows, macOS and Linux alike, with no extra library.

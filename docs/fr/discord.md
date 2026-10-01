@@ -25,7 +25,7 @@ l'installeur.
 - **Toujours dans une autre langue.** C'est la langue de Discord qui décide : choisissez Français ou English. Le
   plugin Corsu affiche un rappel quand Discord est réglé sur une autre langue.
 - **Pas de section Vencord dans les paramètres.** Discord s'est mis à jour et a retiré la modification. Rouvrez
-  Corsu Setup, ou relancez l'installeur avec seulement Discord coché.
+  l'application Corsu, ou relancez l'installeur avec seulement Discord coché.
 - **Linux, Discord installé par la distribution.** Les paquets récents gardent le programme dans
   `~/.config/discord/app-<version>`. Corsu modifie le plus récent. Après une mise à jour de Discord, relancez Corsu
   Setup.

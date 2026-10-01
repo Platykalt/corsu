@@ -91,9 +91,9 @@ copié.
 Les nouveaux terminaux suivent un petit interrupteur lu par bash, zsh et fish : le terminal peut repasser en français
 seul, pour une heure ou jusqu'à ce que vous le réactiviez.
 
-## Corsu Setup
+## L'application Corsu
 
-La fenêtre Corsu Setup est une page servie par Corsu lui-même, à une adresse locale (`127.0.0.1`) que seul votre
+L'application Corsu est une page servie par Corsu lui-même, à une adresse locale (`127.0.0.1`) que seul votre
 ordinateur peut joindre, et protégée par une clé tirée au hasard à chaque ouverture. Rien n'est envoyé sur Internet,
 hormis les téléchargements décrits plus haut. Elle se ferme d'elle-même dix minutes après que vous avez fermé la page.
 

@@ -49,9 +49,9 @@ def data_directory(home):
 def launchers(home):
     if PLATFORM == 'windows':
         menu = home / 'AppData/Roaming/Microsoft/Windows/Start Menu/Programs'
-        return [menu / 'Firefox Corsu.lnk', menu / 'Corsu Setup.lnk']
+        return [menu / 'Firefox Corsu.lnk', menu / 'Corsu.lnk']
     if PLATFORM == 'macos':
-        return [home / 'Applications/Firefox Corsu.app', home / 'Applications/Corsu Setup.app']
+        return [home / 'Applications/Firefox Corsu.app', home / 'Applications/Corsu.app']
     return [home / '.local/bin/firefox-corsu', home / '.local/share/applications/corsu-setup.desktop']
 
 
@@ -107,7 +107,7 @@ def check_discord(root, home, environment):
     settings = home / {'windows': 'AppData/Roaming', 'macos': 'Library/Application Support'}.get(PLATFORM, '.config')
     plugin = json.loads((settings / 'Vencord/settings/settings.json').read_text(encoding='utf-8'))
     assert plugin['plugins']['Corsu']['enabled'] and plugin['autoUpdate'] is False, plugin
-    assert launchers(home)[1].exists(), 'Missing Corsu Setup shortcut'
+    assert launchers(home)[1].exists(), 'Missing Corsu shortcut'
     run(root, environment, 'src/installer.py', '--uninstall', '--yes')
     assert archive.read_bytes() == original, 'Original Discord archive was not restored'
     assert not archive.with_name('_app.asar').exists(), 'Backup archive left next to Discord'

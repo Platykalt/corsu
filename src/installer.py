@@ -297,11 +297,14 @@ def show_plan(components, location):
                 '  KDE Plasma : ajouter les fichiers de traduction corse dans votre dossier personnel et passer la langue en corse,'
                 ' avec le français pour ce qui n\'est pas encore traduit. Déconnectez-vous et reconnectez-vous ensuite.'))
     if 'qt' in components:
-        print(f'  System translations: copy the Corsican files into {corsu.SYSTEM_LOCALE.parent.parent} and'
-              f' {corsu.QT_TRANSLATIONS}, so GTK programs, terminal commands and Qt dialogs use them too.'
-              ' This asks for your password once.')
-    print(t(f'\nA copy of every file Corsu changes is kept in {corsu.DATA}, and Corsu Setup can undo everything.',
-            f'\nUne copie de chaque fichier modifié est gardée dans {corsu.DATA}, et Corsu Setup peut tout annuler.'))
+        print(t(f'  System translations: copy the Corsican files into {corsu.SYSTEM_LOCALE.parent.parent} and'
+                f' {corsu.QT_TRANSLATIONS}, so GTK programs, terminal commands and Qt dialogs use them too.'
+                ' This asks for your password once.',
+                f'  Traductions du système : copier les fichiers corses dans {corsu.SYSTEM_LOCALE.parent.parent} et'
+                f' {corsu.QT_TRANSLATIONS}, pour que les programmes GTK, les commandes du terminal et les fenêtres Qt'
+                ' les utilisent aussi. Votre mot de passe est demandé une fois.'))
+    print(t(f'\nA copy of every file Corsu changes is kept in {corsu.DATA}, and the Corsu app can undo everything.',
+            f'\nUne copie de chaque fichier modifié est gardée dans {corsu.DATA}, et l\'application Corsu peut tout annuler.'))
     print(t('Text without a Corsican translation yet stays in French. Messages are never changed.\n',
             'Le texte sans traduction corse reste en français. Les messages ne sont jamais modifiés.\n'))
 
@@ -360,7 +363,7 @@ def main(argv=None):
             if component in ('desktop', 'qt') and corsu.PLATFORM != 'linux':
                 parser.error(f'{component} is for KDE Plasma on Linux.')
             parser.error(f'{component} was not found on this computer.')
-    # Corsu Setup shows the plan before starting; its log only needs what happens next.
+    # The Corsu app shows the plan before starting; its log only needs what happens next.
     if not os.environ.get('CORSU_SETUP_WINDOW'):
         show_plan(components, location)
     if args.dry_run:
@@ -397,10 +400,10 @@ def main(argv=None):
         return 0
     print(t('\nDone. Close Firefox, your browsers and Discord completely, then open them again.'
             + (' Log out and back in for the Plasma desktop.' if 'desktop' in components else '')
-            + '\nTo add programs, go back to French or uninstall, open Corsu Setup.',
+            + '\nTo add programs, go back to French or uninstall, open the Corsu app.',
             '\nC\'est fait. Fermez complètement Firefox, vos navigateurs et Discord, puis rouvrez-les.'
             + (' Déconnectez-vous et reconnectez-vous pour le bureau Plasma.' if 'desktop' in components else '')
-            + '\nPour ajouter des logiciels, revenir au français ou tout retirer, ouvrez Corsu Setup.'))
+            + '\nPour ajouter des logiciels, revenir au français ou tout retirer, ouvrez l\'application Corsu.'))
     return 0
 
 
@@ -414,5 +417,5 @@ if __name__ == '__main__':
         print('\nNo answer received; nothing was changed.', file=sys.stderr)
         raise SystemExit(1)
     except (RuntimeError, OSError, subprocess.CalledProcessError) as error:
-        print(f'Corsu stopped: {error}\nAnything already changed can be undone with Corsu Setup, or: python3 src/installer.py --uninstall', file=sys.stderr)
+        print(f'Corsu stopped: {error}\nAnything already changed can be undone with the Corsu app, or: python3 src/installer.py --uninstall', file=sys.stderr)
         raise SystemExit(1)

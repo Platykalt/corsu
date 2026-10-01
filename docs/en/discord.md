@@ -22,10 +22,10 @@ Vesktop, a Discord app that already includes Vencord, works the same way: tick V
 
 - **Still in another language.** Discord's language setting wins: set it to Français or English. The Corsu plugin
   shows a reminder when Discord is in any other language.
-- **No Vencord section in the settings.** Discord updated itself and removed the patch. Open Corsu Setup again, or
+- **No Vencord section in the settings.** Discord updated itself and removed the patch. Open the Corsu app again, or
   run the installer with only Discord ticked.
 - **Linux, Discord installed by the distribution.** Recent packages keep the program in
-  `~/.config/discord/app-<version>`. Corsu patches the newest one. After a Discord update, run Corsu Setup again.
+  `~/.config/discord/app-<version>`. Corsu patches the newest one. After a Discord update, open the Corsu app again.
 - **Flatpak Discord.** Not supported: use the regular package or Vesktop.
 - **You already used Vencord.** Corsu replaces it with a Vencord build that includes the Corsu plugin. Your other
   Vencord plugins and settings are kept.
