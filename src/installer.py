@@ -44,9 +44,12 @@ def discord_location():
         candidates = [Path('/Applications/Discord.app'), corsu.HOME / 'Applications/Discord.app']
     else:
         candidates = []
-        host = corsu.CONFIG / 'discord/Discord'
-        if host.exists():
-            candidates.append(host.resolve().parent)
+        for branch in ('discord', 'discordptb', 'discordcanary'):
+            # Recent Discord packages keep the program in ~/.config/discord/app-<version>; the
+            # `Discord` link there can still point at the previous version, so take the newest.
+            versions = sorted((path for path in (corsu.CONFIG / branch).glob('app-*') if (path / 'resources/app.asar').exists()),
+                              key=lambda path: version_key(path.name[4:]))
+            candidates += versions[-1:]
         candidates += map(Path, ['/opt/discord', '/usr/share/discord', '/usr/lib/discord'])
     return next((candidate for candidate in candidates if discord_archive(candidate).exists()), None)
 
@@ -119,7 +122,7 @@ def prepare_build():
         env={**os.environ, 'VENCORD_HASH': manifest['vencord_revision'][:7]})
 
 
-DEPLOYED_FILES = ('LICENSE', 'README.md', 'README.fr.md', 'CONTRIBUTING.md')
+DEPLOYED_FILES = ('LICENSE', 'README.md', 'README.en.md', 'CONTRIBUTING.md')
 DEPLOYED_DIRECTORIES = ('src', 'lexicon', 'install', 'vendor', 'Vencord')
 
 
@@ -207,13 +210,26 @@ def install_discord(location):
     report_path.write_text(json.dumps(report, ensure_ascii=False, indent=2), encoding='utf-8')
 
 
+def french():
+    """Speak French when the computer does; CORSU_LANG=en or fr overrides."""
+    import locale
+    choice = os.environ.get('CORSU_LANG') or os.environ.get('LANGUAGE') or os.environ.get('LC_ALL') \
+        or os.environ.get('LC_MESSAGES') or os.environ.get('LANG') or (locale.getlocale()[0] or '')
+    return choice.lower().startswith(('fr', 'co', 'french'))
+
+
+def t(english, francais):
+    return francais if french() else english
+
+
 DESCRIPTIONS = {
-    'firefox': 'Firefox: menus, settings and error pages',
-    'desktop': 'KDE Plasma: desktop, KDE apps and application menu',
-    'qt': 'System translations: GTK programs, terminal commands and Qt dialogs (asks for your password)',
-    'discord': 'Discord: interface through Vencord',
-    'vesktop': 'Vesktop: interface through Vencord',
-    'chromium': 'Chrome, Opera GX and other Chromium browsers',
+    'firefox': ('Firefox: menus, settings and error pages', 'Firefox : menus, réglages et pages d\'erreur'),
+    'desktop': ('KDE Plasma: desktop, KDE apps and application menu', 'KDE Plasma : bureau, applications KDE et menu'),
+    'qt': ('System translations: GTK programs, terminal commands and Qt dialogs (asks for your password)',
+           'Traductions système : programmes GTK, commandes du terminal et boîtes de dialogue Qt (demande votre mot de passe)'),
+    'discord': ('Discord: interface through Vencord', 'Discord : interface, grâce à Vencord'),
+    'vesktop': ('Vesktop: interface through Vencord', 'Vesktop : interface, grâce à Vencord'),
+    'chromium': ('Chrome, Opera GX and other Chromium browsers', 'Chrome, Opera GX et autres navigateurs Chromium'),
 }
 
 
@@ -224,16 +240,22 @@ def choose(available):
         installed = set(json.loads(corsu.STATE.read_text(encoding='utf-8')).get('components', []))
     selected = {name: True for name in available}
     while True:
-        print('Select what you want to translate:')
+        print(t('Select what you want to translate:', 'Choisissez ce que vous voulez traduire :'))
         for number, name in enumerate(available, 1):
             mark = 'x' if selected[name] else ' '
-            note = '  (installed)' if name in installed else ''
-            print(f'  [{mark}] {number}. {DESCRIPTIONS[name]}{note}')
-        answer = input('Type numbers to toggle (e.g. "2 3"), Enter to continue, q to quit: ').strip().lower()
+            note = t('  (installed)', '  (déjà installé)') if name in installed else ''
+            print(f'  [{mark}] {number}. {t(*DESCRIPTIONS[name])}{note}')
+        answer = input(t('Enter installs everything ticked. Type a number to tick or untick it, a for all, n for none, q to quit: ',
+                         'Entrée installe tout ce qui est coché. Tapez un numéro pour le cocher ou le décocher, '
+                         'a pour tout, n pour rien, q pour quitter : ')).strip().lower()
         if answer in ('q', 'quit'):
             return []
         if not answer:
             return [name for name in available if selected[name]]
+        if answer in ('a', 'all', 'tout', 't'):
+            selected = {name: True for name in available}
+        elif answer in ('n', 'none', 'rien', 'r'):
+            selected = {name: False for name in available}
         for token in answer.replace(',', ' ').split():
             if token.isdigit() and 1 <= int(token) <= len(available):
                 name = available[int(token) - 1]
@@ -267,10 +289,11 @@ def main(argv=None):
             corsu.disable(args.disable or None, hours=args.hours)
         return 0
     if args.uninstall:
-        print('This puts back the original files and settings. Files you changed yourself since are left alone.')
+        print(t('This puts back the original files and settings. Files you changed yourself since are left alone.',
+                'Les fichiers et réglages d\'origine vont être remis. Ceux que vous avez modifiés vous-même depuis ne sont pas touchés.'))
         if args.dry_run:
             return 0
-        if not args.yes and input('Uninstall Corsu? [y/N] ').strip().lower() not in ('y', 'yes'):
+        if not args.yes and input(t('Uninstall Corsu? [y/N] ', 'Désinstaller Corsu ? [o/N] ')).strip().lower() not in ('y', 'yes', 'o', 'oui'):
             return 0
         corsu.uninstall()
         return 0
@@ -282,44 +305,55 @@ def main(argv=None):
     if args.components is None and available and not (args.yes or args.dry_run) and sys.stdin.isatty():
         components = choose(available)
         if not components:
-            print('Nothing selected, nothing was changed.')
+            print(t('Nothing selected, nothing was changed.', 'Rien de sélectionné, rien n\'a été modifié.'))
             return 0
     if not components:
-        parser.error('Corsu found nothing to translate here. Install Firefox, a Chromium browser, Discord or KDE Plasma first.')
+        parser.error(t('Corsu found nothing to translate here. Install Firefox, a Chromium browser, Discord or KDE Plasma first.',
+                       'Corsu n\'a rien trouvé à traduire ici. Installez d\'abord Firefox, un navigateur Chromium, Discord ou KDE Plasma.'))
     for component in components:
         if component not in available and not (component == 'discord' and location and discord_archive(location).exists()):
             if component in ('desktop', 'qt') and corsu.PLATFORM != 'linux':
                 parser.error(f'{component} is for KDE Plasma on Linux.')
             parser.error(f'{component} was not found on this computer.')
-    print('Corsu will make these changes:\n')
+    print(t('Corsu will make these changes:\n', 'Corsu va faire ces changements :\n'))
     if 'firefox' in components:
-        where = {'windows': 'a "Firefox Corsu" shortcut in the Start menu',
-                 'macos': 'a "Firefox Corsu" app in ~/Applications'}.get(corsu.PLATFORM, 'your Firefox menu entry')
-        print(f'  Firefox: make a translated copy of Firefox, opened from {where}.'
-              ' It uses your usual profile.')
+        where = {'windows': t('a "Firefox Corsu" shortcut in the Start menu', 'un raccourci "Firefox Corsu" du menu Démarrer'),
+                 'macos': t('a "Firefox Corsu" app in ~/Applications', 'une application "Firefox Corsu" dans ~/Applications')
+                 }.get(corsu.PLATFORM, t('your Firefox menu entry', 'votre entrée Firefox habituelle du menu'))
+        print(t(f'  Firefox: make a translated copy of Firefox, opened from {where}. It uses your usual profile.',
+                f'  Firefox : faire une copie traduite de Firefox, ouverte depuis {where}. Elle utilise votre profil habituel.'))
     if 'chromium' in components:
         import chromium
         names = ', '.join(browser.label for browser in chromium.browsers()) or 'none found'
-        print(f'  {names}: replace the French language file with a Corsican one.'
-              ' Browsers installed for all users will ask for administrator rights, now and after each update.')
+        print(t(f'  {names}: replace the French language file with a Corsican one.'
+                ' Browsers installed for all users will ask for administrator rights, now and after each update.',
+                f'  {names} : remplacer le fichier de langue française par un fichier corse.'
+                ' Les navigateurs installés pour tous les utilisateurs demanderont les droits administrateur, maintenant et après chaque mise à jour.'))
     if 'discord' in components:
-        print(f'  Discord: patch {location} with the official Vencord installer and turn on the Corsu plugin.'
-              ' Vencord updates are turned off so they do not remove it.')
+        print(t(f'  Discord: patch {location} with the official Vencord installer and turn on the Corsu plugin.'
+                ' Vencord updates are turned off so they do not remove it. Set Discord to French or English.',
+                f'  Discord : modifier {location} avec l\'installeur officiel de Vencord et activer le plugin Corsu.'
+                ' Les mises à jour de Vencord sont coupées pour ne pas l\'effacer. Réglez Discord en français ou en anglais.'))
     if 'vesktop' in components:
-        print('  Vesktop: use the Vencord build that includes the Corsu plugin.')
+        print(t('  Vesktop: use the Vencord build that includes the Corsu plugin.',
+                '  Vesktop : utiliser la version de Vencord qui contient le plugin Corsu.'))
     if 'desktop' in components:
-        print('  KDE Plasma: add Corsican translation files to your home folder and set the language to Corsican,'
-              ' with French for anything not yet translated. Log out and back in afterwards.')
+        print(t('  KDE Plasma: add Corsican translation files to your home folder and set the language to Corsican,'
+                ' with French for anything not yet translated. Log out and back in afterwards.',
+                '  KDE Plasma : ajouter les fichiers de traduction corse dans votre dossier personnel et passer la langue en corse,'
+                ' avec le français pour ce qui n\'est pas encore traduit. Déconnectez-vous et reconnectez-vous ensuite.'))
     if 'qt' in components:
         print(f'  System translations: copy the Corsican files into {corsu.SYSTEM_LOCALE.parent.parent} and'
               f' {corsu.QT_TRANSLATIONS}, so GTK programs, terminal commands and Qt dialogs use them too.'
               ' This asks for your password once.')
-    print(f'\nA copy of every file Corsu changes is kept in {corsu.DATA}, and Corsu Setup can undo everything.')
-    print('Text without a Corsican translation yet stays in French. Websites and messages are never changed.\n')
+    print(t(f'\nA copy of every file Corsu changes is kept in {corsu.DATA}, and Corsu Setup can undo everything.',
+            f'\nUne copie de chaque fichier modifié est gardée dans {corsu.DATA}, et Corsu Setup peut tout annuler.'))
+    print(t('Text without a Corsican translation yet stays in French. Messages are never changed.\n',
+            'Le texte sans traduction corse reste en français. Les messages ne sont jamais modifiés.\n'))
     if args.dry_run:
         return 0
-    if not args.yes and input('Go ahead? [y/N] ').strip().lower() not in ('y', 'yes'):
-        print('Nothing was changed.')
+    if not args.yes and input(t('Go ahead? [y/N] ', 'On y va ? [o/N] ')).strip().lower() not in ('y', 'yes', 'o', 'oui'):
+        print(t('Nothing was changed.', 'Rien n\'a été modifié.'))
         return 0
     target = deploy_release()
     if target != ROOT:
@@ -342,9 +376,12 @@ def main(argv=None):
     if corsu.PLATFORM == 'linux' and shutil.which('update-desktop-database') and applications.is_dir():
         # Only refreshes the menu cache; menus still update on the next login when it fails.
         subprocess.run(['update-desktop-database', str(applications)], check=False)
-    print('\nDone. Close Firefox, your browsers and Discord completely, then open them again.'
-          + (' Log out and back in for the Plasma desktop.' if 'desktop' in components else '')
-          + '\nTo add programs, go back to French or uninstall, open Corsu Setup.')
+    print(t('\nDone. Close Firefox, your browsers and Discord completely, then open them again.'
+            + (' Log out and back in for the Plasma desktop.' if 'desktop' in components else '')
+            + '\nTo add programs, go back to French or uninstall, open Corsu Setup.',
+            '\nC\'est fait. Fermez complètement Firefox, vos navigateurs et Discord, puis rouvrez-les.'
+            + (' Déconnectez-vous et reconnectez-vous pour le bureau Plasma.' if 'desktop' in components else '')
+            + '\nPour ajouter des logiciels, revenir au français ou tout retirer, ouvrez Corsu Setup.'))
     return 0
 
 

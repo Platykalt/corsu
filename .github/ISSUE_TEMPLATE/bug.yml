@@ -1,28 +1,28 @@
-name: Problem with the installer
-description: Something did not install, broke, or did not come back after uninstalling
+name: Problème d'installation · Installer problem
+description: Quelque chose ne s'installe pas, casse, ou ne revient pas après désinstallation · Something did not install, broke, or did not come back after uninstalling
 labels: [bug]
 body:
   - type: dropdown
     id: system
     attributes:
-      label: System
+      label: Système · System
       options: [Windows, macOS, Linux]
     validations:
       required: true
   - type: input
     id: programs
     attributes:
-      label: Programs selected
-      description: For example Firefox, Opera GX, Discord.
+      label: Logiciels choisis · Programs selected
+      description: Par exemple Firefox, Opera GX, Discord · For example Firefox, Opera GX, Discord.
   - type: textarea
     id: what
     attributes:
-      label: What happened
-      description: Paste the installer's last lines if you can.
+      label: Ce qui s'est passé · What happened
+      description: Collez les dernières lignes de l'installeur si possible · Paste the installer's last lines if you can.
     validations:
       required: true
   - type: textarea
     id: status
     attributes:
-      label: Output of `python3 src/corsu.py status`
+      label: Résultat de `python3 src/corsu.py status` · Output of `python3 src/corsu.py status`
       render: json

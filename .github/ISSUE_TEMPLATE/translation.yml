@@ -1,26 +1,26 @@
-name: Translation
-description: A wrong, missing or clumsy Corsican translation
+name: Traduction · Translation
+description: Une traduction corse fausse, manquante ou maladroite · A wrong, missing or clumsy Corsican translation
 labels: [translation]
 body:
   - type: input
     id: seen
     attributes:
-      label: Text you saw
-      description: Copy it exactly, in French, English or Corsican.
+      label: Texte vu · Text you saw
+      description: Copiez-le tel quel, en français, anglais ou corse · Copy it exactly, in French, English or Corsican.
     validations:
       required: true
   - type: input
     id: where
     attributes:
-      label: Where
-      description: Program and place, for example "Firefox, right-click menu".
+      label: Où · Where
+      description: Logiciel et endroit, par exemple « Firefox, menu du clic droit » · Program and place, e.g. "Firefox, right-click menu".
     validations:
       required: true
   - type: input
     id: proposal
     attributes:
-      label: Corsican you suggest
+      label: Corse proposé · Corsican you suggest
   - type: textarea
     id: notes
     attributes:
-      label: Notes
+      label: Remarques · Notes

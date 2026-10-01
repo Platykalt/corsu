@@ -12,7 +12,7 @@ import zipfile
 ROOT = Path(__file__).resolve().parent.parent
 # Stable names, so https://github.com/<owner>/corsu/releases/latest/download/<name> always works.
 ARCHIVES = {'linux': 'corsu-linux.tar.gz', 'windows': 'corsu-windows.zip', 'macos': 'corsu-macos.tar.gz'}
-SOURCES = ('README.md', 'README.fr.md', 'CHANGELOG.md', 'CONTRIBUTING.md', 'LICENSE')
+SOURCES = ('README.md', 'README.en.md', 'CHANGELOG.md', 'CONTRIBUTING.md', 'LICENSE')
 SOURCE_DIRECTORIES = ('src', 'lexicon', 'docs', 'install', 'tests', 'tools')
 
 

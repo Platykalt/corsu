@@ -1,78 +1,61 @@
 # Corsu
 
-Corsu translates the menus and settings of Firefox, Chrome, Opera GX and Discord into Corsican. On Linux it
-also translates the KDE Plasma desktop. It runs on Windows, macOS and Linux, and you can switch back to French
-at any time.
+Corsu met en corse les menus et les réglages de Firefox, Chrome, Opera GX et Discord, ainsi que le bureau KDE Plasma
+et les commandes du terminal sous Linux. Il fonctionne sous Windows, macOS et Linux, et chaque partie peut être
+désactivée puis réactivée à tout moment.
 
-[Version française](README.fr.md)
+[English](README.en.md) · [Pourquoi Corsu](docs/fr/pourquoi-corsu.md) · [Ce qui marche, et où](docs/fr/compatibilite.md)
 
-## Download
+## Installer sur un ordinateur
 
-| System | Download | Then | Step by step |
+| Système | Téléchargement | Ensuite | Guide |
 | --- | --- | --- | --- |
-| Windows | [corsu-windows.zip](https://github.com/Platykalt/corsu/releases/latest/download/corsu-windows.zip) | extract it, double-click `Install for Windows.cmd` | [docs/install-windows.md](docs/install-windows.md) |
-| macOS | [corsu-macos.tar.gz](https://github.com/Platykalt/corsu/releases/latest/download/corsu-macos.tar.gz) | double-click `Install for macOS.command` | [docs/install-macos.md](docs/install-macos.md) |
-| Linux | [corsu-linux.tar.gz](https://github.com/Platykalt/corsu/releases/latest/download/corsu-linux.tar.gz) | run `./"Install for Linux.sh"` | [docs/install-linux.md](docs/install-linux.md) |
+| Windows | [corsu-windows.zip](https://github.com/Platykalt/corsu/releases/latest/download/corsu-windows.zip) | décompresser, double-cliquer sur `Install for Windows.cmd` | [Windows](docs/fr/ordinateur/windows.md) |
+| macOS | [corsu-macos.tar.gz](https://github.com/Platykalt/corsu/releases/latest/download/corsu-macos.tar.gz) | double-cliquer sur `Install for macOS.command` | [macOS](docs/fr/ordinateur/macos.md) |
+| Linux | [corsu-linux.tar.gz](https://github.com/Platykalt/corsu/releases/latest/download/corsu-linux.tar.gz) | lancer `./"Install for Linux.sh"` | [Linux](docs/fr/ordinateur/linux.md) |
 
-Corsu needs Python 3.10 or newer. On Windows the installer offers to install it for you.
-
-You can also install in one line. In PowerShell on Windows:
+Ou en une ligne. Dans PowerShell, sous Windows :
 
 ```powershell
 irm https://raw.githubusercontent.com/Platykalt/corsu/main/install/get.ps1 | iex
 ```
 
-In Terminal on macOS or Linux:
+Dans le Terminal, sous macOS ou Linux :
 
 ```sh
 curl -fsSL https://raw.githubusercontent.com/Platykalt/corsu/main/install/get.sh | sh
 ```
 
-## Using it
+L'installeur affiche ce qu'il a trouvé, tout est coché d'avance : Entrée installe tout. Il dit ce qu'il va changer
+avant de le faire, et garde une copie de chaque fichier modifié. Le raccourci Corsu Setup permet ensuite d'ajouter
+un logiciel, de mettre une partie en pause ou de tout retirer.
 
-The installer shows what it found on your computer and lets you choose:
+Pour Discord, réglez sa langue sur Français ou English : voir [Discord en corse](docs/fr/discord.md).
 
-```
-Select what you want to translate:
-  [x] 1. Firefox: menus, settings and error pages
-  [x] 2. Chrome, Opera GX and other Chromium browsers
-  [x] 3. Discord: interface through Vencord
-Type numbers to toggle (e.g. "2 3"), Enter to continue, q to quit:
-```
+## Sur un téléphone
 
-It then tells you what it is going to change and waits for a yes. Close the programs before you answer and open
-them again afterwards.
+Les menus d'Android et d'iOS ne peuvent pas être traduits par un projet extérieur, mais Firefox, Thunderbird, VLC et
+d'autres applications existent déjà en corse, et Gboard a un clavier corse. Voir [Android](docs/fr/telephone/android.md)
+et [iPhone](docs/fr/telephone/iphone.md).
 
-The installer adds a shortcut called Corsu Setup. Open it later to add another program, to go back to French,
-or to remove Corsu. It keeps a copy of every file it changes, so removing it puts your computer back as it was.
+## Les traductions
 
-Firefox and Discord work on all three systems. Chrome, Opera GX, Edge, Brave and Vivaldi work on Windows and
-Linux; macOS support for them is not done yet. [docs/what-corsu-changes.md](docs/what-corsu-changes.md) explains what Corsu
-changes for each program.
+Corsu compte environ 77 000 phrases traduites. Plus de 13 000 viennent d'autres logiciels libres, traduits pour la
+plupart par Patriccollu di Santa Maria è Sichè : Firefox pour Android et iOS, Thunderbird, VLC, Audacity, Notepad++,
+entre autres. Les autres ont été écrites pour Corsu en suivant le même vocabulaire.
 
-Only the program itself is translated, never websites or messages. Text that has no Corsican translation yet
-stays in French.
+Une traduction vous paraît fausse ou maladroite ? [Ouvrez un ticket](https://github.com/Platykalt/corsu/issues/new?template=translation.yml)
+avec le texte et l'endroit où vous l'avez vu, ou corrigez la ligne vous-même : voir [CONTRIBUTING.md](CONTRIBUTING.md).
 
-## Translations
+Pour pratiquer le corse avec quelqu'un, ou progresser seul : [Sapienzia](https://www.sapienzia.io),
+[Astutu](https://astutu.corsica), [LIV](https://liv.corsica).
 
-Corsu has about 77,000 translated phrases. About 13,000 of them come from other free software, most of them
-translated by Patriccollu di Santa Maria è Sichè: Firefox for Android and iOS, Thunderbird, VLC, Audacity,
-Notepad++ and others. The rest were written for Corsu and follow his vocabulary.
+## Pour aller plus loin
 
-If you see a wrong or clumsy translation, please [open an issue](https://github.com/Platykalt/corsu/issues/new?template=translation.yml)
-with the text and where you saw it. [CONTRIBUTING.md](CONTRIBUTING.md) explains how to correct the files
-directly.
+- [Pourquoi Corsu](docs/fr/pourquoi-corsu.md)
+- [Ce que Corsu modifie](docs/fr/ce-que-corsu-modifie.md)
+- [Ce qui marche, et où](docs/fr/compatibilite.md)
+- [Développement](docs/fr/developpeurs.md) et [CHANGELOG.md](CHANGELOG.md)
 
-## Phones
-
-Apple, Google and Samsung decide which languages their phones offer, and Corsican is not one of them yet. Some
-apps are already in Corsican though, Firefox among them. [docs/phones.md](docs/phones.md) explains how to use
-them.
-
-## Other documents
-
-[docs/developers.md](docs/developers.md) describes the code, the tests and how a release is made.
-[CHANGELOG.md](CHANGELOG.md) lists the changes in each version.
-
-Corsu is free software, released under the [GNU GPL](LICENSE), version 3 or later. Translations taken from other
-projects keep their own license, given at the top of each file in [lexicon/](lexicon/).
+Corsu est un logiciel libre, publié sous [licence GNU GPL](LICENSE), version 3 ou ultérieure. Les traductions reprises
+d'autres projets gardent leur licence, indiquée en tête de chaque fichier de [lexicon/](lexicon/).

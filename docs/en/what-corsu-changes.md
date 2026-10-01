@@ -1,5 +1,7 @@
 # What Corsu changes
 
+[Français](../fr/ce-que-corsu-modifie.md)
+
 Corsu only touches the programs you pick. Each file it writes is listed in `installation.json`, and the original
 is copied to a `backups` folder next to it. Both live in Corsu's data folder: `%LOCALAPPDATA%\corsu` on Windows,
 `~/Library/Application Support/corsu` on macOS and `~/.local/share/corsu` on Linux.
@@ -15,6 +17,9 @@ The copy opens your normal profile, so your bookmarks, passwords and extensions 
 The translation is built from Mozilla's French language pack for your exact version of Firefox. Corsu downloads
 it from archive.mozilla.org and checks it against the checksums Mozilla publishes. If you are offline it uses the
 copy included in the release. The Corsican translations are applied on top of the French text.
+
+The copy also tells websites that you prefer Corsican, then French. Sites that offer Corsican, Google among them,
+then show it.
 
 When Firefox updates, the copy is rebuilt the next time you open it. The copy's own updater is turned off for
 that reason. Firefox's security settings and add-on checks are left as they are.
@@ -32,7 +37,8 @@ This covers Google Chrome, Chromium, Opera, Opera GX, Microsoft Edge, Brave and 
 
 These browsers keep the French text of their interface in one file, `fr.pak`. Corsu rewrites that file with the
 Corsican translations. The browser then shows Corsican wherever it would have shown French. Your profile,
-saved passwords and cookies are not touched.
+saved passwords and cookies are not touched. The browser is also set to tell websites that you prefer Corsican,
+then French.
 
 On Windows, Corsu sets the browser's language to French so that it reads that file. A browser installed for all
 users lives in `Program Files`, so Windows asks for permission before Corsu can change it.
@@ -64,11 +70,16 @@ installed on your system, and puts them in `~/.local/share/locale/co`. It then s
 `co:fr`, so anything without a Corsican translation is shown in French. Program names in the menu are kept as
 they are. Log out and back in to see the change.
 
-Qt, the toolkit KDE is built on, has its own standard buttons and file dialogs. Their translations live in
-`/usr/share/qt6/translations`, which belongs to the system. The optional `qt` component copies Corsican files
-there after asking for your password, and removes them when you uninstall.
+Programs outside KDE (GTK programs, terminal commands) and Qt's own buttons and file dialogs only read
+translations from system folders. The optional system translations copy the Corsican files to
+`/usr/share/locale/co` and `/usr/share/qt6/translations` after asking for your password. Files that belong to an
+installed package are never overwritten, and uninstalling removes what Corsu copied.
+
+New terminals follow a small switch read by bash, zsh and fish, so the terminal can go back to French on its own,
+for an hour or until you switch it on again.
 
 ## Going back to French
 
-Switching Corsican off returns every program to the language it had before, but keeps the translated files, so
+Each part can be switched off on its own: Firefox, the Chromium browsers, Discord, Vesktop, the desktop, the
+terminal. Switching a part off returns it to the language it had before but keeps the translated files, so
 switching it on again is immediate.

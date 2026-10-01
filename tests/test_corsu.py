@@ -169,6 +169,30 @@ class TranslationTests(unittest.TestCase):
                 self.assertFalse((system / 'gtk30.mo').exists())
                 self.assertTrue((system / 'packaged.mo').exists())
 
+    def test_parts_switch_off_and_on_separately(self):
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory)
+            settings = root / 'config/Vencord/settings/settings.json'
+            with patch.object(corsu, 'HOME', root), patch.object(corsu, 'DATA', root / 'data'), \
+                    patch.object(corsu, 'STATE', root / 'data/state.json'), patch.object(corsu, 'CONFIG', root / 'config'), \
+                    patch.object(corsu, 'PLATFORM', 'linux'), redirect_stdout(io.StringIO()):
+                installer = corsu.Installer()
+                installer.json_settings(settings, {'plugins/Corsu/enabled': True}, toggle=True)
+                installer.state['components'] = ['discord', 'desktop']
+                corsu.STATE.write_text(json.dumps(installer.state), encoding='utf-8')
+                corsu.disable(['terminal'], hours=1)
+                self.assertTrue(corsu.is_disabled('terminal'))
+                self.assertFalse(corsu.is_disabled('discord'))
+                self.assertTrue(json.loads(settings.read_text())['plugins']['Corsu']['enabled'])
+                corsu.disable(['discord'])
+                self.assertFalse(json.loads(settings.read_text())['plugins']['Corsu']['enabled'])
+                self.assertTrue(corsu.is_disabled('discord'))
+                with patch.object(corsu, 'install') as install:
+                    corsu.enable(['terminal'])
+                    install.assert_not_called()
+                self.assertFalse(corsu.is_disabled('terminal'))
+                self.assertTrue(corsu.is_disabled('discord'))
+
     def test_gettext_context_and_fallback(self):
         data = corsu.make_mo({'': 'Content-Type: text/plain; charset=UTF-8\nLanguage: co\n',
                               'Save': 'Arregistrà', 'button\x04Close': 'Chjode'})

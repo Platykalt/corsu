@@ -596,7 +596,9 @@ def firefox_runtime():
         # Keep the normal profile and extension signature checks; do not relax security.
         prefs = app / install.resources / 'defaults/pref/corsu.js'
         prefs.parent.mkdir(parents=True, exist_ok=True)
-        prefs.write_text(f'pref("intl.locale.requested", "{locale}");\n', encoding='utf-8')
+        # Websites that offer Corsican (Google among them) use it first, then French.
+        prefs.write_text(f'pref("intl.locale.requested", "{locale}");\n'
+                         'pref("intl.accept_languages", "co, fr, en-US, en");\n', encoding='utf-8')
         # Corsu rebuilds this copy when the system Firefox updates; its own updater would undo the translation.
         policies_path = app / install.resources / 'distribution/policies.json'
         policies = json.loads(policies_path.read_text(encoding='utf-8')) if policies_path.exists() else {}
@@ -744,23 +746,22 @@ def macos_application(installer):
 
 
 def setup_shortcut(installer):
-    """A `Corsu Setup` entry that reopens the installer, to add or remove applications later."""
-    script = SRC / 'installer.py'
+    """A `Corsu Setup` entry that opens the Corsu window: switch parts on and off, add programs, uninstall."""
+    app = SRC / 'app.py'
     if PLATFORM == 'windows':
-        windows_link(installer, START_MENU / 'Corsu Setup.lnk', sys.executable, f'"{script}"')
+        windows_link(installer, START_MENU / 'Corsu Setup.lnk', python_launcher(), f'"{app}"')
     elif PLATFORM == 'macos':
-        command = f'{shlex.quote(sys.executable)} {shlex.quote(str(script))}'
+        command = f'exec {shlex.quote(sys.executable)} {shlex.quote(str(app))} >/dev/null 2>&1 &'
         with tempfile.TemporaryDirectory() as directory:
             applet = Path(directory) / 'Corsu Setup.app'
-            subprocess.run(['osacompile', '-o', str(applet), '-e',
-                            f'tell application "Terminal" to do script {json.dumps(command)}',
-                            '-e', 'tell application "Terminal" to activate'], check=True)
+            subprocess.run(['osacompile', '-o', str(applet), '-e', 'do shell script ' + json.dumps(command)], check=True)
             installer.tree(HOME / 'Applications/Corsu Setup.app', applet)
     else:
         installer.write(HOME / '.local/share/applications/corsu-setup.desktop',
                         '[Desktop Entry]\nType=Application\nName=Corsu Setup\nName[co]=Cunfigurazione di Corsu\n'
-                        'Comment=Choose which applications are translated into Corsican\n'
-                        f'Exec=python3 {shlex.quote(str(script))}\nTerminal=true\nIcon=preferences-desktop-locale\n'
+                        'Name[fr]=Réglages de Corsu\n'
+                        'Comment=Choose what is in Corsican\nComment[fr]=Choisir ce qui est en corse\n'
+                        f'Exec=python3 {shlex.quote(str(app))}\nTerminal=false\nIcon=preferences-desktop-locale\n'
                         'Categories=Settings;\n')
 
 
@@ -941,7 +942,9 @@ def disable(components=None, hours=None):
             continue
         path = Path(name)
         if record.get('json_changes'):
-            fields = {field: False for field in record['json_changes'] if field.endswith('/enabled')}
+            fields = {field: False if field.endswith('/enabled') else saved['original']
+                      for field, saved in record['json_changes'].items()
+                      if field.endswith('/enabled') or saved['existed']}
             if fields and path.exists():
                 installer.json_settings(path, fields, toggle=True)
             continue

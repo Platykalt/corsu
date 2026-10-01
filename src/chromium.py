@@ -84,10 +84,26 @@ WINDOWS = {
 }
 
 
+# Where each browser keeps its profiles on Linux; on Windows it is the folder holding `Local State`.
+LINUX_USER_DATA = {'chrome': 'google-chrome', 'chromium': 'chromium', 'opera': 'opera', 'opera-gx': 'opera-gx',
+                   'brave': 'BraveSoftware/Brave-Browser', 'edge': 'microsoft-edge', 'vivaldi': 'vivaldi'}
+ACCEPT_LANGUAGES = 'co,fr,en-US,en'
+
+
 class Browser:
     def __init__(self, identifier, label, root, commands=(), desktop=None, local_state=None):
         self.id, self.label, self.root = identifier, label, Path(root)
         self.commands, self.desktop, self.local_state = list(commands), desktop, local_state
+
+    def preferences(self):
+        """Each profile's Preferences file. Opera keeps a single profile at the top of its folder."""
+        if self.local_state is not None:
+            base = self.local_state.parent
+        elif self.id in LINUX_USER_DATA:
+            base = corsu.CONFIG / LINUX_USER_DATA[self.id]
+        else:
+            return []
+        return sorted(path for path in [base / 'Preferences', *base.glob('*/Preferences')] if path.is_file())
 
     def packs(self):
         """Every French interface pack, including leftover version folders on Windows."""
@@ -272,6 +288,9 @@ def install(installer):
         if corsu.PLATFORM == 'windows' and browser.local_state and browser.local_state.exists():
             # Chromium on Windows shows the language chosen in its settings; choose French.
             installer.json_settings(browser.local_state, {'intl/app_locale': 'fr'}, toggle=True)
+        for preferences in browser.preferences():
+            # Websites that offer Corsican (Google among them) use it first, then French.
+            installer.json_settings(preferences, {'intl/accept_languages': ACCEPT_LANGUAGES}, toggle=True)
     if corsu.PLATFORM == 'windows':
         # Browser updates bring back French packs: re-translate them at every login.
         corsu.windows_link(installer, corsu.CONFIG / 'Microsoft/Windows/Start Menu/Programs/Startup/Corsu.lnk',

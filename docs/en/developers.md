@@ -1,10 +1,12 @@
 # Development
 
+[Français](../fr/developpeurs.md)
+
 ## Layout
 
 ```
 .github/            CI workflow, issue templates, release notes
-docs/               installation guides and documentation
+docs/               docs/fr (French) and docs/en (English): guides for computers and phones, Discord, compatibility
 install/            Install for Windows.cmd, Install for macOS.command, Install for Linux.sh (placed at the
                     top of each release archive), and get.sh / get.ps1 for one-line installs
 lexicon/            the translations: lexicon.tsv (written for Corsu), lexicon-mozilla.tsv and
@@ -49,7 +51,7 @@ real browser. `CORSU_FIREFOX` does the same for Firefox.
 
 ## Continuous integration
 
-[`.github/workflows/ci.yml`](../.github/workflows/ci.yml) runs on every push:
+[`.github/workflows/ci.yml`](../../.github/workflows/ci.yml) runs on every push:
 
 1. unit tests on Linux, Windows and macOS with Python 3.10 and 3.13;
 2. a Vencord build and the three release archives;
