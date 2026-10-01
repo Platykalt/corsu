@@ -870,7 +870,7 @@ def repair_default_browser():
     stale = []
     for entry in applications.glob('userapp-*.desktop'):
         exec_line = re.search(r'^Exec=(.*)$', entry.read_text(encoding='utf-8', errors='replace'), re.M)
-        if exec_line and exec_line[1].startswith(str(DATA / 'firefox') + os.sep):
+        if exec_line and DATA / 'firefox' in Path(shlex.split(exec_line[1])[0]).parents:
             stale.append(entry)
     if not stale:
         return
