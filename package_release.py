@@ -1,22 +1,38 @@
 #!/usr/bin/env python3
-"""Package an explicit allowlist of public source and runtime artifacts."""
+"""Package an explicit allowlist of public source and runtime artifacts for each platform."""
+import argparse
 import hashlib
 import json
 from pathlib import Path
 import subprocess
 import tarfile
+import urllib.request
+import zipfile
 
 ROOT = Path(__file__).resolve().parent
+ARCHIVES = {'linux': 'linux-x86_64', 'windows': 'windows-x86_64', 'macos': 'macos'}
+SOURCES = ('corsu.py', 'engine.py', 'installer.py', 'coverage.py', 'package_release.py', 'lexicon.tsv',
+           'README.md', 'CONTRIBUTING.md', 'LICENSE', 'release.json', 'install.sh', 'install.cmd', '.gitignore',
+           'test_corsu.py', 'test_engine.py', 'test_installer.py', 'test-browser.mjs', 'ci/check_firefox.py', 'ci/e2e.py',
+           'test-kde.cpp')
 
 
-def main():
-    manifest = json.loads((ROOT / 'release.json').read_text())
+def vencord_installer(manifest, name):
+    """Fetch the pinned official installer for one platform and verify it before packaging."""
+    entry = manifest['installers'][name]
+    binary = ROOT / 'vendor' / entry['file']
+    if not binary.exists():
+        with urllib.request.urlopen(manifest['installer_base_url'] + entry['file'], timeout=120) as response:
+            binary.write_bytes(response.read())
+    if hashlib.sha256(binary.read_bytes()).hexdigest() != entry['sha256']:
+        raise RuntimeError(f'Official installer checksum mismatch: {binary}')
+    return binary
+
+
+def collect(manifest):
     revision = subprocess.check_output(['git', 'rev-parse', 'HEAD'], cwd=ROOT / 'Vencord', text=True).strip()
     if revision != manifest['vencord_revision']:
         raise RuntimeError('Vencord checkout does not match the pinned release revision.')
-    binary = ROOT / 'vendor/VencordInstallerCli-linux'
-    if hashlib.sha256(binary.read_bytes()).hexdigest() != manifest['installer_sha256']:
-        raise RuntimeError('Official installer checksum mismatch.')
     if not (ROOT / 'Vencord/dist/patcher.js').exists():
         raise RuntimeError('Build the custom Vencord plugin first.')
     # The dictionary is compiled into the bundle, so a stale build ships old Discord labels.
@@ -24,31 +40,60 @@ def main():
     stale = [name for name in ('lexicon.tsv', 'plugin/index.ts', 'plugin/translate.ts')
              if (ROOT / name).stat().st_mtime > build]
     if stale:
-        print('Warning: Vencord build predates ' + ', '.join(stale)
-              + '. Rebuild it so Discord receives the current translations.')
-    files = [ROOT / name for name in ('corsu.py', 'engine.py', 'installer.py', 'coverage.py', 'package_release.py',
-                                     'lexicon.tsv', 'README.md', 'CONTRIBUTING.md', 'LICENSE', 'release.json',
-                                     'install.sh', '.gitignore', 'test_corsu.py', 'test_installer.py',
-                                     'test-browser.mjs', 'test-native-firefox.py', 'test-kde.cpp')]
+        raise RuntimeError('Vencord build predates ' + ', '.join(stale) + '. Rebuild it before packaging.')
+    files = [ROOT / name for name in SOURCES]
     files.extend(sorted((ROOT / 'plugin').glob('*.ts')))
-    files.extend(ROOT / 'vendor' / name for name in ('VencordInstallerCli-linux', 'vencord-installer-source.tar.gz'))
+    files.append(ROOT / 'vendor/vencord-installer-source.tar.gz')
+    # The French Firefox language pack (MPL-2.0) is the offline fallback; installs fetch the matching version.
+    files.append(ROOT / 'vendor/firefox-fr.xpi')
     upstream = subprocess.check_output(['git', 'ls-files', '-z'], cwd=ROOT / 'Vencord').decode().split('\0')
     files.extend(ROOT / 'Vencord' / name for name in upstream if name and (ROOT / 'Vencord' / name).is_file())
     files.extend(sorted((ROOT / 'Vencord/src/userplugins/corsu').glob('*')))
     files.extend(sorted((ROOT / 'Vencord/dist').glob('*.*')))
-    # The optional upstream French language pack stays local. Firefox builds are never bundled.
-    output = ROOT / 'releases'
-    output.mkdir(exist_ok=True)
-    name = f'corsu-{manifest["version"]}-linux-x86_64'
-    archive = output / f'{name}.tar.gz'
-    with tarfile.open(archive, 'w:gz') as bundle:
-        for path in sorted(set(files)):
-            if not path.is_file() or path.is_symlink():
-                raise RuntimeError(f'Required release file missing or symbolic link: {path}')
-            bundle.add(path, arcname=f'{name}/{path.relative_to(ROOT)}', recursive=False)
+    for path in files:
+        if not path.is_file() or path.is_symlink():
+            raise RuntimeError(f'Required release file missing or symbolic link: {path}')
+    return sorted(set(files))
+
+
+def package(manifest, name, files, output):
+    files = [*files, vencord_installer(manifest, name)]
+    stem = f'corsu-{manifest["version"]}-{ARCHIVES[name]}'
+    executable = {'install.sh', manifest['installers'][name]['file']}
+    if name == 'windows':
+        archive = output / f'{stem}.zip'
+        with zipfile.ZipFile(archive, 'w', zipfile.ZIP_DEFLATED) as bundle:
+            for path in files:
+                bundle.write(path, f'{stem}/{path.relative_to(ROOT).as_posix()}')
+    else:
+        archive = output / f'{stem}.tar.gz'
+
+        def normalize(info):
+            info.uid = info.gid = 0
+            info.uname = info.gname = ''
+            info.mode = 0o755 if Path(info.name).name in executable else 0o644
+            return info
+
+        with tarfile.open(archive, 'w:gz') as bundle:
+            for path in files:
+                bundle.add(path, arcname=f'{stem}/{path.relative_to(ROOT).as_posix()}', recursive=False,
+                           filter=normalize)
     checksum = hashlib.sha256(archive.read_bytes()).hexdigest()
-    (output / f'{archive.name}.sha256').write_text(f'{checksum}  {archive.name}\n')
+    (output / f'{archive.name}.sha256').write_text(f'{checksum}  {archive.name}\n', encoding='utf-8')
     print(f'{archive} ({archive.stat().st_size / 1024 / 1024:.1f} MiB)\nSHA-256: {checksum}')
+    return archive
+
+
+def main():
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument('--platforms', nargs='+', choices=sorted(ARCHIVES), default=sorted(ARCHIVES))
+    parser.add_argument('--output', type=Path, default=ROOT / 'releases')
+    args = parser.parse_args()
+    manifest = json.loads((ROOT / 'release.json').read_text(encoding='utf-8'))
+    files = collect(manifest)
+    args.output.mkdir(parents=True, exist_ok=True)
+    for name in args.platforms:
+        package(manifest, name, files, args.output)
 
 
 if __name__ == '__main__':

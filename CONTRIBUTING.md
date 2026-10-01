@@ -23,7 +23,7 @@ containing private messages. Discord labels can be added manually from its inter
 
 Run `python3 -m unittest -v`, regenerate the plugin, rebuild Vencord and test in an isolated browser profile.
 The browser test verifies translation, live updates, restoration, and preservation of chat/name/editing areas.
-The native Firefox test verifies real chrome menu labels. Installer tests must use temporary homes and
+`ci/check_firefox.py` starts the real translated Firefox and reads menu, session-restore and context-menu strings; `ci/e2e.py` runs the whole install cycle in a throwaway home on any OS. Installer tests must use temporary homes and
 mock external applications; never patch contributors' real Discord clients during tests.
 
 All Corsu contributions are GPL-3.0-or-later. Include the full license and upstream notices with shared builds.

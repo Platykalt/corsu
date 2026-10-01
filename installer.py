@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Consent-based Linux installer for the open-source Corsu UI overlay."""
+"""Consent-based installer for the open-source Corsu UI overlay: Linux, Windows and macOS."""
 import argparse
 import hashlib
 import json
@@ -17,36 +17,69 @@ import corsu
 ROOT = Path(__file__).resolve().parent
 
 
+def version_key(name):
+    return [int(part) if part.isdigit() else part for part in name.replace('-', '.').split('.')]
+
+
+def discord_archive(location):
+    """The app.asar the official installer patches for a Discord location on this platform.
+
+    The location is what `VencordInstallerCli -location` expects: the folder holding
+    `resources/` on Linux, `%LOCALAPPDATA%\\Discord` on Windows and `Discord.app` on macOS.
+    """
+    location = Path(location)
+    if corsu.PLATFORM == 'macos':
+        return location / 'Contents/Resources/app.asar'
+    if corsu.PLATFORM == 'windows':
+        versions = sorted((path for path in location.glob('app-*') if (path / 'resources/app.asar').exists()),
+                          key=lambda path: version_key(path.name[4:]))
+        return versions[-1] / 'resources/app.asar' if versions else location / 'app-0/resources/app.asar'
+    return location / 'resources/app.asar'
+
+
 def discord_location():
-    host = corsu.CONFIG / 'discord/Discord'
-    if host.exists():
-        candidate = host.resolve().parent
-        if (candidate / 'resources/app.asar').exists():
-            return candidate
-    for candidate in map(Path, ['/opt/discord', '/usr/share/discord', '/usr/lib/discord']):
-        if (candidate / 'resources/app.asar').exists():
-            return candidate
-    return None
+    if corsu.PLATFORM == 'windows':
+        candidates = [Path(os.environ.get('LOCALAPPDATA', corsu.HOME / 'AppData/Local')) / 'Discord']
+    elif corsu.PLATFORM == 'macos':
+        candidates = [Path('/Applications/Discord.app'), corsu.HOME / 'Applications/Discord.app']
+    else:
+        candidates = []
+        host = corsu.CONFIG / 'discord/Discord'
+        if host.exists():
+            candidates.append(host.resolve().parent)
+        candidates += map(Path, ['/opt/discord', '/usr/share/discord', '/usr/lib/discord'])
+    return next((candidate for candidate in candidates if discord_archive(candidate).exists()), None)
+
+
+def vesktop_installed():
+    if shutil.which('vesktop') or (corsu.CONFIG / 'vesktop').is_dir():
+        return True
+    if corsu.PLATFORM == 'windows':
+        return (Path(os.environ.get('LOCALAPPDATA', '')) / 'Programs/vesktop').is_dir()
+    return corsu.PLATFORM == 'macos' and Path('/Applications/Vesktop.app').exists()
 
 
 def available_components():
     result = []
-    if Path('/usr/lib/firefox/application.ini').exists():
+    if corsu.firefox_install():
         result.append('firefox')
-    if shutil.which('plasmashell') and Path('/usr/share/locale/fr/LC_MESSAGES').exists():
+    if corsu.PLATFORM == 'linux' and shutil.which('plasmashell') and corsu.FRENCH_CATALOGS.exists():
         result.append('desktop')
     if discord_location():
         result.append('discord')
-    if shutil.which('vesktop'):
+    if vesktop_installed():
         result.append('vesktop')
-    if list(corsu.QT_TRANSLATIONS.glob('*_fr.qm')):
+    if corsu.PLATFORM == 'linux' and list(corsu.QT_TRANSLATIONS.glob('*_fr.qm')):
         result.append('qt')
     return result
 
 
 def run(command, **kwargs):
-    print('+ ' + ' '.join(map(str, command)), flush=True)
-    subprocess.run(list(map(str, command)), check=True, **kwargs)
+    command = list(map(str, command))
+    print('+ ' + ' '.join(command), flush=True)
+    # Windows only runs `.cmd` shims such as pnpm.cmd when given their full path.
+    command[0] = shutil.which(command[0]) or command[0]
+    subprocess.run(command, check=True, **kwargs)
 
 
 def stale_build(source):
@@ -61,7 +94,7 @@ def stale_build(source):
 
 def prepare_build():
     source = ROOT / 'Vencord'
-    manifest = json.loads((ROOT / 'release.json').read_text())
+    manifest = json.loads((ROOT / 'release.json').read_text(encoding='utf-8'))
     if not source.exists():
         run(['git', 'clone', 'https://github.com/Vendicated/Vencord.git', source])
         run(['git', 'checkout', '--detach', manifest['vencord_revision']], cwd=source)
@@ -70,12 +103,12 @@ def prepare_build():
         return
     if not shutil.which('node'):
         if not (source / 'dist/patcher.js').exists():
-            raise RuntimeError('Building requires Node.js >=22. Use the bundled Linux release to install without building.')
+            raise RuntimeError('Building requires Node.js >=22. Use a release archive to install without building.')
         print('Warning: the Vencord bundle is older than the lexicon; Discord keeps the previous labels.', flush=True)
         return
     if not (source / 'node_modules/esbuild').exists():
         if not shutil.which('pnpm'):
-            raise RuntimeError('Installing Vencord dependencies requires pnpm. Use the bundled Linux release instead.')
+            raise RuntimeError('Installing Vencord dependencies requires pnpm. Use a release archive instead.')
         run(['pnpm', 'install', '--frozen-lockfile'], cwd=source)
     run(['node', 'scripts/build/build.mjs', '--dev', '--disable-updater'], cwd=source,
         env={**os.environ, 'VENCORD_HASH': manifest['vencord_revision'][:7]})
@@ -98,7 +131,7 @@ def deploy_release():
     stage = Path(tempfile.mkdtemp(prefix='stage-', dir=target.parent))
     try:
         for name in ('corsu.py', 'engine.py', 'installer.py', 'lexicon.tsv', 'LICENSE', 'README.md',
-                     'release.json', 'CONTRIBUTING.md', 'coverage.py', 'install.sh'):
+                     'release.json', 'CONTRIBUTING.md', 'coverage.py', 'install.sh', 'install.cmd'):
             if (ROOT / name).exists():
                 shutil.copy2(ROOT / name, stage / name)
         for name in ('plugin', 'vendor', 'Vencord'):
@@ -112,24 +145,31 @@ def deploy_release():
         raise
 
 
-def install_discord(location):
-    binary = ROOT / 'vendor/VencordInstallerCli-linux'
-    manifest = json.loads((ROOT / 'release.json').read_text())
-    if platform.machine() not in ('x86_64', 'amd64'):
-        raise RuntimeError('The bundled Discord installer supports Linux x86_64. Use Vesktop or build the official installer for your architecture.')
+def vencord_installer():
+    """Return the checksum-verified official Vencord installer, downloading the pinned build if absent."""
+    manifest = json.loads((ROOT / 'release.json').read_text(encoding='utf-8'))
+    entry = manifest['installers'][corsu.PLATFORM]
+    binary = ROOT / 'vendor' / entry['file']
+    if corsu.PLATFORM == 'linux' and platform.machine().lower() not in ('x86_64', 'amd64'):
+        raise RuntimeError('The official Discord installer supports Linux x86_64. Use Vesktop on this architecture.')
     if not binary.exists():
         print('Downloading the pinned official Vencord installer...', flush=True)
-        with urllib.request.urlopen(manifest['installer_url'], timeout=60) as response:
+        with urllib.request.urlopen(manifest['installer_base_url'] + entry['file'], timeout=60) as response:
             downloaded = response.read()
-        if hashlib.sha256(downloaded).hexdigest() != manifest['installer_sha256']:
+        if hashlib.sha256(downloaded).hexdigest() != entry['sha256']:
             raise RuntimeError('Downloaded installer checksum mismatch; nothing executed.')
         binary.parent.mkdir(parents=True, exist_ok=True)
         binary.write_bytes(downloaded)
         binary.chmod(0o755)
-    if hashlib.sha256(binary.read_bytes()).hexdigest() != manifest['installer_sha256']:
+    if hashlib.sha256(binary.read_bytes()).hexdigest() != entry['sha256']:
         raise RuntimeError('Official Vencord installer missing or checksum mismatch; extract a fresh release.')
-    app = location / 'resources/app.asar'
-    backup = location / 'resources/_app.asar'
+    return binary
+
+
+def install_discord(location):
+    binary = vencord_installer()
+    app = discord_archive(location)
+    backup = app.with_name('_app.asar')
     installer = corsu.Installer()
     record = installer.state['files'].get(str(app))
     if record and corsu.digest(app.read_bytes()) != record['installed_sha256']:
@@ -139,26 +179,64 @@ def install_discord(location):
     command = [str(binary), '-install', '-location', str(location)]
     environment = {**os.environ, 'VENCORD_USER_DATA_DIR': str(ROOT / 'Vencord'), 'VENCORD_DEV_INSTALL': '1'}
     if not os.access(app.parent, os.W_OK):
+        if corsu.PLATFORM != 'linux':
+            raise RuntimeError(f'Discord is read-only for this account: {location}. Rerun the installer as administrator.')
         command = ['pkexec', 'env', f'VENCORD_USER_DATA_DIR={ROOT / "Vencord"}', 'VENCORD_DEV_INSTALL=1', *command]
     run(command, env=environment)
-    if str(ROOT / 'Vencord/dist/patcher.js').encode() not in app.read_bytes():
+    # The installer writes `require("<dir>/dist/patcher.js")` as a JSON string; Windows escapes backslashes.
+    patched = app.read_bytes()
+    if not any(form.encode() in patched for form in (str(ROOT / 'Vencord'), json.dumps(str(ROOT / 'Vencord'))[1:-1])):
         raise RuntimeError('The official installer did not inject the expected custom build.')
     installer.external_file(app, original)
     installer.state['files'][str(app)]['discord_location'] = str(location)
-    corsu.STATE.write_text(json.dumps(installer.state, indent=2))
+    corsu.STATE.write_text(json.dumps(installer.state, indent=2), encoding='utf-8')
     installer.json_settings(corsu.CONFIG / 'Vencord/settings/settings.json', {
         'plugins/Corsu/enabled': True, 'autoUpdate': False, 'autoUpdateNotification': False})
     report_path = corsu.DATA / 'report.json'
-    report = json.loads(report_path.read_text()) if report_path.exists() else {}
+    report = json.loads(report_path.read_text(encoding='utf-8')) if report_path.exists() else {}
     report['discord_native'] = {'location': str(location), 'plugin': 'Corsu', 'partial': True}
-    report_path.write_text(json.dumps(report, ensure_ascii=False, indent=2))
+    report_path.write_text(json.dumps(report, ensure_ascii=False, indent=2), encoding='utf-8')
+
+
+DESCRIPTIONS = {
+    'firefox': 'Firefox — menus, settings, error pages',
+    'desktop': 'KDE Plasma — desktop, KDE apps, application menu',
+    'qt': 'Qt dialogs — standard buttons and file choosers (administrator)',
+    'discord': 'Discord — interface labels through Vencord',
+    'vesktop': 'Vesktop — interface labels through Vencord',
+}
+
+
+def choose(available):
+    """Ask which detected applications to translate. Rerun the setup later to add more."""
+    installed = set()
+    if corsu.STATE.exists():
+        installed = set(json.loads(corsu.STATE.read_text(encoding='utf-8')).get('components', []))
+    selected = {name: True for name in available}
+    while True:
+        print('Select what you want to translate:')
+        for number, name in enumerate(available, 1):
+            mark = 'x' if selected[name] else ' '
+            note = '  (installed)' if name in installed else ''
+            print(f'  [{mark}] {number}. {DESCRIPTIONS[name]}{note}')
+        answer = input('Type numbers to toggle (e.g. "2 3"), Enter to continue, q to quit: ').strip().lower()
+        if answer in ('q', 'quit'):
+            return []
+        if not answer:
+            return [name for name in available if selected[name]]
+        for token in answer.replace(',', ' ').split():
+            if token.isdigit() and 1 <= int(token) <= len(available):
+                name = available[int(token) - 1]
+                selected[name] = not selected[name]
+        print()
 
 
 def main(argv=None):
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('--components', nargs='+', choices=['firefox', 'desktop', 'discord', 'vesktop', 'qt'],
                         help='Default: all supported integrations already installed on this computer.')
-    parser.add_argument('--discord-path', type=Path, help='Native Discord directory containing resources/app.asar')
+    parser.add_argument('--discord-path', type=Path,
+                        help='Native Discord location: folder with resources/ (Linux), %%LOCALAPPDATA%%\\Discord (Windows) or Discord.app (macOS)')
     parser.add_argument('--yes', action='store_true', help='Accept the displayed installation plan')
     parser.add_argument('--dry-run', action='store_true', help='Display the plan without downloading or changing anything')
     parser.add_argument('--uninstall', action='store_true')
@@ -166,8 +244,6 @@ def main(argv=None):
                         help='Return every application to its previous language, keeping the built catalogs')
     parser.add_argument('--enable', action='store_true', help='Switch Corsican back on after --disable')
     args = parser.parse_args(argv)
-    if sys.platform != 'linux':
-        parser.error('This release supports Linux. The desktop integration targets KDE Plasma.')
     if args.disable and args.enable:
         parser.error('Choose either --disable or --enable.')
     if args.disable or args.enable:
@@ -186,19 +262,28 @@ def main(argv=None):
         corsu.uninstall()
         return 0
     available = available_components()
-    components = args.components if args.components is not None else available
     location = args.discord_path.resolve() if args.discord_path else discord_location()
-    if args.discord_path and 'discord' not in components and args.components is None:
-        components = [*components, 'discord']
+    if args.discord_path and 'discord' not in available and discord_archive(location).exists():
+        available = [*available, 'discord']
+    components = args.components if args.components is not None else available
+    if args.components is None and available and not (args.yes or args.dry_run) and sys.stdin.isatty():
+        components = choose(available)
+        if not components:
+            print('Nothing selected; no changes made.')
+            return 0
     if not components:
         parser.error('No supported applications detected. Install Firefox, native Discord/Vesktop or KDE Plasma first.')
     for component in components:
-        if component not in available and not (component == 'discord' and location and (location / 'resources/app.asar').exists()):
-            parser.error(f'{component} is not installed/supported here. Install it with your distribution package manager first.')
-    print('Corsu — Corsican interface setup (Linux)\n')
+        if component not in available and not (component == 'discord' and location and discord_archive(location).exists()):
+            if component in ('desktop', 'qt') and corsu.PLATFORM != 'linux':
+                parser.error(f'{component} translates KDE Plasma and Qt on Linux; it is not available on {corsu.PLATFORM}.')
+            parser.error(f'{component} is not installed/supported here. Install it first.')
+    print(f'Corsu — Corsican interface setup ({corsu.PLATFORM})\n')
     print('Selected: ' + ', '.join(components))
     if 'firefox' in components:
-        print('• Build a local Firefox copy, translate its interface, and replace your user Firefox launcher. Keep the existing profile.')
+        launcher = {'windows': 'add a “Firefox — Corsu” Start menu shortcut', 'macos': 'add “Firefox Corsu” to ~/Applications'}
+        print('• Build a local Firefox copy, translate its interface, and '
+              + launcher.get(corsu.PLATFORM, 'replace your user Firefox launcher') + '. Keep the existing profile.')
     if 'desktop' in components:
         print('• Add user KDE translation catalogs and set interface language to co:fr. A new login is required.')
     if 'discord' in components:
@@ -211,7 +296,7 @@ def main(argv=None):
     if {'discord', 'vesktop'} & set(components):
         print('• Disable Vencord automatic updates to protect the custom plugin. Rebuild Corsu manually for updates.')
         print('• Use bundled Vencord when available; otherwise download/build the pinned source and dependencies. The official installer may check GitHub for updates.')
-    print('• Save backups under ~/.local/share/corsu. Uninstall restores managed settings and preserves unrelated app settings.')
+    print(f'• Save backups under {corsu.DATA}. Uninstall restores managed settings and preserves unrelated app settings.')
     print('Translation coverage is partial. Untranslated labels retain the original language. Messages, websites and typed text are preserved.\n')
     if args.dry_run:
         return 0
@@ -234,15 +319,23 @@ def main(argv=None):
         corsu.install(local, qt_system='qt' in components)
     if 'discord' in components:
         install_discord(location)
-    if shutil.which('update-desktop-database'):
-        run(['update-desktop-database', str(corsu.HOME / '.local/share/applications')])
-    print('\nInstalled. Fully quit and reopen Firefox and Discord/Vesktop. Log out and back in for Plasma.\n'
-          'Health: python3 corsu.py status\nSwitch off: python3 installer.py --disable\n'
-          'Switch on: python3 installer.py --enable\nUninstall: python3 installer.py --uninstall')
+    corsu.setup_shortcut(corsu.Installer())
+    applications = corsu.HOME / '.local/share/applications'
+    if corsu.PLATFORM == 'linux' and shutil.which('update-desktop-database') and applications.is_dir():
+        # Only refreshes the menu cache; menus still update on the next login when it fails.
+        subprocess.run(['update-desktop-database', str(applications)], check=False)
+    python = 'py -3' if corsu.PLATFORM == 'windows' else 'python3'
+    print('\nInstalled. Fully quit and reopen Firefox and Discord/Vesktop.'
+          + (' Log out and back in for Plasma.' if 'desktop' in components else '') + '\n'
+          f'Health: {python} corsu.py status\nSwitch off: {python} installer.py --disable\n'
+          f'Switch on: {python} installer.py --enable\nUninstall: {python} installer.py --uninstall')
     return 0
 
 
 if __name__ == '__main__':
+    # Windows consoles default to a legacy code page; never crash on Corsican letters.
+    for stream in (sys.stdout, sys.stderr):
+        stream.reconfigure(errors='replace')
     try:
         raise SystemExit(main())
     except (RuntimeError, OSError, subprocess.CalledProcessError) as error:

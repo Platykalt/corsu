@@ -118,6 +118,25 @@ class TranslationTests(unittest.TestCase):
         self.assertEqual(count, 2)
         self.assertEqual(merged, '# note\n\nkept = New only\n\nshared = Bonjour\n    .title = Salut\n\nfooter = Au revoir\n')
 
+    def test_french_properties_merge_by_key(self):
+        merged, count = corsu.merge_properties('# c\nkept=Keep\nshared=Hello %S\n', 'shared=Bonjour %S\ngone=x\n')
+        self.assertEqual((merged, count), ('# c\nkept=Keep\nshared=Bonjour %S\n', 1))
+
+    def test_french_pack_directories_follow_the_chrome_manifest(self):
+        import zipfile
+        buffer = io.BytesIO()
+        with zipfile.ZipFile(buffer, 'w') as bundle:
+            bundle.writestr('chrome/chrome.manifest', 'locale global en-US en-US/locale/en-US/global/\n'
+                            'locale global-platform en-US en-US/locale/en-US/global-platform/win/ os=WINNT\n'
+                            'locale global-platform en-US en-US/locale/en-US/global-platform/unix/ os=LikeUnix\n')
+        manifest = {'languages': {'fr': {'chrome_resources': {
+            'global': 'chrome/fr/locale/fr/global/',
+            'global-platform': {'win': 'chrome/fr/win/', 'linux': 'chrome/fr/unix/'}}}}}
+        with zipfile.ZipFile(buffer) as bundle, patch.object(corsu, 'PLATFORM', 'windows'):
+            self.assertEqual(corsu.locale_directories(bundle, manifest), {
+                'chrome/en-US/locale/en-US/global/': 'chrome/fr/locale/fr/global/',
+                'chrome/en-US/locale/en-US/global-platform/win/': 'chrome/fr/win/'})
+
     def test_gettext_context_and_fallback(self):
         data = corsu.make_mo({'': 'Content-Type: text/plain; charset=UTF-8\nLanguage: co\n',
                               'Save': 'Salvà', 'button\x04Close': 'Chjode'})

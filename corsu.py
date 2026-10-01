@@ -14,6 +14,7 @@ import struct
 import subprocess
 import sys
 import tempfile
+import urllib.request
 import zipfile
 
 import engine
@@ -21,10 +22,18 @@ from engine import make_mo, make_qm, read_mo, read_qm, translate, WORDS
 
 ROOT = Path(__file__).resolve().parent
 HOME = Path.home()
-DATA = HOME / '.local/share/corsu'
+PLATFORM = 'windows' if sys.platform == 'win32' else 'macos' if sys.platform == 'darwin' else 'linux'
+if PLATFORM == 'windows':
+    DATA = Path(os.environ.get('LOCALAPPDATA', HOME / 'AppData/Local')) / 'corsu'
+    CONFIG = Path(os.environ.get('APPDATA', HOME / 'AppData/Roaming'))
+elif PLATFORM == 'macos':
+    DATA = HOME / 'Library/Application Support/corsu'
+    CONFIG = HOME / 'Library/Application Support'
+else:
+    DATA = HOME / '.local/share/corsu'
+    CONFIG = Path(os.environ.get('XDG_CONFIG_HOME', HOME / '.config'))
 STATE = DATA / 'installation.json'
 LEXICON = engine.LEXICON
-CONFIG = Path(os.environ.get('XDG_CONFIG_HOME', HOME / '.config'))
 FRENCH_CATALOGS = Path('/usr/share/locale/fr/LC_MESSAGES')
 QT_TRANSLATIONS = Path('/usr/share/qt6/translations')
 CATALOG_SUFFIX = 'locale/co/LC_MESSAGES'
@@ -134,7 +143,7 @@ def patch_ftl(text):
 class Installer:
     def __init__(self):
         DATA.mkdir(parents=True, exist_ok=True)
-        self.state = json.loads(STATE.read_text()) if STATE.exists() else {'files': {}}
+        self.state = json.loads(STATE.read_text(encoding='utf-8')) if STATE.exists() else {'files': {}}
 
     def write(self, path, data, mode=None, toggle=False):
         path = Path(path)
@@ -156,7 +165,7 @@ class Installer:
         record['toggle'] = record.get('toggle', False) or toggle
         record['installed_sha256'] = digest(data)
         # Record backup before mutation, so an interrupted install remains reversible.
-        STATE.write_text(json.dumps(self.state, indent=2))
+        STATE.write_text(json.dumps(self.state, indent=2), encoding='utf-8')
         temp = path.with_name(path.name + '.corsu-tmp')
         temp.write_bytes(data)
         temp.chmod(mode if mode is not None else (record['mode'] or 0o644))
@@ -164,7 +173,7 @@ class Installer:
 
     def json_settings(self, path, changes, toggle=False):
         path = Path(path)
-        document = json.loads(path.read_text()) if path.exists() else {}
+        document = json.loads(path.read_text(encoding='utf-8')) if path.exists() else {}
         previous = self.state['files'].get(str(path), {})
         saved = previous.get('json_changes', {})
         for field, value in changes.items():
@@ -182,7 +191,20 @@ class Installer:
             previous['installed_sha256'] = digest(path.read_bytes())
         self.write(path, json.dumps(document, indent=4) + '\n', toggle=toggle)
         self.state['files'][str(path)]['json_changes'] = saved
-        STATE.write_text(json.dumps(self.state, indent=2))
+        STATE.write_text(json.dumps(self.state, indent=2), encoding='utf-8')
+
+    def tree(self, path, source):
+        """Install a whole directory, such as a macOS application bundle. Uninstall removes it."""
+        path = Path(path)
+        record = self.state['files'].get(str(path))
+        if path.exists() and record is None:
+            raise RuntimeError(f'Preserving an existing application not created by Corsu: {path}')
+        self.state['files'][str(path)] = {'backup': None, 'mode': None, 'tree': True, 'toggle': False}
+        STATE.write_text(json.dumps(self.state, indent=2), encoding='utf-8')
+        if path.exists():
+            shutil.rmtree(path)
+        path.parent.mkdir(parents=True, exist_ok=True)
+        shutil.copytree(source, path, symlinks=True)
 
     def external_file(self, path, original):
         """Record a file changed by the official Discord installer."""
@@ -194,7 +216,7 @@ class Installer:
             backup.write_bytes(original)
             self.state['files'][key] = {'backup': str(backup), 'mode': path.stat().st_mode & 0o777}
         self.state['files'][key]['installed_sha256'] = digest(path.read_bytes())
-        STATE.write_text(json.dumps(self.state, indent=2))
+        STATE.write_text(json.dumps(self.state, indent=2), encoding='utf-8')
 
 
 def best_translation(source, fallback):
@@ -300,7 +322,7 @@ def kde(installer, qt_system=False):
                     '#!/bin/sh\nexport LANGUAGE=co:fr\n', 0o755, toggle=True)
     for source in sorted(Path('/usr/share/applications').glob('*.desktop')):
         target = HOME / '.local/share/applications' / source.name
-        text = (target if target.exists() else source).read_text()
+        text = (target if target.exists() else source).read_text(encoding='utf-8')
         output = []
         section = []
         changes = 0
@@ -337,50 +359,180 @@ def kde(installer, qt_system=False):
     return stats
 
 
+class FirefoxInstall:
+    """A system Firefox: `root` is copied whole; `resources` holds omni.ja and application.ini."""
+
+    def __init__(self, root):
+        self.root = Path(root)
+        self.app = 'Firefox.app' if PLATFORM == 'macos' else ''
+        self.resources = 'Contents/Resources' if PLATFORM == 'macos' else ''
+        self.binary = {'windows': 'firefox.exe', 'macos': 'Contents/MacOS/firefox'}.get(PLATFORM, 'firefox')
+
+    def version(self):
+        config = configparser.ConfigParser(interpolation=None)
+        config.read(self.root / self.resources / 'application.ini', encoding='utf-8')
+        return config['App']['Version']
+
+
+def firefox_candidates():
+    if os.environ.get('CORSU_FIREFOX'):
+        return [Path(os.environ['CORSU_FIREFOX'])]
+    if PLATFORM == 'windows':
+        bases = [os.environ.get('ProgramFiles'), os.environ.get('ProgramW6432'), os.environ.get('ProgramFiles(x86)'),
+                 os.environ.get('LOCALAPPDATA')]
+        return [Path(base) / 'Mozilla Firefox' for base in bases if base]
+    if PLATFORM == 'macos':
+        return [Path('/Applications/Firefox.app'), HOME / 'Applications/Firefox.app']
+    return [Path('/usr/lib/firefox'), Path('/usr/lib64/firefox'), Path('/opt/firefox'), Path('/usr/lib/firefox-esr')]
+
+
+def firefox_install():
+    """Find the system Firefox. Snap and Flatpak builds are sealed and cannot be copied."""
+    for candidate in firefox_candidates():
+        install = FirefoxInstall(candidate)
+        if (install.root / install.resources / 'application.ini').exists() and (install.root / install.binary).exists():
+            return install
+    return None
+
+
+def french_pack(version):
+    """The French Firefox language pack for this exact version, verified against Mozilla's
+    published SHA512SUMS. Fall back to the bundled pack; messages are merged by id anyway."""
+    cache = DATA / 'langpacks' / f'fr-{version}.xpi'
+    if cache.exists():
+        return cache
+    base = f'https://archive.mozilla.org/pub/firefox/releases/{version}/'
+    if not os.environ.get('CORSU_OFFLINE'):
+        try:
+            with urllib.request.urlopen(base + 'SHA512SUMS', timeout=20) as response:
+                sums = response.read().decode()
+            expected = next(line.split()[0] for line in sums.splitlines() if line.endswith(' linux-x86_64/xpi/fr.xpi'))
+            with urllib.request.urlopen(base + 'linux-x86_64/xpi/fr.xpi', timeout=60) as response:
+                data = response.read()
+            if hashlib.sha512(data).hexdigest() == expected:
+                cache.parent.mkdir(parents=True, exist_ok=True)
+                cache.write_bytes(data)
+                return cache
+            print('Warning: French language pack checksum mismatch; using the bundled pack.', file=sys.stderr)
+        except (OSError, StopIteration, ValueError):
+            pass
+    bundled = ROOT / 'vendor/firefox-fr.xpi'
+    return bundled if bundled.exists() else None
+
+
+def merge_properties(native, french):
+    """Use the French value of every key that still exists; keep the native file's layout."""
+    known = {}
+    for line in french.splitlines():
+        match = PROPERTY.match(line)
+        if match:
+            known[match[1].strip()] = match[2]
+    output, merged = [], 0
+    for line in native.splitlines(keepends=True):
+        match = PROPERTY.match(line.rstrip('\r\n'))
+        if match and match[1].strip() in known:
+            line = match[1] + '=' + known[match[1].strip()] + line[len(line.rstrip('\r\n')):]
+            merged += 1
+        output.append(line)
+    return ''.join(output), merged
+
+
+PROPERTY = re.compile(r'^([^#!\s][^=\n]*?)=([^\n]*)$')
+PLATFORM_FLAGS = {'windows': 'WINNT', 'macos': 'Darwin', 'linux': 'LikeUnix'}
+LANGPACK_PLATFORMS = {'windows': 'win', 'macos': 'macosx', 'linux': 'linux'}
+
+
+def locale_directories(bundle, manifest):
+    """Map each packaged chrome locale directory to its directory in the French pack."""
+    result = {}
+    try:
+        lines = bundle.read('chrome/chrome.manifest').decode().splitlines()
+    except KeyError:
+        return result
+    resources = manifest['languages']['fr']['chrome_resources']
+    for line in lines:
+        fields = line.split()
+        if len(fields) < 4 or fields[0] != 'locale':
+            continue
+        flags = [field.split('=', 1)[1] for field in fields[4:] if field.startswith('os=')]
+        if flags and PLATFORM_FLAGS[PLATFORM] not in flags:
+            continue
+        french = resources.get(fields[1])
+        if isinstance(french, dict):
+            french = french.get(LANGPACK_PLATFORMS[PLATFORM])
+        if french:
+            result['chrome/' + fields[3]] = french
+    return result
+
+
+def packaged_locale(bundle):
+    """Firefox builds package one interface locale; a French Windows build packages `fr`."""
+    for name in bundle.namelist():
+        match = re.match(r'^localization/([A-Za-z-]+)/', name)
+        if match:
+            return match[1]
+    return 'en-US'
+
+
 def firefox_runtime():
-    source = Path('/usr/lib/firefox')
-    fr_path = ROOT / 'vendor/firefox-fr.xpi'
-    version = configparser.ConfigParser()
-    version.read(source / 'application.ini')
-    app_version = version['App']['Version']
-    fr = zipfile.ZipFile(fr_path) if fr_path.exists() else None
-    # Messages are merged by id, so a French pack from another version is still usable.
-    use_fr = fr is not None
+    install = firefox_install()
+    if install is None:
+        raise RuntimeError('No supported Firefox found. Install Firefox from mozilla.org or your distribution.')
+    app_version = install.version()
+    resources = install.root / install.resources
     fingerprint = hashlib.sha256(LEXICON.read_bytes() + Path(__file__).read_bytes())
     for file in ('omni.ja', 'browser/omni.ja', 'application.ini', 'platform.ini'):
-        fingerprint.update((source / file).read_bytes())
-    for file in sorted(source.rglob('*')):
-        if file.is_file():
+        if (resources / file).exists():
+            fingerprint.update((resources / file).read_bytes())
+    for file in sorted(install.root.rglob('*')):
+        if file.is_file() and not file.is_symlink():
             stat = file.stat()
-            fingerprint.update(f'{file.relative_to(source)}:{stat.st_size}:{stat.st_mtime_ns}'.encode())
-    if use_fr:
-        fingerprint.update(fr_path.read_bytes())
+            fingerprint.update(f'{file.relative_to(install.root).as_posix()}:{stat.st_size}:{stat.st_mtime_ns}'.encode())
     target = DATA / 'firefox' / fingerprint.hexdigest()[:16]
     if (target / 'corsu-report.json').exists():
-        return target, json.loads((target / 'corsu-report.json').read_text())
+        return target, json.loads((target / 'corsu-report.json').read_text(encoding='utf-8'))
     target.parent.mkdir(parents=True, exist_ok=True)
+    fr_path = french_pack(app_version)
+    fr = zipfile.ZipFile(fr_path) if fr_path else None
     stage = Path(tempfile.mkdtemp(prefix='build-', dir=target.parent))
     try:
-        shutil.copytree(source, stage, dirs_exist_ok=True, symlinks=True)
-        stats = {'version': app_version, 'translated_values': 0, 'ftl_files': 0,
-                 'fallback': 'fr' if use_fr else 'en-US', 'partial': True}
+        app = stage / install.app
+        shutil.copytree(install.root, app, dirs_exist_ok=True, symlinks=True)
+        french_names = set(fr.namelist()) if fr else set()
+        manifest = json.loads(fr.read('manifest.json')) if fr else None
+        stats = {'version': app_version, 'translated_values': 0, 'ftl_files': 0, 'french_messages': 0,
+                 'fallback': 'fr' if fr else None, 'french_pack': manifest['version'] if fr else None,
+                 'platform': PLATFORM, 'partial': True}
         for name in ('omni.ja', 'browser/omni.ja'):
-            with read_zip(source / name) as original, zipfile.ZipFile(stage / name, 'w', zipfile.ZIP_DEFLATED) as output:
+            if not (resources / name).exists():
+                continue
+            prefix = 'browser/' if name.startswith('browser/') else ''
+            with read_zip(resources / name) as original, \
+                    zipfile.ZipFile(app / install.resources / name, 'w', zipfile.ZIP_DEFLATED) as output:
+                locale = packaged_locale(original) if prefix else stats.setdefault('locale', packaged_locale(original))
+                directories = locale_directories(original, manifest) if fr else {}
                 for info in original.infolist():
                     data = original.read(info.filename)
-                    if info.filename.endswith('.ftl') and '/en-US/' in info.filename:
-                        french_name = ('browser/' if name.startswith('browser/') else '') + info.filename.replace('/en-US/', '/fr/')
-                        if use_fr and french_name in fr.namelist():
-                            data, merged = merge_ftl(data.decode(), fr.read(french_name).decode())
-                            data = data.encode()
-                            stats['french_messages'] = stats.get('french_messages', 0) + merged
-                        patched, count = patch_ftl(data.decode())
-                        data = patched.encode()
+                    if info.filename.endswith('.ftl') and f'/{locale}/' in info.filename:
+                        text = data.decode()
+                        french_name = prefix + info.filename.replace(f'/{locale}/', '/fr/')
+                        if french_name in french_names:
+                            text, merged = merge_ftl(text, fr.read(french_name).decode())
+                            stats['french_messages'] += merged
+                        text, count = patch_ftl(text)
+                        data = text.encode()
                         stats['translated_values'] += count
                         stats['ftl_files'] += 1
                     elif info.filename.endswith('.properties') and '/locale/' in info.filename:
+                        text = data.decode('utf-8')
+                        base = next((path for path in directories if info.filename.startswith(path)), None)
+                        if base is not None:
+                            french_name = directories[base] + info.filename[len(base):]
+                            if french_name in french_names:
+                                text, merged = merge_properties(text, fr.read(french_name).decode('utf-8'))
+                                stats['french_messages'] += merged
                         lines = []
-                        for line in data.decode('utf-8').splitlines(keepends=True):
+                        for line in text.splitlines(keepends=True):
                             match = re.match(r'^([^#!\s][^=\n]*=)([^\n]*)(\n)?$', line)
                             if match:
                                 value = translate(match[2])
@@ -389,34 +541,59 @@ def firefox_runtime():
                             lines.append(line)
                         data = ''.join(lines).encode()
                     output.writestr(info.filename, data)
+        locale = stats.setdefault('locale', 'en-US')
         # Keep the normal profile and extension signature checks; do not relax security.
-        prefs = stage / 'defaults/pref/corsu.js'
+        prefs = app / install.resources / 'defaults/pref/corsu.js'
         prefs.parent.mkdir(parents=True, exist_ok=True)
-        prefs.write_text('pref("intl.locale.requested", "en-US");\n')
-        (stage / 'corsu-report.json').write_text(json.dumps(stats, indent=2))
+        prefs.write_text(f'pref("intl.locale.requested", "{locale}");\n', encoding='utf-8')
+        # Corsu rebuilds this copy when the system Firefox updates; its own updater would undo the translation.
+        policies_path = app / install.resources / 'distribution/policies.json'
+        policies = json.loads(policies_path.read_text(encoding='utf-8')) if policies_path.exists() else {}
+        policies.setdefault('policies', {})['DisableAppUpdate'] = True
+        policies_path.parent.mkdir(parents=True, exist_ok=True)
+        policies_path.write_text(json.dumps(policies, indent=2), encoding='utf-8')
+        if PLATFORM == 'macos':
+            # Changed resources break the bundle seal; an ad-hoc signature keeps Gatekeeper satisfied.
+            subprocess.run(['xattr', '-cr', str(app)], check=False)
+            subprocess.run(['codesign', '--force', '--deep', '--sign', '-', str(app)], check=True,
+                           stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
+        (stage / 'corsu-report.json').write_text(json.dumps(stats, indent=2), encoding='utf-8')
         stage.rename(target)
         return target, stats
     except BaseException:
-        shutil.rmtree(stage)
+        shutil.rmtree(stage, ignore_errors=True)
         raise
     finally:
         if fr:
             fr.close()
 
 
+def firefox_executable(runtime):
+    install = firefox_install()
+    return Path(runtime) / install.app / install.binary
+
+
 def generate():
     plugin = ROOT / 'Vencord/src/userplugins/corsu'
     plugin.mkdir(parents=True, exist_ok=True)
-    (plugin / 'dictionary.json').write_text(json.dumps(WORDS, ensure_ascii=False, indent=2))
+    (plugin / 'dictionary.json').write_text(json.dumps(WORDS, ensure_ascii=False, indent=2), encoding='utf-8')
     for name in ('index.ts', 'translate.ts'):
         shutil.copy2(ROOT / 'plugin' / name, plugin / name)
 
 
+def firefox_profile_roots():
+    if PLATFORM == 'windows':
+        return [CONFIG / 'Mozilla/Firefox']
+    if PLATFORM == 'macos':
+        return [CONFIG / 'Firefox']
+    return [HOME / '.config/mozilla/firefox', HOME / '.mozilla/firefox']
+
+
 def firefox_profile():
     """Find the existing default; let Firefox choose when selection is ambiguous."""
-    for base in (HOME / '.config/mozilla/firefox', HOME / '.mozilla/firefox'):
+    for base in firefox_profile_roots():
         config = configparser.ConfigParser(interpolation=None)
-        config.read(base / 'profiles.ini')
+        config.read(base / 'profiles.ini', encoding='utf-8')
         defaults = {config[section].get('Default') for section in config.sections()
                     if section.startswith('Install') and config[section].get('Default')}
         if not defaults:
@@ -433,26 +610,28 @@ def firefox_profile():
     return None
 
 
-def firefox_arguments(rest):
+def firefox_arguments(rest, locale='en-US'):
     # Explicit profile selection takes precedence over our discovered default.
     selectors = {'-profile', '--profile', '-p', '--p', '-profilemanager', '--profilemanager'}
     if any(arg.lower().split('=', 1)[0] in selectors for arg in rest):
-        return ['-UILocale', 'en-US', *rest]
+        return ['-UILocale', locale, *rest]
     profile = firefox_profile()
     selection = ['-profile', str(profile)] if profile else ['-ProfileManager']
-    return [*selection, '-UILocale', 'en-US', *rest]
+    return [*selection, '-UILocale', locale, *rest]
 
 
 def status():
     """Read installation health without building or changing app settings."""
-    state = json.loads(STATE.read_text()) if STATE.exists() else {'files': {}}
+    state = json.loads(STATE.read_text(encoding='utf-8')) if STATE.exists() else {'files': {}}
     counts = {'managed': len(state['files']), 'missing': [], 'changed': []}
     for name, record in state['files'].items():
         path = Path(name)
         if not path.exists():
             counts['missing'].append(name)
+        elif record.get('tree'):
+            continue
         elif record.get('json_changes'):
-            document = json.loads(path.read_text())
+            document = json.loads(path.read_text(encoding='utf-8'))
             for field, saved in record['json_changes'].items():
                 node = document
                 for part in field.split('/'):
@@ -468,11 +647,83 @@ def status():
                       'installation': counts,
                       'lexicon_entries': len(WORDS),
                       'firefox_profile': str(profile) if profile else None,
-                      'last_build': json.loads(report_path.read_text()) if report_path.exists() else None},
+                      'last_build': json.loads(report_path.read_text(encoding='utf-8')) if report_path.exists() else None},
                      ensure_ascii=False, indent=2))
 
 
+def python_launcher():
+    """The interpreter launchers call; pythonw.exe avoids a console window on Windows."""
+    executable = Path(sys.executable)
+    windowed = executable.with_name('pythonw.exe')
+    return windowed if PLATFORM == 'windows' and windowed.exists() else executable
+
+
+def windows_shortcut(installer, firefox):
+    command = DATA / 'bin/firefox-corsu.cmd'
+    installer.write(command, f'@"{python_launcher()}" "{ROOT / "corsu.py"}" launch-firefox %*\r\n')
+    shortcut = CONFIG / 'Microsoft/Windows/Start Menu/Programs/Firefox — Corsu.lnk'
+    with tempfile.TemporaryDirectory() as directory:
+        temporary = Path(directory) / 'firefox.lnk'
+        script = ('$s = (New-Object -ComObject WScript.Shell).CreateShortcut($env:CORSU_LINK); '
+                  '$s.TargetPath = $env:CORSU_TARGET; $s.Arguments = $env:CORSU_ARGUMENTS; '
+                  '$s.IconLocation = $env:CORSU_ICON; $s.Description = "Firefox — Corsu"; $s.Save()')
+        subprocess.run(['powershell', '-NoProfile', '-NonInteractive', '-Command', script], check=True, env={
+            **os.environ, 'CORSU_LINK': str(temporary), 'CORSU_TARGET': str(python_launcher()),
+            'CORSU_ARGUMENTS': f'"{ROOT / "corsu.py"}" launch-firefox',
+            'CORSU_ICON': str(firefox.root / firefox.binary) + ',0'})
+        installer.write(shortcut, temporary.read_bytes(), toggle=True)
+
+
+def macos_application(installer):
+    """A small AppleScript applet, so Firefox — Corsu appears in Launchpad and Spotlight."""
+    target = HOME / 'Applications/Firefox Corsu.app'
+    command = f'exec {shlex.quote(sys.executable)} {shlex.quote(str(ROOT / "corsu.py"))} launch-firefox >/dev/null 2>&1 &'
+    with tempfile.TemporaryDirectory() as directory:
+        applet = Path(directory) / 'Firefox Corsu.app'
+        script = 'do shell script ' + json.dumps(command)
+        subprocess.run(['osacompile', '-o', str(applet), '-e', script], check=True)
+        installer.tree(target, applet)
+
+
+def setup_shortcut(installer):
+    """A `Corsu — Setup` entry that reopens the installer, to add or remove applications later."""
+    script = ROOT / 'installer.py'
+    if PLATFORM == 'windows':
+        shortcut = CONFIG / 'Microsoft/Windows/Start Menu/Programs/Corsu — Setup.lnk'
+        with tempfile.TemporaryDirectory() as directory:
+            temporary = Path(directory) / 'setup.lnk'
+            command = ('$s = (New-Object -ComObject WScript.Shell).CreateShortcut($env:CORSU_LINK); '
+                       '$s.TargetPath = $env:CORSU_TARGET; $s.Arguments = $env:CORSU_ARGUMENTS; '
+                       '$s.WorkingDirectory = $env:CORSU_DIR; $s.Save()')
+            subprocess.run(['powershell', '-NoProfile', '-NonInteractive', '-Command', command], check=True, env={
+                **os.environ, 'CORSU_LINK': str(temporary), 'CORSU_TARGET': sys.executable,
+                'CORSU_ARGUMENTS': f'"{script}"', 'CORSU_DIR': str(ROOT)})
+            installer.write(shortcut, temporary.read_bytes())
+    elif PLATFORM == 'macos':
+        command = f'{shlex.quote(sys.executable)} {shlex.quote(str(script))}'
+        with tempfile.TemporaryDirectory() as directory:
+            applet = Path(directory) / 'Corsu Setup.app'
+            subprocess.run(['osacompile', '-o', str(applet), '-e',
+                            f'tell application "Terminal" to do script {json.dumps(command)}',
+                            '-e', 'tell application "Terminal" to activate'], check=True)
+            installer.tree(HOME / 'Applications/Corsu Setup.app', applet)
+    else:
+        installer.write(HOME / '.local/share/applications/corsu-setup.desktop',
+                        '[Desktop Entry]\nType=Application\nName=Corsu — Setup\nName[co]=Corsu — Cunfigurazione\n'
+                        'Comment=Choose which applications are translated into Corsican\n'
+                        f'Exec=python3 {shlex.quote(str(script))}\nTerminal=true\nIcon=preferences-desktop-locale\n'
+                        'Categories=Settings;\n')
+
+
 def desktop(installer, firefox=True, vesktop=True):
+    if PLATFORM == 'windows':
+        if firefox:
+            windows_shortcut(installer, firefox_install())
+        return
+    if PLATFORM == 'macos':
+        if firefox:
+            macos_application(installer)
+        return
     launcher = HOME / '.local/bin/firefox-corsu'
     if firefox:
         installer.write(launcher, f'#!/bin/sh\nexec python3 {shlex.quote(str(ROOT / "corsu.py"))} launch-firefox "$@"\n', 0o755)
@@ -482,7 +733,7 @@ def desktop(installer, firefox=True, vesktop=True):
         original = existing if existing.exists() else Path('/usr/share/applications') / desktop_id
         if not original.exists():
             continue
-        text = original.read_text()
+        text = original.read_text(encoding='utf-8')
         if executable:
             text = re.sub(r'^Exec=(?:/usr/lib/firefox/firefox|/usr/bin/firefox|firefox)(?=\s|$)', f'Exec={executable}', text, flags=re.M)
         name = 'Firefox — Corsu' if executable else 'Discord — Corsu (Vesktop)'
@@ -513,7 +764,7 @@ def install(components=None, qt_system=False):
     installer.state['components'] = sorted(set(installer.state.get('components', [])) | components)
     installer.state['qt_system'] = qt_system or installer.state.get('qt_system', False)
     installer.state['enabled'] = True
-    STATE.write_text(json.dumps(installer.state, indent=2))
+    STATE.write_text(json.dumps(installer.state, indent=2), encoding='utf-8')
     disabled_marker().unlink(missing_ok=True)
     clients = sorted({'Vesktop' if name == 'vesktop' else 'Discord' for name in components
                       if name in ('vesktop', 'discord')})
@@ -521,8 +772,15 @@ def install(components=None, qt_system=False):
               'discord': {'clients': clients, 'plugin': 'Corsu', 'dictionary_labels': len(WORDS), 'partial': True},
               'components': sorted(components), 'enabled': True,
               'scope': 'Interface labels only; no translation of messages or arbitrary websites.'}
-    (DATA / 'report.json').write_text(json.dumps(report, ensure_ascii=False, indent=2))
+    (DATA / 'report.json').write_text(json.dumps(report, ensure_ascii=False, indent=2), encoding='utf-8')
     print(json.dumps(report, ensure_ascii=False, indent=2))
+
+
+def vencord_installer():
+    """The official Vencord installer for this platform and its pinned SHA-256."""
+    manifest = json.loads((ROOT / 'release.json').read_text(encoding='utf-8'))
+    entry = manifest['installers'][PLATFORM]
+    return ROOT / 'vendor' / entry['file'], entry['sha256']
 
 
 def disabled_marker():
@@ -566,9 +824,9 @@ def disable():
         else:
             preserved.append(name)
     installer.state['enabled'] = False
-    STATE.write_text(json.dumps(installer.state, indent=2))
+    STATE.write_text(json.dumps(installer.state, indent=2), encoding='utf-8')
     DATA.mkdir(parents=True, exist_ok=True)
-    disabled_marker().write_text('Corsu is disabled. Run: python3 corsu.py enable\n')
+    disabled_marker().write_text('Corsu is disabled. Run: python3 corsu.py enable\n', encoding='utf-8')
     for name in preserved:
         print(f'Preserved changed file: {name}')
     print('Corsu disabled. Restart applications; log out and back in for Plasma.\n'
@@ -580,7 +838,7 @@ def enable():
     if not STATE.exists():
         print('No installation recorded.')
         return
-    state = json.loads(STATE.read_text())
+    state = json.loads(STATE.read_text(encoding='utf-8'))
     components = set(state.get('components') or ['firefox', 'desktop', 'vesktop'])
     if 'vesktop' in components and not (ROOT / 'Vencord/dist/vencordDesktopRenderer.js').exists():
         components.discard('vesktop')
@@ -592,12 +850,15 @@ def uninstall():
     if not STATE.exists():
         print('No installation recorded.')
         return
-    state = json.loads(STATE.read_text())
+    state = json.loads(STATE.read_text(encoding='utf-8'))
     remaining = {}
     for name, record in state['files'].items():
         path = Path(name)
+        if record.get('tree'):
+            shutil.rmtree(path, ignore_errors=True)
+            continue
         if record.get('json_changes') and path.exists():
-            document = json.loads(path.read_text())
+            document = json.loads(path.read_text(encoding='utf-8'))
             for field, saved in record['json_changes'].items():
                 node = document
                 parts = field.split('/')
@@ -608,7 +869,7 @@ def uninstall():
                         node[parts[-1]] = saved['original']
                     else:
                         node.pop(parts[-1], None)
-            path.write_text(json.dumps(document, indent=4) + '\n')
+            path.write_text(json.dumps(document, indent=4) + '\n', encoding='utf-8')
             continue
         if path.exists() and digest(path.read_bytes()) != record['installed_sha256']:
             remaining[name] = record
@@ -618,9 +879,12 @@ def uninstall():
             system_remove([path])
             continue
         if record.get('discord_location') and not os.access(path.parent, os.W_OK):
-            binary = ROOT / 'vendor/VencordInstallerCli-linux'
-            manifest = json.loads((ROOT / 'release.json').read_text())
-            if digest(binary.read_bytes()) != manifest['installer_sha256']:
+            if PLATFORM != 'linux':
+                remaining[name] = record
+                print(f'Discord is read-only; rerun the uninstaller as administrator: {name}')
+                continue
+            binary, expected = vencord_installer()
+            if not binary.exists() or digest(binary.read_bytes()) != expected:
                 raise RuntimeError('Official installer checksum mismatch; preserving Discord.')
             subprocess.run(['pkexec', str(binary), '-uninstall', '-location', record['discord_location']], check=True)
             if not path.exists() or digest(path.read_bytes()) != digest(Path(record['backup']).read_bytes()):
@@ -628,7 +892,12 @@ def uninstall():
                 print(f'Discord restore needs review; original backup: {record["backup"]}')
             continue
         restore(path, record)
-    STATE.write_text(json.dumps({'files': remaining}, indent=2))
+        leftover = path.with_name('_app.asar')
+        if record.get('discord_location') and record.get('backup') and leftover.is_file() \
+                and digest(leftover.read_bytes()) == digest(Path(record['backup']).read_bytes()):
+            # The official installer moved the original aside; it is restored in place now.
+            leftover.unlink()
+    STATE.write_text(json.dumps({'files': remaining}, indent=2), encoding='utf-8')
     disabled_marker().unlink(missing_ok=True)
     print('Restored unchanged managed settings. Local builds retained in ' + str(DATA))
 
@@ -653,7 +922,7 @@ def system_catalogs(installer):
             'backup': None, 'mode': 0o644, 'toggle': False, 'system': True,
             'installed_sha256': digest(target.read_bytes())}
         installed.append(target.name)
-    STATE.write_text(json.dumps(installer.state, indent=2))
+    STATE.write_text(json.dumps(installer.state, indent=2), encoding='utf-8')
     return installed
 
 
@@ -671,11 +940,17 @@ def system_remove(paths):
 def launch_firefox(rest):
     """Run the translated build, or the ordinary system Firefox while Corsu is disabled."""
     if disabled_marker().exists():
-        system = Path('/usr/lib/firefox/firefox')
-        os.execv(str(system), [str(system), *rest])
-    runtime, _ = firefox_runtime()
-    # Reuse the existing profile instead of migrating personal data.
-    os.execv(str(runtime / 'firefox'), [str(runtime / 'firefox'), *firefox_arguments(rest)])
+        install = firefox_install()
+        command = [str(install.root / install.binary), *rest]
+    else:
+        runtime, stats = firefox_runtime()
+        # Reuse the existing profile instead of migrating personal data.
+        command = [str(firefox_executable(runtime)), *firefox_arguments(rest, stats.get('locale', 'en-US'))]
+    if PLATFORM == 'windows':
+        # execv on Windows spawns a child and returns at once, confusing shortcuts and consoles.
+        subprocess.Popen(command, creationflags=subprocess.DETACHED_PROCESS | subprocess.CREATE_NEW_PROCESS_GROUP)
+        return
+    os.execv(command[0], command)
 
 
 def main():
@@ -697,7 +972,7 @@ def main():
         disable()
     elif args.action == 'prepare-firefox':
         runtime, stats = firefox_runtime()
-        print(runtime)
+        print(firefox_executable(runtime))
         print(json.dumps(stats))
     else:
         launch_firefox(rest)

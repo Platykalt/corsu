@@ -1,61 +1,79 @@
 # Corsu
 
-Corsican interface translations for **Linux, KDE Plasma, Firefox, Discord with Vencord, and Vesktop**.
+Corsican interface translations for **Firefox, Discord with Vencord, and Vesktop on Linux, Windows and macOS**,
+plus **KDE Plasma and Qt applications on Linux**.
 GPL-3.0-or-later: you can share, modify and redistribute this project, including its source.
 
-**This is a work in progress, not a complete Corsican language pack.** Common controls, menu labels and
-dialog buttons are translated locally from a reviewed lexicon. Unknown labels keep their original French
-or English text. Websites, chat messages, file names, people's names and typed text are never translated.
-Application names in the Plasma launcher stay as their vendors publish them. The lexicon holds draft
-translations and welcomes review by Corsican speakers.
-Windows, macOS, Flatpak/Snap Firefox and non-KDE desktop environments are not supported by this installer.
+**This is a work in progress, not a complete Corsican language pack.** Menus, dialogs, settings and error
+pages are translated locally from a lexicon of draft translations. Unknown labels keep their French (or
+English) text. Websites, chat messages, file names, people's names and typed text are never translated.
+Application names in the Plasma launcher stay as their vendors publish them. The lexicon welcomes review
+by Corsican speakers.
 
-## Install
+## Download and install
 
-Extract the Linux x86_64 release archive. Install Python 3, Firefox and native Discord or Vesktop using
-your distribution's software manager. For desktop translation, KDE Plasma and French gettext catalogs
-must already be installed. The installer detects supported integrations; it does not install a new desktop.
+Download the archive for your system from the [latest release](https://github.com/Platykalt/corsu/releases/latest)
+and extract it. Each archive comes with a `.sha256` checksum.
 
-From the extracted directory:
+| System | Archive | Start the installer |
+| --- | --- | --- |
+| Windows 10/11 (x64) | `corsu-…-windows-x86_64.zip` | Double-click `install.cmd` (it offers to install Python 3 with `winget` if needed) |
+| macOS 12+ | `corsu-…-macos.tar.gz` | `./install.sh` in Terminal |
+| Linux x86_64 | `corsu-…-linux-x86_64.tar.gz` | `./install.sh` |
 
-```bash
-./install.sh
+The installer asks **“Select what you want to translate”** and lists the applications it found:
+
+```
+Select what you want to translate:
+  [x] 1. Firefox — menus, settings, error pages
+  [x] 2. Discord — interface labels through Vencord
+  [x] 3. Vesktop — interface labels through Vencord
+Type numbers to toggle (e.g. "2 3"), Enter to continue, q to quit:
 ```
 
-The installer lists the changes and asks you to accept them. It copies its code and bundled builds into
-`~/.local/share/corsu/releases/`, so the downloaded archive can be removed after installation.
-The Linux release bundles Vencord's source and a custom build; Node.js is unnecessary for installing it.
-The official Vencord installer is checksum checked before execution and may access GitHub for update checks.
-System-owned Discord installations may request administrator authentication through `pkexec`.
-Close Discord/Firefox before installing, then reopen them afterward. Log out and back in to activate
-the Plasma interface language. Updates to Discord can remove its patch: rerun the installer after reviewing
-the installation status. Firefox's launcher rebuilds its translated copy after system Firefox updates.
-Firefox's security preferences and extension signature checks remain enabled.
+It then lists every change and asks you to accept it. Afterwards a **Corsu — Setup** entry (application
+menu on Linux, Start menu on Windows, `~/Applications` on macOS) reopens this selection, so you can add or
+remove applications at any time. The installer copies itself into Corsu's data directory, so the downloaded
+archive can be deleted.
+
+Requirements: Python 3.10 or newer, and the applications you want translated. Firefox must be the regular
+Mozilla build (Snap and Flatpak Firefox are sealed and cannot be translated this way). For the Plasma
+desktop, KDE Plasma and its French translations must already be installed.
+
+Close Firefox and Discord before installing, then reopen them. Log out and back in to activate the Plasma
+language. Discord updates can remove its patch: open **Corsu — Setup** again afterwards.
 
 ## What each component changes
 
-| Component | Effect |
-| --- | --- |
-| `desktop` | User gettext catalogs (`~/.local/share/locale/co`), Qt catalogs for KDE framework dialogs, Plasma interface language `co:fr`, translated application menu entries |
-| `firefox` | A translated local copy of system Firefox plus a user launcher, keeping your existing profile |
-| `discord` | Patches native Discord through the official Vencord installer and enables the bundled Corsu plugin |
-| `vesktop` | Points Vesktop at the custom Vencord build and enables the Corsu plugin |
-| `qt` | Copies Corsican Qt catalogs into `/usr/share/qt6/translations` so Qt's own buttons and file choosers are translated. Requires administrator authentication and is removed again by `--uninstall` |
+| Component | Systems | Effect |
+| --- | --- | --- |
+| `firefox` | all | A translated copy of your Firefox plus a **Firefox — Corsu** launcher. Your existing profile, bookmarks and extensions are used as they are. The copy is rebuilt automatically after Firefox updates |
+| `discord` | all | Patches native Discord through the official, checksum-verified Vencord installer and enables the bundled Corsu plugin |
+| `vesktop` | all | Points Vesktop at the custom Vencord build and enables the Corsu plugin |
+| `desktop` | Linux | User gettext and Qt catalogs (`~/.local/share/locale/co`), Plasma interface language `co:fr`, translated application menu entries |
+| `qt` | Linux | Copies Corsican Qt catalogs into `/usr/share/qt6/translations` so Qt's own buttons and file choosers are translated. Requires administrator authentication and is removed again by `--uninstall` |
 
-Optional commands:
+Firefox's translation starts from Mozilla's French language pack for your exact Firefox version, downloaded
+from `archive.mozilla.org` and verified against Mozilla's published `SHA512SUMS` (a bundled copy is used
+offline), then applies the Corsican lexicon on top. Firefox's security preferences and extension signature
+checks remain enabled; only the translated copy's self-updater is switched off, because Corsu rebuilds it
+from your updated Firefox instead.
+
+Command-line options (use `py -3` instead of `python3` on Windows):
 
 ```bash
 python3 installer.py --dry-run
-python3 installer.py --components firefox desktop
+python3 installer.py --components firefox discord
 python3 installer.py --components discord --discord-path /path/to/discord
 python3 installer.py --yes
 python3 corsu.py status
 ```
 
 `--yes` explicitly accepts the displayed plan. No settings are changed by `--dry-run` or by declining consent.
-Use `~/.local/bin/firefox-corsu` to launch the translated browser. Explicit `-P`, `-profile` or
-`-ProfileManager` arguments override profile discovery. Ambiguous profiles open Firefox's profile chooser.
-An already running ordinary Firefox may keep its original interface until you fully quit and reopen it.
+`--discord-path` takes the folder holding `resources/` on Linux, `%LOCALAPPDATA%\Discord` on Windows, or
+`Discord.app` on macOS. On Linux, `~/.local/bin/firefox-corsu` launches the translated browser; explicit `-P`,
+`-profile` or `-ProfileManager` arguments override profile discovery. An already running ordinary Firefox may
+keep its original interface until you fully quit and reopen it.
 
 Vencord automatic updates are disabled to protect the custom plugin; update/rebuild Corsu manually.
 Vencord is a third-party Discord client modification. Read its [official documentation](https://docs.vencord.dev/installing/).
@@ -77,17 +95,20 @@ Files you edited yourself are never overwritten: they are reported and left alon
 ## Uninstall and backups
 
 Run `python3 installer.py --uninstall` from this source tree or an installed release directory.
-Original files and hashes are tracked in `~/.local/share/corsu/installation.json` and its `backups/` directory.
+Original files and hashes are tracked in Corsu's data directory — `~/.local/share/corsu` (Linux),
+`%LOCALAPPDATA%\corsu` (Windows), `~/Library/Application Support/corsu` (macOS) — in `installation.json`
+and its `backups/` directory.
 Uninstall restores unchanged managed files and only restores app settings still holding the installed value.
 Later user edits are preserved and reported for manual review. Qt catalogs installed system-wide are removed
-with `pkexec`. The original Discord archive is retained by the official installer as `resources/_app.asar`;
-Corsu also records a backup. Source and translated Firefox builds are retained for review.
+with `pkexec`. The official Vencord installer moves the original Discord archive to `_app.asar`; Corsu also
+records a backup and puts the original back in place on uninstall. Source and translated Firefox builds are retained for review.
 Never remove backups before uninstalling.
 
 ## How the translation works
 
-Python's standard library handles installation, catalog formats and Firefox resources — no network access,
-no machine translation and no access to documents, profiles or messages.
+Python's standard library handles installation, catalog formats and Firefox resources. The only downloads
+are Mozilla's French language pack and the pinned Vencord installer, both checksum-verified. There is no
+machine translation at runtime and no access to documents, profiles or messages.
 
 * `lexicon.tsv` holds reviewed `English|French|Corsican` rows. A row with an empty English field maps a
   French-only variant.
@@ -127,8 +148,19 @@ license notices, compiled artifacts and the official installer. It excludes prof
 tokens, local backups, `.git`, and `node_modules`:
 
 ```bash
-python3 package_release.py
+python3 package_release.py              # Linux, Windows and macOS archives in releases/
+python3 package_release.py --platforms windows
 ```
+
+## Automated checks
+
+Every push runs [CI](.github/workflows/ci.yml) on Linux, Windows and macOS: the unit tests on Python 3.10 and
+3.13, a Vencord build, the three release archives, and end-to-end runs **from each archive** in a throwaway
+home directory. These install the Firefox component, start the real translated Firefox headless and read
+menu, session-restore and context-menu strings (failing if any is still English or French), switch Corsu off
+and on, uninstall and check nothing is left behind. They also patch a stand-in Discord with the real official
+Vencord installer and check the original is restored. Pushing a `v*` tag publishes the release only when all
+of this passes. Run the same checks locally with `python3 ci/e2e.py firefox` and `python3 ci/e2e.py discord`.
 
 See [CONTRIBUTING.md](CONTRIBUTING.md). Upstream Vencord and its installer retain their original authors
 and licenses. Firefox binaries and system gettext/Qt catalogs are built or read locally and are never
@@ -138,6 +170,5 @@ redistributed.
 
 Coverage is counted, never presented as a percentage of the whole interface: the report in
 `missing-labels.json` names the specific resource patterns it examined. Open work: many more lexicon rows,
-sentence-level translations, Firefox strings that only exist in a language pack for a newer Firefox release
-(the interface then falls back to English), Discord settings coverage, and Plasma widgets that ship their
-translations inside QML.
+review of the machine-assisted draft rows by Corsican speakers, Discord settings coverage, Plasma widgets
+that ship their translations inside QML, and Chromium-based browsers.

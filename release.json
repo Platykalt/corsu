@@ -1,11 +1,28 @@
 {
-  "version": "0.3.0",
+  "version": "0.4.0",
   "license": "GPL-3.0-or-later",
-  "platform": "linux-x86_64",
   "vencord_revision": "7f0c10cc29fd789f2f4828ae3dc947623e837920",
-  "installer_url": "https://github.com/Vencord/Installer/releases/download/v1.4.2/VencordInstallerCli-linux",
-  "installer_sha256": "52642c8521a866ad241c10337144a4f513672c54b9c86a8169954785054c815d",
   "installer_revision": "fe6e041a550b01d1853db6c8ea157d42c7480510",
   "installer_source": "vendor/vencord-installer-source.tar.gz",
-  "installer_source_sha256": "587f0ee6c60846bfda954223d1944ef66b88ee8682a1ee32e201f4dbd1b0f1de"
+  "installer_source_sha256": "587f0ee6c60846bfda954223d1944ef66b88ee8682a1ee32e201f4dbd1b0f1de",
+  "platforms": [
+    "linux-x86_64",
+    "windows-x86_64",
+    "macos"
+  ],
+  "installer_base_url": "https://github.com/Vencord/Installer/releases/download/v1.4.2/",
+  "installers": {
+    "linux": {
+      "file": "VencordInstallerCli-linux",
+      "sha256": "52642c8521a866ad241c10337144a4f513672c54b9c86a8169954785054c815d"
+    },
+    "windows": {
+      "file": "VencordInstallerCli.exe",
+      "sha256": "15268aba25625797bf562187dd87ddadf42882e079c7b6192880ad3e83353ef5"
+    },
+    "macos": {
+      "file": "VencordInstallerCli-darwin",
+      "sha256": "f4c77a9dddd4a12deaae270b3dadfda25969dfcfa141cc2354cafe6344044b75"
+    }
+  }
 }

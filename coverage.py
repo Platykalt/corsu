@@ -88,7 +88,7 @@ def main():
     data = json.dumps(result, ensure_ascii=False, indent=2) + '\n'
     if args.output:
         args.output.parent.mkdir(parents=True, exist_ok=True)
-        args.output.write_text(data)
+        args.output.write_text(data, encoding='utf-8')
         print(f'Review queue saved to {args.output}')
         for name in ('firefox', 'kde', 'qt'):
             print(name + ': ' + json.dumps({key: value for key, value in result[name].items() if key != 'review_queue'}))

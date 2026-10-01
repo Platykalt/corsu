@@ -1,0 +1,137 @@
+name: CI
+
+# Every push is checked on Linux, Windows and macOS. A `v*` tag publishes a GitHub release,
+# but only when every guard below passes against the exact archives being released.
+on:
+  push:
+    branches: [main]
+    tags: ['v*']
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  unit:
+    name: Unit tests (${{ matrix.os }}, Python ${{ matrix.python }})
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, windows-latest, macos-latest]
+        python: ['3.10', '3.13']
+    runs-on: ${{ matrix.os }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: ${{ matrix.python }}
+      - name: Unit tests
+        run: python -m unittest discover -p "test_*.py" -v
+
+  package:
+    name: Build Vencord and package releases
+    needs: unit
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.13'
+      - name: Check out the pinned Vencord revision
+        run: |
+          revision=$(python -c "import json; print(json.load(open('release.json'))['vencord_revision'])")
+          git init -q Vencord
+          git -C Vencord fetch -q --depth 1 https://github.com/Vendicated/Vencord.git "$revision"
+          git -C Vencord checkout -q FETCH_HEAD
+      - uses: pnpm/action-setup@v4
+        with:
+          package_json_file: Vencord/package.json
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Build the Corsu plugin into Vencord
+        run: python -c "import installer; installer.prepare_build()"
+      - name: Bundle the French Firefox language pack (offline fallback)
+        run: |
+          version=$(curl -fsSL https://product-details.mozilla.org/1.0/firefox_versions.json | python -c "import json,sys; print(json.load(sys.stdin)['LATEST_FIREFOX_VERSION'])")
+          curl -fsSL "https://archive.mozilla.org/pub/firefox/releases/$version/SHA512SUMS" | grep ' linux-x86_64/xpi/fr.xpi$' | awk '{print $1"  vendor/firefox-fr.xpi"}' > fr.sha512
+          curl -fsSL -o vendor/firefox-fr.xpi "https://archive.mozilla.org/pub/firefox/releases/$version/linux-x86_64/xpi/fr.xpi"
+          sha512sum -c fr.sha512
+      - name: Package Linux, Windows and macOS archives
+        run: python package_release.py --output dist
+      - uses: actions/upload-artifact@v4
+        with:
+          name: releases
+          path: dist/
+          if-no-files-found: error
+
+  e2e:
+    name: End-to-end (${{ matrix.os }})
+    needs: package
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - os: ubuntu-latest
+            archive: linux-x86_64.tar.gz
+          - os: windows-latest
+            archive: windows-x86_64.zip
+          - os: macos-latest
+            archive: macos.tar.gz
+    runs-on: ${{ matrix.os }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.13'
+      - uses: actions/download-artifact@v4
+        with:
+          name: releases
+          path: dist
+      - name: Extract the release archive for this platform
+        shell: bash
+        run: |
+          cd dist
+          archive=$(ls corsu-*-${{ matrix.archive }})
+          sha256sum -c "$archive.sha256" 2>/dev/null || shasum -a 256 -c "$archive.sha256"
+          case "$archive" in *.zip) unzip -q "$archive" ;; *) tar xzf "$archive" ;; esac
+          stem=${archive%.zip}
+          echo "CORSU_RELEASE=dist/${stem%.tar.gz}" >> "$GITHUB_ENV"
+      - name: Install Firefox (Linux)
+        if: runner.os == 'Linux'
+        run: |
+          curl -fsSL -o firefox.tar.xz "https://download.mozilla.org/?product=firefox-latest-ssl&os=linux64&lang=en-US"
+          mkdir -p "$RUNNER_TEMP/mozilla" && tar xf firefox.tar.xz -C "$RUNNER_TEMP/mozilla"
+          echo "CORSU_FIREFOX=$RUNNER_TEMP/mozilla/firefox" >> "$GITHUB_ENV"
+      - name: Install Firefox (Windows)
+        if: runner.os == 'Windows'
+        shell: pwsh
+        run: if (-not (Test-Path "$env:ProgramFiles\Mozilla Firefox\firefox.exe")) { choco install firefox -y --no-progress }
+      - name: Install Firefox (macOS)
+        if: runner.os == 'macOS'
+        run: test -d /Applications/Firefox.app || brew install --cask firefox
+      - name: Firefox — install, launch the translated build, disable, enable, uninstall
+        run: python ci/e2e.py firefox --root "${{ env.CORSU_RELEASE }}"
+      - name: Discord — patch with the official Vencord installer, then restore
+        run: python ci/e2e.py discord --root "${{ env.CORSU_RELEASE }}"
+
+  release:
+    name: Publish GitHub release
+    if: startsWith(github.ref, 'refs/tags/v')
+    needs: e2e
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/download-artifact@v4
+        with:
+          name: releases
+          path: dist
+      - name: Check the tag matches release.json
+        run: test "v$(python3 -c "import json; print(json.load(open('release.json'))['version'])")" = "$GITHUB_REF_NAME"
+      - name: Create the release
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: gh release create "$GITHUB_REF_NAME" dist/corsu-* --title "Corsu $GITHUB_REF_NAME" --notes-file .github/RELEASE_NOTES.md
