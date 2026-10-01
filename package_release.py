@@ -11,7 +11,7 @@ import zipfile
 
 ROOT = Path(__file__).resolve().parent
 ARCHIVES = {'linux': 'linux-x86_64', 'windows': 'windows-x86_64', 'macos': 'macos'}
-SOURCES = ('corsu.py', 'engine.py', 'installer.py', 'coverage.py', 'package_release.py', 'lexicon.tsv',
+SOURCES = ('corsu.py', 'engine.py', 'chromium.py', 'test_chromium.py', 'installer.py', 'coverage.py', 'package_release.py', 'lexicon.tsv', 'lexicon-mozilla.tsv',
            'README.md', 'CONTRIBUTING.md', 'LICENSE', 'release.json', 'install.sh', 'install.cmd', '.gitignore',
            'test_corsu.py', 'test_engine.py', 'test_installer.py', 'test-browser.mjs', 'ci/check_firefox.py', 'ci/e2e.py',
            'test-kde.cpp')

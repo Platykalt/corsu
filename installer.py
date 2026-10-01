@@ -69,6 +69,10 @@ def available_components():
         result.append('discord')
     if vesktop_installed():
         result.append('vesktop')
+    if corsu.PLATFORM != 'macos':
+        import chromium
+        if chromium.browsers():
+            result.append('chromium')
     if corsu.PLATFORM == 'linux' and list(corsu.QT_TRANSLATIONS.glob('*_fr.qm')):
         result.append('qt')
     return result
@@ -121,7 +125,7 @@ def deploy_release():
     if ROOT.is_relative_to((corsu.DATA / 'releases').resolve()) or os.environ.get('CORSU_DEPLOYED') == str(ROOT):
         return ROOT
     fingerprint = hashlib.sha256()
-    for name in ('corsu.py', 'engine.py', 'installer.py', 'lexicon.tsv', 'plugin/index.ts', 'plugin/translate.ts',
+    for name in ('corsu.py', 'engine.py', 'chromium.py', 'installer.py', 'lexicon.tsv', 'lexicon-mozilla.tsv', 'plugin/index.ts', 'plugin/translate.ts',
                  'release.json'):
         fingerprint.update((ROOT / name).read_bytes())
     for path in sorted((ROOT / 'Vencord/dist').glob('*.*')):
@@ -132,7 +136,7 @@ def deploy_release():
     target.parent.mkdir(parents=True, exist_ok=True)
     stage = Path(tempfile.mkdtemp(prefix='stage-', dir=target.parent))
     try:
-        for name in ('corsu.py', 'engine.py', 'installer.py', 'lexicon.tsv', 'LICENSE', 'README.md',
+        for name in ('corsu.py', 'engine.py', 'chromium.py', 'installer.py', 'lexicon.tsv', 'lexicon-mozilla.tsv', 'LICENSE', 'README.md',
                      'release.json', 'CONTRIBUTING.md', 'coverage.py', 'install.sh', 'install.cmd'):
             if (ROOT / name).exists():
                 shutil.copy2(ROOT / name, stage / name)
@@ -206,6 +210,7 @@ DESCRIPTIONS = {
     'qt': 'Qt dialogs — standard buttons and file choosers (administrator)',
     'discord': 'Discord — interface labels through Vencord',
     'vesktop': 'Vesktop — interface labels through Vencord',
+    'chromium': 'Chromium browsers — Chrome, Opera / Opera GX, Edge, Brave, Vivaldi',
 }
 
 
@@ -235,7 +240,7 @@ def choose(available):
 
 def main(argv=None):
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument('--components', nargs='+', choices=['firefox', 'desktop', 'discord', 'vesktop', 'qt'],
+    parser.add_argument('--components', nargs='+', choices=['firefox', 'chromium', 'desktop', 'discord', 'vesktop', 'qt'],
                         help='Default: all supported integrations already installed on this computer.')
     parser.add_argument('--discord-path', type=Path,
                         help='Native Discord location: folder with resources/ (Linux), %%LOCALAPPDATA%%\\Discord (Windows) or Discord.app (macOS)')
@@ -292,6 +297,11 @@ def main(argv=None):
         print(f'• Patch Discord at {location} with the official Vencord installer; enable Corsu. Administrator authentication may be requested.')
     if 'vesktop' in components:
         print('• Point Vesktop at the custom Vencord build and enable Corsu.')
+    if 'chromium' in components:
+        import chromium
+        names = ', '.join(browser.label for browser in chromium.browsers()) or 'none detected'
+        print(f'• Translate the French interface pack of: {names}. Each browser then shows Corsican where'
+              ' French would appear. System-wide browsers ask for administrator rights, again after browser updates.')
     if 'qt' in components:
         print(f'• Build Corsican Qt catalogs and copy them into {corsu.QT_TRANSLATIONS}, so Qt dialog'
               ' buttons and file choosers are translated. Administrator authentication is requested.')

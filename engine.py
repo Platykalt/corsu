@@ -11,6 +11,8 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent
 LEXICON = ROOT / 'lexicon.tsv'
+# Reviewed human translations (MPL-2.0) load first, so their wording wins over draft rows.
+REVIEWED = ROOT / 'lexicon-mozilla.tsv'
 
 # Placeholders that must survive translation untouched: Fluent placeables, printf
 # specifiers, Qt/KDE numbered arguments and shell-style variables.
@@ -22,9 +24,10 @@ PLACEHOLDER = re.compile(
     r'|\$\{[A-Za-z_]\w*\}'
     r'|\$[A-Za-z_]\w*'
     r'|\{\d+\}'
+    r'|\$\d'
 )
 # Markup and entities are contracts with the application, never translated content.
-SIGNATURE = re.compile(r'%(?:\d+\$)?[0-9]*\.?[0-9]*(?:ll|l|h)?[sdiufgexXop]|%[Ln]?\d+|</?[A-Za-z][^>]*>|&[a-zA-Z]+;|\{[^{}]*\}')
+SIGNATURE = re.compile(r'\$\d|%(?:\d+\$)?[0-9]*\.?[0-9]*(?:ll|l|h)?[sdiufgexXop]|%[Ln]?\d+|</?[A-Za-z][^>]*>|&[a-zA-Z]+;|\{[^{}]*\}')
 ACCELERATOR = re.compile(r'(?<![&\w])&(?=[^\W\d_])|(?<![_\w])_(?=[^\W\d_])')
 TRAILING = re.compile(r'^(.*?)([\s  ]*(?:\.\.\.|…|:|\?|!|;|\.))$', re.S)
 WRAPPERS = (('«', '»'), ('"', '"'), ('“', '”'), ('(', ')'), ('[', ']'), ("'", "'"))
@@ -75,7 +78,8 @@ def unmask(template, tokens):
 def load_lexicon(path=None):
     """Read `English|French|Corsican` rows into direct and templated lookup tables."""
     words = {}
-    lines = Path(path or LEXICON).read_text(encoding='utf-8').splitlines()
+    paths = [Path(path)] if path else [REVIEWED, LEXICON]
+    lines = [line for source in paths if source.exists() for line in source.read_text(encoding='utf-8').splitlines()]
     for number, line in enumerate(lines, 1):
         if not line.strip() or line.startswith('#'):
             continue
@@ -341,3 +345,74 @@ def make_qm(messages, language='co'):
                           ('numerus', QM_NUMERUS_RULES)):
         output += bytes([QM_SECTIONS[name]]) + struct.pack('>I', len(payload)) + payload
     return output
+
+
+def read_pak(data):
+    """Parse a Chromium data pack (version 4 or 5) into encoding, resources and aliases."""
+    version = struct.unpack_from('<I', data)[0]
+    if version == 5:
+        encoding, count, alias_count = struct.unpack_from('<IHH', data, 4)
+        table = 12
+        wide_count, wide_aliases = struct.unpack_from('<II', data, 8)
+        if struct.unpack_from('<I', data, table + 2)[0] != table + 6 * (count + 1) + 4 * alias_count \
+                and struct.unpack_from('<I', data, 20)[0] == 16 + 8 * (wide_count + 1) + 8 * wide_aliases:
+            return read_wide_pak(data, encoding & 0xff, wide_count, wide_aliases)
+    elif version == 4:
+        count, encoding = struct.unpack_from('<IB', data, 4)
+        alias_count, table = 0, 9
+    else:
+        raise ValueError(f'Unsupported .pak version {version}')
+    entries = [struct.unpack_from('<HI', data, table + 6 * index) for index in range(count + 1)]
+    resources = {entries[index][0]: data[entries[index][1]:entries[index + 1][1]] for index in range(count)}
+    aliases = {}
+    start = table + 6 * (count + 1)
+    for index in range(alias_count):
+        alias, target = struct.unpack_from('<HH', data, start + 4 * index)
+        aliases[alias] = entries[target][0]
+    return {'version': version, 'encoding': encoding, 'resources': resources, 'aliases': aliases}
+
+
+def read_wide_pak(data, encoding, count, alias_count):
+    """Microsoft Edge's variant of version 5: 32-bit counts, resource ids and alias entries."""
+    entries = [struct.unpack_from('<II', data, 16 + 8 * index) for index in range(count + 1)]
+    resources = {entries[index][0]: data[entries[index][1]:entries[index + 1][1]] for index in range(count)}
+    start = 16 + 8 * (count + 1)
+    aliases = {}
+    for index in range(alias_count):
+        alias, target = struct.unpack_from('<II', data, start + 8 * index)
+        aliases[alias] = entries[target][0]
+    return {'version': 5, 'wide': True, 'encoding': encoding, 'resources': resources, 'aliases': aliases}
+
+
+def make_pak(pak):
+    """Write a version 5 data pack; aliases keep pointing at their original resources."""
+    if pak.get('wide'):
+        return make_wide_pak(pak)
+    ids = sorted(pak['resources'])
+    position = {resource: index for index, resource in enumerate(ids)}
+    aliases = sorted(pak['aliases'].items())
+    offset = 12 + 6 * (len(ids) + 1) + 4 * len(aliases)
+    header = struct.pack('<IIHH', 5, pak['encoding'], len(ids), len(aliases))
+    table, body = [], []
+    for resource in ids:
+        table.append(struct.pack('<HI', resource, offset))
+        body.append(pak['resources'][resource])
+        offset += len(pak['resources'][resource])
+    table.append(struct.pack('<HI', 0, offset))
+    alias_table = [struct.pack('<HH', alias, position[target]) for alias, target in aliases]
+    return header + b''.join(table) + b''.join(alias_table) + b''.join(body)
+
+
+def make_wide_pak(pak):
+    ids = sorted(pak['resources'])
+    position = {resource: index for index, resource in enumerate(ids)}
+    aliases = sorted(pak['aliases'].items())
+    offset = 16 + 8 * (len(ids) + 1) + 8 * len(aliases)
+    output = [struct.pack('<IIII', 5, pak['encoding'], len(ids), len(aliases))]
+    for resource in ids:
+        output.append(struct.pack('<II', resource, offset))
+        offset += len(pak['resources'][resource])
+    output.append(struct.pack('<II', 0, offset))
+    output.extend(struct.pack('<II', alias, position[target]) for alias, target in aliases)
+    output.extend(pak['resources'][resource] for resource in ids)
+    return b''.join(output)

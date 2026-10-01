@@ -14,17 +14,17 @@ class TranslationTests(unittest.TestCase):
                          'Ottene { -mozilla-vpn-brand-name }')
 
     def test_accelerator_marker_is_preserved(self):
-        self.assertEqual(engine.translate('&Cancel'), '&Annullà')
+        self.assertEqual(engine.translate('&Cancel'), '&Abbandunà')
         self.assertEqual(engine.translate('Co&uper'), 'Ta&glià')
-        self.assertEqual(engine.translate('_Save'), '_Salvà')
+        self.assertEqual(engine.translate('_Save'), 'Arregi_strà')
 
     def test_letter_case_and_trailing_punctuation(self):
         self.assertEqual(engine.translate('inconnu'), 'scunnisciutu')
-        self.assertEqual(engine.translate('Enregistrer…'), 'Salvà…')
-        self.assertEqual(engine.translate('Erreur :'), 'Errore:')
+        self.assertEqual(engine.translate('Enregistrer…'), 'Arregistrà…')
+        self.assertEqual(engine.translate('Erreur :'), 'Sbagliu:')
 
     def test_composed_labels_need_every_part(self):
-        self.assertEqual(engine.translate('Paramètres — Général'), 'Paràmetri — Generale')
+        self.assertEqual(engine.translate('Paramètres — Général'), 'Parametri — Generale')
         self.assertEqual(engine.translate('Paramètres — Zorglub'), 'Paramètres — Zorglub')
 
     def test_unknown_and_unsafe_labels_are_returned_unchanged(self):
@@ -47,16 +47,16 @@ class TranslationTests(unittest.TestCase):
 
 class CatalogTests(unittest.TestCase):
     def test_gettext_round_trip_with_context_and_plural(self):
-        entries = {b'': b'Language: co\n', b'Save': 'Salvà'.encode(),
+        entries = {b'': b'Language: co\n', b'Save': 'Arregistrà'.encode(),
                    b'button\x04Close': 'Chjode'.encode(), b'file\x00files': 'schedariu\x00schedarii'.encode()}
         self.assertEqual(engine.read_mo(engine.make_mo(entries)), entries)
 
     def test_qt_round_trip_and_hash_index(self):
-        messages = [{'context': 'KStandardGuiItem', 'source': '&Cancel', 'translations': ['&Annullà']},
+        messages = [{'context': 'KStandardGuiItem', 'source': '&Cancel', 'translations': ['&Abbandunà']},
                     {'source': 'Files', 'comment': 'plural', 'translations': ['Schedariu', 'Schedarii']}]
         catalog = engine.read_qm(engine.make_qm(messages))
         self.assertEqual(catalog['language'], 'co')
-        self.assertEqual(catalog['messages'][0]['translations'], ['&Annullà'])
+        self.assertEqual(catalog['messages'][0]['translations'], ['&Abbandunà'])
         self.assertEqual(catalog['messages'][1]['translations'], ['Schedariu', 'Schedarii'])
 
     def test_qt_hash_matches_the_installed_french_catalogs(self):
@@ -84,15 +84,15 @@ class FluentTests(unittest.TestCase):
         translated, count = corsu.patch_ftl(source)
         self.assertEqual(count, 2)
         self.assertIn('a = Chjode u pannellu laterale\n', translated)
-        self.assertIn('b = Salvà\n', translated)
+        self.assertIn('b = Arregistrà\n', translated)
 
     def test_attributes_selectors_and_access_keys_are_respected(self):
         source = ('save =\n    .label = Enregistrer\n    .accesskey = S\n'
                   'many = { $count ->\n    [one] Enregistrer\n   *[other] Fermer\n  }\n')
         translated, count = corsu.patch_ftl(source)
-        self.assertIn('.label = Salvà', translated)
+        self.assertIn('.label = Arregistrà', translated)
         self.assertIn('.accesskey = S', translated)
-        self.assertIn('[one] Salvà', translated)
+        self.assertIn('[one] Arregistrà', translated)
         self.assertIn('*[other] Chjode', translated)
         self.assertEqual(count, 3)
 

@@ -1,4 +1,6 @@
-Corsican interface translations for **Firefox, Discord (Vencord) and Vesktop on Linux, Windows and macOS**, plus **KDE Plasma and Qt on Linux**.
+Corsican interface translations for **Firefox, Discord (Vencord) and Vesktop on Linux, Windows and macOS**, **Chrome, Opera / Opera GX, Edge, Brave and Vivaldi on Linux and Windows**, plus **KDE Plasma and Qt on Linux**.
+
+Reviewed Corsican translations by Patriccollu and the Mozilla Corsican team (MPL-2.0) come first; about 40,000 draft rows follow their terminology.
 
 ### Install
 

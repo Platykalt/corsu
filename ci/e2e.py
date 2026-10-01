@@ -1,9 +1,11 @@
 #!/usr/bin/env python3
 """End-to-end installer checks in an isolated home directory. Never touches the real user's apps.
 
-Usage: e2e.py firefox|discord [--root EXTRACTED_RELEASE]
+Usage: e2e.py firefox|discord|chromium [--root EXTRACTED_RELEASE]
 
 firefox: install, launch the translated Firefox and read real strings, disable, enable, uninstall.
+chromium: translate a throwaway browser copy (CORSU_CHROMIUM, e.g. Chrome for Testing), read the
+          rendered error page and chrome://version, switch off/on, uninstall, and check the original pack is back.
 discord: lay out a fake Discord for this platform, patch it with the real official Vencord installer,
          check the custom build is injected, then uninstall and check the original archive is back.
 """
@@ -112,15 +114,35 @@ def check_discord(root, home, environment):
     print('PASS: Discord patch with the official Vencord installer and restore')
 
 
+def check_chromium(root, home, environment):
+    import hashlib
+    browser = Path(os.environ['CORSU_CHROMIUM'])
+    executable = next(browser / name for name in ('chrome.exe', 'chrome') if (browser / name).exists())
+    pack = next(path for path in browser.rglob('fr.pak') if path.parent.name in ('locales', 'Locales'))
+    original = hashlib.sha256(pack.read_bytes()).hexdigest()
+    run(root, environment, 'installer.py', '--components', 'chromium', '--yes')
+    assert hashlib.sha256(pack.read_bytes()).hexdigest() != original, 'French pack was not translated'
+    run(root, environment, str(HERE / 'check_chromium.py'), str(executable))
+    run(root, environment, 'installer.py', '--disable')
+    assert hashlib.sha256(pack.read_bytes()).hexdigest() == original, 'Disable did not restore the French pack'
+    run(root, environment, 'installer.py', '--enable')
+    assert hashlib.sha256(pack.read_bytes()).hexdigest() != original, 'Enable did not translate again'
+    run(root, environment, 'installer.py', '--uninstall', '--yes')
+    assert hashlib.sha256(pack.read_bytes()).hexdigest() == original, 'Uninstall did not restore the French pack'
+    assert state(home)['files'] == {}, state(home)
+    print('PASS: Chromium pack translated, rendered in Corsican, switched off/on and restored')
+
+
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument('check', choices=['firefox', 'discord'])
+    parser.add_argument('check', choices=['firefox', 'discord', 'chromium'])
     parser.add_argument('--root', type=Path, default=HERE.parent)
     args = parser.parse_args()
-    with tempfile.TemporaryDirectory(prefix='corsu-home-') as directory:
+    with tempfile.TemporaryDirectory(prefix='corsu-home-', ignore_cleanup_errors=True) as directory:
         home = Path(directory)
         environment = isolated_environment(home)
-        (check_firefox if args.check == 'firefox' else check_discord)(args.root.resolve(), home, environment)
+        checks = {'firefox': check_firefox, 'discord': check_discord, 'chromium': check_chromium}
+        checks[args.check](args.root.resolve(), home, environment)
 
 
 if __name__ == '__main__':

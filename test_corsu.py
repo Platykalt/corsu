@@ -107,8 +107,8 @@ class TranslationTests(unittest.TestCase):
                 self.assertTrue(json.loads(corsu.STATE.read_text(encoding='utf-8'))['enabled'])
 
     def test_exact_labels_only(self):
-        self.assertEqual(corsu.translate('  &Save…  '), '  &Salvà…  ')
-        self.assertEqual(corsu.translate('_Save'), '_Salvà')
+        self.assertEqual(corsu.translate('  &Save…  '), '  Arregi&strà…  ')
+        self.assertEqual(corsu.translate('_Save'), 'Arregi_strà')
         self.assertEqual(corsu.translate('Save my private message'), 'Save my private message')
         self.assertEqual(corsu.translate('Nonexistent %1'), 'Nonexistent %1')
 
@@ -116,7 +116,7 @@ class TranslationTests(unittest.TestCase):
         source = 'save =\n    .label = Save\n    .accesskey = S\ncount = { $count } files\n'
         translated, count = corsu.patch_ftl(source)
         self.assertEqual(count, 1)
-        self.assertIn('.label = Salvà', translated)
+        self.assertIn('.label = Arregistrà', translated)
         self.assertIn('.accesskey = S', translated)
         self.assertIn('count = { $count } files', translated)
 
@@ -148,9 +148,9 @@ class TranslationTests(unittest.TestCase):
 
     def test_gettext_context_and_fallback(self):
         data = corsu.make_mo({'': 'Content-Type: text/plain; charset=UTF-8\nLanguage: co\n',
-                              'Save': 'Salvà', 'button\x04Close': 'Chjode'})
+                              'Save': 'Arregistrà', 'button\x04Close': 'Chjode'})
         loaded = gettext.GNUTranslations(io.BytesIO(data))
-        self.assertEqual(loaded.gettext('Save'), 'Salvà')
+        self.assertEqual(loaded.gettext('Save'), 'Arregistrà')
         self.assertEqual(loaded.pgettext('button', 'Close'), 'Chjode')
         self.assertEqual(loaded.gettext('Unknown'), 'Unknown')
 

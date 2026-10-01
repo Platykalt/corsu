@@ -658,20 +658,27 @@ def python_launcher():
     return windowed if PLATFORM == 'windows' and windowed.exists() else executable
 
 
+def windows_link(installer, path, target, arguments, icon=None, toggle=False):
+    """Create a Windows `.lnk` shortcut through the Shell, and track it like any managed file."""
+    with tempfile.TemporaryDirectory() as directory:
+        temporary = Path(directory) / 'shortcut.lnk'
+        script = ('$s = (New-Object -ComObject WScript.Shell).CreateShortcut($env:CORSU_LINK); '
+                  '$s.TargetPath = $env:CORSU_TARGET; $s.Arguments = $env:CORSU_ARGUMENTS; '
+                  '$s.WorkingDirectory = $env:CORSU_DIR; if ($env:CORSU_ICON) { $s.IconLocation = $env:CORSU_ICON }; $s.Save()')
+        subprocess.run(['powershell', '-NoProfile', '-NonInteractive', '-Command', script], check=True, env={
+            **os.environ, 'CORSU_LINK': str(temporary), 'CORSU_TARGET': str(target), 'CORSU_ARGUMENTS': arguments,
+            'CORSU_DIR': str(ROOT), 'CORSU_ICON': icon or ''})
+        installer.write(path, temporary.read_bytes(), toggle=toggle)
+
+
+START_MENU = CONFIG / 'Microsoft/Windows/Start Menu/Programs'
+
+
 def windows_shortcut(installer, firefox):
     command = DATA / 'bin/firefox-corsu.cmd'
     installer.write(command, f'@"{python_launcher()}" "{ROOT / "corsu.py"}" launch-firefox %*\r\n')
-    shortcut = CONFIG / 'Microsoft/Windows/Start Menu/Programs/Firefox — Corsu.lnk'
-    with tempfile.TemporaryDirectory() as directory:
-        temporary = Path(directory) / 'firefox.lnk'
-        script = ('$s = (New-Object -ComObject WScript.Shell).CreateShortcut($env:CORSU_LINK); '
-                  '$s.TargetPath = $env:CORSU_TARGET; $s.Arguments = $env:CORSU_ARGUMENTS; '
-                  '$s.IconLocation = $env:CORSU_ICON; $s.Description = "Firefox — Corsu"; $s.Save()')
-        subprocess.run(['powershell', '-NoProfile', '-NonInteractive', '-Command', script], check=True, env={
-            **os.environ, 'CORSU_LINK': str(temporary), 'CORSU_TARGET': str(python_launcher()),
-            'CORSU_ARGUMENTS': f'"{ROOT / "corsu.py"}" launch-firefox',
-            'CORSU_ICON': str(firefox.root / firefox.binary) + ',0'})
-        installer.write(shortcut, temporary.read_bytes(), toggle=True)
+    windows_link(installer, START_MENU / 'Firefox — Corsu.lnk', python_launcher(),
+                 f'"{ROOT / "corsu.py"}" launch-firefox', str(firefox.root / firefox.binary) + ',0', toggle=True)
 
 
 def macos_application(installer):
@@ -689,16 +696,7 @@ def setup_shortcut(installer):
     """A `Corsu — Setup` entry that reopens the installer, to add or remove applications later."""
     script = ROOT / 'installer.py'
     if PLATFORM == 'windows':
-        shortcut = CONFIG / 'Microsoft/Windows/Start Menu/Programs/Corsu — Setup.lnk'
-        with tempfile.TemporaryDirectory() as directory:
-            temporary = Path(directory) / 'setup.lnk'
-            command = ('$s = (New-Object -ComObject WScript.Shell).CreateShortcut($env:CORSU_LINK); '
-                       '$s.TargetPath = $env:CORSU_TARGET; $s.Arguments = $env:CORSU_ARGUMENTS; '
-                       '$s.WorkingDirectory = $env:CORSU_DIR; $s.Save()')
-            subprocess.run(['powershell', '-NoProfile', '-NonInteractive', '-Command', command], check=True, env={
-                **os.environ, 'CORSU_LINK': str(temporary), 'CORSU_TARGET': sys.executable,
-                'CORSU_ARGUMENTS': f'"{script}"', 'CORSU_DIR': str(ROOT)})
-            installer.write(shortcut, temporary.read_bytes())
+        windows_link(installer, START_MENU / 'Corsu — Setup.lnk', sys.executable, f'"{script}"')
     elif PLATFORM == 'macos':
         command = f'{shlex.quote(sys.executable)} {shlex.quote(str(script))}'
         with tempfile.TemporaryDirectory() as directory:
@@ -761,6 +759,10 @@ def install(components=None, qt_system=False):
     if 'discord' in components:
         installer.json_settings(CONFIG / 'Vencord/settings/settings.json', plugin_settings, toggle=True)
     desktop(installer, firefox='firefox' in components, vesktop='vesktop' in components)
+    chromium_stats = None
+    if 'chromium' in components:
+        import chromium
+        chromium_stats = chromium.install(installer)
     installer.state['components'] = sorted(set(installer.state.get('components', [])) | components)
     installer.state['qt_system'] = qt_system or installer.state.get('qt_system', False)
     installer.state['enabled'] = True
@@ -768,7 +770,7 @@ def install(components=None, qt_system=False):
     disabled_marker().unlink(missing_ok=True)
     clients = sorted({'Vesktop' if name == 'vesktop' else 'Discord' for name in components
                       if name in ('vesktop', 'discord')})
-    report = {'kde': kde_stats, 'firefox': firefox_stats, 'firefox_runtime': str(runtime) if runtime else None,
+    report = {'kde': kde_stats, 'firefox': firefox_stats, 'chromium': chromium_stats, 'firefox_runtime': str(runtime) if runtime else None,
               'discord': {'clients': clients, 'plugin': 'Corsu', 'dictionary_labels': len(WORDS), 'partial': True},
               'components': sorted(components), 'enabled': True,
               'scope': 'Interface labels only; no translation of messages or arbitrary websites.'}
@@ -810,6 +812,12 @@ def disable():
         return
     installer = Installer()
     preserved = []
+    packs = {name: record for name, record in installer.state['files'].items() if record.get('chromium')}
+    if packs:
+        import chromium
+        chromium.restore(packs)
+        for name in packs:
+            installer.state['files'].pop(name)
     for name, record in list(installer.state['files'].items()):
         if not record.get('toggle'):
             continue
@@ -852,8 +860,14 @@ def uninstall():
         return
     state = json.loads(STATE.read_text(encoding='utf-8'))
     remaining = {}
+    packs = {name: record for name, record in state['files'].items() if record.get('chromium')}
+    if packs:
+        import chromium
+        chromium.restore(packs)
     for name, record in state['files'].items():
         path = Path(name)
+        if record.get('chromium'):
+            continue
         if record.get('tree'):
             shutil.rmtree(path, ignore_errors=True)
             continue
@@ -956,7 +970,7 @@ def launch_firefox(rest):
 def main():
     parser = argparse.ArgumentParser()
     parser.add_argument('action', choices=['generate', 'install', 'uninstall', 'status', 'enable', 'disable',
-                                           'prepare-firefox', 'launch-firefox'])
+                                           'prepare-firefox', 'launch-firefox', 'launch-chromium', 'chromium-refresh'])
     args, rest = parser.parse_known_args()
     if args.action == 'generate':
         generate()
@@ -974,6 +988,12 @@ def main():
         runtime, stats = firefox_runtime()
         print(firefox_executable(runtime))
         print(json.dumps(stats))
+    elif args.action == 'launch-chromium':
+        import chromium
+        chromium.launch(rest[0], rest[1:])
+    elif args.action == 'chromium-refresh':
+        import chromium
+        print(json.dumps(chromium.refresh(), ensure_ascii=False))
     else:
         launch_firefox(rest)
 

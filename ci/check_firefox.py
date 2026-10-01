@@ -58,7 +58,7 @@ def receive(connection):
 
 
 def main(executable):
-    with tempfile.TemporaryDirectory(prefix='corsu-check-') as directory:
+    with tempfile.TemporaryDirectory(prefix='corsu-check-', ignore_cleanup_errors=True) as directory:
         profile = pathlib.Path(directory)
         with socket.socket() as reserve:
             reserve.bind(('127.0.0.1', 0))

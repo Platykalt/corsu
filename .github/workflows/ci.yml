@@ -117,6 +117,16 @@ jobs:
         run: python ci/e2e.py firefox --root "${{ env.CORSU_RELEASE }}"
       - name: Discord — patch with the official Vencord installer, then restore
         run: python ci/e2e.py discord --root "${{ env.CORSU_RELEASE }}"
+      - name: Chromium — translate Chrome for Testing, read it in Corsican, switch off/on, restore
+        if: runner.os != 'macOS'
+        shell: bash
+        run: |
+          platform=$([ "$RUNNER_OS" = Windows ] && echo win64 || echo linux64)
+          url=$(curl -fsSL https://googlechromelabs.github.io/chrome-for-testing/last-known-good-versions-with-downloads.json \
+            | python -c "import json,sys; d=json.load(sys.stdin)['channels']['Stable']['downloads']['chrome']; print([x['url'] for x in d if x['platform']=='$platform'][0])")
+          curl -fsSL -o cft.zip "$url" && unzip -q cft.zip -d "$RUNNER_TEMP/cft"
+          export CORSU_CHROMIUM="$RUNNER_TEMP/cft/chrome-$platform"
+          python ci/e2e.py chromium --root "${{ env.CORSU_RELEASE }}"
 
   release:
     name: Publish GitHub release

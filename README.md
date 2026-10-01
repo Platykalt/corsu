@@ -1,7 +1,8 @@
 # Corsu
 
 Corsican interface translations for **Firefox, Discord with Vencord, and Vesktop on Linux, Windows and macOS**,
-plus **KDE Plasma and Qt applications on Linux**.
+**Chrome, Opera / Opera GX, Edge, Brave, Vivaldi and Chromium on Linux and Windows**, plus **KDE Plasma and Qt
+applications on Linux**.
 GPL-3.0-or-later: you can share, modify and redistribute this project, including its source.
 
 **This is a work in progress, not a complete Corsican language pack.** Menus, dialogs, settings and error
@@ -9,6 +10,12 @@ pages are translated locally from a lexicon of draft translations. Unknown label
 English) text. Websites, chat messages, file names, people's names and typed text are never translated.
 Application names in the Plasma launcher stay as their vendors publish them. The lexicon welcomes review
 by Corsican speakers.
+
+Reviewed human translations come first: `lexicon-mozilla.tsv` holds the Corsican work of **Patriccollu di Santa
+Maria è Sichè** and the Mozilla Corsican team for Firefox on Android (MPL-2.0, from
+[mozilla-l10n/android-l10n](https://github.com/mozilla-l10n/android-l10n)), and every draft row follows its
+terminology (*unghjetta*, *parolla d'intesa*, *indetta*, *cronolugia*, *parametri*, *arregistrà*, *abbandunà*).
+See Patriccollu's catalogue of Corsican software: [Lingua_Corsa-Infurmatica](https://github.com/Patriccollu/Lingua_Corsa-Infurmatica).
 
 ## Download and install
 
@@ -27,7 +34,7 @@ The installer asks **“Select what you want to translate”** and lists the app
 Select what you want to translate:
   [x] 1. Firefox — menus, settings, error pages
   [x] 2. Discord — interface labels through Vencord
-  [x] 3. Vesktop — interface labels through Vencord
+  [x] 3. Chromium browsers — Chrome, Opera / Opera GX, Edge, Brave, Vivaldi
 Type numbers to toggle (e.g. "2 3"), Enter to continue, q to quit:
 ```
 
@@ -48,6 +55,7 @@ language. Discord updates can remove its patch: open **Corsu — Setup** again a
 | Component | Systems | Effect |
 | --- | --- | --- |
 | `firefox` | all | A translated copy of your Firefox plus a **Firefox — Corsu** launcher. Your existing profile, bookmarks and extensions are used as they are. The copy is rebuilt automatically after Firefox updates |
+| `chromium` | Linux, Windows | Translates the French interface pack (`fr.pak`) of every installed Chromium browser in place, so the browser shows Corsican wherever it would show French. Browser updates bring a fresh French pack: Corsu translates it again when you start the browser from its menu entry (Linux) or at login (Windows). System-wide browsers ask for administrator rights for that. Your profile, logins and cookies are untouched |
 | `discord` | all | Patches native Discord through the official, checksum-verified Vencord installer and enables the bundled Corsu plugin |
 | `vesktop` | all | Points Vesktop at the custom Vencord build and enables the Corsu plugin |
 | `desktop` | Linux | User gettext and Qt catalogs (`~/.local/share/locale/co`), Plasma interface language `co:fr`, translated application menu entries |
@@ -58,6 +66,11 @@ from `archive.mozilla.org` and verified against Mozilla's published `SHA512SUMS`
 offline), then applies the Corsican lexicon on top. Firefox's security preferences and extension signature
 checks remain enabled; only the translated copy's self-updater is switched off, because Corsu rebuilds it
 from your updated Firefox instead.
+
+Chromium browsers display Corsican where they would display French: on Windows Corsu selects French in the
+browser's language setting; on Linux its menu entry starts the browser with `LANGUAGE=co:fr`. macOS is not
+supported for Chromium browsers yet: changing a signed browser there breaks its Keychain access to saved
+passwords and cookies.
 
 Command-line options (use `py -3` instead of `python3` on Windows):
 
@@ -78,6 +91,19 @@ keep its original interface until you fully quit and reopen it.
 Vencord automatic updates are disabled to protect the custom plugin; update/rebuild Corsu manually.
 Vencord is a third-party Discord client modification. Read its [official documentation](https://docs.vencord.dev/installing/).
 Corsu does not translate chat messages or provide a message translation service.
+
+## Phones
+
+No phone system can be translated by an outside project, but many apps already speak Corsican:
+
+* **iPhone:** Settings › General › Language & Region › Add Language › Corsican. Apps that ship Corsican, such as
+  Firefox for iOS, then appear in Corsican (per app: Settings › the app › Language). The Keyman app's EuroLatin
+  keyboard types Corsican.
+* **Android / Samsung:** Gboard has a Corsican keyboard. Firefox, Firefox Focus, Thunderbird and VLC ship Corsican.
+  `adb shell settings put system system_locales co-FR,fr-FR` (then restart) makes such apps use it, with French
+  for the rest.
+* A Corsican system interface needs Apple, Google or Samsung — or a free Android system such as LineageOS, whose
+  translations are open to volunteers on Crowdin.
 
 ## Switch Corsican off and on again
 
@@ -158,9 +184,11 @@ Every push runs [CI](.github/workflows/ci.yml) on Linux, Windows and macOS: the 
 3.13, a Vencord build, the three release archives, and end-to-end runs **from each archive** in a throwaway
 home directory. These install the Firefox component, start the real translated Firefox headless and read
 menu, session-restore and context-menu strings (failing if any is still English or French), switch Corsu off
-and on, uninstall and check nothing is left behind. They also patch a stand-in Discord with the real official
+and on, uninstall and check nothing is left behind. On Linux and Windows they translate Chrome for Testing,
+read its error page and `chrome://version` through the DevTools protocol, and check the original pack returns. They also patch a stand-in Discord with the real official
 Vencord installer and check the original is restored. Pushing a `v*` tag publishes the release only when all
-of this passes. Run the same checks locally with `python3 ci/e2e.py firefox` and `python3 ci/e2e.py discord`.
+of this passes. Run the same checks locally with `python3 ci/e2e.py firefox`, `python3 ci/e2e.py discord` and
+`CORSU_CHROMIUM=<Chrome for Testing folder> python3 ci/e2e.py chromium` (the variable hides real browsers).
 
 See [CONTRIBUTING.md](CONTRIBUTING.md). Upstream Vencord and its installer retain their original authors
 and licenses. Firefox binaries and system gettext/Qt catalogs are built or read locally and are never
@@ -171,4 +199,4 @@ redistributed.
 Coverage is counted, never presented as a percentage of the whole interface: the report in
 `missing-labels.json` names the specific resource patterns it examined. Open work: many more lexicon rows,
 review of the machine-assisted draft rows by Corsican speakers, Discord settings coverage, Plasma widgets
-that ship their translations inside QML, and Chromium-based browsers.
+that ship their translations inside QML, Chromium browsers on macOS, and a Corsican spelling dictionary.
