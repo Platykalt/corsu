@@ -641,7 +641,7 @@ def google_labels(resources):
     module = resources / 'corsu'
     module.mkdir(exist_ok=True)
     shutil.copy2(SRC / 'firefox/CorsuChild.sys.mjs', module / 'CorsuChild.sys.mjs')
-    labels = {key: value for key, value in WORDS.items() if len(key) <= 60}
+    labels = {key: value for key, value in WORDS.items() if len(key) <= 100}
     (module / 'dictionary.mjs').write_text('export const words = ' + json.dumps(labels, ensure_ascii=False, separators=(',', ':'))
                                            + ';\n', encoding='utf-8')
 

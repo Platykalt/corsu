@@ -5,10 +5,19 @@
  */
 import { words } from "resource://corsu/dictionary.mjs";
 
-const protectedArea = [
-    "script", "style", "pre", "code", "textarea", "[contenteditable]",
-    "#search", "#rso", "#botstuff", "[data-corsu-ignore]"
-].join(",");
+// Never touched: code, text being typed, and anything marked to ignore.
+const protectedArea = ["script", "style", "pre", "code", "textarea", "[contenteditable]", "[data-corsu-ignore]"].join(",");
+// The results area: only the interface labels listed below are translated there, never links or page text.
+const resultsArea = "#search,#rso,#botstuff";
+const resultLabels = new Set([
+    "AI Overview", "Aperçu IA", "AI Mode", "Mode IA", "Show all", "Tout afficher", "Show more", "Afficher plus",
+    "Show less", "Afficher moins", "People also ask", "Autres questions posées", "Related searches",
+    "Recherches associées", "Short videos", "Vidéos courtes", "Videos", "Vidéos", "Images", "Feedback",
+    "Commentaires", "Envoyer des commentaires", "Learn more", "En savoir plus", "Copy", "Copier", "Share",
+    "Partager", "Listen", "Écouter", "More actions", "Plus d'actions", "Close", "Fermer",
+    "AI can make mistakes, so double-check responses",
+    "Vérifiez les réponses de l'IA, car elle peut faire des erreurs"
+]);
 // On Google's pages every short label outside the results is interface text.
 const uiArea = "*";
 const placeholder = /\{\s*[$-]?[\w.-]+(?:\([^{}]*\))?\s*\}|%(?:\d+\$)?[0-9]*\.?[0-9]*(?:ll|l|h)?[sdiufgexXop]|%[Ln]?\d+|\$\{[A-Za-z_]\w*\}|\{\d+\}/g;
@@ -69,7 +78,7 @@ function resolve(text, segments = true) {
 
 function translateLabel(value) {
     const match = value.match(/^(\s*)(.*?)(\s*)$/s);
-    if (!match || !match[2] || match[2].length > 60) return value;
+    if (!match || !match[2] || match[2].length > 100) return value;
     const [, before, core, after] = match;
     const result = resolve(core);
     if (result === undefined || result === core) return value;
@@ -88,12 +97,15 @@ export function translatePage(doc) {
                 if (node.nodeType === TEXT_NODE) {
                     const parent = node.parentElement;
                     if (!parent || parent.closest(protectedArea) || !parent.closest(uiArea)) return;
+                    if (parent.closest(resultsArea) &&
+                        (parent.closest("a") || !resultLabels.has(normalize(node.data).trim()))) return;
                     const translated = translateLabel(node.data);
                     if (translated !== node.data) node.data = translated;
                 } else if (node.matches && !node.closest(protectedArea) && node.matches(uiArea)) {
+                    const inResults = node.closest(resultsArea);
                     for (const name of ["aria-label", "title", "placeholder"]) {
                         const value = node.getAttribute(name);
-                        if (!value) continue;
+                        if (!value || (inResults && !resultLabels.has(normalize(value).trim()))) continue;
                         const translated = translateLabel(value);
                         if (translated !== value) node.setAttribute(name, translated);
                     }
