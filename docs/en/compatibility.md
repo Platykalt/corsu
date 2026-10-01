@@ -32,3 +32,14 @@ usually because the system prevents it.
 
 The phone apps listed come in Corsican from their makers; Corsu does not change them. See [Android](phone/android.md)
 and [iPhone](phone/iphone.md).
+
+## Google and other websites
+
+Corsu does not translate websites, but Firefox and the Chromium browsers tell websites that you prefer Corsican.
+Sites that offer Corsican, Google among them, then show it, unless your account says otherwise. Google uses your
+account's language first, and that also decides the language of its AI. To get Google in Corsican:
+
+1. Open [myaccount.google.com/language](https://myaccount.google.com/language) and choose **Corsu** as your preferred
+   language.
+2. Without a Google account, open [search settings](https://www.google.com/preferences?hl=co#languages) and choose
+   **Corsu**.

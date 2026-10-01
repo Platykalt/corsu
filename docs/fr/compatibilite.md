@@ -32,3 +32,15 @@ en général parce que le système l'empêche.
 
 Ces applications sont proposées en corse par leurs éditeurs ; Corsu ne les modifie pas. Voir [Android](telephone/android.md)
 et [iPhone](telephone/iphone.md).
+
+## Google et les autres sites
+
+Corsu ne traduit pas les sites web, mais Firefox et les navigateurs Chromium annoncent le corse comme langue
+préférée. Les sites qui proposent le corse, comme Google, l'affichent alors, sauf si votre compte en a décidé
+autrement. Google applique d'abord la langue de votre compte, et c'est elle aussi qui décide de la langue de son IA.
+Pour avoir Google en corse :
+
+1. Ouvrez [myaccount.google.com/language](https://myaccount.google.com/language) et choisissez **Corsu** comme langue
+   préférée.
+2. Sans compte Google, ouvrez [les paramètres de recherche](https://www.google.com/preferences?hl=co#languages) et
+   choisissez **Corsu**.

@@ -1,5 +1,11 @@
 # Changelog
 
+## 0.8.1 (2026-10-01)
+
+- Linux: Corsu patches every version of Discord found in `~/.config/discord`, including the one the launcher still
+  starts before Discord switches to the newest.
+- How to get Google, and its AI, in Corsican through the Google account language.
+
 ## 0.8.0 (2026-10-01)
 
 - Corsu window (Corsu Setup): switch Firefox, the Chromium browsers, Discord, Vesktop, the desktop and the

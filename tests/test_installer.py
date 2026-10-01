@@ -114,6 +114,15 @@ class InstallerTests(unittest.TestCase):
             with patch.object(corsu, 'DATA', alias), patch.object(installer, 'ROOT', real / 'releases/abc'):
                 self.assertEqual(installer.deploy_release(), real / 'releases/abc')
 
+    def test_every_linux_discord_version_is_found(self):
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory)
+            for version in ('1.0.159', '1.0.160'):
+                (root / f'app-{version}/resources').mkdir(parents=True)
+                (root / f'app-{version}/resources/app.asar').write_bytes(b'')
+            with patch.object(corsu, 'PLATFORM', 'linux'):
+                self.assertEqual(installer.sibling_versions(root / 'app-1.0.160'), [root / 'app-1.0.159'])
+
 
 if __name__ == '__main__':
     unittest.main()

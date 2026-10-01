@@ -54,6 +54,16 @@ def discord_location():
     return next((candidate for candidate in candidates if discord_archive(candidate).exists()), None)
 
 
+def sibling_versions(location):
+    """The other app-<version> folders next to a Linux Discord. The launcher may still start an older one
+    until Discord restarts on the newest, so every version present gets the plugin."""
+    location = Path(location)
+    if corsu.PLATFORM != 'linux' or not location.name.startswith('app-'):
+        return []
+    return sorted(path for path in location.parent.glob('app-*')
+                  if path != location and (path / 'resources/app.asar').exists())
+
+
 def vesktop_installed():
     if shutil.which('vesktop') or (corsu.CONFIG / 'vesktop').is_dir():
         return True
@@ -376,6 +386,8 @@ def main(argv=None):
         corsu.install(local, qt_system='qt' in components)
     if 'discord' in components:
         install_discord(location)
+        for other in sibling_versions(location):
+            install_discord(other)
     corsu.setup_shortcut(corsu.Installer())
     applications = corsu.HOME / '.local/share/applications'
     if corsu.PLATFORM == 'linux' and shutil.which('update-desktop-database') and applications.is_dir():
