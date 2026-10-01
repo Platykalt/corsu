@@ -33,7 +33,7 @@ class TranslationTests(unittest.TestCase):
         self.assertEqual(engine.translate('   '), '   ')
 
     def test_lexicon_rows_are_well_formed(self):
-        for number, line in enumerate(engine.LEXICON.read_text().splitlines(), 1):
+        for number, line in enumerate(engine.LEXICON.read_text(encoding='utf-8').splitlines(), 1):
             if not line.strip() or line.startswith('#'):
                 continue
             fields = line.split('|')
