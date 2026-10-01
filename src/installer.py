@@ -66,7 +66,7 @@ def sibling_versions(location):
 
 
 def vesktop_installed():
-    if shutil.which('vesktop') or (corsu.CONFIG / 'vesktop').is_dir():
+    if shutil.which('vesktop') or (corsu.CONFIG / 'vesktop').is_dir() or (corsu.DATA / 'vesktop').is_dir():
         return True
     if corsu.PLATFORM == 'windows':
         return (Path(os.environ.get('LOCALAPPDATA', '')) / 'Programs/vesktop').is_dir()
@@ -81,7 +81,8 @@ def available_components():
         result.append('desktop')
     if discord_location():
         result.append('discord')
-    if vesktop_installed():
+    # Without Discord or Vesktop, Corsu offers to download Vesktop, a Discord app that already includes Vencord.
+    if vesktop_installed() or not discord_location():
         result.append('vesktop')
     if corsu.PLATFORM != 'macos':
         import chromium
@@ -319,7 +320,12 @@ def show_plan(components, location):
                 ' Vencord updates are turned off so they do not remove it. Set Discord to French or English.',
                 f'  Discord : modifier {location} avec l\'installeur officiel de Vencord et activer le plugin Corsu.'
                 ' Les mises à jour de Vencord sont coupées pour ne pas l\'effacer. Réglez Discord en français ou en anglais.'))
-    if 'vesktop' in components:
+    if 'vesktop' in components and not vesktop_installed():
+        print(t('  Vesktop: download Vesktop (about 130 MB) from its GitHub page, check its published checksum, install it'
+                ' and set it up with the Corsu plugin. Vesktop is a Discord app that includes Vencord.',
+                '  Vesktop : télécharger Vesktop (environ 130 Mo) depuis sa page GitHub, vérifier sa somme de contrôle,'
+                ' l\'installer et le régler avec le plugin Corsu. Vesktop est une application Discord qui contient Vencord.'))
+    elif 'vesktop' in components:
         print(t('  Vesktop: use the Vencord build that includes the Corsu plugin.',
                 '  Vesktop : utiliser la version de Vencord qui contient le plugin Corsu.'))
     if 'desktop' in components:
@@ -402,6 +408,7 @@ def main(argv=None):
     if not args.yes and input(t('Go ahead? [y/N] ', 'On y va ? [o/N] ')).strip().lower() not in ('y', 'yes', 'o', 'oui'):
         print(t('Nothing was changed.', 'Rien n\'a été modifié.'))
         return 0
+    corsu.progress(3, 'Preparing', 'Préparation')
     target = deploy_release()
     if target != ROOT:
         command = [sys.executable, str(target / 'src/installer.py'), '--yes', '--components', *components]
@@ -410,16 +417,22 @@ def main(argv=None):
         run(command, env={**os.environ, 'CORSU_DEPLOYED': str(target.resolve())})
         return 0
     if {'discord', 'vesktop'} & set(components):
+        corsu.progress(5, 'Preparing the Discord plugin', 'Préparation du plugin Discord')
         prepare_build()
+    if 'vesktop' in components and not vesktop_installed():
+        import vesktop
+        vesktop.install()
     local = set(components) - {'discord', 'qt'}
     if 'qt' in components:
         local.add('desktop')
     if local:
         corsu.install(local, qt_system='qt' in components)
     if 'discord' in components:
+        corsu.progress(85, 'Installing the Discord plugin', 'Installation du plugin Discord')
         install_discord(location)
         for other in sibling_versions(location):
             install_discord(other)
+    corsu.progress(95, 'Creating shortcuts', 'Création des raccourcis')
     corsu.setup_shortcut(corsu.Installer())
     if ROOT.is_relative_to((corsu.DATA / 'releases').resolve()):
         prune_releases(ROOT)
@@ -444,11 +457,19 @@ if __name__ == '__main__':
     # Windows consoles default to a legacy code page; never crash on Corsican letters.
     for stream in (sys.stdout, sys.stderr):
         stream.reconfigure(errors='replace')
+    import logbook
+    logbook.start('installer')
     try:
         raise SystemExit(main())
     except (EOFError, KeyboardInterrupt):
-        print('\nNo answer received; nothing was changed.', file=sys.stderr)
+        print(t('\nNo answer received; nothing was changed.', '\nAucune réponse reçue ; rien n\'a été modifié.'), file=sys.stderr)
         raise SystemExit(1)
     except (RuntimeError, OSError, subprocess.CalledProcessError) as error:
-        print(f'Corsu stopped: {error}\nAnything already changed can be undone with the Corsu app, or: python3 src/installer.py --uninstall', file=sys.stderr)
+        logbook.failure(error)
+        print(t(f'Corsu stopped: {error}\nDetails: {logbook.path()}\nAnything already changed can be undone with the Corsu app.',
+                f'Corsu s\'est arrêté : {error}\nDétails : {logbook.path()}\nCe qui a déjà été modifié peut être annulé avec l\'application Corsu.'),
+              file=sys.stderr)
+        raise SystemExit(1)
+    except Exception as error:  # Any other error: keep the full details in the log instead of a bare traceback.
+        print(logbook.failure(error), file=sys.stderr)
         raise SystemExit(1)

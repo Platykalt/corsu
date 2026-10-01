@@ -40,7 +40,7 @@ class SetupWindowTests(unittest.TestCase):
             self.assertEqual(self.request('POST', '/api/uninstall', key='secret', host='attacker.example')[0], 403)
             start.assert_not_called()
             self.assertEqual(self.request('POST', '/api/uninstall', key='secret')[0], 200)
-            start.assert_called_once_with('uninstall', ['--uninstall', '--yes'], 'en')
+            start.assert_called_once_with('uninstall', ['--uninstall', '--yes'], 'fr')
 
     def test_state_needs_the_key(self):
         self.assertEqual(self.request('GET', '/api/state')[0], 404)
@@ -56,7 +56,7 @@ class SetupWindowTests(unittest.TestCase):
             start.assert_called_once_with('switch', ['--disable', 'firefox'], 'fr')
             start.reset_mock()
             self.request('POST', '/api/pause', key='secret', body={'hours': 1})
-            start.assert_called_once_with('switch', ['--disable', 'terminal', '--hours', '1.0'], 'en')
+            start.assert_called_once_with('switch', ['--disable', 'terminal', '--hours', '1.0'], 'fr')
 
 
 if __name__ == '__main__':

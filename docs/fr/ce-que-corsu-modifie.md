@@ -109,6 +109,19 @@ envoyer au projet par un ticket GitHub.
 L'option Texte d'origine au survol, dans Logiciels, ajoute une infobulle avec le texte remplacé sur ce que Corsu
 traduit dans Discord et sur Google.
 
+## Vesktop téléchargé par Corsu
+
+Si l'ordinateur n'a ni Discord ni Vesktop, Corsu propose Vesktop, une application Discord qui contient Vencord. Il
+télécharge la dernière version depuis la page GitHub de Vesktop, vérifie sa somme SHA-256 publiée par GitHub,
+l'installe dans son dossier de données (dans `~/Applications` sous macOS) et ajoute une entrée au menu. La
+désinstallation de Corsu la retire.
+
+## Journal
+
+Tout ce que l'installeur, la mise à jour et l'application Corsu affichent est aussi écrit dans `logs/corsu.log`,
+dans le dossier de données de Corsu, avec le détail complet de chaque erreur. Le fichier reste sur l'ordinateur ;
+joignez-le à un signalement en cas de problème. Le bouton Ouvrir le dossier du journal, dans À propos, l'affiche.
+
 ## Revenir au français
 
 Chaque partie peut être désactivée séparément : Firefox, les navigateurs Chromium, Discord, Vesktop, le bureau, le

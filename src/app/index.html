@@ -89,6 +89,10 @@ input[type="checkbox"].pick { width: 16px; height: 16px; margin: 0; accent-color
 .activity.failed .line span { color: var(--danger); }
 .activity pre { margin: 8px 0 2px; max-height: 38vh; overflow: auto; white-space: pre-wrap; word-break: break-word;
   font: 12px/1.5 ui-monospace, "Cascadia Mono", "DejaVu Sans Mono", Menlo, monospace; color: var(--muted); }
+.meter { height: 6px; border-radius: 3px; background: var(--track); overflow: hidden; margin-top: 8px; }
+.meter[hidden] { display: none; }
+.meter span { display: block; height: 100%; width: 0; background: var(--accent); border-radius: 3px; transition: width .4s ease-out; }
+.step { color: var(--muted); font-size: 13px; }
 .busy { width: 12px; height: 12px; border-radius: 50%; border: 2px solid var(--track); border-top-color: var(--accent); animation: turn .9s linear infinite; flex: none; }
 @keyframes turn { to { transform: rotate(360deg); } }
 
@@ -141,7 +145,7 @@ dl.facts dt:not(:first-of-type), dl.facts dd:not(:first-of-type) { border-top: 1
       <button type="button" data-page="about" data-t="nav_about"></button>
     </nav>
     <label class="language"><span data-t="language"></span>
-      <select id="language"><option value="fr">Français</option><option value="en">English</option></select>
+      <select id="language"><option value="co">Corsu</option><option value="fr">Français</option><option value="en">English</option></select>
     </label>
   </aside>
 
@@ -223,6 +227,12 @@ dl.facts dt:not(:first-of-type), dl.facts dd:not(:first-of-type) { border-top: 1
       <h1 data-t="nav_about"></h1>
       <p class="lead" data-t="about_lead"></p>
       <dl class="facts" id="facts"></dl>
+      <h2 data-t="logs"></h2>
+      <p class="muted" data-t="logs_text"></p>
+      <div class="buttons">
+        <button type="button" class="button" id="open-logs" data-t="open_logs"></button>
+        <a class="button" style="text-decoration:none;color:inherit" href="https://github.com/Platykalt/corsu/issues/new?template=bug.yml" target="_blank" rel="noopener noreferrer" data-t="report_bug"></a>
+      </div>
       <h2 data-t="remove_heading"></h2>
       <p class="muted" data-t="remove_text"></p>
       <div class="buttons"><button type="button" class="button destructive" id="remove" data-t="remove_ellipsis"></button></div>
@@ -234,6 +244,8 @@ dl.facts dt:not(:first-of-type), dl.facts dd:not(:first-of-type) { border-top: 1
       <span class="busy" id="busy"></span><span id="activity-text"></span>
       <button type="button" class="textbutton" id="details-toggle"></button>
     </div>
+    <div class="meter" id="meter" hidden role="progressbar" aria-valuemin="0" aria-valuemax="100"><span id="meter-fill"></span></div>
+    <div class="step" id="step"></div>
     <pre id="log" hidden></pre>
   </div>
 </div>
@@ -260,6 +272,58 @@ dl.facts dt:not(:first-of-type), dl.facts dd:not(:first-of-type) { border-top: 1
 "use strict";
 const key = location.hash.slice(1);
 const text = {
+  co: {
+    nav_programs: "Prugrammi", nav_add: "Aghjunghje", nav_help: "Aiutu", nav_about: "À prupositu", language: "Lingua",
+    nav_review: "Rilege",
+    review_lead: "Verificate e traduzzioni scritte per Corsu, e più corte prima. Una currezzione s'applica à u prossimu lanciu di Discord o di Firefox.",
+    review_french: "Francese", review_english: "Inglese", review_corsican: "Corsu",
+    review_ok: "Ghjustu", review_fix: "Curreghje", review_skip: "Passà",
+    review_progress: "{done} nant'à {total} verificate · {fixed}",
+    corrections_one: "{n} currezzione", corrections_many: "{n} currezzioni",
+    review_done: "Tutte e traduzzioni di sta sezzione sò state verificate.",
+    review_share: "Sparte e vostre currezzioni",
+    review_share_text: "E vostre currezzioni fermanu nant'à st'urdinatore. Per ch'elle ghjovinu à tutti, mandatele à u prughjettu : un bigliettu GitHub s'apre, dighjà cumpletu, è sceglite di mandallu o micca.",
+    review_send: "Mandà e mo currezzioni…", review_none: "Nisuna currezzione per avà.",
+    review_copied: "A lista hè troppu longa per l'indirizzu : hè stata cupiata. Incullatela in u bigliettu chì s'apre.",
+    learn: "Amparà", show_original: "Testu d'origine passendu u topu",
+    show_original_detail: "In Discord è nant'à Google, passendu u topu nant'à un testu traduttu, si vede u testu ch'ellu rimpiazza.",
+    update_available: "Corsu {version} hè dispunibule (avete {current}).", update_install: "Aghjurnà",
+    job_update: "Aghjurnamentu",
+    programs_lead: "Ciò chì s'affissa in corsu. Un cambiamentu face effettu à u prossimu lanciu di u prugramma.",
+    programs_none: "Nunda ùn hè stallatu per avà.", go_add: "Aghjunghje prugrammi",
+    restart: "Rilanciate {name} per vede u cambiamentu.", restart_desktop: "Scunnettitevi è cunnettitevi torna per vede u cambiamentu.",
+    installed: "Stallatu",
+    terminal: "Terminale", terminal_label: "Cummande in corsu",
+    terminal_on: "In i novi terminali.", terminal_off: "In francese finu à ch'è vo u rimettite.",
+    terminal_until: "In francese finu à {time}, dopu torna in corsu.",
+    pause_hour: "Francese per un'ora",
+    everything: "Tuttu", everything_on_text: "Rimette ogni prugramma in a so lingua d'origine, senza disinstallà nunda.",
+    everything_off_text: "Corsu hè in pausa : ogni prugramma hè in a so lingua d'origine.",
+    everything_off: "Rimette tuttu in a lingua d'origine", everything_on: "Rimette tuttu in corsu",
+    add_lead: "Prugrammi trovi nant'à st'urdinatore. Corsu mostra ciò ch'ellu hà da mudificà nanzu di fallu, è tuttu si pò annullà.",
+    add_none: "Tuttu ciò chì Corsu hà trovu quì hè dighjà stallatu.",
+    add_missing: "Manca un prugramma ? Corsu prupone solu quelli ch'ellu trova. Stallatelu, dopu riapritete Corsu.",
+    install_ellipsis: "Stallà…", install: "Stallà", cancel: "Abbandunà", plan_title: "Mudificazioni previste",
+    pick_one: "Marcate almenu un prugramma.",
+    help_lead: "E guide sò nant'à GitHub, in francese è in inglese.",
+    guide_install: "Stallazione nant'à {system}", guide_discord: "Discord in corsu", guide_phone: "Telefonu è tastiera",
+    guide_compat: "Ciò chì funziona, è induve", guide_changes: "Ciò chì Corsu mudifica", guide_why: "Perchè Corsu",
+    report: "Signalà un sbagliu di traduzzione",
+    practice: "Praticà u corsu", practice_text: "Un'interfaccia tradutta ùn rimpiazza micca a cunversazione. Per leghje, scrive è discorre in corsu :",
+    sapienzia: "traduzzione, dizziunariu, cuniugazione è cunversazione", astutu: "un assistente chì risponde in corsu",
+    liv: "un'intelligenza artificiale chì parla corsu",
+    about_lead: "Corsu hè un prugramma liberu, sottu licenza GNU GPL versione 3 o più recente.",
+    version: "Versione", system: "Sistema", lexicon: "Lessicu", lexicon_count: "{n} entrate", profile: "Prufilu Firefox",
+    source: "Codice fonte",
+    remove_heading: "Disinstallà", remove_text: "Ogni schedariu è parametru d'origine hè rimessu. Ciò chì avete mudificatu voi stessi dopu à a stallazione ùn hè micca toccu.",
+    remove_ellipsis: "Disinstallà Corsu…", remove_question: "Disinstallà Corsu ?", remove: "Disinstallà",
+    job_install: "Stallazione", job_switch: "Cambiamentu di lingua", job_uninstall: "Disinstallazione",
+    running: "{job} in corsu…", done: "{job} compia.", failed: "{job} interrotta da un sbagliu.",
+    show_details: "Affissà i detagli", hide_details: "Piattà i detagli",
+    busy: "Un'operazione hè dighjà in corsu.", closed: "Corsu hè chjosu. Riapritelu da u listinu di l'appiecazioni.",
+    logs: "Ghjurnale", logs_text: "Tuttu ciò chì Corsu face hè nutatu in un schedariu, nant'à st'urdinatore. S'ellu ci hè un prublema, aghjunghjitelu à u vostru signalamentu.",
+    open_logs: "Apre u cartulare di u ghjurnale", report_bug: "Signalà un prublema",
+  },
   fr: {
     nav_programs: "Logiciels", nav_add: "Ajouter", nav_help: "Aide", nav_about: "À propos", language: "Langue",
     nav_review: "Relire",
@@ -309,6 +373,8 @@ const text = {
     running: "{job} en cours…", done: "{job} terminée.", failed: "{job} interrompue par une erreur.",
     show_details: "Afficher les détails", hide_details: "Masquer les détails",
     busy: "Une opération est déjà en cours.", closed: "Corsu est fermé. Rouvrez-le depuis le menu des applications.",
+    logs: "Journal", logs_text: "Tout ce que fait Corsu est noté dans un fichier, sur cet ordinateur. En cas de problème, joignez-le à votre signalement.",
+    open_logs: "Ouvrir le dossier du journal", report_bug: "Signaler un problème",
   },
   en: {
     nav_programs: "Programs", nav_add: "Add", nav_help: "Help", nav_about: "About", language: "Language",
@@ -359,6 +425,8 @@ const text = {
     running: "{job} in progress…", done: "{job} finished.", failed: "{job} stopped with an error.",
     show_details: "Show details", hide_details: "Hide details",
     busy: "Something is already running.", closed: "Corsu is closed. Open it again from the applications menu.",
+    logs: "Log", logs_text: "Everything Corsu does is written to a file on this computer. If something goes wrong, attach it to your report.",
+    open_logs: "Open the log folder", report_bug: "Report a problem",
   },
 };
 const docs = "https://github.com/Platykalt/corsu/blob/main/docs/";
@@ -371,6 +439,8 @@ let state = null, page = null, picks = null, closed = false, showLog = false;
 const restartHints = new Map();
 
 const $ = id => document.getElementById(id);
+// Browsers have no Corsican number and time formats; the French ones match Corsican usage.
+const numbers = () => language === "co" ? "fr" : language;
 const t = (name, values = {}) => (text[language || "fr"][name] ?? name).replace(/\{(\w+)\}/g, (_, k) => values[k]);
 function make(tag, attributes = {}, ...children) {
   const node = document.createElement(tag);
@@ -448,7 +518,7 @@ function renderPrograms() {
     $("switch-terminal").checked = until === null;
     $("switch-terminal").disabled = busy;
     $("terminal-detail").textContent = until === null ? t("terminal_on") : until === 0 ? t("terminal_off")
-      : t("terminal_until", { time: new Date(until * 1000).toLocaleTimeString(language, { hour: "2-digit", minute: "2-digit" }) });
+      : t("terminal_until", { time: new Date(until * 1000).toLocaleTimeString(numbers(), { hour: "2-digit", minute: "2-digit" }) });
     $("pause-hour").hidden = until !== null;
     $("pause-hour").disabled = busy;
   }
@@ -485,7 +555,7 @@ function linkRow(href, title, detail) {
 }
 
 function renderHelp() {
-  const fr = language === "fr";
+  const fr = language !== "en";
   const computer = fr ? `fr/ordinateur/${state.platform}.md` : `en/computer/${state.platform}.md`;
   $("guides").replaceChildren(
     linkRow(docs + computer, t("guide_install", { system: systems[state.platform] || state.platform })),
@@ -503,7 +573,7 @@ function renderHelp() {
 
 function renderAbout() {
   const rows = [[t("version"), state.version], [t("system"), systems[state.platform] || state.platform],
-    [t("lexicon"), t("lexicon_count", { n: state.lexicon_entries.toLocaleString(language) })]];
+    [t("lexicon"), t("lexicon_count", { n: state.lexicon_entries.toLocaleString(numbers()) })]];
   if (state.firefox_profile) rows.push([t("profile"), state.firefox_profile]);
   const facts = rows.flatMap(([term, value]) => [make("dt", { text: term }), make("dd", { text: value })]);
   facts.push(make("dt", { text: t("source") }),
@@ -519,7 +589,16 @@ function renderActivity() {
   if (!job.title) return;
   const name = t("job_" + job.title);
   bar.classList.toggle("failed", job.ok === false);
-  $("busy").hidden = !job.running;
+  // A filling bar when the task reports its progress; the small spinner only for quick changes.
+  const progress = job.progress;
+  $("meter").hidden = !progress;
+  $("busy").hidden = !job.running || Boolean(progress);
+  if (progress) {
+    const percent = job.running ? progress.percent : job.ok ? 100 : progress.percent;
+    $("meter-fill").style.width = percent + "%";
+    $("meter").setAttribute("aria-valuenow", percent);
+  }
+  $("step").textContent = job.running && progress ? progress.label : "";
   $("activity-text").textContent = t(job.running ? "running" : job.ok ? "done" : "failed", { job: name });
   if (job.ok === false) showLog = true;
   $("details-toggle").textContent = t(showLog ? "hide_details" : "show_details");
@@ -537,7 +616,7 @@ async function loadReview() {
   if (!result) return;
   reviewItem = result.item;
   const progress = result.progress[reviewSection];
-  $("review-progress").textContent = t("review_progress", { done: progress.done.toLocaleString(language), total: progress.total.toLocaleString(language), fixed: t((language === "fr" ? progress.fixed <= 1 : progress.fixed === 1) ? "corrections_one" : "corrections_many", { n: progress.fixed }) });
+  $("review-progress").textContent = t("review_progress", { done: progress.done.toLocaleString(numbers()), total: progress.total.toLocaleString(numbers()), fixed: t((language === "fr" ? progress.fixed <= 1 : progress.fixed === 1) ? "corrections_one" : "corrections_many", { n: progress.fixed }) });
   $("review-card").hidden = !reviewItem;
   $("review-done").hidden = Boolean(reviewItem);
   $("review-error").hidden = true;
@@ -586,7 +665,6 @@ async function refresh() {
     const next = await call("/api/state");
     if (state && state.job.running && !next.job.running) picks = null;
     state = next;
-    if (!chosen) language = state.language;
     if (page === null) show(state.installed ? "programs" : "add");
     render();
   } catch (error) {
@@ -618,6 +696,7 @@ $("review-send").addEventListener("click", async () => {
   window.open(result.url, "_blank", "noopener");
 });
 $("switch-original").addEventListener("change", event => call("/api/options", { showOriginal: event.target.checked }).then(refresh));
+$("open-logs").addEventListener("click", () => call("/api/logs", {}));
 $("update-install").addEventListener("click", () => call("/api/update", {}).then(refresh));
 $("language").addEventListener("change", event => {
   language = event.target.value; chosen = true;
@@ -650,7 +729,8 @@ $("remove-confirm").addEventListener("click", () => {
 });
 for (const button of document.querySelectorAll("[data-close]")) button.addEventListener("click", () => button.closest("dialog").close());
 
-language = language || ((navigator.language || "fr").toLowerCase().startsWith("en") ? "en" : "fr");
+// Corsican first: the app speaks the language it puts on the computer.
+language = language || "co";
 render();
 refresh();
 setInterval(() => { if (!closed) refresh(); }, 1500);

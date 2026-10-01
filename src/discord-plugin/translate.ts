@@ -160,6 +160,12 @@ function resolve(text: string, segments = true): string | undefined {
     }
     const templated = fromTemplate(text);
     if (templated !== undefined) return templated;
+    // A label followed by a count, written with or without spaces: "Members—3", "Membres — 3", "Online – 12".
+    const counted = text.match(/^(.*?\p{L})(\s*[—–:-]\s*|\s+)(\d[\d\s.,\u00a0\u202f]*)$/u);
+    if (counted) {
+        const label = resolve(counted[1], false);
+        if (label !== undefined) return label + counted[2] + counted[3];
+    }
     if (!segments) return undefined;
     const parts = text.split(separators);
     if (parts.length < 3) return composite(text) ?? translateDate(text);

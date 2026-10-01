@@ -46,6 +46,12 @@ def french():
 
 def t(english, francais):
     return francais if french() else english
+
+
+def progress(percent, english, francais):
+    """A progress line for the Corsu app's progress bar; the app hides it from the log it shows."""
+    if os.environ.get('CORSU_SETUP_WINDOW'):
+        print(f'@progress {int(percent)} {t(english, francais)}', flush=True)
 LEXICON = engine.LEXICON
 FRENCH_CATALOGS = Path('/usr/share/locale/fr/LC_MESSAGES')
 QT_TRANSLATIONS = Path('/usr/share/qt6/translations')
@@ -570,13 +576,15 @@ def firefox_runtime():
     stage = Path(tempfile.mkdtemp(prefix='build-', dir=target.parent))
     try:
         app = stage / install.app
+        progress(15, 'Copying Firefox', 'Copie de Firefox')
         shutil.copytree(install.root, app, dirs_exist_ok=True, symlinks=True)
         french_names = set(fr.namelist()) if fr else set()
         manifest = json.loads(fr.read('manifest.json')) if fr else None
         stats = {'version': app_version, 'translated_values': 0, 'ftl_files': 0, 'french_messages': 0,
                  'fallback': 'fr' if fr else None, 'french_pack': manifest['version'] if fr else None,
                  'platform': PLATFORM, 'partial': True}
-        for name in ('omni.ja', 'browser/omni.ja'):
+        for step, name in enumerate(('omni.ja', 'browser/omni.ja')):
+            progress(25 + step * 20, 'Translating Firefox', 'Traduction de Firefox')
             if not (resources / name).exists():
                 continue
             prefix = 'browser/' if name.startswith('browser/') else ''
@@ -1118,6 +1126,8 @@ def install(components=None, qt_system=False):
         raise RuntimeError('Build Vencord before installing.')
     runtime, firefox_stats = firefox_runtime() if 'firefox' in components else (None, None)
     installer = Installer()
+    if 'desktop' in components:
+        progress(65, 'Translating the desktop', 'Traduction du bureau')
     kde_stats = kde(installer, qt_system=qt_system) if 'desktop' in components else None
     if qt_system and kde_stats:
         kde_stats['qt_system_catalogs'] = system_catalogs(installer)
@@ -1137,6 +1147,7 @@ def install(components=None, qt_system=False):
     chromium_stats = None
     if 'chromium' in components:
         import chromium
+        progress(75, 'Translating Chromium browsers', 'Traduction des navigateurs Chromium')
         chromium_stats = chromium.install(installer)
     installer.state['components'] = sorted(set(installer.state.get('components', [])) | components)
     installer.state['qt_system'] = qt_system or installer.state.get('qt_system', False)

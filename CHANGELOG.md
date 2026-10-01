@@ -1,5 +1,16 @@
 # Changelog
 
+## 0.17.0 (2026-10-01)
+
+- The Corsu app speaks Corsican, chosen by default; French and English stay available.
+- Installing shows a progress bar that fills step by step, with the current step written under it.
+- Log: everything Corsu prints goes to `logs/corsu.log` in its data folder, with the full details of any error, and
+  error messages say where to find it. The About page opens the folder.
+- Vesktop: without Discord or Vesktop, Corsu downloads Vesktop, checks its published SHA-256 and sets it up with the
+  Corsu plugin.
+- Discord: labels followed by a count without spaces ("Membres—3") are translated.
+- "Detagli" instead of "detaglii" everywhere, and "ditagli" aligned on it.
+
 ## 0.16.0 (2026-10-01)
 
 - Discord: the plugin now translates labels with a name or number inside ("Send a message in {channel}",

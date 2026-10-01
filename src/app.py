@@ -28,20 +28,27 @@ IDLE_SECONDS = 600
 
 # Names stay general (what the part is); the detail line says what changes.
 COMPONENTS = {
-    'firefox': {'en': ('Firefox', 'Menus, settings and error pages. On Google, also the buttons Google leaves untranslated.'),
+    'firefox': {'co': ('Firefox', "Listini, parametri è pagine d'errore. Nant'à Google, ancu i buttoni chì Google ùn traduce micca."),
+               'en': ('Firefox', 'Menus, settings and error pages. On Google, also the buttons Google leaves untranslated.'),
                 'fr': ('Firefox', 'Menus, réglages et pages d\'erreur. Sur Google, aussi les boutons que Google ne traduit pas.')},
-    'chromium': {'en': ('Chromium browsers', 'Menus and settings.'),
+    'chromium': {'co': ('Navigatori Chromium', 'Listini è parametri.'),
+                'en': ('Chromium browsers', 'Menus and settings.'),
                  'fr': ('Navigateurs Chromium', 'Menus et réglages.')},
-    'discord': {'en': ('Discord', 'The app\'s interface, through Vencord. Messages are not changed.'),
+    'discord': {'co': ('Discord', "L'interfaccia di l'appiecazione, cù Vencord. I messaghji ùn cambianu micca."),
+               'en': ('Discord', 'The app\'s interface, through Vencord. Messages are not changed.'),
                 'fr': ('Discord', 'L\'interface de l\'application, avec Vencord. Les messages ne changent pas.')},
-    'vesktop': {'en': ('Vesktop', 'The app\'s interface. Messages are not changed.'),
+    'vesktop': {'co': ('Vesktop', "L'interfaccia di l'appiecazione. I messaghji ùn cambianu micca."),
+               'en': ('Vesktop', 'The app\'s interface. Messages are not changed.'),
                 'fr': ('Vesktop', 'L\'interface de l\'application. Les messages ne changent pas.')},
-    'desktop': {'en': ('Desktop', 'KDE Plasma: the desktop, the application menu and KDE programs.'),
+    'desktop': {'co': ('Scagnu', "KDE Plasma : u scagnu, u listinu di l'appiecazioni è i prugrammi KDE."),
+               'en': ('Desktop', 'KDE Plasma: the desktop, the application menu and KDE programs.'),
                 'fr': ('Bureau', 'KDE Plasma : le bureau, le menu des applications et les programmes KDE.')},
-    'qt': {'en': ('System translations', 'GTK programs, command output and Qt dialogs. Needs the administrator password.'),
+    'qt': {'co': ('Traduzzioni di u sistema', "Prugrammi GTK, messaghji di e cummande è finestre Qt. Dumanda a parolla d'intesa d'amministratore."),
+          'en': ('System translations', 'GTK programs, command output and Qt dialogs. Needs the administrator password.'),
            'fr': ('Traductions du système', 'Programmes GTK, messages des commandes et fenêtres Qt. Demande le mot de '
                   'passe administrateur.')},
-    'terminal': {'en': ('Terminal', 'Command messages, in new terminal windows.'),
+    'terminal': {'co': ('Terminale', 'I messaghji di e cummande, in i novi terminali.'),
+                'en': ('Terminal', 'Command messages, in new terminal windows.'),
                  'fr': ('Terminal', 'Les messages des commandes, dans les nouveaux terminaux.')},
 }
 ORDER = ['firefox', 'chromium', 'discord', 'vesktop', 'desktop', 'qt', 'terminal']
@@ -56,12 +63,13 @@ class Job:
         self.lines = []
         self.running = False
         self.ok = None
+        self.progress = None
 
     def start(self, title, arguments, language, script='installer.py'):
         with self.lock:
             if self.running:
                 return False
-            self.title, self.lines, self.running, self.ok = title, [], True, None
+            self.title, self.lines, self.running, self.ok, self.progress = title, [], True, None, None
         environment = {**os.environ, 'CORSU_LANG': language, 'PYTHONUNBUFFERED': '1', 'PYTHONIOENCODING': 'utf-8',
                        'CORSU_SETUP_WINDOW': '1'}
         command = [sys.executable, str(corsu.SRC / script), *arguments]
@@ -75,17 +83,26 @@ class Job:
                                        env=environment)
             for line in process.stdout:
                 # Commands the installer runs are echoed with "+ "; they are noise for most people.
+                if line.startswith('@progress '):
+                    percent, _, label = line[10:].strip().partition(' ')
+                    if percent.isdigit():
+                        self.progress = {'percent': int(percent), 'label': label}
+                    continue
                 if not line.startswith('+ '):
                     self.lines.append(line.rstrip('\n'))
             ok = process.wait() == 0
         except OSError as error:
             self.lines.append(str(error))
             ok = False
+        if not ok:
+            import logbook
+            self.lines.append(corsu.t(f'Details: {logbook.path()}', f'Détails : {logbook.path()}'))
         with self.lock:
             self.running, self.ok = False, ok
 
     def snapshot(self):
-        return {'title': self.title, 'lines': self.lines[-400:], 'running': self.running, 'ok': self.ok}
+        return {'title': self.title, 'lines': self.lines[-400:], 'running': self.running, 'ok': self.ok,
+                'progress': self.progress}
 
 
 DETECTED = {'time': 0.0, 'names': set()}
@@ -119,6 +136,10 @@ def snapshot():
             found = ', '.join(browser.label for browser in chromium.browsers())
             if found:
                 text = {language: (label, f'{found}. {detail}') for language, (label, detail) in text.items()}
+        if name == 'vesktop' and not installer.vesktop_installed():
+            text = {'co': ('Vesktop', "Una appiecazione Discord cù Vencord. Corsu a scarica (circa 130 Mo), a verifica è a regula."),
+                    'fr': ('Vesktop', 'Une application Discord avec Vencord. Corsu la télécharge (environ 130 Mo), la vérifie et la règle.'),
+                    'en': ('Vesktop', 'A Discord app with Vencord. Corsu downloads it (about 130 MB), checks it and sets it up.')}
         items.append({'name': name, 'text': text, 'installed': name in installed or name in switchable,
                       'switchable': name in switchable,
                       'on': name in switchable and not corsu.is_disabled(name, state)})
@@ -189,7 +210,8 @@ def make_handler(key, job, activity):
                 request = json.loads(self.rfile.read(length) or b'{}')
             except ValueError:
                 return self.send(400, {'error': 'bad request'})
-            language = 'fr' if request.get('language') == 'fr' else 'en'
+            # The installer speaks French or English; the Corsican window gets French messages.
+            language = 'en' if request.get('language') == 'en' else 'fr'
             names = [name for name in request.get('components', []) if name in COMPONENTS]
             if self.path == '/api/review':
                 try:
@@ -203,6 +225,9 @@ def make_handler(key, job, activity):
                     return self.send(200, {'options': review.set_option('showOriginal', request.get('showOriginal'))})
                 except ValueError as error:
                     return self.send(400, {'error': str(error)})
+            if self.path == '/api/logs':
+                import logbook
+                return self.send(200, {'folder': logbook.open_folder()})
             if self.path == '/api/update':
                 started = job.start('update', ['--install'], language, script='update.py')
                 return self.send(200 if started else 409, {'started': started})
@@ -343,9 +368,15 @@ def main():
             setattr(sys, name, open(os.devnull, 'w', encoding='utf-8'))
         else:
             stream.reconfigure(errors='replace')
-    if '--text' in sys.argv:
-        return run_text()
-    serve(open_browser='--no-browser' not in sys.argv)
+    import logbook
+    logbook.start('app')
+    try:
+        if '--text' in sys.argv:
+            return run_text()
+        serve(open_browser='--no-browser' not in sys.argv)
+    except Exception as error:
+        print(logbook.failure(error), file=sys.stderr)
+        raise SystemExit(1)
 
 
 if __name__ == '__main__':

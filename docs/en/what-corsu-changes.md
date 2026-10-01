@@ -104,6 +104,18 @@ Discord plugin's settings. They stay on the computer unless you choose to send t
 The Original text on hover option, under Programs, adds a tooltip with the replaced text to what Corsu translates in
 Discord and on Google.
 
+## Vesktop downloaded by Corsu
+
+When the computer has neither Discord nor Vesktop, Corsu offers Vesktop, a Discord app that includes Vencord. It
+downloads the latest release from Vesktop's GitHub page, checks the SHA-256 checksum GitHub publishes for it, installs
+it in Corsu's data folder (`~/Applications` on macOS) and adds a menu entry. Uninstalling Corsu removes it.
+
+## Log
+
+Everything the installer, the updater and the Corsu app print is also written to `logs/corsu.log` in Corsu's data
+folder, with the full details of any error. The file stays on the computer; attach it to a bug report when
+something goes wrong. The Open the log folder button, under About, shows it.
+
 ## Going back to French
 
 Each part can be switched off on its own: Firefox, the Chromium browsers, Discord, Vesktop, the desktop, the

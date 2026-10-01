@@ -109,11 +109,17 @@ def install():
 def main():
     for stream in (sys.stdout, sys.stderr):
         stream.reconfigure(errors='replace')
+    import logbook
+    logbook.start('update')
     if '--install' in sys.argv:
         try:
             install()
         except (RuntimeError, OSError) as error:
+            logbook.failure(error)
             print(error, file=sys.stderr)
+            return 1
+        except Exception as error:
+            print(logbook.failure(error), file=sys.stderr)
             return 1
         return 0
     print(json.dumps(latest(force=True)))
