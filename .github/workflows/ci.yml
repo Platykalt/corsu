@@ -62,6 +62,11 @@ jobs:
           sha512sum -c fr.sha512
       - name: Package Linux, Windows and macOS archives
         run: python tools/package_release.py --output dist
+      - name: Build the Corsican keyboard prediction package (Keyman)
+        run: |
+          python tools/build_keyboard.py --package
+          cp keyboard/build/corsu-keyboard.kmp dist/corsu-keyboard.kmp
+          (cd dist && sha256sum corsu-keyboard.kmp > corsu-keyboard.kmp.sha256)
       - uses: actions/upload-artifact@v4
         with:
           name: releases

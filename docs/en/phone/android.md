@@ -10,6 +10,15 @@ come in Corsican, most of them translated by Patriccollu di Santa Maria √® Sich√
 Gboard, Google's keyboard, has a Corsican layout with word suggestions. In Gboard's settings, open Languages, tap
 Add keyboard and choose Corsican.
 
+Corsu also has its own word prediction and spelling correction, built from its 17,000 most used Corsican words. It
+runs in the free [Keyman](https://play.google.com/store/apps/details?id=com.tavultesoft.kmapro) keyboard:
+
+1. Install Keyman from the Play Store and add the EuroLatin (SIL) keyboard, which has every Corsican letter.
+2. On the phone, download [corsu-keyboard.kmp](https://github.com/Platykalt/corsu/releases/latest/download/corsu-keyboard.kmp) and open it: Keyman installs it.
+3. Keyman now suggests and corrects Corsican words as you type.
+
+There is no Corsican grammar checker yet, only spelling and word suggestions.
+
 ## Apps in Corsican
 
 Firefox, Firefox Focus, Thunderbird, K-9 Mail, VLC and OpenTracks include Corsican. VLC has its own language setting.

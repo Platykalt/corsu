@@ -13,7 +13,7 @@ ROOT = Path(__file__).resolve().parent.parent
 # Stable names, so https://github.com/<owner>/corsu/releases/latest/download/<name> always works.
 ARCHIVES = {'linux': 'corsu-linux.tar.gz', 'windows': 'corsu-windows.zip', 'macos': 'corsu-macos.tar.gz'}
 SOURCES = ('README.md', 'CHANGELOG.md', 'CONTRIBUTING.md', 'LICENSE')
-SOURCE_DIRECTORIES = ('src', 'lexicon', 'docs', 'install', 'tests', 'tools')
+SOURCE_DIRECTORIES = ('src', 'lexicon', 'docs', 'install', 'keyboard', 'tests', 'tools')
 
 
 def vencord_installer(manifest, name):
@@ -44,7 +44,7 @@ def collect(manifest):
     files = [ROOT / name for name in SOURCES if (ROOT / name).exists()]
     for directory in SOURCE_DIRECTORIES:
         files.extend(path for path in sorted((ROOT / directory).rglob('*'))
-                     if path.is_file() and '__pycache__' not in path.parts)
+                     if path.is_file() and '__pycache__' not in path.parts and 'build' not in path.parts)
     files.append(ROOT / 'vendor/vencord-installer-source.tar.gz')
     # The French Firefox language pack (MPL-2.0) is the offline fallback; installs fetch the matching version.
     files.append(ROOT / 'vendor/firefox-fr.xpi')

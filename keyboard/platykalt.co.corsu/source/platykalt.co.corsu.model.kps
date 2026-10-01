@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Package>
+  <System>
+    <KeymanDeveloperVersion>18.0</KeymanDeveloperVersion>
+    <FileVersion>12.0</FileVersion>
+  </System>
+  <Options>
+    <ExecuteProgram></ExecuteProgram>
+    <ReadMeFile>readme.htm</ReadMeFile>
+    <LicenseFile>..\LICENSE.md</LicenseFile>
+  </Options>
+  <Info>
+    <Name URL="">Corsu</Name>
+    <Copyright URL="">© Corsu contributors</Copyright>
+    <Author URL="">Corsu</Author>
+    <WebSite URL="https://github.com/Platykalt/corsu">github.com/Platykalt/corsu</WebSite>
+    <Version URL="">1.0</Version>
+    <Description URL="">Corsican word prediction and correction · Predizzione è currezzione di parolle in corsu</Description>
+  </Info>
+  <Files>
+    <File>
+      <Name>..\build\platykalt.co.corsu.model.js</Name>
+    </File>
+    <File>
+      <Name>welcome.htm</Name>
+    </File>
+    <File>
+      <Name>readme.htm</Name>
+    </File>
+    <File>
+      <Name>..\LICENSE.md</Name>
+    </File>
+  </Files>
+  <Keyboards/>
+  <LexicalModels>
+    <LexicalModel>
+      <Name>Corsu</Name>
+      <ID>platykalt.co.corsu</ID>
+      <Languages>
+        <Language ID="co">Corsican</Language>
+      </Languages>
+    </LexicalModel>
+  </LexicalModels>
+  <RelatedPackages/>
+</Package>

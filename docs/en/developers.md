@@ -7,6 +7,8 @@
 ```
 .github/            CI workflow, issue templates, release notes
 docs/               docs/fr (French) and docs/en (English): guides for computers and phones, Discord, compatibility
+keyboard/           the Keyman word prediction project; tools/build_keyboard.py fills its word list and builds
+                    corsu-keyboard.kmp
 install/            Install for Windows.cmd, Install for macOS.command, Install for Linux.sh (placed at the
                     top of each release archive), and get.sh / get.ps1 for one-line installs
 lexicon/            the translations: lexicon.tsv (written for Corsu), lexicon-mozilla.tsv and

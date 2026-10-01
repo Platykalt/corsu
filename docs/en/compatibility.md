@@ -28,7 +28,7 @@ usually because the system prevents it.
 | Firefox, Firefox Focus | In Corsican (Mozilla) | In Corsican (Mozilla) |
 | Thunderbird, VLC | In Corsican | VLC in Corsican |
 | Discord | Not possible | Not possible |
-| Corsican keyboard | Gboard | Keyman |
+| Corsican keyboard | Gboard, or Keyman with Corsu prediction | Keyman with Corsu prediction |
 
 The phone apps listed come in Corsican from their makers; Corsu does not change them. See [Android](phone/android.md)
 and [iPhone](phone/iphone.md).

@@ -28,7 +28,7 @@ en général parce que le système l'empêche.
 | Firefox, Firefox Focus | En corse (Mozilla) | En corse (Mozilla) |
 | Thunderbird, VLC | En corse | VLC en corse |
 | Discord | Impossible | Impossible |
-| Clavier corse | Gboard | Keyman |
+| Clavier corse | Gboard, ou Keyman avec la prédiction Corsu | Keyman avec la prédiction Corsu |
 
 Ces applications sont proposées en corse par leurs éditeurs ; Corsu ne les modifie pas. Voir [Android](telephone/android.md)
 et [iPhone](telephone/iphone.md).

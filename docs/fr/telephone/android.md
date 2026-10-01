@@ -11,6 +11,15 @@ vous pouvez vous en servir dès aujourd'hui.
 Gboard, le clavier de Google, a une disposition corse avec suggestions de mots. Dans les réglages de Gboard, ouvrez
 Langues, touchez Ajouter un clavier et choisissez Corse.
 
+Corsu a aussi sa propre prédiction de mots et correction orthographique, construite à partir de ses 17 000 mots
+corses les plus courants. Elle fonctionne dans le clavier gratuit [Keyman](https://play.google.com/store/apps/details?id=com.tavultesoft.kmapro) :
+
+1. Installez Keyman depuis le Play Store et ajoutez le clavier EuroLatin (SIL), qui a toutes les lettres corses.
+2. Sur le téléphone, téléchargez [corsu-keyboard.kmp](https://github.com/Platykalt/corsu/releases/latest/download/corsu-keyboard.kmp) et ouvrez-le : Keyman l'installe.
+3. Keyman propose et corrige désormais les mots corses pendant que vous écrivez.
+
+Il n'existe pas encore de correcteur de grammaire corse, seulement l'orthographe et les suggestions de mots.
+
 ## Applications en corse
 
 Firefox, Firefox Focus, Thunderbird, K-9 Mail, VLC et OpenTracks sont disponibles en corse. VLC a son propre réglage

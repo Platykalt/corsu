@@ -6,3 +6,5 @@ vendor/VencordInstallerCli*
 releases/
 dist/
 missing-labels.json
+keyboard/build/
+keyboard/*/build/

@@ -1,5 +1,10 @@
 # Changelog
 
+## 0.9.0 (2026-10-01)
+
+- Corsican word prediction and spelling correction for the Keyman keyboard (Android, iPhone, and computers):
+  `corsu-keyboard.kmp`, built from the 17,000 most used Corsican words in the lexicon and attached to each release.
+
 ## 0.8.1 (2026-10-01)
 
 - Linux: Corsu patches every version of Discord found in `~/.config/discord`, including the one the launcher still
