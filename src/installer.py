@@ -127,7 +127,7 @@ def prepare_build():
         env={**os.environ, 'VENCORD_HASH': manifest['vencord_revision'][:7]})
 
 
-DEPLOYED_FILES = ('LICENSE', 'README.md', 'README.en.md', 'CONTRIBUTING.md')
+DEPLOYED_FILES = ('LICENSE', 'README.md', 'CONTRIBUTING.md')
 DEPLOYED_DIRECTORIES = ('src', 'lexicon', 'install', 'vendor', 'Vencord')
 
 
