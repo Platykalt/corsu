@@ -669,7 +669,14 @@ def lexicon_section(name):
             continue
         fields = line.split('|')
         if inside and len(fields) == 3:
-            keys.extend(engine.normalize(key.strip()) for key in fields[:2] if key.strip())
+            for key in (field.strip() for field in fields[:2]):
+                if not key:
+                    continue
+                keys.append(engine.normalize(key))
+                # Labels with a name or number inside are looked up through their template form.
+                skeleton, tokens = engine.mask(key)
+                if tokens:
+                    keys.append(engine.normalize(skeleton))
     return keys
 
 

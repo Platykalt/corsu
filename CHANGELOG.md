@@ -1,5 +1,14 @@
 # Changelog
 
+## 0.16.0 (2026-10-01)
+
+- Discord: the plugin now translates labels with a name or number inside ("Send a message in {channel}",
+  "{count} unread messages", "Server tag: {tag}", "In a call ({name})"), labels made of several parts
+  ("Unread messages, Server name"), and dates ("ghjovi 1 ottobre 2026 à 18:04"). Names themselves are never changed.
+- Discord: about 4,900 more texts, read from all of Discord's French message files instead of only the ones the app
+  had cached, including tooltips such as "Search or start a conversation".
+- Discord: a hidden diagnostic option lists the texts still shown in French, to find what is missing.
+
 ## 0.15.0 (2026-10-01)
 
 - Review page in the Corsu app: go through the translations written for Corsu (Discord and Google), shortest first,

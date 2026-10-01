@@ -18,6 +18,12 @@ const settings = definePluginSettings({
         default: false,
         restartNeeded: true
     },
+    reportMissing: {
+        type: OptionType.BOOLEAN,
+        description: "Diagnostic: list untranslated texts in the console.",
+        default: false,
+        hidden: true
+    },
     corrections: {
         type: OptionType.STRING,
         description: "Currezzioni (JSON). Corrections (JSON).",
@@ -27,6 +33,7 @@ const settings = definePluginSettings({
 });
 
 let translator: ReturnType<typeof createTranslator> | undefined;
+let timer: ReturnType<typeof setInterval> | undefined;
 
 export default definePlugin({
     name: "Corsu",
@@ -40,6 +47,12 @@ export default definePlugin({
             setCorrections({});
         }
         translator = createTranslator(document, { showOriginal: settings.store.showOriginal });
+        if (settings.store.reportMissing) {
+            timer = setInterval(() => {
+                const found = translator?.report() ?? [];
+                if (found.length) console.info("[CorsuMissing] " + JSON.stringify(found));
+            }, 10000);
+        }
         translator.start();
         // The translations start from French or English text; another interface language stays as it is.
         const language = document.documentElement.lang || navigator.language;
@@ -53,6 +66,7 @@ export default definePlugin({
         }
     },
     stop() {
+        if (timer) clearInterval(timer);
         translator?.stop();
         translator = undefined;
     }

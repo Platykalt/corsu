@@ -13,19 +13,105 @@ let corrections: Record<string, string> = {};
 export function setCorrections(value: Record<string, string> | undefined) {
     corrections = value ?? {};
 }
-// What people write is never translated: messages, names of people, servers, channels and roles, statuses,
-// bios, embeds, and the text being typed. Everything else is interface; a text is replaced only when it matches a
-// lexicon entry as a whole, so ordinary words inside content are left alone.
-const protectedArea = [
-    "script", "style", "pre", "code", "textarea", "input", "[contenteditable]", "[data-corsu-ignore]",
-    '[id^="chat-messages"]', '[id^="message-content"]', '[id^="message-accessories"]', '[id^="message-reply-context"]',
-    '[class*="messageContent"]', '[class*="markup"]', '[class*="embed"]', '[class*="attachment"]',
-    '[class*="username"]', '[class*="displayName"]', '[class*="nickname"]', '[class*="globalName"]',
-    '[class*="channelName"]', '[class*="guildName"]', '[class*="roleName"]', '[class*="topic"]',
-    '[class*="activity"]', '[class*="customStatus"]', '[class*="bio"]', '[class*="aboutMe"]',
-    '[class*="member"] [class*="name"]', 'a[href^="/channels/"]:not([href="/channels/@me"])',
-    '[class*="threadName"]', '[class*="forumPost"]', '[class*="searchResult"]'
+// What people write is never touched: messages, bios, statuses, embeds and the text being typed.
+const contentArea = [
+    // Code blocks sit inside messages (markup); a bare <pre> elsewhere is an interface tooltip.
+    "script", "style", "textarea", "input", "[contenteditable]", "[data-corsu-ignore]",
+    '[id^="message-content"]', '[id^="message-accessories"]', '[class*="messageContent"]', '[class*="markup"]',
+    '[class*="embed"]', '[class*="attachment"]', '[class*="topic"]', '[class*="customStatus"]', '[class*="bio"]',
+    '[class*="aboutMe"]', '[class*="forumPost"]', '[class*="searchResult"]'
 ].join(",");
+// Names of people, servers, channels and roles: only labels around them change (templates like "Send a message in
+// {channel}" and dates); a name itself is never looked up in the dictionary.
+const nameArea = [
+    '[id^="chat-messages"]', '[id^="message-reply-context"]',
+    '[class*="username"]', '[class*="displayName"]', '[class*="nickname"]', '[class*="globalName"]',
+    '[class*="channelName"]', '[class*="guildName"]', '[class*="roleName"]', '[class*="activity"]',
+    '[class*="member"] [class*="name"]', 'a[href^="/channels/"]:not([href="/channels/@me"])', '[class*="threadName"]'
+].join(",");
+const protectedArea = contentArea + "," + nameArea;
+
+// Discord shows dates in its interface language; give the day and month their Corsican names.
+const days: Record<string, string> = { lundi: "luni", mardi: "marti", mercredi: "mercuri", jeudi: "ghjovi",
+    vendredi: "venneri", samedi: "sabbatu", dimanche: "dumenica" };
+const months: Record<string, string> = { janvier: "ghjennaghju", février: "ferraghju", mars: "marzu", avril: "aprile",
+    mai: "maghju", juin: "ghjugnu", juillet: "lugliu", août: "aostu", septembre: "sittembre", octobre: "ottobre",
+    novembre: "nuvembre", décembre: "dicembre" };
+const datePattern = new RegExp(`\\b(${Object.keys(days).join("|")}|${Object.keys(months).join("|")}|Aujourd’hui|Aujourd'hui|Hier|Demain)\\b`, "gi");
+const relative: Record<string, string> = { "aujourd’hui": "Oghje", "aujourd'hui": "Oghje", hier: "Eri", demain: "Dumane" };
+
+function translateDate(text: string): string | undefined {
+    if (!/\d/.test(text) || !/^[\p{L}\d\s:,./’'-]+$/u.test(text)) return undefined;
+    let changed = false;
+    const result = text.replace(datePattern, word => {
+        const lower = word.toLowerCase();
+        const value = days[lower] ?? months[lower] ?? relative[lower];
+        if (!value) return word;
+        changed = true;
+        return word[0] === word[0].toUpperCase() ? value[0].toUpperCase() + value.slice(1) : value;
+    });
+    return changed ? result : undefined;
+}
+
+// Templates with names or numbers inside ("Send a message in {channel}"), indexed by the first or last word of
+// their fixed text so that each label only tries a handful of them.
+type Template = { pattern: RegExp; value: string; fixed: number; };
+let templates: Map<string, Template[]> | undefined;
+const escape = (text: string) => text.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+
+function templateIndex() {
+    if (templates) return templates;
+    templates = new Map();
+    for (const [key, value] of [...Object.entries(words), ...Object.entries(corrections)]) {
+        if (!key.includes("\u0000")) continue;
+        const parts = key.split(/\u0000\d+\u0000/);
+        const fixed = parts.join("").trim().length;
+        if (!parts.some(part => /[\p{L}]{2}/u.test(part))) continue;
+        const order: number[] = [];
+        key.replace(/\u0000(\d+)\u0000/g, (_, index) => { order.push(Number(index)); return ""; });
+        const pattern = new RegExp("^" + parts.map(escape).join("(.+?)") + "$", "s");
+        const head = parts[0].trim().split(/\s+/)[0]?.toLowerCase();
+        const tail = parts[parts.length - 1].trim().split(/\s+/).pop()?.toLowerCase();
+        const index = head ? "^" + head : "$" + (tail ?? "");
+        const entry = { pattern, fixed, value: value.replace(/\u0000(\d+)\u0000/g, (_, n) => `\u0000${order.indexOf(Number(n)) + 1}\u0000`) };
+        if (!templates.has(index)) templates.set(index, []);
+        templates.get(index)!.push(entry);
+    }
+    // The most specific template wins.
+    for (const list of templates.values()) list.sort((a, b) => b.fixed - a.fixed);
+    return templates;
+}
+
+function fromTemplate(text: string): string | undefined {
+    const key = normalize(text);
+    const words = key.trim().split(/\s+/);
+    const candidates = [...(templateIndex().get("^" + words[0]?.toLowerCase()) ?? []),
+        ...(templateIndex().get("$" + words[words.length - 1]?.toLowerCase()) ?? [])].sort((a, b) => b.fixed - a.fixed);
+    for (const { pattern, value, fixed } of candidates) {
+        const match = key.match(pattern);
+        // Too little fixed text ("Send {x}") would match labels that only start the same way; such short templates
+        // apply only when what they capture is a number ("{count} mentions").
+        if (match && fixed < 12 && !match.slice(1).every(group => /^[\d\s.,\u00a0\u202f+]+$/.test(group))) continue;
+        if (match) return value.replace(/\u0000(\d+)\u0000/g, (_, n) => match[Number(n)] ?? "");
+    }
+    return undefined;
+}
+
+// Labels made of several parts, like "Unread messages, Server name, Screen share active": translate the parts that
+// are interface text and leave the names as they are.
+function composite(text: string): string | undefined {
+    if (!text.includes(", ") || text.length > 240) return undefined;
+    const parts = text.split(/(,\s+)/);
+    let changed = false;
+    const output = parts.map((part, index) => {
+        if (index % 2) return part;
+        const found = resolve(part.trim(), false) ?? fromTemplate(part.trim());
+        if (found === undefined) return part;
+        changed = true;
+        return part.replace(part.trim(), found);
+    });
+    return changed ? output.join("") : undefined;
+}
 
 // Kept in step with engine.py: placeholders, trailing punctuation, letter case and
 // composed labels. Placeholders always survive translation unchanged.
@@ -72,17 +158,27 @@ function resolve(text: string, segments = true): string | undefined {
                 ? other[0].toUpperCase() + other.slice(1) : other[0].toLowerCase() + other.slice(1);
         }
     }
+    const templated = fromTemplate(text);
+    if (templated !== undefined) return templated;
     if (!segments) return undefined;
     const parts = text.split(separators);
-    if (parts.length < 3) return undefined;
+    if (parts.length < 3) return composite(text) ?? translateDate(text);
     const output: string[] = [];
     for (const [index, part] of parts.entries()) {
         if (index % 2 || !/[^\W\d_]/.test(part)) { output.push(part); continue; }
         const piece = resolve(part.trim(), false);
-        if (piece === undefined) return undefined;
+        if (piece === undefined) return composite(text);
         output.push(part.replace(part.trim(), piece));
     }
     return output.join("");
+}
+
+// Inside names only templates and dates apply, so a name that happens to be a dictionary word stays as it is.
+function nameLabel(value: string): string {
+    const match = value.match(/^(\s*)(.*?)(\s*)$/s);
+    if (!match || !match[2]) return value;
+    const result = fromTemplate(match[2]) ?? translateDate(match[2]);
+    return result === undefined ? value : match[1] + result + match[3];
 }
 
 export function translateLabel(value: string): string {
@@ -107,11 +203,11 @@ export function createTranslator(doc: Document, options: { showOriginal?: boolea
 
     function text(node: Text) {
         const parent = node.parentElement;
-        if (!parent || parent.closest(protectedArea)) return;
+        if (!parent || parent.closest(contentArea)) return;
         const value = node.data;
         const previous = originalText.get(node);
         if (previous && previous.translated === value) return;
-        const translated = translateLabel(value);
+        const translated = parent.closest(nameArea) ? nameLabel(value) : translateLabel(value);
         if (translated === value) return;
         originalText.set(node, { original: value, translated });
         node.data = translated;
@@ -122,13 +218,14 @@ export function createTranslator(doc: Document, options: { showOriginal?: boolea
     }
 
     function attributes(element: Element) {
-        if (element.closest(protectedArea) && !element.matches("input,textarea")) return;
+        if (element.closest(contentArea) && !element.matches("input,textarea")) return;
+        const inName = Boolean(element.closest(nameArea));
         for (const name of ["aria-label", "title", "placeholder"]) {
             const value = element.getAttribute(name);
             if (!value) continue;
             let saved = originalAttrs.get(element);
             if (saved?.get(name)?.translated === value) continue;
-            const translated = translateLabel(value);
+            const translated = inName ? nameLabel(value) : translateLabel(value);
             if (translated === value) continue;
             if (!saved) originalAttrs.set(element, saved = new Map());
             saved.set(name, { original: value, translated });
@@ -140,12 +237,12 @@ export function createTranslator(doc: Document, options: { showOriginal?: boolea
         if (!root.isConnected) return;
         if (root.nodeType === Node.TEXT_NODE) { text(root as Text); return; }
         if (root instanceof Element) {
-            if (root.closest(protectedArea)) return;
+            if (root.closest(contentArea)) return;
             attributes(root);
         }
         const walker = doc.createTreeWalker(root, NodeFilter.SHOW_ELEMENT | NodeFilter.SHOW_TEXT, {
             acceptNode(node) {
-                return node instanceof Element && node.matches(protectedArea)
+                return node instanceof Element && node.matches(contentArea)
                     ? NodeFilter.FILTER_REJECT : NodeFilter.FILTER_ACCEPT;
             }
         });
@@ -176,7 +273,28 @@ export function createTranslator(doc: Document, options: { showOriginal?: boolea
         if (pending.size && !scheduled) { scheduled = true; queueMicrotask(flush); }
     });
 
+    // Diagnostic: visible texts that still look French or English, and whether a protection rule skipped them.
+    const reported = new Set<string>();
+    function report() {
+        const found: string[] = [];
+        const walker = doc.createTreeWalker(doc.body, NodeFilter.SHOW_TEXT);
+        let node: Node | null;
+        while ((node = walker.nextNode())) {
+            const text = (node as Text).data.trim();
+            const parent = (node as Text).parentElement;
+            if (!parent || text.length < 2 || text.length > 160 || !/[A-Za-zÀ-ÿ]{2}/.test(text)) continue;
+            if (parent.closest("script,style") || !(parent as HTMLElement).offsetParent) continue;
+            if (translateLabel(text) !== text || reported.has(text)) continue;
+            if (!/[éèêàçùûôîâ]|\b(le|la|les|des|un|une|de|du|et|à|en|pour|the|and|to|of|your)\b|^[A-Z][a-zé]+$/i.test(text)) continue;
+            reported.add(text);
+            const skipped = parent.closest(protectedArea);
+            found.push((skipped ? "P " + (skipped.className || skipped.tagName).toString().slice(0, 40) + " | " : "") + text);
+        }
+        return found;
+    }
+
     return {
+        report,
         start() {
             if (running) return;
             running = true;
