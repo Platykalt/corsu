@@ -1,15 +1,15 @@
-Corsican interface translations for **Firefox, Discord (Vencord) and Vesktop on Linux, Windows and macOS**, **Chrome, Opera / Opera GX, Edge, Brave and Vivaldi on Linux and Windows**, plus **KDE Plasma and Qt on Linux**.
+Download the file for your system, extract it, and start the installer:
 
-Reviewed Corsican translations by Patriccollu and the Mozilla Corsican team (MPL-2.0) come first; about 40,000 draft rows follow their terminology.
+| System | File | Then |
+| --- | --- | --- |
+| Windows 10 or 11 | `corsu-windows.zip` | double-click `install.cmd` |
+| macOS | `corsu-macos.tar.gz` | run `./install.sh` in Terminal |
+| Linux | `corsu-linux.tar.gz` | run `./install.sh` |
 
-### Install
+Or install in one line: `irm https://raw.githubusercontent.com/Platykalt/corsu/main/get.ps1 | iex` on Windows
+(PowerShell), `curl -fsSL https://raw.githubusercontent.com/Platykalt/corsu/main/get.sh | sh` on macOS and Linux.
 
-1. Download the archive for your system below (`windows-x86_64.zip`, `macos.tar.gz` or `linux-x86_64.tar.gz`) and extract it.
-2. Windows: double-click `install.cmd`. macOS / Linux: run `./install.sh`.
-3. Choose what to translate. A **Corsu — Setup** shortcut lets you add more later.
+Each file has a `.sha256` checksum next to it. Python 3.10 or newer is required; on Windows `install.cmd` offers to
+install it. Every archive here was installed and tested on its own system before this release was published.
 
-Requires Python 3.10+ (the Windows launcher offers to install it). Each archive has a `.sha256` checksum.
-
-Translations are drafts and welcome review by Corsican speakers. Licensed GPL-3.0-or-later; bundled Vencord sources and installer keep their own licenses, and the French Firefox language pack is MPL-2.0.
-
-Every archive here passed end-to-end checks on its own platform before publication: real Firefox started and read in Corsican, Discord patched and restored.
+See [CHANGELOG.md](https://github.com/Platykalt/corsu/blob/main/CHANGELOG.md) for what changed.

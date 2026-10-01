@@ -168,7 +168,7 @@ def write_files(pairs):
     elevated_copy(protected)
     for source, target in pairs:
         if corsu.digest(target.read_bytes()) != corsu.digest(source.read_bytes()):
-            raise RuntimeError(f'Could not write {target}. Close the browser and run Corsu — Setup again.')
+            raise RuntimeError(f'Could not write {target}. Close the browser and run Corsu Setup again.')
 
 
 def apply(installer, browser):
@@ -229,7 +229,7 @@ def linux_entry(installer, browser):
     """Route the browser's menu entry through Corsu, which re-translates after updates and
     asks Chromium for French (`co` has no pack, so `LANGUAGE=co:fr` resolves to the Corsican-filled `fr`)."""
     launcher = corsu.HOME / f'.local/bin/{browser.id}-corsu'
-    installer.write(launcher, f'#!/bin/sh\nexec python3 {shlex.quote(str(corsu.ROOT / "corsu.py"))} '
+    installer.write(launcher, f'#!/bin/sh\nexec python3 {shlex.quote(str(corsu.SRC / "corsu.py"))} '
                               f'launch-chromium {browser.id} "$@"\n', 0o755)
     existing = corsu.HOME / '.local/share/applications' / browser.desktop
     original = existing if existing.exists() else Path('/usr/share/applications') / browser.desktop
@@ -275,6 +275,6 @@ def install(installer):
     if corsu.PLATFORM == 'windows':
         # Browser updates bring back French packs: re-translate them at every login.
         corsu.windows_link(installer, corsu.CONFIG / 'Microsoft/Windows/Start Menu/Programs/Startup/Corsu.lnk',
-                           corsu.python_launcher(), f'"{corsu.ROOT / "corsu.py"}" chromium-refresh')
+                           corsu.python_launcher(), f'"{corsu.SRC / "corsu.py"}" chromium-refresh')
     corsu.STATE.write_text(json.dumps(installer.state, indent=2), encoding='utf-8')
     return reports

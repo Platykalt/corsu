@@ -9,10 +9,11 @@ import re
 import struct
 from pathlib import Path
 
-ROOT = Path(__file__).resolve().parent
-LEXICON = ROOT / 'lexicon.tsv'
-# Reviewed human translations (MPL-2.0) load first, so their wording wins over draft rows.
-REVIEWED = ROOT / 'lexicon-mozilla.tsv'
+ROOT = Path(__file__).resolve().parent.parent
+LEXICON = ROOT / 'lexicon/lexicon.tsv'
+# Reviewed translations from other projects load first, so their wording wins over draft rows.
+REVIEWED = [ROOT / 'lexicon/lexicon-mozilla.tsv', ROOT / 'lexicon/lexicon-upstream.tsv']
+LEXICONS = [*REVIEWED, LEXICON]
 
 # Placeholders that must survive translation untouched: Fluent placeables, printf
 # specifiers, Qt/KDE numbered arguments and shell-style variables.
@@ -78,7 +79,7 @@ def unmask(template, tokens):
 def load_lexicon(path=None):
     """Read `English|French|Corsican` rows into direct and templated lookup tables."""
     words = {}
-    paths = [Path(path)] if path else [REVIEWED, LEXICON]
+    paths = [Path(path)] if path else LEXICONS
     lines = [line for source in paths if source.exists() for line in source.read_text(encoding='utf-8').splitlines()]
     for number, line in enumerate(lines, 1):
         if not line.strip() or line.startswith('#'):
@@ -157,8 +158,8 @@ def _segments(text, resolve):
     changed = False
     for index, part in enumerate(parts):
         if index % 2:
-            # Italian-style spacing for the colon separator as well.
-            output.append(part.lstrip(' \u00a0\u202f') if ':' in part else part)
+            # Keep the source's spacing; Corsican, like French, puts a space before `:`.
+            output.append(part)
             continue
         if not part.strip() or not re.search(r'[^\W\d_]', normalize(part)):
             output.append(part)
@@ -184,8 +185,9 @@ def _resolve(text, segments=True):
     if trailing and trailing[1].strip():
         inner = _resolve(trailing[1].rstrip(), False)
         if inner is not None:
-            # Corsican follows Italian spacing: no blank before `:`, `?`, `!` or `;`.
-            return inner + trailing[2].lstrip(' \u00a0\u202f\t')
+            # Corsican typography, as used by the Mozilla and Weblate translators, keeps a space before
+            # `:`, `?`, `!` and `;`, so the source's spacing is kept.
+            return inner + trailing[2]
     accelerated = _accelerator(text, lambda value: _resolve(value, False))
     if accelerated is not None:
         return accelerated

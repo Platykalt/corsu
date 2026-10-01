@@ -14,7 +14,7 @@ import urllib.request
 
 import corsu
 
-ROOT = Path(__file__).resolve().parent
+ROOT = Path(__file__).resolve().parent.parent
 
 
 def version_key(name):
@@ -93,7 +93,8 @@ def stale_build(source):
         return True
     built = min(path.stat().st_mtime for path in builds)
     return any((ROOT / name).stat().st_mtime > built
-               for name in ('lexicon.tsv', 'plugin/index.ts', 'plugin/translate.ts'))
+               for name in ('lexicon/lexicon.tsv', 'lexicon/lexicon-mozilla.tsv', 'lexicon/lexicon-upstream.tsv',
+                            'discord-plugin/index.ts', 'discord-plugin/translate.ts'))
 
 
 def prepare_build():
@@ -118,6 +119,10 @@ def prepare_build():
         env={**os.environ, 'VENCORD_HASH': manifest['vencord_revision'][:7]})
 
 
+DEPLOYED_FILES = ('LICENSE', 'README.md', 'README.fr.md', 'CONTRIBUTING.md', 'release.json', 'install.sh', 'install.cmd')
+DEPLOYED_DIRECTORIES = ('src', 'lexicon', 'discord-plugin', 'vendor', 'Vencord')
+
+
 def deploy_release():
     """Keep launchers/builds working even after the downloaded archive is removed."""
     # Compare real paths: Windows short names (RUNNER~1) and macOS /var -> /private/var differ otherwise,
@@ -125,23 +130,21 @@ def deploy_release():
     if ROOT.is_relative_to((corsu.DATA / 'releases').resolve()) or os.environ.get('CORSU_DEPLOYED') == str(ROOT):
         return ROOT
     fingerprint = hashlib.sha256()
-    for name in ('corsu.py', 'engine.py', 'chromium.py', 'installer.py', 'lexicon.tsv', 'lexicon-mozilla.tsv', 'plugin/index.ts', 'plugin/translate.ts',
-                 'release.json'):
-        fingerprint.update((ROOT / name).read_bytes())
-    for path in sorted((ROOT / 'Vencord/dist').glob('*.*')):
-        fingerprint.update(path.read_bytes())
+    for path in sorted([*(ROOT / 'src').glob('*.py'), *(ROOT / 'discord-plugin').glob('*.ts'),
+                        *(ROOT / name for name in DEPLOYED_FILES if (ROOT / name).is_file()),
+                        *(ROOT / 'lexicon').glob('*.tsv'), *(ROOT / 'Vencord/dist').glob('*.*')]):
+        fingerprint.update(path.relative_to(ROOT).as_posix().encode() + b'\0' + path.read_bytes())
     target = corsu.DATA / 'releases' / fingerprint.hexdigest()[:16]
     if target.exists():
         return target
     target.parent.mkdir(parents=True, exist_ok=True)
     stage = Path(tempfile.mkdtemp(prefix='stage-', dir=target.parent))
     try:
-        for name in ('corsu.py', 'engine.py', 'chromium.py', 'installer.py', 'lexicon.tsv', 'lexicon-mozilla.tsv', 'LICENSE', 'README.md',
-                     'release.json', 'CONTRIBUTING.md', 'coverage.py', 'install.sh', 'install.cmd'):
-            if (ROOT / name).exists():
+        for name in DEPLOYED_FILES:
+            if (ROOT / name).is_file():
                 shutil.copy2(ROOT / name, stage / name)
-        for name in ('plugin', 'vendor', 'Vencord'):
-            if (ROOT / name).exists():
+        for name in DEPLOYED_DIRECTORIES:
+            if (ROOT / name).is_dir():
                 shutil.copytree(ROOT / name, stage / name,
                                 ignore=shutil.ignore_patterns('.git', 'node_modules', '__pycache__', 'Installer'))
         stage.rename(target)
@@ -205,12 +208,12 @@ def install_discord(location):
 
 
 DESCRIPTIONS = {
-    'firefox': 'Firefox — menus, settings, error pages',
-    'desktop': 'KDE Plasma — desktop, KDE apps, application menu',
-    'qt': 'Qt dialogs — standard buttons and file choosers (administrator)',
-    'discord': 'Discord — interface labels through Vencord',
-    'vesktop': 'Vesktop — interface labels through Vencord',
-    'chromium': 'Chromium browsers — Chrome, Opera / Opera GX, Edge, Brave, Vivaldi',
+    'firefox': 'Firefox: menus, settings and error pages',
+    'desktop': 'KDE Plasma: desktop, KDE apps and application menu',
+    'qt': 'Qt dialogs: standard buttons and file choosers (asks for administrator rights)',
+    'discord': 'Discord: interface through Vencord',
+    'vesktop': 'Vesktop: interface through Vencord',
+    'chromium': 'Chrome, Opera GX and other Chromium browsers',
 }
 
 
@@ -285,10 +288,10 @@ def main(argv=None):
             if component in ('desktop', 'qt') and corsu.PLATFORM != 'linux':
                 parser.error(f'{component} translates KDE Plasma and Qt on Linux; it is not available on {corsu.PLATFORM}.')
             parser.error(f'{component} is not installed/supported here. Install it first.')
-    print(f'Corsu — Corsican interface setup ({corsu.PLATFORM})\n')
+    print(f'Corsu setup ({corsu.PLATFORM})\n')
     print('Selected: ' + ', '.join(components))
     if 'firefox' in components:
-        launcher = {'windows': 'add a “Firefox — Corsu” Start menu shortcut', 'macos': 'add “Firefox Corsu” to ~/Applications'}
+        launcher = {'windows': 'add a "Firefox Corsu" Start menu shortcut', 'macos': 'add "Firefox Corsu" to ~/Applications'}
         print('• Build a local Firefox copy, translate its interface, and '
               + launcher.get(corsu.PLATFORM, 'replace your user Firefox launcher') + '. Keep the existing profile.')
     if 'desktop' in components:
@@ -317,7 +320,7 @@ def main(argv=None):
         return 0
     target = deploy_release()
     if target != ROOT:
-        command = [sys.executable, str(target / 'installer.py'), '--yes', '--components', *components]
+        command = [sys.executable, str(target / 'src/installer.py'), '--yes', '--components', *components]
         if 'discord' in components:
             command.extend(['--discord-path', str(location)])
         run(command, env={**os.environ, 'CORSU_DEPLOYED': str(target.resolve())})
@@ -350,6 +353,9 @@ if __name__ == '__main__':
         stream.reconfigure(errors='replace')
     try:
         raise SystemExit(main())
+    except (EOFError, KeyboardInterrupt):
+        print('\nNo answer received; nothing was changed.', file=sys.stderr)
+        raise SystemExit(1)
     except (RuntimeError, OSError, subprocess.CalledProcessError) as error:
         print(f'Installation stopped: {error}\nManaged changes can be restored with: python3 installer.py --uninstall', file=sys.stderr)
         raise SystemExit(1)

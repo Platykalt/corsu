@@ -107,18 +107,18 @@ class TranslationTests(unittest.TestCase):
                 self.assertTrue(json.loads(corsu.STATE.read_text(encoding='utf-8'))['enabled'])
 
     def test_exact_labels_only(self):
-        self.assertEqual(corsu.translate('  &Save…  '), '  Arregi&strà…  ')
+        self.assertEqual(corsu.translate('  &Save…  '), '  &Arregistrà…  ')
         self.assertEqual(corsu.translate('_Save'), 'Arregi_strà')
         self.assertEqual(corsu.translate('Save my private message'), 'Save my private message')
         self.assertEqual(corsu.translate('Nonexistent %1'), 'Nonexistent %1')
 
     def test_fluent_expressions_and_keys_preserved(self):
-        source = 'save =\n    .label = Save\n    .accesskey = S\ncount = { $count } files\n'
+        source = 'save =\n    .label = Save\n    .accesskey = S\ncount = { $count } zzz-untranslated\n'
         translated, count = corsu.patch_ftl(source)
         self.assertEqual(count, 1)
         self.assertIn('.label = Arregistrà', translated)
         self.assertIn('.accesskey = S', translated)
-        self.assertIn('count = { $count } files', translated)
+        self.assertIn('count = { $count } zzz-untranslated', translated)
 
     def test_french_pack_from_other_version_merges_by_message(self):
         english = '# note\n\nkept = New only\n\nshared = Hello\n    .title = Hi\n\nfooter = Bye\n'

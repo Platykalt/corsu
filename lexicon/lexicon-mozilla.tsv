@@ -1,8 +1,9 @@
-# Corsican translations by Patriccollu di Santa Maria è Sichè and the Mozilla Corsican (co) team,
-# taken from Firefox for Android, Focus and Android Components (github.com/mozilla-l10n/android-l10n).
-# Licensed under the Mozilla Public License 2.0 (https://mozilla.org/MPL/2.0/). Loaded before lexicon.tsv:
-# these reviewed human translations and their terminology take precedence over draft rows.
+# Corsican translations by Patriccollu di Santa Maria è Sichè and fellow translators,
+# imported by tools/import_translations.py. Each section keeps its project's license.
 # English | French | Corsican
+# All rows: Mozilla Public License 2.0, https://mozilla.org/MPL/2.0/
+
+# Firefox for Android, Focus and Android Components (MPL-2.0)
 The page at %1$s says:|Annonce de la page %1$s\u00a0:|Annunziamentu di a pagina %1$s :
 %2$s is requesting your username and password. The site says: “%1$s”|Le site %2$s demande votre nom d’utilisateur et votre mot de passe. Le site indique\u00a0: «\u00a0%1$s\u00a0»|U situ %2$s richiede u vostru nome d’utilizatore è a vostra parolla d’intesa. U site indica : « %1$s »
 %1$s is requesting your username and password.|%1$s demande votre nom d’utilisateur et votre mot de passe.|U situ %1$s richiede u vostru nome d’utilizatore è a vostra parolla d’intesa.
@@ -553,7 +554,6 @@ Set up private summaries|Configurez des résumés privés|Cunfigurà riassunti p
 A one-time download lets %s create page summaries that stay in your control.|Un téléchargement unique permet à %s de créer des résumés de page que vous pouvez contrôler.|Un scaricamentu unicu permette à %s di creà riassunti di pagina chì vo cuntrollate.
 Setting up summaries|Configuration des résumés|Cunfigurazione di i riassunti
 One-time download for private summaries.|Un téléchargement unique pour des résumés privés.|Un scaricamentu unicu per riassunti privati.
-%1$.2f MB / %2$.2f MB|%1$.2f\u00a0Mo / %2$.2f\u00a0Mo|%1$.2f\u00a0Mo / %2$.2f\u00a0Mo
 Unknown error|Erreur inconnue|Sbagliu scunnisciutu
 Try again|Réessayer|Pruvà torna
 Page too long to summarize|Page trop longue pour être résumée|Pagina troppu longa per esse riassunta
@@ -731,7 +731,7 @@ More translations settings|Plus de paramètres de traduction|Altri parametri per
 More page summary settings|Plus de paramètres des résumés de pages|Altri parametri per i riassunti di pagina
 Audio is converted to text by Google Speech Services.|L’audio est converti en texte par Google Speech Services.|L’audio hè cunvertitu in testu da Google Speech Services.
 Block AI enhancements?|Bloquer les améliorations ayant recours à l’IA\u00a0?|Bluccà l’amendamenti impieghendu l’IA\u00a0?
-You won’t see new or current AI enhancements in %1$s, or pop-ups about them. Afterwards, you can unblock anything you want to keep using.  Blocking also affects extensions that use AI provided by %1$s.|Vous ne verrez pas les améliorations par IA (nouvelles ou existantes) dans %1$s, ni les popups qui s’y rapportent. Par la suite, vous pourrez débloquer toute fonctionnalité que vous souhaitez continuer à utiliser.  Le blocage affecte également les extensions qui utilisent l’IA fournie par %1$s.|Ùn viderete micca in %1$s l’amendamenti - novi o attuale - basati nant’à l’IA, nè i finestrini relativi. Più tardi, puderete sbluccà tutta funzione chì vo vulete cuntinuà à impiegà.  U blucchime affetta dinù l’estensioni chì impieganu l’IA pruviste da %1$s.
+You won’t see new or current AI enhancements in %1$s, or pop-ups about them. Afterwards, you can unblock anything you want to keep using. Blocking also affects extensions that use AI provided by %1$s.|Vous ne verrez pas les améliorations par IA (nouvelles ou existantes) dans %1$s, ni les popups qui s’y rapportent. Par la suite, vous pourrez débloquer toute fonctionnalité que vous souhaitez continuer à utiliser. Le blocage affecte également les extensions qui utilisent l’IA fournie par %1$s.|Ùn viderete micca in %1$s l’amendamenti - novi o attuale - basati nant’à l’IA, nè i finestrini relativi. Più tardi, puderete sbluccà tutta funzione chì vo vulete cuntinuà à impiegà. U blucchime affetta dinù l’estensioni chì impieganu l’IA pruviste da %1$s.
 What will be blocked:|Ce qui sera bloqué\u00a0:|Ciò chì serà bluccatu\u00a0:
 Selected language|Langue sélectionnée|Lingua selezziunata
 Follow device language|Utiliser la langue de l’appareil|Impiegà a lingua di l’apparechju
@@ -752,7 +752,7 @@ Help us make Firefox better|Aidez-nous à améliorer Firefox|Aiutateci à amend�
 Automatically send crash reports|Envoyer automatiquement les rapports de plantage|Mandà autumaticamente i raporti d’accidente
 Crash reports allow us to diagnose and fix issues with the browser. Reports may include personal or sensitive data.|Les rapports de plantage nous permettent de diagnostiquer et de corriger des problèmes avec le navigateur. Les rapports peuvent contenir des données personnelles ou sensibles.|I raporti d’accidente ci permettenu di diagnosticà è di currege i prublemi cù u navigatore. I raporti ponu cuntene dati persunali o sensibile.
 %s needs to restart|%s doit redémarrer|%s deve esse rilanciatu
-There was a problem opening %s.  Sending a crash report helps us diagnose and fix problems with the browser. Reports may include personal or sensitive data.|Un problème est survenu lors de l’ouverture de %s.  Envoyer un rapport de plantage nous aide à diagnostiquer et à corriger des problèmes avec le navigateur. Les rapports peuvent contenir des données personnelles ou sensibles.|Un prublema hè accadutu à l’apertura di %s.  L’inviu d’un raportu d’accidente ci permette di diagnosticà è di currege i prublemi cù u navigatore.
+There was a problem opening %s. Sending a crash report helps us diagnose and fix problems with the browser. Reports may include personal or sensitive data.|Un problème est survenu lors de l’ouverture de %s. Envoyer un rapport de plantage nous aide à diagnostiquer et à corriger des problèmes avec le navigateur. Les rapports peuvent contenir des données personnelles ou sensibles.|Un prublema hè accadutu à l’apertura di %s. L’inviu d’un raportu d’accidente ci permette di diagnosticà è di currege i prublemi cù u navigatore.
 Send crash report|Envoyer un rapport de plantage|Mandà u raportu d’accidente
 No thanks|Non merci|Innò, vi ringraziu
 Reopen %s|Rouvrir %s|Riapre %s
@@ -960,7 +960,6 @@ Twilight|Crépuscule|Attrachju
 Midnight|Minuit|Mezanotte
 Northern Lights|Aurores boréales|Albore boreale
 Pixelated|Pixélisé|Pizzelizatu
-Minimal|Minimale|Minimale
 Pride|Fiertés|Fierezze
 Created by @heyheymomodraws|Créé par @heyheymomodraws|Creatu da @heyheymomodraws
 Cuddling|Câlins|Abbracci
@@ -971,13 +970,13 @@ Gradients|Fond en dégradé|Sgradati
 Featured|En vedette|Cunsigliate
 Change app icon?|Changer l’icône de l’application\u00a0?|Cambià l’icona di l’appiecazione\u00a0?
 The app may close. Just tap your shiny new icon to reopen %1$s.|Il se peut que l’application se ferme. Il vous suffit alors d’appuyer sur votre toute nouvelle icône pour relancer %1$s.|L’appiecazione puderia chjodesi. Picchichjate puru nant’à a vostra icona nova nova per riapre %1$s.
-Changing the icon will remove any sites and shortcuts you’ve saved to your Home screen.   %1$s may close. Tap your new icon to reopen.|Modifier l’icône supprimera tous les sites et raccourcis que vous avez enregistrés sur votre écran d’accueil.  %1$s risque de se fermer. Appuyez sur la nouvelle icône pour le rouvrir.|A mudificazione di l’icona caccierà tutti i siti è l’accurtatoghji chì sò arregistrati nant’à u vostru screnu d’accolta.  %1$s puderia chjodesi. Picchichjate nant’à a vostra icona nova per riapre.
+Changing the icon will remove any sites and shortcuts you’ve saved to your Home screen. %1$s may close. Tap your new icon to reopen.|Modifier l’icône supprimera tous les sites et raccourcis que vous avez enregistrés sur votre écran d’accueil. %1$s risque de se fermer. Appuyez sur la nouvelle icône pour le rouvrir.|A mudificazione di l’icona caccierà tutti i siti è l’accurtatoghji chì sò arregistrati nant’à u vostru screnu d’accolta. %1$s puderia chjodesi. Picchichjate nant’à a vostra icona nova per riapre.
 Change icon|Changer l’icône|Cambià l’icona
 Failed to update the app icon. Remove existing shortcuts and try again.|Échec de la mise à jour de l’icône de l’application. Supprimez les raccourcis existants puis réessayez.|Fiascu per mudificà l’icona di l’appiecazione. Cacciate l’accurtatoghji chì esistenu è pruvate torna.
 New extensions now available|Nouvelles extensions disponibles|Nove estensioni dispunibule
 Check out 100+ new extensions that let you make Firefox your own.|Découvrez plus de 100 nouvelles extensions qui vous permettent de personnaliser Firefox.|Scuprite più di 100 estensioni nove chì vi permettenu di persunalizà Firefox.
 Explore extensions|Parcourir les extensions|Esplurà l’estensioni
-One or more extensions stopped working, making your system unstable. %1$s unsuccessfully tried to restart the extension(s).  Extensions won’t be restarted during your current session.  Removing or disabling extensions may fix this issue.|Une extension, ou plusieurs, a cessé de fonctionner entraînant l’instabilité de votre système. %1$s a tenté de la (ou les) redémarrer sans succès.  Ces extensions ne seront pas redémarrées pendant la session actuelle.  Supprimer ou désactiver les extensions peut résoudre le problème.|Certe estensioni anu fermatu di funziunà, rindendu u vostru sistema instabile. %1$s hà pruvatu, senza successu, di rilancialle.  St’estensioni ùn seranu micca rilanciate durante a sessione attuale.  Caccialle o disattivalle puderia currege stu prublema.
+One or more extensions stopped working, making your system unstable. %1$s unsuccessfully tried to restart the extension(s). Extensions won’t be restarted during your current session. Removing or disabling extensions may fix this issue.|Une extension, ou plusieurs, a cessé de fonctionner entraînant l’instabilité de votre système. %1$s a tenté de la (ou les) redémarrer sans succès. Ces extensions ne seront pas redémarrées pendant la session actuelle. Supprimer ou désactiver les extensions peut résoudre le problème.|Certe estensioni anu fermatu di funziunà, rindendu u vostru sistema instabile. %1$s hà pruvatu, senza successu, di rilancialle. St’estensioni ùn seranu micca rilanciate durante a sessione attuale. Caccialle o disattivalle puderia currege stu prublema.
 Try restarting extensions|Essayer de redémarrer les extensions|Pruvà di rilancià l’estensioni
 Continue with extensions disabled|Continuer avec les extensions désactivées|Cuntinuà cù l’estensioni disattivate
 Retry|Réessayer|Pruvà torna
@@ -1347,8 +1346,8 @@ Send to device|Envoyer à un appareil|Mandà à un apparechju
 No Devices Connected|Aucun appareil connecté|Alcunu apparechju cunnessu
 Learn About Sending Tabs…|En savoir plus sur l’envoi d’onglets…|Sapene di più nant’à u mandà d’unghjette…
 Connect Another Device…|Connecter un autre appareil…|Cunnette un altru apparechju…
-%1$s  Sent from %2$s 🦊 Try the mobile browser: %3$s|%1$s  Envoyé depuis %2$s 🦊 Essayez le navigateur mobile\u00a0: %3$s|%1$s  Mandatu da %2$s 🦊 Pruvate u navigatore mobile : %3$s
-%1$s  Sent from %2$s 🦊 %3$s|%1$s  Envoyé depuis %2$s 🦊 %3$s|%1$s  Mandatu da %2$s 🦊 %3$s
+%1$s Sent from %2$s 🦊 Try the mobile browser: %3$s|%1$s Envoyé depuis %2$s 🦊 Essayez le navigateur mobile\u00a0: %3$s|%1$s Mandatu da %2$s 🦊 Pruvate u navigatore mobile : %3$s
+%1$s Sent from %2$s 🦊 %3$s|%1$s Envoyé depuis %2$s 🦊 %3$s|%1$s Mandatu da %2$s 🦊 %3$s
 Sign back in to send tabs between devices|Reconnectez-vous pour envoyer des onglets d’un appareil à l’autre|Ricunnittitevi per mandà unghjette trà l’apparechji
 No devices connected|Aucun appareil connecté|Nisunu apparechju cunnessu
 Check your internet connection|Vérifiez votre connexion à Internet|Verificate a vostra cunnessione internet
@@ -1459,6 +1458,7 @@ Tracking Content|Contenu utilisé pour le pistage|Cuntenutu impiegatu per u spiu
 Stops outside ads, videos, and other content from loading that contains tracking code. May affect some website functionality.|Empêche le chargement des publicités, vidéos et autres contenus d’origine externe au site et contenant du code de pistage. Peut affecter certaines fonctionnalités du site.|Impedisce u caricamentu di e publicità, video è altri cuntenuti d’origine esterna à u situ è cuntenendu codice di spiunagiu. Què pò affettà certe funzioni di u situ web.
 Enhanced Tracking Protection is off for these websites|La protection renforcée contre le pistage est désactivée pour ces sites web|A prutezzione rinfurzata contr’à u spiunagiu hè disattivata per sti siti web
 What’s new in %s|Nouveautés dans %s|Ciò chì hè novu in %s
+%s / OSS Libraries|%s / Bibliothèques open source|%s / Bibliuteche di fonte aperta
 Redirect Trackers|Traqueurs par redirection|Perseguitatori da ridirezzione
 Clears cookies set by redirects to known tracking websites.|Efface les cookies définis par redirection vers des sites web connus pour le pistage.|Squasseghja i canistrelli definiti da ridirezzione ver di siti web cunnisciuti per u spiunagiu.
 Suspected Fingerprinters|Détecteurs d’empreinte numérique suspectés|Detettori d’impronta numerica suspettati
@@ -1860,7 +1860,6 @@ Videos, downloads, or media didn’t work|Des vidéos, des téléchargements ou 
 It’s hard to use or poorly designed|Il est difficile à utiliser ou mal conçu|Hè difficiule da impiegà o mal cuncepitu
 Privacy or security concerns|Préoccupations concernant la confidentialité ou la sécurité|Penseri apprupositu di a cunfidenzialità o di a sicurità
 Submit feedback and uninstall|Envoyer vos commentaires et désinstaller|Mandà u vostru avisu è disinstallà
-Firefox logo|Logo Firefox|Logo Firefox
 Survey feature icon|Icône de fonctionnalité de sondage|Icona di a funzione d’inchiesta
 Close survey|Fermer le sondage|Chjode l’inchiesta
 Autofill tools|Outils de remplissage automatique|Attrezzi di riempiimentu autumaticu
@@ -2158,3 +2157,1488 @@ Start your private browsing session, and we’ll block trackers and other bad st
 We’ll leave you to your private browsing, but get a quicker start next time with the %1$s widget on your Home screen.|Nous allons vous laisser à votre navigation privée, mais démarrez plus vite les prochaines fois avec le widget %1$s sur votre écran d’accueil.|Vi lasciemu à a vostra navigazione privata, ma principiate più prestu e prossime volte cù u widget %1$s nant’à u vostru screnu d’accolta.
 Add widget to home screen|Ajouter le widget à l’écran d’accueil|Aghjunghje u widget à u screnu d’accolta
 Widget added to home screen|Widget ajouté à l’écran d’accueil|Widget aghjuntu à u screnu d’accolta
+
+# Firefox for iOS (MPL-2.0)
+App Icon|Icône de l’application|Icona di l’appiecazione
+Firefox can use your camera to scan QR codes or take photos and video.|Firefox peut utiliser votre appareil photo pour scanner des codes QR ou prendre des photos et vidéos.|Firefox pò impiegà u vostru apparechju-fotò per analizà i codici QR o per piglià fotò è video.
+Firefox requires Face ID to access your saved passwords and payment methods.|Firefox a besoin de Face ID pour accéder à vos mots de passe et moyens de paiement enregistrés.|Firefox richiede Face ID per accede à e vostre parolle d’intesa è metode di pagamentu arregistrate.
+Websites you visit may request your location.|Les sites web que vous visitez peuvent demander à connaître votre emplacement.|I siti web chì vò visitate ponu richiede à cunnosce a vostra lucalizazione.
+Firefox uses your microphone to record and upload audio.|Firefox utilise votre microphone pour enregistrer et charger des fichiers audio.|Firefox impiega u vostru microfonu per arregistrà è incaricà schedarii audio.
+This lets you save photos.|Ceci vous permet d’enregistrer des photos.|Quessu vi permette d’arregistrà fotò.
+This lets Firefox transcribe your audio.|Cela permet à Firefox de transcrire vos contenus audio.|Què permette à Firefox di trascrive u to audio.
+New Private Tab|Nouvel onglet privé|Nova unghjetta privata
+New Tab|Nouvel onglet|Nova unghjetta
+Scan QR Code|Scanner un code QR|Analizà un codice QR
+Open In Firefox|Ouvrir dans Firefox|Apre in Firefox
+Add to Bookmarks|Ajouter aux marque-pages|Aghjunghje à l’indette
+Copy URL|Copier l’URL|Cupià l’indirizzu
+Send Link to Device|Envoyer le lien à un appareil|Mandà u liame à un apparechju
+Open Last Bookmark|Dernier marque-page|Ultima indetta
+Send to Device|Envoyer à un appareil|Mandà à l’apparechju
+Remove Bookmark|Supprimer le marque-page|Caccià l’indetta
+Enter passcode|Saisissez le code d’accès|Stampittate u codice d’accessu
+Use your fingerprint to access Logins now.|Utilisez votre empreinte digitale pour accéder aux identifiants.|Impiegate a vostra impronta digitale per accede subitu à l’identificazioni di cunnessione.
+This action will clear all of your private data, including history from your synced devices.|Cette action effacera l’ensemble de vos données personnelles, y compris l’historique de vos appareils synchronisés.|St’azzione squasserà l’inseme di i vostri dati privati, includendu a cronolugia, da i vostri apparechji sincrunizati.
+Browsing History|Historique de navigation|Cronolugia di navigazione
+Cache|Cache|Impiatta
+Downloaded Files|Fichiers téléchargés|Schedarii scaricati
+Offline Website Data|Données hors connexion|Dati fora di cunnessione
+Saved Logins|Identifiants enregistrés|Identificazioni di cunnessione arregistrate
+Spotlight Index|Indexation Spotlight|Indicera Spotlight
+This action will clear all of your private data. It cannot be undone.|Cette action effacera l’ensemble de vos données personnelles et est irréversible.|St’azzione squasserà l’inseme di i vostri dati privati. Ùn pò micca esse invertita.
+Making Firefox your default browser is a vote for an open, accessible internet.|Faire de Firefox votre navigateur par défaut, c’est voter pour un Internet ouvert et accessible.|Fà di Firefox u vostru navigatore predefinitu ghjè vutà per un Internet apertu è accessibile.
+Default to a Better Internet|Par défaut vers un meilleur Internet|Scelta d’un Internet più bellu
+Learn How|Me montrer comment|Scopre cumu fà
+Set links from websites, emails, and Messages to open automatically in Firefox.|Faites en sorte que les liens des sites web, des e-mails et des messages s’ouvrent automatiquement dans Firefox.|Definisce chì i liami di i siti web, i currieri elettronichi è i messaghji s’aprinu autumaticamente in Firefox.
+Choose Firefox as your default browser to make speed, safety, and privacy automatic.|Choisissez Firefox comme navigateur par défaut pour rendre la vitesse, la sécurité et la confidentialité automatiques.|Sciglite Firefox cum’è navigatore predefinitu per rende autumatica a vitezza, a sicurità è a cunfidenzialità.
+Elevate Everyday Browsing|Améliorez votre navigation ordinaire|Migliurà a navigazione cutidiana
+Firefox blocks 3,000+ trackers per user each month on average. Make us your default browser for privacy peace of mind.|Firefox bloque en moyenne plus de 3 000 traqueurs par utilisateur et par mois. Choisissez-nous comme navigateur par défaut pour la tranquillité d’esprit quant au respect de votre vie privée.|Firefox bluccheghja ogni mese una media di più di 3000 perseguitatori per un utilizatore. Scigliteci cum’è navigatore predefinitu per una vita privata senza penseru.
+Firefox Has Privacy Covered|Firefox protège votre vie privée|Firefox s’imprimurisce di a cunfidenzialità
+Switch Your Default Browser|Changez de navigateur par défaut|Cambià di navigatore predefinitu
+Go to Settings|Ouvrir les réglages|Andà à i parametri
+1. Go to Settings|1. Rendez-vous dans les réglages|1. Andà à i parametri
+2. Tap Default Browser App|2. Appuyez sur App du navigateur par défaut|2. Picchichjà l’appiecazione predefinita di navigazione
+3. Select Firefox|3. Sélectionnez Firefox|3. Selezziunà Firefox
+Default Browser App|App du navigateur par défaut|Appiecazione predefinita di navigazione
+I’ll do this later|Je le ferai plus tard|Què, u feraghju dopu
+Set as Default Browser|Définir comme navigateur par défaut|Sceglie cum’è navigatore predefinitu
+Open in Safari|Ouvrir avec Safari|Apre cù Safari
+Next in-page result|Occurrence suivante dans la page|Occurrenza seguente in a pagina
+Previous in-page result|Occurrence précédente dans la page|Occurrenza precedente in a pagina
+All Time|Depuis toujours|Di sempre
+Last 4 Weeks|Les 4 dernières semaines|E 4 ultime settimane
+Last Hour|La dernière heure|L’ultima ora
+Last 7 Days|Les 7 derniers jours|L’ultimi 7 ghjorni
+Last 24 Hours|Les dernières 24 heures|L’ultima 24 ore
+Deletes history (including synced history from other devices), cookies, and other browsing data.|Supprime l’historique (y compris l’historique synchronisé depuis d’autres appareils), les cookies et d’autres données de navigation.|Squassa a cronolugia (inchjusa quella sincrunizata da l’altri apparechji), i canistrelli è d’altri dati di navigazione.
+Sign In|Se connecter|Cunnettesi
+Start Browsing|Commencer la navigation|Principià a navigazione
+A username and password are being requested by %@.|Le site %@ demande un nom d’utilisateur et un mot de passe.|U situ %@ richiede un nome d’utilizatore è una parolla d’intesa.
+A username and password are being requested by %1$@. The site says: %2$@|Le site %1$@ demande un nom d’utilisateur et un mot de passe. Le site indique : %2$@|U situ %1$@ richiede un nome d’utilizatore è una parolla d’intesa. U situ indicheghja : %2$@
+Pin|Épingler|Spirlà
+Unpin|Désépingler|Dispirlà
+Jump Back In|Revenir à cet onglet|Rivene à st’unghjetta
+Tabs: %d|Onglets : %d|Unghjette : %d
+Recently Saved|Récemment enregistrés|Arregistrati pocu fà
+Recently Visited|Visités récemment|Visitati pocu fà
+Set Rows|Choisir le nombre de lignes|Sceglie u numeru di linee
+Add Tab|Ajouter un onglet|Aghjunghje un’unghjetta
+Add to Reading List|Ajouter à la liste de lecture|Aghjunghje à a lista di lettura
+An error occured while adding the pass to Wallet. Please try again later.|Une erreur s’est produite lors de l’ajout du billet à Wallet. Veuillez réessayer plus tard.|Un sbagliu hè accadutu durante l’aghjuntu di u bigliettu à Wallet. Pruvate torna dopu.
+Failed to Add Pass|Échec de l’ajout du billet|Fiascu di l’aghjuntu di u bigliettu
+Added page to Reading List|Page ajoutée à la liste de lecture|Pagina aghjunta à a lista di lettura
+Address and Search|Recherche ou adresse|Ricerca o indirizzu
+Address Bar|Barre d’adresse|Barra d’indirizzu
+Always Send|Toujours envoyer|Mandà sempre
+Authentication required|Authentification requise|Autenticazione richiesta
+Block Pop-up Windows|Bloquer les fenêtres popup|Bluccà e finestre popup
+Title|Titre|Titulu
+Edit Bookmark|Modifier le marque-page|Mudificà l’indetta
+Edit Folder|Modifier le dossier|Mudificà u cartulare
+Folder|Dossier|Cartulare
+New Bookmark|Nouveau marque-page|Nova indetta
+New Folder|Nouveau dossier|Novu cartulare
+New Separator|Nouveau séparateur|Novu separadore
+This breach occurred on|Cette fuite de données s’est produite le|Sta fughjita di dati hè accaduta u
+Passwords were leaked or stolen since you last changed your password. To protect this account, log in to the site and change your password.|Des mots de passe ont été divulgués ou volés depuis la dernière modification de votre mot de passe. Pour protéger ce compte, connectez-vous au site et modifiez votre mot de passe.|Parolle d’intesa sò state palisate o arrubate dapoi l’ultima mudificazione di a vostra parolla d’intesa. Per prutege stu contu, cunnittitevi à u situ è mudificate a vostra parolla d’intesa.
+Go to|Ouvrir le site|Andà à u situ
+Website Breach|Fuite de données de site web|Fughjita di dati di situ web
+Brightness|Luminosité|Lucidezza
+Changes color theme.|Changer les couleurs.|Cambià i culori.
+Changes font type.|Changer la police.|Cambià a grafia.
+Go|Ouvrir|Apre
+Go to copied link?|Ouvrir le lien copié ?|Apre u liame cupiatu ?
+Closing tab|Fermeture de l’onglet|Chjusura di l’unghjetta
+Bookmark Link|Marquer le lien|Marcà u liame
+New Private Tab opened|Nouvel onglet privé ouvert|Nova unghjetta privata aperta
+New Private Tab Opened|Nouvel onglet privé ouvert|Nova unghjetta privata aperta
+New Tab opened|Nouvel onglet ouvert|Nova unghjetta aperta
+New Tab Opened|Nouvel onglet ouvert|Nova unghjetta aperta
+Copy Image|Copier l’image|Cupià a fiura
+Copy Image Link|Copier le lien de l’image|Cupià u liame di a fiura
+Copy Link|Copier le lien|Cupià u liame
+Download Link|Télécharger le lien|Scaricà a destinazione di u liame
+Open in New Tab|Ouvrir dans un nouvel onglet|Apre in una nova unghjetta
+Save Image|Enregistrer l’image|Arregistrà a fiura
+Share Link|Partager le lien|Sparte u liame
+Toolbar Settings|Paramètres de la barre d’outils|Parametri di a barra d’attrezzi
+Could not add page to Reading List. Maybe it’s already there?|Impossible d’ajouter la page à la liste de lecture. La page s’y trouve peut-être déjà ?|Ùn si pò micca aghjunghje a pagina à a lista di lettura. Forse si ci trovà dighjà ?
+Could not add page to Reading list|Impossible d’ajouter la page à la liste de lecture|Ùn si pò micca aghjunghje a pagina à a lista di lettura
+Could not load page.|Impossible de charger la page.|Ùn si pò micca caricà a pagina.
+Built-in Enhanced Tracking Protection helps stop ads from following you around. Turn on Strict to block even more trackers, ads, and popups.|La protection renforcée contre le pistage empêche le pistage publicitaire. Activez le mode Strict pour bloquer encore plus de traqueurs, de publicités et de popups.|A prutezzione rinfurzata contr’à u spiunagiu impedisce u spiunagiu cù e publicità. Attivate u modu Severa per bluccà ancu più di perseguitatori, publicità è d’annunzii micca richiesti.
+Go to Settings|Ouvrir les paramètres|Andà à i parametri
+Protection Against Ad Tracking|Protection contre le pistage publicitaire|Prutezzione contr’à u spiunagiu da e publicità
+Create an account|Créer un compte|Creà un contu
+Decrease text size|Réduire la taille du texte|Diminuisce a dimensione di u testu
+Default Search Engine|Moteur de recherche par défaut|Mutore di ricerca predefinitu
+Display Settings|Paramètres d’affichage|Parametri per affissà
+Don’t Send|Ne pas envoyer|Ùn mandà micca
+Download Now|Télécharger|Scaricà avà
+Are you sure you want to cancel this download?|Voulez-vous vraiment annuler ce téléchargement ?|Vulete veramente abbandunà stu scaricamentu ?
+Cancel Download|Annuler le téléchargement|Abbandunà u scaricamentu
+Download Cancelled|Téléchargement annulé|Scaricamentu abbandunatu
+Download Failed|Échec du téléchargement|Fiascu di u scaricamentu
+1 of %d files|1 fichier sur %d|1 schedariu nant’à %d
+Downloaded files will show up here.|Les fichiers téléchargés s’afficheront ici.|I schedarii scaricati seranu affissati quì.
+Enter your password to connect|Saisissez votre mot de passe pour vous connecter.|Stampittate a vostra parolla d’intesa per cunnettesi
+Warning: we can’t confirm your connection to this website is secure.|Attention : nous ne pouvons garantir que la connexion à ce site est sécurisée.|Avertimentu : ùn pudemu micca cunfirmà chì a cunnessione à stu situ hè assicurizata.
+It may be a misconfiguration or tampering by an attacker. Proceed if you accept the potential risk.|Il peut s’agir d’une erreur de configuration ou d’une tentative d’attaque. Poursuivez en ayant conscience du risque encouru.|Forse ghjè un sbagliu di cunfigurazione o un tentativu d’attaca. Cuntinuate essendu cusciente di u risicu incorsu.
+The owner of %@ has configured their website improperly. To protect your information from being stolen, Firefox has not connected to this website.|Les propriétaires de %@ ont mal configuré leur site. Pour éviter que vos données ne soient dérobées, Firefox ne s’est pas connecté à ce site.|U pruprietariu di %@ hà cunfiguratu u so situ d’una manera gattiva. Per impedisce chì i vostri dati sianu arrubati, Firefox ùn s’hè micca cunnessu à stu situ.
+This Connection is Untrusted|Cette connexion n’est pas certifiée|Sta cunnessione ùn hè micca accertata
+Visit site anyway|Visiter tout de même|Visità quantunque
+Open this link in the App Store?|Ouvrir ce lien dans l’App Store ?|Apre stu liame in l’App Store ?
+Open this link in external app?|Ouvrir ce lien dans une application externe ?|Apre stu liame in un’appiecazione esterna ?
+Firefox Home Page|Page d’accueil de Firefox|Pagina d’accolta di Firefox
+Customize Homepage|Personnaliser la page d’accueil|Persunalizà a pagina d’accolta
+Discover more|En découvrir davantage|Scoprene di più
+Thought-Provoking Stories|Des articles qui font réfléchir|Storie chì facenu riflette
+Remove|Retirer|Caccià
+Pages: %d|Pages : %d|Pagine : %d
+Our Sponsors & Your Privacy|Nos sponsors et votre vie privée|I nostri spunsurizatori è a vostra vita privata
+Open synced tab|Ouvrir l’onglet synchronisé|Apre l’unghjetta sincrunizata
+See all synced tabs|Afficher tous les onglets synchronisés|Vede tutte l’unghjette sincrunizate
+Tab pickup|Récupération d’onglets|Riguarera d’unghjetta
+Firefox Account|Compte Firefox|Contu Firefox
+Manage Account & Devices|Gérer le compte et les appareils|Amministrà u contu è l’apparechji
+No Internet Connection|Aucune connexion internet|Alcuna cunnessione Internet
+Sync Now|Synchroniser maintenant|Sincrunizà avà
+Firefox Sync has connected to %@|Firefox Sync s’est connecté à %@|Firefox Sync s'hè cunnessu à %@
+Sync Connected|Sync connecté|Sync cunnessu
+This device has been successfully disconnected from Firefox Sync.|Cet appareil a été correctement déconnecté de Firefox Sync.|St’apparechju hè statu discunnessu bè da Firefox Sync.
+Sync Disconnected|Sync déconnecté|Sync discunnessu
+A device has disconnected from Firefox Sync|Un appareil a été déconnecté de Firefox Sync|Un apparechju hè statu discunnessu da Firefox Sync
+%@ has been successfully disconnected.|%@ a été déconnecté.|%@ hè statu discunnessu bè.
+Firefox logo, change the wallpaper.|Logo Firefox, changer le fond d’écran.|Logo Firefox, cambià u sfondu di screnu.
+Clear Recent History…|Supprimer l’historique récent…|Squassà a cronolugia recente…
+The Last Hour|La dernière heure|L’ultima ora
+Today and Yesterday|Aujourd’hui et hier|Oghje è eri
+Websites you’ve visited recently will show up here.|Les sites récemment visités s’affichent ici.|I siti visitati pocu fà seranu affissati quì.
+Your tabs from other devices show up here.|Les onglets d’autres appareils s’affichent ici.|E vostre unghjette da l’altri apparechji s’affissanu quì.
+Sign in to view a list of tabs from your other devices.|Connectez-vous pour afficher la liste des onglets de vos autres appareils.|Cunnittitevi per affissà a lista di l’unghjette di i vostri altri apparechji.
+Recently Closed|Récemment fermés|Chjosi pocu fà
+Home|Accueil|Accolta
+Bookmark|Marquer cette page|Indittà sta pagina
+Delete from History|Supprimer de l’historique|Squassà da a cronolugia
+Open in a Private Tab|Ouvrir dans un onglet privé|Apre in un’unghjetta privata
+Find|Rechercher|Circà
+Forward|Suivant|Seguente
+Normal Browsing Mode|Mode de navigation classique|Modu di navigazione nurmale
+Private Browsing Mode|Mode de navigation privée|Modu di navigazione privata
+Reload Page|Actualiser la page|Attualizà a pagina
+Select Location Bar|Sélectionner la barre d’adresse|Selezziunà a barra d’indirizzu
+Show Next Tab|Afficher l’onglet suivant|Affissà l’unghjetta seguente
+Show Previous Tab|Afficher l’onglet précédent|Affissà l’unghjetta precedente
+Close All Inactive Tabs|Fermer tous les onglets inactifs|Chjode tutte l’unghjette inattive
+Increase text size|Augmenter la taille du texte|Aumentà a dimensione di u testu
+Actual Size|Taille réelle|Dimensione attuale
+Add Bookmark|Ajouter un marque-page|Aghjunghje un’indetta
+Clear Recent History|Effacer l’historique récent|Squassà a cronolugia recente
+Find Again|Rechercher le suivant|Circà torna
+Reload Ignoring Cache|Actualiser en ignorant le cache|Ricaricà ignurendu l’impiatta
+Tools|Outils|Attrezzi
+Window|Fenêtre|Finestra
+Show Bookmarks|Afficher les marque-pages|Affissà l’indette
+Show Downloads|Afficher les téléchargements|Affissà i scaricamenti
+Show First Tab|Aller au premier onglet|Affissà a prima unghjetta
+Show History|Afficher l’historique|Affissà a cronolugia
+Show Last Tab|Aller au dernier onglet|Affissà l’ultima unghjetta
+Zoom In|Zoom avant|Ingrandamentu
+Zoom Out|Zoom arrière|Riduzzione
+Last month|Le mois dernier|U mese scorsu
+Last week|La semaine dernière|A settimana scorsa
+Delete all sites in %@?|Supprimer tous les sites de %@ ?|Squassà tutti i siti in %@ ?
+Removes history (including history synced from other devices), cookies and other browsing data.|Supprime l’historique (y compris l’historique synchronisé depuis d’autres appareils), les cookies et d’autres données de navigation.|Caccia a cronolugia (inchjusa quella sincrunizata da d’altri apparechji), i canistrelli è altri dati di navigazione.
+No history found|Aucun historique trouvé|Ùn si trova nunda in a cronolugia
+Recently Closed Tabs|Onglets récemment fermés|Unghjette chjose pocu fà
+Synced History|Historique synchronisé|Cronolugia sincrunizata
+Licenses|Licences|Licenze
+Load original page|Charger la page d’origine|Caricà a pagina d’origine
+Loading content…|Chargement du contenu…|Caricamentu di u cuntenutu…
+Log in|Se connecter|Cunnettesi
+To use the AutoFill feature for Firefox, you must have a device passcode enabled.|Pour utiliser la fonctionnalité de remplissage automatique, vous devez avoir un code d’appareil actif.|Per impiegà a funzione di riempiimentu autumaticu di Firefox, ci vole à attivà un codice d’accessu per l’apparechju.
+Take your passwords everywhere|Emportez vos mots de passe partout avec vous|Purtatevi e vostre parolle d’intesa dapertuttu
+AutoFill Firefox Passwords|Remplissage automatique des mots de passe par Firefox|Riempiimentu autumaticu da Firefox di e parolle d’intesa
+Turn on AutoFill|Activer le remplissage automatique|Attivà u riempiimentu autumaticu
+Don’t Save|Ne pas enregistrer|Ùn arregistrà micca
+Don’t Update|Ne pas mettre à jour|Ùn mudificà micca
+Save Login|Enregistrer l’identifiant|Arregistrà l’identificazione di cunnessione
+Filter|Filtrer|Filtrà
+There are no results matching your search.|Aucun résultat ne correspond à votre recherche.|Nisunu risultatu currisponde à a vostra ricerca.
+Select a password to fill|Sélectionnez un mot de passe à remplir|Selezziunate una parolla d’intesa à riempie
+SAVED LOGINS|IDENTIFIANTS ENREGISTRÉS|IDENTIFICAZIONI DI CUNNESSIONE ARREGISTRATE
+Looks like Firefox crashed previously. Would you like to restore your tabs?|Il semblerait que Firefox ait planté. Voulez-vous restaurer vos onglets ?|Pare chì Firefox s’hè lampatu. Vulete risturà e vostre unghjette ?
+Mark as Read|Marquer comme lu|Marcà cum’è lettu
+Mark as Unread|Marquer comme non lu|Marcà cum’è micca lettu
+Bookmark Added|Marque-page ajouté|Indetta aghjunta
+Added to Shortcuts|Ajouté aux raccourcis|Aghjuntu à l’accurtatoghji
+Added To Reading List|Ajouté à la liste de lecture|Aghjuntu à a lista di lettura
+Copy Address|Copier l’adresse|Cupià l’indirizzu
+URL Copied To Clipboard|Adresse copiée dans le presse-papiers|Indirizzu cupiatu in u preme’papei
+Turn off Night Mode|Désactiver le mode nocturne|Disattivà u modu nutturnu
+Turn on Night Mode|Activer le mode nocturne|Attivà u modu nutturnu
+Reading List|Liste de lecture|Lista di lettura
+Reload With Tracking Protection|Actualiser avec la protection contre le pistage|Attualizà cù a prutezzione contr’à u spiunagiu
+Reload Without Tracking Protection|Actualiser sans protection contre le pistage|Attualizà senza prutezzione contr’à u spiunagiu
+Bookmark Removed|Marque-page supprimé|Indetta cacciata
+Removed from Shortcuts|Supprimé des raccourcis|Cacciatu da l’accurtatoghji
+Removed from Reading List|Retiré de la liste de lecture|Cacciatu da a lista di lettura
+Sync and Save Data|Synchroniser et enregistrer les données|Sincrunizà è arregistrà i dati
+Tab Sent|Onglet envoyé|Unghjetta mandata
+Verified by %@|Vérifié par %@|Verificatu da %@
+Protection Settings|Paramètres de protection|Parametri di prutezzione
+Social Trackers|Traqueurs de réseaux sociaux|Perseguitatori di rete suciale
+Cross-Site Trackers|Traqueurs intersites|Perseguitatori intersiti
+Websites may load outside ads, videos, and other content that contains hidden trackers. Blocking this can make websites load faster, but some buttons, forms, and login fields, might not work.|Les sites web peuvent charger des publicités, des vidéos et d’autres contenus externes qui contiennent des éléments de pistage. Le blocage du contenu utilisé pour le pistage peut accélérer le chargement des sites, mais certains boutons, formulaires ou champs de connexion risquent de ne pas fonctionner.|I siti web ponu caricà publicità, video, è altri cuntenuti esterni chì cuntenenu elementi di spiunagiu. U blucchime di u cuntenutu impiegatu per u spiunagiu pò accelerà u caricamentu di i siti, ma certi buttoni, furmularii o campi di cunnessione puderianu ùn micca funziunà.
+These cookies follow you from site to site to gather data about what you do online. They are set by third parties such as advertisers and analytics companies.|Ces cookies vous suivent de site en site pour collecter des données sur vos faits et gestes en ligne. Ils sont déposés par des tiers, tels que des annonceurs ou des entreprises d’analyse de données.|Quelli canistrelli vi seguitanu da un situ à l’altru per coglie dati nant’à ciò chì vo fate in linea. Sò definiti da terze parti cum’è sucietà di publicità è d’analisa di dati.
+Cryptominers secretly use your system’s computing power to mine digital money. Cryptomining scripts drain your battery, slow down your computer, and can increase your energy bill.|Les mineurs de cryptomonnaies utilisent sans vous prévenir la puissance de calcul de votre système pour « extraire » de l’argent numérique. Les scripts de cryptominage déchargent votre batterie, ralentissent votre ordinateur et peuvent augmenter votre facture énergétique.|I minatori di crittomuneta impieganu à l’appiattu a putenza di calculu di u vostru urdinatore per minà muneta virtuale. I so scenarii viotanu a vostra batteria, freneghjanu u vostru urdinatore, è ponu aumantà a vostra fattura d’elettricità.
+The settings on your browser and computer are unique. Fingerprinters collect a variety of these unique settings to create a profile of you, which can be used to track you as you browse.|Les paramètres de votre navigateur et de votre appareil sont uniques. Les détecteurs d’empreinte numérique collectent une variété de ces paramètres uniques pour élaborer un profil de vous, qui peut ensuite être utilisé pour vous pister pendant votre navigation.|I parametri di u vostru navigatore et di u vostru apparechju sò unichi. I detettori d’impronta numerica culletteghjanu una mansa di sti parametri unichi per creà un prufilu persunalizatu chì pò dopu esse impiegatu per spiunavvi durante a vostra navigazione.
+Social networks place trackers on other websites to build a more complete and targeted profile of you. Blocking these trackers reduces how much social media companies can see what do you online.|Les réseaux sociaux placent des traqueurs sur d’autres sites web pour créer un profil plus complet et ciblé de vous. Le blocage de ces traqueurs réduit ce que les entreprises de réseaux sociaux peuvent voir de vous en ligne.|E rete suciale piazzanu perseguitatori nant’à d’altri siti web per custruisce un prufilu di voi più cumpletu è più persunalizatu. U blucchime di sti perseguitatori pò diminuisce a quantità d’infurmazione cunnisciuta da e sucietà di rete suciale nant’à ciò chì vo fate in linea.
+Fingerprinters|Détecteurs d’empreinte numérique|Detettori d’impronta numerica
+What’s New|Nouveautés|Ciò chì hè novu
+Zoom (%@)|Zoom (%@)|Ingrandamentu (%@)
+Navigation Toolbar|Barre de navigation|Barra di navigazione
+No tabs|Aucun onglet|Alcuna unghjetta
+Okay|OK|Vai
+Oops! Firefox crashed|Oups, Firefox a planté|Umbè ! Firefox s’hè lampatu
+Open Settings|Ouvrir les paramètres|Apre i parametri
+Open Tabs|Onglets ouverts|Unghjette aperte
+Open articles in Reader View by tapping the book icon when it appears in the title bar.|Ouvrez des articles en mode lecture en appuyant sur l’icône de livre lorsqu’elle apparaît dans la barre de titre.|Aprite l’articuli in modu di lettura picchichjendu l’icona di libru quand’ella s’affacca in a barra di titulu.
+Firefox cannot open the page because it has an invalid address.|Firefox ne parvient pas à ouvrir cette page, car l’adresse est invalide.|Firefox ùn pò micca apre a pagina perchè hà un indirizzu inaccettevule.
+Cannot Open Page|Impossible d’ouvrir la page|Impussibule d’apre a pagina
+This allows you to save the image to your Camera Roll.|Ceci vous permet d’enregistrer l’image dans Pellicule.|Quessu vi permette d’arregistrà a fiura in u vostru Rotulu di filmu.
+Firefox would like to access your Photos|Firefox souhaite accéder à vos photos|Firefox vole accede à e vostre fotò
+Privacy|Vie privée|Vita privata
+Privacy Policy|Politique de confidentialité|Pulitica di cunfidenzialità
+Quick-Search Engines|Moteurs de recherches rapides|Mutori di ricerca rapidi
+Rate on App Store|Noter sur l’App Store|Apprezzià nant’à l’App Store
+Reader View|Mode lecture|Modu di lettura
+Reader Mode available|Mode lecture disponible|Modu di lettura dispunibule
+Reading list|Liste de lecture|Lista di lettura
+Show All|Tout afficher|Tuttu affissà
+Reload page|Actualiser la page|Attualizà a pagina
+Remove from Reading List|Retirer de la liste de lecture|Caccià da a lista di lettura
+Reopen|Rouvrir|Torna à apre
+Reopen Last Closed Tab|Rouvrir le dernier onglet fermé|Torna à apre l’ultima unghjetta chjosa
+Reset text size|Réinitialiser la taille du texte|Reinizià a dimensione di u testu
+Sans-serif|Sans sérif|Senza patta
+Save pages to your Reading List by tapping the book plus icon in the Reader View controls.|Enregistrez des pages dans votre liste de lecture en appuyant sur l’icône de livre possédant un signe « + » présente dans les contrôles du mode lecture.|Arregistrate pagine in a vostra lista di lettura picchichjendu nant’à l’icona di libru cù un segnu « + » chì si trova tramezu i cuntrolli di u modu di lettura.
+Align QR code within frame to scan|Placez le code QR dans le cadre pour qu’il soit analysé|Piazzate u codice QR in u quadru per ch’ellu sia analizatu
+The data is invalid|Données non valides|I dati sò inaccetevule
+Go to device ‘Settings’ > ‘Firefox’. Allow Firefox to access camera.|Accédez à « Réglages » > « Firefox » et autorisez Firefox à accéder à l’appareil photo.|Andà à « Parametri » > « Firefox » di l’apparechju. Permette à Firefox d’accede à l’apparechju-fotò.
+The new search engine will appear in the quick search bar.|Le nouveau moteur de recherche apparaîtra dans la barre de recherche rapide.|U novu mutore di ricerca serà messu in a barra di ricerca rapida.
+Added Search engine!|Le moteur de recherche a été ajouté.|U mutore di ricerca hè statu aghjuntu.
+Add Search Provider?|Ajouter le moteur de recherche ?|Aghjunghje u mutore di ricerca ?
+A search engine with this title or URL has already been added.|Un moteur de recherche du même nom ou de la même adresse a déjà été ajouté.|Un mutore di ricerca di u listessu nome o indirizzu hè statu aghjuntu dighjà.
+Failed|Échec|Fiascu
+The search provider could not be added.|Le moteur de recherche ne peut pas être ajouté.|U mutore di ricerca ùn pò micca esse aghjuntu.
+Please fill all fields correctly.|Veuillez renseigner correctement l’ensemble des champs.|Ci vole à riempie tutti i campi da una manera curretta.
+Failed|Erreur|Fiascu
+Send Feedback|Donner mon avis|Dà u mo avisu
+Send Report|Envoyer le rapport|Mandà u raportu
+Send a crash report so Mozilla can fix the problem?|Envoyer un rapport de plantage afin que Mozilla puisse corriger le problème ?|Mandà un raportu d’accidente per chì Mozilla possa currege u penseru ?
+Available devices:|Appareils disponibles :|Apparechji dispunibule :
+Only HTTP and HTTPS links can be shared.|Seuls les liens HTTP ou HTTPS peuvent être partagés.|Solu i liami HTTP è HTTPS ponu esse sparti.
+The link you are trying to share cannot be shared.|Ce lien ne peut pas être partagé.|Stu liame ùn pò micca esse spartutu.
+Send Tab|Envoyer l’onglet|Mandà l’unghjetta
+You don’t have any other devices connected to this Firefox Account available to sync.|Vous n’avez aucun autre appareil prêt à être synchronisé et connecté à ce compte Firefox.|Ùn avete alcunu altru apparechju prontu à esse sincrunizatu è cunnessu à stu contu Firefox.
+Please open Firefox, go to Settings and sign in to continue.|Veuillez ouvrir Firefox, vous rendre dans les paramètres et vous connecter pour continuer.|Ci vole à apre Firefox, andà in Parametri è identificassi per cuntinuà.
+You are not signed in to your Firefox Account.|Vous n’êtes pas connecté·e à votre compte Firefox.|Ùn site micca cunnessu à u vostru contu Firefox.
+Send|Envoyer|Mandà
+Tap to begin|Appuyer pour commencer|Picchichjà per principià
+New tab arrived from another device.|Nouvel onglet reçu depuis un autre appareil.|Nova unghjetta ricevuta da un’altru apparechju.
+Tab received|Onglet reçu|Unghjetta ricevuta
+New tab arrived in %@|Nouvel onglet reçu dans %@|Nova unghjetta ricevuta in %@
+Tab received from %@|Onglet reçu depuis %@|Unghjetta ricevuta da %@
+Serif|Sérif|Patta (Serif)
+Add Search Engine|Ajouter un moteur de recherche|Aghjunghje un mutore di ricerca
+Add Search Engine|Ajout moteur de recherche|Aghjuntu di mutore di ricerca
+Title|Nom|Nome
+Search Engine|Moteur de recherche|Mutore di ricerca
+URL (Replace Query with %s)|Adresse web (Remplacez la recherche par %s)|Indirizzu web (Rimpiazzà a ricerca da %s)
+Address Bar Placement|Emplacement de la barre d’adresse|Pusizione di a barra d’indirizzu
+Browser Theme|Thème du navigateur|Tema di u navigatore
+Appearance|Apparence|Aspettu
+Website Appearance|Apparence des sites web|Aspettu di i siti web
+Gives websites a dark appearance. Some sites might not look right.|Donne un aspect sombre aux sites web. Certains sites pourraient ne pas s’afficher correctement.|Dà un aspettu scuru à i siti web. Certi siti puderianu ùn micca affissassi currettamente.
+Website Dark Mode|Mode sombre des sites web|Modu scuru per i siti web
+Block Opening External Apps|Bloquer l’ouverture d’applications externes|Bluccà l’apertura d’appiecazioni esterne
+Clear All Website Data|Effacer toutes les données de sites|Squassà tutti dati di siti
+Clear Private Data|Effacer mes traces|Squassà e mo traccie
+Clear Items: %1$@|Supprimer les éléments : %1$@|Squassà l’elementi : %1$@
+Copied to clipboard|Copiée dans le presse-papiers|Cupiata in u preme’papei
+Filter Sites|Filtrer les sites|Filtrà i siti
+Data Management|Gestion des données|Ghjestione di i dati
+Firefox will stop syncing with your account, but won’t delete any of your browsing data on this device.|Firefox ne se synchronisera plus avec votre compte, mais ne supprimera aucune donnée de navigation sur cet appareil.|Firefox ùn si sincruniserà più cù u vostru contu, ma ùn squasserà alcunu datu di navigazione nant’à st’apparechju.
+Disconnect Sync|Déconnecter Sync|Discunnette Sync
+Disconnect|Déconnecter|Discunnette
+Disconnect Sync?|Se déconnecter de Sync ?|Discunnettesi di Sync ?
+Threshold|Seuil|Sogliu
+Manual|Manuel|Manuale
+Pick which theme you want|Choisissez quel thème vous voulez|Sceglie u tema chì vi piace
+Manually|Manuellement|Manualmente
+The theme will automatically change based on your display brightness. You can set the threshold where the theme changes. The circle indicates your display’s current brightness.|Le thème basculera automatiquement en fonction de la luminosité de votre écran. Vous pouvez définir le seuil à partir duquel le thème doit basculer. Le cercle indique la luminosité actuelle.|U tema cambierà autumaticamente secondu a lucidezza di u vostru screnu. Pudete definisce u sogliu quandu u tema deve cambià. U chjerchju indicheghja a lucidezza attuale.
+Switch Mode|Changer de mode|Cambià di modu
+Switch automatically based on screen brightness|Basculer automatiquement en fonction de la luminosité de l’écran|Cambià autumaticamente secondu a lucidezza di u screnu
+Automatically|Automatiquement|Autumaticu
+System Theme|Thème du système|Tema di u sistema
+Use System Light/Dark Mode|Utiliser le mode clair ou sombre du système|Impiegà u modu chjaru o scuru di u sistema
+Theme Picker|Sélecteur de thème|Selettore di tema
+Device Name|Nom de l’appareil|Nome di l’apparechju
+Sync Settings|Paramètres de synchronisation|Parametri di sincrunizazione
+Choose what displays as the homepage.|Choisissez ce qui s’affiche comme page d’accueil.|Sciglite ciò chì s’affissa cum’è pagina d’accolta.
+Choose what’s included on the Firefox homepage.|Choisissez le contenu de la page d’accueil de Firefox.|Sciglite u cuntenutu di a pagina d’accolta di Firefox.
+Recommended by Pocket|Recommandé par Pocket|Ricumandatu da Pocket
+Choose what you see when you return to Firefox.|Choisissez ce qui s’affiche lorsque vous rouvrez Firefox.|Sciglite ciò chì si vede quandu vi rivinite à Firefox.
+Include on Homepage|Inclure sur la page d’accueil|Include nant’à a pagina d’accolta
+Wallpaper|Fond d’écran|Sfondulu di screnu
+Firefox wallpaper, amethyst pattern.|Fond d’écran de Firefox, motif améthyste.|Sfondulu di screnu Firefox, mudellu amatista.
+Firefox wallpaper, beach hills pattern.|Fond d’écran Firefox, motif collines de plage.|Sfondulu di screnu di Firefox, mudellu d’un tombulu di rena.
+Firefox wallpaper, cerulean pattern.|Fond d’écran de Firefox, motif bleu céruléen.|Sfondulu di screnu Firefox, mudellu turchinu azuratu.
+Default clear wallpaper.|Fond d’écran clair par défaut.|Sfondulu chjaru predefinitu.
+Firefox wallpaper, sunrise pattern.|Fond d’écran de Firefox, motif de lever de soleil.|Sfondulu di screnu Firefox, mudellu assulanatu.
+Homepage wallpaper cycle toggle|Commutateur du diaporama du fond d’écran de la page d’accueil|Cummutatore di u ciclu di sfondulu di screnu di a pagina d’accolta
+Firefox wallpaper, twilight hills pattern.|Fond d’écran Firefox, motif collines au crépuscule.|Sfondulu di screnu di Firefox, mudellu d’un’attrachju marina.
+Classic %@|%@ classique|%@ classicu
+OPENING SCREEN|ÉCRAN À L’OUVERTURE|SCRENU À L’APERTURA
+Try the new collection.|Essayez la nouvelle collection.|Pruvate a nova cullezzione.
+The new Independent Voices collection.|La nouvelle collection Voix indépendantes.|A nova cullezzione di Voci indipendente.
+Limited Edition|Édition limitée|Edizione limitata
+Change wallpaper by tapping Firefox homepage logo|Changer le fond d’écran en appuyant sur le logo Firefox de la page d’accueil|Cambià u sfondulu di screnu picchichjendu u logo di a pagina d’accolta
+Wallpaper Updated!|Fond d’écran mis à jour !|Sfondulu di screnu mudificatu !
+Current Homepage|Page d’accueil actuelle|Pagina d’accolta attuale
+Use Current Page|Utiliser la page actuelle|Impiegà a pagina attuale
+Rows|Lignes|Linee
+Sponsored Shortcuts|Raccourcis sponsorisés|Accurtatoghji spunsurizati
+Logins & Passwords|Identifiants et mots de passe|Identificazioni è parolle d’intesa
+Custom URL|Adresse personnalisée|Indirizzu persunalizatu
+Blank Page|Page vide|Una pagina viota
+Firefox Home|Page d’accueil de Firefox|Accolta di Firefox
+Show|Afficher|Affissà
+Choose what to load when opening a new tab|Choisissez ce qui s’affiche à l’ouverture d’un nouvel onglet.|Sciglite ciò chì s’affissa à l’apertura d’una nova unghjetta
+Block Images|Bloquer les images|Bluccà e fiure
+When Opening Firefox|À l’ouverture de Firefox|À l’apertura di Firefox
+When opening %@|Lors de l’ouverture de %@|À l’apertura di %@
+Offer to Open Copied Links|Proposer d’ouvrir les liens copiés|Prupone d’apre i liami cupiati
+Open mail links with|Ouvrir les liens des e-mails avec|Apre i liami di messaghjeria cù
+Mail App|Application de messagerie|Appiecazione di messaghjeria
+Use your fingerprint to access passwords now.|Utilisez votre empreinte digitale pour accéder aux mots de passe.|Impiegate a vostra impronta digitale per accede subitu à e parolle d’intesa.
+Your passwords are now protected by Face ID, Touch ID or a device passcode.|Vos mots de passe sont désormais protégés par Face ID, Touch ID ou le code de l’appareil.|E vostre parolle d’intesa sò prutette avà da Face ID, Touch ID o un codice d’accessu per l’apparechju.
+Save Passwords|Enregistrer les mots de passe|Arregistrà e parolle d’intesa
+Save Logins|Enregistrer les identifiants|Arregistrà l’identificazioni di cunnessione
+Learn More.|En savoir plus.|Sapene di più.
+Mozilla strives to only collect what we need to provide and improve Firefox for everyone.|Mozilla veille à collecter uniquement les données nécessaires afin d’offrir et d’améliorer Firefox pour tout le monde.|Mozilla face casu à cullettà solu i dati chì sò ghjuvevule per rigalà è bunificà Firefox per tutti.
+Send Usage Data|Envoyer des données d’utilisation|Mandà i dati d’adopru
+When Long-pressing Links|Lors d’un appui long sur les liens|Durante un appoghju longu nant’à i liami
+When long-pressing links|Lors d’un appui long sur les liens|Durante un appoghju longu nant’à i liami
+Show Link Previews|Afficher l’aperçu des liens|Affissà a fighjulata di i liami
+Show in Application Menu|Afficher dans le menu de l’application|Affissà in u listinu di l’appiecazione
+Open New Tab|Ouvrir un nouvel onglet|Apre una nova unghjetta
+Use Siri shortcuts to quickly open Firefox via Siri|Utilisez les raccourcis Siri pour ouvrir rapidement Firefox via Siri|Impiegà l’accurtatoghji Siri per apre Firefox in furia via Siri
+Siri Shortcuts|Raccourcis Siri|Accurtatoghji Siri
+Firefox may install and run studies from time to time.|Firefox peut installer et lancer des études de temps en temps.|Firefox pò installà è lancià studii di quandu in quandu.
+Sign in to sync tabs, bookmarks, passwords, and more.|Connectez-vous pour synchroniser onglets, marque-pages, mots de passe et bien plus.|Cunnittitevi per sincrunizà unghjette, indette, parolle d’intesa è ancu di più.
+Inactive Tabs|Onglets inactifs|Unghjette inattive
+Tabs you haven’t viewed for two weeks get moved to the inactive section.|Les onglets que vous n’avez pas consultés depuis deux semaines sont déplacés vers la section « Onglets inactifs ».|L’unghjette chì vo ùn avete micca viste dapoi duie settimane sò dispiazzate in a sezzione inattiva.
+Tab Groups|Groupes d’onglets|Gruppi d’unghjette
+Customize Tab Tray|Personnaliser le panneau des onglets|Persunalizà a barra d’unghjette
+Toolbar|Barre d’outils|Barra d’attrezzi
+If a site doesn’t work as expected, tap the lock in the address bar and turn off Enhanced Tracking Protection for that page.|Si un site ne fonctionne pas comme prévu, appuyez sur le cadenas dans la barre d’adresse et désactivez la protection renforcée contre le pistage pour cette page.|S’è un situ ùn funziona micca cum’è previstu, appughjate nant’à u lucchettu in a barra d’indirizzu è disattivate a prutezzione rinfurzata contr’à u spiunagiu per sta pagina.
+Heads up!|Attention !|Fate casu !
+BLOCKS|BLOQUE|BLUCCATU
+Reduces targeted ads and helps stop advertisers from tracking your browsing.|Réduit les publicités ciblées et empêche les annonceurs de suivre votre navigation.|Riduce e publicità sibulate è vi aiuta à impedisce i siti di seguità a vostra navigazione.
+Allows some ad tracking so websites function properly.|Autorise certains traqueurs publicitaires afin que des sites fonctionnent correctement.|Permette qualchì elementu di spiunagiu da e publicità per chì i siti funziuneghjinu currettamente.
+Blocks more trackers, ads, and popups. Pages load faster, but some functionality may not work.|Bloque davantage de traqueurs, de publicités et de popups. Les pages se chargent plus rapidement, mais certaines fonctionnalités peuvent ne pas fonctionner.|Bluccheghja più perseguitatori, publicità è annunzii micca richiesti. E pagine si caricheranu più prestu, ma certi siti puderianu ùn micca funziunà currettamente.
+Protection Level|Niveau de protection|Livellu di prutezzione
+Tracking Protection|Protection contre le pistage|Prutezzione contr’à u spiunagiu
+Strict|Strict|Severa
+Troubleshoot|Résolution de problèmes|Infurmazioni per currege certi penseri
+Show More|Afficher plus|Affissà più
+This action will clear all of your website data. It cannot be undone.|Cette action effacera l’ensemble des données de sites et est irréversible.|St’azzione squasserà l’inseme di i vostri dati di siti web. Ùn pò micca esse invertita.
+This action will clear the selected items. It cannot be undone.|Cette action effacera l’ensemble des éléments sélectionnés et est irréversible.|St’azzione squasserà l’elementi selezziunati. Ùn pò micca esse invertita.
+Website Data|Données des sites|Dati di siti web
+Added to Reading List|Ajoutée à la liste de lecture|Aghjunta à a lista di lettura
+Bookmark This Page|Marquer cette page|Indettà sta pagina
+Bookmarked|Ajoutée aux marque-pages|Aghjunta à l’indette
+Load in Background|Charger en arrière-plan|Caricà in tacca di fondu
+Loading in Firefox|Chargement dans Firefox|Caricamentu in Firefox
+Open in Firefox|Ouvrir dans Firefox|Apre in Firefox
+Search in Firefox|Rechercher dans Firefox|Ricercà in Firefox
+Show Search Suggestions|Afficher les suggestions|Affissà e sugestioni
+Show Tabs|Afficher les onglets|Affissà l’unghjette
+Show Tour|Lancer la visite guidée|Principià a visita guidata
+Swipe right or left with three fingers to close the tab.|Faites glisser trois doigts vers la droite ou la gauche pour fermer l’onglet.|Fate sguillà trè diti à manu dritta o manca per chjode l’unghjetta.
+Syncing…|Synchronisation en cours…|Sincrunizazione in corsu…
+Sync is offline|Sync est hors connexion|Sincrunizazione fora di cunnessione
+Tab %1$@ of %2$@|Onglet %1$@ sur %2$@|Unghjetta %1$@ nant’à %2$@
+Show All Tabs|Afficher tous les onglets|Affissà tutte l’unghjette
+Close All Tabs|Fermer tous les onglets|Chjode tutte l’unghjette
+Currently selected tab.|Onglet actuellement sélectionné.|Unghjetta selezziunata attualmente.
+Others|Autres|Altri
+Synced|Synchronisés|Sincrunizate
+Tabs %1$@ to %2$@ of %3$@|Onglets %1$@ à %2$@ sur %3$@|Unghjette %1$@ à %2$@ nant’à %3$@
+Tabs Tray|Liste des onglets|Lista di l’unghjette
+View Inactive Tabs|Afficher les onglets inactifs|Affissà l’unghjette inattive
+Hide Inactive Tabs|Masquer les onglets inactifs|Piattà l’unghjette inattive
+The page could not be displayed in Reader View.|La page n’a pas pu être affichée en mode lecture.|A pagina ùn si pò micca affissà in modu di lettura.
+There was a problem accessing tabs from your other devices. Try again in a few moments.|Un problème s’est produit en accédant aux onglets de vos autres appareils. Veuillez réessayer plus tard.|Un penseru hè accadutu durante l’accessu à l’unghjette da i vostri altri apparechji. Pruvate torna da quì à pocu.
+There was an error converting the page|Une erreur s’est produite lors de la conversion de la page|Un sbagliu hè accadutu durante a cunversione di a pagina
+yesterday|hier|eri
+Not Now|Plus tard|Micca subitu
+Open App Store|Ouvrir l’App Store|Apre l’App Store
+Remove page — %@|Supprimer la page - %@|Caccià a pagina - %@
+This page appears to be in %1$@. Translate to %2$@ with %3$@?|Cette page semble être en %1$@. La traduire en %2$@ avec %3$@ ?|Sta pagina pare esse in %1$@. Traducella in %2$@ cù %3$@ ?
+Search with Firefox|Rechercher avec Firefox|Ricercà cù Firefox
+Use stage servers|Utiliser les serveurs de simulation|Impiegà i servitori di simulazione
+Something went wrong with this wallpaper.|Quelque chose s’est mal passé avec ce fond d’écran.|Un sbagliu hè accadutu cù stu sfondulu di screnu.
+Couldn’t Change Wallpaper|Impossible de changer le fond d’écran|Impussibule di cambià u sfondulu di screnu
+Something went wrong with your download.|Quelque chose s’est mal passé avec votre téléchargement.|Un sbagliu hè accadutu cù u vostru scaricamentu.
+Couldn’t Download Wallpaper|Impossible de télécharger le fond d’écran|Impussibule di scaricà u sfondulu di screnu
+Web content|Contenu web|Cuntenutu web
+Welcome to your Reading List|Bienvenue dans votre liste de lecture|Benvenuta in a vostra lista di lettura
+Well, this is embarrassing.|Hum, c’est embarrassant.|Umbè, ghjè imbarazzante.
+Your Rights|Droits de l’utilisateur|Diritti di l’utilizatore
+Sign In with Your Camera|Connectez-vous avec votre appareil photo|Cunnittitevi cù u vostru apparechju-fotò
+On your computer open Firefox and go to firefox.com/pair|Sur votre ordinateur, ouvrez Firefox et accédez à firefox.com/pair|Nant’à u vostru urdinatore, aprite Firefox è andate à firefox.com/pair
+Ready to Scan|Prêt·e à scanner|Prontu à analizà
+Use Email Instead|Utiliser plutôt une adresse e-mail|Impiegà piuttostu un messaghju elettronicu
+just now|à l’instant|una stonda fà
+mobile device|appareil mobile|apparechju mobile
+more than a month ago|il y a plus d’un mois|più d’un mese fà
+more than a week ago|il y a plus d’une semaine|più d’una settimana fà
+read|Lu|Lettu
+this week|cette semaine|sta settimana
+today at %@|aujourd’hui à %@|oghje à %@
+unread|Non lu|Micca lettu
+Are you sure?|Poursuivre la suppression ?|Cuntinuà a suppressione ?
+Clear Search|Effacer les recherches|Squassà e ricerche
+Created %@|Date de création : %@|Creatu %@
+You cannot undo this action.|Cette action ne peut être annulée.|Ùn si pò disfà st’azzione.
+This will remove the password from all of your synced devices.|Le mot de passe sera supprimé de tous vos appareils synchronisés.|St’azzione hà da caccià a parolla d’intesa da tutti i vostri apparechji sincrunizati.
+Remove Password?|Supprimer le mot de passe ?|Caccià a parolla d’intesa ?
+Deselect All|Tout désélectionner|Ùn selezziunà nunda
+Enter Search Mode|Activer le mode recherche|Attivà u modu di ricerca
+Hide|Masquer|Piattà
+Password removed|Mot de passe supprimé|Parolla d’intesa cacciata
+Logins will be permanently removed.|Les identifiants seront supprimés définitivement.|L’identificazioni di cunnessione seranu cacciate ab’eternu.
+Logins will be removed from all connected devices.|Les identifiants seront supprimés de tous vos appareils connectés.|L’identificazioni di cunnessione seranu cacciate da tutti l’apparechji cunnessi.
+Modified %@|Dernière modification : %@|Mudificatu %@
+No logins found|Aucun identifiant trouvé|Ùn si trova nisuna identificazione di cunnessione
+No passwords found|Aucun mot de passe trouvé|Ùn si trova nisuna parolla d’intesa
+Open & Fill|Ouvrir et renseigner|Apre è rinsignà
+Reveal|Afficher|Palisà
+Search Input Field|Rechercher des identifiants|Ricercà identificazioni di cunnessione
+Select All|Tout sélectionner|Tuttu selezziunà
+Successfully Downloaded PDF|PDF téléchargé|PDF scaricatu currettamente
+Open New Private Tab|Ouvrir un nouvel onglet privé|Apre una nova unghjetta privata
+Synced Tabs|Onglets synchronisés|Unghjette sincrunizate
+Report Site Issue|Signaler un problème sur ce site|Signalà un penseru cù stu situ
+See All|Tout afficher|Tuttu affissà
+Share Page With…|Partager la page avec…|Sparte a pagina cù…
+Request Desktop Site|Voir la version ordinateur|Fighjà a versione urdinatore
+Request Mobile Site|Voir la version mobile|Fighjà a versione mobile
+Close Private Tabs|Fermer les onglets privés|Chjode l’unghjette private
+Open in New Private Tab|Ouvrir dans un nouvel onglet privé|Apre in una nova unghjetta privata
+Firefox won’t remember any of your history or cookies, but new bookmarks will be saved.|Firefox ne conservera aucun historique ni aucun cookie, cependant les nouveaux marque-pages seront conservés.|Firefox ùn cunserverà alcuna cronolugia nè canistrelli, ma e nove indette seranu arregistrate.
+Private Browsing|Navigation privée|Navigazione privata
+Private Mode|Mode de navigation privée|Modu di navigazione privata
+Turns private mode on or off|Active ou désactive la navigation privée|Attiva o disattiva a navigazione privata
+When Leaving Private Browsing|Lorsque vous quittez la navigation privée|Quandu vò quittate a navigazione privata
+%@ search|Recherche %@|Ricerca %@
+Search Settings|Paramètres de recherche|Parametri di ricerca
+%1$@ on %2$@|%1$@ sur %2$@|%1$@ nant’à %2$@
+Bookmarks Menu|Menu Marque-pages|Listinu di l’indette
+Mobile Bookmarks|Marque-pages mobile|Indette mobile
+Unsorted Bookmarks|Marque-pages non classés|Indette micca classificate
+Add Firefox shortcuts to your Home screen.|Ajoutez des raccourcis Firefox à votre écran d’accueil.|Aghjunghjite accurtatoghji Firefox à u vostru screnu d’accolta.
+Go to copied link|Ouvrir le lien copié|Apre u liame cupiatu
+Go to Copied Link|Ouvrir le lien copié|Apre u liame cupiatu
++%d More…|+%d autres…|Più di %d altre…
+New Search|Nouvelle recherche|Nova ricerca
+No open tabs.|Aucun onglet ouvert.|Alcuna unghjetta aperta.
+Open Firefox|Ouvrir Firefox|Apre Firefox
+Add a Firefox shortcut to your Home screen. After adding the widget, touch and hold to edit it and select a different shortcut.|Ajoutez un raccourci Firefox à votre écran d’accueil. Après avoir ajouté le widget, appuyez de manière prolongée pour le modifier et sélectionnez un autre raccourci.|Aghjunghjite un accurtatoghju Firefox à u vostru screnu d’accolta. Dopu l’aghjuntu di u widget, tuccatelu è mantenelu per mudificalu è selezziunate un altru accurtatoghju.
+Quick Actions|Actions rapides|Azzioni preste
+Firefox Shortcuts|Raccourcis Firefox|Accurtatoghji Firefox
+Add shortcuts to your open tabs.|Ajoutez des raccourcis vers vos onglets ouverts.|Aghjunghjite accurtatoghji à e vostre unghjette aperte.
+Quick View|Aperçu rapide|Vista presta
+Search in Private Tab|Rechercher dans un onglet privé|Ricercà in un’ unghjetta privata
+Add shortcuts to frequently and recently visited sites.|Ajoutez des raccourcis vers des sites fréquemment et récemment visités.|Aghjunghjite accurtatoghji à i siti visitati aspessu è pocu fà.
+Top Sites|Sites principaux|Siti principale
+Website Shortcuts|Raccourcis de sites web|Accurtatoghji di siti web
+Search image with Google Lens|Rechercher une image avec Google Lens|Circà una fiura cù Google Lens
+Photo Library|Bibliothèque photos|Biblioteca di fiure
+Take Photo|Prendre une photo|Piglià una fotò
+Privacy & Security Settings|Paramètres de vie privée et de sécurité|Parametri di vita privata è di sicurità
+Opens search engine selection|Ouvre la sélection du moteur de recherche|Apre a selezzione di u mutore di ricerca
+Search Engine: %@|Moteur de recherche : %@|Mutore di ricerca : %@
+This will remove the card from all of your synced devices.|La carte sera supprimée de tous vos appareils synchronisés.|St’azzione hà da caccià a carta da tutti i vostri apparechji sincrunizati.
+Remove Card?|Supprimer la carte ?|Caccià a carta ?
+%@ is asking to download a file and add an event to your calendar.|%@ souhaite télécharger un fichier et ajouter un évènement à votre agenda.|%@ richiede di scaricà un schedariu è d’aghjunghje un evenimentu à u vostru calendariu.
+This site is asking to download a file and add an event to your calendar.|Ce site souhaite télécharger un fichier et ajouter un évènement à votre agenda.|Stu situ richiede di scaricà un schedariu è d’aghjunghje un evenimentu à u vostru calendariu.
+Add to calendar?|Ajouter à l’agenda ?|Aghjunghje à u calendariu ?
+Close all private tabs and delete history, cookies, and all other site data.|Fermer tous les onglets privés et supprimer l’historique, les cookies et toutes les autres données des sites.|Chjode tutte l’unghjette private è squassà a cronolugia, i canistrelli è tutti l’altri dati di i siti.
+Delete session data|Supprimer les données de la session|Squassà i dati di a sessione
+End your private session?|Mettre fin à votre session privée ?|Compie a vostra sessione privata ?
+Restore tabs|Restaurer les onglets|Risturà l’unghjette
+Sorry about that. Restore tabs to pick up where you left off.|Oups ! Restaurez les onglets pour reprendre là où vous en étiez.|Chì peccatu ! Risturà l’unghjette per ripiglià induve vi site piantati.
+%@ crashed. Restore your tabs?|%@ a planté. Restaurer vos onglets ?|%@ s’hè lampatu. Risturà e vostre unghjette ?
+Selected|Sélectionné|Selezziunatu
+Select the %@ app icon|Sélectionner l’icône de l’application %@|Selezziunà l’icona di l’appiecazione %@
+Deselected|Désélectionné|Micca selezziunatu
+Cool|Cool|Simpaticu
+Light|Claire|Chjaru
+Midday|Midi|Meziornu
+Created by %@|Créée par %@|Creata da %@
+Sorry, there was an error setting your app icon.|Désolé, une erreur s’est produite lors du paramétrage de l’icône de l’application.|Per disgrazia, un sbagliu hè accadutu durante a definizione di l’icona di l’appiecazione.
+Basics|Basiques|Generale
+Colors|Colorées|Culori
+More|Autres|Altri
+Authenticate to access passwords.|Authentifiez-vous pour accéder aux mots de passe.|Autenticatevi per accede à e parolle d’intesa.
+Authenticate to access your saved passwords and payment methods.|Authentifiez-vous pour accéder à vos mots de passe et moyens de paiement enregistrés.|Autenticatevi per accede à e vostre parolle d’intesa è metode di pagamentu arregistrate.
+Are you sure you want to delete it and its contents?|Voulez-vous vraiment supprimer ce dossier ainsi que son contenu ?|Vulete veramente squassà stu cartulare è u so cuntenutu ?
+This folder isn’t empty.|Le dossier n’est pas vide.|Stu cartulare ùn hè micca viotu.
+This folder is empty|Ce dossier est vide|Stu cartulare hè viotu
+Save sites as you browse. We’ll also grab bookmarks from other synced devices.|Enregistrez des sites en cours de navigation. Nous récupèrerons aussi les marque-pages des autres appareils synchronisés.|Arregistrate siti durante a navigazione. Averemu da ricuperà l’indette d’altri apparechji sincrunizati.
+Save sites as you browse. Sign in to grab bookmarks from other synced devices.|Enregistrez des sites en cours de navigation. Connectez-vous pour récupérer les marque-pages d’autres appareils synchronisés.|Arregistrate siti durante a navigazione. Cunnittitevi per ricuperà l’indette d’altri apparechji sincrunizati.
+Sign in to Sync|Se connecter pour synchroniser|Cunnettesi per sincrunizà
+All|Tout|Tuttu
+Delete Bookmark|Supprimer le marque-page|Squassà l’indetta
+Delete Folder|Supprimer le dossier|Squassà u cartulare
+Deleted “%@”|« %@ » supprimé|« %@ » squassatu
+All Folders|Tous les dossiers|Tutti i cartulari
+Change Location|Changer d’emplacement|Cambià di locu
+DESKTOP BOOKMARKS|MARQUE-PAGES ORDINATEUR|INDETTE URDINATORE
+Desktop|Ordinateur|Urdinatore
+Collapsed|Réduit|Riduttu
+Expanded|Développé|Allargatu
+MOBILE BOOKMARKS|MARQUE-PAGES MOBILE|INDETTE MOBILE
+Remove from Shortcuts|Retirer des raccourcis|Caccià da l’accurtatoghji
+Saved in “Bookmarks”|Enregistré dans « Marque-pages »|Arregistrata in « Indette »
+Saved in “%@”|Enregistré dans « %@ »|Arregistrata in « %@ »
+Use a saved address?|Utiliser une adresse enregistrée ?|Impiegà un indirizzu arregistratu ?
+Go to Settings > %@ on your device to allow Firefox to use your camera.|Rendez-vous dans Réglages > %@ sur votre appareil pour autoriser Firefox à utiliser votre appareil photo.|Andate à « Parametri > %@ » nant’à u vostru apparechju per permette à Firefox d’accede à u vostru apparechju-fotò.
+Tap here to start a fresh private session. Delete your history, cookies — everything.|Appuyez ici pour lancer une nouvelle session de navigation privée. Supprimez historique, cookies — tout.|Picchicciate quì per principià una sessione privata nova. Squassà cronolugia, canistrelli… tuttu.
+Use your camera or choose a photo to search what you see.|Utilisez votre appareil photo ou choisissez une photo pour lancer une recherche visuelle.|Impiegà u vostru apparechju-fotò o sceglie una fotò per lancià una ricerca visuale.
+Search With Google Lens|Rechercher avec Google Lens|Circà cù Google Lens
+Fast, private translations are ready when you are.|Des traductions rapides et confidentielles vous attendent dès que vous en avez besoin.|Traduzzioni rapide è private sò pronte quandu vo n’avete bisognu.
+%@ Speaks Your Language|%@ parle votre langue|%@ parla a vostra lingua
+There was an issue with autofill. Please try again.|Un problème est survenu avec le remplissage automatique. Veuillez réessayer.|Un sbagliu hè accadutu cù u riempiimentu autumaticu. Pruvate torna.
+Autofill Error|Erreur de remplissage automatique|Sbagliu di riempiimentu autumaticu
+The passwords you save or sync to %@ will be listed here. All passwords you save are encrypted.|Les mots de passe que vous enregistrez ou synchronisez avec %@ seront répertoriés ici. Tous les mots de passe que vous enregistrez sont chiffrés.|E parolle d’intesa chì vo arregistrate o sincrunizate cù %@ seranu affissate quì. Tutte e parolle d’intesa chì vo arregistrate sò cifrate.
+No passwords saved|Aucun mot de passe enregistré|Nisuna parolla d’intesa arregistrata
+To save and automatically fill passwords, enable Face ID, Touch ID, or a device passcode.|Pour enregistrer et renseigner automatiquement les mots de passe, activez Face ID, Touch ID ou un code pour l’appareil.|Per arregistrà è riempie autumaticamente e parolle d’intesa, attivate Face ID, Touch ID o un codice d’accessu per l’apparechju.
+To save and autofill credit cards, enable Face ID, Touch ID, or a device passcode.|Pour enregistrer et remplir automatiquement les cartes bancaires et mots de passe, activez Face ID, Touch ID ou un code pour l’appareil.|Per arregistrà è riempie autumaticamente e carte bancarie, attivate Face ID, Touch ID o un codice d’accessu per l’apparechju.
+Privacy Report|Rapport de confidentialité|Raportu di cunfidenzialità
+Articles powered by %@|Articles mis en avant par %@|Articuli selezziunati da %@
+Top Stories|Articles populaires|Articuli pupulari
+World Cup|Coupe du monde|Coppa di u mondu
+Expires|Date d’expiration|Scadenza
+Edit Card|Modifier la carte|Mudificà a carta
+The address will be removed from all of your synced devices.|L’adresse sera supprimée de tous vos appareils synchronisés.|L’indirizzu serà cacciatu da tutti i vostri apparechji sincrunizati.
+Remove Address|Supprimer l’adresse|Caccià l’indirizzu
+Country or Region|Pays ou région|Paese o regione
+Department|Département|Dipartimentu
+Organization|Entreprise|Urganismu
+ZIP Code|Code postal (États-Unis)|Codice pustale (Stati Uniti)
+View address|Voir l’adresse|Fighjà l’indirizzu
+Address Removed|Adresse supprimée|Indirizzu cacciatu
+Address Couldn’t Be Saved|L’adresse n’a pas pu être enregistrée|L’indirizzu ùn pò micca esse arregistratu
+Address Couldn’t Be Removed|L’adresse n’a pas pu être supprimée|L’indirizzu ùn pò micca esse cacciatu
+Address Saved|Adresse enregistrée|Indirizzu arregistratu
+Address Information Updated|Informations d’adresse mises à jour|Infurmazioni d’indirizzu mudificate
+Add Card|Ajouter une carte|Aghjunghje una carta
+Expiration MM / YY|Expiration MM / AA|Scadenza MM / AA
+Conceal|Masquer|Ammascà
+Expires %@|Date d’expiration : %@|Data di scadenza : %@
+Remove Card|Supprimer la carte|Caccià sta carta
+SAVED CARDS|CARTES ENREGISTRÉES|CARTE ARREGISTRATE
+Save and Fill Payment Methods|Enregistrer et renseigner les moyens de paiement|Arregistrà è rinsignà e metode di pagamentu
+View Card|Afficher la carte|Affissà a carta
+Find something nearby. Or discover something fun.|Trouvez quelque chose à proximité. Ou découvrez quelque chose d’amusant.|Truvate qualcosa in vicinanza. O scuprite qualcosa di svagativu.
+Start your first search|Effectuez votre première recherche|Inizià cù a vostra prima ricerca
+Private browsing in %@ doesn’t save your info and blocks hidden trackers.|La navigation privée de %@ ne conserve pas vos informations et bloque les traqueurs cachés.|A navigazione privata in %@ ùn arregistreghja micca e vostre infurmazioni è blucca l’elementi di spiunagiu chì sò piattati.
+Browse without a trace|Naviguez sans laisser de traces|Navigà senza nisuna traccia
+Browse with no saved cookies or history in %@.|Naviguez sans enregistrer ni cookies ni historique dans %@.|Navigate senza arregistrà nè canistrelli nè cronolugia in %@.
+Try private browsing|Essayez la navigation privée|Pruvà a navigazione privata
+Common Name|Nom courant|Nome cumunu
+Issuer Name|Nom de l’émetteur|Nome di l’emettidore
+Subject Alt Names|Noms alternatifs du sujet|Nomi alternativi di u sughjettu
+DNS Name|Nom DNS|Nome DNS
+Subject Name|Nom du sujet|Nome di u sughjettu
+Certificate|Certificat|Certificatu
+Validity|Validité|Validità
+Not After|Pas après|Micca dopu
+Not Before|Pas avant|Micca nanzu
+Removing cookies and site data for %@ might log you out of websites and clear shopping carts.|Supprimer les cookies et les données de sites pour %@ peut vous déconnecter de sites web et vider vos paniers d’achats.|A cacciatura di i canistrelli è di i dati di i siti per %@ puderia discunnettevi è viutà e sporte di cumprera.
+Cookies and site data removed|Cookies et données de sites supprimés|Canistrelli è dati di siti sò stati cacciati
+Close privacy and security menu|Fermer le menu Sécurité et vie privée|Chjode u listinu di vita privata è di sicurità
+No trackers found|Aucun traqueur trouvé|Ùn si trova nisunu perseguitatore
+Tracking content: %@|Contenu utilisé pour le pistage : %@|Cuntenutu impiegatu per u spiunagiu : %@
+Cross-site tracking cookies: %@|Cookies de pistage intersites : %@|Canistrelli di spiunagiu intersiti : %@
+Fingerprinters: %@|Détecteurs d’empreinte numérique : %@|Detettori d’impronta numerica : %@
+Social media trackers: %@|Traqueurs de réseaux sociaux : %@|Perseguitatori di rete suciale : %@
+Trackers blocked: %@|Traqueurs bloqués : %@|Perseguitatori bluccati : %@
+Standard blocks common trackers after a page starts loading, so you may see a higher tracker count. %@|La protection standard bloque les traqueurs courants au chargement des pages, vous pouvez donc constater un nombre élevé de traqueurs. %@|A prutezzione classica blucca i perseguitatori cumuni dopu à u caricamentu di e pagine, dunque si pò vede un numeru superiore di perseguitatori. %@
+Strict blocks more trackers by stopping them before a page loads, so you may see a lower tracker count. %@|La protection stricte bloque davantage de traqueurs en les arrêtant avant le chargement des pages. Vous constaterez peut-être un nombre moins élevé de traqueurs. %@|A prutezzione severa blucca più perseguitatori piantenduli prima u caricamentu di a pagina, dunque si pò vede un numeru inferiore di perseguitatori. %@
+View certificate|Afficher le certificat|Affissà u certificatu
+%@ is off-duty. We suggest turning protections back on.|%@ n’est pas en service. Nous vous suggérons de réactiver les protections.|%@ ùn hè micca in serviziu. Vi ricumandemu d’attivà torna e prutezzioni.
+You’re protected. If we spot something, we’ll let you know.|Vous êtes protégé·e. Si nous remarquons quelque chose, nous vous le ferons savoir.|Site prutetti. S’è no fighjemu qualcosa, a vi feremu sapè.
+%@ is on guard|%@ vous protège|%@ vi prutege
+Privacy settings|Paramètres de vie privée|Parametri di cunfidenzialità
+Protections are OFF. We suggest turning them back on.|Les protections sont désactivées. Nous vous suggérons de les réactiver.|E prutezzioni sò disattivate. Vi ricumandemu di riattivalle torna.
+Enter a valid expiration date|Saisissez une date d’expiration valide|Stampittate una data di scadenza accettevule
+The application required to open that link can’t be found.|L’application nécessaire pour ouvrir ce lien est introuvable.|Ùn si pò truvà l’appiecazione richiesta per apre stu liame.
+Open email in the default mail application?|Ouvrir l’e-mail dans l’application de messagerie par défaut ?|Apre l’eMail cù l’appiecazione di messaghjeria predefinita ?
+Open sms in an external application?|Ouvrir le SMS dans une application externe ?|Apre u SMS in un’appiecazione esterna ?
+We’ve updated our %1$@ to reflect the latest features in %2$@. %3$@|Nous avons mis à jour notre %1$@ pour prendre en compte les dernières fonctionnalités de %2$@. %3$@|Avemu messu à livellu a nostra %1$@ per piglià in contu l’ultime funzioni di %2$@. %3$@
+Private Browsing Data Erased|Données de navigation privée supprimées|Dati di navigazione privata squassati
+%@ deletes your cookies, history, and site data when you close all your private tabs.|%@ efface cookies, historique de navigation et données de sites lorsque vous fermez tous les onglets de navigation privée.|%@ squassa i vostri canistrelli, cronolugia è dati di siti quandu vo chjudite tutte e vostre unghjette private.
+Enter the URL for the website.|Saisissez l’adresse du site web.|Stampittà l’indirizzu per u situ web.
+Add Shortcut|Ajouter un raccourci|Aghjunghje un accurtatoghju
+Website URL|URL du site web|Indirizzu web di u situ
+Pinned: %@|Épinglé : %@|Spirlatu : %@
+%1$@ of %2$@|%1$@ sur %2$@|%1$@ nant’à %2$@
+You’re Protected|Vous êtes protégé·e|Site prutetti
+Save username?|Enregistrer le nom d’utilisateur ?|Arregistrà u nome d’utilizatore ?
+SAVED PASSWORDS|MOTS DE PASSE ENREGISTRÉS|PAROLLE D’INTESA ARREGISTRATE
+Payment Methods|Moyens de paiement|Metode di pagamentu
+Powered by %1$@. Part of the %2$@ family.|Fonctionne grâce à %1$@. Membre de la famille %2$@.|Funziuneghja grazia à %1$@. Parte di a famiglia %2$@.
+%1$@ tabs closed: %2$@|Onglets %1$@ fermés : %2$@|Unghjette di %1$@ chjose : %2$@
+Meet your personalized homepage. Recent tabs, bookmarks, and search results will appear here.|Faites connaissance avec votre page d’accueil personnalisée. Onglets récents, marque-pages et résultats de recherche y apparaissent.|Fate cunnuscenza cù a vostra pagina d’accolta. L’unghjette, l’indette è i risultati di riceca recente ci si trovanu.
+Your tabs are syncing! Pick up where you left off on your other device.|Vos onglets sont synchronisés ! Reprenez là vous en étiez sur votre autre appareil.|E vostre unghjette sò sincrunizate ! Ripigliate induve vi site piantati nant’à u vostru altru apparechju.
+Next form field|Champ de formulaire suivant|Campu di furmulariu seguente
+Previous form field|Champ de formulaire précédent|Campu di furmulariu precedente
+Downloading Files: %@|Téléchargement de fichiers : %@|Scaricamentu di schedarii : %@
+Downloading “%@”|Téléchargement de « %@ »|Scaricamentu di « %@ »
+Bookmarks, history, and settings — all at your fingertips.|Marque-pages, historique et paramètres à portée de main.|Indette, cronolugia è parametri : tuttu vicinu à voi.
+New menu, no clutter|Nouveau menu, sans le superflu|Un listinu novu… è basta !
+Find what you need faster, from private browsing to save actions.|Trouvez plus vite ce dont vous avez besoin, de la navigation privée aux actions d’enregistrement.|Truvate più prestu ciò chì vo avete bisognu, da a navigazione privata à l’azzioni d’arregistramentu.
+New: streamlined menu|Nouveau : menu simplifié|Novu : listinu simplificatu
+Bookmark Page|Marquer cette page|Indettà a pagina
+Close Menu|Fermer le menu|Chjode u listinu
+Dismiss banner|Fermer la bannière|Righjittà a striscia
+Dimmed|Grisé|Adumbratu
+Sign in to sync passwords, tabs, and more|Connectez-vous pour synchroniser vos mots de passe, vos onglets et plus encore|Cunnittitevi per sincrunizà e parolle d’intesa, l’unghjette, è ancu di più
+Sync passwords, tabs, and more|Synchronisez vos mots de passe, vos onglets et plus encore|Sincrunizà e parolle d’intesa, l’unghjette, è ancu di più
+Sync bookmarks, passwords, tabs, and more|Synchronisez vos marque-pages, vos mots de passe, vos onglets et plus encore|Sincrunizà l’indette, e parolle d’intesa, l’unghjette, è ancu di più
+Sign In|Connexion|Cunnettesi
+Takes seconds. Change anytime.|Quelques secondes suffisent. Vous pouvez changer d’avis à tout moment.|Bastanu duie seconde. Cambiate quand’ella vi pare.
+Make %@ your default|Définissez %@ comme navigateur par défaut|Definisce %@ cum’è navigatore predefinitu
+Get Help|Obtenir de l’aide|Ottene aiutu
+New in %@|Nouveau dans %@|Novu in %@
+Ad Blocker|Bloqueur de publicités|Blucchime di publicità
+Protections|Protections|Prutezzioni
+Protections are OFF|Les protections sont désactivées|E prutezzioni sò disattivate
+Protections are ON|Les protections sont activées|E prutezzioni sò attivate
+Add to Home Screen|Ajouter à l’écran d’accueil|Aghjunghje à u screnu d’accolta
+Shortcut|Raccourci|Accurtatoghju
+Save to Reading List|Enregistrer dans la liste de lecture|Arregistrà in a lista di lettura
+Night Mode|Mode nocturne|Modu nutturnu
+Turn off Reader View|Quitter le mode lecture|Disattivà u modu di lettura
+Turn on Reader View|Passer en mode lecture|Attivà u modu di lettura
+Report Broken Site|Signaler des problèmes avec ce site|Signalà prublemi cù stu situ
+Zoom|Zoom|Ingrandamentu
+Page Zoom|Zoom sur la page|Ingrandamentu di a pagina
+Report|Signaler un problème|Signalà
+Report Broken Site…|Signaler des problèmes avec ce site…|Signalà prublemi cù stu situ…
+Main Menu|Menu principal|Listinu principale
+Desktop Site|Version ordinateur|Versione urdinatore
+Less|Moins|Menu
+Save submenu|Sous-menu Enregistrer|Sottulistinu Arregistrà
+Summarize Page|Résumer la page|Riassume a pagina
+Switch to desktop site|Passer en version pour ordinateur|Passà à a versione per urdinatore
+Switch to mobile site|Passer en version mobile|Passà à a versione mobile
+Tools submenu|Sous-menu Outils|Sottulistinu Attrezzi
+Find in Page…|Rechercher dans la page…|Circà in a pagina…
+Switch to Desktop Site|Passer en version classique|Passà à a versione per urdinatore
+Switch to Mobile Site|Passer en version mobile|Passà à a versione mobile
+Page Translated|Page traduite|Pagina tradutta
+Translated to %@|Traduite en %@|Tradutta in %@
+Translate Page|Traduire la page|Traduce a pagina
+Translate Page…|Traduire la page…|Traduce a pagina…
+Translated…|Page traduite…|Tradutta…
+Help us make %@ better. It only takes a minute.|Aidez-nous à améliorer %@. Cela ne prend qu’une minute.|Aiutateci à rende %@ megliu. Què piglia solu un minutu.
+%1$@ out of %2$@|%1$@ sur %2$@|%1$@ nant’à %2$@
+Unselected|Désélectionné|Diselezziunatu
+Survey|Enquête|Inchiesta
+%1$@ doesn’t trust this site because the certificate found isn’t valid for %2$@.|%1$@ ne fait pas confiance à ce site, car le certificat détecté n’est pas valable pour %2$@.|%1$@ ùn face micca cunfidenza à stu situ perchè u certificatu trovu ùn hè micca accettevule per %2$@.
+This site doesn’t allow connections that aren’t secure.|Ce site n’autorise pas les connexions non sécurisées.|Stu situ ùn permette micca e cunnessioni chì ùn sò micca sicurizate.
+You might need to sign in to your Wi-Fi network, or check your VPN settings.|Vous devrez peut-être vous connecter à votre réseau Wi-Fi ou vérifier vos paramètres VPN.|Forse duverete cunnettesi à a vostra reta Wi-Fi o verificà i vostri parametri VPN.
+If you’re on a corporate network, your support team might have more info.|Si vous utilisez un réseau d’entreprise, votre équipe d’assistance pourrait avoir plus d’informations.|S’è vo impiegate una reta d’impresa, a vostra squadra d’assistenza puderia avè d’altre infurmazioni.
+Someone pretending to be the site could try to steal your personal info. Your connection settings could also be set up incorrectly.|Quelqu’un se faisant passer pour le site pourrait tenter de dérober vos informations personnelles. Vos paramètres de connexion peuvent également être mal configurés.|Qualchissia pritendendu esse u situ puderia circà à arrubà e vostre infurmazioni persunale. Si puderia dinù chì i vostri parametri di cunnessione ùn sianu micca definiti bè.
+Error code: %@|Code d’erreur : %@|Codice di sbagliu : %@
+Hide advanced|Masquer|Piattà
+Proceed to %@ (Risky)|Poursuivre vers %@ (risqué)|Cuntinuà versu %@ (risicatu)
+Be careful. Something doesn’t look right.|Faites preuve de prudence, il semble y avoir un problème.|Fate casu. Pare ch’ella ci sia un prublema.
+View the site’s certificate|Afficher le certificat du site|Affissà u certificatu di u situ
+The owner of %@ hasn’t set it up properly and a secure connection can’t be created.|Le propriétaire de %@ ne l’a pas configuré correctement et une connexion sécurisée n’a pas pu être établie.|U prupietariu di %@ ùn l’hà micca cunfiguratu currettamente è ùn si pò creà una cunnessione assicurizata.
+Looks like there’s a problem with your internet connection.|Il semble y avoir un problème avec votre connexion Internet.|Pare ch’ella ci sia un prublema cù a vostra cunnessione internet.
+The site may be busy or unavailable. Try again later. If other pages won’t load, check your Wi-Fi or data connection. %@ can also search the Wayback Machine for an earlier version of this page.|Le site est peut-être occupé ou indisponible. Réessayez plus tard. Si d’autres pages ne se chargent pas, vérifiez votre connexion Wi-Fi ou de données. %@ peut également rechercher sur la Wayback Machine une version antérieure de cette page.|U situ hè forse sopracaricatu o indispunibule. Pruvate torna un’altra volta. S’è d’altre pagine ùn si caricanu micca, verificate a vostra cunnessione di dati o Wi-Fi. %@ pò dinù circà una versione precedente di sta pagina via Wayback Machine.
+Unable to connect|Connexion impossible|Impussibule di cunnettesi
+Searches the Wayback Machine for an archived version of this page.|Recherche d’une version archivée de cette page sur la Wayback Machine.|Circà via Wayback Machine una versione archiviata di sta pagina.
+%@ Tip|Conseil de %@|Cunsigliu di %@
+*Is %@ already your default?* Close this message and tap Skip.|*%@ est-il déjà votre navigateur par défaut ?* Fermez ce message et appuyez sur Ignorer.|*%@ hè dighjà u vostru navigatore predefinitu ?* Chjudite stu messaghju è picchichjate nant’à « Ignurà ».
+1. Go to *Settings*|1. Rendez-vous dans les *paramètres*|1. Andate à *Parametri*
+2. Tap *Default Browser App*|2. Appuyez sur *App du navigateur par défaut*|2. Picchichjate nant’à *Appiecazione predefinita di navigazione*
+3. Select *%@*|3. Sélectionnez *%@*|3. Selezziunate *%@*
+Customize %@|Personnaliser %@|Persunalizà %@
+Set your theme and toolbar to match your unique browsing style.|Configurez le thème et la barre d’outils à votre propre façon de naviguer.|Definite u tema è a barra d’attrezzi per ch’elli currispondenu à u vostru stilu di navigazione.
+%@ puts you in control|%@ vous donne le contrôle|%@ vi dà u cuntrollu
+Save and Continue|Enregistrer et continuer|Arregistrà è cuntinuà
+See the web in the best light.|Donnez au Web la lumière que vous aimez.|Fighjate u Web cù u lume chì vi piace.
+System Auto|Thème système – auto|Autumaticu (sistema)
+Pick a theme|Choisir un thème|Sceglie un tema
+Choose your theme|Choisissez votre thème|Sciglite u vostru tema
+Save and Start Browsing|Enregistrer et commencer la navigation|Arregistrà è principià a navigazione
+Keep searches within reach.|Gardez vos recherches à portée de main.|Mantinite e vostre ricerche accant’à voi.
+Pick a toolbar placement|Choisissez l’emplacement de la barre d’outils|Sciglite a piazza di a barra d’attrezzi
+Indie. Non-profit. For good.|Indépendant. À but non lucratif. Pour le bien commun.|Indipendente. Senza scopu lucrativu. Per u bè cumunu.
+Committed to the promise of a better Internet for everyone.|Engagé dans la promesse d’un Internet meilleur pour tout le monde.|Impegnatu per a prumessa d’un Internet megliu per tutti.
+Pick your favorite theme or have %@ match your device, putting you in control.|Choisissez votre thème préféré ou adaptez %@ à votre appareil, pour garder le contrôle.|Sciglite u vostru tema favuritu osinnò adattate %@ à u vostru apparechju, per guardà u cuntrollu.
+Start typing to get search suggestions, your top sites, bookmarks, history and search engines – all in one place.|Commencez à écrire pour obtenir des suggestions de recherche, vos sites préférés, vos marque-pages, votre historique et des moteurs de recherche — le tout au même endroit.|Principiate à stampittà per ottene suggestioni di ricerca, i vostri siti preferiti, e vostre indette, a vostra cronolugia è mutori di ricerca, tuttu què in un locu unicu.
+Share how you discovered %1$@, and that you use it, with %2$@’s marketing partners. This data is never sold.|Partagez la manière dont vous avez découvert %1$@ et que vous l’utilisez, avec les partenaires marketing de %2$@. Ces données ne sont jamais vendues.|Spartite cumu vo avete scupertu %1$@, è perchè vo l’impiegate, cù i cumpagni cummerciali di %2$@. Sti dati ùn sò mai vindute.
+Discover privacy features in %@ and securely send tabs between your devices.|Découvrez les fonctionnalités de protection de la vie privée dans %@ et envoyez des onglets en toute sécurité entre vos appareils.|Scuprite e funzioni di cunfidenzialità di %@ è mandate l’unghjette d’una manera sicura trà i vostri apparechji.
+Notifications help you stay safer with %@|Les notifications vous aident à rester en sécurité avec %@|E nutificazioni vi aiutanu à stà in sicurità cù %@
+Start Syncing|Démarrer la synchronisation|Lancià a sincrunizazione
+Agree and continue|Accepter et continuer|Accettà è cuntinuà
+To help improve the browser, %1$@ sends diagnostic and interaction data to %2$@. %3$@|Pour aider à l’amélioration du navigateur, %1$@ envoie des données de diagnostic et d’interaction à %2$@. %3$@|Per aiutà à amendà u navigatore, %1$@ manda à %2$@ i dati di diagnosticu è d’interazzione. %3$@
+%1$@ cares about your privacy. Read more in our %2$@|%1$@ se soucie de votre vie privée. Pour en savoir plus, consultez notre %2$@|%1$@ face casu di a vostra vita privata. Sapene di più in a nostra %2$@
+By continuing, you agree to the %@|En continuant, vous acceptez les %@|Cuntinuendu, vole si dì chì vo accettate e %@
+%@ Terms of Use|Conditions d’utilisation de %@|Cundizioni d’utilizazione di %@
+Open your links with built-in privacy|Accédez à vos liens tout en protégeant votre vie privée|Aprite i vostri liami prutigendu a vostra vita privata
+Choose where to put your address bar|Choisissez où placer votre barre d’adresse|Sciglite induve piazzà a vostra barra d’indirizzu
+Get your bookmarks, history, and passwords on any device.|Accédez à vos marque-pages, à votre historique et à vos mots de passe depuis n’importe quel appareil.|Accidite à e vostre indette, crunulogia è parolle d’entrata da ogni apparechju.
+Your bookmarks, passwords, and more sync on any device. Everything’s protected with encryption, so only you can access it.|Vos marque-pages, vos mots de passe et bien d’autres éléments sont synchronisés sur tous vos appareils. Grâce au chiffrement, vous seul·e pouvez y accéder.|E vostre indette, parolle d’intesa, è ancu d’altri elementi sò sincrunizati nant’à i vostri altri apparechji. Tuttu hè prutettu cù a cifratura, cusì voi solu pudete accedeci.
+Take %@ on all your browsing adventures|Emmenez %@ lors de chacune de vos aventures sur le Web|Pigliate %@ per tutte e vostre aventure nant’à u Web
+Automatic protection of your personal info Load sites fast and search smarter Brought to you by the non-profit %@, trusted for over 20 years|Protection automatique de vos données personnelles Navigation rapide et recherche optimisée Conçu par l’organisation à but non lucratif %@, digne de confiance depuis plus de 20 ans|Prutezzione autumatica di i vostri dati persunali Caricamentu in furia di i siti è ricerca astuta Cuncepitu da l’urganismu senza scopu lucrativu %@, degnu di cunfidenza dapoi più di 20 anni
+Privacy Notice.|Politique de confidentialité.|Pulitica di cunfidenzialità.
+Crash reports allow us to diagnose and fix issues with the browser. %@|Les rapports de plantage nous permettent de diagnostiquer et de corriger des problèmes avec le navigateur. %@|I raporti d’accidente ci permettenu di diagnosticà è di currege i prublemi cù u navigatore. %@
+Data about your device, hardware configuration, and how you use %1$@ helps improve features, performance, and stability for everyone. %2$@|Les données concernant votre appareil, la configuration matérielle et la façon dont vous utilisez %1$@ contribuent à améliorer les fonctionnalités, les performances et la stabilité pour tout le monde. %2$@|I dati apprupositu di u vostru apparechju, a cunfigurazione materiale è cumu vo impiegate %1$@ aiutanu à amendà e funzioni, e perfurmenze è a stabilità per tutti. %2$@
+Send technical and interaction data to %@|Envoyer des données techniques et d’interaction à %@|Mandà à %@ i dati tecnichi è d’interazzione
+Help us make %@ better|Aidez-nous à améliorer %@|Aiutateci à amendà %@
+Load sites lightning fast Automatic tracking protection Sync on all your devices|Chargement rapide des sites Protection automatique contre le pistage Synchronisation entre tous vos appareils|Caricamentu in furia di i siti Prutezzione autumatica contr’à u spiunagiu Sincrunizazione trà tutti i vostri apparechji
+%@ Terms of Use.|Conditions d’utilisation de %@.|Cundizioni d’utilizazione di %@.
+Upgrade your browsing|Améliorez votre navigation|Mudernizate a vostra navigazione
+Take charge of the internet|Prenez le contrôle d’Internet|Pigliate u cuntrollu d’Internet
+One choice protects you everywhere you go on the web. You can always change it later.|Une simple décision vous protège partout où vous allez sur le Web. Vous pourrez toujours changer d’avis plus tard.|Una scelta unica vi prutege dapertuttu quandu vo navigate nant’à u Web. Si pò sempre cambià què dopu.
+Say goodbye to creepy ads|Dites adieu aux publicités intrusives|Dite addiu à e publicità intrusive
+Securely send tabs between your devices and discover other privacy features in %@.|Envoyez des onglets d’un appareil à un autre en toute sécurité et découvrez d’autres fonctionnalités de protection de la vie privée de %@.|Mandate in sicurità l’unghjette trà i vostri apparechji è scuprite d’altre funzioni di cunfidenzialità di %@.
+Turn On Notifications|Activer les notifications|Attivate e nutificazioni
+%@ encrypts your passwords, bookmarks, and more when you’re synced.|%@ chiffre vos mots de passe, vos marque-pages et plus encore lorsque vous utilisez la synchronisation.|%@ cifra e vostre parolle d’intesa, e vostre indette, è ancu di più quandu vo impiegate a sincrunizazione.
+Stay encrypted when you hop between devices|Protégez-vous grâce au chiffrement lorsque vous passez d’un appareil à un autre|Prutigitevi grazia à a cifratura quandu vo passate da un apparechju à l’altru
+Fast and secure web browsing|Une navigation rapide et sûre|Una navigazione rapida è assicurizata
+Welcome to %@|Bienvenue dans %@|Benvenuta in %@
+Classic Wallpaper|Fond d’écran classique|Sfondulu di screnu classicu
+Limited Edition Wallpaper|Fond d’écran en édition limité|Sfondulu di screnu in edizione limitata
+Set Wallpaper|Définir un fond d’écran|Definisce un sfondulu di screnu
+Choose a %@ Wallpaper|Choisir un fond d’écran %@|Sceglie un sfondulu di screnu per %@
+Get Started|Prise en main|Principià
+Close and exit %@ onboarding|Fermer et quitter l’accueil de %@|Chjode è compie u prucessu d’accolta di %@
+Our non-profit backed browser helps stop companies from secretly following you around the web.|Notre navigateur soutenu par une organisation à but non lucratif empêche les entreprises de vous suivre secrètement sur le Web.|U nostru navigatore sustinutu da un urganismu senza scopu lucrativu impedisce l’imprese di seguitavvi da manera sicreta nant’à u Web.
+Learn more in our privacy notice|En savoir plus dans notre politique de confidentialité|Sapene di più in a nostra dichjarazione di cunfidenzialità
+We love keeping you safe|Votre protection compte pour nous|A vostra prutezzione ci impreme
+Welcome to an independent internet|Bienvenue sur un Internet indépendant|Benvenuta in un Internet indipendente
+(no username)|(aucun nom d’utilisateur)|(nisunu nome d’utilizatore)
+You’ll sign into %@|Vous allez vous connecter à %@|Avete da cunnettesi à %@
+Use saved password?|Utiliser le mot de passe enregistré ?|Impiegà a parolla d’intesa arregistrata ?
+Use saved password|Utiliser le mot de passe enregistré|Impiegà a parolla d’intesa arregistrata
+Password Generator|Générateur de mot de passe|Generatore di parolla d’intesa
+Protect your account by using a strong, randomly generated password.|Protégez votre compte en utilisant un mot de passe compliqué, généré aléatoirement.|Prutigite u vostru contu impieghendu una parolla d’intesa forte è ingenerata à l’azardu.
+Use strong password|Utiliser un mot de passe compliqué|Impiegà una parolla d’intesa forte
+Generated password: %@|Mot de passe généré : %@|Parolle d’intesa ingenerata : %@
+Generate a new strong password|Générer un nouveau mot de passe compliqué|Ingenerà una nova parolla d’intesa forte
+Use a strong password?|Utiliser un mot de passe compliqué ?|Impiegà una parolla d’intesa forte ?
+Use Password|Utiliser ce mot de passe|Impiegà sta parolla d’intesa
+Scan QR code|Scanner un code QR|Analizà un codice QR
+New! %@ Relay email masks are now available on mobile.|Nouveau ! Les alias de messagerie %@ Relay sont désormais disponibles sur les appareils mobiles.|Novu ! Ora, e maschere di messaghjeria %@ Relay sò dispunibule nant’à l’apparechji mobili.
+You’ve used your 5 free email masks, so we picked one for you to reuse.|Vous avez utilisé vos 5 alias de messagerie gratuits, nous en avons choisi un que vous pourrez réutiliser.|Avete impiegatu e vostre 5 maschere di messaghjeria di rigalu, tandu n’avemu sceltu unu chì vo puderete rimpiegà.
+Email mask inserted|Alias de messagerie inséré|Maschera di messaghjeria framessa
+Manage Email Masks|Gérer les alias de messagerie|Urganizà e maschere di messaghjeria
+Email Masks|Alias de messagerie|Maschere di messaghjeria
+Suggest Email Masks|Suggérer des alias de messagerie|Suggerisce maschere di messaghjeria
+%@ encrypts your card number. Your security code won’t be saved.|%@ chiffre votre numéro de carte. Votre code de sécurité ne sera pas enregistré.|%@ cifra u vostru numeru di carta. U vostru codice di sicurità ùn serà micca arregistratu.
+Card Information Updated|Informations de la carte mises à jour|Infurmazioni di a carta messe à livellu
+Please help make %@ better by taking a short survey.|Aidez-nous à améliorer %@ en répondant à un court sondage.|Pè piacè aiutateci à rende %@ megliu facendu una corta inchiesta.
+Allow %@ to open?|Autoriser l’ouverture de %@ ?|Permette l’apertura da %@ ?
+Opens search settings|Ouvre les paramètres de recherche|Apre i parametri di ricerca
+This time search in:|Pour cette recherche :|Sta volta, ricercà cù :
+%@ search|Recherches %@|Ricerche %@
+Google Search|Recherches Google|Ricerche Google
+Trending on %@|Tendance sur %@|Tendenza nant’à %@
+Show Recent Searches|Afficher les recherches récentes|Affissà e ricerche recente
+Show Trending Searches|Afficher les recherches populaires|Affissà e ricerche pupulare
+Address for %@|Adresse pour %@|Indirizzu per %@
+Save Addresses to %@|Enregistrez les adresses dans %@|Arregistrà l’indirizzi in %@
+SAVED ADDRESSES|ADRESSES ENREGISTRÉES|INDIRIZZI ARREGISTRATI
+Securely save your information to get quick access to it later.|Enregistrez vos informations en toute sécurité pour y accéder rapidement plus tard.|Arregistrate e vostre infurmazioni in tutta sicurità per accedeci prestu prestu un’altra volta.
+Save and Fill Addresses|Enregistrer et remplir automatiquement les adresses|Arregistrà è rinsignà autumaticamente l’indirizzi
+Use saved address|Utiliser une adresse enregistrée|Impiegà un indirizzu arregistratu
+Save your card information securely to check out faster next time.|Enregistrez les informations de votre carte en toute sécurité pour payer plus rapidement la prochaine fois.|Arregistrate l’infurmazione di a vostra carta di manera assicurata per pagà più prestu a prossima volta.
+Save Cards to %@|Enregistrez des cartes dans %@|Arregistrà e carte in %@
+%1$@, issued to %2$@, ending in %3$@, expires %4$@|Carte %1$@, délivrée à %2$@, se finissant par %3$@, expire en %4$@|Carta %1$@ per %2$@, cumpiendusi da %3$@, scade u %4$@
+Update card?|Mettre à jour la carte ?|Mudificà a carta ?
+Done|Terminer|Compiu
+Available|Disponible|Dispunibule
+**Available**: You’ll see the feature and can use it.|**Disponible** : vous verrez la fonctionnalité et pourrez l’utiliser.|**Dispunibule** : viderete a funzione è puderete impiegalla.
+**Blocked**: You won’t see and can’t use the feature. For on-device AI, any downloaded models are removed.|**Bloqué** : vous ne voyez pas et ne pouvez pas utiliser cette fonctionnalité. Pour l’IA sur l’appareil, tous les modèles déjà téléchargés sont supprimés.|**Bluccata** : ùn viderete è ùn puderete micca impiegà sta funzione. Per l’IA lucale, tutti i mudelli scaricati seranu cacciati.
+Page Summaries|Résumés de pages|Riassunti di pagine
+Your voice, questions, and answers are never stored.|Votre voix, vos questions et vos réponses ne sont jamais stockées.|A vostra voce, e vostre dumande è e vostre risposte ùn sò mai arregistrate.
+Quick Answers|Réponses rapides|Risposte preste
+AI-POWERED FEATURES|FONCTIONNALITÉS AYANT RECOURS À L’IA|FUNZIONI BASATE NANT’À L’IA
+Translations stay private on your device.|Les traductions restent confidentielles sur votre appareil.|E traduzzioni stanu private nant’à u vostru apparechju.
+Translation|Traduction|Traduzzione
+Blocking means you won’t see new or current AI enhancements in %@, or pop-ups about them.|Activer le blocage implique que vous ne verrez pas les améliorations par IA (nouvelles ou existantes) dans %@, ni les popups qui s’y rapportent.|Attivà u blucchime vole dì chì ùn viderete nant’à %@, nè l’amendamenti, novi o esistenti, da l’intelligenza artificiale, nè i finestrini relativi.
+Block AI Enhancements|Bloquer les améliorations ayant recours à l’IA|Bluccà l’amendamenti impieghendu l’IA
+That includes whether to use features enhanced with AI.|Y compris d’utiliser ou non des fonctionnalités améliorées par l’IA.|Què include l’impiegu - o nò - di funzioni amendate da l’intelligenza artificiale.
+You always have a choice in %@|Vous avez toujours le choix dans %@|Avete sempre a scelta in %@
+AI Controls|Contrôles de l’IA|Cuntrolli di l’IA
+Changes the button in the center of the toolbar.|Change le bouton au centre de la barre d’outils.|Cambia u buttone à u centru di a barra d’attrezzi.
+Toolbar Button|Bouton de la barre d’outils|Buttone di a barra d’attrezzi
+Reset Site Settings|Réinitialiser les paramètres du site|Reinizià i parametri di u situ
+Zoom Settings|Paramètres de zoom|Parametri d’ingrandamentu
+To add to this list, visit a site and adjust the page zoom from the menu|Pour compléter cette liste, visitez un site et ajustez le niveau de zoom de la page à partir du menu|Per aghjunghje à sta lista, visitate un situ è accumudate l’ingrandamentu di a pagina via u listinu
+Specific site settings|Paramètres de sites spécifiques|Parametri specifichi di u situ
+Zoom Level|Niveau de zoom|Livellu d’ingrandamentu
+Autofills & Passwords|Remplissage automatique et mots de passe|Riempiimentu autumaticu è parolle d’intesa
+Allow Audio and Video|Autoriser l’audio et la vidéo|Permette l’audio è a video
+Block Audio|Bloquer l’audio|Bluccà l’audio
+Block Audio and Video|Bloquer l’audio et la vidéo|Bluccà l’audio è a video
+Autoplay settings will only apply to newly opened tabs. Changes cannot be applied to existing tabs unless the application is restarted.|Les paramètres de lecture automatique ne s’appliqueront qu’aux onglets récemment ouverts. Les changements ne peuvent être appliqués aux onglets existants que si l’application est redémarrée.|I parametri di lettura autumatica s’appiecheranu solu à l’unghjette aperte pocu fà. I cambiamenti ùn ponu micca appiecassi à l’unghjette esistente for chè l’appiecazione hè rilanciata.
+Autoplay|Lecture automatique|Lettura autumatica
+Block Ads|Bloquer les publicités|Bluccà e publicità
+Browsing|Navigation|Navigazione
+This helps us diagnose and fix issues with the browser.|Cela nous permet de diagnostiquer et de corriger des problèmes avec le navigateur.|Què ci permette d’identificà è currege i prublemi cù u navigatore.
+Automatically Send Crash Reports|Envoyer automatiquement les rapports de plantage|Mandà autumaticamente i raporti d’accidente
+This helps %@ to estimate active users.|Ce paramètre aide %@ à évaluer le nombre d’utilisateurs actifs.|Què aiuta %@ à prezzà u numeru d’utilizatori attivi.
+Daily Usage Ping|Ping d’utilisation quotidienne|Ping d’aghjovu oghjincu
+This must be turned on to receive tabs and get notified when you sign in on another device.|Cette option doit être activée pour recevoir des onglets et être averti·e lorsque vous vous connectez sur un autre appareil.|St’ozzione deve esse attivata per riceve l’unghjette è esse nutificatu quandu vo site cunnessu nant’à un altru apparechju.
+Sync|Synchronisation|Sincrunizazione
+You turned off all %1$@ notifications. Turn them on by going to device Settings > Notifications > %2$@|Vous avez désactivé toutes les notifications de %1$@. Activez-les depuis Réglages > Notifications > %2$@|Avete disattivatu tutte e nutificazioni di %1$@. Attivatele via Parametri > Nutificazioni > %2$@
+Learn about useful features and how to get the most out of %@.|Découvrez des fonctionnalités utiles et des conseils pour tirer le meilleur parti de %@.|Sapene di più nant’à funzioni ghjuvevule è cumu ottene u più bonu di %@.
+Tips and Features|Conseils et fonctionnalités|Cunsiglii è funzioni
+Go to your device Settings to turn on notifications in %@|Allez dans les paramètres de votre appareil pour activer les notifications dans %@|Andate in i parametri di u vostru apparechju per attivà e nutificazioni in %@
+Turn on Notifications|Activer les notifications|Attivate e nutificazioni
+%@ will improve features, performance, and stability between updates. Changes applied remotely.|%@ améliorera les fonctionnalités, les performances et la stabilité entre les mises à jour. Modifications appliquées à distance.|%@ amenderà e funzioni, e perfurmenze è a stabilità trà e messe à livellu. I cambiamenti sò appiecati à distanza.
+Allow Remote Improvements|Permettre les améliorations à distance|Permette l’amendamenti à distanza
+Scroll to Hide Tab and Address Bar|Faire défiler pour masquer la barre d’adresse et d’onglets|Sfilà per piattà a barra d’unghjette è a barra d’indirizzu
+Alternative Search Engines|Moteurs de recherche alternatifs|Mutori di ricerca alternativi
+Suggestions from Search Engines|Suggestions des moteurs de recherche|Suggestioni di i mutori di ricerca
+Send images to Google to search.|Envoyez des images à Google pour effectuer des recherches.|Manda fiure à Google per fà e ricerche.
+Show suggestions from search engines in private sessions|Afficher les suggestions des moteurs de recherche lors des sessions privées|Affissà e suggestioni di i mutori di ricerca in e sessioni di navigazione privata
+Show in Private Sessions|Afficher au cours des sessions de navigation privée|Affissà durante e sessioni di navigazione privata
+Show suggestions from Firefox Suggest in private sessions|Afficher les suggestions de Firefox Suggest dans les sessions privées|Affissà e suggestioni di Firefox Suggest in e sessioni di navigazione privata
+Search Browsing History|Rechercher dans l’historique de navigation|Ricercà in a cronolugia di navigazione
+Search Bookmarks|Rechercher dans les marque-pages|Ricercà in l’indette
+Search Synced Tabs|Rechercher dans les onglets synchronisés|Ricercà in l’unghjette sincrunizate
+Get suggestions from %@ related to your search|Obtenir des suggestions %@ en rapport avec votre recherche|Ottene suggestioni da %@ relative à a vostra ricerca
+Suggestions from the Web|Suggestions du Web|Suggestioni da u Web
+Support %@ with occasional sponsored suggestions|Soutenir %@ en affichant de temps en temps des suggestions sponsorisées|Sustene %@ cù suggestioni occasiunale spunsurizate
+Suggestions from Sponsors|Suggestions de sponsors|Suggestioni da i spunsurizatori
+Try out features and ideas before they’re released to everyone.|Testez des fonctionnalités et des idées avant qu’elles ne soient disponibles pour tout le monde.|Pruvate funzioni è idee prima ch’elle sianu dispunibule à tutti.
+%@ randomly selects users to test features, which improves quality for everyone.|%@ sélectionne au hasard des utilisateurs et utilisatrices pour tester des fonctionnalités, ce qui améliore la qualité pour tout le monde.|%@ selezziuneghja à l’azardu certi utilizatori per pruvà e funzioni, ciò chì aumenteghja a qualità per tutte è tutti.
+Install and Run Studies|Installer et lancer des études|Installà è lancià studii
+Allow Feature Studies|Autoriser les études sur des fonctionnalités|Permette e studii nant’à e funzioni
+Provides access to summarize pages.|Permet d’accéder aux résumés de pages.|Permette l’accessu à a funzione per riassume e pagine.
+Shake your device from side to side to summarize a page.|Secouez votre appareil d’un côté à l’autre pour résumer une page.|Ciambuttate u vostru apparechju d’un latu à l’altru per riassume una pagina.
+Shake to Summarize|Secouer pour résumer|Ciambuttà per riassume
+Website Language|Langue du site web|Lingua di u situ web
+Summarize Pages|Résumer les pages|Riassume e pagine
+Data about your device, hardware configuration, and usage helps us improve %@ features, performance and stability.|Les données concernant votre appareil, la configuration matérielle et votre utilisation nous aident à améliorer les fonctionnalités, les performances et la stabilité de %@.|I dati apprupositu di u vostru apparechju, a cunfigurazione materiale è u vostru adopru ci aiutanu à amendà e funzioni, e perfurmenze è a stabilità di %@.
+Send Technical and Interaction Data|Envoyer des données techniques et d’interaction|Mandà i dati tecnichi è d’interazzione
+Translates pages to your top preferred language automatically.|Traduit automatiquement les pages dans la langue de votre choix.|Traduce autumaticamente e pagine in a lingua di a vostra scelta.
+Automatically Translate|Traduire automatiquement|Traduce autumaticamente
+Select Language|Sélectionnez une langue|Selezziunà a lingua
+Add Language…|Ajouter une langue…|Aghjunghje una lingua…
+Device Language|Langue de l’appareil|Lingua di l’apparechju
+Choose from these languages when translating.|Sélectionnez l’une de ces langues pour effectuer la traduction.|Sciglite trà quelle lingue per fà a traduzzione
+Preferred Languages|Langues préférées|Lingue preferite
+Translation Preferences|Préférences de traduction|Preferenze di traduzzione
+Turn this off to remove translation from the toolbar and menu.|Désactivez cette option pour supprimer la traduction de la barre d’outils et du menu.|Disattivate st’ozzione per caccià a traduzzione da a barra d’attrezzi è da u listinu.
+Enable Translations|Activer les traductions|Attivà e traduzzioni
+You don’t have any other devices connected to this account available to sync.|Vous ne disposez pas d’autre appareil connecté à votre compte prêt à être synchronisé.|Ùn avete alcunu altru apparechju cunnessu à stu contu è prontu à esse sincrunizatu.
+You are not signed in to your account.|Vous n’êtes pas connecté·e à votre compte.|Ùn site micca cunnessu à u vostru contu.
+File Copied To Clipboard|Fichier copié dans le presse-papiers|Schedariu cupiatu in u preme’papei
+Card Removed|Carte supprimée|Carta cacciata
+New Card Saved|Nouvelle carte enregistrée|Nova carta arregistrata
+Spread the word about %1$@ every time you share a link on %2$@.|Faites connaître %1$@ à chaque fois que vous partagez un lien sur %2$@.|Fate cunnosce %1$@ ogni volta chì vo spartite un liame nant’à %2$@.
+Include %1$@ Download Link on %2$@ Shares|Inclure un lien de téléchargement de %1$@ dans les partages %2$@|Include un liame di scaricamentu di %1$@ in e spartere nant’à %2$@
+%1$@ Sent from %2$@ 🦊 Try the mobile browser: %3$@|%1$@ Envoyé depuis %2$@ 🦊 Essayez le navigateur mobile : %3$@|%1$@ Mandatu da %2$@ 🦊 Pruvate u navigatore mobile : %3$@
+%1$@ Sent from %2$@ 🦊 %3$@|%1$@ Envoyé depuis %2$@ 🦊 %3$@|%1$@ Mandatu da %2$@ 🦊 %3$@
+Tap to summarize this page. Touch and hold for Reader View.|Appuyez pour résumer cette page. Effectuez un appui long pour accéder au mode lecture.|Picchichjà per riassume sta pagina. Tuccate à mantinite per accede à u modu di lettura.
+Summarized by Apple Intelligence|Résumé par Apple Intelligence|Riassuntu da Apple Intelligence
+Close Summary|Fermer le résumé|Chjode u riassuntu
+Page is still loading. Wait for it to finish, then hit summarize.|La page est en cours de chargement. Veuillez attendre qu’elle soit complètement chargée, puis cliquez sur « Résumer ».|A pagina hè in corsu di caricamentu. Ci vole à aspettà ch’ella sia caricata sana eppò fate un cliccu nant’à « Riassume ».
+Can’t handle this one at the moment. Try again later!|Impossible de résumer cette page pour l’instant. Veuillez réessayer ultérieurement.|Impussibule di riassume quella pagina subitu. Pruvate torna un’altra volta.
+Error summarizing page. Try again later.|Erreur lors de la synthèse de la page. Réessayez plus tard.|Sbagliu durante u riassuntu di a pagina. Pruvate torna un’altra volta.
+Limited content detected. This page may be restricted or mostly visual.|Contenu limité détecté. Cette page peut être restreinte ou principalement visuelle.|Hè statu scupertu un cuntenutu limitatu. Sta pagina puderia esse ristrinta o soprattuttu visuale.
+This website doesn’t allow content summarization. Try a different page.|Ce site web ne permet pas de résumer son contenu. Essayez avec une autre page.|Stu situ web ùn permette micca di riassume u so cuntenutu. Pruvate cù un’altra pagina.
+Note: Summarization can make errors.|Remarque : le résumé peut contenir des erreurs.|Nota : u riassuntu puderia cuntene sbaglii.
+Summarized by %@|Résumé par %@|Riassuntu da %@
+Loading summary|Chargement du résumé|Caricamentu di u riassuntu
+Retry to summarize web page|Réessayer de résumer la page web|Pruvà torna à riassume a pagina web
+Drag or tap the web page to close the summary|Faites glisser ou appuyez sur la page web pour fermer le résumé|Fate sguillà o picchichjate a pagina web per chjode u riassuntu
+How it works|Principes de fonctionnement|Cumu què funziuneghja
+Accept consent|Accepter le consentement|Accettà l’accunsentu
+See the main points in seconds with %@.|Consultez les points clés en un instant avec %@.|Fighjate i punti principali in poche seconde cù %@.
+Summarize this page?|Résumer cette page ?|Riassume sta pagina ?
+Summary not available|Résumé non disponible|Riassuntu indispunibule
+Double tap and hold for more options|Appuyez deux fois puis maintenez votre doigt appuyé pour afficher davantage d’options|Picchichjate duie volte è mantinite u vostru ditu appughjatu per affissà più d’ozzioni
+Connection not secure. Enhanced Tracking Protection is off.|Connexion non sécurisée. La protection renforcée contre le pistage est désactivée.|Cunnessione micca assicurata. A prutezzione rinfurzata contr’à u spiunagiu hè disattivata.
+Secure connection. Enhanced Tracking Protection is off.|Connexion sécurisée. La protection renforcée contre le pistage est désactivée.|Cunnessione assicurizata. A prutezzione rinfurzata contr’à u spiunagiu hè disattivata.
+Share this page|Partager cette page|Sparte sta pagina
+Show Tabs: %@|Afficher les onglets : %@|Affissà l’unghjette : %@
+Remove page|Retirer la page|Caccià a pagina
+Tab Closed|Onglet fermé|Unghjetta chjosa
+Tabs Closed: %d|Onglets fermés : %d|Unghjette chjose : %d
+Sync|Synchronisés|Sincrunizate
+Close Old Tabs…|Fermer les anciens onglets…|Chjode l’unghjette vechje…
+Close Tabs (%@)|Fermer les onglets (%@)|Chjode l’unghjette (%@)
+Close tabs older than…|Fermer les onglets de plus de…|Chjode l’unghjette più vechje chè…
+1 Day Ago|Un jour|1 ghjornu
+1 Month Ago|Un mois|1 mese
+1 Week Ago|Une semaine|1 settimana
+Turn on tab syncing to view a list of tabs from your other devices.|Activez la synchronisation des onglets pour afficher la liste des onglets de vos autres appareils.|Attivate a sincrunizazione di l’unghjette per affissà a lista di l’unghjette di i vostri altri apparechji.
+Sync Tabs|Synchroniser les onglets|Sincrunizà l’unghjette
+Data Clearance|Effacement des données|Viutatura di i dati
+We’ve introduced a %@ Terms of Use and updated our Privacy Notice.|Nous avons mis en place des Conditions d’utilisation pour %@ et mis à jour notre Politique de confidentialité.|Avemu messu in piazza e cundizioni d’utilizazione di %@ è mudificatu a nostra pulitica di cunfidenzialità.
+You can learn more %@.|Vous pouvez en savoir plus %@.|Pudete sapene di più %@.
+Remind Me Later|Rappeler plus tard|Rammintatemi un altra volta
+Please take a moment to review and accept. Learn more|Veuillez prendre quelques instants pour les consulter et les accepter. En savoir plus|Ci vole à piglià u so tempu per fighjalle è accettalle. Sapene di più
+Terms of Use sheet opened|Panneau des Conditions d’utilisation ouvert|U fogliu di e cundizioni d’utilizazione hè apertu
+A note from %@|Un message de %@|Un messaghju da %@
+Reader View. Page summary available.|Mode lecture. Résumé de la page disponible.|Modu di lettura. Riassuntu di a pagina dispunibule.
+Close This Tab|Fermer cet onglet|Chjode st’unghjetta
+Tabs open|Onglets ouverts|Unghjette aperte
+Tabs open: %@|Onglets ouverts : %@|Unghjette aperte : %@
+Tabs open: 99+|Onglets ouverts : plus de 99|Unghjette aperte : più chè 99
+Show page in original language|Afficher la page dans sa langue d’origine|Affissà a pagina in a lingua d’origine
+Translating page|Traduction de la page|Traduzzione di a pagina
+Move the toolbar to the top if that’s more your style.|Placez la barre d’outils en haut si cela vous correspond mieux.|S’è vo preferite, pudete dispiazzà a barra d’attrezzi insù.
+Tap and hold the arrows to jump between pages in this tab’s history.|Effectuez un appui long sur une des flèches pour naviguer dans les pages de l’historique de cet onglet.|Picchichjà è mantene e fleccie per saltà trà e pagine in sta cronolugia d’unghjetta
+Move the toolbar to the bottom if that’s more your style.|Placez la barre d’outils en bas si cela vous correspond mieux.|S’è vo preferite, pudete dispiazzà a barra d’attrezzi inghjò.
+Enable|Activer|Attivà
+Automatically translate pages when available?|Traduire automatiquement les pages lorsque cela est possible ?|Traduce autumaticamente e pagine s’ella hè pussibule ?
+Close Translation Panel|Fermer le panneau de traduction|Chjode u pannellu di traduzzione
+Translated from %1$@ to %2$@|Page traduite en %2$@, l’originale est en %1$@|Tradutta da %1$@ à %2$@
+Couldn’t translate page|Impossible de traduire la page|Impussibule di traduce a pagina
+Open Language Preferences|Ouvrir les préférences de langue|Apre e preferenze di lingua
+Translate page to %@?|Traduire la page en %@ ?|Traduce a pagina in %@ ?
+Page Translated to %@|Page traduite en %@|Pagina tradutta in %@
+Preferred Languages…|Langues préférées…|Lingue preferite…
+Show Original|Afficher la page d’origine|Affissà a pagina d’origine
+Translate Page to…|Traduire la page en…|Traduce a pagina in…
+Choose Language|Choisissez une langue|Sciglite una lingua
+Please try again.|Veuillez réessayer.|Pruvate torna.
+Couldn’t Translate Page|Impossible de traduire la page|Impussibule di traduce a pagina
+Check your internet connection and try again.|Vérifiez votre connexion Internet puis réessayez.|Ci vole à verificà a vostra cunnessione internet è pruvà torna.
+Couldn’t Load Languages|Impossible de charger les langues|Impussibule di caricà e lingue
+From|Langue source :|Da
+Page translated|Page traduite|Pagina tradutta
+To|Langue cible :|À
+Translate From %@|Langue source : %@|Traduce da %@
+Translate From|Langue source :|Traduce da
+Translate To %@|Langue cible : %@|Traduce in %@
+Translate To|Langue cible :|Traduce in
+Pick up where you left off with tabs from other devices now on your homepage.|Reprenez là où vous en étiez avec des onglets d’autres appareils qui figurent désormais sur votre page d’accueil.|Ripigliate induve vi site piantati cù l’unghjette d’altri apparechji chì si trovanu avà nant’à a vostra pagina d’accolta.
+Switching screens is easier than ever|Passer d’un écran à l’autre est plus facile que jamais|Passà d’un screnu à l’altru hè più faciule chè mai
+New colors. New convenience. Same commitment to people over profits.|De nouvelles couleurs. Un nouveau confort. Mais le même engagement pour les gens plutôt que pour l’argent.|Novi culori. Novu cunfortu. Ma u stessu impegnu pè a ghjente piuttostu chè pè i soldi.
+Welcome to a more personal internet|Bienvenue sur un Internet plus personnel|Benvenuta in un Internet più persunale
+Search Image with Google Lens|Rechercher une image avec Google Lens|Circà una fiura cù Google Lens
+Loading Document|Chargement du document|Caricamentu di u ducumentu
+Loading…|Chargement…|Caricamentu…
+Close World Cup country picker|Fermer le sélecteur de pays pour la Coupe du monde|Chjode a selezzione di paese per a Coppa di u mondu
+Central America|Amérique centrale|America centrale
+Europe|Europe|Europa
+North America|Amérique du Nord|America di u Nordu
+South America|Amérique du Sud|America Suttana
+England|Angleterre|Inghilterra
+Scotland|Écosse|Scozia
+Follow Your Team|Suivez votre équipe|Seguitate a vostra squadra
+Group A|Groupe A|Gruppu A
+Group B|Groupe B|Gruppu B
+Group C|Groupe C|Gruppu C
+Group D|Groupe D|Gruppu D
+Group E|Groupe E|Gruppu E
+Group F|Groupe F|Gruppu F
+Group G|Groupe G|Gruppu G
+Group H|Groupe H|Gruppu H
+Group I|Groupe I|Gruppu I
+Group J|Groupe J|Gruppu J
+Group K|Groupe K|Gruppu K
+Group L|Groupe L|Gruppu L
+Group Stage|Phase de groupes|Fasa di gruppi
+Change team|Changer d’équipe|Cambià di squadra
+D|J|G
+H|h|O
+Countdown to the World Cup|Compte à rebours avant la Coupe du monde|Contu à l'arritrosa prima a Coppa di u mondu
+View Schedule|Voir le calendrier|Affissà u calendariu
+Disable notifications|Désactiver les notifications|Disattivà e nutificazioni
+Choose Team|Choisir l’équipe|Sceglie a squadra
+Choose another team to keep up with the World Cup.|Choisissez une autre équipe pour continuer à suivre la Coupe du monde.|Sciglite un’altra squadra per cuntinuà à seguità a Coppa di u mondu.
+Remove the World Cup widget|Supprimer le widget Coupe du monde|Caccià u widget di a Coppa di u mondu
+Still want to Follow Along?|Voulez-vous continuer à suivre la compétition ?|Vulete cuntinuà à seguità a cumpetizione ?
+We couldn’t load match data. Please refresh.|Nous n’avons pas pu charger les données du match. Veuillez actualiser.|Ùn si pò caricà i dati di a partita. Ci vole à attualizà.
+Extra time|Prolongations|Prulungazioni
+(Full Time)|(Match terminé)|(Partita finita)
+Full Time|Match terminé|Partita finita
+First half|Première mi-temps|Primu mezutempu
+Hide World Cup updates|Masquer les informations sur la Coupe du monde|Piattà l’infurmazioni nant’à a coppa di u mondu
+Get live match updates and more.|Recevez les dernières infos en direct sur les matchs et bien plus encore.|Ricivete in vivu l’ultime nutizie nant’à e partite è ancu di più.
+Keep Tabs on the World Cup|Gardez un œil sur la Coupe du monde|Dà un’ochjata à a Coppa di u mondu
+Follow team|Suivre une équipe|Seguità una squadra
+Full time • Penalties (%@)|Match terminé • Tirs au but (%@)|Partita finita - Tiri à u puntu (%@)
+Get custom wallpaper|Obtenir un fond d’écran personnalisé|Ottene un sfondulu di screnu persunalizatu
+Related matches|Matchs liés|Partite assuciate
+Half time|Mi-temps|Mezutempu
+LIVE|EN DIRECT|IN VIVU
+Match info is not available right now. Try refreshing in a few minutes.|Les informations concernant le match ne sont pas disponibles pour le moment. Essayez d’actualiser dans quelques minutes.|L’infurmazioni apprupositu di a partita ùn sò mica dispunibule avà. Pruvate d’attualizà in qualchì minutu.
+Looks like you’re offline. Check your internet connection and try again.|Il semble que vous soyez hors ligne. Veuillez vérifier votre connexion Internet et réessayer.|Pare chì vo site fora di linea. Ci vole à verificà a vostra cunnessione internet è pruvà torna.
+Penalties (%@)|Tirs au but (%@)|Tiri à u puntu (%@)
+BRONZE FINAL|PETITE FINALE|CHJUCA FINALE
+QUARTER-FINALS|QUARTS DE FINALE|QUARTI DI FINALE
+ROUND OF 16|8ES DE FINALE|OTTESIMI DI FINALE
+ROUND OF 32|16ES DE FINALE|SEDECESIMI DI FINALE
+Scroll to see previous or next matches|Faites défiler pour voir les matchs précédents ou suivants|Fà sfilà per vede e partite precedente o seguente
+SEMI-FINALS|DEMI-FINALES|MEZU FINALE
+THIRD PLACE|TROISIÈME PLACE|TERZA PIAZZA
+Upcoming|À venir|À vene
+2026 WORLD CUP CHAMPIONS|CHAMPIONS DU MONDE 2026|CAMPIONI DI U MONDU 2026
+Second half|Deuxième mi-temps|Secondu mezutempu
+We’ll keep you updated as the World Cup approaches|Nous vous tiendrons au courant à l’approche de la Coupe du monde|Avemu da tenevi infurmati à l’avvicinata di a Coppa di u mondu
+Close Zoom Panel|Fermer le panneau de zoom|Chjode u pannellu d’ingrandamentu
+Current Zoom Level: %@|Niveau de zoom actuel : %@|Livellu attuale d’ingrandamentu : %@
+Decrease Zoom Level|Réduire le niveau de zoom|Diminuisce u livellu d’ingrandamentu
+Increase Zoom Level|Augmenter le niveau de zoom|Aumentà u livellu d’ingrandamentu
+Just to confirm, you wanted ‘Go to Copied Link’?|Voulez-vous vraiment sélectionner « Ouvrir le lien copié » ?|Cunfirmate chì vò vulete « Apre u liame cupiatu » ?
+Just to confirm, you wanted ‘Clear Private Tabs’?|Voulez-vous vraiment sélectionner « Effacer les onglets privés » ?|Cunfirmate chì vò vulete « Squassà l’unghjette private » ?
+Just to confirm, you wanted ‘New Private Search’?|Voulez-vous vraiment sélectionner « Nouvelle recherche privée » ?|Cunfirmate chì vò vulete fà una « Nova ricerca privata » ?
+Just to confirm, you wanted ‘New Search’?|Voulez-vous vraiment sélectionner « Nouvelle recherche » ?|Cunfirmate chì vò vulete fà una « Nova ricerca » ?
+Quick access to various Firefox actions|Accès rapide à diverses actions de Firefox|Accessu rapidu à parechje azzioni Firefox
+Clear Private Tabs|Effacer les onglets privés|Squassà l’unghjette private
+Quick Action Type|Type d’action rapide|Tipu d’azzione rapida
+Quick Action|Action rapide|Azzione rapida
+There are ${count} options matching ‘Go to Copied Link’.|${count} options correspondent à « Ouvrir le lien copié ».|Ci hè ${count} ozzioni chì currispondenu à « Apre u liame cupiatu ».
+There are ${count} options matching ‘Clear Private Tabs’.|${count} options correspondent à « Effacer les onglets privés ».|Ci hè ${count} ozzioni chì currispondenu à « Squassà l’unghjette private ».
+There are ${count} options matching ‘New Private Search’.|${count} options correspondent à « Nouvelle recherche privée ».|Ci hè ${count} ozzioni chì currispondenu à « Nova ricerca privata ».
+There are ${count} options matching ‘New Search’.|${count} options correspondent à « Nouvelle recherche ».|Ci hè ${count} ozzioni chì currispondenu à « Nova ricerca ».
+New Private Search|Nouvelle recherche privée|Nova ricerca privata
+
+# Mozilla VPN (MPL-2.0)
+Authentication error|Erreur d’authentification|Sbagliu d’autenticazione
+Background service error|Erreur du service en arrière-plan|Sbagliu di u serviziu in tacca di fondu
+Signed out and device disconnected|L’appareil a été déconnecté|L’apparechju hè statu scunnessu
+Operation not allowed from current location|Opération non autorisée depuis l’emplacement actuel|Operazione micca permessa da a pusizione attuale
+Remote service error|Erreur du service distant|Sbagliu di u serviziu alluntanatu
+Subscription failed|Échec de l’abonnement|Fiascu di l’abbunamentu
+The Mozilla VPN is successfully installed. You’re ready to start taking control of your online privacy.|Mozilla VPN est correctement installé. Vous pouvez maintenant prendre le contrôle de votre confidentialité en ligne.|Mozilla VPN hè statu installatu currettamente. Site pronti à piglià u cuntrollu di a vostra vita privata in linea.
+Trouble with this installation?|Un problème avec cette installation ?|Un penseru cù quell’installazione ?
+Success!|Terminé !|Operazione riesciuta !
+A previous installation of Mozilla VPN exists at /Applications/Mozilla VPN.app. This installer will remove the previous installation prior to installing. Please back up any data before proceeding.|Une installation précédente de Mozilla VPN existe dans /Applications/Mozilla VPN.app. Ce programme d’installation supprimera celle-ci avant la nouvelle installation. Veuillez sauvegarder toutes les données de l’installation précédente avant de continuer.|Un’installazione precedente di Mozilla VPN esiste dighjà in /Applications/Mozilla VPN.app. Stu stalladore hà da caccià a versione precedente prima d’installà a nova. Ci vole à fà una salvaguardia di i vostri dati nanzu à cuntinuà.
+Previous Installation Detected|Installation précédente détectée|Scuperta d’una installazione precedente
+Mozilla VPN for macOS|Mozilla VPN pour macOS|Mozilla VPN per macOS
+Mozilla VPN requires Mac OS X 10.6 or later.|Mozilla VPN nécessite Mac OS X 10.6 ou supérieur.|Mozilla VPN richiede Mac OS X 10.6 o più recente.
+Unable to install|Installation impossible|Impussibule d’installà
+You will now be guided through the installation steps for the Mozilla VPN. Thank you for choosing your VPN from the trusted pioneer of internet privacy.|Le programme va à présent vous guider à travers les étapes d’installation de Mozilla VPN. Merci d’avoir choisi votre VPN auprès des pionniers du respect de la vie privée sur Internet.|Avete da esse guidati trà e tappe d’installazione di Mozilla VPN. Vi ringraziemu d’avè sceltu a vostra VPN da u precursore affidatu di a vita privata nant’à Internet.
+Click “Continue” to continue the setup.|Cliquez sur « Continuer » pour continuer la configuration.|Sciglite « Cuntinuà » per cuntinuà l’installazione.
+File|Fichier|Schedariu
+Something went wrong…|Quelque chose s’est mal passé…|Un sbagliu hè accadutu…
+Unable to establish a connection at this time. We’re working hard to resolve the issue. Please try again shortly.|Impossible d’établir une connexion pour le moment. Nous travaillons d’arrache-pied pour résoudre ce problème. Veuillez réessayer sous peu.|Impussibule di stabilisce una cunnessione à st’ora. Travagliemu cum’è dannati per currege stu penseru. Ci vole à pruvà torna da quì à pocu.
+The Mozilla VPN app quit unexpectedly. Would you like to send a crash report to help fix the issue?|L’application Mozilla VPN s’est fermée de manière inattendue. Souhaitez-vous envoyer un rapport de plantage pour nous aider à résoudre ce problème ?|L’appiecazione Mozilla VPN s’hè chjosa di manera inaspettata. Vulete mandà un raportu d’accidente per aiutà à currege stu penseru ?
+Crash reporting|Rapport de plantage|Raportu d’accidente
+current location - %1|emplacement actuel – %1|pusizione attuale - %1
+Select location|Sélectionner un emplacement|Selezziunà una pusizione
+Check Connection|Vérifier la connexion|Verificà a cunnessione
+No Signal|Aucun signal|Nisunu signale
+Unstable|Instable|Instabile
+VPN is on|Le VPN est activé|A VPN hè attiva
+Masking connection and location|Masquage de la connexion et de l’emplacement|Dissimulazione di a cunnessione è di a pusizione
+Turn on to protect your privacy|Activez-le pour protéger votre vie privée|Attivalla per prutege a vostra cunfidenzialità
+Secure and private|Sécurisé et privé|Assicurizata è privata
+Attempting to confirm connection|Tentative de confirmation de la connexion|Tentativu di cunfirmazione di a cunnessione
+VPN is off|Le VPN est désactivé|A VPN hè disattivata
+Unmasking connection and location|Désactivation du masquage de la connexion et de l’emplacement|Palisamentu di a cunnessione è di a pusizione
+Disconnecting…|Déconnexion…|Scunnessione…
+Switching…|Changement…|Cummutazione…
+From %1 to %2|De %1 vers %2|Da %1 à %2
+Turn VPN off|Désactiver le VPN|Disattivà a VPN
+Turn VPN on|Activer le VPN|Attivà a VPN
+Cities|Villes|Cità
+Guest Wi-Fi portal alert|Alerte de portail Wi-Fi invité|Alerta di purtone Wi-Fi d’ospite
+Get notified if a guest Wi-Fi portal is blocked due to VPN connection|Recevoir une notification si un portail Wi-Fi invité est bloqué par la connexion VPN|Ricivete una nutificazione s’è un purtone Wi-Fi d’ospite hè bluccatu per via di a cunnessione VPN
+Get notified when the connection status changes|Recevoir une notification lorsque l’état de la connexion change|Ricivete una nutificazione quandu si cambia u statu di a cunnessione
+Connection change notification|Notification de changement de connexion|Nutificazione di cambiamentu di cunnessione
+Get notified when you successfully switched servers|Recevoir une notification lorsque vous avez changé de serveur|Ricivete una nutificazione quandu un scambiu di servitore s’hè passatu bè
+Server switching notification|Notification de changement de serveur|Nutificazione di scambiu di servitore
+Unsecured network alert|Alerte de réseau non sécurisé|Alerta di reta micca assicurata
+Get notified if you connect to an unsecured Wi-Fi network|Recevoir une notification si vous vous connectez à un réseau Wi-Fi non sécurisé|Ricivete una nutificazione s’è vo vi cunnittite à una reta Wi-Fi micca assicurata
+Add application|Ajouter une application|Aghjunghje un’appiecazione
+Search apps|Rechercher des applications|Ricercà appiecazioni
+Check outage updates|Consultez les mises à jour des pannes|Infurmassi nant’à l’interruzzioni di serviziu
+Your connection will not be secure while you update.|Votre connexion ne sera pas sécurisée pendant la mise à jour.|A vostra cunnessione ùn serà micca assicurata durante u rinnovu.
+Update now|Mettre à jour|Rinnovà subitu
+Please update the app before you continue to use the VPN|Veuillez mettre à jour l’application avant de continuer à utiliser le VPN|Ci vole à rinnovà l’appiecazione nanzu di cuntinuà à impiegà a VPN
+We detected and fixed a serious bug. You must update your app.|Nous avons détecté et corrigé un problème important. Vous devez mettre à jour votre application.|Avemu scupertu è currettu un prublema impurtante. Duvete rinnovà a vostra appiecazione.
+Update required|Mise à jour nécessaire|Rinnovu richiestu
+General Notifications|Notifications générales|Nutificazioni generale
+Copy %1|Copier %1|Cupià %1
+Release version|Version|Versione
+Terms of service|Conditions d’utilisation|Cundizioni d’utilizazione
+About us|À propos de nous|Infurmazioni
+%1 of %2|%1 sur %2|%1 nant’à %2
+Selected item: %1|Élément sélectionné : %1|Elementu selezziunatu : %1
+Bypass VPN for select traffic|Ignorer le VPN pour une partie des données|Ignurà a VPN per selezziunà u trafficu
+Learn more.|En savoir plus.|Sapene di più.
+Allow RCS/MMS messaging, Apple features like CarPlay and AirDrop, and connections to local devices. May reduce network security.|Autoriser les messages RCS/MMS, les fonctionnalités Apple comme CarPlay et AirDrop, et la connexion aux appareils locaux. Peut réduire la sécurité du réseau.|Permette a messaghjeria RCS/MMS, i funzioni Apple cum’è CarPlay è AirDrop, è e cunnessioni à l’apparechji lucali. St’ozzione pò riduce a sicurità.
+VPN must be off to change this setting|Le VPN doit être désactivé pour modifier ce paramètre|A VPN deve esse disattivata per mudificà stu parametru
+You must turn off your VPN in order to see the portal, and turn it back on once you have logged in.|Vous devez désactiver le VPN afin d’afficher le portail et le réactiver une fois votre connexion établie.|Duvete disattivà a vostra VPN per affissà u purtone, è attivalla torna dopu quandu a vostra cunnessione hè stabilita.
+You can turn on your VPN once you have gained internet access by logging in to the portal.|Vous pouvez activer votre VPN une fois l’accès à Internet obtenu en vous connectant au portail.|Pudete attivà a vostra VPN quandu l’accessu à Internet hè ottinutu via una cunnessione à u purtone.
+Turn off VPN|Désactiver le VPN|Disattivà a VPN
+A captive portal is when the guest Wi-Fi you are using requires you to log in to get internet access.|Vous voyez un portail captif quand le Wi-Fi invité que vous utilisez demande de vous connecter pour accéder à Internet.|Un purtone cattivu si vede quandu u Wi-Fi d’ospite chì vò impiegate vi dumanda di cunnettevi per accede à Internet.
+Captive portal detected!|Portail captif détecté !|Purtone cattivu abbentatu !
+Connection information|Informations de connexion|Infurmazioni di cunnessione
+Looks like there was an unexpected error while trying to connect. Please try again or check your connection.|Il semble qu’une erreur inattendue se soit produite lors de la tentative de connexion. Veuillez réessayer ou vérifier votre connexion à Internet.|Pare chì un sbagliu inaspettatu sia accadutu durante u tentativu di cunnessione. Pruvate torna o cuntrollate a vostra cunnessione.
+Exit Server IP:|IP du serveur de sortie :|IP di u servitore d’esciuta :
+Exit Server IPv6:|IPv6 du serveur de sortie :|IPv6 di u servitore d’esciuta :
+Streaming in 4K|Streaming en 4K|Diffusione in 4K
+Online gaming|Jeux en ligne|Ghjochi in linea
+High-speed downloads|Téléchargements à grande vitesse|Scaricamenti à alta vitezza
+Upload|Émission|Incaricà
+At your current speed, here’s what your device is optimized for:|À la vitesse actuelle, voici ce pour quoi votre appareil est optimisé :|À a vitezza attuale, eccu ciò chì hè ottimale per u vostru apparechju :
+It looks like the connection to this server location is a bit slow, you can try:|Il semble que la connexion à un serveur situé à cet emplacement soit un peu lente, vous pouvez essayer :|Pare chì a cunnessione à a pusizione di stu servitore hè un pocu piana, pudete pruvà :
+Loading|Chargement…|Caricamentu…
+Testing speed…|Test de vitesse…|Sperimentu di vitezza…
+Browsing the internet|Naviguer sur Internet|Navigà nant’à internet
+Video conferencing|Visioconférence|Visiocunferenza
+Streaming video|Streaming vidéo|Diffusione di video
+Restart speed test|Relancer le test de vitesse|Rilancià a prova di vitezza
+Start speed test|Lancer le test de vitesse|Lancià una prova di vitezza
+Switching server locations|Changer d’emplacement de serveur|Cambiamentu di pusizione di u servitore
+Switching back to a single-hop connection|Retour à une connexion à serveur unique|Ritornu à una cunnessione à saltu unicu
+Checking your internet connection|Vérifier votre connexion à Internet|Verificazione di a vostra cunnessione internet
+Preparing your connection|Préparation de votre connexion|Appruntata di a vostra cunnessione
+Don’t show this again. Autosend crash reports to Mozilla.|Ne plus afficher ce message. Envoyer automatiquement les rapports de plantage à Mozilla.|Ùn affissà più stu messaghju. Mandà autumaticamente i raporti d’accidente à Mozilla.
+Mozilla Crash Report|Rapport de plantage Mozilla|Raportu d’accidente Mozilla
+Delete account|Supprimer mon compte|Squassà u contu
+%1 out of %2 devices added|%1 appareils ajoutés sur %2|%1 apparechji aghjunti nant’à %2
+You’re using VPN on 5 devices. To add another device, please remove one.|Vous utilisez le VPN sur 5 appareils. Pour ajouter un autre appareil, veuillez en supprimer un.|Impiegate a VPN nant’à 5 apparechji. Per aghjunghje un altru apparechju, ci vole à cacciane unu.
+Device not added|L’appareil n’a pas été ajouté|Apparechju micca aghjuntu
+Added %1 days ago|Ajouté il y a %1 jours|Aghjuntu %1 ghjorni fà
+Added a few hours ago (%1)|Ajouté il y a quelques heures (%1)|Aghjuntu qualchì ora fà (%1)
+Added less than an hour ago|Ajouté il y a moins d’une heure|Aghjuntu menu d’un’ora fà
+Current Device|Cet appareil|Apparechju currente
+Remove %1|Supprimer %1|Caccià %1
+Please confirm you would like to remove %1.|Veuillez confirmer la suppression de %1.|Ci vole à cunfirmà chì vò vulete caccià %1.
+Remove device?|Supprimer l’appareil ?|Caccià l’apparechju ?
+Removing device…|Suppression de l’appareil…|Cacciatura di l’apparechju…
+Devices|Appareils|Apparechji
+Using these privacy features will override your custom DNS.|L’utilisation de ces fonctionnalités de confidentialité remplacera votre DNS personnalisé.|L’impiegu di ste funzioni di cunfidenzialità rimpiazzerà u vostru DNS persunalizatu.
+Using a custom DNS will override your preferences in the privacy features page.|L’utilisation d’un DNS personnalisé remplacera vos préférences dans la page des fonctionnalités de confidentialité.|L’impiegu d’un DNS persunalizatu supranerà e vostre preferenze nant’à a pagina di e funzioni di cunfidenzialità.
+Maybe later|Peut-être plus tard|Forse un’altra volta
+Override DNS settings?|Remplacer les paramètres DNS ?|Rimpiazzà i parametri DNS ?
+Override privacy features?|Outrepasser les fonctionnalités de protection de la vie privée ?|Supranà e funzioni di cunfidenzialità ?
+7-day free trial|Essai gratuit de 7 jours|Prova di rigalu di 7 ghjorni
+Sign up to start your 7-day free trial.|Inscrivez-vous pour démarrer votre essai gratuit de 7 jours.|Arregistratevi per principià a vostra prova di rigalu di 7 ghjorni.
+Unexpected error|Erreur inattendue|Sbagliu inaspettatu
+Problem confirming subscription|Problème de confirmation d’abonnement|Prublema à a cunfirmazione di l’abbunamentu
+An unexpected error has occurred, please try again. Visit our help center below to learn how to troubleshoot this issue or contact support.|Une erreur inattendue s’est produite, veuillez réessayer. Consultez notre centre d’aide ci-dessous pour savoir comment résoudre ce problème ou contactez l’assistance.|Un sbagliu inaspettatu hè accadutu, pruvate torna. Visitate u nostru centru d’assistenza quaghjò per sapè cumu lucalizà a cagione o cuntattà l’assistenza.
+Developer options|Options de développement|Ozzioni di sviluppu
+Help Center|Centre d’assistance|Centru d’assistenza
+View Logs|Afficher les journaux|Vista di u ghjurnale
+Collapse|Réduire|Riduce
+Copied!|Copié !|Cupiatu.
+Discover now|Découvrir maintenant|Scopre subitu
+Expand|Développer|Allargà
+No internet connection|Aucune connexion Internet|Nisuna cunnessione Internet
+VPN User|Utilisateur ou utilisatrice VPN|Utilizatore VPN
+Adding a new device to your subscription is easy: just download and log in to Mozilla VPN on that device.|Ajouter un nouvel appareil à votre abonnement est facile : téléchargez simplement Mozilla VPN et connectez-vous depuis cet appareil.|Aghjunghje un apparechju novu à u vostru abbunamentu hè faciule : basta à scaricà Mozilla VPN è cunnittitevi via st’apparechju.
+To remove one of your added devices, select “Edit” on this screen and use the trash icon to remove the device you no longer want to use Mozilla VPN on.|Pour supprimer l’un de vos appareils ajoutés, sélectionnez « Modifier » sur cet écran et utilisez l’icône de corbeille pour supprimer l’appareil sur lequel vous ne souhaitez plus utiliser Mozilla VPN.|Per caccià unu trà i vostri apparechji aghjunti, selezziunate « Mudificà » nant’à stu screnu è impiegate l’icona di a curbella per caccià l’apparechju nant’à quellu ùn vulete più impiegà Mozilla VPN.
+Adding and removing devices|Ajout et suppression d’appareils|Aghjuntu è cacciatura d’apparechji
+Device management|Gestion des appareils|Ghjestione di l’apparechji
+Whenever you connect to a website, a DNS (domain name system) first turns the domain name (e.g. www.mozilla.org) into an IP address that allows your internet traffic to reach that destination.|Chaque fois que vous vous connectez à un site web, un DNS (système de noms de domaine) transforme d’abord le nom de domaine (par exemple, www.mozilla.org) en une adresse IP qui permet à votre trafic internet d’atteindre sa destination.|Quandu vi cunnittite à un situ web, ci hè un DNS (sistema di nome di duminiu) chì trasfurmeghja, in primu locu, u nome di duminiu (p.i. www.mozilla.org) in un indirizzu IP, ciò chì permette à u vostru trafficu internet di tuccà sta destinazione.
+Mozilla VPN allows you to choose a custom DNS server if you prefer. If you use one, you won’t be able to use other privacy features in the VPN like tracker blocking.|Mozilla VPN vous permet de choisir un serveur DNS personnalisé. Si vous en utilisez un, vous ne pourrez pas utiliser les autres fonctionnalités de confidentialité du VPN, comme le blocage des traqueurs.|Mozilla VPN vi permette di sceglie un servitore DNS persunalizatu s’è vo preferite. S’è vo ne aduprate unu, ùn puderete micca impiegà d’altre funzioni di cunfidenzialità di a VPN cum’è u blucchime di u spiunaghju.
+What is a custom DNS?|Qu’est-ce qu’un DNS personnalisé ?|Cosa hè un DNS persunalizatu ?
+Custom DNS settings|Paramètres DNS personnalisés|Parametri DNS persunalizati
+Excluded apps let you turn off VPN protection for specific apps, without turning off VPN protection for your entire device.|Les applications exclues vous permettent de désactiver la protection VPN pour des applications spécifiques, sans désactiver la protection VPN pour l’ensemble de votre appareil.|L’appiecazioni escluse vi permettenu di disattivà a prutezzione VPN per certe appiecazioni, senza disattivalla per l’apparechju sanu.
+When you exclude an app, it will have access to your IP address and approximate location.|Si vous excluez une application, elle aura accès à votre adresse IP et à votre localisation approximative.|Quandu un’appiecazione hè esclusa, pò quantunque accede à u vostru indirizzu IP è à a vostra lucalizazione apprussimativa.
+You can use the settings under Settings > Privacy features to block ads, block trackers, and block malware, even on excluded apps.|Vous pouvez utiliser les paramètres sous Paramètres > Fonctionnalités de confidentialité pour bloquer des publicités, des traqueurs et des logiciels malveillants, même sur les applications exclues.|Pudete impiegà i parametri, via Parametri > Funzioni di cunfidenzialità, per bluccà e publicità, i perseguitatori è i prugrammi animosi, ancu nant’à l’appiecazioni escluse.
+Open “Privacy features”|Ouvrir « Fonctionnalités de confidentialité »|Apre « Funzioni di cunfidenzialità »
+What are excluded apps?|Que sont les applications exclues ?|Cosa sò l’appiecazioni escluse ?
+Excluded apps|Applications exclues|Appiecazioni escluse
+If you want maximum speed and reliability, choose one of the recommended locations in the “Single-hop” toggle. We’ve sorted them based on expected performance.|Si vous souhaitez privilégier la vitesse et la fiabilité, choisissez l’un des emplacements recommandés dans le bouton « Connexion à serveur unique ». Nous les avons triés en fonction des performances attendues.|S’è vo vulete una vitezza è un’assicuranza più maiò, sciglite una trà e pusizioni ricumandate via u buttone « Cunnessione à saltu unicu ». L’avemu classificate secondu à e perfurmenze aspettate.
+If you want to add more privacy, switch to “Multi-hop” and add an additional server location. Multi-hop VPN routes your traffic through two server locations instead of one for extra security and privacy. This may also slow down your connection a bit.|Si vous souhaitez renforcer la confidentialité, passez en mode « Serveurs en cascade » et ajoutez un emplacement de serveur supplémentaire. Un VPN en cascade achemine votre trafic via deux emplacements de serveur au lieu d’un seul pour une sécurité et une confidentialité accrues. Cela pourrait également ralentir légèrement votre connexion.|S’è vo vulete rinfurzà a cunfidenzialità, passate in modu « Servitori in cascata » è aghjunghjite una pusizione cumplementaria di servitore. Un VPN in cascata (multi-hop) fà viaghjà u vostru trafficu attraversu duie pusizioni di servitore piuttostu chè unu per assicurà una sicurità è una cunfidenzialità più maiò. Què puderia dinù rallentà una cria a vostra cunnessione.
+Single-hop vs multi-hop|Serveurs à connexion unique versus serveurs en cascade|Cunnessione à saltu unicu o servitori in cascata
+Location selection|Sélection de l’emplacement|Selezzione di a pusizione
+Privacy features give you greater control over the types of content you see, helping you stay safe online.|Les fonctionnalités de confidentialité vous permettent de mieux contrôler les types de contenus que vous consultez, ce qui vous aide à rester en sécurité en ligne.|E funzioni di cunfidenzialità vi permettenu di cuntrollà megliu i cuntenuti chì vo fighjate, ciò chì vi aiuta à stà sicuru in linea.
+If you activate these features, they’ll overwrite any custom DNS you’re using. These protections are not a substitute for taking other security precautions — for example, while blocking malware you should still avoid downloading attachments in strange emails.|Si vous activez ces fonctionnalités, elles remplaceront tout DNS personnalisé que vous utilisez. Ces protections ne se substituent pas à d’autres précautions en matière de sécurité. Par exemple, même si vous bloquez les logiciels malveillants, vous devez toujours éviter de télécharger les pièces jointes d’e-mails étranges.|S’è ste funzioni sò attivate, anu da rimpiazzà tutti i DNS persunalizati chì serianu impiegati. Ste prutezzioni ùn rimpiazzanu micca l’altre precauzioni abituale cum’è, per indettu, quandu u blucchime di i prugrammi periculosi hè attivu, ci vole à evità u scaricamentu di i schedarii assuciati à i messaghji elettronichi.
+What can privacy features do for me?|Que peuvent m’apporter les fonctionnalités de protection de la vie privée ?|Cumu mi aiutanu e funzioni di cunfidenzialità ?
+Privacy features|Fonctionnalités de confidentialité|Funzioni di cunfidenzialità
+Change email|Changer d’adresse e-mail|Cambià d’indirizzu elettronicu
+Continue to sign in|Continuer pour vous connecter|Cuntinuà per cunnettesi
+Create account|Créer un compte|Creà un contu
+Create password|Créer un mot de passe|Creà una parolla d’intesa
+Enter email|Saisissez votre adresse e-mail|Stampittate u vostru indirizzu elettronicu
+We’ve resent your code to your email.|Votre code a été renvoyé à votre adresse e-mail.|Avemu mandatu u vostru codice torna à u vostru indirizzu elettronicu.
+Open your email and enter the verification code that was sent.|Consultez votre boîte de réception et saisissez le code de vérification qui a été envoyé.|Aprite a vostra messaghjeria è stampittate u codice di verificazione chì vi hè statu mandatu.
+Enter your email address to continue using Mozilla VPN|Saisissez votre adresse e-mail pour continuer à utiliser Mozilla VPN|Stampittate u vostru indirizzu elettronicu per cuntinuà à impiegà Mozilla VPN
+Finish creating your Mozilla account to continue to Mozilla VPN|Terminez la création de votre compte Mozilla pour continuer vers Mozilla VPN|Cumpiete a creazione di u vostru contu Mozilla per cuntinuà versu Mozilla VPN
+Forgot your password?|Mot de passe oublié ?|Parolla d’intesa scurdata ?
+We only use your email to create your account or sign in. We will never sell it to a third party.|Nous utilisons votre adresse e-mail uniquement pour créer votre compte et vous permettre de vous connecter. Nous ne la vendrons jamais à un tiers.|Impiegemu u vostru indirizzu elettronicu solu per creà u vostru contu è permette a vostra cunnessione. Ùn u vinderemu mai à qualchissia.
+Invalid code. Please try again|Code invalide. Veuillez réessayer|Codice inaccettevule. Pruvate torna
+Invalid email. Please try again|Adresse e-mail invalide. Veuillez réessayer|Indirizzu elettronicu inaccettevule. Pruvate torna
+Email format not supported. Please try again with a different email|Format d’adresse e-mail non pris en charge. Veuillez réessayer avec une autre adresse e-mail|Furmatu d’indirizzu elettronicu micca accettatu. Pruvate torna cù un altru indirizzu elettronicu
+Invalid password. Please try again|Mot de passe incorrect. Veuillez réessayer|Parolla d’intesa inaccettevule. Pruvate torna
+Must be at least 8 characters|Doit être long d’au moins 8 caractères|Deve cuntene omancu 8 caratteri
+Must not be a common password|Ne doit pas être un mot de passe courant|Ùn deve micca esse una parolla d’intesa urdinaria
+Must not be your email address|Doit être différent de votre adresse e-mail|Ùn deve micca esse u vostru indirizzu elettronicu
+Enter password|Saisissez votre mot de passe|Stampittate a vostra parolla d’intesa
+Please wait…|Veuillez patienter…|Aspittate per piacè…
+Primary account email required for sign-in|L’adresse principale du compte est nécessaire pour se connecter|L’indirizzu principale di u contu hè richiestu per cunnettesi
+Sorry, we were unable to send you a verification code.|Désolé, nous n’avons pas pu vous envoyer de code de vérification.|Per disgrazia, ùn avemu micca riesciutu à mandavvi un codice di verificazione.
+Problem sending email…|Problème lors de l’envoi de l’e-mail…|Prublema durante l’inviu di u messaghju elettronicu…
+I’d like to receive product update emails from Firefox.|Je souhaite recevoir des e-mails concernant l’actualité des produits Firefox.|Vuleria riceve messaghji elettronichi apprupositu di l’attualità di i prudutti Firefox.
+To continue, please confirm with your Mozilla account password.|Pour continuer, veuillez confirmer avec le mot de passe de votre compte Mozilla.|Per cuntinuà, ci vole à cunfirmà cù a parolla d’intesa di u vostru contu Mozilla.
+Resend code|Renvoyer le code|Mandà torna u codice
+Enter 6-digit code|Saisissez le code à 6 chiffres|Stampittate u codice à 6 cifri
+Security code|Code de sécurité|Codice di sicurità
+Open your authentication app and enter the security code it provides.|Ouvrez l’application d’authentification et saisissez le code de sécurité fourni.|Aprite l’appiecazione d’autenticazione è stampittate u codice di sicurità ottenutu.
+Enter security code|Saisissez le code de sécurité|Stampittate u codice di sicurità
+You’ve made too many attempts to sign in. You won’t be able to try again with this account for 1 minute.|Vous avez fait trop de tentatives de connexion. Vous ne pourrez pas réessayer avec ce compte avant 1 minute.|Avete fattu troppu tentativi di cunnessione. Ùn puderete micca pruvà torna cù stu contu durante 1 minutu.
+You’ve made too many attempts to sign in. You won’t be able to try again with this account for 15 minutes.|Vous avez fait trop de tentatives de connexion. Vous ne pourrez pas réessayer avec ce compte avant 15 minutes.|Avete fattu troppu tentativi di cunnessione. Ùn puderete micca pruvà torna cù stu contu durante 15 minuti.
+Sign-in failed|Échec de la connexion|Fiascu di a cunnessione
+Continue to Mozilla VPN by signing in with your Mozilla account|Continuez vers Mozilla VPN en vous connectant avec votre compte Mozilla|Cuntinuà versu Mozilla VPN cunnittenduvi cù u vostru contu Mozilla
+Create a password|Créer un mot de passe|Creà una parolla d’intesa
+To finish setting up your Mozilla account, create a password in your account settings:|Pour terminer la configuration de votre compte Mozilla, créez un mot de passe dans les paramètres de votre compte :|Per compie a cunfigurazione di u vostru contu Mozilla, create una parolla d’intesa in i parametri di u vostru contu :
+1. Go to <a href="open-account">Create password</a> in your Mozilla account settings.|1. Accédez à <a href="open-account">Créer un mot de passe</a> dans les paramètres de votre compte Mozilla.|1. Accidite à <a href="open-account">Creà una parolla d’intesa</a> in i parametri di u vostru contu Mozilla.
+2. Create a password.|2. Créez un mot de passe.|2. Create una parolla d’intesa.
+When your password is created, return to this screen and continue to sign in to Mozilla VPN.|Une fois votre mot de passe créé, revenez sur cet écran et continuez à vous connecter à Mozilla VPN.|Quandu a vostra parolla d’intesa hè creata, rivinite nant’à stu screnu è cuntinuate à cunnettevi à Mozilla VPN.
+Check your email|Vérifiez votre adresse e-mail|Verificate u vostru indirizzu elettronicu
+We’ve sent an email to %1 with the verification link. Please follow the directions to set up your password and finish setting up your account.|Nous avons envoyé un e-mail à %1 avec le lien de vérification. Veuillez suivre les instructions pour créer votre mot de passe et terminer la configuration de votre compte.|Avemu mandatu un messaghju elettronicu à %1 cù u liame di verificazione. Ci vole à seguità l’istruzzioni per definisce a vostra parolla d’intesa è compie a cunfigurazione di u vostru contu.
+By continuing, you agree to the <a href="terms-of-service">Terms of Service</a> and the <a href="privacy-notice">Privacy Notice</a>.|En continuant, vous acceptez les <a href="terms-of-service">Conditions d’utilisation</a> et la <a href="privacy-notice">Politique de confidentialité</a>.|Cuntinuate, solu s’è vò site d’accunsenti cù e <a href="terms-of-service">cundizioni d’utilizazione</a> è di <a href="privacy-notice">cunfidenzialità</a>.
+Enter 8-digit code|Saisissez le code à 8 chiffres|Stampittate u codice à 8 cifri
+Enter verification code|Saisissez le code de vérification|Stampittate u codice di verificazione
+Verify|Vérifier|Verificà
+Waiting for sign in and subscription confirmation…|En attente de l’inscription et de la confirmation de l’abonnement…|In attesa di l’iscrizzione è di a cunfirmazione di l’abbunamentu…
+Critical|Critique|Criticu
+Delete message|Supprimer le message|Squassà u messaghju
+You’re up to date!|Vous êtes à jour !|L’appiecazione hè à livellu !
+No messages|Aucun message|Nisunu messaghju
+Extension|Extension|Estensione
+Messages|Messages|Messaghji
+New update|Nouvelle mise à jour|Nova messa à livellu
+Search messages|Rechercher dans les messages|Ricercà in i messaghji
+Subscription|Abonnement|Abbunamentu
+Warning|Avertissement|Avertimentu
+What’s new|Nouveautés|Ciò chì hè novu
+Account issues|Problèmes de compte|Prublemi di contu
+Choose a category|Choisissez une catégorie|Sciglite una categuria
+Request features|Demander des fonctionnalités|Dumandà nove funzioni
+Describe issue|Décrivez le problème|Discrivite u prublema
+Payment and billing|Paiement et facturation|Pagamentu è fatturazione
+Mozilla VPN Privacy Notice|Politique de confidentialité de Mozilla VPN|Pulitica di cunfidenzialità di Mozilla VPN
+Support will use this data to better diagnose your issue.|L’assistance utilisera ces données pour mieux diagnostiquer votre problème.|L’assistenza impiegherà sti dati per capisce megliu u vostru prublema.
+Share logs with support|Partager les journaux avec l’assistance|Sparte i ghjurnali di messaghji cù l’assistenza
+Subject (optional)|Sujet (facultatif)|Sughjettu (ozzionale)
+Enter your email|Saisissez votre adresse e-mail|Stampittate u vostru indirizzu elettronicu
+Email address|Adresse e-mail|Indirizzu elettronicu
+Try opening in browser|Essayer d’ouvrir dans le navigateur|Pruvà d’apre in u navigatore
+Error submitting your support request|Erreur lors de l’envoi de votre demande d’assistance|Sbagliu à l’inviu di a vostra dumanda d’assistenza
+An unexpected error has occurred, please try again.|Une erreur inattendue s’est produite, veuillez réessayer.|Un sbagliu inaspettatu hè accadutu, pruvate torna.
+How can we help you with Mozilla VPN?|Comment pouvons-nous vous aider avec Mozilla VPN ?|Cumu pudemu aiutavvi cù Mozilla VPN ?
+Contact support|Contacter l’assistance|Cuntattà l’assistenza
+Our support team will contact you at %1 once we’ve been able to look at your issue.|Notre équipe d’assistance vous contactera à l’adresse %1 une fois que nous aurons pu examiner votre problème.|A nostra squadra d’assistenza vi cuntatterà à l’indirizzu %1 quandu no averemu esaminatu u vostru prublema.
+Thank you!|Merci !|Vi ringraziemu !
+Technical issues|Problèmes techniques|Prublemi tecnichi
+Queries current Mozilla VPN connection status|Demande l’état actuel de la connexion Mozilla VPN|Dumanda u statu attuale di a cunnessione Mozilla VPN
+Mozilla VPN is currently connected|Mozilla VPN est actuellement connecté|Mozilla VPN hè cunnessu attualmente
+Mozilla VPN is currently disconnected|Mozilla VPN est actuellement déconnecté|Mozilla VPN hè discunnessu attualmente
+Is the VPN currently connected?|Le VPN est-il actuellement connecté ?|Attualmente, a VPN seria cunnessa ?
+Changes Mozilla VPN status|Modifie l’état de Mozilla VPN|Cambia u statu di a VPN
+Error changing VPN status|Erreur lors de la modification de l’état du VPN|Sbagliu durante u cambiamentu di statu di a VPN
+Toggle Mozilla VPN|Activer/Désactiver Mozilla VPN|Attivà o disattivà a VPN
+Turn Off Mozilla VPN|Désactiver Mozilla VPN|Disattivà Mozilla VPN
+Mozilla VPN disconnected|Mozilla VPN déconnecté|Mozilla VPN hè discunnessu
+Deactivate the Mozilla VPN connection|Désactiver la connexion Mozilla VPN|Disattivà a cunnessione Mozilla VPN
+No active VPN connection|Aucune connexion VPN active|Nisuna cunnessione VPN attiva
+Turn On Mozilla VPN|Activer Mozilla VPN|Attivà Mozilla VPN
+VPN is already connected|Le VPN est déjà connecté|A VPN hè dighjà cunnessa
+Mozilla VPN connected|Mozilla VPN connecté|Mozilla VPN cunnessu
+Mozilla VPN connected through %1$@ via %2$@|Mozilla VPN connecté à %1$@ via %2$@|Mozilla VPN cunnessu à %1$@ via %2$@
+Mozilla VPN connected through %@|Mozilla VPN connecté à %@|Mozilla VPN cunnessu à %@
+Activate the Mozilla VPN connection|Activer la connexion Mozilla VPN|Attivà a cunnessione Mozilla VPN
+Error turning on Mozilla VPN|Erreur lors de l’activation de Mozilla VPN|Sbagliu durante l’attivazione di Mozilla VPN
+Search languages|Rechercher des langues|Ricercà una lingua
+Mozilla VPN will use the default system language.|Mozilla VPN utilisera la langue par défaut du système.|Mozilla VPN impiegherà a lingua predefinita di u sistema.
+System language|Langue du système|Lingua di u sistema
+Already a subscriber?|Déjà abonné·e ?|Dighjà abbunata(u) ?
+A safe, reliable and fast VPN. Built by the makers of Firefox.|Un VPN sûr, robuste et rapide. Conçu par les équipes de Firefox.|Una VPN sicura, degnu di cunfidenza è rapida. Cuncepita da l’autori di Firefox.
+Sign up|S’inscrire|Arregistrassi
+Your subscription is linked to another Mozilla account. You may need to sign in with a different email address.|Votre abonnement est lié à un autre compte Mozilla. Vous devrez peut-être vous connecter avec une autre adresse e-mail.|U vostru abbunamentu hè assuciatu à un altru contu Mozilla.
+Visit our help center to learn more about managing your subscriptions.|Consultez notre centre d’assistance pour en savoir plus sur la gestion de vos abonnements.|Visitate u nostru centru d’assistenza per sapene di più apprupositu di a ghjestione di i vostri abbunamenti.
+%1 to %2|%1 vers %2|Da %1 à %2
+To|Vers|ver di
+Recent connections|Connexions récentes|Cunnessioni recente
+Select entry location|Sélectionnez l’emplacement d’entrée|Selezziunate una pusizione d’entrata
+Select exit location|Sélectionnez l’emplacement de sortie|Selezziunate una pusizione d’esciuta
+Exit location represents your main VPN server.|L’emplacement de sortie représente votre serveur VPN principal.|A pusizione d’esciuta hè u vostru servitore VPN principale.
+Multi-hop|Serveurs en cascade|Servitori in cascata
+No results. Try a different search|Aucun résultat. Essayez une recherche différente|Nisunu risultatu. Pruvate una ricerca sfarente
+Single-hop|Serveur unique|Saltu unicu
+Multi-hop tunnel|Tunnel pour le VPN en cascade|Tunellu per a VPN in cascata
+To continue subscribing, please sign in to your Google Account|Pour continuer à vous abonner, veuillez vous connecter à votre compte Google|Per cuntinuà à abbunavvi, ci vole à cunnettevi à u vostru contu Google
+Sign in to Google Account|Connectez-vous à votre compte Google|Cunnittitevi à u vostru contu Google
+Go to Play Store|Accéder au Play Store|Accede à Play Store
+Connected through %1|Connecté via %1|Cunnessu via %1
+VPN Connected|VPN connecté|VPN cunnessa
+Disconnected from %1|Déconnecté de %1|Scunnessu da %1
+VPN Disconnected|VPN déconnecté|VPN scunnessa
+Connected through %1 via %2|Connecté à %1 via %2|Cunnessu à %1 via %2
+Disconnected from %1 and %2|Déconnecté de %1 et %2|Scunnessu da %1 è %2
+Switched from %1 to %2|Passage de %1 à %2|Cambiamentu da %1 à %2
+VPN Switched Servers|Le VPN a changé de serveur|A VPN hà cambiatu di servitore
+The guest Wi-Fi network you’re connected to requires action. Click to turn off VPN to see the portal.|Le réseau Wi-Fi invité auquel vous êtes connecté·e nécessite une action. Cliquez ici pour désactiver le VPN et voir le portail.|A reta Wi-Fi d’ospite à quella site cunnessi richiede un’azzione. Cliccu per disattivà a VPN è vede u purtone.
+Guest Wi-Fi portal blocked|Portail Wi-Fi invité bloqué|Blucchime di purtone Wi-Fi d’ospite
+The guest Wi-Fi network you’re connected to may not be secure. Click to turn on VPN to secure your device.|Le réseau Wi-Fi invité auquel vous êtes connecté·e n’est peut-être pas sécurisé. Cliquez ici pour activer le VPN et protéger votre appareil.|A reta Wi-Fi d’ospite à quella site cunnessi ùn pare micca sicura. Cliccu per attivà a VPN è assicurizà u vostru apparechju.
+Guest Wi-Fi portal detected|Portail Wi-Fi invité détecté|Scuperta d’un purtone Wi-Fi d’ospite
+Sorry, something went wrong with your VPN connection.|Désolé, une erreur s’est produite avec votre connexion VPN.|Per disgrazia, un sbagliu hè accadutu cù a vostra cunnessione VPN.
+Connection failed|Échec de la connexion|Fiascu di a cunnessione
+Your Mozilla VPN subscription cannot be found. Please open the app to resolve this subscription issue.|Votre abonnement à Mozilla VPN est introuvable. Veuillez ouvrir l’application pour résoudre ce problème.|Ùn si pò truvà u vostru abbunamentu à Mozilla VPN. Aprite l’appiecazione per currege stu penseru.
+Wi-Fi network is not secure. Click here to turn on VPN and secure your device.|Le réseau Wi-Fi n’est pas sécurisé. Cliquez ici pour activer le VPN et sécuriser votre appareil.|A reta Wi-Fi ùn hè micca sicura. Fate un cliccu quì per attivà a VPN è prutege u vostru apparechju.
+%1 is not secure. Click here to turn on VPN and secure your device.|%1 n’est pas sécurisé. Cliquez ici pour activer le VPN et sécuriser votre appareil.|%1 ùn hè micca sicuru. Fate un cliccu quì per attivà a VPN è assicurà u vostru apparechju.
+Unsecured Wi-Fi network detected|Réseau Wi-Fi non sécurisé détecté|Scuperta d’una reta Wi-Fi micca assicurata
+Help us improve Mozilla VPN by sharing crash reports, diagnostics, and product usage data. We never collect data about your online activity while using the VPN.|Aidez-nous à améliorer Mozilla VPN en partageant les rapports de plantage, des diagnostics et des données d’utilisation du produit. Nous ne collectons jamais de données sur votre activité en ligne lorsque vous utilisez le VPN.|Aiutateci à amendà Mozilla VPN spartendu i raporti d’accidente, i diagnostichi è i dati d’aghjovu di pruduttu. Ùn cullettemu mai i dati nant’à a vostra attività in linea quandu vo impiegate a VPN.
+Learn more about data collection|En savoir plus sur la collecte de données|Sapene di più nant’à a culletta di dati
+Share technical data|Partager les données techniques|Sparte i dati tecnichi
+To install the VPN on another tablet or mobile device, scan the QR code.|Pour installer le VPN sur une autre tablette ou un autre appareil mobile, scannez le code QR.|Per installà a VPN nant’à un’altra tavulella o un altru apparechju mobile, analizate u codice QR.
+To install the VPN on another tablet or mobile device, scan the QR code. To install on a desktop computer, visit the Download page on the Mozilla VPN website.|Pour installer le VPN sur une autre tablette ou un autre appareil mobile, scannez le code QR. Pour l’installer sur un ordinateur de bureau, visitez la page de téléchargement sur le site web de Mozilla VPN.|Per installà a VPN nant’à un’altra tavulella o un altru apparechju mobile, analizate u codice QR. Per installalla nant’à un urdinatore di scagnu, visitate a pagina di scaricamenti nant’à u situ web di Mozilla VPN.
+Select device type:|Sélectionnez le type d’appareil :|Selezziunà u tipu d’apparechju :
+Install Mozilla VPN on up to 5 devices|Installez Mozilla VPN sur jusqu’à 5 appareils|Installà Mozilla VPN nant’à 5 apparechji à u massimu
+QR Code that links to the Mozilla VPN product page on the Google Play Store|Code QR qui pointe vers la page produit de Mozilla VPN sur le Google Play Store|Codice QR chì rimanda versu a pagina di u pruduttu Mozilla VPN nant’à Google Play Store
+QR Code that links to the Mozilla VPN product page on the iOS App Store|Code QR qui pointe vers la page produit de Mozilla VPN sur l’App Store d’iOS|Codice QR chì rimanda versu a pagina di u pruduttu Mozilla VPN nant’à l’iOS App Store
+You can set Mozilla VPN to protect you from ads, trackers, and malware. Plus, customize your protection for specific apps.|Vous pouvez configurer Mozilla VPN pour vous protéger des publicités, des traqueurs et des logiciels malveillants. Et en plus, vous pouvez personnaliser la protection pour des applications spécifiques.|Pudete definisce Mozilla VPN per prutegevi di e publicità, i perseguitatori è i prugrammi animosi. È di più, si pò persunalizà a prutezzione per l’appiecazioni specifiche.
+Add even more privacy|Renforcez davantage votre vie privée|Aghjunghjite ancu più di cunfidenzialità
+Protecting yourself is simple: tap to connect to the VPN and you’re ready to browse safely. Mozilla VPN will start automatically for seamless protection.|Pour vous protéger, rien de plus simple : appuyez pour vous connecter au VPN et vous êtes prêt·e à naviguer en toute sécurité. Mozilla VPN démarrera automatiquement pour une protection transparente.|Prutegesi hè simplice : un tuccà per cunnettesi à a VPN è site pronti à navigà in sicurità. Mozilla VPN si lancierà autumaticamente per una prutezzione senza straziu.
+One tap to safety|La sécurité à portée de main|Un tuccà per a sicurità
+With more than 500 servers in 60 cities around the world, Mozilla VPN protects your data, browsing activity, and your true location from network spies.|Avec plus de 500 serveurs dans 60 villes du monde entier, Mozilla VPN protège vos données, votre navigation et votre véritable localisation des espions réseaux.|Cù più di 500 servitori in 60 cità in u mondu sanu, Mozilla VPN prutege i vostri dati, a vostra attività di navigazione è a vostra pusizione esatta da u spiunagiu nant’à a reta.
+Protect your privacy|Protégez votre vie privée|Prutezzione di a vita privata
+Use these features for more protection. They may cause issues on some sites, so you can turn them off anytime in settings.|Utilisez ces fonctionnalités pour une protection renforcée. Elles peuvent causer des problèmes sur certains sites, vous pouvez donc les désactiver à tout moment depuis les paramètres.|Impiegate ste funzioni per una prutezzione più forte. Ponu cagiunà penseri nant’à certi siti, dunque si pò disattivalle à ogni mumentu in i parametri.
+Get more privacy|Plus de confidentialité pour vous|Ottinite più di cunfidenzialità
+Onboarding step “%1” (%2 of %3). Select to go back to this step.|Étape d’accueil « %1 » (%2 sur %3). Sélectionnez pour revenir à cette étape.|Fasa d’accolta « %1 » (%2 nant’à %3). Selezziunà per rivultà à sta fasa.
+Onboarding step “%1” (%2 of %3). You are currently on this step.|Étape d’accueil « %1 » (%2 sur %3). Vous en êtes à cette étape.|Fasa d’accolta « %1 » (%2 nant’à %3). Site attualmente à sta fasa.
+Onboarding step “%1” (%2 of %3)|Étape d’accueil « %1 » (%2 sur %3)|Fasa d’accolta « %1 » (%2 nant’à %3)
+Connect|Connexion|Cunnettassi
+Data|Données|Dati
+Startup|Démarrage|Avviu
+Allow VPN connection|Autoriser la connexion VPN|Permette a cunnessione VPN
+Launch the VPN whenever you start your device. We’ll automatically reconnect you to the same server location you last used.|Lancez le VPN à chaque démarrage de votre appareil. Nous vous reconnecterons automatiquement au dernier emplacement de serveur utilisé.|Lancià a VPN quandu u vostru apparechju hè avviatu. Vi ricunnitteremu autumaticamente à l’ultima pusizione di servitore chì vo avete impiegata.
+Connect Mozilla VPN on startup|Connecter Mozilla VPN au démarrage|Cunnette Mozilla VPN à l’avviu
+Your mobile device will now ask you to allow Mozilla VPN to create a connection. Please allow this so that the VPN works correctly on your device.|Votre appareil mobile vous demande maintenant d’autoriser Mozilla VPN à établir une connexion. Veuillez autoriser cette action pour que le VPN fonctionne correctement sur votre appareil.|U vostru apparechju mobile hà da dumandavvi di permette à Mozilla VPN di creà una cunnessione. Ci vole à permette què per chì a VPN funziuneghji currettamente nant’à u vostru apparechju.
+Allow Mozilla VPN to create a VPN connection|Autoriser Mozilla VPN à établir une connexion VPN|Permette à Mozilla VPN di creà una cunnessione
+To use Mozilla VPN, please allow it to run in the background.|Pour utiliser Mozilla VPN, veuillez autoriser son exécution en arrière-plan.|Per impiegà Mozilla VPN, ci vole à permette a so esecuzione in sfondulu.
+In order to do this, please click the button below to open the <i>Login Items</i> of your <i>System Preferences</i>, and enable <i>Allow in the background</i> for Mozilla VPN.|Pour ce faire, veuillez cliquer sur le bouton ci-dessous afin d’accéder aux <i>Éléments à l’ouverture</i> dans vos <i>Préférences système</i>, puis d’activer l’option <i>Autoriser en arrière-plan</i> pour Mozilla VPN.|Per fà què, ci vole à fà un cliccu nant’à u buttone quaghjò per accede à <i>Elementi di cunnessione</i> di e vostre <i>Preferenze di u sistema</i> è attivà l’ozzione <i>Permette in sfondulu</i> per Mozilla VPN.
+In order to do this, please click the button below to open the <i>Login Items & Extensions</i> of your <i>System Preferences</i>, and enable <i>Allow in the background</i> for Mozilla VPN.|Pour ce faire, veuillez cliquer sur le bouton ci-dessous afin d’accéder aux <i>Ouverture et extensions</i> dans vos <i>Préférences système</i>, puis d’activer l’option <i>Autoriser en arrière-plan</i> pour Mozilla VPN.|Per fà què, ci vole à fà un cliccu nant’à u buttone quaghjò per accede à l’<i>Elementi di cunnessione è estensioni</i> di e vostre <i>Preferenze di u sistema</i> è attivà l’ozzione <i>Permette in sfondulu</i> per Mozilla VPN.
+In order to do this, please click the button below to open the <i>Login Items & Extensions</i> of your <i>System Preferences</i>, and enable <i>App Background Activity</i> for Mozilla VPN.|Pour ce faire, veuillez cliquer sur le bouton ci-dessous pour ouvrir la section <i>Ouverture et extensions</i> de vos <i>Réglages Système</i>, et activez <i>Activité des apps en arrière-plan</i> pour Mozilla VPN.|Per fà què, ci vole à fà un cliccu nant’à u buttone quaghjò per accede à l’<i>Elementi di cunnessione è estensioni</i> di e vostre <i>Preferenze di u sistema</i> è attivà l’ozzione <i>Attività di l’appiecazioni in tacca di sfondulu</i> per Mozilla VPN.
+Open Login Items|Accéder aux éléments à l’ouverture|Apre « Elementi di cunnessione »
+Open Login Items & Extensions|Ouvrir « Ouverture et extensions »|Apre « Elementi di cunnessione è estensioni »
+Allow VPN to run in background|Autoriser le VPN à s’exécuter en arrière-plan|Permette l’esecuzione di a VPN in sfondulu
+A fast, secure and easy to use VPN. Built by the makers of Firefox.|Un VPN rapide, sûr et facile à utiliser. Conçu par les équipes de Firefox.|Una reta privata virtuale (VPN) rapida, assicurizata è faciule à impiegà. Cuncepita da l’autori di Firefox.
+Save %1%|Économiser %1 %|Risparmià %1 %
+Subscribe now|S’abonner maintenant|Abbunassi subitu
+%1-month plan: %2|Forfait de %1 mois : %2|Prugramma per %1 mesi : %2
+Please continue subscribing in your browser…|Veuillez finaliser l’abonnement dans votre navigateur…|Ci vole à cuntinuà l’abbunamentu nant’à u vostru navigatore…
+We couldn’t find a subscription for %1. Subscribe now to protect your connection.|Impossible de trouver un abonnement pour %1. Abonnez-vous maintenant pour protéger votre connexion.|Ùn si pò truvà un abbunamentu per %1. Abbunatevi subitu per prutege a vostra cunnessione.
+Subscribe to Mozilla VPN|Abonnez-vous à Mozilla VPN|Abbunatevi à Mozilla VPN
+This will reset all VPN settings, including:|Cette action réinitialisera tous les paramètres du VPN, notamment :|St’azzione reinizierà tutti i parametri di a VPN, cum’è :
+Resetting the VPN will sign you out, but your account will not be deleted.|La réinitialisation du VPN vous déconnectera, mais votre compte ne sera pas supprimé.|U reiniziu di a VPN vi discunnetterà ma u vostru contu ùn serà micca squassatu.
+Reset Mozilla VPN settings? This can’t be undone.|Réinitialiser les paramètres de Mozilla VPN ? Cette action ne peut pas être annulée.|Reinizià i parametri di Mozilla VPN ? St’azzione ùn pò micca esse invertita.
+Reset and quit|Réinitialiser et quitter|Reinizià è esce
+Confirm reset|Confirmer la réinitialisation|Cunfirmà u reiniziu
+Preferences|Préférences|Preferenze
+Reset VPN|Réinitialiser le VPN|Reinizià a VPN
+Reset Mozilla VPN|Réinitialiser Mozilla VPN|Reinizià Mozilla VPN
+Sorry, we are unable to connect your Mozilla account to a current subscription. Please try again or contact our support team for further assistance.|Désolé, nous ne pouvons pas connecter votre compte Mozilla à un abonnement en cours. Veuillez réessayer ou contacter notre équipe d’assistance pour obtenir de l’aide.|Per disgrazia, ùn pudemu micca cunnette u vostru contu Mozilla à un abbunamentu in corsu. Pruvate torna o cuntattate a nostra squadra d’assistenza per ottene un aiutu.
+Sorry, we were unable to confirm your subscription. Please try again or contact our support team for help.|Désolé, nous n’avons pas réussi à confirmer votre abonnement. Veuillez réessayer ou contacter notre assistance pour obtenir de l’aide.|Per disgrazia, ùn avemu micca riesciutu à cunfirmà u vostru abbunamentu. Pruvate torna o cuntattate a nostra squadra d’assistenza per ottene un aiutu.
+Another Mozilla account has already subscribed using this Apple ID. Please sign out and try again or contact our support team for help.|Un autre compte Mozilla s’est déjà abonné en utilisant cet identifiant Apple. Veuillez vous déconnecter et réessayer, ou contacter notre assistance pour obtenir de l’aide.|Un altru contu Mozilla hè dighjà abbunatu cù st’Apple ID. Discunnittitevi è pruvate torna o cuntattate a nostra squadra d’assistenza per ottene un aiutu.
+This server location is temporarily unavailable. Choose a new location.|Cet emplacement de serveur est temporairement indisponible. Choisissez un nouvel emplacement.|A pusizione di stu servitore hè timpurariamente indispunibule. Sciglitene una nova.
+Choose a new location|Choisissez un nouvel emplacement|Sciglite una pusizione nova
+Server unavailable|Serveur indisponible|Servitore indispunibule
+This server location is temporarily unavailable. Please open the app to choose a new location.|Cet emplacement de serveur est temporairement indisponible. Veuillez ouvrir l’application et choisir un nouvel emplacement.|A pusizione di stu servitore hè timpurariamente indispunibule. Aprite l’appiecazione per sceglie una pusizione nova.
+The server has been blocked. Check your firewall settings.|Le serveur a été bloqué. Vérifiez les paramètres de votre pare-feu.|U servitore hè statu bluccatu. Verificate i parametri di u vostru parafocu.
+Server unavailable notification|Notification de serveur indisponible|Nutificazione di servitore indispunibule
+Get notified when connecting to a server location failed|Recevoir une notification lorsque la connexion à un emplacement de serveur a échoué|Ricivete una nutificazione quandu a cunnessione à una pusizione di servitore hè fiascata
+To see recommended server locations, turn off the VPN.|Pour afficher les emplacements de serveurs recommandés, désactivez le VPN.|Per affissà e pusizioni di servitore ricumandate, disattivate a VPN.
+Refresh list|Actualiser la liste|Attualizà a lista
+Last updated: %1. To update this list please disconnect from the VPN.|Dernière mise à jour : %1. Pour mettre à jour cette liste, veuillez vous déconnecter du VPN.|Ultima mudificazione : %1. Per mudificà sta lista ci vole à discunnettesi da a VPN.
+Last updated: %1.|Dernière mise à jour : %1.|Ultima mudificazione : %1.
+Disconnect from the VPN to update this list.|Déconnectez-vous du VPN pour mettre à jour cette liste.|Discunnittitevi da a VPN per mudificà sta lista.
+Tap to update|Appuyez pour mettre à jour|Picchichjà per mudificà
+Checking (%1%)…|Vérification (%1%)…|Verificazione (%1 %)…
+Search countries|Rechercher un pays|Ricercà un paese
+%1. Good connectivity|%1. Bonne connectivité|%1. Bella cunnettività
+%1. Moderate connectivity|%1. Connectivité modérée|%1. Cunnettività muderata
+%1. No connectivity|%1. Aucune connectivité|%1. Nisuna cunnettività
+%1. Poor connectivity|%1. Connectivité médiocre|%1. Cunnettività scarsa
+Follow your system’s appearance|Suit l’apparence du système|Seguità l’aspettu di u sistema
+On some devices, Mozilla VPN may be disconnected in the background. If you’ve experienced this, allow it to run in the background.|Sur certains appareils, Mozilla VPN peut être déconnecté en arrière-plan. Si vous avez déjà rencontré ce problème, autorisez-le à s’exécuter en arrière-plan.|Nant’à certi apparechji, Mozilla VPN pò esse discunnessu in tacca di sfondulu. S’è stu prublemu hè dighjà accadutu, permittitelu di funziunà in tacca di sfondulu.
+Allow background permissions|Autoriser l’exécution en arrière-plan|Permette l’esecuzione in tacca di sfondulu
+Allow Mozilla VPN to automatically send crash reports to help fix unexpected crashes|Autoriser Mozilla VPN à envoyer automatiquement des rapports de plantage pour aider à résoudre les problèmes|Permette à Mozilla VPN di mandà autumaticamente i raporti d’accidente per aiutà à currege i prublemi
+We couldn’t access your saved VPN settings. Please sign in again.|Nous n’avons pas pu accéder à vos paramètres VPN enregistrés. Veuillez vous reconnecter.|Ùn avemu micca pussutu accede à i vostri parametri VPN arregistrati. Ci vole à cunnettevi torna.
+DNS settings|Paramètres DNS|Parametri DNS
+Resolve websites using a custom DNS|Résoudre l’adresse des sites web à l’aide d’un DNS personnalisé|Cunvertisce i siti web grazia à un DNS persunalizatu
+Invalid DNS, please try a new one|DNS invalide, veuillez en essayer un nouveau|DNS inaccettevule, pruvatene un altru
+Use custom DNS|Utiliser un DNS personnalisé|Impiegà un DNS persunalizatu
+Changing these settings will cause the VPN to disconnect and reconnect automatically.|La modification de ces paramètres entraînera la déconnexion et la reconnexion automatiques du VPN.|U cambiamentu di sti parametri cagiunerà à scunnessione è a ricunnessione autumatica di a VPN.
+Enter custom DNS|Saisissez un DNS personnalisé|Stampittate un DNS persunalizatu
+Resolve websites using Mozilla VPN’s standard DNS|Résoudre l’adresse des sites web à l’aide du DNS standard de Mozilla VPN|Cunvertisce i siti web grazia à u DNS classicu di Mozilla VPN
+Use standard DNS|Utiliser le DNS standard|Impiegà u DNS classicu
+These options may cause some websites to break or not display content correctly.|Ces options peuvent empêcher certains sites de fonctionner correctement ou ne pas afficher correctement leur contenu.|St’ozzioni ponu cagiunà un funziunamentu gattivu o un’affissera incurretta nant’à certi siti web.
+Turn off VPN for specific websites.|Désactivez le VPN pour des sites web spécifiques.|Disattivà a VPN per siti web specifichi.
+No more toggling your VPN on and off when you need a site to work. Plus, your preference for the website is saved so you don’t have to adjust it each time.|Plus besoin d’activer ou de désactiver le VPN lorsque vous avez besoin qu’un site fonctionne. Et en plus, vos préférences pour le site web sont enregistrées, vous évitant ainsi de devoir les reconfigurer à chaque visite.|Ùn hè più necessariu à attivà o disattivà a VPN quandu avete bisognu à fà funziunà un situ. In più di què, e vostre preferenze per u situ web sò arregistrate, è cusì ùn hè più bisognu à adattalle à ogni visita.
+Firefox extension|Extension Firefox|Estensione Firefox
+Get more precise control over how your VPN works when you’re browsing, with the Firefox extension.|Avec l’extension Firefox, contrôlez plus précisément le fonctionnement de votre VPN lorsque vous naviguez.|Grazia à l’estensione Firefox, avete un cuntrollu più precisu nant’à u funziunamentu di a vostra VPN quandu vo navigate.
+Get the extension|Installer l’extension|Ottene l’estensione
+Choose different locations for different websites.|Choisissez des emplacements différents pour différents sites web.|Sciglite pusizioni sfarente per siti web sfarenti.
+Browse one site as if you’re in New York and another as if you’re in Paris — all in the same Firefox session.|Naviguez sur un site comme si vous étiez à New York et sur un autre comme si vous étiez à Paris, le tout dans la même session Firefox.|Navigate nant’à un situ cum’è s’è vo fussi in New York è nant’à un altru cum’è s’è vo fussi in Parigi, è tuttu in a listessa sessione Firefox.
+Reduces the number of ads you see when you’re using VPN|Réduit le nombre de publicités que vous voyez lorsque vous utilisez le VPN|Riduce u numeru di publicità affissate quandu s’impiegheghja a VPN
+Block ads|Bloquer les publicités|Blucchime di publicità
+Helps protect you from ransomware, phishing, spyware, and viruses|Vous aide à vous protéger contre les ransomwares, le phishing, les logiciels espions et les virus|Prutezzione contr’à i ransomware, phishing, i prugrammi di spiunaghju è l’agenti infettivi
+Block malware|Bloquer les logiciels malveillants|Blucchime di prugrammi periculosi
+Fewer harmful domains will be able to track you|Moins de domaines nuisibles seront en mesure de vous pister|Menu di duminiu dannighjevule serà capace di spiunavvi
+Block trackers|Bloquer les traqueurs|Blucchime di u spiunaghju
+For your security, please sign in again to access your account information. You’ll complete this process on Mozilla’s website.|Pour votre sécurité, veuillez vous reconnecter pour accéder aux informations de votre compte. Cette action sera effectuée sur le site web de Mozilla.|Per a vostra sicurità, ci vole à ricunnettesi per accede à l’infurmazioni di u vostru contu. Ci vulerà à compie sta prucedura nant’à u situ web di Mozilla.
+Sign In Again|Reconnectez-vous|Cunnittitevi torna
+Help improve Mozilla VPN by sharing crash reports, diagnostics, and product usage data.|Aidez à améliorer Mozilla VPN en partageant les rapports de plantage, des diagnostics et des données d’utilisation du produit.|Aiutateci à amendà Mozilla VPN spartendu i raporti d’accidente, i diagnostichi è i dati d’aghjovu di pruduttu.
+Mozilla VPN will launch and connect when you start up your device|Mozilla VPN se lancera et se connectera lorsque vous démarrerez votre appareil|Mozilla VPN si lancierà è si cunnitterà à l’avviu di u vostru apparechju
+Connect VPN on startup|Connecter le VPN au démarrage|Cunnette VPN à l’avviu
+VPN must be restarted to take effect|Le VPN doit être redémarré pour prendre en compte les changements|A VPN deve esse rilanciata per piglià in contu i cambiamenti
+Show or hide the developer options menu|Afficher ou masquer le menu des options de développement|Affissà o piattà u listinu di l’ozzioni di sviluppu
+Show Developer Options|Afficher les options de développement|Affissà l’ozzioni di sviluppu
+Developer Options|Options de développement|Ozzioni di sviluppu
+Staging services are used to test features before they go live to production|Les serveurs de qualification sont utilisés pour tester les fonctionnalités avant leur mise en production|I servitori di qualifica sò impiegati per pruvà e funzioni nanzu a so messa in pruduzzione
+Use Staging Servers|Utiliser les serveurs de qualification|Impiegà i servitori di qualifica
+Show system apps|Afficher les applications système|Affissà l’appiecazioni di u sistema
+Error activating App exclusions|Erreur lors de l’activation de l’exclusion d’applications|Sbagliu durante l’attivazione di l’esclusione d’appiecazioni
+VPN must be off to edit Excluded apps|Le VPN doit être désactivé pour modifier les applications exclues|A VPN deve esse disattivata per mudificà l’appiecazioni escluse
+Add apps manually|Ajouter des applications manuellement|Aghjunghje appiecazioni manualmente
+Success! You added “%1” to this list.|Terminé ! Vous avez ajouté « %1 » à cette liste.|Operazione riesciuta ! Avete aghjuntu « %1 » à sta lista.
+%1 apps missing from list.|%1 applications manquantes dans la liste.|%1 appiecazione(i) assente nant’à a lista.
+Monthly plan: %1|Forfait mensuel : %1|Prugramma misincu : %1
+%1/month + tax|%1/mois + taxes|%1 à u mese + e tasse
+%1/month|%1/mois|%1 à u mese
+Hide Mozilla VPN|Masquer Mozilla VPN|Piattà Mozilla VPN
+Preferences…|Préférences…|Preferenze…
+Quit Mozilla VPN|Quitter Mozilla VPN|Esce da Mozilla VPN
+Show Mozilla VPN|Afficher Mozilla VPN|Affissà Mozilla VPN
+Connect to the last location:|Se connecter au dernier emplacement :|Cunnette à l’ultima pusizione :
+Connected to:|Connecté à :|Cunnessa à :
+Connecting to:|Connexion à :|Cunnessione à :
+Disconnecting from:|Se déconnecter de :|Scunnettesi da :
+Allow on this device|Autoriser sur cet appareil|Permette nant’à st’apparechju
+We strive to provide you with choices and collect only the data we need to improve Mozilla VPN. Sharing this data with Mozilla is optional.|Nous nous efforçons de vous laisser le choix et de collecter uniquement les données dont nous avons besoin pour améliorer Mozilla VPN. Le partage de ces données avec Mozilla est facultatif.|Femu casu à pruponevi a scelta è cullettà solu i dati ch’avemu bisognu per amendà Mozilla VPN. U spartimentu di sti dati cù Mozilla hè ozzionale.
+Learn more about what data Mozilla collects and how it’s used.|Apprenez-en davantage sur les données que Mozilla collecte et comment elles sont utilisées.|Sapene di più nant’à i dati culletti da Mozilla è cum’elli sò impiegati.
+Allow Mozilla VPN to send technical, interaction, and campaign and referral data to Mozilla?|Autoriser Mozilla VPN à envoyer des données techniques, d’interaction, de campagne et de référence à Mozilla ?|Permette à Mozilla VPN di mandà i dati tecnichi, d’interazzione, di campagna è di ricumandazione à Mozilla ?
+Turn Mozilla VPN on and off, and see the current location.|Activez ou désactivez Mozilla VPN et consultez votre emplacement actuel.|Attivate o disattivate Mozilla VPN è fighjate a vostra pusizione attuale.
+Check for Updates|Rechercher des mises à jour|Cuntrollà i rinnovi
+You currently have the latest version of Mozilla VPN|Vous disposez de la dernière version de Mozilla VPN|Avete attualmente l’ultima versione di Mozilla VPN
+Click to update to the latest version of the application|Cliquez pour mettre à jour l’application vers la dernière version|Cliccà per rinnovà l’appiecazione à l’ultima versione
+You are up to date|Vous êtes à jour|Site à l’ultimu livellu
+Updates available|Mises à jour disponibles|Rinnovi dispunibule

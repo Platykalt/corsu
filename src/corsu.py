@@ -20,7 +20,8 @@ import zipfile
 import engine
 from engine import make_mo, make_qm, read_mo, read_qm, translate, WORDS
 
-ROOT = Path(__file__).resolve().parent
+ROOT = Path(__file__).resolve().parent.parent
+SRC = Path(__file__).resolve().parent
 HOME = Path.home()
 PLATFORM = 'windows' if sys.platform == 'win32' else 'macos' if sys.platform == 'darwin' else 'linux'
 if PLATFORM == 'windows':
@@ -480,7 +481,8 @@ def firefox_runtime():
         raise RuntimeError('No supported Firefox found. Install Firefox from mozilla.org or your distribution.')
     app_version = install.version()
     resources = install.root / install.resources
-    fingerprint = hashlib.sha256(LEXICON.read_bytes() + Path(__file__).read_bytes())
+    fingerprint = hashlib.sha256(b''.join(path.read_bytes() for path in engine.LEXICONS if path.exists())
+                                 + Path(__file__).read_bytes())
     for file in ('omni.ja', 'browser/omni.ja', 'application.ini', 'platform.ini'):
         if (resources / file).exists():
             fingerprint.update((resources / file).read_bytes())
@@ -578,7 +580,7 @@ def generate():
     plugin.mkdir(parents=True, exist_ok=True)
     (plugin / 'dictionary.json').write_text(json.dumps(WORDS, ensure_ascii=False, indent=2), encoding='utf-8')
     for name in ('index.ts', 'translate.ts'):
-        shutil.copy2(ROOT / 'plugin' / name, plugin / name)
+        shutil.copy2(ROOT / 'discord-plugin' / name, plugin / name)
 
 
 def firefox_profile_roots():
@@ -676,15 +678,15 @@ START_MENU = CONFIG / 'Microsoft/Windows/Start Menu/Programs'
 
 def windows_shortcut(installer, firefox):
     command = DATA / 'bin/firefox-corsu.cmd'
-    installer.write(command, f'@"{python_launcher()}" "{ROOT / "corsu.py"}" launch-firefox %*\r\n')
-    windows_link(installer, START_MENU / 'Firefox — Corsu.lnk', python_launcher(),
-                 f'"{ROOT / "corsu.py"}" launch-firefox', str(firefox.root / firefox.binary) + ',0', toggle=True)
+    installer.write(command, f'@"{python_launcher()}" "{SRC / "corsu.py"}" launch-firefox %*\r\n')
+    windows_link(installer, START_MENU / 'Firefox Corsu.lnk', python_launcher(),
+                 f'"{SRC / "corsu.py"}" launch-firefox', str(firefox.root / firefox.binary) + ',0', toggle=True)
 
 
 def macos_application(installer):
-    """A small AppleScript applet, so Firefox — Corsu appears in Launchpad and Spotlight."""
+    """A small AppleScript applet, so Firefox Corsu appears in Launchpad and Spotlight."""
     target = HOME / 'Applications/Firefox Corsu.app'
-    command = f'exec {shlex.quote(sys.executable)} {shlex.quote(str(ROOT / "corsu.py"))} launch-firefox >/dev/null 2>&1 &'
+    command = f'exec {shlex.quote(sys.executable)} {shlex.quote(str(SRC / "corsu.py"))} launch-firefox >/dev/null 2>&1 &'
     with tempfile.TemporaryDirectory() as directory:
         applet = Path(directory) / 'Firefox Corsu.app'
         script = 'do shell script ' + json.dumps(command)
@@ -693,10 +695,10 @@ def macos_application(installer):
 
 
 def setup_shortcut(installer):
-    """A `Corsu — Setup` entry that reopens the installer, to add or remove applications later."""
-    script = ROOT / 'installer.py'
+    """A `Corsu Setup` entry that reopens the installer, to add or remove applications later."""
+    script = SRC / 'installer.py'
     if PLATFORM == 'windows':
-        windows_link(installer, START_MENU / 'Corsu — Setup.lnk', sys.executable, f'"{script}"')
+        windows_link(installer, START_MENU / 'Corsu Setup.lnk', sys.executable, f'"{script}"')
     elif PLATFORM == 'macos':
         command = f'{shlex.quote(sys.executable)} {shlex.quote(str(script))}'
         with tempfile.TemporaryDirectory() as directory:
@@ -707,7 +709,7 @@ def setup_shortcut(installer):
             installer.tree(HOME / 'Applications/Corsu Setup.app', applet)
     else:
         installer.write(HOME / '.local/share/applications/corsu-setup.desktop',
-                        '[Desktop Entry]\nType=Application\nName=Corsu — Setup\nName[co]=Corsu — Cunfigurazione\n'
+                        '[Desktop Entry]\nType=Application\nName=Corsu Setup\nName[co]=Cunfigurazione di Corsu\n'
                         'Comment=Choose which applications are translated into Corsican\n'
                         f'Exec=python3 {shlex.quote(str(script))}\nTerminal=true\nIcon=preferences-desktop-locale\n'
                         'Categories=Settings;\n')
@@ -724,7 +726,7 @@ def desktop(installer, firefox=True, vesktop=True):
         return
     launcher = HOME / '.local/bin/firefox-corsu'
     if firefox:
-        installer.write(launcher, f'#!/bin/sh\nexec python3 {shlex.quote(str(ROOT / "corsu.py"))} launch-firefox "$@"\n', 0o755)
+        installer.write(launcher, f'#!/bin/sh\nexec python3 {shlex.quote(str(SRC / "corsu.py"))} launch-firefox "$@"\n', 0o755)
     entries = ([('firefox.desktop', str(launcher))] if firefox else []) + ([('vesktop.desktop', None)] if vesktop else [])
     for desktop_id, executable in entries:
         existing = HOME / '.local/share/applications' / desktop_id
@@ -734,7 +736,7 @@ def desktop(installer, firefox=True, vesktop=True):
         text = original.read_text(encoding='utf-8')
         if executable:
             text = re.sub(r'^Exec=(?:/usr/lib/firefox/firefox|/usr/bin/firefox|firefox)(?=\s|$)', f'Exec={executable}', text, flags=re.M)
-        name = 'Firefox — Corsu' if executable else 'Discord — Corsu (Vesktop)'
+        name = 'Firefox Corsu' if executable else 'Vesktop Corsu'
         text = re.sub(r'^Name=.*$', 'Name=' + name, text, count=1, flags=re.M)
         text = re.sub(r'^Name\[(?:co|fr)\]=.*\n?', '', text, flags=re.M)
         text = text.replace('[Desktop Entry]\n', f'[Desktop Entry]\nName[co]={name}\nName[fr]={name}\n', 1)

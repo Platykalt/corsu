@@ -9,12 +9,12 @@ import tarfile
 import urllib.request
 import zipfile
 
-ROOT = Path(__file__).resolve().parent
-ARCHIVES = {'linux': 'linux-x86_64', 'windows': 'windows-x86_64', 'macos': 'macos'}
-SOURCES = ('corsu.py', 'engine.py', 'chromium.py', 'test_chromium.py', 'installer.py', 'coverage.py', 'package_release.py', 'lexicon.tsv', 'lexicon-mozilla.tsv',
-           'README.md', 'CONTRIBUTING.md', 'LICENSE', 'release.json', 'install.sh', 'install.cmd', '.gitignore',
-           'test_corsu.py', 'test_engine.py', 'test_installer.py', 'test-browser.mjs', 'ci/check_firefox.py', 'ci/e2e.py',
-           'test-kde.cpp')
+ROOT = Path(__file__).resolve().parent.parent
+# Stable names, so https://github.com/<owner>/corsu/releases/latest/download/<name> always works.
+ARCHIVES = {'linux': 'corsu-linux.tar.gz', 'windows': 'corsu-windows.zip', 'macos': 'corsu-macos.tar.gz'}
+SOURCES = ('README.md', 'README.fr.md', 'CHANGELOG.md', 'CONTRIBUTING.md', 'LICENSE', 'release.json',
+           'install.sh', 'install.cmd', 'get.sh', 'get.ps1')
+SOURCE_DIRECTORIES = ('src', 'lexicon', 'discord-plugin', 'docs', 'tests', 'tools', 'ci')
 
 
 def vencord_installer(manifest, name):
@@ -37,12 +37,15 @@ def collect(manifest):
         raise RuntimeError('Build the custom Vencord plugin first.')
     # The dictionary is compiled into the bundle, so a stale build ships old Discord labels.
     build = min(path.stat().st_mtime for path in (ROOT / 'Vencord/dist').glob('*.js'))
-    stale = [name for name in ('lexicon.tsv', 'plugin/index.ts', 'plugin/translate.ts')
+    stale = [name for name in ('lexicon/lexicon.tsv', 'lexicon/lexicon-mozilla.tsv', 'lexicon/lexicon-upstream.tsv',
+                               'discord-plugin/index.ts', 'discord-plugin/translate.ts')
              if (ROOT / name).stat().st_mtime > build]
     if stale:
         raise RuntimeError('Vencord build predates ' + ', '.join(stale) + '. Rebuild it before packaging.')
-    files = [ROOT / name for name in SOURCES]
-    files.extend(sorted((ROOT / 'plugin').glob('*.ts')))
+    files = [ROOT / name for name in SOURCES if (ROOT / name).exists()]
+    for directory in SOURCE_DIRECTORIES:
+        files.extend(path for path in sorted((ROOT / directory).rglob('*'))
+                     if path.is_file() and '__pycache__' not in path.parts)
     files.append(ROOT / 'vendor/vencord-installer-source.tar.gz')
     # The French Firefox language pack (MPL-2.0) is the offline fallback; installs fetch the matching version.
     files.append(ROOT / 'vendor/firefox-fr.xpi')
@@ -58,15 +61,15 @@ def collect(manifest):
 
 def package(manifest, name, files, output):
     files = [*files, vencord_installer(manifest, name)]
-    stem = f'corsu-{manifest["version"]}-{ARCHIVES[name]}'
+    stem = 'corsu'
     executable = {'install.sh', manifest['installers'][name]['file']}
     if name == 'windows':
-        archive = output / f'{stem}.zip'
+        archive = output / ARCHIVES[name]
         with zipfile.ZipFile(archive, 'w', zipfile.ZIP_DEFLATED) as bundle:
             for path in files:
                 bundle.write(path, f'{stem}/{path.relative_to(ROOT).as_posix()}')
     else:
-        archive = output / f'{stem}.tar.gz'
+        archive = output / ARCHIVES[name]
 
         def normalize(info):
             info.uid = info.gid = 0

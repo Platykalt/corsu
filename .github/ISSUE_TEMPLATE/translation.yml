@@ -1,0 +1,26 @@
+name: Translation
+description: A wrong, missing or clumsy Corsican translation
+labels: [translation]
+body:
+  - type: input
+    id: seen
+    attributes:
+      label: Text you saw
+      description: Copy it exactly, in French, English or Corsican.
+    validations:
+      required: true
+  - type: input
+    id: where
+    attributes:
+      label: Where
+      description: Program and place, for example "Firefox, right-click menu".
+    validations:
+      required: true
+  - type: input
+    id: proposal
+    attributes:
+      label: Corsican you suggest
+  - type: textarea
+    id: notes
+    attributes:
+      label: Notes

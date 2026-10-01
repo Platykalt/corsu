@@ -27,7 +27,7 @@ jobs:
         with:
           python-version: ${{ matrix.python }}
       - name: Unit tests
-        run: python -m unittest discover -p "test_*.py" -v
+        run: python -m unittest discover -s tests -t . -v
 
   package:
     name: Build Vencord and package releases
@@ -53,7 +53,7 @@ jobs:
         with:
           node-version: '22'
       - name: Build the Corsu plugin into Vencord
-        run: python -c "import installer; installer.prepare_build()"
+        run: PYTHONPATH=src python -c "import installer; installer.prepare_build()"
       - name: Bundle the French Firefox language pack (offline fallback)
         run: |
           version=$(curl -fsSL https://product-details.mozilla.org/1.0/firefox_versions.json | python -c "import json,sys; print(json.load(sys.stdin)['LATEST_FIREFOX_VERSION'])")
@@ -61,7 +61,7 @@ jobs:
           curl -fsSL -o vendor/firefox-fr.xpi "https://archive.mozilla.org/pub/firefox/releases/$version/linux-x86_64/xpi/fr.xpi"
           sha512sum -c fr.sha512
       - name: Package Linux, Windows and macOS archives
-        run: python package_release.py --output dist
+        run: python tools/package_release.py --output dist
       - uses: actions/upload-artifact@v4
         with:
           name: releases
@@ -76,11 +76,11 @@ jobs:
       matrix:
         include:
           - os: ubuntu-latest
-            archive: linux-x86_64.tar.gz
+            archive: corsu-linux.tar.gz
           - os: windows-latest
-            archive: windows-x86_64.zip
+            archive: corsu-windows.zip
           - os: macos-latest
-            archive: macos.tar.gz
+            archive: corsu-macos.tar.gz
     runs-on: ${{ matrix.os }}
     steps:
       - uses: actions/checkout@v4
@@ -95,11 +95,11 @@ jobs:
         shell: bash
         run: |
           cd dist
-          archive=$(ls corsu-*-${{ matrix.archive }})
+          archive=${{ matrix.archive }}
           sha256sum -c "$archive.sha256" 2>/dev/null || shasum -a 256 -c "$archive.sha256"
-          case "$archive" in *.zip) unzip -q "$archive" ;; *) tar xzf "$archive" ;; esac
-          stem=${archive%.zip}
-          echo "CORSU_RELEASE=dist/${stem%.tar.gz}" >> "$GITHUB_ENV"
+          mkdir extracted
+          case "$archive" in *.zip) unzip -q "$archive" -d extracted ;; *) tar xzf "$archive" -C extracted ;; esac
+          echo "CORSU_RELEASE=dist/extracted/corsu" >> "$GITHUB_ENV"
       - name: Install Firefox (Linux)
         if: runner.os == 'Linux'
         run: |

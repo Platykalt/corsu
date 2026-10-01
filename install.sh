@@ -6,4 +6,4 @@ if ! command -v python3 >/dev/null 2>&1 || ! python3 -c 'import sys; sys.exit(sy
     echo 'Python 3.10 or newer is required. Install it with your package manager (macOS: xcode-select --install).' >&2
     exit 1
 fi
-exec python3 "$corsu_dir/installer.py" "$@"
+exec python3 "$corsu_dir/src/installer.py" "$@"

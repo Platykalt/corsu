@@ -48,7 +48,7 @@ def data_directory(home):
 def launchers(home):
     if PLATFORM == 'windows':
         menu = home / 'AppData/Roaming/Microsoft/Windows/Start Menu/Programs'
-        return [menu / 'Firefox — Corsu.lnk', menu / 'Corsu — Setup.lnk']
+        return [menu / 'Firefox Corsu.lnk', menu / 'Corsu Setup.lnk']
     if PLATFORM == 'macos':
         return [home / 'Applications/Firefox Corsu.app', home / 'Applications/Corsu Setup.app']
     return [home / '.local/bin/firefox-corsu', home / '.local/share/applications/corsu-setup.desktop']
@@ -59,7 +59,7 @@ def state(home):
 
 
 def check_firefox(root, home, environment):
-    run(root, environment, 'installer.py', '--components', 'firefox', '--yes')
+    run(root, environment, 'src/installer.py', '--components', 'firefox', '--yes')
     for launcher in launchers(home):
         assert launcher.exists(), f'Missing launcher: {launcher}'
     report = json.loads((data_directory(home) / 'report.json').read_text(encoding='utf-8'))
@@ -67,15 +67,15 @@ def check_firefox(root, home, environment):
     print(json.dumps(stats, indent=2))
     assert stats['french_pack'], 'The French language pack was not applied'
     assert stats['french_messages'] > 5000, stats
-    executable = run(root, environment, 'corsu.py', 'prepare-firefox', capture=True).splitlines()[0].strip()
+    executable = run(root, environment, 'src/corsu.py', 'prepare-firefox', capture=True).splitlines()[0].strip()
     run(root, environment, str(HERE / 'check_firefox.py'), executable)
-    status = json.loads(run(root, environment, 'corsu.py', 'status', capture=True))
+    status = json.loads(run(root, environment, 'src/corsu.py', 'status', capture=True))
     assert status['enabled'] and status['installation']['missing'] == [] and status['installation']['changed'] == [], status
-    run(root, environment, 'installer.py', '--disable')
+    run(root, environment, 'src/installer.py', '--disable')
     assert not state(home)['enabled']
-    run(root, environment, 'installer.py', '--enable')
+    run(root, environment, 'src/installer.py', '--enable')
     assert state(home)['enabled']
-    run(root, environment, 'installer.py', '--uninstall', '--yes')
+    run(root, environment, 'src/installer.py', '--uninstall', '--yes')
     assert state(home)['files'] == {}, state(home)
     for launcher in launchers(home):
         assert not launcher.exists(), f'Launcher left behind: {launcher}'
@@ -100,14 +100,14 @@ def fake_discord(home):
 
 def check_discord(root, home, environment):
     location, archive, original = fake_discord(home)
-    run(root, environment, 'installer.py', '--components', 'discord', '--discord-path', str(location), '--yes')
+    run(root, environment, 'src/installer.py', '--components', 'discord', '--discord-path', str(location), '--yes')
     patched = archive.read_bytes()
     assert patched != original and b'patcher.js' in patched, 'Discord archive was not patched'
     settings = home / {'windows': 'AppData/Roaming', 'macos': 'Library/Application Support'}.get(PLATFORM, '.config')
     plugin = json.loads((settings / 'Vencord/settings/settings.json').read_text(encoding='utf-8'))
     assert plugin['plugins']['Corsu']['enabled'] and plugin['autoUpdate'] is False, plugin
-    assert launchers(home)[1].exists(), 'Missing Corsu — Setup shortcut'
-    run(root, environment, 'installer.py', '--uninstall', '--yes')
+    assert launchers(home)[1].exists(), 'Missing Corsu Setup shortcut'
+    run(root, environment, 'src/installer.py', '--uninstall', '--yes')
     assert archive.read_bytes() == original, 'Original Discord archive was not restored'
     assert not archive.with_name('_app.asar').exists(), 'Backup archive left next to Discord'
     assert not launchers(home)[1].exists(), 'Setup shortcut left behind'
@@ -120,14 +120,14 @@ def check_chromium(root, home, environment):
     executable = next(browser / name for name in ('chrome.exe', 'chrome') if (browser / name).exists())
     pack = next(path for path in browser.rglob('fr.pak') if path.parent.name in ('locales', 'Locales'))
     original = hashlib.sha256(pack.read_bytes()).hexdigest()
-    run(root, environment, 'installer.py', '--components', 'chromium', '--yes')
+    run(root, environment, 'src/installer.py', '--components', 'chromium', '--yes')
     assert hashlib.sha256(pack.read_bytes()).hexdigest() != original, 'French pack was not translated'
     run(root, environment, str(HERE / 'check_chromium.py'), str(executable))
-    run(root, environment, 'installer.py', '--disable')
+    run(root, environment, 'src/installer.py', '--disable')
     assert hashlib.sha256(pack.read_bytes()).hexdigest() == original, 'Disable did not restore the French pack'
-    run(root, environment, 'installer.py', '--enable')
+    run(root, environment, 'src/installer.py', '--enable')
     assert hashlib.sha256(pack.read_bytes()).hexdigest() != original, 'Enable did not translate again'
-    run(root, environment, 'installer.py', '--uninstall', '--yes')
+    run(root, environment, 'src/installer.py', '--uninstall', '--yes')
     assert hashlib.sha256(pack.read_bytes()).hexdigest() == original, 'Uninstall did not restore the French pack'
     assert state(home)['files'] == {}, state(home)
     print('PASS: Chromium pack translated, rendered in Corsican, switched off/on and restored')

@@ -1,0 +1,28 @@
+name: Problem with the installer
+description: Something did not install, broke, or did not come back after uninstalling
+labels: [bug]
+body:
+  - type: dropdown
+    id: system
+    attributes:
+      label: System
+      options: [Windows, macOS, Linux]
+    validations:
+      required: true
+  - type: input
+    id: programs
+    attributes:
+      label: Programs selected
+      description: For example Firefox, Opera GX, Discord.
+  - type: textarea
+    id: what
+    attributes:
+      label: What happened
+      description: Paste the installer's last lines if you can.
+    validations:
+      required: true
+  - type: textarea
+    id: status
+    attributes:
+      label: Output of `python3 src/corsu.py status`
+      render: json

@@ -21,7 +21,7 @@ class TranslationTests(unittest.TestCase):
     def test_letter_case_and_trailing_punctuation(self):
         self.assertEqual(engine.translate('inconnu'), 'scunnisciutu')
         self.assertEqual(engine.translate('Enregistrer…'), 'Arregistrà…')
-        self.assertEqual(engine.translate('Erreur :'), 'Sbagliu:')
+        self.assertEqual(engine.normalize(engine.translate('Erreur\xa0:')), 'Sbagliu :')
 
     def test_composed_labels_need_every_part(self):
         self.assertEqual(engine.translate('Paramètres — Général'), 'Parametri — Generale')
