@@ -11,9 +11,10 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent.parent
 LEXICON = ROOT / 'lexicon/lexicon.tsv'
-# Reviewed translations from other projects load first, so their wording wins over draft rows.
+# Corrections load first; then reviewed translations from other projects, whose wording wins over draft rows.
+FIXES = ROOT / 'lexicon/lexicon-fixes.tsv'
 REVIEWED = [ROOT / 'lexicon/lexicon-mozilla.tsv', ROOT / 'lexicon/lexicon-upstream.tsv']
-LEXICONS = [*REVIEWED, LEXICON]
+LEXICONS = [FIXES, *REVIEWED, LEXICON]
 
 # Placeholders that must survive translation untouched: Fluent placeables, printf
 # specifiers, Qt/KDE numbered arguments and shell-style variables.

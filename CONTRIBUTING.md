@@ -15,7 +15,8 @@ Restart %1|Redémarrer %1|Rilancià %1
 |Effacer|Squassà
 ```
 
-Les corrections vont dans `lexicon/lexicon.tsv`. Les deux autres fichiers sont copiés depuis d'autres projets par
+Les corrections vont dans `lexicon/lexicon.tsv`. Si une traduction importée est fausse dans un logiciel précis, la
+correction va dans `lexicon/lexicon-fixes.tsv`, lu en premier. Les deux autres fichiers sont copiés depuis d'autres projets par
 `tools/import_translations.py` : une erreur s'y corrige plutôt dans le projet d'origine (Pontoon de Mozilla,
 Weblate, ou le dépôt du projet), pour que tous ses utilisateurs en profitent.
 
@@ -48,7 +49,8 @@ Restart %1|Redémarrer %1|Rilancià %1
 |Effacer|Squassà
 ```
 
-Corrections go in `lexicon/lexicon.tsv`. The two other files are copied from other projects by
+Corrections go in `lexicon/lexicon.tsv`. When an imported translation is wrong for a given program, the correction
+goes in `lexicon/lexicon-fixes.tsv`, which is read first. The two other files are copied from other projects by
 `tools/import_translations.py`, so a mistake there is better fixed in the original project (Mozilla's Pontoon,
 Weblate, or the project's repository), where every user of that program benefits.
 

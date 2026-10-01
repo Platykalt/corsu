@@ -35,8 +35,10 @@ après la dernière ouverture de la page. `app.py --text` donne le menu dans le 
 ## Lexique
 
 Chaque ligne d'un fichier `.tsv` de `lexicon/` s'écrit `anglais|français|corse`. L'une des deux sources peut être
-vide. Le moteur charge `lexicon-mozilla.tsv`, puis `lexicon-upstream.tsv`, puis `lexicon.tsv` ; la première
-traduction trouvée l'emporte, donc les traductions relues passent avant les autres.
+vide. Le moteur charge `lexicon-fixes.tsv`, puis `lexicon-mozilla.tsv`, puis `lexicon-upstream.tsv`, puis `lexicon.tsv` ;
+la première traduction trouvée l'emporte. Les traductions relues passent donc avant les autres, et
+`lexicon-fixes.tsv` contient les quelques corrections qui doivent l'emporter sur une traduction importée (un mot
+qui a un autre sens dans Discord, par exemple).
 
 Les variables sont reconnues par leur position : une seule ligne `Restart %1|Redémarrer %1|Rilancià %1` couvre aussi
 `Redémarrer { -brand-short-name }` dans Firefox et `Redémarrer $1` dans Chrome. Le moteur refuse une traduction qui

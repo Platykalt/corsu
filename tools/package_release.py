@@ -36,7 +36,7 @@ def collect(manifest):
         raise RuntimeError('Build the custom Vencord plugin first.')
     # The dictionary is compiled into the bundle, so a stale build ships old Discord labels.
     build = min(path.stat().st_mtime for path in (ROOT / 'Vencord/dist').glob('*.js'))
-    stale = [name for name in ('lexicon/lexicon.tsv', 'lexicon/lexicon-mozilla.tsv', 'lexicon/lexicon-upstream.tsv',
+    stale = [name for name in ('lexicon/lexicon.tsv', 'lexicon/lexicon-fixes.tsv', 'lexicon/lexicon-mozilla.tsv', 'lexicon/lexicon-upstream.tsv',
                                'src/discord-plugin/index.ts', 'src/discord-plugin/translate.ts')
              if (ROOT / name).stat().st_mtime > build]
     if stale:

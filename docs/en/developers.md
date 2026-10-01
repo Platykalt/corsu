@@ -34,8 +34,10 @@ shows its output. The server stops ten minutes after the page was last open. `ap
 ## Lexicon
 
 Each line of a `.tsv` file in `lexicon/` is `English|French|Corsican`. Either source may be empty. The engine
-loads `lexicon-mozilla.tsv`, then `lexicon-upstream.tsv`, then `lexicon.tsv`; the first translation found for a
-label wins, so reviewed translations take precedence over drafts.
+loads `lexicon-fixes.tsv`, then `lexicon-mozilla.tsv`, then `lexicon-upstream.tsv`, then `lexicon.tsv`; the first
+translation found for a label wins. Reviewed translations therefore take precedence over drafts, and
+`lexicon-fixes.tsv` holds the few corrections that must beat an imported translation (for example a word that means
+something else in Discord).
 
 Placeholders are matched by position: one row `Restart %1|Redémarrer %1|Rilancià %1` also covers
 `Redémarrer { -brand-short-name }` in Firefox and `Redémarrer $1` in Chrome. The engine refuses a translation

@@ -107,7 +107,7 @@ def stale_build(source):
         return True
     built = min(path.stat().st_mtime for path in builds)
     return any((ROOT / name).stat().st_mtime > built
-               for name in ('lexicon/lexicon.tsv', 'lexicon/lexicon-mozilla.tsv', 'lexicon/lexicon-upstream.tsv',
+               for name in ('lexicon/lexicon.tsv', 'lexicon/lexicon-fixes.tsv', 'lexicon/lexicon-mozilla.tsv', 'lexicon/lexicon-upstream.tsv',
                             'src/discord-plugin/index.ts', 'src/discord-plugin/translate.ts'))
 
 

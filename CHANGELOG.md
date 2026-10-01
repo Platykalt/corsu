@@ -1,5 +1,13 @@
 # Changelog
 
+## 0.13.0 (2026-10-01)
+
+- Discord: about 8,500 more interface labels in Corsican. Discord's own French text was read from the app and
+  translated for Corsu with a shared glossary (canale for a channel, servore, filu, mintuvata…). 96% of Discord's
+  short labels are now covered, up from about a quarter.
+- New `lexicon/lexicon-fixes.tsv`, read before the imported translations, for the few that are wrong in context:
+  Forum, Share your screen, Disable and Off no longer show unrelated or adjective forms.
+
 ## 0.12.0 (2026-10-01)
 
 - Firefox: Google pages load as fast as before. The Google module now carries only Google's own labels (11 KB instead
