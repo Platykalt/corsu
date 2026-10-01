@@ -57,8 +57,7 @@ stays in French.
 
 Corsu has about 77,000 translated phrases. About 13,000 of them come from other free software, most of them
 translated by Patriccollu di Santa Maria è Sichè: Firefox for Android and iOS, Thunderbird, VLC, Audacity,
-Notepad++ and others. The rest were written for Corsu and follow his vocabulary. They have not all been checked
-by a Corsican speaker yet.
+Notepad++ and others. The rest were written for Corsu and follow his vocabulary.
 
 If you see a wrong or clumsy translation, please [open an issue](https://github.com/Platykalt/corsu/issues/new?template=translation.yml)
 with the text and where you saw it. [CONTRIBUTING.md](CONTRIBUTING.md) explains how to correct the files
