@@ -19,7 +19,9 @@ it from archive.mozilla.org and checks it against the checksums Mozilla publishe
 copy included in the release. The Corsican translations are applied on top of the French text.
 
 The copy also tells websites that you prefer Corsican, then French. Sites that offer Corsican, Google among them,
-then show it.
+then show it. Google's own Corsican interface is incomplete and falls back to French or English on some buttons and
+menus; on Google's pages the copy completes those labels with the Corsu lexicon. Search results and other page
+text are never changed, and no other website is touched.
 
 When Firefox updates, the copy is rebuilt the next time you open it. The copy's own updater is turned off for
 that reason. Firefox's security settings and add-on checks are left as they are.

@@ -193,6 +193,18 @@ class TranslationTests(unittest.TestCase):
                 self.assertFalse(corsu.is_disabled('terminal'))
                 self.assertTrue(corsu.is_disabled('discord'))
 
+    def test_google_labels_module_is_installed_in_the_firefox_copy(self):
+        with tempfile.TemporaryDirectory() as directory:
+            resources = Path(directory)
+            corsu.google_labels(resources)
+            config = (resources / 'corsu.cfg').read_text(encoding='utf-8')
+            self.assertTrue(config.startswith('//'))
+            self.assertIn('"google.fr"', config)
+            self.assertNotIn('HOSTS', config)
+            self.assertTrue((resources / 'corsu/CorsuChild.sys.mjs').exists())
+            dictionary = (resources / 'corsu/dictionary.mjs').read_text(encoding='utf-8')
+            self.assertTrue(dictionary.startswith('export const words = {'))
+
     def test_gettext_context_and_fallback(self):
         data = corsu.make_mo({'': 'Content-Type: text/plain; charset=UTF-8\nLanguage: co\n',
                               'Save': 'Arregistrà', 'button\x04Close': 'Chjode'})

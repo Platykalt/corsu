@@ -11,6 +11,8 @@
 | Application Discord | Testé en partie | Testé en partie | Testé en partie, utilisé tous les jours |
 | Vesktop | Prévu | Prévu | Prévu |
 | Discord dans un navigateur | Non pris en charge | Non pris en charge | Non pris en charge |
+| Safari | | Impossible | |
+| Boutons et menus de Google (dans Firefox Corsu) | Essayé à la main | Prévu | Essayé à la main |
 | Bureau KDE Plasma et programmes KDE | | | Utilisé tous les jours |
 | Programmes GTK et commandes du terminal | | | Prévu |
 
@@ -18,7 +20,8 @@
 **Testé en partie** : la CI vérifie que Corsu modifie Discord puis le restaure, sans ouvrir Discord lui-même.
 **Utilisé tous les jours** : un locuteur corse s'en sert chaque jour. **Prévu** : le code existe mais personne ne l'a
 encore vérifié sur ce système ; dites-nous comment ça se passe. **Non pris en charge** : Corsu ne le fait pas,
-en général parce que le système l'empêche.
+en général parce que le système l'empêche. Safari fait partie de macOS : Apple le protège et ne propose que les
+langues de macOS, où le corse n'existe pas.
 
 ## Téléphones
 

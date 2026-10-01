@@ -1,5 +1,12 @@
 # Changelog
 
+## 0.9.1 (2026-10-01)
+
+- Firefox: on Google's pages, the buttons and menus that Google's own Corsican interface leaves in French or English
+  ("Voir plus", "Search for Images", "Paramètres de recherche"…) are completed in Corsican. Search results are not
+  changed, and no other website is touched.
+- Safari added to the compatibility table: it cannot be translated, as it is part of macOS.
+
 ## 0.9.0 (2026-10-01)
 
 - Corsican word prediction and spelling correction for the Keyman keyboard (Android, iPhone, and computers):

@@ -11,6 +11,8 @@
 | Discord desktop app | Partly tested | Partly tested | Partly tested, used daily |
 | Vesktop | Expected | Expected | Expected |
 | Discord in a browser | Not supported | Not supported | Not supported |
+| Safari | | Not possible | |
+| Google's buttons and menus (in Firefox Corsu) | Tried by hand | Expected | Tried by hand |
 | KDE Plasma desktop and KDE programs | | | Used daily |
 | GTK programs and terminal commands | | | Expected |
 
@@ -18,7 +20,8 @@
 in Corsican. **Partly tested** means the CI checks that Corsu patches Discord and restores it, but does not open
 Discord itself. **Used daily** means a Corsican speaker uses it every day. **Expected** means the code is there but
 nobody has checked it on that system yet: please report how it goes. **Not supported** means Corsu does not do it,
-usually because the system prevents it.
+usually because the system prevents it. Safari is part of macOS: Apple protects it and only offers the
+languages of macOS, which does not include Corsican.
 
 ## Phones
 

@@ -531,7 +531,8 @@ def firefox_runtime():
     app_version = install.version()
     resources = install.root / install.resources
     fingerprint = hashlib.sha256(b''.join(path.read_bytes() for path in engine.LEXICONS if path.exists())
-                                 + Path(__file__).read_bytes())
+                                 + Path(__file__).read_bytes()
+                                 + b''.join(path.read_bytes() for path in sorted((SRC / 'firefox').glob('*'))))
     for file in ('omni.ja', 'browser/omni.ja', 'application.ini', 'platform.ini'):
         if (resources / file).exists():
             fingerprint.update((resources / file).read_bytes())
@@ -596,9 +597,14 @@ def firefox_runtime():
         # Keep the normal profile and extension signature checks; do not relax security.
         prefs = app / install.resources / 'defaults/pref/corsu.js'
         prefs.parent.mkdir(parents=True, exist_ok=True)
-        # Websites that offer Corsican (Google among them) use it first, then French.
+        # Websites that offer Corsican (Google among them) use it first, then French. The autoconfig file
+        # completes Google's own Corsican interface; it exists only in this copy of Firefox.
         prefs.write_text(f'pref("intl.locale.requested", "{locale}");\n'
-                         'pref("intl.accept_languages", "co, fr, en-US, en");\n', encoding='utf-8')
+                         'pref("intl.accept_languages", "co, fr, en-US, en");\n'
+                         'pref("general.config.filename", "corsu.cfg");\n'
+                         'pref("general.config.obscure_value", 0);\n'
+                         'pref("general.config.sandbox_enabled", false);\n', encoding='utf-8')
+        google_labels(app / install.resources)
         # Corsu rebuilds this copy when the system Firefox updates; its own updater would undo the translation.
         policies_path = app / install.resources / 'distribution/policies.json'
         policies = json.loads(policies_path.read_text(encoding='utf-8')) if policies_path.exists() else {}
@@ -619,6 +625,23 @@ def firefox_runtime():
     finally:
         if fr:
             fr.close()
+
+
+GOOGLE_DOMAINS = ('google.com', 'google.fr', 'google.it', 'google.be', 'google.ch', 'google.ca', 'google.co.uk',
+                  'google.de', 'google.es', 'google.pt', 'google.com.br')
+
+
+def google_labels(resources):
+    """Install the module that puts Corsican on Google's buttons and menus, where Google's own Corsican
+    interface falls back to French or English. Search results are left alone."""
+    config = (SRC / 'firefox/corsu.cfg').read_text(encoding='utf-8').replace('HOSTS', json.dumps(list(GOOGLE_DOMAINS)))
+    (resources / 'corsu.cfg').write_text(config, encoding='utf-8')
+    module = resources / 'corsu'
+    module.mkdir(exist_ok=True)
+    shutil.copy2(SRC / 'firefox/CorsuChild.sys.mjs', module / 'CorsuChild.sys.mjs')
+    labels = {key: value for key, value in WORDS.items() if len(key) <= 60}
+    (module / 'dictionary.mjs').write_text('export const words = ' + json.dumps(labels, ensure_ascii=False, separators=(',', ':'))
+                                           + ';\n', encoding='utf-8')
 
 
 def firefox_executable(runtime):

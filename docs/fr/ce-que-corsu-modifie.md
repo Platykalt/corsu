@@ -20,7 +20,9 @@ sur archive.mozilla.org et le vérifie avec les sommes de contrôle publiées pa
 copie fournie avec la version de Corsu. Les traductions corses sont ensuite appliquées par-dessus le texte français.
 
 La copie indique aussi aux sites web que vous préférez le corse, puis le français. Les sites qui proposent le corse,
-dont Google, l'affichent alors.
+dont Google, l'affichent alors. L'interface corse de Google est incomplète et laisse certains boutons et menus en
+français ou en anglais ; sur les pages de Google, la copie complète ces libellés avec le lexique de Corsu. Les
+résultats de recherche et le reste du texte des pages ne sont jamais modifiés, et aucun autre site n'est touché.
 
 Quand Firefox se met à jour, la copie est reconstruite à la prochaine ouverture. Le système de mise à jour propre à
 la copie est donc coupé. Les réglages de sécurité de Firefox et la vérification des extensions ne changent pas.

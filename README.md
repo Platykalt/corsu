@@ -55,7 +55,7 @@ de le faire et garde une copie de chaque fichier modifié. Le raccourci Corsu Se
 logiciel, de mettre une partie en pause (le terminal pendant une heure, par exemple) ou de tout retirer.
 
 Discord : réglez sa langue sur Français ou English, voir [Discord en corse](docs/fr/discord.md).
-Google en corse : choisissez Corsu dans la langue de votre compte Google, voir [ce guide](docs/fr/compatibilite.md#google-et-les-autres-sites).
+Google en corse : choisissez Corsu dans la langue de votre compte Google, voir [ce guide](docs/fr/compatibilite.md#google-et-les-autres-sites). Dans Firefox Corsu, les boutons que Google laisse en français ou en anglais sont complétés en corse.
 Téléphones : [Android](docs/fr/telephone/android.md), [iPhone](docs/fr/telephone/iphone.md). Prédiction et correction des mots corses pour le clavier Keyman : [corsu-keyboard.kmp](https://github.com/Platykalt/corsu/releases/latest/download/corsu-keyboard.kmp).
 Ce qui est vérifié et ce qui est seulement prévu : [Ce qui marche, et où](docs/fr/compatibilite.md).
 
@@ -120,7 +120,7 @@ doing it and keeps a copy of every file it changes. The Corsu Setup shortcut the
 (the terminal for an hour, for example) or remove everything.
 
 Discord: set its language to Français or English, see [Discord in Corsican](docs/en/discord.md).
-Google in Corsican: choose Corsu as your Google account language, see [this guide](docs/en/compatibility.md#google-and-other-websites).
+Google in Corsican: choose Corsu as your Google account language, see [this guide](docs/en/compatibility.md#google-and-other-websites). In Firefox Corsu, the buttons Google leaves in French or English are completed in Corsican.
 Phones: [Android](docs/en/phone/android.md), [iPhone](docs/en/phone/iphone.md). Corsican word prediction and correction for the Keyman keyboard: [corsu-keyboard.kmp](https://github.com/Platykalt/corsu/releases/latest/download/corsu-keyboard.kmp).
 What is verified and what is only expected: [What works where](docs/en/compatibility.md).
 
