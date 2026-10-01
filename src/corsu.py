@@ -648,6 +648,19 @@ GOOGLE_DOMAINS = ('google.com', 'google.fr', 'google.it', 'google.be', 'google.c
                   'google.de', 'google.es', 'google.pt', 'google.com.br')
 
 
+def lexicon_section(name):
+    """Source texts of the `# <name>:` section of lexicon.tsv, which runs to the next `# …:` heading."""
+    keys, inside = [], False
+    for line in LEXICON.read_text(encoding='utf-8').splitlines():
+        if line.startswith('# '):
+            inside = line.startswith(f'# {name}:')
+            continue
+        fields = line.split('|')
+        if inside and len(fields) == 3:
+            keys.extend(engine.normalize(key.strip()) for key in fields[:2] if key.strip())
+    return keys
+
+
 def google_labels(resources):
     """Write the autoconfig file that starts the Google module (kept in browser/omni.ja, see google_modules)."""
     config = (SRC / 'firefox/corsu.cfg').read_text(encoding='utf-8').replace('HOSTS', json.dumps(list(GOOGLE_DOMAINS)))
@@ -662,11 +675,7 @@ def google_modules():
     for line in (SRC / 'firefox/google-labels.txt').read_text(encoding='utf-8').splitlines():
         if line and not line.startswith('#') and WORDS.get(line, line) != line:
             labels[line] = WORDS[line]
-    section = LEXICON.read_text(encoding='utf-8').split('\n# Google:', 1)
-    for line in (section[1].splitlines()[1:] if len(section) == 2 else []):
-        fields = line.split('|')
-        if len(fields) == 3 and not line.startswith('#'):
-            labels.update({key: WORDS.get(key, fields[2]) for key in fields[:2] if key})
+    labels.update({key: WORDS[key] for key in lexicon_section('Google') if key in WORDS})
     return {'CorsuChild.sys.mjs': (SRC / 'firefox/CorsuChild.sys.mjs').read_bytes(),
             'dictionary.mjs': ('export const words = ' + json.dumps(labels, ensure_ascii=False, separators=(',', ':'))
                                + ';\n').encode('utf-8')}
@@ -688,7 +697,9 @@ def generate():
     # Discord shows short interface labels: leave out long sentences and terminal messages, which only
     # make the plugin heavier.
     terminal = re.compile(r'%[-0-9.]*[sdlucfx]|(^|\s)--?\w|\\n|\t')
-    words = {key: value for key, value in WORDS.items() if len(key) <= 60 and not terminal.search(key)}
+    words = {key: value for key, value in WORDS.items() if len(key) <= 40 and not terminal.search(key)}
+    # Sentences written for Discord are kept whatever their length.
+    words.update({key: WORDS[key] for key in lexicon_section('Discord') if key in WORDS})
     (plugin / 'dictionary.json').write_text(json.dumps(words, ensure_ascii=False, separators=(',', ':')), encoding='utf-8')
     for name in ('index.ts', 'translate.ts'):
         shutil.copy2(SRC / 'discord-plugin' / name, plugin / name)

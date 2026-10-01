@@ -1,5 +1,12 @@
 # Changelog
 
+## 0.14.0 (2026-10-01)
+
+- Discord: about 5,600 longer sentences in Corsican too (settings explanations, warnings, dialogs). 96% of Discord's
+  plain text is now covered, labels and sentences together.
+- The Discord plugin is lighter (8.2 MB instead of 9.3 MB): it carries short general labels plus every text written
+  for Discord, instead of every label up to 60 characters.
+
 ## 0.13.0 (2026-10-01)
 
 - Discord: about 8,500 more interface labels in Corsican. Discord's own French text was read from the app and
