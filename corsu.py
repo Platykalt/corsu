@@ -74,6 +74,36 @@ def ftl_units(text):
         yield unit
 
 
+def ftl_messages(text):
+    """Split a Fluent file into (id, block) pairs; comments and blanks get id None."""
+    block, ident = [], None
+    for line in text.splitlines(keepends=True):
+        start = re.match(r'^(-?[A-Za-z][\w-]*)\s*=', line)
+        if start or (line.strip() and not line[0].isspace()) or (ident is None and block and not line.strip()):
+            if block:
+                yield ident, ''.join(block)
+            block, ident = [], start[1] if start else None
+        block.append(line)
+    if block:
+        yield ident, ''.join(block)
+
+
+def merge_ftl(english, french):
+    """Keep the English file's structure and use each French message whose id still exists,
+    so a French pack from another Firefox version never drops or breaks messages."""
+    known = {ident: block for ident, block in ftl_messages(french) if ident}
+    output, merged = [], 0
+    for ident, block in ftl_messages(english):
+        if ident in known:
+            replacement = known[ident]
+            # Trailing blank lines belong to the English layout.
+            tail = block[len(block.rstrip('\n')):]
+            block = replacement.rstrip('\n') + (tail or '\n')
+            merged += 1
+        output.append(block)
+    return ''.join(output), merged
+
+
 def patch_ftl(text):
     """Translate literal Fluent values, single line or multiline. Never identifiers,
     selectors, placeables or access keys."""
@@ -313,11 +343,9 @@ def firefox_runtime():
     version = configparser.ConfigParser()
     version.read(source / 'application.ini')
     app_version = version['App']['Version']
-    use_fr = False
     fr = zipfile.ZipFile(fr_path) if fr_path.exists() else None
-    if fr:
-        maximum = json.loads(fr.read('manifest.json'))['browser_specific_settings']['gecko']['strict_max_version']
-        use_fr = maximum.split('.')[0] == app_version.split('.')[0]
+    # Messages are merged by id, so a French pack from another version is still usable.
+    use_fr = fr is not None
     fingerprint = hashlib.sha256(LEXICON.read_bytes() + Path(__file__).read_bytes())
     for file in ('omni.ja', 'browser/omni.ja', 'application.ini', 'platform.ini'):
         fingerprint.update((source / file).read_bytes())
@@ -343,7 +371,9 @@ def firefox_runtime():
                     if info.filename.endswith('.ftl') and '/en-US/' in info.filename:
                         french_name = ('browser/' if name.startswith('browser/') else '') + info.filename.replace('/en-US/', '/fr/')
                         if use_fr and french_name in fr.namelist():
-                            data = fr.read(french_name)
+                            data, merged = merge_ftl(data.decode(), fr.read(french_name).decode())
+                            data = data.encode()
+                            stats['french_messages'] = stats.get('french_messages', 0) + merged
                         patched, count = patch_ftl(data.decode())
                         data = patched.encode()
                         stats['translated_values'] += count

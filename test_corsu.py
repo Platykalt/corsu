@@ -111,6 +111,13 @@ class TranslationTests(unittest.TestCase):
         self.assertIn('.accesskey = S', translated)
         self.assertIn('count = { $count } files', translated)
 
+    def test_french_pack_from_other_version_merges_by_message(self):
+        english = '# note\n\nkept = New only\n\nshared = Hello\n    .title = Hi\n\nfooter = Bye\n'
+        french = 'shared = Bonjour\n    .title = Salut\nremoved = Ancien\nfooter = Au revoir\n'
+        merged, count = corsu.merge_ftl(english, french)
+        self.assertEqual(count, 2)
+        self.assertEqual(merged, '# note\n\nkept = New only\n\nshared = Bonjour\n    .title = Salut\n\nfooter = Au revoir\n')
+
     def test_gettext_context_and_fallback(self):
         data = corsu.make_mo({'': 'Content-Type: text/plain; charset=UTF-8\nLanguage: co\n',
                               'Save': 'Salvà', 'button\x04Close': 'Chjode'})
