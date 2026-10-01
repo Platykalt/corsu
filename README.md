@@ -35,7 +35,7 @@ personne à qui le parler :
 
 - [Sapienzia](https://www.sapienzia.io) : traduction, dictionnaire, conjugaison et assistant de conversation en corse ;
 - [Astutu](https://astutu.corsica) : assistant qui répond en corse ;
-- [LIV](https://liv.corsica) : Liviu pour les adultes, Livia pour les enfants.
+- [LIV](https://liv.corsica) : une intelligence artificielle qui parle corse.
 
 La version longue : [Pourquoi Corsu](docs/fr/pourquoi-corsu.md).
 
@@ -99,7 +99,7 @@ nobody around to speak it with:
 
 - [Sapienzia](https://www.sapienzia.io): translation, dictionary, conjugation and a conversation assistant in Corsican;
 - [Astutu](https://astutu.corsica): an assistant that answers in Corsican;
-- [LIV](https://liv.corsica): Liviu for adults, Livia for children.
+- [LIV](https://liv.corsica): an artificial intelligence that speaks Corsican.
 
 The long version: [Why Corsu](docs/en/why-corsu.md).
 

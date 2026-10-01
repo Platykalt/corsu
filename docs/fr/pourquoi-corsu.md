@@ -48,4 +48,4 @@ progresser :
 - [Sapienzia](https://www.sapienzia.io) : traduction français-corse, dictionnaire collaboratif, conjugaison et
   assistant conversationnel.
 - [Astutu](https://astutu.corsica) : assistant conversationnel qui répond en corse.
-- [LIV](https://liv.corsica) : Liviu pour les adultes, Livia pour les enfants.
+- [LIV](https://liv.corsica) : une intelligence artificielle qui parle corse.

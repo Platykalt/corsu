@@ -46,4 +46,4 @@ If you have nobody to speak Corsican with, these tools let you read, write and h
 - [Sapienzia](https://www.sapienzia.io): French-Corsican translation, a shared dictionary, conjugation and a
   conversational assistant.
 - [Astutu](https://astutu.corsica): a conversational assistant that answers in Corsican.
-- [LIV](https://liv.corsica): Liviu for adults, Livia for children.
+- [LIV](https://liv.corsica): an artificial intelligence that speaks Corsican.
