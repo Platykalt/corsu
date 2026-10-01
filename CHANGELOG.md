@@ -1,5 +1,14 @@
 # Changelog
 
+## 0.7.0 (2026-10-01)
+
+- About 18,700 new phrases for the applications people use on Linux: Krita, Kleopatra, Lutris, Transmission,
+  Meld, Haruna, Solaar, pavucontrol and the rest of the KDE programs, plus GTK and GLib dialogs, PipeWire and
+  NetworkManager.
+- The README, the guides and the installer messages were rewritten in plainer language.
+- The installer says in plain words what it will change before asking.
+- CI now also tries the one-line installers against each published release.
+
 ## 0.6.0 (2026-10-01)
 
 - Corsican punctuation now follows the reviewed translations: a space before `:`, `?`, `!` and `;`.

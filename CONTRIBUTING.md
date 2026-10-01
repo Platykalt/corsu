@@ -1,6 +1,6 @@
 # Contributing
 
-The most useful help is checking translations. Most of the 60,000 phrases have not been read by a Corsican
+The most useful help is checking translations. Most of the 77,000 phrases have not been read by a Corsican
 speaker yet.
 
 To report a mistake, [open an issue](https://github.com/Platykalt/corsu/issues/new?template=translation.yml).

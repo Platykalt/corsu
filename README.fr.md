@@ -60,7 +60,7 @@ corse reste en français.
 
 ## Les traductions
 
-Corsu compte environ 60 000 phrases traduites. Près de 13 000 viennent d'autres logiciels libres, traduits pour
+Corsu compte environ 77 000 phrases traduites. Près de 13 000 viennent d'autres logiciels libres, traduits pour
 la plupart par Patriccollu di Santa Maria è Sichè : Firefox pour Android et iOS, Thunderbird, VLC, Audacity,
 Notepad++, entre autres. Les autres ont été écrites pour Corsu en suivant son vocabulaire. Elles n'ont pas encore
 toutes été relues par un locuteur.
