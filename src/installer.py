@@ -109,7 +109,7 @@ def prepare_build():
     if not shutil.which('node'):
         if not (source / 'dist/patcher.js').exists():
             raise RuntimeError('Building requires Node.js >=22. Use a release archive to install without building.')
-        print('Warning: the Vencord bundle is older than the lexicon; Discord keeps the previous labels.', flush=True)
+        print('Note: the Discord plugin was built before the latest translations; Discord keeps the older ones.', flush=True)
         return
     if not (source / 'node_modules/esbuild').exists():
         if not shutil.which('pnpm'):
@@ -162,7 +162,7 @@ def vencord_installer():
     if corsu.PLATFORM == 'linux' and platform.machine().lower() not in ('x86_64', 'amd64'):
         raise RuntimeError('The official Discord installer supports Linux x86_64. Use Vesktop on this architecture.')
     if not binary.exists():
-        print('Downloading the pinned official Vencord installer...', flush=True)
+        print('Downloading the official Vencord installer...', flush=True)
         with urllib.request.urlopen(manifest['installer_base_url'] + entry['file'], timeout=60) as response:
             downloaded = response.read()
         if hashlib.sha256(downloaded).hexdigest() != entry['sha256']:
@@ -257,14 +257,13 @@ def main(argv=None):
     if args.disable and args.enable:
         parser.error('Choose either --disable or --enable.')
     if args.disable or args.enable:
-        action = 'Switch Corsican on' if args.enable else 'Switch Corsican off, keeping catalogs and builds'
-        print(f'{action} for Firefox, Discord and Plasma.')
+        print('Switching Corsican back on.' if args.enable else 'Switching back to French. Corsu Setup can turn Corsican on again.')
         if args.dry_run:
             return 0
         corsu.enable() if args.enable else corsu.disable()
         return 0
     if args.uninstall:
-        print('Restore managed files/settings, preserving later user edits. Retain source and local builds.')
+        print('This puts back the original files and settings. Files you changed yourself since are left alone.')
         if args.dry_run:
             return 0
         if not args.yes and input('Uninstall Corsu? [y/N] ').strip().lower() not in ('y', 'yes'):
@@ -279,44 +278,42 @@ def main(argv=None):
     if args.components is None and available and not (args.yes or args.dry_run) and sys.stdin.isatty():
         components = choose(available)
         if not components:
-            print('Nothing selected; no changes made.')
+            print('Nothing selected, nothing was changed.')
             return 0
     if not components:
-        parser.error('No supported applications detected. Install Firefox, native Discord/Vesktop or KDE Plasma first.')
+        parser.error('Corsu found nothing to translate here. Install Firefox, a Chromium browser, Discord or KDE Plasma first.')
     for component in components:
         if component not in available and not (component == 'discord' and location and discord_archive(location).exists()):
             if component in ('desktop', 'qt') and corsu.PLATFORM != 'linux':
-                parser.error(f'{component} translates KDE Plasma and Qt on Linux; it is not available on {corsu.PLATFORM}.')
-            parser.error(f'{component} is not installed/supported here. Install it first.')
-    print(f'Corsu setup ({corsu.PLATFORM})\n')
-    print('Selected: ' + ', '.join(components))
+                parser.error(f'{component} is for KDE Plasma on Linux.')
+            parser.error(f'{component} was not found on this computer.')
+    print('Corsu will make these changes:\n')
     if 'firefox' in components:
-        launcher = {'windows': 'add a "Firefox Corsu" Start menu shortcut', 'macos': 'add "Firefox Corsu" to ~/Applications'}
-        print('• Build a local Firefox copy, translate its interface, and '
-              + launcher.get(corsu.PLATFORM, 'replace your user Firefox launcher') + '. Keep the existing profile.')
-    if 'desktop' in components:
-        print('• Add user KDE translation catalogs and set interface language to co:fr. A new login is required.')
-    if 'discord' in components:
-        print(f'• Patch Discord at {location} with the official Vencord installer; enable Corsu. Administrator authentication may be requested.')
-    if 'vesktop' in components:
-        print('• Point Vesktop at the custom Vencord build and enable Corsu.')
+        where = {'windows': 'a "Firefox Corsu" shortcut in the Start menu',
+                 'macos': 'a "Firefox Corsu" app in ~/Applications'}.get(corsu.PLATFORM, 'your Firefox menu entry')
+        print(f'  Firefox: make a translated copy of Firefox, opened from {where}.'
+              ' It uses your usual profile.')
     if 'chromium' in components:
         import chromium
-        names = ', '.join(browser.label for browser in chromium.browsers()) or 'none detected'
-        print(f'• Translate the French interface pack of: {names}. Each browser then shows Corsican where'
-              ' French would appear. System-wide browsers ask for administrator rights, again after browser updates.')
+        names = ', '.join(browser.label for browser in chromium.browsers()) or 'none found'
+        print(f'  {names}: replace the French language file with a Corsican one.'
+              ' Browsers installed for all users will ask for administrator rights, now and after each update.')
+    if 'discord' in components:
+        print(f'  Discord: patch {location} with the official Vencord installer and turn on the Corsu plugin.'
+              ' Vencord updates are turned off so they do not remove it.')
+    if 'vesktop' in components:
+        print('  Vesktop: use the Vencord build that includes the Corsu plugin.')
+    if 'desktop' in components:
+        print('  KDE Plasma: add Corsican translation files to your home folder and set the language to Corsican,'
+              ' with French for anything not yet translated. Log out and back in afterwards.')
     if 'qt' in components:
-        print(f'• Build Corsican Qt catalogs and copy them into {corsu.QT_TRANSLATIONS}, so Qt dialog'
-              ' buttons and file choosers are translated. Administrator authentication is requested.')
-    if {'discord', 'vesktop'} & set(components):
-        print('• Disable Vencord automatic updates to protect the custom plugin. Rebuild Corsu manually for updates.')
-        print('• Use bundled Vencord when available; otherwise download/build the pinned source and dependencies. The official installer may check GitHub for updates.')
-    print(f'• Save backups under {corsu.DATA}. Uninstall restores managed settings and preserves unrelated app settings.')
-    print('Translation coverage is partial. Untranslated labels retain the original language. Messages, websites and typed text are preserved.\n')
+        print(f'  Qt dialogs: copy Corsican files into {corsu.QT_TRANSLATIONS} (asks for your password).')
+    print(f'\nA copy of every file Corsu changes is kept in {corsu.DATA}, and Corsu Setup can undo everything.')
+    print('Text without a Corsican translation yet stays in French. Websites and messages are never changed.\n')
     if args.dry_run:
         return 0
-    if not args.yes and input('Accept these changes and install? [y/N] ').strip().lower() not in ('y', 'yes'):
-        print('Cancelled; no changes made.')
+    if not args.yes and input('Go ahead? [y/N] ').strip().lower() not in ('y', 'yes'):
+        print('Nothing was changed.')
         return 0
     target = deploy_release()
     if target != ROOT:
@@ -339,11 +336,9 @@ def main(argv=None):
     if corsu.PLATFORM == 'linux' and shutil.which('update-desktop-database') and applications.is_dir():
         # Only refreshes the menu cache; menus still update on the next login when it fails.
         subprocess.run(['update-desktop-database', str(applications)], check=False)
-    python = 'py -3' if corsu.PLATFORM == 'windows' else 'python3'
-    print('\nInstalled. Fully quit and reopen Firefox and Discord/Vesktop.'
-          + (' Log out and back in for Plasma.' if 'desktop' in components else '') + '\n'
-          f'Health: {python} corsu.py status\nSwitch off: {python} installer.py --disable\n'
-          f'Switch on: {python} installer.py --enable\nUninstall: {python} installer.py --uninstall')
+    print('\nDone. Close Firefox, your browsers and Discord completely, then open them again.'
+          + (' Log out and back in for the Plasma desktop.' if 'desktop' in components else '')
+          + '\nTo add programs, go back to French or uninstall, open Corsu Setup.')
     return 0
 
 
@@ -357,5 +352,5 @@ if __name__ == '__main__':
         print('\nNo answer received; nothing was changed.', file=sys.stderr)
         raise SystemExit(1)
     except (RuntimeError, OSError, subprocess.CalledProcessError) as error:
-        print(f'Installation stopped: {error}\nManaged changes can be restored with: python3 installer.py --uninstall', file=sys.stderr)
+        print(f'Corsu stopped: {error}\nAnything already changed can be undone with Corsu Setup, or: python3 src/installer.py --uninstall', file=sys.stderr)
         raise SystemExit(1)

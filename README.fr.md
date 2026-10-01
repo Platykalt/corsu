@@ -1,45 +1,40 @@
 # Corsu
 
-Corsu met en corse l'interface des logiciels de tous les jours : Firefox, Chrome et Opera GX, Discord, et le
-bureau KDE Plasma. Il fonctionne sous Windows, macOS et Linux, et on peut le désactiver ou le désinstaller à tout
-moment.
+Corsu traduit en corse les menus et les réglages de Firefox, Chrome, Opera GX et Discord. Sous Linux, il
+traduit aussi le bureau KDE Plasma. Il fonctionne sous Windows, macOS et Linux, et on peut revenir au français
+à tout moment.
 
-**Télécharger :**
-[Windows](https://github.com/Platykalt/corsu/releases/latest/download/corsu-windows.zip) ·
-[macOS](https://github.com/Platykalt/corsu/releases/latest/download/corsu-macos.tar.gz) ·
-[Linux](https://github.com/Platykalt/corsu/releases/latest/download/corsu-linux.tar.gz)
+[English version](README.md)
 
-[Read in English](README.md)
+## Télécharger
 
-## Installer sous Windows
+| | |
+| --- | --- |
+| Windows | [corsu-windows.zip](https://github.com/Platykalt/corsu/releases/latest/download/corsu-windows.zip) |
+| macOS | [corsu-macos.tar.gz](https://github.com/Platykalt/corsu/releases/latest/download/corsu-macos.tar.gz) |
+| Linux | [corsu-linux.tar.gz](https://github.com/Platykalt/corsu/releases/latest/download/corsu-linux.tar.gz) |
 
-1. Téléchargez [corsu-windows.zip](https://github.com/Platykalt/corsu/releases/latest/download/corsu-windows.zip).
-2. Faites un clic droit sur le fichier, choisissez *Extraire tout*, puis ouvrez le dossier `corsu`.
-3. Double-cliquez sur `install.cmd`. Windows peut vous demander de confirmer l'ouverture d'un fichier téléchargé.
-4. Choisissez ce que vous voulez traduire et acceptez la liste des changements.
+Sous Windows, décompressez le fichier zip (clic droit, Extraire tout), ouvrez le dossier `corsu` et
+double-cliquez sur `install.cmd`. Windows peut vous demander si vous voulez vraiment lancer un fichier
+téléchargé. Si Python n'est pas installé, le script propose de l'installer.
 
-Corsu a besoin de Python 3.10 ou plus récent. S'il manque, `install.cmd` propose de l'installer avec `winget`.
+Sous macOS et Linux, décompressez l'archive et lancez `./install.sh` depuis le dossier `corsu`.
 
-Vous pouvez aussi installer depuis PowerShell, en une ligne :
+On peut aussi tout faire en une ligne. Dans PowerShell, sous Windows :
 
 ```powershell
 irm https://raw.githubusercontent.com/Platykalt/corsu/main/get.ps1 | iex
 ```
 
-## Installer sous macOS ou Linux
-
-Ouvrez un terminal et lancez :
+Dans un terminal, sous macOS ou Linux :
 
 ```sh
 curl -fsSL https://raw.githubusercontent.com/Platykalt/corsu/main/get.sh | sh
 ```
 
-La commande télécharge la dernière version, vérifie sa somme de contrôle SHA-256 et lance l'installeur. Vous
-pouvez aussi télécharger l'archive de votre système, l'extraire et lancer `./install.sh` dans le dossier `corsu`.
+## Utilisation
 
-## Ce que fait l'installeur
-
-Il cherche les logiciels présents sur l'ordinateur et demande lesquels traduire :
+L'installeur affiche ce qu'il a trouvé sur l'ordinateur et vous laisse choisir :
 
 ```
 Select what you want to translate:
@@ -49,63 +44,41 @@ Select what you want to translate:
 Type numbers to toggle (e.g. "2 3"), Enter to continue, q to quit:
 ```
 
-Avant de toucher à quoi que ce soit, il affiche ce qu'il va faire et attend votre accord. Il ajoute ensuite un
-raccourci **Corsu Setup** (menu Démarrer, menu des applications, ou `~/Applications` sur macOS). Ouvrez-le plus
-tard pour ajouter des logiciels, revenir au français ou tout désinstaller. L'archive téléchargée peut être
-supprimée.
+Il explique ensuite ce qu'il va modifier et attend votre accord. Fermez les logiciels avant de répondre, puis
+rouvrez-les.
 
-Fermez Firefox, Chrome et Discord avant l'installation, puis rouvrez-les. Sous Linux, déconnectez-vous et
-reconnectez-vous pour le bureau Plasma.
+L'installeur ajoute un raccourci nommé Corsu Setup. Ouvrez-le plus tard pour ajouter un logiciel, revenir au
+français ou retirer Corsu. Il garde une copie de chaque fichier qu'il modifie : le retirer remet l'ordinateur
+dans l'état où il était.
 
-## Ce qui est traduit
+Firefox et Discord marchent sur les trois systèmes. Chrome, Opera GX, Edge, Brave et Vivaldi marchent sous
+Windows et Linux ; ils ne sont pas encore pris en charge sur macOS. [docs/components.md](docs/components.md)
+détaille ce que Corsu change pour chaque logiciel.
 
-| Logiciel | Windows | macOS | Linux |
-| --- | --- | --- | --- |
-| Firefox | oui | oui | oui |
-| Chrome, Opera, Opera GX, Edge, Brave, Vivaldi | oui | pas encore | oui |
-| Discord (avec Vencord) et Vesktop | oui | oui | oui |
-| Bureau KDE Plasma et applications Qt | | | oui |
-
-Seule l'interface est traduite : menus, boutons, paramètres, pages d'erreur. Les sites web, les messages et ce que
-vous tapez ne changent pas. Corsu fonctionne hors ligne et ne lit jamais vos messages, profils ou documents. Un
-libellé qui n'a pas encore de traduction corse reste en français.
-
-[docs/components.md](docs/components.md) détaille ce que chaque partie modifie sur l'ordinateur.
+Seul le logiciel est traduit, jamais les sites web ni les messages. Le texte qui n'a pas encore de traduction
+corse reste en français.
 
 ## Les traductions
 
-Le lexique de Corsu compte environ 50 000 entrées. Plus de 12 000 sont des traductions relues, faites pour la
-plupart par Patriccollu di Santa Maria è Sichè pour Firefox, Thunderbird, VLC, Audacity, Notepad++ et d'autres
-logiciels libres ([lexicon/](lexicon/)). Le reste est un brouillon qui suit le même vocabulaire et doit encore
-être relu par des locuteurs.
+Corsu compte environ 60 000 phrases traduites. Près de 13 000 viennent d'autres logiciels libres, traduits pour
+la plupart par Patriccollu di Santa Maria è Sichè : Firefox pour Android et iOS, Thunderbird, VLC, Audacity,
+Notepad++, entre autres. Les autres ont été écrites pour Corsu en suivant son vocabulaire. Elles n'ont pas encore
+toutes été relues par un locuteur.
 
-Si vous voyez une erreur, ouvrez un ticket ou corrigez la ligne vous-même : voir [CONTRIBUTING.md](CONTRIBUTING.md).
+Si vous voyez une traduction fausse ou maladroite, [ouvrez un ticket](https://github.com/Platykalt/corsu/issues/new?template=translation.yml)
+avec le texte et l'endroit où vous l'avez vu. [CONTRIBUTING.md](CONTRIBUTING.md) explique comment corriger les
+fichiers directement.
 
 ## Téléphones
 
-Apple, Google et Samsung ne laissent pas un projet extérieur traduire leur système, mais plusieurs applications
-parlent déjà corse. [docs/phones.md](docs/phones.md) explique comment les utiliser sur iPhone ou Android.
+Apple, Google et Samsung choisissent les langues de leurs téléphones, et le corse n'en fait pas encore partie.
+Certaines applications sont pourtant déjà en corse, dont Firefox. [docs/phones.md](docs/phones.md) explique
+comment s'en servir.
 
-## Désactiver ou désinstaller
+## Autres documents
 
-Ouvrez **Corsu Setup**, ou lancez l'une de ces commandes depuis le dossier `corsu` (`py -3` au lieu de `python3`
-sous Windows) :
+[docs/development.md](docs/development.md) décrit le code, les tests et la publication d'une version.
+[CHANGELOG.md](CHANGELOG.md) liste les changements de chaque version.
 
-```sh
-python3 src/installer.py --disable     # retour au français, tout reste prêt pour réactiver
-python3 src/installer.py --enable
-python3 src/installer.py --uninstall   # remet les fichiers et réglages d'origine
-```
-
-Corsu garde une copie de chaque fichier qu'il modifie. Les fichiers que vous modifiez ensuite vous-même ne sont
-pas touchés.
-
-## Pour aller plus loin
-
-- [docs/components.md](docs/components.md) : ce que modifie chaque composant, et où
-- [docs/phones.md](docs/phones.md) : le corse sur iPhone et Android
-- [docs/development.md](docs/development.md) : organisation du projet, tests, publication d'une version
-- [CHANGELOG.md](CHANGELOG.md)
-
-Corsu est un logiciel libre sous [GNU GPL v3](LICENSE) ou ultérieure. Les traductions reprises d'autres projets
-gardent leur licence d'origine, indiquée dans chaque fichier de [lexicon/](lexicon/).
+Corsu est un logiciel libre, publié sous [licence GNU GPL](LICENSE), version 3 ou ultérieure. Les traductions
+reprises d'autres projets gardent leur licence, indiquée en tête de chaque fichier de [lexicon/](lexicon/).

@@ -1,52 +1,51 @@
-# Corsican on phones
+# Corsican on a phone
 
-Neither iOS nor Android can be translated by an outside project: only Apple, Google and Samsung can add a
-system language. What you can do today is use the apps that already ship a Corsican translation, most of them
-translated by Patriccollu di Santa Maria è Sichè.
+Only Apple, Google and Samsung can add a language to their phone systems, so Corsu cannot translate them. Several
+apps already include Corsican, though, mostly thanks to Patriccollu di Santa Maria è Sichè, and you can use them
+today.
 
-## iPhone and iPad
+## iPhone
 
-1. Open *Settings › General › Language & Region* and tap *Add Language…*.
-2. Choose *Corsican* (*Corsu*). Keep your current language first in the list if you want the rest of the phone
-   unchanged.
-3. Apps that include Corsican, such as Firefox and Firefox Focus, now display it. You can also pick the language
-   of a single app in *Settings › (app name) › Language*.
+Open Settings, then General, then Language & Region, and tap Add Language. Choose Corsican (Corsu). If you put it
+second in the list, the rest of the phone stays in your current language.
 
-For typing, the free [Keyman](https://apps.apple.com/app/keyman/id933676545) app has a EuroLatin keyboard that
-covers all Corsican letters. There is no Corsican spell checker or word prediction on iOS yet.
+Apps that include Corsican, Firefox and Firefox Focus for example, now show it. You can also change the language
+of one app only, in Settings, then the app's name, then Language.
 
-## Android and Samsung Galaxy
+To type in Corsican, the free [Keyman](https://apps.apple.com/app/keyman/id933676545) app has a EuroLatin keyboard
+with every letter you need. There is no Corsican spell checker on the iPhone yet.
 
-- **Keyboard:** Gboard has a Corsican keyboard. Open Gboard's settings, then *Languages › Add keyboard ›
-  Corsican*.
-- **Apps in Corsican:** Firefox, Firefox Focus, Thunderbird (and K-9 Mail), VLC, OpenTracks. VLC has its own
-  language setting; the others follow the phone's language list.
+## Android
 
-Android does not list Corsican in its language settings. You can still add it with a computer and
-[ADB](https://developer.android.com/tools/adb) (USB debugging enabled):
+Gboard, Google's keyboard, has a Corsican layout. In Gboard's settings, open Languages, tap Add keyboard and pick
+Corsican.
+
+Firefox, Firefox Focus, Thunderbird, K-9 Mail, VLC and OpenTracks include Corsican. VLC has its own language
+setting. The others follow the phone's language list, where Android does not offer Corsican. You can still add it
+from a computer with [ADB](https://developer.android.com/tools/adb), after turning on USB debugging:
 
 ```sh
 adb shell settings put system system_locales co-FR,fr-FR
 ```
 
-Restart the phone. Apps that ship Corsican use it, and everything else stays in French. To undo it, choose your
-language again in the phone's settings.
+Restart the phone afterwards. Apps that include Corsican use it, and everything else stays in French. Picking
+your language again in the phone's settings undoes it.
 
-On Android 13 and later you can also set Corsican for one app only:
+On Android 13 or later you can set Corsican for a single app instead:
 
 ```sh
 adb shell cmd locale set-app-locales org.mozilla.firefox --locales co-FR
 ```
 
-## A Corsican system language
+## The system itself
 
-The system menus themselves (One UI, Android, iOS) need the manufacturer:
+LineageOS, a free version of Android that runs on some Samsung phones, is translated by volunteers on
+[Crowdin](https://crowdin.com/project/lineageos). Sardinian, Friulian and Welsh are already there, and Corsican
+could be added the same way.
 
-- **LineageOS**, a free Android system that runs on some Samsung phones, translates through volunteers on
-  [Crowdin](https://crowdin.com/project/lineageos). Sardinian, Friulian and Welsh are already there; Corsican could
-  be added the same way.
-- **Apple and Google** have added regional languages after official requests. Slovenian came to iOS after a
-  change in Slovenian law and a public campaign; Galician and Basque came to Android after a request from the
-  Galician government.
-- Android and iOS take their date formats and language names from Unicode CLDR, where Corsican is still
-  incomplete. Completing it is a useful first step.
+Apple and Google have added regional languages before, after official requests. Apple added Slovenian once a
+Slovenian law required it and people had campaigned for it. Google added Galician and Basque to Android after the
+Galician government asked.
+
+Phones also take their date formats and language names from Unicode CLDR, where Corsican is incomplete.
+Finishing it would help any future request.

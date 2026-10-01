@@ -12,4 +12,4 @@ $expected = ([string](Invoke-RestMethod "$base/corsu-windows.zip.sha256" -UseBas
 $actual = (Get-FileHash $zip -Algorithm SHA256).Hash.ToLower()
 if ($expected -ne $actual) { throw "Checksum mismatch for corsu-windows.zip; nothing was installed." }
 Expand-Archive -Path $zip -DestinationPath $dir
-& (Join-Path $dir 'corsu\install.cmd')
+& (Join-Path $dir 'corsu\install.cmd') @args

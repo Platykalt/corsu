@@ -19,7 +19,7 @@ else
 fi
 tar xzf "$dir/$name" -C "$dir"
 # The installer asks questions: read the answers from the terminal, not from this piped script.
-if [ -r /dev/tty ]; then
+if (: </dev/tty) 2>/dev/null; then
     exec "$dir/corsu/install.sh" "$@" </dev/tty
 fi
 exec "$dir/corsu/install.sh" "$@"
