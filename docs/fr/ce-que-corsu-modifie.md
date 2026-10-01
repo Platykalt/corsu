@@ -13,7 +13,14 @@ l'installation, Corsu laisse votre version et indique où se trouve la copie d'o
 ## Firefox
 
 Corsu fait une copie de votre Firefox dans son dossier de données et traduit cette copie. Votre Firefox n'est pas
-modifié. La copie ouvre votre profil habituel : vos marque-pages, mots de passe et extensions sont là.
+modifié. La copie ouvre votre profil habituel : vos marque-pages, mots de passe, extensions, page d'accueil et
+réglages sont là, et Corsu n'en change aucun. Pour que ce soit aussi le cas quand la copie est lancée sans passer par
+Corsu (comme navigateur par défaut, par exemple), Corsu ajoute dans `profiles.ini` une ligne qui lui associe ce
+profil. Si vous choisissez Firefox Corsu comme navigateur par défaut, Corsu fait pointer ce choix vers l'entrée
+Firefox du menu, qui garde son icône. Les copies faites pour d'anciennes versions de Firefox sont supprimées.
+
+Firefox peut mettre à jour sa page Nouvel onglet séparément, dans votre profil, avec ses propres textes. Corsu
+traduit aussi ces textes à chaque ouverture.
 
 La traduction part du pack de langue français de Mozilla pour votre version exacte de Firefox. Corsu le télécharge
 sur archive.mozilla.org et le vérifie avec les sommes de contrôle publiées par Mozilla. Hors ligne, il utilise la

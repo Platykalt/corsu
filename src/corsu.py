@@ -603,7 +603,9 @@ def firefox_runtime():
                          'pref("intl.accept_languages", "co, fr, en-US, en");\n'
                          'pref("general.config.filename", "corsu.cfg");\n'
                          'pref("general.config.obscure_value", 0);\n'
-                         'pref("general.config.sandbox_enabled", false);\n', encoding='utf-8')
+                         'pref("general.config.sandbox_enabled", false);\n'
+                         # The copy cannot become the default browser itself: its folder changes with each update.
+                         'pref("browser.shell.checkDefaultBrowser", false);\n', encoding='utf-8')
         google_labels(app / install.resources)
         # Corsu rebuilds this copy when the system Firefox updates; its own updater would undo the translation.
         policies_path = app / install.resources / 'distribution/policies.json'
@@ -644,6 +646,11 @@ def google_labels(resources):
                                            + ';\n', encoding='utf-8')
 
 
+def firefox_directory(runtime):
+    """The folder Firefox names its installation after: the application bundle on macOS."""
+    return Path(runtime) / firefox_install().app if PLATFORM == 'macos' else Path(runtime)
+
+
 def firefox_executable(runtime):
     install = firefox_install()
     return Path(runtime) / install.app / install.binary
@@ -661,6 +668,133 @@ def generate():
         shutil.copy2(SRC / 'discord-plugin' / name, plugin / name)
 
 
+# Mozilla's copy of CityHash64 (version 1.0.2). Firefox names each installation's section of profiles.ini with
+# this hash of the installation directory.
+MASK = 0xFFFFFFFFFFFFFFFF
+K0, K1, K2, K3 = 0xc3a5c85c97cb3127, 0xb492b66fbe98f273, 0x9ae16a3b2f90404f, 0xc949d7c7509e6557
+
+
+def city_hash64(data):
+    def fetch64(i):
+        return int.from_bytes(data[i:i + 8], 'little')
+
+    def rotate(value, shift):
+        return value if shift == 0 else ((value >> shift) | (value << (64 - shift))) & MASK
+
+    def shift_mix(value):
+        return value ^ (value >> 47)
+
+    def hash16(u, v):
+        a = ((u ^ v) * 0x9ddfea08eb382d69) & MASK
+        a ^= a >> 47
+        b = ((v ^ a) * 0x9ddfea08eb382d69) & MASK
+        b ^= b >> 47
+        return (b * 0x9ddfea08eb382d69) & MASK
+
+    def weak32(i, a, b):
+        w, x, y, z = fetch64(i), fetch64(i + 8), fetch64(i + 16), fetch64(i + 24)
+        a = (a + w) & MASK
+        b = rotate((b + a + z) & MASK, 21)
+        c = a
+        a = (a + x + y) & MASK
+        b = (b + rotate(a, 44)) & MASK
+        return (a + z) & MASK, (b + c) & MASK
+
+    n = len(data)
+    if n <= 16:
+        if n > 8:
+            a, b = fetch64(0), fetch64(n - 8)
+            return hash16(a, rotate((b + n) & MASK, n)) ^ b
+        if n >= 4:
+            a = int.from_bytes(data[:4], 'little')
+            return hash16((n + (a << 3)) & MASK, int.from_bytes(data[n - 4:], 'little'))
+        if n:
+            y, z = data[0] + (data[n >> 1] << 8), n + (data[n - 1] << 2)
+            return (shift_mix(((y * K2) ^ (z * K3)) & MASK) * K2) & MASK
+        return K2
+    if n <= 32:
+        a, b = (fetch64(0) * K1) & MASK, fetch64(8)
+        c, d = (fetch64(n - 8) * K2) & MASK, (fetch64(n - 16) * K0) & MASK
+        return hash16((rotate((a - b) & MASK, 43) + rotate(c, 30) + d) & MASK, (a + rotate(b ^ K3, 20) - c + n) & MASK)
+    if n <= 64:
+        halves = []
+        for start, end in ((0, n - 16), (n - 32, n - 16)):
+            z = fetch64(24) if start == 0 else fetch64(n - 8)
+            a = ((fetch64(0) + (n + fetch64(n - 16)) * K0) & MASK) if start == 0 else (fetch64(16) + fetch64(n - 32)) & MASK
+            b, c = rotate((a + z) & MASK, 52), rotate(a, 37)
+            a = (a + fetch64(8 if start == 0 else n - 24)) & MASK
+            c = (c + rotate(a, 7)) & MASK
+            a = (a + fetch64(16 if start == 0 else n - 16)) & MASK
+            halves.append(((a + z) & MASK, (b + rotate(a, 31) + c) & MASK))
+        (vf, vs), (wf, ws) = halves
+        r = shift_mix((((vf + ws) & MASK) * K2 + ((wf + vs) & MASK) * K0) & MASK)
+        return (shift_mix((r * K0 + vs) & MASK) * K2) & MASK
+    x, y, z = fetch64(0), fetch64(n - 16) ^ K1, fetch64(n - 56) ^ K0
+    v, w = weak32(n - 64, n, y), weak32(n - 32, (n * K1) & MASK, K0)
+    z = (z + shift_mix(v[1]) * K1) & MASK
+    x = (rotate((z + x) & MASK, 39) * K1) & MASK
+    y = (rotate(y, 33) * K1) & MASK
+    for i in range(0, (n - 1) & ~63, 64):
+        x = (rotate((x + y + v[0] + fetch64(i + 16)) & MASK, 37) * K1) & MASK
+        y = (rotate((y + v[1] + fetch64(i + 48)) & MASK, 42) * K1) & MASK
+        x ^= w[1]
+        y ^= v[0]
+        z = rotate(z ^ w[0], 33)
+        v = weak32(i, (v[1] * K1) & MASK, (x + w[0]) & MASK)
+        w = weak32(i + 32, (z + w[1]) & MASK, y)
+        z, x = x, z
+    return hash16((hash16(v[0], w[0]) + shift_mix(y) * K1 + z) & MASK, (hash16(v[1], w[1]) + x) & MASK)
+
+
+def install_section(directory):
+    """The profiles.ini section that holds the default profile of the Firefox installed in `directory`."""
+    return 'Install%016X' % city_hash64(str(directory).encode('utf-16-le'))
+
+
+def read_ini(path):
+    config = configparser.ConfigParser(interpolation=None)
+    config.optionxform = str
+    config.read(path, encoding='utf-8')
+    return config
+
+
+def write_ini(path, config):
+    with path.open('w', encoding='utf-8') as file:
+        config.write(file, space_around_delimiters=False)
+
+
+def link_profile(directory, profile):
+    """Make the Firefox copy in `directory` open `profile` even when started without Corsu's launcher, for example
+    as the default browser. Otherwise Firefox gives every new installation directory a new, empty profile."""
+    section = install_section(directory)
+    for base in firefox_profile_roots():
+        if not (base / 'profiles.ini').exists():
+            continue
+        try:
+            value = profile.relative_to(base).as_posix()
+        except ValueError:
+            continue
+        for name in ('profiles.ini', 'installs.ini'):
+            path = base / name
+            config = read_ini(path)
+            if config.has_section(section) and config[section].get('Default') == value:
+                continue
+            config[section] = {'Default': value, 'Locked': '1'}
+            write_ini(path, config)
+        return
+
+
+def unlink_profile(directory):
+    section = install_section(directory)
+    for base in firefox_profile_roots():
+        for name in ('profiles.ini', 'installs.ini'):
+            path = base / name
+            if path.exists():
+                config = read_ini(path)
+                if config.remove_section(section):
+                    write_ini(path, config)
+
+
 def firefox_profile_roots():
     if PLATFORM == 'windows':
         return [CONFIG / 'Mozilla/Firefox']
@@ -670,12 +804,16 @@ def firefox_profile_roots():
 
 
 def firefox_profile():
-    """Find the existing default; let Firefox choose when selection is ambiguous."""
+    """The profile the system Firefox opens; failing that, the only default. Firefox asks when it is ambiguous."""
+    install = firefox_install()
+    system = install_section(install.root) if install else None
     for base in firefox_profile_roots():
-        config = configparser.ConfigParser(interpolation=None)
-        config.read(base / 'profiles.ini', encoding='utf-8')
-        defaults = {config[section].get('Default') for section in config.sections()
-                    if section.startswith('Install') and config[section].get('Default')}
+        config = read_ini(base / 'profiles.ini')
+        if system and config.has_section(system) and config[system].get('Default'):
+            defaults = {config[system]['Default']}
+        else:
+            defaults = {config[section].get('Default') for section in config.sections()
+                        if section.startswith('Install') and config[section].get('Default')}
         if not defaults:
             defaults = {config[section].get('Path') for section in config.sections()
                         if section.startswith('Profile') and config[section].get('Default') == '1'}
@@ -688,6 +826,96 @@ def firefox_profile():
         if path.is_dir():
             return path
     return None
+
+
+def newtab_strings(profile, locale):
+    """Firefox can update its New Tab page on its own, into the profile, and that update brings its own English
+    text. Translate it the same way as the rest of Firefox; the copy's autoconfig file then uses this folder."""
+    xpi = profile / 'extensions/newtab@mozilla.org.xpi'
+    target = DATA / 'newtab'
+    if not xpi.exists():
+        shutil.rmtree(target, ignore_errors=True)
+        return None
+    stamp = f'{xpi.stat().st_size}:{xpi.stat().st_mtime_ns}:{locale}:{digest(Path(__file__).read_bytes())}'
+    if (target / 'source.txt').exists() and (target / 'source.txt').read_text(encoding='utf-8') == stamp:
+        return target
+    shutil.rmtree(target, ignore_errors=True)
+    prefix = f'locales/{locale}/'
+    with zipfile.ZipFile(xpi) as bundle:
+        names = set(bundle.namelist())
+        for name in sorted(names):
+            if not (name.startswith(prefix) and name.endswith('.ftl')):
+                continue
+            text = bundle.read(name).decode('utf-8')
+            french = 'locales/fr/' + name[len(prefix):]
+            if french in names:
+                text, _ = merge_ftl(text, bundle.read(french).decode('utf-8'))
+            text, _ = patch_ftl(text)
+            output = target / locale / name[len(prefix):]
+            output.parent.mkdir(parents=True, exist_ok=True)
+            output.write_text(text, encoding='utf-8')
+    target.mkdir(parents=True, exist_ok=True)
+    (target / 'source.txt').write_text(stamp, encoding='utf-8')
+    return target
+
+
+def repair_default_browser():
+    """When a Corsu copy is made the default browser, Firefox records its exact folder, which changes with every
+    Firefox update, in a menu entry without an icon. Point the default browser back at the Firefox Corsu entry."""
+    if PLATFORM != 'linux':
+        return
+    applications = HOME / '.local/share/applications'
+    if not (applications / 'firefox.desktop').exists():
+        return
+    stale = []
+    for entry in applications.glob('userapp-*.desktop'):
+        exec_line = re.search(r'^Exec=(.*)$', entry.read_text(encoding='utf-8', errors='replace'), re.M)
+        if exec_line and exec_line[1].startswith(str(DATA / 'firefox') + os.sep):
+            stale.append(entry)
+    if not stale:
+        return
+    for mimeapps in (CONFIG / 'mimeapps.list', applications / 'mimeapps.list'):
+        if not mimeapps.exists():
+            continue
+        text = original = mimeapps.read_text(encoding='utf-8')
+        for entry in stale:
+            text = text.replace(entry.name, 'firefox.desktop')
+        text = re.sub(r'(?<![\w.-])firefox\.desktop;(?:firefox\.desktop;)+', 'firefox.desktop;', text)
+        if text != original:
+            mimeapps.write_text(text, encoding='utf-8')
+    for entry in stale:
+        entry.unlink()
+
+
+def running_executables():
+    paths = set()
+    if PLATFORM == 'linux':
+        for process in Path('/proc').iterdir():
+            try:
+                paths.add(os.readlink(process / 'exe'))
+            except OSError:
+                continue
+        return paths
+    command = (['powershell', '-NoProfile', '-Command', '(Get-Process).Path'] if PLATFORM == 'windows'
+               else ['ps', '-axo', 'comm='])
+    result = subprocess.run(command, capture_output=True, text=True)
+    if result.returncode != 0:
+        return None
+    return {line.strip() for line in result.stdout.splitlines() if line.strip()}
+
+
+def prune_runtimes(current):
+    """Remove the copies left by earlier Firefox versions, unless one of them is still running."""
+    running = running_executables()
+    if running is None:
+        return
+    for directory in (DATA / 'firefox').iterdir():
+        if directory == current or not directory.is_dir():
+            continue
+        if any(path.startswith(str(directory) + os.sep) for path in running):
+            continue
+        unlink_profile(firefox_directory(directory))
+        shutil.rmtree(directory, ignore_errors=True)
 
 
 def firefox_arguments(rest, locale='en-US'):
@@ -838,6 +1066,11 @@ def install(components=None, qt_system=False):
     if 'discord' in components:
         installer.json_settings(CONFIG / 'Vencord/settings/settings.json', plugin_settings, toggle=True)
     desktop(installer, firefox='firefox' in components, vesktop='vesktop' in components)
+    if runtime:
+        profile = firefox_profile()
+        if profile:
+            link_profile(firefox_directory(runtime), profile)
+        repair_default_browser()
     chromium_stats = None
     if 'chromium' in components:
         import chromium
@@ -1140,8 +1373,17 @@ def launch_firefox(rest):
         command = [str(install.root / install.binary), *rest]
     else:
         runtime, stats = firefox_runtime()
+        locale = stats.get('locale', 'en-US')
+        profile = firefox_profile()
+        if profile:
+            link_profile(firefox_directory(runtime), profile)
+            strings = newtab_strings(profile, locale)
+            if strings:
+                os.environ['CORSU_NEWTAB'] = str(strings)
+        repair_default_browser()
+        prune_runtimes(runtime)
         # Reuse the existing profile instead of migrating personal data.
-        command = [str(firefox_executable(runtime)), *firefox_arguments(rest, stats.get('locale', 'en-US'))]
+        command = [str(firefox_executable(runtime)), *firefox_arguments(rest, locale)]
     if PLATFORM == 'windows':
         # execv on Windows spawns a child and returns at once, confusing shortcuts and consoles.
         subprocess.Popen(command, creationflags=subprocess.DETACHED_PROCESS | subprocess.CREATE_NEW_PROCESS_GROUP)

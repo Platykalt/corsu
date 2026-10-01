@@ -1,5 +1,14 @@
 # Changelog
 
+## 0.9.2 (2026-10-01)
+
+- Firefox: the copy always opens your usual profile, with your home page, extensions and settings, even when it is
+  started as the default browser. Before, such a start could create a new, empty profile.
+- Firefox: choosing Firefox Corsu as the default browser no longer creates a menu entry without an icon (the blank
+  sheet in the taskbar); the choice now points at the Firefox Corsu entry.
+- Firefox: the New Tab page that Firefox updates separately ("Search with Google or enter address"…) is translated.
+- Copies made for older Firefox versions are removed when Firefox Corsu starts.
+
 ## 0.9.1 (2026-10-01)
 
 - Firefox: on Google's pages, the buttons and menus that Google's own Corsican interface leaves in French or English

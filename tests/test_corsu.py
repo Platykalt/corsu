@@ -52,6 +52,69 @@ class TranslationTests(unittest.TestCase):
                 (base / 'profiles.ini').write_text('[InstallXYZ]\nDefault=Profiles/abc.default-release\n')
                 self.assertEqual(corsu.firefox_profile(), base / 'Profiles/abc.default-release')
 
+    def test_install_sections_match_firefox(self):
+        # Sections Firefox wrote itself, for its usual folders on Linux and Windows and for a long path.
+        self.assertEqual(corsu.install_section('/usr/lib/firefox'), 'Install4F96D1932A9F858E')
+        self.assertEqual(corsu.install_section('C:\\Program Files\\Mozilla Firefox'), 'Install308046B0AF4A39CB')
+        self.assertEqual(corsu.install_section('/home/kalt/.local/share/corsu/firefox/d28cdbade330decb'),
+                         'Install964A175157EB0296')
+
+    def test_system_firefox_profile_wins_and_copies_open_it(self):
+        with tempfile.TemporaryDirectory() as directory:
+            home = Path(directory)
+            base = home / '.config/mozilla/firefox'
+            for name in ('mine', 'empty'):
+                (base / name).mkdir(parents=True)
+            system = corsu.FirefoxInstall(home / 'firefox')
+            (base / 'profiles.ini').write_text(
+                f'[Profile0]\nPath=mine\n\n[{corsu.install_section(system.root)}]\nDefault=mine\nLocked=1\n\n'
+                '[InstallDD1636AE193E3CB3]\nDefault=empty\nLocked=1\n')
+            with patch.object(corsu, 'HOME', home), patch.object(corsu, 'PLATFORM', 'linux'), \
+                    patch.object(corsu, 'firefox_install', return_value=system):
+                self.assertEqual(corsu.firefox_profile(), base / 'mine')
+                copy = home / 'data/firefox/abc'
+                corsu.link_profile(copy, base / 'mine')
+                for name in ('profiles.ini', 'installs.ini'):
+                    text = (base / name).read_text()
+                    self.assertIn(f'[{corsu.install_section(copy)}]\nDefault=mine\nLocked=1\n', text)
+                self.assertIn('[Profile0]\nPath=mine\n', (base / 'profiles.ini').read_text())
+                corsu.unlink_profile(copy)
+                self.assertNotIn(corsu.install_section(copy), (base / 'profiles.ini').read_text())
+
+    def test_default_browser_entry_of_a_copy_is_replaced(self):
+        with tempfile.TemporaryDirectory() as directory:
+            home = Path(directory)
+            applications = home / '.local/share/applications'
+            applications.mkdir(parents=True)
+            (applications / 'firefox.desktop').write_text('[Desktop Entry]\nIcon=firefox\n')
+            data = home / '.local/share/corsu'
+            (applications / 'userapp-Firefox-AB12.desktop').write_text(
+                f'[Desktop Entry]\nExec={data}/firefox/0123/firefox %u\nNoDisplay=true\n')
+            (applications / 'userapp-Other-CD34.desktop').write_text('[Desktop Entry]\nExec=/usr/bin/other %u\n')
+            mimeapps = home / '.config/mimeapps.list'
+            mimeapps.parent.mkdir()
+            mimeapps.write_text('[Default Applications]\nx-scheme-handler/https=userapp-Firefox-AB12.desktop\n'
+                                '[Added Associations]\ntext/html=userapp-Firefox-AB12.desktop;firefox.desktop;\n')
+            with patch.object(corsu, 'HOME', home), patch.object(corsu, 'PLATFORM', 'linux'), \
+                    patch.object(corsu, 'DATA', data), patch.object(corsu, 'CONFIG', home / '.config'):
+                corsu.repair_default_browser()
+            self.assertEqual(mimeapps.read_text(), '[Default Applications]\nx-scheme-handler/https=firefox.desktop\n'
+                                                   '[Added Associations]\ntext/html=firefox.desktop;\n')
+            self.assertFalse((applications / 'userapp-Firefox-AB12.desktop').exists())
+            self.assertTrue((applications / 'userapp-Other-CD34.desktop').exists())
+
+    def test_old_firefox_copies_are_removed_unless_running(self):
+        with tempfile.TemporaryDirectory() as directory:
+            data = Path(directory)
+            for name in ('current', 'old', 'running'):
+                (data / 'firefox' / name).mkdir(parents=True)
+            running = {str(data / 'firefox/running/firefox')}
+            with patch.object(corsu, 'DATA', data), patch.object(corsu, 'running_executables', return_value=running), \
+                    patch.object(corsu, 'firefox_install', return_value=corsu.FirefoxInstall(data)), \
+                    patch.object(corsu, 'PLATFORM', 'linux'), patch.object(corsu, 'HOME', data):
+                corsu.prune_runtimes(data / 'firefox/current')
+            self.assertEqual(sorted(path.name for path in (data / 'firefox').iterdir()), ['current', 'running'])
+
     def test_status_checks_owned_settings_without_writes(self):
         with tempfile.TemporaryDirectory() as directory:
             root = Path(directory)

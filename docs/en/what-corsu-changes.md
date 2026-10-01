@@ -12,7 +12,14 @@ leaves your version in place and tells you where the original copy is.
 ## Firefox
 
 Corsu makes a copy of your Firefox in its data folder and translates the copy. Your own Firefox is not modified.
-The copy opens your normal profile, so your bookmarks, passwords and extensions are there.
+The copy opens your normal profile, so your bookmarks, passwords, extensions, home page and settings are there, and
+Corsu changes none of them. So that this also holds when the copy is started without Corsu (as the default browser,
+for example), Corsu adds a line to `profiles.ini` that links it to that profile. If you make Firefox Corsu your
+default browser, Corsu points that choice at the Firefox menu entry, which keeps its icon. Copies made for older
+Firefox versions are removed.
+
+Firefox can update its New Tab page separately, into your profile, with its own text. Corsu translates that text too
+each time Firefox opens.
 
 The translation is built from Mozilla's French language pack for your exact version of Firefox. Corsu downloads
 it from archive.mozilla.org and checks it against the checksums Mozilla publishes. If you are offline it uses the
