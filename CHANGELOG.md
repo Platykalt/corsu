@@ -11,6 +11,7 @@
 - Plainer names: "Corsu Setup" is now the Corsu app; parts are called Firefox, Chromium browsers (with the browsers
   found), Discord, Vesktop, Desktop, System translations and Terminal. The old "Corsu Setup" shortcut is replaced.
 - The installer's plan for system translations is in French too.
+- Updating deletes the copies of earlier Corsu versions, except one that Discord or Vesktop still loads.
 
 ## 0.10.0 (2026-10-01)
 

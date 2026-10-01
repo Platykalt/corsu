@@ -124,5 +124,22 @@ class InstallerTests(unittest.TestCase):
                 self.assertEqual(installer.sibling_versions(root / 'app-1.0.160'), [root / 'app-1.0.159'])
 
 
+    def test_old_releases_are_deleted_unless_something_loads_them(self):
+        with tempfile.TemporaryDirectory() as directory:
+            data = Path(directory) / 'data'
+            for name in ('current', 'old', 'discord', 'vesktop'):
+                (data / 'releases' / name).mkdir(parents=True)
+            asar = Path(directory) / 'app.asar'
+            asar.write_text(f'require("{data / "releases/discord/Vencord/dist/patcher.js"}")')
+            config = Path(directory) / 'config'
+            (config / 'vesktop').mkdir(parents=True)
+            (config / 'vesktop/state.json').write_text(json.dumps({'vencordDir': str(data / 'releases/vesktop/Vencord/dist')}))
+            state = data / 'installation.json'
+            state.write_text(json.dumps({'files': {str(asar): {}}}))
+            with patch.object(corsu, 'DATA', data), patch.object(corsu, 'STATE', state), patch.object(corsu, 'CONFIG', config):
+                installer.prune_releases(data / 'releases/current')
+            self.assertEqual(sorted(path.name for path in (data / 'releases').iterdir()), ['current', 'discord', 'vesktop'])
+
+
 if __name__ == '__main__':
     unittest.main()

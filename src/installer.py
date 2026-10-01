@@ -173,6 +173,37 @@ def deploy_release():
         raise
 
 
+def releases_in_use():
+    """Release folders something still loads: Discord's patched app.asar and Vesktop point into one."""
+    used = set()
+    releases = str(corsu.DATA / 'releases')
+    state = corsu.load_state()
+    places = [Path(name) for name in state.get('files', {}) if name.endswith('app.asar')]
+    places.append(corsu.CONFIG / 'vesktop/state.json')
+    for place in places:
+        try:
+            text = place.read_bytes().decode('utf-8', 'replace').replace('\\\\', '/').replace('\\', '/')
+        except OSError:
+            continue
+        start = text.find(releases.replace('\\', '/'))
+        while start != -1:
+            name = text[start + len(releases) + 1:].split('/', 1)[0]
+            used.add(name)
+            start = text.find(releases.replace('\\', '/'), start + 1)
+    return used
+
+
+def prune_releases(current):
+    """Delete the copies of earlier Corsu versions, keeping the current one and any still in use."""
+    folder = corsu.DATA / 'releases'
+    if not folder.is_dir():
+        return
+    keep = releases_in_use() | {Path(current).name}
+    for release in folder.iterdir():
+        if release.is_dir() and release.name not in keep:
+            shutil.rmtree(release, ignore_errors=True)
+
+
 def vencord_installer():
     """Return the checksum-verified official Vencord installer, downloading the pinned build if absent."""
     manifest = json.loads((ROOT / 'src/release.json').read_text(encoding='utf-8'))
@@ -390,6 +421,8 @@ def main(argv=None):
         for other in sibling_versions(location):
             install_discord(other)
     corsu.setup_shortcut(corsu.Installer())
+    if ROOT.is_relative_to((corsu.DATA / 'releases').resolve()):
+        prune_releases(ROOT)
     applications = corsu.HOME / '.local/share/applications'
     if corsu.PLATFORM == 'linux' and shutil.which('update-desktop-database') and applications.is_dir():
         # Only refreshes the menu cache; menus still update on the next login when it fails.
