@@ -7,6 +7,12 @@
 import dictionary from "./dictionary.json";
 
 const words: Record<string, string> = dictionary;
+// Corrections made in the Corsu app's Review page; they win over the dictionary.
+let corrections: Record<string, string> = {};
+
+export function setCorrections(value: Record<string, string> | undefined) {
+    corrections = value ?? {};
+}
 // What people write is never translated: messages, names of people, servers, channels and roles, statuses,
 // bios, embeds, and the text being typed. Everything else is interface; a text is replaced only when it matches a
 // lexicon entry as a whole, so ordinary words inside content are left alone.
@@ -32,6 +38,7 @@ function normalize(text: string): string {
 
 function direct(text: string): string | undefined {
     const key = normalize(text);
+    if (Object.hasOwn(corrections, key)) return corrections[key];
     if (Object.hasOwn(words, key)) return words[key];
     const tokens: string[] = [];
     const skeleton = key.replace(placeholder, found => {
@@ -90,7 +97,8 @@ export function translateLabel(value: string): string {
     return before + result + after;
 }
 
-export function createTranslator(doc: Document) {
+// With showOriginal, hovering a translated label shows the text it replaced: a way to learn while using Discord.
+export function createTranslator(doc: Document, options: { showOriginal?: boolean; } = {}) {
     const originalText = new WeakMap<Text, { original: string; translated: string; }>();
     const originalAttrs = new WeakMap<Element, Map<string, { original: string; translated: string; }>>();
     const pending = new Set<Node>();
@@ -107,6 +115,10 @@ export function createTranslator(doc: Document) {
         if (translated === value) return;
         originalText.set(node, { original: value, translated });
         node.data = translated;
+        if (options.showOriginal && !parent.hasAttribute("title")) {
+            parent.setAttribute("title", value.trim());
+            parent.setAttribute("data-corsu-title", "");
+        }
     }
 
     function attributes(element: Element) {
@@ -182,6 +194,10 @@ export function createTranslator(doc: Document) {
             const walker = doc.createTreeWalker(doc.documentElement, NodeFilter.SHOW_ELEMENT | NodeFilter.SHOW_TEXT);
             let node: Node | null;
             while ((node = walker.nextNode())) {
+                if (node instanceof Element && node.hasAttribute("data-corsu-title")) {
+                    node.removeAttribute("title");
+                    node.removeAttribute("data-corsu-title");
+                }
                 if (node.nodeType === Node.TEXT_NODE) {
                     const saved = originalText.get(node as Text);
                     if (saved && (node as Text).data === saved.translated) (node as Text).data = saved.original;

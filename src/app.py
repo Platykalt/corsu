@@ -18,6 +18,8 @@ import webbrowser
 
 import corsu
 import installer
+import review
+import update
 from installer import t
 
 PAGE = Path(__file__).resolve().parent / 'app/index.html'
@@ -55,14 +57,14 @@ class Job:
         self.running = False
         self.ok = None
 
-    def start(self, title, arguments, language):
+    def start(self, title, arguments, language, script='installer.py'):
         with self.lock:
             if self.running:
                 return False
             self.title, self.lines, self.running, self.ok = title, [], True, None
         environment = {**os.environ, 'CORSU_LANG': language, 'PYTHONUNBUFFERED': '1', 'PYTHONIOENCODING': 'utf-8',
                        'CORSU_SETUP_WINDOW': '1'}
-        command = [sys.executable, str(corsu.SRC / 'installer.py'), *arguments]
+        command = [sys.executable, str(corsu.SRC / script), *arguments]
         threading.Thread(target=self.run, args=(command, environment), daemon=True).start()
         return True
 
@@ -131,6 +133,9 @@ def snapshot():
         'terminal_paused_until': paused,
         'firefox_profile': str(profile) if profile else None,
         'lexicon_entries': len(corsu.WORDS),
+        'review': review.progress_all(),
+        'options': review.options(),
+        'update': UPDATE.get('info'),
     }
 
 
@@ -168,6 +173,11 @@ def make_handler(key, job, activity):
                 return self.send(200, icon, 'image/svg+xml')
             if self.path == '/api/state' and self.allowed():
                 return self.send(200, {**snapshot(), 'job': job.snapshot()})
+            if self.path.startswith('/api/review/next') and self.allowed():
+                section = 'Google' if 'section=Google' in self.path else 'Discord'
+                return self.send(200, {'item': review.next_item(section), 'progress': review.progress_all()})
+            if self.path == '/api/review/issue' and self.allowed():
+                return self.send(200, review.issue_link())
             self.send(404, {'error': 'not found'})
 
         def do_POST(self):
@@ -181,6 +191,21 @@ def make_handler(key, job, activity):
                 return self.send(400, {'error': 'bad request'})
             language = 'fr' if request.get('language') == 'fr' else 'en'
             names = [name for name in request.get('components', []) if name in COMPONENTS]
+            if self.path == '/api/review':
+                try:
+                    progress = review.record(request.get('french', ''), request.get('english', ''),
+                                             request.get('verdict'), request.get('corsican'))
+                except ValueError as error:
+                    return self.send(400, {'error': str(error)})
+                return self.send(200, {'progress': progress})
+            if self.path == '/api/options':
+                try:
+                    return self.send(200, {'options': review.set_option('showOriginal', request.get('showOriginal'))})
+                except ValueError as error:
+                    return self.send(400, {'error': str(error)})
+            if self.path == '/api/update':
+                started = job.start('update', ['--install'], language, script='update.py')
+                return self.send(200 if started else 409, {'started': started})
             if self.path == '/api/plan':
                 if not names:
                     return self.send(400, {'error': 'nothing selected'})
@@ -216,6 +241,12 @@ def make_handler(key, job, activity):
 
 
 SESSION = corsu.DATA / 'setup-session.json'
+UPDATE = {}
+
+
+def check_update():
+    """Look for a newer release in the background, once per window."""
+    UPDATE['info'] = update.latest()
 
 
 def running_session():
@@ -241,6 +272,7 @@ def serve(open_browser=True):
     server = ThreadingHTTPServer(('127.0.0.1', 0), make_handler(key, job, activity))
     url = f'http://127.0.0.1:{server.server_address[1]}/#{key}'
     threading.Thread(target=server.serve_forever, daemon=True).start()
+    threading.Thread(target=check_update, daemon=True).start()
     try:
         corsu.DATA.mkdir(parents=True, exist_ok=True)
         SESSION.write_text(json.dumps({'url': url}), encoding='utf-8')

@@ -93,6 +93,17 @@ The Corsu app is a page served by Corsu itself at a local address (`127.0.0.1`) 
 reach, protected by a key drawn at random each time it opens. Nothing is sent to the internet apart from the downloads
 described above. It stops by itself ten minutes after you close the page.
 
+While it is open, the app asks GitHub, at most once an hour, for the number of the latest Corsu release. When a newer
+one exists, the Update button downloads the archive for your system, checks its SHA-256 checksum and reinstalls the
+same programs as before. Nothing is installed without that click.
+
+The Review page shows the translations written for Corsu, one at a time. Your corrections are saved in
+`lexicon-user.tsv`, in Corsu's data folder, and read before every other translation; they are also copied into the
+Discord plugin's settings. They stay on the computer unless you choose to send them to the project as a GitHub issue.
+
+The Original text on hover option, under Programs, adds a tooltip with the replaced text to what Corsu translates in
+Discord and on Google.
+
 ## Going back to French
 
 Each part can be switched off on its own: Firefox, the Chromium browsers, Discord, Vesktop, the desktop, the

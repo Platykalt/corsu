@@ -115,6 +115,8 @@ export function translatePage(doc) {
         const win = doc.defaultView;
         if (!win || started.has(doc)) return;
         started.add(doc);
+        // Option of the Corsu app: hovering a completed label shows the text it replaced.
+        const showOriginal = Services.prefs.getBoolPref("corsu.showOriginal", false);
         doc.documentElement?.setAttribute("data-corsu", "on");
         const walk = root => {
             if (!root || !root.isConnected) return;
@@ -124,7 +126,10 @@ export function translatePage(doc) {
                     if (!parent || parent.closest(protectedArea) || !parent.closest(uiArea)) return;
                     if (parent.closest(resultsArea) && !allowedInResults(node.data, parent)) return;
                     const translated = translateLabel(node.data);
-                    if (translated !== node.data) node.data = translated;
+                    if (translated !== node.data) {
+                        if (showOriginal && !parent.hasAttribute("title")) parent.setAttribute("title", node.data.trim());
+                        node.data = translated;
+                    }
                 } else if (node.matches && !node.closest(protectedArea) && node.matches(uiArea)) {
                     const inResults = node.closest(resultsArea);
                     for (const name of ["aria-label", "title", "placeholder"]) {

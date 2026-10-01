@@ -1,5 +1,14 @@
 # Changelog
 
+## 0.15.0 (2026-10-01)
+
+- Review page in the Corsu app: go through the translations written for Corsu (Discord and Google), shortest first,
+  and mark each one correct or fix it. Corrections apply on this computer at the next start of Discord or Firefox,
+  and can be sent to the project as a prefilled GitHub issue.
+- Updates: the Corsu app shows when a newer release exists and installs it in one click, after checking the
+  archive's SHA-256 checksum.
+- Learn option: hovering a translated text in Discord or on Google shows the original text.
+
 ## 0.14.0 (2026-10-01)
 
 - Discord: about 5,600 longer sentences in Corsican too (settings explanations, warnings, dialogs). 96% of Discord's

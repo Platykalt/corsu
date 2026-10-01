@@ -536,6 +536,14 @@ def packaged_locale(bundle):
     return 'en-US'
 
 
+def review_options():
+    """Options chosen in the Corsu app (see review.py)."""
+    try:
+        return json.loads((DATA / 'review.json').read_text(encoding='utf-8')).get('options', {})
+    except (OSError, ValueError):
+        return {}
+
+
 def firefox_runtime():
     install = firefox_install()
     if install is None:
@@ -545,6 +553,7 @@ def firefox_runtime():
     fingerprint = hashlib.sha256(b''.join(path.read_bytes() for path in engine.LEXICONS if path.exists())
                                  + Path(__file__).read_bytes()
                                  + b''.join(path.read_bytes() for path in sorted((SRC / 'firefox').glob('*'))))
+    fingerprint.update(json.dumps(review_options(), sort_keys=True).encode())
     for file in ('omni.ja', 'browser/omni.ja', 'application.ini', 'platform.ini'):
         if (resources / file).exists():
             fingerprint.update((resources / file).read_bytes())
@@ -620,7 +629,10 @@ def firefox_runtime():
                          'pref("general.config.obscure_value", 0);\n'
                          'pref("general.config.sandbox_enabled", false);\n'
                          # The copy cannot become the default browser itself: its folder changes with each update.
-                         'pref("browser.shell.checkDefaultBrowser", false);\n', encoding='utf-8')
+                         'pref("browser.shell.checkDefaultBrowser", false);\n'
+                         # Set in the Corsu app: hovering a completed Google label shows the original text.
+                         f'pref("corsu.showOriginal", {str(bool(review_options().get("showOriginal"))).lower()});\n',
+                         encoding='utf-8')
         google_labels(app / install.resources)
         # Corsu rebuilds this copy when the system Firefox updates; its own updater would undo the translation.
         policies_path = app / install.resources / 'distribution/policies.json'

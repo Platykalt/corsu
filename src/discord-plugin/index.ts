@@ -5,9 +5,26 @@
  */
 
 import { showNotification } from "@api/Notifications";
-import definePlugin from "@utils/types";
+import { definePluginSettings } from "@api/Settings";
+import definePlugin, { OptionType } from "@utils/types";
 
-import { createTranslator } from "./translate";
+import { createTranslator, setCorrections } from "./translate";
+
+// Written by the Corsu app: corrections from its Review page, and whether hovering shows the original text.
+const settings = definePluginSettings({
+    showOriginal: {
+        type: OptionType.BOOLEAN,
+        description: "Mustrà u testu d'origine passendu u topu. Show the original text on hover.",
+        default: false,
+        restartNeeded: true
+    },
+    corrections: {
+        type: OptionType.STRING,
+        description: "Currezzioni (JSON). Corrections (JSON).",
+        default: "{}",
+        hidden: true
+    }
+});
 
 let translator: ReturnType<typeof createTranslator> | undefined;
 
@@ -15,8 +32,14 @@ export default definePlugin({
     name: "Corsu",
     description: "Traduzzione lucale parziale di l'interfaccia in corsu. I messaghji fermanu invariati.",
     authors: [{ name: "Corsu local", id: 0n }],
+    settings,
     start() {
-        translator = createTranslator(document);
+        try {
+            setCorrections(JSON.parse(settings.store.corrections || "{}"));
+        } catch {
+            setCorrections({});
+        }
+        translator = createTranslator(document, { showOriginal: settings.store.showOriginal });
         translator.start();
         // The translations start from French or English text; another interface language stays as it is.
         const language = document.documentElement.lang || navigator.language;

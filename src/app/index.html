@@ -103,6 +103,19 @@ dl.facts dt { color: var(--muted); }
 dl.facts dd { overflow-wrap: anywhere; }
 dl.facts dt:not(:first-of-type), dl.facts dd:not(:first-of-type) { border-top: 1px solid var(--line); }
 .closed { padding: 60px 34px; color: var(--muted); }
+.banner { display: flex; align-items: center; gap: 12px; padding: 10px 14px; margin: 0 0 20px; border: 1px solid var(--line); border-radius: 6px; background: var(--row); }
+.banner[hidden] { display: none; }
+.banner span { flex: 1; }
+.review dl { margin: 0; }
+.review { border: 1px solid var(--line); border-radius: 6px; background: var(--row); padding: 16px; }
+.review dt { color: var(--muted); font-size: 12px; margin-top: 10px; }
+.review dt:first-child { margin-top: 0; }
+.review dd { margin: 2px 0 0; }
+.review dd.source { font-size: 16px; }
+.review textarea { width: 100%; font: inherit; font-size: 16px; color: var(--text); background: var(--window); border: 1px solid var(--line); border-radius: 4px; padding: 6px 8px; resize: vertical; min-height: 2.4em; }
+.review .error { color: var(--danger); font-size: 13px; margin-top: 6px; }
+.toolbar { display: flex; align-items: center; gap: 12px; margin-bottom: 12px; flex-wrap: wrap; }
+.toolbar select { font: inherit; color: var(--text); background: var(--row); border: 1px solid var(--line); border-radius: 4px; padding: 3px 6px; }
 
 @media (prefers-reduced-motion: reduce) { .busy { animation: none; } .switch i, .switch i::after { transition: none; } }
 @media (max-width: 640px) {
@@ -123,6 +136,7 @@ dl.facts dt:not(:first-of-type), dl.facts dd:not(:first-of-type) { border-top: 1
     <nav aria-label="Corsu">
       <button type="button" data-page="programs" data-t="nav_programs"></button>
       <button type="button" data-page="add" data-t="nav_add"></button>
+      <button type="button" data-page="review" data-t="nav_review"></button>
       <button type="button" data-page="help" data-t="nav_help"></button>
       <button type="button" data-page="about" data-t="nav_about"></button>
     </nav>
@@ -132,6 +146,10 @@ dl.facts dt:not(:first-of-type), dl.facts dd:not(:first-of-type) { border-top: 1
   </aside>
 
   <main>
+    <div class="banner" id="update-banner" hidden aria-live="polite">
+      <span id="update-text"></span>
+      <button type="button" class="button default" id="update-install" data-t="update_install"></button>
+    </div>
     <section id="programs" data-page-panel>
       <h1 data-t="nav_programs"></h1>
       <p class="lead" id="programs-lead"></p>
@@ -146,6 +164,13 @@ dl.facts dt:not(:first-of-type), dl.facts dd:not(:first-of-type) { border-top: 1
         </ul>
         <div class="buttons"><button type="button" class="button" id="pause-hour" data-t="pause_hour"></button></div>
       </div>
+      <h2 data-t="learn"></h2>
+      <ul class="group">
+        <li>
+          <span class="label"><label for="switch-original" data-t="show_original"></label><span class="detail" data-t="show_original_detail"></span></span>
+          <span class="switch"><input type="checkbox" role="switch" id="switch-original"><i></i></span>
+        </li>
+      </ul>
       <h2 data-t="everything"></h2>
       <p class="muted" id="everything-text"></p>
       <div class="buttons"><button type="button" class="button" id="everything"></button></div>
@@ -157,6 +182,32 @@ dl.facts dt:not(:first-of-type), dl.facts dd:not(:first-of-type) { border-top: 1
       <ul class="group" id="choices"></ul>
       <div class="buttons"><button type="button" class="button default" id="review" data-t="install_ellipsis"></button></div>
       <p class="muted" style="margin-top:18px" data-t="add_missing"></p>
+    </section>
+
+    <section id="review" data-page-panel hidden>
+      <h1 data-t="nav_review"></h1>
+      <p class="lead" data-t="review_lead"></p>
+      <div class="toolbar">
+        <select id="review-section" aria-label="Section"><option value="Discord">Discord</option><option value="Google">Google</option></select>
+        <span class="muted" id="review-progress"></span>
+      </div>
+      <div class="review" id="review-card">
+        <dl>
+          <dt data-t="review_french"></dt><dd class="source" id="review-french"></dd>
+          <dt data-t="review_english"></dt><dd class="muted" id="review-english"></dd>
+          <dt><label for="review-corsican" data-t="review_corsican"></label></dt>
+          <dd><textarea id="review-corsican" rows="2" spellcheck="false"></textarea><div class="error" id="review-error" hidden></div></dd>
+        </dl>
+        <div class="buttons">
+          <button type="button" class="button default" id="review-ok" data-t="review_ok"></button>
+          <button type="button" class="button" id="review-fix" data-t="review_fix"></button>
+          <button type="button" class="button" id="review-skip" data-t="review_skip"></button>
+        </div>
+      </div>
+      <p class="muted" id="review-done" hidden data-t="review_done"></p>
+      <h2 data-t="review_share"></h2>
+      <p class="muted" data-t="review_share_text"></p>
+      <div class="buttons"><button type="button" class="button" id="review-send" data-t="review_send"></button></div>
     </section>
 
     <section id="help" data-page-panel hidden>
@@ -211,6 +262,21 @@ const key = location.hash.slice(1);
 const text = {
   fr: {
     nav_programs: "Logiciels", nav_add: "Ajouter", nav_help: "Aide", nav_about: "À propos", language: "Langue",
+    nav_review: "Relire",
+    review_lead: "Vérifiez les traductions écrites pour Corsu, les plus courtes d'abord. Une correction s'applique au prochain démarrage de Discord ou de Firefox.",
+    review_french: "Français", review_english: "Anglais", review_corsican: "Corse",
+    review_ok: "Juste", review_fix: "Corriger", review_skip: "Passer",
+    review_progress: "{done} sur {total} vérifiées · {fixed}",
+    corrections_one: "{n} correction", corrections_many: "{n} corrections",
+    review_done: "Toutes les traductions de cette section ont été vérifiées.",
+    review_share: "Partager vos corrections",
+    review_share_text: "Vos corrections restent sur cet ordinateur. Pour qu'elles profitent à tout le monde, envoyez-les au projet : un ticket GitHub s'ouvre, déjà rempli, et vous choisissez de l'envoyer ou non.",
+    review_send: "Envoyer mes corrections…", review_none: "Aucune correction pour l'instant.",
+    review_copied: "La liste est trop longue pour l'adresse : elle a été copiée. Collez-la dans le ticket qui s'ouvre.",
+    learn: "Apprendre", show_original: "Texte d'origine au survol",
+    show_original_detail: "Dans Discord et sur Google, passer la souris sur un texte traduit montre le texte qu'il remplace.",
+    update_available: "Corsu {version} est disponible (vous avez {current}).", update_install: "Mettre à jour",
+    job_update: "Mise à jour",
     programs_lead: "Ce qui s'affiche en corse. Un changement prend effet au prochain démarrage du logiciel.",
     programs_none: "Rien n'est installé pour l'instant.", go_add: "Ajouter des logiciels",
     restart: "Redémarrez {name} pour voir le changement.", restart_desktop: "Déconnectez-vous puis reconnectez-vous pour voir le changement.",
@@ -246,6 +312,21 @@ const text = {
   },
   en: {
     nav_programs: "Programs", nav_add: "Add", nav_help: "Help", nav_about: "About", language: "Language",
+    nav_review: "Review",
+    review_lead: "Check the translations written for Corsu, shortest first. A correction applies the next time Discord or Firefox starts.",
+    review_french: "French", review_english: "English", review_corsican: "Corsican",
+    review_ok: "Correct", review_fix: "Fix", review_skip: "Skip",
+    review_progress: "{done} of {total} checked · {fixed}",
+    corrections_one: "{n} correction", corrections_many: "{n} corrections",
+    review_done: "Every translation in this section has been checked.",
+    review_share: "Share your corrections",
+    review_share_text: "Your corrections stay on this computer. To let everyone benefit, send them to the project: a GitHub issue opens, already filled in, and you choose whether to send it.",
+    review_send: "Send my corrections…", review_none: "No corrections yet.",
+    review_copied: "The list is too long for the address, so it was copied. Paste it into the issue that opens.",
+    learn: "Learn", show_original: "Original text on hover",
+    show_original_detail: "In Discord and on Google, hovering a translated text shows the text it replaces.",
+    update_available: "Corsu {version} is available (you have {current}).", update_install: "Update",
+    job_update: "Update",
     programs_lead: "What is shown in Corsican. A change takes effect the next time the program starts.",
     programs_none: "Nothing is installed yet.", go_add: "Add programs",
     restart: "Restart {name} to see the change.", restart_desktop: "Log out and back in to see the change.",
@@ -449,6 +530,47 @@ function renderActivity() {
   if (atEnd) log.scrollTop = log.scrollHeight;
 }
 
+let reviewItem = null, reviewSection = "Discord";
+
+async function loadReview() {
+  const result = await call(`/api/review/next?section=${reviewSection}`);
+  if (!result) return;
+  reviewItem = result.item;
+  const progress = result.progress[reviewSection];
+  $("review-progress").textContent = t("review_progress", { done: progress.done.toLocaleString(language), total: progress.total.toLocaleString(language), fixed: t((language === "fr" ? progress.fixed <= 1 : progress.fixed === 1) ? "corrections_one" : "corrections_many", { n: progress.fixed }) });
+  $("review-card").hidden = !reviewItem;
+  $("review-done").hidden = Boolean(reviewItem);
+  $("review-error").hidden = true;
+  if (!reviewItem) return;
+  $("review-french").textContent = reviewItem.french || "—";
+  $("review-english").textContent = reviewItem.english || "—";
+  $("review-corsican").value = reviewItem.corsican;
+  $("review-fix").disabled = true;
+}
+
+async function answer(verdict) {
+  if (!reviewItem) return;
+  const corsican = $("review-corsican").value;
+  const response = await fetch("/api/review", { method: "POST", headers: { "X-Corsu-Key": key, "Content-Type": "application/json" },
+    body: JSON.stringify({ language, french: reviewItem.french, english: reviewItem.english, verdict, corsican }) });
+  if (!response.ok) {
+    const result = await response.json().catch(() => ({}));
+    $("review-error").textContent = result.error || response.status;
+    $("review-error").hidden = false;
+    return;
+  }
+  await loadReview();
+  $("review-corsican").focus();
+}
+
+function renderExtras() {
+  const info = state.update;
+  $("update-banner").hidden = !(info && info.newer);
+  if (info && info.newer) $("update-text").textContent = t("update_available", { version: info.version, current: state.version });
+  $("update-install").disabled = state.job.running;
+  $("switch-original").checked = Boolean(state.options && state.options.showOriginal);
+}
+
 function render() {
   document.documentElement.lang = language;
   document.title = "Corsu";
@@ -456,7 +578,7 @@ function render() {
   $("language").value = language;
   if (!state) return;
   $("version").textContent = state.version;
-  renderPrograms(); renderAdd(); renderHelp(); renderAbout(); renderActivity();
+  renderPrograms(); renderAdd(); renderHelp(); renderAbout(); renderActivity(); renderExtras();
 }
 
 async function refresh() {
@@ -475,7 +597,28 @@ async function refresh() {
   }
 }
 
-for (const button of document.querySelectorAll("[data-page]")) button.addEventListener("click", () => show(button.dataset.page));
+for (const button of document.querySelectorAll("[data-page]")) button.addEventListener("click", () => {
+  show(button.dataset.page);
+  if (button.dataset.page === "review") loadReview();
+});
+$("review-section").addEventListener("change", event => { reviewSection = event.target.value; loadReview(); });
+$("review-corsican").addEventListener("input", () => { $("review-fix").disabled = !reviewItem || $("review-corsican").value === reviewItem.corsican; });
+$("review-corsican").addEventListener("keydown", event => {
+  if (event.key === "Enter" && !event.shiftKey) { event.preventDefault(); answer($("review-fix").disabled ? "ok" : "fix"); }
+});
+$("review-ok").addEventListener("click", () => answer("ok"));
+$("review-fix").addEventListener("click", () => answer("fix"));
+$("review-skip").addEventListener("click", () => answer("skip"));
+$("review-send").addEventListener("click", async () => {
+  const result = await call("/api/review/issue");
+  if (!result || !result.count) { alert(t("review_none")); return; }
+  if (result.url.includes("body=")) { window.open(result.url, "_blank", "noopener"); return; }
+  try { await navigator.clipboard.writeText(result.text); } catch (error) {}
+  alert(t("review_copied"));
+  window.open(result.url, "_blank", "noopener");
+});
+$("switch-original").addEventListener("change", event => call("/api/options", { showOriginal: event.target.checked }).then(refresh));
+$("update-install").addEventListener("click", () => call("/api/update", {}).then(refresh));
 $("language").addEventListener("change", event => {
   language = event.target.value; chosen = true;
   try { localStorage.setItem("corsu-language", language); } catch (error) {}

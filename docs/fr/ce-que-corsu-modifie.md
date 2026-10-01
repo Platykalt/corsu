@@ -97,6 +97,18 @@ L'application Corsu est une page servie par Corsu lui-même, à une adresse loca
 ordinateur peut joindre, et protégée par une clé tirée au hasard à chaque ouverture. Rien n'est envoyé sur Internet,
 hormis les téléchargements décrits plus haut. Elle se ferme d'elle-même dix minutes après que vous avez fermé la page.
 
+Quand elle est ouverte, l'application demande à GitHub, au plus une fois par heure, le numéro de la dernière version
+de Corsu. Si une version plus récente existe, le bouton Mettre à jour télécharge l'archive de votre système, vérifie
+sa somme SHA-256 et réinstalle les mêmes logiciels qu'avant. Rien n'est installé sans ce clic.
+
+La page Relire montre les traductions écrites pour Corsu, une par une. Vos corrections sont enregistrées dans
+`lexicon-user.tsv`, dans le dossier de données de Corsu, et lues avant toutes les autres traductions ; elles sont
+aussi copiées dans les réglages du plugin Discord. Elles restent sur l'ordinateur, sauf si vous choisissez de les
+envoyer au projet par un ticket GitHub.
+
+L'option Texte d'origine au survol, dans Logiciels, ajoute une infobulle avec le texte remplacé sur ce que Corsu
+traduit dans Discord et sur Google.
+
 ## Revenir au français
 
 Chaque partie peut être désactivée séparément : Firefox, les navigateurs Chromium, Discord, Vesktop, le bureau, le

@@ -5,16 +5,34 @@ Everything is local and deterministic. No network access, no machine translation
 access to user documents or messages. Only whole interface labels are translated; when a
 label is unknown it is returned unchanged.
 """
+import os
 import re
 import struct
+import sys
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent.parent
 LEXICON = ROOT / 'lexicon/lexicon.tsv'
-# Corrections load first; then reviewed translations from other projects, whose wording wins over draft rows.
+
+
+def user_lexicon():
+    """Corrections made in the Corsu app's Review page, kept with Corsu's own data so updates keep them."""
+    if os.environ.get('CORSU_USER_LEXICON'):
+        return Path(os.environ['CORSU_USER_LEXICON'])
+    home = Path.home()
+    if sys.platform == 'win32':
+        return Path(os.environ.get('LOCALAPPDATA', home / 'AppData/Local')) / 'corsu/lexicon-user.tsv'
+    if sys.platform == 'darwin':
+        return home / 'Library/Application Support/corsu/lexicon-user.tsv'
+    return home / '.local/share/corsu/lexicon-user.tsv'
+
+
+# The person's own corrections load first, then Corsu's corrections, then reviewed translations from other
+# projects, whose wording wins over draft rows.
+USER = user_lexicon()
 FIXES = ROOT / 'lexicon/lexicon-fixes.tsv'
 REVIEWED = [ROOT / 'lexicon/lexicon-mozilla.tsv', ROOT / 'lexicon/lexicon-upstream.tsv']
-LEXICONS = [FIXES, *REVIEWED, LEXICON]
+LEXICONS = [USER, FIXES, *REVIEWED, LEXICON]
 
 # Placeholders that must survive translation untouched: Fluent placeables, printf
 # specifiers, Qt/KDE numbered arguments and shell-style variables.
