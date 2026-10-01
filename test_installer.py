@@ -101,6 +101,18 @@ class InstallerTests(unittest.TestCase):
         for name in ('linux', 'windows', 'macos'):
             self.assertRegex(manifest['installers'][name]['sha256'], r'^[0-9a-f]{64}$')
 
+    def test_deployed_copy_is_recognised_through_symlinked_or_short_paths(self):
+        with tempfile.TemporaryDirectory() as directory:
+            real = Path(directory).resolve() / 'data'
+            (real / 'releases/abc').mkdir(parents=True)
+            alias = Path(directory) / 'alias'
+            try:
+                alias.symlink_to(real)
+            except OSError:
+                self.skipTest('Symbolic links need extra rights on this system')
+            with patch.object(corsu, 'DATA', alias), patch.object(installer, 'ROOT', real / 'releases/abc'):
+                self.assertEqual(installer.deploy_release(), real / 'releases/abc')
+
 
 if __name__ == '__main__':
     unittest.main()

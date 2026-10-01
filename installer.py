@@ -116,7 +116,9 @@ def prepare_build():
 
 def deploy_release():
     """Keep launchers/builds working even after the downloaded archive is removed."""
-    if ROOT.is_relative_to(corsu.DATA / 'releases'):
+    # Compare real paths: Windows short names (RUNNER~1) and macOS /var -> /private/var differ otherwise,
+    # and the installer would re-run itself forever. The environment flag is a second guard.
+    if ROOT.is_relative_to((corsu.DATA / 'releases').resolve()) or os.environ.get('CORSU_DEPLOYED') == str(ROOT):
         return ROOT
     fingerprint = hashlib.sha256()
     for name in ('corsu.py', 'engine.py', 'installer.py', 'lexicon.tsv', 'plugin/index.ts', 'plugin/translate.ts',
@@ -308,7 +310,7 @@ def main(argv=None):
         command = [sys.executable, str(target / 'installer.py'), '--yes', '--components', *components]
         if 'discord' in components:
             command.extend(['--discord-path', str(location)])
-        run(command)
+        run(command, env={**os.environ, 'CORSU_DEPLOYED': str(target.resolve())})
         return 0
     if {'discord', 'vesktop'} & set(components):
         prepare_build()
