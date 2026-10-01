@@ -116,6 +116,11 @@ def prepare_build():
         return
     if not (source / 'node_modules/esbuild').exists():
         if not shutil.which('pnpm'):
+            if (source / 'dist/patcher.js').exists():
+                # An installed copy has the built plugin but not the build tools: use what is there.
+                print(t('Note: the Discord plugin was built before the latest translations; Discord keeps the older ones.',
+                        'Note : le plugin Discord a été construit avant les dernières traductions ; Discord garde les anciennes.'), flush=True)
+                return
             raise RuntimeError('Installing Vencord dependencies requires pnpm. Use a release archive instead.')
         run(['pnpm', 'install', '--frozen-lockfile'], cwd=source)
     run(['node', 'scripts/build/build.mjs', '--dev', '--disable-updater'], cwd=source,

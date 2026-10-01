@@ -40,7 +40,7 @@ et [iPhone](docs/fr/telephone/iphone.md).
 
 ## Les traductions
 
-Corsu compte environ 77 000 phrases traduites. Plus de 13 000 viennent d'autres logiciels libres, traduits pour la
+Corsu compte environ 109 000 phrases traduites. Plus de 13 000 viennent d'autres logiciels libres, traduits pour la
 plupart par Patriccollu di Santa Maria è Sichè : Firefox pour Android et iOS, Thunderbird, VLC, Audacity, Notepad++,
 entre autres. Les autres ont été écrites pour Corsu en suivant le même vocabulaire.
 

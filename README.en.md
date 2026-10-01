@@ -40,7 +40,7 @@ already come in Corsican, and Gboard has a Corsican keyboard. See [Android](docs
 
 ## Translations
 
-Corsu has about 77,000 translated phrases. More than 13,000 come from other free software, most of them translated
+Corsu has about 109,000 translated phrases. More than 13,000 come from other free software, most of them translated
 by Patriccollu di Santa Maria è Sichè: Firefox for Android and iOS, Thunderbird, VLC, Audacity, Notepad++ and
 others. The rest were written for Corsu with the same vocabulary.
 

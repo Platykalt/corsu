@@ -629,7 +629,11 @@ def firefox_executable(runtime):
 def generate():
     plugin = ROOT / 'Vencord/src/userplugins/corsu'
     plugin.mkdir(parents=True, exist_ok=True)
-    (plugin / 'dictionary.json').write_text(json.dumps(WORDS, ensure_ascii=False, indent=2), encoding='utf-8')
+    # Discord shows short interface labels: leave out long sentences and terminal messages, which only
+    # make the plugin heavier.
+    terminal = re.compile(r'%[-0-9.]*[sdlucfx]|(^|\s)--?\w|\\n|\t')
+    words = {key: value for key, value in WORDS.items() if len(key) <= 60 and not terminal.search(key)}
+    (plugin / 'dictionary.json').write_text(json.dumps(words, ensure_ascii=False, separators=(',', ':')), encoding='utf-8')
     for name in ('index.ts', 'translate.ts'):
         shutil.copy2(SRC / 'discord-plugin' / name, plugin / name)
 

@@ -1,5 +1,19 @@
 # Changelog
 
+## 0.8.0 (2026-10-01)
+
+- Corsu window (Corsu Setup): switch Firefox, the Chromium browsers, Discord, Vesktop, the desktop and the
+  terminal on or off one by one; put the terminal back in French for an hour.
+- Firefox and the Chromium browsers ask websites for Corsican first, then French. Google answers in Corsican.
+- Discord: Corsu patches the newest version of Discord installed in `~/.config/discord`, and the plugin reminds
+  you to set Discord to French or English.
+- GTK programs and terminal commands now use the Corsican translations (system translations option).
+- The installer speaks French on French systems. Enter installs everything; `a` ticks all, `n` ticks none.
+- README in French with an English version. Documentation in French and English, with guides for computers and
+  phones, Discord, a table of what works where, and why Corsu exists.
+- About 32,000 more phrases for the desktop and the terminal: file types, keyboard layouts, units, Kate,
+  GnuPG, and the commands of coreutils, bash, git, pacman, sudo and util-linux.
+
 ## 0.7.0 (2026-10-01)
 
 - About 18,700 new phrases for the applications people use on Linux: Krita, Kleopatra, Lutris, Transmission,
