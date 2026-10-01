@@ -26,7 +26,8 @@ SHORT_WORDS = {'a', 'à', 'è', 'e', 'i', 'o', 'u'}
 
 def word_counts():
     counts, reviewed = Counter(), set()
-    for path in engine.LEXICONS:
+    # The project's lexicons only: the word list ships to everyone, not one person's corrections.
+    for path in (path for path in engine.LEXICONS if path != engine.USER and path.exists()):
         weight = 1 if path == engine.LEXICON else 3
         for line in path.read_text(encoding='utf-8').splitlines():
             fields = line.split('|')
