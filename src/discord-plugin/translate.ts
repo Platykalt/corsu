@@ -40,10 +40,29 @@ const months: Record<string, string> = { janvier: "ghjennaghju", février: "ferr
 const datePattern = new RegExp(`\\b(${Object.keys(days).join("|")}|${Object.keys(months).join("|")}|Aujourd’hui|Aujourd'hui|Hier|Demain)\\b`, "gi");
 const relative: Record<string, string> = { "aujourd’hui": "Oghje", "aujourd'hui": "Oghje", hier: "Eri", demain: "Dumane" };
 
+// Relative times written by Discord's date library: "il y a 5 minutes", "dans un jour".
+const units: Record<string, string> = { seconde: "secondu", secondes: "secondi", minute: "minutu", minutes: "minuti",
+    heure: "ora", heures: "ore", jour: "ghjornu", jours: "ghjorni", semaine: "simana", semaines: "simane",
+    mois: "mesi", an: "annu", ans: "anni" };
+const amounts: Record<string, string> = { un: "un", une: "una", "quelques": "uni pochi di" };
+
+function relativeTime(text: string): string | undefined {
+    const match = text.match(/^(il y a|dans) (\d+|une?|quelques) (\p{L}+)$/u);
+    if (!match || !units[match[3]]) return undefined;
+    let amount = amounts[match[2]] ?? match[2];
+    const unit = match[3] === "mois" && amount === "un" ? "mese" : units[match[3]];
+    if (amount === "una" && unit === "ora") amount = "un'";
+    else if (amount === "una" && unit === "minutu") amount = "un";
+    const quantity = amount.endsWith("'") ? amount + unit : amount + " " + unit;
+    return match[1] === "dans" ? "trà " + quantity : quantity + " fà";
+}
+
 function translateDate(text: string): string | undefined {
+    const ago = relativeTime(text);
+    if (ago) return ago;
     if (!/\d/.test(text) || !/^[\p{L}\d\s:,./’'-]+$/u.test(text)) return undefined;
     let changed = false;
-    const result = text.replace(datePattern, word => {
+    const result = text.replace(/ dernier à /g, () => { changed = true; return " scorsu à "; }).replace(datePattern, word => {
         const lower = word.toLowerCase();
         const value = days[lower] ?? months[lower] ?? relative[lower];
         if (!value) return word;
@@ -166,6 +185,13 @@ function resolve(text: string, segments = true): string | undefined {
         const label = resolve(counted[1], false);
         if (label !== undefined) return label + counted[2] + counted[3];
     }
+    // A sentence Discord breaks over lines for layout ("Ce salon n'a pas encore de\nmessage épinglé"): look up the whole
+    // sentence and break the translation at the same share of its length.
+    if (text.includes("\n")) {
+        const lines = text.split(/\s*\n\s*/);
+        const joined = resolve(lines.join(" "), false);
+        if (joined !== undefined) return rebreak(joined, lines);
+    }
     if (!segments) return undefined;
     const parts = text.split(separators);
     if (parts.length < 3) return composite(text) ?? translateDate(text);
@@ -177,6 +203,30 @@ function resolve(text: string, segments = true): string | undefined {
         output.push(part.replace(part.trim(), piece));
     }
     return output.join("");
+}
+
+function rebreak(translated: string, lines: string[]): string {
+    const total = lines.reduce((sum, line) => sum + line.length + 1, -1);
+    let result = translated, offset = 0, seen = 0;
+    for (const line of lines.slice(0, -1)) {
+        seen += line.length + 1;
+        const target = Math.round(seen / total * translated.length);
+        // The space nearest to the same share of the text becomes the line break; a line that ends a sentence
+        // breaks after the nearest sentence end.
+        const sentence = /[.!?:…]$/.test(line);
+        let best = -1;
+        for (const strict of sentence ? [true, false] : [false]) {
+            for (let i = offset; i < result.length; i++) {
+                if (result[i] !== " " || /[?!:;»]/.test(result[i + 1] ?? "") || strict && !/[.!?:…]/.test(result[i - 1] ?? "")) continue;
+                if (best < 0 || Math.abs(i - target) < Math.abs(best - target)) best = i;
+            }
+            if (best >= 0) break;
+        }
+        if (best < 0) break;
+        result = result.slice(0, best) + "\n" + result.slice(best + 1);
+        offset = best + 1;
+    }
+    return result;
 }
 
 // Inside names only templates and dates apply, so a name that happens to be a dictionary word stays as it is.

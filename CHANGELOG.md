@@ -1,5 +1,15 @@
 # Changelog
 
+## 0.19.0 (2026-10-02)
+
+- Discord: about 3,300 more texts in Corsican, found by comparing every French message of Discord with the
+  dictionary. They cover the pieces of sentences around bold text and links, such as "Membre(s) correspondant à"
+  when typing @, and the settings pages (privacy, age groups, subscriptions, server setup, notifications).
+- Discord: sentences Discord breaks over two lines ("Ce salon n'a pas encore de / message épinglé") are translated
+  as a whole, and the line break goes back at the same place in the Corsican text.
+- Discord: relative times are in Corsican ("il y a 5 minutes" becomes "5 minuti fà", "dans 3 jours" becomes
+  "trà 3 ghjorni", "lundi dernier" becomes "luni scorsu").
+
 ## 0.18.0 (2026-10-02)
 
 - Updates no longer fail after Discord updates itself: the installer finds the current Discord instead of a version
