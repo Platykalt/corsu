@@ -104,6 +104,13 @@ Discord plugin's settings. They stay on the computer unless you choose to send t
 The Original text on hover option, under Programs, adds a tooltip with the replaced text to what Corsu translates in
 Discord and on Google.
 
+## Firefox downloaded by Corsu
+
+When the computer has no Firefox, Corsu offers to download Mozilla's French Firefox from archive.mozilla.org. It
+checks it against the SHA-512 checksum Mozilla publishes, then installs it in Corsu's data folder on Linux, in
+`~/Applications` on macOS, and in `%LOCALAPPDATA%\Mozilla Firefox` on Windows, without administrator rights. That
+Firefox is then translated like any other.
+
 ## Vesktop downloaded by Corsu
 
 When the computer has neither Discord nor Vesktop, Corsu offers Vesktop, a Discord app that includes Vencord. It

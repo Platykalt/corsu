@@ -15,8 +15,7 @@ const settings = definePluginSettings({
     showOriginal: {
         type: OptionType.BOOLEAN,
         description: "Mustrà u testu d'origine passendu u topu. Show the original text on hover.",
-        default: false,
-        restartNeeded: true
+        default: false
     },
     reportMissing: {
         type: OptionType.BOOLEAN,
@@ -46,7 +45,8 @@ export default definePlugin({
         } catch {
             setCorrections({});
         }
-        translator = createTranslator(document, { showOriginal: settings.store.showOriginal });
+        // Read on every hover, so switching the option in Vencord's settings applies at once.
+        translator = createTranslator(document, { showOriginal: () => Boolean(settings.store.showOriginal) });
         if (settings.store.reportMissing) {
             timer = setInterval(() => {
                 const found = translator?.report() ?? [];

@@ -136,6 +136,10 @@ def snapshot():
             found = ', '.join(browser.label for browser in chromium.browsers())
             if found:
                 text = {language: (label, f'{found}. {detail}') for language, (label, detail) in text.items()}
+        if name == 'firefox' and not corsu.firefox_install():
+            text = {'co': ('Firefox', "Ùn hè micca stallatu : Corsu scarica u Firefox francese di Mozilla (circa 90 Mo), u verifica è u traduce."),
+                    'fr': ('Firefox', "Pas encore installé : Corsu télécharge le Firefox français de Mozilla (environ 90 Mo), le vérifie et le traduit."),
+                    'en': ('Firefox', "Not installed yet: Corsu downloads Mozilla's French Firefox (about 90 MB), checks it and translates it.")}
         if name == 'vesktop' and not installer.vesktop_installed():
             text = {'co': ('Vesktop', "Una appiecazione Discord cù Vencord. Corsu a scarica (circa 130 Mo), a verifica è a regula."),
                     'fr': ('Vesktop', 'Une application Discord avec Vencord. Corsu la télécharge (environ 130 Mo), la vérifie et la règle.'),

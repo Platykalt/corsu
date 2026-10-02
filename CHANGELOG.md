@@ -1,5 +1,19 @@
 # Changelog
 
+## 0.18.0 (2026-10-02)
+
+- Updates no longer fail after Discord updates itself: the installer finds the current Discord instead of a version
+  folder Discord has deleted, and forgets the files that went with it.
+- Original text on hover: a small bubble now appears at once over translated text in Discord and on Google, and the
+  option can be switched in Vencord's settings inside Discord without restarting.
+- Vencord's own settings pages and plugin descriptions, which only exist in English, are in Corsican (about 1,000
+  texts), including Backup & Restore and Patch Helper.
+- More reviewed translations by Patriccollu di Santa Maria è Sichè: VLC media player, HandBrake, Tenacity, OpenTracks
+  and Firefox Focus for iOS (16,600 rows from other projects, up from 13,000). Imports keep the source's "…" and skip
+  lone letters.
+- Without Firefox, Corsu downloads Mozilla's French Firefox and checks it against Mozilla's published SHA-512.
+- "Dettagliu", plural "dettagli", everywhere.
+
 ## 0.17.0 (2026-10-01)
 
 - The Corsu app speaks Corsican, chosen by default; French and English stay available.

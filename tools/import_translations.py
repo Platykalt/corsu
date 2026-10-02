@@ -44,6 +44,15 @@ def android(data):
     return result
 
 
+def unquote(value):
+    """A PO string literal; JSON reads nearly all of them, the rest get the usual C escapes."""
+    try:
+        return json.loads(value)
+    except ValueError:
+        body = value.strip()[1:-1] if value.strip().endswith('"') else value.strip()[1:]
+        return body.replace('\\n', ' ').replace('\\t', ' ').replace('\\"', '"').replace('\\\\', '\\')
+
+
 def po(data):
     """msgid -> msgstr for singular, non-fuzzy entries."""
     result, entry, field, fuzzy = {}, {}, None, False
@@ -63,11 +72,11 @@ def po(data):
             continue
         elif line.startswith(('msgid ', 'msgstr ', 'msgctxt ')):
             field, _, value = line.partition(' ')
-            entry[field] = json.loads(value) if value.startswith('"') else ''
+            entry[field] = unquote(value) if value.startswith('"') else ''
         elif line.startswith('msgid_plural') or line.startswith('msgstr['):
             field = None
         elif line.startswith('"') and field:
-            entry[field] += json.loads(line)
+            entry[field] += unquote(line)
     return result
 
 
@@ -116,12 +125,16 @@ ANDROID = [
       'legacy/ui/legacy/src/main/res', 'feature/account/setup/src/main/res', 'feature/settings/import/src/main/res']),
     ('VLC for Android', 'GPL-2.0-or-later', 'videolan/vlc-android', 'master',
      ['application/resources/src/main/res', 'medialibrary/res']),
+    ('OpenTracks', 'Apache-2.0', 'OpenTracksApp/OpenTracks', 'main', ['src/main/res']),
 ]
 PO = [
     ('Audacity', 'GPL-2.0-or-later', 'audacity/audacity', 'master', 'au3/locale/fr.po', 'au3/locale/co.po'),
     ('Poedit', 'MIT', 'vslavik/poedit', 'master', 'locales/fr.po', 'locales/co.po'),
     ('WinMerge', 'GPL-2.0-or-later', 'WinMerge/winmerge', 'master', 'Translations/WinMerge/French.po',
      'Translations/WinMerge/Corsican.po'),
+    ('VLC media player', 'GPL-2.0-or-later', 'videolan/vlc', 'master', 'po/fr.po', 'po/co.po'),
+    ('HandBrake', 'GPL-2.0-only', 'HandBrake/HandBrake', 'master', 'gtk/po/fr.po', 'gtk/po/co.po'),
+    ('Tenacity', 'GPL-2.0-or-later', 'tenacityteam/tenacity', 'main', 'locale/fr.po', 'locale/co.po'),
 ]
 
 
@@ -132,6 +145,9 @@ def clean(text):
 def usable(english, french, corsican):
     if not corsican or corsican in (english, french) or not (english or french):
         return False
+    # A lone letter or symbol is a format code or a shortcut, never an interface label.
+    if any(source and not re.search(r'[^\W\d_].*[^\W\d_]', source) for source in (english, french)):
+        return False
     return all(engine.signature(source) == engine.signature(corsican) for source in (english, french) if source)
 
 
@@ -141,6 +157,9 @@ def write(path, header, sections):
         lines.append(f'# {title} ({license})')
         for english, french, corsican in rows:
             english, french, corsican = clean(english), clean(french), clean(corsican)
+            # The French interface shows "…"; keep the Corsican in step when the translation typed three dots.
+            if corsican.endswith('...') and (french.endswith('…') or english.endswith('…')):
+                corsican = corsican[:-3] + '…'
             if not usable(english, french, corsican) or (english, french) in seen:
                 continue
             seen.add((english, french))
@@ -210,6 +229,7 @@ def main():
         ('Firefox for Android, Focus and Android Components', 'MPL-2.0', list(mozilla_android())),
         ('Firefox for iOS', 'MPL-2.0', list(mozilla_xliff('mozilla-l10n/firefoxios-l10n', 'main', 'firefox-ios.xliff'))),
         ('Mozilla VPN', 'MPL-2.0', list(mozilla_xliff('mozilla-l10n/mozilla-vpn-client-l10n', 'main', 'mozillavpn.xliff'))),
+        ('Firefox Focus for iOS', 'MPL-2.0', list(mozilla_xliff('mozilla-l10n/focusios-l10n', 'main', 'focus-ios.xliff'))),
     ])
     sections = [(title, license, list(upstream_android(repo, branch, directories)))
                 for title, license, repo, branch, directories in ANDROID]

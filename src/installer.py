@@ -74,9 +74,8 @@ def vesktop_installed():
 
 
 def available_components():
-    result = []
-    if corsu.firefox_install():
-        result.append('firefox')
+    # Firefox is offered even when missing: Corsu then downloads Mozilla's French Firefox first.
+    result = ['firefox']
     if corsu.PLATFORM == 'linux' and shutil.which('plasmashell') and corsu.FRENCH_CATALOGS.exists():
         result.append('desktop')
     if discord_location():
@@ -226,6 +225,21 @@ def vencord_installer():
     return binary
 
 
+def forget_removed_discord():
+    """Discord deletes old app-<version> folders when it updates. Drop Corsu's records of files that went with them,
+    so installing, switching and uninstalling do not fail on a file that no longer exists."""
+    if not corsu.STATE.exists():
+        return
+    state = corsu.load_state()
+    gone = [name for name, record in state['files'].items()
+            if record.get('discord_location') and not Path(record['discord_location']).exists()]
+    for name in gone:
+        state['files'].pop(name)
+        print(t(f'Forgetting {name}: Discord removed that version.', f'Oubli de {name} : Discord a supprimé cette version.'))
+    if gone:
+        corsu.STATE.write_text(json.dumps(state, indent=2), encoding='utf-8')
+
+
 def install_discord(location):
     binary = vencord_installer()
     app = discord_archive(location)
@@ -302,6 +316,11 @@ def choose(available):
 
 def show_plan(components, location):
     print(t('Corsu will make these changes:\n', 'Corsu va faire ces changements :\n'))
+    if 'firefox' in components and not corsu.firefox_install():
+        print(t('  Firefox: not found, so download Mozilla\'s French Firefox (about 90 MB) from archive.mozilla.org and check'
+                ' it against Mozilla\'s published checksum first.',
+                '  Firefox : introuvable, donc télécharger d\'abord le Firefox français de Mozilla (environ 90 Mo) depuis'
+                ' archive.mozilla.org et le vérifier avec la somme publiée par Mozilla.'))
     if 'firefox' in components:
         where = {'windows': t('a "Firefox Corsu" shortcut in the Start menu', 'un raccourci "Firefox Corsu" du menu Démarrer'),
                  'macos': t('a "Firefox Corsu" app in ~/Applications', 'une application "Firefox Corsu" dans ~/Applications')
@@ -384,6 +403,12 @@ def main(argv=None):
         return 0
     available = available_components()
     location = args.discord_path.resolve() if args.discord_path else discord_location()
+    if args.discord_path and not discord_archive(location).exists():
+        # A path remembered from before a Discord update; Discord has removed that version since.
+        print(t(f'Note: {location} no longer exists; using the Discord found on this computer.',
+                f'Note : {location} n\'existe plus ; utilisation du Discord trouvé sur cet ordinateur.'))
+        location = discord_location()
+    forget_removed_discord()
     if args.discord_path and 'discord' not in available and discord_archive(location).exists():
         available = [*available, 'discord']
     components = args.components if args.components is not None else available
@@ -422,6 +447,9 @@ def main(argv=None):
     if 'vesktop' in components and not vesktop_installed():
         import vesktop
         vesktop.install()
+    if 'firefox' in components and not corsu.firefox_install():
+        import firefox_download
+        firefox_download.install()
     local = set(components) - {'discord', 'qt'}
     if 'qt' in components:
         local.add('desktop')

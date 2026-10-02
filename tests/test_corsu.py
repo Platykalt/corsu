@@ -171,7 +171,7 @@ class TranslationTests(unittest.TestCase):
 
     def test_exact_labels_only(self):
         self.assertEqual(corsu.translate('  &Save…  '), '  &Arregistrà…  ')
-        self.assertEqual(corsu.translate('_Save'), 'Arregi_strà')
+        self.assertEqual(corsu.translate('_Save'), '_Arregistrà')
         self.assertEqual(corsu.translate('Save my private message'), 'Save my private message')
         self.assertEqual(corsu.translate('Nonexistent %1'), 'Nonexistent %1')
 

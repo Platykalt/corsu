@@ -96,11 +96,8 @@ def install():
                 else:
                     archive.extractall(folder)
         installer = folder / 'corsu/src/installer.py'
+        # The installer finds Discord again: Discord updates itself into a new app-<version> folder.
         command = [sys.executable, str(installer), '--yes', '--components', *components]
-        if 'discord' in components:
-            record = next((record for record in corsu.load_state()['files'].values() if record.get('discord_location')), None)
-            if record:
-                command += ['--discord-path', record['discord_location']]
         result = subprocess.run(command)
         if result.returncode:
             raise RuntimeError(t('The new version could not be installed.', 'La nouvelle version n\'a pas pu être installée.'))

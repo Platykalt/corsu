@@ -200,7 +200,7 @@ export function translateLabel(value: string): string {
 }
 
 // With showOriginal, hovering a translated label shows the text it replaced: a way to learn while using Discord.
-export function createTranslator(doc: Document, options: { showOriginal?: boolean; } = {}) {
+export function createTranslator(doc: Document, options: { showOriginal?: () => boolean; } = {}) {
     const originalText = new WeakMap<Text, { original: string; translated: string; }>();
     const originalAttrs = new WeakMap<Element, Map<string, { original: string; translated: string; }>>();
     const pending = new Set<Node>();
@@ -217,10 +217,6 @@ export function createTranslator(doc: Document, options: { showOriginal?: boolea
         if (translated === value) return;
         originalText.set(node, { original: value, translated });
         node.data = translated;
-        if (options.showOriginal && !parent.hasAttribute("title")) {
-            parent.setAttribute("title", value.trim());
-            parent.setAttribute("data-corsu-title", "");
-        }
     }
 
     function attributes(element: Element) {
@@ -279,6 +275,38 @@ export function createTranslator(doc: Document, options: { showOriginal?: boolea
         if (pending.size && !scheduled) { scheduled = true; queueMicrotask(flush); }
     });
 
+    // Learning option: hovering a translated text shows, in a small bubble, the text it replaced.
+    let bubble: HTMLDivElement | undefined;
+    function originalOf(element: Element | null): string | undefined {
+        for (let depth = 0; element && depth < 4; depth++, element = element.parentElement) {
+            for (const child of Array.from(element.childNodes)) {
+                const saved = child.nodeType === Node.TEXT_NODE ? originalText.get(child as Text) : undefined;
+                if (saved && (child as Text).data === saved.translated) return saved.original.trim();
+            }
+            const attribute = originalAttrs.get(element)?.get("aria-label");
+            if (attribute && element.getAttribute("aria-label") === attribute.translated) return attribute.original;
+        }
+        return undefined;
+    }
+    function hover(event: MouseEvent) {
+        const original = options.showOriginal?.() ? originalOf(event.target as Element) : undefined;
+        if (!original) { if (bubble) bubble.style.display = "none"; return; }
+        if (!bubble) {
+            bubble = doc.createElement("div");
+            bubble.setAttribute("data-corsu-ignore", "");
+            bubble.style.cssText = "position:fixed;z-index:100000;pointer-events:none;max-width:320px;padding:4px 8px;" +
+                "border-radius:4px;font:13px/1.35 var(--font-primary, sans-serif);background:#111214;color:#dbdee1;" +
+                "box-shadow:0 2px 8px rgba(0,0,0,.35)";
+            doc.body.append(bubble);
+        }
+        bubble.textContent = original;
+        bubble.style.display = "block";
+        const x = Math.min(event.clientX + 12, doc.documentElement.clientWidth - bubble.offsetWidth - 8);
+        const y = event.clientY + 18 + bubble.offsetHeight > doc.documentElement.clientHeight ? event.clientY - bubble.offsetHeight - 10 : event.clientY + 18;
+        bubble.style.left = x + "px";
+        bubble.style.top = y + "px";
+    }
+
     // Diagnostic: visible texts that still look French or English, and whether a protection rule skipped them.
     const reported = new Set<string>();
     function report() {
@@ -305,6 +333,7 @@ export function createTranslator(doc: Document, options: { showOriginal?: boolea
             if (running) return;
             running = true;
             walk(doc.documentElement);
+            doc.addEventListener("mousemove", hover, { passive: true });
             observer.observe(doc.documentElement, {
                 subtree: true, childList: true, characterData: true,
                 attributes: true, attributeFilter: ["aria-label", "title", "placeholder"]
@@ -314,14 +343,13 @@ export function createTranslator(doc: Document, options: { showOriginal?: boolea
             if (!running) return;
             running = false;
             observer.disconnect();
+            doc.removeEventListener("mousemove", hover);
+            bubble?.remove();
+            bubble = undefined;
             pending.clear();
             const walker = doc.createTreeWalker(doc.documentElement, NodeFilter.SHOW_ELEMENT | NodeFilter.SHOW_TEXT);
             let node: Node | null;
             while ((node = walker.nextNode())) {
-                if (node instanceof Element && node.hasAttribute("data-corsu-title")) {
-                    node.removeAttribute("title");
-                    node.removeAttribute("data-corsu-title");
-                }
                 if (node.nodeType === Node.TEXT_NODE) {
                     const saved = originalText.get(node as Text);
                     if (saved && (node as Text).data === saved.translated) (node as Text).data = saved.original;

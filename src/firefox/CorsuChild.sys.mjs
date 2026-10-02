@@ -117,6 +117,33 @@ export function translatePage(doc) {
         started.add(doc);
         // Option of the Corsu app: hovering a completed label shows the text it replaced.
         const showOriginal = Services.prefs.getBoolPref("corsu.showOriginal", false);
+        const originals = new WeakMap();
+        // Learning option: hovering a completed label shows, in a small bubble, the text it replaced.
+        if (showOriginal) {
+            let bubble = null;
+            doc.addEventListener("mousemove", event => {
+                let element = event.target, original;
+                for (let depth = 0; element && element.childNodes && depth < 4 && !original; depth++, element = element.parentElement) {
+                    for (const child of element.childNodes) {
+                        const saved = child.nodeType === TEXT_NODE ? originals.get(child) : undefined;
+                        if (saved && child.data === saved.translated) { original = saved.original; break; }
+                    }
+                }
+                if (!original) { if (bubble) bubble.style.display = "none"; return; }
+                if (!bubble) {
+                    bubble = doc.createElement("div");
+                    bubble.setAttribute("data-corsu-ignore", "");
+                    bubble.style.cssText = "position:fixed;z-index:2147483647;pointer-events:none;max-width:320px;" +
+                        "padding:4px 8px;border-radius:4px;font:13px/1.35 sans-serif;background:#202124;color:#f1f3f4;" +
+                        "box-shadow:0 2px 8px rgba(0,0,0,.3)";
+                    doc.documentElement.append(bubble);
+                }
+                bubble.textContent = original;
+                bubble.style.display = "block";
+                bubble.style.left = Math.min(event.clientX + 12, doc.documentElement.clientWidth - bubble.offsetWidth - 8) + "px";
+                bubble.style.top = (event.clientY + 18) + "px";
+            }, { passive: true });
+        }
         doc.documentElement?.setAttribute("data-corsu", "on");
         const walk = root => {
             if (!root || !root.isConnected) return;
@@ -127,7 +154,7 @@ export function translatePage(doc) {
                     if (parent.closest(resultsArea) && !allowedInResults(node.data, parent)) return;
                     const translated = translateLabel(node.data);
                     if (translated !== node.data) {
-                        if (showOriginal && !parent.hasAttribute("title")) parent.setAttribute("title", node.data.trim());
+                        originals.set(node, { original: node.data.trim(), translated });
                         node.data = translated;
                     }
                 } else if (node.matches && !node.closest(protectedArea) && node.matches(uiArea)) {

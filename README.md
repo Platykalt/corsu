@@ -68,9 +68,10 @@ Ce qui est vérifié et ce qui est seulement prévu : [Ce qui marche, et où](do
 
 ### Les traductions
 
-Corsu compte environ 109 000 phrases traduites. Plus de 13 000 viennent d'autres logiciels libres, traduits pour la
-plupart par Patriccollu di Santa Maria è Sichè (Firefox pour Android et iOS, Thunderbird, VLC, Audacity, Notepad++…).
-Les autres ont été écrites pour Corsu avec le même vocabulaire. Une traduction vous paraît fausse ?
+Corsu compte environ 132 000 phrases traduites. Plus de 16 000 viennent d'autres logiciels libres, traduits pour la
+plupart par Patriccollu di Santa Maria è Sichè (Firefox pour Android et iOS, Thunderbird, VLC, Audacity, HandBrake,
+Notepad++, Poedit, WinMerge, Tenacity, OpenTracks…). Les autres ont été écrites pour Corsu avec le même vocabulaire,
+dont environ 20 000 pour Discord et Vencord. Une traduction vous paraît fausse ?
 [Ouvrez un ticket](https://github.com/Platykalt/corsu/issues/new?template=translation.yml) ou voyez
 [CONTRIBUTING.md](CONTRIBUTING.md).
 
@@ -135,9 +136,10 @@ What is verified and what is only expected: [What works where](docs/en/compatibi
 
 ### Translations
 
-Corsu has about 109,000 translated phrases. More than 13,000 come from other free software, most of them translated
-by Patriccollu di Santa Maria è Sichè (Firefox for Android and iOS, Thunderbird, VLC, Audacity, Notepad++…). The rest
-were written for Corsu with the same vocabulary. Does a translation look wrong?
+Corsu has about 132,000 translated phrases. More than 16,000 come from other free software, most of them translated
+by Patriccollu di Santa Maria è Sichè (Firefox for Android and iOS, Thunderbird, VLC, Audacity, HandBrake, Notepad++,
+Poedit, WinMerge, Tenacity, OpenTracks…). The rest were written for Corsu with the same vocabulary, about 20,000 of
+them for Discord and Vencord. Does a translation look wrong?
 [Open an issue](https://github.com/Platykalt/corsu/issues/new?template=translation.yml) or see
 [CONTRIBUTING.md](CONTRIBUTING.md).
 

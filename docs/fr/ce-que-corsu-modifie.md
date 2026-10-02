@@ -109,6 +109,13 @@ envoyer au projet par un ticket GitHub.
 L'option Texte d'origine au survol, dans Logiciels, ajoute une infobulle avec le texte remplacé sur ce que Corsu
 traduit dans Discord et sur Google.
 
+## Firefox téléchargé par Corsu
+
+Sans Firefox sur l'ordinateur, Corsu propose de télécharger le Firefox français de Mozilla depuis
+archive.mozilla.org. Il le vérifie avec la somme SHA-512 publiée par Mozilla, puis l'installe dans son dossier de
+données sous Linux, dans `~/Applications` sous macOS, et dans `%LOCALAPPDATA%\Mozilla Firefox` sous Windows, sans
+droits administrateur. Ce Firefox est ensuite traduit comme les autres.
+
 ## Vesktop téléchargé par Corsu
 
 Si l'ordinateur n'a ni Discord ni Vesktop, Corsu propose Vesktop, une application Discord qui contient Vencord. Il

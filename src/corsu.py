@@ -451,7 +451,8 @@ def firefox_candidates():
         return [Path(base) / 'Mozilla Firefox' for base in bases if base]
     if PLATFORM == 'macos':
         return [Path('/Applications/Firefox.app'), HOME / 'Applications/Firefox.app']
-    return [Path('/usr/lib/firefox'), Path('/usr/lib64/firefox'), Path('/opt/firefox'), Path('/usr/lib/firefox-esr')]
+    return [Path('/usr/lib/firefox'), Path('/usr/lib64/firefox'), Path('/opt/firefox'), Path('/usr/lib/firefox-esr'),
+            DATA / 'firefox-mozilla']
 
 
 def firefox_install():
@@ -726,7 +727,7 @@ def generate():
     terminal = re.compile(r'%[-0-9.]*[sdlucfx]|(^|\s)--?\w|\\n|\t')
     words = {key: value for key, value in WORDS.items() if len(key) <= 40 and not terminal.search(key)}
     # Sentences written for Discord are kept whatever their length.
-    words.update({key: WORDS[key] for key in lexicon_section('Discord') if key in WORDS})
+    words.update({key: WORDS[key] for name in ('Discord', 'Vencord') for key in lexicon_section(name) if key in WORDS})
     (plugin / 'dictionary.json').write_text(json.dumps(words, ensure_ascii=False, separators=(',', ':')), encoding='utf-8')
     for name in ('index.ts', 'translate.ts'):
         shutil.copy2(SRC / 'discord-plugin' / name, plugin / name)
@@ -1107,6 +1108,14 @@ def desktop(installer, firefox=True, vesktop=True):
     for desktop_id, executable in entries:
         existing = HOME / '.local/share/applications' / desktop_id
         original = existing if existing.exists() else Path('/usr/share/applications') / desktop_id
+        if not original.exists() and executable and (DATA / 'firefox-mozilla').exists():
+            # Firefox downloaded by Corsu has no menu entry of its own.
+            icon = DATA / 'firefox-mozilla/browser/chrome/icons/default/default128.png'
+            installer.write(existing, '[Desktop Entry]\nType=Application\nName=Firefox Corsu\nGenericName=Web Browser\n'
+                            f'Exec={executable} %u\nIcon={icon}\nTerminal=false\nStartupWMClass=firefox\n'
+                            'Categories=Network;WebBrowser;\nMimeType=text/html;x-scheme-handler/http;x-scheme-handler/https;\n',
+                            toggle=True)
+            continue
         if not original.exists():
             continue
         text = original.read_text(encoding='utf-8')
@@ -1243,6 +1252,9 @@ def component_of(name, record):
 
 def restore(path, record):
     """Return one managed file to its pre-installation content. False when the user changed it."""
+    if not path.exists() and not path.parent.exists():
+        # The program removed that folder itself (Discord deletes old versions when it updates): nothing to put back.
+        return True
     if path.exists() and digest(path.read_bytes()) != record['installed_sha256']:
         return False
     if record.get('backup'):

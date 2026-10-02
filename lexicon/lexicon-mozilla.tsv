@@ -3168,8 +3168,6 @@ Group K|Groupe K|Gruppu K
 Group L|Groupe L|Gruppu L
 Group Stage|Phase de groupes|Fasa di gruppi
 Change team|Changer d’équipe|Cambià di squadra
-D|J|G
-H|h|O
 Countdown to the World Cup|Compte à rebours avant la Coupe du monde|Contu à l'arritrosa prima a Coppa di u mondu
 View Schedule|Voir le calendrier|Affissà u calendariu
 Disable notifications|Désactiver les notifications|Disattivà e nutificazioni
@@ -3642,3 +3640,145 @@ You currently have the latest version of Mozilla VPN|Vous disposez de la derniè
 Click to update to the latest version of the application|Cliquez pour mettre à jour l’application vers la dernière version|Cliccà per rinnovà l’appiecazione à l’ultima versione
 You are up to date|Vous êtes à jour|Site à l’ultimu livellu
 Updates available|Mises à jour disponibles|Rinnovi dispunibule
+
+# Firefox Focus for iOS (MPL-2.0)
+Erase browsing session|Effacer la session de navigation|Squassà a sessione di navigazione
+This lets you take and upload photos.|Ceci vous permet de prendre des photos et de les envoyer.|Què vi permette di piglià è d’incaricà fotò.
+This lets you unlock the app.|Cette autorisation vous permet de déverrouiller l’application.|Què vi permette di spalancà l’appiecazione.
+This lets you take and upload videos.|Ceci vous permet de prendre des vidéos et de les envoyer.|Què vi permette di piglià è d’incaricà video.
+This lets you save and upload photos.|Ceci vous permet d’enregistrer des photos et de les envoyer.|Què vi permette d’arregistrà è d’incaricà fotò.
+Clear your entire browsing session history, passwords, cookies anytime with a single tap.|Supprimez votre historique de navigation, vos mots de passe, vos cookies et plus encore, d’une simple pression.|Squassate a vostra cronolugia di navigazione, e vostre parolle d’intesa, i vostri canistrelli, à ogni mumentu, cù un’incalcata simplice.
+Your history is history|L’historique, c’est de l’histoire ancienne|A cronolugia, ghjè una vechja storia
+Searching for something different? Choose a different search engine.|Vous recherchez quelque chose de différent ? Choisissez un autre moteur de recherche.|Ricercate qualcosa di sfarente ? Sciglite un altru mutore di ricerca.
+Take private browsing to the next level. Block ads and other content that can track you across sites and bog down page load times.|La navigation privée passe au niveau supérieur. Dites adieu aux publicités et autres traqueurs qui vous espionnent et ralentissent le chargement des pages web.|Fate passà a navigazione privata à u livellu superiore. Bluccate e publicità è altri perseguitatori chì vi spiunanu è rallentanu u caricamentu di e pagine web.
+%@ is produced by Mozilla. Our mission is to foster a healthy, open Internet.|%@ est réalisé par Mozilla. Notre mission est de défendre l’ouverture et la bonne santé d’Internet.|%@ hè sviluppatu da Mozilla. A nostra missione hè d’incuragisce un Internet apertu è in bella saluta.
+Search and browse right in the app|Effectuez des recherches et naviguez depuis l’application|Fate ricerche è navigate in l’appiecazione
+Block trackers (or update settings to allow trackers)|Bloquez les traqueurs (ou modifiez les paramètres pour les autoriser)|Bluccate i perseguitatori (o mudificate i parametri per auturizalli)
+Erase to delete cookies as well as search and browsing history|Effacez les cookies, ainsi que les historiques de navigation et de recherche|Squassate i canistrelli è ancu e cronolugie di navigazione è di ricerca
+Use it as a private browser:|Utilisez-le comme un navigateur privé :|Impiegatelu cum’è un navigatore privatu :
+Block trackers for improved privacy|Bloquez les traqueurs pour encore plus de vie privée|Bluccate i perseguitatori per amendà a vita privata
+Block web fonts to reduce page size|Bloquez les polices web pour alléger les pages|Bluccà e grafie web per riduce a dimensione di e pagine
+Use it as a Safari extension:|Utilisez-le comme une extension Safari :|Impiegatelu cum’è un’estensione Safari :
+About %@|À propos de %@|Apprupositu di %@
+%@ puts you in control.|%@ vous aide à rester aux commandes.|%@ vi aiuta à stà à e cumande.
+Ok|OK|Vai
+Authenticate to return to %@|Veuillez vous authentifier pour revenir à %@|Ci vole à autenticassi per rivene à %@
+Add Custom URL|Ajouter une adresse personnalisée|Aghjunghje un indirizzu persunalizatu
+Example: example.com|Exemple : example.com|Esempiu : esempiu.com
++ Add Custom URL|+ Ajouter une adresse personnalisée|+ Aghjunghje un indirizzu persunalizatu
+New Custom URL added.|Nouvelle adresse personnalisée ajoutée.|L’indirizzu web persunalizatu novu hè aghjuntu.
+Enable to have %@ autocomplete over 450 popular URLs in the address bar.|Activer pour que %@ complète automatiquement plus de 450 adresses populaires dans la barre d’adresse.|Attivà per chì %@ compii autumaticamente più di 450 indirizzi pupulari in a barra d’indirizzu.
+Disabled|Désactivée|Disattivata
+No Custom URLs to display|Aucune adresse personnalisée à afficher|Nisunu indirizzu persunalizatu à affissà
+Enabled|Activée|Attivata
+Manage Sites|Gérer les sites|Urganizà i siti
+My Sites|Mes sites|I mo siti
+Enable to have %@ autocomplete your favorite URLs.|Activer pour que %@ complète automatiquement vos adresses web favorites.|Attivà per chì %@ compii autumaticamente i vostri indirizzi web favuriti.
+Top Sites|Sites populaires|Siti pupulari
+New Session|Nouvelle session|Sessione nova
+Forward|Avancer d’une page|Pagina seguente
+%@ wants to open another App|%@ souhaite ouvrir une autre application|%@ vole apre un’altra appiecazione
+Find in page done|Arrêter de rechercher dans la page|Ricerca compia in a pagina
+Find next in page|Rechercher le prochain résultat dans la page|Circà a prossima occurrenza in a pagina
+Find previous in page|Rechercher le précédent résultat dans la page|Circà a precedente occurrenza in a pagina
+OK, Got It!|J’ai compris|Iè, aghju capitu !
+Browse like no one’s watching.|Naviguez comme si personne ne vous regardait.|Navigate cum’è s’è nisunu vi fighjava.
+The Internet connection appears to be offline.|Il semble que la connexion Internet soit déconnectée.|Pare chì a cunnessione internet ùn sia micca attiva.
+Get Started|Lancez-vous|Principià
+Fast. Private. No Distractions.|Rapide. Confidentiel. Sans distractions.|Rapidu. Pruvatu. Senza distrazzione.
+Start browsing|Commencer la navigation|Principià a navigazione
+Make %@ your default to protect your data with every link you open.|Choisissez %@ comme navigateur par défaut et protégez vos données à chaque lien que vous ouvrez.|Fate di %@ u vostru navigatore predefinitu per prutege i vostri dati à l’apertura d’ogni liame.
+%@ isn’t like other browsers|%@ n’est pas comme les autres navigateurs|%@ ùn hè micca cum’è l’altri navigatori
+Erase your browsing history, passwords, cookies, and prevent unwanted ads from following you in a simple click!|Effacez votre historique de navigation, vos mots de passe, vos cookies, et empêchez les publicités indésirables de vous suivre d’un simple clic !|D’un cliccu simplice, squassate a vostra cronolugia di navigazione, e vostre parolle d’intesa, i vostri canistrelli, è impedite e publicità indesiderevule di seguitavvi.
+Your history doesn’t follow you|Libérez-vous de votre historique|A vostra cronolugia ùn vi seguita micca
+%@ is a dedicated privacy browser with tracking protection and content blocking.|%@ est un navigateur dédié à la vie privée avec une protection contre le pistage et un blocage de contenu.|%@ hè un navigatore dedicatu à a cunfidenzialità cù una prutezzione contr’à u spiunagiu è u blucchime di cuntenutu.
+More than just incognito|Mieux qu’un mode incognito|Più chè solu incognitu
+Firefox cares about your privacy. Read more in %@.|Firefox se soucie de votre vie privée. Pour en savoir plus, consultez notre %@.|Firefox face casu di a vostra vita privata.Sapene di più in a %@.
+Configure settings so you can decide how much or how little you share.|Configurez les paramètres afin de décider ce que vous partagez.|Cunfigureghja i parametri per sceglie s’è vò scumpartite assai o pocu.
+Protection at your own discretion|Protégez-vous comme vous le voulez|Prutezzione discreziunale
+Take your private browsing to the next level.|Faites passer votre navigation privée à la vitesse supérieure.|Fate passà a vostra navigazione privata à u livellu superiore.
+Agree and Continue|Accepter et continuer|Accettà è cuntinuà
+By continuing, you agree to %@.|En continuant, vous acceptez les %@.|Cuntinuendu, vole si dì chì vo accettate e %@.
+Welcome to Firefox %@!|Bienvenue dans Firefox %@ !|Benvenuta in Firefox %@ !
+Tap Safari, then select Content Blockers|Appuyez sur Safari, puis sélectionnez « Bloqueurs de contenu »|Picchichjate nant’à Safari, eppò selezziunate « Blucchime di cuntenutu »
+Enable %@|Activez %@|Attivà %@
+Select Safari, then select Extensions|Sélectionnez Safari, puis sélectionnez Extensions|Selezziunate Safari, eppò Estensioni
+%@ is not enabled.|%@ n’est pas activé.|%@ ùn hè micca attivatu.
+Open Settings App|Ouvrez l’application Réglages|Aprite i parametri
+Open device settings|Ouvrez les réglages de l’appareil|Aprite i parametri di l’apparechju
+That didn’t work. Try replacing the search term with this: %s.|Cela n’a pas fonctionné. Essayez de remplacer les termes de recherche par ceci : %s.|Ùn hà micca funziunatu. Pruvate di rimpiazzà u termine di a ricerca da què : %s.
+To get suggestions, %@ needs to send what you type in the address bar to the search engine.|Pour obtenir des suggestions, %@ doit envoyer ce que vous saisissez dans la barre d’adresse vers le moteur de recherche.|Per ottene suggestioni di ricerca, %@ hà bisognu di mandà à u mutore di ricerca ciò chì vo stampittate in a barra d’indirizzu.
+Show Search Suggestions?|Afficher les suggestions de recherche ?|Affissà e suggestioni di ricerca ?
+Add Another Search Engine|Ajouter un autre moteur de recherche|Aghjunghje un altru mutore di ricerca
+Add Search Engine|Ajouter moteur recherche|Aghjunghje un mutore di ricerca
+INSTALLED SEARCH ENGINES|MOTEURS DE RECHERCHE INSTALLÉS|MUTORI DI RICERCA INSTALLATI
+Name to display|Nom à afficher|Nome à affissà
+New Search Engine Added.|Nouveau moteur de recherche ajouté.|U mutore di ricerca novu hè aghjuntu.
+Restore Default Search Engines|Restaurer les moteurs de recherche par défaut|Risturà i mutori di ricerca predefiniti
+Paste or enter search string. If necessary, replace search term with: %s.|Collez ou saisissez une chaîne de recherche. Si nécessaire, remplacez le terme recherché avec : %s.|Incullate o stampittate una catena di ricerca. S’ellu hè bisognu, rimpiazzate u termine di ricerca da : %s.
+Blocking other content trackers may break some videos and web pages.|Bloquer les autres traqueurs de contenu peut empêcher certaines vidéos et pages web de s’afficher correctement.|Bluccà l’altri perseguitatori di cuntenutu pò impedisce certe video è pagine web d’affissassi currettamente.
+Block Content Trackers|Bloquer les traqueurs de contenu|Bluccà i perseguitatori di cuntenutu
+%@ will send what you type in the address bar to your search engine.|%@ enverra ce que vous saisissez dans la barre d’adresse à votre moteur de recherche.|%@ manderà à u vostru mutore di ricerca ciò chì vo stampittate in a barra d’indirizzu.
+Mozilla strives to collect only what we need to provide and improve %@ for everyone.|Mozilla veille à collecter uniquement les données nécessaires afin d’offrir et d’améliorer %@ pour tout le monde.|Mozilla face casu di cullettà solu i dati chì sò ghjuvevule per rigalà è amendà %@ per tutti.
+Rate %@|Noter %@|Valutà %@
+SAFARI INTEGRATION|INTÉGRATION SAFARI|INTEGRAZIONE SAFARI
+Get Search Suggestions|Obtenir des suggestions de recherche|Ottene suggestioni di ricerca
+SEARCH|RECHERCHE|RICERCA
+PRIVACY|VIE PRIVÉE|CUNFIDENZIALITÀ
+Set links from websites, emails and messages to open automatically in %@.|Faites en sorte que les liens des sites web, des e-mails et des messages s’ouvrent automatiquement dans %@.|Definisce chì i liami di i siti web, i currieri elettronichi è i messaghji s’aprinu autumaticamente in %@.
+Use Face ID to unlock app|Utiliser Face ID pour déverrouiller l’application|Impiegà Face ID per spalancà l’appiecazione
+Face ID can unlock %@ if a URL is already open in the app|Face ID peut déverrouiller %@ si une adresse web est déjà ouverte dans l’application|Face ID pò spalancà %@ s’è un indirizzu web hè dighjà apertu in l’appiecazione
+Show home screen tips|Afficher des astuces sur l’écran d’accueil|Affissà minichichje nant’à u screnu d’accolta
+Use Touch ID to unlock app|Utiliser Touch ID pour déverrouiller l’application|Impiegà Touch ID per spalancà l’appiecazione
+Touch ID can unlock %@ if a URL is already open in the app|Touch ID peut déverrouiller %@ si une adresse web est déjà ouverte dans l’application|Touch ID pò spalancà %@ s’è un indirizzu web hè dighjà apertu in l’appiecazione
+SIRI SHORTCUTS|RACCOURCIS SIRI|ACCURTATOGHJI SIRI
+Shortcut removed|Raccourci supprimé|Accurtatoghju cacciatu
+Open in Chrome|Ouvrir dans Chrome|Apre in Chrome
+Open in Default Browser|Ouvrir dans le navigateur par défaut|Apre in u navigatore predefinitu
+Open Link|Ouvrir le lien|Apre u liame
+Rename Shortcut|Renommer le raccourci|Rinuminà l’accurtatoghju
+Long press on the Home screen until the icons start to jiggle.|Appuyez longuement sur l’écran d’accueil jusqu’à ce que les icônes commencent à trembler.|Longa incalcata nant’à u screnu d’accolta fine à chì l’icone principianu à tremulà.
+Search for %@. Then choose a widget.|Recherchez %@. Choisissez ensuite un widget.|Ricercate %@. Eppò sciglite un widget.
+Tap on the plus icon.|Appuyez sur l’icône plus.|Appughjate nant’à l’icona « + ».
+Add a %@ Widget|Ajouter un widget %@|Aghjunghjite un widget per %@
+Add to Siri|Ajouter à Siri|Aghjunghje à Siri
+Re-Record or Delete Shortcut|Réenregistrer ou supprimer le raccourci|Arregistrà torna o squassà l’accurtatoghju
+Erase & Open|Effacer et ouvrir|Squassà è apre
+Open Favorite Site|Ouvrir le site préféré|Apre u situ favuritu
+URL to open|URL à ouvrir|Indirizzu à apre
+Lock %@ when a site is open:|Verrouillez %@ lorsqu’un site est ouvert :|Ammarchjunà %@ quandu un situ hè apertu :
+Turn on Face ID|Activer Face ID|Attivà Face ID
+Turn on Touch ID|Activer Touch ID|Attivà Touch ID
+Page Actions > Request Desktop Site|Actions de la page > Voir la version ordinateur|Azzioni di a pagina > Fighjà a versione urdinatore
+Want to see the full desktop version of a site?|Vous souhaitez voir la version complète pour ordinateur d’un site ?|Vulete fighjà a versione urdinatore cumpleta d’un situ ?
+%@ trackers blocked so far|%@ traqueurs bloqués jusqu’à présent|%@ perseguitatori bluccati sin’avà
+You browse. %@ blocks.|Vous naviguez. %@ bloque.|Navigate. %@ blucca.
+Select Add to Shortcuts from the %@ menu|Sélectionnez Ajouter aux raccourcis dans le menu %@|Selezziunate « Aghjunghje à l’accurtatoghji » da u listinu di %@
+Create shortcuts to the sites you visit most:|Créez des raccourcis vers les sites que vous visitez le plus :|Create l’accurtatoghji per i siti chì vo visitate u più :
+Add Siri shortcut|Ajouter un raccourci Siri|Aghjunghje un accurtatoghju Siri
+“Siri, erase my %@ session.”|« Siri, efface ma session %@. »|« Siri, squassa a mo sessione %@. »
+“Siri, open my favorite site.”|« Siri, ouvre mon site préféré. »|« Siri, apre u mo situ preferitu. »
+Try turning off Tracking Protection|Essayez de désactiver la protection contre le pistage|Pruvate di disattivà a prutezzione contr’à u spiunagiu
+Site missing content or acting strange?|Un site se comporte bizarrement ou du contenu manque ?|Ci seria u cuntenutu chì manca o u situ si cumpurteria d’una manera strana ?
+Search in %@|Rechercher dans %@|Circà in %@
+Go to Settings to manage specific privacy & security options.|Rendez-vous dans les paramètres pour gérer les options avancées de sécurité et de vie privée.|Andà à i parametri per urganizà l’ozzioni specifiche di cunfidenzialità è di sicurità.
+%@ stopped this site from spying on you. Tap the shield for info on what we blocked.|%@ a empêché ce site de vous espionner. Appuyez sur le bouclier pour obtenir des informations sur ce que nous avons bloqué.|%@ hà fermatu u spiunagiu da stu situ. Picchichjate u scudu per cunnosce ciò ch’avemu bluccatu.
+Tap the trash anytime to remove all traces of your current session.|Appuyez sur la corbeille à tout moment pour supprimer toute trace de votre session en cours.|Picchichjate a curbella à ogni mumenti per caccià tutta traccia di a vostra sessione currente.
+Add link to autocomplete|Ajouter le lien à la saisie semi-automatique|Aghjunghje u liame à a scrittura mezu-autumatica
+ERASE|EFFACER|SQUASSÀ
+Find in page: %@|Rechercher dans la page : %@|Circà in a pagina : %@
+Search for %@|Rechercher %@|Circà %@
+Trackers blocked|Traqueurs bloqués|Perseguitatori bluccati
+Show Me How|Me montrer comment|Fatemi vede cumu fà
+We’ll leave you to your private browsing, but get a quicker start next time with the %@ widget on your Home screen.|Nous allons vous laisser à votre navigation privée, mais démarrez plus vite les prochaines fois avec le widget %@ sur votre écran d’accueil.|Vi lasciemu à a vostra navigazione privata, ma principiate più prestu e prossime volte cù u widget %@ nant’à u vostru screnu d’accolta.
+Open in %@|Ouvrir dans %@|Apre in %@
+URL Copied To Clipboard|URL copiée dans le presse-papiers|Indirizzu cupiatu in u preme’papei
+%1$@ wants to open %2$@|%1$@ souhaite ouvrir %2$@|%1$@ vole apre %2$@
+Example: searchengine.example.com/search/?q=%s|Exemple : moteurderecherche.example.com/search/?q=%s|Esempiu : esempiudimutorediricerca.com/search/?q=%s
+Protections are OFF for this session|Les protections sont désactivées pour cette session|E prutezzioni sò disattivate per sta sessione
+Protections are ON for this session|Les protections sont activées pour cette session|E prutezzioni sò attivate per sta sessione
+Trackers blocked since %@|Traqueurs bloqués depuis le %@|Perseguitatori bluccati dapoi u %@
+Trackers and scripts to block|Traqueurs et scripts à bloquer|Perseguitatori è scenarii à bluccà
+Content blocking and tracking protection from Mozilla|Blocage de contenu et protection contre le pistage de Mozilla|Blucchime di cuntenutu è prutezzione contr’à u spiunagiu da Mozilla
+Add a %@ shortcut to your Home screen. After adding the widget, touch and hold to edit it and select a different shortcut.|Ajoutez un raccourci %@ à votre écran d’accueil. Après avoir ajouté le widget, appuyez de manière prolongée pour le modifier et sélectionnez un autre raccourci.|Aghjunghjite un accurtatoghju %@ à u vostru screnu d’accolta. Dopu l’aghjuntu di u widget, tuccatelu è mantenelu per mudificallu è selezziunate un altru accurtatoghju.
+Start a private search in %@ with your default search engine.|Lancer une recherche privée dans %@ avec votre moteur de recherche par défaut.|Principià una ricerca privata in %@ cù u vostru mutore di ricerca predefinitu.

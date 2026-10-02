@@ -141,5 +141,18 @@ class InstallerTests(unittest.TestCase):
             self.assertEqual(sorted(path.name for path in (data / 'releases').iterdir()), ['current', 'discord', 'vesktop'])
 
 
+    def test_records_of_removed_discord_versions_are_forgotten(self):
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory)
+            kept = root / 'app-2'
+            (kept / 'resources').mkdir(parents=True)
+            state = {'files': {str(root / 'app-1/resources/app.asar'): {'discord_location': str(root / 'app-1')},
+                               str(kept / 'resources/app.asar'): {'discord_location': str(kept)}}}
+            with patch.object(corsu, 'STATE', root / 'state.json'), redirect_stdout(io.StringIO()):
+                corsu.STATE.write_text(json.dumps(state))
+                installer.forget_removed_discord()
+                self.assertEqual(list(corsu.load_state()['files']), [str(kept / 'resources/app.asar')])
+
+
 if __name__ == '__main__':
     unittest.main()
