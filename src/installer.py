@@ -231,7 +231,11 @@ def releases_in_use():
 def folders_in_use(parent):
     """Names of the folders of `parent` that a file Corsu wrote (or Vesktop's settings) refers to."""
     used = set()
-    prefix = str(parent).replace('\\', '/')
+    # Written paths may use either form of the same folder (C:\Users\RUNNER~1 or C:\Users\runneradmin).
+    prefixes = {str(form).replace('\\', '/') for form in (parent, parent.resolve())}
+    # Windows paths ignore case, and shortcuts do not always keep it.
+    fold = str.lower if corsu.PLATFORM == 'windows' else str
+    prefixes = {fold(prefix) for prefix in prefixes}
     state = corsu.load_state()
     places = [Path(name) for name in state.get('files', {})]
     places.append(corsu.CONFIG / 'vesktop/state.json')
@@ -251,11 +255,12 @@ def folders_in_use(parent):
             continue
         # Compiled AppleScript keeps its strings in UTF-16.
         for encoding in ('utf-8', 'utf-16-be', 'utf-16-le'):
-            text = data.decode(encoding, 'replace').replace('\\\\', '/').replace('\\', '/')
-            start = text.find(prefix)
-            while start != -1:
-                used.add(text[start + len(prefix) + 1:].split('/', 1)[0])
-                start = text.find(prefix, start + 1)
+            text = fold(data.decode(encoding, 'replace').replace('\\\\', '/').replace('\\', '/'))
+            for prefix in prefixes:
+                start = text.find(prefix)
+                while start != -1:
+                    used.add(text[start + len(prefix) + 1:].split('/', 1)[0])
+                    start = text.find(prefix, start + 1)
     return used
 
 

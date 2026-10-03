@@ -110,7 +110,11 @@ def check_bundled_python(root, home, environment):
     if PLATFORM == 'linux':
         assert str(copies[0]) in shortcut.read_text(encoding='utf-8'), 'The Corsu shortcut does not use the copied Python'
     elif PLATFORM == 'windows':
-        assert str(copies[0]).encode('utf-16-le') in shortcut.read_bytes(), 'The Corsu shortcut does not use the copied Python'
+        # The shortcut keeps the long form of the path (runneradmin, not RUNNER~1), in UTF-16 or the ANSI code page.
+        data = shortcut.read_bytes().lower()
+        forms = {str(copies[0]).lower(), str(copies[0].resolve()).lower()}
+        assert any(form.encode(encoding) in data for form in forms for encoding in ('utf-16-le', 'mbcs')), \
+            'The Corsu shortcut does not use the copied Python'
     if PLATFORM != 'linux':
         python = copies[0] / ('python.exe' if PLATFORM == 'windows' else 'bin/python3')
         binding = 'import clr' if PLATFORM == 'windows' else 'import AppKit, WebKit'
