@@ -71,7 +71,7 @@ class Job:
                 return False
             self.title, self.lines, self.running, self.ok, self.progress = title, [], True, None, None
         environment = {**os.environ, 'CORSU_LANG': language, 'PYTHONUNBUFFERED': '1', 'PYTHONIOENCODING': 'utf-8',
-                       'CORSU_SETUP_WINDOW': '1'}
+                       'CORSU_SETUP_WINDOW': '1', 'CORSU_APP_ROOT': str(corsu.ROOT)}
         command = [sys.executable, str(corsu.SRC / script), *arguments]
         threading.Thread(target=self.run, args=(command, environment), daemon=True).start()
         return True

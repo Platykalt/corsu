@@ -312,6 +312,27 @@ class TranslationTests(unittest.TestCase):
                 self.assertTrue(restored['autoUpdate'])
                 self.assertNotIn('enabled', restored['plugins']['Corsu'])
 
+    def test_launchers_follow_the_current_copy(self):
+        with tempfile.TemporaryDirectory() as directory:
+            data = Path(directory) / 'data'
+            current = data / 'releases/0123456789abcdef'
+            (current / 'src').mkdir(parents=True)
+            launcher = Path(directory) / 'firefox-corsu'
+            old = data / 'releases/fedcba9876543210/src/corsu.py'
+            state = data / 'installation.json'
+            with patch.object(corsu, 'DATA', data), patch.object(corsu, 'STATE', state), \
+                    patch.object(corsu, 'ROOT', current):
+                installer = corsu.Installer()
+                installer.write(launcher, f'#!/bin/sh\nexec python3 {old} launch-firefox "$@"\n', 0o755)
+                edited = Path(directory) / 'edited.desktop'
+                installer.write(edited, f'Exec=python3 {old}\n')
+                edited.write_text(f'Exec=python3 {old} --mine\n')
+                corsu.refresh_launchers(installer)
+                self.assertIn(str(current / 'src/corsu.py'), launcher.read_text())
+                self.assertEqual(launcher.stat().st_mode & 0o777, 0o755)
+                # A file the user changed is left as it is.
+                self.assertIn(str(old), edited.read_text())
+
 
 if __name__ == '__main__':
     unittest.main()

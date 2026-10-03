@@ -1092,6 +1092,30 @@ def setup_shortcut(installer):
                         'Categories=Settings;\n')
 
 
+def refresh_launchers(installer):
+    """Point every launcher and shortcut Corsu wrote at this copy of Corsu. Installing one part used to leave the
+    others on the copy they were written with, which then could never be deleted."""
+    releases = (DATA / 'releases').resolve()
+    if not ROOT.is_relative_to(releases):
+        return
+    pattern = re.compile(re.escape(str(releases)) + r'([\\/])([0-9a-f]{16})(?=[\\/])')
+    for name, record in list(installer.state['files'].items()):
+        path = Path(name)
+        # Vencord's installer owns app.asar; trees and system files are rebuilt by their own steps.
+        if path.name == 'app.asar' or record.get('tree') or record.get('system') or not path.is_file():
+            continue
+        data = path.read_bytes()
+        if digest(data) != record.get('installed_sha256'):
+            continue
+        try:
+            text = data.decode('utf-8')
+        except UnicodeDecodeError:
+            continue
+        updated = pattern.sub(lambda match: str(releases) + match.group(1) + ROOT.name, text)
+        if updated != text:
+            installer.write(path, updated, mode=path.stat().st_mode & 0o777, toggle=record.get('toggle', False))
+
+
 def desktop(installer, firefox=True, vesktop=True):
     if PLATFORM == 'windows':
         if firefox:
@@ -1148,6 +1172,7 @@ def install(components=None, qt_system=False):
     if 'discord' in components:
         installer.json_settings(CONFIG / 'Vencord/settings/settings.json', plugin_settings, toggle=True)
     desktop(installer, firefox='firefox' in components, vesktop='vesktop' in components)
+    refresh_launchers(installer)
     if runtime:
         profile = firefox_profile()
         if profile:

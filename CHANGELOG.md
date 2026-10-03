@@ -1,5 +1,12 @@
 # Changelog
 
+## 0.19.2 (2026-10-03)
+
+- An open Discord or Vesktop keeps the Corsu copy it started with until it closes: new windows and style reloads no
+  longer fail after an update made while it is running.
+- The Corsu app no longer stops with "release.json not found" after an update it started itself.
+- Every installation points all launchers and shortcuts at the current copy, so earlier copies can be deleted.
+
 ## 0.19.1 (2026-10-03)
 
 - Fixed: after installing or updating only Discord, links and downloads opened from Discord did nothing. The

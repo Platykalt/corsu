@@ -206,12 +206,47 @@ def releases_in_use():
     return used
 
 
-def prune_releases(current):
-    """Delete the copies of earlier Corsu versions, keeping the current one and any still in use."""
+CLIENTS = ('Discord', 'DiscordPTB', 'DiscordCanary', 'Vesktop', 'vesktop')
+
+
+def clients_running():
+    """Whether Discord or Vesktop is open: an open client keeps using the Corsu copy it started with."""
+    try:
+        if corsu.PLATFORM == 'linux':
+            for comm in Path('/proc').glob('[0-9]*/comm'):
+                try:
+                    if comm.read_text().strip() in CLIENTS:
+                        return True
+                except OSError:
+                    continue
+            return False
+        if corsu.PLATFORM == 'windows':
+            output = subprocess.run(['tasklist', '/FO', 'CSV', '/NH'], capture_output=True, text=True, check=False).stdout
+            return any(f'"{name}.exe"'.lower() in output.lower() for name in CLIENTS)
+        return any(subprocess.run(['pgrep', '-x', name], capture_output=True, check=False).returncode == 0
+                   for name in CLIENTS)
+    except OSError:
+        # Unknown: keeping a copy one run longer is harmless, deleting one in use is not.
+        return True
+
+
+def prune_releases(current, loaded=()):
+    """Delete the copies of earlier Corsu versions, keeping the current one, any still in use, and the ones an open
+    Discord or Vesktop loaded before this run (its new windows and style reloads still read them)."""
     folder = corsu.DATA / 'releases'
     if not folder.is_dir():
         return
     keep = releases_in_use() | {Path(current).name}
+    # The Corsu app that started this installation keeps running from its own copy.
+    if os.environ.get('CORSU_APP_ROOT'):
+        keep.add(Path(os.environ['CORSU_APP_ROOT']).name)
+    state = corsu.load_state()
+    running = set(state.get('running_releases', [])) | set(loaded)
+    running = {name for name in running if (folder / name).is_dir()} if clients_running() else set()
+    keep |= running
+    if state.get('running_releases', []) != sorted(running) and corsu.STATE.exists():
+        state['running_releases'] = sorted(running)
+        corsu.STATE.write_text(json.dumps(state, indent=2), encoding='utf-8')
     for release in folder.iterdir():
         if release.is_dir() and release.name not in keep:
             shutil.rmtree(release, ignore_errors=True)
@@ -447,6 +482,8 @@ def main(argv=None):
         print(t('Nothing was changed.', 'Rien n\'a été modifié.'))
         return 0
     corsu.progress(3, 'Preparing', 'Préparation')
+    # What Discord and Vesktop loaded at their start: they keep using it until they restart.
+    loaded = releases_in_use()
     target = deploy_release()
     if target != ROOT:
         command = [sys.executable, str(target / 'src/installer.py'), '--yes', '--components', *components]
@@ -474,9 +511,11 @@ def main(argv=None):
         for other in sibling_versions(location):
             install_discord(other)
     corsu.progress(95, 'Creating shortcuts', 'Création des raccourcis')
-    corsu.setup_shortcut(corsu.Installer())
+    shortcuts = corsu.Installer()
+    corsu.setup_shortcut(shortcuts)
+    corsu.refresh_launchers(shortcuts)
     if ROOT.is_relative_to((corsu.DATA / 'releases').resolve()):
-        prune_releases(ROOT)
+        prune_releases(ROOT, loaded)
     applications = corsu.HOME / '.local/share/applications'
     if corsu.PLATFORM == 'linux' and shutil.which('update-desktop-database') and applications.is_dir():
         # Only refreshes the menu cache; menus still update on the next login when it fails.

@@ -1,5 +1,6 @@
 import io
 import json
+import os
 from pathlib import Path
 import tempfile
 import unittest
@@ -175,6 +176,40 @@ class InstallerTests(unittest.TestCase):
                 corsu.STATE.write_text(json.dumps(state))
                 installer.forget_removed_discord()
                 self.assertEqual(list(corsu.load_state()['files']), [str(kept / 'resources/app.asar')])
+
+    def test_copies_loaded_by_an_open_client_stay_until_it_closes(self):
+        with tempfile.TemporaryDirectory() as directory:
+            data = Path(directory) / 'data'
+            for name in ('current', 'loaded', 'old'):
+                (data / 'releases' / name).mkdir(parents=True)
+            state = data / 'installation.json'
+            state.write_text(json.dumps({'files': {}}))
+            with patch.object(corsu, 'DATA', data), patch.object(corsu, 'STATE', state), \
+                    patch.object(corsu, 'CONFIG', Path(directory) / 'config'):
+                with patch.object(installer, 'clients_running', return_value=True):
+                    installer.prune_releases(data / 'releases/current', {'loaded'})
+                    self.assertEqual(sorted(path.name for path in (data / 'releases').iterdir()), ['current', 'loaded'])
+                    # A later run still knows the open client uses it, even though nothing points there any more.
+                    installer.prune_releases(data / 'releases/current')
+                    self.assertTrue((data / 'releases/loaded').is_dir())
+                with patch.object(installer, 'clients_running', return_value=False):
+                    installer.prune_releases(data / 'releases/current')
+                self.assertEqual(sorted(path.name for path in (data / 'releases').iterdir()), ['current'])
+                self.assertEqual(json.loads(state.read_text())['running_releases'], [])
+
+    def test_the_copy_of_the_open_corsu_app_is_kept(self):
+        with tempfile.TemporaryDirectory() as directory:
+            data = Path(directory) / 'data'
+            for name in ('current', 'app', 'old'):
+                (data / 'releases' / name).mkdir(parents=True)
+            state = data / 'installation.json'
+            state.write_text(json.dumps({'files': {}}))
+            with patch.object(corsu, 'DATA', data), patch.object(corsu, 'STATE', state), \
+                    patch.object(corsu, 'CONFIG', Path(directory) / 'config'), \
+                    patch.object(installer, 'clients_running', return_value=False), \
+                    patch.dict(os.environ, {'CORSU_APP_ROOT': str(data / 'releases/app')}):
+                installer.prune_releases(data / 'releases/current')
+            self.assertEqual(sorted(path.name for path in (data / 'releases').iterdir()), ['app', 'current'])
 
 
 if __name__ == '__main__':
