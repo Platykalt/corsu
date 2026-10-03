@@ -11,7 +11,7 @@ curl -fsSL https://raw.githubusercontent.com/Platykalt/corsu/main/install/get.sh
 It downloads the latest release, checks its SHA-256 checksum and starts the installer. To do it by hand, download
 [corsu-linux.tar.gz](https://github.com/Platykalt/corsu/releases/latest/download/corsu-linux.tar.gz), extract it and run `./"Install for Linux.sh"` from the `corsu` folder.
 
-The Corsu app opens in your browser. The programs found are all ticked: untick what you do not want, click
+The Corsu app opens in its own window. The programs found are all ticked: untick what you do not want, click
 Continue, read what Corsu will change, then click Install. Without a graphical session, or with `--text`, everything
 happens in the terminal: Enter installs everything ticked, and a number ticks or unticks one item. Some steps ask for your password: translating a browser installed by your distribution,
 and the system translations used by GTK programs and terminal commands.

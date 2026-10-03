@@ -314,14 +314,21 @@ class TranslationTests(unittest.TestCase):
 
     def test_launchers_follow_the_current_copy(self):
         with tempfile.TemporaryDirectory() as directory:
-            data = Path(directory) / 'data'
+            # Reached through a link, like /var -> /private/var on macOS or a short name on Windows: launchers hold
+            # the path as written, which differs from the real one.
+            (Path(directory) / 'real').mkdir()
+            try:
+                (Path(directory) / 'link').symlink_to(Path(directory) / 'real', target_is_directory=True)
+                data = Path(directory) / 'link/data'
+            except OSError:
+                data = Path(directory) / 'real/data'
             current = data / 'releases/0123456789abcdef'
             (current / 'src').mkdir(parents=True)
             launcher = Path(directory) / 'firefox-corsu'
             old = data / 'releases/fedcba9876543210/src/corsu.py'
             state = data / 'installation.json'
             with patch.object(corsu, 'DATA', data), patch.object(corsu, 'STATE', state), \
-                    patch.object(corsu, 'ROOT', current):
+                    patch.object(corsu, 'ROOT', current.resolve()):
                 installer = corsu.Installer()
                 installer.write(launcher, f'#!/bin/sh\nexec python3 {old} launch-firefox "$@"\n', 0o755)
                 edited = Path(directory) / 'edited.desktop'

@@ -93,9 +93,11 @@ seul, pour une heure ou jusqu'à ce que vous le réactiviez.
 
 ## L'application Corsu
 
-L'application Corsu est une page servie par Corsu lui-même, à une adresse locale (`127.0.0.1`) que seul votre
-ordinateur peut joindre, et protégée par une clé tirée au hasard à chaque ouverture. Rien n'est envoyé sur Internet,
-hormis les téléchargements décrits plus haut. Elle se ferme d'elle-même dix minutes après que vous avez fermé la page.
+L'application Corsu s'ouvre dans une fenêtre à elle. C'est une page servie par Corsu lui-même, à une adresse locale
+que seul votre ordinateur peut joindre : tant que Corsu est ouvert, vous pouvez aussi l'afficher dans votre navigateur
+à l'adresse `http://localhost:7744`. Les autres sites ouverts dans le navigateur ne peuvent pas s'en servir. Rien
+n'est envoyé sur Internet, hormis les téléchargements décrits plus haut. Elle s'arrête peu après la fermeture de sa
+fenêtre, ou dix minutes après votre dernière visite dans le navigateur.
 
 Quand elle est ouverte, l'application demande à GitHub, au plus une fois par heure, le numéro de la dernière version
 de Corsu. Si une version plus récente existe, le bouton Mettre à jour télécharge l'archive de votre système, vérifie

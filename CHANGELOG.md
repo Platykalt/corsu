@@ -1,5 +1,17 @@
 # Changelog
 
+## 0.20.0 (2026-10-03)
+
+- The Corsu app opens in a window of its own, with Corsu's name and icon, instead of a browser tab: WebKitGTK on
+  Linux, pywebview when installed, otherwise the app window of Edge, Chrome or Chromium, and a browser tab only when
+  none of these exists.
+- While Corsu is open, it can also be shown in any browser at the fixed address http://localhost:7744 (the next free
+  port when another program holds it). Only Corsu's own page can drive it: other sites, other host names and, on
+  Linux, other accounts on the computer are refused.
+- `--browser` opens a tab instead of the window.
+- Fixed from 0.19.2, which was not published: launchers are found again when the data folder is reached through a
+  link or a short Windows name.
+
 ## 0.19.2 (2026-10-03)
 
 - An open Discord or Vesktop keeps the Corsu copy it started with until it closes: new windows and style reloads no

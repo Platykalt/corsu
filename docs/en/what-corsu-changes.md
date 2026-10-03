@@ -89,9 +89,10 @@ for an hour or until you switch it on again.
 
 ## The Corsu app
 
-The Corsu app is a page served by Corsu itself at a local address (`127.0.0.1`) that only your computer can
-reach, protected by a key drawn at random each time it opens. Nothing is sent to the internet apart from the downloads
-described above. It stops by itself ten minutes after you close the page.
+The Corsu app opens in a window of its own. It is a page served by Corsu itself at a local address that only your
+computer can reach: while Corsu is open, you can also show it in your browser at `http://localhost:7744`. Other sites
+open in the browser cannot use it. Nothing is sent to the internet apart from the downloads described above. It stops
+shortly after its window closes, or ten minutes after your last visit in the browser.
 
 While it is open, the app asks GitHub, at most once an hour, for the number of the latest Corsu release. When a newer
 one exists, the Update button downloads the archive for your system, checks its SHA-256 checksum and reinstalls the

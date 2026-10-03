@@ -26,11 +26,17 @@ vendor/             fichiers tiers figés
 
 Seule la bibliothèque standard de Python est utilisée. Construire le plugin Discord demande Node.js 22 ou plus et pnpm.
 
-L'application Corsu (`src/app.py`) est un petit serveur web lié à 127.0.0.1, sur un port au hasard. La page reçoit une clé
-aléatoire dans la partie de l'adresse après `#` et l'envoie à chaque requête ; une requête sans elle, ou avec un autre
-`Host`, est refusée, si bien que les autres pages ouvertes dans le navigateur ne peuvent pas le piloter. Chaque action
-lance `installer.py` dans un processus à part et la page affiche ce qu'il écrit. Le serveur s'arrête dix minutes
-après la dernière ouverture de la page. `app.py --text` donne le menu dans le terminal.
+L'application Corsu (`src/app.py`) est un petit serveur web lié à 127.0.0.1, à l'adresse fixe `http://localhost:7744`
+(le port suivant libre si un autre programme occupe celui-ci). `src/window.py` l'affiche dans une fenêtre à elle :
+pywebview s'il est présent, WebKitGTK sous Linux, sinon la fenêtre d'application d'Edge, Chrome ou Chromium, et en
+dernier recours un onglet du navigateur. La même adresse s'ouvre aussi dans n'importe quel navigateur tant que Corsu
+tourne. Seule la page de Corsu peut le piloter : le serveur refuse tout autre `Host` (contre le rebinding DNS), exige
+l'en-tête `X-Corsu` qu'une page d'un autre site ne peut pas envoyer sans une autorisation que le serveur ne donne
+jamais, refuse un `Origin` étranger, et sous Linux vérifie que la connexion vient du même compte. Chaque action lance
+`installer.py` dans un processus à part et la page affiche ce qu'il écrit. Le serveur s'arrête 30 secondes après la
+fermeture de la fenêtre, ou dix minutes après la dernière visite dans un navigateur. `app.py --browser` ouvre un
+onglet au lieu de la fenêtre, `app.py --no-browser` ne fait que servir l'adresse, `app.py --text` donne le menu dans
+le terminal.
 
 ## Lexique
 

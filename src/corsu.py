@@ -1089,7 +1089,7 @@ def setup_shortcut(installer):
                         'GenericName=Corsican language\nGenericName[fr]=Langue corse\nGenericName[co]=Lingua corsa\n'
                         'Comment=Choose which programs are in Corsican\nComment[fr]=Choisir les logiciels en corse\n'
                         f'Exec=python3 {shlex.quote(str(app))}\nTerminal=false\nIcon={SRC / "app/corsu.svg"}\n'
-                        'Categories=Settings;\n')
+                        'StartupWMClass=corsu\nCategories=Settings;\n')
 
 
 def refresh_launchers(installer):
@@ -1098,7 +1098,9 @@ def refresh_launchers(installer):
     releases = (DATA / 'releases').resolve()
     if not ROOT.is_relative_to(releases):
         return
-    pattern = re.compile(re.escape(str(releases)) + r'([\\/])([0-9a-f]{16})(?=[\\/])')
+    # Launchers hold the path as it was written (C:\Users\RUNNER~1, /var/...), which may differ from the real one.
+    prefixes = sorted({str(DATA / 'releases'), str(releases)}, key=len, reverse=True)
+    pattern = re.compile('(' + '|'.join(map(re.escape, prefixes)) + r')([\\/])([0-9a-f]{16})(?=[\\/])')
     for name, record in list(installer.state['files'].items()):
         path = Path(name)
         # Vencord's installer owns app.asar; trees and system files are rebuilt by their own steps.
@@ -1111,7 +1113,7 @@ def refresh_launchers(installer):
             text = data.decode('utf-8')
         except UnicodeDecodeError:
             continue
-        updated = pattern.sub(lambda match: str(releases) + match.group(1) + ROOT.name, text)
+        updated = pattern.sub(lambda match: match.group(1) + match.group(2) + ROOT.name, text)
         if updated != text:
             installer.write(path, updated, mode=path.stat().st_mode & 0o777, toggle=record.get('toggle', False))
 

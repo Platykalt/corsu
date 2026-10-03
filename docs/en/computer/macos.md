@@ -8,7 +8,7 @@ The simplest way is to open Terminal (Applications, then Utilities) and paste:
 curl -fsSL https://raw.githubusercontent.com/Platykalt/corsu/main/install/get.sh | sh
 ```
 
-It downloads the latest release, checks its SHA-256 checksum and opens the Corsu app in your browser. The
+It downloads the latest release, checks its SHA-256 checksum and opens the Corsu app. The
 programs found are all ticked: untick what you do not want, click Continue, read what Corsu will change, then click
 Install.
 

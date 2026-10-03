@@ -270,7 +270,6 @@ dl.facts dt:not(:first-of-type), dl.facts dd:not(:first-of-type) { border-top: 1
 
 <script>
 "use strict";
-const key = location.hash.slice(1);
 const text = {
   co: {
     nav_programs: "Prugrammi", nav_add: "Aghjunghje", nav_help: "Aiutu", nav_about: "À prupositu", language: "Lingua",
@@ -457,7 +456,7 @@ function make(tag, attributes = {}, ...children) {
 async function call(path, body) {
   const response = await fetch(path, {
     method: body ? "POST" : "GET",
-    headers: { "X-Corsu-Key": key, "Content-Type": "application/json" },
+    headers: { "X-Corsu": "1", "Content-Type": "application/json" },
     body: body ? JSON.stringify({ language, ...body }) : undefined,
   });
   if (response.status === 409) { alert(t("busy")); return null; }
@@ -630,7 +629,7 @@ async function loadReview() {
 async function answer(verdict) {
   if (!reviewItem) return;
   const corsican = $("review-corsican").value;
-  const response = await fetch("/api/review", { method: "POST", headers: { "X-Corsu-Key": key, "Content-Type": "application/json" },
+  const response = await fetch("/api/review", { method: "POST", headers: { "X-Corsu": "1", "Content-Type": "application/json" },
     body: JSON.stringify({ language, french: reviewItem.french, english: reviewItem.english, verdict, corsican }) });
   if (!response.ok) {
     const result = await response.json().catch(() => ({}));

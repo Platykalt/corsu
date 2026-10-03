@@ -54,7 +54,7 @@ La version longue : [Pourquoi Corsu](docs/fr/pourquoi-corsu.md).
 Ou en une ligne, dans PowerShell sous Windows : `irm https://raw.githubusercontent.com/Platykalt/corsu/main/install/get.ps1 | iex`
 Dans le Terminal sous macOS ou Linux : `curl -fsSL https://raw.githubusercontent.com/Platykalt/corsu/main/install/get.sh | sh`
 
-L'application Corsu s'ouvre dans votre navigateur avec les logiciels trouvés, tous cochés. Elle montre ce qui va
+L'application Corsu s'ouvre dans sa fenêtre avec les logiciels trouvés, tous cochés. Elle montre ce qui va
 changer avant de le faire, et Corsu garde une copie de chaque fichier modifié. Rouvrez-la ensuite depuis le menu des
 applications pour ajouter un logiciel, remettre une partie dans sa langue d'origine (le terminal pendant une heure,
 par exemple) ou tout retirer.
@@ -123,7 +123,7 @@ The long version: [Why Corsu](docs/en/why-corsu.md).
 Or in one line, in PowerShell on Windows: `irm https://raw.githubusercontent.com/Platykalt/corsu/main/install/get.ps1 | iex`
 In Terminal on macOS or Linux: `curl -fsSL https://raw.githubusercontent.com/Platykalt/corsu/main/install/get.sh | sh`
 
-The Corsu app opens in your browser with the programs found, all ticked. It shows what will change before
+The Corsu app opens in its own window with the programs found, all ticked. It shows what will change before
 doing it, and Corsu keeps a copy of every file it changes. Open it again from the applications menu to add a program,
 put a part back in its original language (the terminal for an hour, for example) or remove everything.
 

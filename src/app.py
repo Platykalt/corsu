@@ -1,20 +1,19 @@
 #!/usr/bin/env python3
 """The Corsu app: install Corsu, switch each part on or off, pause the terminal, remove everything.
 
-The window is a local page opened in the browser, served on 127.0.0.1 only and protected by a random key, so it
-works the same way on Windows, macOS and Linux without extra libraries. `--text` gives a menu in the terminal.
+The window is a local page served on 127.0.0.1 at a fixed address (http://localhost:7744 while Corsu is open), shown
+in a window of its own (see window.py) or in any browser. `--browser` opens it in the browser instead of a window,
+`--text` gives a menu in the terminal.
 """
 import json
 import os
 from pathlib import Path
-import secrets
 import subprocess
 import sys
 import threading
 import time
 import urllib.request
 from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
-import webbrowser
 
 import corsu
 import installer
@@ -25,6 +24,11 @@ from installer import t
 PAGE = Path(__file__).resolve().parent / 'app/index.html'
 # The page asks for news every few seconds; without any for this long, the window was closed.
 IDLE_SECONDS = 600
+# Once Corsu's own window is closed, a browser tab on the address keeps it running; without one it stops sooner.
+CLOSED_IDLE_SECONDS = 30
+# The fixed address; when another program holds the port, the next free one is used.
+PORT = 7744
+PORTS = range(PORT, PORT + 10)
 
 # Names stay general (what the part is); the detail line says what changes.
 COMPONENTS = {
@@ -164,9 +168,25 @@ def snapshot():
     }
 
 
-def make_handler(key, job, activity):
+def peer_uid(port):
+    """The user owning the local TCP connection from `port` (Linux only; None elsewhere or when unknown)."""
+    for table in ('/proc/net/tcp', '/proc/net/tcp6'):
+        try:
+            lines = Path(table).read_text().splitlines()[1:]
+        except OSError:
+            continue
+        for line in lines:
+            fields = line.split()
+            if len(fields) > 7 and int(fields[1].rsplit(':', 1)[1], 16) == port:
+                return int(fields[7])
+    return None
+
+
+def make_handler(job, activity, port):
     page = PAGE.read_bytes()
     icon = (PAGE.parent / 'corsu.svg').read_bytes()
+    hosts = {f'127.0.0.1:{port}', f'localhost:{port}'}
+    origins = {f'http://{host}' for host in hosts}
 
     class Handler(BaseHTTPRequestHandler):
         def log_message(self, *arguments):
@@ -185,18 +205,27 @@ def make_handler(key, job, activity):
             self.wfile.write(data)
 
         def allowed(self):
-            # Other pages open in the browser cannot read the key, so they cannot drive Corsu.
-            host = self.headers.get('Host', '')
-            return host.startswith(('127.0.0.1:', 'localhost:')) and secrets.compare_digest(
-                self.headers.get('X-Corsu-Key', ''), key)
+            """Only Corsu's own page may drive Corsu. The Host check stops other sites reaching it through a
+            rebound domain name; the custom header can only be sent by a page of this address (a page elsewhere
+            would need permission the server never gives); on Linux the connection must also come from this user,
+            so another account on the same computer cannot use it."""
+            if self.headers.get('Host', '') not in hosts or self.headers.get('X-Corsu') != '1':
+                return False
+            if self.headers.get('Origin') and self.headers['Origin'] not in origins:
+                return False
+            if corsu.PLATFORM == 'linux' and hasattr(os, 'getuid'):
+                return peer_uid(self.client_address[1]) in (None, os.getuid())
+            return True
 
         def do_GET(self):
-            activity[0] = time.monotonic()
             if self.path.split('?')[0] == '/':
+                if self.headers.get('Host', '') not in hosts:
+                    return self.send(403, {'error': 'forbidden'})
                 return self.send(200, page, 'text/html; charset=utf-8')
             if self.path == '/corsu.svg':
                 return self.send(200, icon, 'image/svg+xml')
             if self.path == '/api/state' and self.allowed():
+                activity[0] = time.monotonic()
                 return self.send(200, {**snapshot(), 'job': job.snapshot()})
             if self.path.startswith('/api/review/next') and self.allowed():
                 section = 'Google' if 'section=Google' in self.path else 'Discord'
@@ -206,9 +235,9 @@ def make_handler(key, job, activity):
             self.send(404, {'error': 'not found'})
 
         def do_POST(self):
-            activity[0] = time.monotonic()
             if not self.allowed():
                 return self.send(403, {'error': 'forbidden'})
+            activity[0] = time.monotonic()
             length = min(int(self.headers.get('Content-Length') or 0), 65536)
             try:
                 request = json.loads(self.rfile.read(length) or b'{}')
@@ -279,27 +308,40 @@ def check_update():
 
 
 def running_session():
-    """The address of a Corsu window already open, so a second click shows it instead of starting another."""
+    """The address of a Corsu already open, so a second click shows it instead of starting another."""
     try:
         url = json.loads(SESSION.read_text(encoding='utf-8'))['url']
-        request = urllib.request.Request(url.split('#')[0] + 'api/state', headers={'X-Corsu-Key': url.split('#')[1]})
+        request = urllib.request.Request(url + 'api/state', headers={'X-Corsu': '1'})
         with urllib.request.urlopen(request, timeout=2) as response:
             return url if response.status == 200 else None
-    except (OSError, ValueError, KeyError, IndexError):
+    except (OSError, ValueError, KeyError):
         return None
 
 
-def serve(open_browser=True):
+def listen(job, activity):
+    """Serve on the fixed port, or the next free one when another program holds it."""
+    for port in PORTS:
+        try:
+            return ThreadingHTTPServer(('127.0.0.1', port), make_handler(job, activity, port))
+        except OSError:
+            continue
+    raise RuntimeError(t(f'Ports {PORTS.start} to {PORTS.stop - 1} are all in use; close the program using them.',
+                         f'Les ports {PORTS.start} à {PORTS.stop - 1} sont tous utilisés ; fermez le programme qui les occupe.'))
+
+
+def serve(mode='window'):
+    """Run Corsu at its address. `mode`: 'window' (its own window, the browser when none is possible), 'browser'
+    or 'none' (only the address)."""
     existing = running_session()
     if existing:
-        if open_browser:
-            webbrowser.open(existing)
+        if mode != 'none':
+            import window
+            window.show(existing, mode)
         return
-    key = secrets.token_urlsafe(24)
     job = Job()
     activity = [time.monotonic()]
-    server = ThreadingHTTPServer(('127.0.0.1', 0), make_handler(key, job, activity))
-    url = f'http://127.0.0.1:{server.server_address[1]}/#{key}'
+    server = listen(job, activity)
+    url = f'http://localhost:{server.server_address[1]}/'
     threading.Thread(target=server.serve_forever, daemon=True).start()
     threading.Thread(target=check_update, daemon=True).start()
     try:
@@ -309,14 +351,18 @@ def serve(open_browser=True):
             SESSION.chmod(0o600)
     except OSError:
         pass
-    print(t(f'Corsu is open in your browser. If not, open this address:\n  {url}\nClose this window to stop.',
-            f'Corsu est ouvert dans votre navigateur. Sinon, ouvrez cette adresse :\n  {url}\n'
-            'Fermez cette fenêtre pour arrêter.'), flush=True)
-    if open_browser:
-        webbrowser.open(url)
+    print(t(f'Corsu is open at {url} until you close it.', f'Corsu est ouvert à l\'adresse {url} jusqu\'à sa fermeture.'),
+          flush=True)
+    idle = IDLE_SECONDS
+    if mode != 'none':
+        import window
+        # The window blocks until it is closed; a browser tab returns at once and the idle timer decides.
+        if window.show(url.replace('localhost', '127.0.0.1'), mode):
+            idle = CLOSED_IDLE_SECONDS
+            activity[0] = time.monotonic()
     try:
-        while job.running or time.monotonic() - activity[0] < IDLE_SECONDS:
-            time.sleep(2)
+        while job.running or time.monotonic() - activity[0] < idle:
+            time.sleep(1)
     except KeyboardInterrupt:
         pass
     server.shutdown()
@@ -377,7 +423,7 @@ def main():
     try:
         if '--text' in sys.argv:
             return run_text()
-        serve(open_browser='--no-browser' not in sys.argv)
+        serve('none' if '--no-browser' in sys.argv else 'browser' if '--browser' in sys.argv else 'window')
     except Exception as error:
         print(logbook.failure(error), file=sys.stderr)
         raise SystemExit(1)

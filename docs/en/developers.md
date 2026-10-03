@@ -26,10 +26,15 @@ vendor/             pinned third-party files
 
 Only Python's standard library is used. Building the Discord plugin needs Node.js 22 or newer and pnpm.
 
-The Corsu app (`src/app.py`) is a small web server bound to 127.0.0.1 on a random port. The page gets a random key in
-the address fragment and sends it with every request; requests without it, or with another `Host`, are refused, so
-other pages open in the browser cannot drive it. Every action runs `installer.py` in a child process and the page
-shows its output. The server stops ten minutes after the page was last open. `app.py --text` is the terminal menu.
+The Corsu app (`src/app.py`) is a small web server bound to 127.0.0.1 at the fixed address `http://localhost:7744`
+(the next free port when another program holds it). `src/window.py` shows it in a window of its own: pywebview when
+present, WebKitGTK on Linux, otherwise the app window of Edge, Chrome or Chromium, and as a last resort a browser tab.
+The same address also opens in any browser while Corsu runs. Only Corsu's page can drive it: the server refuses any
+other `Host` (against DNS rebinding), requires the `X-Corsu` header, which a page from another site cannot send
+without a permission the server never grants, refuses a foreign `Origin`, and on Linux checks that the connection
+comes from the same account. Every action runs `installer.py` in a child process and the page shows its output. The
+server stops 30 seconds after the window closes, or ten minutes after the last visit in a browser. `app.py --browser`
+opens a tab instead of the window, `app.py --no-browser` only serves the address, `app.py --text` is the terminal menu.
 
 ## Lexicon
 
