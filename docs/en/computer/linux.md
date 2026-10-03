@@ -16,7 +16,9 @@ Continue, read what Corsu will change, then click Install. Without a graphical s
 happens in the terminal: Enter installs everything ticked, and a number ticks or unticks one item. Some steps ask for your password: translating a browser installed by your distribution,
 and the system translations used by GTK programs and terminal commands.
 
-Corsu needs Python 3.10 or newer, which current distributions include.
+Corsu uses the distribution's Python 3.10 or newer, which current distributions include: with WebKitGTK it gives
+Corsu its window. Without it, the archive (x86_64 processors) carries its own Python; Corsu then opens in Chrome,
+Chromium or the browser.
 
 ## Differences between distributions
 

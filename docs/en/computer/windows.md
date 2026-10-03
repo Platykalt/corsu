@@ -13,8 +13,9 @@ Windows 10 and 11 (64-bit).
 Windows may warn you that the file comes from the internet. Choose Run, or More info and then Run anyway. The file
 is a short text script, and Windows shows this warning for any downloaded script that is not signed.
 
-Corsu needs Python 3.10 or newer. If it is missing, the script offers to install it with `winget`; answer `y`, wait
-for it to finish, and double-click `Install for Windows.cmd` again.
+There is nothing else to install: the archive carries its own Python, with what Corsu's window needs (WebView2,
+already part of Windows 10 and 11). From the source code, Python 3.10 or newer is needed; when it is missing, the
+script offers to install it with `winget`.
 
 You can also install from PowerShell in one line:
 

@@ -1,5 +1,14 @@
 # Changelog
 
+## 0.21.0 (2026-10-03)
+
+- Nothing else to install: the Windows, macOS and Linux archives carry their own Python (python-build-standalone,
+  checked against its published SHA-256), with what Corsu's window needs on Windows (WebView2) and macOS (WebKit).
+  The installer copies it once into Corsu's data folder and the shortcuts use that copy. On Linux, the distribution's
+  Python stays the first choice, since its GTK bindings give Corsu its window.
+- Linux shortcuts call the Python that installed Corsu instead of whatever `python3` is first on the path.
+- Archives: about 41 MB on Linux (was 10), Python trimmed of Tk, IDLE, pip, headers and tests.
+
 ## 0.20.1 (2026-10-03)
 
 Includes 0.20.0, which was not published.

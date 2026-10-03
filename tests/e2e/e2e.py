@@ -99,6 +99,25 @@ def fake_discord(home):
     return location, archive, original
 
 
+def check_bundled_python(root, home, environment):
+    """Run from a release archive's own Python: it is copied to Corsu's data folder, the shortcuts use that copy,
+    and it carries what Corsu's window needs."""
+    if not Path(sys.executable).resolve().is_relative_to((Path(root) / 'runtime').resolve()):
+        return
+    copies = list((data_directory(home) / 'runtime').glob('*/python'))
+    assert copies, 'The bundled Python was not copied to the data folder'
+    shortcut = launchers(home)[1]
+    if PLATFORM == 'linux':
+        assert str(copies[0]) in shortcut.read_text(encoding='utf-8'), 'The Corsu shortcut does not use the copied Python'
+    elif PLATFORM == 'windows':
+        assert str(copies[0]).encode('utf-16-le') in shortcut.read_bytes(), 'The Corsu shortcut does not use the copied Python'
+    if PLATFORM != 'linux':
+        python = copies[0] / ('python.exe' if PLATFORM == 'windows' else 'bin/python3')
+        binding = 'import clr' if PLATFORM == 'windows' else 'import AppKit, WebKit'
+        subprocess.run([str(python), '-c', f'import webview; {binding}'], check=True)
+    print('PASS: bundled Python copied, used by the shortcuts and able to open the window')
+
+
 def check_discord(root, home, environment):
     location, archive, original = fake_discord(home)
     run(root, environment, 'src/installer.py', '--components', 'discord', '--discord-path', str(location), '--yes')
@@ -108,6 +127,7 @@ def check_discord(root, home, environment):
     plugin = json.loads((settings / 'Vencord/settings/settings.json').read_text(encoding='utf-8'))
     assert plugin['plugins']['Corsu']['enabled'] and plugin['autoUpdate'] is False, plugin
     assert launchers(home)[1].exists(), 'Missing Corsu shortcut'
+    check_bundled_python(root, home, environment)
     run(root, environment, 'src/installer.py', '--uninstall', '--yes')
     assert archive.read_bytes() == original, 'Original Discord archive was not restored'
     assert not archive.with_name('_app.asar').exists(), 'Backup archive left next to Discord'

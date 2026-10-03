@@ -17,8 +17,9 @@ double-cliquer sur `Install for macOS.command`. La première fois, macOS refuser
 fichier n'est pas signé : ouvrez Réglages Système, puis Confidentialité et sécurité, cliquez sur Ouvrir quand même
 à côté du message, puis rouvrez le fichier.
 
-Corsu a besoin de Python 3.10 ou plus récent. Si macOS propose d'installer les outils de développement en ligne de
-commande, acceptez : ils contiennent Python. Python est aussi disponible sur [python.org](https://www.python.org/downloads/macos/).
+Il n'y a rien d'autre à installer : l'archive contient son propre Python, pour les Mac Intel comme pour les Mac
+Apple Silicon. Depuis le code source, il faut Python 3.10 ou plus récent, disponible sur
+[python.org](https://www.python.org/downloads/macos/).
 
 Sur macOS, Corsu traduit Firefox et Discord. Firefox en corse s'ouvre avec l'application Firefox Corsu du dossier
 Applications. Chrome, Opera GX et les autres navigateurs Chromium ne sont pas pris en charge sur macOS : modifier

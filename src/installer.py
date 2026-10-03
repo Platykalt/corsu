@@ -173,12 +173,65 @@ def deploy_release():
         raise
 
 
+def machine():
+    """The processor name used for the bundled Python folders: x86_64 or aarch64."""
+    name = platform.machine().lower()
+    return {'amd64': 'x86_64', 'x64': 'x86_64', 'arm64': 'aarch64'}.get(name, name)
+
+
+def runtime_python(root):
+    """The bundled Python's interpreter under `root` (runtime/<processor>/python, or a copy of it)."""
+    python = root / 'python'
+    return python / 'python.exe' if corsu.PLATFORM == 'windows' else python / 'bin/python3'
+
+
+def deploy_runtime():
+    """Release archives carry their own Python for computers without one. When Corsu runs on it, copy it once to
+    Corsu's data folder, shared by every copy of Corsu, so launchers keep working after the archive is deleted.
+    Returns the interpreter later steps and launchers should use."""
+    bundled = ROOT / 'runtime' / machine()
+    current = Path(sys.executable).resolve()
+    if not bundled.is_dir() or not current.is_relative_to(bundled.resolve()):
+        return Path(sys.executable)
+    version = json.loads((ROOT / 'src/release.json').read_text(encoding='utf-8'))['python_runtime']['version']
+    target = corsu.DATA / 'runtime' / version.replace('+', '-')
+    if not runtime_python(target).exists():
+        target.parent.mkdir(parents=True, exist_ok=True)
+        stage = Path(tempfile.mkdtemp(prefix='stage-', dir=target.parent))
+        try:
+            shutil.copytree(bundled / 'python', stage / 'python', symlinks=True,
+                            ignore=shutil.ignore_patterns('__pycache__'))
+            shutil.rmtree(target, ignore_errors=True)
+            stage.rename(target)
+        except BaseException:
+            shutil.rmtree(stage, ignore_errors=True)
+            raise
+    return runtime_python(target)
+
+
+def prune_runtimes():
+    """Delete copies of the bundled Python that neither this run nor any launcher uses any more."""
+    folder = corsu.DATA / 'runtime'
+    if not folder.is_dir():
+        return
+    keep = folders_in_use(folder)
+    current = Path(sys.executable).resolve()
+    for runtime in folder.iterdir():
+        if runtime.is_dir() and runtime.name not in keep and not current.is_relative_to(runtime.resolve()):
+            shutil.rmtree(runtime, ignore_errors=True)
+
+
 def releases_in_use():
     """Release folders something still loads: Discord's patched app.asar, Vesktop, and every launcher or shortcut
     Corsu wrote (the Firefox launcher, the Corsu entry, Windows .cmd files, macOS applets). Installing one part
     leaves the others on the copy they were written with, so that copy must stay."""
+    return folders_in_use(corsu.DATA / 'releases')
+
+
+def folders_in_use(parent):
+    """Names of the folders of `parent` that a file Corsu wrote (or Vesktop's settings) refers to."""
     used = set()
-    releases = str(corsu.DATA / 'releases').replace('\\', '/')
+    prefix = str(parent).replace('\\', '/')
     state = corsu.load_state()
     places = [Path(name) for name in state.get('files', {})]
     places.append(corsu.CONFIG / 'vesktop/state.json')
@@ -199,10 +252,10 @@ def releases_in_use():
         # Compiled AppleScript keeps its strings in UTF-16.
         for encoding in ('utf-8', 'utf-16-be', 'utf-16-le'):
             text = data.decode(encoding, 'replace').replace('\\\\', '/').replace('\\', '/')
-            start = text.find(releases)
+            start = text.find(prefix)
             while start != -1:
-                used.add(text[start + len(releases) + 1:].split('/', 1)[0])
-                start = text.find(releases, start + 1)
+                used.add(text[start + len(prefix) + 1:].split('/', 1)[0])
+                start = text.find(prefix, start + 1)
     return used
 
 
@@ -485,8 +538,9 @@ def main(argv=None):
     # What Discord and Vesktop loaded at their start: they keep using it until they restart.
     loaded = releases_in_use()
     target = deploy_release()
+    python = deploy_runtime()
     if target != ROOT:
-        command = [sys.executable, str(target / 'src/installer.py'), '--yes', '--components', *components]
+        command = [str(python), str(target / 'src/installer.py'), '--yes', '--components', *components]
         if 'discord' in components:
             command.extend(['--discord-path', str(location)])
         run(command, env={**os.environ, 'CORSU_DEPLOYED': str(target.resolve())})
@@ -516,6 +570,7 @@ def main(argv=None):
     corsu.refresh_launchers(shortcuts)
     if ROOT.is_relative_to((corsu.DATA / 'releases').resolve()):
         prune_releases(ROOT, loaded)
+    prune_runtimes()
     applications = corsu.HOME / '.local/share/applications'
     if corsu.PLATFORM == 'linux' and shutil.which('update-desktop-database') and applications.is_dir():
         # Only refreshes the menu cache; menus still update on the next login when it fails.

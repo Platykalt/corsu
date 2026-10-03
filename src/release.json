@@ -1,5 +1,5 @@
 {
-  "version": "0.20.1",
+  "version": "0.21.0",
   "license": "GPL-3.0-or-later",
   "vencord_revision": "7f0c10cc29fd789f2f4828ae3dc947623e837920",
   "installer_revision": "fe6e041a550b01d1853db6c8ea157d42c7480510",
@@ -23,6 +23,65 @@
     "macos": {
       "file": "VencordInstallerCli-darwin",
       "sha256": "f4c77a9dddd4a12deaae270b3dadfda25969dfcfa141cc2354cafe6344044b75"
+    }
+  },
+  "python_runtime": {
+    "version": "3.13.16+20261001",
+    "base_url": "https://github.com/astral-sh/python-build-standalone/releases/download/20261001/",
+    "note": "python-build-standalone (python.org license and bundled libraries' licenses in each runtime).",
+    "files": {
+      "linux": {
+        "x86_64": [
+          "cpython-3.13.16+20261001-x86_64-unknown-linux-gnu-install_only_stripped.tar.gz",
+          "ffcb50e716789d1a6e1db5e745d4d194ac8ed9b015ccf5eabcaccb179a25e4a8"
+        ]
+      },
+      "windows": {
+        "x86_64": [
+          "cpython-3.13.16+20261001-x86_64-pc-windows-msvc-install_only_stripped.tar.gz",
+          "c402eb9a35aba90de319bbc87d23e6d887eca1551a05cfa80775f92dcf3ebc08"
+        ]
+      },
+      "macos": {
+        "x86_64": [
+          "cpython-3.13.16+20261001-x86_64-apple-darwin-install_only_stripped.tar.gz",
+          "a88bef59d9dd61ba4210772cce57a4b4cb963aa745ab956f7cc79ba60f9e2523"
+        ],
+        "aarch64": [
+          "cpython-3.13.16+20261001-aarch64-apple-darwin-install_only_stripped.tar.gz",
+          "d00669acb53c1b014f1fcf5eaea740d8e45c3aff4b1e0244dc0f8697fb211a82"
+        ]
+      }
+    },
+    "packages": {
+      "windows": {
+        "platform": "win_amd64",
+        "requirements": [
+          "pywebview==6.2.1",
+          "pythonnet==3.2.0",
+          "clr_loader==0.3.1",
+          "cffi==2.1.1",
+          "pycparser==3.0",
+          "bottle==0.13.4",
+          "typing_extensions==4.16.0",
+          "proxy_tools==0.1.0"
+        ]
+      },
+      "macos": {
+        "platform": "macosx_11_0_universal2",
+        "requirements": [
+          "pywebview==6.2.1",
+          "pyobjc-core==12.2.2",
+          "pyobjc-framework-Cocoa==12.2.2",
+          "pyobjc-framework-Quartz==12.2.2",
+          "pyobjc-framework-WebKit==12.2.2",
+          "pyobjc-framework-Security==12.2.2",
+          "pyobjc-framework-UniformTypeIdentifiers==12.2.2",
+          "bottle==0.13.4",
+          "typing_extensions==4.16.0",
+          "proxy_tools==0.1.0"
+        ]
+      }
     }
   }
 }

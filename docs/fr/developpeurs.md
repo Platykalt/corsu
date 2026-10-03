@@ -24,7 +24,14 @@ tools/              publication, rapport de couverture, import des traductions d
 vendor/             fichiers tiers figés
 ```
 
-Seule la bibliothèque standard de Python est utilisée. Construire le plugin Discord demande Node.js 22 ou plus et pnpm.
+Seule la bibliothèque standard de Python est utilisée ; la fenêtre se sert de pywebview quand il est là. Construire
+le plugin Discord demande Node.js 22 ou plus et pnpm.
+
+Les archives publiées contiennent leur propre Python (`runtime/<processeur>/python`, de
+[python-build-standalone](https://github.com/astral-sh/python-build-standalone), épinglé avec sa somme SHA-256 dans
+`src/release.json`), allégé de Tk, IDLE, pip et des tests ; ceux de Windows et macOS ont pywebview et ses liaisons.
+`tools/package_release.py --no-runtime` construit des archives sans lui. Lancé depuis ce Python, l'installeur le
+copie une seule fois dans `runtime/<version>` du dossier de données, que les raccourcis utilisent ensuite.
 
 L'application Corsu (`src/app.py`) est un petit serveur web lié à 127.0.0.1, à l'adresse fixe `http://localhost:7744`
 (le port suivant libre si un autre programme occupe celui-ci). `src/window.py` l'affiche dans une fenêtre à elle :
@@ -74,7 +81,8 @@ un vrai navigateur. `CORSU_FIREFOX` fait de même pour Firefox.
 2. construction de Vencord et des trois archives ;
 3. sur chaque système, depuis son archive : installation, lancement de Firefox traduit et de Chrome for Testing,
    lecture de leur texte, désactivation, réactivation, désinstallation et vérification que rien ne reste ; puis
-   modification d'un faux Discord avec l'installeur officiel de Vencord et vérification de sa restauration.
+   modification d'un faux Discord avec l'installeur officiel de Vencord et vérification de sa restauration, cette fois
+   avec le Python de l'archive, dont on vérifie la copie, les raccourcis et ce qu'il faut pour la fenêtre.
 
 Envoyer une étiquette `vX.Y.Z` qui correspond à `src/release.json` publie une version sur GitHub avec les archives,
 seulement si tout ce qui précède passe.

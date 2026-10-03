@@ -105,6 +105,14 @@ jobs:
           mkdir extracted
           case "$archive" in *.zip) unzip -q "$archive" -d extracted ;; *) tar xzf "$archive" -C extracted ;; esac
           echo "CORSU_RELEASE=dist/extracted/corsu" >> "$GITHUB_ENV"
+          # The archive's own Python, as on a computer without Python.
+          case "$RUNNER_OS-$(uname -m)" in
+            Windows-*) python=runtime/x86_64/python/python.exe ;;
+            macOS-arm64) python=runtime/aarch64/python/bin/python3 ;;
+            *) python=runtime/x86_64/python/bin/python3 ;;
+          esac
+          test -x "extracted/corsu/$python" || test -f "extracted/corsu/$python"
+          echo "CORSU_PYTHON=$GITHUB_WORKSPACE/dist/extracted/corsu/$python" >> "$GITHUB_ENV"
       - name: Install Firefox (Linux)
         if: runner.os == 'Linux'
         run: |
@@ -120,8 +128,9 @@ jobs:
         run: test -d /Applications/Firefox.app || brew install --cask firefox
       - name: Firefox — install, launch the translated build, disable, enable, uninstall
         run: python tests/e2e/e2e.py firefox --root "${{ env.CORSU_RELEASE }}"
-      - name: Discord — patch with the official Vencord installer, then restore
-        run: python tests/e2e/e2e.py discord --root "${{ env.CORSU_RELEASE }}"
+      - name: Discord — patch with the official Vencord installer, then restore (with the archive's own Python)
+        shell: bash
+        run: '"$CORSU_PYTHON" tests/e2e/e2e.py discord --root "${{ env.CORSU_RELEASE }}"'
       - name: Chromium — translate Chrome for Testing, read it in Corsican, switch off/on, restore
         if: runner.os != 'macOS'
         shell: bash

@@ -4,7 +4,9 @@ import argparse
 import hashlib
 import json
 from pathlib import Path
+import shutil
 import subprocess
+import sys
 import tarfile
 import urllib.request
 import zipfile
@@ -26,6 +28,76 @@ def vencord_installer(manifest, name):
     if hashlib.sha256(binary.read_bytes()).hexdigest() != entry['sha256']:
         raise RuntimeError(f'Official installer checksum mismatch: {binary}')
     return binary
+
+
+def download(url, path, sha256):
+    """Fetch `url` into `path` once and check it against the pinned SHA-256."""
+    if not path.exists():
+        path.parent.mkdir(parents=True, exist_ok=True)
+        with urllib.request.urlopen(url, timeout=300) as response:
+            path.write_bytes(response.read())
+    if hashlib.sha256(path.read_bytes()).hexdigest() != sha256:
+        path.unlink()
+        raise RuntimeError(f'Checksum mismatch: {url}')
+    return path
+
+
+def site_packages(python):
+    return python / 'Lib/site-packages' if (python / 'python.exe').exists() else next((python / 'lib').glob('python3*/site-packages'))
+
+
+def build_runtime(manifest, name):
+    """Python for computers without it: python-build-standalone for each processor of `name`, with the packages of
+    Corsu's window (pywebview and the platform bindings it uses) in its site-packages. Returns the folder holding one
+    `<processor>/python` per processor, staged under build/runtime/<name>."""
+    runtime = manifest['python_runtime']
+    stage = ROOT / 'build/runtime' / name
+    shutil.rmtree(stage, ignore_errors=True)
+    for machine, (file, sha256) in runtime['files'][name].items():
+        archive = download(runtime['base_url'] + file.replace('+', '%2B'), ROOT / 'vendor/runtime' / file, sha256)
+        (stage / machine).mkdir(parents=True)
+        with tarfile.open(archive) as bundle:
+            bundle.extractall(stage / machine, filter='tar' if hasattr(tarfile, 'tar_filter') else None)
+        packages = runtime.get('packages', {}).get(name)
+        if not packages:
+            continue
+        target = site_packages(stage / machine / 'python')
+        for requirement in packages['requirements']:
+            binary = subprocess.run([sys.executable, '-m', 'pip', 'install', '--quiet', '--no-deps', '--target', str(target),
+                                     '--only-binary=:all:', '--platform', packages['platform'], '--python-version',
+                                     runtime['version'].split('+')[0].rsplit('.', 1)[0], '--implementation', 'cp',
+                                     requirement], capture_output=True, text=True)
+            if binary.returncode:
+                # Published only as source: acceptable when it is pure Python, which works on every system.
+                before = set(target.rglob('*'))
+                subprocess.run([sys.executable, '-m', 'pip', 'install', '--quiet', '--no-deps', '--target', str(target),
+                                requirement], check=True)
+                if any(path.suffix in ('.so', '.pyd', '.dylib') for path in set(target.rglob('*')) - before):
+                    raise RuntimeError(f'{requirement} has no wheel for {name} and is not pure Python.')
+        shutil.rmtree(target / 'bin', ignore_errors=True)
+    trim(stage)
+    return stage
+
+
+# Parts of Python Corsu never uses: Tk and IDLE, pip, C headers, the test suite, documentation, caches.
+UNUSED_DIRECTORIES = {'include', 'share', 'libs', 'Scripts', 'tcl', 'tkinter', 'idlelib', 'turtledemo', 'ensurepip',
+                      'pydoc_data', 'test', '__pycache__', 'pip', 'pkgconfig'}
+# The python binary of python-build-standalone is static on Linux and macOS: libpython only serves programs that embed it.
+UNUSED_FILES = ('libpython*', '*-config', 'libtcl*', 'libtk*', 'tcl*.dll', 'tk*.dll', 'zlib1.dll.tk', '_tkinter*', 'idle*', 'pip*', 'pydoc*',
+                '*.a')
+
+
+def trim(stage):
+    for path in sorted(stage.rglob('*'), key=lambda path: len(path.parts)):
+        if not path.exists() and not path.is_symlink():
+            continue
+        name = path.name
+        if path.is_dir() and not path.is_symlink() and (name in UNUSED_DIRECTORIES or name.startswith(('tcl', 'tk', 'itcl', 'thread', 'pip-'))
+                                                        and path.parent.name in ('lib', 'python', 'site-packages')):
+            shutil.rmtree(path)
+        elif (path.is_file() or path.is_symlink()) and any(path.match(pattern) for pattern in UNUSED_FILES) \
+                and path.parent.name in ('bin', 'lib', 'DLLs', 'python', 'lib-dynload'):
+            path.unlink()
 
 
 def collect(manifest):
@@ -66,28 +138,39 @@ def archive_name(path):
     return relative
 
 
-def package(manifest, name, files, output):
+def package(manifest, name, files, output, runtime=None):
     files = [*files, vencord_installer(manifest, name)]
     stem = 'corsu'
     executable = {'Install for Linux.sh', 'Install for macOS.command', 'get.sh', manifest['installers'][name]['file']}
+    # The bundled Python keeps its own permissions and links (bin/python3 -> python3.13).
+    bundled = sorted(runtime.rglob('*')) if runtime else []
     if name == 'windows':
         archive = output / ARCHIVES[name]
         with zipfile.ZipFile(archive, 'w', zipfile.ZIP_DEFLATED) as bundle:
             for path in files:
                 bundle.write(path, f'{stem}/{archive_name(path)}')
+            for path in bundled:
+                if path.is_file():
+                    bundle.write(path, f'{stem}/runtime/{path.relative_to(runtime).as_posix()}')
     else:
         archive = output / ARCHIVES[name]
 
-        def normalize(info):
+        def owner(info):
             info.uid = info.gid = 0
             info.uname = info.gname = ''
-            info.mode = 0o755 if Path(info.name).name in executable else 0o644
             return info
+
+        def normalize(info):
+            info.mode = 0o755 if Path(info.name).name in executable else 0o644
+            return owner(info)
 
         with tarfile.open(archive, 'w:gz') as bundle:
             for path in files:
                 bundle.add(path, arcname=f'{stem}/{archive_name(path)}', recursive=False,
                            filter=normalize)
+            for path in bundled:
+                bundle.add(path, arcname=f'{stem}/runtime/{path.relative_to(runtime).as_posix()}', recursive=False,
+                           filter=owner)
     checksum = hashlib.sha256(archive.read_bytes()).hexdigest()
     (output / f'{archive.name}.sha256').write_text(f'{checksum}  {archive.name}\n', encoding='utf-8')
     print(f'{archive} ({archive.stat().st_size / 1024 / 1024:.1f} MiB)\nSHA-256: {checksum}')
@@ -98,12 +181,13 @@ def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('--platforms', nargs='+', choices=sorted(ARCHIVES), default=sorted(ARCHIVES))
     parser.add_argument('--output', type=Path, default=ROOT / 'releases')
+    parser.add_argument('--no-runtime', action='store_true', help='Leave out the bundled Python (smaller test archives)')
     args = parser.parse_args()
     manifest = json.loads((ROOT / 'src/release.json').read_text(encoding='utf-8'))
     files = collect(manifest)
     args.output.mkdir(parents=True, exist_ok=True)
     for name in args.platforms:
-        package(manifest, name, files, args.output)
+        package(manifest, name, files, args.output, None if args.no_runtime else build_runtime(manifest, name))
 
 
 if __name__ == '__main__':

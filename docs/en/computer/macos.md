@@ -17,8 +17,8 @@ You can also download [corsu-macos.tar.gz](https://github.com/Platykalt/corsu/re
 registered developer: open System Settings, then Privacy & Security, click Open Anyway next to the message, and
 open the file again.
 
-Corsu needs Python 3.10 or newer. If macOS offers to install the command line developer tools, accept: they include
-Python. You can also get it from [python.org](https://www.python.org/downloads/macos/).
+There is nothing else to install: the archive carries its own Python, for Intel and Apple Silicon Macs alike. From
+the source code, Python 3.10 or newer is needed, available from [python.org](https://www.python.org/downloads/macos/).
 
 On macOS Corsu translates Firefox and Discord. Firefox in Corsican opens from the Firefox Corsu app in your
 Applications folder. Chrome, Opera GX and the other Chromium browsers are not supported on macOS: changing their

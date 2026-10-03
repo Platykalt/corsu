@@ -211,6 +211,39 @@ class InstallerTests(unittest.TestCase):
                 installer.prune_releases(data / 'releases/current')
             self.assertEqual(sorted(path.name for path in (data / 'releases').iterdir()), ['app', 'current'])
 
+    def test_the_bundled_python_is_copied_once_and_used(self):
+        with tempfile.TemporaryDirectory() as directory:
+            root, data = Path(directory) / 'archive', Path(directory) / 'data'
+            python = root / 'runtime' / installer.machine() / 'python'
+            interpreter = python / ('python.exe' if corsu.PLATFORM == 'windows' else 'bin/python3')
+            interpreter.parent.mkdir(parents=True)
+            interpreter.write_text('')
+            (root / 'src').mkdir()
+            (root / 'src/release.json').write_text(json.dumps({'python_runtime': {'version': '3.13.16+20261001'}}))
+            with patch.object(installer, 'ROOT', root), patch.object(corsu, 'DATA', data), \
+                    patch.object(installer.sys, 'executable', str(interpreter)):
+                deployed = installer.deploy_runtime()
+                self.assertEqual(deployed, installer.runtime_python(data / 'runtime/3.13.16-20261001'))
+                self.assertTrue(deployed.exists())
+                self.assertEqual(installer.deploy_runtime(), deployed)
+            # A system Python stays the one used.
+            with patch.object(installer, 'ROOT', root), patch.object(corsu, 'DATA', data):
+                self.assertEqual(installer.deploy_runtime(), Path(installer.sys.executable))
+
+    def test_unused_python_copies_are_deleted(self):
+        with tempfile.TemporaryDirectory() as directory:
+            data = Path(directory) / 'data'
+            for name in ('old', 'launcher'):
+                (data / 'runtime' / name / 'python').mkdir(parents=True)
+            launcher = Path(directory) / 'firefox-corsu'
+            launcher.write_text(f'exec {data / "runtime/launcher/python/bin/python3"} corsu.py\n')
+            state = data / 'installation.json'
+            state.write_text(json.dumps({'files': {str(launcher): {}}}))
+            with patch.object(corsu, 'DATA', data), patch.object(corsu, 'STATE', state), \
+                    patch.object(corsu, 'CONFIG', Path(directory) / 'config'):
+                installer.prune_runtimes()
+            self.assertEqual([path.name for path in (data / 'runtime').iterdir()], ['launcher'])
+
 
 if __name__ == '__main__':
     unittest.main()

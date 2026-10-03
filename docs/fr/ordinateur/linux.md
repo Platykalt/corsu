@@ -19,7 +19,9 @@ numéro coche ou décoche un élément. Certaines étapes demandent votre mot de
 navigateur installé par la distribution, et les traductions système utilisées par les programmes GTK et les commandes
 du terminal.
 
-Corsu a besoin de Python 3.10 ou plus récent, présent dans les distributions actuelles.
+Corsu utilise le Python 3.10 ou plus récent de la distribution, présent dans les distributions actuelles : avec
+WebKitGTK, il donne à Corsu sa fenêtre. Sans lui, l'archive (processeurs x86_64) contient son propre Python ; Corsu
+s'ouvre alors dans Chrome, Chromium ou le navigateur.
 
 ## Différences entre distributions
 

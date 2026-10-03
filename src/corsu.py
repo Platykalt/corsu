@@ -1088,7 +1088,7 @@ def setup_shortcut(installer):
                         '[Desktop Entry]\nType=Application\nName=Corsu\n'
                         'GenericName=Corsican language\nGenericName[fr]=Langue corse\nGenericName[co]=Lingua corsa\n'
                         'Comment=Choose which programs are in Corsican\nComment[fr]=Choisir les logiciels en corse\n'
-                        f'Exec=python3 {shlex.quote(str(app))}\nTerminal=false\nIcon={SRC / "app/corsu.svg"}\n'
+                        f'Exec={shlex.quote(sys.executable)} {shlex.quote(str(app))}\nTerminal=false\nIcon={SRC / "app/corsu.svg"}\n'
                         'StartupWMClass=corsu\nCategories=Settings;\n')
 
 
@@ -1129,7 +1129,7 @@ def desktop(installer, firefox=True, vesktop=True):
         return
     launcher = HOME / '.local/bin/firefox-corsu'
     if firefox:
-        installer.write(launcher, f'#!/bin/sh\nexec python3 {shlex.quote(str(SRC / "corsu.py"))} launch-firefox "$@"\n', 0o755)
+        installer.write(launcher, f'#!/bin/sh\nexec {shlex.quote(sys.executable)} {shlex.quote(str(SRC / "corsu.py"))} launch-firefox "$@"\n', 0o755)
     entries = ([('firefox.desktop', str(launcher))] if firefox else []) + ([('vesktop.desktop', None)] if vesktop else [])
     for desktop_id, executable in entries:
         existing = HOME / '.local/share/applications' / desktop_id

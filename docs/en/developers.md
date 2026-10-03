@@ -24,7 +24,14 @@ tools/              packaging, coverage report, import of translations from othe
 vendor/             pinned third-party files
 ```
 
-Only Python's standard library is used. Building the Discord plugin needs Node.js 22 or newer and pnpm.
+Only Python's standard library is used; the window uses pywebview when it is present. Building the Discord plugin
+needs Node.js 22 or newer and pnpm.
+
+Published archives carry their own Python (`runtime/<processor>/python`, from
+[python-build-standalone](https://github.com/astral-sh/python-build-standalone), pinned with its SHA-256 in
+`src/release.json`), without Tk, IDLE, pip and the tests; the Windows and macOS ones have pywebview and its bindings.
+`tools/package_release.py --no-runtime` builds archives without it. Run from that Python, the installer copies it once
+to `runtime/<version>` in the data folder, which the shortcuts then use.
 
 The Corsu app (`src/app.py`) is a small web server bound to 127.0.0.1 at the fixed address `http://localhost:7744`
 (the next free port when another program holds it). `src/window.py` shows it in a window of its own: pywebview when
@@ -73,7 +80,8 @@ real browser. `CORSU_FIREFOX` does the same for Firefox.
 2. a Vencord build and the three release archives;
 3. on each system, from that system's archive: install, start the translated Firefox and Chrome for Testing,
    read their interface text, switch off, switch on, uninstall, and check that nothing is left behind; then
-   patch a stand-in Discord with the official Vencord installer and check that it is restored.
+   patch a stand-in Discord with the official Vencord installer and check that it is restored, this time with the
+   archive's own Python, checking its copy, the shortcuts and what the window needs.
 
 Pushing a tag `vX.Y.Z` that matches `src/release.json` publishes a GitHub release with the archives, but only when
 all of the above passes.
