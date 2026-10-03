@@ -8,6 +8,7 @@ in a window of its own (see window.py) or in any browser. `--browser` opens it i
 import json
 import os
 from pathlib import Path
+import socket
 import subprocess
 import sys
 import threading
@@ -318,11 +319,22 @@ def running_session():
         return None
 
 
+class Server(ThreadingHTTPServer):
+    # On Windows, SO_REUSEADDR lets a second program take a port already in use; Corsu must move to the next one
+    # instead, so it asks for the port alone.
+    allow_reuse_address = os.name != 'nt'
+
+    def server_bind(self):
+        if os.name == 'nt' and hasattr(socket, 'SO_EXCLUSIVEADDRUSE'):
+            self.socket.setsockopt(socket.SOL_SOCKET, socket.SO_EXCLUSIVEADDRUSE, 1)
+        super().server_bind()
+
+
 def listen(job, activity):
     """Serve on the fixed port, or the next free one when another program holds it."""
     for port in PORTS:
         try:
-            return ThreadingHTTPServer(('127.0.0.1', port), make_handler(job, activity, port))
+            return Server(('127.0.0.1', port), make_handler(job, activity, port))
         except OSError:
             continue
     raise RuntimeError(t(f'Ports {PORTS.start} to {PORTS.stop - 1} are all in use; close the program using them.',

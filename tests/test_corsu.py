@@ -1,6 +1,7 @@
 import gettext
 import io
 import json
+import os
 from pathlib import Path
 import tempfile
 import unittest
@@ -336,7 +337,8 @@ class TranslationTests(unittest.TestCase):
                 edited.write_text(f'Exec=python3 {old} --mine\n')
                 corsu.refresh_launchers(installer)
                 self.assertIn(str(current / 'src/corsu.py'), launcher.read_text())
-                self.assertEqual(launcher.stat().st_mode & 0o777, 0o755)
+                if os.name != 'nt':
+                    self.assertEqual(launcher.stat().st_mode & 0o777, 0o755)
                 # A file the user changed is left as it is.
                 self.assertIn(str(old), edited.read_text())
 

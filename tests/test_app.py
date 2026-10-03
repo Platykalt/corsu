@@ -2,7 +2,6 @@ import http.client
 import json
 import threading
 import unittest
-from http.server import ThreadingHTTPServer
 from unittest.mock import patch
 
 import app
@@ -11,7 +10,7 @@ import app
 class SetupWindowTests(unittest.TestCase):
     def setUp(self):
         self.job = app.Job()
-        self.server = ThreadingHTTPServer(('127.0.0.1', 0), app.make_handler(self.job, [0.0], 0))
+        self.server = app.Server(('127.0.0.1', 0), app.make_handler(self.job, [0.0], 0))
         self.port = self.server.server_address[1]
         self.server.RequestHandlerClass = app.make_handler(self.job, [0.0], self.port)
         threading.Thread(target=self.server.serve_forever, daemon=True).start()

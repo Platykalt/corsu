@@ -1,6 +1,9 @@
 # Changelog
 
-## 0.20.0 (2026-10-03)
+## 0.20.1 (2026-10-03)
+
+Includes 0.20.0, which was not published.
+
 
 - The Corsu app opens in a window of its own, with Corsu's name and icon, instead of a browser tab: WebKitGTK on
   Linux, pywebview when installed, otherwise the app window of Edge, Chrome or Chromium, and a browser tab only when
@@ -9,6 +12,7 @@
   port when another program holds it). Only Corsu's own page can drive it: other sites, other host names and, on
   Linux, other accounts on the computer are refused.
 - `--browser` opens a tab instead of the window.
+- Windows: Corsu no longer takes a port another program already uses.
 - Fixed from 0.19.2, which was not published: launchers are found again when the data folder is reached through a
   link or a short Windows name.
 
