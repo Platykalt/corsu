@@ -174,22 +174,35 @@ def deploy_release():
 
 
 def releases_in_use():
-    """Release folders something still loads: Discord's patched app.asar and Vesktop point into one."""
+    """Release folders something still loads: Discord's patched app.asar, Vesktop, and every launcher or shortcut
+    Corsu wrote (the Firefox launcher, the Corsu entry, Windows .cmd files, macOS applets). Installing one part
+    leaves the others on the copy they were written with, so that copy must stay."""
     used = set()
-    releases = str(corsu.DATA / 'releases')
+    releases = str(corsu.DATA / 'releases').replace('\\', '/')
     state = corsu.load_state()
-    places = [Path(name) for name in state.get('files', {}) if name.endswith('app.asar')]
+    places = [Path(name) for name in state.get('files', {})]
     places.append(corsu.CONFIG / 'vesktop/state.json')
+    files = []
     for place in places:
+        if place.is_dir():
+            files.extend(path for path in place.rglob('*') if path.is_file())
+        else:
+            files.append(place)
+    for path in files:
         try:
-            text = place.read_bytes().decode('utf-8', 'replace').replace('\\\\', '/').replace('\\', '/')
+            # Large files (translation packs, browser archives) never hold a launcher path.
+            if path.stat().st_size > 4_000_000:
+                continue
+            data = path.read_bytes()
         except OSError:
             continue
-        start = text.find(releases.replace('\\', '/'))
-        while start != -1:
-            name = text[start + len(releases) + 1:].split('/', 1)[0]
-            used.add(name)
-            start = text.find(releases.replace('\\', '/'), start + 1)
+        # Compiled AppleScript keeps its strings in UTF-16.
+        for encoding in ('utf-8', 'utf-16-be', 'utf-16-le'):
+            text = data.decode(encoding, 'replace').replace('\\\\', '/').replace('\\', '/')
+            start = text.find(releases)
+            while start != -1:
+                used.add(text[start + len(releases) + 1:].split('/', 1)[0])
+                start = text.find(releases, start + 1)
     return used
 
 

@@ -140,6 +140,29 @@ class InstallerTests(unittest.TestCase):
                 installer.prune_releases(data / 'releases/current')
             self.assertEqual(sorted(path.name for path in (data / 'releases').iterdir()), ['current', 'discord', 'vesktop'])
 
+    def test_releases_used_by_launchers_are_kept(self):
+        # Installing only Discord leaves the Firefox launcher and the Corsu shortcut on an earlier copy; deleting that
+        # copy broke every link Discord opened in Firefox.
+        with tempfile.TemporaryDirectory() as directory:
+            data = Path(directory) / 'data'
+            for name in ('current', 'old', 'firefox', 'shortcut', 'applet'):
+                (data / 'releases' / name).mkdir(parents=True)
+            launcher = Path(directory) / 'firefox-corsu'
+            launcher.write_text(f'#!/bin/sh\nexec python3 {data / "releases/firefox/src/corsu.py"} launch-firefox "$@"\n')
+            shortcut = Path(directory) / 'corsu-setup.desktop'
+            shortcut.write_text(f'[Desktop Entry]\nExec=python3 {data / "releases/shortcut/src/app.py"}\n')
+            applet = Path(directory) / 'Corsu.app'
+            (applet / 'Contents/Resources/Scripts').mkdir(parents=True)
+            (applet / 'Contents/Resources/Scripts/main.scpt').write_bytes(
+                b'\x00' + str(data / 'releases/applet/src/app.py').encode('utf-16-be') + b'\x00')
+            state = data / 'installation.json'
+            state.write_text(json.dumps({'files': {str(launcher): {}, str(shortcut): {}, str(applet): {'tree': True}}}))
+            with patch.object(corsu, 'DATA', data), patch.object(corsu, 'STATE', state), \
+                    patch.object(corsu, 'CONFIG', Path(directory) / 'config'):
+                installer.prune_releases(data / 'releases/current')
+            self.assertEqual(sorted(path.name for path in (data / 'releases').iterdir()),
+                             ['applet', 'current', 'firefox', 'shortcut'])
+
 
     def test_records_of_removed_discord_versions_are_forgotten(self):
         with tempfile.TemporaryDirectory() as directory:

@@ -1,5 +1,11 @@
 # Changelog
 
+## 0.19.1 (2026-10-03)
+
+- Fixed: after installing or updating only Discord, links and downloads opened from Discord did nothing. The
+  installer deleted the earlier Corsu copy that the Firefox launcher still used; every launcher and shortcut Corsu
+  wrote now keeps its copy.
+
 ## 0.19.0 (2026-10-02)
 
 - Discord: about 3,300 more texts in Corsican, found by comparing every French message of Discord with the
