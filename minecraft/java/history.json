@@ -138,12 +138,460 @@
    "note": "26.3 key of another family; same meaning checked"
   }
  },
+ "advMode.trackOutput": {
+  "799825053a36": {
+   "co": "Seguità u risultatu",
+   "kind": "reused",
+   "from": "advMode.trackOutput",
+   "review": "ai",
+   "note": "English changed only in case or punctuation"
+  }
+ },
+ "advancements.adventure.lightning_rod_with_villager_no_fire.description": {
+  "9e5c6d2c13e5": {
+   "co": "Prutigite un paisanu da una scossa indesiderata senza appiccià un focu",
+   "kind": "reused",
+   "from": "advancements.adventure.lightning_rod_with_villager_no_fire.description",
+   "review": "ai",
+   "note": "English changed only in case or punctuation"
+  }
+ },
+ "advancements.adventure.ol_betsy.description": {
+  "0a95d91ab282": {
+   "co": "Tirate cù una balestra",
+   "kind": "reused",
+   "from": "advancements.adventure.ol_betsy.description",
+   "review": "ai",
+   "note": "English changed only in case or punctuation"
+  }
+ },
+ "advancements.adventure.play_jukebox_in_meadows.description": {
+  "f0a6fd16159e": {
+   "co": "Fate rinvivisce i prati cù u sonu di a musica d'un ghjiradischi",
+   "kind": "reused",
+   "from": "advancements.adventure.play_jukebox_in_meadows.description",
+   "review": "ai",
+   "note": "English changed only in case or punctuation"
+  }
+ },
+ "advancements.adventure.shoot_arrow.description": {
+  "f020d0bd2ef9": {
+   "co": "Tirate nant'à qualcosa cù una freccia",
+   "kind": "reused",
+   "from": "advancements.adventure.shoot_arrow.description",
+   "review": "ai",
+   "note": "English changed only in case or punctuation"
+  }
+ },
+ "advancements.adventure.sleep_in_bed.description": {
+  "49b69b0b359d": {
+   "co": "Durmite in un lettu per cambià u vostru puntu di rinascita",
+   "kind": "reused",
+   "from": "advancements.adventure.sleep_in_bed.description",
+   "review": "ai",
+   "note": "English changed only in case or punctuation"
+  }
+ },
+ "advancements.adventure.sleep_in_bed.title": {
+  "74b1e7506feb": {
+   "co": "Sonnii d'oru",
+   "kind": "reused",
+   "from": "advancements.adventure.sleep_in_bed.title",
+   "review": "ai",
+   "note": "English changed only in case or punctuation"
+  }
+ },
+ "advancements.adventure.sniper_duel.title": {
+  "0f639eb95c1d": {
+   "co": "Duellu da luntanu",
+   "kind": "reused",
+   "from": "advancements.adventure.sniper_duel.title",
+   "review": "ai",
+   "note": "English changed only in case or punctuation"
+  }
+ },
+ "advancements.adventure.spyglass_at_dragon.description": {
+  "a0ece63a2c0b": {
+   "co": "Fighjate u Dragone di l'End cù un cannuchjale",
+   "kind": "reused",
+   "from": "advancements.adventure.spyglass_at_dragon.description",
+   "review": "ai",
+   "note": "English changed only in case or punctuation"
+  }
+ },
+ "advancements.adventure.spyglass_at_ghast.description": {
+  "d40387ee7b2c": {
+   "co": "Fighjate un Ghast cù un cannuchjale",
+   "kind": "reused",
+   "from": "advancements.adventure.spyglass_at_ghast.description",
+   "review": "ai",
+   "note": "English changed only in case or punctuation"
+  }
+ },
+ "advancements.adventure.spyglass_at_parrot.description": {
+  "d869556b8e8d": {
+   "co": "Fighjate un pappagallu cù un cannuchjale",
+   "kind": "reused",
+   "from": "advancements.adventure.spyglass_at_parrot.description",
+   "review": "ai",
+   "note": "English changed only in case or punctuation"
+  }
+ },
+ "advancements.adventure.throw_trident.description": {
+  "203f665426b1": {
+   "co": "Lampate un tridente nant'à qualcosa.\nNota : lampà a vostra sola arma ùn hè micca una bona idea.",
+   "kind": "reused",
+   "from": "advancements.adventure.throw_trident.description",
+   "review": "ai",
+   "note": "English changed only in case or punctuation"
+  }
+ },
+ "advancements.adventure.trade_at_world_height.description": {
+  "bc7bcc702814": {
+   "co": "Scambiate cù un paisanu à l'altezza limita di custruzzione",
+   "kind": "reused",
+   "from": "advancements.adventure.trade_at_world_height.description",
+   "review": "ai",
+   "note": "English changed only in case or punctuation"
+  }
+ },
+ "advancements.adventure.two_birds_one_arrow.description": {
+  "40f4c7711d6f": {
+   "co": "Tumbate dui fantasmi cù una freccia perforante",
+   "kind": "reused",
+   "from": "advancements.adventure.two_birds_one_arrow.description",
+   "review": "ai",
+   "note": "English changed only in case or punctuation"
+  }
+ },
+ "advancements.adventure.walk_on_powder_snow_with_leather_boots.description": {
+  "57bc8b9e1d65": {
+   "co": "Marchjate nant'à a neve polverosa… senza affundà",
+   "kind": "reused",
+   "from": "advancements.adventure.walk_on_powder_snow_with_leather_boots.description",
+   "review": "ai",
+   "note": "English changed only in case or punctuation"
+  },
+  "e29a580c8e23": {
+   "co": "Marchjate nant'à a neve polverosa… senza affundà",
+   "kind": "reused",
+   "from": "advancements.adventure.walk_on_powder_snow_with_leather_boots.description",
+   "review": "ai",
+   "note": "English changed only in case or punctuation"
+  }
+ },
+ "advancements.end.dragon_breath.description": {
+  "a583ae5550c4": {
+   "co": "Cuglite fiatu di dragone in una buttiglia di vetru",
+   "kind": "reused",
+   "from": "advancements.end.dragon_breath.description",
+   "review": "ai",
+   "note": "English changed only in case or punctuation"
+  }
+ },
+ "advancements.end.elytra.description": {
+  "1bf99a1a6e25": {
+   "co": "Truvate l'elitre",
+   "kind": "reused",
+   "from": "advancements.end.elytra.description",
+   "review": "ai",
+   "note": "English changed only in case or punctuation"
+  }
+ },
+ "advancements.end.respawn_dragon.description": {
+  "446a1ea97dab": {
+   "co": "Fate rinasce u Dragone di l'End",
+   "kind": "reused",
+   "from": "advancements.end.respawn_dragon.description",
+   "review": "ai",
+   "note": "English changed only in case or punctuation"
+  }
+ },
+ "advancements.husbandry.axolotl_in_a_bucket.description": {
+  "a52079f3ec1c": {
+   "co": "Chjappate un Axolotl cù una secchja",
+   "kind": "reused",
+   "from": "advancements.husbandry.axolotl_in_a_bucket.description",
+   "review": "ai",
+   "note": "English changed only in case or punctuation"
+  }
+ },
  "advancements.husbandry.break_diamond_hoe.title": {
   "eedff0391976": {
    "co": "Una vera passione",
    "kind": "renamed",
    "from": "advancements.husbandry.netherite_hoe.title",
    "review": "ai"
+  }
+ },
+ "advancements.husbandry.complete_catalogue.description": {
+  "2282d0ca3972": {
+   "co": "Addumisticate tutte e varietà di ghjattu !",
+   "kind": "reused",
+   "from": "advancements.husbandry.complete_catalogue.description",
+   "review": "ai",
+   "note": "English changed only in case or punctuation"
+  }
+ },
+ "advancements.husbandry.kill_axolotl_target.description": {
+  "5f59c82a1c6d": {
+   "co": "Fate squadra cù un Axolotl è vincite un cumbattimentu",
+   "kind": "reused",
+   "from": "advancements.husbandry.kill_axolotl_target.description",
+   "review": "ai",
+   "note": "English changed only in case or punctuation"
+  }
+ },
+ "advancements.husbandry.netherite_hoe.description": {
+  "fdb91876cea0": {
+   "co": "Aduprate un lingottu di netherite per migliurà una zappa, è dopu ripensate e vostre scelte di vita",
+   "kind": "reused",
+   "from": "advancements.husbandry.netherite_hoe.description",
+   "review": "ai",
+   "note": "English changed only in case or punctuation"
+  }
+ },
+ "advancements.husbandry.tactical_fishing.description": {
+  "5f91af01bdc6": {
+   "co": "Pigliate un pesciu… senza canna di pesca !",
+   "kind": "reused",
+   "from": "advancements.husbandry.tactical_fishing.description",
+   "review": "ai",
+   "note": "English changed only in case or punctuation"
+  }
+ },
+ "advancements.nether.brew_potion.description": {
+  "81dfc1536806": {
+   "co": "Distillate una pozione",
+   "kind": "reused",
+   "from": "advancements.nether.brew_potion.description",
+   "review": "ai",
+   "note": "English changed only in case or punctuation"
+  }
+ },
+ "advancements.nether.create_beacon.description": {
+  "b50a860afb7f": {
+   "co": "Custruite è piazzate un faru",
+   "kind": "reused",
+   "from": "advancements.nether.create_beacon.description",
+   "review": "ai",
+   "note": "English changed only in case or punctuation"
+  }
+ },
+ "advancements.nether.create_full_beacon.description": {
+  "7d80fece2f23": {
+   "co": "Purtate un faru à a so piena putenza",
+   "kind": "reused",
+   "from": "advancements.nether.create_full_beacon.description",
+   "review": "ai",
+   "note": "English changed only in case or punctuation"
+  }
+ },
+ "advancements.nether.get_wither_skull.description": {
+  "a7b6673aa562": {
+   "co": "Ottenite u cranu d'un scheletru di Wither",
+   "kind": "reused",
+   "from": "advancements.nether.get_wither_skull.description",
+   "review": "ai",
+   "note": "English changed only in case or punctuation"
+  }
+ },
+ "advancements.nether.loot_bastion.description": {
+  "6d69f532c9eb": {
+   "co": "Saccheghjate una cascia in i vestigii d'un bastione",
+   "kind": "reused",
+   "from": "advancements.nether.loot_bastion.description",
+   "review": "ai",
+   "note": "English changed only in case or punctuation"
+  }
+ },
+ "advancements.nether.ride_strider_in_overworld_lava.title": {
+  "c8b01b1aa70f": {
+   "co": "Cum'è in casa",
+   "kind": "reused",
+   "from": "advancements.nether.ride_strider_in_overworld_lava.title",
+   "review": "ai",
+   "note": "English changed only in case or punctuation"
+  }
+ },
+ "advancements.nether.uneasy_alliance.description": {
+  "c7bc042752c7": {
+   "co": "Salvate un Ghast da u Nether, purtatelu sanu è salvu in u Mondu di sopra… è dopu tumbatelu.",
+   "kind": "adapted",
+   "from": "advancements.nether.uneasy_alliance.description",
+   "review": "ai",
+   "note": "punctuation as in this English"
+  }
+ },
+ "advancements.nether.use_lodestone.description": {
+  "d33c15e4b598": {
+   "co": "Aduprate una bussula nant'à una calamita",
+   "kind": "reused",
+   "from": "advancements.nether.use_lodestone.description",
+   "review": "ai",
+   "note": "English changed only in case or punctuation"
+  }
+ },
+ "advancements.story.cure_zombie_villager.description": {
+  "c7dd2ea908d4": {
+   "co": "Indebulite è dopu guarite un paisanu zombi",
+   "kind": "reused",
+   "from": "advancements.story.cure_zombie_villager.description",
+   "review": "ai",
+   "note": "English changed only in case or punctuation"
+  }
+ },
+ "advancements.story.deflect_arrow.description": {
+  "2b2c1b3a88d7": {
+   "co": "Parate un prughjettile cù un scudu",
+   "kind": "reused",
+   "from": "advancements.story.deflect_arrow.description",
+   "review": "ai",
+   "note": "English changed only in case or punctuation"
+  }
+ },
+ "advancements.story.enter_the_nether.description": {
+  "963cd546e528": {
+   "co": "Custruite, accendite è entrite in un portale di u Nether",
+   "kind": "reused",
+   "from": "advancements.story.enter_the_nether.description",
+   "review": "ai",
+   "note": "English changed only in case or punctuation"
+  }
+ },
+ "advancements.story.form_obsidian.description": {
+  "e35fd35adabf": {
+   "co": "Ottenite un bloccu d'ossidiana",
+   "kind": "reused",
+   "from": "advancements.story.form_obsidian.description",
+   "review": "ai",
+   "note": "English changed only in case or punctuation"
+  }
+ },
+ "advancements.story.iron_tools.description": {
+  "617fee51daf3": {
+   "co": "Migliurate u vostru piccone",
+   "kind": "reused",
+   "from": "advancements.story.iron_tools.description",
+   "review": "ai",
+   "note": "English changed only in case or punctuation"
+  }
+ },
+ "advancements.story.lava_bucket.description": {
+  "717bd5edfef7": {
+   "co": "Empite una secchja di lava",
+   "kind": "reused",
+   "from": "advancements.story.lava_bucket.description",
+   "review": "ai",
+   "note": "English changed only in case or punctuation"
+  }
+ },
+ "advancements.story.mine_stone.description": {
+  "dfc034e27c56": {
+   "co": "Scavate a petra cù u vostru piccone novu",
+   "kind": "reused",
+   "from": "advancements.story.mine_stone.description",
+   "review": "ai",
+   "note": "English changed only in case or punctuation"
+  }
+ },
+ "advancements.story.shiny_gear.title": {
+  "ba810a6d160e": {
+   "co": "Cupritemi di diamanti",
+   "kind": "reused",
+   "from": "advancements.story.shiny_gear.title",
+   "review": "ai",
+   "note": "English changed only in case or punctuation"
+  }
+ },
+ "advancements.story.smelt_iron.description": {
+  "14d718e93edd": {
+   "co": "Fate fonde un lingottu di ferru",
+   "kind": "reused",
+   "from": "advancements.story.smelt_iron.description",
+   "review": "ai",
+   "note": "English changed only in case or punctuation"
+  }
+ },
+ "advancements.story.upgrade_tools.description": {
+  "2adef600271a": {
+   "co": "Custruite un piccone megliu",
+   "kind": "reused",
+   "from": "advancements.story.upgrade_tools.description",
+   "review": "ai",
+   "note": "English changed only in case or punctuation"
+  }
+ },
+ "argument.double.big": {
+  "3759f267e407": {
+   "co": "U double ùn deve micca esse più di %s, ma hè %s",
+   "kind": "reused",
+   "from": "argument.double.big",
+   "review": "ai",
+   "note": "English changed only in case or punctuation"
+  }
+ },
+ "argument.double.low": {
+  "58e5cf320e2e": {
+   "co": "U double ùn deve micca esse menu di %s, ma hè %s",
+   "kind": "reused",
+   "from": "argument.double.low",
+   "review": "ai",
+   "note": "English changed only in case or punctuation"
+  }
+ },
+ "argument.float.big": {
+  "4fdef8ea8b6f": {
+   "co": "U float ùn deve micca esse più di %s, ma hè %s",
+   "kind": "reused",
+   "from": "argument.float.big",
+   "review": "ai",
+   "note": "English changed only in case or punctuation"
+  }
+ },
+ "argument.float.low": {
+  "a874c04793db": {
+   "co": "U float ùn deve micca esse menu di %s, ma hè %s",
+   "kind": "reused",
+   "from": "argument.float.low",
+   "review": "ai",
+   "note": "English changed only in case or punctuation"
+  }
+ },
+ "argument.integer.big": {
+  "21de73249f9e": {
+   "co": "L'interu ùn deve micca esse più di %s, ma hè %s",
+   "kind": "reused",
+   "from": "argument.integer.big",
+   "review": "ai",
+   "note": "English changed only in case or punctuation"
+  }
+ },
+ "argument.integer.low": {
+  "67237b9e0ba7": {
+   "co": "L'interu ùn deve micca esse menu di %s, ma hè %s",
+   "kind": "reused",
+   "from": "argument.integer.low",
+   "review": "ai",
+   "note": "English changed only in case or punctuation"
+  }
+ },
+ "argument.long.big": {
+  "27b372ba27c2": {
+   "co": "U long ùn deve micca esse più di %s, ma hè %s",
+   "kind": "reused",
+   "from": "argument.long.big",
+   "review": "ai",
+   "note": "English changed only in case or punctuation"
+  }
+ },
+ "argument.long.low": {
+  "e61c62bf9e1d": {
+   "co": "U long ùn deve micca esse menu di %s, ma hè %s",
+   "kind": "reused",
+   "from": "argument.long.low",
+   "review": "ai",
+   "note": "English changed only in case or punctuation"
   }
  },
  "argument.pos.incomplete": {
@@ -154,12 +602,48 @@
    "review": "ai"
   }
  },
+ "argument.pos.outofbounds": {
+  "ea4f760e5654": {
+   "co": "Sta pusizione hè fora di i limiti permessi.",
+   "kind": "adapted",
+   "from": "argument.pos.outofbounds",
+   "review": "ai",
+   "note": "punctuation as in this English"
+  }
+ },
+ "argument.resource_or_id.invalid": {
+  "d157e5ed716c": {
+   "co": "ID o etichetta inaccettevule",
+   "kind": "reused",
+   "from": "argument.resource_or_id.invalid",
+   "review": "ai",
+   "note": "English changed only in case or punctuation"
+  }
+ },
+ "argument.time.tick_count_too_low": {
+  "35d333b6bda8": {
+   "co": "U numeru di tick ùn deve micca esse menu di %s, ma hè %s",
+   "kind": "reused",
+   "from": "argument.time.tick_count_too_low",
+   "review": "ai",
+   "note": "English changed only in case or punctuation"
+  }
+ },
  "argument.vec2.incomplete": {
   "5895c38fc7b2": {
    "co": "Incumpletu (ci volenu 2 coordinate)",
    "kind": "renamed",
    "from": "argument.pos2d.incomplete",
    "review": "ai"
+  }
+ },
+ "arguments.swizzle.invalid": {
+  "1761acf77ddd": {
+   "co": "Swizzle inaccettevule : ci vole una cumbinazione di 'x', 'y' è 'z'",
+   "kind": "reused",
+   "from": "arguments.swizzle.invalid",
+   "review": "ai",
+   "note": "English changed only in case or punctuation"
   }
  },
  "attribute.name.generic.armorToughness": {
@@ -259,6 +743,87 @@
    "review": "ai"
   }
  },
+ "chat.copy.click": {
+  "d7caf7ffca14": {
+   "co": "Cliccate per cupià in u preme'papei",
+   "kind": "reused",
+   "from": "chat.copy.click",
+   "review": "ai",
+   "note": "English changed only in case or punctuation"
+  }
+ },
+ "chat.disabled.launcher": {
+  "f5cfe4435e91": {
+   "co": "Chjachjerata disattivata da un'ozzione di u lanciadore. Impussibule di mandà u messaghju",
+   "kind": "adapted",
+   "from": "chat.disabled.launcher",
+   "review": "ai",
+   "note": "punctuation as in this English"
+  }
+ },
+ "chat.disabled.options": {
+  "bca5dd1ae706": {
+   "co": "Chjachjerata disattivata in l'ozzioni di u cliente",
+   "kind": "adapted",
+   "from": "chat.disabled.options",
+   "review": "ai",
+   "note": "punctuation as in this English"
+  }
+ },
+ "chat.link.open": {
+  "052269b2c823": {
+   "co": "Apre in u navigatore",
+   "kind": "reused",
+   "from": "chat.link.open",
+   "review": "ai",
+   "note": "English changed only in case or punctuation"
+  }
+ },
+ "chat_restriction.disabled_by_launcher": {
+  "a67c2a45d9d8": {
+   "co": "A chjachjerata hè ristretta da u lanciadore",
+   "kind": "adapted",
+   "from": "chat_restriction.disabled_by_launcher",
+   "review": "ai",
+   "note": "punctuation as in this English"
+  }
+ },
+ "chat_restriction.disabled_by_profile.action": {
+  "559d63fa1fe2": {
+   "co": "Andà à i parametri di u vostru prufilu",
+   "kind": "reused",
+   "from": "chat_restriction.disabled_by_profile.action",
+   "review": "ai",
+   "note": "English changed only in case or punctuation"
+  }
+ },
+ "command.unknown.command": {
+  "570f5ed3cbf5": {
+   "co": "Cumanda scunnisciuta o incumpleta. Fighjate quì sottu per u sbagliu",
+   "kind": "reused",
+   "from": "command.unknown.command",
+   "review": "ai",
+   "note": "English changed only in case or punctuation"
+  }
+ },
+ "commands.data.merge.failed": {
+  "a3b53b51e394": {
+   "co": "Nisun cambiamentu. E pruprietà specificate anu digià sti valori",
+   "kind": "reused",
+   "from": "commands.data.merge.failed",
+   "review": "ai",
+   "note": "English changed only in case or punctuation"
+  }
+ },
+ "commands.datapack.create.io_failure": {
+  "5fb90075e6ee": {
+   "co": "Impussibule di creà u pacchettu cù u nome '%s'. Verificate i ghjurnali",
+   "kind": "reused",
+   "from": "commands.datapack.create.io_failure",
+   "review": "ai",
+   "note": "English changed only in case or punctuation"
+  }
+ },
  "commands.debug.reportFailed": {
   "4cc9b84fd41f": {
    "co": "Impussibule di creà u raportu di spannatura",
@@ -273,6 +838,33 @@
    "kind": "renamed",
    "from": "commands.perf.reportSaved",
    "review": "ai"
+  }
+ },
+ "commands.execute.conditional.fail_count": {
+  "f19991d82abf": {
+   "co": "Prova fallita. Contu : %s",
+   "kind": "reused",
+   "from": "commands.execute.conditional.fail_count",
+   "review": "ai",
+   "note": "English changed only in case or punctuation"
+  }
+ },
+ "commands.execute.conditional.pass_count": {
+  "6d1157cc5d89": {
+   "co": "Prova riesciuta. Contu : %s",
+   "kind": "reused",
+   "from": "commands.execute.conditional.pass_count",
+   "review": "ai",
+   "note": "English changed only in case or punctuation"
+  }
+ },
+ "commands.function.error.argument_not_compound": {
+  "ac8a1484021d": {
+   "co": "Tipu d'argumentu inaccettevule : %s. Ci vulia Compound",
+   "kind": "reused",
+   "from": "commands.function.error.argument_not_compound",
+   "review": "ai",
+   "note": "English changed only in case or punctuation"
   }
  },
  "commands.kill.successful": {
@@ -315,6 +907,15 @@
    "review": "ai"
   }
  },
+ "commands.place.template.invalid": {
+  "c5da5057eb64": {
+   "co": "Ùn ci hè nisunu mudellu cù l'ID \"%s\"",
+   "kind": "reused",
+   "from": "commands.place.template.invalid",
+   "review": "ai",
+   "note": "English changed only in case or punctuation"
+  }
+ },
  "commands.placefeature.failed": {
   "91e901e2186d": {
    "co": "Impussibule di piazzà l'elementu",
@@ -337,6 +938,15 @@
    "kind": "renamed",
    "from": "commands.place.feature.success",
    "review": "ai"
+  }
+ },
+ "commands.profile_fetch.id.success": {
+  "212567ac1b9e": {
+   "co": "Prufilu risoltu per l'ID %s : %s",
+   "kind": "reused",
+   "from": "commands.profile_fetch.id.success",
+   "review": "ai",
+   "note": "English changed only in case or punctuation"
   }
  },
  "commands.replaceitem.block.success": {
@@ -387,6 +997,24 @@
    "review": "ai"
   }
  },
+ "commands.schedule.cleared.failure": {
+  "4064b2d22dc7": {
+   "co": "Nisuna pianificazione cù l'ID %s",
+   "kind": "reused",
+   "from": "commands.schedule.cleared.failure",
+   "review": "ai",
+   "note": "English changed only in case or punctuation"
+  }
+ },
+ "commands.schedule.cleared.success": {
+  "72942ec2893c": {
+   "co": "Pianificazioni cacciate : %s, cù l'ID %s",
+   "kind": "reused",
+   "from": "commands.schedule.cleared.success",
+   "review": "ai",
+   "note": "English changed only in case or punctuation"
+  }
+ },
  "commands.scoreboard.players.enable.success": {
   "9211c4619c84": {
    "co": "Attivadore %s attivatu per %s",
@@ -411,12 +1039,66 @@
    "review": "ai"
   }
  },
+ "commands.stopwatch.create.success": {
+  "9f2d06e2d063": {
+   "co": "Cronometru '%s' creatu",
+   "kind": "reused",
+   "from": "commands.stopwatch.create.success",
+   "review": "ai",
+   "note": "English changed only in case or punctuation"
+  }
+ },
+ "commands.stopwatch.remove.success": {
+  "088b0a2c612c": {
+   "co": "Cronometru '%s' cacciatu",
+   "kind": "reused",
+   "from": "commands.stopwatch.remove.success",
+   "review": "ai",
+   "note": "English changed only in case or punctuation"
+  }
+ },
+ "commands.stopwatch.restart.success": {
+  "63820e5260fc": {
+   "co": "Cronometru '%s' rilanciatu",
+   "kind": "reused",
+   "from": "commands.stopwatch.restart.success",
+   "review": "ai",
+   "note": "English changed only in case or punctuation"
+  }
+ },
  "commands.teleport.success.coordinates": {
   "1fd9369de38d": {
    "co": "Teleportazione di %s versu %s, %s, %s",
    "kind": "renamed",
    "from": "commands.teleport.success.location.single",
    "review": "ai"
+  }
+ },
+ "commands.test.locate.done": {
+  "35cc84533b80": {
+   "co": "Ricerca finita : strutture truvate : %s",
+   "kind": "reused",
+   "from": "commands.test.locate.done",
+   "review": "ai",
+   "note": "English changed only in case or punctuation"
+  }
+ },
+ "commands.test.locate.started": {
+  "10b0214a527d": {
+   "co": "Ricerca di e strutture di prova principiata. Pò piglià un pezzu…",
+   "kind": "reused",
+   "from": "commands.test.locate.started",
+   "review": "ai",
+   "note": "English changed only in case or punctuation"
+  }
+ },
+ "commands.tick.query.percentiles": {
+  "c640a785d508": {
+   "co": "Percentili : P50 : %sms P95 : %sms P99 : %sms. Campione : %s",
+   "kind": "reused",
+   "from": "commands.tick.query.percentiles",
+   "review": "ai",
+   "note": "English changed only in case or punctuation"
   }
  },
  "commands.tp.success": {
@@ -441,6 +1123,15 @@
    "kind": "renamed",
    "from": "commands.worldborder.set.failed.small",
    "review": "ai"
+  }
+ },
+ "container.enchant.level.requirement": {
+  "192a71addaca": {
+   "co": "Livellu richiestu : %s",
+   "kind": "reused",
+   "from": "container.enchant.level.requirement",
+   "review": "ai",
+   "note": "English changed only in case or punctuation"
   }
  },
  "container.minecart": {
@@ -595,6 +1286,15 @@
    "note": "26.3 key of another family; same meaning checked"
   }
  },
+ "datapackFailure.safeMode.failed.title": {
+  "8cd2bdc7b1bb": {
+   "co": "Fiascu di u caricamentu di u mondu in modu senza fiascu.",
+   "kind": "adapted",
+   "from": "datapackFailure.safeMode.failed.title",
+   "review": "ai",
+   "note": "punctuation as in this English"
+  }
+ },
  "death.attack.netherBed.link": {
   "81feb02da903": {
    "co": "Cuncepimentu vulintariu di u ghjocu",
@@ -611,6 +1311,78 @@
    "review": "ai"
   }
  },
+ "deathScreen.spectate": {
+  "5133b20e4eaf": {
+   "co": "Fighjà u mondu",
+   "kind": "reused",
+   "from": "deathScreen.spectate",
+   "review": "ai",
+   "note": "English changed only in case or punctuation"
+  }
+ },
+ "deathScreen.title": {
+  "e238933d8b01": {
+   "co": "Avete persu a vita !",
+   "kind": "reused",
+   "from": "deathScreen.title",
+   "review": "ai",
+   "note": "English changed only in case or punctuation"
+  }
+ },
+ "deathScreen.title.hardcore": {
+  "349f3cc1115e": {
+   "co": "Partita finita !",
+   "kind": "reused",
+   "from": "deathScreen.title.hardcore",
+   "review": "ai",
+   "note": "English changed only in case or punctuation"
+  }
+ },
+ "deathScreen.titleScreen": {
+  "e6777d251567": {
+   "co": "Listinu principale",
+   "kind": "reused",
+   "from": "deathScreen.titleScreen",
+   "review": "ai",
+   "note": "English changed only in case or punctuation"
+  }
+ },
+ "debug.options.notAllowed.tooltip": {
+  "9e343e0200a7": {
+   "co": "Micca visibile quandu l'infurmazioni di spannatura sò ridotte",
+   "kind": "adapted",
+   "from": "debug.options.notAllowed.tooltip",
+   "review": "ai",
+   "note": "punctuation as in this English"
+  }
+ },
+ "demo.day.1": {
+  "caa8f0e86dd6": {
+   "co": "Sta dimustrazione durerà cinque ghjorni di ghjocu. Fate di u vostru megliu !",
+   "kind": "reused",
+   "from": "demo.day.1",
+   "review": "ai",
+   "note": "English changed only in case or punctuation"
+  }
+ },
+ "demo.day.6": {
+  "cdf7a278b9ae": {
+   "co": "U vostru quintu ghjornu hè passatu. Aduprate %s per arregistrà una cattura di screnu di a vostra creazione",
+   "kind": "adapted",
+   "from": "demo.day.6",
+   "review": "ai",
+   "note": "punctuation as in this English"
+  }
+ },
+ "demo.reminder": {
+  "ec6ec161d7a6": {
+   "co": "U tempu di dimustrazione hè finitu. Cumprate u ghjocu per cuntinuà o principiate un mondu novu !",
+   "kind": "reused",
+   "from": "demo.reminder",
+   "review": "ai",
+   "note": "English changed only in case or punctuation"
+  }
+ },
  "disconnect.quitting": {
   "d67020addf98": {
    "co": "Surtita",
@@ -618,6 +1390,15 @@
    "from": "multiplayer.status.quitting",
    "review": "ai",
    "note": "26.3 key of another family; same meaning checked"
+  }
+ },
+ "editGamerule.inGame.discardChanges.title": {
+  "05188138726c": {
+   "co": "Cambiamenti di e regule di ghjocu",
+   "kind": "reused",
+   "from": "editGamerule.inGame.discardChanges.title",
+   "review": "ai",
+   "note": "English changed only in case or punctuation"
   }
  },
  "effect.absorption": {
@@ -1717,6 +2498,15 @@
    "review": "ai"
   }
  },
+ "entity.minecraft.tropical_fish.type.sunstreak": {
+  "f5c5349f9f95": {
+   "co": "Pesciu raghju di sole",
+   "kind": "reused",
+   "from": "entity.minecraft.tropical_fish.type.sunstreak",
+   "review": "ai",
+   "note": "English changed only in case or punctuation"
+  }
+ },
  "entity.mule.name": {
   "f487a85eea09": {
    "co": "Mulu",
@@ -1739,6 +2529,213 @@
    "kind": "renamed",
    "from": "entity.minecraft.zombie_horse",
    "review": "ai"
+  }
+ },
+ "event.minecraft.raid.raiders_remaining": {
+  "87bd34cfd340": {
+   "co": "Assalitori chì fermanu : %s",
+   "kind": "reused",
+   "from": "event.minecraft.raid.raiders_remaining",
+   "review": "ai",
+   "note": "English changed only in case or punctuation"
+  }
+ },
+ "filled_map.id": {
+  "11f54b54d931": {
+   "co": "ID #%s",
+   "kind": "reused",
+   "from": "filled_map.id",
+   "review": "ai",
+   "note": "English changed only in case or punctuation"
+  }
+ },
+ "gameMode.hardcore": {
+  "1abab52d092f": {
+   "co": "Modu estremu !",
+   "kind": "adapted",
+   "from": "gameMode.hardcore",
+   "review": "ai",
+   "note": "punctuation as in this English"
+  }
+ },
+ "gamerule.category.updates": {
+  "9baf061df02d": {
+   "co": "Rinnovi di u mondu",
+   "kind": "reused",
+   "from": "gamerule.category.updates",
+   "review": "ai",
+   "note": "English changed only in case or punctuation"
+  }
+ },
+ "gamerule.commandModificationBlockLimit": {
+  "cd849832f722": {
+   "co": "Limita di blocchi mudificati da una cumanda",
+   "kind": "reused",
+   "from": "gamerule.commandModificationBlockLimit",
+   "review": "ai",
+   "note": "English changed only in case or punctuation"
+  }
+ },
+ "gamerule.doEntityDrops.description": {
+  "31def2c11127": {
+   "co": "Decide ciò chì lascianu i carretti (cumpresu u so inventariu), e curnice, e barche, ecc.",
+   "kind": "reused",
+   "from": "gamerule.doEntityDrops.description",
+   "review": "ai",
+   "note": "English changed only in case or punctuation"
+  }
+ },
+ "gamerule.doLimitedCrafting.description": {
+  "a4b40d99519c": {
+   "co": "S'ella hè attivata, i ghjucadori puderanu fabbricà solu e ricette sbluccate",
+   "kind": "adapted",
+   "from": "gamerule.doLimitedCrafting.description",
+   "review": "ai",
+   "note": "punctuation as in this English"
+  }
+ },
+ "gamerule.doMobLoot.description": {
+  "01041a4644b8": {
+   "co": "Decide e risorse lasciate da e criature, cumprese e sfere di sperienza",
+   "kind": "adapted",
+   "from": "gamerule.doMobLoot.description",
+   "review": "ai",
+   "note": "punctuation as in this English"
+  }
+ },
+ "gamerule.doMobSpawning.description": {
+  "ea3acbc43a9f": {
+   "co": "Certe entità ponu avè regule sparte",
+   "kind": "adapted",
+   "from": "gamerule.doMobSpawning.description",
+   "review": "ai",
+   "note": "punctuation as in this English"
+  }
+ },
+ "gamerule.doTileDrops.description": {
+  "6d3fefb4e7d8": {
+   "co": "Decide e risorse lasciate da i blocchi, cumprese e sfere di sperienza",
+   "kind": "adapted",
+   "from": "gamerule.doTileDrops.description",
+   "review": "ai",
+   "note": "punctuation as in this English"
+  }
+ },
+ "gamerule.doTraderSpawning": {
+  "501f79832419": {
+   "co": "Fà apparisce i mercanti girandulone",
+   "kind": "reused",
+   "from": "gamerule.doTraderSpawning",
+   "review": "ai",
+   "note": "English changed only in case or punctuation"
+  }
+ },
+ "gamerule.enderPearlsVanishOnDeath": {
+  "13caddd81282": {
+   "co": "E perle di l'Ender lampate spariscenu à a morte",
+   "kind": "reused",
+   "from": "gamerule.enderPearlsVanishOnDeath",
+   "review": "ai",
+   "note": "English changed only in case or punctuation"
+  }
+ },
+ "gamerule.enderPearlsVanishOnDeath.description": {
+  "76464394e1bf": {
+   "co": "Decide s'è e perle di l'Ender lampate da un ghjucadore spariscenu quandu stu ghjucadore more.",
+   "kind": "reused",
+   "from": "gamerule.enderPearlsVanishOnDeath.description",
+   "review": "ai",
+   "note": "English changed only in case or punctuation"
+  }
+ },
+ "gamerule.lavaSourceConversion.description": {
+  "52169ca95252": {
+   "co": "Quandu a lava chì corre hè circundata da duie surgente di lava, si cambia in surgente.",
+   "kind": "reused",
+   "from": "gamerule.lavaSourceConversion.description",
+   "review": "ai",
+   "note": "English changed only in case or punctuation"
+  }
+ },
+ "gamerule.maxCommandChainLength.description": {
+  "f2d19d4053ae": {
+   "co": "Vale per e catene di blocchi di cumanda è per e funzioni",
+   "kind": "adapted",
+   "from": "gamerule.maxCommandChainLength.description",
+   "review": "ai",
+   "note": "punctuation as in this English"
+  }
+ },
+ "gamerule.minecraft.fire_spread_radius_around_player.description": {
+  "f9a91d9925d9": {
+   "co": "U raghju, in blocchi, intornu à un ghjucadore induve u focu si pò sparghje",
+   "kind": "adapted",
+   "from": "gamerule.minecraft.fire_spread_radius_around_player.description",
+   "review": "ai",
+   "note": "punctuation as in this English"
+  }
+ },
+ "gamerule.playersNetherPortalCreativeDelay": {
+  "86268c286ae9": {
+   "co": "Ritardu di u portale di u Nether di u ghjucadore in modu creativu",
+   "kind": "reused",
+   "from": "gamerule.playersNetherPortalCreativeDelay",
+   "review": "ai",
+   "note": "English changed only in case or punctuation"
+  }
+ },
+ "gamerule.playersNetherPortalCreativeDelay.description": {
+  "c5dc3530a2f2": {
+   "co": "Tempu (in tick) chì un ghjucadore in modu creativu deve stà in un portale di u Nether nanzu di cambià di dimensione.",
+   "kind": "reused",
+   "from": "gamerule.playersNetherPortalCreativeDelay.description",
+   "review": "ai",
+   "note": "English changed only in case or punctuation"
+  }
+ },
+ "gamerule.playersNetherPortalDefaultDelay": {
+  "59c29d60e330": {
+   "co": "Ritardu di u portale di u Nether di u ghjucadore fora di u modu creativu",
+   "kind": "reused",
+   "from": "gamerule.playersNetherPortalDefaultDelay",
+   "review": "ai",
+   "note": "English changed only in case or punctuation"
+  }
+ },
+ "gamerule.playersNetherPortalDefaultDelay.description": {
+  "444a41cc96e9": {
+   "co": "Tempu (in tick) chì un ghjucadore fora di u modu creativu deve stà in un portale di u Nether nanzu di cambià di dimensione.",
+   "kind": "reused",
+   "from": "gamerule.playersNetherPortalDefaultDelay.description",
+   "review": "ai",
+   "note": "English changed only in case or punctuation"
+  }
+ },
+ "gamerule.reducedDebugInfo.description": {
+  "b486a958e67e": {
+   "co": "Limita u cuntenutu di u screnu di spannatura",
+   "kind": "adapted",
+   "from": "gamerule.reducedDebugInfo.description",
+   "review": "ai",
+   "note": "punctuation as in this English"
+  }
+ },
+ "gamerule.spawnChunkRadius.description": {
+  "160ee4b61f2c": {
+   "co": "U numeru di pezzi chì fermanu caricati intornu à u puntu d'apparizione di u Mondu di sopra.",
+   "kind": "reused",
+   "from": "gamerule.spawnChunkRadius.description",
+   "review": "ai",
+   "note": "English changed only in case or punctuation"
+  }
+ },
+ "gamerule.waterSourceConversion.description": {
+  "5ca3acb032c3": {
+   "co": "Quandu l'acqua chì corre hè circundata da duie surgente d'acqua, si cambia in surgente.",
+   "kind": "reused",
+   "from": "gamerule.waterSourceConversion.description",
+   "review": "ai",
+   "note": "English changed only in case or punctuation"
   }
  },
  "generator.amplified": {
@@ -1819,6 +2816,213 @@
    "kind": "renamed",
    "from": "generator.minecraft.single_biome_surface",
    "review": "ai"
+  }
+ },
+ "gui.abuseReport.discard.title": {
+  "da5d5b9c8125": {
+   "co": "Scartà u signalamentu è i cummenti ?",
+   "kind": "reused",
+   "from": "gui.abuseReport.discard.title",
+   "review": "ai",
+   "note": "English changed only in case or punctuation"
+  }
+ },
+ "gui.abuseReport.draft.title": {
+  "ab7d5215d258": {
+   "co": "Mudificà a bruttacopia di signalamentu di chjachjerata ?",
+   "kind": "reused",
+   "from": "gui.abuseReport.draft.title",
+   "review": "ai",
+   "note": "English changed only in case or punctuation"
+  }
+ },
+ "gui.abuseReport.error.title": {
+  "1f39c3179e2c": {
+   "co": "Prublema à u mandu di u vostru signalamentu",
+   "kind": "reused",
+   "from": "gui.abuseReport.error.title",
+   "review": "ai",
+   "note": "English changed only in case or punctuation"
+  }
+ },
+ "gui.abuseReport.report_sent_msg": {
+  "ea8e6900bd58": {
+   "co": "Avemu ricevutu u vostru signalamentu. Vi ringraziemu !\n\nA nostra squadra l'esaminerà u più prestu pussibule.",
+   "kind": "reused",
+   "from": "gui.abuseReport.report_sent_msg",
+   "review": "ai",
+   "note": "English changed only in case or punctuation"
+  }
+ },
+ "gui.abuseReport.sending.title": {
+  "88baa9632f91": {
+   "co": "Mandu di u vostru signalamentu…",
+   "kind": "reused",
+   "from": "gui.abuseReport.sending.title",
+   "review": "ai",
+   "note": "English changed only in case or punctuation"
+  }
+ },
+ "gui.abuseReport.sent.title": {
+  "a7615ceb35e1": {
+   "co": "Signalamentu mandatu",
+   "kind": "reused",
+   "from": "gui.abuseReport.sent.title",
+   "review": "ai",
+   "note": "English changed only in case or punctuation"
+  }
+ },
+ "gui.banned.description.permanent": {
+  "c87aba32607b": {
+   "co": "U vostru contu hè esclusu per sempre, ciò chì vole dì chì ùn pudete micca ghjucà in linea nè raghjunghje Realms.",
+   "kind": "reused",
+   "from": "gui.banned.description.permanent",
+   "review": "ai",
+   "note": "English changed only in case or punctuation"
+  }
+ },
+ "gui.banned.description.temporary": {
+  "02ee1c6a3f42": {
+   "co": "%s Finu à tandu, ùn pudete micca ghjucà in linea nè raghjunghje Realms.",
+   "kind": "reused",
+   "from": "gui.banned.description.temporary",
+   "review": "ai",
+   "note": "English changed only in case or punctuation"
+  }
+ },
+ "gui.banned.title.permanent": {
+  "8643612fcab0": {
+   "co": "Contu esclusu per sempre",
+   "kind": "reused",
+   "from": "gui.banned.title.permanent",
+   "review": "ai",
+   "note": "English changed only in case or punctuation"
+  }
+ },
+ "gui.banned.title.temporary": {
+  "1de88048e24a": {
+   "co": "Contu suspesu pè un tempu",
+   "kind": "reused",
+   "from": "gui.banned.title.temporary",
+   "review": "ai",
+   "note": "English changed only in case or punctuation"
+  }
+ },
+ "gui.chatReport.discard.title": {
+  "da5d5b9c8125": {
+   "co": "Scartà u signalamentu è i cummenti ?",
+   "kind": "reused",
+   "from": "gui.chatReport.discard.title",
+   "review": "ai",
+   "note": "English changed only in case or punctuation"
+  }
+ },
+ "gui.chatReport.draft.title": {
+  "ab7d5215d258": {
+   "co": "Mudificà a bruttacopia di signalamentu di chjachjerata ?",
+   "kind": "reused",
+   "from": "gui.chatReport.draft.title",
+   "review": "ai",
+   "note": "English changed only in case or punctuation"
+  }
+ },
+ "gui.chatReport.report_sent_msg": {
+  "ea8e6900bd58": {
+   "co": "Avemu ricevutu u vostru signalamentu. Vi ringraziemu !\n\nA nostra squadra l'esaminerà u più prestu pussibule.",
+   "kind": "reused",
+   "from": "gui.chatReport.report_sent_msg",
+   "review": "ai",
+   "note": "English changed only in case or punctuation"
+  }
+ },
+ "gui.friends.error.unauthorized": {
+  "485f40193115": {
+   "co": "Gettone inaccettevule. Rilanciate u ghjocu è u lanciadore, po pruvate torna",
+   "kind": "adapted",
+   "from": "gui.friends.error.unauthorized",
+   "review": "ai",
+   "note": "punctuation as in this English"
+  }
+ },
+ "gui.recipebook.moreRecipes": {
+  "14d7c2407108": {
+   "co": "Cliccu dirittu per vede di più",
+   "kind": "reused",
+   "from": "gui.recipebook.moreRecipes",
+   "review": "ai",
+   "note": "English changed only in case or punctuation"
+  }
+ },
+ "gui.recipebook.toggleRecipes.all": {
+  "00eb6df29fc6": {
+   "co": "Tutte e ricette",
+   "kind": "reused",
+   "from": "gui.recipebook.toggleRecipes.all",
+   "review": "ai",
+   "note": "English changed only in case or punctuation"
+  }
+ },
+ "gui.recipebook.toggleRecipes.blastable": {
+  "754dafa32d7e": {
+   "co": "Ricette d'altofornu",
+   "kind": "reused",
+   "from": "gui.recipebook.toggleRecipes.blastable",
+   "review": "ai",
+   "note": "English changed only in case or punctuation"
+  }
+ },
+ "gui.recipebook.toggleRecipes.craftable": {
+  "e65cb7c1aae1": {
+   "co": "Ricette fabbricabile",
+   "kind": "reused",
+   "from": "gui.recipebook.toggleRecipes.craftable",
+   "review": "ai",
+   "note": "English changed only in case or punctuation"
+  }
+ },
+ "gui.recipebook.toggleRecipes.smeltable": {
+  "bebe2fa8164e": {
+   "co": "Ricette di fornu",
+   "kind": "reused",
+   "from": "gui.recipebook.toggleRecipes.smeltable",
+   "review": "ai",
+   "note": "English changed only in case or punctuation"
+  }
+ },
+ "gui.recipebook.toggleRecipes.smokable": {
+  "d4d32170dd08": {
+   "co": "Ricette d'affumicatore",
+   "kind": "reused",
+   "from": "gui.recipebook.toggleRecipes.smokable",
+   "review": "ai",
+   "note": "English changed only in case or punctuation"
+  }
+ },
+ "gui.report_to_server": {
+  "f00bdc3a4719": {
+   "co": "Signalà à u servitore",
+   "kind": "reused",
+   "from": "gui.report_to_server",
+   "review": "ai",
+   "note": "English changed only in case or punctuation"
+  }
+ },
+ "gui.toMenu": {
+  "4025823188e1": {
+   "co": "Ritornu à a lista di servitori",
+   "kind": "reused",
+   "from": "gui.toMenu",
+   "review": "ai",
+   "note": "English changed only in case or punctuation"
+  }
+ },
+ "gui.toTitle": {
+  "8c641d76f6ea": {
+   "co": "Ritornu à u listinu principale",
+   "kind": "reused",
+   "from": "gui.toTitle",
+   "review": "ai",
+   "note": "English changed only in case or punctuation"
   }
  },
  "item.apple.name": {
@@ -8303,6 +9507,51 @@
    "review": "ai"
   }
  },
+ "item.modifiers.feet": {
+  "3e923ec41416": {
+   "co": "À i pedi :",
+   "kind": "reused",
+   "from": "item.modifiers.feet",
+   "review": "ai",
+   "note": "English changed only in case or punctuation"
+  }
+ },
+ "item.modifiers.head": {
+  "83acbdd48415": {
+   "co": "Nant'à u capu :",
+   "kind": "reused",
+   "from": "item.modifiers.head",
+   "review": "ai",
+   "note": "English changed only in case or punctuation"
+  }
+ },
+ "item.modifiers.legs": {
+  "bb20a9123474": {
+   "co": "À e gambe :",
+   "kind": "reused",
+   "from": "item.modifiers.legs",
+   "review": "ai",
+   "note": "English changed only in case or punctuation"
+  }
+ },
+ "item.modifiers.mainhand": {
+  "b227adca3dc4": {
+   "co": "In a manu principale :",
+   "kind": "reused",
+   "from": "item.modifiers.mainhand",
+   "review": "ai",
+   "note": "English changed only in case or punctuation"
+  }
+ },
+ "item.modifiers.offhand": {
+  "a123ee52962e": {
+   "co": "In l'altra manu :",
+   "kind": "reused",
+   "from": "item.modifiers.offhand",
+   "review": "ai",
+   "note": "English changed only in case or punctuation"
+  }
+ },
  "item.mushroomStew.name": {
   "f661800e26ed": {
    "co": "Stufatu di funghi",
@@ -8365,6 +9614,15 @@
    "kind": "renamed",
    "from": "item.minecraft.quartz",
    "review": "ai"
+  }
+ },
+ "item.op_block_warning.line2": {
+  "46d815cb83b6": {
+   "co": "L'usu di st'ogettu pò fà eseguisce cumande",
+   "kind": "adapted",
+   "from": "item.op_block_warning.line2",
+   "review": "ai",
+   "note": "punctuation as in this English"
   }
  },
  "item.painting.name": {
@@ -9088,12 +10346,75 @@
    "note": "26.3 key of another family; same meaning checked"
   }
  },
+ "jigsaw_block.joint_label": {
+  "503fb74ac7bb": {
+   "co": "Tipu d'articulazione :",
+   "kind": "reused",
+   "from": "jigsaw_block.joint_label",
+   "review": "ai",
+   "note": "English changed only in case or punctuation"
+  }
+ },
+ "jigsaw_block.keep_jigsaws": {
+  "dd4fd6a343eb": {
+   "co": "Mantene i blocchi puzzle : ",
+   "kind": "adapted",
+   "from": "jigsaw_block.keep_jigsaws",
+   "review": "ai",
+   "note": "punctuation as in this English"
+  }
+ },
+ "jigsaw_block.pool": {
+  "4e87d961b132": {
+   "co": "Inseme di destinazione :",
+   "kind": "reused",
+   "from": "jigsaw_block.pool",
+   "review": "ai",
+   "note": "English changed only in case or punctuation"
+  }
+ },
+ "jigsaw_block.target": {
+  "291fa88e8da2": {
+   "co": "Nome di destinazione :",
+   "kind": "reused",
+   "from": "jigsaw_block.target",
+   "review": "ai",
+   "note": "English changed only in case or punctuation"
+  }
+ },
+ "key.debug.fpsCharts": {
+  "4cd8c9bd9531": {
+   "co": "Grafichi di fps",
+   "kind": "reused",
+   "from": "key.debug.fpsCharts",
+   "review": "ai",
+   "note": "English changed only in case or punctuation"
+  }
+ },
+ "key.keyboard.unknown": {
+  "04ab4fc311e1": {
+   "co": "Micca assignatu",
+   "kind": "reused",
+   "from": "key.keyboard.unknown",
+   "review": "ai",
+   "note": "English changed only in case or punctuation"
+  }
+ },
  "key.mouseButton": {
   "9a203d7fff0e": {
    "co": "Buttone %1$s",
    "kind": "renamed",
    "from": "key.mouse",
    "review": "ai"
+  }
+ },
+ "language.code": {
+  "fa73905e89c5": {
+   "co": "co_FR",
+   "kind": "adapted",
+   "from": "language.code",
+   "review": "ai",
+   "note": "language code as the game writes it up to 1.10.2 (co_FR)"
   }
  },
  "lingering_potion.effect.awkward": {
@@ -9256,12 +10577,521 @@
    "review": "ai"
   }
  },
+ "mco.account.privacy.information": {
+  "e516fe79c06a": {
+   "co": "Mojang applica certe prucedure per aiutà à prutege i zitelli è a so vita privata, in particulare rispittendu u Children's Online Privacy Protection Act (COPPA) è u Regulamentu generale nant'à a prutezzione di i dati (RGPD).\n\nPò esse chì vi tocchi à ottene u cunsensu di i vostri genitori nanzu d'accede à u vostru contu Realms.",
+   "kind": "reused",
+   "from": "mco.account.privacy.information",
+   "review": "ai",
+   "note": "English changed only in case or punctuation"
+  }
+ },
+ "mco.account.privacyinfo": {
+  "839addfde9f1": {
+   "co": "Mojang applica certe prucedure per aiutà à prutege i zitelli è a so vita privata, in particulare rispittendu u Children's Online Privacy Protection Act (COPPA) è u Regulamentu generale nant'à a prutezzione di i dati (RGPD).\n\nPò esse chì vi tocchi à ottene u cunsensu di i vostri genitori nanzu d'accede à u vostru contu Realms.\n\nS'è vo avete un contu Minecraft anticu (vi cunnittite cù u vostru nome d'utilizatore), ci vole à migrà stu contu versu un contu Mojang per accede à Realms.",
+   "kind": "reused",
+   "from": "mco.account.privacyinfo",
+   "review": "ai",
+   "note": "English changed only in case or punctuation"
+  }
+ },
+ "mco.backup.button.download": {
+  "2608fdc093de": {
+   "co": "Scaricà l'ultimu",
+   "kind": "reused",
+   "from": "mco.backup.button.download",
+   "review": "ai",
+   "note": "English changed only in case or punctuation"
+  }
+ },
+ "mco.backup.button.reset": {
+  "7353fd7f6e30": {
+   "co": "Reinizià u mondu",
+   "kind": "reused",
+   "from": "mco.backup.button.reset",
+   "review": "ai",
+   "note": "English changed only in case or punctuation"
+  }
+ },
+ "mco.backup.button.upload": {
+  "0aa5cc24d895": {
+   "co": "Incaricà un mondu",
+   "kind": "reused",
+   "from": "mco.backup.button.upload",
+   "review": "ai",
+   "note": "English changed only in case or punctuation"
+  }
+ },
+ "mco.backup.info.title": {
+  "1d0d5a75ea49": {
+   "co": "Cambiamenti dapoi l'ultima salvaguardia",
+   "kind": "reused",
+   "from": "mco.backup.info.title",
+   "review": "ai",
+   "note": "English changed only in case or punctuation"
+  }
+ },
+ "mco.backup.nobackups": {
+  "f16c5d948145": {
+   "co": "Stu Realm ùn hà micca salvaguardie per avà.",
+   "kind": "reused",
+   "from": "mco.backup.nobackups",
+   "review": "ai",
+   "note": "English changed only in case or punctuation"
+  }
+ },
+ "mco.backup.restoring": {
+  "c57edfe906dc": {
+   "co": "Ristabilimentu di u vostru Realm",
+   "kind": "reused",
+   "from": "mco.backup.restoring",
+   "review": "ai",
+   "note": "English changed only in case or punctuation"
+  }
+ },
+ "mco.brokenworld.nonowner.error": {
+  "22b395723a9a": {
+   "co": "Aspettate chì u pruprietariu di u Realm reinizii u mondu",
+   "kind": "reused",
+   "from": "mco.brokenworld.nonowner.error",
+   "review": "ai",
+   "note": "English changed only in case or punctuation"
+  }
+ },
+ "mco.compatibility.downgrade.description": {
+  "5445ace6419c": {
+   "co": "L'ultima volta, stu mondu hè statu ghjucatu in a versione %s ; voi site in a versione %s. Fà retrucede un mondu pò guastallu - ùn pudemu micca garantisce ch'ellu si caricherà o ch'ellu funziunerà.\n\nUna salvaguardia di u vostru mondu serà arregistrata in \"Salvaguardie di u mondu\". Ristabilite u vostru mondu s'ellu ci vole.",
+   "kind": "reused",
+   "from": "mco.compatibility.downgrade.description",
+   "review": "ai",
+   "note": "English changed only in case or punctuation"
+  }
+ },
+ "mco.compatibility.unverifiable.message": {
+  "d92858dbe6d1": {
+   "co": "Ùn hè micca statu pussibule di verificà a versione induve stu mondu hè statu ghjucatu l'ultima volta. S'è u mondu hè aghjurnatu o fattu retrucede, una salvaguardia serà creata autumaticamente è arregistrata in \"Salvaguardie di u mondu\".",
+   "kind": "reused",
+   "from": "mco.compatibility.unverifiable.message",
+   "review": "ai",
+   "note": "English changed only in case or punctuation"
+  }
+ },
+ "mco.configure.world.backup": {
+  "f60bbd3172c5": {
+   "co": "Salvaguardie di u mondu",
+   "kind": "reused",
+   "from": "mco.configure.world.backup",
+   "review": "ai",
+   "note": "English changed only in case or punctuation"
+  }
+ },
+ "mco.configure.world.buttons.invite": {
+  "51c06f119227": {
+   "co": "Invità un ghjucadore",
+   "kind": "reused",
+   "from": "mco.configure.world.buttons.invite",
+   "review": "ai",
+   "note": "English changed only in case or punctuation"
+  }
+ },
+ "mco.configure.world.buttons.options": {
+  "b1b34c34c90d": {
+   "co": "Ozzioni di u mondu",
+   "kind": "reused",
+   "from": "mco.configure.world.buttons.options",
+   "review": "ai",
+   "note": "English changed only in case or punctuation"
+  }
+ },
+ "mco.configure.world.buttons.resetworld": {
+  "7353fd7f6e30": {
+   "co": "Reinizià u mondu",
+   "kind": "reused",
+   "from": "mco.configure.world.buttons.resetworld",
+   "review": "ai",
+   "note": "English changed only in case or punctuation"
+  }
+ },
+ "mco.configure.world.buttons.switchminigame": {
+  "e1fb1ff168ea": {
+   "co": "Cambià di minighjocu",
+   "kind": "reused",
+   "from": "mco.configure.world.buttons.switchminigame",
+   "review": "ai",
+   "note": "English changed only in case or punctuation"
+  }
+ },
+ "mco.configure.world.close.question.line1": {
+  "8a55f7ad56ac": {
+   "co": "Pudete chjode u vostru Realm per un pezzu, ciò chì impedisce di ghjucà ci mentre chì voi fate cambiamenti. Apritelu torna quandu site pronti.\n\nQuessu ùn annulleghja micca u vostru abbunamentu Realms.",
+   "kind": "reused",
+   "from": "mco.configure.world.close.question.line1",
+   "review": "ai",
+   "note": "English changed only in case or punctuation"
+  }
+ },
+ "mco.configure.world.commandBlocks": {
+  "a876deef2778": {
+   "co": "Blocchi di cumanda",
+   "kind": "reused",
+   "from": "mco.configure.world.commandBlocks",
+   "review": "ai",
+   "note": "English changed only in case or punctuation"
+  }
+ },
+ "mco.configure.world.delete.button": {
+  "b736fac784d3": {
+   "co": "Squassà u Realm",
+   "kind": "reused",
+   "from": "mco.configure.world.delete.button",
+   "review": "ai",
+   "note": "English changed only in case or punctuation"
+  }
+ },
+ "mco.configure.world.delete.question.line1": {
+  "b9544f628c56": {
+   "co": "U vostru Realm serà squassatu definitivamente",
+   "kind": "reused",
+   "from": "mco.configure.world.delete.question.line1",
+   "review": "ai",
+   "note": "English changed only in case or punctuation"
+  }
+ },
+ "mco.configure.world.description": {
+  "341db7ad9710": {
+   "co": "Discrizzione di u Realm",
+   "kind": "reused",
+   "from": "mco.configure.world.description",
+   "review": "ai",
+   "note": "English changed only in case or punctuation"
+  }
+ },
+ "mco.configure.world.edit.slot.name": {
+  "ba83da0df17d": {
+   "co": "Nome di u mondu",
+   "kind": "reused",
+   "from": "mco.configure.world.edit.slot.name",
+   "review": "ai",
+   "note": "English changed only in case or punctuation"
+  }
+ },
+ "mco.configure.world.forceGameMode": {
+  "fe0c020023cf": {
+   "co": "Impone u modu di ghjocu",
+   "kind": "reused",
+   "from": "mco.configure.world.forceGameMode",
+   "review": "ai",
+   "note": "English changed only in case or punctuation"
+  }
+ },
+ "mco.configure.world.invites.normal.tooltip": {
+  "ce6c40be8c92": {
+   "co": "Utilizatore nurmale",
+   "kind": "reused",
+   "from": "mco.configure.world.invites.normal.tooltip",
+   "review": "ai",
+   "note": "English changed only in case or punctuation"
+  }
+ },
+ "mco.configure.world.leave.question.line1": {
+  "7a55f9d7d23e": {
+   "co": "S'è vo lasciate stu Realm, ùn u viderete più fin'à ch'è vo site invitati torna",
+   "kind": "reused",
+   "from": "mco.configure.world.leave.question.line1",
+   "review": "ai",
+   "note": "English changed only in case or punctuation"
+  },
+  "f3e44e9537cb": {
+   "co": "S'è vo lasciate stu Realm, ùn u viderete più fin'à ch'è vo site invitati torna",
+   "kind": "reused",
+   "from": "mco.configure.world.leave.question.line1",
+   "review": "ai",
+   "note": "English changed only in case or punctuation"
+  }
+ },
+ "mco.configure.world.name": {
+  "660be2543080": {
+   "co": "Nome di u Realm",
+   "kind": "reused",
+   "from": "mco.configure.world.name",
+   "review": "ai",
+   "note": "English changed only in case or punctuation"
+  }
+ },
+ "mco.configure.world.opening": {
+  "2d192950d303": {
+   "co": "Apertura di u Realm…",
+   "kind": "reused",
+   "from": "mco.configure.world.opening",
+   "review": "ai",
+   "note": "English changed only in case or punctuation"
+  }
+ },
+ "mco.configure.world.resourcepack.question": {
+  "3415e331f86d": {
+   "co": "Ci vole un pacchettu di risorse persunalizatu per ghjucà nant'à stu Realm\n\nU vulete scaricà è ghjucà ?",
+   "kind": "reused",
+   "from": "mco.configure.world.resourcepack.question",
+   "review": "ai",
+   "note": "English changed only in case or punctuation"
+  }
+ },
+ "mco.configure.world.resourcepack.question.line1": {
+  "bfb917afd870": {
+   "co": "Ci vole un pacchettu di risorse persunalizatu per ghjucà nant'à stu Realm",
+   "kind": "reused",
+   "from": "mco.configure.world.resourcepack.question.line1",
+   "review": "ai",
+   "note": "English changed only in case or punctuation"
+  }
+ },
+ "mco.configure.world.slot.switch.question.line1": {
+  "4eaf0ce93cc7": {
+   "co": "U vostru Realm passerà à un altru mondu",
+   "kind": "reused",
+   "from": "mco.configure.world.slot.switch.question.line1",
+   "review": "ai",
+   "note": "English changed only in case or punctuation"
+  }
+ },
+ "mco.configure.world.spawnAnimals": {
+  "d578b93c6e6e": {
+   "co": "Apparizione d'animali",
+   "kind": "reused",
+   "from": "mco.configure.world.spawnAnimals",
+   "review": "ai",
+   "note": "English changed only in case or punctuation"
+  }
+ },
+ "mco.configure.world.spawnMonsters": {
+  "d049ed63852d": {
+   "co": "Apparizione di mostri",
+   "kind": "reused",
+   "from": "mco.configure.world.spawnMonsters",
+   "review": "ai",
+   "note": "English changed only in case or punctuation"
+  }
+ },
+ "mco.configure.world.spawnProtection": {
+  "1d2607aaceed": {
+   "co": "Prutezzione di u puntu di rinascita",
+   "kind": "reused",
+   "from": "mco.configure.world.spawnProtection",
+   "review": "ai",
+   "note": "English changed only in case or punctuation"
+  }
+ },
+ "mco.configure.world.spawn_toggle.message": {
+  "dbb0e1617995": {
+   "co": "Disattivà st'ozzione CACCERÀ TUTTE l'entità esistente di stu tipu",
+   "kind": "adapted",
+   "from": "mco.configure.world.spawn_toggle.message",
+   "review": "ai",
+   "note": "punctuation as in this English"
+  }
+ },
+ "mco.configure.world.spawn_toggle.message.npc": {
+  "a28af4cf65a8": {
+   "co": "Disattivà st'ozzione CACCERÀ TUTTE l'entità esistente di stu tipu, cum'è i paisani",
+   "kind": "adapted",
+   "from": "mco.configure.world.spawn_toggle.message.npc",
+   "review": "ai",
+   "note": "punctuation as in this English"
+  }
+ },
+ "mco.configure.world.subscription.extend": {
+  "c030dd4a7767": {
+   "co": "Allungà l'abbunamentu",
+   "kind": "reused",
+   "from": "mco.configure.world.subscription.extend",
+   "review": "ai",
+   "note": "English changed only in case or punctuation"
+  }
+ },
+ "mco.configure.world.subscription.less_than_a_day": {
+  "b538ba189d41": {
+   "co": "Menu d'un ghjornu",
+   "kind": "reused",
+   "from": "mco.configure.world.subscription.less_than_a_day",
+   "review": "ai",
+   "note": "English changed only in case or punctuation"
+  }
+ },
+ "mco.configure.world.subscription.start": {
+  "ff99f5b5f794": {
+   "co": "Data di principiu",
+   "kind": "reused",
+   "from": "mco.configure.world.subscription.start",
+   "review": "ai",
+   "note": "English changed only in case or punctuation"
+  }
+ },
+ "mco.configure.world.subscription.timeleft": {
+  "99c94eb852d2": {
+   "co": "Tempu chì ferma",
+   "kind": "reused",
+   "from": "mco.configure.world.subscription.timeleft",
+   "review": "ai",
+   "note": "English changed only in case or punctuation"
+  }
+ },
+ "mco.configure.world.subscription.title": {
+  "e93263ac0d05": {
+   "co": "U vostru abbunamentu",
+   "kind": "reused",
+   "from": "mco.configure.world.subscription.title",
+   "review": "ai",
+   "note": "English changed only in case or punctuation"
+  }
+ },
+ "mco.configure.world.switch.slot": {
+  "1c2ef062be82": {
+   "co": "Creà un mondu",
+   "kind": "reused",
+   "from": "mco.configure.world.switch.slot",
+   "review": "ai",
+   "note": "English changed only in case or punctuation"
+  }
+ },
+ "mco.configure.world.switch.slot.subtitle": {
+  "df319f458614": {
+   "co": "Stu mondu hè viotu. Sciglite cumu creà u vostru mondu",
+   "kind": "reused",
+   "from": "mco.configure.world.switch.slot.subtitle",
+   "review": "ai",
+   "note": "English changed only in case or punctuation"
+  }
+ },
+ "mco.configure.world.title": {
+  "4745e650d167": {
+   "co": "Cunfigurà u Realm",
+   "kind": "adapted",
+   "from": "mco.configure.world.title",
+   "review": "ai",
+   "note": "punctuation as in this English"
+  },
+  "8dd9c1c3638c": {
+   "co": "Cunfigurà u Realm :",
+   "kind": "reused",
+   "from": "mco.configure.world.title",
+   "review": "ai",
+   "note": "English changed only in case or punctuation"
+  }
+ },
+ "mco.connect.connecting": {
+  "b6654404290a": {
+   "co": "Cunnessione à u Realm…",
+   "kind": "reused",
+   "from": "mco.connect.connecting",
+   "review": "ai",
+   "note": "English changed only in case or punctuation"
+  }
+ },
+ "mco.connect.failed": {
+  "6510fe530500": {
+   "co": "Impussibule di cunnettesi à u Realm",
+   "kind": "reused",
+   "from": "mco.connect.failed",
+   "review": "ai",
+   "note": "English changed only in case or punctuation"
+  }
+ },
  "mco.create.world.seed": {
   "38992ef385f5": {
    "co": "Grana (facultativa)",
    "kind": "renamed",
    "from": "mco.reset.world.seed",
    "review": "ai"
+  }
+ },
+ "mco.create.world.subtitle": {
+  "806f0c98323c": {
+   "co": "S'è vo vulete, selezziunate u mondu à mette nant'à u vostru Realm novu",
+   "kind": "reused",
+   "from": "mco.create.world.subtitle",
+   "review": "ai",
+   "note": "English changed only in case or punctuation"
+  }
+ },
+ "mco.create.world.wait": {
+  "9140284f0064": {
+   "co": "Creazione di u Realm…",
+   "kind": "reused",
+   "from": "mco.create.world.wait",
+   "review": "ai",
+   "note": "English changed only in case or punctuation"
+  }
+ },
+ "mco.download.confirmation.line2": {
+  "84a17901879a": {
+   "co": "Ùn puderete più incaricà stu mondu nant'à u vostru Realm",
+   "kind": "reused",
+   "from": "mco.download.confirmation.line2",
+   "review": "ai",
+   "note": "English changed only in case or punctuation"
+  }
+ },
+ "mco.download.confirmation.oversized": {
+  "f09cf146a2ac": {
+   "co": "U mondu chì avete da scaricà hè più grande chè %s\n\nÙn puderete più incaricà stu mondu nant'à u vostru Realm",
+   "kind": "reused",
+   "from": "mco.download.confirmation.oversized",
+   "review": "ai",
+   "note": "English changed only in case or punctuation"
+  }
+ },
+ "mco.download.title": {
+  "3bd3d68cea10": {
+   "co": "Scaricamentu di l'ultimu mondu",
+   "kind": "reused",
+   "from": "mco.download.title",
+   "review": "ai",
+   "note": "English changed only in case or punctuation"
+  }
+ },
+ "mco.error.invalid.session.title": {
+  "1ebf32ac7d03": {
+   "co": "Sessione micca valida",
+   "kind": "reused",
+   "from": "mco.error.invalid.session.title",
+   "review": "ai",
+   "note": "English changed only in case or punctuation"
+  }
+ },
+ "mco.errorMessage.6002": {
+  "6cecc42264bc": {
+   "co": "Cundizioni d'utilizazione micca accettate",
+   "kind": "reused",
+   "from": "mco.errorMessage.6002",
+   "review": "ai",
+   "note": "English changed only in case or punctuation"
+  }
+ },
+ "mco.errorMessage.connectionFailure": {
+  "cd40b60488f8": {
+   "co": "Un sbagliu hè accadutu. Pruvate torna più tardi.",
+   "kind": "reused",
+   "from": "mco.errorMessage.connectionFailure",
+   "review": "ai",
+   "note": "English changed only in case or punctuation"
+  }
+ },
+ "mco.errorMessage.realmsService.unknownCompatibility": {
+  "33dd5020a77a": {
+   "co": "Impussibule di verificà a versione cumpatibile. Risposta ricevuta : %s",
+   "kind": "reused",
+   "from": "mco.errorMessage.realmsService.unknownCompatibility",
+   "review": "ai",
+   "note": "English changed only in case or punctuation"
+  }
+ },
+ "mco.minigame.world.changeButton": {
+  "2b934df80865": {
+   "co": "Selezziunà un altru minighjocu",
+   "kind": "reused",
+   "from": "mco.minigame.world.changeButton",
+   "review": "ai",
+   "note": "English changed only in case or punctuation"
   }
  },
  "mco.minigame.world.info2": {
@@ -9272,12 +11102,253 @@
    "review": "ai"
   }
  },
+ "mco.minigame.world.restore": {
+  "7e9d671bf96f": {
+   "co": "Fine di u minighjocu…",
+   "kind": "reused",
+   "from": "mco.minigame.world.restore",
+   "review": "ai",
+   "note": "English changed only in case or punctuation"
+  }
+ },
+ "mco.minigame.world.restore.question.line1": {
+  "f3e17497a152": {
+   "co": "U minighjocu finiscerà è u vostru Realm serà ristabilitu.",
+   "kind": "reused",
+   "from": "mco.minigame.world.restore.question.line1",
+   "review": "ai",
+   "note": "English changed only in case or punctuation"
+  }
+ },
+ "mco.minigame.world.selected": {
+  "49cae79eac70": {
+   "co": "Minighjocu selezziunatu :",
+   "kind": "reused",
+   "from": "mco.minigame.world.selected",
+   "review": "ai",
+   "note": "English changed only in case or punctuation"
+  }
+ },
+ "mco.minigame.world.slot.screen.title": {
+  "845209794925": {
+   "co": "Cambiamentu di mondu…",
+   "kind": "reused",
+   "from": "mco.minigame.world.slot.screen.title",
+   "review": "ai",
+   "note": "English changed only in case or punctuation"
+  }
+ },
+ "mco.minigame.world.starting.screen.title": {
+  "ff78c2f48c51": {
+   "co": "Lanciu di u minighjocu…",
+   "kind": "reused",
+   "from": "mco.minigame.world.starting.screen.title",
+   "review": "ai",
+   "note": "English changed only in case or punctuation"
+  }
+ },
+ "mco.minigame.world.stopButton": {
+  "3c8ed9eb53e6": {
+   "co": "Piantà u minighjocu",
+   "kind": "reused",
+   "from": "mco.minigame.world.stopButton",
+   "review": "ai",
+   "note": "English changed only in case or punctuation"
+  }
+ },
+ "mco.minigame.world.switch.title": {
+  "e1fb1ff168ea": {
+   "co": "Cambià di minighjocu",
+   "kind": "reused",
+   "from": "mco.minigame.world.switch.title",
+   "review": "ai",
+   "note": "English changed only in case or punctuation"
+  }
+ },
+ "mco.minigame.world.title": {
+  "360b3f3013b3": {
+   "co": "Passà u Realm à un minighjocu",
+   "kind": "reused",
+   "from": "mco.minigame.world.title",
+   "review": "ai",
+   "note": "English changed only in case or punctuation"
+  }
+ },
  "mco.more.info.question.line2": {
   "0193e5ee8536": {
    "co": "Vulete cuntinuà ?",
    "kind": "renamed",
    "from": "mco.configure.world.restore.download.question.line2",
    "review": "ai"
+  }
+ },
+ "mco.notification.visitUrl.buttonText.default": {
+  "d2de1a2831e7": {
+   "co": "Apre u liame",
+   "kind": "reused",
+   "from": "mco.notification.visitUrl.buttonText.default",
+   "review": "ai",
+   "note": "English changed only in case or punctuation"
+  }
+ },
+ "mco.reset.world.generate": {
+  "545a5ea2090e": {
+   "co": "Mondu novu",
+   "kind": "reused",
+   "from": "mco.reset.world.generate",
+   "review": "ai",
+   "note": "English changed only in case or punctuation"
+  }
+ },
+ "mco.reset.world.template": {
+  "7e1db793091c": {
+   "co": "Mudelli di mondu",
+   "kind": "reused",
+   "from": "mco.reset.world.template",
+   "review": "ai",
+   "note": "English changed only in case or punctuation"
+  }
+ },
+ "mco.reset.world.title": {
+  "7353fd7f6e30": {
+   "co": "Reinizià u mondu",
+   "kind": "reused",
+   "from": "mco.reset.world.title",
+   "review": "ai",
+   "note": "English changed only in case or punctuation"
+  }
+ },
+ "mco.reset.world.warning": {
+  "842aafa6605d": {
+   "co": "Quessu rimpiazzerà u mondu attuale di u vostru Realm",
+   "kind": "reused",
+   "from": "mco.reset.world.warning",
+   "review": "ai",
+   "note": "English changed only in case or punctuation"
+  }
+ },
+ "mco.selectServer.buy": {
+  "9ed570b5f936": {
+   "co": "Cumprate un Realm !",
+   "kind": "reused",
+   "from": "mco.selectServer.buy",
+   "review": "ai",
+   "note": "English changed only in case or punctuation"
+  }
+ },
+ "mco.selectServer.closeserver": {
+  "ecfe414c53c2": {
+   "co": "Chjode u Realm",
+   "kind": "reused",
+   "from": "mco.selectServer.closeserver",
+   "review": "ai",
+   "note": "English changed only in case or punctuation"
+  }
+ },
+ "mco.selectServer.configureRealm": {
+  "e3ef38d9a045": {
+   "co": "Cunfigurà u Realm",
+   "kind": "reused",
+   "from": "mco.selectServer.configureRealm",
+   "review": "ai",
+   "note": "English changed only in case or punctuation"
+  }
+ },
+ "mco.selectServer.create": {
+  "5cf50ab1e829": {
+   "co": "Creà un Realm",
+   "kind": "reused",
+   "from": "mco.selectServer.create",
+   "review": "ai",
+   "note": "English changed only in case or punctuation"
+  }
+ },
+ "mco.selectServer.create.subtitle": {
+  "19c686c9399a": {
+   "co": "Selezziunate u mondu à mette nant'à u vostru Realm novu",
+   "kind": "reused",
+   "from": "mco.selectServer.create.subtitle",
+   "review": "ai",
+   "note": "English changed only in case or punctuation"
+  }
+ },
+ "mco.selectServer.expired": {
+  "03a0c3575fe5": {
+   "co": "Realm scadutu",
+   "kind": "reused",
+   "from": "mco.selectServer.expired",
+   "review": "ai",
+   "note": "English changed only in case or punctuation"
+  }
+ },
+ "mco.selectServer.leave": {
+  "6e37416b73bd": {
+   "co": "Lascià u Realm",
+   "kind": "reused",
+   "from": "mco.selectServer.leave",
+   "review": "ai",
+   "note": "English changed only in case or punctuation"
+  }
+ },
+ "mco.selectServer.open": {
+  "5f48517ea5f6": {
+   "co": "Realm apertu",
+   "kind": "reused",
+   "from": "mco.selectServer.open",
+   "review": "ai",
+   "note": "English changed only in case or punctuation"
+  }
+ },
+ "mco.selectServer.openserver": {
+  "5f48517ea5f6": {
+   "co": "Apre u Realm",
+   "kind": "reused",
+   "from": "mco.selectServer.openserver",
+   "review": "ai",
+   "note": "English changed only in case or punctuation"
+  }
+ },
+ "mco.selectServer.popup": {
+  "3fcf92e239a1": {
+   "co": "Realms hè un modu sicuru è simplice di prufittà d'un mondu Minecraft in linea cù sin'à dece amichi à tempu. Prupone assai minighjochi è parechji mondi persunalizati ! Solu u pruprietariu di u Realm hà da pagà.",
+   "kind": "reused",
+   "from": "mco.selectServer.popup",
+   "review": "ai",
+   "note": "English changed only in case or punctuation"
+  },
+  "5a8602b63e91": {
+   "co": "Realms hè un modu sicuru è simplice di prufittà d'un mondu Minecraft in linea cù sin'à dece amichi à tempu. Prupone assai minighjochi è parechji mondi persunalizati ! Solu u pruprietariu di u Realm hà da pagà.",
+   "kind": "reused",
+   "from": "mco.selectServer.popup",
+   "review": "ai",
+   "note": "English changed only in case or punctuation"
+  }
+ },
+ "mco.selectServer.trial": {
+  "62bec92766d2": {
+   "co": "Ottenite una prova !",
+   "kind": "reused",
+   "from": "mco.selectServer.trial",
+   "review": "ai",
+   "note": "English changed only in case or punctuation"
+  }
+ },
+ "mco.selectServer.uninitialized": {
+  "707fb0a38748": {
+   "co": "Cliccate per lancià u vostru Realm novu !",
+   "kind": "reused",
+   "from": "mco.selectServer.uninitialized",
+   "review": "ai",
+   "note": "English changed only in case or punctuation"
+  }
+ },
+ "mco.terms.buttons.disagree": {
+  "69e888e10e2e": {
+   "co": "Ùn accettu micca",
+   "kind": "reused",
+   "from": "mco.terms.buttons.disagree",
+   "review": "ai",
+   "note": "English changed only in case or punctuation"
   }
  },
  "mco.title": {
@@ -9289,12 +11360,217 @@
    "note": "26.3 key of another family; same meaning checked"
   }
  },
+ "mco.trial.message.line1": {
+  "eb547992db93": {
+   "co": "Vulete u vostru propiu Realm ?",
+   "kind": "reused",
+   "from": "mco.trial.message.line1",
+   "review": "ai",
+   "note": "English changed only in case or punctuation"
+  }
+ },
+ "mco.upload.close.failure": {
+  "8e4861140ec4": {
+   "co": "Impussibule di chjode u vostru Realm. Pruvate torna più tardi",
+   "kind": "adapted",
+   "from": "mco.upload.close.failure",
+   "review": "ai",
+   "note": "punctuation as in this English"
+  },
+  "f390563c902b": {
+   "co": "Impussibule di chjode u vostru Realm. Pruvate torna più tardi",
+   "kind": "adapted",
+   "from": "mco.upload.close.failure",
+   "review": "ai",
+   "note": "punctuation as in this English"
+  }
+ },
+ "mco.upload.select.world.title": {
+  "0aa5cc24d895": {
+   "co": "Incaricà un mondu",
+   "kind": "reused",
+   "from": "mco.upload.select.world.title",
+   "review": "ai",
+   "note": "English changed only in case or punctuation"
+  }
+ },
+ "menu.game": {
+  "02c8caaf7c3f": {
+   "co": "Listinu di u ghjocu",
+   "kind": "reused",
+   "from": "menu.game",
+   "review": "ai",
+   "note": "English changed only in case or punctuation"
+  }
+ },
+ "menu.paused": {
+  "2ca008102a7f": {
+   "co": "Ghjocu in pausa",
+   "kind": "reused",
+   "from": "menu.paused",
+   "review": "ai",
+   "note": "English changed only in case or punctuation"
+  }
+ },
+ "mount.onboard": {
+  "e2e18e057c68": {
+   "co": "Appughjate nant'à %1$s per falà",
+   "kind": "reused",
+   "from": "mount.onboard",
+   "review": "ai",
+   "note": "English changed only in case or punctuation"
+  }
+ },
+ "multiplayer.confirm_command.signature_required": {
+  "4cbeeceed93f": {
+   "co": "Pruvate d'eseguisce una cumanda chì manderà messaghji di chjachjerata à u vostru nome.\nPò esse eseguita solu da u screnu di chjachjerata.\nCumanda : %s",
+   "kind": "reused",
+   "from": "multiplayer.confirm_command.signature_required",
+   "review": "ai",
+   "note": "English changed only in case or punctuation"
+  }
+ },
+ "multiplayer.disconnect.authservers_down": {
+  "b62e9fa3dbc0": {
+   "co": "I servitori d'autenticazione sò in panna. Pruvate torna più tardi. Scusate !",
+   "kind": "reused",
+   "from": "multiplayer.disconnect.authservers_down",
+   "review": "ai",
+   "note": "English changed only in case or punctuation"
+  }
+ },
+ "multiplayer.disconnect.banned": {
+  "4da7615730ec": {
+   "co": "Site esclusi da stu servitore.",
+   "kind": "adapted",
+   "from": "multiplayer.disconnect.banned",
+   "review": "ai",
+   "note": "punctuation as in this English"
+  }
+ },
+ "multiplayer.disconnect.kicked": {
+  "b8b76bbc6ecc": {
+   "co": "Espulsu da un operatore.",
+   "kind": "adapted",
+   "from": "multiplayer.disconnect.kicked",
+   "review": "ai",
+   "note": "punctuation as in this English"
+  }
+ },
+ "multiplayer.downloadingTerrain": {
+  "8c974a9bc917": {
+   "co": "Caricamentu di u terrenu",
+   "kind": "adapted",
+   "from": "multiplayer.downloadingTerrain",
+   "review": "ai",
+   "note": "punctuation as in this English"
+  }
+ },
+ "optimizeWorld.confirm.title": {
+  "2480149fb4cc": {
+   "co": "Ottimizà u mondu",
+   "kind": "reused",
+   "from": "optimizeWorld.confirm.title",
+   "review": "ai",
+   "note": "English changed only in case or punctuation"
+  }
+ },
+ "options.accessibility.high_contrast.error.tooltip": {
+  "5568af4609bc": {
+   "co": "U pacchettu di risorse « Cuntrastu forte » ùn hè micca dispunibule",
+   "kind": "adapted",
+   "from": "options.accessibility.high_contrast.error.tooltip",
+   "review": "ai",
+   "note": "punctuation as in this English"
+  }
+ },
+ "options.accessibility.high_contrast.tooltip": {
+  "c70dee53801d": {
+   "co": "Rinforza u cuntrastu di l'elementi di l'interfaccia",
+   "kind": "adapted",
+   "from": "options.accessibility.high_contrast.tooltip",
+   "review": "ai",
+   "note": "punctuation as in this English"
+  }
+ },
+ "options.accessibility.menu_background_blurriness.tooltip": {
+  "0e7589c8b7a6": {
+   "co": "Cambia a sfumatura di u fondu di i listini",
+   "kind": "adapted",
+   "from": "options.accessibility.menu_background_blurriness.tooltip",
+   "review": "ai",
+   "note": "punctuation as in this English"
+  }
+ },
+ "options.accessibility.title": {
+  "4883b480bc90": {
+   "co": "Parametri d'accessibilità…",
+   "kind": "adapted",
+   "from": "options.accessibility.title",
+   "review": "ai",
+   "note": "punctuation as in this English"
+  }
+ },
+ "options.allowServerListing.tooltip": {
+  "40ce7ad44fe2": {
+   "co": "I servitori ponu elencà i ghjucadori in linea in u so statutu publicu.\nS'è st'ozzione hè disattivata, u vostru nome ùn cumparerà micca in sse liste.",
+   "kind": "reused",
+   "from": "options.allowServerListing.tooltip",
+   "review": "ai",
+   "note": "English changed only in case or punctuation"
+  }
+ },
  "options.anisotropicFiltering": {
   "44605974562e": {
    "co": "Filtratura anisotropa",
    "kind": "renamed",
    "from": "options.maxAnisotropy",
    "review": "ai"
+  }
+ },
+ "options.ao.off": {
+  "e3de5ab0ca4c": {
+   "co": "Disattivata",
+   "kind": "reused",
+   "from": "options.ao.off",
+   "review": "ai",
+   "note": "English changed only in case or punctuation"
+  }
+ },
+ "options.autoJump": {
+  "1e475042d666": {
+   "co": "Saltu autumaticu",
+   "kind": "reused",
+   "from": "options.autoJump",
+   "review": "ai",
+   "note": "English changed only in case or punctuation"
+  }
+ },
+ "options.chat.title": {
+  "e42b70874e26": {
+   "co": "Parametri di a chjachjerata…",
+   "kind": "adapted",
+   "from": "options.chat.title",
+   "review": "ai",
+   "note": "punctuation as in this English"
+  }
+ },
+ "options.chunks": {
+  "b2544548b1bd": {
+   "co": "%s pezzi",
+   "kind": "reused",
+   "from": "options.chunks",
+   "review": "ai",
+   "note": "English changed only in case or punctuation"
+  }
+ },
+ "options.directionalAudio.off.tooltip": {
+  "db48db88875c": {
+   "co": "Sonu stereo classicu",
+   "kind": "adapted",
+   "from": "options.directionalAudio.off.tooltip",
+   "review": "ai",
+   "note": "punctuation as in this English"
   }
  },
  "options.entityDistancePercent": {
@@ -9306,12 +11582,98 @@
    "note": "26.3 key of another family; same meaning checked"
   }
  },
+ "options.graphics.fabulous.tooltip": {
+  "5e2a09102324": {
+   "co": "A grafica %s impiega shaders di screnu per disegnà i fenomeni meteorologichi, i nivuli è e particule daretu à i blocchi traslucidi è à l'acqua.\nQuessa pò tuccà assai e perfurmenze di l'apparechji purtatili è di i screni 4K.",
+   "kind": "reused",
+   "from": "options.graphics.fabulous.tooltip",
+   "review": "ai",
+   "note": "English changed only in case or punctuation"
+  }
+ },
+ "options.graphics.fancy.tooltip": {
+  "b06d466abe16": {
+   "co": "A grafica elaburata equilibreghja e perfurmenze è a qualità per a maiò parte di l'urdinatori.\nI fenomeni meteorologichi, i nivuli è e particule ponu ùn cumparisce micca daretu à i blocchi traslucidi o à l'acqua.",
+   "kind": "reused",
+   "from": "options.graphics.fancy.tooltip",
+   "review": "ai",
+   "note": "English changed only in case or punctuation"
+  }
+ },
+ "options.graphics.warning.accept": {
+  "27b5cf847e6c": {
+   "co": "Cuntinuà senza sustegnu",
+   "kind": "reused",
+   "from": "options.graphics.warning.accept",
+   "review": "ai",
+   "note": "English changed only in case or punctuation"
+  },
+  "ca23e4d59784": {
+   "co": "Cuntinuà senza sustegnu",
+   "kind": "reused",
+   "from": "options.graphics.warning.accept",
+   "review": "ai",
+   "note": "English changed only in case or punctuation"
+  }
+ },
+ "options.graphics.warning.cancel": {
+  "0494a31f46e4": {
+   "co": "Vultà in daretu",
+   "kind": "reused",
+   "from": "options.graphics.warning.cancel",
+   "review": "ai",
+   "note": "English changed only in case or punctuation"
+  },
+  "2a98ec8316f4": {
+   "co": "Vultà in daretu",
+   "kind": "reused",
+   "from": "options.graphics.warning.cancel",
+   "review": "ai",
+   "note": "English changed only in case or punctuation"
+  }
+ },
  "options.guiScale.normal": {
   "45e118d0563e": {
    "co": "Nurmale",
    "kind": "renamed",
    "from": "options.difficulty.normal",
    "review": "ai"
+  }
+ },
+ "options.hideMatchedNames.tooltip": {
+  "3df248e445a2": {
+   "co": "I servitori di terzi ponu mandà messaghji di chjachjerata in furmati micca standard.\nS'è st'ozzione hè attivata, i ghjucadori piattati seranu ricunnisciuti secondu u nome di u speditore di a chjachjerata.",
+   "kind": "reused",
+   "from": "options.hideMatchedNames.tooltip",
+   "review": "ai",
+   "note": "English changed only in case or punctuation"
+  }
+ },
+ "options.inactivityFpsLimit": {
+  "64b0b21edfab": {
+   "co": "Riduce i fps quandu",
+   "kind": "reused",
+   "from": "options.inactivityFpsLimit",
+   "review": "ai",
+   "note": "English changed only in case or punctuation"
+  }
+ },
+ "options.japaneseGlyphVariants.tooltip": {
+  "954e56a56815": {
+   "co": "Impiega e varianti giappunesi di i caratteri CJK in a grafia predefinita",
+   "kind": "adapted",
+   "from": "options.japaneseGlyphVariants.tooltip",
+   "review": "ai",
+   "note": "punctuation as in this English"
+  }
+ },
+ "options.languageWarning": {
+  "1b52db75189e": {
+   "co": "E traduzzioni ponu ùn esse micca esatte à 100%%",
+   "kind": "adapted",
+   "from": "options.languageWarning",
+   "review": "ai",
+   "note": "punctuation as in this English"
   }
  },
  "options.music": {
@@ -9323,12 +11685,75 @@
    "note": "26.3 key of another family; same meaning checked"
   }
  },
+ "options.narrator.all": {
+  "310099afb90b": {
+   "co": "Narra tuttu",
+   "kind": "reused",
+   "from": "options.narrator.all",
+   "review": "ai",
+   "note": "English changed only in case or punctuation"
+  }
+ },
+ "options.narrator.chat": {
+  "fb228145a87d": {
+   "co": "Narra a chjachjerata",
+   "kind": "reused",
+   "from": "options.narrator.chat",
+   "review": "ai",
+   "note": "English changed only in case or punctuation"
+  }
+ },
+ "options.narrator.notavailable": {
+  "d1a17af19f53": {
+   "co": "Indispunibule",
+   "kind": "reused",
+   "from": "options.narrator.notavailable",
+   "review": "ai",
+   "note": "English changed only in case or punctuation"
+  }
+ },
+ "options.narrator.off": {
+  "e3de5ab0ca4c": {
+   "co": "Disattivatu",
+   "kind": "reused",
+   "from": "options.narrator.off",
+   "review": "ai",
+   "note": "English changed only in case or punctuation"
+  }
+ },
+ "options.narrator.system": {
+  "e9f8cb381894": {
+   "co": "Narra u sistema",
+   "kind": "reused",
+   "from": "options.narrator.system",
+   "review": "ai",
+   "note": "English changed only in case or punctuation"
+  }
+ },
+ "options.rawMouseInput": {
+  "26478f4cad46": {
+   "co": "Entrata grezza",
+   "kind": "reused",
+   "from": "options.rawMouseInput",
+   "review": "ai",
+   "note": "English changed only in case or punctuation"
+  }
+ },
  "options.renderDistance.normal": {
   "45e118d0563e": {
    "co": "Nurmale",
    "kind": "renamed",
    "from": "options.difficulty.normal",
    "review": "ai"
+  }
+ },
+ "options.resourcepack": {
+  "316972494acb": {
+   "co": "Pacchetti di risorse",
+   "kind": "adapted",
+   "from": "options.resourcepack",
+   "review": "ai",
+   "note": "punctuation as in this English"
   }
  },
  "options.saturation": {
@@ -9338,6 +11763,15 @@
    "from": "effect.minecraft.saturation",
    "review": "ai",
    "note": "26.3 key of another family; same meaning checked"
+  }
+ },
+ "options.screenEffectScale.tooltip": {
+  "b847634a3f0c": {
+   "co": "Forza di l'effetti di distorsione di u screnu di a nausea è di u portale di u Nether.\nÀ valori bassi, l'effettu di nausea hè rimpiazzatu da una suprapusizione verde.",
+   "kind": "reused",
+   "from": "options.screenEffectScale.tooltip",
+   "review": "ai",
+   "note": "English changed only in case or punctuation"
   }
  },
  "options.stream.chat.enabled.always": {
@@ -9364,6 +11798,33 @@
    "from": "key.keyboard.mute",
    "review": "ai",
    "note": "26.3 key of another family; same meaning checked"
+  }
+ },
+ "options.telemetry": {
+  "cfa727227878": {
+   "co": "Dati di telemetria",
+   "kind": "adapted",
+   "from": "options.telemetry",
+   "review": "ai",
+   "note": "punctuation as in this English"
+  }
+ },
+ "pack.dropRejected.message": {
+  "faa4a2573334": {
+   "co": "L'elementi seguenti ùn eranu micca pacchetti accettevuli è ùn sò micca stati cupiati :\n%s",
+   "kind": "reused",
+   "from": "pack.dropRejected.message",
+   "review": "ai",
+   "note": "English changed only in case or punctuation"
+  }
+ },
+ "parsing.bool.invalid": {
+  "386be0811d4f": {
+   "co": "Booleanu inaccettevule : ci vole 'true' o 'false' ma ci hè '%s'",
+   "kind": "reused",
+   "from": "parsing.bool.invalid",
+   "review": "ai",
+   "note": "English changed only in case or punctuation"
   }
  },
  "potion.absorption": {
@@ -9831,6 +12292,15 @@
    "review": "ai"
   }
  },
+ "record.nowPlaying": {
+  "5e93536f90eb": {
+   "co": "Avà in lettura : %s",
+   "kind": "reused",
+   "from": "record.nowPlaying",
+   "review": "ai",
+   "note": "English changed only in case or punctuation"
+  }
+ },
  "resourcePack.incompatible": {
   "06db4ffa7efb": {
    "co": "Incumpatibile",
@@ -9858,12 +12328,129 @@
    "note": "26.3 key of another family; same meaning checked"
   }
  },
+ "selectServer.add": {
+  "37a460a1defb": {
+   "co": "Aghjunghje un servitore",
+   "kind": "reused",
+   "from": "selectServer.add",
+   "review": "ai",
+   "note": "English changed only in case or punctuation"
+  }
+ },
+ "selectWorld.allowCommands": {
+  "a42e13bbaa48": {
+   "co": "Permette i trucchi :",
+   "kind": "adapted",
+   "from": "selectWorld.allowCommands",
+   "review": "ai",
+   "note": "punctuation as in this English"
+  }
+ },
+ "selectWorld.backupEraseCache": {
+  "87fb78a096ee": {
+   "co": "Squassà i dati in memoria tampone",
+   "kind": "reused",
+   "from": "selectWorld.backupEraseCache",
+   "review": "ai",
+   "note": "English changed only in case or punctuation"
+  }
+ },
+ "selectWorld.backupJoinSkipButton": {
+  "f7842c678779": {
+   "co": "Sò ciò chì facciu !",
+   "kind": "reused",
+   "from": "selectWorld.backupJoinSkipButton",
+   "review": "ai",
+   "note": "English changed only in case or punctuation"
+  }
+ },
  "selectWorld.backupQuestion": {
   "e0a4cbef5ced": {
    "co": "Vulete veramente caricà stu mondu ?",
    "kind": "renamed",
    "from": "selectWorld.backupQuestion.snapshot",
    "review": "ai"
+  }
+ },
+ "selectWorld.backupWarning.downgrade": {
+  "026cf377d5c5": {
+   "co": "Stu mondu hè statu ghjucatu l'ultima volta in a versione %s ; site in a versione %s. Fà vultà un mondu à una versione più vechja pò dannighjallu ; ùn pudemu micca garantisce ch'ellu si caricherà o ch'ellu funziunerà. S'è vo vulete cuntinuà quantunque, fate una salvaguardia !",
+   "kind": "adapted",
+   "from": "selectWorld.backupWarning.downgrade",
+   "review": "ai",
+   "note": "punctuation as in this English"
+  }
+ },
+ "selectWorld.bonusItems": {
+  "10814db34994": {
+   "co": "Cascia bonus :",
+   "kind": "adapted",
+   "from": "selectWorld.bonusItems",
+   "review": "ai",
+   "note": "punctuation as in this English"
+  }
+ },
+ "selectWorld.conversion.tooltip": {
+  "aff066494ef4": {
+   "co": "Stu mondu deve esse apertu in una versione più vechja (cum'è a 1.6.4) per esse cunvertitu senza risicu",
+   "kind": "adapted",
+   "from": "selectWorld.conversion.tooltip",
+   "review": "ai",
+   "note": "punctuation as in this English"
+  }
+ },
+ "selectWorld.edit.backupSize": {
+  "1078fa288ba9": {
+   "co": "Dimensione : %s Mo",
+   "kind": "reused",
+   "from": "selectWorld.edit.backupSize",
+   "review": "ai",
+   "note": "English changed only in case or punctuation"
+  }
+ },
+ "selectWorld.enterSeed": {
+  "dd0e11d4047b": {
+   "co": "Grana per u generatore di mondu",
+   "kind": "reused",
+   "from": "selectWorld.enterSeed",
+   "review": "ai",
+   "note": "English changed only in case or punctuation"
+  }
+ },
+ "selectWorld.experimental.details.title": {
+  "027daf4a0429": {
+   "co": "Funzioni sperimentali richieste",
+   "kind": "reused",
+   "from": "selectWorld.experimental.details.title",
+   "review": "ai",
+   "note": "English changed only in case or punctuation"
+  }
+ },
+ "selectWorld.gameMode": {
+  "90174aa994c9": {
+   "co": "Modu di ghjocu :",
+   "kind": "adapted",
+   "from": "selectWorld.gameMode",
+   "review": "ai",
+   "note": "punctuation as in this English"
+  }
+ },
+ "selectWorld.gameMode.adventure.line1": {
+  "d37331a8c569": {
+   "co": "Cum'è u modu sopravivenza, ma i blocchi ùn ponu",
+   "kind": "reused",
+   "from": "selectWorld.gameMode.adventure.line1",
+   "review": "ai",
+   "note": "English changed only in case or punctuation"
+  }
+ },
+ "selectWorld.gameMode.hardcore.line1": {
+  "f959c5111c1e": {
+   "co": "Cum'è u modu sopravivenza, bluccatu à a difficultà",
+   "kind": "reused",
+   "from": "selectWorld.gameMode.hardcore.line1",
+   "review": "ai",
+   "note": "English changed only in case or punctuation"
   }
  },
  "selectWorld.import_worldgen_settings.deprecated.question": {
@@ -9896,6 +12483,60 @@
    "kind": "renamed",
    "from": "selectWorld.warning.experimental.title",
    "review": "ai"
+  }
+ },
+ "selectWorld.loading_list": {
+  "4454f4b65bac": {
+   "co": "Caricamentu di a lista di mondi",
+   "kind": "reused",
+   "from": "selectWorld.loading_list",
+   "review": "ai",
+   "note": "English changed only in case or punctuation"
+  }
+ },
+ "selectWorld.locked": {
+  "655f839842db": {
+   "co": "Bluccatu da un'altra istanza di Minecraft in corsu",
+   "kind": "adapted",
+   "from": "selectWorld.locked",
+   "review": "ai",
+   "note": "punctuation as in this English"
+  }
+ },
+ "selectWorld.mapFeatures": {
+  "3e5bd3811faf": {
+   "co": "Generà strutture :",
+   "kind": "adapted",
+   "from": "selectWorld.mapFeatures",
+   "review": "ai",
+   "note": "punctuation as in this English"
+  }
+ },
+ "selectWorld.mapType": {
+  "d6553258aed7": {
+   "co": "Tipu di mondu :",
+   "kind": "adapted",
+   "from": "selectWorld.mapType",
+   "review": "ai",
+   "note": "punctuation as in this English"
+  }
+ },
+ "sign.edit": {
+  "8bd8fc0ef5e0": {
+   "co": "Mudificà u messaghju di u cartellu",
+   "kind": "reused",
+   "from": "sign.edit",
+   "review": "ai",
+   "note": "English changed only in case or punctuation"
+  }
+ },
+ "slot.only_single_allowed": {
+  "3397e819767b": {
+   "co": "Solu e caselle uniche sò permesse : ricevutu « %s »",
+   "kind": "reused",
+   "from": "slot.only_single_allowed",
+   "review": "ai",
+   "note": "English changed only in case or punctuation"
   }
  },
  "splash_potion.effect.awkward": {
@@ -10363,6 +13004,15 @@
    "review": "ai"
   }
  },
+ "stat.minecraft.damage_blocked_by_shield": {
+  "0eeb529cb572": {
+   "co": "Danni parati cù u scudu",
+   "kind": "reused",
+   "from": "stat.minecraft.damage_blocked_by_shield",
+   "review": "ai",
+   "note": "English changed only in case or punctuation"
+  }
+ },
  "stat.minecraft.play_one_minute": {
   "25fa47c8047a": {
    "co": "Tempu di ghjocu",
@@ -10540,12 +13190,171 @@
    "note": "26.3 key of another family; same meaning checked"
   }
  },
+ "structure_block.detect_size": {
+  "17a60cecdfd8": {
+   "co": "Avventà a dimensione è a pusizione di a struttura :",
+   "kind": "reused",
+   "from": "structure_block.detect_size",
+   "review": "ai",
+   "note": "English changed only in case or punctuation"
+  }
+ },
+ "structure_block.include_entities": {
+  "445c87506260": {
+   "co": "Include l'entità :",
+   "kind": "reused",
+   "from": "structure_block.include_entities",
+   "review": "ai",
+   "note": "English changed only in case or punctuation"
+  }
+ },
+ "structure_block.mode_info.corner": {
+  "81a549e9e798": {
+   "co": "Modu cantone - Marcatore di piazzamentu è di dimensione",
+   "kind": "reused",
+   "from": "structure_block.mode_info.corner",
+   "review": "ai",
+   "note": "English changed only in case or punctuation"
+  },
+  "f007a430e187": {
+   "co": "Modu cantone - Marcatore di piazzamentu è di dimensione",
+   "kind": "reused",
+   "from": "structure_block.mode_info.corner",
+   "review": "ai",
+   "note": "English changed only in case or punctuation"
+  }
+ },
+ "structure_block.mode_info.data": {
+  "05b96b4a1fd3": {
+   "co": "Modu dati - Marcatore di logica di ghjocu",
+   "kind": "reused",
+   "from": "structure_block.mode_info.data",
+   "review": "ai",
+   "note": "English changed only in case or punctuation"
+  },
+  "17bafbebac79": {
+   "co": "Modu dati - Marcatore di logica di ghjocu",
+   "kind": "reused",
+   "from": "structure_block.mode_info.data",
+   "review": "ai",
+   "note": "English changed only in case or punctuation"
+  },
+  "aa218f49475e": {
+   "co": "Modu dati - Marcatore di logica di ghjocu",
+   "kind": "reused",
+   "from": "structure_block.mode_info.data",
+   "review": "ai",
+   "note": "English changed only in case or punctuation"
+  }
+ },
+ "structure_block.mode_info.load": {
+  "30069fe15602": {
+   "co": "Modu caricamentu - Caricà da un schedariu",
+   "kind": "reused",
+   "from": "structure_block.mode_info.load",
+   "review": "ai",
+   "note": "English changed only in case or punctuation"
+  },
+  "808504133cc1": {
+   "co": "Modu caricamentu - Caricà da un schedariu",
+   "kind": "reused",
+   "from": "structure_block.mode_info.load",
+   "review": "ai",
+   "note": "English changed only in case or punctuation"
+  },
+  "fb020fa759ee": {
+   "co": "Modu caricamentu - Caricà da un schedariu",
+   "kind": "reused",
+   "from": "structure_block.mode_info.load",
+   "review": "ai",
+   "note": "English changed only in case or punctuation"
+  }
+ },
+ "structure_block.mode_info.save": {
+  "5c70c1582911": {
+   "co": "Modu arregistramentu - Scrive in un schedariu",
+   "kind": "reused",
+   "from": "structure_block.mode_info.save",
+   "review": "ai",
+   "note": "English changed only in case or punctuation"
+  },
+  "adcaa098c243": {
+   "co": "Modu arregistramentu - Scrive in un schedariu",
+   "kind": "reused",
+   "from": "structure_block.mode_info.save",
+   "review": "ai",
+   "note": "English changed only in case or punctuation"
+  }
+ },
+ "structure_block.position.x": {
+  "3c7daed98351": {
+   "co": "pusizione relativa x",
+   "kind": "reused",
+   "from": "structure_block.position.x",
+   "review": "ai",
+   "note": "English changed only in case or punctuation"
+  }
+ },
+ "structure_block.show_air": {
+  "21b83f47de66": {
+   "co": "Mustrà i blocchi invisibili :",
+   "kind": "reused",
+   "from": "structure_block.show_air",
+   "review": "ai",
+   "note": "English changed only in case or punctuation"
+  }
+ },
+ "structure_block.show_boundingbox": {
+  "450a58b9253e": {
+   "co": "Mustrà a scatula di delimitazione :",
+   "kind": "reused",
+   "from": "structure_block.show_boundingbox",
+   "review": "ai",
+   "note": "English changed only in case or punctuation"
+  }
+ },
+ "structure_block.size_failure": {
+  "7eb49ab83b29": {
+   "co": "Impussibule d'avventà a dimensione di a struttura. Aghjunghjite cantoni cù nomi di struttura currispundenti",
+   "kind": "reused",
+   "from": "structure_block.size_failure",
+   "review": "ai",
+   "note": "English changed only in case or punctuation"
+  }
+ },
+ "subtitles.block.blastfurnace.fire_crackle": {
+  "3efd796ad82e": {
+   "co": "Altofornu scuppietta",
+   "kind": "reused",
+   "from": "subtitles.block.blastfurnace.fire_crackle",
+   "review": "ai",
+   "note": "English changed only in case or punctuation"
+  }
+ },
  "subtitles.block.note.note": {
   "1eac7ce2c327": {
    "co": "Bloccu musicale sona",
    "kind": "renamed",
    "from": "subtitles.block.note_block.note",
    "review": "ai"
+  }
+ },
+ "subtitles.chiseled_bookshelf.insert_enchanted": {
+  "75a70c2bc938": {
+   "co": "Libru incantatu piazzatu",
+   "kind": "reused",
+   "from": "subtitles.chiseled_bookshelf.insert_enchanted",
+   "review": "ai",
+   "note": "English changed only in case or punctuation"
+  }
+ },
+ "subtitles.chiseled_bookshelf.take_enchanted": {
+  "5a6c4f0e377c": {
+   "co": "Libru incantatu pigliatu",
+   "kind": "reused",
+   "from": "subtitles.chiseled_bookshelf.take_enchanted",
+   "review": "ai",
+   "note": "English changed only in case or punctuation"
   }
  },
  "subtitles.entity.armorstand.fall": {
@@ -10820,6 +13629,15 @@
    "review": "ai"
   }
  },
+ "subtitles.entity.leash_knot.place": {
+  "2b888cf1f619": {
+   "co": "Nodu di ligaccia attaccatu",
+   "kind": "reused",
+   "from": "subtitles.entity.leash_knot.place",
+   "review": "ai",
+   "note": "English changed only in case or punctuation"
+  }
+ },
  "subtitles.entity.lightning.impact": {
   "7f1b2d643070": {
    "co": "Fulmine casca",
@@ -10924,6 +13742,24 @@
    "review": "ai"
   }
  },
+ "subtitles.entity.shulker_bullet.hit": {
+  "19839c4634d0": {
+   "co": "Prughjettile di Shulker scoppia",
+   "kind": "reused",
+   "from": "subtitles.entity.shulker_bullet.hit",
+   "review": "ai",
+   "note": "English changed only in case or punctuation"
+  }
+ },
+ "subtitles.entity.shulker_bullet.hurt": {
+  "138ed65ceefc": {
+   "co": "Prughjettile di Shulker si rompe",
+   "kind": "reused",
+   "from": "subtitles.entity.shulker_bullet.hurt",
+   "review": "ai",
+   "note": "English changed only in case or punctuation"
+  }
+ },
  "subtitles.entity.snowman.death": {
   "44c2aca841f9": {
    "co": "Golem di neve more",
@@ -10938,6 +13774,33 @@
    "kind": "renamed",
    "from": "subtitles.entity.snow_golem.hurt",
    "review": "ai"
+  }
+ },
+ "subtitles.entity.turtle.egg_break": {
+  "18be9ab7150e": {
+   "co": "Ovu di tartaruga si rompe",
+   "kind": "reused",
+   "from": "subtitles.entity.turtle.egg_break",
+   "review": "ai",
+   "note": "English changed only in case or punctuation"
+  }
+ },
+ "subtitles.entity.turtle.egg_crack": {
+  "638d8ca3eee6": {
+   "co": "Ovu di tartaruga si crepa",
+   "kind": "reused",
+   "from": "subtitles.entity.turtle.egg_crack",
+   "review": "ai",
+   "note": "English changed only in case or punctuation"
+  }
+ },
+ "subtitles.entity.turtle.egg_hatch": {
+  "cd6cb9a63fa0": {
+   "co": "Ovu di tartaruga si sciappa",
+   "kind": "reused",
+   "from": "subtitles.entity.turtle.egg_hatch",
+   "review": "ai",
+   "note": "English changed only in case or punctuation"
   }
  },
  "subtitles.entity.villager.trading": {
@@ -10972,6 +13835,15 @@
    "review": "ai"
   }
  },
+ "subtitles.item.armor.equip_turtle": {
+  "5c6e10788459": {
+   "co": "Scorza di tartaruga batte",
+   "kind": "reused",
+   "from": "subtitles.item.armor.equip_turtle",
+   "review": "ai",
+   "note": "English changed only in case or punctuation"
+  }
+ },
  "subtitles.item.berries.pick": {
   "12a894e23ec4": {
    "co": "Baghe scoppianu",
@@ -10994,6 +13866,123 @@
    "kind": "renamed",
    "from": "subtitles.item.shears.shear",
    "review": "ai"
+  }
+ },
+ "telemetry.event.performance_metrics.description": {
+  "558b59fc571f": {
+   "co": "Cunnosce u prufilu generale di e perfurmenze di Minecraft ci aiuta à regulà è à ottimizà u ghjocu per una larga varietà di cunfigurazioni materiale è di sistemi d'operazione.\nA versione di u ghjocu hè inclusa per aiutacci à paragunà u prufilu di perfurmenze di e nove versioni di Minecraft.",
+   "kind": "reused",
+   "from": "telemetry.event.performance_metrics.description",
+   "review": "ai",
+   "note": "English changed only in case or punctuation"
+  }
+ },
+ "telemetry.event.world_load_times.description": {
+  "81ce456a8372": {
+   "co": "Hè impurtante per noi di capisce quantu tempu ci vole per righjunghje un mondu, è cumu quessa cambia cù u tempu. Per esempiu, quandu aghjunghjimu funzioni nove o femu cambiamenti tecnichi maiò, avemu bisognu di vede l'impattu ch'elli anu avutu nant'à i tempi di caricamentu.",
+   "kind": "reused",
+   "from": "telemetry.event.world_load_times.description",
+   "review": "ai",
+   "note": "English changed only in case or punctuation"
+  }
+ },
+ "telemetry.property.frame_rate_samples.title": {
+  "430989a11058": {
+   "co": "Campioni di fiure per seconda (fps)",
+   "kind": "reused",
+   "from": "telemetry.property.frame_rate_samples.title",
+   "review": "ai",
+   "note": "English changed only in case or punctuation"
+  }
+ },
+ "test.error.block_property_mismatch": {
+  "c08476ddc924": {
+   "co": "A pruprietà %s duvia esse %s, ma era %s",
+   "kind": "reused",
+   "from": "test.error.block_property_mismatch",
+   "review": "ai",
+   "note": "English changed only in case or punctuation"
+  }
+ },
+ "test.error.block_property_missing": {
+  "26e11a77578a": {
+   "co": "Pruprietà di bloccu mancante. A pruprietà %s duvia esse %s",
+   "kind": "reused",
+   "from": "test.error.block_property_missing",
+   "review": "ai",
+   "note": "English changed only in case or punctuation"
+  }
+ },
+ "test.error.entity_property_details": {
+  "f18d945cbad7": {
+   "co": "L'entità %s hà fallitu a prova : %s. Ci vulia %s, ma era %s",
+   "kind": "reused",
+   "from": "test.error.entity_property_details",
+   "review": "ai",
+   "note": "English changed only in case or punctuation"
+  }
+ },
+ "test.error.expected_block": {
+  "3626a12deb23": {
+   "co": "Ci vulia u bloccu %s, ma ci hè %s",
+   "kind": "reused",
+   "from": "test.error.expected_block",
+   "review": "ai",
+   "note": "English changed only in case or punctuation"
+  }
+ },
+ "test.error.expected_block_tag": {
+  "ab498d735ddb": {
+   "co": "Ci vulia un bloccu in #%s, ma ci hè %s",
+   "kind": "reused",
+   "from": "test.error.expected_block_tag",
+   "review": "ai",
+   "note": "English changed only in case or punctuation"
+  }
+ },
+ "test.error.expected_entity_count": {
+  "3cc9cdd52e5e": {
+   "co": "Ci vulianu %s entità di tipu %s, ma ce ne hè %s",
+   "kind": "reused",
+   "from": "test.error.expected_entity_count",
+   "review": "ai",
+   "note": "English changed only in case or punctuation"
+  }
+ },
+ "test.error.expected_entity_data": {
+  "1ad5d06bea89": {
+   "co": "I dati d'entità duvianu esse %s, ma eranu %s",
+   "kind": "reused",
+   "from": "test.error.expected_entity_data",
+   "review": "ai",
+   "note": "English changed only in case or punctuation"
+  }
+ },
+ "test.error.expected_items_count": {
+  "0c3f7fc717f5": {
+   "co": "Ci vulianu %s ogetti di tipu %s, ma ce ne hè %s",
+   "kind": "reused",
+   "from": "test.error.expected_items_count",
+   "review": "ai",
+   "note": "English changed only in case or punctuation"
+  }
+ },
+ "test.error.state_not_equal": {
+  "59f44382b32a": {
+   "co": "Statu scorrettu. Ci vulia %s, ma era %s",
+   "kind": "reused",
+   "from": "test.error.state_not_equal",
+   "review": "ai",
+   "note": "English changed only in case or punctuation"
+  }
+ },
+ "test.error.value_not_equal": {
+  "5a8a2ce892ee": {
+   "co": "%s duvia esse %s, ma era %s",
+   "kind": "reused",
+   "from": "test.error.value_not_equal",
+   "review": "ai",
+   "note": "English changed only in case or punctuation"
   }
  },
  "tile.acaciaFence.name": {
