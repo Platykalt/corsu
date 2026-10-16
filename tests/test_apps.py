@@ -48,7 +48,9 @@ class VLCTests(unittest.TestCase):
                                     (apps, 'APPLICATION_DIRS', (self.system / 'applications',)),
                                     (apps, 'FLATPAK_SYSTEM', self.root / 'flatpak'), (vlc, 'LOCALE', self.locale),
                                     (vlc, 'SNAP', self.root / 'snap/vlc'), (apps.shutil, 'which', lambda name: '/usr/bin/vlc'),
-                                    (vlc, 'version', lambda executable: '3.0.21')):
+                                    (vlc, 'version', lambda executable: '3.0.21'),
+                                    # Never the real processes: a VLC open on the test machine must not matter.
+                                    (corsu, 'running_executables', lambda: set())):
             self.stack.enter_context(patch.object(target, name, value))
         self.stack.enter_context(patch.dict(os.environ, {'LANGUAGE': '', 'LC_ALL': '', 'LC_MESSAGES': '', 'LANG': 'fr_FR.UTF-8'}))
         self.stack.enter_context(redirect_stdout(io.StringIO()))

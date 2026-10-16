@@ -976,6 +976,8 @@ def repair_default_browser():
 def running_executables():
     paths = set()
     if PLATFORM == 'linux':
+        if not Path('/proc').is_dir():
+            return None
         for process in Path('/proc').iterdir():
             try:
                 paths.add(os.readlink(process / 'exe'))
