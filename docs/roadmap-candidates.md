@@ -49,7 +49,9 @@ Research note, 16 October 2026. Nothing here is started. Numbers were measured o
   (`storage/localstorage.cpp`: `SettingsKey = CreateLegacyLocalKey(QByteArray(), salt)`, `writeEncrypted`). The key is
   derivable without a passcode, but editing `tdata` from outside is undocumented and could corrupt a session. Feasible
   instead: Corsu opens the `tg://setlanguage?lang=…` link (`xdg-open` / `start` / `open`), the user confirms once.
-- **Benefit**: daily messaging, phone + desktop from one pack. Telegram is less used in Corsica than WhatsApp (no data
+- **Benefit**: daily messaging on phone and desktop under one pack name. A pack holds a separate string set per app
+  (Telegram Desktop, Android, iOS, macOS, Web), each with its own keys, so each one is translated on its own; only the
+  install link is shared. Telegram is less used in Corsica than WhatsApp (no data
   found; to verify with users).
 - **Maintenance**: Telegram adds strings with every release; the pack falls back to English for missing keys.
 - **Blockers**: contact the `corsican` pack owner or create a new pack (e.g. `corsu`) covering all apps; translations
@@ -100,15 +102,18 @@ Research note, 16 October 2026. Nothing here is started. Numbers were measured o
   1,114. Next step is the manual test on Windows/Android, not more translation.
 
 ### VLC (completion)
-- `docs/apps-research.md` did not exist when this was written; figures measured directly.
+- Mechanism and sources: [apps-research.md](apps-research.md). Figures below were measured directly.
 - Upstream already ships Corsican and lists it in the interface (`{ "co", "Corsu" }` in Qt
   `simple_preferences.cpp`). [3.0.x `po/co.po`](https://github.com/videolan/vlc/blob/3.0.x/po/co.po): 4,443 / 6,203
   (71.6 %); [master `po/co.po`](https://github.com/videolan/vlc/blob/master/po/co.po): 2,348 + 331 fuzzy / 6,220. Last
-  translator revision Dec 2017 (Patriccollu). Work is via VLC's Transifex team; check with Patriccollu first.
+  translator revision Dec 2017 (Patriccollu). The missing strings can be prepared now in Corsu's translation memory
+  (`tools/tm.py`); sending them upstream through VLC's Transifex team, ideally with Patriccollu, is a later step and
+  does not block that work. Measured reuse on 3.0.x with the context-aware memory: 10 exact compatible reuses, 70
+  suggestions to review, 1,750 still to translate, so most of it is new translation, whatever the lexicon's size.
 - Benefit: no install work for Corsu at all; every finished string reaches all VLC users who pick Corsican.
 
 ### Web extensions
-- `docs/webext.md` did not exist when this was written; no assessment here.
+- Assessment and prototype: [webext.md](webext.md).
 
 ## Recommendation: three projects, one at a time
 
@@ -117,9 +122,10 @@ Do not open more than one of these at once; each finishes with a measured state 
 1. **Minecraft Bedrock: test, then decide** (first). Work is already done and only an in-game test on one device is
    missing; it reaches the largest young audience of any candidate. If the test passes, translate in order of
    visibility (`options`, `selectWorld`, menus) rather than `howtoplay`/`store`. If it fails, stop and record why.
-2. **Telegram pack covering Desktop + Android + iOS** (second). Highest daily use, one pack serves every device and
-   updates itself, and Corsu's install step is just opening a link. Start by contacting the `corsican` pack owner
-   (avoid two competing packs); begin with Desktop's 8,715 strings, of which 1,094 have exact lexicon drafts, and the
+2. **Telegram pack covering Desktop + Android + iOS** (second). Highest daily use; one pack name and link for every
+   app, which updates itself, but each app's string set is translated separately, and Corsu's install step is just opening a link. Start by contacting the `corsican` pack owner
+   (avoid two competing packs); begin with Desktop's 8,715 strings, of which 1,094 match a lexicon entry by text alone (a preliminary estimate,
+   before the context check that `tools/tm.py` applies), and the
    most visible sections (chat list, settings, login). No encrypted-file hacks.
 3. **Luanti engine upstream, then Mineclonia** (third). Engine is small (1,575 strings) and goes through Weblate, so
    it ships to everyone; Mineclonia has the best reuse measured (39 % from Corsu's Minecraft texts), which also gives
