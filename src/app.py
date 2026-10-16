@@ -52,9 +52,9 @@ COMPONENTS = {
           'en': ('System translations', 'GTK programs, command output and Qt dialogs. Needs the administrator password.'),
            'fr': ('Traductions du système', 'Programmes GTK, messages des commandes et fenêtres Qt. Demande le mot de '
                   'passe administrateur.')},
-    'minecraft': {'co': ('Minecraft', "Minecraft Java Edition 26.3 in corsu : u pacchettu di risorse è a lingua di u ghjocu. Chjudite Minecraft prima."),
-                  'en': ('Minecraft', 'Minecraft Java Edition 26.3 in Corsican: the resource pack and the game language. Close Minecraft first.'),
-                  'fr': ('Minecraft', 'Minecraft Java Edition 26.3 en corse : le pack de ressources et la langue du jeu. Fermez Minecraft d\'abord.')},
+    'minecraft': {'co': ('Minecraft', "Minecraft Java Edition in corsu, secondu a versione di ogni cartulare di ghjocu : u pacchettu di risorse è a lingua. Chjudite Minecraft prima."),
+                  'en': ('Minecraft', 'Minecraft Java Edition in Corsican, for the version each game folder plays: the resource pack and the language. Close Minecraft first.'),
+                  'fr': ('Minecraft', 'Minecraft Java Edition en corse, selon la version de chaque dossier de jeu : le pack de ressources et la langue. Fermez Minecraft d\'abord.')},
     'terminal': {'co': ('Terminale', 'I messaghji di e cummande, in i novi terminali.'),
                 'en': ('Terminal', 'Command messages, in new terminal windows.'),
                  'fr': ('Terminal', 'Les messages des commandes, dans les nouveaux terminaux.')},

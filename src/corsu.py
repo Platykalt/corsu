@@ -1220,6 +1220,14 @@ def install(components=None, qt_system=False):
         import minecraft
         progress(85, 'Putting Minecraft in Corsican', 'Minecraft en corse')
         minecraft_stats = minecraft.install(installer)
+        # Same record as the programs (state['results']): the window shows each game folder, its version and pack.
+        result = minecraft_stats.get('result')
+        if result:
+            owned = any(component_of(name, record) == 'minecraft' for name, record in installer.state['files'].items())
+            if result['activation'] in ('blocked', 'failed') and owned:
+                previous = installer.state.get('results', {}).get('minecraft', {}).get('activation')
+                result['activation'] = previous if previous in ('active', 'partial', 'restart_required') else 'active'
+            installer.state.setdefault('results', {})['minecraft'] = result
     import apps
     application_stats = {}
     previous = dict(installer.state.get('results', {}))
