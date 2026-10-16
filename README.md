@@ -22,6 +22,10 @@ est dans [Ce qui marche, et où](docs/fr/compatibilite.md).
 et l'application Corsu ajoute le pack et choisit le corse comme langue du jeu. La traduction n'a pas encore été relue
 par un locuteur ni essayée en jeu : [Minecraft en corse](docs/fr/minecraft.md).
 
+**Logiciels déjà traduits en corse** : VLC, 7-Zip, Notepad++, WinMerge, SumatraPDF, FileZilla, HandBrake et VeraCrypt
+ont une traduction corse faite par Patriccollu di Santa Maria è Sichè. Quand ils sont installés, l'application Corsu
+les propose et règle leur langue sur le corse, puis la rend à la désactivation.
+
 Ce qui est traduit, ce qui est en cours et ce qui est prévu : **[État des traductions](docs/fr/etat-des-traductions.md)**.
 
 ### Pourquoi Corsu
@@ -100,6 +104,10 @@ again at any time, and the details for each system are in [What works where](doc
 **Minecraft: Java Edition in Corsican (version 26.3), under review**: all 8,557 texts of the game are translated, and
 the Corsu app adds the pack and makes Corsican the game's language. The translation has not yet been reviewed by a
 speaker nor tried in the game: [Minecraft in Corsican](docs/en/minecraft.md).
+
+**Programs already translated into Corsican**: VLC, 7-Zip, Notepad++, WinMerge, SumatraPDF, FileZilla, HandBrake and
+VeraCrypt have a Corsican translation by Patriccollu di Santa Maria è Sichè. When they are installed, the Corsu app offers
+them and sets their language to Corsican, and gives it back when switched off.
 
 What is translated, in progress and planned: **[Translation status](docs/en/translation-status.md)**.
 

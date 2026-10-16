@@ -227,3 +227,13 @@ class WindowsProgramsTests(unittest.TestCase):
         report = self.run_install('veracrypt')
         self.assertEqual(broken.read_text(), '<VeraCrypt><configuration>')  # malformed: never rewritten
         self.assertEqual(len(report['skipped']), 1)
+
+    def test_notepad_plus_plus_without_its_language_folder_gets_the_official_file(self):
+        self.make('Notepad++/notepad++.exe')
+        official = b'<NotepadPlus><Native-Langue name="Corsu"/></NotepadPlus>'
+        with patch.object(self.programs.NotepadPlusPlus, 'official_file', lambda app, executable: (official, 'v8.9.8')):
+            self.run_install('notepadpp')
+        native = self.root / 'Roaming/Notepad++/nativeLang.xml'
+        self.assertEqual(native.read_bytes(), official)
+        corsu.disable(['notepadpp'])
+        self.assertFalse(native.exists())

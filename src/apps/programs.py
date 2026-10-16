@@ -101,28 +101,82 @@ class SevenZip(SettingApp):
 
 
 class NotepadPlusPlus(SettingApp):
+    """Notepad++'s installer copies only the language picked during setup, so localization/corsican.xml is often not
+    there. Then Corsu fetches the official file of the installed version from the Notepad++ repository and checks it
+    against the repository's own blob hash before using it."""
     id, name = 'notepadpp', 'Notepad++'
     description = {'co': ('Notepad++', "L'interfaccia di Notepad++ in corsu (Patriccollu)."),
                    'fr': ('Notepad++', "L'interface de Notepad++ en corse (Patriccollu)."),
                    'en': ('Notepad++', "Notepad++'s interface in Corsican (Patriccollu).")}
     executables = (('windows', 'Notepad++/notepad++.exe'),)
     corsican = 'localization/corsican.xml'
+    REPOSITORY = 'notepad-plus-plus/notepad-plus-plus'
+    PATH = 'PowerEditor/installer/nativeLang/corsican.xml'
 
     def target(self, folder):
         # Portable mode (doLocalConf.xml next to the program) keeps its settings in the program's folder.
         return folder / 'nativeLang.xml' if (folder / 'doLocalConf.xml').exists() else appdata() / 'Notepad++/nativeLang.xml'
 
-    def check(self, folder):
-        target = self.target(folder)
-        if not os.access(target.parent if target.parent.exists() else target.parent.parent, os.W_OK):
-            return corsu.t(f'{target.parent} cannot be written', f'{target.parent} n\'est pas modifiable')
-        return None
+    def find(self):
+        result = []
+        for executable, folder in self.installs():
+            catalog = self.corsican_file(folder)
+            target = self.target(folder)
+            reason = None
+            if not os.access(target.parent if target.parent.exists() else target.parent.parent, os.W_OK):
+                reason = corsu.t(f'{target.parent} cannot be written', f'{target.parent} n\'est pas modifiable')
+            note = None if catalog.exists() else corsu.t('official Corsican file fetched from Notepad++',
+                                                         'fichier corse officiel téléchargé depuis Notepad++')
+            result.append(apps.Installation(self, corsu.t('installed', 'installé'), executable, None,
+                                            catalog if catalog.exists() else None, note, reason))
+        return result
+
+    def version(self, executable):
+        import subprocess
+        try:
+            output = subprocess.run(['powershell', '-NoProfile', '-Command',
+                                     f"(Get-Item -LiteralPath '{executable}').VersionInfo.ProductVersion"],
+                                    capture_output=True, text=True, timeout=30).stdout.strip()
+        except (OSError, subprocess.SubprocessError):
+            return None
+        return output.split()[0] if output else None
+
+    def official_file(self, executable):
+        """corsican.xml of the installed version (tag v<version>), checked against the git blob hash GitHub gives."""
+        import hashlib
+        import json as _json
+        import urllib.request
+        version = self.version(executable)
+        if not version:
+            raise ValueError(corsu.t('version of Notepad++ unknown', 'version de Notepad++ inconnue'))
+        tag = 'v' + '.'.join(part for part in version.replace(',', '.').split('.') if part)
+        while tag.endswith('.0') and tag.count('.') > 1:
+            tag = tag[:-2]
+        api = f'https://api.github.com/repos/{self.REPOSITORY}/contents/{self.PATH}?ref={tag}'
+        request = urllib.request.Request(api, headers={'User-Agent': 'Corsu', 'Accept': 'application/vnd.github+json'})
+        with urllib.request.urlopen(request, timeout=60) as response:
+            meta = _json.loads(response.read())
+        with urllib.request.urlopen(meta['download_url'], timeout=60) as response:
+            data = response.read()
+        blob = hashlib.sha1(b'blob %d\0' % len(data) + data).hexdigest()
+        if blob != meta['sha']:
+            raise ValueError(corsu.t('downloaded file does not match the repository', 'fichier téléchargé non conforme au dépôt'))
+        return data, tag
 
     def enable(self, installer, installation):
         # What Notepad++'s own language menu does: copy the language file to nativeLang.xml. A nativeLang.xml of
         # another language is kept as the backup and comes back when Corsu is switched off.
         folder = installation.location.parent
-        installer.write(self.target(folder), self.corsican_file(folder).read_bytes(), toggle=True)
+        if installation.catalog:
+            data = installation.catalog.read_bytes()
+        else:
+            try:
+                data, tag = self.official_file(installation.location)
+            except OSError as error:
+                return corsu.t(f'could not fetch the Corsican file ({error})', f'téléchargement du fichier corse impossible ({error})')
+            print(corsu.t(f'Notepad++: Corsican file of {tag} fetched from github.com/{self.REPOSITORY}',
+                          f'Notepad++ : fichier corse de {tag} téléchargé depuis github.com/{self.REPOSITORY}'))
+        installer.write(self.target(folder), data, toggle=True)
         installer.state['files'][str(self.target(folder))]['component'] = self.id
 
 

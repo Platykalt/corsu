@@ -13,3 +13,5 @@
 | [Ce qui marche, et où](fr/compatibilite.md) | [What works where](en/compatibility.md) |
 | [Ce que Corsu modifie](fr/ce-que-corsu-modifie.md) | [What Corsu changes](en/what-corsu-changes.md) |
 | [Développement](fr/developpeurs.md) | [Development](en/developers.md) |
+
+Reprise du projet : [continuite.md](continuite.md) · Recherche par logiciel : [apps-research.md](apps-research.md) · Extension web : [webext.md](webext.md) · Pistes : [roadmap-candidates.md](roadmap-candidates.md)

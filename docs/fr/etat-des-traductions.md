@@ -24,11 +24,35 @@ corse).
 | Minecraft : phrases d'accueil, poème de fin | Pack facultatif, toutes langues | voir [Minecraft en corse](minecraft.md) | — | non |
 | Minecraft Bedrock Edition | Prototype, jamais essayé en jeu | 4 288 / 13 340 clés (reprises de Java, anglais identique) | formats vérifiés hors jeu ([état](../../minecraft/bedrock/STATUS.md)) | non |
 
+## Logiciels qui ont déjà leur traduction corse : Corsu l'active
+
+Ces logiciels ont une traduction corse faite en amont, presque toujours par Patriccollu di Santa Maria è Sichè, et
+livrée avec le logiciel. Corsu ne traduit rien ici : il trouve le logiciel, vérifie que son fichier corse est présent
+et change **un seul réglage** de langue, qu'il rend à la désactivation. Les logiciels eux-mêmes ne sont jamais
+installés par Corsu. Détail des mécanismes et des sources : [docs/apps-research.md](../apps-research.md).
+
+| Logiciel | Traduction amont | Activation par Corsu | Couverture (mesurée) | Tests automatiques | Essai réel | Revue humaine |
+| --- | --- | --- | --- | --- | --- | --- |
+| VLC | Patriccollu, `po/co.po` de VLC | Linux : entrée de menu lancée avec `LANGUAGE=co:…` (paquet du système), override du Flatpak ; Windows : réglage `Lang` de VLC ; macOS : préférence `language` | 3.0.24 : 4 443 / 6 203 textes (71,6 %) ; paquet Ubuntu 3.0.20 : 3 144 messages corses pour 6 254 français | unitaires (Linux, Windows, Flatpak simulés) ; CI : vrai VLC d'Ubuntu, aide affichée en corse, puis retour | CI Linux seulement (aide en ligne de commande, pas la fenêtre) | celle de Patriccollu en amont |
+| 7-Zip (Windows) | Patriccollu, `Lang/co.txt` | réglage `Lang` de 7-Zip | non mesurée | unitaires ; CI : vrai 7-Zip et registre Windows | non | amont |
+| Notepad++ (Windows) | Patriccollu, `corsican.xml` | copie en `nativeLang.xml`, comme le menu de Notepad++ (mode portable compris) | non mesurée | unitaires ; CI : vrai Notepad++ | non | amont |
+| WinMerge (Windows) | Patriccollu, `Corsican.po` | réglage `LanguageId` = 1155 (portable laissé tel quel) | non mesurée | unitaires | non | amont |
+| SumatraPDF (Windows) | Patriccollu, intégrée au programme | `UiLanguage = co` dans ses réglages | non mesurée | unitaires | non | amont |
+| FileZilla (Windows, Linux) | Patriccollu, `filezilla.mo` | `Language Code` dans `filezilla.xml` | 99,7 % (catalogue amont) | unitaires | non | amont |
+| HandBrake (Windows, Linux) | Patriccollu, intégrée / `ghb.mo` | `UiLanguage` dans ses réglages (portable laissé tel quel) | non mesurée | unitaires | non | amont |
+| VeraCrypt (Windows, Linux) | Patriccollu, `Language.co.xml` | `Language` dans `Configuration.xml` | non mesurée | unitaires | non | amont |
+
+Règles communes : un logiciel qui réécrit ses réglages en quittant doit être fermé (sinon il est laissé tel quel, et
+Corsu le dit) ; un fichier de réglages absent (logiciel jamais lancé) ou illisible n'est pas créé ni réécrit ; une
+valeur que vous changez ensuite vous appartient et n'est pas remise à la désactivation. Prochains : Audacity,
+Tenacity, fre:ac, PDFsam, Poedit. Applications de téléphone : Corsu ne peut pas les régler depuis l'ordinateur ;
+sur Android 13 et plus, choisissez la langue de chaque application dans les réglages du téléphone.
+
 ## Traductions reprises d'autres projets
 
-Le lexique de Corsu reprend les traductions corses publiées par d'autres logiciels libres, presque toutes de
-Patriccollu di Santa Maria è Sichè. Elles servent de vocabulaire de référence et traduisent les mêmes libellés
-ailleurs. Chaque section garde sa licence ([lexicon-upstream.tsv](../../lexicon/lexicon-upstream.tsv),
+Le lexique de Corsu reprend aussi ces traductions comme **vocabulaire** (avec leur contexte, leur version et leur
+licence, dans `lexicon/memory/`), pour traduire de manière cohérente les logiciels qui n'en ont pas. Reprendre du
+vocabulaire n'active rien dans le logiciel d'origine : c'est la section précédente qui le fait. Chaque section garde sa licence ([lexicon-upstream.tsv](../../lexicon/lexicon-upstream.tsv),
 [lexicon-mozilla.tsv](../../lexicon/lexicon-mozilla.tsv), `tools/import_translations.py`).
 
 | Projet | Lignes reprises | Licence |

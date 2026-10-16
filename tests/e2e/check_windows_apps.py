@@ -1,6 +1,6 @@
 """Real programs on Windows (CI runner): 7-Zip (preinstalled), VLC and Notepad++ (installed by the workflow).
 
-For each: Corsu finds it and its Corsican file, sets its language in the real registry or settings folder, and
+For each: Corsu finds it and its Corsican file (Notepad++'s default install lacks it: Corsu fetches the official one), sets its language in the real registry or settings folder, and
 switching off gives the previous value back. The programs' windows are not opened: this checks the files and settings
 the programs read at start, not their display.
 """
