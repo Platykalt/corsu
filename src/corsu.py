@@ -162,7 +162,7 @@ def patch_ftl(text):
 class Installer:
     def __init__(self):
         DATA.mkdir(parents=True, exist_ok=True)
-        self.state = json.loads(STATE.read_text(encoding='utf-8')) if STATE.exists() else {'files': {}}
+        self.state = load_state()
 
     def write(self, path, data, mode=None, toggle=False):
         path = Path(path)
@@ -184,7 +184,7 @@ class Installer:
         record['toggle'] = record.get('toggle', False) or toggle
         record['installed_sha256'] = digest(data)
         # Record backup before mutation, so an interrupted install remains reversible.
-        STATE.write_text(json.dumps(self.state, indent=2), encoding='utf-8')
+        save_state(self.state)
         temp = path.with_name(path.name + '.corsu-tmp')
         temp.write_bytes(data)
         temp.chmod(mode if mode is not None else (record['mode'] or 0o644))
@@ -210,7 +210,7 @@ class Installer:
             previous['installed_sha256'] = digest(path.read_bytes())
         self.write(path, json.dumps(document, indent=4) + '\n', toggle=toggle)
         self.state['files'][str(path)]['json_changes'] = saved
-        STATE.write_text(json.dumps(self.state, indent=2), encoding='utf-8')
+        save_state(self.state)
 
     def add_line(self, path, line):
         """Add one line to a file the user owns, such as ~/.bashrc. Uninstall removes only that line."""
@@ -220,7 +220,7 @@ class Installer:
             path.parent.mkdir(parents=True, exist_ok=True)
             path.write_text(text + ('' if not text or text.endswith('\n') else '\n') + line + '\n', encoding='utf-8')
         self.state['files'][str(path)] = {'backup': None, 'mode': None, 'toggle': False, 'line': line}
-        STATE.write_text(json.dumps(self.state, indent=2), encoding='utf-8')
+        save_state(self.state)
 
     def tree(self, path, source):
         """Install a whole directory, such as a macOS application bundle. Uninstall removes it."""
@@ -229,11 +229,19 @@ class Installer:
         if path.exists() and record is None:
             raise RuntimeError(f'Preserving an existing application not created by Corsu: {path}')
         self.state['files'][str(path)] = {'backup': None, 'mode': None, 'tree': True, 'toggle': False}
-        STATE.write_text(json.dumps(self.state, indent=2), encoding='utf-8')
-        if path.exists():
-            shutil.rmtree(path)
+        save_state(self.state)
         path.parent.mkdir(parents=True, exist_ok=True)
-        shutil.copytree(source, path, symlinks=True)
+        # The new copy is complete before the working one goes: an interruption leaves the old one, or both.
+        staged = path.with_name(path.name + '.corsu-new')
+        old = path.with_name(path.name + '.corsu-old')
+        for leftover in (staged, old):
+            if leftover.exists():
+                shutil.rmtree(leftover)
+        shutil.copytree(source, staged, symlinks=True)
+        if path.exists():
+            path.rename(old)
+        staged.rename(path)
+        shutil.rmtree(old, ignore_errors=True)
 
     def external_file(self, path, original):
         """Record a file changed by the official Discord installer."""
@@ -245,7 +253,7 @@ class Installer:
             backup.write_bytes(original)
             self.state['files'][key] = {'backup': str(backup), 'mode': path.stat().st_mode & 0o777}
         self.state['files'][key]['installed_sha256'] = digest(path.read_bytes())
-        STATE.write_text(json.dumps(self.state, indent=2), encoding='utf-8')
+        save_state(self.state)
 
 
 def best_translation(source, fallback):
@@ -468,7 +476,7 @@ def french_pack(version):
     """The French Firefox language pack for this exact version, verified against Mozilla's
     published SHA512SUMS. Fall back to the bundled pack; messages are merged by id anyway."""
     cache = DATA / 'langpacks' / f'fr-{version}.xpi'
-    if cache.exists():
+    if cache.exists() and zipfile.is_zipfile(cache):
         return cache
     base = f'https://archive.mozilla.org/pub/firefox/releases/{version}/'
     if not os.environ.get('CORSU_OFFLINE'):
@@ -480,7 +488,10 @@ def french_pack(version):
                 data = response.read()
             if hashlib.sha512(data).hexdigest() == expected:
                 cache.parent.mkdir(parents=True, exist_ok=True)
-                cache.write_bytes(data)
+                # Written aside then renamed: an interrupted write never leaves a pack that looks complete.
+                temp = cache.with_name(cache.name + '.corsu-tmp')
+                temp.write_bytes(data)
+                temp.replace(cache)
                 return cache
             print('Warning: French language pack checksum mismatch; using the bundled pack.', file=sys.stderr)
         except (OSError, StopIteration, ValueError):
@@ -999,7 +1010,7 @@ def firefox_arguments(rest, locale='en-US'):
 
 def status():
     """Read installation health without building or changing app settings."""
-    state = json.loads(STATE.read_text(encoding='utf-8')) if STATE.exists() else {'files': {}}
+    state = load_state()
     counts = {'managed': len(state['files']), 'missing': [], 'changed': []}
     for name, record in state['files'].items():
         path = Path(name)
@@ -1244,7 +1255,36 @@ def component_names(names):
 
 
 def load_state():
-    return json.loads(STATE.read_text(encoding='utf-8')) if STATE.exists() else {'files': {}}
+    """Corsu's record of every change it made. A damaged file falls back to the copy kept by the previous save,
+    so an interrupted write never loses the way back."""
+    for path in (STATE, STATE.with_name(STATE.name + '.previous')):
+        try:
+            return json.loads(path.read_text(encoding='utf-8'))
+        except FileNotFoundError:
+            continue
+        except ValueError:
+            print(t(f'Damaged, not used: {path}', f'Endommagé, non utilisé : {path}'), file=sys.stderr)
+    if STATE.exists():
+        raise RuntimeError(t(f'{STATE} is damaged and has no usable earlier copy; nothing was changed.',
+                             f'{STATE} est endommagé et n\'a pas de copie antérieure utilisable ; rien n\'a été modifié.'))
+    return {'files': {}}
+
+
+def save_state(state):
+    """Write the record atomically, keeping the previous version next to it."""
+    STATE.parent.mkdir(parents=True, exist_ok=True)
+    temp = STATE.with_name(STATE.name + '.corsu-tmp')
+    with open(temp, 'w', encoding='utf-8') as output:
+        output.write(json.dumps(state, indent=2))
+        output.flush()
+        os.fsync(output.fileno())
+    if STATE.exists():
+        try:
+            json.loads(STATE.read_text(encoding='utf-8'))
+            shutil.copyfile(STATE, STATE.with_name(STATE.name + '.previous'))
+        except ValueError:
+            pass
+    os.replace(temp, STATE)
 
 
 def switchable(state=None):
@@ -1398,7 +1438,7 @@ def enable(components=None):
     if 'terminal' in targets:
         (DATA / TERMINAL_OFF).unlink(missing_ok=True)
     state['disabled'] = sorted(disabled - targets)
-    STATE.write_text(json.dumps(state, indent=2), encoding='utf-8')
+    save_state(state)
     rebuild = targets - {'terminal'}
     if 'vesktop' in rebuild and not (ROOT / 'Vencord/dist/vencordDesktopRenderer.js').exists():
         rebuild.discard('vesktop')
@@ -1415,7 +1455,7 @@ def uninstall():
     if not STATE.exists():
         print(t('Corsu is not installed.', 'Corsu n\'est pas installé.'))
         return
-    state = json.loads(STATE.read_text(encoding='utf-8'))
+    state = load_state()
     remaining = {}
     packs = {name: record for name, record in state['files'].items() if record.get('chromium')}
     if packs:
@@ -1529,7 +1569,7 @@ def system_catalogs(installer):
             'backup': None, 'mode': 0o644, 'toggle': False, 'system': True,
             'installed_sha256': digest(target.read_bytes())}
         installed.append(target.name)
-    STATE.write_text(json.dumps(installer.state, indent=2), encoding='utf-8')
+    save_state(installer.state)
     return installed
 
 

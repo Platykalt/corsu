@@ -212,7 +212,7 @@ def apply(installer, browser):
             'installed_sha256': corsu.digest(translated)}
         changed += count
     write_files(pairs)
-    corsu.STATE.write_text(json.dumps(installer.state, indent=2), encoding='utf-8')
+    corsu.save_state(installer.state)
     return {'browser': browser.label, 'packs': len(browser.packs()), 'updated_packs': len(pairs), 'translated_strings': changed}
 
 
@@ -295,5 +295,5 @@ def install(installer):
         # Browser updates bring back French packs: re-translate them at every login.
         corsu.windows_link(installer, corsu.CONFIG / 'Microsoft/Windows/Start Menu/Programs/Startup/Corsu.lnk',
                            corsu.python_launcher(), f'"{corsu.SRC / "corsu.py"}" chromium-refresh')
-    corsu.STATE.write_text(json.dumps(installer.state, indent=2), encoding='utf-8')
+    corsu.save_state(installer.state)
     return reports

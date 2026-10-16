@@ -86,7 +86,7 @@ def install():
             # /S: silent; the user's own folder needs no administrator rights.
             subprocess.run([str(archive), '/S', f'/InstallDirectoryPath={target()}'], check=True)
             installer.state['files'][str(target())] = {'backup': None, 'mode': None, 'tree': True, 'toggle': False}
-            corsu.STATE.write_text(json.dumps(installer.state, indent=2), encoding='utf-8')
+            corsu.save_state(installer.state)
         elif corsu.PLATFORM == 'macos':
             mount = folder / 'mount'
             mount.mkdir()

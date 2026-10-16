@@ -104,6 +104,52 @@ class TranslationTests(unittest.TestCase):
             self.assertFalse((applications / 'userapp-Firefox-AB12.desktop').exists())
             self.assertTrue((applications / 'userapp-Other-CD34.desktop').exists())
 
+    def test_interrupted_state_write_keeps_the_way_back(self):
+        with tempfile.TemporaryDirectory() as directory:
+            data = Path(directory)
+            state = data / 'installation.json'
+            with patch.object(corsu, 'DATA', data), patch.object(corsu, 'STATE', state):
+                corsu.save_state({'files': {'/a': {'backup': '/b'}}})
+                corsu.save_state({'files': {'/a': {'backup': '/b'}, '/c': {'backup': None}}})
+                # A power cut while an older version wrote the file in place left half of it.
+                state.write_text('{"files": {"/a": {"back', encoding='utf-8')
+                with redirect_stdout(io.StringIO()), patch('sys.stderr', io.StringIO()) as errors:
+                    self.assertEqual(corsu.load_state(), {'files': {'/a': {'backup': '/b'}}})
+                self.assertIn('installation.json', errors.getvalue())
+                (data / 'installation.json.previous').write_text('{', encoding='utf-8')
+                with patch('sys.stderr', io.StringIO()), self.assertRaises(RuntimeError):
+                    corsu.load_state()
+                self.assertEqual(state.read_text(encoding='utf-8'), '{"files": {"/a": {"back')
+
+    def test_interrupted_downloads_and_copies_are_never_taken_as_complete(self):
+        import zipfile
+        with tempfile.TemporaryDirectory() as directory:
+            data = Path(directory)
+            # A language pack cut short by a lost connection used to be reused at every start.
+            cache = data / 'langpacks/fr-150.0.xpi'
+            cache.parent.mkdir(parents=True)
+            cache.write_bytes(b'PK\x03\x04 cut short')
+            with patch.object(corsu, 'DATA', data), patch.object(corsu, 'ROOT', data / 'release'), \
+                    patch.object(corsu.urllib.request, 'urlopen', side_effect=OSError('network is unreachable')):
+                self.assertIsNone(corsu.french_pack('150.0'))
+            # Replacing an installed application: a failed copy leaves the working one in place.
+            application = data / 'Applications/Firefox.app'
+            (application / 'Contents').mkdir(parents=True)
+            (application / 'Contents/firefox').write_text('working')
+            source = data / 'new.app'
+            (source / 'Contents').mkdir(parents=True)
+            (source / 'Contents/firefox').write_text('new')
+            with patch.object(corsu, 'DATA', data), patch.object(corsu, 'STATE', data / 'installation.json'):
+                installer = corsu.Installer()
+                installer.state['files'][str(application)] = {'tree': True}
+                with patch.object(corsu.shutil, 'copytree', side_effect=OSError('disk full')), self.assertRaises(OSError):
+                    installer.tree(application, source)
+                self.assertEqual((application / 'Contents/firefox').read_text(), 'working')
+                installer.tree(application, source)
+                self.assertEqual((application / 'Contents/firefox').read_text(), 'new')
+                self.assertEqual(sorted(path.name for path in application.parent.iterdir()), ['Firefox.app'])
+            self.assertFalse(zipfile.is_zipfile(cache))
+
     def test_old_firefox_copies_are_removed_unless_running(self):
         with tempfile.TemporaryDirectory() as directory:
             data = Path(directory)

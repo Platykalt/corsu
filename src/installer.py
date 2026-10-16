@@ -309,7 +309,7 @@ def prune_releases(current, loaded=()):
     keep |= running
     if state.get('running_releases', []) != sorted(running) and corsu.STATE.exists():
         state['running_releases'] = sorted(running)
-        corsu.STATE.write_text(json.dumps(state, indent=2), encoding='utf-8')
+        corsu.save_state(state)
     for release in folder.iterdir():
         if release.is_dir() and release.name not in keep:
             shutil.rmtree(release, ignore_errors=True)
@@ -322,15 +322,22 @@ def vencord_installer():
     binary = ROOT / 'vendor' / entry['file']
     if corsu.PLATFORM == 'linux' and platform.machine().lower() not in ('x86_64', 'amd64'):
         raise RuntimeError('The official Discord installer supports Linux x86_64. Use Vesktop on this architecture.')
-    if not binary.exists():
+    if not binary.exists() or hashlib.sha256(binary.read_bytes()).hexdigest() != entry['sha256']:
+        # Missing, or cut short by an interrupted download: fetch the pinned build again.
         print('Downloading the official Vencord installer...', flush=True)
-        with urllib.request.urlopen(manifest['installer_base_url'] + entry['file'], timeout=60) as response:
-            downloaded = response.read()
+        try:
+            with urllib.request.urlopen(manifest['installer_base_url'] + entry['file'], timeout=60) as response:
+                downloaded = response.read()
+        except OSError as error:
+            raise RuntimeError(f'Official Vencord installer missing or checksum mismatch, and it could not be '
+                               f'downloaded again ({error}); nothing executed. Check the connection and retry.') from None
         if hashlib.sha256(downloaded).hexdigest() != entry['sha256']:
             raise RuntimeError('Downloaded installer checksum mismatch; nothing executed.')
         binary.parent.mkdir(parents=True, exist_ok=True)
-        binary.write_bytes(downloaded)
-        binary.chmod(0o755)
+        temp = binary.with_name(binary.name + '.corsu-tmp')
+        temp.write_bytes(downloaded)
+        temp.chmod(0o755)
+        temp.replace(binary)
     if hashlib.sha256(binary.read_bytes()).hexdigest() != entry['sha256']:
         raise RuntimeError('Official Vencord installer missing or checksum mismatch; extract a fresh release.')
     return binary
@@ -348,7 +355,7 @@ def forget_removed_discord():
         state['files'].pop(name)
         print(t(f'Forgetting {name}: Discord removed that version.', f'Oubli de {name} : Discord a supprimé cette version.'))
     if gone:
-        corsu.STATE.write_text(json.dumps(state, indent=2), encoding='utf-8')
+        corsu.save_state(state)
 
 
 def install_discord(location):
@@ -375,7 +382,7 @@ def install_discord(location):
     installer.external_file(app, original)
     installer.state['files'][str(app)]['discord_location'] = str(location)
     installer.state['components'] = sorted(set(installer.state.get('components', [])) | {'discord'})
-    corsu.STATE.write_text(json.dumps(installer.state, indent=2), encoding='utf-8')
+    corsu.save_state(installer.state)
     installer.json_settings(corsu.CONFIG / 'Vencord/settings/settings.json', {
         'plugins/Corsu/enabled': True, 'autoUpdate': False, 'autoUpdateNotification': False})
     report_path = corsu.DATA / 'report.json'
@@ -413,7 +420,7 @@ def choose(available):
     """Ask which detected applications to translate. Rerun the setup later to add more."""
     installed = set()
     if corsu.STATE.exists():
-        installed = set(json.loads(corsu.STATE.read_text(encoding='utf-8')).get('components', []))
+        installed = set(corsu.load_state().get('components', []))
     selected = {name: True for name in available}
     while True:
         print(t('Select what you want to translate:', 'Choisissez ce que vous voulez traduire :'))

@@ -363,12 +363,12 @@ def install_folder(installer, folder, data):
         'backup': None, 'mode': None, 'toggle': True, 'component': 'minecraft', 'options_original': original,
         'installed_sha256': corsu.digest(options.read_bytes()) if options.exists() else corsu.digest(b''),
     }
-    corsu.STATE.write_text(json.dumps(installer.state, indent=2), encoding='utf-8')
+    corsu.save_state(installer.state)
     content = write_options(new_lines, newline).encode('utf-8')
     options.parent.mkdir(parents=True, exist_ok=True)
     atomic_write(options, content)
     installer.state['files'][str(options)]['installed_sha256'] = corsu.digest(content)
-    corsu.STATE.write_text(json.dumps(installer.state, indent=2), encoding='utf-8')
+    corsu.save_state(installer.state)
     return None
 
 
