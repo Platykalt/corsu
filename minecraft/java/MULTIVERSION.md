@@ -56,3 +56,67 @@ the game (recorded per version in `versions.json` notes and `STATUS.md`).
 - `tools/mcversions.py` (maintenance): `fetch`, `index`, `formats`, `build VERSION|all`, `verify VERSION|all`.
 - `tools/mchistory.py` (maintenance): classify pairs (reusable, renamed, absent from 26.3, changed, ambiguous) and
   report; writes nothing in `history.json` without a decision recorded in it.
+
+## Formats (agent A)
+
+Measured 2026-10-17 with `tools/mcversions.py` on Mojang's files; `versions.json` keeps the facts and, per release,
+where each one comes from (`sources`).
+
+| Releases | Language file in the pack | Code (`options.txt`, `language` block) | pack.mcmeta | Formats |
+| --- | --- | --- | --- | --- |
+| 1.6.1 to 1.10.2 | `assets/minecraft/lang/co_FR.lang` | `co_FR` | `pack_format` | 1 (to 1.8.9), 2 (1.9 to 1.10.2) |
+| 1.11 to 1.12.2 | `assets/minecraft/lang/co_fr.lang` | `co_fr` | `pack_format` | 3 |
+| 1.13 to 1.20.1 | `assets/minecraft/lang/co_fr.json` | `co_fr` | `pack_format` | 4 to 15 |
+| 1.20.2 to 1.21.8 | same | `co_fr` | `pack_format` + `supported_formats` `[n, n]` | 18 to 64 |
+| 1.21.9 to 26.3 | same | `co_fr` | `min_format` = `max_format` = n (no `pack_format`) | 69 to 97 |
+
+Sources. File name and case: the English file inside each client jar (`en_US.lang` to 1.10.2, `en_us.lang` 1.11 to
+1.12.2, `en_us.json` from 1.13) and Mojang's own language list (the asset `pack.mcmeta`: `en_US` keys to 1.10.2,
+`en_us` from 1.11). The `language` block: present in Mojang's list for every release, and in the 1.6.1 jar's own
+`pack.mcmeta` next to `pack_format: 1`. Pack format: the jar's `version.json` (`pack_version`: an integer 1.14 to
+1.16.5, `{resource, data}` 1.17 to 1.21.8, `{resource_major, resource_minor, …}` from 1.21.9); before 1.14 the jar has
+none, so minecraft.wiki "Template:Resource pack format" (revision 3784632, 2026-09-19) gives 1, 2, 3, 4, checked
+against the 1.6.x jar's `pack.mcmeta` and against `version.json` of 1.14 (4). Style: minecraft.wiki "Pack.mcmeta"
+(revision 3821904): `supported_formats` from 1.20.2 (23w31a); from 1.21.9 (25w31a) `min_format`/`max_format`, and
+`supported_formats` refused for resource formats 65 and later; `verify` checks that each jar holds the strings
+`supported_formats` / `min_format` exactly when the style says so. pack.mcmeta is written in ASCII (`\u` escapes):
+before 1.19.3 the game did not read raw UTF-8 there (same wiki page).
+
+Engines, read in the jars' bytecode (1.6.4, 1.8.9, 1.12.2, 1.13.2, 1.16.5, 1.20.1, 1.21.x, 26.x): every language
+loader reads UTF-8 (1.6 to 1.8 `Charsets.UTF_8`, then `StandardCharsets.UTF_8`), splits `.lang` lines at the first
+`=` (Guava `Splitter.on('=').limit(2)`, `#` lines skipped), and turns `%d`, `%.1f`, `%1$d`… into `%s` / `%1$s` with the
+pattern `%(\d+\$)?[\d\.]*[df]` as it reads. Screens then call `String.format` (an error shows "Format error: …");
+text components (chat, advancements; from 1.7) accept only `%s`, `%n$s` and `%%`. Hence the rule `verify` applies to
+every version: after that normalisation, a translation shows exactly the argument numbers its English shows (implicit
+`%s` are numbered in order, explicit `%n$s` may reorder), uses no other conversion and no lone `%`, keeps the same `§`
+codes, and in `.lang` holds no line break (a key holds no `=` and does not start with `#`). Up to 1.12 the loader also
+switches the game to its Unicode font when over 10 % of characters are above U+00FF: the Corsican files do not
+(checked by the game's code for 1.6.4, 1.8.9 and 1.12.2).
+
+Realms: its English came from the library `com.mojang:realms` (1.7.10 to 1.14.3), from `assets/realms/lang` in the
+client jar (1.14.4 to 1.19.2), inside `en_us.json` (1.19.3 to 1.20.1) and also the asset `realms/lang/en_us.json`
+(1.20.2 and later). Every loader merges all namespaces into one table, so the pack keeps Realms keys in its single
+`minecraft` language file. `keys.tsv` includes these Realms texts (Realms' file wins, as in `tools/minecraft.py`).
+
+`keys.tsv`, versions column: comma-separated items in release order (`versions.json` order), each a release id or
+`first..last` for a run of three or more consecutive releases (`1.13..26.3`). 12,537 pairs over 87 releases, 0.7 MB.
+
+`versions.json` adds to the contract: `pack_format_minor` (1.21.9 and later), `client_sha1` (as the version JSON
+gives it), `realms` (where Realms' English came from), `sources`. `supported` is written by `verify` only: true when
+the Python checks give no error and the game's own code accepted the pack.
+
+`verify` runs, per release: keys.tsv against Mojang's English; the zip (files, fixed dates, same bytes twice); the
+mcmeta schema of the style; the language file reads back as built (UTF-8, no BOM); every text by the rule above; for
+the base release, the same pack as `src/minecraft.py` builds. Then the game's own code, from the whole client jar
+(SHA-1 checked), in `tools/minecraft/LegacyFormatCheck.java`: obfuscated classes are found by their string constants
+and signatures; the jar's loader reads the pack's language file and the English, the jar's formatter (Locale up to
+1.13, then ClientLanguage + I18n) renders every text with arguments typed from the English (`%d` an Integer, `%f` a
+Double), and the jar's metadata readers parse the `language` and `pack` sections. For 26.x, `LangCheck.java` also
+renders every text component. Not covered by game code: text components before 26.x (Python rule above), the `pack`
+section of 1.21.1 (its reader needs the game bootstrapped), the code itself in the `language` section from 1.20 (the
+jar's reader there reads one language; the code is checked in Python), drawing, and the resource pack screen. No
+game window is opened; starting a real client headless was not attempted.
+
+`fetch` reads only the needed jar members with HTTP range requests: it checks the version JSON's SHA-1 (manifest),
+asset SHA-1s and each member's CRC-32, not the jar's SHA-1, which it records. `verify` downloads whole jars and
+checks their SHA-1. Snapshots, pre-releases and release candidates: `other-versions.md`.
