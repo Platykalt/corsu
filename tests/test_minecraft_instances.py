@@ -76,8 +76,8 @@ class InstancesTests(unittest.TestCase):
         components = [{'uid': 'org.lwjgl3', 'version': '3.3.3'}, {'uid': 'net.minecraft', 'version': version}]
         if loader:
             components.append({'uid': loader[0], 'version': loader[1]})
-        (instance / 'mmc-pack.json').write_text(json.dumps({'components': components, 'formatVersion': 1}))
-        (instance / 'instance.cfg').write_text(f'[General]\nInstanceType=OneSix\nname={name}\n')
+        (instance / 'mmc-pack.json').write_text(json.dumps({'components': components, 'formatVersion': 1}), encoding='utf-8')
+        (instance / 'instance.cfg').write_text(f'[General]\nInstanceType=OneSix\nname={name}\n', encoding='utf-8')
         if options is not None:
             (instance / game_folder / 'options.txt').write_bytes(options)
         return instance / game_folder
@@ -87,7 +87,7 @@ class InstancesTests(unittest.TestCase):
         for component in pack['components']:
             if component['uid'] == 'net.minecraft':
                 component['version'] = version
-        (folder.parent / 'mmc-pack.json').write_text(json.dumps(pack))
+        (folder.parent / 'mmc-pack.json').write_text(json.dumps(pack), encoding='utf-8')
 
     def install(self):
         installer = self.corsu.Installer()
@@ -121,7 +121,7 @@ class InstancesTests(unittest.TestCase):
     def test_old_instance_without_mmc_pack_uses_instance_cfg(self):
         instance = self.share / 'multimc/instances/Old'
         (instance / 'minecraft').mkdir(parents=True)
-        (instance / 'instance.cfg').write_text('InstanceType=Legacy\nIntendedVersion=1.12.2\n')
+        (instance / 'instance.cfg').write_text('InstanceType=Legacy\nIntendedVersion=1.12.2\n', encoding='utf-8')
         [folder] = self.game.find_folders()
         self.assertEqual((folder.version, folder.launcher), ('1.12.2', 'MultiMC'))
 
@@ -131,14 +131,15 @@ class InstancesTests(unittest.TestCase):
         elsewhere = self.root / 'Ghjochi Minecraft'
         (data / 'prismlauncher.cfg').write_text(
             # QSettings writes paths with forward slashes (or doubled backslashes), never single backslashes.
-            f'[General]\nConfigVersion=1.3\nInstanceDir=Mes instances\nAdditionalInstanceDirs="{elsewhere.as_posix()}"\n')
+            f'[General]\nConfigVersion=1.3\nInstanceDir=Mes instances\nAdditionalInstanceDirs="{elsewhere.as_posix()}"\n',
+            encoding='utf-8')  # Qt 6 writes its INI files in UTF-8; this folder name has an accent
         relative = self.instance('A', '26.3', instances=data / 'Mes instances')
         absolute = self.instance('B', '1.21.1', instances=elsewhere)
         ignored = self.instance('C', '26.3')  # instances/ is no longer where Prism Launcher looks
         paths = [folder.path for folder in self.game.find_folders()]
         self.assertEqual(paths, [relative, absolute])
         self.assertNotIn(ignored, paths)
-        (data / 'prismlauncher.cfg').write_text(f'[General]\nInstanceDir={elsewhere.as_posix()}\n')
+        (data / 'prismlauncher.cfg').write_text(f'[General]\nInstanceDir={elsewhere.as_posix()}\n', encoding='utf-8')
         self.assertEqual([folder.path for folder in self.game.find_folders()], [absolute])
 
     def test_flatpak_and_data_dir_variable(self):
@@ -163,9 +164,9 @@ class InstancesTests(unittest.TestCase):
         official = self.root / '.minecraft'
         for version, data in versions.items():
             (official / 'versions' / version).mkdir(parents=True)
-            (official / 'versions' / version / f'{version}.json').write_text(json.dumps({'id': version, **data}))
+            (official / 'versions' / version / f'{version}.json').write_text(json.dumps({'id': version, **data}), encoding='utf-8')
         official.mkdir(exist_ok=True)
-        (official / 'launcher_profiles.json').write_text(json.dumps({'profiles': profiles}))
+        (official / 'launcher_profiles.json').write_text(json.dumps({'profiles': profiles}), encoding='utf-8')
         return official
 
     def test_official_launcher_fabric_profile_inherits_its_version(self):
@@ -175,7 +176,7 @@ class InstancesTests(unittest.TestCase):
              'neoforge-21.1.77': {'inheritsFrom': '1.21.1', 'libraries': [{'name': 'net.neoforged:neoforge:21.1.77'}]},
              'fabric-loader-0.16.9-1.21.1': {'inheritsFrom': '1.21.1', 'mainClass': 'net.fabricmc.loader.impl.launch.knot.KnotClient',
                                              'libraries': [{'name': 'net.fabricmc:fabric-loader:0.16.9'}]}})
-        (official / 'options.txt').write_text('lang:fr_fr\n')
+        (official / 'options.txt').write_text('lang:fr_fr\n', encoding='utf-8')
         [folder] = self.game.find_folders()
         self.assertEqual((folder.version, folder.loader), ('1.21.1', 'Fabric'))
         self.assertEqual(self.game.version_details(official, '1.20.1-forge-47.2.0'), ('1.20.1', 'Forge'))  # no JSON
@@ -250,7 +251,7 @@ class InstancesTests(unittest.TestCase):
         options = folder / 'options.txt'
         self.install()
         # The player adds a pack after Corsu's, then moves the instance to 1.7.10.
-        options.write_text(options.read_text().replace('"file/corsu-minecraft-java.zip"', '"file/corsu-minecraft-java.zip","file/B.zip"'))
+        options.write_text(options.read_text().replace('"file/corsu-minecraft-java.zip"', '"file/corsu-minecraft-java.zip","file/B.zip"'), encoding='utf-8')
         self.set_version(folder, '1.7.10')
         report = self.install()
         text = options.read_text()
@@ -273,7 +274,7 @@ class InstancesTests(unittest.TestCase):
         folder = self.instance('Moving', '1.21.1', b'lang:fr_fr\n')
         options = folder / 'options.txt'
         self.install()
-        options.write_text(options.read_text().replace('lang:co_fr', 'lang:en_us'))
+        options.write_text(options.read_text().replace('lang:co_fr', 'lang:en_us'), encoding='utf-8')
         self.set_version(folder, '1.21.9')
         self.install()
         self.assertIn('lang:en_us', options.read_text())
@@ -301,7 +302,7 @@ class InstancesTests(unittest.TestCase):
 
     def old_state(self, folder, options_text):
         options = folder / 'options.txt'
-        options.write_text(options_text)
+        options.write_text(options_text, encoding='utf-8')
         pack = folder / 'resourcepacks/corsu-minecraft-java.zip'
         pack.parent.mkdir()
         pack.write_bytes(b'0.22.0 pack')
