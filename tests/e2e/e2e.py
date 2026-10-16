@@ -68,8 +68,8 @@ def launcher_icons(home):
             location = subprocess.run(['powershell', '-NoProfile', '-NonInteractive', '-Command', script], text=True,
                                       capture_output=True, check=True, env={**os.environ, 'CORSU_LINK': str(launcher)})
             path = location.stdout.strip().rsplit(',', 1)[0]
-            if path:
-                icons[launcher] = Path(path)
+            # Both shortcuts set an icon; an empty one would show python.exe's.
+            icons[launcher] = Path(path) if path else None
         elif launcher.suffix == '.app':
             icons[launcher] = launcher / 'Contents/Resources/applet.icns'
     return icons
@@ -86,6 +86,9 @@ def check_firefox(root, home, environment):
     for launcher, icon in launcher_icons(home).items():
         assert icon and icon.is_file(), f'{launcher} shows a missing icon: {icon}'
         print(f'PASS: {launcher.name} icon {icon}')
+        if launcher.name == 'Corsu.lnk':
+            # Updates delete old release folders, so the icon must live outside them.
+            assert 'releases' not in icon.parts, f'Corsu.lnk icon is inside a release folder: {icon}'
     applet = home / 'Applications/Firefox Corsu.app/Contents/Resources/applet.icns'
     if PLATFORM == 'macos':
         firefox_icon = Path(os.environ.get('CORSU_FIREFOX', '/Applications/Firefox.app')) / 'Contents/Resources/firefox.icns'

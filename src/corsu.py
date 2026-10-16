@@ -1101,7 +1101,10 @@ def setup_shortcut(installer):
         elif record:
             restore(old, record)
     if PLATFORM == 'windows':
-        windows_link(installer, START_MENU / 'Corsu.lnk', python_launcher(), f'"{app}"')
+        # The icon lives outside the release folders, which updates delete; without one Windows shows Python's.
+        icon = DATA / 'corsu.ico'
+        installer.write(icon, (SRC / 'app/corsu.ico').read_bytes())
+        windows_link(installer, START_MENU / 'Corsu.lnk', python_launcher(), f'"{app}"', f'{icon},0')
     elif PLATFORM == 'macos':
         command = f'exec {shlex.quote(sys.executable)} {shlex.quote(str(app))} >/dev/null 2>&1 &'
         with tempfile.TemporaryDirectory() as directory:
