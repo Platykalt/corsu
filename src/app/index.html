@@ -607,7 +607,8 @@ function statusBlock(item) {
 }
 
 function instanceRow(instance) {
-  const title = [instance.kind, instance.version].filter(Boolean).join(" ");
+  // Minecraft folders also name their mod loader (Fabric, NeoForge…) next to the game version.
+  const title = [instance.kind, instance.version, instance.loader].filter(Boolean).join(" ");
   const coverage = coverageText(instance.coverage);
   const note = instance.coverage && instance.coverage.note;
   // Reason and action come written by the installer, in French or English: shown as they are.
@@ -618,7 +619,8 @@ function instanceRow(instance) {
     instance.location ? make("span", { class: "where", text: instance.location }) : null,
     instance.reason ? make("span", { text: instance.reason }) : null,
     instance.action ? make("span", { class: "hint", text: instance.action }) : null,
-    note ? make("span", { class: "muted", text: note }) : null);
+    note ? make("span", { class: "muted", text: note }) : null,
+    instance.note ? make("span", { class: "hint", text: instance.note }) : null);
 }
 
 function rowClass(block) {
