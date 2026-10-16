@@ -149,7 +149,9 @@ jobs:
         if: runner.os == 'Linux'
         run: |
           sudo apt-get update -qq
-          sudo apt-get install -y -qq vlc vlc-l10n
+          sudo apt-get install -y -qq vlc vlc-l10n locales
+          # gettext ignores LANGUAGE under the C locale: a desktop session has a real one, the runner needs it made.
+          sudo locale-gen fr_FR.UTF-8
           ls /usr/share/applications/vlc.desktop
           ls -l /usr/share/locale/co/LC_MESSAGES/vlc.mo
           python tests/e2e/check_vlc.py

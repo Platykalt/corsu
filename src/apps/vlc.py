@@ -1,6 +1,7 @@
 """VLC media player. Its Corsican catalogue is Patriccollu di Santa Maria è Sichè's (po/co.po in videolan/vlc).
 
-Linux: VLC has no language setting of its own and follows the session language (LANGUAGE/LANG). When the Corsican
+Linux: VLC has no language setting of its own and follows the session language (LANGUAGE/LANG). gettext ignores
+LANGUAGE when the session locale is "C" (no locale configured), as on bare servers; desktop sessions have one. When the Corsican
 catalogue is installed with VLC (/usr/share/locale/co/LC_MESSAGES/vlc.mo), Corsu starts VLC's menu entry with
 LANGUAGE=co:<your languages>; for the Flatpak, the same variable goes in its user override. When the catalogue is
 missing, Corsu says so and changes nothing. Snap: left alone (no per-user environment override).
