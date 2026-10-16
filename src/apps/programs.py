@@ -178,7 +178,11 @@ class NotepadPlusPlus(SettingApp):
         while tag.endswith('.0') and tag.count('.') > 1:
             tag = tag[:-2]
         api = f'https://api.github.com/repos/{self.REPOSITORY}/contents/{self.PATH}?ref={tag}'
-        request = urllib.request.Request(api, headers={'User-Agent': 'Corsu', 'Accept': 'application/vnd.github+json'})
+        headers = {'User-Agent': 'Corsu', 'Accept': 'application/vnd.github+json'}
+        if os.environ.get('GITHUB_TOKEN'):
+            # CI runners share an address and GitHub's limit of 60 anonymous API requests an hour.
+            headers['Authorization'] = 'Bearer ' + os.environ['GITHUB_TOKEN']
+        request = urllib.request.Request(api, headers=headers)
         with urllib.request.urlopen(request, timeout=60) as response:
             meta = _json.loads(response.read())
         with urllib.request.urlopen(meta['download_url'], timeout=60) as response:

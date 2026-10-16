@@ -188,6 +188,8 @@ jobs:
           python tests/e2e/check_vlc.py
       - name: Windows programs — 7-Zip, VLC and Notepad++ set to Corsican in the real registry and back
         if: runner.os == 'Windows'
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
         run: |
           choco install vlc notepadplusplus -y --no-progress
           python tests/e2e/check_windows_apps.py
