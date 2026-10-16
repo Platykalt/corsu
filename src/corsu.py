@@ -939,13 +939,19 @@ def newtab_strings(profile, locale):
     return target
 
 
+def firefox_launcher():
+    return HOME / '.local/bin/firefox-corsu'
+
+
 def repair_default_browser():
     """When a Corsu copy is made the default browser, Firefox records its exact folder, which changes with every
-    Firefox update, in a menu entry without an icon. Point the default browser back at the Firefox Corsu entry."""
+    Firefox update, in a menu entry without an icon: the taskbar's browser button shows a blank page, and that
+    entry starts the copy directly, so this repair in the launcher never ran again. Point the default browser back
+    at firefox.desktop (Firefox Corsu, or the system Firefox once Corsu is switched off or removed)."""
     if PLATFORM != 'linux':
         return
     applications = HOME / '.local/share/applications'
-    if not (applications / 'firefox.desktop').exists():
+    if not any((folder / 'firefox.desktop').exists() for folder in (applications, Path('/usr/share/applications'))):
         return
     stale = []
     for entry in applications.glob('userapp-*.desktop'):
@@ -1069,7 +1075,7 @@ def windows_shortcut(installer, firefox):
                  f'"{SRC / "corsu.py"}" launch-firefox', str(firefox.root / firefox.binary) + ',0', toggle=True)
 
 
-def macos_application(installer):
+def macos_application(installer, firefox=None):
     """A small AppleScript applet, so Firefox Corsu appears in Launchpad and Spotlight."""
     target = HOME / 'Applications/Firefox Corsu.app'
     command = f'exec {shlex.quote(sys.executable)} {shlex.quote(str(SRC / "corsu.py"))} launch-firefox >/dev/null 2>&1 &'
@@ -1077,6 +1083,10 @@ def macos_application(installer):
         applet = Path(directory) / 'Firefox Corsu.app'
         script = 'do shell script ' + json.dumps(command)
         subprocess.run(['osacompile', '-o', str(applet), '-e', script], check=True)
+        # osacompile gives every applet the generic script icon; show Firefox's own logo instead.
+        icon = firefox.root / 'Contents/Resources/firefox.icns' if firefox else None
+        if icon and icon.is_file():
+            shutil.copyfile(icon, applet / 'Contents/Resources/applet.icns')
         installer.tree(target, applet)
 
 
@@ -1140,9 +1150,9 @@ def desktop(installer, firefox=True, vesktop=True):
         return
     if PLATFORM == 'macos':
         if firefox:
-            macos_application(installer)
+            macos_application(installer, firefox_install())
         return
-    launcher = HOME / '.local/bin/firefox-corsu'
+    launcher = firefox_launcher()
     if firefox:
         installer.write(launcher, f'#!/bin/sh\nexec {shlex.quote(sys.executable)} {shlex.quote(str(SRC / "corsu.py"))} launch-firefox "$@"\n', 0o755)
     entries = ([('firefox.desktop', str(launcher))] if firefox else []) + ([('vesktop.desktop', None)] if vesktop else [])
@@ -1194,7 +1204,7 @@ def install(components=None, qt_system=False):
         profile = firefox_profile()
         if profile:
             link_profile(firefox_directory(runtime), profile)
-        repair_default_browser()
+    repair_default_browser()
     chromium_stats = None
     if 'chromium' in components:
         import chromium
@@ -1555,7 +1565,8 @@ def uninstall():
                 and digest(leftover.read_bytes()) == digest(Path(record['backup']).read_bytes()):
             # The official installer moved the original aside; it is restored in place now.
             leftover.unlink()
-    STATE.write_text(json.dumps({'files': remaining}, indent=2), encoding='utf-8')
+    save_state({'files': remaining})
+    repair_default_browser()
     disabled_marker().unlink(missing_ok=True)
     (DATA / TERMINAL_OFF).unlink(missing_ok=True)
     print(t(f'Original files and settings are back. Corsu\'s own files stay in {DATA}; you can delete that folder.',
@@ -1624,6 +1635,10 @@ def launch_firefox(rest):
                 os.environ['CORSU_NEWTAB'] = str(strings)
         repair_default_browser()
         prune_runtimes(runtime)
+        if PLATFORM == 'linux' and firefox_launcher().exists():
+            # Firefox compares the default browser's command with this path. Without it, the copy never sees itself
+            # as the default, and "Make default" writes an icon-less entry for the copy's versioned folder.
+            os.environ['MOZ_APP_LAUNCHER'] = str(firefox_launcher())
         # Reuse the existing profile instead of migrating personal data.
         command = [str(firefox_executable(runtime)), *firefox_arguments(rest, locale)]
     if PLATFORM == 'windows':

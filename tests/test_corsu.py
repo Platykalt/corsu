@@ -104,6 +104,39 @@ class TranslationTests(unittest.TestCase):
             self.assertFalse((applications / 'userapp-Firefox-AB12.desktop').exists())
             self.assertTrue((applications / 'userapp-Other-CD34.desktop').exists())
 
+    def test_default_browser_is_repaired_by_corsu_itself_not_only_by_the_launcher(self):
+        # The entry Firefox wrote on a real computer: it starts the copy directly, so the launcher's repair never ran,
+        # and the taskbar's browser button showed a blank page. Switching off or removing Corsu must still fix it,
+        # even when only the system has a firefox.desktop left.
+        with tempfile.TemporaryDirectory() as directory:
+            home = Path(directory)
+            data = home / '.local/share/corsu'
+            applications = home / '.local/share/applications'
+            applications.mkdir(parents=True)
+            userapp = applications / 'userapp-Firefox-DQPWW3.desktop'
+            userapp.write_text('[Desktop Entry]\nEncoding=UTF-8\nVersion=1.0\nType=Application\nNoDisplay=true\n'
+                               f'Exec={data}/firefox/fbf656f92f218836/firefox %u\nName=Firefox\n'
+                               'Comment=Définition personnalisée pour Firefox\n', encoding='utf-8')
+            mimeapps = home / '.config/mimeapps.list'
+            mimeapps.parent.mkdir()
+            mimeapps.write_text('[Added Associations]\nx-scheme-handler/https=userapp-Firefox-DQPWW3.desktop;firefox.desktop;\n'
+                                '[Default Applications]\nx-scheme-handler/https=userapp-Firefox-DQPWW3.desktop\n'
+                                'x-scheme-handler/discord=vesktop.desktop\n', encoding='utf-8')
+            data.mkdir(parents=True)
+            (data / 'state.json').write_text('{"files": {}}', encoding='utf-8')
+            system = Path('/usr/share/applications/firefox.desktop')
+            exists = Path.exists
+            with patch.object(corsu, 'HOME', home), patch.object(corsu, 'DATA', data), \
+                    patch.object(corsu, 'STATE', data / 'state.json'), patch.object(corsu, 'CONFIG', home / '.config'), \
+                    patch.object(corsu, 'PLATFORM', 'linux'), redirect_stdout(io.StringIO()), \
+                    patch.object(Path, 'exists', lambda path: path == system or exists(path)):
+                corsu.uninstall()
+            self.assertFalse(userapp.exists())
+            self.assertEqual(mimeapps.read_text(encoding='utf-8'),
+                             '[Added Associations]\nx-scheme-handler/https=firefox.desktop;\n'
+                             '[Default Applications]\nx-scheme-handler/https=firefox.desktop\n'
+                             'x-scheme-handler/discord=vesktop.desktop\n')
+
     def test_interrupted_state_write_keeps_the_way_back(self):
         with tempfile.TemporaryDirectory() as directory:
             data = Path(directory)

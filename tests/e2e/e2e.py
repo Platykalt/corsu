@@ -12,6 +12,7 @@ discord: lay out a fake Discord for this platform, patch it with the real offici
 import argparse
 import json
 import os
+import re
 from pathlib import Path
 import subprocess
 import sys
@@ -55,6 +56,25 @@ def launchers(home):
     return [home / '.local/bin/firefox-corsu', home / '.local/share/applications/corsu-setup.desktop']
 
 
+def launcher_icons(home):
+    """The icon file each installed launcher shows, so a missing or deleted icon fails here, not on the desktop."""
+    icons = {}
+    for launcher in launchers(home):
+        if launcher.suffix == '.desktop':
+            match = re.search(r'^Icon=(.+)$', launcher.read_text(encoding='utf-8'), re.M)
+            icons[launcher] = Path(match[1]) if match else None
+        elif launcher.suffix == '.lnk':
+            script = '(New-Object -ComObject WScript.Shell).CreateShortcut($env:CORSU_LINK).IconLocation'
+            location = subprocess.run(['powershell', '-NoProfile', '-NonInteractive', '-Command', script], text=True,
+                                      capture_output=True, check=True, env={**os.environ, 'CORSU_LINK': str(launcher)})
+            path = location.stdout.strip().rsplit(',', 1)[0]
+            if path:
+                icons[launcher] = Path(path)
+        elif launcher.suffix == '.app':
+            icons[launcher] = launcher / 'Contents/Resources/applet.icns'
+    return icons
+
+
 def state(home):
     return json.loads((data_directory(home) / 'installation.json').read_text(encoding='utf-8'))
 
@@ -63,6 +83,13 @@ def check_firefox(root, home, environment):
     run(root, environment, 'src/installer.py', '--components', 'firefox', '--yes')
     for launcher in launchers(home):
         assert launcher.exists(), f'Missing launcher: {launcher}'
+    for launcher, icon in launcher_icons(home).items():
+        assert icon and icon.is_file(), f'{launcher} shows a missing icon: {icon}'
+        print(f'PASS: {launcher.name} icon {icon}')
+    applet = home / 'Applications/Firefox Corsu.app/Contents/Resources/applet.icns'
+    if PLATFORM == 'macos':
+        firefox_icon = Path(os.environ.get('CORSU_FIREFOX', '/Applications/Firefox.app')) / 'Contents/Resources/firefox.icns'
+        assert applet.read_bytes() == firefox_icon.read_bytes(), 'Firefox Corsu.app does not show the Firefox logo'
     report = json.loads((data_directory(home) / 'report.json').read_text(encoding='utf-8'))
     stats = report['firefox']
     print(json.dumps(stats, indent=2))
@@ -70,6 +97,9 @@ def check_firefox(root, home, environment):
     assert stats['french_messages'] > 5000, stats
     executable = run(root, environment, 'src/corsu.py', 'prepare-firefox', capture=True).splitlines()[0].strip()
     run(root, environment, str(HERE / 'check_firefox.py'), executable)
+    if PLATFORM == 'linux':
+        run(root, {**environment, 'XDG_DATA_HOME': str(home / '.local/share')}, str(HERE / 'check_firefox_default.py'),
+            str(launchers(home)[0]))
     status = json.loads(run(root, environment, 'src/corsu.py', 'status', capture=True))
     assert status['enabled'] and status['installation']['missing'] == [] and status['installation']['changed'] == [], status
     run(root, environment, 'src/installer.py', '--disable')
