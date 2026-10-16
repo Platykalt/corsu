@@ -2,6 +2,20 @@
 
 ## 0.22.0 (2026-10-16)
 
+- Firefox keeps its logo as the default browser on Linux. Firefox Corsu did not recognise its own menu entry as the
+  default, and "Make default" wrote an entry without an icon that pointed at the copy's versioned folder. That entry
+  also started the copy without Corsu's launcher, so the taskbar's browser button showed a blank page. The launcher now
+  gives Firefox its command (`MOZ_APP_LAUNCHER`), and installing, switching off and uninstalling repair an existing
+  entry. On macOS, Firefox Corsu.app shows Firefox's icon.
+- An interrupted run no longer loses the way back. `installation.json` is replaced atomically and keeps its previous
+  version. A language pack, Vencord installer or application copy cut short is never taken as complete.
+- Programs with their own Corsican translation: the summary names only the programs actually switched. A program that
+  is open stays in Corsican when switched off, until it is closed. A language chosen in Notepad++ afterwards is kept
+  (it used to stop the installation). Settings files keep their Windows line endings and byte order mark.
+- The Corsu window says when its record is damaged instead of reading as closed.
+- Chromium check on Windows: the new tab's own about:blank load sometimes replaced the page being checked
+  (`net::ERR_ABORTED`). The check now detects this and reports browser, URL, page state, HTML and a screenshot when
+  it fails.
 - Minecraft: Java Edition 26.3 in Corsican, as a resource pack adding the language "Corsu (Corsica)": all 8,557
   texts of the game's language files (menus, options, blocks, items, creatures, biomes, advancements, subtitles,
   commands, Realms…). `tools/minecraft.py` fetches Mojang's texts, checks every key and argument, renders every

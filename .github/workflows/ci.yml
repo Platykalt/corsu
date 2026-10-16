@@ -101,6 +101,9 @@ jobs:
           - os: macos-latest
             archive: corsu-macos.tar.gz
     runs-on: ${{ matrix.os }}
+    env:
+      # Screenshots and page excerpts the browser checks save when they fail.
+      CORSU_E2E_ARTIFACTS: ${{ github.workspace }}/e2e-artifacts
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-python@v5
@@ -170,6 +173,13 @@ jobs:
           curl -fsSL -o cft.zip "$url" && unzip -q cft.zip -d "$RUNNER_TEMP/cft"
           export CORSU_CHROMIUM="$RUNNER_TEMP/cft/chrome-$platform"
           python tests/e2e/e2e.py chromium --root "${{ env.CORSU_RELEASE }}"
+      - name: Keep what the failed checks saw
+        if: failure()
+        uses: actions/upload-artifact@v4
+        with:
+          name: e2e-failure-${{ matrix.os }}
+          path: e2e-artifacts
+          if-no-files-found: ignore
 
   release:
     name: Publish GitHub release
