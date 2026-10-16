@@ -1876,6 +1876,855 @@
    "note": "English changed only in case or punctuation"
   }
  },
+ "commands.achievement.alreadyHave": {
+  "4049ad6b2dbf": {
+   "co": "U ghjucadore %s hà digià u successu %s",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
+  }
+ },
+ "commands.achievement.dontHave": {
+  "132a9406449d": {
+   "co": "U ghjucadore %s ùn hà micca u successu %s",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
+  }
+ },
+ "commands.achievement.give.success.all": {
+  "2eb723a40b9d": {
+   "co": "Tutti i successi sò stati dati à %s",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
+  }
+ },
+ "commands.achievement.give.success.one": {
+  "5c473af2b6fb": {
+   "co": "Successu datu à %s : %s",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
+  },
+  "fd82e0be21fe": {
+   "co": "Statistica data à %s : %s",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
+  }
+ },
+ "commands.achievement.statTooLow": {
+  "352ff5f39823": {
+   "co": "U ghjucadore %s ùn hà micca a statistica %s",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
+  }
+ },
+ "commands.achievement.take.success.all": {
+  "94faf9f46570": {
+   "co": "Tutti i successi sò stati ritirati à %s",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
+  }
+ },
+ "commands.achievement.take.success.one": {
+  "0481ffc7b85a": {
+   "co": "Statistica %s ritirata à %s",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
+  },
+  "f3e6856856af": {
+   "co": "Successu %s ritiratu à %s",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
+  }
+ },
+ "commands.achievement.unknownAchievement": {
+  "4e97c69d5966": {
+   "co": "Successu scunnisciutu : '%s'",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
+  },
+  "dac01f81f0d7": {
+   "co": "Successu o statistica scunnisciuta : '%s'",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
+  }
+ },
+ "commands.achievement.usage": {
+  "1de4f7553e1f": {
+   "co": "/achievement give <nome di statistica> [ghjucadore]",
+   "kind": "new",
+   "from": null,
+   "review": "ai",
+   "note": "command syntax: names of arguments translated, keywords kept"
+  },
+  "22bcd498fb69": {
+   "co": "/achievement <give|take> <nome di statistica|*> [ghjucadore]",
+   "kind": "new",
+   "from": null,
+   "review": "ai",
+   "note": "command syntax: names of arguments translated, keywords kept"
+  },
+  "54eb055ce0bc": {
+   "co": "/achievement <give|take> <nome|*> [ghjucadore]",
+   "kind": "new",
+   "from": null,
+   "review": "ai",
+   "note": "command syntax: names of arguments translated, keywords kept"
+  }
+ },
+ "commands.advancement.advancementNotFound": {
+  "65e4519a15e6": {
+   "co": "Nisun prugressu truvatu cù u nome '%1$s'",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
+  }
+ },
+ "commands.advancement.grant.criterion.failed": {
+  "577e5c246055": {
+   "co": "Impussibule d'accurdà u criteriu '%3$s' di u prugressu '%1$s' à %2$s chì l'hà digià",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
+  }
+ },
+ "commands.advancement.grant.criterion.success": {
+  "07bd4e31c022": {
+   "co": "Criteriu '%3$s' di u prugressu '%1$s' accurdatu à %2$s",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
+  }
+ },
+ "commands.advancement.grant.everything.failed": {
+  "46ccadc7c796": {
+   "co": "Impussibule d'accurdà prugressi à %1$s chì li hà digià tutti",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
+  }
+ },
+ "commands.advancement.grant.everything.success": {
+  "c0dfccc444da": {
+   "co": "Tutti i prugressi accurdati à %1$s (%2$s in tuttu)",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
+  }
+ },
+ "commands.advancement.grant.everything.usage": {
+  "d0adf2c2a1c9": {
+   "co": "/advancement grant <ghjucadore> everything",
+   "kind": "new",
+   "from": null,
+   "review": "ai",
+   "note": "command syntax: names of arguments translated, keywords kept"
+  }
+ },
+ "commands.advancement.grant.from.failed": {
+  "6933028317b4": {
+   "co": "Impussibule d'accurdà u prugressu '%1$s' o i so discendenti à %2$s chì li hà digià tutti",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
+  }
+ },
+ "commands.advancement.grant.from.success": {
+  "782ae59ff002": {
+   "co": "'%1$s' è tutti i so discendenti accurdati à %2$s (%3$s in tuttu)",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
+  }
+ },
+ "commands.advancement.grant.from.usage": {
+  "6fc53ebdee83": {
+   "co": "/advancement grant <ghjucadore> from <prugressu>",
+   "kind": "new",
+   "from": null,
+   "review": "ai",
+   "note": "command syntax: names of arguments translated, keywords kept"
+  }
+ },
+ "commands.advancement.grant.only.failed": {
+  "7864c2a3d339": {
+   "co": "Impussibule d'accurdà u prugressu '%1$s' à %2$s chì l'hà digià",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
+  }
+ },
+ "commands.advancement.grant.only.success": {
+  "e3bfb72b6405": {
+   "co": "Prugressu '%1$s' accurdatu sanu à %2$s",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
+  }
+ },
+ "commands.advancement.grant.only.usage": {
+  "49b3d045befe": {
+   "co": "/advancement grant <ghjucadore> only <prugressu> [criteriu]",
+   "kind": "new",
+   "from": null,
+   "review": "ai",
+   "note": "command syntax: names of arguments translated, keywords kept"
+  }
+ },
+ "commands.advancement.grant.through.failed": {
+  "6dbd51af6522": {
+   "co": "Impussibule d'accurdà u prugressu '%1$s', i so antenati o i so discendenti à %2$s chì li hà digià tutti",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
+  }
+ },
+ "commands.advancement.grant.through.success": {
+  "b6e3473dd9a2": {
+   "co": "'%1$s', tutti i so antenati è tutti i so discendenti accurdati à %2$s (%3$s in tuttu)",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
+  }
+ },
+ "commands.advancement.grant.through.usage": {
+  "34f058bc4519": {
+   "co": "/advancement grant <ghjucadore> through <prugressu>",
+   "kind": "new",
+   "from": null,
+   "review": "ai",
+   "note": "command syntax: names of arguments translated, keywords kept"
+  }
+ },
+ "commands.advancement.grant.until.failed": {
+  "28a0a27c87b7": {
+   "co": "Impussibule d'accurdà u prugressu '%1$s' o i so antenati à %2$s chì li hà digià tutti",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
+  }
+ },
+ "commands.advancement.grant.until.success": {
+  "32335619e46b": {
+   "co": "'%1$s' è tutti i so antenati accurdati à %2$s (%3$s in tuttu)",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
+  }
+ },
+ "commands.advancement.grant.until.usage": {
+  "7d56c19f1ce9": {
+   "co": "/advancement grant <ghjucadore> until <prugressu>",
+   "kind": "new",
+   "from": null,
+   "review": "ai",
+   "note": "command syntax: names of arguments translated, keywords kept"
+  }
+ },
+ "commands.advancement.grant.usage": {
+  "8c7af933ea34": {
+   "co": "/advancement grant <ghjucadore> <only|until|from|through|everything>",
+   "kind": "new",
+   "from": null,
+   "review": "ai",
+   "note": "command syntax: names of arguments translated, keywords kept"
+  }
+ },
+ "commands.advancement.revoke.criterion.failed": {
+  "f15810914a8f": {
+   "co": "Impussibule di ritirà u criteriu '%3$s' di u prugressu '%1$s' à %2$s chì ùn l'hà micca principiatu",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
+  }
+ },
+ "commands.advancement.revoke.criterion.success": {
+  "02a66e69ab0f": {
+   "co": "Criteriu '%3$s' di u prugressu '%1$s' ritiratu à %2$s",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
+  }
+ },
+ "commands.advancement.revoke.everything.failed": {
+  "a68c40716ca4": {
+   "co": "Impussibule di ritirà prugressi à %1$s chì ùn n'hà principiatu nisunu",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
+  }
+ },
+ "commands.advancement.revoke.everything.success": {
+  "a6e8a2e713a3": {
+   "co": "Tutti i prugressi ritirati à %1$s (%2$s in tuttu)",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
+  }
+ },
+ "commands.advancement.revoke.everything.usage": {
+  "d8bb97f5cb6d": {
+   "co": "/advancement revoke <ghjucadore> everything",
+   "kind": "new",
+   "from": null,
+   "review": "ai",
+   "note": "command syntax: names of arguments translated, keywords kept"
+  }
+ },
+ "commands.advancement.revoke.from.failed": {
+  "673ebc71648b": {
+   "co": "Impussibule di ritirà u prugressu '%1$s' o i so discendenti à %2$s chì ùn n'hà principiatu nisunu",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
+  }
+ },
+ "commands.advancement.revoke.from.success": {
+  "dce6a758dc6e": {
+   "co": "'%1$s' è tutti i so discendenti ritirati à %2$s (%3$s in tuttu)",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
+  }
+ },
+ "commands.advancement.revoke.from.usage": {
+  "61471de454c1": {
+   "co": "/advancement revoke <ghjucadore> from <prugressu>",
+   "kind": "new",
+   "from": null,
+   "review": "ai",
+   "note": "command syntax: names of arguments translated, keywords kept"
+  }
+ },
+ "commands.advancement.revoke.only.failed": {
+  "05624c03e162": {
+   "co": "Impussibule di ritirà u prugressu '%1$s' à %2$s chì ùn l'hà micca principiatu",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
+  }
+ },
+ "commands.advancement.revoke.only.success": {
+  "9092dbf149b5": {
+   "co": "Prugressu '%1$s' ritiratu sanu à %2$s",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
+  }
+ },
+ "commands.advancement.revoke.only.usage": {
+  "f7879647ec6b": {
+   "co": "/advancement revoke <ghjucadore> only <prugressu> [criteriu]",
+   "kind": "new",
+   "from": null,
+   "review": "ai",
+   "note": "command syntax: names of arguments translated, keywords kept"
+  }
+ },
+ "commands.advancement.revoke.through.failed": {
+  "8e1701e590b7": {
+   "co": "Impussibule di ritirà u prugressu '%1$s', i so antenati o i so discendenti à %2$s chì ùn n'hà principiatu nisunu",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
+  }
+ },
+ "commands.advancement.revoke.through.success": {
+  "d2bafc89fb0f": {
+   "co": "'%1$s', tutti i so antenati è tutti i so discendenti ritirati à %2$s (%3$s in tuttu)",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
+  }
+ },
+ "commands.advancement.revoke.through.usage": {
+  "998975adea64": {
+   "co": "/advancement revoke <ghjucadore> through <prugressu>",
+   "kind": "new",
+   "from": null,
+   "review": "ai",
+   "note": "command syntax: names of arguments translated, keywords kept"
+  }
+ },
+ "commands.advancement.revoke.until.failed": {
+  "a51faf06ce96": {
+   "co": "Impussibule di ritirà u prugressu '%1$s' o i so antenati à %2$s chì ùn n'hà principiatu nisunu",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
+  }
+ },
+ "commands.advancement.revoke.until.success": {
+  "990a74ffda06": {
+   "co": "'%1$s' è tutti i so antenati ritirati à %2$s (%3$s in tuttu)",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
+  }
+ },
+ "commands.advancement.revoke.until.usage": {
+  "c7bb37bd603e": {
+   "co": "/advancement revoke <ghjucadore> until <prugressu>",
+   "kind": "new",
+   "from": null,
+   "review": "ai",
+   "note": "command syntax: names of arguments translated, keywords kept"
+  }
+ },
+ "commands.advancement.revoke.usage": {
+  "cba545b17ff6": {
+   "co": "/advancement revoke <ghjucadore> <only|until|from|through|everything>",
+   "kind": "new",
+   "from": null,
+   "review": "ai",
+   "note": "command syntax: names of arguments translated, keywords kept"
+  }
+ },
+ "commands.advancement.test.advancement.notDone": {
+  "03d1b7032d6c": {
+   "co": "U ghjucadore %1$s ùn hà micca compiu u prugressu '%2$s'",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
+  }
+ },
+ "commands.advancement.test.advancement.success": {
+  "f5dc4bde8c03": {
+   "co": "U ghjucadore %1$s hà compiu u prugressu '%2$s'",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
+  }
+ },
+ "commands.advancement.test.criterion.notDone": {
+  "e055972e69a5": {
+   "co": "U ghjucadore %1$s ùn hà micca compiu u criteriu '%3$s' di u prugressu '%2$s'",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
+  }
+ },
+ "commands.advancement.test.criterion.success": {
+  "30994918faad": {
+   "co": "U ghjucadore %1$s hà compiu u criteriu '%3$s' di u prugressu '%2$s'",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
+  }
+ },
+ "commands.advancement.test.usage": {
+  "862ab5fa8f8e": {
+   "co": "/advancement test <ghjucadore> <prugressu> [criteriu]",
+   "kind": "new",
+   "from": null,
+   "review": "ai",
+   "note": "command syntax: names of arguments translated, keywords kept"
+  }
+ },
+ "commands.advancement.usage": {
+  "1d5f1f499f69": {
+   "co": "/advancement <grant|revoke|test> <ghjucadore>",
+   "kind": "new",
+   "from": null,
+   "review": "ai",
+   "note": "command syntax: names of arguments translated, keywords kept"
+  }
+ },
+ "commands.ban.usage": {
+  "75d8da1f1819": {
+   "co": "/ban <nome> [mutivu ...]",
+   "kind": "new",
+   "from": null,
+   "review": "ai",
+   "note": "command syntax: names of arguments translated, keywords kept"
+  }
+ },
+ "commands.banip.success.players": {
+  "c0b259e80dc3": {
+   "co": "Esclusione di l'indirizzu IP %s, chì appartene à %s",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
+  }
+ },
+ "commands.banip.usage": {
+  "ff26b8459e31": {
+   "co": "/ban-ip <indirizzu|nome> [mutivu ...]",
+   "kind": "new",
+   "from": null,
+   "review": "ai",
+   "note": "command syntax: names of arguments translated, keywords kept"
+  }
+ },
+ "commands.banlist.ips": {
+  "958e87e6e088": {
+   "co": "Ci sò %s indirizzi IP esclusi in tuttu :",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
+  },
+  "afc86a0632e6": {
+   "co": "Ci sò %d indirizzi IP esclusi in tuttu :",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
+  }
+ },
+ "commands.banlist.players": {
+  "0526f55bc73e": {
+   "co": "Ci sò %s ghjucadori esclusi in tuttu :",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
+  },
+  "c0b6e07535ba": {
+   "co": "Ci sò %d ghjucadori esclusi in tuttu :",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
+  }
+ },
+ "commands.banlist.usage": {
+  "29c475ef40d5": {
+   "co": "/banlist [ips|players]",
+   "kind": "new",
+   "from": null,
+   "review": "ai",
+   "note": "same as English: command syntax with keywords only"
+  }
+ },
+ "commands.blockdata.failed": {
+  "564dbaa4a8d9": {
+   "co": "L'etichetta di dati ùn hà micca cambiatu : %s",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
+  }
+ },
+ "commands.blockdata.notValid": {
+  "62b3d2ce8bc7": {
+   "co": "U bloccu di destinazione ùn pò micca tene dati",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
+  }
+ },
+ "commands.blockdata.outOfWorld": {
+  "b84a21478afc": {
+   "co": "Impussibule di cambià un bloccu fora di u mondu",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
+  }
+ },
+ "commands.blockdata.success": {
+  "7cbe564c75d4": {
+   "co": "Dati di u bloccu aghjurnati : %s",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
+  }
+ },
+ "commands.blockdata.tagError": {
+  "313d3603dc50": {
+   "co": "Fiascu di l'analisi di l'etichetta di dati : %s",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
+  }
+ },
+ "commands.blockdata.usage": {
+  "6243fdc7f3a3": {
+   "co": "/blockdata <x> <y> <z> <etichetta di dati>",
+   "kind": "new",
+   "from": null,
+   "review": "ai",
+   "note": "command syntax: names of arguments translated, keywords kept"
+  }
+ },
+ "commands.chunkinfo.compiled": {
+  "8d7484ab829e": {
+   "co": "U pezzu hè cumpilatu.",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
+  }
+ },
+ "commands.chunkinfo.data": {
+  "49e8d59a3472": {
+   "co": "I primi 64 vertici sò : %s",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
+  }
+ },
+ "commands.chunkinfo.empty": {
+  "ac5389334380": {
+   "co": "U pezzu hè viotu.",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
+  }
+ },
+ "commands.chunkinfo.hasLayers": {
+  "4490e3c469ed": {
+   "co": "U pezzu hà sti strati : %s",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
+  }
+ },
+ "commands.chunkinfo.hasNoRenderableLayers": {
+  "c93a07e3f4d4": {
+   "co": "U pezzu ùn hà nisunu stratu visualizabile.",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
+  }
+ },
+ "commands.chunkinfo.isEmpty": {
+  "70935cb899ae": {
+   "co": "U pezzu hà sti strati vioti : %s",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
+  }
+ },
+ "commands.chunkinfo.location": {
+  "53f117b934c7": {
+   "co": "Pusizione di u pezzu : (%s, %s, %s)",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
+  },
+  "5f78c874ceb5": {
+   "co": "Pusizione di u pezzu : (%d, %d, %d)",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
+  }
+ },
+ "commands.chunkinfo.noChunk": {
+  "00f0cd435da6": {
+   "co": "Nisunu pezzu truvatu à a pusizione di pezzu %d, %d, %d",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
+  },
+  "69210ff980cd": {
+   "co": "Nisunu pezzu truvatu à a pusizione di pezzu %s, %s, %s",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
+  }
+ },
+ "commands.chunkinfo.notCompiled": {
+  "207d0ec030ad": {
+   "co": "U pezzu ùn hè micca cumpilatu.",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
+  }
+ },
+ "commands.chunkinfo.notEmpty": {
+  "88d2d94ceea6": {
+   "co": "U pezzu ùn hè micca viotu.",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
+  }
+ },
+ "commands.chunkinfo.usage": {
+  "a22a91a9b604": {
+   "co": "/chunkinfo [<x> <y> <z>]",
+   "kind": "new",
+   "from": null,
+   "review": "ai",
+   "note": "same as English: command syntax with keywords only"
+  }
+ },
+ "commands.chunkinfo.vertices": {
+  "17a33ec124ee": {
+   "co": "A memoria tampone di u stratu %s cuntene %s vertici",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
+  },
+  "2ab57b8aca1a": {
+   "co": "A memoria tampone di u stratu %s cuntene %d vertici",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
+  }
+ },
+ "commands.clear.failure": {
+  "7ce799d4ab1b": {
+   "co": "Impussibule di viutà l'inventariu di %s : nisunu ogettu à caccià",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
+  }
+ },
+ "commands.clear.success": {
+  "05c169d99a0c": {
+   "co": "Inventariu di %s viutatu : %s ogetti cacciati",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
+  },
+  "251b43a76d14": {
+   "co": "Inventariu di %s viutatu : %d ogetti cacciati",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
+  }
+ },
+ "commands.clear.tagError": {
+  "313d3603dc50": {
+   "co": "Fiascu di l'analisi di l'etichetta di dati : %s",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
+  }
+ },
+ "commands.clear.testing": {
+  "16b80cc1d58e": {
+   "co": "%s hà %d ogetti chì currispondenu à i criterii",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
+  },
+  "4f1d0aadcd19": {
+   "co": "%s hà %s ogetti chì currispondenu à i criterii",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
+  }
+ },
+ "commands.clear.usage": {
+  "2976bc870031": {
+   "co": "/clear <ghjucadore> [ogettu] [dati]",
+   "kind": "new",
+   "from": null,
+   "review": "ai",
+   "note": "command syntax: names of arguments translated, keywords kept"
+  },
+  "d10dc3fd0abc": {
+   "co": "/clear [ghjucadore] [ogettu] [dati] [numeru mass] [etichetta di dati]",
+   "kind": "new",
+   "from": null,
+   "review": "ai",
+   "note": "command syntax: names of arguments translated, keywords kept"
+  }
+ },
+ "commands.clone.noOverlap": {
+  "42536fc2b6b0": {
+   "co": "L'urigine è a destinazione ùn si ponu micca accavallà",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
+  }
+ },
+ "commands.clone.outOfWorld": {
+  "013628bcb4e3": {
+   "co": "Impussibule d'accede à blocchi fora di u mondu",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
+  }
+ },
+ "commands.clone.tooManyBlocks": {
+  "48e017c14b56": {
+   "co": "Troppu blocchi in a zona specificata (%s > %s)",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
+  },
+  "59cc34fd2943": {
+   "co": "Troppu blocchi in a zona specificata (%d > %d)",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
+  }
+ },
+ "commands.clone.usage": {
+  "26b04f6d2857": {
+   "co": "/clone <x1> <y1> <z1> <x2> <y2> <z2> <x> <y> <z> [modu di maschera] [modu di clonazione]",
+   "kind": "new",
+   "from": null,
+   "review": "ai",
+   "note": "command syntax: names of arguments translated, keywords kept"
+  },
+  "299223499426": {
+   "co": "/clone <x1> <y1> <z1> <x2> <y2> <z2> <x> <y> <z> [modu]",
+   "kind": "new",
+   "from": null,
+   "review": "ai",
+   "note": "command syntax: names of arguments translated, keywords kept"
+  }
+ },
+ "commands.compare.failed": {
+  "a6abdea93674": {
+   "co": "L'urigine è a destinazione ùn sò micca identiche",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
+  }
+ },
+ "commands.compare.outOfWorld": {
+  "013628bcb4e3": {
+   "co": "Impussibule d'accede à blocchi fora di u mondu",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
+  }
+ },
+ "commands.compare.success": {
+  "7e26ca891f23": {
+   "co": "Blocchi paragunati : %d",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
+  },
+  "cde9138fff20": {
+   "co": "Blocchi paragunati : %s",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
+  }
+ },
+ "commands.compare.tooManyBlocks": {
+  "48e017c14b56": {
+   "co": "Troppu blocchi in a zona specificata (%s > %s)",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
+  },
+  "59cc34fd2943": {
+   "co": "Troppu blocchi in a zona specificata (%d > %d)",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
+  }
+ },
+ "commands.compare.usage": {
+  "b8e0bc172bb3": {
+   "co": "/testforblocks <x1> <y1> <z1> <x2> <y2> <z2> <x> <y> <z> [modu]",
+   "kind": "new",
+   "from": null,
+   "review": "ai",
+   "note": "command syntax: names of arguments translated, keywords kept"
+  }
+ },
  "commands.data.merge.failed": {
   "a3b53b51e394": {
    "co": "Nisun cambiamentu. E pruprietà specificate anu digià sti valori",
@@ -1894,6 +2743,30 @@
    "note": "English changed only in case or punctuation"
   }
  },
+ "commands.datapack.disable.success": {
+  "7cc3a3195088": {
+   "co": "Pacchettu di dati %s disattivatu",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
+  }
+ },
+ "commands.datapack.enable.success": {
+  "d0a2d41e93c0": {
+   "co": "Pacchettu di dati %s attivatu",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
+  }
+ },
+ "commands.debug.notStarted": {
+  "7316fe2ffec1": {
+   "co": "Impussibule di piantà l'analisi chì ùn hè ancu principiata !",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
+  }
+ },
  "commands.debug.reportFailed": {
   "4cc9b84fd41f": {
    "co": "Impussibule di creà u raportu di spannatura",
@@ -1907,6 +2780,275 @@
    "co": "Raportu di spannatura creatu in %s",
    "kind": "renamed",
    "from": "commands.perf.reportSaved",
+   "review": "ai"
+  }
+ },
+ "commands.debug.start": {
+  "88881dff828e": {
+   "co": "Analisi di spannatura principiata",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
+  }
+ },
+ "commands.debug.stop": {
+  "67d52c61fa25": {
+   "co": "Analisi di spannatura piantata dopu à %s seconde (%s tick)",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
+  },
+  "e0dab11fd86a": {
+   "co": "Analisi di spannatura piantata dopu à %.2f seconde (%d tick)",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
+  }
+ },
+ "commands.debug.usage": {
+  "71ca4bdde9d3": {
+   "co": "/debug <start|stop>",
+   "kind": "new",
+   "from": null,
+   "review": "ai",
+   "note": "same as English: command syntax with keywords only"
+  },
+  "89418b68c26f": {
+   "co": "/debug <start|stop|chunk> [<x> <y> <z>]",
+   "kind": "new",
+   "from": null,
+   "review": "ai",
+   "note": "same as English: command syntax with keywords only"
+  }
+ },
+ "commands.defaultgamemode.usage": {
+  "33a6b1b80bc5": {
+   "co": "/defaultgamemode <modu>",
+   "kind": "new",
+   "from": null,
+   "review": "ai",
+   "note": "command syntax: names of arguments translated, keywords kept"
+  }
+ },
+ "commands.deop.usage": {
+  "51ed5a67a06c": {
+   "co": "/deop <ghjucadore>",
+   "kind": "new",
+   "from": null,
+   "review": "ai",
+   "note": "command syntax: names of arguments translated, keywords kept"
+  }
+ },
+ "commands.difficulty.usage": {
+  "86af42fe12c3": {
+   "co": "/difficulty <difficultà nova>",
+   "kind": "new",
+   "from": null,
+   "review": "ai",
+   "note": "command syntax: names of arguments translated, keywords kept"
+  }
+ },
+ "commands.downfall.success": {
+  "d98f05b0332a": {
+   "co": "Precipitazioni cambiate",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
+  }
+ },
+ "commands.downfall.usage": {
+  "fb4a0582c11b": {
+   "co": "/toggledownfall",
+   "kind": "new",
+   "from": null,
+   "review": "ai",
+   "note": "same as English: command syntax with keywords only"
+  }
+ },
+ "commands.effect.failure.notActive": {
+  "6804f1188824": {
+   "co": "Impussibule di ritirà %1$s à %2$s chì ùn hà micca st'effettu",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
+  }
+ },
+ "commands.effect.failure.notActive.all": {
+  "8b2ccbe147dc": {
+   "co": "Impussibule di ritirà effetti à %s chì ùn n'hà nisunu",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
+  }
+ },
+ "commands.effect.notFound": {
+  "616bca5110a8": {
+   "co": "Ùn ci hè nisunu effettu cù l'ID %d",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
+  },
+  "624622baded7": {
+   "co": "Ùn ci hè nisunu effettu cù l'ID %s",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
+  }
+ },
+ "commands.effect.success": {
+  "dc8ff744ff29": {
+   "co": "%1$s (ID %2$s) * %3$s datu à %4$s per %5$s seconde",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
+  },
+  "ed4d5846c1f1": {
+   "co": "%1$s (ID %2$d) * %3$d datu à %4$s per %5$d seconde",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
+  }
+ },
+ "commands.effect.success.removed": {
+  "4fe55c90a603": {
+   "co": "%1$s ritiratu à %2$s",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
+  }
+ },
+ "commands.effect.success.removed.all": {
+  "f0ab003ef394": {
+   "co": "Tutti l'effetti ritirati à %s",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
+  }
+ },
+ "commands.effect.usage": {
+  "735586cff4b1": {
+   "co": "/effect <ghjucadore> <effettu> [seconde] [amplificatore] [piattà particule]",
+   "kind": "new",
+   "from": null,
+   "review": "ai",
+   "note": "command syntax: names of arguments translated, keywords kept"
+  },
+  "8a6b8f8f4757": {
+   "co": "/effect <ghjucadore> <effettu> [seconde] [amplificatore]",
+   "kind": "new",
+   "from": null,
+   "review": "ai",
+   "note": "command syntax: names of arguments translated, keywords kept"
+  },
+  "c1dbefa44a32": {
+   "co": "/effect <ghjucadore> <effettu> [seconde] [amplificatore] [piattà particule] O /effect <ghjucadore> clear",
+   "kind": "new",
+   "from": null,
+   "review": "ai",
+   "note": "command syntax: names of arguments translated, keywords kept"
+  }
+ },
+ "commands.enchant.cantCombine": {
+  "ec32f0796b4d": {
+   "co": "%1$s ùn si pò micca cumbinà cù %2$s",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
+  }
+ },
+ "commands.enchant.cantEnchant": {
+  "87401eba2016": {
+   "co": "L'incantesimu sceltu ùn si pò micca aghjunghje à l'ogettu di destinazione",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
+  }
+ },
+ "commands.enchant.noItem": {
+  "6330ef907b25": {
+   "co": "A destinazione ùn tene nisunu ogettu",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
+  }
+ },
+ "commands.enchant.notFound": {
+  "47f1c0150371": {
+   "co": "Ùn ci hè nisunu incantesimu cù l'ID %s",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
+  },
+  "d25e25300d3b": {
+   "co": "Ùn ci hè nisunu incantesimu cù l'ID %d",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
+  }
+ },
+ "commands.enchant.success": {
+  "8fbc3a025d2a": {
+   "co": "Incantesimu riesciutu",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
+  }
+ },
+ "commands.enchant.usage": {
+  "f8f214d46242": {
+   "co": "/enchant <ghjucadore> <ID d'incantesimu> [livellu]",
+   "kind": "new",
+   "from": null,
+   "review": "ai",
+   "note": "command syntax: names of arguments translated, keywords kept"
+  }
+ },
+ "commands.entitydata.failed": {
+  "564dbaa4a8d9": {
+   "co": "L'etichetta di dati ùn hà micca cambiatu : %s",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
+  }
+ },
+ "commands.entitydata.noPlayers": {
+  "e57f4587bbcb": {
+   "co": "%s hè un ghjucadore è ùn pò micca esse cambiatu",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
+  }
+ },
+ "commands.entitydata.success": {
+  "cf9fd21e100e": {
+   "co": "Dati di l'entità aghjurnati : %s",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
+  }
+ },
+ "commands.entitydata.tagError": {
+  "313d3603dc50": {
+   "co": "Fiascu di l'analisi di l'etichetta di dati : %s",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
+  }
+ },
+ "commands.entitydata.usage": {
+  "ae00d5609c09": {
+   "co": "/entitydata <entità> <etichetta di dati>",
+   "kind": "new",
+   "from": null,
+   "review": "ai",
+   "note": "command syntax: names of arguments translated, keywords kept"
+  }
+ },
+ "commands.execute.allInvocationsFailed": {
+  "937f0bf13de8": {
+   "co": "Tutte l'invucazioni anu fallitu : '%s'",
+   "kind": "new",
+   "from": null,
    "review": "ai"
   }
  },
@@ -1928,6 +3070,76 @@
    "note": "English changed only in case or punctuation"
   }
  },
+ "commands.execute.failed": {
+  "3e218d763d06": {
+   "co": "Impussibule d'eseguisce '%s' cum'è %s",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
+  }
+ },
+ "commands.execute.usage": {
+  "0bd1491d8c87": {
+   "co": "/execute <entità> <x> <y> <z> <cumanda> O /execute <entità> <x> <y> <z> detect <x> <y> <z> <bloccu> <valore di dati|-1|statu|*> <cumanda>",
+   "kind": "new",
+   "from": null,
+   "review": "ai",
+   "note": "command syntax: names of arguments translated, keywords kept"
+  },
+  "6280f4f258df": {
+   "co": "/execute <entità> <x> <y> <z> <cumanda> O /execute <entità> <x> <y> <z> detect <x> <y> <z> <bloccu> <dati> <cumanda>",
+   "kind": "new",
+   "from": null,
+   "review": "ai",
+   "note": "command syntax: names of arguments translated, keywords kept"
+  }
+ },
+ "commands.fill.outOfWorld": {
+  "2435ad3554b3": {
+   "co": "Impussibule di piazzà blocchi fora di u mondu",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
+  }
+ },
+ "commands.fill.tagError": {
+  "313d3603dc50": {
+   "co": "Fiascu di l'analisi di l'etichetta di dati : %s",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
+  }
+ },
+ "commands.fill.tooManyBlocks": {
+  "48e017c14b56": {
+   "co": "Troppu blocchi in a zona specificata (%s > %s)",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
+  },
+  "59cc34fd2943": {
+   "co": "Troppu blocchi in a zona specificata (%d > %d)",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
+  }
+ },
+ "commands.fill.usage": {
+  "5d3e99161128": {
+   "co": "/fill <x1> <y1> <z1> <x2> <y2> <z2> <bloccu> [valore di dati|statu] [trattamentu di u bloccu vechju] [etichetta di dati]",
+   "kind": "new",
+   "from": null,
+   "review": "ai",
+   "note": "command syntax: names of arguments translated, keywords kept"
+  },
+  "8fdfd0b3cf0b": {
+   "co": "/fill <x1> <y1> <z1> <x2> <y2> <z2> <nome di bloccu> [valore di dati] [trattamentu di u bloccu vechju] [etichetta di dati]",
+   "kind": "new",
+   "from": null,
+   "review": "ai",
+   "note": "command syntax: names of arguments translated, keywords kept"
+  }
+ },
  "commands.function.error.argument_not_compound": {
   "ac8a1484021d": {
    "co": "Tipu d'argumentu inaccettevule : %s. Ci vulia Compound",
@@ -1935,6 +3147,434 @@
    "from": "commands.function.error.argument_not_compound",
    "review": "ai",
    "note": "English changed only in case or punctuation"
+  }
+ },
+ "commands.function.skipped": {
+  "18e43a29bc09": {
+   "co": "Esecuzione di a funzione '%1$s' saltata",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
+  }
+ },
+ "commands.function.success": {
+  "dbe457513c75": {
+   "co": "Cumande eseguite : %2$s, da a funzione '%1$s'",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
+  }
+ },
+ "commands.function.unknown": {
+  "8d2e1a8e5c87": {
+   "co": "Funzione scunnisciuta : '%s'",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
+  }
+ },
+ "commands.function.usage": {
+  "9d4508ff28cc": {
+   "co": "/function <nome> [if <selettore>|unless <selettore>]",
+   "kind": "new",
+   "from": null,
+   "review": "ai",
+   "note": "command syntax: names of arguments translated, keywords kept"
+  }
+ },
+ "commands.gamemode.usage": {
+  "84436ee8fe65": {
+   "co": "/gamemode <modu> [ghjucadore]",
+   "kind": "new",
+   "from": null,
+   "review": "ai",
+   "note": "command syntax: names of arguments translated, keywords kept"
+  }
+ },
+ "commands.gamerule.nopermission": {
+  "b7b390b2001c": {
+   "co": "Solu i pruprietarii di u servitore ponu cambià '%s'",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
+  }
+ },
+ "commands.gamerule.norule": {
+  "12d985ba1da6": {
+   "co": "Ùn ci hè nisuna regula di ghjocu chjamata '%s'",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
+  }
+ },
+ "commands.gamerule.success": {
+  "03c960665aae": {
+   "co": "A regula di ghjocu %s hè avà definita à %s",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
+  },
+  "29f8b9b88687": {
+   "co": "Regula di ghjocu aghjurnata",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
+  }
+ },
+ "commands.gamerule.usage": {
+  "b2dad7503865": {
+   "co": "/gamerule <nome di regula> [valore]",
+   "kind": "new",
+   "from": null,
+   "review": "ai",
+   "note": "command syntax: names of arguments translated, keywords kept"
+  },
+  "c8ad51783a30": {
+   "co": "/gamerule <nome di regula> <valore> O /gamerule <nome di regula>",
+   "kind": "new",
+   "from": null,
+   "review": "ai",
+   "note": "command syntax: names of arguments translated, keywords kept"
+  }
+ },
+ "commands.generic.blockstate.invalid": {
+  "4942a59646b4": {
+   "co": "'%s' ùn hè micca un statu di u bloccu %s",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
+  }
+ },
+ "commands.generic.boolean.invalid": {
+  "eff32ad6d46d": {
+   "co": "'%s' ùn hè nè true nè false",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
+  }
+ },
+ "commands.generic.deprecatedId": {
+  "1f305d2d9542": {
+   "co": "Attenzione : i numeri d'ID ùn seranu più accettati in u futuru. Aduprate i nomi, cum'è '%s'",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
+  }
+ },
+ "commands.generic.double.tooBig": {
+  "60721d1ba618": {
+   "co": "U numeru ch'è vo avete scrittu (%.2f) hè troppu grande, ùn deve micca passà %.2f",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
+  }
+ },
+ "commands.generic.double.tooSmall": {
+  "12a1fa17943d": {
+   "co": "U numeru ch'è vo avete scrittu (%.2f) hè troppu chjucu, deve esse almenu %.2f",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
+  }
+ },
+ "commands.generic.entity.invalidType": {
+  "83b3c4e674e8": {
+   "co": "U tipu d'entità '%s' hè inaccettevule",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
+  }
+ },
+ "commands.generic.entity.invalidUuid": {
+  "29071c7f9bb3": {
+   "co": "U UUID d'entità datu ùn hà micca un furmatu accettevule",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
+  },
+  "7edbefd5b9c1": {
+   "co": "U UUID d'entità '%s' ùn hà micca un furmatu accettevule",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
+  }
+ },
+ "commands.generic.entity.notFound": {
+  "650ef639cd8b": {
+   "co": "L'entità '%s' ùn si trova micca",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
+  },
+  "9f0c027b7e6b": {
+   "co": "Ùn si trova micca st'entità",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
+  }
+ },
+ "commands.generic.exception": {
+  "f733d4be9b84": {
+   "co": "Un sbagliu scunnisciutu hè accadutu durante l'esecuzione di sta cumanda",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
+  }
+ },
+ "commands.generic.notFound": {
+  "05a1828276ee": {
+   "co": "Cumanda scunnisciuta. Pruvate /help per a lista di e cumande",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
+  }
+ },
+ "commands.generic.num.invalid": {
+  "de472c0652d3": {
+   "co": "'%s' ùn hè micca un numeru accettevule",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
+  }
+ },
+ "commands.generic.num.tooBig": {
+  "1f1ee04e660e": {
+   "co": "U numeru ch'è vo avete scrittu (%d) hè troppu grande, ùn deve micca passà %d",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
+  },
+  "f61ca39a4e4c": {
+   "co": "U numeru ch'è vo avete scrittu (%s) hè troppu grande, ùn deve micca passà %s",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
+  }
+ },
+ "commands.generic.num.tooSmall": {
+  "3171dda9d3c2": {
+   "co": "U numeru ch'è vo avete scrittu (%s) hè troppu chjucu, deve esse almenu %s",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
+  },
+  "7a85e18d017c": {
+   "co": "U numeru ch'è vo avete scrittu (%d) hè troppu chjucu, deve esse almenu %d",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
+  }
+ },
+ "commands.generic.parameter.invalid": {
+  "942138335e25": {
+   "co": "'%s' ùn hè micca un parametru accettevule",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
+  }
+ },
+ "commands.generic.permission": {
+  "fc9209a6eb01": {
+   "co": "Ùn avete micca u permessu d'aduprà sta cumanda",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
+  }
+ },
+ "commands.generic.player.notFound": {
+  "7129182bdeea": {
+   "co": "U ghjucadore '%s' ùn si trova micca",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
+  },
+  "7b44b13aeac8": {
+   "co": "Ùn si trova micca stu ghjucadore",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
+  }
+ },
+ "commands.generic.player.unspecified": {
+  "b28bb57c2083": {
+   "co": "Ci vole à specificà nant'à quale ghjucadore vulete fà st'azzione.",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
+  }
+ },
+ "commands.generic.selector.notFound": {
+  "599ad99583aa": {
+   "co": "U selettore '%s' ùn hà trovu nunda",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
+  }
+ },
+ "commands.generic.selector_argument": {
+  "7f8f4fd6fe70": {
+   "co": "Argumentu di selettore inaccettevule : '%s'",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
+  }
+ },
+ "commands.generic.syntax": {
+  "bfc5973d5203": {
+   "co": "Sintassi di cumanda inaccettevule",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
+  }
+ },
+ "commands.generic.usage": {
+  "1fa2750b5c28": {
+   "co": "Usu : %s",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
+  }
+ },
+ "commands.give.block.notFound": {
+  "2d377b5bd0bc": {
+   "co": "Ùn ci hè nisunu bloccu chjamatu %s",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
+  },
+  "4dc697fda501": {
+   "co": "Ùn ci hè nisunu bloccu chjamatu %d",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
+  }
+ },
+ "commands.give.item.notFound": {
+  "9eae74778810": {
+   "co": "Ùn ci hè nisunu ogettu chjamatu %d",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
+  },
+  "a294fd0f8975": {
+   "co": "Ùn ci hè nisunu ogettu chjamatu %s",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
+  }
+ },
+ "commands.give.notFound": {
+  "9eae74778810": {
+   "co": "Ùn ci hè nisunu ogettu chjamatu %d",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
+  },
+  "f33b1e132181": {
+   "co": "Ùn ci hè nisunu ogettu cù l'ID %d",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
+  }
+ },
+ "commands.give.success": {
+  "1298d6223913": {
+   "co": "%s * %s datu à %s",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
+  },
+  "e69218a915e2": {
+   "co": "%s * %d datu à %s",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
+  },
+  "edd05bcdd698": {
+   "co": "%s (ID %d) * %d datu à %s",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
+  }
+ },
+ "commands.give.tagError": {
+  "313d3603dc50": {
+   "co": "Fiascu di l'analisi di l'etichetta di dati : %s",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
+  }
+ },
+ "commands.give.usage": {
+  "0dbecdd2ddf5": {
+   "co": "/give <ghjucadore> <ogettu> [quantità] [dati] [etichetta di dati]",
+   "kind": "new",
+   "from": null,
+   "review": "ai",
+   "note": "command syntax: names of arguments translated, keywords kept"
+  },
+  "1cbc04af5119": {
+   "co": "/give <ghjucadore> <ogettu> [quantità] [dati]",
+   "kind": "new",
+   "from": null,
+   "review": "ai",
+   "note": "command syntax: names of arguments translated, keywords kept"
+  }
+ },
+ "commands.help.footer": {
+  "6e11bfce0135": {
+   "co": "Cunsigliu : aduprate u tastu <tab> mentre chì scrivite una cumanda per compie autumaticamente a cumanda o i so argumenti",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
+  }
+ },
+ "commands.help.header": {
+  "70fb30038d61": {
+   "co": "--- Pagina d'aiutu %s nant'à %s (/help <pagina>) ---",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
+  },
+  "ebd145101aed": {
+   "co": "--- Pagina d'aiutu %d nant'à %d (/help <pagina>) ---",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
+  }
+ },
+ "commands.help.usage": {
+  "1be5e2a4551b": {
+   "co": "/help [pagina|nome di cumanda]",
+   "kind": "new",
+   "from": null,
+   "review": "ai",
+   "note": "command syntax: names of arguments translated, keywords kept"
+  }
+ },
+ "commands.kick.success.reason": {
+  "e8da2f9d2165": {
+   "co": "%s espulsu da u ghjocu : '%s'",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
+  }
+ },
+ "commands.kick.usage": {
+  "5dc0d9036c99": {
+   "co": "/kick <ghjucadore> [mutivu ...]",
+   "kind": "new",
+   "from": null,
+   "review": "ai",
+   "note": "command syntax: names of arguments translated, keywords kept"
+  }
+ },
+ "commands.kill.success": {
+  "eca6d17741f0": {
+   "co": "Ahi ! Paria chì fessi male",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
   }
  },
  "commands.kill.successful": {
@@ -1945,11 +3585,49 @@
    "review": "ai"
   }
  },
+ "commands.kill.usage": {
+  "3143cba7564b": {
+   "co": "/kill",
+   "kind": "new",
+   "from": null,
+   "review": "ai",
+   "note": "same as English: command syntax with keywords only"
+  },
+  "51fd8ca59099": {
+   "co": "/kill [ghjucadore|entità]",
+   "kind": "new",
+   "from": null,
+   "review": "ai",
+   "note": "command syntax: names of arguments translated, keywords kept"
+  }
+ },
+ "commands.locate.biome.invalid": {
+  "4a85573e41a5": {
+   "co": "Ùn ci hè nisunu biomu di tipu \"%s\"",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
+  }
+ },
  "commands.locate.failed": {
+  "362e9b604df0": {
+   "co": "Impussibule di truvà sta struttura vicinu",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
+  },
   "8e2ae187dc57": {
    "co": "Impussibule di truvà una struttura di tipu \"%s\" vicinu",
    "kind": "renamed",
    "from": "commands.locate.structure.not_found",
+   "review": "ai"
+  }
+ },
+ "commands.locate.failure": {
+  "040027949026": {
+   "co": "Impussibule di truvà un elementu %s",
+   "kind": "new",
+   "from": null,
    "review": "ai"
   }
  },
@@ -1961,12 +3639,52 @@
    "review": "ai"
   }
  },
+ "commands.locate.poi.invalid": {
+  "808e29286e77": {
+   "co": "Ùn ci hè nisunu puntu d'interessu di tipu \"%s\"",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
+  }
+ },
  "commands.locate.success": {
+  "8473e8d55b9b": {
+   "co": "%s truvatu in %s (y?) %s",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
+  },
   "e36e98ef7352": {
    "co": "Pusizione a più vicina di %s : %s (à %s blocchi)",
    "kind": "renamed",
    "from": "commands.locate.poi.success",
    "review": "ai"
+  }
+ },
+ "commands.locate.usage": {
+  "3b87fa5b0985": {
+   "co": "/locate <elementu>",
+   "kind": "new",
+   "from": null,
+   "review": "ai",
+   "note": "command syntax: names of arguments translated, keywords kept"
+  }
+ },
+ "commands.locatebiome.invalid": {
+  "4a85573e41a5": {
+   "co": "Ùn ci hè nisunu biomu di tipu \"%s\"",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
+  }
+ },
+ "commands.locatebiome.notFound": {
+  "30cbf4da5ca8": {
+   "co": "Impussibule di truvà un biomu di tipu \"%s\" à una distanza raghjunevule",
+   "kind": "adapted",
+   "from": "commands.locate.biome.not_found",
+   "review": "ai",
+   "note": "same sentence as 26.3"
   }
  },
  "commands.locatebiome.success": {
@@ -1975,6 +3693,73 @@
    "kind": "renamed",
    "from": "commands.locate.poi.success",
    "review": "ai"
+  }
+ },
+ "commands.me.usage": {
+  "9bac1abd346f": {
+   "co": "/me <azzione ...>",
+   "kind": "new",
+   "from": null,
+   "review": "ai",
+   "note": "command syntax: names of arguments translated, keywords kept"
+  }
+ },
+ "commands.message.sameTarget": {
+  "6d4a326300be": {
+   "co": "Ùn vi pudete micca mandà un messaghju privatu à voi stessi !",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
+  }
+ },
+ "commands.message.usage": {
+  "b01c6429a057": {
+   "co": "/tell <ghjucadore> <messaghju privatu ...>",
+   "kind": "new",
+   "from": null,
+   "review": "ai",
+   "note": "command syntax: names of arguments translated, keywords kept"
+  }
+ },
+ "commands.op.usage": {
+  "4c24b90a8bd6": {
+   "co": "/op <ghjucadore>",
+   "kind": "new",
+   "from": null,
+   "review": "ai",
+   "note": "command syntax: names of arguments translated, keywords kept"
+  }
+ },
+ "commands.particle.invalidParam": {
+  "2b313e42b3a4": {
+   "co": "Parametru inaccettevule (%s)",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
+  }
+ },
+ "commands.particle.notFound": {
+  "79cc96150140": {
+   "co": "Nome d'effettu scunnisciutu (%s)",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
+  }
+ },
+ "commands.particle.usage": {
+  "29d228ba3267": {
+   "co": "/particle <nome> <x> <y> <z> <xd> <yd> <zd> <velocità> [numeru] [modu]",
+   "kind": "new",
+   "from": null,
+   "review": "ai",
+   "note": "command syntax: names of arguments translated, keywords kept"
+  },
+  "2d2ca8d69c01": {
+   "co": "/particle <nome> <x> <y> <z> <xd> <yd> <zd> <velocità> [numeru] [modu] [ghjucadore] [parametri]",
+   "kind": "new",
+   "from": null,
+   "review": "ai",
+   "note": "command syntax: names of arguments translated, keywords kept"
   }
  },
  "commands.place.template.invalid": {
@@ -2010,6 +3795,69 @@
    "review": "ai"
   }
  },
+ "commands.players.list": {
+  "061ca4ac420f": {
+   "co": "Ci sò %d/%d ghjucadori in linea :",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
+  },
+  "3cf63ffa6e4d": {
+   "co": "Ci sò %s/%s ghjucadori in linea :",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
+  }
+ },
+ "commands.players.usage": {
+  "6fbfb6a13d94": {
+   "co": "/list",
+   "kind": "new",
+   "from": null,
+   "review": "ai",
+   "note": "same as English: command syntax with keywords only"
+  }
+ },
+ "commands.playsound.playerTooFar": {
+  "6309e4969680": {
+   "co": "U ghjucadore %s hè troppu luntanu per sente u sonu",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
+  }
+ },
+ "commands.playsound.success": {
+  "5b821fa3e86e": {
+   "co": "Sonu '%s' ghjucatu à %s",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
+  }
+ },
+ "commands.playsound.unknownSoundSource": {
+  "67762d5200f8": {
+   "co": "Fonte %s scunnisciuta",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
+  }
+ },
+ "commands.playsound.usage": {
+  "c604f21f8c9a": {
+   "co": "/playsound <sonu> <ghjucadore> [x] [y] [z] [vulume] [tonu] [vulume minimu]",
+   "kind": "new",
+   "from": null,
+   "review": "ai",
+   "note": "command syntax: names of arguments translated, keywords kept"
+  },
+  "d17048f1441d": {
+   "co": "/playsound <sonu> <fonte> <ghjucadore> [x] [y] [z] [vulume] [tonu] [vulume minimu]",
+   "kind": "new",
+   "from": null,
+   "review": "ai",
+   "note": "command syntax: names of arguments translated, keywords kept"
+  }
+ },
  "commands.profile_fetch.id.success": {
   "212567ac1b9e": {
    "co": "Prufilu risoltu per l'ID %s : %s",
@@ -2019,11 +3867,127 @@
    "note": "English changed only in case or punctuation"
   }
  },
+ "commands.publish.usage": {
+  "d67eaf24dfaa": {
+   "co": "/publish",
+   "kind": "new",
+   "from": null,
+   "review": "ai",
+   "note": "same as English: command syntax with keywords only"
+  }
+ },
+ "commands.recipe.alreadyHave": {
+  "8d9802d82d3f": {
+   "co": "U ghjucadore %s hà digià a ricetta di %s",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
+  }
+ },
+ "commands.recipe.dontHave": {
+  "e923f44e7b03": {
+   "co": "U ghjucadore %s ùn hà micca a ricetta di %s",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
+  }
+ },
+ "commands.recipe.give.success.all": {
+  "090e122ece86": {
+   "co": "Tutte e ricette sò state date à %s",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
+  }
+ },
+ "commands.recipe.give.success.one": {
+  "46d0c829a14f": {
+   "co": "Ricetta data à %s : %s",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
+  }
+ },
+ "commands.recipe.take.success.all": {
+  "8d428f63af2b": {
+   "co": "Tutte e ricette sò state ritirate à %s",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
+  }
+ },
+ "commands.recipe.take.success.one": {
+  "d14fbc6cabbf": {
+   "co": "Ricetta di %s ritirata à %s",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
+  }
+ },
+ "commands.recipe.unknownrecipe": {
+  "80153da278e8": {
+   "co": "%s hè una ricetta scunnisciuta",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
+  }
+ },
+ "commands.recipe.unsupported": {
+  "6a29d7b07a75": {
+   "co": "%s hè una ricetta micca accettata",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
+  }
+ },
+ "commands.recipe.usage": {
+  "43ec741eba6e": {
+   "co": "/recipe <give|take> [ghjucadore] <nome|*>",
+   "kind": "new",
+   "from": null,
+   "review": "ai",
+   "note": "command syntax: names of arguments translated, keywords kept"
+  }
+ },
+ "commands.reload.usage": {
+  "3ae4130d41c5": {
+   "co": "/reload",
+   "kind": "new",
+   "from": null,
+   "review": "ai",
+   "note": "same as English: command syntax with keywords only"
+  }
+ },
+ "commands.replaceitem.block.failed": {
+  "3dfac1da297b": {
+   "co": "U bloccu di destinazione ùn hè micca un cuntenitore",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
+  }
+ },
  "commands.replaceitem.block.success": {
   "ffa04fdab459": {
    "co": "Una casella rimpiazzata in %s, %s, %s cù %s",
    "kind": "renamed",
    "from": "commands.item.block.set.success",
+   "review": "ai"
+  }
+ },
+ "commands.replaceitem.block.usage": {
+  "754979494fa3": {
+   "co": "/replaceitem block <x> <y> <z> <casella> <ogettu> [quantità] [dati] [etichetta di dati]",
+   "kind": "new",
+   "from": null,
+   "review": "ai",
+   "note": "command syntax: names of arguments translated, keywords kept"
+  }
+ },
+ "commands.replaceitem.entity.failed": {
+  "71839f637f75": {
+   "co": "Impussibule di mette %s in a casella %s",
+   "kind": "new",
+   "from": null,
    "review": "ai"
   }
  },
@@ -2043,6 +4007,43 @@
    "review": "ai"
   }
  },
+ "commands.replaceitem.entity.usage": {
+  "9279c28f191b": {
+   "co": "/replaceitem entity <selettore> <casella> <ogettu> [quantità] [dati] [etichetta di dati]",
+   "kind": "new",
+   "from": null,
+   "review": "ai",
+   "note": "command syntax: names of arguments translated, keywords kept"
+  }
+ },
+ "commands.replaceitem.failed": {
+  "9b42e1d8d99e": {
+   "co": "Impussibule di rimpiazzà a casella %s cù %s * %s",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
+  },
+  "b141e6124d8c": {
+   "co": "Impussibule di rimpiazzà a casella %d cù %d * %s",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
+  }
+ },
+ "commands.replaceitem.noContainer": {
+  "5fd1bcb850bc": {
+   "co": "U bloccu in %s, %s, %s ùn hè micca un cuntenitore",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
+  },
+  "f5435ab41971": {
+   "co": "U bloccu in %d, %d, %d ùn hè micca un cuntenitore",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
+  }
+ },
  "commands.replaceitem.slot.inapplicable": {
   "95b00194242c": {
    "co": "A destinazione ùn hà micca a casella %s",
@@ -2051,20 +4052,130 @@
    "review": "ai"
   }
  },
+ "commands.replaceitem.success": {
+  "c30809ae297c": {
+   "co": "Casella %s rimpiazzata cù %s * %s",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
+  },
+  "ec92a75c3e61": {
+   "co": "Casella %d rimpiazzata cù %d * %s",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
+  }
+ },
+ "commands.replaceitem.tagError": {
+  "313d3603dc50": {
+   "co": "Fiascu di l'analisi di l'etichetta di dati : %s",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
+  }
+ },
+ "commands.replaceitem.usage": {
+  "9830db2450e6": {
+   "co": "/replaceitem <entity|block> ...",
+   "kind": "new",
+   "from": null,
+   "review": "ai",
+   "note": "same as English: command syntax with keywords only"
+  }
+ },
  "commands.save-off.alreadyOff": {
   "0f41689e1862": {
    "co": "L'arregistramentu hè digià disattivatu",
    "kind": "renamed",
    "from": "commands.save.alreadyOff",
    "review": "ai"
+  },
+  "37cd377789bc": {
+   "co": "L'arregistramentu hè digià disattivatu.",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
+  }
+ },
+ "commands.save-off.usage": {
+  "56cf6ff791bd": {
+   "co": "/save-off",
+   "kind": "new",
+   "from": null,
+   "review": "ai",
+   "note": "same as English: command syntax with keywords only"
   }
  },
  "commands.save-on.alreadyOn": {
+  "750d35fbb19c": {
+   "co": "L'arregistramentu hè digià attivatu.",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
+  },
   "bb7412ea185d": {
    "co": "L'arregistramentu hè digià attivatu",
    "kind": "renamed",
    "from": "commands.save.alreadyOn",
    "review": "ai"
+  }
+ },
+ "commands.save-on.usage": {
+  "ed37cec810e5": {
+   "co": "/save-on",
+   "kind": "new",
+   "from": null,
+   "review": "ai",
+   "note": "same as English: command syntax with keywords only"
+  }
+ },
+ "commands.save.flushEnd": {
+  "c894c5bd6700": {
+   "co": "Scrittura compiuta",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
+  }
+ },
+ "commands.save.flushStart": {
+  "9fdef6d0a8e1": {
+   "co": "Scrittura di tutti l'arregistramenti…",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
+  }
+ },
+ "commands.save.start": {
+  "ae7e887517b0": {
+   "co": "Arregistramentu…",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
+  }
+ },
+ "commands.save.usage": {
+  "d284ad36bf98": {
+   "co": "/save-all",
+   "kind": "new",
+   "from": null,
+   "review": "ai",
+   "note": "same as English: command syntax with keywords only"
+  },
+  "e4b397cf782f": {
+   "co": "/save-all [flush]",
+   "kind": "new",
+   "from": null,
+   "review": "ai",
+   "note": "same as English: command syntax with keywords only"
+  }
+ },
+ "commands.say.usage": {
+  "88c365cf306f": {
+   "co": "/say <messaghju ...>",
+   "kind": "new",
+   "from": null,
+   "review": "ai",
+   "note": "command syntax: names of arguments translated, keywords kept"
   }
  },
  "commands.schedule.cleared.failure": {
@@ -2085,12 +4196,921 @@
    "note": "English changed only in case or punctuation"
   }
  },
+ "commands.scoreboard.allMatchesFailed": {
+  "bcc06efb02bf": {
+   "co": "Tutte e currispundenze anu fallitu",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
+  }
+ },
+ "commands.scoreboard.noMultiWildcard": {
+  "50bd77005010": {
+   "co": "Un solu jolly d'utilizatore hè permessu",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
+  }
+ },
+ "commands.scoreboard.objectiveNotFound": {
+  "e7fcecf65530": {
+   "co": "Nisunu ughjettivu truvatu cù u nome '%s'",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
+  }
+ },
+ "commands.scoreboard.objectiveReadOnly": {
+  "76f54d5c5f8c": {
+   "co": "L'ughjettivu '%s' hè in lettura sola è ùn si pò micca definisce",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
+  }
+ },
+ "commands.scoreboard.objectives.add.alreadyExists": {
+  "44e7730808eb": {
+   "co": "Un ughjettivu chjamatu '%s' esiste digià",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
+  }
+ },
+ "commands.scoreboard.objectives.add.displayTooLong": {
+  "24cd3fc26ff7": {
+   "co": "U nome affissatu '%s' hè troppu longu per un ughjettivu : pò avè %d caratteri à u più",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
+  },
+  "fc281f70e446": {
+   "co": "U nome affissatu '%s' hè troppu longu per un ughjettivu : pò avè %s caratteri à u più",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
+  }
+ },
+ "commands.scoreboard.objectives.add.longName": {
+  "4bf1a7e9df13": {
+   "co": "I nomi d'ughjettivi ùn ponu micca avè più di %s caratteri",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
+  }
+ },
+ "commands.scoreboard.objectives.add.tooLong": {
+  "11939172337d": {
+   "co": "U nome '%s' hè troppu longu per un ughjettivu : pò avè %s caratteri à u più",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
+  },
+  "cfb05a8dff22": {
+   "co": "U nome '%s' hè troppu longu per un ughjettivu : pò avè %d caratteri à u più",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
+  }
+ },
+ "commands.scoreboard.objectives.add.usage": {
+  "1feaa1ad022f": {
+   "co": "/scoreboard objectives add <nome> <tipu di criteriu> [nome affissatu ...]",
+   "kind": "new",
+   "from": null,
+   "review": "ai",
+   "note": "command syntax: names of arguments translated, keywords kept"
+  }
+ },
+ "commands.scoreboard.objectives.add.wrongType": {
+  "10dc51979411": {
+   "co": "Tipu di criteriu d'ughjettivu inaccettevule. I tipi accettevuli sò : %s",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
+  },
+  "903a543b7a46": {
+   "co": "Tipu di criteriu d'ughjettivu '%s' inaccettevule",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
+  }
+ },
+ "commands.scoreboard.objectives.list.count": {
+  "22aa630b225e": {
+   "co": "%s ughjettivu(i) in a tavula di punti :",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
+  },
+  "c7bfca2b877f": {
+   "co": "%d ughjettivu(i) in a tavula di punti",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
+  },
+  "f9176d5e9219": {
+   "co": "%d ughjettivu(i) in a tavula di punti :",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
+  }
+ },
+ "commands.scoreboard.objectives.list.entry": {
+  "5372f4f70f15": {
+   "co": "- %s : affissatu cum'è '%s', di tipu '%s'",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
+  }
+ },
+ "commands.scoreboard.objectives.remove.usage": {
+  "61ee20fad20d": {
+   "co": "/scoreboard objectives remove <nome>",
+   "kind": "new",
+   "from": null,
+   "review": "ai",
+   "note": "command syntax: names of arguments translated, keywords kept"
+  }
+ },
+ "commands.scoreboard.objectives.setdisplay.invalidSlot": {
+  "6d2dc52c3ab7": {
+   "co": "Ùn ci hè nisuna casella d'affissera '%s'",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
+  }
+ },
+ "commands.scoreboard.objectives.setdisplay.successCleared": {
+  "a63d899159d9": {
+   "co": "Casella d'affissera '%s' squassata",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
+  }
+ },
+ "commands.scoreboard.objectives.setdisplay.successSet": {
+  "8bb5637b6929": {
+   "co": "A casella d'affissera '%s' mostra avà l'ughjettivu '%s'",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
+  }
+ },
+ "commands.scoreboard.objectives.setdisplay.usage": {
+  "a7bc8904d784": {
+   "co": "/scoreboard objectives setdisplay <casella> [ughjettivu]",
+   "kind": "new",
+   "from": null,
+   "review": "ai",
+   "note": "command syntax: names of arguments translated, keywords kept"
+  }
+ },
+ "commands.scoreboard.objectives.usage": {
+  "0bcd553eedf1": {
+   "co": "/scoreboard objectives <list|add|remove|setdisplay>",
+   "kind": "new",
+   "from": null,
+   "review": "ai",
+   "note": "same as English: command syntax with keywords only"
+  },
+  "f85ea27a3b03": {
+   "co": "/scoreboard objectives <list|add|remove|setdisplay> ...",
+   "kind": "new",
+   "from": null,
+   "review": "ai",
+   "note": "same as English: command syntax with keywords only"
+  }
+ },
+ "commands.scoreboard.players.add.usage": {
+  "16e7a595d7b2": {
+   "co": "/scoreboard players add <ghjucadore> <ughjettivu> <numeru>",
+   "kind": "new",
+   "from": null,
+   "review": "ai",
+   "note": "command syntax: names of arguments translated, keywords kept"
+  },
+  "402e14d58c85": {
+   "co": "/scoreboard players add <ghjucadore> <ughjettivu> <numeru> [etichetta di dati]",
+   "kind": "new",
+   "from": null,
+   "review": "ai",
+   "note": "command syntax: names of arguments translated, keywords kept"
+  }
+ },
+ "commands.scoreboard.players.enable.noTrigger": {
+  "2037fdf52094": {
+   "co": "L'ughjettivu %s ùn hè micca un attivadore",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
+  }
+ },
  "commands.scoreboard.players.enable.success": {
   "9211c4619c84": {
    "co": "Attivadore %s attivatu per %s",
    "kind": "renamed",
    "from": "commands.scoreboard.players.enable.success.single",
    "review": "ai"
+  }
+ },
+ "commands.scoreboard.players.enable.usage": {
+  "09acbd7d1e4d": {
+   "co": "/scoreboard players enable <ghjucadore> <attivadore>",
+   "kind": "new",
+   "from": null,
+   "review": "ai",
+   "note": "command syntax: names of arguments translated, keywords kept"
+  }
+ },
+ "commands.scoreboard.players.list.count": {
+  "30521f94bffd": {
+   "co": "%d ghjucadori seguitati in a tavula di punti :",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
+  },
+  "4efa9e578c2e": {
+   "co": "%s ghjucadori seguitati in a tavula di punti :",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
+  },
+  "69c36bea10e0": {
+   "co": "%d ghjucadori seguitati in a tavula di punti",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
+  }
+ },
+ "commands.scoreboard.players.list.player.count": {
+  "3a03567c6a2f": {
+   "co": "%s ughjettivu(i) seguitatu(i) per %s :",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
+  },
+  "990efc8d1585": {
+   "co": "%d ughjettivu(i) seguitatu(i) per %s :",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
+  },
+  "d8105fd7a5f8": {
+   "co": "%d ughjettivu(i) seguitatu(i) per %s",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
+  }
+ },
+ "commands.scoreboard.players.list.player.empty": {
+  "20d5004850fb": {
+   "co": "U ghjucadore %s ùn hà nisunu punteghju arregistratu",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
+  }
+ },
+ "commands.scoreboard.players.list.player.entry": {
+  "34ff45013dd0": {
+   "co": "- %2$s : %1$s (%3$s)",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
+  },
+  "50ad2ca25a0d": {
+   "co": "- %2$s : %1$d (%3$s)",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
+  }
+ },
+ "commands.scoreboard.players.list.usage": {
+  "86e9b2e9e03a": {
+   "co": "/scoreboard players list [nome]",
+   "kind": "new",
+   "from": null,
+   "review": "ai",
+   "note": "command syntax: names of arguments translated, keywords kept"
+  }
+ },
+ "commands.scoreboard.players.name.tooLong": {
+  "6024c98b14d8": {
+   "co": "U nome '%s' hè troppu longu per un ghjucadore : pò avè %d caratteri à u più",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
+  },
+  "e7a261934607": {
+   "co": "U nome '%s' hè troppu longu per un ghjucadore : pò avè %s caratteri à u più",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
+  }
+ },
+ "commands.scoreboard.players.operation.invalidOperation": {
+  "6256fbc6ac9d": {
+   "co": "Operazione %s inaccettevule",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
+  }
+ },
+ "commands.scoreboard.players.operation.notFound": {
+  "a296bb33172d": {
+   "co": "Nisunu punteghju %s truvatu per %s",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
+  }
+ },
+ "commands.scoreboard.players.operation.success": {
+  "6a33f4422725": {
+   "co": "Operazione applicata",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
+  }
+ },
+ "commands.scoreboard.players.operation.usage": {
+  "8900e9d7df5a": {
+   "co": "/scoreboard players operation <nome di destinazione> <ughjettivu di destinazione> <operazione> <selettore> <ughjettivu>",
+   "kind": "new",
+   "from": null,
+   "review": "ai",
+   "note": "command syntax: names of arguments translated, keywords kept"
+  }
+ },
+ "commands.scoreboard.players.remove.usage": {
+  "200837075a97": {
+   "co": "/scoreboard players remove <ghjucadore> <ughjettivu> <numeru>",
+   "kind": "new",
+   "from": null,
+   "review": "ai",
+   "note": "command syntax: names of arguments translated, keywords kept"
+  },
+  "9fbdc452a963": {
+   "co": "/scoreboard players remove <ghjucadore> <ughjettivu> <numeru> [etichetta di dati]",
+   "kind": "new",
+   "from": null,
+   "review": "ai",
+   "note": "command syntax: names of arguments translated, keywords kept"
+  }
+ },
+ "commands.scoreboard.players.reset.success": {
+  "f1d9ddb4e308": {
+   "co": "Tutti i punteghji di u ghjucadore %s rimessi à zeru",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
+  },
+  "fe0cd11a79b6": {
+   "co": "Punteghji di u ghjucadore %s rimessi à zeru",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
+  }
+ },
+ "commands.scoreboard.players.reset.usage": {
+  "29ec0aff7f33": {
+   "co": "/scoreboard players reset <ghjucadore> [ughjettivu]",
+   "kind": "new",
+   "from": null,
+   "review": "ai",
+   "note": "command syntax: names of arguments translated, keywords kept"
+  },
+  "c0fe8fea9be9": {
+   "co": "/scoreboard players reset <ghjucadore>",
+   "kind": "new",
+   "from": null,
+   "review": "ai",
+   "note": "command syntax: names of arguments translated, keywords kept"
+  }
+ },
+ "commands.scoreboard.players.resetscore.success": {
+  "a4b74342526e": {
+   "co": "Punteghju %s di u ghjucadore %s rimessu à zeru",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
+  }
+ },
+ "commands.scoreboard.players.set.success": {
+  "50aaa3634dac": {
+   "co": "Punteghju %s di u ghjucadore %s definitu à %d",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
+  },
+  "56c442e92c28": {
+   "co": "Punteghju %s di u ghjucadore %s definitu à %s",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
+  }
+ },
+ "commands.scoreboard.players.set.tagError": {
+  "00294b554299": {
+   "co": "Impussibule d'analizà l'etichetta di dati, mutivu : %s",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
+  }
+ },
+ "commands.scoreboard.players.set.tagMismatch": {
+  "fbad1b8d5597": {
+   "co": "L'etichetta di dati ùn currisponde micca per %s",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
+  }
+ },
+ "commands.scoreboard.players.set.usage": {
+  "1d05dc8ae2f4": {
+   "co": "/scoreboard players set <ghjucadore> <ughjettivu> <punteghju>",
+   "kind": "new",
+   "from": null,
+   "review": "ai",
+   "note": "command syntax: names of arguments translated, keywords kept"
+  },
+  "c75b6527ad09": {
+   "co": "/scoreboard players set <ghjucadore> <ughjettivu> <punteghju> [etichetta di dati]",
+   "kind": "new",
+   "from": null,
+   "review": "ai",
+   "note": "command syntax: names of arguments translated, keywords kept"
+  }
+ },
+ "commands.scoreboard.players.tag.list": {
+  "9a8055af75ed": {
+   "co": "L'etichette di l'entità %s sò :",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
+  }
+ },
+ "commands.scoreboard.players.tag.notFound": {
+  "346410c0ddf5": {
+   "co": "L'entità ùn avia micca l'etichetta %s",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
+  }
+ },
+ "commands.scoreboard.players.tag.success.add": {
+  "3db21fe03984": {
+   "co": "Etichetta %s aghjunta",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
+  }
+ },
+ "commands.scoreboard.players.tag.success.remove": {
+  "3003e5de43df": {
+   "co": "Etichetta %s cacciata",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
+  }
+ },
+ "commands.scoreboard.players.tag.tagError": {
+  "6c517c6b8f39": {
+   "co": "Fiascu di a cumanda d'etichetta di i ghjucadori, mutivu : %s",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
+  }
+ },
+ "commands.scoreboard.players.tag.tagMismatch": {
+  "fbad1b8d5597": {
+   "co": "L'etichetta di dati ùn currisponde micca per %s",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
+  }
+ },
+ "commands.scoreboard.players.tag.tooMany": {
+  "d3d6f10d9499": {
+   "co": "Impussibule d'aghjunghje più di %s etichette à un'entità",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
+  },
+  "eac90d657819": {
+   "co": "Impussibule d'aghjunghje più di %d etichette à un'entità",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
+  }
+ },
+ "commands.scoreboard.players.tag.usage": {
+  "23bf321aae5f": {
+   "co": "/scoreboard players tag <ghjucadore> <add|remove|list> <nome d'etichetta> [etichetta di dati]",
+   "kind": "new",
+   "from": null,
+   "review": "ai",
+   "note": "command syntax: names of arguments translated, keywords kept"
+  }
+ },
+ "commands.scoreboard.players.test.failed": {
+  "3678cc880ca8": {
+   "co": "U punteghju %d ùn hè MICCA trà %d è %d",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
+  },
+  "a460c70488ab": {
+   "co": "U punteghju %s ùn hè MICCA trà %s è %s",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
+  }
+ },
+ "commands.scoreboard.players.test.notFound": {
+  "a296bb33172d": {
+   "co": "Nisunu punteghju %s truvatu per %s",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
+  }
+ },
+ "commands.scoreboard.players.test.success": {
+  "3b3014e5fd33": {
+   "co": "U punteghju %s hè trà %s è %s",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
+  },
+  "c71fccd283a7": {
+   "co": "U punteghju %d hè trà %d è %d",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
+  }
+ },
+ "commands.scoreboard.players.test.usage": {
+  "83d63a069043": {
+   "co": "/scoreboard players test <ghjucadore> <ughjettivu> <min> <mass>",
+   "kind": "new",
+   "from": null,
+   "review": "ai",
+   "note": "command syntax: names of arguments translated, keywords kept"
+  },
+  "b3bd3093074e": {
+   "co": "/scoreboard players test <ghjucadore> <ughjettivu> <min> [mass]",
+   "kind": "new",
+   "from": null,
+   "review": "ai",
+   "note": "command syntax: names of arguments translated, keywords kept"
+  }
+ },
+ "commands.scoreboard.players.usage": {
+  "1bb9bfbdeb5e": {
+   "co": "/scoreboard players <set|add|remove|reset|list|enable|test|operation> ...",
+   "kind": "new",
+   "from": null,
+   "review": "ai",
+   "note": "same as English: command syntax with keywords only"
+  },
+  "3b00604606cd": {
+   "co": "/scoreboard players <set|add|remove|reset|list|enable|test|operation|tag> ...",
+   "kind": "new",
+   "from": null,
+   "review": "ai",
+   "note": "same as English: command syntax with keywords only"
+  },
+  "6884e9eb1b61": {
+   "co": "/scoreboard players <set|add|remove|reset|list>",
+   "kind": "new",
+   "from": null,
+   "review": "ai",
+   "note": "same as English: command syntax with keywords only"
+  }
+ },
+ "commands.scoreboard.teamNotFound": {
+  "d17c26401d8e": {
+   "co": "Nisuna squadra truvata cù u nome '%s'",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
+  }
+ },
+ "commands.scoreboard.teams.add.alreadyExists": {
+  "d7c1e6bc46cf": {
+   "co": "Una squadra chjamata '%s' esiste digià",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
+  }
+ },
+ "commands.scoreboard.teams.add.displayTooLong": {
+  "269bb498768e": {
+   "co": "U nome affissatu '%s' hè troppu longu per una squadra : pò avè %s caratteri à u più",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
+  },
+  "461937dbb55d": {
+   "co": "U nome affissatu '%s' hè troppu longu per una squadra : pò avè %d caratteri à u più",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
+  }
+ },
+ "commands.scoreboard.teams.add.success": {
+  "598fd07d8947": {
+   "co": "Squadra nova '%s' aghjunta",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
+  }
+ },
+ "commands.scoreboard.teams.add.tooLong": {
+  "1fc9f8fb94cd": {
+   "co": "U nome '%s' hè troppu longu per una squadra : pò avè %s caratteri à u più",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
+  },
+  "9cb64d952a64": {
+   "co": "U nome '%s' hè troppu longu per una squadra : pò avè %d caratteri à u più",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
+  }
+ },
+ "commands.scoreboard.teams.add.usage": {
+  "fff9dd9b7f8e": {
+   "co": "/scoreboard teams add <nome> [nome affissatu ...]",
+   "kind": "new",
+   "from": null,
+   "review": "ai",
+   "note": "command syntax: names of arguments translated, keywords kept"
+  }
+ },
+ "commands.scoreboard.teams.empty.alreadyEmpty": {
+  "081ca078480b": {
+   "co": "A squadra %s hè digià viota : impussibule di caccià ghjucadori chì ùn ci sò micca",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
+  }
+ },
+ "commands.scoreboard.teams.empty.success": {
+  "9eeb8f686dd9": {
+   "co": "Tutti i %s ghjucadori cacciati da a squadra %s",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
+  },
+  "fec209e7894b": {
+   "co": "Tutti i %d ghjucadori cacciati da a squadra %s",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
+  }
+ },
+ "commands.scoreboard.teams.empty.usage": {
+  "08003f3d0f88": {
+   "co": "/scoreboard teams empty <squadra>",
+   "kind": "new",
+   "from": null,
+   "review": "ai",
+   "note": "command syntax: names of arguments translated, keywords kept"
+  },
+  "d32613a4666f": {
+   "co": "/scoreboard teams empty",
+   "kind": "new",
+   "from": null,
+   "review": "ai",
+   "note": "same as English: command syntax with keywords only"
+  },
+  "ec6a6db02483": {
+   "co": "/scoreboard teams clear <nome>",
+   "kind": "new",
+   "from": null,
+   "review": "ai",
+   "note": "command syntax: names of arguments translated, keywords kept"
+  }
+ },
+ "commands.scoreboard.teams.join.failure": {
+  "40873880597d": {
+   "co": "Impussibule d'aghjunghje %d ghjucadore(i) à a squadra %s : %s",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
+  },
+  "d8c86df549af": {
+   "co": "Impussibule d'aghjunghje %s ghjucadore(i) à a squadra %s : %s",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
+  }
+ },
+ "commands.scoreboard.teams.join.success": {
+  "a769b0325623": {
+   "co": "%d ghjucadore(i) aghjuntu(i) à a squadra %s : %s",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
+  },
+  "bc12a088fa4c": {
+   "co": "%s ghjucadore(i) aghjuntu(i) à a squadra %s : %s",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
+  }
+ },
+ "commands.scoreboard.teams.join.usage": {
+  "a95756153075": {
+   "co": "/scoreboard teams join <squadra> [ghjucadore]",
+   "kind": "new",
+   "from": null,
+   "review": "ai",
+   "note": "command syntax: names of arguments translated, keywords kept"
+  }
+ },
+ "commands.scoreboard.teams.leave.failure": {
+  "070491387a23": {
+   "co": "Impussibule di caccià %d ghjucadore(i) da e so squadre : %s",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
+  },
+  "971bec077121": {
+   "co": "Impussibule di caccià %s ghjucadore(i) da e so squadre : %s",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
+  }
+ },
+ "commands.scoreboard.teams.leave.noTeam": {
+  "987dafc0c925": {
+   "co": "Ùn site in nisuna squadra",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
+  }
+ },
+ "commands.scoreboard.teams.leave.success": {
+  "1f86e8ada51a": {
+   "co": "%d ghjucadore(i) cacciatu(i) da e so squadre : %s",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
+  },
+  "6d0275a89636": {
+   "co": "%s ghjucadore(i) cacciatu(i) da e so squadre : %s",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
+  }
+ },
+ "commands.scoreboard.teams.leave.usage": {
+  "fb00ff4374da": {
+   "co": "/scoreboard teams leave [ghjucadore]",
+   "kind": "new",
+   "from": null,
+   "review": "ai",
+   "note": "command syntax: names of arguments translated, keywords kept"
+  }
+ },
+ "commands.scoreboard.teams.list.count": {
+  "26a729f764d9": {
+   "co": "%d squadre in a tavula di punti :",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
+  },
+  "411aa298612b": {
+   "co": "%d squadre in a tavula di punti",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
+  },
+  "dc132bf8b186": {
+   "co": "%s squadre in a tavula di punti :",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
+  }
+ },
+ "commands.scoreboard.teams.list.empty": {
+  "d4c14a99d511": {
+   "co": "Ùn ci hè nisuna squadra arregistrata in a tavula di punti",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
+  }
+ },
+ "commands.scoreboard.teams.list.entry": {
+  "0bee303b2204": {
+   "co": "- %1$s : '%2$s' hà %3$d ghjucadori",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
+  },
+  "78c9a3b914d1": {
+   "co": "- %1$s : '%2$s' hà %3$s ghjucadori",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
+  }
+ },
+ "commands.scoreboard.teams.list.player.count": {
+  "6948910e2243": {
+   "co": "%d ghjucadore(i) in a squadra %s :",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
+  },
+  "ad628ef5a583": {
+   "co": "%s ghjucadore(i) in a squadra %s :",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
+  },
+  "ae508cd2c797": {
+   "co": "%d ghjucadore(i) in a squadra %s",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
+  }
+ },
+ "commands.scoreboard.teams.list.player.empty": {
+  "96e14d2e501a": {
+   "co": "A squadra %s ùn hà nisunu ghjucadore",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
+  }
+ },
+ "commands.scoreboard.teams.list.player.entry": {
+  "34ff45013dd0": {
+   "co": "- %2$s : %1$s (%3$s)",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
+  },
+  "50ad2ca25a0d": {
+   "co": "- %2$s : %1$d (%3$s)",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
+  }
+ },
+ "commands.scoreboard.teams.list.usage": {
+  "26e339fb6bc5": {
+   "co": "/scoreboard teams list [nome]",
+   "kind": "new",
+   "from": null,
+   "review": "ai",
+   "note": "command syntax: names of arguments translated, keywords kept"
+  }
+ },
+ "commands.scoreboard.teams.option.noValue": {
+  "149d74cd82d2": {
+   "co": "I valori accettevuli per l'ozzione %s sò : %s",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
+  }
+ },
+ "commands.scoreboard.teams.option.success": {
+  "c61b19e5d22f": {
+   "co": "Ozzione %s di a squadra %s definita à %s",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
+  }
+ },
+ "commands.scoreboard.teams.option.usage": {
+  "608f006dd919": {
+   "co": "/scoreboard teams option <squadra> <friendlyfire|color|seeFriendlyInvisibles|nametagVisibility|deathMessageVisibility> <valore>",
+   "kind": "new",
+   "from": null,
+   "review": "ai",
+   "note": "command syntax: names of arguments translated, keywords kept"
+  },
+  "644e1b3b3cd9": {
+   "co": "/scoreboard teams option <squadra> <friendlyfire|color|seeFriendlyInvisibles|nametagVisibility|deathMessageVisibility|collisionRule> <valore>",
+   "kind": "new",
+   "from": null,
+   "review": "ai",
+   "note": "command syntax: names of arguments translated, keywords kept"
+  },
+  "ce99a97a7d37": {
+   "co": "/scoreboard teams option <squadra> <friendlyfire|color|seeFriendlyInvisibles> <valore>",
+   "kind": "new",
+   "from": null,
+   "review": "ai",
+   "note": "command syntax: names of arguments translated, keywords kept"
+  },
+  "e08efb0044c5": {
+   "co": "/scoreboard teams option <squadra> <friendlyfire|color> <valore>",
+   "kind": "new",
+   "from": null,
+   "review": "ai",
+   "note": "command syntax: names of arguments translated, keywords kept"
   }
  },
  "commands.scoreboard.teams.remove.success": {
@@ -2101,12 +5121,463 @@
    "review": "ai"
   }
  },
+ "commands.scoreboard.teams.remove.usage": {
+  "c41d89d21a00": {
+   "co": "/scoreboard teams remove <nome>",
+   "kind": "new",
+   "from": null,
+   "review": "ai",
+   "note": "command syntax: names of arguments translated, keywords kept"
+  }
+ },
+ "commands.scoreboard.teams.usage": {
+  "842f0b1b8701": {
+   "co": "/scoreboard teams <list|add|remove|empty|join|leave|option> ...",
+   "kind": "new",
+   "from": null,
+   "review": "ai",
+   "note": "same as English: command syntax with keywords only"
+  },
+  "847487542052": {
+   "co": "/scoreboard teams <list|add|remove|empty|join|leave|option>",
+   "kind": "new",
+   "from": null,
+   "review": "ai",
+   "note": "same as English: command syntax with keywords only"
+  }
+ },
+ "commands.scoreboard.usage": {
+  "f37c35405ea1": {
+   "co": "/scoreboard <objectives|players|teams>",
+   "kind": "new",
+   "from": null,
+   "review": "ai",
+   "note": "same as English: command syntax with keywords only"
+  },
+  "f73c77f42fa9": {
+   "co": "/scoreboard <objectives|players|teams> ...",
+   "kind": "new",
+   "from": null,
+   "review": "ai",
+   "note": "same as English: command syntax with keywords only"
+  }
+ },
+ "commands.seed.usage": {
+  "8cc7d32d2e7b": {
+   "co": "/seed",
+   "kind": "new",
+   "from": null,
+   "review": "ai",
+   "note": "same as English: command syntax with keywords only"
+  }
+ },
+ "commands.setblock.noChange": {
+  "0eeb3a075150": {
+   "co": "U bloccu ùn s'hè micca pussutu piazzà",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
+  }
+ },
+ "commands.setblock.notFound": {
+  "b27a755e9073": {
+   "co": "Ùn ci hè nisunu bloccu cù l'ID o u nome %s",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
+  }
+ },
+ "commands.setblock.outOfWorld": {
+  "1cd0b10c9170": {
+   "co": "Impussibule di piazzà un bloccu fora di u mondu",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
+  }
+ },
+ "commands.setblock.tagError": {
+  "313d3603dc50": {
+   "co": "Fiascu di l'analisi di l'etichetta di dati : %s",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
+  }
+ },
+ "commands.setblock.usage": {
+  "67d9aaa99bac": {
+   "co": "/setblock <x> <y> <z> <nome di bloccu> [valore di dati] [trattamentu di u bloccu vechju] [etichetta di dati]",
+   "kind": "new",
+   "from": null,
+   "review": "ai",
+   "note": "command syntax: names of arguments translated, keywords kept"
+  },
+  "7520391649b8": {
+   "co": "/setblock <x> <y> <z> <bloccu> [valore di dati|statu] [trattamentu di u bloccu vechju] [etichetta di dati]",
+   "kind": "new",
+   "from": null,
+   "review": "ai",
+   "note": "command syntax: names of arguments translated, keywords kept"
+  }
+ },
+ "commands.setidletimeout.usage": {
+  "5e7f86bb0b5b": {
+   "co": "/setidletimeout <minuti nanzu l'espulsione>",
+   "kind": "new",
+   "from": null,
+   "review": "ai",
+   "note": "command syntax: names of arguments translated, keywords kept"
+  },
+  "92c52ed4ffda": {
+   "co": "/setidletimeout <minuti>",
+   "kind": "new",
+   "from": null,
+   "review": "ai",
+   "note": "command syntax: names of arguments translated, keywords kept"
+  }
+ },
+ "commands.setworldspawn.usage": {
+  "85896c3aa5b8": {
+   "co": "/setworldspawn [<x> <y> <z>]",
+   "kind": "new",
+   "from": null,
+   "review": "ai",
+   "note": "same as English: command syntax with keywords only"
+  },
+  "98f2d507602e": {
+   "co": "/setworldspawn O /setworldspawn <x> <y> <z>",
+   "kind": "new",
+   "from": null,
+   "review": "ai",
+   "note": "command syntax: names of arguments translated, keywords kept"
+  }
+ },
+ "commands.spawnpoint.success": {
+  "5928b3ffe00b": {
+   "co": "Puntu di rinascita di %s definitu à (%s, %s, %s)",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
+  },
+  "c57d7e513404": {
+   "co": "Puntu di rinascita di %s definitu à (%d, %d, %d)",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
+  }
+ },
+ "commands.spawnpoint.usage": {
+  "589bfd101a57": {
+   "co": "/spawnpoint O /spawnpoint <ghjucadore> O /spawnpoint <ghjucadore> <x> <y> <z>",
+   "kind": "new",
+   "from": null,
+   "review": "ai",
+   "note": "command syntax: names of arguments translated, keywords kept"
+  },
+  "c6e1c2fe7e43": {
+   "co": "/spawnpoint [ghjucadore] [<x> <y> <z>]",
+   "kind": "new",
+   "from": null,
+   "review": "ai",
+   "note": "command syntax: names of arguments translated, keywords kept"
+  }
+ },
+ "commands.spreadplayers.failure.players": {
+  "38cd1eb4209a": {
+   "co": "Impussibule di sparghje %s ghjucadore(i) intornu à %s, %s (troppu ghjucadori per u spaziu : pruvate una sparghjera di %s à u più)",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
+  },
+  "9ce92d7419b2": {
+   "co": "Impussibule di sparghje %s ghjucadore(i) intornu à %s,%s (troppu ghjucadori per u spaziu : pruvate una sparghjera di %s à u più)",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
+  },
+  "aab9fe4c2f38": {
+   "co": "Impussibule di sparghje %s ghjucadori intornu à %s,%s (troppu ghjucadori per u spaziu : pruvate una sparghjera di %s à u più)",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
+  }
+ },
+ "commands.spreadplayers.failure.teams": {
+  "1a59a1540070": {
+   "co": "Impussibule di sparghje %s squadra(e) intornu à %s,%s (troppu ghjucadori per u spaziu : pruvate una sparghjera di %s à u più)",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
+  },
+  "2c75ea647201": {
+   "co": "Impussibule di sparghje %s squadre intornu à %s,%s (troppu ghjucadori per u spaziu : pruvate una sparghjera di %s à u più)",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
+  },
+  "bc0e095b62ed": {
+   "co": "Impussibule di sparghje %s squadra(e) intornu à %s, %s (troppu ghjucadori per u spaziu : pruvate una sparghjera di %s à u più)",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
+  }
+ },
+ "commands.spreadplayers.info.players": {
+  "32b94904c3b6": {
+   "co": "(Distanza media trà i ghjucadori : %s blocchi dopu à %s iterazioni)",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
+  }
+ },
+ "commands.spreadplayers.info.teams": {
+  "4060f4e74665": {
+   "co": "(Distanza media trà e squadre : %s blocchi dopu à %s iterazioni)",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
+  }
+ },
+ "commands.spreadplayers.noop": {
+  "6af539cca596": {
+   "co": "Nisunu ghjucadore truvatu à sparghje",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
+  }
+ },
+ "commands.spreadplayers.spreading.players": {
+  "bff225f2b080": {
+   "co": "Sparghjera di %s ghjucadori nant'à %s blocchi intornu à %s,%s (almenu %s blocchi trà elli)",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
+  },
+  "cef0ce26f482": {
+   "co": "Sparghjera di %s ghjucadore(i) nant'à %s blocchi intornu à %s, %s (almenu %s blocchi trà elli)",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
+  },
+  "f97617784fe7": {
+   "co": "Sparghjera di %s ghjucadore(i) nant'à %s blocchi intornu à %s,%s (almenu %s blocchi trà elli)",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
+  }
+ },
+ "commands.spreadplayers.spreading.teams": {
+  "25455116ca35": {
+   "co": "Sparghjera di %s squadre nant'à %s blocchi intornu à %s,%s (almenu %s blocchi trà elle)",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
+  },
+  "89c473ffd0d0": {
+   "co": "Sparghjera di %s squadra(e) nant'à %s blocchi intornu à %s,%s (almenu %s blocchi trà elle)",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
+  },
+  "d7a7447343d6": {
+   "co": "Sparghjera di %s squadra(e) nant'à %s blocchi intornu à %s, %s (almenu %s blocchi trà elle)",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
+  }
+ },
+ "commands.spreadplayers.success.players": {
+  "26544fca8915": {
+   "co": "%s ghjucadore(i) sparsu(i) intornu à %s,%s",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
+  },
+  "3897897f2c84": {
+   "co": "%s ghjucadore(i) sparsu(i) intornu à %s, %s",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
+  },
+  "59d8bd3f3482": {
+   "co": "%s ghjucadori sparsi intornu à %s,%s",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
+  }
+ },
+ "commands.spreadplayers.usage": {
+  "1cd823b1d469": {
+   "co": "/spreadplayers <x> <z> <distanza di sparghjera> <portata mass> <rispettà e squadre true|false> <ghjucadore ...>",
+   "kind": "new",
+   "from": null,
+   "review": "ai",
+   "note": "command syntax: names of arguments translated, keywords kept"
+  }
+ },
+ "commands.stats.block.clear.usage": {
+  "844463d4cafd": {
+   "co": "/stats block <x> <y> <z> clear <statistica>",
+   "kind": "new",
+   "from": null,
+   "review": "ai",
+   "note": "command syntax: names of arguments translated, keywords kept"
+  }
+ },
+ "commands.stats.block.set.usage": {
+  "2f274135deeb": {
+   "co": "/stats block <x> <y> <z> set <statistica> <selettore> <ughjettivu>",
+   "kind": "new",
+   "from": null,
+   "review": "ai",
+   "note": "command syntax: names of arguments translated, keywords kept"
+  }
+ },
+ "commands.stats.block.usage": {
+  "6a3e383f1cbf": {
+   "co": "/stats block <x> <y> <z> <modu> ...",
+   "kind": "new",
+   "from": null,
+   "review": "ai",
+   "note": "command syntax: names of arguments translated, keywords kept"
+  }
+ },
+ "commands.stats.cleared": {
+  "e52dc4eda42a": {
+   "co": "%s statistiche squassate",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
+  }
+ },
+ "commands.stats.entity.clear.usage": {
+  "1f74904ba167": {
+   "co": "/stats entity <selettore> clear <statistica>",
+   "kind": "new",
+   "from": null,
+   "review": "ai",
+   "note": "command syntax: names of arguments translated, keywords kept"
+  }
+ },
+ "commands.stats.entity.set.usage": {
+  "41e6ab24839e": {
+   "co": "/stats entity <selettore> set <statistica> <selettore> <ughjettivu>",
+   "kind": "new",
+   "from": null,
+   "review": "ai",
+   "note": "command syntax: names of arguments translated, keywords kept"
+  }
+ },
+ "commands.stats.entity.usage": {
+  "739b1cf9b935": {
+   "co": "/stats entity <selettore> <modu>",
+   "kind": "new",
+   "from": null,
+   "review": "ai",
+   "note": "command syntax: names of arguments translated, keywords kept"
+  },
+  "a7d05b556a53": {
+   "co": "/stats entity <selettore> <modu> ...",
+   "kind": "new",
+   "from": null,
+   "review": "ai",
+   "note": "command syntax: names of arguments translated, keywords kept"
+  }
+ },
+ "commands.stats.failed": {
+  "af470a78fff8": {
+   "co": "Parametri inaccettevuli",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
+  }
+ },
+ "commands.stats.noCompatibleBlock": {
+  "d4fa995b0c83": {
+   "co": "U bloccu in %d, %d, %d ùn pò micca seguità statistiche",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
+  },
+  "e5c3cb9e5d0b": {
+   "co": "U bloccu in %s, %s, %s ùn pò micca seguità statistiche",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
+  }
+ },
+ "commands.stats.success": {
+  "cf6d252e7001": {
+   "co": "Arregistramentu di e statistiche %s in %s nant'à %s",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
+  }
+ },
+ "commands.stats.usage": {
+  "7e80651c27f3": {
+   "co": "/stats <entity|block> ...",
+   "kind": "new",
+   "from": null,
+   "review": "ai",
+   "note": "same as English: command syntax with keywords only"
+  }
+ },
  "commands.stop.start": {
   "6d94822203b3": {
    "co": "Arrestu di u servitore",
    "kind": "renamed",
    "from": "commands.stop.stopping",
    "review": "ai"
+  }
+ },
+ "commands.stop.usage": {
+  "d1c99386ed39": {
+   "co": "/stop",
+   "kind": "new",
+   "from": null,
+   "review": "ai",
+   "note": "same as English: command syntax with keywords only"
+  }
+ },
+ "commands.stopsound.success.all": {
+  "203a650bf18c": {
+   "co": "Tutti i soni piantati per %s",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
+  }
+ },
+ "commands.stopsound.success.individualSound": {
+  "fc2b469dd3e5": {
+   "co": "Sonu '%s' di a fonte '%s' piantatu per %s",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
+  }
+ },
+ "commands.stopsound.success.soundSource": {
+  "39fbdff01c6c": {
+   "co": "Fonte '%s' piantata per %s",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
+  }
+ },
+ "commands.stopsound.unknownSoundSource": {
+  "67762d5200f8": {
+   "co": "Fonte %s scunnisciuta",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
+  }
+ },
+ "commands.stopsound.usage": {
+  "412279b3b9b9": {
+   "co": "/stopsound <ghjucadore> [fonte] [sonu]",
+   "kind": "new",
+   "from": null,
+   "review": "ai",
+   "note": "command syntax: names of arguments translated, keywords kept"
   }
  },
  "commands.stopwatch.create.success": {
@@ -2136,12 +5607,78 @@
    "note": "English changed only in case or punctuation"
   }
  },
+ "commands.summon.outOfWorld": {
+  "bd570556fb14": {
+   "co": "Impussibule d'invucà l'ogettu fora di u mondu",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
+  }
+ },
+ "commands.summon.tagError": {
+  "313d3603dc50": {
+   "co": "Fiascu di l'analisi di l'etichetta di dati : %s",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
+  }
+ },
+ "commands.summon.usage": {
+  "58c92a64fdb1": {
+   "co": "/summon <nome d'entità> [x] [y] [z] [etichetta di dati]",
+   "kind": "new",
+   "from": null,
+   "review": "ai",
+   "note": "command syntax: names of arguments translated, keywords kept"
+  },
+  "bd2ae458fa48": {
+   "co": "/summon <nome d'entità> [x] [y] [z] [etichetta di dati]",
+   "kind": "new",
+   "from": null,
+   "review": "ai",
+   "note": "command syntax: names of arguments translated, keywords kept"
+  }
+ },
+ "commands.team.add.longName": {
+  "8ceb9f7912a6": {
+   "co": "I nomi di squadre ùn ponu micca avè più di %s caratteri",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
+  }
+ },
  "commands.teleport.success.coordinates": {
   "1fd9369de38d": {
    "co": "Teleportazione di %s versu %s, %s, %s",
    "kind": "renamed",
    "from": "commands.teleport.success.location.single",
    "review": "ai"
+  }
+ },
+ "commands.teleport.usage": {
+  "8f6ea345b2f3": {
+   "co": "/teleport <entità> <x> <y> <z> [<rot-y> <rot-x>]",
+   "kind": "new",
+   "from": null,
+   "review": "ai",
+   "note": "command syntax: names of arguments translated, keywords kept"
+  }
+ },
+ "commands.tellraw.jsonException": {
+  "dacaa24664ab": {
+   "co": "Json inaccettevule : %s",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
+  }
+ },
+ "commands.tellraw.usage": {
+  "9ca055dd2bd4": {
+   "co": "/tellraw <ghjucadore> <messaghju json grezzu>",
+   "kind": "new",
+   "from": null,
+   "review": "ai",
+   "note": "command syntax: names of arguments translated, keywords kept"
   }
  },
  "commands.test.locate.done": {
@@ -2162,6 +5699,178 @@
    "note": "English changed only in case or punctuation"
   }
  },
+ "commands.testfor.failed": {
+  "539eb8721574": {
+   "co": "/testfor si pò aduprà solu cù blocchi di cumanda à surtita analogica",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
+  }
+ },
+ "commands.testfor.failure": {
+  "17e3d3e8e1e9": {
+   "co": "%s ùn currisponde micca à a struttura di dati richiesta",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
+  }
+ },
+ "commands.testfor.success": {
+  "10ebdc5d3ec1": {
+   "co": "%s truvatu",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
+  }
+ },
+ "commands.testfor.tagError": {
+  "313d3603dc50": {
+   "co": "Fiascu di l'analisi di l'etichetta di dati : %s",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
+  }
+ },
+ "commands.testfor.usage": {
+  "063e2a5877c7": {
+   "co": "/testfor <ghjucadore>",
+   "kind": "new",
+   "from": null,
+   "review": "ai",
+   "note": "command syntax: names of arguments translated, keywords kept"
+  },
+  "64b7aa5b4547": {
+   "co": "/testfor <ghjucadore> [etichetta di dati]",
+   "kind": "new",
+   "from": null,
+   "review": "ai",
+   "note": "command syntax: names of arguments translated, keywords kept"
+  }
+ },
+ "commands.testforblock.failed.data": {
+  "7dc589a8a0d1": {
+   "co": "U bloccu in %s, %s, %s avia u valore di dati %s (ci vulia : %s)",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
+  },
+  "a02dc7267d5c": {
+   "co": "U bloccu in %d,%d,%d avia u valore di dati %s (ci vulia : %s).",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
+  },
+  "e8d38f00c9c7": {
+   "co": "U bloccu in %d, %d, %d avia u valore di dati %s (ci vulia : %s)",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
+  }
+ },
+ "commands.testforblock.failed.nbt": {
+  "35416807bc58": {
+   "co": "U bloccu in %s, %s, %s ùn avia micca e chjave NBT richieste",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
+  },
+  "52d6f5edf5f5": {
+   "co": "U bloccu in %d,%d,%d ùn avia micca e chjave NBT richieste.",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
+  },
+  "8298023bc29c": {
+   "co": "U bloccu in %d, %d, %d ùn avia micca e chjave NBT richieste",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
+  }
+ },
+ "commands.testforblock.failed.tile": {
+  "111876bbcca3": {
+   "co": "U bloccu in %d, %d, %d hè %s (ci vulia : %s)",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
+  },
+  "230a791603f6": {
+   "co": "U bloccu in %d,%d,%d hè %s (ci vulia : %s).",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
+  },
+  "cfed3fcf3839": {
+   "co": "U bloccu in %s, %s, %s hè %s (ci vulia : %s)",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
+  }
+ },
+ "commands.testforblock.failed.tileEntity": {
+  "2c42f2329e47": {
+   "co": "U bloccu in %d,%d,%d ùn hè micca un'entità di bloccu è ùn pò micca paragunà etichette.",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
+  },
+  "911cf02d78cf": {
+   "co": "U bloccu in %s, %s, %s ùn hè micca un'entità di bloccu è ùn pò micca paragunà etichette",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
+  },
+  "f1b0303ededf": {
+   "co": "U bloccu in %d, %d, %d ùn hè micca un'entità di bloccu è ùn pò micca paragunà etichette",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
+  }
+ },
+ "commands.testforblock.outOfWorld": {
+  "803fdde7a9df": {
+   "co": "Impussibule di verificà un bloccu fora di u mondu",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
+  }
+ },
+ "commands.testforblock.success": {
+  "0e0c4c2e2c5e": {
+   "co": "Bloccu truvatu in %s, %s, %s",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
+  },
+  "490dbecaf92f": {
+   "co": "Bloccu truvatu in %d, %d, %d",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
+  },
+  "bcd2e1d37116": {
+   "co": "Bloccu truvatu in %d,%d,%d.",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
+  }
+ },
+ "commands.testforblock.usage": {
+  "0305ed01014e": {
+   "co": "/testforblock <x> <y> <z> <nome di bloccu> [valore di dati] [etichetta di dati]",
+   "kind": "new",
+   "from": null,
+   "review": "ai",
+   "note": "command syntax: names of arguments translated, keywords kept"
+  },
+  "afdd60671610": {
+   "co": "/testforblock <x> <y> <z> <bloccu> [valore di dati|-1|statu|*] [etichetta di dati]",
+   "kind": "new",
+   "from": null,
+   "review": "ai",
+   "note": "command syntax: names of arguments translated, keywords kept"
+  }
+ },
  "commands.tick.query.percentiles": {
   "c640a785d508": {
    "co": "Percentili : P50 : %sms P95 : %sms P99 : %sms. Campione : %s",
@@ -2169,6 +5878,109 @@
    "from": "commands.tick.query.percentiles",
    "review": "ai",
    "note": "English changed only in case or punctuation"
+  }
+ },
+ "commands.time.added": {
+  "432eb667c8a4": {
+   "co": "%d aghjuntu à l'ora",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
+  },
+  "b7336d5dce28": {
+   "co": "%s aghjuntu à l'ora",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
+  }
+ },
+ "commands.time.usage": {
+  "588a557479c7": {
+   "co": "/time <set|add|query> <valore>",
+   "kind": "new",
+   "from": null,
+   "review": "ai",
+   "note": "command syntax: names of arguments translated, keywords kept"
+  },
+  "6616460ce45d": {
+   "co": "/time <set|add> <valore>",
+   "kind": "new",
+   "from": null,
+   "review": "ai",
+   "note": "command syntax: names of arguments translated, keywords kept"
+  }
+ },
+ "commands.title.success": {
+  "d251b39a3599": {
+   "co": "Cumanda di titulu eseguita",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
+  }
+ },
+ "commands.title.usage": {
+  "06348794580f": {
+   "co": "/title <ghjucadore> <title|subtitle|clear|reset|times> ...",
+   "kind": "new",
+   "from": null,
+   "review": "ai",
+   "note": "command syntax: names of arguments translated, keywords kept"
+  },
+  "81f0597d2e3f": {
+   "co": "/title <ghjucadore> <title|subtitle|actionbar|clear|reset|times> ...",
+   "kind": "new",
+   "from": null,
+   "review": "ai",
+   "note": "command syntax: names of arguments translated, keywords kept"
+  },
+  "900f300ac348": {
+   "co": "/title <ghjucadore> title|subtitle|actionbar|clear|reset|times ...",
+   "kind": "new",
+   "from": null,
+   "review": "ai",
+   "note": "command syntax: names of arguments translated, keywords kept"
+  }
+ },
+ "commands.title.usage.clear": {
+  "76982b9b7ae2": {
+   "co": "/title <ghjucadore> clear|reset",
+   "kind": "new",
+   "from": null,
+   "review": "ai",
+   "note": "command syntax: names of arguments translated, keywords kept"
+  }
+ },
+ "commands.title.usage.times": {
+  "94c384e7f121": {
+   "co": "/title <ghjucadore> times <apparizione> <durata> <sparizione>",
+   "kind": "new",
+   "from": null,
+   "review": "ai",
+   "note": "command syntax: names of arguments translated, keywords kept"
+  }
+ },
+ "commands.title.usage.title": {
+  "b7c5f1ffe9b2": {
+   "co": "/title <ghjucadore> title|subtitle <titulu json grezzu>",
+   "kind": "new",
+   "from": null,
+   "review": "ai",
+   "note": "command syntax: names of arguments translated, keywords kept"
+  },
+  "da5a32f46fc7": {
+   "co": "/title <ghjucadore> title|subtitle|actionbar <titulu json grezzu>",
+   "kind": "new",
+   "from": null,
+   "review": "ai",
+   "note": "command syntax: names of arguments translated, keywords kept"
+  }
+ },
+ "commands.tp.notSameDimension": {
+  "2bb7c6941950": {
+   "co": "Impussibule di teleportà : i ghjucadori ùn sò micca in a listessa dimensione",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
   }
  },
  "commands.tp.success": {
@@ -2185,6 +5997,269 @@
    "kind": "renamed",
    "from": "commands.teleport.success.location.single",
    "review": "ai"
+  },
+  "69629b047fbc": {
+   "co": "Teleportazione di %s versu %.2f,%.2f,%.2f",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
+  }
+ },
+ "commands.tp.usage": {
+  "827f57b61f74": {
+   "co": "/tp [ghjucadore destinatariu] <ghjucadore di destinazione> O /tp [ghjucadore destinatariu] <x> <y> <z>",
+   "kind": "new",
+   "from": null,
+   "review": "ai",
+   "note": "command syntax: names of arguments translated, keywords kept"
+  },
+  "96a11ecb4a05": {
+   "co": "/tp [ghjucadore destinatariu] <ghjucadore di destinazione> O /tp [ghjucadore destinatariu] <x> <y> <z> [<rot-y> <rot-x>]",
+   "kind": "new",
+   "from": null,
+   "review": "ai",
+   "note": "command syntax: names of arguments translated, keywords kept"
+  },
+  "9949635c1ddd": {
+   "co": "/tp [ghjucadore destinatariu] <ghjucadore di destinazione> O /tp [ghjucadore destinatariu] <x> <y> <z> [<orientazione> <inclinazione>]",
+   "kind": "new",
+   "from": null,
+   "review": "ai",
+   "note": "command syntax: names of arguments translated, keywords kept"
+  }
+ },
+ "commands.trigger.disabled": {
+  "000d2ec330e4": {
+   "co": "L'attivadore %s ùn hè micca attivatu",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
+  }
+ },
+ "commands.trigger.invalidMode": {
+  "a3d073575245": {
+   "co": "Modu d'attivadore %s inaccettevule",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
+  }
+ },
+ "commands.trigger.invalidObjective": {
+  "e164a1644c21": {
+   "co": "Nome d'attivadore %s inaccettevule",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
+  }
+ },
+ "commands.trigger.invalidPlayer": {
+  "038faac1e87a": {
+   "co": "Solu i ghjucadori ponu aduprà a cumanda /trigger",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
+  }
+ },
+ "commands.trigger.success": {
+  "ee093d2859aa": {
+   "co": "Attivadore %s cambiatu cù %s %s",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
+  }
+ },
+ "commands.trigger.usage": {
+  "e7787625cab7": {
+   "co": "/trigger <ughjettivu> <add|set> <valore>",
+   "kind": "new",
+   "from": null,
+   "review": "ai",
+   "note": "command syntax: names of arguments translated, keywords kept"
+  }
+ },
+ "commands.unban.failed": {
+  "5247b9e27beb": {
+   "co": "Impussibule di riammette u ghjucadore %s",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
+  }
+ },
+ "commands.unban.success": {
+  "5060dcdcd635": {
+   "co": "U ghjucadore %s hè riammessu",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
+  }
+ },
+ "commands.unban.usage": {
+  "52f5c1f44104": {
+   "co": "/pardon <nome>",
+   "kind": "new",
+   "from": null,
+   "review": "ai",
+   "note": "command syntax: names of arguments translated, keywords kept"
+  }
+ },
+ "commands.unbanip.invalid": {
+  "87287d1032a8": {
+   "co": "Avete scrittu un indirizzu IP inaccettevule",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
+  }
+ },
+ "commands.unbanip.success": {
+  "bbc3577540bd": {
+   "co": "Indirizzu IP %s riammessu",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
+  }
+ },
+ "commands.unbanip.usage": {
+  "3357fc69cadc": {
+   "co": "/pardon-ip <indirizzu>",
+   "kind": "new",
+   "from": null,
+   "review": "ai",
+   "note": "command syntax: names of arguments translated, keywords kept"
+  }
+ },
+ "commands.weather.clear": {
+  "f9422ec7746a": {
+   "co": "U tempu diventa bellu",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
+  }
+ },
+ "commands.weather.rain": {
+  "bd3f1b9e26f2": {
+   "co": "U tempu diventa piuvosu",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
+  }
+ },
+ "commands.weather.thunder": {
+  "2c830a33d342": {
+   "co": "Piova è tempurale",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
+  }
+ },
+ "commands.weather.usage": {
+  "630f512de94c": {
+   "co": "/weather <clear/rain/thunder> [durata in seconde]",
+   "kind": "new",
+   "from": null,
+   "review": "ai",
+   "note": "command syntax: names of arguments translated, keywords kept"
+  },
+  "6b51e58a437c": {
+   "co": "/weather <clear|rain|thunder> [durata in seconde]",
+   "kind": "new",
+   "from": null,
+   "review": "ai",
+   "note": "command syntax: names of arguments translated, keywords kept"
+  }
+ },
+ "commands.whitelist.add.usage": {
+  "8d073ff7d9ea": {
+   "co": "/whitelist add <ghjucadore>",
+   "kind": "new",
+   "from": null,
+   "review": "ai",
+   "note": "command syntax: names of arguments translated, keywords kept"
+  }
+ },
+ "commands.whitelist.remove.usage": {
+  "31171e2921a8": {
+   "co": "/whitelist remove <ghjucadore>",
+   "kind": "new",
+   "from": null,
+   "review": "ai",
+   "note": "command syntax: names of arguments translated, keywords kept"
+  }
+ },
+ "commands.whitelist.usage": {
+  "7f3c4ab1f274": {
+   "co": "/whitelist <on|off|list|add|remove|reload>",
+   "kind": "new",
+   "from": null,
+   "review": "ai",
+   "note": "same as English: command syntax with keywords only"
+  }
+ },
+ "commands.worldborder.add.usage": {
+  "dd83a2ccda45": {
+   "co": "/worldborder add <dimensione in blocchi> [tempu in seconde]",
+   "kind": "new",
+   "from": null,
+   "review": "ai",
+   "note": "command syntax: names of arguments translated, keywords kept"
+  }
+ },
+ "commands.worldborder.center.usage": {
+  "af6b9a9f7212": {
+   "co": "/worldborder center <x> <z>",
+   "kind": "new",
+   "from": null,
+   "review": "ai",
+   "note": "same as English: command syntax with keywords only"
+  }
+ },
+ "commands.worldborder.damage.amount.usage": {
+  "78b9b52e770e": {
+   "co": "/worldborder damage amount <danni per bloccu>",
+   "kind": "new",
+   "from": null,
+   "review": "ai",
+   "note": "command syntax: names of arguments translated, keywords kept"
+  }
+ },
+ "commands.worldborder.damage.buffer.usage": {
+  "c163ac4a2c5c": {
+   "co": "/worldborder damage buffer <dimensione in blocchi>",
+   "kind": "new",
+   "from": null,
+   "review": "ai",
+   "note": "command syntax: names of arguments translated, keywords kept"
+  }
+ },
+ "commands.worldborder.damage.usage": {
+  "b4eafaeb66f8": {
+   "co": "/worldborder damage <buffer|amount> ...",
+   "kind": "new",
+   "from": null,
+   "review": "ai",
+   "note": "same as English: command syntax with keywords only"
+  },
+  "d3cf5359b4a0": {
+   "co": "/worldborder damage <buffer|amount>",
+   "kind": "new",
+   "from": null,
+   "review": "ai",
+   "note": "same as English: command syntax with keywords only"
+  }
+ },
+ "commands.worldborder.get.success": {
+  "1276f02a100c": {
+   "co": "U cunfine di u mondu hè largu di %s blocchi",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
+  }
+ },
+ "commands.worldborder.set.failed.big.": {
+  "1d8482daa56d": {
+   "co": "U cunfine di u mondu ùn pò micca esse più largu chè 60 000 000 di blocchi",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
   }
  },
  "commands.worldborder.set.failed.small.": {
@@ -2193,6 +6268,155 @@
    "kind": "renamed",
    "from": "commands.worldborder.set.failed.small",
    "review": "ai"
+  }
+ },
+ "commands.worldborder.set.success": {
+  "24ad9e4ef1be": {
+   "co": "Cunfine di u mondu definitu à %s blocchi di larghezza (nanzu : %s blocchi)",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
+  }
+ },
+ "commands.worldborder.set.usage": {
+  "d3349107a93a": {
+   "co": "/worldborder set <dimensione in blocchi> [tempu in seconde]",
+   "kind": "new",
+   "from": null,
+   "review": "ai",
+   "note": "command syntax: names of arguments translated, keywords kept"
+  }
+ },
+ "commands.worldborder.setSlowly.grow.success": {
+  "add7ea22adf1": {
+   "co": "U cunfine di u mondu cresce sin'à %s blocchi di larghezza (da %s blocchi) in %s seconde",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
+  }
+ },
+ "commands.worldborder.setSlowly.shrink.success": {
+  "332a8e3acd85": {
+   "co": "U cunfine di u mondu si riduce à %s blocchi di larghezza (da %s blocchi) in %s seconde",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
+  }
+ },
+ "commands.worldborder.usage": {
+  "5149b9ad9727": {
+   "co": "/worldborder <set|center|damage|warning|get> ...",
+   "kind": "new",
+   "from": null,
+   "review": "ai",
+   "note": "same as English: command syntax with keywords only"
+  },
+  "c4f03e5b95d0": {
+   "co": "/worldborder <set|center|damage|warning|get|add> ...",
+   "kind": "new",
+   "from": null,
+   "review": "ai",
+   "note": "same as English: command syntax with keywords only"
+  }
+ },
+ "commands.worldborder.warning.distance.usage": {
+  "55df3a05631a": {
+   "co": "/worldborder warning distance <blocchi>",
+   "kind": "new",
+   "from": null,
+   "review": "ai",
+   "note": "command syntax: names of arguments translated, keywords kept"
+  },
+  "c8e94586a8f2": {
+   "co": "/worldborder warning distance <distanza>",
+   "kind": "new",
+   "from": null,
+   "review": "ai",
+   "note": "command syntax: names of arguments translated, keywords kept"
+  }
+ },
+ "commands.worldborder.warning.time.usage": {
+  "27c269456a2b": {
+   "co": "/worldborder warning time <seconde>",
+   "kind": "new",
+   "from": null,
+   "review": "ai",
+   "note": "command syntax: names of arguments translated, keywords kept"
+  }
+ },
+ "commands.worldborder.warning.usage": {
+  "7828c1cca5f9": {
+   "co": "/worldborder warning <time|distance>",
+   "kind": "new",
+   "from": null,
+   "review": "ai",
+   "note": "same as English: command syntax with keywords only"
+  },
+  "bf19510cdb34": {
+   "co": "/worldborder warning <time|distance> ...",
+   "kind": "new",
+   "from": null,
+   "review": "ai",
+   "note": "same as English: command syntax with keywords only"
+  }
+ },
+ "commands.xp.failure.widthdrawXp": {
+  "549decd4f7d3": {
+   "co": "Impussibule di dà punti di sperienza negativi à un ghjucadore",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
+  }
+ },
+ "commands.xp.success": {
+  "467970b840bd": {
+   "co": "%d di sperienza datu à %s",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
+  },
+  "82c1811da195": {
+   "co": "%s di sperienza datu à %s",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
+  }
+ },
+ "commands.xp.success.levels": {
+  "1bdb3c8ab0e8": {
+   "co": "%d livelli dati à %s",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
+  },
+  "edef908d2f16": {
+   "co": "%s livelli dati à %s",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
+  }
+ },
+ "commands.xp.success.negative.levels": {
+  "2fcae0f17956": {
+   "co": "%s livelli ritirati à %s",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
+  },
+  "c4ff22689581": {
+   "co": "%d livelli ritirati à %s",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
+  }
+ },
+ "commands.xp.usage": {
+  "006d7e8e7f59": {
+   "co": "/xp <quantità> [ghjucadore] O /xp <quantità>L [ghjucadore]",
+   "kind": "new",
+   "from": null,
+   "review": "ai",
+   "note": "command syntax: names of arguments translated, keywords kept"
   }
  },
  "container.enchant.level.requirement": {
