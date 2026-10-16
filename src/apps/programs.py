@@ -40,6 +40,14 @@ def running(*names):
     return any(Path(process.replace('\\', '/')).name.lower() in wanted for process in processes)
 
 
+def writable(path):
+    """Whether a file could be created at path: the nearest existing folder above it must be writable."""
+    folder = Path(path).parent
+    while not folder.exists() and folder != folder.parent:
+        folder = folder.parent
+    return os.access(folder, os.W_OK)
+
+
 def close_first(name):
     return corsu.t(f'{name} is open: close it, then run Corsu again (it rewrites its settings when it quits)',
                    f'{name} est ouvert : fermez-le, puis relancez Corsu (il réécrit ses réglages en quittant)')
@@ -123,7 +131,7 @@ class NotepadPlusPlus(SettingApp):
             catalog = self.corsican_file(folder)
             target = self.target(folder)
             reason = None
-            if not os.access(target.parent if target.parent.exists() else target.parent.parent, os.W_OK):
+            if not writable(target):
                 reason = corsu.t(f'{target.parent} cannot be written', f'{target.parent} n\'est pas modifiable')
             note = None if catalog.exists() else corsu.t('official Corsican file fetched from Notepad++',
                                                          'fichier corse officiel téléchargé depuis Notepad++')
