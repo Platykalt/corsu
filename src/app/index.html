@@ -107,6 +107,8 @@ dl.facts dt { color: var(--muted); }
 dl.facts dd { overflow-wrap: anywhere; }
 dl.facts dt:not(:first-of-type), dl.facts dd:not(:first-of-type) { border-top: 1px solid var(--line); }
 .closed { padding: 60px 34px; color: var(--muted); }
+.banner.problem { color: var(--danger); display: block; }
+.banner.problem[hidden] { display: none; }
 .banner { display: flex; align-items: center; gap: 12px; padding: 10px 14px; margin: 0 0 20px; border: 1px solid var(--line); border-radius: 6px; background: var(--row); }
 .banner[hidden] { display: none; }
 .banner span { flex: 1; }
@@ -150,6 +152,7 @@ dl.facts dt:not(:first-of-type), dl.facts dd:not(:first-of-type) { border-top: 1
   </aside>
 
   <main>
+    <p class="banner problem" id="problem" hidden role="alert"></p>
     <div class="banner" id="update-banner" hidden aria-live="polite">
       <span id="update-text"></span>
       <button type="button" class="button default" id="update-install" data-t="update_install"></button>
@@ -660,6 +663,9 @@ function render() {
   $("language").value = language;
   if (!state) return;
   $("version").textContent = state.version;
+  // Shown as the server wrote it (French or English): it names the damaged file and what was kept.
+  $("problem").textContent = state.problem || "";
+  $("problem").hidden = !state.problem;
   renderPrograms(); renderAdd(); renderHelp(); renderAbout(); renderActivity(); renderExtras();
 }
 

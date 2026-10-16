@@ -136,7 +136,11 @@ def order():
 
 def snapshot():
     """Everything the page shows, read fresh each time."""
-    state = corsu.load_state()
+    try:
+        state, problem = corsu.load_state(), None
+    except RuntimeError as error:
+        # A damaged record: say so instead of the page reading as if Corsu had closed.
+        state, problem = {'files': {}}, str(error)
     installed = set(state.get('components', [])) if corsu.STATE.exists() else set()
     if state.get('qt_system'):
         installed.add('qt')
@@ -181,6 +185,7 @@ def snapshot():
         'review': review.progress_all(),
         'options': review.options(),
         'update': UPDATE.get('info'),
+        'problem': problem,
     }
 
 
