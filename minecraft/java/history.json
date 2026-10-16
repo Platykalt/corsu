@@ -16,6 +16,31 @@
    "review": "ai"
   }
  },
+ "achievement.acquireIron.desc": {
+  "14d718e93edd": {
+   "co": "Fate fonde un lingottu di ferru",
+   "kind": "adapted",
+   "from": "advancements.story.smelt_iron.description",
+   "review": "ai",
+   "note": "same as the 26.3 advancement"
+  }
+ },
+ "achievement.bakeCake": {
+  "e22d893d6d13": {
+   "co": "A bugia",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
+  }
+ },
+ "achievement.bakeCake.desc": {
+  "d521575295e6": {
+   "co": "Granu, zuccheru, latte è ova !",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
+  }
+ },
  "achievement.blazeRod": {
   "180cdfb30c33": {
    "co": "In u focu",
@@ -41,11 +66,184 @@
    "note": "26.3 key of another family; same meaning checked"
   }
  },
+ "achievement.bookcase.desc": {
+  "a08478479623": {
+   "co": "Custruite scaffali di libri per migliurà u vostru bancu d'incantesimi",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
+  }
+ },
+ "achievement.breedCow": {
+  "696d5d21188e": {
+   "co": "Ripupulamentu",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
+  }
+ },
+ "achievement.breedCow.desc": {
+  "f53637d2df13": {
+   "co": "Fate ripruduce duie vacche cù u granu",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
+  }
+ },
  "achievement.buildBetterPickaxe": {
   "b6d3bcbeffff": {
    "co": "Un passu più in sù",
    "kind": "renamed",
    "from": "advancements.story.upgrade_tools.title",
+   "review": "ai"
+  }
+ },
+ "achievement.buildBetterPickaxe.desc": {
+  "2adef600271a": {
+   "co": "Custruite un piccone megliu",
+   "kind": "adapted",
+   "from": "advancements.story.upgrade_tools.description",
+   "review": "ai",
+   "note": "same as the 26.3 advancement"
+  }
+ },
+ "achievement.buildFurnace": {
+  "1fcff0695c9e": {
+   "co": "Focu à u focu",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
+  }
+ },
+ "achievement.buildFurnace.desc": {
+  "5b6c982dbcba": {
+   "co": "Custruite un fornu cù ottu blocchi di petrame",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
+  },
+  "a885751292a7": {
+   "co": "Custruite un fornu cù ottu blocchi di petra",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
+  }
+ },
+ "achievement.buildHoe": {
+  "d9c5d980fc05": {
+   "co": "Ora d'arà !",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
+  }
+ },
+ "achievement.buildHoe.desc": {
+  "d41044c3a310": {
+   "co": "Aduprate tavule è bastoni per fà una zappa",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
+  }
+ },
+ "achievement.buildPickaxe": {
+  "689ff1d4e26b": {
+   "co": "Ora di scavà !",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
+  }
+ },
+ "achievement.buildPickaxe.desc": {
+  "a98362413d65": {
+   "co": "Aduprate tavule è bastoni per fà un piccone",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
+  }
+ },
+ "achievement.buildSword": {
+  "66b7544ea5d0": {
+   "co": "Ora di batte !",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
+  }
+ },
+ "achievement.buildSword.desc": {
+  "98153ad4c394": {
+   "co": "Aduprate tavule è bastoni per fà una spada",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
+  }
+ },
+ "achievement.buildWorkBench": {
+  "6f3b2ca27465": {
+   "co": "À u bancu !",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
+  }
+ },
+ "achievement.buildWorkBench.desc": {
+  "796f1f8139f0": {
+   "co": "Fabbricate un bancu di travagliu cù quattru blocchi di tavule",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
+  }
+ },
+ "achievement.cookFish": {
+  "d1370bc152e4": {
+   "co": "Pesciu sapuritu",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
+  }
+ },
+ "achievement.cookFish.desc": {
+  "ce28754f2c73": {
+   "co": "Pigliate è fate coce un pesciu !",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
+  }
+ },
+ "achievement.diamonds": {
+  "4039e68ded9e": {
+   "co": "DIAMANTI !",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
+  }
+ },
+ "achievement.diamonds.desc": {
+  "b71fca5862b5": {
+   "co": "Ottenite diamanti cù i vostri attrezzi di ferru",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
+  }
+ },
+ "achievement.diamondsToYou": {
+  "0cacac4c060e": {
+   "co": "Diamanti per voi !",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
+  }
+ },
+ "achievement.diamondsToYou.desc": {
+  "a37a97962945": {
+   "co": "Lampate diamanti à un altru ghjucadore",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
+  },
+  "b193b29a314f": {
+   "co": "Lampate diamanti à un altru ghjucadore.",
+   "kind": "new",
+   "from": null,
    "review": "ai"
   }
  },
@@ -57,6 +255,14 @@
    "review": "ai"
   }
  },
+ "achievement.enchantments.desc": {
+  "5ac10d28dd85": {
+   "co": "Aduprate un libru, ossidiana è diamanti per custruisce un bancu d'incantesimi",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
+  }
+ },
  "achievement.exploreAllBiomes": {
   "b6acfbd33cff": {
    "co": "Ghjiramondu",
@@ -65,11 +271,51 @@
    "review": "ai"
   }
  },
+ "achievement.exploreAllBiomes.desc": {
+  "8ae61d4fae34": {
+   "co": "Scuprite tutti i biomi",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
+  }
+ },
+ "achievement.flyPig": {
+  "09b5aadf1c19": {
+   "co": "Quandu i porchi volaranu",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
+  }
+ },
+ "achievement.flyPig.desc": {
+  "35b7c67d0f8a": {
+   "co": "Fate vulà un porcu da una scogliera",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
+  }
+ },
  "achievement.fullBeacon": {
   "90f0dc364b44": {
    "co": "Faru à tuttu focu",
    "kind": "renamed",
    "from": "advancements.nether.create_full_beacon.title",
+   "review": "ai"
+  }
+ },
+ "achievement.fullBeacon.desc": {
+  "f7515371aad5": {
+   "co": "Create un faru à piena putenza",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
+  }
+ },
+ "achievement.get": {
+  "bc27d1734c75": {
+   "co": "Successu ottenutu !",
+   "kind": "new",
+   "from": null,
    "review": "ai"
   }
  },
@@ -89,11 +335,165 @@
    "review": "ai"
   }
  },
+ "achievement.killCow": {
+  "1877239299fa": {
+   "co": "Spella-vacche",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
+  }
+ },
+ "achievement.killCow.desc": {
+  "f684ed40d938": {
+   "co": "Ricugliite un pocu di coghju",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
+  }
+ },
  "achievement.killEnemy": {
   "aeded0953f1e": {
    "co": "Cacciadore di mostri",
    "kind": "renamed",
    "from": "advancements.adventure.kill_a_mob.title",
+   "review": "ai"
+  }
+ },
+ "achievement.killEnemy.desc": {
+  "2abafc445f01": {
+   "co": "Attaccate è distrughjite un mostru",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
+  }
+ },
+ "achievement.killWither": {
+  "c5606ecff83b": {
+   "co": "U principiu.",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
+  }
+ },
+ "achievement.killWither.desc": {
+  "fd683aa3afe2": {
+   "co": "Tumbate u Wither",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
+  }
+ },
+ "achievement.makeBread": {
+  "a5001b934c66": {
+   "co": "Fà u pane",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
+  }
+ },
+ "achievement.makeBread.desc": {
+  "c67c5474966e": {
+   "co": "Cambiate u granu in pane",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
+  }
+ },
+ "achievement.mineWood": {
+  "048b93373c76": {
+   "co": "À u legnu !",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
+  }
+ },
+ "achievement.mineWood.desc": {
+  "c022daff06e2": {
+   "co": "Battite un arburu finu à chì ne caschi un bloccu di legnu",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
+  }
+ },
+ "achievement.onARail": {
+  "945a0fe42f1d": {
+   "co": "Nant'à i binarii",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
+  }
+ },
+ "achievement.onARail.desc": {
+  "ee6e91ec2be5": {
+   "co": "Viaghjate in carrettu almenu 1 km da u vostru puntu di partenza",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
+  }
+ },
+ "achievement.openInventory": {
+  "7f1671fe160e": {
+   "co": "Fà l'inventariu",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
+  }
+ },
+ "achievement.openInventory.desc": {
+  "a332d9045304": {
+   "co": "Appughjate nant'à '%1$s' per apre u vostru inventariu.",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
+  },
+  "e640c9397433": {
+   "co": "Appughjate nant'à '%1$s' per apre u vostru inventariu",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
+  }
+ },
+ "achievement.overkill": {
+  "3c02aebe0a38": {
+   "co": "Troppu forte",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
+  }
+ },
+ "achievement.overkill.desc": {
+  "8ed7f678d61d": {
+   "co": "Fate ottu cori di danni in un colpu solu",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
+  },
+  "90dd05644a21": {
+   "co": "Fate nove cori di danni in un colpu solu",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
+  }
+ },
+ "achievement.overpowered": {
+  "486545eaf837": {
+   "co": "Sopraputente",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
+  }
+ },
+ "achievement.overpowered.desc": {
+  "85963b9336de": {
+   "co": "Custruite una mela di Notch",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
+  },
+  "ed0cdf3297b6": {
+   "co": "Manghjate una mela di Notch",
+   "kind": "new",
+   "from": null,
    "review": "ai"
   }
  },
@@ -105,11 +505,36 @@
    "review": "ai"
   }
  },
+ "achievement.portal.desc": {
+  "7f20d3f80549": {
+   "co": "Custruite un portale versu u Nether",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
+  }
+ },
  "achievement.potion": {
   "e1dc266bb420": {
    "co": "Distillaria di paese",
    "kind": "renamed",
    "from": "advancements.nether.brew_potion.title",
+   "review": "ai"
+  }
+ },
+ "achievement.potion.desc": {
+  "81dfc1536806": {
+   "co": "Distillate una pozione",
+   "kind": "adapted",
+   "from": "advancements.nether.brew_potion.description",
+   "review": "ai",
+   "note": "same as the 26.3 advancement"
+  }
+ },
+ "achievement.requires": {
+  "43a0de699d79": {
+   "co": "Ci vole '%1$s'",
+   "kind": "new",
+   "from": null,
    "review": "ai"
   }
  },
@@ -121,11 +546,67 @@
    "review": "ai"
   }
  },
+ "achievement.snipeSkeleton.desc": {
+  "16ab930526cd": {
+   "co": "Tumbate un scheletru cù una freccia da più di 50 metri",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
+  }
+ },
+ "achievement.spawnWither": {
+  "824999bbed17": {
+   "co": "U principiu ?",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
+  }
+ },
+ "achievement.spawnWither.desc": {
+  "b04122001394": {
+   "co": "Fate apparisce u Wither",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
+  }
+ },
+ "achievement.taken": {
+  "5d8148d2185d": {
+   "co": "Persu !",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
+  }
+ },
  "achievement.theEnd": {
   "e1b36eea8513": {
    "co": "A fine ?",
    "kind": "renamed",
    "from": "advancements.story.enter_the_end.title",
+   "review": "ai"
+  }
+ },
+ "achievement.theEnd.desc": {
+  "2e1c7166213c": {
+   "co": "Truvate l'End",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
+  }
+ },
+ "achievement.theEnd2": {
+  "6b4a3a20e019": {
+   "co": "A fine.",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
+  }
+ },
+ "achievement.theEnd2.desc": {
+  "ed27a072bb9b": {
+   "co": "Scunfiggite u Dragone di l'End",
+   "kind": "new",
+   "from": null,
    "review": "ai"
   }
  },
@@ -136,6 +617,54 @@
    "from": "flat_world_preset.unknown",
    "review": "ai",
    "note": "26.3 key of another family; same meaning checked"
+  }
+ },
+ "addServer.hideAddress": {
+  "91701bcdc52d": {
+   "co": "Piattà l'indirizzu",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
+  }
+ },
+ "advMode.allEntities": {
+  "c129786e63bb": {
+   "co": "Aduprate \"@e\" per mirà tutte l'entità",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
+  }
+ },
+ "advMode.allPlayers": {
+  "986139de2f35": {
+   "co": "Aduprate \"@a\" per mirà tutti i ghjucadori",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
+  }
+ },
+ "advMode.nearestPlayer": {
+  "e0675084329c": {
+   "co": "Aduprate \"@p\" per mirà u ghjucadore u più vicinu",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
+  }
+ },
+ "advMode.randomPlayer": {
+  "6d06d015e2ac": {
+   "co": "Aduprate \"@r\" per mirà un ghjucadore à casu",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
+  }
+ },
+ "advMode.self": {
+  "90b93ca2120d": {
+   "co": "Aduprate \"@s\" per mirà l'entità chì eseguisce a cumanda",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
   }
  },
  "advMode.trackOutput": {
@@ -314,6 +843,15 @@
    "from": "advancements.husbandry.axolotl_in_a_bucket.description",
    "review": "ai",
    "note": "English changed only in case or punctuation"
+  }
+ },
+ "advancements.husbandry.break_diamond_hoe.description": {
+  "617d993f3bc6": {
+   "co": "Frustate una zappa di diamante finu à rompela, è dopu ripensate e vostre scelte di vita",
+   "kind": "adapted",
+   "from": "advancements.husbandry.netherite_hoe.description",
+   "review": "ai",
+   "note": "built like the 26.3 netherite hoe advancement"
   }
  },
  "advancements.husbandry.break_diamond_hoe.title": {
@@ -594,6 +1132,14 @@
    "note": "English changed only in case or punctuation"
   }
  },
+ "argument.nbt.invalid": {
+  "8af6e6eb070c": {
+   "co": "NBT inaccettevule : %s",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
+  }
+ },
  "argument.pos.incomplete": {
   "9f73764f6d5c": {
    "co": "Incumpletu (ci volenu 3 coordinate)",
@@ -634,6 +1180,22 @@
    "co": "Incumpletu (ci volenu 2 coordinate)",
    "kind": "renamed",
    "from": "argument.pos2d.incomplete",
+   "review": "ai"
+  }
+ },
+ "arguments.nbtpath.child.invalid": {
+  "71318087a262": {
+   "co": "Impussibule d'accede à u figliolu '%s' : ùn esiste micca o u parente ùn hè micca un compostu",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
+  }
+ },
+ "arguments.nbtpath.element.invalid": {
+  "d8e03774a6c2": {
+   "co": "Impussibule d'accede à l'elementu %s : ùn esiste micca o u parente ùn hè micca una lista",
+   "kind": "new",
+   "from": null,
    "review": "ai"
   }
  },
@@ -1171,6 +1733,122 @@
    "note": "English changed only in case or punctuation"
   }
  },
+ "chat.preview": {
+  "27ee7ce40b4a": {
+   "co": "Scrivite per vede in anteprima",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
+  }
+ },
+ "chat.previewInput": {
+  "920076bc68e7": {
+   "co": "Appughjate nant'à [%s] per vede in anteprima",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
+  }
+ },
+ "chat.stream.emote": {
+  "86ff5a3a4a11": {
+   "co": "(%s) * %s %s",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
+  }
+ },
+ "chat.stream.text": {
+  "21364a3bbf7f": {
+   "co": "(%s) <%s> %s",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
+  }
+ },
+ "chat.tag.filtered": {
+  "d746e7645da1": {
+   "co": "Stu messaghju hè statu filtratu da u servitore.",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
+  }
+ },
+ "chat.tag.modified.original": {
+  "40dccd771ee2": {
+   "co": "Testu uriginale : %s",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
+  }
+ },
+ "chat.type.achievement": {
+  "a2516a678888": {
+   "co": "%s hà guadagnatu u successu %s",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
+  }
+ },
+ "chat.type.achievement.taken": {
+  "b5645b04c23f": {
+   "co": "%s hà persu u successu %s",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
+  }
+ },
+ "chatPreview.warning.check": {
+  "cd554aaf8826": {
+   "co": "Ùn più avvisà per stu servitore",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
+  }
+ },
+ "chatPreview.warning.content": {
+  "a7ac1654939e": {
+   "co": "L'anteprima di a chjachjerata permette à u servitore di vede i vostri messaghji in tempu reale mentre chì voi i scrivite, ancu nanzu ch'elli sianu mandati. Serve spessu à mustrà u vostru messaghju cù u so stile.\n\nL'anteprima hè attivata per difettu, ma si pò disattivà in i parametri di a chjachjerata.",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
+  },
+  "e1c147c38f4f": {
+   "co": "L'anteprima di a chjachjerata permette à u servitore di vede i vostri messaghji nanzu ch'elli sianu mandati à l'altri ghjucadori. Cusì, u servitore vi pò mandà un'anteprima di i vostri messaghji cù mudificazioni è stili persunalizati.\n\nU funziunamentu di l'anteprima si pò cambià in i parametri di a chjachjerata. Parametru attuale : [%s]",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
+  }
+ },
+ "chatPreview.warning.title": {
+  "c48356b8b3b9": {
+   "co": "Stu servitore impiega l'anteprima di a chjachjerata",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
+  }
+ },
+ "chatPreview.warning.toast": {
+  "73bea331e062": {
+   "co": "Stu servitore impiega l'anteprima di a chjachjerata è pò vede i vostri messaghji mentre chì voi i scrivite, ancu nanzu ch'elli sianu mandati. A pudete disattivà in i parametri di a chjachjerata.",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
+  },
+  "91b0e8795bd5": {
+   "co": "Stu servitore impiega l'anteprima di a chjachjerata è pò vede i vostri messaghji nanzu ch'elli sianu mandati à l'altri ghjucadori. A pudete disattivà in i parametri di a chjachjerata.",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
+  }
+ },
+ "chatPreview.warning.toast.title": {
+  "c71474fa8797": {
+   "co": "L'anteprima di a chjachjerata hè attivata",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
+  }
+ },
  "chat_restriction.disabled_by_launcher": {
   "a67c2a45d9d8": {
    "co": "A chjachjerata hè ristretta da u lanciadore",
@@ -1535,6 +2213,116 @@
    "note": "26.3 key of another family; same meaning checked"
   }
  },
+ "container.minecart.chest": {
+  "a436e80133c3": {
+   "co": "Carrettu cù cascia",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
+  }
+ },
+ "container.minecart.hopper": {
+  "323767a31a59": {
+   "co": "Carrettu cù tramoghja",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
+  }
+ },
+ "createWorld.customize.buffet.generator": {
+  "719b3a92446e": {
+   "co": "Sceglite un tipu di generatore",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
+  }
+ },
+ "createWorld.customize.buffet.generatortype": {
+  "64d8f41b3c42": {
+   "co": "Generatore di mondu :",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
+  }
+ },
+ "createWorld.customize.custom.baseSize": {
+  "b76c11e81e1a": {
+   "co": "Dimensione di basa di a prufundità",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
+  }
+ },
+ "createWorld.customize.custom.biomeDepthOffset": {
+  "927ddfb89290": {
+   "co": "Spiazzamentu di prufundità di i biomi",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
+  }
+ },
+ "createWorld.customize.custom.biomeDepthWeight": {
+  "7bf125b5a685": {
+   "co": "Pesu di prufundità di i biomi",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
+  }
+ },
+ "createWorld.customize.custom.biomeScaleOffset": {
+  "589bf44b3039": {
+   "co": "Spiazzamentu di scala di i biomi",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
+  }
+ },
+ "createWorld.customize.custom.biomeScaleWeight": {
+  "a9fe63b41511": {
+   "co": "Pesu di scala di i biomi",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
+  }
+ },
+ "createWorld.customize.custom.biomeSize": {
+  "597f36b121fc": {
+   "co": "Dimensione di i biomi",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
+  }
+ },
+ "createWorld.customize.custom.center": {
+  "dd4bfb08bdb5": {
+   "co": " Altezza centrale",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
+  },
+  "e624852f3412": {
+   "co": "Altezza centrale",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
+  }
+ },
+ "createWorld.customize.custom.confirm1": {
+  "2ed271022466": {
+   "co": "Quessu rimpiazzerà i vostri parametri",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
+  }
+ },
+ "createWorld.customize.custom.confirm2": {
+  "7148f30c4ae3": {
+   "co": "attuali è ùn si pò micca disfà.",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
+  }
+ },
  "createWorld.customize.custom.confirmTitle": {
   "c94e855e54cd": {
    "co": "Attenti !",
@@ -1544,6 +2332,152 @@
    "note": "26.3 key of another family; same meaning checked"
   }
  },
+ "createWorld.customize.custom.coordinateScale": {
+  "e16d918ae551": {
+   "co": "Scala di e coordinate",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
+  }
+ },
+ "createWorld.customize.custom.count": {
+  "526dbc71d7fa": {
+   "co": " Tentativi d'apparizione",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
+  },
+  "bc4dc6ae31b2": {
+   "co": "Tentativi d'apparizione",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
+  }
+ },
+ "createWorld.customize.custom.defaults": {
+  "428819bf9e83": {
+   "co": "Valori predefiniti",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
+  }
+ },
+ "createWorld.customize.custom.depthNoiseScaleExponent": {
+  "c8f29a7171a0": {
+   "co": "Espunente di u rimore di prufundità",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
+  }
+ },
+ "createWorld.customize.custom.depthNoiseScaleX": {
+  "a517f9b29805": {
+   "co": "Scala X di u rimore di prufundità",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
+  }
+ },
+ "createWorld.customize.custom.depthNoiseScaleZ": {
+  "70f0487483dc": {
+   "co": "Scala Z di u rimore di prufundità",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
+  }
+ },
+ "createWorld.customize.custom.dungeonChance": {
+  "f1cda165c1fd": {
+   "co": "Numeru di segrete",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
+  }
+ },
+ "createWorld.customize.custom.fixedBiome": {
+  "4e60685e05f6": {
+   "co": "Biomu",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
+  }
+ },
+ "createWorld.customize.custom.heightScale": {
+  "6e19527f1a1e": {
+   "co": "Scala d'altezza",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
+  }
+ },
+ "createWorld.customize.custom.lavaLakeChance": {
+  "0901df898d2f": {
+   "co": "Rarità di i laghi di lava",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
+  }
+ },
+ "createWorld.customize.custom.lowerLimitScale": {
+  "09fb6b099901": {
+   "co": "Scala di u limitu bassu",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
+  }
+ },
+ "createWorld.customize.custom.mainNoiseScaleX": {
+  "7632c8ced731": {
+   "co": "Scala X di u rimore principale",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
+  }
+ },
+ "createWorld.customize.custom.mainNoiseScaleY": {
+  "33b6ba8f4dff": {
+   "co": "Scala Y di u rimore principale",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
+  }
+ },
+ "createWorld.customize.custom.mainNoiseScaleZ": {
+  "8f3fc02ef53e": {
+   "co": "Scala Z di u rimore principale",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
+  }
+ },
+ "createWorld.customize.custom.maxHeight": {
+  "05c496f176d1": {
+   "co": " Altezza mass.",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
+  },
+  "32b206768a1e": {
+   "co": "Altezza mass.",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
+  }
+ },
+ "createWorld.customize.custom.minHeight": {
+  "1394c154bf08": {
+   "co": "Altezza min.",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
+  },
+  "ad7222462c09": {
+   "co": " Altezza min.",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
+  }
+ },
  "createWorld.customize.custom.next": {
   "5e92f5f19e85": {
    "co": "Pagina seguente",
@@ -1551,6 +2485,86 @@
    "from": "book.page_button.next",
    "review": "ai",
    "note": "26.3 key of another family; same meaning checked"
+  }
+ },
+ "createWorld.customize.custom.page0": {
+  "d006c7cc33f1": {
+   "co": "Parametri di basa",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
+  }
+ },
+ "createWorld.customize.custom.page1": {
+  "8287158518f9": {
+   "co": "Parametri di i minerali",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
+  }
+ },
+ "createWorld.customize.custom.page2": {
+  "a3c52cea6049": {
+   "co": "Parametri avanzati (solu per sperti !)",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
+  }
+ },
+ "createWorld.customize.custom.page3": {
+  "8976cf8b7db2": {
+   "co": "Parametri assai avanzati (solu per sperti !)",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
+  }
+ },
+ "createWorld.customize.custom.preset.caveChaos": {
+  "816bf3771f46": {
+   "co": "Grotte di u caosu",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
+  }
+ },
+ "createWorld.customize.custom.preset.caveDelight": {
+  "a0a2c804903b": {
+   "co": "A gioia di i speleologhi",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
+  }
+ },
+ "createWorld.customize.custom.preset.drought": {
+  "225c88a863d0": {
+   "co": "Seccia",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
+  }
+ },
+ "createWorld.customize.custom.preset.goodLuck": {
+  "33cd1e6b57a2": {
+   "co": "Bona furtuna",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
+  }
+ },
+ "createWorld.customize.custom.preset.isleLand": {
+  "03d6c9673233": {
+   "co": "Terra d'isule",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
+  }
+ },
+ "createWorld.customize.custom.preset.mountains": {
+  "c5e93be97f5e": {
+   "co": "Muntagne matte",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
   }
  },
  "createWorld.customize.custom.preset.waterWorld": {
@@ -1570,6 +2584,14 @@
    "review": "ai"
   }
  },
+ "createWorld.customize.custom.presets.title": {
+  "f7cb8004995c": {
+   "co": "Prerigature di mondu persunalizatu",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
+  }
+ },
  "createWorld.customize.custom.prev": {
   "27e16676ef1c": {
    "co": "Pagina precedente",
@@ -1577,6 +2599,74 @@
    "from": "book.page_button.previous",
    "review": "ai",
    "note": "26.3 key of another family; same meaning checked"
+  }
+ },
+ "createWorld.customize.custom.randomize": {
+  "7e429a6c549c": {
+   "co": "À casu",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
+  }
+ },
+ "createWorld.customize.custom.riverSize": {
+  "5f2758657067": {
+   "co": "Dimensione di i fiumi",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
+  }
+ },
+ "createWorld.customize.custom.seaLevel": {
+  "27b385bc344c": {
+   "co": "Livellu di u mare",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
+  }
+ },
+ "createWorld.customize.custom.size": {
+  "dba494ad3503": {
+   "co": "Dimensione d'apparizione",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
+  },
+  "de472d5b25a5": {
+   "co": " Dimensione d'apparizione",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
+  }
+ },
+ "createWorld.customize.custom.spread": {
+  "3049f18e402d": {
+   "co": "Altezza di sparghjera",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
+  },
+  "f91f4c2a0283": {
+   "co": " Altezza di sparghjera",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
+  }
+ },
+ "createWorld.customize.custom.stretchY": {
+  "708dbb99a82c": {
+   "co": "Stiramentu d'altezza",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
+  }
+ },
+ "createWorld.customize.custom.upperLimitScale": {
+  "79c5b30c5506": {
+   "co": "Scala di u limitu altu",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
   }
  },
  "createWorld.customize.custom.useCaves": {
@@ -1588,6 +2678,118 @@
    "note": "26.3 key of another family; same meaning checked"
   }
  },
+ "createWorld.customize.custom.useDungeons": {
+  "89eabb1765a7": {
+   "co": "Segrete",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
+  }
+ },
+ "createWorld.customize.custom.useLavaLakes": {
+  "4897afed1c77": {
+   "co": "Laghi di lava",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
+  }
+ },
+ "createWorld.customize.custom.useLavaOceans": {
+  "042d94b22a82": {
+   "co": "Oceani di lava",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
+  }
+ },
+ "createWorld.customize.custom.useMansions": {
+  "13a305e28c0e": {
+   "co": "Palazzi di i boschi",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
+  }
+ },
+ "createWorld.customize.custom.useMineShafts": {
+  "88b4e3098b63": {
+   "co": "Gallerie di minera",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
+  }
+ },
+ "createWorld.customize.custom.useMonuments": {
+  "ea25d6475642": {
+   "co": "Munumenti oceanichi",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
+  }
+ },
+ "createWorld.customize.custom.useOceanRuins": {
+  "80a11e4eae14": {
+   "co": "Ruvine oceaniche",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
+  }
+ },
+ "createWorld.customize.custom.useRavines": {
+  "a51c539974d2": {
+   "co": "Burroni",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
+  }
+ },
+ "createWorld.customize.custom.useStrongholds": {
+  "c997c73e01f1": {
+   "co": "Furtezze",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
+  }
+ },
+ "createWorld.customize.custom.useTemples": {
+  "4ec77ede7887": {
+   "co": "Tempii",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
+  }
+ },
+ "createWorld.customize.custom.useVillages": {
+  "28dfe58bbd81": {
+   "co": "Paesi",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
+  }
+ },
+ "createWorld.customize.custom.useWaterLakes": {
+  "d9574467b845": {
+   "co": "Laghi d'acqua",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
+  }
+ },
+ "createWorld.customize.custom.waterLakeChance": {
+  "54fdcc44abb9": {
+   "co": "Rarità di i laghi d'acqua",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
+  }
+ },
+ "createWorld.customize.flat.addLayer": {
+  "a39ef9a1e19f": {
+   "co": "Aghjunghje un stratu",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
+  }
+ },
  "createWorld.customize.flat.air": {
   "ddd068101243": {
    "co": "Aria",
@@ -1595,6 +2797,14 @@
    "from": "block.minecraft.air",
    "review": "ai",
    "note": "26.3 key of another family; same meaning checked"
+  }
+ },
+ "createWorld.customize.flat.editLayer": {
+  "577d5988d78a": {
+   "co": "Mudificà u stratu",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
   }
  },
  "createWorld.customize.preset.bottomless_pit": {
@@ -1703,6 +2913,38 @@
    "review": "ai"
   }
  },
+ "death.fell.accident.water": {
+  "c733f990bd15": {
+   "co": "%1$s hè cascatu fora di l'acqua",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
+  }
+ },
+ "deathScreen.deleteWorld": {
+  "14488b1d9275": {
+   "co": "Squassà u mondu",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
+  }
+ },
+ "deathScreen.hardcoreInfo": {
+  "7f20328d415e": {
+   "co": "Ùn pudete micca rinasce in modu estremu !",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
+  }
+ },
+ "deathScreen.leaveServer": {
+  "da6fea13c7e3": {
+   "co": "Lascià u servitore",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
+  }
+ },
  "deathScreen.spectate": {
   "5133b20e4eaf": {
    "co": "Fighjà u mondu",
@@ -1739,6 +2981,28 @@
    "note": "English changed only in case or punctuation"
   }
  },
+ "debug.cycle_renderdistance.help": {
+  "2d811b3badbf": {
+   "co": "F3 + F = Cambià a distanza di visualizazione (Maiuscule per invertisce)",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
+  },
+  "9dae7c07bfc1": {
+   "co": "F3 + F = Cambià a distanza di visualizazione (Maiuscule per invertisce)",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
+  }
+ },
+ "debug.cycle_renderdistance.message": {
+  "0d0d0e77cd15": {
+   "co": "Distanza di visualizazione : %s",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
+  }
+ },
  "debug.options.notAllowed.tooltip": {
   "9e343e0200a7": {
    "co": "Micca visibile quandu l'infurmazioni di spannatura sò ridotte",
@@ -1773,6 +3037,52 @@
    "from": "demo.reminder",
    "review": "ai",
    "note": "English changed only in case or punctuation"
+  }
+ },
+ "disconnect.closed": {
+  "5f1cf5c4ba39": {
+   "co": "Cunnessione chjosa",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
+  }
+ },
+ "disconnect.disconnected": {
+  "b2d9f523c6cd": {
+   "co": "Scunnettatu da u servitore",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
+  }
+ },
+ "disconnect.kicked": {
+  "0769d134ca6b": {
+   "co": "Espulsu da u ghjocu",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
+  }
+ },
+ "disconnect.loginFailed": {
+  "0c0f3ff0e35e": {
+   "co": "Fiascu di a cunnessione",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
+  },
+  "c6cddd36d123": {
+   "co": "Fiascu di a cunnessione",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
+  }
+ },
+ "disconnect.overflow": {
+  "cce48398db48": {
+   "co": "Debordu di memoria tampone",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
   }
  },
  "disconnect.quitting": {
@@ -3244,6 +4554,12 @@
    "kind": "renamed",
    "from": "generator.minecraft.amplified",
    "review": "ai"
+  },
+  "cd12a3cbbb3e": {
+   "co": "Amplificatu",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
   }
  },
  "generator.amplified.info": {
@@ -3252,6 +4568,22 @@
    "kind": "renamed",
    "from": "generator.minecraft.amplified.info",
    "review": "ai"
+  },
+  "cce9142b8e9c": {
+   "co": "Attenzione : solu per divertimentu, ci vole un urdinatore putente",
+   "kind": "adapted",
+   "from": "generator.minecraft.amplified.info",
+   "review": "ai",
+   "note": "26.3 sentence with this English's punctuation"
+  }
+ },
+ "generator.buffet": {
+  "cdfeebfa2509": {
+   "co": "Buffet",
+   "kind": "new",
+   "from": null,
+   "review": "ai",
+   "note": "same as English: kept as the name of the world type"
   }
  },
  "generator.debug_all_block_states": {
@@ -3307,6 +4639,14 @@
    "co": "Isule volante",
    "kind": "renamed",
    "from": "generator.single_biome_floating_islands",
+   "review": "ai"
+  }
+ },
+ "generator.minecraft.surface": {
+  "cda05ca6d84a": {
+   "co": "Superficia",
+   "kind": "new",
+   "from": null,
    "review": "ai"
   }
  },
@@ -3370,6 +4710,14 @@
    "from": "gui.abuseReport.sent.title",
    "review": "ai",
    "note": "English changed only in case or punctuation"
+  }
+ },
+ "gui.achievements": {
+  "a6634f24b2db": {
+   "co": "Successi",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
   }
  },
  "gui.banned.description.permanent": {
@@ -11285,6 +12633,38 @@
    "review": "ai"
   }
  },
+ "itemGroup.brewing": {
+  "16792ae3681f": {
+   "co": "Distillazione",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
+  }
+ },
+ "itemGroup.decorations": {
+  "b12ba0ebca55": {
+   "co": "Blocchi di decurazione",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
+  }
+ },
+ "itemGroup.food": {
+  "bd100859f41d": {
+   "co": "Alimenti",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
+  }
+ },
+ "itemGroup.materials": {
+  "2402ea363265": {
+   "co": "Materiali",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
+  }
+ },
  "itemGroup.misc": {
   "5f2cbd107037": {
    "co": "Diversi",
@@ -11292,6 +12672,22 @@
    "from": "key.categories.misc",
    "review": "ai",
    "note": "26.3 key of another family; same meaning checked"
+  }
+ },
+ "itemGroup.transportation": {
+  "145a070a5177": {
+   "co": "Trasporti",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
+  }
+ },
+ "jigsaw_block.attachement_type": {
+  "33b0104ff3fd": {
+   "co": "Tipu d'attaccu :",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
   }
  },
  "jigsaw_block.joint_label": {
@@ -11330,6 +12726,23 @@
    "note": "English changed only in case or punctuation"
   }
  },
+ "jigsaw_block.target_pool": {
+  "4e87d961b132": {
+   "co": "Inseme di destinazione :",
+   "kind": "adapted",
+   "from": "jigsaw_block.pool",
+   "review": "ai",
+   "note": "same English as 26.3 jigsaw_block.pool"
+  }
+ },
+ "key.categories.stream": {
+  "1e8325521df6": {
+   "co": "Diffusione in diretta",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
+  }
+ },
  "key.debug.fpsCharts": {
   "4cd8c9bd9531": {
    "co": "Grafichi di fps",
@@ -11337,6 +12750,14 @@
    "from": "key.debug.fpsCharts",
    "review": "ai",
    "note": "English changed only in case or punctuation"
+  }
+ },
+ "key.fog": {
+  "fc1112fdd369": {
+   "co": "Attivà/disattivà a nebbia",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
   }
  },
  "key.keyboard.unknown": {
@@ -11353,6 +12774,46 @@
    "co": "Buttone %1$s",
    "kind": "renamed",
    "from": "key.mouse",
+   "review": "ai"
+  }
+ },
+ "key.streamCommercial": {
+  "8feb4cb3427b": {
+   "co": "Mustrà e publicità di a diffusione",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
+  }
+ },
+ "key.streamPauseUnpause": {
+  "defdb339e671": {
+   "co": "Mette in pausa/ripiglià a diffusione",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
+  }
+ },
+ "key.streamStartStop": {
+  "f428b2bb9b5e": {
+   "co": "Lancià/piantà a diffusione",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
+  }
+ },
+ "key.streamToggleMic": {
+  "3afcf5f1063c": {
+   "co": "Parlà/silenzià u micrò",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
+  }
+ },
+ "key.swapHands": {
+  "dd18dbaa3c3d": {
+   "co": "Scambià l'ogetti trà e mani",
+   "kind": "new",
+   "from": null,
    "review": "ai"
   }
  },
@@ -11597,6 +13058,14 @@
    "note": "English changed only in case or punctuation"
   }
  },
+ "mco.backup.title": {
+  "530cc25bdc7d": {
+   "co": "Salvaguardie",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
+  }
+ },
  "mco.brokenworld.nonowner.error": {
   "22b395723a9a": {
    "co": "Aspettate chì u pruprietariu di u Realm reinizii u mondu",
@@ -11604,6 +13073,38 @@
    "from": "mco.brokenworld.nonowner.error",
    "review": "ai",
    "note": "English changed only in case or punctuation"
+  }
+ },
+ "mco.buy.realms.buy": {
+  "cdbdc144e12b": {
+   "co": "Ne vogliu unu !",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
+  }
+ },
+ "mco.buy.realms.title": {
+  "40b0d276e729": {
+   "co": "Cumprà un Realm",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
+  }
+ },
+ "mco.client.outdated.msg": {
+  "5581c9bb5be8": {
+   "co": "U vostru cliente ùn hè più à ghjornu : pensate à aghjurnallu per aduprà Realms",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
+  }
+ },
+ "mco.client.outdated.title": {
+  "660681d0a18c": {
+   "co": "Cliente scadutu !",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
   }
  },
  "mco.compatibility.downgrade.description": {
@@ -11633,6 +13134,22 @@
    "note": "English changed only in case or punctuation"
   }
  },
+ "mco.configure.world.buttons.backup": {
+  "530cc25bdc7d": {
+   "co": "Salvaguardie",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
+  }
+ },
+ "mco.configure.world.buttons.deop": {
+  "a6a12cf450fe": {
+   "co": "Caccià l'operatore",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
+  }
+ },
  "mco.configure.world.buttons.invite": {
   "51c06f119227": {
    "co": "Invità un ghjucadore",
@@ -11640,6 +13157,22 @@
    "from": "mco.configure.world.buttons.invite",
    "review": "ai",
    "note": "English changed only in case or punctuation"
+  }
+ },
+ "mco.configure.world.buttons.modifyMiniGame": {
+  "81fac2408c44": {
+   "co": "Mudificà u minighjocu",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
+  }
+ },
+ "mco.configure.world.buttons.op": {
+  "1e5c03c4ca5d": {
+   "co": "Operatore",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
   }
  },
  "mco.configure.world.buttons.options": {
@@ -11651,6 +13184,14 @@
    "note": "English changed only in case or punctuation"
   }
  },
+ "mco.configure.world.buttons.reset": {
+  "11c94ba90bb8": {
+   "co": "Reinizià u Realm",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
+  }
+ },
  "mco.configure.world.buttons.resetworld": {
   "7353fd7f6e30": {
    "co": "Reinizià u mondu",
@@ -11660,6 +13201,14 @@
    "note": "English changed only in case or punctuation"
   }
  },
+ "mco.configure.world.buttons.startMiniGame": {
+  "63aab903ce74": {
+   "co": "Passà à un minighjocu",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
+  }
+ },
  "mco.configure.world.buttons.switchminigame": {
   "e1fb1ff168ea": {
    "co": "Cambià di minighjocu",
@@ -11667,6 +13216,14 @@
    "from": "mco.configure.world.buttons.switchminigame",
    "review": "ai",
    "note": "English changed only in case or punctuation"
+  }
+ },
+ "mco.configure.world.buttons.uninvite": {
+  "5f29f579a194": {
+   "co": "Caccià l'invitu",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
   }
  },
  "mco.configure.world.close.question.line1": {
@@ -11721,6 +13278,14 @@
    "from": "mco.configure.world.edit.slot.name",
    "review": "ai",
    "note": "English changed only in case or punctuation"
+  }
+ },
+ "mco.configure.world.edit.title": {
+  "eeec6c8696af": {
+   "co": "Mudificà u Realm",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
   }
  },
  "mco.configure.world.forceGameMode": {
@@ -11847,6 +13412,14 @@
    "note": "punctuation as in this English"
   }
  },
+ "mco.configure.world.subscription.daysleft": {
+  "c27b0cf1dfbc": {
+   "co": "Ghjorni chì fermanu",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
+  }
+ },
  "mco.configure.world.subscription.extend": {
   "c030dd4a7767": {
    "co": "Allungà l'abbunamentu",
@@ -11854,6 +13427,14 @@
    "from": "mco.configure.world.subscription.extend",
    "review": "ai",
    "note": "English changed only in case or punctuation"
+  }
+ },
+ "mco.configure.world.subscription.extendHere": {
+  "e447b1831ba0": {
+   "co": "Allungà l'abbunamentu quì :",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
   }
  },
  "mco.configure.world.subscription.less_than_a_day": {
@@ -11942,6 +13523,22 @@
    "from": "mco.connect.failed",
    "review": "ai",
    "note": "English changed only in case or punctuation"
+  }
+ },
+ "mco.create.world.location.title": {
+  "e59e8f15f760": {
+   "co": "Lochi",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
+  }
+ },
+ "mco.create.world.location.warning": {
+  "9c2b865d7dfc": {
+   "co": "Pò esse chì ùn vi tocchi u locu esattu ch'è vo sciglite",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
   }
  },
  "mco.create.world.seed": {
@@ -12042,11 +13639,43 @@
    "note": "English changed only in case or punctuation"
   }
  },
+ "mco.minigame.world.info1": {
+  "486fd8f4c153": {
+   "co": "Quessu rimpiazzerà per un pezzu u vostru mondu cù un minighjocu !",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
+  }
+ },
  "mco.minigame.world.info2": {
   "73fbaddc8df7": {
    "co": "Pudete vultà dopu à u vostru mondu uriginale senza perde nunda.",
    "kind": "renamed",
    "from": "mco.minigame.world.info.line2",
+   "review": "ai"
+  }
+ },
+ "mco.minigame.world.modify.end": {
+  "51ee31ba28b7": {
+   "co": "Finisce u minighjocu è ristabilisce u vostru Realm ?",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
+  }
+ },
+ "mco.minigame.world.modify.new": {
+  "309c78fe4ab0": {
+   "co": "Selezziunà un altru minighjocu ?",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
+  }
+ },
+ "mco.minigame.world.modify.title": {
+  "81fac2408c44": {
+   "co": "Mudificà u minighjocu",
+   "kind": "new",
+   "from": null,
    "review": "ai"
   }
  },
@@ -12120,6 +13749,14 @@
    "from": "mco.minigame.world.title",
    "review": "ai",
    "note": "English changed only in case or punctuation"
+  }
+ },
+ "mco.more.info.question.line1": {
+  "a2d4de45b40c": {
+   "co": "Serete mandati à u vostru navigatore predefinitu per vede a pagina.",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
   }
  },
  "mco.more.info.question.line2": {
@@ -12238,6 +13875,22 @@
    "note": "English changed only in case or punctuation"
   }
  },
+ "mco.selectServer.locked": {
+  "054256d5812e": {
+   "co": "Servitore bluccatu",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
+  }
+ },
+ "mco.selectServer.moreinfo": {
+  "3c8c0b9c9e94": {
+   "co": "Più d'infurmazioni",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
+  }
+ },
  "mco.selectServer.open": {
   "5f48517ea5f6": {
    "co": "Realm apertu",
@@ -12288,6 +13941,14 @@
    "from": "mco.selectServer.uninitialized",
    "review": "ai",
    "note": "English changed only in case or punctuation"
+  }
+ },
+ "mco.selectServer.whatisrealms": {
+  "001711ac8f41": {
+   "co": "Chì hè Realms ?",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
   }
  },
  "mco.terms.buttons.disagree": {
@@ -12342,6 +14003,22 @@
    "note": "English changed only in case or punctuation"
   }
  },
+ "mcoServer.title": {
+  "ef13c9a08b4f": {
+   "co": "Mondu Minecraft in linea",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
+  }
+ },
+ "menu.convertingLevel": {
+  "eda366e37370": {
+   "co": "Cunversione di u mondu",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
+  }
+ },
  "menu.game": {
   "02c8caaf7c3f": {
    "co": "Listinu di u ghjocu",
@@ -12351,6 +14028,38 @@
    "note": "English changed only in case or punctuation"
   }
  },
+ "menu.generatingLevel": {
+  "0b9a3eb52505": {
+   "co": "Generazione di u mondu",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
+  }
+ },
+ "menu.generatingTerrain": {
+  "923c6e68bda7": {
+   "co": "Custruzzione di u terrenu",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
+  }
+ },
+ "menu.loadingForcedChunks": {
+  "da3a19174fe5": {
+   "co": "Caricamentu di i pezzi furzati per a dimensione %s",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
+  }
+ },
+ "menu.loadingLevel": {
+  "31774d3ae5ae": {
+   "co": "Caricamentu di u mondu",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
+  }
+ },
  "menu.paused": {
   "2ca008102a7f": {
    "co": "Ghjocu in pausa",
@@ -12358,6 +14067,46 @@
    "from": "menu.paused",
    "review": "ai",
    "note": "English changed only in case or punctuation"
+  }
+ },
+ "menu.respawning": {
+  "a6f1407a4b42": {
+   "co": "Rinascita",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
+  }
+ },
+ "menu.simulating": {
+  "b529e8df5a66": {
+   "co": "Simulazione di u mondu per un pezzu",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
+  }
+ },
+ "menu.switchingLevel": {
+  "413e268d9301": {
+   "co": "Cambiamentu di mondu",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
+  }
+ },
+ "merchant.current_level": {
+  "c1a69d34d73c": {
+   "co": "Livellu attuale di u mercante",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
+  }
+ },
+ "merchant.next_level": {
+  "c205a992a357": {
+   "co": "Livellu seguente di u mercante",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
   }
  },
  "mount.onboard": {
@@ -12378,6 +14127,14 @@
    "note": "English changed only in case or punctuation"
   }
  },
+ "multiplayer.connect": {
+  "b65463cb6a42": {
+   "co": "Cunnettesi",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
+  }
+ },
  "multiplayer.disconnect.authservers_down": {
   "b62e9fa3dbc0": {
    "co": "I servitori d'autenticazione sò in panna. Pruvate torna più tardi. Scusate !",
@@ -12396,6 +14153,14 @@
    "note": "punctuation as in this English"
   }
  },
+ "multiplayer.disconnect.invalid_public_key": {
+  "0f32c71d3755": {
+   "co": "Impussibule d'analizà a chjave publica di u prufilu.",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
+  }
+ },
  "multiplayer.disconnect.kicked": {
   "b8b76bbc6ecc": {
    "co": "Espulsu da un operatore.",
@@ -12403,6 +14168,14 @@
    "from": "multiplayer.disconnect.kicked",
    "review": "ai",
    "note": "punctuation as in this English"
+  }
+ },
+ "multiplayer.disconnect.missing_public_key": {
+  "6ee448cda931": {
+   "co": "Chjave publica di u prufilu mancante.\nStu servitore richiede prufili sicuri.",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
   }
  },
  "multiplayer.downloadingTerrain": {
@@ -12414,6 +14187,46 @@
    "note": "punctuation as in this English"
   }
  },
+ "multiplayer.info1": {
+  "3eb22b50040d": {
+   "co": "U modu parechji ghjucadori di Minecraft ùn hè ancu finitu, ma ci sò",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
+  }
+ },
+ "multiplayer.info2": {
+  "efd2104e979f": {
+   "co": "prove preliminari, cù qualchì bug.",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
+  }
+ },
+ "multiplayer.ipinfo": {
+  "bb9956815452": {
+   "co": "Scrivite l'IP d'un servitore per cunnettesi ci :",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
+  }
+ },
+ "multiplayer.status.client_out_of_date": {
+  "27e878d07fd6": {
+   "co": "Cliente scadutu !",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
+  }
+ },
+ "multiplayer.status.server_out_of_date": {
+  "d2e495e08a4f": {
+   "co": "Servitore scadutu !",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
+  }
+ },
  "optimizeWorld.confirm.title": {
   "2480149fb4cc": {
    "co": "Ottimizà u mondu",
@@ -12421,6 +14234,14 @@
    "from": "optimizeWorld.confirm.title",
    "review": "ai",
    "note": "English changed only in case or punctuation"
+  }
+ },
+ "optimizeWorld.stage.structures": {
+  "bc598581ab0d": {
+   "co": "Messa à livellu di i dati di e strutture…",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
   }
  },
  "options.accessibility.high_contrast.error.tooltip": {
@@ -12459,6 +14280,47 @@
    "note": "punctuation as in this English"
   }
  },
+ "options.advancedButton": {
+  "d2534b7ff96d": {
+   "co": "Parametri video avanzati…",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
+  }
+ },
+ "options.advancedOpengl": {
+  "72194bb6a710": {
+   "co": "OpenGL avanzatu",
+   "kind": "new",
+   "from": null,
+   "review": "ai",
+   "note": "same as English: OpenGL is a name"
+  }
+ },
+ "options.advancedOpenglDesc0": {
+  "32ab9868ed22": {
+   "co": "Attiva e richieste d'occlusione. Nant'à i materiali AMD",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
+  }
+ },
+ "options.advancedOpenglDesc1": {
+  "c84931f3c2df": {
+   "co": "è Intel, quessa pò riduce e perfurmenze.",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
+  }
+ },
+ "options.advancedVideoTitle": {
+  "9b9a723f32c3": {
+   "co": "Parametri video avanzati",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
+  }
+ },
  "options.allowServerListing.tooltip": {
   "40ce7ad44fe2": {
    "co": "I servitori ponu elencà i ghjucadori in linea in u so statutu publicu.\nS'è st'ozzione hè disattivata, u vostru nome ùn cumparerà micca in sse liste.",
@@ -12466,6 +14328,14 @@
    "from": "options.allowServerListing.tooltip",
    "review": "ai",
    "note": "English changed only in case or punctuation"
+  }
+ },
+ "options.anaglyph": {
+  "7e8fd8978557": {
+   "co": "Anaglifu 3D",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
   }
  },
  "options.anisotropicFiltering": {
@@ -12485,6 +14355,14 @@
    "note": "English changed only in case or punctuation"
   }
  },
+ "options.aoDesc0": {
+  "b3d69ab86912": {
+   "co": "Attiva una falsa occlusione ambientale nant'à i blocchi.",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
+  }
+ },
  "options.autoJump": {
   "1e475042d666": {
    "co": "Saltu autumaticu",
@@ -12492,6 +14370,14 @@
    "from": "options.autoJump",
    "review": "ai",
    "note": "English changed only in case or punctuation"
+  }
+ },
+ "options.blockAlternatives": {
+  "a223b9aeb8fd": {
+   "co": "Blocchi alternativi",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
   }
  },
  "options.chat.title": {
@@ -12503,6 +14389,62 @@
    "note": "punctuation as in this English"
   }
  },
+ "options.chatPreview": {
+  "f92b1ade947b": {
+   "co": "Anteprima di a chjachjerata",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
+  }
+ },
+ "options.chatPreview.confirm": {
+  "38d17b0e88f6": {
+   "co": "À u mandu",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
+  }
+ },
+ "options.chatPreview.live": {
+  "26e57dac8b22": {
+   "co": "Mentre chì si scrive",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
+  }
+ },
+ "options.chatPreview.tooltip": {
+  "9b56f5cd27f2": {
+   "co": "L'anteprima di a chjachjerata permette à i servitori di vede i vostri messaghji mentre chì voi i scrivite, ciò chì li permette di dà li un stile. Pudete sempre chjachjarà s'è vo a disattivate.",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
+  }
+ },
+ "options.chatPreview.tooltip.confirm": {
+  "fd03f661dd05": {
+   "co": "S'è un servitore impiega l'anteprima di a chjachjerata : un'anteprima hè generata solu quandu pruvate à mandà un messaghju chì ùn n'hà micca o chì l'aspetta.\nU mandu di u messaghju richiede una cunferma.",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
+  }
+ },
+ "options.chatPreview.tooltip.live": {
+  "01334a5b2bf2": {
+   "co": "S'è un servitore impiega l'anteprima di a chjachjerata : ogni mudificazione fatta da u servitore à i vostri messaghji serà mandata in anteprima mentre chì voi scrivite.",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
+  }
+ },
+ "options.chatPreview.tooltip.off": {
+  "8d80b797bf71": {
+   "co": "E mudificazioni fatte da un servitore à i vostri messaghji ùn seranu micca mustrate in anteprima è seranu trattate cum'è micca sicure.",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
+  }
+ },
  "options.chunks": {
   "b2544548b1bd": {
    "co": "%s pezzi",
@@ -12510,6 +14452,14 @@
    "from": "options.chunks",
    "review": "ai",
    "note": "English changed only in case or punctuation"
+  }
+ },
+ "options.customizeTitle": {
+  "0b5acb9058ce": {
+   "co": "Persunalizà i parametri di u mondu",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
   }
  },
  "options.directionalAudio.off.tooltip": {
@@ -12528,6 +14478,70 @@
    "from": "mco.upload.percent",
    "review": "ai",
    "note": "26.3 key of another family; same meaning checked"
+  }
+ },
+ "options.farWarning1": {
+  "54cc6769e0df": {
+   "co": "Una installazione Java à 64 bit hè ricumandata",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
+  }
+ },
+ "options.farWarning2": {
+  "2010f4c214a7": {
+   "co": "per a distanza 'Luntana' (avete 32 bit)",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
+  }
+ },
+ "options.fboEnable": {
+  "d5cc697b8c5d": {
+   "co": "Attivà i FBO",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
+  }
+ },
+ "options.fboEnableDesc0": {
+  "44b7a85c048b": {
+   "co": "Attiva l'usu di l'ogetti framebuffer (FBO).",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
+  }
+ },
+ "options.fboEnableDesc1": {
+  "c4bb218c1499": {
+   "co": "Necessarii per certe funzioni di Minecraft.",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
+  }
+ },
+ "options.fovEffectScale.off": {
+  "e3de5ab0ca4c": {
+   "co": "Disattivatu",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
+  }
+ },
+ "options.framerateLimitDesc0": {
+  "91538cf6c6b4": {
+   "co": "Sceglie a frequenza massima di fiure :",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
+  }
+ },
+ "options.framerateLimitDesc1": {
+  "97cabfee24b5": {
+   "co": "35 fps, 120 fps o 200+ fps.",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
   }
  },
  "options.graphics.fabulous.tooltip": {
@@ -12580,11 +14594,43 @@
    "note": "English changed only in case or punctuation"
   }
  },
+ "options.graphicsDesc0": {
+  "b333ca41a1c9": {
+   "co": "'Elaburata' : attiva più trasparenza.",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
+  }
+ },
+ "options.graphicsDesc1": {
+  "60fee20a5ae0": {
+   "co": "'Rapida' : cunsigliata per i materiali modesti.",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
+  }
+ },
+ "options.guiScale.large": {
+  "738fd1d2452f": {
+   "co": "Grande",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
+  }
+ },
  "options.guiScale.normal": {
   "45e118d0563e": {
    "co": "Nurmale",
    "kind": "renamed",
    "from": "options.difficulty.normal",
+   "review": "ai"
+  }
+ },
+ "options.guiScale.small": {
+  "c74fd9714e38": {
+   "co": "Chjuca",
+   "kind": "new",
+   "from": null,
    "review": "ai"
   }
  },
@@ -12678,6 +14724,94 @@
    "note": "English changed only in case or punctuation"
   }
  },
+ "options.particlesDesc0": {
+  "6c10e5fb662f": {
+   "co": "Sceglie a quantità generale di particule.",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
+  }
+ },
+ "options.particlesDesc1": {
+  "6ef1c6eec3c1": {
+   "co": "Nant'à i materiali modesti, menu hè megliu.",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
+  }
+ },
+ "options.performanceButton": {
+  "b583157c1208": {
+   "co": "Parametri di perfurmenze video…",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
+  }
+ },
+ "options.performanceVideoTitle": {
+  "f03ba3a64e38": {
+   "co": "Parametri di perfurmenze video",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
+  }
+ },
+ "options.postButton": {
+  "74384cbf042d": {
+   "co": "Parametri di post-trattamentu…",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
+  }
+ },
+ "options.postProcessEnable": {
+  "3387a3861e5f": {
+   "co": "Attivà u post-trattamentu",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
+  }
+ },
+ "options.postProcessEnableDesc0": {
+  "216265111e3c": {
+   "co": "Attiva u post-trattamentu. Disattivallu",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
+  }
+ },
+ "options.postProcessEnableDesc1": {
+  "d69fff00651d": {
+   "co": "riducerà u Livellu di Bellezza.",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
+  }
+ },
+ "options.postVideoTitle": {
+  "f3632326f8cd": {
+   "co": "Parametri di post-trattamentu",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
+  }
+ },
+ "options.qualityButton": {
+  "582639e0b939": {
+   "co": "Parametri di qualità video…",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
+  }
+ },
+ "options.qualityVideoTitle": {
+  "e44e60878528": {
+   "co": "Parametri di qualità video",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
+  }
+ },
  "options.rawMouseInput": {
   "26478f4cad46": {
    "co": "Entrata grezza",
@@ -12687,11 +14821,59 @@
    "note": "English changed only in case or punctuation"
   }
  },
+ "options.renderCloudsDesc0": {
+  "9e3cc4d90f07": {
+   "co": "Attiva a visualizazione di i nivuli.",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
+  }
+ },
+ "options.renderDistance.far": {
+  "49b2cf9ade90": {
+   "co": "Luntana",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
+  }
+ },
  "options.renderDistance.normal": {
   "45e118d0563e": {
    "co": "Nurmale",
    "kind": "renamed",
    "from": "options.difficulty.normal",
+   "review": "ai"
+  }
+ },
+ "options.renderDistance.short": {
+  "0fe7d82f25a3": {
+   "co": "Corta",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
+  }
+ },
+ "options.renderDistance.tiny": {
+  "deb4a0704845": {
+   "co": "Minima",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
+  }
+ },
+ "options.renderDistanceDesc0": {
+  "e6cf191568d7": {
+   "co": "Distanza massima di visualizazione. I valori più chjuchi",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
+  }
+ },
+ "options.renderDistanceDesc1": {
+  "84a3762f375f": {
+   "co": "funziunanu megliu nant'à i materiali modesti.",
+   "kind": "new",
+   "from": null,
    "review": "ai"
   }
  },
@@ -12713,6 +14895,14 @@
    "note": "26.3 key of another family; same meaning checked"
   }
  },
+ "options.screenEffectScale.off": {
+  "e3de5ab0ca4c": {
+   "co": "Disattivatu",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
+  }
+ },
  "options.screenEffectScale.tooltip": {
   "b847634a3f0c": {
    "co": "Forza di l'effetti di distorsione di u screnu di a nausea è di u portale di u Nether.\nÀ valori bassi, l'effettu di nausea hè rimpiazzatu da una suprapusizione verde.",
@@ -12720,6 +14910,108 @@
    "from": "options.screenEffectScale.tooltip",
    "review": "ai",
    "note": "English changed only in case or punctuation"
+  }
+ },
+ "options.serverTextures": {
+  "9b8d2e44a8ae": {
+   "co": "Testure di u servitore",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
+  }
+ },
+ "options.showCape": {
+  "37df5e3ed564": {
+   "co": "Mustrà a cappa",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
+  }
+ },
+ "options.snooper": {
+  "3f4f5ee00a66": {
+   "co": "Permette u Snooper",
+   "kind": "new",
+   "from": null,
+   "review": "ai",
+   "note": "ambiguous: Snooper (Mojang's data collection) kept as a name"
+  }
+ },
+ "options.snooper.desc": {
+  "14a1dfec64df": {
+   "co": "Vulemu sempre migliurà Minecraft è, per aiutacci, vuleriamu cuglie qualchì infurmazione. Cusì sapemu quale materiale accettà è induve sò i prublemi maiò. Ci dà dinù un'idea di quanti ghjucadori sò attivi, per sapè s'è no femu un bon travagliu. Pudete vede quì sottu tutte l'infurmazioni ch'è no cuglimu. S'è vo ùn vulete micca participà, basta à disattivallu !",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
+  },
+  "efcf6357c8e5": {
+   "co": "Vulemu cuglie infurmazioni nant'à u vostru urdinatore per migliurà Minecraft, sapendu ciò chì pudemu accettà è induve sò i prublemi maiò. Tutte st'infurmazioni sò cumpletamente anonime è si ponu vede quì sottu. Prumittimu di ùn fà nunda di male cù sti dati, ma s'è vo ùn vulete micca participà, pudete disattivallu !",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
+  }
+ },
+ "options.snooper.title": {
+  "6f74e37ccb59": {
+   "co": "Cugliera di e caratteristiche di l'urdinatore",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
+  },
+  "b1153a68d383": {
+   "co": "Dateci dati !",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
+  }
+ },
+ "options.snooper.view": {
+  "1b60e96bf306": {
+   "co": "Parametri di u Snooper…",
+   "kind": "new",
+   "from": null,
+   "review": "ai",
+   "note": "ambiguous: Snooper kept as a name"
+  }
+ },
+ "options.sound": {
+  "b4e3efeba10e": {
+   "co": "Sonu",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
+  }
+ },
+ "options.stream": {
+  "e87a031c5bfd": {
+   "co": "Parametri di diffusione…",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
+  }
+ },
+ "options.stream.bytesPerPixel": {
+  "a60f2c73604f": {
+   "co": "Qualità",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
+  }
+ },
+ "options.stream.changes": {
+  "82f894f9a5a6": {
+   "co": "Pò esse chì vi tocchi à rilancià a diffusione per chì sti cambiamenti fessinu effettu.",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
+  }
+ },
+ "options.stream.chat.enabled": {
+  "20063ad90532": {
+   "co": "Attivà",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
   }
  },
  "options.stream.chat.enabled.always": {
@@ -12739,6 +15031,150 @@
    "review": "ai"
   }
  },
+ "options.stream.chat.enabled.streaming": {
+  "7645f5cff59e": {
+   "co": "Durante a diffusione",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
+  }
+ },
+ "options.stream.chat.title": {
+  "7374da3c06f1": {
+   "co": "Parametri di a chjachjerata Twitch",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
+  }
+ },
+ "options.stream.chat.userFilter": {
+  "2bd6f4fb71df": {
+   "co": "Filtru d'utilizatori",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
+  }
+ },
+ "options.stream.chat.userFilter.all": {
+  "0d9d646c94c1": {
+   "co": "Tutti i spettatori",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
+  }
+ },
+ "options.stream.chat.userFilter.mods": {
+  "6a847e1643d5": {
+   "co": "Muderatori",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
+  }
+ },
+ "options.stream.chat.userFilter.subs": {
+  "6f13df39a03f": {
+   "co": "Abbunati",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
+  }
+ },
+ "options.stream.compression": {
+  "46ead4045fba": {
+   "co": "Cumpressione",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
+  }
+ },
+ "options.stream.compression.high": {
+  "b1a5954a483f": {
+   "co": "Alta",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
+  }
+ },
+ "options.stream.compression.low": {
+  "a124947cbd2d": {
+   "co": "Bassa",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
+  }
+ },
+ "options.stream.compression.medium": {
+  "d404968ea90b": {
+   "co": "Media",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
+  }
+ },
+ "options.stream.estimation": {
+  "2cbe77e8b37f": {
+   "co": "Risuluzione stimata : %dx%d",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
+  }
+ },
+ "options.stream.fps": {
+  "55023d4d792b": {
+   "co": "Fiure per seconda",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
+  }
+ },
+ "options.stream.ingest.reset": {
+  "d3784437dee5": {
+   "co": "Rimette à zeru a preferenza",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
+  }
+ },
+ "options.stream.ingest.title": {
+  "5fbbbc4e87d1": {
+   "co": "Servitori di diffusione Twitch",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
+  }
+ },
+ "options.stream.ingestSelection": {
+  "a870bd13afcb": {
+   "co": "Lista di i servitori di diffusione",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
+  }
+ },
+ "options.stream.kbps": {
+  "1d06cbba91d4": {
+   "co": "Banda passante",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
+  }
+ },
+ "options.stream.micToggleBehavior": {
+  "01941c7a2db3": {
+   "co": "Appughjà per",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
+  }
+ },
+ "options.stream.micVolumne": {
+  "c30ec7b1b262": {
+   "co": "Vulume di u micrò",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
+  }
+ },
  "options.stream.mic_toggle.mute": {
   "0f0973483d91": {
    "co": "Mutu",
@@ -12748,6 +15184,38 @@
    "note": "26.3 key of another family; same meaning checked"
   }
  },
+ "options.stream.mic_toggle.talk": {
+  "4e6a710d7f85": {
+   "co": "Parlà",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
+  }
+ },
+ "options.stream.sendMetadata": {
+  "7e37cb0d96e0": {
+   "co": "Mandà i metadati",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
+  }
+ },
+ "options.stream.systemVolume": {
+  "b01a499df8dd": {
+   "co": "Vulume di u sistema",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
+  }
+ },
+ "options.stream.title": {
+  "182551cd42bc": {
+   "co": "Parametri di diffusione Twitch",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
+  }
+ },
  "options.telemetry": {
   "cfa727227878": {
    "co": "Dati di telemetria",
@@ -12755,6 +15223,22 @@
    "from": "options.telemetry",
    "review": "ai",
    "note": "punctuation as in this English"
+  }
+ },
+ "options.vbo": {
+  "79c3db121f21": {
+   "co": "Aduprà i VBO",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
+  }
+ },
+ "options.viewBobbingDesc0": {
+  "f88ddd55fc1a": {
+   "co": "Attiva l'oscillazione di a vista mentre chì vi muvite.",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
   }
  },
  "pack.dropRejected.message": {
@@ -12773,6 +15257,30 @@
    "from": "parsing.bool.invalid",
    "review": "ai",
    "note": "English changed only in case or punctuation"
+  }
+ },
+ "performance.balanced": {
+  "03342dbb856b": {
+   "co": "Equilibratu",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
+  }
+ },
+ "performance.max": {
+  "a5a5093418e5": {
+   "co": "Fps massimi",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
+  }
+ },
+ "performance.powersaver": {
+  "4e4f771652b1": {
+   "co": "Ecunumia d'energia",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
   }
  },
  "potion.absorption": {
@@ -13617,6 +16125,14 @@
    "review": "ai"
   }
  },
+ "realms.missing.module.error.text": {
+  "6b68ff557ce2": {
+   "co": "Ùn hè micca statu pussibule d'apre Realms avà, pruvate torna più tardi",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
+  }
+ },
  "record.nowPlaying": {
   "5e93536f90eb": {
    "co": "Avà in lettura : %s",
@@ -13626,6 +16142,22 @@
    "note": "English changed only in case or punctuation"
   }
  },
+ "resourcePack.available.title": {
+  "119bd120b65f": {
+   "co": "Pacchetti di risorse dispunibuli",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
+  }
+ },
+ "resourcePack.folderInfo": {
+  "14d1569fa1a9": {
+   "co": "(Mittite quì i schedarii di pacchetti di risorse)",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
+  }
+ },
  "resourcePack.incompatible": {
   "06db4ffa7efb": {
    "co": "Incumpatibile",
@@ -13633,6 +16165,30 @@
    "from": "pack.incompatible",
    "review": "ai",
    "note": "26.3 key of another family; same meaning checked"
+  }
+ },
+ "resourcePack.incompatible.confirm.new": {
+  "cc1717aacfec": {
+   "co": "Stu pacchettu di risorse hè statu fattu per una versione più recente di Minecraft è ùn puderia più funziunà bè.",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
+  }
+ },
+ "resourcePack.incompatible.confirm.old": {
+  "d86626d6a7fd": {
+   "co": "Stu pacchettu di risorse hè statu fattu per una versione più vechja di Minecraft è ùn puderia più funziunà bè.",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
+  }
+ },
+ "resourcePack.incompatible.confirm.title": {
+  "aba7002c628f": {
+   "co": "Site sicuru di vulè caricà stu pacchettu di risorse ?",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
   }
  },
  "resourcePack.incompatible.new": {
@@ -13653,6 +16209,28 @@
    "note": "26.3 key of another family; same meaning checked"
   }
  },
+ "resourcePack.openFolder": {
+  "0e089492a0bb": {
+   "co": "Apre u cartulare di i pacchetti di risorse",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
+  },
+  "ec624e9d7f76": {
+   "co": "Apre u cartulare di i pacchetti di risorse",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
+  }
+ },
+ "resourcePack.selected.title": {
+  "c3ce97828dfe": {
+   "co": "Pacchetti di risorse selezziunati",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
+  }
+ },
  "selectServer.add": {
   "37a460a1defb": {
    "co": "Aghjunghje un servitore",
@@ -13660,6 +16238,22 @@
    "from": "selectServer.add",
    "review": "ai",
    "note": "English changed only in case or punctuation"
+  }
+ },
+ "selectServer.empty": {
+  "ad87109bfff0": {
+   "co": "viotu",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
+  }
+ },
+ "selectServer.title": {
+  "40c1854fb1b0": {
+   "co": "Sceglie un servitore",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
   }
  },
  "selectWorld.allowCommands": {
@@ -13697,6 +16291,20 @@
    "review": "ai"
   }
  },
+ "selectWorld.backupWarning": {
+  "25b4f610e06f": {
+   "co": "Stu mondu hè statu ghjucatu l'ultima volta in a versione %s ; site in a versione %s. Fate una salvaguardia in casu chì u mondu sia dannighjatu !",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
+  },
+  "97d9ef72d676": {
+   "co": "Stu mondu hè statu ghjucatu l'ultima volta in a versione %s ; site in a snapshot %s. Fate una salvaguardia in casu chì u mondu sia dannighjatu !",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
+  }
+ },
  "selectWorld.backupWarning.downgrade": {
   "026cf377d5c5": {
    "co": "Stu mondu hè statu ghjucatu l'ultima volta in a versione %s ; site in a versione %s. Fà vultà un mondu à una versione più vechja pò dannighjallu ; ùn pudemu micca garantisce ch'ellu si caricherà o ch'ellu funziunerà. S'è vo vulete cuntinuà quantunque, fate una salvaguardia !",
@@ -13724,6 +16332,14 @@
    "note": "punctuation as in this English"
   }
  },
+ "selectWorld.createDemo": {
+  "91bf6bbcb887": {
+   "co": "Ghjucà un mondu di dimustrazione novu",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
+  }
+ },
  "selectWorld.edit.backupSize": {
   "1078fa288ba9": {
    "co": "Dimensione : %s Mo",
@@ -13731,6 +16347,14 @@
    "from": "selectWorld.edit.backupSize",
    "review": "ai",
    "note": "English changed only in case or punctuation"
+  }
+ },
+ "selectWorld.empty": {
+  "ad87109bfff0": {
+   "co": "viotu",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
   }
  },
  "selectWorld.enterSeed": {
@@ -13776,6 +16400,22 @@
    "from": "selectWorld.gameMode.hardcore.line1",
    "review": "ai",
    "note": "English changed only in case or punctuation"
+  }
+ },
+ "selectWorld.hardcoreMode": {
+  "17acc5d567be": {
+   "co": "Estremu :",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
+  }
+ },
+ "selectWorld.hardcoreMode.info": {
+  "10b8661c7be1": {
+   "co": "U mondu hè squassatu à a morte",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
   }
  },
  "selectWorld.import_worldgen_settings.deprecated.question": {
@@ -13844,6 +16484,54 @@
    "from": "selectWorld.mapType",
    "review": "ai",
    "note": "punctuation as in this English"
+  }
+ },
+ "selectWorld.newWorld.copyOf": {
+  "4a03f8491a4a": {
+   "co": "Copia di %s",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
+  }
+ },
+ "selectWorld.pre_worldheight": {
+  "15533dfda7b6": {
+   "co": "U caricamentu di i mondi cù altezza allargata hè disattivatu.",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
+  }
+ },
+ "selectWorld.rename": {
+  "d3f4cb898fbe": {
+   "co": "Rinumà",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
+  }
+ },
+ "selectWorld.renameButton": {
+  "d3f4cb898fbe": {
+   "co": "Rinumà",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
+  }
+ },
+ "selectWorld.renameTitle": {
+  "b97262bfc572": {
+   "co": "Rinumà u mondu",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
+  }
+ },
+ "selectWorld.tooltip.unsupported": {
+  "aacd8d369970": {
+   "co": "Stu mondu ùn hè più accettatu è si pò ghjucà solu in %s",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
   }
  },
  "sign.edit": {
@@ -14081,6 +16769,14 @@
    "review": "ai"
   }
  },
+ "stat.breakItem": {
+  "01935d3fbb1c": {
+   "co": "%1$s frusti",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
+  }
+ },
  "stat.brewingstandInteraction": {
   "80ffe4a147ef": {
    "co": "Interazzioni cù u lambiccu",
@@ -14129,11 +16825,33 @@
    "review": "ai"
   }
  },
+ "stat.craftItem": {
+  "d61f2a96d191": {
+   "co": "%1$s fabbricati",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
+  }
+ },
  "stat.crafted": {
   "2567ac2bf600": {
    "co": "Volte fabbricatu",
    "kind": "renamed",
    "from": "stat_type.minecraft.crafted",
+   "review": "ai"
+  }
+ },
+ "stat.createWorld": {
+  "2ee4b96a7cf5": {
+   "co": "Mondi creati",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
+  },
+  "b99e57f93c65": {
+   "co": "Mondi creati",
+   "kind": "new",
+   "from": null,
    "review": "ai"
   }
  },
@@ -14169,11 +16887,27 @@
    "review": "ai"
   }
  },
+ "stat.depleted": {
+  "c5bd5c1505af": {
+   "co": "Volte frustu",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
+  }
+ },
  "stat.dispenserInspected": {
   "032f141af703": {
    "co": "Distributori frugati",
    "kind": "renamed",
    "from": "stat.minecraft.inspect_dispenser",
+   "review": "ai"
+  }
+ },
+ "stat.diveOneCm": {
+  "cefd13b35b90": {
+   "co": "Distanza in immersione",
+   "kind": "new",
+   "from": null,
    "review": "ai"
   }
  },
@@ -14210,6 +16944,12 @@
   }
  },
  "stat.entityKilledBy": {
+  "2c3db4dd2160": {
+   "co": "%s v'hà tombu %d volta(e)",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
+  },
   "3a4f8f81f3ff": {
    "co": "%s v'hà tombu %s volta(e)",
    "kind": "renamed",
@@ -14226,6 +16966,12 @@
   }
  },
  "stat.entityKills": {
+  "b81df4f5a873": {
+   "co": "Avete tombu %d %s",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
+  },
   "d8c074671815": {
    "co": "Avete tombu %s %s",
    "kind": "renamed",
@@ -14258,6 +17004,12 @@
   }
  },
  "stat.flowerPotted": {
+  "8cedd985fafe": {
+   "co": "Piante messe in vasu",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
+  },
   "d5c485a621c6": {
    "co": "Piante messe in vasu",
    "kind": "renamed",
@@ -14305,6 +17057,20 @@
    "review": "ai"
   }
  },
+ "stat.joinMultiplayer": {
+  "7dab8edce289": {
+   "co": "Partite à parechji ghjucadori",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
+  },
+  "dbc8eda5beb5": {
+   "co": "Partite à parechji ghjucadori",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
+  }
+ },
  "stat.jump": {
   "933adea19eee": {
    "co": "Salti",
@@ -14313,11 +17079,47 @@
    "review": "ai"
   }
  },
+ "stat.junkFished": {
+  "86d7f3b0ca46": {
+   "co": "Robba inutile pescata",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
+  }
+ },
  "stat.leaveGame": {
+  "2d24e54e2610": {
+   "co": "Partite lasciate",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
+  },
   "a26be4d6b20d": {
    "co": "Partite lasciate",
    "kind": "renamed",
    "from": "stat.minecraft.leave_game",
+   "review": "ai"
+  }
+ },
+ "stat.loadWorld": {
+  "62fcf0629637": {
+   "co": "Arregistramenti caricati",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
+  },
+  "ca13094f7369": {
+   "co": "Arregistramenti caricati",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
+  }
+ },
+ "stat.mineBlock": {
+  "676ee4129191": {
+   "co": "%1$s scavati",
+   "kind": "new",
+   "from": null,
    "review": "ai"
   }
  },
@@ -14338,6 +17140,14 @@
    "note": "English changed only in case or punctuation"
   }
  },
+ "stat.minecraft.junk_fished": {
+  "86d7f3b0ca46": {
+   "co": "Robba inutile pescata",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
+  }
+ },
  "stat.minecraft.play_one_minute": {
   "25fa47c8047a": {
    "co": "Tempu di ghjocu",
@@ -14351,6 +17161,14 @@
    "co": "Campane sunate",
    "kind": "renamed",
    "from": "stat.minecraft.bell_ring",
+   "review": "ai"
+  }
+ },
+ "stat.minecraft.treasure_fished": {
+  "013d2e0f113e": {
+   "co": "Tesori pescati",
+   "kind": "new",
+   "from": null,
    "review": "ai"
   }
  },
@@ -14371,6 +17189,12 @@
   }
  },
  "stat.noteblockPlayed": {
+  "b1226e874ef9": {
+   "co": "Blocchi musicali sunati",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
+  },
   "ce3967541a2f": {
    "co": "Blocchi musicali sunati",
    "kind": "renamed",
@@ -14383,6 +17207,12 @@
    "co": "Blocchi musicali accurdati",
    "kind": "renamed",
    "from": "stat.minecraft.tune_noteblock",
+   "review": "ai"
+  },
+  "d1f0001ecfaf": {
+   "co": "Blocchi musicali accurdati",
+   "kind": "new",
+   "from": null,
    "review": "ai"
   }
  },
@@ -14408,6 +17238,12 @@
    "kind": "renamed",
    "from": "stat.minecraft.play_time",
    "review": "ai"
+  },
+  "cb004c9fdc3b": {
+   "co": "Minuti di ghjocu",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
   }
  },
  "stat.playerKills": {
@@ -14415,6 +17251,14 @@
    "co": "Ghjucadori tombi",
    "kind": "renamed",
    "from": "stat.minecraft.player_kills",
+   "review": "ai"
+  }
+ },
+ "stat.recordPlayed": {
+  "deec0c23425b": {
+   "co": "Dischi sunati",
+   "kind": "new",
+   "from": null,
    "review": "ai"
   }
  },
@@ -14450,6 +17294,20 @@
    "review": "ai"
   }
  },
+ "stat.startGame": {
+  "a9b8b6093b70": {
+   "co": "Partite lanciate",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
+  },
+  "f8d6a7c134b6": {
+   "co": "Partite lanciate",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
+  }
+ },
  "stat.swimOneCm": {
   "313e788a4ca6": {
    "co": "Distanza à natu",
@@ -14466,6 +17324,14 @@
    "review": "ai"
   }
  },
+ "stat.timeSinceDeath": {
+  "d413b32077e2": {
+   "co": "Dapoi l'ultima morte",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
+  }
+ },
  "stat.tradedWithVillager": {
   "1a6cb8992aed": {
    "co": "Scambii cù i paisani",
@@ -14479,6 +17345,22 @@
    "co": "Casce à trappula scatenate",
    "kind": "renamed",
    "from": "stat.minecraft.trigger_trapped_chest",
+   "review": "ai"
+  }
+ },
+ "stat.treasureFished": {
+  "013d2e0f113e": {
+   "co": "Tesori pescati",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
+  }
+ },
+ "stat.useItem": {
+  "3884824e7ddd": {
+   "co": "%1$s aduprati",
+   "kind": "new",
+   "from": null,
    "review": "ai"
   }
  },
@@ -14506,6 +17388,166 @@
    "review": "ai"
   }
  },
+ "stats.tooltip.type.achievement": {
+  "19130d3f1b9d": {
+   "co": "Successu",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
+  }
+ },
+ "stats.tooltip.type.statistic": {
+  "cd4e9febd5df": {
+   "co": "Statistica",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
+  }
+ },
+ "stream.confirm_start": {
+  "36ea4f8bfa52": {
+   "co": "Site sicuru di vulè principià a diffusione ?",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
+  }
+ },
+ "stream.unavailable.account_not_bound": {
+  "74b579789fb5": {
+   "co": "Nanzu di pudè diffonde Minecraft nant'à Twitch, ci vole à ligà u vostru contu Twitch nant'à mojang.com. U vulete fà avà ?",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
+  }
+ },
+ "stream.unavailable.account_not_bound.okay": {
+  "7a7543d4fc8f": {
+   "co": "Ligà i conti",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
+  }
+ },
+ "stream.unavailable.account_not_migrated": {
+  "f54211709369": {
+   "co": "Nanzu di pudè diffonde Minecraft nant'à Twitch, ci vole à migrà u vostru contu Minecraft versu un contu Mojang. U vulete fà avà ?",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
+  }
+ },
+ "stream.unavailable.account_not_migrated.okay": {
+  "9064859a7375": {
+   "co": "Migrà u contu",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
+  }
+ },
+ "stream.unavailable.failed_auth": {
+  "f8cf932bfeaf": {
+   "co": "Fiascu di l'autenticazione nant'à Twitch. Andate nant'à mojang.com è ligate torna u vostru contu Twitch.",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
+  }
+ },
+ "stream.unavailable.failed_auth.okay": {
+  "d9635517ee38": {
+   "co": "Ligà torna i conti",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
+  }
+ },
+ "stream.unavailable.failed_auth_error": {
+  "44c27321e080": {
+   "co": "Impussibule d'autenticassi nant'à Twitch. Pruvate torna più tardi.",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
+  }
+ },
+ "stream.unavailable.initialization_failure": {
+  "d114d313a692": {
+   "co": "Impussibule d'inizià u SDK di Twitch.",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
+  }
+ },
+ "stream.unavailable.initialization_failure.extra": {
+  "faa4152a6d80": {
+   "co": "(Mutivu : %s)",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
+  }
+ },
+ "stream.unavailable.library_arch_mismatch": {
+  "4dccc0137655": {
+   "co": "A versione di Java persunalizata aduprata per lancià Minecraft hà un'architettura sfarente da quella di u lanciadore. Verificate ch'elle sianu listesse, 32 bit o 64 bit per tramindui.",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
+  }
+ },
+ "stream.unavailable.library_failure": {
+  "5297dbb67fd3": {
+   "co": "Impussibule di caricà e bibliuteche necessarie per u serviziu integratu di diffusione Twitch.",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
+  }
+ },
+ "stream.unavailable.no_fbo": {
+  "6ac2b2179951": {
+   "co": "A vostra carta video deve accettà almenu a versione 3.0 d'OpenGL o l'ogetti framebuffer via un'estensione per aduprà a diffusione Twitch integrata.",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
+  }
+ },
+ "stream.unavailable.no_fbo.arb": {
+  "8a254c22a1d0": {
+   "co": "Sustegnu di l'ogetti framebuffer via ARB : %s",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
+  }
+ },
+ "stream.unavailable.no_fbo.blend": {
+  "a3c91b699b4a": {
+   "co": "Sustegnu di a fusione separata via EXT : %s",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
+  }
+ },
+ "stream.unavailable.no_fbo.ext": {
+  "683107282c5d": {
+   "co": "Sustegnu di l'ogetti framebuffer via EXT : %s",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
+  }
+ },
+ "stream.unavailable.no_fbo.version": {
+  "cf437c200259": {
+   "co": "Aduprate avà : %s",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
+  }
+ },
+ "stream.unavailable.not_supported.mac": {
+  "a68749a699dc": {
+   "co": "Disgraziatamente, a diffusione Twitch integrata nant'à Mac richiede una versione d'OSX più recente chè a vostra. Ci vole 10.7 (Mac OS X Lion) o più recente per aduprà stu serviziu. Vulete visità apple.com per sapè cumu aghjurnà ?",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
+  }
+ },
  "stream.unavailable.not_supported.mac.okay": {
   "a6f47e00e036": {
    "co": "Aghjurnà",
@@ -14513,6 +17555,239 @@
    "from": "mco.compatibility.upgrade",
    "review": "ai",
    "note": "26.3 key of another family; same meaning checked"
+  }
+ },
+ "stream.unavailable.not_supported.other": {
+  "fb5af27e5eac": {
+   "co": "Disgraziatamente, u serviziu integratu di diffusione Twitch richiede Windows (Vista o più recente) o Mac OS X (10.7/Lion o più recente)",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
+  }
+ },
+ "stream.unavailable.not_supported.windows": {
+  "7e37d0c7c6d7": {
+   "co": "Disgraziatamente, a diffusione Twitch integrata richiede una versione di Windows più recente chè a vostra. Ci vole almenu Windows Vista o più recente.",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
+  }
+ },
+ "stream.unavailable.report_to_mojang": {
+  "f5c639c45ece": {
+   "co": "Signalà à Mojang",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
+  }
+ },
+ "stream.unavailable.soundflower.chat": {
+  "913b7a4c0e0c": {
+   "co": "Ci vole Soundflower per pudè diffonde nant'à Mac. %s",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
+  }
+ },
+ "stream.unavailable.soundflower.chat.link": {
+  "0b482320f7b7": {
+   "co": "Cliccate quì per installallu.",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
+  }
+ },
+ "stream.unavailable.title": {
+  "98237850b837": {
+   "co": "Diffusione Twitch indispunibule",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
+  }
+ },
+ "stream.unavailable.unknown": {
+  "4d856f1b54e5": {
+   "co": "Disgraziatamente, ùn pudete micca diffonde nant'à Twitch per avà. È ùn sapemu micca perchè :'(",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
+  }
+ },
+ "stream.unavailable.unknown.chat": {
+  "91f3b5b67437": {
+   "co": "Impussibule di principià a diffusione : %s",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
+  }
+ },
+ "stream.user.mode.administrator": {
+  "e5d442d7d93d": {
+   "co": "Amministratore Twitch",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
+  }
+ },
+ "stream.user.mode.banned": {
+  "c8cd83f62e9d": {
+   "co": "Esclusu",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
+  }
+ },
+ "stream.user.mode.banned.other": {
+  "dd63da4de83c": {
+   "co": "Esclusu da u canale di %s",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
+  }
+ },
+ "stream.user.mode.banned.self": {
+  "bdbac94df343": {
+   "co": "Esclusu da u vostru canale",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
+  }
+ },
+ "stream.user.mode.broadcaster": {
+  "c2862d4a6234": {
+   "co": "Diffusore",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
+  }
+ },
+ "stream.user.mode.broadcaster.other": {
+  "c2862d4a6234": {
+   "co": "Diffusore",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
+  }
+ },
+ "stream.user.mode.broadcaster.self": {
+  "3b89ad77edfc": {
+   "co": "Diffusore (voi !)",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
+  }
+ },
+ "stream.user.mode.moderator": {
+  "ad3b15c3a7bc": {
+   "co": "Muderatore",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
+  }
+ },
+ "stream.user.mode.moderator.other": {
+  "23378a6a45e0": {
+   "co": "Muderatore di u canale di %s",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
+  }
+ },
+ "stream.user.mode.moderator.self": {
+  "99e706dd0aa4": {
+   "co": "Muderatore di u vostru canale",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
+  }
+ },
+ "stream.user.mode.staff": {
+  "2237fae3f474": {
+   "co": "Squadra Twitch",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
+  }
+ },
+ "stream.user.subscription.subscriber": {
+  "16b20e68bb28": {
+   "co": "Abbunatu",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
+  }
+ },
+ "stream.user.subscription.subscriber.other": {
+  "66d378fb932a": {
+   "co": "Abbunatu à u canale di %s",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
+  }
+ },
+ "stream.user.subscription.subscriber.self": {
+  "0f108df5ca6f": {
+   "co": "Abbunatu à u vostru canale",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
+  }
+ },
+ "stream.user.subscription.turbo": {
+  "8db64abb422a": {
+   "co": "Twitch Turbo",
+   "kind": "new",
+   "from": null,
+   "review": "ai",
+   "note": "same as English: name of a Twitch offer"
+  }
+ },
+ "stream.userinfo.ban": {
+  "bfa1bfbf6c1c": {
+   "co": "Escludere",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
+  }
+ },
+ "stream.userinfo.chatTooltip": {
+  "96ad67ff801e": {
+   "co": "Cliccate per gestisce l'utilizatore",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
+  }
+ },
+ "stream.userinfo.mod": {
+  "f6f6f89431db": {
+   "co": "Prumove muderatore",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
+  }
+ },
+ "stream.userinfo.timeout": {
+  "d4c45de0fe64": {
+   "co": "Sospensione",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
+  }
+ },
+ "stream.userinfo.unban": {
+  "d2671bfbfdd2": {
+   "co": "Riammette",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
+  }
+ },
+ "stream.userinfo.unmod": {
+  "5733d90410d9": {
+   "co": "Caccià da muderatore",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
   }
  },
  "structure_block.detect_size": {
@@ -14662,6 +17937,13 @@
    "kind": "renamed",
    "from": "subtitles.block.note_block.note",
    "review": "ai"
+  },
+  "6cc95cfcc674": {
+   "co": "Bloccu musicale sona",
+   "kind": "adapted",
+   "from": "subtitles.block.note_block.note",
+   "review": "ai",
+   "note": "same sound as the 26.3 note block subtitle"
   }
  },
  "subtitles.chiseled_bookshelf.insert_enchanted": {
@@ -14690,6 +17972,14 @@
    "review": "ai"
   }
  },
+ "subtitles.entity.bobber.splash": {
+  "e416df294352": {
+   "co": "Ganciu di pesca sciaccuttuleghja",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
+  }
+ },
  "subtitles.entity.bobber.throw": {
   "99b2e910b949": {
    "co": "Galleghjante lampatu",
@@ -14698,11 +17988,27 @@
    "review": "ai"
   }
  },
+ "subtitles.entity.creaking.angry": {
+  "5f4aab3ddc66": {
+   "co": "Scricchjone vede un ghjucadore",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
+  }
+ },
  "subtitles.entity.elder_guardian.ambient.land": {
   "37089ad4ea4c": {
    "co": "Guardianu anzianu si sbatte",
    "kind": "renamed",
    "from": "subtitles.entity.elder_guardian.ambient_land",
+   "review": "ai"
+  }
+ },
+ "subtitles.entity.elder_guardian.attack": {
+  "44b907a11554": {
+   "co": "Guardianu anzianu tira",
+   "kind": "new",
+   "from": null,
    "review": "ai"
   }
  },
@@ -14760,6 +18066,13 @@
    "kind": "renamed",
    "from": "subtitles.entity.ender_eye.launch",
    "review": "ai"
+  },
+  "5723f90507b5": {
+   "co": "Ochju di l'Ender parte",
+   "kind": "adapted",
+   "from": "subtitles.entity.ender_eye.launch",
+   "review": "ai",
+   "note": "same sound as 26.3"
   }
  },
  "subtitles.entity.enderpearl.throw": {
@@ -14866,6 +18179,14 @@
    "review": "ai"
   }
  },
+ "subtitles.entity.guardian.curse": {
+  "95b478283b0a": {
+   "co": "Guardianu maledice",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
+  }
+ },
  "subtitles.entity.illusion_illager.ambient": {
   "e9300b55f9c3": {
    "co": "Illusiunistu murmuleghja",
@@ -14930,6 +18251,15 @@
    "review": "ai"
   }
  },
+ "subtitles.entity.itemframe.break": {
+  "f6dfd5afacea": {
+   "co": "Curnice rotta",
+   "kind": "adapted",
+   "from": "subtitles.entity.item_frame.break",
+   "review": "ai",
+   "note": "same sound as 26.3"
+  }
+ },
  "subtitles.entity.itemframe.place": {
   "30773d6ea04c": {
    "co": "Curnice piazzata",
@@ -14963,7 +18293,32 @@
    "note": "English changed only in case or punctuation"
   }
  },
+ "subtitles.entity.leashknot.break": {
+  "74b6615a1b03": {
+   "co": "Nodu di ligaccia rottu",
+   "kind": "adapted",
+   "from": "subtitles.entity.leash_knot.break",
+   "review": "ai",
+   "note": "same sound as 26.3"
+  }
+ },
+ "subtitles.entity.leashknot.place": {
+  "2b888cf1f619": {
+   "co": "Nodu di ligaccia attaccatu",
+   "kind": "adapted",
+   "from": "subtitles.entity.leash_knot.place",
+   "review": "ai",
+   "note": "same sound as 26.3"
+  }
+ },
  "subtitles.entity.lightning.impact": {
+  "2346b840d4f4": {
+   "co": "Fulmine casca",
+   "kind": "adapted",
+   "from": "subtitles.entity.lightning_bolt.impact",
+   "review": "ai",
+   "note": "English typo (Lighting); same sound as 26.3"
+  },
   "7f1b2d643070": {
    "co": "Fulmine casca",
    "kind": "renamed",
@@ -15019,6 +18374,14 @@
    "review": "ai"
   }
  },
+ "subtitles.entity.parrot.imitate.enderman": {
+  "362d1a7e3ce8": {
+   "co": "Pappagallu fà vwup",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
+  }
+ },
  "subtitles.entity.parrot.imitate.evocation_illager": {
   "2771bc8f76be": {
    "co": "Pappagallu murmura",
@@ -15043,6 +18406,14 @@
    "review": "ai"
   }
  },
+ "subtitles.entity.parrot.imitate.panda": {
+  "f40bcf937aa3": {
+   "co": "Pappagallu ansima",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
+  }
+ },
  "subtitles.entity.parrot.imitate.polar_bear": {
   "b8872e115116": {
    "co": "Pappagallu si lamenta",
@@ -15059,11 +18430,27 @@
    "review": "ai"
   }
  },
+ "subtitles.entity.parrot.imitate.wolf": {
+  "f40bcf937aa3": {
+   "co": "Pappagallu ansima",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
+  }
+ },
  "subtitles.entity.parrot.imitate.zombie_pigman": {
   "1d8d005881b4": {
    "co": "Pappagallu grugna",
    "kind": "renamed",
    "from": "subtitles.entity.parrot.imitate.ravager",
+   "review": "ai"
+  }
+ },
+ "subtitles.entity.polar_bear.baby_ambient": {
+  "1d5107e6eeef": {
+   "co": "Orsu polare canticchja",
+   "kind": "new",
+   "from": null,
    "review": "ai"
   }
  },
@@ -15160,6 +18547,38 @@
    "review": "ai"
   }
  },
+ "subtitles.entity.zombie_pigman.ambient": {
+  "9df304b8b9dd": {
+   "co": "Omu-porcu zombi grugna",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
+  }
+ },
+ "subtitles.entity.zombie_pigman.angry": {
+  "64f49414e9db": {
+   "co": "Omu-porcu zombi s'arrabbia",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
+  }
+ },
+ "subtitles.entity.zombie_pigman.death": {
+  "dfdc2cee2904": {
+   "co": "Omu-porcu zombi more",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
+  }
+ },
+ "subtitles.entity.zombie_pigman.hurt": {
+  "4826087c436a": {
+   "co": "Omu-porcu zombi hè feritu",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
+  }
+ },
  "subtitles.item.armor.equip_turtle": {
   "5c6e10788459": {
    "co": "Scorza di tartaruga batte",
@@ -15174,6 +18593,14 @@
    "co": "Baghe scoppianu",
    "kind": "renamed",
    "from": "subtitles.block.sweet_berry_bush.pick_berries",
+   "review": "ai"
+  }
+ },
+ "subtitles.item.brush.brush_sand_completed": {
+  "c3726f3f89b3": {
+   "co": "Pinnellatura di rena compiuta",
+   "kind": "new",
+   "from": null,
    "review": "ai"
   }
  },
@@ -19241,6 +22668,82 @@
    "co": "Freccia di debulezza",
    "kind": "renamed",
    "from": "item.minecraft.tipped_arrow.effect.weakness",
+   "review": "ai"
+  }
+ },
+ "title.oldgl.deprecation.line1": {
+  "28834794d708": {
+   "co": "Vechja carta grafica individuata ; quessa vi puderia impedisce",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
+  }
+ },
+ "title.oldgl.deprecation.line2": {
+  "d362e2fc6b13": {
+   "co": "di ghjucà in u futuru, chì OpenGL 3.2 serà necessariu !",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
+  }
+ },
+ "title.oldgl.eol.line1": {
+  "77ba827442b9": {
+   "co": "Vechja carta grafica individuata ; quessa V'IMPEDISCERÀ",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
+  }
+ },
+ "title.oldgl.eol.line2": {
+  "5433c9043998": {
+   "co": "di ghjucà à l'aghjurnamenti futuri, chì OpenGL 2.0 serà necessariu !",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
+  }
+ },
+ "title.oldgl1": {
+  "28834794d708": {
+   "co": "Vechja carta grafica individuata ; quessa vi puderia impedisce",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
+  },
+  "ff88fddc6b31": {
+   "co": "\"Vechja carta grafica individuata ; quessa vi puderia impedisce\"",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
+  }
+ },
+ "title.oldgl2": {
+  "2050dd19781d": {
+   "co": "di ghjucà in u futuru, chì OpenGL 2.0 serà necessariu.",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
+  },
+  "7262bff4990b": {
+   "co": "\"di ghjucà in un futuru luntanu, chì OpenGL 2.0 serà necessariu.\"",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
+  }
+ },
+ "title.oldjava1": {
+  "79e7995f9833": {
+   "co": "Vechja versione di Java individuata ; quessa vi impediscerà di ghjucà",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
+  }
+ },
+ "title.oldjava2": {
+  "08beb787b671": {
+   "co": "in u futuru, chì Java 8 serà necessariu.",
+   "kind": "new",
+   "from": null,
    "review": "ai"
   }
  }
