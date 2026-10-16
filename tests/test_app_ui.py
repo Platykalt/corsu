@@ -190,7 +190,7 @@ class RenderTests(unittest.TestCase):
             harness, fixture = Path(folder) / 'harness.js', Path(folder) / 'fixture.json'
             harness.write_text(HARNESS, encoding='utf-8')
             fixture.write_text(json.dumps(FIXTURE), encoding='utf-8')
-            done = subprocess.run(['node', str(harness), str(PAGE), str(fixture)], capture_output=True, text=True, timeout=60)
+            done = subprocess.run(['node', str(harness), str(PAGE), str(fixture)], capture_output=True, text=True, encoding='utf-8', timeout=60)
         if done.returncode:
             raise AssertionError(done.stderr)
         cls.result = json.loads(done.stdout)
@@ -199,7 +199,7 @@ class RenderTests(unittest.TestCase):
         return next(row for row in self.result[rows] if row['name'] == name)
 
     def test_page_script_parses(self):
-        subprocess.run(['node', '--check', '-'], input=script()[1], text=True, check=True, timeout=60)
+        subprocess.run(['node', '--check', '-'], input=script()[1], text=True, encoding='utf-8', check=True, timeout=60)
 
     def test_coverage_is_counted_in_the_page_language(self):
         self.assertEqual(self.result['en']['partial'], 'Translated: 4,443 / 6,203 (72%)')
