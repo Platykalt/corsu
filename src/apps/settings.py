@@ -33,6 +33,19 @@ def read_text(path):
     return ('﻿' if bom else '') + text, '\r\n' if '\r\n' in text else '\n'
 
 
+def encode(text, newline, bom=False):
+    """The file's bytes with its own line endings for every line, added ones too, and its byte order mark."""
+    if newline == '\r\n':
+        text = text.replace('\r\n', '\n').replace('\n', '\r\n')
+    return (b'\xef\xbb\xbf' if bom else b'') + text.encode('utf-8')
+
+
+def read_body(path):
+    """(text without byte order mark, newline, had a byte order mark): a mark would hide the first line's key."""
+    text, newline = read_text(path)
+    return text.lstrip('\ufeff'), newline, text.startswith('\ufeff')
+
+
 def ini_get(text, section, key):
     current = None
     for line in text.splitlines():
@@ -93,7 +106,7 @@ def drop_empty_section(lines, section):
 def set_ini(installer, component, path, section, key, value):
     """Set one INI key for a component; recorded with its original value. Raises ValueError if unreadable."""
     path = Path(path)
-    text, newline = read_text(path)
+    text, newline, bom = read_body(path)
     name = f'{path}#[{section}]{key}'
     record = installer.state['files'].get(name)
     original = record['original'] if record else ini_get(text, section, key)
@@ -101,8 +114,8 @@ def set_ini(installer, component, path, section, key, value):
                                       'setting': {'type': 'ini', 'file': str(path), 'section': section, 'key': key,
                                                   'original': original, 'installed': value},
                                       'installed_sha256': ''}
-    corsu.STATE.write_text(json.dumps(installer.state, indent=2), encoding='utf-8')
-    atomic_write(path, ini_set(text, section, key, value, newline).encode('utf-8'))
+    corsu.save_state(installer.state)
+    atomic_write(path, encode(ini_set(text, section, key, value, newline), newline, bom))
 
 
 def registry_get(key, name):
@@ -136,7 +149,7 @@ def set_registry(installer, component, key, name, value, kind):
                                                          'original': list(original) if original else None,
                                                          'installed': [value, kind]},
                                              'installed_sha256': ''}
-    corsu.STATE.write_text(json.dumps(installer.state, indent=2), encoding='utf-8')
+    corsu.save_state(installer.state)
     registry_set(key, name, (value, kind))
 
 
@@ -148,12 +161,12 @@ def revert(record):
         if not path.exists():
             return True
         try:
-            text, newline = read_text(path)
+            text, newline, bom = read_body(path)
         except ValueError:
             return False
         if ini_get(text, setting['section'], setting['key']) == setting['installed']:
-            atomic_write(path, ini_set(text, setting['section'], setting['key'], setting['original'],
-                                       newline).encode('utf-8'))
+            atomic_write(path, encode(ini_set(text, setting['section'], setting['key'], setting['original'], newline),
+                                      newline, bom))
         return True
     if setting['type'] == 'file':
         path = Path(setting['file'])
@@ -161,9 +174,9 @@ def revert(record):
             return True
         get, put = FILE_KINDS[setting['kind']]
         try:
-            text, _ = read_text(path)
+            text, newline, bom = read_body(path)
             if get(text, setting['key']) == setting['installed']:
-                atomic_write(path, put(text, setting['key'], setting['original']).encode('utf-8'))
+                atomic_write(path, encode(put(text, setting['key'], setting['original']), newline, bom))
         except Exception:
             return False
         return True
@@ -268,7 +281,7 @@ def set_file_value(installer, component, path, kind, key, value):
     path = Path(path)
     if not path.exists():
         raise ValueError(f'{path}: not created yet (start the program once)')
-    text, newline = read_text(path)
+    text, newline, bom = read_body(path)
     get, put = FILE_KINDS[kind]
     spec = list(key) if isinstance(key, (list, tuple)) else key
     name = f'{path}#{json.dumps(spec)}'
@@ -284,8 +297,8 @@ def set_file_value(installer, component, path, kind, key, value):
                                       'setting': {'type': 'file', 'kind': kind, 'file': str(path), 'key': spec,
                                                   'original': original, 'installed': value},
                                       'installed_sha256': ''}
-    corsu.STATE.write_text(json.dumps(installer.state, indent=2), encoding='utf-8')
-    atomic_write(path, changed.encode('utf-8'))
+    corsu.save_state(installer.state)
+    atomic_write(path, encode(changed, newline, bom))
 
 
 def defaults_get(domain, key):
@@ -309,5 +322,5 @@ def set_defaults(installer, component, domain, key, value):
                                       'setting': {'type': 'defaults', 'domain': domain, 'key': key,
                                                   'original': original, 'installed': value},
                                       'installed_sha256': ''}
-    corsu.STATE.write_text(json.dumps(installer.state, indent=2), encoding='utf-8')
+    corsu.save_state(installer.state)
     defaults_put(domain, key, value)

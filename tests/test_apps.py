@@ -237,3 +237,72 @@ class WindowsProgramsTests(unittest.TestCase):
         self.assertEqual(native.read_bytes(), official)
         corsu.disable(['notepadpp'])
         self.assertFalse(native.exists())
+
+
+class SettingsIntegrityTests(WindowsProgramsTests):
+    """What happens to the person's own files and choices around Corsu's single setting."""
+
+    def test_windows_files_keep_their_line_endings_and_byte_order_mark(self):
+        self.make('SumatraPDF/SumatraPDF.exe', 'HandBrake/HandBrake.exe')
+        sumatra = self.root / 'Local/SumatraPDF/SumatraPDF-settings.txt'
+        sumatra.parent.mkdir(parents=True)
+        original = '\ufeffUiLanguage = fr\r\nShowToolbar = true\r\n'.encode('utf-8')
+        sumatra.write_bytes(original)
+        self.run_install('sumatrapdf')
+        self.assertEqual(sumatra.read_bytes(), '\ufeffUiLanguage = co\r\nShowToolbar = true\r\n'.encode('utf-8'))
+        corsu.disable(['sumatrapdf'])
+        self.assertEqual(sumatra.read_bytes(), original)
+        handbrake = self.root / 'Roaming/HandBrake/settings.json'
+        handbrake.parent.mkdir(parents=True)
+        original = '\ufeff{\r\n  "UpdateStatus": true\r\n}\r\n'.encode('utf-8')
+        handbrake.write_bytes(original)
+        report = self.run_install('handbrake')
+        self.assertEqual(report['skipped'], [])
+        self.assertTrue(handbrake.read_bytes().startswith('\ufeff{\r\n'.encode('utf-8')))
+        self.assertNotIn(b'\n', handbrake.read_bytes().replace(b'\r\n', b''))
+        self.assertEqual(json.loads(handbrake.read_bytes().decode('utf-8-sig'))['UiLanguage'], 'co')
+        corsu.disable(['handbrake'])
+        self.assertEqual(handbrake.read_bytes(), original)
+
+    def test_program_open_when_switched_off_stays_on_until_it_is_closed(self):
+        self.make('FileZilla FTP Client/filezilla.exe', 'FileZilla FTP Client/locales/co/filezilla.mo')
+        config = self.root / 'Roaming/FileZilla/filezilla.xml'
+        config.parent.mkdir(parents=True)
+        original = '<FileZilla3>\n\t<Settings>\n\t</Settings>\n</FileZilla3>\n'
+        config.write_text(original)
+        self.run_install('filezilla')
+        self.running = {r'C:\Program Files\FileZilla FTP Client\filezilla.exe'}
+        output = io.StringIO()
+        with redirect_stdout(output):
+            corsu.disable(['filezilla'])
+        # FileZilla writes its settings back when it quits: reverting now would be undone and then forgotten.
+        self.assertIn('<Setting name="Language Code">co</Setting>', config.read_text())
+        self.assertFalse(corsu.is_disabled('filezilla'))
+        self.assertIn('FileZilla', output.getvalue())
+        self.running = set()
+        corsu.disable(['filezilla'])
+        self.assertEqual(config.read_text(), original)
+        self.assertTrue(corsu.is_disabled('filezilla'))
+
+    def test_language_chosen_in_notepad_plus_plus_is_kept_when_corsu_runs_again(self):
+        self.make('Notepad++/notepad++.exe')
+        corsican = self.files / 'Notepad++/localization/corsican.xml'
+        corsican.parent.mkdir(parents=True)
+        corsican.write_text('<NotepadPlus><Native-Langue name="Corsu"/></NotepadPlus>')
+        self.run_install('notepadpp')
+        native = self.root / 'Roaming/Notepad++/nativeLang.xml'
+        native.write_text('<NotepadPlus><Native-Langue name="English"/></NotepadPlus>')
+        report = self.run_install('notepadpp')  # used to stop the whole installation with a RuntimeError
+        self.assertIn('English', native.read_text())
+        self.assertEqual(len(report['skipped']), 1)
+
+    def test_summary_names_only_programs_actually_switched(self):
+        self.make('7-Zip/7zFM.exe', 'WinMerge/WinMergeU.exe', 'WinMerge/Languages/Corsican.po')
+        output = io.StringIO()
+        with redirect_stdout(output), patch.object(corsu, 'ROOT', self.root / 'checkout'):
+            corsu.install(['7zip', 'winmerge'])
+        text = output.getvalue()
+        self.assertIn('Installed: WinMerge', text)
+        self.assertNotIn('7-Zip', text.split('Installed:')[1].splitlines()[0])
+        self.assertIn('Not switched to Corsican (see the reasons above): 7-Zip', text)
+        self.assertEqual(corsu.load_state()['components'], ['winmerge'])

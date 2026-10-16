@@ -1210,11 +1210,17 @@ def install(components=None, qt_system=False):
     for app_id in sorted(components & set(apps.registry())):
         progress(88, 'Switching programs to Corsican', 'Passage des logiciels en corse')
         application_stats[app_id] = apps.install(installer, app_id)
+    # A program none of whose installations could be switched is not installed: it is neither reported as in
+    # Corsican nor recorded as a part to switch on and off, unless an earlier run already switched it.
+    left_alone = {app_id for app_id, stats in application_stats.items() if not stats['installed']}
+    left_alone -= {component_of(name, record) for name, record in installer.state['files'].items()}
+    partly = sorted(app_id for app_id, stats in application_stats.items() if stats['installed'] and stats['skipped'])
+    components = components - left_alone
     installer.state['components'] = sorted(set(installer.state.get('components', [])) | components)
     installer.state['qt_system'] = qt_system or installer.state.get('qt_system', False)
     installer.state['disabled'] = sorted(set(installer.state.get('disabled', [])) - components)
     installer.state['enabled'] = True
-    STATE.write_text(json.dumps(installer.state, indent=2), encoding='utf-8')
+    save_state(installer.state)
     disabled_marker().unlink(missing_ok=True)
     clients = sorted({'Vesktop' if name == 'vesktop' else 'Discord' for name in components
                       if name in ('vesktop', 'discord')})
@@ -1223,7 +1229,15 @@ def install(components=None, qt_system=False):
               'components': sorted(components), 'enabled': True,
               'scope': 'Interface labels only; no translation of messages or arbitrary websites.'}
     (DATA / 'report.json').write_text(json.dumps(report, ensure_ascii=False, indent=2), encoding='utf-8')
-    print(t('Installed: ', 'Installé : ') + component_names(components & set(COMPONENT_LABELS)))
+    installed = components & (set(COMPONENT_LABELS) | set(apps.registry()))
+    if installed:
+        print(t('Installed: ', 'Installé : ') + component_names(installed))
+    if partly:
+        print(t('Only some installations switched (see above): ', 'Certaines installations seulement (voir plus haut) : ')
+              + component_names(partly))
+    if left_alone:
+        print(t('Not switched to Corsican (see the reasons above): ', 'Pas passé en corse (raisons ci-dessus) : ')
+              + component_names(left_alone))
 
 
 def vencord_installer():
@@ -1369,7 +1383,7 @@ def disable(components=None, hours=None):
         DATA.mkdir(parents=True, exist_ok=True)
         until = '' if not hours else str(int(__import__('time').time() + hours * 3600))
         (DATA / TERMINAL_OFF).write_text(until, encoding='utf-8')
-    preserved = []
+    preserved, busy = [], []
     packs = {name: record for name, record in installer.state['files'].items()
              if record.get('chromium') and 'chromium' in targets}
     if packs:
@@ -1390,6 +1404,11 @@ def disable(components=None, hours=None):
             continue
         if record.get('setting'):
             from apps import settings
+            import apps
+            reason = apps.busy(component_of(name, record))
+            if reason:
+                busy.append((component_of(name, record), reason))
+                continue
             if settings.revert(record):
                 installer.state['files'].pop(name)
             else:
@@ -1406,13 +1425,18 @@ def disable(components=None, hours=None):
             installer.state['files'].pop(name)
         else:
             preserved.append(name)
-    installer.state['disabled'] = sorted(set(installer.state.get('disabled', [])) | (targets - {'terminal'}))
+    # A program left in Corsican because it is open stays switched on, so the app does not show it as off.
+    installer.state['disabled'] = sorted(set(installer.state.get('disabled', []))
+                                         | (targets - {'terminal'} - {component for component, _ in busy}))
     installer.state['enabled'] = not everything and installer.state.get('enabled', True)
-    STATE.write_text(json.dumps(installer.state, indent=2), encoding='utf-8')
+    save_state(installer.state)
+    repair_default_browser()
     if everything:
         disabled_marker().write_text('Corsu is switched off. Open the Corsu app to switch it on again.\n', encoding='utf-8')
     for name in preserved:
         print(t(f'Left alone because you changed it: {name}', f'Laissé tel quel car vous l\'avez modifié : {name}'))
+    for reason in dict.fromkeys(reason for _, reason in busy):
+        print(t(f'Still in Corsican: {reason}', f'Encore en corse : {reason}'))
     names = component_names(targets)
     print(t(f'Back to the original language: {names}. Restart these programs'
             + ('; log out and back in for the desktop.' if 'desktop' in targets else '.'),

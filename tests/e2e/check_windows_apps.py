@@ -29,6 +29,7 @@ def main():
         assert any(item.usable for item in found[app_id]), f'{app_id}: not usable here'
     settings.registry_set(r'Software\7-Zip', 'Lang', ('en', 1))
     corsu.install(wanted)
+    corsu.install(wanted)  # a second run (update, repair) must not take Corsican for the original language
     assert settings.registry_get(r'Software\7-Zip', 'Lang')[0] == 'co'
     assert settings.registry_get(r'Software\VideoLAN\VLC', 'Lang')[0] == 'co'
     native = Path(os.environ['APPDATA']) / 'Notepad++/nativeLang.xml'
@@ -38,7 +39,15 @@ def main():
     assert settings.registry_get(r'Software\7-Zip', 'Lang')[0] == 'en', '7-Zip did not get its language back'
     assert settings.registry_get(r'Software\VideoLAN\VLC', 'Lang') is None, 'VLC kept a language it did not have'
     assert not native.exists(), 'nativeLang.xml should be gone (there was none before)'
-    print('7-Zip, VLC and Notepad++: switched to Corsican and back')
+    corsu.enable(wanted)
+    assert settings.registry_get(r'Software\7-Zip', 'Lang')[0] == 'co', 'switching on again did not set Corsican'
+    # The person picks German in 7-Zip afterwards: removing Corsu leaves that choice.
+    settings.registry_set(r'Software\7-Zip', 'Lang', ('de', 1))
+    corsu.uninstall()
+    assert settings.registry_get(r'Software\7-Zip', 'Lang')[0] == 'de', 'uninstall undid a language chosen in 7-Zip'
+    assert settings.registry_get(r'Software\VideoLAN\VLC', 'Lang') is None, 'uninstall left VLC in Corsican'
+    assert not native.exists(), 'uninstall left nativeLang.xml'
+    print('7-Zip, VLC and Notepad++: switched to Corsican twice, back, on again, and a later choice kept on uninstall')
 
 
 if __name__ == '__main__':

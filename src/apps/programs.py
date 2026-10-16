@@ -180,12 +180,17 @@ class NotepadPlusPlus(SettingApp):
         else:
             try:
                 data, tag = self.official_file(installation.location)
-            except OSError as error:
+            except (OSError, ValueError, KeyError) as error:
                 return corsu.t(f'could not fetch the Corsican file ({error})', f'téléchargement du fichier corse impossible ({error})')
             print(corsu.t(f'Notepad++: Corsican file of {tag} fetched from github.com/{self.REPOSITORY}',
                           f'Notepad++ : fichier corse de {tag} téléchargé depuis github.com/{self.REPOSITORY}'))
-        installer.write(self.target(folder), data, toggle=True)
-        installer.state['files'][str(self.target(folder))]['component'] = self.id
+        target = self.target(folder)
+        record = installer.state['files'].get(str(target))
+        if record and target.exists() and corsu.digest(target.read_bytes()) != record['installed_sha256']:
+            # Notepad++'s own language menu rewrites nativeLang.xml: that choice is the person's.
+            return corsu.t('language changed in Notepad++ since; left alone', 'langue changée dans Notepad++ depuis ; laissé tel quel')
+        installer.write(target, data, toggle=True)
+        installer.state['files'][str(target)]['component'] = self.id
 
 
 class WinMerge(SettingApp):

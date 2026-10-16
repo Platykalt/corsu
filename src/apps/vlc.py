@@ -1,4 +1,4 @@
-"""VLC media player. Its Corsican catalogue is Patriccollu di Santa Maria è Sichè's (po/co.po in videolan/vlc).
+r"""VLC media player. Its Corsican catalogue is Patriccollu di Santa Maria è Sichè's (po/co.po in videolan/vlc).
 
 Windows: VLC's own language setting (HKCU\Software\VideoLAN\VLC, Lang). macOS: its preference "language" in the
 org.videolan.vlc domain. Both are what VLC's Preferences write since 3.0.9.

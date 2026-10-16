@@ -33,8 +33,10 @@ class Installation:
         parts = [self.kind]
         if self.version:
             parts.append(self.version)
-        if self.coverage:
+        if self.coverage and self.coverage[0].isdigit():
             parts.append(corsu.t(f'Corsican {self.coverage}', f'corse {self.coverage}'))
+        elif self.coverage:
+            parts.append(self.coverage)
         return f'{self.app.name} ({", ".join(parts)})'
 
 
@@ -163,7 +165,8 @@ def install(installer, app_id):
         if reason is None:
             try:
                 reason = app.enable(installer, installation)
-            except (OSError, ValueError, ImportError) as error:
+            except (OSError, ValueError, ImportError, RuntimeError) as error:
+                # RuntimeError: a file Corsu wrote before was changed since (Installer.write keeps it).
                 reason = corsu.t(f'could not write ({error})', f'écriture impossible ({error})')
         entry = {'kind': installation.kind, 'location': str(installation.location), 'version': installation.version,
                  'coverage': installation.coverage}
@@ -176,6 +179,17 @@ def install(installer, app_id):
             print(corsu.t(f'{installation.describe()}: in Corsican. Restart it if it is open.',
                           f'{installation.describe()} : en corse. Relancez-le s\'il est ouvert.'))
     return {'installed': done, 'skipped': skipped}
+
+
+def busy(component):
+    """Why a program's setting cannot be put back now (it is open and rewrites its settings when it quits), or None."""
+    app = registry().get(component)
+    processes = getattr(app, 'processes', ())
+    if processes:
+        from apps import programs
+        if programs.running(*processes):
+            return programs.close_first(app.name)
+    return None
 
 
 def which(*names):
