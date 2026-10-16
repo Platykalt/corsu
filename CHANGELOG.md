@@ -2,6 +2,14 @@
 
 ## 0.22.0 (2026-10-16)
 
+- The Corsu window shows each program's real state: in Corsican, partly (some installations switched, others not,
+  each with its reason and the next step), blocked, failed, or to restart. Translation coverage is shown separately
+  (VLC: 4,443 / 6,203), and so is how each switch was checked. The installation summary reads the same record.
+- Windows: the Corsu shortcut shows Corsu's icon instead of Python's (`corsu.ico`, kept outside the release folders
+  that updates delete).
+- `CORSU_DOWNLOAD_BASE` points the one-line scripts and the updater at another folder of the same archives (for tests);
+  the checksum is still checked. CI now installs from the built archives outside the checkout, deletes the extracted
+  folder, updates and uninstalls, on all three systems.
 - Firefox keeps its logo as the default browser on Linux. Firefox Corsu did not recognise its own menu entry as the
   default, and "Make default" wrote an entry without an icon that pointed at the copy's versioned folder. That entry
   also started the copy without Corsu's launcher, so the taskbar's browser button showed a blank page. The launcher now

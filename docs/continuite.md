@@ -56,8 +56,12 @@ Vérifié avec de vrais logiciels : Firefox (Linux, Windows, macOS en CI ; Linux
 la désinstallation), VLC sous Linux. Seulement sur des fichiers et un registre simulés : WinMerge, SumatraPDF,
 FileZilla, HandBrake, VeraCrypt, et tout macOS hors Firefox. Aucune fenêtre de ces logiciels n'a été regardée.
 
-Sur l'ordinateur du mainteneur, `userapp-Firefox-DQPWW3.desktop` (5 octobre) est encore le navigateur par défaut :
-la prochaine installation ou mise à jour de Corsu le répare.
+Ordinateur du mainteneur, réparé le 16 octobre 2026 par `repair_default_browser()` du dépôt : sauvegarde dans
+`~/.local/share/corsu/backups/manual-firefox-default-2026-10-16/`, `userapp-Firefox-DQPWW3.desktop` retiré, seules
+les lignes Firefox de `~/.config/mimeapps.list` changées. `xdg-mime` et `gio` donnent `firefox.desktop` (Firefox Corsu,
+`Icon=firefox` du système, `Exec=~/.local/bin/firefox-corsu`) ; cache KDE reconstruit. Vérifié dans les fichiers
+seulement : l'icône à l'écran n'a pas été regardée. Corsu 0.21.0 y est encore installé : son lanceur ne donne pas
+`MOZ_APP_LAUNCHER`, donc cliquer sur « Définir par défaut » dans Firefox recréerait l'entrée avant la mise à jour.
 
 ## Prête pour des testeurs ?
 
@@ -81,15 +85,19 @@ la prochaine installation ou mise à jour de Corsu le répare.
   modifié ([décision D1](../minecraft/java/decisions-2.md)).
 - Restent visibles : le raccourci Windows « Corsu » montre l'icône de Python ; la fenêtre n'indique pas encore les
   logiciels activés en partie.
-- macOS : aucun logiciel n'a été essayé sur un vrai Mac ; FileZilla et VeraCrypt sous macOS ne sont pas activés
-  (chemins de réglages non confirmés).
+- macOS : la CI tourne sur un vrai Mac de GitHub (macos-latest). Firefox y est installé, lancé et lu par les
+  vérifications automatiques, et l'archive y est installée puis mise à jour. Personne n'a regardé l'écran d'un Mac.
+  Les autres logiciels n'y sont testés que sur fixtures ; FileZilla et VeraCrypt n'y sont pas activés (chemins de
+  réglages non confirmés).
 
 ## Mesures de réutilisation
 
 - VLC 3.0.x (`po/co.po`, 6 203 textes) : 4 443 traduits en amont, 1 760 manquants. `tools/tm.py match` sur la mémoire
   actuelle : 10 réutilisations exactes compatibles, 70 suggestions à relire, 0 conflit, 1 750 restent à traduire.
-  Compléter VLC est donc surtout un travail de traduction nouveau, à faire en amont avec Patriccollu plutôt que dans
-  Corsu.
+  Compléter VLC est donc surtout un travail de traduction nouveau, quelle que soit la taille du lexique. Il peut se
+  préparer dès maintenant dans la mémoire de Corsu ; l'envoi en amont (Transifex de VLC, idéalement avec Patriccollu)
+  est une étape ultérieure, pas un préalable. Les chiffres « textuels » (correspondance par le texte seul) sont des
+  estimations préliminaires ; seuls les réemplois compatibles avec le contexte comptent comme acquis.
 - Transmission (essai de l'outil, catalogue sans corse) : 597 textes uniques, 39 réutilisations exactes, 36
   suggestions, 30 conflits refusés.
 
@@ -97,5 +105,5 @@ la prochaine installation ou mise à jour de Corsu le répare.
 
 1. Audacity / Tenacity, fre:ac, PDFsam, Poedit : même mécanisme, sources dans [apps-research.md](apps-research.md).
 2. Bedrock : un essai en jeu, puis traduire les écrans les plus visibles.
-3. Telegram : un seul pack pour bureau et téléphone, après contact avec le propriétaire du pack « corsican »
-   existant ([roadmap-candidates.md](roadmap-candidates.md)).
+3. Telegram : un même nom de pack et un même lien pour toutes les applications, mais chaque application (Desktop,
+   Android, iOS, macOS, Web) a ses propres textes à traduire ([roadmap-candidates.md](roadmap-candidates.md)).
