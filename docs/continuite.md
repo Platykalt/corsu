@@ -74,6 +74,26 @@ seulement : l'icône à l'écran n'a pas été regardée. Corsu 0.21.0 y est enc
   prototypes.
 - La version 0.22.0 n'est ni étiquetée ni publiée : à décider par le mainteneur.
 
+## Itération du 16 octobre 2026 (soir)
+
+- Ordinateur du mainteneur mis à jour en 0.22.0 avec l'archive Linux testée par la CI (commit `18c48e3`, SHA-256
+  `4d626d71…5d05`) : parties `desktop`, `discord`, `firefox`, `minecraft`. Instance Prism Launcher `26.3` : pack
+  copié, `lang:co_fr` (sauvegarde de `options.txt` dans `~/.local/share/corsu/backups/`). Pas encore vu en jeu.
+- Défaut trouvé pendant cette mise à jour réelle, corrigé : la copie installée de Corsu n'avait pas `minecraft/java`,
+  l'installation s'arrêtait. Le parcours d'archive de la CI installe désormais Minecraft dans une instance Prism.
+- Défaut corrigé : `set_ini` plantait (KeyError) au second passage (VLC Flatpak).
+- Fenêtre : état structuré par logiciel (`state['results']`) ; le résumé de l'installeur lit le même enregistrement.
+- Windows : raccourci Corsu avec `corsu.ico` (dans `DATA`, hors des copies supprimées par les mises à jour) ;
+  vérifié sur un vrai Windows de la CI par les métadonnées du raccourci, pas à l'œil.
+- Archives : installées depuis un dossier avec espace et accent, dossier supprimé, mise à jour par `update.py`
+  depuis les mêmes archives (`CORSU_DOWNLOAD_BASE`, somme vérifiée), désinstallées, sur les trois systèmes. Les tests
+  sur la version publiée (`smoke`) ne tournent qu'avec une étiquette `v*`.
+- Audacity 3/4, Tenacity, fre:ac : faits par un agent sur la branche locale `integrations-audio` (non fusionnée,
+  pour la version suivante). Audacity 3, Audacity 4 et Tenacity lancés pour de vrai sous Linux (AppImages, dossier
+  personnel jetable) : corse à l'écran ; Windows et macOS sur fixtures ; fre:ac jamais vu lancé. Pendant ses essais,
+  fre:ac a créé deux dossiers vides dans le vrai dossier personnel (`~/.config/freac`, `~/.cache/freac`), retirés.
+- Version 0.22.0 : prête, non publiée ; l'étiquette `v0.22.0` attend l'accord explicite du mainteneur.
+
 ## Blocages et ce qui demande une personne
 
 - Essai réel de Minecraft Java 26.3 ([TESTING.md](../minecraft/java/TESTING.md)) et de Bedrock.
