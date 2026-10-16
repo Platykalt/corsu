@@ -1,7 +1,7 @@
 # Continuité du projet
 
 Document de reprise, tenu à jour à chaque étape. Il renvoie aux documents détaillés plutôt que de les répéter.
-Dernière mise à jour : 16 octobre 2026, après la passe de stabilisation (Corsu 0.22.0, non publiée, aucune étiquette).
+Dernière mise à jour : 16 octobre 2026, après la passe de stabilisation (Corsu 0.22.0, publiée le 16 octobre 2026).
 
 ## Objectifs retenus
 
@@ -92,7 +92,9 @@ seulement : l'icône à l'écran n'a pas été regardée. Corsu 0.21.0 y est enc
   pour la version suivante). Audacity 3, Audacity 4 et Tenacity lancés pour de vrai sous Linux (AppImages, dossier
   personnel jetable) : corse à l'écran ; Windows et macOS sur fixtures ; fre:ac jamais vu lancé. Pendant ses essais,
   fre:ac a créé deux dossiers vides dans le vrai dossier personnel (`~/.config/freac`, `~/.cache/freac`), retirés.
-- Version 0.22.0 : prête, non publiée ; l'étiquette `v0.22.0` attend l'accord explicite du mainteneur.
+- Version 0.22.0 publiée le 16 octobre 2026 (étiquette `v0.22.0` sur `d94e4f0`, avec l'accord du mainteneur) :
+  tous les tests de la CI, puis installation en une ligne depuis la version publiée sous Linux et Windows (pas de
+  test de ce type sous macOS). Suite : fusionner `integrations-audio`, PDFsam, Poedit.
 
 ## Blocages et ce qui demande une personne
 
