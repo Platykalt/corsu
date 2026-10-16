@@ -10,13 +10,13 @@
   color-scheme: light dark;
   --window: #fbfbfa; --sidebar: #f1f1ef; --text: #1d1f20; --muted: #63686b; --line: #dcdedd; --row: #ffffff;
   --hover: #ececea; --selected: #e1e5e7; --accent: #2d5f7c; --on-accent: #ffffff; --danger: #a1302b;
-  --track: #b9bebf; --focus: #3d84b8;
+  --track: #b9bebf; --focus: #3d84b8; --warning: #8a5300;
 }
 @media (prefers-color-scheme: dark) {
   :root {
     --window: #1e2021; --sidebar: #191b1c; --text: #e4e6e6; --muted: #9a9fa1; --line: #33373a; --row: #25282a;
     --hover: #2b2f31; --selected: #30373b; --accent: #7fb2cf; --on-accent: #10202a; --danger: #ee8d86;
-    --track: #4a5053; --focus: #8cc0e0;
+    --track: #4a5053; --focus: #8cc0e0; --warning: #e0b15e;
   }
 }
 * { box-sizing: border-box; }
@@ -57,6 +57,28 @@ p { margin: 0 0 10px; }
 .group a.label:hover > :first-child { text-decoration: underline; text-underline-offset: 2px; }
 .group li.link:hover { background: var(--hover); }
 .external { color: var(--muted); font-size: 12px; }
+
+/* Program rows: what is really switched, how much is translated, how far it was tested. */
+.group > li.tall { align-items: flex-start; }
+.group > li.tall > .switch, .group > li.tall > .state { margin-top: 2px; }
+.group > li.tall > .pick { margin-top: 3px; }
+.group > li.attention { box-shadow: inset 3px 0 var(--warning); }
+.group > li.problem { box-shadow: inset 3px 0 var(--danger); }
+.group .label { overflow-wrap: anywhere; }
+.group .status { display: block; font-size: 13px; margin-top: 2px; color: var(--muted); }
+.badge { font-weight: 600; color: var(--muted); }
+.badge.active { color: var(--accent); }
+.badge.partial, .badge.restart_required { color: var(--warning); }
+.badge.blocked, .badge.failed { color: var(--danger); }
+.group .tested { display: block; color: var(--muted); font-size: 12px; margin-top: 1px; }
+.group details { margin-top: 6px; font-size: 13px; }
+.group summary { cursor: pointer; color: var(--accent); width: fit-content; max-width: 100%; border-radius: 3px; }
+.group summary:hover { text-decoration: underline; text-underline-offset: 2px; }
+.instances { list-style: none; margin: 6px 0 0; padding: 0 0 0 10px; border-left: 2px solid var(--line); display: flex; flex-direction: column; gap: 8px; }
+.instances li > span { display: block; }
+.instances .where { font: 12px/1.4 ui-monospace, "Cascadia Mono", "DejaVu Sans Mono", Menlo, monospace; color: var(--muted); overflow-wrap: anywhere; }
+.instances .hint { margin-top: 0; }
+.instances .when { color: var(--muted); font-size: 12px; }
 
 .switch { position: relative; flex: none; width: 36px; height: 20px; }
 .switch input { position: absolute; inset: 0; margin: 0; opacity: 0; cursor: pointer; }
@@ -296,6 +318,16 @@ const text = {
     programs_none: "Nunda ùn hè stallatu per avà.", go_add: "Aghjunghje prugrammi",
     restart: "Rilanciate {name} per vede u cambiamentu.", restart_desktop: "Scunnettitevi è cunnettitevi torna per vede u cambiamentu.",
     installed: "Stallatu",
+    activation_active: "In corsu", activation_partial: "In parte in corsu", activation_inactive: "In lingua d'origine",
+    activation_blocked: "Bluccatu", activation_failed: "Sbagliu", activation_restart_required: "Da rilancià",
+    coverage_complete: "Traduzzione cumpleta", coverage_partial: "Traduzzione parziale",
+    coverage_count: "Traduttu : {translated} / {total} ({percent})",
+    tested: "Pruvatu : {list}", tested_none: "Micca pruvatu per avà",
+    tested_simulated: "simulatu", tested_real: "in u veru prugramma ({systems})", tested_no_real: "micca in u veru prugramma",
+    tested_visual: "cuntrollu visuale", tested_no_visual: "senza cuntrollu visuale",
+    tested_review: "rilettura linguistica", tested_no_review: "senza rilettura linguistica",
+    instances_one: "Dettagli di a stallazione", instances_many: "Dettagli di e {n} stallazioni",
+    status_as_of: "Situazione à u {time}",
     terminal: "Terminale", terminal_label: "Cummande in corsu",
     terminal_on: "In i novi terminali.", terminal_off: "In francese finu à ch'è vo u rimettite.",
     terminal_until: "In francese finu à {time}, dopu torna in corsu.",
@@ -349,6 +381,16 @@ const text = {
     programs_none: "Rien n'est installé pour l'instant.", go_add: "Ajouter des logiciels",
     restart: "Redémarrez {name} pour voir le changement.", restart_desktop: "Déconnectez-vous puis reconnectez-vous pour voir le changement.",
     installed: "Installé",
+    activation_active: "En corse", activation_partial: "En partie en corse", activation_inactive: "Langue d'origine",
+    activation_blocked: "Bloqué", activation_failed: "Échec", activation_restart_required: "À redémarrer",
+    coverage_complete: "Traduction complète", coverage_partial: "Traduction partielle",
+    coverage_count: "Traduit : {translated} / {total} ({percent})",
+    tested: "Testé : {list}", tested_none: "Pas encore testé",
+    tested_simulated: "simulation", tested_real: "logiciel réel ({systems})", tested_no_real: "pas dans le logiciel réel",
+    tested_visual: "contrôle visuel", tested_no_visual: "sans contrôle visuel",
+    tested_review: "relecture linguistique", tested_no_review: "sans relecture linguistique",
+    instances_one: "Détails de l'installation", instances_many: "Détails des {n} installations",
+    status_as_of: "État au {time}",
     terminal: "Terminal", terminal_label: "Commandes en corse",
     terminal_on: "Dans les nouveaux terminaux.", terminal_off: "En français jusqu'à ce que vous le réactiviez.",
     terminal_until: "En français jusqu'à {time}, puis de nouveau en corse.",
@@ -402,6 +444,16 @@ const text = {
     programs_none: "Nothing is installed yet.", go_add: "Add programs",
     restart: "Restart {name} to see the change.", restart_desktop: "Log out and back in to see the change.",
     installed: "Installed",
+    activation_active: "In Corsican", activation_partial: "Partly in Corsican", activation_inactive: "Original language",
+    activation_blocked: "Blocked", activation_failed: "Failed", activation_restart_required: "Restart needed",
+    coverage_complete: "Fully translated", coverage_partial: "Partly translated",
+    coverage_count: "Translated: {translated} / {total} ({percent})",
+    tested: "Tested: {list}", tested_none: "Not tested yet",
+    tested_simulated: "simulated", tested_real: "real app ({systems})", tested_no_real: "not in the real app",
+    tested_visual: "visual check", tested_no_visual: "no visual check",
+    tested_review: "linguistic review", tested_no_review: "no linguistic review",
+    instances_one: "Installation details", instances_many: "Details of the {n} installations",
+    status_as_of: "Status as of {time}",
     terminal: "Terminal", terminal_label: "Commands in Corsican",
     terminal_on: "In new terminal windows.", terminal_off: "In French until you switch it back on.",
     terminal_until: "In French until {time}, then back to Corsican.",
@@ -442,7 +494,7 @@ let language = null;
 try { language = localStorage.getItem("corsu-language"); } catch (error) {}
 let chosen = Boolean(language);
 let state = null, page = null, picks = null, closed = false, showLog = false;
-const restartHints = new Map();
+const restartHints = new Map(), openDetails = new Map();
 
 const $ = id => document.getElementById(id);
 // Browsers have no Corsican number and time formats; the French ones match Corsican usage.
@@ -480,21 +532,126 @@ function show(name) {
   for (const panel of document.querySelectorAll("[data-page-panel]")) panel.hidden = panel.id !== name;
 }
 
+// Activation (is Corsican switched on?) and coverage (how much of the program is translated) are separate:
+// a program fully switched on with a partial catalogue is "active", not a partial failure.
+// Older saved states only carry `on`; the state is read from it then.
+function activationOf(item) {
+  if (item.activation) return item.activation;
+  if (item.on) return "active";
+  return item.installed && item.switchable ? "inactive" : null;
+}
+
+function activationLabel(activation) {
+  const key = "activation_" + activation;
+  return key in text[language || "fr"] ? t(key) : activation;
+}
+
+function coverageText(coverage) {
+  if (!coverage) return null;
+  if (coverage.state === "complete") return t("coverage_complete");
+  if (coverage.state !== "partial") return null;
+  const { translated, total } = coverage;
+  if (!Number.isFinite(translated) || !Number.isFinite(total) || total <= 0) return t("coverage_partial");
+  // Never "100 %" while messages are still missing.
+  let percent = Math.round(translated / total * 100);
+  if (translated < total) percent = Math.min(percent, 99);
+  return t("coverage_count", { translated: translated.toLocaleString(numbers()), total: total.toLocaleString(numbers()),
+    percent: (percent / 100).toLocaleString(numbers(), { style: "percent" }) });
+}
+
+function validationText(validation) {
+  if (!validation) return null;
+  const real = validation.real_app || [];
+  if (!validation.simulated && !real.length && !validation.visual && !validation.linguistic_review) return t("tested_none");
+  const parts = [];
+  if (validation.simulated) parts.push(t("tested_simulated"));
+  parts.push(real.length ? t("tested_real", { systems: real.map(system => systems[system] || system).join(", ") }) : t("tested_no_real"));
+  parts.push(t(validation.visual ? "tested_visual" : "tested_no_visual"));
+  parts.push(t(validation.linguistic_review ? "tested_review" : "tested_no_review"));
+  return t("tested", { list: parts.join(" · ") });
+}
+
+const troubled = activation => activation === "blocked" || activation === "failed";
+const noted = instance => Boolean(instance.reason || instance.action);
+
+// What a row adds under the program's description: status, coverage, testing, and each installation when useful.
+// Empty for the fixed parts (Firefox, Discord…) and old saved states: the switch already says it all.
+function statusBlock(item) {
+  const activation = activationOf(item);
+  const instances = Array.isArray(item.instances) ? item.instances : [];
+  const coverage = coverageText(item.coverage);
+  const tested = validationText(item.validation);
+  const ordinary = activation === "active" || activation === "inactive" || activation === null;
+  if (ordinary && !instances.length && !coverage && !tested) return { nodes: [], kind: null };
+  const nodes = [];
+  if (activation !== null || coverage) {
+    nodes.push(make("span", { class: "status", id: "status-" + item.name },
+      activation !== null ? make("span", { class: "badge " + activation, text: activationLabel(activation) }) : null,
+      activation !== null && coverage ? " · " : null, coverage));
+  }
+  if (tested) nodes.push(make("span", { class: "tested", text: tested }));
+  const attention = !ordinary || instances.some(instance => instance.activation !== "active" && instance.activation !== "inactive") || instances.some(noted);
+  if (instances.length > 1 || instances.some(instance => instance.activation !== "active") || instances.some(noted)) {
+    // Opened by default when something needs the person's attention; then it stays as they leave it.
+    const open = openDetails.has(item.name) ? openDetails.get(item.name) : attention;
+    nodes.push(make("details", { open, ontoggle: event => {
+      // The first event only echoes the default; from then on the person's choice is kept.
+      if (event.target.open !== open || openDetails.has(item.name)) openDetails.set(item.name, event.target.open);
+    } },
+      make("summary", { id: "details-" + item.name, text: instances.length === 1 ? t("instances_one") : t("instances_many", { n: instances.length }) }),
+      make("ul", { class: "instances" }, ...instances.map(instanceRow),
+        item.updated ? make("li", { class: "when", text: t("status_as_of", { time: new Date(item.updated * 1000).toLocaleString(numbers(), { dateStyle: "short", timeStyle: "short" }) }) }) : null)));
+  }
+  const kind = troubled(activation) ? "problem" : attention ? "attention" : null;
+  return { nodes, kind };
+}
+
+function instanceRow(instance) {
+  const title = [instance.kind, instance.version].filter(Boolean).join(" ");
+  const coverage = coverageText(instance.coverage);
+  const note = instance.coverage && instance.coverage.note;
+  // Reason and action come written by the installer, in French or English: shown as they are.
+  return make("li", {},
+    make("span", {}, title ? make("b", { text: title }) : null, title ? " · " : null,
+      make("span", { class: "badge " + instance.activation, text: activationLabel(instance.activation) }),
+      coverage ? " · " + coverage : null),
+    instance.location ? make("span", { class: "where", text: instance.location }) : null,
+    instance.reason ? make("span", { text: instance.reason }) : null,
+    instance.action ? make("span", { class: "hint", text: instance.action }) : null,
+    note ? make("span", { class: "muted", text: note }) : null);
+}
+
+function rowClass(block) {
+  return [block.nodes.length > 1 || block.nodes.some(node => node.tagName === "DETAILS") ? "tall" : null, block.kind].filter(Boolean).join(" ") || null;
+}
+
 function switchRow(item, busy) {
   const [name, detail] = item.text[language];
   const id = "switch-" + item.name;
-  const hint = restartHints.get(item.name);
-  return make("li", {},
+  const block = statusBlock(item);
+  // A restart cannot show a change that did not happen.
+  const hint = troubled(activationOf(item)) ? null : restartHints.get(item.name);
+  return make("li", { class: rowClass(block) },
     make("span", { class: "label" },
       make("label", { for: id, text: name }),
       make("span", { class: "detail", text: detail }),
+      ...block.nodes,
       hint ? make("span", { class: "hint", text: hint }) : null),
     make("span", { class: "switch" },
-      make("input", { type: "checkbox", role: "switch", id, checked: item.on, disabled: busy, onchange: event => {
+      // Always the server's word: after a failed or deferred change, the next refresh puts it back.
+      make("input", { type: "checkbox", role: "switch", id, checked: item.on, disabled: busy,
+        "aria-describedby": block.nodes.some(node => node.id === "status-" + item.name) ? "status-" + item.name : null, onchange: event => {
         restartHints.set(item.name, item.name === "desktop" ? t("restart_desktop") : t("restart", { name }));
-        call("/api/switch", { components: [item.name], on: event.target.checked }).then(refresh);
+        call("/api/switch", { components: [item.name], on: event.target.checked }).catch(() => null).then(refresh);
       } }),
       make("i")));
+}
+
+// Rows are rebuilt at every refresh: keep the focused control and the opened details where they were.
+function replaceKeepingFocus(list, rows) {
+  const focused = list.contains(document.activeElement) ? document.activeElement.id : null;
+  list.replaceChildren(...rows);
+  if (focused && $(focused)) $(focused).focus();
 }
 
 function renderPrograms() {
@@ -506,7 +663,9 @@ function renderPrograms() {
     if (item.switchable) rows.push(switchRow(item, busy));
     else if (item.installed) {
       const [name, detail] = item.text[language];
-      rows.push(make("li", {}, make("span", { class: "label" }, make("span", { text: name }), make("span", { class: "detail", text: detail })),
+      const block = statusBlock(item);
+      rows.push(make("li", { class: rowClass(block) },
+        make("span", { class: "label" }, make("span", { text: name }), make("span", { class: "detail", text: detail }), ...block.nodes),
         make("span", { class: "state", text: t("installed") })));
     }
   }
@@ -514,7 +673,7 @@ function renderPrograms() {
     rows.push(make("li", {}, make("span", { class: "label muted", text: t("programs_none") }),
       make("button", { type: "button", class: "button", text: t("go_add"), onclick: () => show("add") })));
   }
-  list.replaceChildren(...rows);
+  replaceKeepingFocus(list, rows);
   $("programs-lead").textContent = t("programs_lead");
 
   const terminal = state.items.find(item => item.name === "terminal");
@@ -542,13 +701,15 @@ function renderAdd() {
   const rows = candidates.map(item => {
     const [name, detail] = item.text[language];
     const id = "pick-" + item.name;
-    return make("li", {},
+    // A first attempt that switched nothing leaves the program here: say why.
+    const block = statusBlock(item);
+    return make("li", { class: rowClass(block) },
       make("input", { type: "checkbox", class: "pick", id, checked: picks.has(item.name), onchange: event => {
         if (event.target.checked) picks.add(item.name); else picks.delete(item.name);
       } }),
-      make("span", { class: "label" }, make("label", { for: id, text: name }), make("span", { class: "detail", text: detail })));
+      make("span", { class: "label" }, make("label", { for: id, text: name }), make("span", { class: "detail", text: detail }), ...block.nodes));
   });
-  $("choices").replaceChildren(...(rows.length ? rows : [make("li", {}, make("span", { class: "label muted", text: t("add_none") }))]));
+  replaceKeepingFocus($("choices"), rows.length ? rows : [make("li", {}, make("span", { class: "label muted", text: t("add_none") }))]);
   $("review").hidden = !candidates.length;
   $("review").disabled = state.job.running;
 }
