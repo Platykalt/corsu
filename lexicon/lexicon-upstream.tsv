@@ -4924,7 +4924,7 @@ Smooth Time:|Durée de lissage :|Durata d’allisciata :
 Smooth Time|Durée de lissage|Durata d’allisciata
 Use Defaults|Utiliser les réglages par défaut|Impiegà e predefinizioni
 Restore Defaults|Restaurer les réglages par défaut|Risturà e predefinizioni
-Silence|Silencer|Silenziu
+Silence|Silence|Silenziu
 Creates audio of zero amplitude|Crée de l’audio d’amplitude zéro|Crea audio d’ampiitutine nulla
 Stereo To Mono|Stéréo vers Mono|Da stereo à mono
 Converts stereo tracks to mono|Convertit des pistes stéréo en mono|Cunvertisce e traccie stereo in mono
@@ -5160,6 +5160,7 @@ Split Cut|Couper-séparer|Sparte è taglià
 Split-deleted %.2f seconds at t=%.2f|Audio supprimé de %.2f secondes à t=%.2f|Spartera è squassatura di %.2f seconde à t=%.2f
 Split Delete|Supprimer et raccorder|Sparte è squassà
 Silenced selected tracks for %.2f seconds at %.2f|Pistes sélectionnées rendues muettes de %.2f secondes à %.2f|Traccie selezziunate ammutulite per %.2f seconde à %.2f
+Silence|Silencer|Silenziu
 Trim selected audio tracks from %.2f seconds to %.2f seconds|Rogner la piste audio sélectionné de %.2f secondes à %.2f secondes|Ammuzzà e traccie audio selezziunate da %.2f seconde à %.2f seconde
 Trim Audio|Rognage audio|Ammuzzatura audio
 Split|Séparer|Sparte
@@ -7209,6 +7210,7 @@ Hide Others|Masquer le reste|Piattà l’altri
 Show All|Tout afficher|Tuttu affissà
 Quit %s|Quitter %s|Esce %s
 Preferences…|Préférences…|Preferenze…
+Preferences...|Préférences...|Preferenze…
 Preferences...|Préférences…|Preferenze…
 Apply|Appliquer|Appiecà
 &Back|Retour|&Ritornu
@@ -8433,7 +8435,7 @@ Ignored Diff|Diff. ignorées|Sfarenze ignurate
 Unpacker|Décompresseur|Spacchittadore
 Prediffer|Précomparateur|Preparagone
 Middle|Milieu|Centru
-Diff|Différences|Sfarenze
+Diff|Différence|Sfarenze
 Left Duplicate Count|Nombre de doublons à Gauche|Numeru di doppiatura à manca
 Right Duplicate Count|Nombre de doublons à Droite|Numeru di doppiatura à diritta
 Middle Duplicate Count|Nombre de doublons au Milieu|Numeru di doppiatura à u centru
@@ -8666,6 +8668,7 @@ DirectWrite Natural Symmetric|DirectWrite symétrique naturel|DirectWrite natura
 MDI child window or main window|Fenêtre enfant MDI ou fenêtre principale|Finestra zitella o finestra principale MDI
 MDI child window only|Fenêtre enfant MDI uniquement|Finestra zitella MDI solu
 Close main window if only one MDI child window|Fermer la fenêtre principale s'il n'y a qu'une seule fenêtre enfant MDI|Chjode a finestra principale s’ella ci hè solu una finestra zitella MDI
+Diff|Différences|Sfarenze
 Highlight|Surbrillance|Sopralineamentu
 Blink|Clignotement|Cinnulamentu
 Block Size|Taille du bloc|Dimensione di bloccu
@@ -12625,7 +12628,6 @@ Failed to load sound from "%s" (error %d).|Échec du chargement du son depuis «
 Font file "%s" doesn't exist.|Le fichier de police "%s" n'existe pas.|U schedariu di grafia « %s » ùn esiste micca.
 Font file "%s" cannot be used as it is not inside the font directory "%s".|Le fichier de police "%s" ne peut pas être utilisé s'il n'est pas dans le répertoire de polices "%s".|U schedariu di grafia « %s » ùn pò micca esse impiegatu perchè ùn si trova micca in u cartulare di e grafie « %s ».
 About...|À propos...|Apprupositu…
-Preferences...|Préférences...|Preferenze...
 Hide %s|Cacher %s|Piattà %s
 Hide Application|Cacher l'Application|Piattà l’appiecazione
 Hide Others|Cacher les Autres|Piattà l’altre
@@ -12809,6 +12811,7 @@ A standard bullet name.|Un nom de tiret standard.|Un nome di puce classica.
 &Number:|&Numéro :|&Numeru :
 The list item number.|Le numéro de l'élément de la liste.|U numeru di l’elementu di a lista.
 Shows a preview of the bullet settings.|Affiche un aperçu des réglages pour les tirets.|Affisseghja una fighjulata di i parametri di puce.
+(None)|(Aucun)|(Nisunu)
 Upper case letters|Lettres majuscules|Lettere maiuscule
 Lower case letters|Lettres minuscules|Lettere minuscule
 Upper case roman numerals|Chiffres romains majuscules|Cifri rumani in maiuscule
@@ -13413,6 +13416,7 @@ In selection|Dans la sélection|In a selezzione
 Clear all marks|Purger les marques|Squassà tutte e marche
 Replace All in All Opened Documents|Remplacer dans tous les documents ouverts|Rimpiazzalle tutte in tutti i ducumenti aperti
 Find All in All Opened Documents|Rechercher dans tous les documents ouverts|Circalle tutte in tutti i ducumenti aperti
+Filters:|Filtres :|Filtri :
 Directory:|Dossier :|Cartulare :
 Find All|Trouver tout|Circalle tutte
 In all sub-folders|Sous-dossiers|In i sottucartulari
@@ -13592,6 +13596,7 @@ User language|Langage :|Linguaghju
 Ext.:|Ext. :|Est. :
 Undock|Désancrer|Staccà
 Font options|Police :|Ozzioni di grafia
+Size:|Taille :|Dimensione :
 Nesting|Héberge :|Incastramentu
 Delimiter 1|Délimiteur 1|Delimitatore 1
 Delimiter 2|Délimiteur 2|Delimitatore 2
@@ -14545,6 +14550,7 @@ Algorithm complexity|Complexité d'algorythme|Cumplessità di cudificazione
 CBR quality|Qualité de l'encodage CBR|Qualità CBR
 VBR quality|Qualité de l'encodage VBR|Qualità VBR
 ABR target bitrate|Qualité de l'encodage ABR|Flussu binariu ABR di destinazione
+Bitrate|Débit binaire|Flussu binariu
 Max. bitrate|Débit binaire maximum|Massimu Flussu binariu
 Basic settings|Réglages de base|Parametri basichi
 Encoding mode|Mode d'encodage|Modu di cudificazione

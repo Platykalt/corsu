@@ -5,6 +5,7 @@ Everything is local and deterministic. No network access, no machine translation
 access to user documents or messages. Only whole interface labels are translated; when a
 label is unknown it is returned unchanged.
 """
+import json
 import os
 import re
 import struct
@@ -33,6 +34,14 @@ USER = user_lexicon()
 FIXES = ROOT / 'lexicon/lexicon-fixes.tsv'
 REVIEWED = [ROOT / 'lexicon/lexicon-mozilla.tsv', ROOT / 'lexicon/lexicon-upstream.tsv']
 LEXICONS = [USER, FIXES, *REVIEWED, LEXICON]
+# Contextual translation memory: one JSON object per string, with its application, key, context and provenance
+# (lexicon/memory/README.md). Used by lookup() and application_words(); translate() keeps the flat tables above.
+MEMORY = ROOT / 'lexicon/memory'
+# How far a translation was checked, from the least to the most trusted.
+REVIEW_RANK = {'to-review': 0, 'untranslated': 0, 'corsu-draft': 1, 'ai-reviewed': 2, 'upstream-reviewed': 3,
+               'human-reviewed': 4}
+# Toolkits whose reviewed labels are generic interface words, valid in any application.
+GENERIC_APPS = {'wxwidgets'}
 
 # Placeholders that must survive translation untouched: Fluent placeables, printf
 # specifiers, Qt/KDE numbered arguments and shell-style variables.
@@ -125,8 +134,9 @@ def rows(source_path, section=None):
     """(english, french, corsican) rows of a lexicon file, or of one `# <section>:` part of it."""
     inside = section is None
     for number, line in enumerate(source_path.read_text(encoding='utf-8').splitlines(), 1):
-        if line.startswith('#'):
-            if section is not None:
+        # A heading is '# ' (or a lone '#'); '#lounge|#détente|#riposu' is a row about a channel name.
+        if line.startswith('#') and (line.startswith('# ') or line.strip() == '#' or line.count('|') != 2):
+            if section is not None and line.startswith('# '):
                 inside = line.startswith(f'# {section}:')
             continue
         if not line.strip() or not inside:
@@ -166,12 +176,220 @@ def application_words(*sections):
     for section in sections:
         for row in rows(LEXICON, section):
             add_row(words, *row)
+    # Reviewed strings recorded in the translation memory for this application by another source than lexicon.tsv
+    # itself (whose sections were just read).
+    wanted = {section.casefold() for section in sections}
+    for entry in memory_entries(exported=False):
+        if (entry.get('app') or '').casefold() in wanted and not _from_lexicon(entry) \
+                and REVIEW_RANK.get(entry.get('review'), 0) >= REVIEW_RANK['ai-reviewed'] \
+                and isinstance(entry.get('target'), str):
+            add_row(words, entry['source'] if entry.get('source_lang') == 'en' else '', entry.get('source_fr') or '',
+                    entry['target'])
     for key, value in WORDS.items():
         words.setdefault(key, value)
     return words
 
 
 WORDS = load_lexicon()
+
+
+# --- translation memory ---------------------------------------------------------------------------------------------
+
+def placeholders(text):
+    found = []
+    for value in PLACEHOLDER.findall(text or ''):
+        if value not in found:
+            found.append(value)
+    return found
+
+
+def read_memory(path):
+    """Entries of one memory file with every field filled in: a `{"_defaults": {...}}` line gives the values its
+    following entries leave out (nested one level for `origin` and `context`), `key` defaults to the source text,
+    `params` to the source's placeholders and `source_fr` to the source when the source is French."""
+    defaults = {}
+    with open(path, encoding='utf-8') as lines:
+        for line in lines:
+            if not line.strip():
+                continue
+            entry = json.loads(line)
+            if '_defaults' in entry:
+                defaults = entry['_defaults']
+                continue
+            for field, value in defaults.items():
+                if field not in entry:
+                    entry[field] = value
+                elif isinstance(value, dict) and isinstance(entry[field], dict):
+                    entry[field] = {**value, **entry[field]}
+            entry.setdefault('source', '')
+            entry.setdefault('key', entry['source'])
+            entry.setdefault('source_lang', 'en')
+            if entry['source_lang'] == 'fr':
+                entry.setdefault('source_fr', entry['source'])
+            if 'params' not in entry:
+                entry['params'] = placeholders(entry['source'])
+            for field in ('app', 'component', 'context', 'source_fr', 'target', 'plural', 'origin', 'version',
+                          'license', 'review', 'fetched'):
+                entry.setdefault(field, None)
+            yield entry
+
+
+_MEMORY_CACHE = {}
+
+
+def memory_entries(directory=None, exported=True):
+    """Every entry of lexicon/memory/*.jsonl (read once per directory). exported=False leaves out the corsu-*.jsonl
+    files, which are exports of lexicon.tsv itself."""
+    directory = Path(directory or MEMORY)
+    if (directory, exported) not in _MEMORY_CACHE:
+        entries = []
+        if directory.is_dir():
+            for path in sorted(directory.glob('*.jsonl')):
+                if exported or not path.name.startswith('corsu-'):
+                    entries.extend(read_memory(path))
+        _MEMORY_CACHE[(directory, exported)] = entries
+    return _MEMORY_CACHE[(directory, exported)]
+
+
+def _from_lexicon(entry):
+    return ((entry.get('origin') or {}).get('path') or '').endswith('lexicon/lexicon.tsv')
+
+
+def meaning(text):
+    """A translation reduced to what distinguishes its meaning: typography, case, access keys and final
+    punctuation removed."""
+    text = normalize(text or '').replace('…', '...').casefold()
+    text = ACCELERATOR.sub('', text)
+    text = re.sub(r'[\s.:!?;]+$', '', text)
+    return re.sub(r'\s+', ' ', text).strip()
+
+
+def memory_sources(entry):
+    """(source text, Corsican) pairs an entry answers: its source, its French (unless, in an imported entry, the
+    French abbreviates a longer English label, see loose_french) and its plural source with the last form."""
+    target = entry.get('target')
+    if not target:
+        return []
+    forms = target if isinstance(target, list) else [target]
+    pairs = [(entry.get('source'), forms[0])]
+    french = entry.get('source_fr')
+    english = entry.get('source') if entry.get('source_lang') == 'en' else ''
+    if french and french != entry.get('source') and not (
+            entry.get('review') == 'upstream-reviewed' and english and loose_french(english, french, forms[0])):
+        pairs.append((french, forms[0]))
+    if entry.get('plural') and entry['plural'].get('source_plural'):
+        pairs.append((entry['plural']['source_plural'], forms[-1]))
+    return [(source, value) for source, value in pairs if source and value]
+
+
+_INDEX_CACHE = {}
+
+
+def _memory_index(directory=None):
+    """Normalised source text (and placeholder template) -> [(entry, translation or template, tokens?)]."""
+    directory = Path(directory or MEMORY)
+    if directory not in _INDEX_CACHE:
+        index = {}
+        for entry in memory_entries(directory):
+            target = entry.get('target')
+            if not target:
+                continue
+            for source, value in memory_sources(entry):
+                if not source or not value:
+                    continue
+                index.setdefault(normalize(source).strip(), []).append((entry, value, None))
+                skeleton, tokens = mask(source)
+                if tokens:
+                    template = remask(value, tokens)
+                    if template is not None:
+                        index.setdefault(normalize(skeleton).strip(), []).append((entry, template, len(tokens)))
+        _INDEX_CACHE[directory] = index
+    return _INDEX_CACHE[directory]
+
+
+def _corrections():
+    """The person's own corrections, then lexicon-fixes.tsv: they win everywhere, as in application_words."""
+    if 'corrections' not in _INDEX_CACHE:
+        words = {}
+        for source_path in (USER, FIXES):
+            if Path(source_path).exists() and Path(source_path).is_file():
+                for row in rows(Path(source_path)):
+                    add_row(words, *row)
+        _INDEX_CACHE['corrections'] = words
+    return _INDEX_CACHE['corrections']
+
+
+def _context_matches(entry, context):
+    if not context:
+        return False
+    wanted = set(context.values()) if isinstance(context, dict) else {context}
+    wanted.discard(None)
+    found = {entry.get('component'), entry.get('key')}
+    value = entry.get('context')
+    if isinstance(value, str):
+        found.add(value)
+    elif isinstance(value, dict):
+        found.update(item for name, item in value.items() if isinstance(item, str))
+    found.discard(None)
+    return bool(wanted & found)
+
+
+def lookup(text, app=None, context=None, directory=None):
+    """The Corsican of one exact source text (English or French) chosen with its application and context.
+
+    Order: the person's corrections and lexicon-fixes.tsv; an entry of the same application; an entry with the same
+    context (msgctxt, file, section or key); a reviewed entry of a generic toolkit. Otherwise, when the candidates
+    disagree in meaning across applications (two or more distinct translations from different applications, none
+    of them the requested one), the answer is None: keep the source rather than borrow another program's sense.
+    When they agree, the best reviewed one is returned. Unknown text gives None."""
+    if not text or not text.strip():
+        return None
+    core = normalize(text).strip()
+    corrections = _corrections()
+    if core in corrections:
+        return corrections[core]
+    skeleton, tokens = mask(core)
+    if tokens and normalize(skeleton) in corrections:
+        result = unmask(corrections[normalize(skeleton)], tokens)
+        if result is not None:
+            return result
+    index = _memory_index(directory)
+    candidates = [(entry, value) for entry, value, _ in index.get(core, [])]
+    if not candidates and tokens:
+        for entry, template, count in index.get(normalize(skeleton).strip(), []):
+            value = unmask(template, tokens) if count == len(tokens) else None
+            if value is not None:
+                candidates.append((entry, value))
+    if not candidates:
+        return None
+    candidates.sort(key=lambda item: -REVIEW_RANK.get(item[0].get('review'), 0))
+    wanted = (app or '').casefold()
+    if wanted:
+        for entry, value in candidates:
+            if (entry.get('app') or '').casefold() == wanted:
+                return value
+    if context:
+        for entry, value in candidates:
+            if _context_matches(entry, context):
+                return value
+    for entry, value in candidates:
+        if ((entry.get('app') or '').casefold() in GENERIC_APPS or not entry.get('app')) \
+                and REVIEW_RANK.get(entry.get('review'), 0) >= REVIEW_RANK['ai-reviewed']:
+            return value
+    by_meaning = {}
+    for entry, value in candidates:
+        by_meaning.setdefault(meaning(value), set()).add((entry.get('app') or '').casefold())
+    if len(by_meaning) > 1:
+        apps = set().union(*by_meaning.values())
+        if len(apps) > 1:
+            return None
+    # One meaning, or a single application's variants: the most trusted, then the most frequent wording.
+    best = REVIEW_RANK.get(candidates[0][0].get('review'), 0)
+    top = [value for entry, value in candidates if REVIEW_RANK.get(entry.get('review'), 0) == best]
+    counts = {}
+    for value in top:
+        counts[value] = counts.get(value, 0) + 1
+    return max(top, key=lambda value: counts[value])
 
 
 def signature(text):

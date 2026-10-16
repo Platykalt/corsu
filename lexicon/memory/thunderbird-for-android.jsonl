@@ -1,0 +1,952 @@
+{"_defaults":{"app":"Thunderbird for Android","component":"legacy/ui/legacy/src/main/res","fetched":"2026-10-16","license":"Apache-2.0","origin":{"branch":"main","path":"legacy/ui/legacy/src/main/res/values-co/strings.xml","repo":"thunderbird/thunderbird-android"},"review":"upstream-reviewed","source_lang":"en","version":"084f9c184388e0f939b7fe202d5f89728664a44f"}}
+{"component":"app-k9mail/src/main/res","context":{"comment":"Please keep the K-9 Mail format and just localize the mail part if possible."},"key":"app_name","origin":{"path":"app-k9mail/src/main/res/values-co/strings.xml"},"source":"K-9 Mail","source_fr":"Courriel K-9","target":"K-9 Mail"}
+{"context":{"comment":"Used in the about dialog"},"key":"about_app_authors_k9","source":"The K-9 Dog Walkers","source_fr":"Les auteurs de Courriel K-9 Mail","target":"Quelle è quelli di u K-9 storicu"}
+{"key":"about_project_title","source":"Open Source Project","source_fr":"Projet à code source ouvert","target":"Prughjettu à codice di fonte apertu"}
+{"key":"about_website_title","source":"Website","source_fr":"Site Web","target":"Situ web"}
+{"key":"get_help_title","source":"Get help","source_fr":"Obtenir de l’aide","target":"Ottene aiutu"}
+{"key":"changelog_title","source":"Changelog","source_fr":"Journal des changements","target":"Ghjurnale di i cambiamenti"}
+{"key":"changelog_recent_changes_title","source":"What's new","source_fr":"Nouveautés","target":"Ciò chì hè novu"}
+{"key":"changelog_show_recent_changes","source":"Show recent changes when app was updated","source_fr":"Afficher les changements récents après mise à jour de l’appli","target":"Affissà i cambiamenti recente quandu l’appiecazione hè stata messa à livellu"}
+{"context":{"comment":"Button text of the \"snack bar\" that is displayed when the app was updated."},"key":"changelog_snackbar_button_text","source":"View","source_fr":"Afficher","target":"Affissà"}
+{"context":{"comment":"=== General strings =================================================================="},"key":"authors","source":"Authors","source_fr":"Auteurs","target":"Autori"}
+{"key":"compose_title_compose","source":"Compose","source_fr":"Rédiger","target":"Cumpone"}
+{"key":"compose_title_reply_all","source":"Reply all","source_fr":"Répondre à tous","target":"Risponde à tutti"}
+{"key":"compose_title_forward","source":"Forward","source_fr":"Transférer","target":"Trasferisce"}
+{"key":"choose_folder_title","source":"Choose Folder","source_fr":"Choisir un dossier","target":"Sceglie un cartulare"}
+{"key":"choose_folder_move_title","source":"Move to…","source_fr":"Déplacer vers…","target":"Dispiazzà versu…"}
+{"key":"choose_folder_copy_title","source":"Copy to…","source_fr":"Copier vers…","target":"Cupià versu…"}
+{"key":"empty_subject","source":"Subject is empty, click again to send anyway","source_fr":"L’objet est vide. Touchez de nouveau pour envoyer quand même","target":"U sughjettu hè viotu. Tuccate torna per mandà quantunque"}
+{"key":"reply_action","source":"Reply","source_fr":"Répondre","target":"Risponde"}
+{"key":"reply_all_action","source":"Reply all","source_fr":"Répondre à tous","target":"Risponde à tutti"}
+{"key":"delete_action","source":"Delete","source_fr":"Supprimer","target":"Squassà"}
+{"key":"archive_action","source":"Archive","source_fr":"Archiver","target":"Archiviu"}
+{"key":"spam_action","source":"Spam","source_fr":"Pourriel (indésirable)","target":"Merzaghju"}
+{"key":"forward_action","source":"Forward","source_fr":"Transférer","target":"Trasferisce"}
+{"key":"forward_as_attachment_action","source":"Forward as attachment","source_fr":"Transférer en tant que fichier joint","target":"Trasferisce cum’è pezza ghjunta"}
+{"key":"edit_as_new_message_action","source":"Edit as new message","source_fr":"Éditer en tant que nouveau courriel","target":"Mudificà cum’è un messaghju novu"}
+{"key":"refile_action","source":"Refile…","source_fr":"Reclasser…","target":"Riclassificà…"}
+{"key":"done_action","source":"Done","source_fr":"Terminé","target":"Fattu"}
+{"key":"discard_action","source":"Discard","source_fr":"Abandonner","target":"Tralascià"}
+{"key":"save_draft_action","source":"Save as draft","source_fr":"Enregistrer comme brouillon","target":"Arregistrà cum’è bruttacopia"}
+{"key":"check_mail_action","source":"Check mail","source_fr":"Relever les courriels","target":"Racoglie i messaghji novi"}
+{"key":"send_messages_action","source":"Send messages","source_fr":"Envoyer les courriels","target":"Mandà i messaghji"}
+{"key":"refresh_folders_action","source":"Refresh folder list","source_fr":"Actualiser la liste des dossiers","target":"Attualizà a lista di i cartulari"}
+{"key":"filter_folders_action","source":"Find folder","source_fr":"Trouver un dossier","target":"Truvà un cartulare"}
+{"key":"add_account_action","source":"Add account","source_fr":"Ajouter un compte","target":"Aghjunghje un contu"}
+{"key":"compose_action","source":"Compose","source_fr":"Rédiger","target":"Cumpone"}
+{"key":"search_action","source":"Search","source_fr":"Chercher","target":"Ricercà"}
+{"key":"search_everywhere_action","source":"Search everywhere","source_fr":"Chercher partout","target":"Ricercà dapertuttu"}
+{"key":"search_results","source":"Search results","source_fr":"Résultats de la recherche","target":"Risultati di a ricerca"}
+{"key":"new_messages_title","source":"New messages","source_fr":"Nouveaux courriels","target":"Messaghji novi"}
+{"key":"app_license","source":"Apache License, Version 2.0","source_fr":"Licence Apache, Version 2.0","target":"Licenza Apache, versione 2.0"}
+{"key":"user_forum_title","source":"User forum","source_fr":"Forum des utilisateurs","target":"Foru di l’utilizatori"}
+{"key":"about_libraries","source":"Libraries","source_fr":"Bibliothèques","target":"Bibliuteche"}
+{"key":"license","source":"License","source_fr":"Licence","target":"Licenza"}
+{"key":"changelog_loading_error","source":"Couldn't load the changelog.","source_fr":"Impossible de charger le journal des changements.","target":"Impussibule di caricà u ghjurnale di i cambiamenti."}
+{"key":"source_code","source":"Source code","source_fr":"Code source","target":"Codice di fonte"}
+{"key":"changelog_version_title","source":"Version %s","source_fr":"Version %s","target":"Versione %s"}
+{"context":{"comment":"Displayed in a \"snack bar\" at the bottom of the screen when the app was updated."},"key":"changelog_snackbar_text","source":"Find out what's new in this release","source_fr":"Découvrez les nouveautés de cette version","target":"Scuprite ciò chì hè novu in sta versione"}
+{"key":"accounts_title","source":"Accounts","source_fr":"Comptes","target":"Conti"}
+{"key":"compose_title_reply","source":"Reply","source_fr":"Répondre","target":"Risponde"}
+{"key":"compose_title_forward_as_attachment","source":"Forward as attachment","source_fr":"Transférer en tant que fichier joint","target":"Trasferisce cum’è pezza ghjunta"}
+{"key":"send_action","source":"Send","source_fr":"Envoyer","target":"Mandà"}
+{"key":"move_action","source":"Move","source_fr":"Déplacer","target":"Dispiazzà"}
+{"key":"move_to_drafts_action","source":"Move to Drafts","source_fr":"Déplacer vers Brouillons","target":"Dispiazzà versu Bruttacopie"}
+{"key":"folders_action","source":"Manage folders","source_fr":"Gérer les dossiers","target":"Ghjestione di i cartulari"}
+{"key":"send_alternate_chooser_title","source":"Choose sender","source_fr":"Choisir l’expéditeur","target":"Sceglie u speditore"}
+{"key":"flag_action","source":"Add star","source_fr":"Ajouter une étoile","target":"Aghjunghje una stella"}
+{"key":"unflag_action","source":"Remove star","source_fr":"Supprimer l’étoile","target":"Caccià a stella"}
+{"key":"copy_action","source":"Copy","source_fr":"Copier","target":"Cupià"}
+{"key":"unsubscribe_action","source":"Unsubscribe","source_fr":"Vous désabonner","target":"Disabbunassi"}
+{"key":"show_headers_action","source":"Show headers","source_fr":"Afficher les en-têtes","target":"Affissà l’intestature"}
+{"key":"copy_subject_to_clipboard","source":"Subject text copied to clipboard","source_fr":"Le texte de l’objet a été copié dans le presse-papiers","target":"U testu di u sughjettu hè statu cupiatu in u preme’papei"}
+{"key":"message_view_theme_action_dark","source":"Switch to dark theme","source_fr":"Basculer vers le thème foncé","target":"Passà à u tema scuru"}
+{"key":"message_view_theme_action_light","source":"Switch to light theme","source_fr":"Basculer vers le thème clair","target":"Passà à u tema chjaru"}
+{"key":"mark_as_unread_action","source":"Mark unread","source_fr":"Marquer comme non lu","target":"Marcà cum’è à leghje"}
+{"key":"read_receipt","source":"Read receipt","source_fr":"Accusé de lecture","target":"Cunferma di lettura"}
+{"key":"read_receipt_enabled","source":"Will request read receipt","source_fr":"Un accusé de lecture sera demandé","target":"Una cunferma di lettura serà richiesta"}
+{"key":"read_receipt_disabled","source":"Will not request read receipt","source_fr":"Un accusé de lecture ne sera pas demandé","target":"Una cunferma di lettura ùn serà micca richiesta"}
+{"key":"empty_trash_action","source":"Empty Trash","source_fr":"Vider la corbeille","target":"Viutà a curbella"}
+{"key":"add_attachment_action","source":"Add attachment","source_fr":"Ajouter un fichier joint","target":"Aghjunghje una pezza ghjunta"}
+{"key":"expunge_action","source":"Expunge","source_fr":"Supprimer irrémédiablement","target":"Squassà"}
+{"key":"about_action","source":"About","source_fr":"À propos","target":"Apprupositu"}
+{"key":"prefs_title","source":"Settings","source_fr":"Paramètres","target":"Parametri"}
+{"context":{"comment":"Shown in place of the subject when a message has no subject. Showing this in parentheses is customary."},"key":"general_no_subject","source":"(No subject)","source_fr":"(Aucun objet)","target":"(Nisunu sughjettu)"}
+{"key":"general_no_sender","source":"No sender","source_fr":"Aucun expéditeur","target":"Nisunu speditore"}
+{"key":"status_loading_more","source":"Loading messages\\u2026","source_fr":"Chargement des courriels…","target":"Caricamentu di i messaghji…"}
+{"key":"status_network_error","source":"Connection error","source_fr":"Erreur de connexion","target":"Sbagliu di cunnessione"}
+{"key":"status_invalid_id_error","source":"Message not found","source_fr":"Le courriel est introuvable","target":"Messaghju intruvevule"}
+{"key":"status_loading_error","source":"Message loading error","source_fr":"Erreur de chargement du courriel","target":"Sbaglii di caricamentu di u messaghju"}
+{"key":"load_more_messages_fmt","source":"Load up\n    to %d more","source_fr":"Charger jusqu’à %d de plus","target":"Caricà fine à %d di più"}
+{"key":"size_format_gigabytes","source":"%.1f GB","source_fr":"%.1f Go","target":"%.1f Go"}
+{"key":"size_format_megabytes","source":"%.1f MB","source_fr":"%.1f Mo","target":"%.1f Mo"}
+{"key":"size_format_kilobytes","source":"%.1f kB","source_fr":"%.1f ko","target":"%.1f ko"}
+{"key":"size_format_bytes","source":"%d B","source_fr":"%d o","target":"%d o"}
+{"key":"notification_new_messages_title","plural":{"forms":["one","other"],"source_plural":"%d new messages"},"source":"%d new message","source_fr":"%d nouveau courriel","target":["%d messaghju novu","%d messaghji novi"]}
+{"key":"notification_additional_messages","source":"+ %1$d more on %2$s","source_fr":"+ %1$d de plus sur %2$s","target":"+ %1$d di più nant’à %2$s"}
+{"key":"notification_action_reply","source":"Reply","source_fr":"Répondre","target":"Risponde"}
+{"key":"notification_action_mark_as_read","source":"Mark Read","source_fr":"Marquer comme lu","target":"Marcà cum’è lettu"}
+{"key":"notification_action_mark_all_as_read","source":"Mark All Read","source_fr":"Tout marquer comme lu","target":"Tuttu marcà cum’è lettu"}
+{"key":"notification_action_delete","source":"Delete","source_fr":"Supprimer","target":"Squassà"}
+{"key":"notification_action_delete_all","source":"Delete All","source_fr":"Tout supprimer","target":"Tuttu squassà"}
+{"key":"notification_action_archive","source":"Archive","source_fr":"Archiver","target":"Archiviu"}
+{"key":"notification_action_archive_all","source":"Archive All","source_fr":"Tout archiver","target":"Tuttu in archiviu"}
+{"key":"notification_action_spam","source":"Spam","source_fr":"Pourriel (indésirable)","target":"Merzaghju"}
+{"key":"notification_certificate_error_public","source":"Certificate error","source_fr":"Erreur de certificat","target":"Sbagliu di certificatu"}
+{"key":"notification_certificate_error_title","source":"Certificate error for %s","source_fr":"Erreur de certificat pour (%s)","target":"Sbagliu di certificatu per %s"}
+{"key":"notification_certificate_error_text","source":"Check your server settings","source_fr":"Vérifiez les paramètres du serveur","target":"Verificate i vostri parametri di servitore"}
+{"key":"notification_authentication_error_title","source":"Authentication failed","source_fr":"Échec d’authentification","target":"Fiascu d’autenticazione"}
+{"key":"notification_authentication_error_text","source":"Authentication failed for %s. Update your server settings.","source_fr":"Échec d’authentification pour %s. Mettez à jour les paramètres du serveur.","target":"Fiascu d’autenticazione per %s. Mittite à livellu i vostri parametri di servitore."}
+{"key":"notification_bg_sync_ticker","source":"Checking mail: %1$s:%2$s","source_fr":"Relève des courriels : %1$s:%2$s","target":"Rileva di i messaghji : %1$s:%2$s"}
+{"key":"notification_bg_sync_title","source":"Checking mail","source_fr":"Relève des courriels","target":"Rileva di i messaghji"}
+{"key":"notification_bg_send_ticker","source":"Sending mail: %s","source_fr":"Envoi du courriel : %s","target":"Inviu di i messaghji : %s"}
+{"key":"notification_bg_send_title","source":"Sending mail","source_fr":"Envoi du courriel","target":"Inviu di i messaghji"}
+{"key":"notification_bg_title_separator","source":":","source_fr":":","target":":"}
+{"key":"notification_channel_push_title","source":"Synchronize (Push)","source_fr":"Synchroniser (poussé)","target":"Sincrunizà (Catapughjà)"}
+{"key":"notification_channel_push_description","source":"Displayed while waiting for new messages","source_fr":"Affiché lors de l’attente de nouveaux courriels","target":"Affissatu durante l’attesa di i messaghji novi"}
+{"key":"notification_channel_messages_title","source":"Messages","source_fr":"Courriels","target":"Messaghji"}
+{"key":"notification_channel_messages_description","source":"Notifications related to messages","source_fr":"Notifications relatives aux courriels","target":"Nutificazioni relative à i messaghji"}
+{"key":"notification_channel_miscellaneous_title","source":"Miscellaneous","source_fr":"Divers","target":"Diversi"}
+{"key":"notification_channel_miscellaneous_description","source":"Miscellaneous notifications like errors etc.","source_fr":"Notifications diverses telles que les erreurs, etc.","target":"Nutificazioni diverse tale chì sbaglii, ecc."}
+{"key":"send_failure_subject","source":"Failed to send some messages","source_fr":"Échec d’envoi de certains courriels","target":"Fiascu per mandà certi messaghji"}
+{"key":"version","source":"Version","source_fr":"Version","target":"Versione"}
+{"key":"debug_enable_debug_logging_title","source":"Enable debug logging","source_fr":"Activer le journal de débogage","target":"Attivà u ghjurnale di spannatura"}
+{"key":"debug_enable_sensitive_logging_title","source":"Log sensitive information","source_fr":"Journaliser les données sensibles","target":"Arregistrà l’infurmazioni sensibile"}
+{"key":"debug_enable_sensitive_logging_summary","source":"May show passwords in logs.","source_fr":"Pourrait afficher les mots de passe dans les journaux.","target":"Puderia affissà e parolle d’intesa in i ghjurnali."}
+{"key":"debug_export_logs_title","source":"Export logs","source_fr":"Exporter les journaux","target":"Espurtà i ghjurnali"}
+{"key":"debug_export_logs_failure","source":"Export failed.","source_fr":"Échec d’exportation.","target":"Fiascu d’espurtazione."}
+{"key":"message_to_fmt","source":"To:%s","source_fr":"À : %s","target":"À :%s"}
+{"key":"message_compose_subject_hint","source":"Subject","source_fr":"Objet","target":"Sughjettu"}
+{"key":"message_compose_signature_hint","source":"Signature","source_fr":"Signature","target":"Segnatura"}
+{"key":"message_compose_quote_header_separator","source":"-------- Original Message --------","source_fr":"-------- Courriel initial --------","target":"-------- Messaghju d’origine --------"}
+{"key":"message_compose_quote_header_subject","source":"Subject:","source_fr":"Objet :","target":"Sughjettu :"}
+{"key":"message_compose_quote_header_send_date","source":"Sent:","source_fr":"Envoyé :","target":"Mandatu :"}
+{"key":"message_compose_quote_header_to","source":"To:","source_fr":"À :","target":"À :"}
+{"key":"message_compose_quote_header_cc","source":"Cc:","source_fr":"Cc :","target":"Cc :"}
+{"key":"message_compose_reply_header_fmt","source":"%s wrote:","source_fr":"%s a écrit :","target":"%s hà scrittu :"}
+{"key":"message_compose_error_no_recipients","source":"You must add at least one recipient.","source_fr":"Vous devez ajouter au moins un destinataire.","target":"Ci vole à aghjunghje omancu un destinatariu."}
+{"key":"compose_error_incomplete_recipient","source":"Recipient field contains incomplete input!","source_fr":"Le champ des destinataires comprend une entrée incomplète","target":"U campu Destinatariu cuntene un’entrata incumpleta !"}
+{"key":"error_contact_address_not_found","source":"No email address could be found for this contact.","source_fr":"Aucune adresse courriel n’a été trouvée pour ce contact.","target":"Ùn si pò truvà alcunu indirizzu elettronicu per stu cuntattu."}
+{"key":"message_compose_show_quoted_text_action","source":"Include quoted message","source_fr":"Citer le courriel initial","target":"Mintuà u messaghju d’origine"}
+{"key":"message_compose_attachments_forward_toast","source":"The message cannot be forwarded because some attachments have not been downloaded.","source_fr":"Le courriel ne peut pas être transféré, car certains fichiers joints n’ont pas été téléchargés.","target":"U messaghju ùn pò micca esse trasferitu perchè certe pezze ghjunte ùn sò state scaricate."}
+{"key":"message_compose_description_delete_quoted_text","source":"Remove quoted text","source_fr":"Supprimer le texte entre guillemets","target":"Caccià u testu menziunatu"}
+{"key":"message_compose_description_edit_quoted_text","source":"Edit quoted text","source_fr":"Modifier le texte entre guillemets","target":"Mudificà u testu menziunatu"}
+{"key":"remove_attachment_action","source":"Remove attachment","source_fr":"Supprimer le fichier joint","target":"Caccià a pezza ghjunta"}
+{"key":"message_to_label","source":"To:","source_fr":"À :","target":"À :"}
+{"key":"message_view_cc_label","source":"Cc:","source_fr":"Cc :","target":"Cc :"}
+{"key":"message_view_bcc_label","source":"Bcc:","source_fr":"Cci :","target":"Cci :"}
+{"key":"message_view_status_attachment_not_saved","source":"Unable to save attachment.","source_fr":"Impossible d’enregistrer le fichier joint.","target":"Impussibule d’arregistrà a pezza ghjunta."}
+{"context":{"comment":"Displayed in the message view screen if the message was addressed to the user. Make sure this works with 'message_view_recipient_prefix'. In English it's \"to me\"."},"key":"message_view_to_me_text","source":"me","source_fr":"moi","target":"eiu"}
+{"key":"message_view_no_viewer","source":"Unable to find viewer for %s.","source_fr":"Impossible de trouver un visualiseur pour %s.","target":"Ùn si pò truvà un affissadore per %s."}
+{"key":"message_view_download_remainder","source":"Download complete message","source_fr":"Télécharger le courriel entier","target":"Scaricà u messaghju cumpletu"}
+{"key":"message_view_sender_label","source":"via %1$s","source_fr":"par %1$s","target":"via %1$s"}
+{"key":"from_same_sender","source":"More from this sender","source_fr":"Davantage de cet expéditeur","target":"Più da quessu speditore"}
+{"key":"message_discarded_toast","source":"Message discarded","source_fr":"Le courriel a été abandonné","target":"U messaghju hè statu tralasciatu"}
+{"key":"global_settings_flag_label","source":"Show stars","source_fr":"Afficher les étoiles","target":"Affissà e stelle"}
+{"key":"global_settings_preview_lines_label","source":"Preview lines","source_fr":"Lignes dʼaperçu","target":"Linee di fighjulata"}
+{"key":"global_settings_show_correspondent_names_label","source":"Show correspondent names","source_fr":"Afficher le nom des correspondants","target":"Affissà u nome di i currispundenti"}
+{"key":"global_settings_show_correspondent_names_summary","source":"Show correspondent names rather than their email addresses","source_fr":"Afficher le nom des correspondants plutôt que leur adresse courriel","target":"Affissà u nome di i currispundenti invece di i so indirizzi elettronichi"}
+{"key":"global_settings_sender_above_subject_label","source":"Correspondent above subject","source_fr":"Correspondants au-dessus de l’objet","target":"Currispundente sopra u sughjettu"}
+{"key":"global_settings_show_contact_name_label","source":"Show contact names","source_fr":"Afficher le nom des contacts","target":"Affissà u nome di i cuntatti"}
+{"key":"global_settings_registered_name_color_changed","source":"Colorize names in your contact list","source_fr":"Colorer les noms dans votre liste de contacts","target":"Culurisce i nomi in a vostra lista di cuntatti"}
+{"key":"general_settings_contact_name_color_label","source":"Contact name color","source_fr":"Couleur des noms de contact","target":"Culore di i nomi di cuntattu"}
+{"key":"global_settings_messageview_fixedwidth_label","source":"Fixed-width fonts","source_fr":"Polices à largeur fixe","target":"Grafie à larghezza fissa"}
+{"key":"global_settings_messageview_fixedwidth_summary","source":"Use a fixed-width font when showing plain text messages","source_fr":"Utiliser une police à largeur fixe pour les courriels en texte brut","target":"Impiegà una grafia à larghezza fissa per affissà i messaghji in testu rozu"}
+{"key":"global_settings_messageview_autofit_width_label","source":"Auto-fit messages","source_fr":"Ajustement automatique des courriels","target":"Adattazione autumatica di i messaghji"}
+{"key":"global_settings_messageview_autofit_width_summary","source":"Shrink messages to fit the screen","source_fr":"Rétrécir les courriels pour les adapter à l’écran","target":"Strittisce i messaghji per adattassi à u screnu"}
+{"context":{"comment":"Name of the setting to configure the navigation action to perform after the user has deleted or moved a message from the message view screen"},"key":"general_settings_post_remove_action_title","source":"After deleting or moving a message","source_fr":"Après avoir supprimé ou déplacé un courriel","target":"Dopu avè squassatu o dispiazzatu un messaghju"}
+{"key":"general_settings_post_remove_action_return_to_list","source":"Return to message list","source_fr":"Retourner à la liste des courriels","target":"Rivene à a lista di i messaghji"}
+{"key":"general_settings_post_remove_action_show_previous_message","source":"Show previous message","source_fr":"Afficher le courriel précédent","target":"Affissà u messaghju precedente"}
+{"key":"general_settings_post_remove_action_show_next_message","source":"Show next message","source_fr":"Afficher le courriel suivant","target":"Affissà u messaghju seguente"}
+{"key":"general_settings_post_mark_as_unread_action_stay","source":"Stay on current message","source_fr":"Rester sur le courriel affiché","target":"Stà nant’à u messaghju attuale"}
+{"key":"general_settings_post_mark_as_unread_action_return_to_list","source":"Return to message list","source_fr":"Retourner sur la liste des courriels","target":"Rivene à a lista di i messaghji"}
+{"key":"global_settings_confirm_actions_title","source":"Confirm actions","source_fr":"Confirmer les actions","target":"Cunfirmà l’azzioni"}
+{"key":"global_settings_confirm_actions_summary","source":"Show a dialog whenever you perform selected actions","source_fr":"Afficher une fenêtre de dialogue lors de certaines actions","target":"Affissà una finestra di dialogu quandu s’eseguiscenu l’azzioni selezziunate"}
+{"key":"global_settings_confirm_action_delete","source":"Delete","source_fr":"Supprimer","target":"Squassà"}
+{"key":"global_settings_confirm_menu_discard","source":"Discard message","source_fr":"Abandonner le courriel","target":"Tralascià u messaghju"}
+{"key":"global_settings_confirm_menu_mark_all_read","source":"Mark all messages as read","source_fr":"Marquer tous les courriels comme lus","target":"Marcà tutti i messaghji cum’è letti"}
+{"context":{"comment":"Title of the screen to configure swipe actions"},"key":"general_settings_swipe_actions_title","source":"Swipe actions","source_fr":"Actions de balayage","target":"Azzioni di spazzatura"}
+{"context":{"comment":"Name of the setting to configure the right swipe action"},"key":"general_settings_right_swipe_title","source":"Right swipe","source_fr":"Balayer vers la droite","target":"Spazzà versu à diritta"}
+{"context":{"comment":"Name of the setting to configure the left swipe action"},"key":"general_settings_left_swipe_title","source":"Left swipe","source_fr":"Balayer vers la gauche","target":"Spazzà versu à manca"}
+{"context":{"comment":"The list item users select to not use a swipe action for a particular direction"},"key":"general_settings_swipe_action_none","source":"None","source_fr":"Aucune","target":"Nisuna"}
+{"context":{"comment":"Name of the swipe action to select/deselect a message"},"key":"general_settings_swipe_action_toggle_selection","source":"Toggle selection","source_fr":"Sélectionner ou dessélectionner","target":"Invertisce a selezzione"}
+{"context":{"comment":"Name of the swipe action to mark as message as read/unread"},"key":"general_settings_swipe_action_toggle_read","source":"Mark as read/unread","source_fr":"Marquer comme lu ou non lu","target":"Marcà cum’è lettu o à leghje"}
+{"context":{"comment":"Name of the swipe action to add/remove a star"},"key":"general_settings_swipe_action_toggle_star","source":"Add/remove star","source_fr":"Ajouter ou supprimer l’étoile","target":"Aghjunghje o caccià a stella"}
+{"context":{"comment":"Name of the swipe action to archive a message"},"key":"general_settings_swipe_action_archive","source":"Archive","source_fr":"Archiver","target":"Archiviu"}
+{"context":{"comment":"Name of the swipe action to delete a message"},"key":"general_settings_swipe_action_delete","source":"Delete","source_fr":"Supprimer","target":"Squassà"}
+{"context":{"comment":"Name of the swipe action to move a message to the spam folder"},"key":"general_settings_swipe_action_spam","source":"Spam","source_fr":"Pourriel (indésirable)","target":"Merzaghju"}
+{"context":{"comment":"Name of the swipe action to move a message to another folder"},"key":"general_settings_swipe_action_move","source":"Move","source_fr":"Déplacer","target":"Dispiazzà"}
+{"context":{"comment":"Title of the setting to specify the density of the message list"},"key":"general_settings_message_list_density_title","source":"Density","source_fr":"Densité","target":"Densità"}
+{"context":{"comment":"The default value for the message list density setting. Uses a comfortable amount of whitespace to separate list items."},"key":"general_settings_ui_density_default","source":"Default","source_fr":"Par défaut","target":"Predefinita"}
+{"key":"global_settings_privacy_hide_useragent","source":"Hide mail client","source_fr":"Cacher le client de courriel","target":"Piattà u nome di messaghjeria"}
+{"key":"global_settings_privacy_hide_useragent_detail","source":"Remove User-Agent from mail headers","source_fr":"Supprimer l’agent-utilisateur des en-têtes de courriels","target":"Caccià l’agente utilizatore da l’intestature di i messaghji"}
+{"key":"global_settings_privacy_hide_timezone","source":"Hide timezone","source_fr":"Cacher le fuseau horaire","target":"Piattà u fusu orariu"}
+{"key":"global_settings_privacy_hide_timezone_detail","source":"Use UTC instead of local timezone in mail headers and reply header","source_fr":"Utiliser UTC au lieu du fuseau horaire local dans les en-têtes de courriel et de réponse","target":"Impiegà UTC invece di u fusu orariu lucale in l’intestature di messaghju è di risposta"}
+{"key":"global_settings_notification_quick_delete_when_single_msg","source":"For single message notification","source_fr":"Pour une notification de courriel unique","target":"Per a nutificazione d’un messaghju unicu"}
+{"key":"global_settings_notification_quick_delete_always","source":"Always","source_fr":"Toujours","target":"Sempre"}
+{"key":"global_settings_lock_screen_notification_visibility_title","source":"Lock Screen Notifications","source_fr":"Notifications sur l’écran verrouillé","target":"Nutificazioni di u screnu d’ammarchjunata"}
+{"key":"global_settings_lock_screen_notification_visibility_app_name","source":"Application name","source_fr":"Nom de l’application","target":"Nome di l’appiecazione"}
+{"key":"global_settings_lock_screen_notification_visibility_message_count","source":"New message count","source_fr":"Nombre de nouveaux courriels","target":"Numeru di messaghji novi"}
+{"key":"global_settings_lock_screen_notification_visibility_senders","source":"Message count and senders","source_fr":"Nombre de courriels et expéditeurs","target":"Numeru di messaghji è speditori"}
+{"key":"global_settings_lock_screen_notification_visibility_everything","source":"Same as when screen unlocked","source_fr":"Identiques à celles de l’écran déverrouillé","target":"Listessu chè quandu u screnu hè spalancatu"}
+{"key":"quiet_time","source":"Quiet Time","source_fr":"Période calme","target":"Periodu zittu"}
+{"key":"quiet_time_notification","source":"Disable notifications","source_fr":"Désactiver les notifications","target":"Disattivà e nutificazioni"}
+{"key":"quiet_time_starts","source":"Quiet Time starts","source_fr":"Début de la période calme","target":"Principiu di u periodu zittu"}
+{"key":"quiet_time_ends","source":"Quiet Time ends","source_fr":"Fin de la période calme","target":"Fine di u periodu zittu"}
+{"key":"account_setup_basics_title","source":"Set up a new account","source_fr":"Configurer un nouveau compte","target":"Cunfigurà un contu novu"}
+{"key":"account_setup_incoming_delete_policy_label","source":"When I delete a message","source_fr":"Quand je supprime un courriel","target":"Quandu squassu un messaghju"}
+{"key":"account_setup_incoming_delete_policy_delete_label","source":"Delete from server","source_fr":"Supprimer sur le serveur","target":"Squassà nant’à u servitore"}
+{"key":"account_setup_incoming_delete_policy_markread_label","source":"Mark as read on server","source_fr":"Marquer comme lu sur le serveur","target":"Marcà cum’è lettu nant’à u servitore"}
+{"key":"account_setup_expunge_policy_label","source":"Erase deleted messages on server","source_fr":"Supprimer aussi les courriels sur le serveur","target":"Viutà i messaghji squassati nant’à u servitore"}
+{"key":"account_setup_expunge_policy_immediately","source":"Immediately","source_fr":"Immédiatement","target":"Subitu subitu"}
+{"key":"account_setup_expunge_policy_on_poll","source":"When polling","source_fr":"Lors de la synchronisation","target":"Durante a sullicitazione"}
+{"key":"account_setup_expunge_policy_manual","source":"Manually","source_fr":"Manuellement","target":"Manualmente"}
+{"key":"drafts_folder_label","source":"Drafts folder","source_fr":"Dossier des brouillons","target":"Cartulare di e bruttacopie"}
+{"key":"sent_folder_label","source":"Sent folder","source_fr":"Dossier des envoyés","target":"Cartulare di i messaghji mandati"}
+{"key":"archive_folder_label","source":"Archive folder","source_fr":"Dossier des archives","target":"Cartulare di l’archivii"}
+{"key":"spam_folder_label","source":"Spam folder","source_fr":"Dossier des pourriels (indésirables)","target":"Cartulare di i merzaghji"}
+{"key":"sort_attach_first","source":"Messages with attachments first","source_fr":"Courriels avec des fichiers joints en premier","target":"Messaghji cù pezze ghjunte in primu"}
+{"key":"sort_unattached_first","source":"Messages without attachments first","source_fr":"Courriels sans fichiers joints en premier","target":"Messaghji senza pezza ghjunta in primu"}
+{"key":"sort_by_attach","source":"Attachments","source_fr":"Fichiers joints","target":"Pezze ghjunte"}
+{"key":"loading_attachment","source":"Loading attachment…","source_fr":"Chargement du fichier joint…","target":"Caricamentu di a pezza ghjunta…"}
+{"key":"fetching_attachment_dialog_message","source":"Fetching attachment…","source_fr":"Obtention du fichier joint…","target":"Riguarera di a pezza ghjunta…"}
+{"key":"error_crypto_inline_attach","source":"PGP/INLINE mode does not support attachments!","source_fr":"Le mode PGP/INTÉGRÉ ne prend pas en charge les fichiers joints.","target":"U modu PGP/INLINE ùn accetteghja micca e pezze ghjunte !"}
+{"key":"account_settings_action","source":"Account settings","source_fr":"Paramètres du compte","target":"Parametri di u contu"}
+{"key":"remove_account_action","source":"Remove account","source_fr":"Supprimer le compte","target":"Caccià u contu"}
+{"key":"mark_as_read_action","source":"Mark as read","source_fr":"Marquer comme lu","target":"Marcà cum’è lettu"}
+{"key":"send_alternate_action","source":"Share","source_fr":"Partager","target":"Sparte"}
+{"key":"copy_address_to_clipboard","plural":{"forms":["one","other"],"source_plural":"Addresses copied to clipboard"},"source":"Address copied to clipboard","source_fr":"L’adresse a été copiée dans le presse-papiers","target":["L’indirizzu hè statu cupiatu in u preme’papei","L’indirizzi sò stati cupiati in u preme’papei"]}
+{"context":{"comment":"Title of an error notification that is displayed when creating a notification for a new message has failed"},"key":"notification_notify_error_title","source":"Notification error","source_fr":"Erreur de notification","target":"Sbagliu di nutificazione"}
+{"context":{"comment":"Body of an error notification that is displayed when creating a notification for a new message has failed"},"key":"notification_notify_error_text","source":"An error has occurred while trying to create a system notification for a new message. The reason is most likely a missing notification sound.  Tap to open notification settings.","source_fr":"Impossible de créer une notification système de nouveau courriel. Un son de notification manquant en est probablement la cause.  Touchez pour ouvrir les paramètres de notification.","target":"Un sbagliu hè accadutu pruvendu di creà una nutificazione di sistema per un messaghju novu. A ragione prubabile hè l’assenza di sonu di nutificazione.    Picchichjà per apre i parametri di nutificazione."}
+{"key":"debug_enable_debug_logging_summary","source":"Log extra diagnostic information","source_fr":"Journaliser les renseignements de diagnostic supplémentaires","target":"Arregistrà l’infurmazioni addiziunale di diagnosticu"}
+{"key":"debug_export_logs_success","source":"Export successful. Logs might contain sensitive information. Be careful who you send them to.","source_fr":"L’exportation est réussie. Les journaux pourraient comprendre des données sensibles. Faites attention à qui vous les envoyez.","target":"L’espurtazione hè riesciuta. I ghjurnali puderianu cuntene infurmazioni sensibile. Fate casu à quale i mandate."}
+{"key":"message_list_load_more_messages_action","source":"Load more messages","source_fr":"Charger davantage de courriels","target":"Caricà d’altri messaghji"}
+{"key":"message_compose_content_hint","source":"Message text","source_fr":"Texte du courriel","target":"Testu di u messaghju"}
+{"key":"message_compose_quote_header_from","source":"From:","source_fr":"De :","target":"Da :"}
+{"key":"message_compose_reply_header_fmt_with_date","source":"On %1$s, %2$s wrote:","source_fr":"Le %1$s, %2$s a écrit :","target":"U %1$s, %2$s hà scrittu :"}
+{"key":"message_compose_attachments_skipped_toast","source":"Some attachments cannot be forwarded because they have not been downloaded.","source_fr":"Certains fichiers joints ne peuvent pas être transférés, car ils n’ont pas été téléchargés.","target":"Certe pezze ghjunte ùn ponu micca esse trasferite perchè ùn sò state scaricate."}
+{"key":"dialog_attachment_progress_title","source":"Downloading attachment","source_fr":"Téléchargement du fichier joint","target":"Scaricamentu di a pezza ghjunta"}
+{"key":"openpgp_inline_minus_attach","source":"Attachments are not supported","source_fr":"Les fichiers joints ne sont pas pris en charge","target":"E pezza aghjunte ùn sò micca accettate"}
+{"key":"openpgp_dialog_sign_only_minus_attach","source":"Signatures may be displayed as 'signature.asc' attachments in some clients.","source_fr":"Dans certaines applis de courriel, les signatures pourraient être affichées en tant que fichiers joints « signature.asc ».","target":"E segnature puderianu esse affissate cum’è pezze ghjunte « signature.asc » in certe messaghjerie elettroniche."}
+{"context":{"comment":"Used to display the recipient list in the message view screen."},"key":"message_view_recipients_format","source":"to %s","source_fr":"à %s","target":"à %s"}
+{"context":{"comment":"Displayed in the message view screen in front of the number of additional recipients (the ones that are not displayed)."},"key":"message_view_additional_recipient_prefix","source":"+","source_fr":"+","target":"+"}
+{"context":{"comment":"Text of the button that is displayed below the message header when the message body references one or more remote images"},"key":"message_view_show_remote_images_action","source":"Show remote images","source_fr":"Afficher les images distantes","target":"Affissà e fiure alluntanate"}
+{"key":"message_saved_toast","source":"Message saved as draft","source_fr":"Le courriel a été enregistré comme brouillon","target":"U messaghju hè statu arregistratu cum’è bruttacopia"}
+{"key":"global_settings_flag_summary","source":"Stars indicate flagged messages","source_fr":"Les étoiles indiquent les courriels suivis","target":"E stelle indettanu i messaghji cù indicatore"}
+{"key":"global_settings_sender_above_subject_summary","source":"Show correspondent names above the subject line, rather than below it","source_fr":"Afficher le nom des correspondants au-dessus de la ligne d’objet, plutôt qu’en dessous","target":"Affissà u nome di i currispundenti sopra a linea di u sughjettu piuttostu chè sottu"}
+{"key":"global_settings_show_contact_name_summary","source":"Use recipient names from Contacts when available","source_fr":"Utiliser le nom des destinataires provenant de Contacts s’il y en a","target":"Impiegà u nome di i destinatarii di i cuntattu s’ella hè dispunibule"}
+{"key":"global_settings_registered_name_color_label","source":"Colorize contacts","source_fr":"Colorer les contacts","target":"Culurisce i cuntatti"}
+{"context":{"comment":"Name of the setting to configure the navigation action to perform after the user has marked a message as unread from the message view screen"},"key":"general_settings_post_mark_as_unread_action_title","source":"After marking a message as unread","source_fr":"Après avoir marqué un courriel comme non lu","target":"Dopu avè marcatu un messaghju cum’è à leghje"}
+{"key":"global_settings_confirm_action_delete_starred","source":"Delete Starred (in message view)","source_fr":"Supprimer Étoilé (dans la vue des courriels)","target":"Squassà Stellatu (in a vista di i messaghji)"}
+{"key":"global_settings_confirm_action_delete_notif","source":"Delete (from notification)","source_fr":"Supprimer (d’une notification)","target":"Squassà (da una nutificazione)"}
+{"key":"global_settings_confirm_action_spam","source":"Spam","source_fr":"Pourriel (indésirable)","target":"Merzaghju"}
+{"context":{"comment":"Value for the message list density setting. Uses almost no whitespace to separate list items."},"key":"general_settings_ui_density_compact","source":"Compact","source_fr":"Compacte","target":"Cumpatta"}
+{"key":"global_settings_notification_quick_delete_title","source":"Show 'Delete' button","source_fr":"Afficher le bouton Supprimer","target":"Affissà u buttone « Squassà »"}
+{"key":"global_settings_notification_quick_delete_never","source":"Never","source_fr":"Jamais","target":"Mai"}
+{"context":{"comment":"Value for the message list density setting. Uses more whitespace than the default to separate list items."},"key":"general_settings_ui_density_relaxed","source":"Relaxed","source_fr":"Détendue","target":"Allungata"}
+{"key":"global_settings_lock_screen_notification_visibility_nothing","source":"No lock screen notifications","source_fr":"Aucune notification si l’écran est verrouillé","target":"Nisuna nutificazione quandu u screnu hè ammarchjunatu"}
+{"key":"quiet_time_description","source":"Disable ringing, buzzing and flashing at night","source_fr":"Désactiver la sonnerie, la vibration et le clignotement pendant la nuit","target":"Disattivà a suneria, a vibrazione è u cinnulamentu di notte"}
+{"key":"quiet_time_notification_description","source":"Completely disable notifications during Quiet Time","source_fr":"Désactiver complètement les notifications en période calme","target":"Disattivà cumpletamente e nutificazioni durante u periodu zittu"}
+{"key":"account_setup_incoming_delete_policy_never_label","source":"Do not delete on server","source_fr":"Ne pas supprimer sur le serveur","target":"Ùn squassà micca nant’à u servitore"}
+{"key":"trash_folder_label","source":"Trash folder","source_fr":"Dossier de la corbeille","target":"Cartulare di a curbella"}
+{"key":"account_setup_incoming_subscribed_folders_only_label","source":"Show only subscribed folders","source_fr":"Afficher seulement les dossiers auxquels je suis abonné","target":"Affissà solu i cartulari à quelli mi sò abbunatu"}
+{"key":"account_setup_options_mail_check_frequency_never","source":"Never","source_fr":"Jamais","target":"Mai"}
+{"key":"account_setup_options_mail_check_frequency_15min","source":"Every 15 minutes","source_fr":"Toutes les 15 minutes","target":"Tutti i 15 minuti"}
+{"key":"account_setup_options_mail_check_frequency_30min","source":"Every 30 minutes","source_fr":"Toutes les 30 minutes","target":"Tutti i 30 minuti"}
+{"key":"account_setup_options_mail_check_frequency_1hour","source":"Every hour","source_fr":"Toutes les heures","target":"Tutte l’ore"}
+{"key":"account_setup_options_mail_check_frequency_6hour","source":"Every 6 hours","source_fr":"Toutes les 6 heures","target":"Tutte e 6 ore"}
+{"key":"idle_refresh_period_2min","source":"Every 2 minutes","source_fr":"Toutes les 2 minutes","target":"Tutti i 2 minuti"}
+{"key":"idle_refresh_period_6min","source":"Every 6 minutes","source_fr":"Toutes les 6 minutes","target":"Tutti i 6 minuti"}
+{"key":"idle_refresh_period_24min","source":"Every 24 minutes","source_fr":"Toutes les 24 minutes","target":"Tutti i 24 minuti"}
+{"key":"idle_refresh_period_36min","source":"Every 36 minutes","source_fr":"Toutes les 36 minutes","target":"Tutti i 36 minuti"}
+{"key":"idle_refresh_period_60min","source":"Every 60 minutes","source_fr":"Toutes les 60 minutes","target":"Tutti i 60 minuti"}
+{"key":"account_setup_options_mail_display_count_10","source":"10 messages","source_fr":"10 courriels","target":"10 messaghji"}
+{"key":"account_setup_options_mail_display_count_25","source":"25 messages","source_fr":"25 courriels","target":"25 messaghji"}
+{"key":"account_setup_options_mail_display_count_50","source":"50 messages","source_fr":"50 courriels","target":"50 messaghji"}
+{"key":"account_setup_options_mail_display_count_100","source":"100 messages","source_fr":"100 courriels","target":"100 messaghji"}
+{"key":"account_setup_options_mail_display_count_250","source":"250 messages","source_fr":"250 courriels","target":"250 messaghji"}
+{"key":"account_setup_options_mail_display_count_500","source":"500 messages","source_fr":"500 courriels","target":"500 messaghji"}
+{"key":"account_setup_options_mail_display_count_1000","source":"1000 messages","source_fr":"1 000 courriels","target":"1000 messaghji"}
+{"key":"account_setup_options_mail_display_count_2500","source":"2500 messages","source_fr":"2 500 courriels","target":"2500 messaghji"}
+{"key":"account_setup_options_mail_display_count_5000","source":"5000 messages","source_fr":"5 000 courriels","target":"5000 messaghji"}
+{"key":"account_setup_options_mail_display_count_10000","source":"10000 messages","source_fr":"10 000 courriels","target":"10000 messaghji"}
+{"key":"account_setup_options_mail_display_count_all","source":"all messages","source_fr":"tous les courriels","target":"tutti i messaghji"}
+{"key":"move_copy_cannot_copy_unsynced_message","source":"Cannot copy or move a message that is not synchronized with the server","source_fr":"Impossible de copier ou déplacer un courriel qui n’est pas synchronisé avec le serveur","target":"Ùn si pò micca cupià o dispiazzà un messaghju chì ùn hè micca sincrunizatu cù u servitore"}
+{"key":"account_settings_push_advanced_title","source":"Advanced","source_fr":"Avancé","target":"Espertu"}
+{"key":"account_settings_notify_sync_label","source":"Sync notifications","source_fr":"Notifications de synchronisation","target":"Nutificazioni di sincrunizazione"}
+{"key":"account_settings_email_label","source":"Your email address","source_fr":"Votre adresse courriel","target":"U vostru indirizzu elettronicu"}
+{"key":"account_settings_notify_summary","source":"Notify in status bar when mail arrives","source_fr":"Notification dans la barre d’état dès réception de courriels","target":"Nutificazione in a barra di statu à ricezzione d’un messaghju novu"}
+{"key":"account_settings_notify_sync_summary","source":"Notify in status bar while mail is checked","source_fr":"Notification dans la barre d’état lors de la relève des courriels","target":"Nutificazione in a barra di statu durante a rileva di i messaghji"}
+{"key":"account_settings_notify_self_label","source":"Include outgoing mail","source_fr":"Courriels sortants","target":"Include i messaghji d’esciuta"}
+{"key":"account_settings_notify_self_summary","source":"Show a notification for messages I sent","source_fr":"Afficher une notification pour les courriels que j’ai envoyés","target":"Affissà una nutificazione per i messaghji ch’aghju mandati"}
+{"key":"account_notify_contacts_mail_only_label","source":"Contacts only","source_fr":"Pour les contacts seulement","target":"Solu i cuntatti"}
+{"key":"account_notify_contacts_mail_only_summary","source":"Show notifications only for messages from known contacts","source_fr":"N’afficher des notifications que pour les courriels de contacts connus","target":"Affissà e nutificazioni solu per i messaghji da cuntatti cunnisciuti"}
+{"key":"account_settings_ignore_chat_messages_label","source":"Ignore chat messages","source_fr":"Ignorer les messages de conversation","target":"Ignurà i messaghji di chjachjerata"}
+{"key":"account_settings_ignore_chat_messages_summary","source":"Don't show notifications for messages belonging to an email chat","source_fr":"Ne pas afficher de notification pour les messages qui appartiennent à une conversation de courriel","target":"Ùn affissà micca e nutificazioni per i messaghji d’una chjachjerata"}
+{"key":"account_settings_mark_message_as_read_on_view_label","source":"Mark as read when opened","source_fr":"Marquer comme lu à l’ouverture","target":"Marcà cum’è lettu à l’apertura"}
+{"key":"account_settings_mark_message_as_read_on_view_summary","source":"Mark a message as read when it is opened for viewing","source_fr":"Marquer un courriel comme lu après ouverture pour consultation","target":"Marcà un messaghju cum’è lettu quand’ellu hè apertu per esse vistu"}
+{"key":"account_settings_mark_message_as_read_on_delete_label","source":"Mark as read when deleted","source_fr":"Marquer comme lu lors de la suppression","target":"Marcà cum’è lettu durante a squassatura"}
+{"key":"account_settings_mark_message_as_read_on_delete_summary","source":"Mark a message as read when it is deleted","source_fr":"Marquer un message comme lu lorsqu’il est supprimé","target":"Marcà un messaghju cum’è lettu quand’ellu hè squassatu"}
+{"key":"account_settings_notification_channels_label","source":"Notification categories","source_fr":"Catégories de notification","target":"Categurie di nutificazione"}
+{"key":"account_settings_open_notification_settings_messages_summary","source":"Configure notifications for new messages","source_fr":"Configurer les notifications pour les nouveaux courriels","target":"Cunfigurà e nutificazioni per i messaghji novi"}
+{"key":"account_settings_open_notification_settings_miscellaneous_summary","source":"Configure error and status notifications","source_fr":"Configurer les notifications d’erreur et d’état","target":"Cunfigurà e nutificazioni di sbagliu è di statu"}
+{"key":"account_settings_show_pictures_label","source":"Always show images","source_fr":"Toujours afficher les images","target":"Sempre affissà e fiure"}
+{"key":"account_settings_show_pictures_never","source":"No","source_fr":"Non","target":"Nò"}
+{"key":"account_settings_show_pictures_only_from_contacts","source":"From contacts","source_fr":"Des contacts","target":"Da i cuntatti"}
+{"key":"account_settings_show_pictures_always","source":"From anyone","source_fr":"De n’importe qui","target":"Da qualunque"}
+{"key":"account_settings_composition","source":"Sending mail","source_fr":"Envoi de courriels","target":"Inviu di messaghju"}
+{"key":"account_settings_default_quoted_text_shown_label","source":"Quote message when replying","source_fr":"Citer le courriel lors de la réponse","target":"Menziunà u messaghju cù a risposta"}
+{"key":"account_settings_default_quoted_text_shown_summary","source":"Include the original message in your reply.","source_fr":"Le courriel initial est compris dans votre réponse.","target":"Menziunà u messaghju d’origine in a vostra risposta."}
+{"key":"account_settings_reply_after_quote_label","source":"Reply after quoted text","source_fr":"Réponse après le texte cité","target":"Risposta dopu à u testu menziunatu"}
+{"key":"account_settings_reply_after_quote_summary","source":"The original message will appear above your reply.","source_fr":"Le courriel initial apparaîtra en haut de votre réponse.","target":"U messaghju d’origine serà piazzatu nanzu a vostra risposta."}
+{"key":"account_settings_strip_signature_label","source":"Strip signatures on reply","source_fr":"Retirer les signatures des réponses","target":"Caccià e segnature di e risposte"}
+{"key":"account_settings_strip_signature_summary","source":"Signatures will be removed from quoted messages","source_fr":"Les signatures seront supprimées des courriels cités","target":"E segnature seranu cacciate da i messaghji menziunati"}
+{"key":"account_settings_message_format_label","source":"Message Format","source_fr":"Format des courriels","target":"Furmatu di messaghju"}
+{"key":"account_settings_message_format_text","source":"Plain Text (remove images and formatting)","source_fr":"Texte brut (supprimer les images et la mise en forme)","target":"Testu rozu (caccià e fiure è a messa in forma)"}
+{"key":"account_settings_message_format_html","source":"HTML (keep images and formatting)","source_fr":"HTML (garder les images et la mise en forme)","target":"HTML (cunservà e fiure è a messa in forma)"}
+{"key":"account_settings_always_show_cc_bcc_label","source":"Always show Cc/Bcc","source_fr":"Toujours afficher Cc et Cci","target":"Sempre affissà Cc/Cci"}
+{"key":"account_settings_message_read_receipt_label","source":"Read receipt","source_fr":"Accusé de lecture","target":"Cunferma di lettura"}
+{"key":"account_settings_message_read_receipt_summary","source":"Always request a read receipt","source_fr":"Toujours demander un accusé de lecture","target":"Sempre richiede una cunferma di lettura"}
+{"key":"account_settings_quote_style_label","source":"Reply quoting style","source_fr":"Style de citation des réponses","target":"Stilu di menzione di e risposte"}
+{"key":"account_settings_quote_style_prefix","source":"Prefix (like Gmail)","source_fr":"Préfixe (comme Gmail)","target":"Prefissu (cum’è Gmail)"}
+{"key":"account_settings_quote_style_header","source":"Header (like Outlook)","source_fr":"En-tête (comme Outlook)","target":"Intestatura (cum’è Outlook)"}
+{"key":"account_settings_upload_sent_messages_label","source":"Upload sent messages","source_fr":"Téléverser les courriels envoyés","target":"Incaricà i messaghji mandati"}
+{"key":"account_settings_upload_sent_messages_summary","source":"Upload messages to Sent folder after sending","source_fr":"Téléverser les courriels vers le dossier Envoyés après l’envoi","target":"Incaricà i messaghji versu u cartulare Mandati dopu à l’inviu"}
+{"key":"account_settings_general_title","source":"General settings","source_fr":"Paramètres généraux","target":"Parametri generali"}
+{"key":"account_settings_reading_mail","source":"Reading mail","source_fr":"Lecture du courriel","target":"Lettura di i messaghji"}
+{"key":"account_settings_sync","source":"Fetching mail","source_fr":"Relève des courriels","target":"Riguarera di i messaghji"}
+{"key":"account_settings_folders","source":"Folders","source_fr":"Dossiers","target":"Cartulari"}
+{"key":"account_settings_quote_prefix_label","source":"Quoted text prefix","source_fr":"Préfixe de citation","target":"Prefissu di testu menziunatu"}
+{"key":"account_settings_crypto","source":"End-to-end encryption","source_fr":"Chiffrement de bout en bout","target":"Cifratura da un capu à l’altru"}
+{"key":"account_settings_crypto_app","source":"Enable OpenPGP support","source_fr":"Activer la prise en charge d’OpenPGP","target":"Attivà l’impiegu d’OpenPGP"}
+{"key":"account_settings_crypto_app_select_title","source":"Select OpenPGP app","source_fr":"Choisir une appli OpenPGP","target":"Selezziunà un’appiecazione OpenPGP"}
+{"key":"account_settings_crypto_key","source":"Configure end-to-end key","source_fr":"Configurer la clé de chiffrement de bout en bout","target":"Cunfigurà a chjave da un capu à l’altru"}
+{"key":"account_settings_crypto_summary_off","source":"No OpenPGP app configured","source_fr":"Aucune appli OpenPGP n’est configurée","target":"Alcuna appiecazione OpenPGP ùn hè cunfigurata"}
+{"key":"account_settings_crypto_encrypt_all_drafts_off","source":"Encrypt drafts only if encryption is enabled","source_fr":"Ne chiffrer les brouillons que si le chiffrement est activé","target":"Cifrà e bruttacopie solu s’è a cifratura hè attivata"}
+{"key":"account_settings_mail_check_frequency_label","source":"Folder poll frequency","source_fr":"Fréquence d'interrogation des dossiers","target":"Frequenza di sullicitazione di i cartulari"}
+{"key":"account_settings_mail_display_count_label","source":"Local folder size","source_fr":"Taille du dossier local","target":"Dimensione di u cartulare lucale"}
+{"key":"account_settings_autodownload_message_size_1","source":"1 KiB","source_fr":"1 KiB","target":"1 Kio"}
+{"key":"account_settings_autodownload_message_size_512","source":"512 KiB","source_fr":"512 KiB","target":"512 Kio"}
+{"key":"account_settings_autodownload_message_size_any","source":"any size (no limit)","source_fr":"n’importe quelle taille (pas de limite)","target":"qualsiasi dimensione (senza limitu)"}
+{"key":"account_settings_message_age_label","source":"Sync messages from","source_fr":"Synchroniser les messages depuis","target":"Sincrunizà i messaghji da"}
+{"key":"account_settings_message_age_any","source":"any time (no limit)","source_fr":"à tout moment (pas de limite)","target":"qualsiasi data (senza limitu)"}
+{"key":"account_settings_message_age_0","source":"today","source_fr":"aujourd'hui","target":"oghje"}
+{"key":"account_settings_message_age_2","source":"the last 3 days","source_fr":"les 3 derniers jours","target":"i 3 ultimi ghjorni"}
+{"key":"account_settings_message_age_7","source":"the last week","source_fr":"la dernière semaine","target":"l’ultima settimana"}
+{"key":"account_settings_message_age_14","source":"the last 2 weeks","source_fr":"les 2 dernières semaines","target":"e 2 ultime settimane"}
+{"key":"account_settings_message_age_1_month","source":"the last month","source_fr":"le dernier mois","target":"l’ultimu mese"}
+{"key":"account_settings_message_age_2_months","source":"the last 2 months","source_fr":"les 2 derniers mois","target":"i 2 ultimi mesi"}
+{"key":"account_settings_message_age_3_months","source":"the last 3 months","source_fr":"les 3 derniers mois","target":"i 3 ultimi mesi"}
+{"key":"account_settings_message_age_6_months","source":"the last 6 months","source_fr":"les 6 derniers mois","target":"i 6 ultimi mesi"}
+{"key":"account_settings_message_age_1_year","source":"the last year","source_fr":"la dernière année","target":"l’ultimu annu"}
+{"key":"folder_settings_clear_local_folder_action","source":"Clear local messages","source_fr":"Effacer les courriels locaux","target":"Squassà i messaghji lucale"}
+{"key":"account_settings_outgoing_summary","source":"Configure the outgoing mail (SMTP) server","source_fr":"Configurer le serveur de courriel sortant (SMTP)","target":"Cunfigurà u servitore d’esciuta (SMTP) di i messaghji"}
+{"key":"account_settings_vibration","source":"Vibration","source_fr":"Vibration","target":"Vibrazione"}
+{"key":"account_settings_vibrate_pattern_label","source":"Vibration pattern","source_fr":"Profil de vibration","target":"Mudellu di vibrazione"}
+{"key":"account_settings_vibrate_pattern_3","source":"Pattern 3","source_fr":"3e profil","target":"Mudellu 3"}
+{"key":"account_settings_vibrate_times","source":"Repeat vibration","source_fr":"Nombre de vibrations","target":"Ripete a vibrazione"}
+{"key":"account_settings_vibrate_summary_disabled","source":"Disabled","source_fr":"Désactivée","target":"Disattivata"}
+{"key":"account_setup_options_mail_check_frequency_2hour","source":"Every 2 hours","source_fr":"Toutes les 2 heures","target":"Tutte e 2 ore"}
+{"key":"account_setup_options_mail_check_frequency_3hour","source":"Every 3 hours","source_fr":"Toutes les 3 heures","target":"Tutte e 3 ore"}
+{"key":"account_setup_options_mail_check_frequency_12hour","source":"Every 12 hours","source_fr":"Toutes les 12 heures","target":"Tutte e 12 ore"}
+{"key":"account_setup_options_mail_check_frequency_24hour","source":"Every 24 hours","source_fr":"Toutes les 24 heures","target":"Tutte e 24 ore"}
+{"key":"idle_refresh_period_label","source":"Refresh IDLE connection","source_fr":"Actualiser la connexion IDLE","target":"Attualizà a cunnessione IDLE"}
+{"key":"idle_refresh_period_3min","source":"Every 3 minutes","source_fr":"Toutes les 3 minutes","target":"Tutti i 3 minuti"}
+{"key":"idle_refresh_period_12min","source":"Every 12 minutes","source_fr":"Toutes les 12 minutes","target":"Tutti i 12 minuti"}
+{"key":"idle_refresh_period_48min","source":"Every 48 minutes","source_fr":"Toutes les 48 minutes","target":"Tutti i 48 minuti"}
+{"key":"account_settings_title_fmt","source":"Account settings","source_fr":"Paramètres du compte","target":"Parametri di u contu"}
+{"key":"account_settings_notify_label","source":"New mail notifications","source_fr":"Notifications de nouveaux courriels","target":"Nutificazioni di messaghji novi"}
+{"key":"account_settings_message_format_auto","source":"Automatic","source_fr":"Automatique","target":"Autumaticu"}
+{"key":"account_settings_autodownload_message_size_label","source":"Fetch messages up to","source_fr":"Récupérer les messages jusqu’à","target":"Riguarà i messaghji fine à"}
+{"key":"account_settings_crypto_summary_on","source":"Connected to %s","source_fr":"Connecté à %s","target":"Cunnessu à %s"}
+{"key":"account_settings_crypto_summary_config","source":"Configuring…","source_fr":"Configuration…","target":"Cunfigurazione…"}
+{"key":"account_settings_crypto_encrypt_all_drafts","source":"Store all drafts encrypted","source_fr":"Enregistrer les brouillons chiffrés","target":"Arregistrà cifrate tutte e bruttacopie"}
+{"key":"account_settings_crypto_encrypt_all_drafts_on","source":"All drafts will be stored encrypted","source_fr":"Les brouillons seront enregistrés chiffrés","target":"Tutte e bruttacopie seranu arregistrate cifrate"}
+{"key":"account_settings_autodownload_message_size_2","source":"2 KiB","source_fr":"2 KiB","target":"2 Kio"}
+{"key":"account_settings_autodownload_message_size_4","source":"4 KiB","source_fr":"4 KiB","target":"4 Kio"}
+{"key":"account_settings_autodownload_message_size_8","source":"8 KiB","source_fr":"8 KiB","target":"8 Kio"}
+{"key":"account_settings_autodownload_message_size_16","source":"16 KiB","source_fr":"16 KiB","target":"16 Kio"}
+{"key":"account_settings_autodownload_message_size_32","source":"32 KiB","source_fr":"32 KiB","target":"32 Kio"}
+{"key":"account_settings_autodownload_message_size_64","source":"64 KiB","source_fr":"64 KiB","target":"64 Kio"}
+{"key":"account_settings_autodownload_message_size_128","source":"128 KiB","source_fr":"128 KiB","target":"128 Kio"}
+{"key":"account_settings_autodownload_message_size_256","source":"256 KiB","source_fr":"256 KiB","target":"256 Kio"}
+{"key":"account_settings_autodownload_message_size_1024","source":"1 MiB","source_fr":"1 MiB","target":"1 Mio"}
+{"key":"account_settings_autodownload_message_size_2048","source":"2 MiB","source_fr":"2 MiB","target":"2 Mio"}
+{"key":"account_settings_autodownload_message_size_5120","source":"5 MiB","source_fr":"5 MiB","target":"5 Mio"}
+{"key":"account_settings_autodownload_message_size_10240","source":"10 MiB","source_fr":"10 MiB","target":"10 Mio"}
+{"key":"account_settings_message_age_1","source":"the last 2 days","source_fr":"les 2 derniers jours","target":"i 2 ultimi ghjorni"}
+{"key":"account_settings_message_age_21","source":"the last 3 weeks","source_fr":"les 3 dernières semaines","target":"e 3 ultime settimane"}
+{"key":"account_settings_sync_remote_deletetions_label","source":"Sync server deletions","source_fr":"Suppressions du serveur de synchronisation","target":"Sincrunizà e squassature di u servitore"}
+{"key":"account_settings_sync_remote_deletetions_summary","source":"Remove messages when deleted on server","source_fr":"Supprimer les messages lorsqu’ils sont supprimés sur le serveur","target":"Caccià i messaghji quand’elli sò squassati nant’à u servitore"}
+{"key":"account_settings_openpgp_missing","source":"Missing OpenPGP app - was it uninstalled?","source_fr":"L’appli OpenPGP manque. A-t-elle été désinstallée ?","target":"L’appiecazione OpenPGP hè assente ; seria desinstallata ?"}
+{"key":"folder_settings_title","source":"Folder settings","source_fr":"Paramètres du dossier","target":"Parametri di u cartulare"}
+{"key":"folder_settings_in_top_group_label","source":"Show in top group","source_fr":"Afficher dans le groupe supérieur","target":"Affissà in u gruppu superiore"}
+{"key":"account_settings_vibrate_enable","source":"Vibrate","source_fr":"Vibration","target":"Vibrà"}
+{"key":"account_settings_vibrate_pattern_default","source":"Default","source_fr":"Par défaut","target":"Predefinitu"}
+{"key":"account_settings_vibrate_pattern_1","source":"Pattern 1","source_fr":"1er profil","target":"Mudellu 1"}
+{"key":"account_settings_vibrate_pattern_4","source":"Pattern 4","source_fr":"4e profil","target":"Mudellu 4"}
+{"key":"account_settings_vibrate_pattern_2","source":"Pattern 2","source_fr":"2e profil","target":"Mudellu 2"}
+{"key":"account_settings_vibrate_pattern_5","source":"Pattern 5","source_fr":"5e profil","target":"Mudellu 5"}
+{"key":"account_settings_incoming_label","source":"Incoming server","source_fr":"Serveur entrant","target":"Servitore d’entrata"}
+{"key":"account_settings_incoming_summary","source":"Configure the incoming mail server","source_fr":"Configurez le serveur de courrier entrant","target":"Cunfigurà u servitore d’entrata di i messaghji"}
+{"key":"account_settings_outgoing_label","source":"Outgoing server","source_fr":"Serveur sortant","target":"Servitore d’esciuta"}
+{"key":"account_settings_name_label","source":"Your name","source_fr":"Votre nom","target":"A vostra casata"}
+{"key":"notifications_title","source":"Notifications","source_fr":"Notifications","target":"Nutificazioni"}
+{"key":"account_settings_ringtone","source":"New mail ringtone","source_fr":"Sonnerie de nouveaux courriels","target":"Suneria di messaghju novu"}
+{"key":"account_settings_notification_light_label","source":"Notification light","source_fr":"Lumière de notification","target":"Lume di nutificazione"}
+{"key":"account_settings_notification_light_disabled","source":"Disabled","source_fr":"Désactivée","target":"Disattivata"}
+{"key":"account_settings_notification_light_account_color","source":"Account color","source_fr":"Couleur du compte","target":"Culore di u contu"}
+{"key":"account_settings_notification_light_yellow","source":"Yellow","source_fr":"Jaune","target":"Ghjallu"}
+{"key":"account_settings_notification_light_cyan","source":"Cyan","source_fr":"Cyan","target":"Cianu"}
+{"key":"account_settings_composition_title","source":"Message composition options","source_fr":"Options de rédaction des courriels","target":"Ozzioni di redazzione di messaghju"}
+{"key":"account_settings_composition_label","source":"Composition defaults","source_fr":"Valeurs de rédaction par défaut","target":"Valori predefiniti di redazzione"}
+{"key":"account_settings_composition_summary","source":"Set your default From, Bcc and signature","source_fr":"Définir les valeurs par défaut pour De, Cci et pour la signature","target":"Definisce i valori predefiniti per Da, Cci è a segnatura"}
+{"key":"account_settings_identities_label","source":"Manage identities","source_fr":"Gérer les identités","target":"Amministrà l’identità"}
+{"key":"account_settings_identities_summary","source":"Set up alternate 'From' addresses and signatures","source_fr":"Définir des adresses « De » et signatures de substitution","target":"Definisce d’altri indirizzi « Da » è d’altre segnature"}
+{"key":"manage_identities_title","source":"Manage identities","source_fr":"Gérer les identités","target":"Amministrà l’identità"}
+{"key":"manage_identities_context_menu_title","source":"Manage identity","source_fr":"Gérer l’identité","target":"Amministrà un’identità"}
+{"key":"edit_identity_title","source":"Edit identity","source_fr":"Modifier l’identité","target":"Mudificà un’identità"}
+{"key":"edit_identity_save","source":"Save","source_fr":"Enregistrer","target":"Arregistrà"}
+{"key":"new_identity_action","source":"New identity","source_fr":"Nouvelle identité","target":"Identità nova"}
+{"key":"account_settings_always_bcc_label","source":"Bcc all messages to","source_fr":"Envoyer une copie Cci de tous les courriels à","target":"Mandà una copia Cci di tutti i messaghji à"}
+{"key":"manage_identities_edit_action","source":"Edit","source_fr":"Modifier","target":"Mudificà"}
+{"key":"manage_identities_move_up_action","source":"Move up","source_fr":"Déplacer cer le haut","target":"Dispiazzà sopra"}
+{"key":"manage_identities_move_down_action","source":"Move down","source_fr":"Déplacer vers les bas","target":"Dispiazzà sottu"}
+{"key":"manage_identities_move_top_action","source":"Move to top / make default","source_fr":"Déplacer en haut. Définir par défaut","target":"Dispiazzà in altu (definisce cum’è predefinizione)"}
+{"key":"manage_identities_remove_action","source":"Remove","source_fr":"Supprimer","target":"Caccià"}
+{"key":"edit_identity_description_label","source":"Identity description","source_fr":"Description de l’identité","target":"Discrizzione di l’identità"}
+{"key":"edit_identity_description_hint","source":"(Optional)","source_fr":"(Facultative)","target":"(Ozzionale)"}
+{"key":"edit_identity_email_hint","source":"(Required)","source_fr":"(Requis)","target":"(Richiestu)"}
+{"key":"edit_identity_name_label","source":"Your name","source_fr":"Votre nom","target":"A vostra casata"}
+{"key":"edit_identity_name_hint","source":"(Optional)","source_fr":"(Facultatif)","target":"(Ozzionale)"}
+{"key":"edit_identity_email_label","source":"Email address","source_fr":"Adresse courriel","target":"Indirizzu elettronicu"}
+{"key":"edit_identity_reply_to_label","source":"Reply-to address","source_fr":"Adresse de réponse","target":"Indirizzu di risposta"}
+{"key":"edit_identity_reply_to_hint","source":"(Optional)","source_fr":"(Facultative)","target":"(Ozzionale)"}
+{"key":"account_settings_signature_use_label","source":"Use Signature","source_fr":"Signer les courriels","target":"Impiegà a segnatura"}
+{"key":"account_settings_signature_label","source":"Signature","source_fr":"Signature","target":"Segnatura"}
+{"key":"default_identity_description","source":"Initial identity","source_fr":"Première identité","target":"Identità iniziale"}
+{"key":"choose_identity_title","source":"Choose identity","source_fr":"Choisir l’identité","target":"Sceglie l’identità"}
+{"key":"send_as","source":"Send as","source_fr":"Envoyer en tant que","target":"Mandà da"}
+{"key":"no_removable_identity","source":"You can't remove your only identity","source_fr":"Vous devez garder au moins une identité","target":"Ùn pudete micca caccià a vostra identità unica"}
+{"key":"identity_has_no_email","source":"You can't use an identity without an email address","source_fr":"Une identité doit comporter une adresse courriel","target":"Ùn pudete micca impiegà un’identità senza indirizzu elettronicu"}
+{"key":"sort_earliest_first","source":"Earliest messages first","source_fr":"Courriels les plus anciens en premier","target":"Messaghji più vechji in primu"}
+{"key":"sort_subject_alpha","source":"Subject alphabetical","source_fr":"Objet de A à Z","target":"Sughjettu in l’ordine alfabeticu"}
+{"key":"sort_subject_re_alpha","source":"Subject reverse alphabetical","source_fr":"Objet de Z à A","target":"Sughjettu in l’ordine alfabeticu invertitu"}
+{"key":"sort_flagged_first","source":"Starred messages first","source_fr":"Courriels étoilés en premier","target":"Messaghji stellati in primu"}
+{"key":"sort_flagged_last","source":"Unstarred messages first","source_fr":"Courriels sans étoile en premier","target":"Messaghji senza stella in primu"}
+{"key":"sort_unread_first","source":"Unread messages first","source_fr":"Courriels non lus en premier","target":"Messaghji à leghje in primu"}
+{"key":"sort_unread_last","source":"Read messages first","source_fr":"Courriels lus en premier","target":"Messaghji letti in primu"}
+{"key":"sort_by","source":"Sort by…","source_fr":"Trier par…","target":"Ordinà da…"}
+{"key":"sort_by_date","source":"Date","source_fr":"Date","target":"Data"}
+{"key":"sort_by_arrival","source":"Arrival","source_fr":"Date de réception","target":"Data di ricezzione"}
+{"key":"sort_by_subject","source":"Subject","source_fr":"Objet","target":"Sughjettu"}
+{"key":"sort_by_sender","source":"Sender","source_fr":"Expéditeur","target":"Speditore"}
+{"key":"sort_by_flag","source":"Star","source_fr":"Étoile","target":"Stella"}
+{"key":"sort_by_unread","source":"Read/unread","source_fr":"Lu ou non lu","target":"Lettu/à leghje"}
+{"key":"account_delete_dlg_title","source":"Remove Account","source_fr":"Supprimer le compte","target":"Caccià u contu"}
+{"key":"folder_list_filter_hint","source":"Folder name contains","source_fr":"Le nom de dossier comprend","target":"U nome di cartulare cuntene"}
+{"key":"account_settings_signature__location_label","source":"Signature position","source_fr":"Position de la signature","target":"Pusizione di a segnatura"}
+{"key":"account_settings_signature__location_before_quoted_text","source":"Before quoted message","source_fr":"Avant le courriel cité","target":"Nanzu à u messaghju menziunatu"}
+{"key":"account_settings_signature__location_after_quoted_text","source":"After quoted message","source_fr":"Après le courriel cité","target":"Dopu à u messaghju menziunatu"}
+{"key":"setting_theme_global","source":"Use app theme","source_fr":"Utiliser le thème de l’appli","target":"Impiegà u tema di l’appiecazione"}
+{"key":"setting_theme_dark","source":"Dark","source_fr":"Foncé","target":"Scuru"}
+{"key":"setting_theme_follow_system","source":"Use system default","source_fr":"Utiliser le thème par défaut du système","target":"Impiegà u tema predefinitu di u sistema"}
+{"key":"display_preferences","source":"Display","source_fr":"Affichage","target":"Affissera"}
+{"key":"global_preferences","source":"Global","source_fr":"Général","target":"Glubale"}
+{"key":"privacy_preferences","source":"Privacy","source_fr":"Protection des données personnelles","target":"Cunfidenzialità"}
+{"key":"network_preferences","source":"Network","source_fr":"Réseau","target":"Reta"}
+{"key":"account_settings_notification_light_default_color","source":"System default color","source_fr":"Couleur par défaut du système","target":"Culore predefinitu di u sistema"}
+{"key":"account_settings_notification_light_white","source":"White","source_fr":"Blanche","target":"Biancu"}
+{"key":"account_settings_notification_light_red","source":"Red","source_fr":"Rouge","target":"Rossu"}
+{"key":"account_settings_notification_light_green","source":"Green","source_fr":"Verte","target":"Verde"}
+{"key":"account_settings_notification_light_blue","source":"Blue","source_fr":"Bleue","target":"Turchinu"}
+{"key":"account_settings_notification_light_magenta","source":"Magenta","source_fr":"Magenta","target":"Magenta"}
+{"key":"sort_latest_first","source":"Latest messages first","source_fr":"Courriels les plus récents en premier","target":"Messaghji più recente in primu"}
+{"key":"sort_sender_re_alpha","source":"Sender reverse alphabetical","source_fr":"Expéditeur de Z à A","target":"Speditore in l’ordine alfabeticu invertitu"}
+{"key":"sort_sender_alpha","source":"Sender alphabetical","source_fr":"Expéditeur de A à Z","target":"Speditore in l’ordine alfabeticu"}
+{"key":"edit_identity_signature_label","source":"Signature","source_fr":"Signature","target":"Segnatura"}
+{"key":"edit_identity_signature_hint","source":"(Optional)","source_fr":"(Facultative)","target":"(Ozzionale)"}
+{"key":"setting_theme_light","source":"Light","source_fr":"Clair","target":"Chjaru"}
+{"key":"debug_preferences","source":"Debugging","source_fr":"Débogage","target":"Spannatura"}
+{"key":"settings_theme_label","source":"Theme","source_fr":"Thème","target":"Tema"}
+{"key":"settings_message_theme_label","source":"Message view theme","source_fr":"Thème d’affichage des courriels","target":"Tema di vista di i messaghji"}
+{"key":"settings_compose_theme_label","source":"Composer theme","source_fr":"Thème de rédaction","target":"Tema di redazzione"}
+{"key":"preference_search_no_results","source":"No settings found","source_fr":"Aucun paramètre n’a été trouvé","target":"Nisunu parametru trovu"}
+{"key":"settings_message_theme_selection_summary_on","source":"Use a fixed message view theme","source_fr":"Utiliser un thème d’affichage de courriels fixe","target":"Impiegà un tema di vista di i messaghji fissu"}
+{"key":"account_setup_push_limit_5","source":"5 folders","source_fr":"5 dossiers","target":"5 cartulari"}
+{"key":"account_setup_push_limit_10","source":"10 folders","source_fr":"10 dossiers","target":"10 cartulari"}
+{"key":"account_setup_push_limit_50","source":"50 folders","source_fr":"50 dossiers","target":"50 cartulari"}
+{"key":"account_setup_push_limit_100","source":"100 folders","source_fr":"100 dossiers","target":"100 cartulari"}
+{"key":"account_setup_push_limit_500","source":"500 folders","source_fr":"500 dossiers","target":"500 cartulari"}
+{"key":"account_setup_push_limit_1000","source":"1000 folders","source_fr":"1 000 dossiers","target":"1000 cartulari"}
+{"key":"animations_title","source":"Animation","source_fr":"Animation","target":"Animazione"}
+{"key":"show_unified_inbox_title","source":"Show Unified Inbox","source_fr":"Afficher la boîte de réception unifiée","target":"Affissà a scatula di ricezzione cuncolta"}
+{"key":"show_starred_count_title","source":"Show starred count","source_fr":"Afficher le compte d’étoilés","target":"Affissà u numaru di stellati"}
+{"key":"integrated_inbox_detail","source":"All messages in unified folders","source_fr":"Tous les courriels dans les dossiers unifiés","target":"Tutti i messaghji in i cartulari cuncolti"}
+{"key":"folder_settings_include_in_integrated_inbox_label","source":"Unify","source_fr":"Unifier","target":"Unificà"}
+{"key":"account_settings_automatic_special_folder","source":"Automatic (%s)","source_fr":"Automatique (%s)","target":"Autumaticu (%s)"}
+{"key":"font_size_message_list_sender","source":"Sender","source_fr":"Expéditeur","target":"Speditore"}
+{"key":"font_size_message_list_date","source":"Date","source_fr":"Date","target":"Data"}
+{"key":"font_size_message_view","source":"Messages","source_fr":"Courriels","target":"Messaghji"}
+{"key":"font_size_message_view_sender","source":"Sender","source_fr":"Expéditeur","target":"Speditore"}
+{"key":"font_size_message_view_recipients","source":"Recipients","source_fr":"Destinataires","target":"Destinatarii"}
+{"key":"font_size_message_view_subject","source":"Subject","source_fr":"Objet","target":"Sughjettu"}
+{"key":"font_size_message_view_content","source":"Message body","source_fr":"Corps des courriels","target":"Corpu di u messaghju"}
+{"key":"font_size_message_compose_input","source":"Text input fields","source_fr":"Champs de saisie de texte","target":"Campi di stampittera di testu"}
+{"key":"font_size_tiniest","source":"Tiniest","source_fr":"La plus petite","target":"U più mininninu"}
+{"key":"font_size_tiny","source":"Tiny","source_fr":"Très petite","target":"Mininninu"}
+{"key":"font_size_small","source":"Small","source_fr":"Petite","target":"Chjucu"}
+{"key":"font_size_large","source":"Large","source_fr":"Grande","target":"Maiò"}
+{"key":"font_size_larger","source":"Larger","source_fr":"Plus grande","target":"Più maiò"}
+{"key":"send_failed_reason","source":"Send failed: %s","source_fr":"Échec d’envoi : %s","target":"Fiascu d’inviu : %s"}
+{"key":"save_or_discard_draft_message_changes","source":"Save or Discard changes?","source_fr":"Enregistrer ou abandonner les changements ?","target":"Arregistrà o tralascià i cambiamenti ?"}
+{"key":"confirm_discard_draft_message_title","source":"Discard message?","source_fr":"Abandonner le courriel ?","target":"Tralascià u messaghju ?"}
+{"key":"dialog_confirm_delete_cancel_button","source":"No","source_fr":"Non","target":"Nò"}
+{"key":"dialog_confirm_mark_all_as_read_title","source":"Confirm mark all as read","source_fr":"Confirmer tout marquer comme lu","target":"Cunfirmà tuttu marcà cum’è lettu"}
+{"key":"dialog_confirm_mark_all_as_read_cancel_button","source":"No","source_fr":"Non","target":"Nò"}
+{"key":"dialog_confirm_spam_title","source":"Confirm move to spam folder","source_fr":"Confirmer le déplacement vers le dossier des pourriels (indésirables)","target":"Cunfirmà u dispiazzamentu versu u cartulare di i merzaghji"}
+{"key":"dialog_confirm_spam_confirm_button","source":"Yes","source_fr":"Oui","target":"Sì"}
+{"key":"settings_list_miscellaneous_category","source":"Miscellaneous","source_fr":"Divers","target":"Diversi"}
+{"key":"settings_export_title","source":"Export settings","source_fr":"Exporter les paramètres","target":"Espurtà i parametri"}
+{"key":"webview_contextmenu_phone_call_action","source":"Call number","source_fr":"Composer le numéro","target":"Chjamà u numeru"}
+{"key":"account_settings_remote_search_num_results_entries_100","source":"100","source_fr":"100","target":"100"}
+{"key":"account_settings_remote_search_num_results_entries_250","source":"250","source_fr":"250","target":"250"}
+{"key":"remote_search_error","source":"Remote search failed","source_fr":"Échec de recherche distante","target":"Fiascu di a ricerca alluntanata"}
+{"key":"account_settings_search","source":"Search","source_fr":"Recherche","target":"Ricercà"}
+{"key":"action_remote_search","source":"Search messages on server","source_fr":"Chercher des courriels sur le serveur","target":"Ricercà i messaghji nant’à u servitore"}
+{"key":"global_settings_background_as_unread_indicator_label","source":"Change colour when read","source_fr":"Changer la couleur une fois lu","target":"Cambià u culore d’un messaghju lettu"}
+{"key":"global_settings_threaded_view_summary","source":"Group messages by conversation","source_fr":"Grouper les courriels par discussion","target":"Gruppà i messaghji da discursata"}
+{"key":"upgrade_databases_title","source":"Upgrading databases","source_fr":"Mettre les bases de données à niveau","target":"Messa à livellu di e base di dati"}
+{"key":"settings_message_theme_selection_label","source":"Fixed message theme","source_fr":"Thème de courriel fixe","target":"Tema di messaghju fissu"}
+{"key":"settings_message_theme_selection_summary_off","source":"Select the message view theme while viewing the message","source_fr":"Choisir le thème d’affichage du courriel lors de sa visualisation","target":"Selezziunà u tema di vista di i messaghji quandu u messaghju hè affissatu"}
+{"key":"account_setup_push_limit_250","source":"250 folders","source_fr":"250 dossiers","target":"250 cartulari"}
+{"context":{"comment":"Displayed in the font size settings screen to configure the font size of the account name in the message view."},"key":"font_size_message_view_account","source":"Account name","source_fr":"Nom des comptes","target":"Nome di u contu"}
+{"key":"font_size_message_list_preview","source":"Preview","source_fr":"Aperçu","target":"Fighjulata"}
+{"key":"font_size_message_view_date","source":"Time and date","source_fr":"Date et heure","target":"Data è ora"}
+{"key":"font_size_message_compose","source":"Message composition","source_fr":"Rédaction des courriels","target":"Redazzione di messaghju"}
+{"key":"font_size_default","source":"Default","source_fr":"Par défaut","target":"Predefinita"}
+{"key":"font_size_smaller","source":"Smaller","source_fr":"Plus petite","target":"Più chjucu"}
+{"key":"font_size_medium","source":"Medium","source_fr":"Moyenne","target":"Medianu"}
+{"key":"save_or_discard_draft_message_dlg_title","source":"Save draft message?","source_fr":"Enregistrer le brouillon ?","target":"Arregistrà a bruttacopia ?"}
+{"key":"save_or_discard_draft_message_instructions_fmt","source":"Save or Discard this message?","source_fr":"Enregistrer ou abandonner ce courriel ?","target":"Arregistrà o tralascià stu messaghju ?"}
+{"key":"confirm_discard_draft_message","source":"Are you sure you want to discard this message?","source_fr":"Voulez-vous abandonner ce courriel ?","target":"Da veru, vulete tralascià stu messaghju ?"}
+{"key":"dialog_confirm_clear_local_folder_title","source":"Clear local messages?","source_fr":"Effacer les courriels locaux ?","target":"Squassà i messaghji lucale ?"}
+{"key":"dialog_confirm_clear_local_folder_message","source":"This will remove all local messages from the folder. No messages will be deleted from the server.","source_fr":"Tous les courriels locaux seront supprimés du dossier, mais pas sur le serveur.","target":"St’azzione caccierà tutti i messaghji lucale da u cartulare. Alcunu messaghju ùn serà squassatu da u servitore."}
+{"key":"dialog_confirm_clear_local_folder_action","source":"Clear messages","source_fr":"Effacer les courriels","target":"Squassà i messaghji"}
+{"key":"dialog_confirm_delete_message","source":"Do you want to delete this message?","source_fr":"Voulez-vous supprimer ce courriel ?","target":"Vulete squassà stu messaghju ?"}
+{"key":"dialog_confirm_mark_all_as_read_message","source":"Do you want to mark all messages as read?","source_fr":"Voulez-vous marquer tous les courriels comme lus ?","target":"Vulete marcà tutti i messaghji cum’è letti ?"}
+{"key":"webview_contextmenu_link_copy_action","source":"Copy link to clipboard","source_fr":"Copier le lien dans le presse-papiers","target":"Cupià u liame in u preme’papei"}
+{"key":"dialog_confirm_spam_message","plural":{"forms":["one","other"],"source_plural":"Do you really want to move %1$d messages to the spam folder?"},"source":"Do you really want to move this message to the spam folder?","source_fr":"Voulez-vous déplacer %1$d courriel vers le dossier des pourriels ?","target":["Da veru, vulete dispiazzà stu messaghju versu u cartulare di i merzaghji ?","Da veru, vulete dispiazzà i %1$d messaghji versu u cartulare di i merzaghji ?"]}
+{"key":"settings_list_backup_category","source":"Backup","source_fr":"Sauvegarde","target":"Salvaguardia"}
+{"key":"dialog_confirm_delete_title","source":"Confirm deletion","source_fr":"Confirmer la suppression","target":"Cunfirmà a squassatura"}
+{"key":"integrated_inbox_title","source":"Unified Inbox","source_fr":"Boîte de réception unifiée","target":"Ricezzione cuncolta"}
+{"key":"font_size_message_list","source":"Message lists","source_fr":"Listes de courriels","target":"Liste di i messaghji"}
+{"key":"font_size_message_list_subject","source":"Subject","source_fr":"Objet","target":"Sughjettu"}
+{"key":"font_size_settings_description","source":"Configure font size","source_fr":"Configurer la taille des polices","target":"Cunfigurà a dimensione di e grafie"}
+{"key":"webview_contextmenu_link_view_action","source":"Open link","source_fr":"Ouvrir le lien","target":"Apre u liame"}
+{"key":"webview_empty_message","source":"No text","source_fr":"Aucun texte","target":"Senza testu"}
+{"key":"webview_contextmenu_link_share_action","source":"Share link","source_fr":"Partager le lien","target":"Sparte u liame"}
+{"key":"webview_contextmenu_link_text_copy_action","source":"Copy link text to clipboard","source_fr":"Copier le texte du lien dans le presse-papiers","target":"Cupià u testu di u liame in u preme’papei"}
+{"key":"webview_contextmenu_link_text_clipboard_label","source":"Link text","source_fr":"Texte du lien","target":"Testu di u liame"}
+{"key":"webview_contextmenu_image_title","source":"Image","source_fr":"Image","target":"Fiura"}
+{"key":"webview_contextmenu_image_view_action","source":"View image","source_fr":"Afficher l’image","target":"Affissà a fiura"}
+{"key":"webview_contextmenu_image_save_action","source":"Save image","source_fr":"Enregistrer l’image","target":"Arregistrà a fiura"}
+{"key":"webview_contextmenu_phone_save_action","source":"Save to Contacts","source_fr":"Enregistrer dans Contacts","target":"Arregistrà trà i cuntatti"}
+{"key":"account_settings_remote_search_num_results_entries_500","source":"500","source_fr":"500","target":"500"}
+{"key":"webview_contextmenu_phone_copy_action","source":"Copy number to clipboard","source_fr":"Copier le numéro dans le presse-papiers","target":"Cupià u numeru in u preme’papei"}
+{"key":"webview_contextmenu_email_send_action","source":"Send mail","source_fr":"Envoyer un courriel","target":"Mandà un messaghju"}
+{"key":"webview_contextmenu_phone_clipboard_label","source":"Phone number","source_fr":"Numéro de téléphone","target":"Numeru di telefonu"}
+{"key":"remote_search_unavailable_no_network","source":"A network connection is required for server search.","source_fr":"Une connexion réseau est nécessaire pour chercher sur le serveur.","target":"Una cunnessione à a reta hè richiesta per una ricerca nant’à u servitore."}
+{"key":"global_settings_background_as_unread_indicator_summary","source":"A different background will show that the message has been read","source_fr":"Un arrière-plan différent indique que le courriel a été lu","target":"Un sfondulu sfarente indicherà chì u messaghju hè statu lettu"}
+{"key":"upgrade_database_format","source":"Upgrading database of account \"%s\"","source_fr":"Mise à niveau de la base de données du compte « %s »","target":"Messa à livellu di a basa di dati di u contu « %s »"}
+{"key":"interaction_preferences","source":"Interaction","source_fr":"Interaction","target":"Interazzione"}
+{"key":"accountlist_preferences","source":"Account list","source_fr":"Liste des comptes","target":"Lista di i conti"}
+{"key":"messageview_preferences","source":"Messages","source_fr":"Courriels","target":"Messaghji"}
+{"key":"messagelist_preferences","source":"Message lists","source_fr":"Liste de courriels","target":"Liste di i messaghji"}
+{"key":"settings_language_label","source":"Language","source_fr":"Langue","target":"Lingua"}
+{"key":"background_ops_label","source":"Background sync","source_fr":"Synchronisation en arrière-plan","target":"Sincrunizazione in tacca di sfondulu"}
+{"key":"background_ops_auto_sync_only","source":"When 'Auto-sync' is checked","source_fr":"Quand la synchronisation automatique est activée","target":"Quandu a sincrunizazione autumatica hè attivata"}
+{"key":"setting_language_system","source":"System default","source_fr":"Langue par défaut du système","target":"Lingua predefinita di u sistema"}
+{"key":"background_ops_never","source":"Never","source_fr":"Jamais","target":"Mai"}
+{"key":"background_ops_always","source":"Always","source_fr":"Toujours","target":"Sempre"}
+{"key":"account_setup_push_limit_label","source":"Max folders to check with push","source_fr":"Maximum de dossiers à vérifier avec le poussé","target":"Numeru massimu di cartulari à sincrunizà cù a catapughjata"}
+{"key":"batch_select_all","source":"Select all","source_fr":"Tout sélectionner","target":"Tuttu selezziunà"}
+{"key":"account_setup_push_limit_25","source":"25 folders","source_fr":"25 dossiers","target":"25 cartulari"}
+{"key":"account_settings_no_folder_selected","source":"None","source_fr":"Aucun","target":"Nisunu"}
+{"key":"font_size_settings_title","source":"Font size","source_fr":"Taille des polices","target":"Dimensione di grafia"}
+{"key":"error_activity_not_found","source":"No suitable application for this action found.","source_fr":"Aucune appli adéquate n’a été trouvée pour cette action.","target":"Nisuna appiecazione apprupiata ùn hè stata trova per st’azzione."}
+{"key":"dialog_confirm_delete_messages","plural":{"forms":["one","other"],"source_plural":"Do you really want to delete %1$d messages?"},"source":"Do you really want to delete this message?","source_fr":"Voulez-vous supprimer %1$d courriel ?","target":["Da veru, vulete squassà stu messaghju ?","Da veru, vulete squassà i %1$d messaghji ?"]}
+{"key":"dialog_confirm_delete_confirm_button","source":"Yes","source_fr":"Oui","target":"Sì"}
+{"key":"dialog_confirm_empty_trash_title","source":"Confirm empty trash","source_fr":"Confirmation du vidage de la corbeille","target":"Cunfirmazione di a viutatura di a curbella"}
+{"key":"dialog_confirm_empty_trash_message","source":"Do you want to empty the trash folder?","source_fr":"Voulez-vous vider le dossier de la corbeille ?","target":"Vulete viutà u cartulare di a curbella ?"}
+{"key":"dialog_confirm_mark_all_as_read_confirm_button","source":"Yes","source_fr":"Oui","target":"Sì"}
+{"key":"dialog_confirm_spam_cancel_button","source":"No","source_fr":"Non","target":"Nò"}
+{"key":"settings_export_success_generic","source":"Settings successfully exported","source_fr":"Les paramètres ont été exportés","target":"I parametri sò stati espurtati currettamente"}
+{"key":"settings_export_failure","source":"Failed to export settings","source_fr":"Échec d’exportation des paramètres","target":"Fiascu per espurtà i parametri"}
+{"key":"settings_export_button","source":"Export","source_fr":"Exporter","target":"Espurtà"}
+{"key":"settings_export_share_button","source":"Share","source_fr":"Partager","target":"Sparte"}
+{"key":"settings_export_progress_text","source":"Exporting settings…","source_fr":"Exportation des paramètres…","target":"Espurtazione di i parametri…"}
+{"key":"webview_contextmenu_link_clipboard_label","source":"Link","source_fr":"Lien","target":"Liame"}
+{"key":"webview_contextmenu_image_clipboard_label","source":"Image URL","source_fr":"URL de l’image","target":"Indirizzu web di a fiura"}
+{"key":"webview_contextmenu_image_download_action","source":"Download image","source_fr":"Télécharger l’image","target":"Scaricà a fiura"}
+{"key":"webview_contextmenu_image_copy_action","source":"Copy image URL to clipboard","source_fr":"Copier l’URL de l’image dans le presse-papiers","target":"Cupià l’indirizzu web di a fiura in u preme’papei"}
+{"key":"account_settings_remote_search_num_results_entries_10","source":"10","source_fr":"10","target":"10"}
+{"key":"webview_contextmenu_email_save_action","source":"Save to Contacts","source_fr":"Enregistrer dans Contacts","target":"Arregistrà trà i cuntatti"}
+{"key":"webview_contextmenu_email_copy_action","source":"Copy address to clipboard","source_fr":"Copier l’adresse dans le presse-papiers","target":"Cupià l’indirizzu in u preme’papei"}
+{"key":"webview_contextmenu_email_clipboard_label","source":"Email address","source_fr":"Adresse courriel","target":"Indirizzu elettronicu"}
+{"key":"account_settings_remote_search_num_results_entries_all","source":"All","source_fr":"Tout","target":"Tutti"}
+{"key":"account_settings_remote_search_num_results_entries_25","source":"25","source_fr":"25","target":"25"}
+{"key":"account_settings_remote_search_num_results_entries_50","source":"50","source_fr":"50","target":"50"}
+{"key":"remote_search_sending_query","source":"Sending query to server","source_fr":"Envoi de la requête au serveur","target":"Inviu di a richiesta à u servitore"}
+{"key":"remote_search_downloading","plural":{"forms":["one","other"],"source_plural":"Fetching %d results"},"source":"Fetching %d result","source_fr":"Extraction de %d résultat","target":["Riguarera di %d risultatu","Riguarera di %d risultati"]}
+{"key":"account_settings_remote_search_num_results_entries_1000","source":"1000","source_fr":"1000","target":"1000"}
+{"key":"account_settings_remote_search_num_label","source":"Server search limit","source_fr":"Limite de recherche sur le serveur","target":"Limitu di ricera nant’à u servitore"}
+{"key":"remote_search_downloading_limited","plural":{"forms":["one","other"],"source_plural":"Fetching %1$d of %2$d results"},"source":"Fetching %1$d of %2$d results","source_fr":"Extraction de %1$d résultat de %2$d","target":["Riguarera di %1$d risultatu nant’à %2$d","Riguarera di %1$d risultati nant’à %2$d"]}
+{"key":"global_settings_threaded_view_label","source":"Threaded view","source_fr":"Fil de discussion","target":"Vista in discussione"}
+{"key":"upgrade_databases_unspecified","source":"Upgrading databases…","source_fr":"Mise à niveau des bases de données…","target":"Messa à livellu di e base di dati…"}
+{"key":"mark_all_as_read","source":"Mark all as read","source_fr":"Tout marquer comme lu","target":"Tuttu marcà cum’è lettu"}
+{"key":"global_settings_splitview_always","source":"Always","source_fr":"Toujours","target":"Sempre"}
+{"key":"global_settings_splitview_never","source":"Never","source_fr":"Jamais","target":"Mai"}
+{"key":"global_settings_colorize_missing_contact_pictures_label","source":"Colorize contact pictures","source_fr":"Colorer la photo des contacts","target":"Culurisce a fiura di i cuntatti"}
+{"key":"global_settings_messageview_visible_refile_actions_title","source":"Visible message actions","source_fr":"Actions visibles dans les courriels","target":"Azzioni videvule in i messaghji"}
+{"key":"global_settings_messageview_visible_refile_actions_summary","source":"Show selected actions in the message view menu","source_fr":"Afficher les actions sélectionnées dans le menu d’affichage des courriels","target":"Affissà l’azzioni selezziunate nant’à u listinu di vista di i messaghji"}
+{"context":{"comment":"Note: This references message_view_download_remainder"},"key":"preview_encrypted","source":"*Encrypted*","source_fr":"*Chiffré*","target":"*Cifratu*"}
+{"key":"recipient_cc","source":"Cc","source_fr":"Cc","target":"Cc"}
+{"key":"recipient_from","source":"From","source_fr":"De","target":"Da"}
+{"key":"reply_to_label","source":"Reply to","source_fr":"Répondre à","target":"Risponde à"}
+{"key":"address_type_work","source":"Work","source_fr":"Travail","target":"Travagliu"}
+{"key":"address_type_other","source":"Other","source_fr":"Autre","target":"Altru"}
+{"key":"compose_error_no_key_configured","source":"No key configured for this account! Check your settings.","source_fr":"Aucune clé n’est configurée pour ce compte. Vérifiez vos paramètres.","target":"Alcuna chjave ùn hè cunfigurata per stu contu ! Verificate i vostri parametri."}
+{"key":"enable_inline_pgp","source":"Enable PGP/INLINE","source_fr":"Activer PGP/INTÉGRÉ","target":"Attivà PGP/INLINE"}
+{"key":"disable_inline_pgp","source":"Disable PGP/INLINE","source_fr":"Désactiver PGP/INTÉGRÉ","target":"Disattivà PGP/INLINE"}
+{"key":"recipient_bcc","source":"Bcc","source_fr":"Cci","target":"Cci"}
+{"key":"recipient_to","source":"To","source_fr":"À","target":"À"}
+{"key":"unknown_recipient","source":"<Unknown Recipient>","source_fr":"<Le destinataire est inconnu>","target":"<U destinatariu hè scunnisciutu>"}
+{"key":"address_type_home","source":"Home","source_fr":"Domicile","target":"Casa"}
+{"key":"unknown_sender","source":"<Unknown Sender>","source_fr":"<L’expéditeur est inconnu>","target":"<U speditore hè scunnisciutu>"}
+{"key":"compose_error_no_draft_folder","source":"No Drafts folder configured for this account!","source_fr":"Aucun dossier Brouillons n’est configuré pour ce compte","target":"Alcunu cartulare Bruttacopia ùn hè cunfiguratu per stu contu !"}
+{"key":"error_crypto_provider_ui_required","source":"Failed to initialize end-to-end encryption, please check your settings","source_fr":"Échec d’initialisation du chiffrement de bout en bout. Vérifiez vos paramètres.","target":"Ùn si pò micca inizià a cifratura da un capu à l’altru, ci vole à vérificà i vostri parametri"}
+{"key":"global_settings_splitview_mode_label","source":"Show split-screen","source_fr":"Partager l’écran","target":"Affissà un screnu frazziunatu"}
+{"key":"message_view_empty","source":"Please select a message on the left","source_fr":"Choisissez un courriel sur la gauche","target":"Selezziunate un messaghju à manu manca"}
+{"key":"global_settings_splitview_when_in_landscape","source":"When in Landscape orientation","source_fr":"En mode paysage","target":"In modu paisagiu"}
+{"key":"global_settings_show_contact_picture_summary","source":"Show contact pictures in the message list","source_fr":"Afficher la photo des contacts dans la liste des courriels","target":"Affissà a fiura di i cuntatti nant’à a lista di i messaghji"}
+{"key":"global_settings_show_contact_picture_label","source":"Show contact pictures","source_fr":"Afficher la photo des contacts","target":"Affissà a fiura di i cuntatti"}
+{"key":"global_settings_colorize_missing_contact_pictures_summary","source":"Colorize missing contact pictures","source_fr":"Colorer les photos de contact manquantes","target":"Culurisce e fiure assente di i cuntatti"}
+{"key":"fetching_attachment_dialog_title_send","source":"Sending message","source_fr":"Envoi du courriel","target":"Inviu di u messaghju"}
+{"key":"fetching_attachment_dialog_title_save","source":"Saving draft","source_fr":"Enregistrement du brouillon","target":"Arregistramentu di a bruttacopia"}
+{"key":"add_from_contacts","source":"Add from Contacts","source_fr":"Ajouter à partir des contacts","target":"Aghjunghje da i cuntatti"}
+{"key":"address_type_mobile","source":"Mobile","source_fr":"Mobile","target":"Telefuninu"}
+{"key":"error_crypto_provider_incompatible","source":"Crypto provider uses incompatible version. Please check your settings!","source_fr":"Le fournisseur cryptographique utilise une version non compatible. Vérifiez vos paramètres.","target":"U furnidore crittograficu impiegheghja una versione incumpatibile. Ci vole à verificà i vostri parametri !"}
+{"key":"error_crypto_provider_connect","source":"Cannot connect to crypto provider, check your settings or click crypto icon to retry!","source_fr":"Impossible de se connecter au fournisseur cryptographique. Vérifiez vos paramètres ou touchez l’icône Cryptographie pour réessayer.","target":"Ùn si pò micca cunnette à u furnidore crittograficu. Verificate i vostri parametri o tuccate l’icona Crittografia per pruvà torna !"}
+{"key":"enable_sign_only","source":"Enable PGP Sign-Only","source_fr":"Activer PGP signer-seulement","target":"Attivà PGP Sign-Only"}
+{"key":"openpgp_inline_text","source":"The email is sent in PGP/INLINE format. This should only be used for compatibility:","source_fr":"Ce courriel est envoyé au format PGP/INTÉGRÉ. Il ne devrait être utilisé que pour des raisons de compatibilité :","target":"Stu messaghju elettronicu hè mandatu à u furmatu PGP/INLINE.  Quessu furmatu duveria esse impiegatu solu per ragioni di cumpatibilità :"}
+{"key":"openpgp_inline_keep_enabled","source":"Keep Enabled","source_fr":"Garder activé","target":"Cunservà attivatu"}
+{"key":"openpgp_sign_only_ok","source":"Got it!","source_fr":"J’ai compris","target":"Aghju capitu !"}
+{"key":"openpgp_dialog_sign_only_neutral_encsigned","source":"Encrypted messages always include a signature.","source_fr":"Les courriels chiffrés comprennent toujours une signature.","target":"I messaghji cifrati cuntenenu sempre una segnatura."}
+{"key":"crypto_msg_unencrypted_sign_error","source":"end-to-end signature contained an error","source_fr":"la signature de bout en bout comportait une erreur","target":"A segnatura da un capu à l’altru cuntinia un sbagliu"}
+{"key":"crypto_msg_cancelled","source":"Message is encrypted, but decryption was cancelled.","source_fr":"Le courriel est chiffré, mais le déchiffrement a été annulé.","target":"U messaghju hè cifratu, ma a dicifratura hè stata abbandunata."}
+{"key":"crypto_msg_title_unencrypted_signed_e2e","source":"End-to-End signed plaintext","source_fr":"Texte brut signé de bout en bout","target":"Testu rozu firmatu da un capu à l’altru"}
+{"key":"crypto_msg_unencrypted_sign_revoked","source":"but end-to-end key is revoked","source_fr":"mais la clé de chiffrement de bout en bout est révoquée","target":"ma a chjave da un capu à l’altru hè revucata"}
+{"key":"crypto_msg_unencrypted_sign_unknown","source":"from unknown end-to-end key","source_fr":"d’une clé de chifremment de bout en bout inconnue","target":"da una chjave da un capu à l’altru scunnisciuta"}
+{"key":"crypto_msg_title_encrypted_unknown","source":"Encrypted","source_fr":"Chiffré","target":"Cifratu"}
+{"key":"crypto_msg_encrypted_error","source":"but there was a decryption error","source_fr":"mais une erreur de déchiffrement est survenue","target":"ma un sbagliu di dicifratura hè accadutu"}
+{"key":"crypto_msg_encrypted_incomplete","source":"must fully download message for decryption","source_fr":"le courriel doit être complètement téléchargé pour le déchiffrer","target":"u messaghju deve esse scaricatu sanu sanu per dicifrallu"}
+{"key":"crypto_msg_title_encrypted_unsigned","source":"Encrypted","source_fr":"Chiffré","target":"Cifratu"}
+{"key":"crypto_msg_title_encrypted_signed","source":"Encrypted","source_fr":"Chiffré","target":"Cifratu"}
+{"key":"crypto_msg_encrypted_sign_unknown","source":"from unknown end-to-end key","source_fr":"d’une clé de chiffrement de bout en bout inconnue","target":"da una chjave da un capu à l’altru scunnisciuta"}
+{"key":"crypto_msg_encrypted_sign_revoked","source":"but end-to-end key is revoked","source_fr":"mais la clé de chiffrement de bout en bout est révoquée","target":"ma a chjave da un capu à l’altru hè revucata"}
+{"key":"crypto_msg_encrypted_insecure","source":"but encryption not considered secure","source_fr":"mais le niveau de sécurité du chiffrement n’est pas suffisant","target":"ma a cifratura ùn hè micca cunsiderata cum’è sicura"}
+{"key":"locked_attach_unencrypted","source":"This part was not encrypted, and may be insecure.","source_fr":"Cette partie n’a pas été chiffrée et pourrait ne pas être sûre.","target":"Sta parte ùn hè stata micca cifrata è puderia ùn esse sicura."}
+{"key":"messageview_decrypt_cancelled","source":"Decryption was cancelled.","source_fr":"Le déchiffrement a été annulé.","target":"A dicifratura hè stata abbandunata."}
+{"key":"account_settings_crypto_hide_sign_only_off","source":"All signatures will be displayed","source_fr":"Toutes les signatures seront affichées","target":"Tutte e segnature seranu affissate"}
+{"key":"openpgp_description_text1","source":"Encrypting messages ensures they can be read by the recipient, and nobody else.","source_fr":"Le chiffrement des courriels garantit qu’ils ne peuvent être lus que par le destinataire et personne d’autre.","target":"A cifratura di i messaghji assicureghja ch’elli pudenu esse letti solu da u destinatariu, è da altrunimu."}
+{"key":"openpgp_enabled_error_disable","source":"Disable Encryption","source_fr":"Désactiver le chiffrement","target":"Disattivà a cifratura"}
+{"key":"openpgp_encryption","source":"OpenPGP Encryption","source_fr":"Chiffrement OpenPGP","target":"Cifratura OpenPGP"}
+{"key":"dialog_autocrypt_mutual_title","source":"Autocrypt mutual mode","source_fr":"Mode mutuel Autocrypt","target":"Modu mutuale di cifratura autumatica"}
+{"key":"dialog_autocrypt_mutual_learn_more","source":"You can click here to learn more.","source_fr":"Vous pouvez toucher ici (page en anglais) pour en apprendre davantage.","target":"Pudete tuccà quì per sapene di più."}
+{"key":"general_settings_title","source":"General settings","source_fr":"Paramètres généraux","target":"Parametri generali"}
+{"key":"dialog_openkeychain_info_install","source":"Install","source_fr":"Installer","target":"Installà"}
+{"key":"account_settings_crypto_encrypt_subject","source":"Encrypt message subjects","source_fr":"Chiffrer l’objet des courriels","target":"Cifrà u sughjettu di i messaghji"}
+{"key":"account_settings_crypto_encrypt_subject_subtitle","source":"May not be supported by some recipients","source_fr":"Pourrait ne pas être pris en charge par certains destinataires","target":"Què puderia ùn esse micca accettatu da certi destinatarii"}
+{"key":"toast_openpgp_provider_error","source":"Error connecting to %s!","source_fr":"Erreur de connexion à %s","target":"Sbagliu di cunnessione à %s !"}
+{"key":"ac_transfer_setting_title","source":"Send Autocrypt Setup Message","source_fr":"Envoyer un courriel de configuration Autocrypt","target":"Mandà un messaghju di cunfigurazione Autocrypt"}
+{"key":"ac_transfer_title","source":"Autocrypt Setup Message","source_fr":"Courriel de configuration Autocrypt","target":"Messaghju di cunfigurazione Autocrypt"}
+{"key":"ac_transfer_button_send","source":"Send Setup Message","source_fr":"Envoyer le courriel de configuration","target":"Mandà u messaghju di cunfigurazione"}
+{"key":"ac_transfer_sending_to","source":"Sending message to:","source_fr":"Envoi du courriel à :","target":"Inviu di u messaghju à :"}
+{"key":"ac_transfer_finish","source":"To finish, open the message on your other device and enter the setup code.","source_fr":"Pour terminer, ouvrez le courriel dans votre autre appareil et saisissez le code de configuration.","target":"Per compie, aprite u messaghju nant’à u vostru altru apparechju è stampittate u codice di cunfigurazione."}
+{"key":"switch_off","source":"Off","source_fr":"Désactiver","target":"Inattivu"}
+{"key":"generic_loading_error","source":"An error occurred while loading the data","source_fr":"Une erreur est survenue lors du chargement des données","target":"Un sbagliu hè accadutu durante u caricamentu di i dati"}
+{"key":"push_notification_state_wait_background_sync","source":"Sleeping until background sync is allowed","source_fr":"Inactif tant que la synchronisation en arrière-plan n’est pas autorisée","target":"Inattiva finchè a sincrunizazione in tacca di sfondulu sia permessa"}
+{"key":"push_notification_state_wait_network","source":"Sleeping until network is available","source_fr":"Inactif tant que le réseau n’est pas connecté","target":"Inattiva finchè a reta sia dispunibule"}
+{"key":"push_notification_grant_alarm_permission","source":"Tap to grant permission.","source_fr":"Touchez pour accorder l’autorisation.","target":"Tuccà per cunsente u permessu."}
+{"context":{"comment":"Name of setting to configure whether to show a \"compose\" floating action button on top of the message list"},"key":"general_settings_show_compose_button_title","source":"Show floating compose button","source_fr":"Afficher un bouton de rédaction flottant","target":"Affissà buttone undighjante per redige"}
+{"context":{"comment":"Displayed when an email is missing the 'Date' header field and no date can be displayed in the message details bottom sheet."},"key":"message_details_missing_date","source":"Missing 'Date' header","source_fr":"L’en-tête « Date » manque","target":"L’intestatura « Data » hè assente"}
+{"context":{"comment":"Title of the \"Bcc\" section in the message details bottom sheet. This should probably be the same as the string 'recipient_bcc'."},"key":"message_details_bcc_section_title","source":"Bcc","source_fr":"Cci","target":"Cci"}
+{"context":{"comment":"Displayed when loading the message details has failed"},"key":"message_details_loading_error","source":"An error occurred while loading the message details.","source_fr":"Une erreur est survenue lors du chargement des détails du courriel.","target":"Un sbagliu hè accadutu durante u caricamentu di i detaglii di u messaghju."}
+{"context":{"comment":"A user visible label for the email address copied to the clipboard"},"key":"clipboard_label_email_address","source":"Email address","source_fr":"Adresse courriel","target":"Indirizzu elettronicu"}
+{"key":"dialog_autocrypt_mutual_description_1","source":"Messages will normally be encrypted by choice, or when replying to an encrypted message.","source_fr":"Les courriels seront habituellement chiffrés par choix ou en répondant à un courriel chiffré.","target":"Di regula, i messaghji sò cifrati per scelta, o quandu si risponde à un messaghju cifratu."}
+{"key":"openpgp_inline_plus_compat","source":"Some clients only support this format","source_fr":"Certains clients ne prennent que ce format en charge","target":"Certe messaghjerie elettroniche accettanu solu stu furmatu"}
+{"key":"openpgp_inline_minus_transit","source":"Signatures may break during transit","source_fr":"Les signatures pourraient se briser pendant le transit","target":"E segnature puderianu rompesi durante u transitu"}
+{"key":"openpgp_sign_only_keep_enabled","source":"Keep Enabled","source_fr":"Garder activé","target":"Cunservà attivatu"}
+{"key":"openpgp_dialog_sign_only_text","source":"In this mode, your PGP key will be used to create a cryptographic signature of an unencrypted email.","source_fr":"Dans ce mode, votre clé PGP est utilisée pour signer cryptographiquement un courriel non chiffré.","target":"In stu modu, a vostra chjave PGP serà impiegata per creà una segnatura crittografica di un messaghju micca cifratu."}
+{"key":"openpgp_dialog_sign_only_minus_break","source":"Signatures may break when sent to mailing lists.","source_fr":"Les signatures pourraient se briser si elles sont envoyées à des listes de diffusion.","target":"E segnature puderianu rompesi quand’elle sò mandate à e liste di diffusione."}
+{"key":"crypto_msg_incomplete_signed","source":"must fully download message to process signature","source_fr":"le courriel doit être complètement téléchargé afin de traiter la signature","target":"u messaghju deve esse scaricatu sanu sanu per trattà a segnatura"}
+{"key":"crypto_msg_unsupported_signed","source":"contains unsupported end-to-end signature","source_fr":"comprend une signature de bout en bout non prise en charge","target":"cuntene una segnatura da un capu à l’altru chì ùn hè micca accettata"}
+{"key":"crypto_msg_unsupported_encrypted","source":"Message is encrypted, but in an unsupported format.","source_fr":"Le courriel est chiffré, mais dans un format non pris en charge.","target":"U messaghju hè cifratu, ma in un furmatu chì ùn hè micca accettatu."}
+{"key":"crypto_msg_title_unencrypted_signed","source":"Signed plaintext","source_fr":"Texte brut signé","target":"Testu rozu firmatu"}
+{"key":"crypto_msg_unencrypted_sign_mismatch","source":"but end-to-end key didn't match sender","source_fr":"mais la clé de chiffrement de bout en bout ne correspondait pas à l’expéditeur","target":"ma a chjave da un capu à l’altru ùn currispundia micca à u speditore"}
+{"key":"crypto_msg_unencrypted_sign_expired","source":"but end-to-end key is expired","source_fr":"mais la clé de chiffrment de bout en bout est expirée","target":"ma a chjave da un capu à l’altru hè scaduta"}
+{"key":"crypto_msg_unencrypted_sign_insecure","source":"but end-to-end key is not considered secure","source_fr":"mais la clé de chiffrement de bout en bout n’est pas considérée comme sûre","target":"ma a chjave da un capu à l’altru ùn hè micca cunsiderata cum’è sicura"}
+{"key":"crypto_msg_encrypted_unsigned","source":"but not end-to-end","source_fr":"mais pas de bout en bout","target":"ma micca da un capu à l’altru"}
+{"key":"crypto_msg_encrypted_no_provider","source":"but no crypto app is configured","source_fr":"mais aucune appli de cryptographie n’est configurée","target":"ma alcuna appiecazione di crittografia ùn hè cunfigurata"}
+{"key":"crypto_msg_title_encrypted_signed_e2e","source":"End-to-End encrypted","source_fr":"Chiffré de bout en bout","target":"Cifratu da un capu à l’altru"}
+{"key":"crypto_msg_encrypted_sign_verified","source":"from verified sender","source_fr":"d’un expéditeur confirmé","target":"da un speditore verificatu"}
+{"key":"crypto_msg_encrypted_sign_mismatch","source":"but end-to-end key didn't match sender","source_fr":"mais la clé de chiffrement de bout en bout ne correspondait pas à l’expéditeur","target":"ma a chjave da un capu à l’altru ùn currispundia micca à u speditore"}
+{"key":"crypto_msg_encrypted_sign_insecure","source":"but end-to-end key is not considered secure","source_fr":"mais la clé de chiffrement de bout en bout n’est pas considérée comme sûre","target":"ma a chjave da un capu à l’altru ùn hè micca cunsiderata cum’è sicura"}
+{"key":"crypto_msg_encrypted_sign_error","source":"but end-to-end data has errors","source_fr":"mais les données de bout en bout comportent des erreurs","target":"ma i dati da un capu à l’altru cuntenenu sbaglii"}
+{"key":"messageview_decrypt_retry","source":"Retry","source_fr":"Réessayer","target":"Pruvà torna"}
+{"key":"messageview_decrypt_incomplete","source":"Encrypted message must be downloaded for decryption.","source_fr":"Le courriel chiffré doit être téléchargé pour être déchiffré.","target":"U messaghju cifratu deve esse scaricatu per pudè esse dicifratu."}
+{"key":"error_sign_only_no_encryption","source":"Encryption unavailable in sign-only mode!","source_fr":"Le chiffrement n’est pas proposé en mode signer-seulement","target":"A cifratura hè indispunibule in u modu « sign-only » !"}
+{"key":"account_settings_crypto_prefer_encrypt","source":"Autocrypt mutual mode","source_fr":"Mode mutuel Autocrypt","target":"Modu mutuale di cifratura autumatica"}
+{"key":"dialog_autocrypt_mutual_description_2","source":"If both sender and recipients enable mutual mode, encryption will be enabled by default.","source_fr":"Si l’expéditeur et les destinataires activent le mode mutuel, le chiffrement sera activé par défaut.","target":"S’è u speditore è i destinatarii attivanu u modu mutuale, a cifratura serà attivata in modu predefinitu."}
+{"key":"dialog_openkeychain_info_title","source":"No OpenPGP app installed","source_fr":"Aucune appli OpenPGP n’est installée","target":"Alcuna appiecazione OpenPGP ùn hè installata"}
+{"key":"ac_transfer_intro","source":"An Autocrypt Setup Message securely shares your end-to-end setup with other devices.","source_fr":"Un courriel de configuration Autocrypt partage en toute sécurité la configuration du chiffrement de bout en bout avec d’autres appareils.","target":"Un messaghju di cunfigurazione Autocrypt sparte in modu sicuru a vostra cunfigurazione da un capu à l’altru cù d’altri apparechji."}
+{"key":"ac_transfer_will_be_sent","source":"The message will be sent to your address:","source_fr":"Le courriel sera envoyé à votre adresse :","target":"U messaghju serà mandatu à u vostru indirizzu :"}
+{"key":"ac_transfer_msg_body","source":"This message contains all information to transfer your Autocrypt settings along with your secret key securely from your original device.\n\nTo set up your new device for Autocrypt, please follow the instructions that should be presented by your new device.\n\nYou can keep this message and use it as a backup for your secret key. If you want to do this, you should write down the password and store it securely.","source_fr":"Ce courriel comprend tous les renseignements nécessaires pour transférer en toute sécurité de votre appareil d’origine vos paramètres Autocrypt ainsi que votre clé secrète. Pour configurer Autocrypt sur votre nouvel appareil, suivez les instructions qui devraient vous être présentées par votre nouvel appareil. Vous pouvez conserver ce courriel et l’utiliser comme sauvegarde de votre clé secrète. Pour ce faire, écrivez le mot de passe et mettez-le à l’abri.","target":"Stu messaghju cuntene tutte l’infurmazioni per trasferisce in modu sicuru i vostri parametri Autocrypt è a vostra chjave sicreta da u vostru apparechju d’origine. Per cunfigurà u vostru apparechju novu per Autocrypt, ci vole à seguità l’istruzzioni chì duverianu esse prisentate da u vostru apparechju novu. Pudete cunservà stu messaghju è impiegallu tale una salvaguardia di a vostra chjave sicreta. S’è vo vulete fà cusì, duveriate piglià nota di a parolla d’intesa è piazzalla in un locu sicuru."}
+{"key":"push_info_title","source":"Push Info","source_fr":"Renseignements sur le poussé","target":"Infurmazioni di a catapughjata"}
+{"key":"push_notification_state_alarm_permission_missing","source":"Missing permission to schedule alarms","source_fr":"Il manque une autorisation pour programmer des alarmes","target":"Un permessu hè assente per pianificà l’alarme"}
+{"key":"push_info_disable_push_text","source":"If you don't need instant notifications about new messages, you should disable Push and use Polling. Polling checks for new mail at regular intervals and does not need the notification.","source_fr":"Si vous n’avez pas besoin de notifications instantanées pour les nouveaux courriels, vous devriez désactiver le poussé et utiliser la synchronisation. La synchronisation vérifie la présence de nouveaux courriels à intervalles réguliers et n’a pas besoin de notification.","target":"S’è vo ùn avete micca bisognu di nutificazione istantanea per i messaghji novi, duveriate disattivà a catapughjata è impiegà a sullicitazione. A sullicitazione cuntrolleghja l’arrivu di i messaghji novi à un intervallu regulare è ùn hà micca bisognu di nutificazione."}
+{"context":{"comment":"Displayed in the toolbar when there was an error loading the message list, e.g. because the folder no longer exists."},"key":"message_list_error_title","source":"Error","source_fr":"Erreur","target":"Sbagliu"}
+{"context":{"comment":"Title of the \"Reply to\" section in the message details bottom sheet. This should probably be the same as the string 'reply_to_label'."},"key":"message_details_replyto_section_title","source":"Reply to","source_fr":"Répondre à","target":"Risponde à"}
+{"context":{"comment":"Title of the \"To\" section in the message details bottom sheet. This should probably be the same as the string 'recipient_to'."},"key":"message_details_to_section_title","source":"To","source_fr":"À","target":"À"}
+{"context":{"comment":"Name of the action to copy an email address to the clipboard. Usually displayed in a menu or in a tooltip when long-pressing the associated icon."},"key":"action_copy_email_address","source":"Copy email address","source_fr":"Copier l’adresse courriel","target":"Cupià l’indirizzu elettronicu"}
+{"key":"disable_sign_only","source":"Disable PGP Sign-Only","source_fr":"Désactiver PGP signer-seulement","target":"Disattivà PGP Sign-Only"}
+{"key":"openpgp_inline_title","source":"PGP/INLINE Mode","source_fr":"Mode PGP/INTÉGRÉ","target":"Modu PGP/INLINE"}
+{"key":"openpgp_inline_ok","source":"Got it!","source_fr":"J’ai compris","target":"Aghju capitu !"}
+{"key":"openpgp_inline_disable","source":"Disable","source_fr":"Désactiver","target":"Disattivà"}
+{"key":"openpgp_sign_only_disable","source":"Disable","source_fr":"Désactiver","target":"Disattivà"}
+{"key":"openpgp_dialog_sign_only_title","source":"PGP Sign-Only Mode","source_fr":"Mode PGP signer-seulement","target":"Modu PGP Sign-Only"}
+{"key":"openpgp_dialog_sign_only_plus_verified","source":"This does not encrypt the email, but verifies that it was sent from your key.","source_fr":"Ce mode ne chiffre pas le courriel, mais le certifie avec votre clé.","target":"Stu modu ùn cifra micca u messaghju, ma verificheghja ch’ellu hè statu mandatu da a vostra chjave."}
+{"key":"crypto_msg_title_plaintext","source":"Plaintext","source_fr":"Texte brut","target":"Testu rozu"}
+{"key":"crypto_msg_unencrypted_sign_verified","source":"from verified signer","source_fr":"d’un signataire confirmé","target":"da un signatariu verificatu"}
+{"key":"crypto_msg_encrypted_sign_expired","source":"but end-to-end key is expired","source_fr":"mais la clé de chiffrement de bout en bout est expirée","target":"ma a chjave da un capu à l’altru hè scaduta"}
+{"key":"locked_attach_unlock","source":"Unlock","source_fr":"Déverrrouiller","target":"Spalancà"}
+{"key":"message_progress_text","source":"Loading…","source_fr":"Chargement…","target":"Caricamentu…"}
+{"key":"recipient_error_parse_failed","source":"Error parsing address!","source_fr":"Erreur d’analyse de l’adresse","target":"Sbagliu durante l’analisa di l’indirizzu !"}
+{"key":"account_settings_crypto_hide_sign_only","source":"Hide unencrypted signatures","source_fr":"Cacher les signatures non chiffrées","target":"Piattà e segnature micca cifrate"}
+{"key":"messageview_crypto_error_title","source":"Error decrypting email","source_fr":"Erreur de déchiffrement du courriel","target":"Sbagliu di dicifratura di u messaghju"}
+{"key":"recipient_error_non_ascii","source":"Special characters are currently not supported!","source_fr":"Les caractères spéciaux ne sont actuellement pas pris en charge","target":"Attualmente, I caratteri speziali ùn sò micca accettati !"}
+{"key":"account_settings_crypto_hide_sign_only_on","source":"Only encrypted signatures will be displayed","source_fr":"Seules les signatures chiffrées seront affichées","target":"Solu e segnature cifrate seranu affissate"}
+{"key":"crypto_no_provider_message","source":"This email has been encrypted with OpenPGP. To read it, you need to install and configure a compatible OpenPGP App.","source_fr":"Ce courriel a été chiffré avec OpenPGP. Pour le lire, vous devez installer et configurer une appli compatible avec OpenPGP.","target":"Stu messaghju elettronicu hè statu cifratu cù OpenPGP.  Per leghjelu, ci vole à installà è cunfigurà un’appiecazione cumpatibile cù OpenPGP."}
+{"key":"crypto_no_provider_title","source":"This email is encrypted","source_fr":"Ce courriel est chiffré","target":"Stu messaghju hè cifratu"}
+{"key":"crypto_no_provider_button","source":"Go to Settings","source_fr":"Accéder aux Paramètres","target":"Andà à i parametri"}
+{"key":"unsigned_text_divider_label","source":"Unsigned Text","source_fr":"Texte non signé","target":"Testu micca firmatu"}
+{"key":"enable_encryption","source":"Enable Encryption","source_fr":"Activer le chiffrement","target":"Attivà a cifratura"}
+{"key":"disable_encryption","source":"Disable Encryption","source_fr":"Désactiver le chiffrement","target":"Disattivà a cifratura"}
+{"key":"openpgp_enabled_error_title","source":"Encryption not possible","source_fr":"Le chiffrement est impossible","target":"A cifratura hè impussibule"}
+{"key":"openpgp_enabled_error_msg","source":"Some of the selected recipients don't support this feature!","source_fr":"Certains des destinataires choisis ne prennent pas cette fonction en charge","target":"Certi destinatarii selezziunati ùn accettanu micca sta funzione !"}
+{"key":"openpgp_description_text2","source":"Toggle encryption by clicking this icon.","source_fr":"Activer ou désactiver le chiffrement en touchant cette icône.","target":"Attivà o disattivà a cifratura tucchendu st’icona."}
+{"key":"openpgp_description_text3","source":"Encryption will only show up if supported by all recipients, and they must have sent you an email before.","source_fr":"Le chiffrement ne sera proposé que s’il est pris en charge par tous les destinataires et qu’ils vous ont envoyé un courriel auparavant.","target":"A cifratura ùn serà pruposta chì solu s’ella hè accettata da tutti i destinatarii, è ch’elli vi anu dighjà mandatu un messaghju prima."}
+{"key":"openpgp_enabled_error_gotit","source":"Got it","source_fr":"J’ai compris","target":"Aghju capitu"}
+{"key":"openpgp_enabled_error_back","source":"Back","source_fr":"Retour","target":"Ritornu"}
+{"key":"toast_account_not_found","source":"Internal error: Invalid account!","source_fr":"Erreur interne : le compte est invalide !","target":"Sbagliu internu : u contu hè inaccettevule !"}
+{"key":"ac_transfer_setting_summary","source":"Securely share end-to-end setup with other devices","source_fr":"Partager en toute sécurité la configuration du chiffrement de bout de bout avec d’autres appareils","target":"Sparte in modu sicuru a cunfigurazione da un capu à l’altru cù d’altri apparechji"}
+{"key":"ac_transfer_generating","source":"Generating setup message…","source_fr":"Génération du courriel de configuration…","target":"Generazione di u messaghju di cunfigurazione…"}
+{"key":"ac_transfer_show_code","source":"Show Setup Code","source_fr":"Afficher le code de configuration","target":"Affissà u codice di cunfigurazione"}
+{"key":"ac_transfer_msg_subject","source":"Autocrypt Setup Message","source_fr":"Courriel de configuration Autocrypt","target":"Messaghju di cunfigurazione Autocrypt"}
+{"key":"ac_transfer_error_send","source":"An error occurred while sending the message. Please check your network connectivity and outgoing server configuration.","source_fr":"Une erreur est survenue lors de l’envoi du courriel. Vérifiez votre connexion réseau et la configuration du serveur sortant.","target":"Un sbagliu hè accadutu durante l’inviu di u messaghju. Ci vole à verificà a vostra cunnettività cù a reta è a cunfigurazione di u servitore d’esciuta."}
+{"key":"switch_on","source":"On","source_fr":"Activer","target":"Attivu"}
+{"key":"push_notification_state_listening","source":"Waiting for new emails","source_fr":"En attente de nouveaux courriels","target":"In attesa di i messaghji novi"}
+{"key":"push_notification_state_initializing","source":"Initializing…","source_fr":"Initialisation…","target":"Iniziu…"}
+{"key":"push_notification_info","source":"Tap to learn more.","source_fr":"Touchez pour en apprendre davantage.","target":"Tuccà per sapene di più."}
+{"key":"push_info_configure_notification_text","source":"However, Android also allows you to hide the notification.","source_fr":"Cependant, Android vous permet aussi de cacher la notification.","target":"Sarrimanenti, Android vi permette dinù di piattà a nutificazione."}
+{"key":"push_info_learn_more_text","source":"Learn more","source_fr":"En apprendre davantage","target":"Per sapene di più"}
+{"key":"push_info_configure_notification_action","source":"Configure notification","source_fr":"Configurer la notification","target":"Cunfigurà a nutificazione"}
+{"key":"push_info_disable_push_action","source":"Disable Push","source_fr":"Désactiver le poussé","target":"Disattivà a catapughjata"}
+{"context":{"comment":"Displayed instead of the message list when a folder couldn't be found, e.g. due to an outdated home screen shortcut."},"key":"message_list_error_folder_not_found","source":"Folder not found","source_fr":"Le dossier est introuvable","target":"U cartulare hè intruvevule"}
+{"context":{"comment":"Title of the toolbar that is displayed when the message details bottom sheet has been expanded"},"key":"message_details_toolbar_title","source":"Message details","source_fr":"Détails du courriel","target":"Detaglii di u messaghju"}
+{"context":{"comment":"Title of the \"From\" section in the message details bottom sheet. This should probably be the same as the string 'recipient_from'."},"key":"message_details_from_section_title","source":"From","source_fr":"De","target":"Da"}
+{"context":{"comment":"Title of the \"Sender\" section in the message details bottom sheet. This refers to the 'Sender' header. Be careful with translations."},"key":"message_details_sender_section_title","source":"Sender","source_fr":"Expéditeur","target":"Speditore"}
+{"context":{"comment":"Title of the \"Cc\" section in the message details bottom sheet. This should probably be the same as the string 'recipient_cc'."},"key":"message_details_cc_section_title","source":"Cc","source_fr":"Cc","target":"Cc"}
+{"context":{"comment":"Name of the action to compose a new message to a particular address. Usually displayed in a menu or in a tooltip when long-pressing the associated icon."},"key":"action_compose_message_to","source":"Compose message to","source_fr":"Rédiger un courriel pour","target":"Cumpone un messaghju à"}
+{"context":{"comment":"Name of the action to add a person to contacts. Usually displayed in a menu or in a tooltip when long-pressing the associated icon."},"key":"action_add_to_contacts","source":"Add to contacts","source_fr":"Ajouter aux contacts","target":"Aghjunghje à i cuntatti"}
+{"context":{"comment":"Name of the action to copy a name and email address to the clipboard. Usually displayed in a menu or in a tooltip when long-pressing the associated icon."},"key":"action_copy_name_and_email_address","source":"Copy name and email address","source_fr":"Copier le nom et l’adresse courriel","target":"Cupià u nome è l’indirizzu elettronicu"}
+{"context":{"comment":"A user visible label for the name and email address copied to the clipboard"},"key":"clipboard_label_name_and_email_address","source":"Name and email address","source_fr":"Nom et adresse courriel","target":"Nome è indirizzu elettronicu"}
+{"context":{"comment":"For unread messages the first line of a message list item is modified by this to improve the experience for people with screen readers."},"key":"message_list_content_description_unread_prefix","source":"unread, %s","source_fr":"non lus, %s","target":"à leghje, %s"}
+{"context":{"comment":"Might be displayed in a notification when deleting an account (in the background)"},"key":"background_work_notification_remove_account","source":"Removing account…","source_fr":"Suppression du compte…","target":"Cacciatura di u contu…"}
+{"context":{"comment":"General strings that include the app name"},"key":"account_delete_dlg_instructions_fmt","source":"The account \"%1$s\" will be removed from %2$s.","source_fr":"Le compte « %1$s » sera supprimé de %2$s.","target":"U contu \"%1$s\" serà cacciatu da %2$s."}
+{"key":"push_info_notification_explanation_text","source":"When using Push, %1$s maintains a connection to the mail server. Android requires displaying an ongoing notification while the app is active in the background. %2$s","source_fr":"Si le poussé est utilisé, %1$s maintient une connexion vers le serveur de courriel. Android exige d’afficher une notification continue quand l’appli est active en arrière-plan. %2$s","target":"Quandu s’impiegheghja a catapughjata, %1$s mantene una cunnessione à u servitore di messaghjeria. Android richiede l’affissera d’una nutificazione quandu l’appiecazione hè attiva in tacca di sfondulu. %2$s"}
+{"key":"dialog_openkeychain_info_text","source":"The app OpenKeychain is required to enable support for end-to-end encryption.","source_fr":"L’appli OpenKeychain est nécessaire pour prendre en charge le chiffrement de bout en bout.","target":"L’appiecazione OpenKeychain hè richiesta per permette l’adopru di a cifratura da un capu à l’altru."}
+{"key":"about_title","source":"About %s","source_fr":"À propos de %s","target":"Apprupositu di %s"}
+{"key":"about_app_authors_thunderbird","source":"Thunderbird Mobile Team","source_fr":"L’équipe Thunderbird pour appareils mobiles","target":"A squadra Thunderbird Mobile"}
+{"key":"folder_settings_push_label","source":"Enable Push","source_fr":"Activer le poussé","target":"Attivà a catapughjata"}
+{"key":"folder_settings_sync_label","source":"Enable sync","source_fr":"Activer la synchronisation","target":"Attivà a sincrunizazione"}
+{"key":"folder_settings_notifications_label","source":"Notifications","source_fr":"Notifications","target":"Nutificazioni"}
+{"context":{"comment":"Description of the \"Usage and technical data\" setting used in the \"data collection\" section of the general settings screen"},"key":"settings_ui_telemetry_description","source":"Shares performance, usage, hardware and customization data about this app with Mozilla to help us make Thunderbird better","source_fr":"Partage les données de performance, d’utilisation, de matériel et de personnalisation de cette appli avec Mozilla pour nous aider à améliorer Thunderbird","target":"Sparte cù Mozilla i dati di perfurmenza, d’impiegu, di materiale è di persunalizazione di st’appiecazione per aiutacci à amendà Thunderbird"}
+{"context":{"comment":"Name of the \"data collection\" section in the general settings screen"},"key":"settings_ui_data_collection","source":"Data collection","source_fr":"Collecte de données","target":"Culletta di dati"}
+{"context":{"comment":"Title of the \"Usage and technical data\" setting used in the \"data collection\" section of the general settings screen"},"key":"settings_ui_telemetry_title","source":"Usage and technical data","source_fr":"Données d’utilisation et techniques","target":"Dati d’impiegu è tecnichi"}
+{"key":"folder_settings_visible_label","source":"Show folder","source_fr":"Afficher le dossier","target":"Affissà u cartulare"}
+{"key":"folder_list_show_hidden_folders","source":"Show hidden folders","source_fr":"Afficher les dossiers cachés","target":"Affissà i cartulari piattati"}
+{"key":"settings_list_action_support","source":"Support %s","source_fr":"Soutenir %s","target":"Sustene %s"}
+{"key":"volume_navigation_title_short","source":"Volume key navigation","source_fr":"Se déplacer avec les boutons de volume","target":"Navigà cù i tasti di vulume"}
+{"key":"volume_navigation_summary","source":"Navigate between messages using the volume keys in message view","source_fr":"Dans la vue des courriels, passez d’un courriel à l’autre grâce aux boutons de volume","target":"Navigà d’un messaghju à l’altru cù i tasti di vulume nant’à a vista di i messaghji"}
+{"key":"save_attachment_action","source":"Save attachment","source_fr":"Enregistrer le fichier joint","target":"Arregistrà a pezza ghjunta"}
+{"key":"expand_content_description","source":"Expand","source_fr":"Développer","target":"Spiegà"}
+{"key":"dialog_confirm_empty_spam_message","source":"Do you want to empty the spam folder?","source_fr":"Voulez-vous vider le dossier des pourriels ?","target":"Vulete viutà u cartulare di i merzaghji ?"}
+{"key":"empty_spam_action","source":"Empty Spam","source_fr":"Supprimer les pourriels/indésirables","target":"Squassà i merzaghji"}
+{"key":"dialog_confirm_empty_spam_title","source":"Confirm empty spam","source_fr":"Confirmer la suppression des pourriels","target":"Cunfirmà à squassatura di i merzaghji"}
+{"key":"attach_file","source":"Attach File","source_fr":"Joindre un fichier","target":"Assucià un schedariu"}
+{"key":"open_camera","source":"Open Camera","source_fr":"Ouvrir l’appareil photo","target":"Apre l’apparechju-fotò"}
+{"key":"camera_permission_denied","source":"Camera Permission Denied! Unable to take photo","source_fr":"L’autorisation d’accès à l’appareil photo a été refusée. Impossible de prendre une photo","target":"U permessu d’accede à l’apparechju-fotò hè statu ricusatu. Impussibule di piglià una fotò"}
+{"key":"debug_enable_sync_debug_logging_title","source":"Enable sync debug logging","source_fr":"Activer la journalisation de débogage de la synchronisation","target":"Attivà u ghjurnale di spannatura di a sincrunizazione"}
+{"key":"debug_enable_sync_debug_logging_summary","source":"Log sync diagnostic information for 24 hours","source_fr":"Journaliser les données de diagnostic de synchronisation pendant 24 heures","target":"Arregistrà l’infurmazioni di diagnosticu di a sincrunizazione per 24 ore"}
+{"key":"debug_sync_export_logs_title","source":"Export Sync logs","source_fr":"Exporter les journaux de synchronisation","target":"Espurtà i ghjurnali di sincrunizazione"}
+{"key":"debug_open_secret_debug_screen","source":"Open Secret debug screen","source_fr":"Ouvrir l’écran de débogage de Secret","target":"Apre u screnu sicretu di spannatura"}
+{"key":"archiving_not_available_for_this_account","source":"Archiving is not available for this account.","source_fr":"L’archivage n’est pas proposé pour ce compte.","target":"L’archiviera ùn hè micca dispunibule per stu contu."}
+{"context":{"comment":"Debug/testing menu items"},"key":"debug_invalidate_access_token","source":"Test: Invalidate access token","source_fr":"Essai : invalider le jeton d’accès","target":"Prova : invalidà u gettone d’accessu"}
+{"key":"debug_invalidate_access_token_done","source":"Access token invalidated. Next request will refresh.","source_fr":"Le jeton d’accès a été invalidé. La prochaine requête l’actualisera.","target":"U gettone d’accessu hè statu invalidatu. A prossima richiesta u rinfrescherà."}
+{"key":"debug_invalidate_access_token_unavailable","source":"No OAuth token available for this account.","source_fr":"Aucun jeton OAuth n’est proposé pour ce compte.","target":"Nisunu gettone OAuth hè dispunibule per stu contu."}
+{"key":"debug_invalidate_access_token_local","source":"Test: Invalidate access token (local)","source_fr":"Essai : invalider le jeton d’accès (local)","target":"Prova : invalidà u gettone d’accessu (lucale)"}
+{"key":"debug_invalidate_access_token_local_done","source":"Local invalidation requested. Next request will fetch a new token.","source_fr":"L’nvalidation locale a été demandée. La prochaine requête récupérera un nouveau jeton.","target":"L’invalidazione lucale hè stata richiesta. A prossima richiesta riguarerà un gettone novu."}
+{"key":"debug_invalidate_access_token_server","source":"Test: Invalidate access token (server)","source_fr":"Essai : invalider le jeton d’accès (serveur)","target":"Prova : invalidà u gettone d’accessu (servitore)"}
+{"key":"debug_invalidate_access_token_server_done","source":"Stored access token corrupted. Next request will fail then refresh.","source_fr":"Le jeton d’accès enregistré est corrompu. La prochaine requête échouera, puis l’actualisera.","target":"U gettone d’accessu arregistratu hè dannighjatu. A prossima richiesta si fiascherà eppò u rinfrescherà."}
+{"key":"debug_force_auth_failure","source":"Test: Force auth failure now","source_fr":"Essai : forcer un échec d’authentification maintenant","target":"Prova : sfurzà un fiascu d’autenticazione subitu"}
+{"key":"debug_force_auth_failure_done","source":"OAuth state cleared. Next request will fail.","source_fr":"L’état OAuth a été effacé. La prochaine requête échouera.","target":"U statu OAuth hè statu squassatu. A prossima richiesta si fiascherà."}
+{"key":"debug_force_auth_failure_unavailable","source":"No OAuth configuration available for this account.","source_fr":"Aucune configuration OAuth n’est proposée pour ce compte.","target":"Nisuna cunfigurazione OAuth hè dispunibule per stu contu."}
+{"key":"debug_invalidate_access_token_cannot_modify","source":"Could not modify stored access token. Try local invalidation.","source_fr":"Impossible de modifier le jeton d’accès enregistré. Essayez l’invalidation locale.","target":"Ùn si pò micca mudificà u gettone d’accessu arregistratu. Pruvate un’invalidazione lucale."}
+{"key":"debug_invalidate_access_token_already_modified","source":"Stored access token already modified.","source_fr":"Le jeton d’accès enregistré est déjà modifié.","target":"U gettone d’accessu arregistratu hè dighjà mudificatu."}
+{"key":"message_view_menu_action_export_eml","source":"Export as EML","source_fr":"Exporter en tant que EML","target":"Espurtà cum’è EML"}
+{"key":"set_format_html_action","source":"Use original formatting","source_fr":"Utiliser la mise en forme originale","target":"Impiegà a messa in forma d’origine"}
+{"key":"set_format_html_condensed_action","source":"Show formatted","source_fr":"Afficher mis en forme","target":"Affissà a messa in forma"}
+{"key":"set_format_plain_action","source":"Show unformatted message","source_fr":"Afficher le courriel non mis en forme","target":"Affissà u messaghju non messu in forma"}
+{"key":"set_format_plain_condensed_action","source":"Show unformatted","source_fr":"Afficher non mis en forme","target":"Affissà senza messa in forma"}
+{"key":"global_settings_messageview_body_content_type_title","source":"Body Content-Type","source_fr":"Type de contenu du corps","target":"Tipu di cuntenutu di u corpu di messaghju"}
+{"key":"global_settings_messageview_body_content_type_text_html","source":"HTML (text/html)","source_fr":"HTML (texte/html)","target":"HTML (testu/html)"}
+{"key":"global_settings_messageview_body_content_type_text_plain","source":"Plain text (text/plain)","source_fr":"Texte brut (texte/brute)","target":"Testu rozu(testu/rozu)"}
+{"key":"account_setup_auto_select_folder","source":"Auto-select folder","source_fr":"Choix automatique du dossier","target":"Selezzione autumatica di u cartulare"}
+{"key":"navigation_drawer_preferences","source":"Side Menu","source_fr":"Menu latéral","target":"Listinu laterale"}
+{"key":"expand_folders","source":"Expand Folders","source_fr":"Développer les dossiers","target":"Spiegà i cartulari"}
+{"key":"debug_feature_flags","source":"DEBUG: Feature Flags","source_fr":"DÉBOGAGE : Indicateurs de fonction","target":"SPANNATURA : Bandere di funzione"}
+{"key":"print_message_action","source":"Print","source_fr":"Imprimer","target":"Stampà"}
+{"key":"global_settings_splitview_when_unfolded","source":"When device is unfolded","source_fr":"Quand l’appareil est déplié","target":"Quandu l’apparechju hè apertu"}
+{"context":{"comment":"Message List Date/Time format title"},"key":"general_settings_message_list_date_time_format_title","source":"Date/Time Format","source_fr":"Format de la date et de l’heure","target":"Furmatu di a data è di l’ora"}
+{"context":{"comment":"Message List Date/Time format default setting option: contextual"},"key":"general_settings_message_list_date_time_format_contextual","source":"Contextual","source_fr":"Contextuel","target":"Cuntestuale"}
+{"context":{"comment":"Message List Date/Time format setting option: full"},"key":"general_settings_message_list_date_time_format_full","source":"Full","source_fr":"Complet","target":"Cumpletu"}
+{"key":"sort_by_then_by","source":"Then by…","source_fr":"Ensuite, par…","target":"Eppò da…"}
+{"key":"message_view_attachment_summary","plural":{"forms":["one","other"],"source_plural":"%1$d Attachments (%2$s)"},"source":"%1$d Attachment (%2$s)","source_fr":"%1$d fichier joint (%2$s)","target":["%1$d pezza ghjunta (%2$s)","%1$d pezze ghjunte (%2$s)"]}
+{"key":"message_view_single_attachment_summary","source":"%1$s (%2$s)","source_fr":"%1$s (%2$s)","target":"%1$s (%2$s)"}
+{"key":"message_view_attachments_view_all","source":"View all","source_fr":"Tout afficher","target":"Tuttu affissà"}
+{"key":"message_view_attachments_view","source":"View","source_fr":"Afficher","target":"Affissà"}
+{"key":"message_view_attachments_title","source":"Attachments","source_fr":"Fichiers joints","target":"Pezze ghjunte"}
+{"key":"message_view_attachments_save_all","source":"Save all","source_fr":"Tout enregistrer","target":"Tuttu arregistrà"}
+{"context":{"comment":"Message List Date/Time format setting option: ISO"},"key":"general_settings_message_list_date_time_format_iso","source":"ISO","source_fr":"ISO","target":"ISO"}
+{"key":"no_network_message_will_be_sent_later_toast","source":"Offline. Message will be sent once connection is available","source_fr":"Hors ligne. Le courriel sera envoyé dès que la connexion sera accessible","target":"Fora di linea. U messaghju serà mandatu da ch’ella serà dispunibule a cunnessione"}
+{"key":"changelog_latest_label_text","source":"LATEST","source_fr":"PLUS RÉCENTS","target":"ULTIMI"}
+{"key":"changelog_type_new_text","source":"NEW","source_fr":"NOUVEAUX","target":"NOVI"}
+{"key":"changelog_type_changed_text","source":"CHANGED","source_fr":"CHANGÉS","target":"CAMBIATI"}
+{"key":"changelog_type_fixed_text","source":"FIXED","source_fr":"CORRIGÉS","target":"CURRETTI"}
+{"key":"notification_actions_settings_title","source":"Notification actions","source_fr":"Actions de notification","target":"Azzioni di nutificazione"}
+{"key":"notification_actions_settings_summary","source":"Choose which actions appear in email notifications","source_fr":"Choisissez les actions qui apparaissent dans les notifications par courriel","target":"Sciglite l’azzioni chì appariscenu in e nutificazioni da messaghju elettronicu"}
+{"key":"notification_summary_delete_title","source":"Show Delete on multi-message notifications","source_fr":"Afficher Supprimer pour les notifications groupées","target":"Affissà Squassà per e nutificazioni multi messaghji"}
+{"key":"notification_summary_delete_summary","source":"Adds a Delete action to notifications that summarize multiple new messages","source_fr":"Ajoute une action Supprimer aux notifications qui résument plusieurs nouveaux courriels","target":"Aghjunghje un’azzione di squassatura à e nutificazioni chì riassumenu parechji messaghji novi"}
+{"key":"notification_show_contact_picture_title","source":"Show contact pictures in notifications","source_fr":"Afficher la photo des contact dans les notifications","target":"Affissà a fiura di i cuntatti in e nutificazioni"}
+{"key":"notification_show_contact_picture_summary","source":"Display sender avatars in new message notifications","source_fr":"Afficher l’avatar des expéditeurs dans les notifications de nouveaux messages","target":"Affissà a riprisentazione virtuale di i speditori in e nutificazioni di i messaghji novi"}
+{"key":"notification_actions_settings_description","source":"Reorder notification actions.","source_fr":"Réorganiser les actions de notification.","target":"Riurdinà l’azzioni di nutificazione."}
+{"key":"notification_actions_cutoff_description","source":"Shown actions cutoff","source_fr":"Limite des actions affichées","target":"Limita di l’azzioni affissate"}
+{"key":"notification_actions_cutoff_state","source":"Actions above this line are shown in the notification","source_fr":"Les actions situées au-dessus de cette ligne apparaissent dans la notification","target":"L’azzioni sopra sta linea sò affissate in a nutificazione"}
+{"key":"notification_actions_shown_state","source":"Shown in the notification","source_fr":"Apparaît dans la notification","target":"Affissata in a nutificazione"}
+{"key":"notification_actions_hidden_state","source":"Not shown in the notification","source_fr":"N’apparaît pas dans la notification","target":"Non affissata in a nutificazione"}
+{"key":"accessibility_move_up","source":"Move up","source_fr":"Déplacer vers le haut","target":"Dispiazzà sopra"}
+{"key":"accessibility_move_down","source":"Move down","source_fr":"Déplacer vers le bas","target":"Dispiazzà sottu"}
+{"key":"accessibility_move_item_up","source":"Move %1$s up","source_fr":"Déplacer %1$s vers le haut","target":"Dispiazzà %1$s insù"}
+{"key":"accessibility_move_item_down","source":"Move %1$s down","source_fr":"Déplacer %1$s vers le bas","target":"Dispiazzà %1$s inghjò"}
+{"key":"accessibility_move_cutoff_up","source":"Move shown actions cutoff up","source_fr":"Déplacer la limite des actions affichées vers le haut","target":"Dispiazzà insù a limita di l’azzioni affissate"}
+{"key":"accessibility_move_cutoff_down","source":"Move shown actions cutoff down","source_fr":"Déplacer la limite des actions affichées vers le bas","target":"Dispiazzà inghjò a limita di l’azzioni affissate"}
+{"key":"notification_action_star","source":"Star","source_fr":"Étoiler","target":"Stella"}
+{"key":"animation_setting_on","source":"On","source_fr":"Activée","target":"Attivu"}
+{"key":"animation_setting_off","source":"Off","source_fr":"Désactivée","target":"Inattivu"}
+{"key":"animation_setting_follow_system","source":"Use system default","source_fr":"Utiliser la valeur par défaut du système","target":"Impiegà u valore predefinitu da u sistema"}
+{"component":"feature/account/setup/src/main/res","key":"account_setup_auto_discovery_validation_error_email_address_required","origin":{"path":"feature/account/setup/src/main/res/values-co/strings.xml"},"source":"Email address is required.","source_fr":"L’adresse courriel est requise.","target":"L’indirizzu elettronicu hè richiestu."}
+{"component":"feature/account/setup/src/main/res","key":"account_setup_auto_discovery_validation_error_email_address_not_allowed","origin":{"path":"feature/account/setup/src/main/res/values-co/strings.xml"},"source":"This email address is not allowed.","source_fr":"Cette adresse courriel n’est pas permise.","target":"St’indirizzu elettronicu ùn hè micca permessu."}
+{"component":"feature/account/setup/src/main/res","key":"account_setup_auto_discovery_validation_error_email_address_invalid","origin":{"path":"feature/account/setup/src/main/res/values-co/strings.xml"},"source":"This is not recognized as a valid email address.","source_fr":"Cette adresse courriel n’est pas reconnue comme valide.","target":"St’indirizzu elettronicu ùn hè micca ricunnisciutu cum’è accettevule."}
+{"component":"feature/account/setup/src/main/res","key":"account_setup_auto_discovery_connection_security_start_tls","origin":{"path":"feature/account/setup/src/main/res/values-co/strings.xml"},"source":"StartTLS","source_fr":"StartTLS","target":"StartTLS"}
+{"component":"feature/account/setup/src/main/res","key":"account_setup_auto_discovery_connection_security_ssl","origin":{"path":"feature/account/setup/src/main/res/values-co/strings.xml"},"source":"SSL/TLS","source_fr":"SSL/TLS","target":"SSL/TLS"}
+{"component":"feature/account/setup/src/main/res","key":"account_setup_auto_discovery_loading_message","origin":{"path":"feature/account/setup/src/main/res/values-co/strings.xml"},"source":"Looking up configuration…","source_fr":"Découverte de la configuration…","target":"Ricerca di a cunfigurazione…"}
+{"component":"feature/account/setup/src/main/res","key":"account_setup_auto_discovery_loading_error","origin":{"path":"feature/account/setup/src/main/res/values-co/strings.xml"},"source":"Failed to load email configuration","source_fr":"Échec de chargement de la configuration du compte de courriel","target":"Fiascu di u caricamentu di a cunfigurazione di u contu di messaghjeria"}
+{"component":"feature/account/setup/src/main/res","key":"account_setup_auto_discovery_status_header_title_configuration_found","origin":{"path":"feature/account/setup/src/main/res/values-co/strings.xml"},"source":"Configuration found","source_fr":"La configuration a été trouvée","target":"A cunfigurazione hè stata trova"}
+{"component":"feature/account/setup/src/main/res","key":"account_setup_auto_discovery_result_header_subtitle_configuration_untrusted","origin":{"path":"feature/account/setup/src/main/res/values-co/strings.xml"},"source":"This configuration is not trusted","source_fr":"Cette configuration n’est pas fiable","target":"A cunfigurazione ùn hè micca degna di cunfidenza"}
+{"component":"feature/account/setup/src/main/res","key":"account_setup_auto_discovery_result_approval_checkbox_label","origin":{"path":"feature/account/setup/src/main/res/values-co/strings.xml"},"source":"I trust this configuration","source_fr":"Je fais confiance à cette configuration","target":"Facciu cunfidenza à quella cunfigurazione"}
+{"component":"feature/account/setup/src/main/res","key":"account_setup_auto_discovery_result_approval_error_approval_required","origin":{"path":"feature/account/setup/src/main/res/values-co/strings.xml"},"source":"It is required to approve the configuration.","source_fr":"Il est obligatoire d’approuver la configuration.","target":"Hè richiestu d’appruvà a cunfigurazione."}
+{"component":"feature/account/setup/src/main/res","key":"account_setup_special_folders_loading_message","origin":{"path":"feature/account/setup/src/main/res/values-co/strings.xml"},"source":"Fetching list of folders…","source_fr":"Obtention de la liste des dossiers…","target":"Riguarera di a lista di i cartulari…"}
+{"component":"feature/account/setup/src/main/res","key":"account_setup_special_folders_error_message","origin":{"path":"feature/account/setup/src/main/res/values-co/strings.xml"},"source":"Failed to fetch the list of folders from the server","source_fr":"Échec d’obtention de la liste des dossiers du serveur","target":"Fiascu di a riguarera di a lista di i cartulari da u servitore"}
+{"component":"feature/account/setup/src/main/res","key":"account_setup_special_folders_success_message","origin":{"path":"feature/account/setup/src/main/res/values-co/strings.xml"},"source":"All special folders have been configured automatically by the server.","source_fr":"Tous les dossiers spéciaux ont été configurés automatiquement par le serveur.","target":"Tutti i cartulari speziali sò stati cunfigurati autumaticamente da u servitore."}
+{"component":"feature/account/setup/src/main/res","key":"account_setup_special_folders_archive_folder_label","origin":{"path":"feature/account/setup/src/main/res/values-co/strings.xml"},"source":"Archive folder","source_fr":"Dossier des archives","target":"Cartulare di l’archivii"}
+{"component":"feature/account/setup/src/main/res","key":"account_setup_special_folders_sent_folder_label","origin":{"path":"feature/account/setup/src/main/res/values-co/strings.xml"},"source":"Sent folder","source_fr":"Dossier des courriels envoyés","target":"Cartulare di i messaghji mandati"}
+{"component":"feature/account/setup/src/main/res","key":"account_setup_special_folders_folder_none","origin":{"path":"feature/account/setup/src/main/res/values-co/strings.xml"},"source":"None","source_fr":"Aucun","target":"Nisunu"}
+{"component":"feature/account/setup/src/main/res","key":"account_setup_special_folders_folder_automatic","origin":{"path":"feature/account/setup/src/main/res/values-co/strings.xml"},"source":"Automatic (%s)","source_fr":"Automatique (%s)","target":"Autumaticu (%s)"}
+{"component":"feature/account/setup/src/main/res","key":"account_setup_options_section_display_options","origin":{"path":"feature/account/setup/src/main/res/values-co/strings.xml"},"source":"Display options","source_fr":"Options d’affichage","target":"Ozzioni d’affissera"}
+{"component":"feature/account/setup/src/main/res","key":"account_setup_options_account_name_error_blank","origin":{"path":"feature/account/setup/src/main/res/values-co/strings.xml"},"source":"Account name can't be blank.","source_fr":"Le nom du compte ne peut pas être vide.","target":"U nome di u contu ùn pò micca esse viotu."}
+{"component":"feature/account/setup/src/main/res","key":"account_setup_options_email_signature_label","origin":{"path":"feature/account/setup/src/main/res/values-co/strings.xml"},"source":"Email signature","source_fr":"Signature du courriel","target":"Segnatura di u messaghju elettronicu"}
+{"component":"feature/account/setup/src/main/res","key":"account_setup_options_account_check_frequency_label","origin":{"path":"feature/account/setup/src/main/res/values-co/strings.xml"},"source":"Check frequency","source_fr":"Fréquence de relève","target":"Frequenza di cuntrollu"}
+{"component":"feature/account/setup/src/main/res","key":"account_setup_options_email_check_frequency_never","origin":{"path":"feature/account/setup/src/main/res/values-co/strings.xml"},"source":"Never","source_fr":"Jamais","target":"Mai"}
+{"component":"feature/account/setup/src/main/res","key":"account_setup_options_email_check_frequency_minutes","origin":{"path":"feature/account/setup/src/main/res/values-co/strings.xml"},"plural":{"forms":["one","other"],"source_plural":"Every %d minutes"},"source":"Every minute","source_fr":"Toutes les %d minutes","target":["Ogni minutu","Tutti i %d minuti"]}
+{"component":"feature/account/setup/src/main/res","key":"account_setup_options_email_check_frequency_hours","origin":{"path":"feature/account/setup/src/main/res/values-co/strings.xml"},"plural":{"forms":["one","other"],"source_plural":"Every %d hours"},"source":"Every hour","source_fr":"Toutes les %d heure","target":["Ogni ora","Tutte e %d ore"]}
+{"component":"feature/account/setup/src/main/res","key":"account_setup_options_email_display_count_label","origin":{"path":"feature/account/setup/src/main/res/values-co/strings.xml"},"source":"Number of messages to display","source_fr":"Nombre de courriels à afficher","target":"Numeru di messaghji à affissà"}
+{"component":"feature/account/setup/src/main/res","key":"account_setup_options_show_notifications_label","origin":{"path":"feature/account/setup/src/main/res/values-co/strings.xml"},"source":"Show notifications","source_fr":"Afficher les notifications","target":"Affissà e nutificazioni"}
+{"component":"feature/account/setup/src/main/res","key":"account_setup_create_account_creating","origin":{"path":"feature/account/setup/src/main/res/values-co/strings.xml"},"source":"Creating account…","source_fr":"Création du compte…","target":"Creazione di contu…"}
+{"component":"feature/account/setup/src/main/res","key":"account_setup_create_account_error","origin":{"path":"feature/account/setup/src/main/res/values-co/strings.xml"},"source":"An error occurred while trying to create the account","source_fr":"Une erreur est survenue lors de la création du compte","target":"Un sbagliu hè accadutu durante a creazione di u contu"}
+{"component":"feature/account/setup/src/main/res","key":"account_setup_create_account_created","origin":{"path":"feature/account/setup/src/main/res/values-co/strings.xml"},"source":"Account successfully created","source_fr":"Le compte a été créé","target":"U contu hè statu creatu currettamente"}
+{"component":"feature/account/setup/src/main/res","key":"account_setup_error_network","origin":{"path":"feature/account/setup/src/main/res/values-co/strings.xml"},"source":"Network error. Please check your connection status and try again.","source_fr":"Erreur réseau. Vérifiez l’état de votre connexion et réessayez.","target":"Sbagliu di a reta. Ci vole à verificà a vostra cunnessione è pruvà torna."}
+{"component":"feature/account/setup/src/main/res","key":"account_setup_error_unknown","origin":{"path":"feature/account/setup/src/main/res/values-co/strings.xml"},"source":"Unknown error","source_fr":"Erreur inconnue","target":"Sbagliu scunnisciutu"}
+{"component":"feature/account/setup/src/main/res","key":"account_setup_auto_discovery_validation_error_email_address_not_supported","origin":{"path":"feature/account/setup/src/main/res/values-co/strings.xml"},"source":"This email address is not supported.","source_fr":"Cette adresse courriel n’est pas prise en charge.","target":"St’indirizzu elettronicu ùn hè micca accettatu."}
+{"component":"feature/account/setup/src/main/res","key":"account_setup_auto_discovery_validation_error_password_required","origin":{"path":"feature/account/setup/src/main/res/values-co/strings.xml"},"source":"Password is required.","source_fr":"Le mot de passe est requis.","target":"A parolla d’intesa hè richiesta."}
+{"component":"feature/account/setup/src/main/res","key":"account_setup_auto_discovery_result_header_title_configuration_not_found","origin":{"path":"feature/account/setup/src/main/res/values-co/strings.xml"},"source":"Configuration not found","source_fr":"La configuration n’a pas été trouvée","target":"A cunfigurazione ùn si trova micca"}
+{"component":"feature/account/setup/src/main/res","key":"account_setup_auto_discovery_result_header_subtitle_configuration_trusted","origin":{"path":"feature/account/setup/src/main/res/values-co/strings.xml"},"source":"Configure automatically","source_fr":"Configurer automatiquement","target":"Cunfigurà autumaticamente"}
+{"component":"feature/account/setup/src/main/res","key":"account_setup_special_folders_form_description","origin":{"path":"feature/account/setup/src/main/res/values-co/strings.xml"},"source":"Please specify the special folders for your account.","source_fr":"Sélectionnez les dossiers spéciaux de votre compte.","target":"Selezziunate i cartulari speziali per u vostru contu."}
+{"component":"feature/account/setup/src/main/res","key":"account_setup_auto_discovery_result_disclaimer_untrusted_configuration","origin":{"path":"feature/account/setup/src/main/res/values-co/strings.xml"},"source":"We received the configuration for your email server over a connection that isn't as secure as we'd like. This means that there is a tiny chance that someone could have altered it. Could you please double-check the provided configuration to make sure it's as it should be?","source_fr":"Nous avons reçu la configuration de votre serveur de courriel par une connexion qui n’est pas aussi sécurisée que nous le souhaitions. Cela signifie qu’il y a une infime chance que quelqu’un ait pu la modifier. Pourriez-vous revérifier la configuration fournie pour vous assurer qu’elle est conforme à ce qu’elle devrait être ?","target":"Avemu ricevutu a cunfigurazione per u vostru servitore di messaghjeria via una cunnessione chì ùn hè micca tantu sicura chì no a vuleriamu. Vole si dì chì ci hè una pussibilità chjuca chjuca chì qualchissia l’abbia alterata. Puderiate verificà torna a cunfigurazione pruvista per assicurassi ch’ella sia degna di cunfidenza ?"}
+{"component":"feature/account/setup/src/main/res","key":"account_setup_auto_discovery_result_header_subtitle_configuration_not_found","origin":{"path":"feature/account/setup/src/main/res/values-co/strings.xml"},"source":"Configure manually","source_fr":"Configurer manuellement","target":"Cunfigurà manualmente"}
+{"component":"feature/account/setup/src/main/res","key":"account_setup_auto_discovery_result_edit_configuration_button_label","origin":{"path":"feature/account/setup/src/main/res/values-co/strings.xml"},"source":"Edit configuration","source_fr":"Modifier la configuration","target":"Mudificà a cunfigurazione"}
+{"component":"feature/account/setup/src/main/res","key":"account_setup_special_folders_form_description_automatic","origin":{"path":"feature/account/setup/src/main/res/values-co/strings.xml"},"source":"The \"Automatic\" entry will follow changes made by the server automatically. The current server value is displayed in parentheses.","source_fr":"L’option « Automatique » suivra automatiquement les changements effectués par le serveur. La valeur actuelle du serveur est affichée entre parenthèses.","target":"L’ozzione « Autumaticu » seguiterà autumaticamente i cambiamenti fatti da u servitore. U valore attuale di u servitore hè affissatu trà parentesi."}
+{"component":"feature/account/setup/src/main/res","key":"account_setup_special_folders_drafts_folder_label","origin":{"path":"feature/account/setup/src/main/res/values-co/strings.xml"},"source":"Drafts folder","source_fr":"Dossier des brouillons","target":"Cartulare di e bruttacopie"}
+{"component":"feature/account/setup/src/main/res","key":"account_setup_special_folders_spam_folder_label","origin":{"path":"feature/account/setup/src/main/res/values-co/strings.xml"},"source":"Spam folder","source_fr":"Dossier du pourriel (indésirables)","target":"Cartulare di i merzaghji (dispiacevule)"}
+{"component":"feature/account/setup/src/main/res","key":"account_setup_special_folders_trash_folder_label","origin":{"path":"feature/account/setup/src/main/res/values-co/strings.xml"},"source":"Trash folder","source_fr":"Dossier de la corbeille","target":"Cartulare di a curbella"}
+{"component":"feature/account/setup/src/main/res","key":"account_setup_options_account_name_label","origin":{"path":"feature/account/setup/src/main/res/values-co/strings.xml"},"source":"Account name","source_fr":"Nom du compte","target":"Nome di u contu"}
+{"component":"feature/account/setup/src/main/res","key":"account_setup_options_section_sync_options","origin":{"path":"feature/account/setup/src/main/res/values-co/strings.xml"},"source":"Sync options","source_fr":"Options de synchronisation","target":"Ozzioni di sincrunizazione"}
+{"component":"feature/account/setup/src/main/res","key":"account_setup_options_email_signature_error_blank","origin":{"path":"feature/account/setup/src/main/res/values-co/strings.xml"},"source":"Email signature name can't be blank.","source_fr":"La signature du courriel ne peut pas être vide.","target":"A segnatura di u messaghju elettronicu ùn pò micca esse viota."}
+{"component":"feature/account/setup/src/main/res","key":"account_setup_options_email_display_count_messages","origin":{"path":"feature/account/setup/src/main/res/values-co/strings.xml"},"plural":{"forms":["one","other"],"source_plural":"%d messages"},"source":"1 message","source_fr":"%d courriel","target":["1 messaghju","%d messaghji"]}
+{"component":"feature/account/setup/src/main/res","key":"account_setup_options_your_name_label","origin":{"path":"feature/account/setup/src/main/res/values-co/strings.xml"},"source":"Your name","source_fr":"Votre nom","target":"A vostra casata"}
+{"component":"feature/account/setup/src/main/res","key":"account_setup_options_your_name_error_required","origin":{"path":"feature/account/setup/src/main/res/values-co/strings.xml"},"source":"Your name is required.","source_fr":"Vous devez saisir votre nom.","target":"A vostra casata hè richiesta."}
+{"component":"feature/settings/import/src/main/res","key":"settings_import_title","origin":{"path":"feature/settings/import/src/main/res/values-co/strings.xml"},"source":"Import settings","source_fr":"Importer les paramètres","target":"Impurtà i parametri"}
+{"component":"feature/settings/import/src/main/res","key":"settings_import_pick_document_button","origin":{"path":"feature/settings/import/src/main/res/values-co/strings.xml"},"source":"Select file","source_fr":"Sélectionner un fichier","target":"Selezziunà un schedariu"}
+{"component":"feature/settings/import/src/main/res","key":"settings_import_button","origin":{"path":"feature/settings/import/src/main/res/values-co/strings.xml"},"source":"Import","source_fr":"Importation","target":"Impurtà"}
+{"component":"feature/settings/import/src/main/res","key":"settings_import_success_generic","origin":{"path":"feature/settings/import/src/main/res/values-co/strings.xml"},"source":"Settings successfully imported","source_fr":"Les paramètres ont été importés","target":"I parametri sò stati impurtati currettamente"}
+{"component":"feature/settings/import/src/main/res","context":{"comment":"Displayed after importing accounts when one or multiple accounts require to use the OAuth authorization flow"},"key":"settings_import_authorization_required","origin":{"path":"feature/settings/import/src/main/res/values-co/strings.xml"},"source":"Please sign in","source_fr":"Connectez-vous","target":"Cunnittitevi"}
+{"component":"feature/settings/import/src/main/res","context":{"comment":"Displayed after importing accounts when some accounts require entering a password and some to use the OAuth authorization flow"},"key":"settings_import_authorization_and_password_required","origin":{"path":"feature/settings/import/src/main/res/values-co/strings.xml"},"source":"Please sign in and enter passwords","source_fr":"Connectez-vous et saisissez les mots de passe","target":"Cunnittitevi è stampittate e parolle d’intesa"}
+{"component":"feature/settings/import/src/main/res","key":"settings_import_failure","origin":{"path":"feature/settings/import/src/main/res/values-co/strings.xml"},"source":"Failed to import settings","source_fr":"Échec d’importation des paramètres","target":"Fiascu per impurtà i parametri"}
+{"component":"feature/settings/import/src/main/res","key":"settings_import_read_failure","origin":{"path":"feature/settings/import/src/main/res/values-co/strings.xml"},"source":"Failed to read settings file","source_fr":"Échec de lecture du fichier de paramètres","target":"Fiascu di lettura di u schedariu di parametri"}
+{"component":"feature/settings/import/src/main/res","key":"settings_import_partial_failure","origin":{"path":"feature/settings/import/src/main/res/values-co/strings.xml"},"source":"Failed to import some settings","source_fr":"Échec d’importation de certains paramètres","target":"Fiascu per impurtà certi parametri"}
+{"component":"feature/settings/import/src/main/res","key":"settings_import_status_success","origin":{"path":"feature/settings/import/src/main/res/values-co/strings.xml"},"source":"Imported successfully","source_fr":"A été importé","target":"Impurtatu currettamente"}
+{"component":"feature/settings/import/src/main/res","key":"settings_import_status_password_required","origin":{"path":"feature/settings/import/src/main/res/values-co/strings.xml"},"source":"Password required","source_fr":"Le mot de passe est requis","target":"A parolla d’intesa hè richiesta"}
+{"component":"feature/settings/import/src/main/res","key":"settings_import_status_not_imported","origin":{"path":"feature/settings/import/src/main/res/values-co/strings.xml"},"source":"Not imported","source_fr":"N’a pas été importé","target":"Micca impurtatu"}
+{"component":"feature/settings/import/src/main/res","key":"settings_import_status_error","origin":{"path":"feature/settings/import/src/main/res/values-co/strings.xml"},"source":"Import failure","source_fr":"Échec d’importation","target":"Fiascu à l’impurtazione"}
+{"component":"feature/settings/import/src/main/res","key":"settings_import_later_button","origin":{"path":"feature/settings/import/src/main/res/values-co/strings.xml"},"source":"Later","source_fr":"Plus tard","target":"Dopu"}
+{"component":"feature/settings/import/src/main/res","key":"settings_importing","origin":{"path":"feature/settings/import/src/main/res/values-co/strings.xml"},"source":"Importing settings…","source_fr":"Importation des paramètres…","target":"Impurtazione di i parametri…"}
+{"component":"feature/settings/import/src/main/res","key":"settings_import_incoming_server_password_hint","origin":{"path":"feature/settings/import/src/main/res/values-co/strings.xml"},"source":"Incoming server password","source_fr":"Mot de passe du serveur entrant","target":"Parolla d’intesa di u servitore d’entrata"}
+{"component":"feature/settings/import/src/main/res","key":"settings_import_outgoing_server_password_hint","origin":{"path":"feature/settings/import/src/main/res/values-co/strings.xml"},"source":"Outgoing server password","source_fr":"Mot de passe du serveur sortant","target":"Parolla d’intesa di u servitore d’esciuta"}
+{"component":"feature/settings/import/src/main/res","key":"settings_import_use_same_password_for_outgoing_server","origin":{"path":"feature/settings/import/src/main/res/values-co/strings.xml"},"source":"Use same password for outgoing server","source_fr":"Utiliser le même mot de passe pour le serveur sortant","target":"Impiegà a listessa parolla d’intesa per u servitore d’esciuta"}
+{"component":"feature/settings/import/src/main/res","key":"settings_import_oauth_error_browser_not_found","origin":{"path":"feature/settings/import/src/main/res/values-co/strings.xml"},"source":"The app couldn't find a browser to use for granting access to your account.","source_fr":"L’appli n’a pas trouvé de navigateur pour accorder l’accès à votre compte.","target":"L’appiecazione ùn pò micca truvà un navigatore à impiegà per cuncede l’accessu à u vostru contu."}
+{"component":"feature/settings/import/src/main/res","key":"settings_import_general_settings_item","origin":{"path":"feature/settings/import/src/main/res/values-co/strings.xml"},"source":"General settings","source_fr":"Paramètres généraux","target":"Parametri generali"}
+{"component":"feature/settings/import/src/main/res","context":{"comment":"Displayed after importing accounts when one or multiple accounts require entering a password"},"key":"settings_import_password_required","origin":{"path":"feature/settings/import/src/main/res/values-co/strings.xml"},"source":"Please enter passwords","source_fr":"Saisissez vos mots de passe","target":"Stampittate e parolle d’intesa"}
+{"component":"feature/settings/import/src/main/res","context":{"comment":"Content description for the icon that is displayed next to an imported account that requires sign-in"},"key":"settings_import_status_log_in_required","origin":{"path":"feature/settings/import/src/main/res/values-co/strings.xml"},"source":"Sign-in required","source_fr":"La connexion est requise","target":"A cunnessione hè richiesta"}
+{"component":"feature/settings/import/src/main/res","key":"settings_import_password_prompt","origin":{"path":"feature/settings/import/src/main/res/values-co/strings.xml"},"plural":{"forms":["one","other"],"source_plural":"To be able to use the account \"%s\" you need to provide the server passwords."},"source":"To be able to use the account \"%s\" you need to provide the server password.","source_fr":"Pour utiliser le compte « %s », vous devez indiquer le mot de passe du serveur.","target":["Per pudè impiegà u contu \"%s\" ci vole à pruvede a parolla d’intesa di u servitore.","Per pudè impiegà u contu \"%s\" ci vole à pruvede e parolle d’intesa di u servitore."]}
+{"component":"feature/settings/import/src/main/res","key":"settings_import_server_name_format","origin":{"path":"feature/settings/import/src/main/res/values-co/strings.xml"},"source":"Server name: %s","source_fr":"Nom du serveur : %s","target":"Nome di u servitore : %s"}
+{"component":"feature/settings/import/src/main/res","key":"settings_import_oauth_description","origin":{"path":"feature/settings/import/src/main/res/values-co/strings.xml"},"source":"To use this email account, you need to sign in and grant the app access to your emails.","source_fr":"Pour utiliser ce compte de courriel, vous devez vous connecter et accorder à l’appli l’accès à vos courriels.","target":"Per impiegà stu contu, ci vole à cunnettesi è cuncede à l’appiecazione l’accessu à a vostra messaghjeria."}
+{"component":"feature/settings/import/src/main/res","key":"settings_import_oauth_sign_in","origin":{"path":"feature/settings/import/src/main/res/values-co/strings.xml"},"source":"Sign in","source_fr":"Connexion","target":"Cunnettesi"}
+{"component":"feature/settings/import/src/main/res","key":"settings_import_oauth_sign_in_with_google","origin":{"path":"feature/settings/import/src/main/res/values-co/strings.xml"},"source":"Sign in with Google","source_fr":"Connexion avec Google","target":"Cunnettesi cù Google"}
+{"component":"feature/settings/import/src/main/res","key":"settings_import_oauth_error_oauth_flow_canceled","origin":{"path":"feature/settings/import/src/main/res/values-co/strings.xml"},"source":"Authorization canceled","source_fr":"L’autorisation a été annulée","target":"Autorizazione abbandunata"}
+{"component":"feature/settings/import/src/main/res","key":"settings_import_oauth_error_oauth_flow_failed","origin":{"path":"feature/settings/import/src/main/res/values-co/strings.xml"},"source":"Authorization failed with the following error: %s","source_fr":"Échec d’autorisation avec l’erreur suivante :%s","target":"Fiascu di l’autorizazione cù quellu sbagliu : %s"}
+{"component":"feature/settings/import/src/main/res","key":"settings_import_oauth_error_oauth_not_supported","origin":{"path":"feature/settings/import/src/main/res/values-co/strings.xml"},"source":"OAuth 2.0 is currently not supported with this provider.","source_fr":"OAuth 2.0 n’est actuellement pas pris en charge par ce service.","target":"Attualmente, OAuth 2.0 ùn hè micca accettatu cù stu furnidore."}
+{"component":"feature/settings/import/src/main/res","key":"settings_import_pick_app_button","origin":{"path":"feature/settings/import/src/main/res/values-co/strings.xml"},"source":"Import from app","source_fr":"Importer d’une appli","target":"Impurtà da l’appiecazione"}
+{"component":"feature/settings/import/src/main/res","key":"settings_import_pick_app_dialog_title","origin":{"path":"feature/settings/import/src/main/res/values-co/strings.xml"},"source":"Import from app","source_fr":"Importer d’une appli","target":"Impurtà da l’appiecazione"}
+{"component":"feature/settings/import/src/main/res","key":"settings_import_scan_qr_code_button","origin":{"path":"feature/settings/import/src/main/res/values-co/strings.xml"},"source":"Scan QR code","source_fr":"Lire un code QR","target":"Leghje un codice QR"}
+{"component":"feature/settings/import/src/main/res","context":{"comment":"Displayed below the app name in the list of apps from which settings can be imported when the app is too old and doesn't support exporting settings to another app."},"key":"settings_import_app_version_not_supported","origin":{"path":"feature/settings/import/src/main/res/values-co/strings.xml"},"source":"App version not supported.","source_fr":"La version de l’appli n’est pas prise en charge.","target":"A versione di l’appiecazione ùn hè micca accettata."}

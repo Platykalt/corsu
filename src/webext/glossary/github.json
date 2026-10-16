@@ -1,0 +1,638 @@
+{
+ "site": "github",
+ "source_language": "en",
+ "notes": "GitHub interface labels for the Corsu web extension. status: reviewed = row of the reviewed Mozilla/upstream imports, draft = row of lexicon.tsv, proposal = new for this extension, to be reviewed by a speaker before release.",
+ "entries": [
+  {
+   "source": "Code",
+   "co": "Codice",
+   "status": "proposal",
+   "origin": "new; \"codice\" as in lexicon-upstream \"Open Source|Codice Apertu\"",
+   "within": "nav[aria-label=\"Repository\"], [data-component=\"Button\"], button"
+  },
+  {
+   "source": "Issues",
+   "co": "Prublemi",
+   "status": "reviewed",
+   "origin": "lexicon-upstream.tsv",
+   "note": "GitHub issue tracker; review whether \"Segnalazioni\" reads better"
+  },
+  {
+   "source": "Pull requests",
+   "co": "Dumande di fusione",
+   "status": "proposal",
+   "origin": "new; \"fusione\" = merge in lexicon-mozilla/upstream"
+  },
+  {
+   "source": "Actions",
+   "co": "Azzioni",
+   "status": "reviewed",
+   "origin": "lexicon-upstream.tsv"
+  },
+  {
+   "source": "Projects",
+   "co": "Prughjetti",
+   "status": "reviewed",
+   "origin": "lexicon-upstream.tsv"
+  },
+  {
+   "source": "Insights",
+   "co": "Analisi",
+   "status": "proposal",
+   "origin": "new"
+  },
+  {
+   "source": "Discussions",
+   "co": "Discussioni",
+   "status": "proposal",
+   "origin": "new"
+  },
+  {
+   "source": "Security and quality",
+   "co": "Sicurità è qualità",
+   "status": "proposal",
+   "origin": "new; \"Sicurità\" from lexicon-mozilla"
+  },
+  {
+   "source": "Platform",
+   "co": "Piattaforma",
+   "status": "proposal",
+   "origin": "new"
+  },
+  {
+   "source": "Solutions",
+   "co": "Suluzioni",
+   "status": "proposal",
+   "origin": "new"
+  },
+  {
+   "source": "Open Source",
+   "co": "Codice apertu",
+   "status": "reviewed",
+   "origin": "lexicon-upstream.tsv (\"Codice Apertu\")"
+  },
+  {
+   "source": "Enterprise",
+   "co": "Imprese",
+   "status": "proposal",
+   "origin": "new"
+  },
+  {
+   "source": "Pricing",
+   "co": "Tariffi",
+   "status": "proposal",
+   "origin": "new"
+  },
+  {
+   "source": "Appearance settings",
+   "co": "Parametri d’aspettu",
+   "status": "proposal",
+   "origin": "new; \"Aspettu\" from lexicon-mozilla"
+  },
+  {
+   "source": "Toggle navigation",
+   "co": "Affissà o piattà a navigazione",
+   "status": "proposal",
+   "origin": "new"
+  },
+  {
+   "source": "Close navigation menu",
+   "co": "Chjode u listinu di navigazione",
+   "status": "proposal",
+   "origin": "new; \"Listinu\" = menu in lexicon-mozilla"
+  },
+  {
+   "source": "Navigation Menu",
+   "co": "Listinu di navigazione",
+   "status": "proposal",
+   "origin": "new; \"Listinu\" = menu in lexicon-mozilla"
+  },
+  {
+   "source": "Global navigation menu",
+   "co": "Listinu di navigazione generale",
+   "status": "proposal",
+   "origin": "new"
+  },
+  {
+   "source": "GitHub Homepage",
+   "co": "Pagina d’accolta di GitHub",
+   "status": "proposal",
+   "origin": "new; \"Pagina d’accolta\" from lexicon-mozilla"
+  },
+  {
+   "source": "Search or jump to...",
+   "co": "Ricercà o andà à…",
+   "status": "proposal",
+   "origin": "new"
+  },
+  {
+   "source": "Explore",
+   "co": "Scopre",
+   "status": "draft",
+   "origin": "lexicon.tsv"
+  },
+  {
+   "source": "Topics",
+   "co": "Temi",
+   "status": "draft",
+   "origin": "lexicon.tsv (\"Themes|Temi\")"
+  },
+  {
+   "source": "Trending",
+   "co": "In voga",
+   "status": "proposal",
+   "origin": "new"
+  },
+  {
+   "source": "Events",
+   "co": "Evenimenti",
+   "status": "draft",
+   "origin": "lexicon.tsv"
+  },
+  {
+   "source": "Marketplace",
+   "co": "Mercatu",
+   "status": "proposal",
+   "origin": "new; \"mercatu\" in lexicon-upstream"
+  },
+  {
+   "source": "Changelog",
+   "co": "Ghjurnale di i cambiamenti",
+   "status": "reviewed",
+   "origin": "lexicon-upstream.tsv"
+  },
+  {
+   "source": "Customer support",
+   "co": "Assistenza à i clienti",
+   "status": "proposal",
+   "origin": "new; \"Assistenza\" from lexicon-mozilla"
+  },
+  {
+   "source": "Pagination",
+   "co": "Paginazione",
+   "status": "proposal",
+   "origin": "new"
+  },
+  {
+   "source": "Breadcrumbs",
+   "co": "Chjassu di navigazione",
+   "status": "proposal",
+   "origin": "new; \"Chjassu\" = path in lexicon-upstream"
+  },
+  {
+   "source": "Next Page",
+   "co": "Pagina seguente",
+   "status": "reviewed",
+   "origin": "lexicon-upstream.tsv (\"Next page\")"
+  },
+  {
+   "source": "Previous Page",
+   "co": "Pagina precedente",
+   "status": "reviewed",
+   "origin": "lexicon-upstream.tsv (\"Previous page\")"
+  },
+  {
+   "source": "Page {n}",
+   "co": "Pagina {n}",
+   "status": "proposal",
+   "origin": "new"
+  },
+  {
+   "source": "External link",
+   "co": "Liame esternu",
+   "status": "proposal",
+   "origin": "new; \"liame\" from lexicon-mozilla"
+  },
+  {
+   "source": "Dismiss this message",
+   "co": "Ricusà stu messaghju",
+   "status": "proposal",
+   "origin": "new; \"Ricusà\" from lexicon-mozilla"
+  },
+  {
+   "source": "Dismiss error",
+   "co": "Ricusà u sbagliu",
+   "status": "proposal",
+   "origin": "new"
+  },
+  {
+   "source": "Public",
+   "co": "Publicu",
+   "status": "reviewed",
+   "origin": "lexicon-upstream.tsv"
+  },
+  {
+   "source": "Private",
+   "co": "Privatu",
+   "status": "reviewed",
+   "origin": "lexicon-upstream.tsv"
+  },
+  {
+   "source": "Star",
+   "co": "Stella",
+   "status": "reviewed",
+   "origin": "lexicon-upstream.tsv",
+   "note": "button verb in GitHub, noun in the source row"
+  },
+  {
+   "source": "Watch",
+   "co": "Surveglià",
+   "status": "proposal",
+   "origin": "new; lexicon-upstream has the noun \"Surveglianza\""
+  },
+  {
+   "source": "You must be signed in to star a repository",
+   "co": "Ci vole à esse cunnettu per dà una stella à un dipositu",
+   "status": "proposal",
+   "origin": "new; \"dipositu\" = repository in lexicon-upstream"
+  },
+  {
+   "source": "You must be signed in to fork a repository",
+   "co": "Ci vole à esse cunnettu per fà un fork di un dipositu",
+   "status": "proposal",
+   "origin": "new"
+  },
+  {
+   "source": "You must be signed in to change notification settings",
+   "co": "Ci vole à esse cunnettu per cambià i parametri di nutificazione",
+   "status": "proposal",
+   "origin": "new"
+  },
+  {
+   "source": "Readme",
+   "co": "Leghjimi",
+   "status": "proposal",
+   "origin": "new"
+  },
+  {
+   "source": "Stars",
+   "co": "Stelle",
+   "status": "proposal",
+   "origin": "new"
+  },
+  {
+   "source": "stars",
+   "co": "stelle",
+   "status": "proposal",
+   "origin": "new"
+  },
+  {
+   "source": "Watchers",
+   "co": "Osservatori",
+   "status": "proposal",
+   "origin": "new"
+  },
+  {
+   "source": "watching",
+   "co": "in osservazione",
+   "status": "proposal",
+   "origin": "new"
+  },
+  {
+   "source": "Report repository",
+   "co": "Signalà u dipositu",
+   "status": "proposal",
+   "origin": "new; \"Signalà\" = report in lexicon-mozilla"
+  },
+  {
+   "source": "Releases",
+   "co": "Esciute",
+   "status": "proposal",
+   "origin": "new; from lexicon-mozilla \"Pre-releases|Esciute in anteprima\""
+  },
+  {
+   "source": "Packages",
+   "co": "Pacchetti",
+   "status": "proposal",
+   "origin": "new"
+  },
+  {
+   "source": "Languages",
+   "co": "Linguaghji",
+   "status": "proposal",
+   "origin": "new; programming languages, cf. lexicon.tsv \"Language|Linguaghju\""
+  },
+  {
+   "source": "Contributing",
+   "co": "Cuntribuisce",
+   "status": "proposal",
+   "origin": "new"
+  },
+  {
+   "source": "Security policy",
+   "co": "Pulitica di sicurità",
+   "status": "proposal",
+   "origin": "new"
+  },
+  {
+   "source": "Code of conduct",
+   "co": "Codice di cumportu",
+   "status": "proposal",
+   "origin": "new"
+  },
+  {
+   "source": "Repository",
+   "co": "Dipositu",
+   "status": "proposal",
+   "origin": "new; lexicon-upstream \"Plugin list repository|Dipositu di a lista di i moduli\""
+  },
+  {
+   "source": "Repository navigation",
+   "co": "Navigazione di u dipositu",
+   "status": "proposal",
+   "origin": "new"
+  },
+  {
+   "source": "Repository files navigation",
+   "co": "Navigazione di i schedarii di u dipositu",
+   "status": "proposal",
+   "origin": "new"
+  },
+  {
+   "source": "Go to file",
+   "co": "Andà à u schedariu",
+   "status": "proposal",
+   "origin": "new"
+  },
+  {
+   "source": "Add file",
+   "co": "Aghjunghje un schedariu",
+   "status": "draft",
+   "origin": "lexicon.tsv"
+  },
+  {
+   "source": "Folders and files",
+   "co": "Cartulari è schedarii",
+   "status": "proposal",
+   "origin": "new; \"Cartulari\" from lexicon-upstream"
+  },
+  {
+   "source": "Last commit message",
+   "co": "Messaghju di l’ultimu commit",
+   "status": "proposal",
+   "origin": "new; \"commit\" kept as the git term"
+  },
+  {
+   "source": "Last commit date",
+   "co": "Data di l’ultimu commit",
+   "status": "proposal",
+   "origin": "new"
+  },
+  {
+   "source": "Latest commit",
+   "co": "Ultimu commit",
+   "status": "proposal",
+   "origin": "new"
+  },
+  {
+   "source": "View all files",
+   "co": "Affissà tutti i schedarii",
+   "status": "proposal",
+   "origin": "new; \"Affissà\" = view in lexicon-mozilla"
+  },
+  {
+   "source": "More file actions",
+   "co": "Altre azzioni pè u schedariu",
+   "status": "proposal",
+   "origin": "new"
+  },
+  {
+   "source": "Expand file tree",
+   "co": "Allargà l’arburu di i schedarii",
+   "status": "proposal",
+   "origin": "new; \"Allargà\" = expand in lexicon-mozilla"
+  },
+  {
+   "source": "Collapse file tree",
+   "co": "Riduce l’arburu di i schedarii",
+   "status": "proposal",
+   "origin": "new; \"Riduce\" = collapse in lexicon-mozilla"
+  },
+  {
+   "source": "Copy code to clipboard",
+   "co": "Cupià u codice in u preme’papei",
+   "status": "proposal",
+   "origin": "new; \"preme’papei\" from lexicon-mozilla"
+  },
+  {
+   "source": "Copy raw file",
+   "co": "Cupià u schedariu bruttu",
+   "status": "proposal",
+   "origin": "new; \"raw\" rendered as unformatted"
+  },
+  {
+   "source": "Download raw file",
+   "co": "Scaricà u schedariu bruttu",
+   "status": "proposal",
+   "origin": "new"
+  },
+  {
+   "source": "View commit history for this file.",
+   "co": "Affissà a cronolugia di i commit di stu schedariu.",
+   "status": "proposal",
+   "origin": "new"
+  },
+  {
+   "source": "This path skips through empty directories",
+   "co": "Stu chjassu salta i cartulari vioti",
+   "status": "proposal",
+   "origin": "new"
+  },
+  {
+   "source": "{name}, (Directory)",
+   "co": "{name}, (Cartulare)",
+   "status": "proposal",
+   "origin": "new; \"Cartulare\" from lexicon-mozilla"
+  },
+  {
+   "source": "{name}, (File)",
+   "co": "{name}, (Schedariu)",
+   "status": "proposal",
+   "origin": "new; \"Schedariu\" from lexicon-mozilla"
+  },
+  {
+   "source": "{name} branch",
+   "co": "ramu {name}",
+   "status": "proposal",
+   "origin": "new"
+  },
+  {
+   "source": "Branches",
+   "co": "Rami",
+   "status": "proposal",
+   "origin": "new"
+  },
+  {
+   "source": "Open",
+   "co": "Aperti",
+   "status": "proposal",
+   "origin": "new; state filter (issues, plural)"
+  },
+  {
+   "source": "Closed",
+   "co": "Chjusi",
+   "status": "proposal",
+   "origin": "new; state filter (issues, plural)"
+  },
+  {
+   "source": "Open pull request",
+   "co": "Dumanda di fusione aperta",
+   "status": "proposal",
+   "origin": "new"
+  },
+  {
+   "source": "Milestones",
+   "co": "Tappe",
+   "status": "proposal",
+   "origin": "new"
+  },
+  {
+   "source": "New issue",
+   "co": "Novu prublema",
+   "status": "proposal",
+   "origin": "new; follows \"Issues|Prublemi\""
+  },
+  {
+   "source": "New pull request",
+   "co": "Nova dumanda di fusione",
+   "status": "proposal",
+   "origin": "new"
+  },
+  {
+   "source": "All pull requests",
+   "co": "Tutte e dumande di fusione",
+   "status": "proposal",
+   "origin": "new"
+  },
+  {
+   "source": "Assignee",
+   "co": "Incaricatu",
+   "status": "proposal",
+   "origin": "new"
+  },
+  {
+   "source": "Assignees",
+   "co": "Incaricati",
+   "status": "proposal",
+   "origin": "new"
+  },
+  {
+   "source": "Oldest",
+   "co": "Più anziani",
+   "status": "proposal",
+   "origin": "new; cf. lexicon-upstream \"Oldest first|U più anzianu in primu\""
+  },
+  {
+   "source": "Search issues",
+   "co": "Ricercà i prublemi",
+   "status": "proposal",
+   "origin": "new"
+  },
+  {
+   "source": "Search pull requests",
+   "co": "Ricercà e dumande di fusione",
+   "status": "proposal",
+   "origin": "new"
+  },
+  {
+   "source": "Clear filter",
+   "co": "Squassà u filtru",
+   "status": "proposal",
+   "origin": "new; \"Squassà\" = clear in lexicon-mozilla"
+  },
+  {
+   "source": "Filter by author",
+   "co": "Filtrà per autore",
+   "status": "proposal",
+   "origin": "new"
+  },
+  {
+   "source": "Filter by author {user}",
+   "co": "Filtrà per autore {user}",
+   "status": "proposal",
+   "origin": "new"
+  },
+  {
+   "source": "Filter by label {label}",
+   "co": "Filtrà per etichetta {label}",
+   "status": "proposal",
+   "origin": "new"
+  },
+  {
+   "source": "1 comments",
+   "co": "1 cummentu",
+   "status": "proposal",
+   "origin": "new; GitHub writes \"1 comments\", exact entry wins over the {n} template"
+  },
+  {
+   "source": "{n} comments",
+   "co": "{n} cummenti",
+   "status": "proposal",
+   "origin": "new; \"Cummenti\" from lexicon-upstream"
+  },
+  {
+   "source": "More information available below.",
+   "co": "Più infurmazioni quì sottu.",
+   "status": "proposal",
+   "origin": "new"
+  },
+  {
+   "source": "Comments",
+   "co": "Cummenti",
+   "status": "reviewed",
+   "origin": "lexicon-upstream.tsv"
+  },
+  {
+   "source": "Terms",
+   "co": "Cundizioni",
+   "status": "draft",
+   "origin": "lexicon.tsv"
+  },
+  {
+   "source": "Docs",
+   "co": "Documentazione",
+   "status": "proposal",
+   "origin": "new; from lexicon-upstream \"Documentation\""
+  },
+  {
+   "source": "Manage cookies",
+   "co": "Gestisce i canistrelli",
+   "status": "proposal",
+   "origin": "new; \"canistrelli\" = cookies in lexicon-mozilla"
+  },
+  {
+   "source": "Do not share my personal information",
+   "co": "Ùn sparte micca e mo infurmazioni persunale",
+   "status": "proposal",
+   "origin": "new"
+  },
+  {
+   "source": "Footer navigation",
+   "co": "Navigazione di u bassu di pagina",
+   "status": "proposal",
+   "origin": "new; \"Bassu di pagina\" from lexicon-upstream"
+  }
+ ],
+ "exceptions": [
+  {
+   "source": "Open",
+   "within": "svg, [role=\"img\"]",
+   "co": "Apertu",
+   "status": "proposal",
+   "note": "aria-label of the state icon of a single issue (singular)"
+  },
+  {
+   "source": "Closed",
+   "within": "svg, [role=\"img\"]",
+   "co": "Chjusu",
+   "status": "proposal",
+   "note": "aria-label of the state icon of a single issue (singular)"
+  },
+  {
+   "source": "Code",
+   "within": "h2, h3",
+   "skip": true,
+   "note": "\"Code\" headings are often section titles written by repository owners"
+  }
+ ]
+}

@@ -10,3 +10,4 @@ keyboard/build/
 keyboard/*/build/
 /build/
 vendor/runtime/
+lexicon/memory/corsu-*.jsonl

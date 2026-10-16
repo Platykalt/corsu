@@ -1,0 +1,38 @@
+{
+  "manifest_version": 3,
+  "name": "Corsu web",
+  "short_name": "Corsu web",
+  "version": "0.1.0",
+  "description": "Shows Corsican interface labels on selected websites (pilot: GitHub), from Corsu's local dictionary. User content is never changed and nothing is sent anywhere.",
+  "permissions": ["storage"],
+  "host_permissions": ["https://github.com/*"],
+  "background": {
+    "service_worker": "background.js",
+    "scripts": ["background.js"]
+  },
+  "content_scripts": [
+    {
+      "matches": ["https://github.com/*"],
+      "js": ["core/engine.js", "adapters/github.js", "content.js"],
+      "run_at": "document_idle",
+      "all_frames": false
+    }
+  ],
+  "options_ui": {
+    "page": "options/options.html",
+    "open_in_tab": false
+  },
+  "commands": {
+    "toggle-original": {
+      "suggested_key": { "default": "Alt+Shift+O" },
+      "description": "Show the site's original text / Corsican again"
+    }
+  },
+  "browser_specific_settings": {
+    "gecko": {
+      "id": "corsu-web@corsu.invalid",
+      "strict_min_version": "140.0",
+      "data_collection_permissions": { "required": ["none"] }
+    }
+  }
+}

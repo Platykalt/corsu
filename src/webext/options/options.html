@@ -1,0 +1,28 @@
+<!doctype html>
+<html lang="co">
+<head>
+  <meta charset="utf-8">
+  <title>Corsu web</title>
+  <style>
+    body { font: 14px/1.5 system-ui, sans-serif; margin: 12px; min-width: 300px; }
+    fieldset { border: 1px solid #ccc; border-radius: 6px; margin: 0 0 12px; }
+    label { display: block; margin: 4px 0; }
+    small { color: #666; display: block; margin-top: 8px; }
+  </style>
+</head>
+<body>
+  <fieldset>
+    <legend>Siti (sites)</legend>
+    <div id="sites"></div>
+  </fieldset>
+  <fieldset>
+    <legend>Testu uriginale (original text)</legend>
+    <label><input type="radio" name="showOriginal" value="tooltip"> Affissà u testu uriginale sottu à u puntatore (tooltip)</label>
+    <label><input type="radio" name="showOriginal" value="off"> Ùn affissà micca (off)</label>
+    <small>Alt+Shift+O: testu uriginale / corsu (toggle).</small>
+  </fieldset>
+  <small>Corsu web ùn manda nunda in rete: u dizziunariu hè in l'estensione. Nothing is sent anywhere.</small>
+  <script src="../adapters/github.js"></script>
+  <script src="options.js"></script>
+</body>
+</html>

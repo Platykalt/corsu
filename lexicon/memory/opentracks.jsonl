@@ -1,0 +1,543 @@
+{"_defaults":{"app":"OpenTracks","component":"src/main/res","fetched":"2026-10-16","license":"Apache-2.0","origin":{"branch":"main","path":"src/main/res/values-co/strings.xml","repo":"OpenTracksApp/OpenTracks"},"review":"upstream-reviewed","source_lang":"en","version":"3c23a9f5400c7b5b914a221469d76cc019a18296"}}
+{"key":"about_preference_title","source":"About","source_fr":"À propos d'OpenTracks","target":"Apprupositu"}
+{"key":"about_description","source":"OpenTracks is a sport tracking application that completely respects your privacy.","source_fr":"OpenTracks est une application de suivi sportif qui respecte totalement votre vie privée.","target":"OpenTracks hè un’appiecazione di tracciatu spurtivu chì rispetta cumpletamente a vostra vita privata."}
+{"key":"about_url","source":"Project webpage: %1$s","source_fr":"Page web du projet : %1$s","target":"Pagina web di u prughjettu : %1$s"}
+{"key":"about_version_code","source":"Version code: %1$d","source_fr":"Code de version : %1$d","target":"Codice di a versione :%1$d"}
+{"key":"about_third_party_data","source":"Third-party data","source_fr":"Données de tiers","target":"Dati esterni"}
+{"key":"about_libraries","source":"Libraries","source_fr":"Bibliothèques","target":"Bibliuteche"}
+{"key":"help_storage_pictures_title","source":"How does OpenTracks store pictures that were taken as markers?","source_fr":"Comment OpenTracks stocke-t-il les photos qui ont été prises en tant que repère \\?","target":"Cumu OpenTracks accuncieghja e fiure chì sò state pigliate cum’è stantelle ?"}
+{"key":"help_storage_pictures_content","source":"These are stored in the app internal storage (i.e., only accessible within OpenTracks).","source_fr":"Elles sont enregistrées dans le stockage interne de l'application (c'est-à-dire uniquement accessible dans OpenTracks).","target":"Sò piazzate in a memoria interna di l’appiecazione (vole si dì, solu accessibile da OpenTracks)."}
+{"key":"help_data_google_play_services_title","source":"Does OpenTracks require/use Google Play Service?","source_fr":"OpenTracks nécessite-t-il/utilise-t-il le service Google Play ?","target":"OpenTracks richiede o impiegheghja u serviziu Google Play ?"}
+{"key":"help_data_google_play_services_content","source":"No","source_fr":"Non","target":"Innò"}
+{"key":"help_recording_title","source":"How does OpenTracks record data?","source_fr":"Comment OpenTracks enregistre-t-il les données ?","target":"Cumu OpenTracks arregistreghja i dati ?"}
+{"key":"help_gps_troubleshooting_title","source":"OpenTracks is not recording locations?","source_fr":"OpenTracks n’enregistre pas la position \\?","target":"OpenTracks ùn arregistreghja micca e pusizioni ?"}
+{"key":"help_support_title","source":"How can I support OpenTracks?","source_fr":"Comment puis-je soutenir OpenTracks \\?","target":"Cumu possu sustene OpenTracks ?"}
+{"key":"open_track_as_trackfileformat","source":"Open as %1$s","source_fr":"Ouvrir comme %1$s","target":"Apre cum’è %1$s"}
+{"context":{"comment":"Activity Type"},"key":"activity_type_airplane","source":"airplane","source_fr":"navigation aérienne","target":"aviò"}
+{"key":"activity_type_atv","source":"ATV","source_fr":"quad","target":"fora di strada"}
+{"key":"activity_type_biking","source":"biking","source_fr":"vélo","target":"bicicletta"}
+{"key":"activity_type_blimp","source":"blimp","source_fr":"dirigeable","target":"dirigevule"}
+{"key":"activity_type_climbing","source":"climbing","source_fr":"escalade","target":"appichjata"}
+{"key":"activity_type_commercial_airplane","source":"commercial airplane","source_fr":"avion commercial","target":"aviò cummerciale"}
+{"key":"activity_type_cycling","source":"cycling","source_fr":"cyclisme","target":"ciclismu"}
+{"key":"activity_type_dirt_bike","source":"dirt bike","source_fr":"motocross","target":"motocross"}
+{"key":"activity_type_donkey_back_riding","source":"donkey back riding","source_fr":"équitation à dos d'âne","target":"cavalcatura à sumere"}
+{"key":"activity_type_driving","source":"driving","source_fr":"automobile","target":"cundotta"}
+{"key":"activity_type_driving_bus","source":"driving bus","source_fr":"conduite d'un autobus","target":"autobus"}
+{"key":"activity_type_escooter","source":"escooter","source_fr":"éscooter","target":"scooter elettricu"}
+{"key":"activity_type_kickscooter","source":"scooter","source_fr":"trottinette","target":"scooter"}
+{"key":"activity_type_ferry","source":"ferry","source_fr":"bac","target":"barcu"}
+{"key":"activity_type_frisbee","source":"frisbee","source_fr":"Friesbee","target":"frisbee"}
+{"key":"activity_type_hang_gliding","source":"hang gliding","source_fr":"deltaplane","target":"deltaplanu"}
+{"key":"activity_type_gliding","source":"gliding","source_fr":"vol à voile","target":"volu à vela"}
+{"key":"activity_type_helicopter","source":"helicopter","source_fr":"hélicoptère","target":"elicotteru"}
+{"key":"activity_type_hiking","source":"hiking","source_fr":"randonnée","target":"girandulata"}
+{"key":"activity_type_horse_back_riding","source":"horse back riding","source_fr":"équitation","target":"cavalcatura à cavallu"}
+{"key":"activity_type_hot_air_balloon","source":"hot air balloon","source_fr":"vol en montgolfière","target":"ballone"}
+{"key":"activity_type_ice_sailing","source":"ice sailing","source_fr":"char à glace","target":"carru à ghjacciu"}
+{"key":"activity_type_inline_skating","source":"inline skating","source_fr":"roller","target":"pattinaghju in linea"}
+{"key":"activity_type_kite_surfing","source":"kite surfing","source_fr":"kite surf","target":"kitesurf"}
+{"key":"activity_type_paddling","source":"paddling","source_fr":"paddleboard","target":"paddle"}
+{"key":"activity_type_para_gliding","source":"para gliding","source_fr":"parapente","target":"parapenta"}
+{"key":"activity_type_rc_airplane","source":"RC airplane","source_fr":"avion radiocommandé","target":"aviò radiocumandatu"}
+{"key":"activity_type_riding","source":"riding","source_fr":"équitation","target":"cavalcatura"}
+{"key":"activity_type_road_biking","source":"road biking","source_fr":"cyclisme sur route","target":"ciclismu nant’à strada"}
+{"key":"activity_type_roller_skiing","source":"roller skiing","source_fr":"ski à roulettes","target":"schì à rutulelle"}
+{"key":"activity_type_rowing","source":"rowing","source_fr":"aviron","target":"canuttera"}
+{"key":"activity_type_running","source":"running","source_fr":"course à pied","target":"corsa"}
+{"key":"activity_type_sailing","source":"sailing","source_fr":"voile","target":"vela"}
+{"key":"activity_type_seaplane","source":"seaplane","source_fr":"hydravion","target":"idraviò"}
+{"key":"activity_type_skate_boarding","source":"skate boarding","source_fr":"skateboard","target":"skateboard"}
+{"key":"activity_type_skating","source":"skating","source_fr":"patinage","target":"pattinaghju"}
+{"key":"activity_type_skiing","source":"skiing","source_fr":"ski","target":"schì"}
+{"key":"activity_type_sky_jumping","source":"sky jumping","source_fr":"parachutisme","target":"paracadutisimu"}
+{"key":"activity_type_sled","source":"sled","source_fr":"traîneau","target":"sculiscetta"}
+{"key":"activity_type_snow_boarding","source":"snow boarding","source_fr":"snowboard","target":"snowboard"}
+{"key":"activity_type_snow_shoeing","source":"snow shoeing","source_fr":"randonnée raquette","target":"racchette di neve"}
+{"key":"activity_type_speed_walking","source":"speed walking","source_fr":"marche sportive","target":"marchja spurtiva"}
+{"key":"activity_type_street_running","source":"street running","source_fr":"course urbaine","target":"corsa urbana"}
+{"key":"activity_type_surfing","source":"surfing","source_fr":"surf","target":"surf"}
+{"key":"activity_type_track_cycling","source":"track cycling","source_fr":"cyclisme sur piste","target":"ciclismu nant’à traccia"}
+{"key":"activity_type_track_running","source":"track running","source_fr":"course athlétique","target":"corsa atletica"}
+{"key":"activity_type_trail_hiking","source":"trail hiking","source_fr":"randonnée","target":"girandulata nant’à pista"}
+{"key":"activity_type_trail_running","source":"trail running","source_fr":"trail","target":"corsa nant’à pista"}
+{"key":"activity_type_train","source":"train","source_fr":"chemin","target":"trenu"}
+{"key":"activity_type_ultimate_frisbee","source":"ultimate frisbee","source_fr":"ultimate","target":"frisbee assulutu"}
+{"key":"activity_type_unknown","source":"unknown","source_fr":"inconnue","target":"scunnisciuta"}
+{"key":"activity_type_wakeboarding","source":"wakeboarding","source_fr":"wakeboard","target":"wakeboard"}
+{"key":"activity_type_walking","source":"walking","source_fr":"marche","target":"marchja"}
+{"key":"activity_type_water_skiing","source":"water skiing","source_fr":"ski nautique","target":"schì nauticu"}
+{"key":"activity_type_wind_surfing","source":"wind surfing","source_fr":"planche à voile","target":"windsurf"}
+{"key":"activity_type_swimming","source":"swimming","source_fr":"natation","target":"nutera"}
+{"key":"activity_type_swimming_open","source":"swimming in open water","source_fr":"natation en eau libre","target":"nutera in acqua libera"}
+{"key":"activity_type_workout","source":"workout","source_fr":"entraînement","target":"addestramentu"}
+{"key":"description_average_pace_in_minute","source":"Average pace: %1$s min/km (%2$s min/mi)","source_fr":"Allure moyenne : %1$s min/km (%2$s min/mi)","target":"Andatura mediana : %1$s min/km (%2$s min/mi)"}
+{"key":"description_average_speed","source":"Average speed: %1$.2f km/h (%2$.1f mi/h)","source_fr":"Vitesse moyenne : %1$.2f km/h (%2$.1f mi/h)","target":"Vitezza mediana : %1$.2f km/o (%2$.1f mi/o)"}
+{"key":"description_altitude_gain","source":"Elevation gain: %1$d m (%2$d ft)","source_fr":"Dénivelé positif : %1$d m (%2$d pi)","target":"Dislivellu pusitivu : %1$d m (%2$d ft)"}
+{"key":"description_altitude_loss","source":"Elevation loss: %1$d m (%2$d ft)","source_fr":"Dénivelé négatif : %1$d m (%2$d ft)","target":"Dislivellu negativu : %1$d m (%2$d ft)"}
+{"key":"description_altitude_imperial","source":"Elevation (ft)","source_fr":"Altitude (pi)","target":"Altitudine (ft)"}
+{"key":"description_max_altitude","source":"Max elevation: %1$d m (%2$d ft)","source_fr":"Élévation max. : %1$d m (%2$d pi)","target":"Altitudine massima : %1$d m (%2$d ft)"}
+{"key":"description_max_speed","source":"Max speed: %1$.2f km/h (%2$.1f mi/h)","source_fr":"Vitesse max. : %1$.2f km/h (%2$.1f mi/h)","target":"Vitezza massima : %1$.2f km/o (%2$.1f mi/o)"}
+{"key":"description_min_altitude","source":"Min elevation: %1$d m (%2$d ft)","source_fr":"Élévation min. : %1$d m (%2$d pi)","target":"Altitudine minima : %1$d m (%2$d ft)"}
+{"key":"description_moving_time","source":"Moving time: %1$s","source_fr":"Durée en déplacement : %1$s","target":"Durata in mossa : %1$s"}
+{"key":"description_pace_imperial","source":"Pace (min/mi)","source_fr":"Allure (min/mi)","target":"Andatura (min/mi)"}
+{"key":"description_pace_nautical","source":"Pace (min/NM)","source_fr":"Allure (min/MN)","target":"Andatura (min/NM)"}
+{"key":"description_recorded_time","source":"Recorded: %1$s","source_fr":"Date d'enregistrement : %1$s","target":"Data d’arregistramentu : %1$s"}
+{"key":"description_speed_ms","source":"Speed (m/s)","source_fr":"Vitesse (m/s)","target":"Vitezza (m/s)"}
+{"key":"description_sensor_cadence","source":"Cadence (rpm)","source_fr":"Cadence (tr/min)","target":"Cadenza (g/min)"}
+{"key":"description_sensor_power","source":"Power (W)","source_fr":"Puissance (W)","target":"Putenza (W)"}
+{"key":"description_default_speed_or_pace","source":"By activity type","source_fr":"Par type d'activité","target":"Da tipu d’attività"}
+{"key":"description_speed_imperial","source":"Speed (mi/hr)","source_fr":"Vitesse (mi/h)","target":"Vitezza (mi/ora)"}
+{"key":"description_speed_nautical","source":"Speed (knots)","source_fr":"Vitesse (nœuds)","target":"Vitezza (nodi)"}
+{"key":"description_speed_source_gps","source":"GPS","source_fr":"GPS","target":"GPS"}
+{"key":"export_error_post_workout","source":"Post-workout export failed, please check the export directory.","source_fr":"L'exportation du post-travail a échoué, veuillez vérifier le répertoire d'exportation.","target":"Fiascu à l’espurtazione dopu à l’addestramentu, ci vole à cuntrollà u cartulare d’espurtazione."}
+{"key":"export_cannot_write_to_dir","source":"Cannot write to export directory.","source_fr":"Impossible d'écrire dans le répertoire d'exportation.","target":"Ùn si pò micca scrive in u cartulare d’espurtazione."}
+{"key":"export_dir_not_writable","source":" (not writable!)","source_fr":" (non inscriptible !)","target":" (non scrivibile !)"}
+{"key":"export_progress_message","source":"Exporting to %1$s…","source_fr":"Exportation vers le répertoire %1$s en cours…","target":"Espurtazione versu %1$s…"}
+{"key":"export_track_already_exists_msg","source":"The file %1$s already exists at the destination directory.","source_fr":"Le fichier %1$s existe déjà dans le répertoire de destination.","target":"U schedariu %1$s esiste dighjà in u cartulare di destinazione."}
+{"key":"export_all_do_it_for_all","source":"do it for all conflicts","source_fr":"le faire pour tous les conflits","target":"fallu per tutti i cunflitti"}
+{"key":"export_progress_summary_errors_msg","source":"Errors","source_fr":"Erreurs","target":"Sbaglii"}
+{"context":{"comment":"Generic"},"key":"generic_add","source":"Add","source_fr":"Ajouter","target":"Aghjunghje"}
+{"key":"generic_name","source":"Name","source_fr":"Nom","target":"Nome"}
+{"key":"generic_name_line","source":"Name: %1$s","source_fr":"Nom : %1$s","target":"Nome : %1$s"}
+{"key":"generic_save","source":"Save","source_fr":"Enregistrer","target":"Arregistrà"}
+{"key":"generic_tracks","source":"Tracks","source_fr":"Tracés","target":"Tracciati"}
+{"key":"generic_overwrite","source":"Overwrite","source_fr":"Écraser","target":"Rimpiazzà"}
+{"key":"generic_skip","source":"Skip","source_fr":"Ignorer","target":"Tralascià"}
+{"key":"generic_separator_done_total","source":"/","source_fr":"/","target":"/"}
+{"key":"generic_show_errors","source":"Show Errors","source_fr":"Afficher les erreurs","target":"Affissà i sbaglii"}
+{"key":"generic_completed_with_errors","plural":{"forms":["one","other"],"source_plural":"Completed with %1$d errors"},"source":"Completed with one error","source_fr":"Terminé avec %1$d erreur","target":["Compiu cù un sbagliu","Compiu cù %1$d sbaglii"]}
+{"key":"generic_completed","source":"Completed","source_fr":"Compléter","target":"Compiu"}
+{"key":"generic_choose_an_option","source":"Choose an option","source_fr":"Choisissez une option","target":"Sciglite un’ozzione"}
+{"key":"generic_undo","source":"Undo","source_fr":"Annuler","target":"Disfà"}
+{"key":"generic_from","source":"From","source_fr":"Du","target":"Da"}
+{"key":"generic_to","source":"To","source_fr":"Au","target":"À"}
+{"key":"generic_yesterday","source":"Yesterday","source_fr":"Hier","target":"Eri"}
+{"context":{"comment":"Gps"},"key":"gps_starting","source":"Starting GPS","source_fr":"Lancement du GPS en cours","target":"Lanciu di u GPS"}
+{"key":"gps_wait_for_better_signal","source":"Waiting for a better GPS signal","source_fr":"En attente d'un signal GPS de meilleure qualité","target":"In attesa d’un signale GPS più bellu"}
+{"key":"gps_wait_for_signal","source":"Waiting for GPS signal","source_fr":"En attente du signal GPS","target":"In attesa di u signale GPS"}
+{"key":"gps_disabled_msg","source":"GPS disabled","source_fr":"GPS désactivé","target":"GPS disattivatu"}
+{"key":"gps_fixed_and_ready","source":"GPS fixed and ready","source_fr":"GPS fixe et prêt","target":"GPS fissu è prontu"}
+{"key":"gps_recording_status","source":"%1$s: %2$s","source_fr":"%1$s : %2$s","target":"%1$s : %2$s"}
+{"context":{"comment":"Image"},"key":"image_arrow","source":"Arrow","source_fr":"Flèche","target":"Freccia"}
+{"key":"image_marker_count","source":"Marker count","source_fr":"Nombre de repères","target":"Numeru di stantelle"}
+{"key":"image_stop","source":"Stop","source_fr":"Arrêter","target":"Piantà"}
+{"key":"image_discard","source":"Discard","source_fr":"Ignorer","target":"Scartà"}
+{"key":"image_track","source":"Track","source_fr":"Tracé","target":"Tracciatu"}
+{"context":{"comment":"Import"},"key":"import_thread_interrupted","source":"Thread interrupted","source_fr":"Fil interrompu","target":"Filu d’esecuzione interrottu"}
+{"key":"import_unsupported_format","source":"Unsupported file format","source_fr":"Format de fichier non pris en charge","target":"Furmatu di schedariu inaccettatu"}
+{"key":"import_parser_error","source":"Parser error: %1$s","source_fr":"Erreur de l'analyseur : %1$s","target":"Sbagliu di l’analizatore di sintassa : %1$s"}
+{"key":"import_unable_to_import_file","source":"Unable to import file: %1$s","source_fr":"Impossible d'importer le fichier : %1$s","target":"Ùn si pò micca impurtà u schedariu : %1$s"}
+{"key":"import_no_kml_file_found","source":"No kml file found in KMZ","source_fr":"Pas de fichier kml trouvé dans KMZ","target":"Ùn si pò truvà nisunu schedariu kml in KMZ"}
+{"key":"import_error_info","source":"%1$s: %2$s","source_fr":"%1$s : %2$s","target":"%1$s : %2$s"}
+{"key":"import_error_list_dialog_title","source":"Files not imported","source_fr":"Les fichiers ne sont pas importées","target":"Schedarii micca impurtati"}
+{"key":"import_file_imported","source":"File %1$s imported","source_fr":"Fichier %1$s importé","target":"Schedariu %1$s impurtatu"}
+{"key":"import_prevent_reimport","source":"You have set prevent re-import track","source_fr":"Vous avez défini l'empêchement de la réimportation des tracés","target":"Avete definitu d’impedisce a reimpurtazione di tracciatu"}
+{"key":"import_progress_message","source":"Importing from %1$s…","source_fr":"Importation depuis le répertoire %1$s en cours…","target":"Impurtazione da %1$s…"}
+{"key":"import_progress_summary_ok_msg","source":"Files imported","source_fr":"Les fichiers importés","target":"Schedarii impurtati"}
+{"key":"import_progress_summary_exists_msg","source":"Already exists","source_fr":"Il existe déjà","target":"Esiste dighjà"}
+{"key":"marker_add_error","source":"Unable to insert a marker. No GPS signal. Try again.","source_fr":"Impossible d'insérer un repère. Pas de signal GPS. Veuillez réessayer.","target":"Impussibule di framette una stantella. Nisunu signale GPS. Pruvate torna."}
+{"key":"marker_add_canceled","source":"Canceled, no marker added","source_fr":"Opération annulée. Aucun repère n'a été ajouté","target":"Operazione abbandunata, nisuna stantella aghjunta"}
+{"key":"marker_add_photo_canceled","source":"Canceled, no photo marker added","source_fr":"Annulé, aucun marqueur de photo ajouté","target":"Operazione abbandunata, nisuna stantella di fotò aghjunta"}
+{"key":"marker_delete_one_confirm_message","source":"The marker will be permanently deleted from the device","source_fr":"Le repère va être définitivement supprimé de l'appareil","target":"A stantella serà squassata ab’eternu da l’apparechju"}
+{"key":"marker_delete_one_confirm_title","source":"Delete marker?","source_fr":"Supprimer le repère ?","target":"Squassà a stantella ?"}
+{"key":"marker_delete_multiple_confirm_message","source":"The selected markers will be permanently deleted from the device","source_fr":"Les repères sélectionnés vont être définitivement supprimés de l'appareil","target":"E stantelle selezziunate seranu squassate ab’eternu da l’apparechju"}
+{"key":"marker_name_format","source":"Marker %1$d","source_fr":"Repère %1$d","target":"Stantella %1$d"}
+{"context":{"comment":"Marker List"},"key":"marker_list_empty_message","source":"You don't have any markers","source_fr":"Vous n'avez aucun repère","target":"Ùn avete nisuna stantella"}
+{"context":{"comment":"Menu"},"key":"menu_aggregated_statistics","source":"Aggregated stats","source_fr":"Statistiques cumulées","target":"Statistiche aggregate"}
+{"key":"menu_edit","source":"Edit","source_fr":"Modifier","target":"Mudificà"}
+{"key":"menu_insert_marker","source":"Insert marker","source_fr":"Insérer un repère","target":"Framette una stantella"}
+{"key":"menu_insert_photo","source":"Insert photo","source_fr":"Insérer une photo","target":"Framette una fotò"}
+{"key":"menu_insert_gallery_img","source":"Insert gallery image","source_fr":"Insérer une image de la galerie","target":"Framette una fiura di a galleria"}
+{"key":"menu_markers","source":"Markers","source_fr":"Repères","target":"Stantelle"}
+{"key":"menu_search","source":"Search","source_fr":"Rechercher","target":"Ricercà"}
+{"key":"menu_show_on_map","source":"Show on map","source_fr":"Afficher sur la carte","target":"Affissà nant’à a carta"}
+{"key":"menu_voice_rate","source":"Voice speed","source_fr":"Vitesse vocale","target":"Vitezza di a voce"}
+{"key":"menu_resume_track","source":"Resume track","source_fr":"Reprendre le tracé","target":"Ripiglià u tracciatu"}
+{"key":"menu_add_custom_layout","source":"New Layout","source_fr":"Nouvelle présentation","target":"Accunciamentu novu"}
+{"key":"menu_filter","source":"Filter","source_fr":"Filtre","target":"Filtru"}
+{"key":"about_version_name","source":"Version name: %1$s","source_fr":"Nom de la version : %1$s","target":"Nome di a versione :%1$s"}
+{"key":"about_history","source":"OpenTracks is a fork of Google's MyTracks (discontinued in 2016).","source_fr":"OpenTracks est une bifurcation de Google's MyTracks (abandonné en 2016).","target":"OpenTracks hè una scansa di MyTracks da Google (abbandunatu in u 2016)."}
+{"key":"help_track_export_title","source":"How can I export/share recorded tracks?","source_fr":"Comment puis-je exporter/partager des tracés enregistrées \\?","target":"Cumu possu espurtà o scumparte i tracciati arregistrati ?"}
+{"key":"help_track_export_content","source":"Tracks can be exported from the Settings as KMZ, KML, or GPX. KMZ/KML all data; GPX only locations. Tracks shared via the share icon are shared as KMZ.","source_fr":"Les tracés peuvent être exportés depuis le menu des paramètres au format KMZ, KML ou GPX. KMZ/KML pour toutes les données ; GPX pour seulement les emplacements. Les tracés partagés via l'icône partager le sont au format KMZ.","target":"I tracciati ponu esse espurtati da i Parametri à u furmatu KMZ, KML, o GPX. KMZ o KML per tutti i dati ; GPX solu per e pusizioni. I tracciati scumparti via l’icona di spartera sò à u furmatu KMZ."}
+{"key":"help_track_map_content","source":"Use the small map icon. \n        a)\n        (live updates) Install OSMDashboard.\n        It provides online or offline maps via OpenStreetMap. \n        Actually, OSMDashboard is a separate app that only can access (temporarily) the data of track(s) that are going to be shown.\n\n         \n        b)\n        Via a \"normal\" map application (e.g., OsmAnd and MAPS.ME).\n        These apps need to support the KMZ file format (only locations and timestamps).\n        In fact, an app needs to support ACTION_VIEW with MIME application/vnd.google-earth.kmz.","source_fr":"\\u0020Utilisez la petite icône en forme de carte. \n  \\u0020 \\u0020a) \\u0020 \\u0020(Actualisation en direct) Installez OSMDashboard. \\u0020 \\u0020Il fournit des cartes en ligne ou hors ligne grâce à OpenStreetMap.\n  \\u0020 \\u0020OSMDashboard est en réalité une application séparée qui n'accéder (temporairement) qu'aux données des tracés qui vont être affichées. \\u0020 \n  \\u0020 \\u0020b) \\u0020 Via une application cartographique standard (p. ex. OsmAnd ou MAPS.ME ). \\u0020 L’application doit prendre en charge le format de fichier KMZ (uniquement les lieux et les horodatages). \\u0020 Plus précisément, l'application doit prendre en charge ACTION_VIEW avec le type MIME application/vnd.google-earth.kmz. \\u0020","target":"Impiegate l’icona chjuca in forma di carta.  a) (messe à livellu in vivu) Installate OSMDashboard. Furnisce carte in linea o fora di linea via OpenStreetMap.  In fatti, OSMDashboard hè un’altra appiecazione chì pò solu accede (timpurariamente) à i dati di i tracciati chì anu da esse affissati.   b) Via un’appiecazione classica di cartugrafia (p.i. OsmAnd è MAPS.ME). St’appiecazioni devenu piglià in carica u furmatu di schedariu KMZ (solu e pusizioni è e stampiglie). In fatti, l’appiecazione deve incaricassi di ACTION_VIEW cù u tipu MIME application/vnd.google-earth.kmz."}
+{"key":"help_recording_content","source":"OpenTracks uses the GPS sensor of the device to record the location continuously.\n        If the GPS device reports inaccurate data (e.g., location, speed, elevation), OpenTracks cannot do anything about it.","source_fr":"OpenTracks utilise le capteur GPS de lappareil pour enregistrer la position en continu.\nSi le dispositif GPS signale des données inexactes (par exemple, la localisation, la vitesse, laltitude), OpenTracks ne peut rien y faire.","target":"OpenTracks impiegheghja u cattore GPS di l’apparechju per arregistrà di cuntinuu a pusizione. S’è l’apparechju GPS signaleghja dati falsi (per indettu, pusizione, vitezza o altitudine), OpenTracks ùn pò fà nunda."}
+{"key":"help_data_storage_title","source":"How does OpenTracks store sensor data?","source_fr":"Comment OpenTracks stocke-t-il les données des capteurs \\?","target":"Cumu OpenTracks arregistreghja i dati di i cattori ?"}
+{"key":"activity_type_driving_car","source":"driving car","source_fr":"conduite automobile","target":"vittura"}
+{"key":"help_data_storage_content","source":"Sensor data is stored per recorded location. In terms of a heart rate sensor, this means that only one heart rate measurement is stored per location. If you are standing still or are indoors, no sensor data will be recorded (but it will be shown).","source_fr":"Les données des capteurs sont stockées par emplacement enregistré. Dans le cas dun capteur de fréquence cardiaque, cela signifie que seule la mesure de la fréquence cardiaque one est stockée par emplacement. Si vous êtes à larrêt ou à lintérieur, aucune donnée du capteur ne sera enregistrée (mais elle sera affichée).","target":"I dati di i cattori sò piazzati à a pusizione arregistrata. In casu d’un cattore di frequenza cardiaca, vole si dì chì solu una misura di frequenza cardiaca hè arregistrata à a pusizione. S’è vo state immobile o s’è vo site dentru, nisunu datu di cattore ùn serà arregistratu (ma serà affissatu)."}
+{"key":"help_gps_troubleshooting_content","source":"What you can do: \n        a) check if GPS is enabled, \n        b) improve GPS reception (e.g., go outdoors), \n        c) check with GPSTest app, and \n        d) disable power saving. \n         \n        If everything does not help please report a bug.","source_fr":"Ce que vous pouvez faire :\n  a) vérifier si le GPS est activé,\n  b) améliorer la réception du GPS (p. ex. aller à l'extérieur),\n  c) contrôler avec l'application GPSTest\n  d) désactiver l'économie d'énergie.\n \n  Si le problème persiste, veuillez signaler un bug.","target":"Ciò ch’ella si pò fà :  a) verificate chì u GPS hè attivatu,  b) amendà a ricezzione (p.i. andate fora),  c) cuntrollate cù l’appiecazione GPSTest, è  d) disattivate l’ecunumia d’energia.   S’è tuttu què ùn aiuta micca, ci vole à signalà u prublema."}
+{"key":"help_support_content","source":"You can: \n        a) spread the word about OpenTracks, \n        b) propose features, \n        c) report bugs, \n        d) help in software development, \n        e) buy in Google Play Store, \n        f) donate, and \n        g) do whatever you think helps OpenTracks.","source_fr":"Vous pouvez :\n  a) faire connaître OpenTracks,\n  b) proposer des fonctionnalités,\n  c) rapporter des bogues,\n  d) aider au développement du logiciel,\n  e) acheter dans Google Play Store,\n  f) faire un don, et\n  g) faire tout ce qui vous semble utile à OpenTracks.","target":"Pudete :  a) fà cunnosce OpenTracks,  b) prupone funzioni,  c) signalà i prublemi,  d) aiutà à u sviluppu di u prugramma,  e) cumprallu in u Google Play Store,  f) fà una dunazione, è  g) fà tuttu ciò ch’ella vi pare ghjuvevule per OpenTracks."}
+{"key":"activity_type_boat","source":"boat","source_fr":"nautisme","target":"battellu"}
+{"key":"activity_type_cross_country_skiing","source":"cross-country skiing","source_fr":"ski de fond","target":"schì di fondu"}
+{"context":{"comment":"Help"},"key":"help_feature_title","source":"OpenTracks has the following features:","source_fr":"OpenTracks possède les fonctionnalité suivantes :","target":"OpenTracks pussede quelle funzioni :"}
+{"key":"help_feature_content","source":"* create GPS tracks\n * use a heart rate sensor (Bluetooth LE only)\n * voice announcements (by time or distance)\n * create markers (incl. pictures)\n * works completely offline\n * show tracks on a map (see below)","source_fr":"* Créer des tracés par GPS\n * Utilisation d'un capteur de fréquence cardiaque (Bluetooth LE uniquement)\n * Annonces vocales (par temps ou par distance)\n * Créer des repères (avec image)\n * Fonctionne complètement hors ligne\n * Affichage des traces sur une carte (voir ci-dessous)","target":"* creazione di tracciati GPS\n * impiegu d’un cattore di frequenza cardiaca (Bluetooth LE solu)\n * annunziamenti vucali (per tempu o per distanza)\n * creazione di stantelle (cù fiure)\n * funziuneghja cumpletamente fora di linea\n * affissera di i tracciati nant’à una carta (fighjà quì sottu)"}
+{"key":"help_track_map_title","source":"How to show a track on a map?","source_fr":"Comment afficher un tracé sur une carte \\?","target":"Cumu affissà un tracciatu nant’à una carta ?"}
+{"key":"activity_type_kayaking","source":"kayaking","source_fr":"kayak","target":"kayac"}
+{"key":"activity_type_mixed_type","source":"mixed type","source_fr":"type mixte","target":"tipu mischju"}
+{"key":"activity_type_motor_bike","source":"motor bike","source_fr":"moto","target":"motò"}
+{"key":"activity_type_motor_boating","source":"motor boating","source_fr":"bateau à moteur","target":"battellu à mutore"}
+{"key":"activity_type_mountain_biking","source":"mountain biking","source_fr":"VTT","target":"VTT"}
+{"key":"activity_type_off_trail_hiking","source":"off trail hiking","source_fr":"randonnée hors piste","target":"girandulata fora di strada"}
+{"key":"activity_type_other","source":"other","source_fr":"autre","target":"altru"}
+{"key":"activity_type_land_sailing","source":"land sailing","source_fr":"char à voile","target":"carru à vela"}
+{"key":"activity_type_rc_helicopter","source":"RC helicopter","source_fr":"hélicoptère radiocommandé","target":"elicotteru radiocumandatu"}
+{"key":"activity_type_rc_boat","source":"RC boat","source_fr":"bateau radiocommandé","target":"battellu radiocumandatu"}
+{"key":"description_altitude_metric","source":"Elevation (m)","source_fr":"Altitude (m)","target":"Altitudine (m)"}
+{"key":"description_average_moving_pace_in_minute","source":"Average moving pace: %1$s min/km (%2$s min/mi)","source_fr":"Allure moyenne en déplacement : %1$s min/km (%2$s min/mi)","target":"Andatura mediana in mossa : %1$s min/km (%2$s min/mi)"}
+{"context":{"comment":"Description"},"key":"description_activity_type","source":"Activity type: %1$s","source_fr":"Type d'activité : %1$s","target":"Tipu d’attività : %1$s"}
+{"key":"description_fastest_pace_in_minute","source":"Fastest pace: %1$s min/km (%2$s min/mi)","source_fr":"Vitesse maximale : %1$s min/km (%2$s min/mi)","target":"Andatura massima : %1$s min/km (%2$s min/mi)"}
+{"key":"description_pace_metric","source":"Pace (min/km)","source_fr":"Allure (min/km)","target":"Andatura (min/km)"}
+{"key":"description_average_moving_speed","source":"Average moving speed: %1$.2f km/h (%2$.1f mi/h)","source_fr":"Vitesse moyenne en déplacement : %1$.2f km/h (%2$.1f mi/h)","target":"Vitezza mediana in mossa : %1$.2f km/o (%2$.1f mi/o)"}
+{"key":"description_sensor_heart_rate","source":"Heart rate (bpm)","source_fr":"Fréquence cardiaque (bpm)","target":"Frequenza cardiaca (bpm)"}
+{"key":"description_speed_metric","source":"Speed (km/hr)","source_fr":"Vitesse (km/h)","target":"Vitezza (km/ora)"}
+{"key":"description_time","source":"Time","source_fr":"Durée","target":"Durata"}
+{"key":"description_total_distance","source":"Total distance: %1$.2f km (%2$.1f mi)","source_fr":"Distance totale : %1$.2f km (%2$.1f mi)","target":"Distanza tutale : %1$.2f km (%2$.1f mi)"}
+{"key":"description_total_time","source":"Total time: %1$s","source_fr":"Durée totale : %1$s","target":"Durata tutale : %1$s"}
+{"context":{"comment":"Export"},"key":"export_with_photos","source":"with photos","source_fr":"avec les photos","target":"cù e fotò"}
+{"key":"export_without_photos","source":"without photos","source_fr":"sans les photos","target":"senza fotò"}
+{"key":"export_track_errors","source":"Files not exported","source_fr":"Fichiers non exportés","target":"Schedarii micca espurtati"}
+{"key":"export_progress_summary_overwrite_msg","source":"Files overwritten","source_fr":"Fichiers écrasés","target":"Schedarii rimpiazzati"}
+{"key":"export_progress_summary_skip_msg","source":"Files skipped","source_fr":"Fichiers ignorés","target":"Schedarii tralasciati"}
+{"key":"export_progress_summary_new_msg","source":"New files exported","source_fr":"Nouveaux fichiers exportés","target":"Schedarii novi espurtati"}
+{"key":"generic_delete_selected_confirm_title","source":"Delete selected?","source_fr":"Supprimer les éléments sélectionnés ?","target":"Squassà l’elementi selezziunati ?"}
+{"key":"generic_description_line","source":"Description: %1$s","source_fr":"Description : %1$s","target":"Discrizzione : %1$s"}
+{"key":"generic_description","source":"Description","source_fr":"Description","target":"Discrizzione"}
+{"key":"generic_open_track","source":"Open Track","source_fr":"Voie ouverte","target":"Apre un tracciatu"}
+{"key":"generic_click_twice_cancel","source":"Click back again to cancel","source_fr":"Cliquez sur retour pour annuler","target":"Cliccu torna nant’à ritornu per abbandunà"}
+{"key":"generic_filter","source":"Filter","source_fr":"Filtre","target":"Filtru"}
+{"key":"generic_recording","source":"Recording…","source_fr":"Enregistrement…","target":"Arregistramentu…"}
+{"key":"generic_today","source":"Today","source_fr":"Aujourd'hui","target":"Oghje"}
+{"key":"generic_dismiss","source":"Dismiss","source_fr":"Oublier","target":"Ricusà"}
+{"key":"gps_recording_without_signal","source":"OpenTracks is recording without GPS data.","source_fr":"OpenTracks enregistre actuellement sans les données GPS.","target":"OpenTracks arregistreghja senza i dati GPS."}
+{"key":"image_record","source":"Record","source_fr":"Enregistrer","target":"Arregistrà"}
+{"key":"import_progress_summary_errors_msg","source":"Errors","source_fr":"Erreur","target":"Sbaglii"}
+{"context":{"comment":"Marker"},"key":"create_marker_error","source":"Unable to create a marker. Try again.","source_fr":"Impossible de créer un marqueur. Veuillez réessayer.","target":"Impussibule di creà una stantella. Pruvate torna."}
+{"context":{"comment":"Marker Edit"},"key":"marker_edit_marker_type","source":"Marker type (e.g. waterfall)","source_fr":"Type de repère (exemple : cascade)","target":"Tipu di stantella (p.i. cascata)"}
+{"key":"menu_delete","source":"Delete","source_fr":"Supprimer","target":"Squassà"}
+{"key":"menu_export_all","source":"Export all (one file per track)","source_fr":"Tout exporter (Un fichier par tracé)","target":"Tuttu espurtà (un schedariu à u tracciatu)"}
+{"key":"menu_export_all_one_file","source":"Export all (one file for all tracks)","source_fr":"Tout exporter (En un seul fichier)","target":"Tuttu espurtà (un schedariu per tutti i tracciati)"}
+{"key":"menu_help","source":"Help","source_fr":"Aide","target":"Aiutu"}
+{"key":"menu_import_all","source":"Import all","source_fr":"Tout importer","target":"Tuttu impurtà"}
+{"key":"marker_add_success","source":"A marker was inserted","source_fr":"Un repère a bien été inséré","target":"Una stantella hè stata framessa"}
+{"key":"image_photo_marker","source":"Photo marker","source_fr":"Repère de photo","target":"Stantella di fotò"}
+{"key":"menu_select_all","source":"Select all","source_fr":"Tout sélectionner","target":"Tuttu selezziunà"}
+{"key":"menu_settings","source":"Settings","source_fr":"Paramètres","target":"Parametri"}
+{"key":"menu_share","source":"Share","source_fr":"Partager","target":"Sparte"}
+{"key":"menu_select_layout","source":"Select Layout","source_fr":"Sélectionner la mise en page","target":"Selezziunà l’accunciamentu"}
+{"context":{"comment":"OpenTracks"},"key":"recording_service","source":"Recording service","source_fr":"Service enregistrement","target":"Serviziu d’arregistramentu"}
+{"context":{"comment":"Permission"},"key":"permission_gps_failed","source":"OpenTracks requires permission to use GPS.","source_fr":"OpenTracks nécessite une autorisation pour utiliser le GPS.","target":"OpenTracks richiede u permessu d’impiegà u GPS."}
+{"key":"permission_bluetooth_failed","source":"OpenTracks requires permission to use Bluetooth.","source_fr":"OpenTracks a besoin de la permission d'utiliser le Bluetooth.","target":"OpenTracks richiede u permessu d’impiegà u Bluetooth."}
+{"context":{"comment":"Sensor State"},"key":"sensor_state_cadence_avg","source":"Avg Cadence","source_fr":"Cadence moyenne","target":"Cadenza mediana"}
+{"key":"sensor_state_cadence_max","source":"Max Cadence","source_fr":"Cadence maximale","target":"Cadenza massima"}
+{"key":"sensor_state_heart_rate","source":"Heart rate","source_fr":"Fréquence cardiaque","target":"Frequenza cardiaca"}
+{"key":"sensor_state_heart_rate_avg","source":"Avg Heart rate","source_fr":"Rythme cardiaque moyen","target":"Frequenza cardiaca mediana"}
+{"key":"sensor_state_heart_rate_max","source":"Max Heart rate","source_fr":"Fréquence cardiaque max","target":"Frequenza cardiaca massima"}
+{"key":"sensor_state_heart_rate_unit","source":"bpm","source_fr":"bpm","target":"bpm"}
+{"key":"sensor_state_power","source":"Power","source_fr":"Puissance","target":"Putenza"}
+{"key":"sensor_state_pressure","source":"Barometer","source_fr":"Baromètre","target":"Barometru"}
+{"key":"sensor_state_power_avg","source":"Avg Power","source_fr":"Puissance moyenne","target":"Putenza mediana"}
+{"key":"sensor_state_power_max","source":"Max Power","source_fr":"Puissance maximale","target":"Putenza massima"}
+{"key":"sensor_could_not_scan","source":"Could not scan for Bluetooth devices (error %1$i).","source_fr":"Impossible de rechercher les appareils Bluetooth (erreur %1$i).","target":"Ùn si pò micca ricercà l’apparechji Bluetooth (sbagliu %1$i)."}
+{"key":"bluetooth_disabled","source":"Please enable Bluetooth.","source_fr":"Veuillez activer Bluetooth.","target":"Ci vole à attivà u Bluetooth."}
+{"key":"bluetooth_sensor_summary","source":"%1$s (%2$s)","source_fr":"%1$s (%2$s)","target":"%1$s (%2$s)"}
+{"key":"settings_defaults_title","source":"Default Units and Activity","source_fr":"Unités et activité par défaut","target":"Unità è attività predefinite"}
+{"key":"settings_ui_title","source":"User Interface","source_fr":"Interface utilisateur","target":"Interfaccia di l’utilizatore"}
+{"key":"settings_ui_summary","source":"Appearance, Recording Layout, Theme","source_fr":"Apparence, Mise en page de l'enregistrement, Thème","target":"Aspettu, accunciamentu di l’arregistramentu, tema"}
+{"key":"settings_gps_sensor","source":"GPS","source_fr":"GPS","target":"GPS"}
+{"key":"settings_gps_summary","source":"Time interval, Distance interval, Max Distance, Accuracy","source_fr":"Intervalle de temps, Intervalle de distance, Distance maximale, Précision","target":"Intervalli di tempu è di distanza, distanza massima, precisione"}
+{"key":"settings_announcements_idle_category_title","source":"Idle Announcements","source_fr":"Alertes de mise en veille","target":"Annunziamenti d’inattività"}
+{"key":"settings_announcements_summary","source":"Time, Distance, Voice Speed","source_fr":"Temps, distance, vitesse de la voix","target":"Tempu, distanza è vitezza di a voce"}
+{"key":"settings_import_export_title","source":"Import and Export","source_fr":"Importer et Exporter","target":"Impurtazione è espurtazione"}
+{"key":"settings_reset_summary","source":"Reset Settings to Default Values","source_fr":"Réinitialiser les paramètres aux valeurs par défaut","target":"Reinizià i parametri à i valori predefiniti"}
+{"key":"settings_export_filename_title","source":"Format of the filename","source_fr":"Format du nom de fichier","target":"Furmatu di u nome di schedariu"}
+{"context":{"comment":"Settings Chart"},"key":"settings_chart_by_distance","source":"By distance","source_fr":"En fonction de la distance","target":"Secondu à a distanza"}
+{"key":"settings_chart_by_time","source":"By time","source_fr":"En fonction de la durée","target":"Secondu à a durata"}
+{"key":"settings_ui_dynamic_colors_summary","source":"Use user-defined Dynamic Colors (Android 12+ only; requires a manual restart)","source_fr":"Utiliser des couleurs dynamiques définies par l'utilisateur (Android 12+ uniquement ; requiert un redémarrage manuel)","target":"Impiegà i culori dinamichi definiti da l’utilizatore (solu Android 12 è più ; richiede un rilanciu manuale)"}
+{"key":"settings_recording_customize_layout_title","source":"Customize your recording layout","source_fr":"Personnalisez votre disposition d'enregistrement","target":"Persunalizà u vostru accunciamentu d’arregistramentu"}
+{"key":"settings_recording_customize_layout_select_columns","source":"Data fields per row","source_fr":"Champs de données par rangée","target":"Campi di dati à a linea"}
+{"key":"settings_recording_keep_screen_on_while_recording_title","source":"Keep screen on","source_fr":"Garder l'écran allumé","target":"Cunservà u screnu accesu"}
+{"key":"settings_recording_fullscreen_on_while_recording_title","source":"Fullscreen","source_fr":"Plein écran","target":"Screnu sanu"}
+{"key":"settings_recording_default_activity_title","source":"Default activity type","source_fr":"Type d'activité par défaut","target":"Tipu predefinitu d’attività"}
+{"key":"settings_recording_location_frequency_summary","source":"%1$s between location checks","source_fr":"%1$s entre chaque enregistrement de la position","target":"%1$s trà i cuntrolli di pusizione"}
+{"key":"settings_recording_min_recording_distance_title","source":"Recording distance interval","source_fr":"Intervalle dist. enreg","target":"Intervallu di distanza d’arregistramentu"}
+{"key":"settings_recording_min_recording_interval_title","source":"Recording time interval","source_fr":"Intervalle temps enreg","target":"Intervallu di durata d’arregistramentu"}
+{"key":"settings_recording_min_required_accuracy_summary","source":"Location is ignored if its accuracy is greater than %1$s","source_fr":"La position est ignoré si sa précision est supérieure à %1$s","target":"A pusizione hè tralasciata s’è a so precisione hè superiore à %1$s"}
+{"key":"settings_recording_track_name_date_iso_8601_option","source":"Date (ISO 8601)","source_fr":"Date (format ISO 8601)","target":"Data (furmatu ISO 8601)"}
+{"key":"settings_recording_track_name_date_local_option","source":"Date (local)","source_fr":"Date (format local)","target":"Data (furmatu lucale)"}
+{"key":"settings_night_mode_title","source":"UI Theme","source_fr":"Thème de l'Interface utilisateur","target":"Tema di l’interfaccia di l’utilizatore"}
+{"key":"settings_recording_idle_timeout_title","source":"Idle threshold","source_fr":"Délai avant mise en veille","target":"Sogliu d’inattività"}
+{"key":"settings_night_mode_option_system","source":"System","source_fr":"Système","target":"Sistema"}
+{"key":"settings_night_mode_option_day","source":"Day","source_fr":"Jour","target":"Ghjornu"}
+{"key":"settings_night_mode_option_night","source":"Night","source_fr":"Nuit","target":"Notte"}
+{"key":"settings_announcements_lap_speed_pace","source":"Lap speed/pace","source_fr":"Allure/vitesse au tour","target":"Vitezza è andatura à u giru"}
+{"context":{"comment":"Custom Layout"},"key":"custom_layout_list_title","source":"Layouts","source_fr":"Maquettes","target":"Accunciamenti"}
+{"key":"custom_layout_list_edit_name","source":"Type layout's name to add","source_fr":"Tapez le nom du modèle à ajouter","target":"Stampittà u nome di l’accunciamentu à aghjunghje"}
+{"key":"custom_layout_list_edit_already_exists","source":"Layout's name already exists","source_fr":"Le nom du modèle existe déjà","target":"U nome di l’accunciamentu esiste dighjà"}
+{"key":"settings_layout_reset_confirm_message","source":"All layout settings will be reverted to the default values. This will not delete any tracks on the device.","source_fr":"Tous les paramètres de disposition reviendront à leur valeur par défaut. Ceci ne supprimera aucun tracé de l'appareil.","target":"Tutti i parametri d’accunciamentu seranu rimessi à u so valore predefinitu. St’azzione ùn squasserà nisunu tracciatu nant’à l’apparechju."}
+{"key":"settings_layout_reset_confirm_title","source":"Reset your layouts?","source_fr":"Réinitialiser vos dispositions \\?","target":"Reinizià i vostri accunciamenti ?"}
+{"key":"settings_layout_reset_done","source":"All layout settings have been reverted to the default values","source_fr":"Tous les paramètres de mise en page sont revenus à leur valeur par défaut","target":"Tutti i parametri d’accunciamentu sò stati rimessi à u so valore predefinitu"}
+{"context":{"comment":"Settings Reset"},"key":"settings_all_reset","source":"Reset","source_fr":"Réinitialiser","target":"Reinizià"}
+{"key":"settings_reset_confirm_message","source":"All settings will be reverted to the default values. This will not delete any tracks on the device.","source_fr":"Les valeurs par défaut seront rétablies pour tous les paramètres.","target":"Tutti i parametri seranu rimessi à u so valore predefinitu. St’azzione ùn squasserà nisunu tracciatu nant’à l’apparechju."}
+{"context":{"comment":"Settings Sensor"},"key":"settings_generic_sensor","source":"Generic","source_fr":"Générique","target":"Genericu"}
+{"key":"settings_cycling_sensor","source":"Cycling","source_fr":"Cyclisme","target":"Ciclismu"}
+{"key":"settings_running_sensor","source":"Running","source_fr":"Course à pied","target":"Corsa à pedi"}
+{"key":"settings_sensor_cycling_distance_speed","source":"Distance and Speed","source_fr":"Distance et vitesse","target":"Distanza è vitezza"}
+{"key":"settings_sensor_cycling_cadence","source":"Cadence","source_fr":"Cadence","target":"Cadenza"}
+{"key":"settings_sensor_running_speed_and_cadence","source":"Distance, Speed, and Cadence","source_fr":"Distance, vitesse et cadence","target":"Distanza, vitezza è cadenza"}
+{"context":{"comment":"Settings Stats"},"key":"settings_stats_rate_title","source":"Preferred rate","source_fr":"Mode de calcul souhaité","target":"Frequenza preferita"}
+{"key":"settings_stats_units_nautical","source":"Nautical (NM, ft)","source_fr":"Nautique (NM, pieds)","target":"Nautica (NM, ft)"}
+{"key":"settings_stats_units_title","source":"Preferred units","source_fr":"Unités souhaitées","target":"Unità preferita"}
+{"context":{"comment":"Settings public api"},"key":"settings_api_title","source":"Public API","source_fr":"API publique","target":"API publica"}
+{"key":"settings_api_summary","source":"Remote control and statistics API for other apps","source_fr":"API de contrôle et de statistiques pour applications tierces","target":"API di cuntrollu à distanza è di statistiche per d’altre appiecazioni"}
+{"key":"settings_public_api_enabled_title","source":"Public API","source_fr":"API publique","target":"API publica"}
+{"key":"settings_public_api_dashboard_enabled_title","source":"Automatic data transfer","source_fr":"Transfert automatique des données","target":"Trasferimentu autumaticu di i dati"}
+{"key":"settings_public_api_dashboard_enabled_summary_on","source":"An application that started a recording can also access the recorded data.","source_fr":"Une application qui a commencé un enregistrement peut aussi accéder aux données enregistrées.","target":"Un’appiecazione chì hà lanciatu un arregistramentu pò dinù accede à i dati arregistrati."}
+{"key":"settings_public_api_dashboard_enabled_summary_off","source":"Recorded data will not be shared automatically with other applications.","source_fr":"Les données enregistrées ne seront pas automatiquement partagées avec d'autres applications.","target":"I dati arregistrati ùn seranu micca scumparti autumaticamente cù d’altre appiecazioni."}
+{"context":{"comment":"Stats"},"key":"stats_average_moving_pace","source":"Avg moving pace","source_fr":"Allure moyenne en déplacement","target":"Andatura mediana in mossa"}
+{"key":"stats_altitude","source":"Elevation","source_fr":"Altitude","target":"Altitudine"}
+{"key":"stats_fastest_pace","source":"Fastest pace","source_fr":"Allure la plus rapide","target":"Andatura a più rapida"}
+{"key":"stats_gain","source":"Gain","source_fr":"Dénivelé positif","target":"Dislivellu pusitivu"}
+{"key":"stats_loss","source":"Loss","source_fr":"Dénivelé négatif","target":"Dislivellu negativu"}
+{"key":"stats_sensors_cadence","source":"Cadence","source_fr":"Cadences","target":"Cadenza"}
+{"key":"track_distance_notification","source":"Distance: %1$s","source_fr":"Distance : %1$s","target":"Distanza : %1$s"}
+{"key":"track_markers","source":"%1$s Markers","source_fr":"Repères pour le parcours %1$s","target":"Stantelle per %1$s"}
+{"context":{"comment":"Track Delete"},"key":"track_delete_one_confirm_message","source":"The track and its markers will be permanently deleted from the device.","source_fr":"Ce tracé et ses repères vont être définitivement effacés de l'appareil.","target":"U tracciatu è e so stantelle seranu squassati ab’eternu da l’apparechju."}
+{"key":"track_delete_number_of_tracks","source":"%1$d tracks","source_fr":"%1$d tracés","target":"%1$d tracciati"}
+{"key":"track_delete_not_recording","source":"This track cannot be deleted as it is currently recorded.","source_fr":"Cette piste ne peut pas être supprimée car elle est en cours d'enregistrement.","target":"Stu tracciatu ùn pò micca esse squassatu perchè hè in corsu d’arregistramentu."}
+{"key":"track_detail_intervals_tab","source":"Intervals","source_fr":"Intervalles","target":"Intervalli"}
+{"context":{"comment":"Track Edit"},"key":"track_edit_activity_type","source":"Activity type (e.g. hiking)","source_fr":"Type d'activité (exemple : randonnée)","target":"Tipu d’attività (p.i. girandulata)"}
+{"key":"track_edit_activity_type_hint","source":"Activity type","source_fr":"Type d'activité","target":"Tipu d’attività"}
+{"context":{"comment":"Track List"},"key":"track_list_empty_message","source":"Start recording your next adventure here","source_fr":"Commencez à enregistrer votre prochaine aventure ici","target":"Principiate quì à arregistrà a vostra prossima aventura"}
+{"context":{"comment":"Interval List"},"key":"interval_list_empty_message","source":"There are not any interval yet","source_fr":"Il n'y a pas encore d'intervalle","target":"Ùn ci hè nisunu intervallu à st’ora"}
+{"context":{"comment":"Unit"},"key":"unit_feet","source":"ft","source_fr":"pied(s)","target":"ft"}
+{"key":"unit_kilometer","source":"km","source_fr":"km","target":"km"}
+{"key":"unit_minute_per_kilometer","source":"min/km","source_fr":"min/km","target":"min/km"}
+{"key":"unit_minute_per_mile","source":"min/mi","source_fr":"min/mi","target":"min/mi"}
+{"key":"unit_minute_per_nautical_mile","source":"min/NM","source_fr":"min/MN","target":"min/NM"}
+{"context":{"comment":"Location Coordinates"},"key":"location_coordinate","source":"%1$s°","source_fr":"%1$s°","target":"%1$s°"}
+{"key":"value_integer_feet_recommended","source":"%1$d ft (recommended)","source_fr":"%1$d pied(s) (recommandé)","target":"%1$d ft (ricumandatu)"}
+{"key":"value_float_kilometer_hour","source":"%1$.1f km/h","source_fr":"%1$.1f km/h","target":"%1$.1f km/o"}
+{"key":"value_float_kilometer_hour_recommended","source":"%1$.1f km/h (recommended)","source_fr":"%1$.1f km/h (recommandé)","target":"%1$.1f km/o (ricumandatu)"}
+{"context":{"comment":"Value"},"key":"value_integer_feet_excellent_gps","source":"%1$d ft (excellent GPS)","source_fr":"%1$d pied(s) (réception GPS excellente)","target":"%1$d ft (signale GPS forte)"}
+{"key":"value_integer_meter_excellent_gps","source":"%1$d m (excellent GPS)","source_fr":"%1$d m (réception GPS excellente)","target":"%1$d m (signale GPS forte)"}
+{"key":"value_integer_meter_poor_gps","source":"%1$d m (poor GPS)","source_fr":"%1$d m (mauvaise réception GPS)","target":"%1$d m (signale GPS debule)"}
+{"key":"value_integer_meter_recommended","source":"%1$d m (recommended)","source_fr":"%1$d m (recommandé)","target":"%1$d m (ricumandatu)"}
+{"key":"value_integer_knots","source":"%1$d knots","source_fr":"%1$d nœuds","target":"%1$d nodi"}
+{"key":"value_float_mile_hour","source":"%1$.1f mi/h","source_fr":"%1$.1f mi/h","target":"%1$.1f mi/o"}
+{"key":"value_float_knots","source":"%1$.1f knots","source_fr":"%1$.1f nœuds","target":"%1$.1f nodi"}
+{"key":"value_integer_minute","source":"%1$d min","source_fr":"%1$d min","target":"%1$d min"}
+{"key":"value_integer_second","source":"%1$d s","source_fr":"%1$d s","target":"%1$d s"}
+{"key":"value_none","source":"None","source_fr":"Aucun","target":"Nisuna"}
+{"key":"value_off","source":"Off","source_fr":"Désactiver","target":"Disattivatu"}
+{"key":"value_internal_sensor","source":"Internal sensor","source_fr":"Capteur interne","target":"Cattore internu"}
+{"key":"value_smallest_recommended","source":"Smallest (recommended)","source_fr":"La plus petite (recommandé)","target":"A più chjuca (ricumandatu)"}
+{"key":"value_int_seconds","source":"%1$d s (recommended)","source_fr":"%1$d s (recommandé)","target":"%1$d s (ricumandatu)"}
+{"key":"voiceHoursPlural","source":"{n, plural,\n        =1 {1 hour}\n        other {{n,number} hours}\n        }","source_fr":"{ n, plural,\n        one {{n} heure}\n        many {{n} heures}\n        other {{n} heures}\n        }","target":"{n, plural, =1 {1 ora} other {{n,number} ore} }"}
+{"key":"voiceMinutesPlural","source":"{n, plural,\n        =1 {1 minute}\n        other {{n,number} minutes}\n        }","source_fr":"{ n, plural,\n        one {{n} minute}\n        many {{n} minute}\n        other {{n} minutes}\n        }","target":"{n, plural, =1 {1 minutu} other {{n,number} minuti} }"}
+{"key":"voiceSpeedMilesPerHourPlural","source":"{n, plural,\n        =1 {1 mile per hour}\n        other {{n,number,#.0} miles per hour}\n        }","source_fr":"{ n, plural,\n        one {{n,number,#.0} mile par heure}\n        many {{n,number,#.0} miles par heure}\n        other {{n,number,#.0} miles par heure}\n        }","target":"{n, plural, =1 {1 mile à l’ora} other {{n,number,#.0} mile à l’ora} }"}
+{"key":"voiceSpeed","source":"{n, plural,\n        =1 {1}\n        other {{n,number,#.0}}\n        }","source_fr":"{n, plural, =1 {1} other {{n,number,#.0}} }","target":"{n, plural, =1 {1} other {{n,number,#.0}} }"}
+{"key":"voice_on_device_speaker_title","source":"Use the device's speaker","source_fr":"Utiliser le haut-parleur de l'appareil","target":"Impiegà u spachjasonu di l’apparechju"}
+{"key":"voice_per_kilometer","source":"per kilometer","source_fr":"par kilomètre","target":"à u chilometru"}
+{"key":"voice_per_nautical_mile","source":"per nautical mile","source_fr":"par mile nautique","target":"à u mile nauticu"}
+{"key":"pace","source":"Pace","source_fr":"Rythme","target":"Andatura"}
+{"key":"lap_time","source":"Lap time","source_fr":"Temps par tour","target":"Durata à u giru"}
+{"key":"lap_speed","source":"Lap speed","source_fr":"Vitesse par tour","target":"Vitezza à u giru"}
+{"key":"voiceDistanceMilesPlural","source":"{n, plural,\n        =1 {1 mile}\n        other {{n,number,#.0} miles}\n        }","source_fr":"{ n, plural,\n        one {{n,number,#.0} mile}\n        many {{n,number,#.0} miles}\n        other {{n,number,#.0} miles}\n        }","target":"{n, plural, =1 {1 mile} other {{n,number,#.0} mile} }"}
+{"key":"voiceDistanceNauticalMilesPlural","source":"{n, plural,\n        =1 {1 nautical mile}\n        other {{n,number,#.0} nautical miles}\n        }","source_fr":"{ n, plural,\n        one {{n,number,#.0} mille nautique}\n        many {{n,number,#.0} milles nautique}\n        other {{n,number,#.0} milles nautique}\n        }","target":"{n, plural, =1 {1 mile nauticu} other {{n,number,#.0} mile nautichi} }"}
+{"key":"voiceDistance","source":"{n, plural,\n        =1 {1 }\n        other {{n,number,#.0}}\n        }","source_fr":"{n, plural, =1 {1 } other {{n,number,#.0}} }","target":"{n, plural, =1 {1 } other {{n,number,#.0}} }"}
+{"key":"current_heart_rate","source":"Current heart rate","source_fr":"Fréquence cardiaque actuelle","target":"Frequenza cardiaca attuale"}
+{"context":{"comment":"Waypoint Type"},"key":"waypoint_type_atm","source":"ATM","source_fr":"distributeur de billets","target":"distributore di biglietti"}
+{"key":"waypoint_type_bank","source":"bank","source_fr":"banque","target":"banca"}
+{"key":"waypoint_type_barbecue","source":"barbecue","source_fr":"grillade","target":"brasgera"}
+{"key":"waypoint_type_bus_stop","source":"bus stop","source_fr":"arrêt de bus","target":"fermata d’autobus"}
+{"key":"waypoint_type_cafe","source":"cafe","source_fr":"café","target":"caffè"}
+{"key":"waypoint_type_campground","source":"campground","source_fr":"terrain de camping","target":"campeghju"}
+{"key":"waypoint_type_church","source":"church","source_fr":"église","target":"ghjesgia"}
+{"key":"waypoint_type_coffee_house","source":"coffee house","source_fr":"café","target":"caffeteria"}
+{"key":"waypoint_type_convenience_store","source":"convenience store","source_fr":"supérette","target":"minimercatu"}
+{"key":"waypoint_type_falling_rocks","source":"falling rocks","source_fr":"chute de pierres","target":"caduta di petre"}
+{"key":"waypoint_type_fire_place","source":"fire place","source_fr":"cheminée","target":"sciaminè"}
+{"key":"waypoint_type_fishing","source":"fishing","source_fr":"pêche","target":"piscata"}
+{"key":"waypoint_type_gas_station","source":"gas station","source_fr":"station-service","target":"pompa à essenza"}
+{"key":"waypoint_type_grocery_store","source":"grocery store","source_fr":"épicerie","target":"spezieria"}
+{"key":"waypoint_type_hair_dresser","source":"hair dresser","source_fr":"coiffeur","target":"piluccheru"}
+{"key":"waypoint_type_harbor","source":"harbor","source_fr":"port","target":"portu"}
+{"key":"waypoint_type_hiking_path","source":"hiking path","source_fr":"sentier de randonnée","target":"chjassu di girandulata"}
+{"key":"waypoint_type_hotel","source":"hotel","source_fr":"hôtel","target":"osteria"}
+{"key":"waypoint_type_house","source":"house","source_fr":"maison","target":"casa"}
+{"key":"waypoint_type_opera","source":"opera","source_fr":"opéra","target":"opera"}
+{"key":"waypoint_type_parking","source":"parking","source_fr":"parking","target":"parcheghju"}
+{"key":"waypoint_type_police_station","source":"police station","source_fr":"poste de police","target":"postu di pulizza"}
+{"key":"waypoint_type_pothole","source":"pothole","source_fr":"nid-de-poule","target":"chjuvone"}
+{"key":"waypoint_type_railway_crossing","source":"railway crossing","source_fr":"passage à niveau","target":"passeghju à livellu"}
+{"key":"waypoint_type_sight","source":"sight","source_fr":"point de vue","target":"puntu di vista"}
+{"key":"waypoint_type_store","source":"store","source_fr":"magasin","target":"magazinu"}
+{"key":"waypoint_type_swimming_pool","source":"swimming pool","source_fr":"piscine","target":"piscina"}
+{"key":"waypoint_type_telephone","source":"telephone","source_fr":"téléphone","target":"telefonu"}
+{"key":"waypoint_type_theater","source":"theater","source_fr":"théâtre","target":"teatru"}
+{"key":"waypoint_type_toilet","source":"toilet","source_fr":"toilettes","target":"cabinetti"}
+{"key":"waypoint_type_tourist_information","source":"tourist information","source_fr":"informations touristiques","target":"offiziu di turisimu"}
+{"key":"waypoint_type_waterfall","source":"waterfall","source_fr":"cascade","target":"cascata"}
+{"key":"waypoint_type_water_fountain","source":"water fountain","source_fr":"fontaine","target":"funtana"}
+{"key":"waypoint_type_waypoint","source":"waypoint","source_fr":"point de cheminement","target":"puntu di passeghju"}
+{"context":{"comment":"Share image"},"key":"share_image_subject","source":"I would like to share an image with you","source_fr":"J aimerais partager une image avec vous","target":"Vuleria sparte una fiura cù voi"}
+{"key":"share_image_body","source":"I think you might be interested in this image.","source_fr":"Je pense que cette image pourrait vous intéresser.","target":"Pensu chì sta fiura puderia interessavvi."}
+{"key":"hold_to_stop","source":"Hold to stop","source_fr":"Maintenir pour arrêter","target":"Mantene per piantà"}
+{"key":"instant_export_enabled_summary","source":"Export track to storage after recording is finished","source_fr":"Exportation du tracé dans le stockage à la fin de l'enregistrement","target":"Espurtà u tracciatu versu a memoria quandu l’arregistramentu hè compiu"}
+{"key":"instant_export_enabled_title","source":"Instant post-workout export","source_fr":"Exportation instantanée après l'entraînement","target":"Espurtazione istantanea dopu à l’addestramentu"}
+{"context":{"comment":"Fields"},"key":"field_set_primary","source":"Primary","source_fr":"Principal","target":"Principale"}
+{"key":"no_compatible_file_manager_installed","source":"No compatible file manager installed","source_fr":"Aucun gestionnaire de fichiers compatible n'est installé","target":"Nisunu ghjestiunariu di schedariu cumpatibile ùn hè installatu"}
+{"key":"no_compatible_camera_installed","source":"No compatible camera application installed","source_fr":"Aucune application pour l'appareil photo compatible n'est installée","target":"Nisuna appiecazione cumpatibile per l’apparechju-fotò ùn hè installata"}
+{"key":"error_crash_title","source":"%1$s crashed","source_fr":"%1$s a crashé","target":"%1$s s‘hè lampatu"}
+{"key":"report_bug","source":"Report bug","source_fr":"Signaler un problème","target":"Signalà un prublema"}
+{"key":"show_on_dashboard","source":"OpenTracks Dashboard API","source_fr":"Tableau de bord de l'API OpenTracks","target":"API di tavula di cundutta d’OpenTracks"}
+{"key":"show_on_dashboard_not_installed","source":"No application supporting OpenTracks Dashboard API installed.","source_fr":"Il n'y a pas d'application installé supportant l'API OpenTracks Dashboard.","target":"Nisuna appiecazione accettendu l’API di tavula di cundutta d’OpenTracks ùn hè installata."}
+{"key":"power","source":"Power","source_fr":"Puissance","target":"Putenza"}
+{"key":"settings_recording_location_distance_summary","source":"%1$s between recorded locations","source_fr":"%1$s entre chaque localisation enregistrée","target":"%1$s trà e pusizioni arregistrate"}
+{"key":"power_x_watt","source":"Power {x, plural,  =1 {1 watt} other {# watts} }","source_fr":"Puissance {x, plural, =1 {1 watt} other {# watt} }","target":"Power {x, plural, =1 {1 vattu} other {# vatti} }"}
+{"key":"permission_recording_failed","source":"OpenTracks requires permission to access your location as well as nearby devices.","source_fr":"OpenTracks a besoin de la permission d'accéder à votre localisation ainsi qu'aux appareils à proximité.","target":"OpenTracks richiede u permessu d’accede à a vostra pusizione ma dinù à l’apparechji vicini."}
+{"key":"permission_bluetooth_failed_rejected","source":"You manually need to grant OpenTracks access to Nearby Devices in system settings.","source_fr":"Vous devez accorder manuellement l'accès aux appareils à proximité à OpenTracks dans les paramètres système.","target":"Duvete cunsente manualmente à OpenTracks d’accede à l’apparechji vicini in i parametri di u sistema."}
+{"key":"sensor_state_cadence_unit","source":"rpm","source_fr":"tr/min","target":"g/min"}
+{"key":"sensor_state_heart_rate_value","source":"%1$d bpm","source_fr":"%1$d ppm","target":"%1$d palpiti à u minutu"}
+{"key":"sensor_state_power_unit","source":"W","source_fr":"W","target":"W"}
+{"key":"settings_defaults_summary","source":"Preferred Units, Default Activity, Track Default Name","source_fr":"Unités préférées, Activité par défaut, Suivi du nom par défaut","target":"Unità preferite, attività predefinita, nome predefinitu di u tracciatu"}
+{"key":"settings_sensors_title","source":"Sensors","source_fr":"Capteurs","target":"Cattori"}
+{"key":"settings_sensors_summary","source":"Cycling Sensors, Wheel Circumference, Running Sensors","source_fr":"Capteurs de cyclisme, Circonférence de roue, Capteurs de course à pied","target":"Cattori di ciclismu, circunferenza di rota, cattori di corsa à pedi"}
+{"key":"settings_announcements_statistics_title","source":"Statistics Announcements","source_fr":"Annonces vocales","target":"Annunziamenti di statistiche"}
+{"key":"settings_import_export_summary","source":"Import, Export, Auto Export","source_fr":"Importez, Exportez, Auto Export","target":"Impurtà, espurtà è espurtazione autumatica"}
+{"key":"settings_units_category","source":"Units","source_fr":"Unités","target":"Unità"}
+{"key":"settings_activity_defaults_category","source":"Activity's Defaults","source_fr":"Valeurs par défaut de l'activité","target":"Predefinizioni d’attività"}
+{"context":{"comment":"Settings Advanced"},"key":"settings_advanced","source":"Advanced","source_fr":"Avancé","target":"Espertu"}
+{"key":"settings_default_trackfileformat","source":"Export/sharing file format","source_fr":"Format de fichier d'exportation / partage","target":"Furmatu di schedariu d’espurtazione è di spartera"}
+{"context":{"comment":"Settings Recording"},"key":"settings_recording_title","source":"Recording","source_fr":"Enregistrement","target":"Arregistramentu"}
+{"key":"settings_theme_switch_restart","source":"Theme changes may require a manual restart.","source_fr":"Les changements de thème peuvent nécessiter un redémarrage manuel.","target":"Un cambiamentu di tema pò richiede un rilanciu manuale."}
+{"key":"settings_ui_dynamic_colors_title","source":"Dynamic Colors","source_fr":"Couleurs dynamiques","target":"Culori dinamichi"}
+{"key":"stats_split_interval","source":"Split interval","source_fr":"Intervalle partagé","target":"Intervallu di frazziunamentu"}
+{"key":"stats_total_time","source":"Total time","source_fr":"Durée totale","target":"Durata tutale"}
+{"key":"stats_sensors_power","source":"Power","source_fr":"Énergie","target":"Putenza"}
+{"key":"track_recording_notification_accuracy","source":"Location accuracy: %1$s","source_fr":"Précision de la localisation : %1$s","target":"Precisione di a pusizione : %1$s"}
+{"key":"track_pace_notification","source":"Pace: %1$s","source_fr":"Allure : %1$s","target":"Andatura : %1$s"}
+{"key":"settings_recording_show_on_lockscreen_while_recording_title","source":"Show statistics on lockscreen","source_fr":"Afficher les statistiques sur l'écran de verrouillage","target":"Affissà e statistiche nant’à u screnu d’ammarchjunata"}
+{"key":"settings_recording_show_on_lockscreen_while_recording_summary","source":"While recording, show statistics without unlocking the device.","source_fr":"Pendant l'enregistrement, afficher les statistiques sans déverrouiller l'appareil.","target":"Durante l’arregistramentu, affissà e statistiche senza spalancà l’apparechju."}
+{"key":"settings_recording_keep_screen_on_while_recording_summary","source":"While recording, keep the screen on.","source_fr":"Pendant l'enregistrement, garder l'écran allumé.","target":"Durante l’arregistramentu, cunservà u screnu accesu."}
+{"key":"settings_recording_fullscreen_on_while_recording_summary","source":"While recording, present in fullscreen.","source_fr":"Pendant l'enregistrement, affichage en plein écran.","target":"Durante l’arregistramentu, affissà in screnu sanu."}
+{"key":"settings_recording_max_recording_distance_summary","source":"A new segment is created if the distance between two locations is greater than %1$s","source_fr":"Un nouveau segment est créé si la distance entre deux positions est supérieure à %1$s","target":"Un segmentu novu hè creatu s’è a distanza trà duie pusizioni hè superiore à %1$s"}
+{"key":"settings_recording_min_required_accuracy_title","source":"GPS accuracy","source_fr":"Précision du GPS","target":"Precisione GPS"}
+{"key":"settings_recording_max_recording_distance_title","source":"Max distance","source_fr":"Distance max","target":"Distanza massima"}
+{"key":"settings_recording_track_name_number_option","source":"Number","source_fr":"Numéro","target":"Numeru"}
+{"key":"settings_recording_track_name_title","source":"Default track name","source_fr":"Nom du tracé par défaut","target":"Nome predefinitu di u tracciatu"}
+{"key":"settings_night_mode_option_night_oled","source":"OLED friendly","source_fr":"Compatible OLED","target":"Cumpatibile OLED"}
+{"key":"settings_announcements_totaltime_frequency","source":"Time interval","source_fr":"Intervalle de temps","target":"Intervallu di durata"}
+{"key":"settings_announcements_distance_frequency","source":"Lap length","source_fr":"Longueur du tour","target":"Longhezza di u giru"}
+{"key":"settings_announcements_lap_heart_rate","source":"Lap heart rate","source_fr":"Fréquence cardiaque au tour","target":"Frequenza cardiaca à u giru"}
+{"key":"settings_announcements_average_heart_rate","source":"Average heart rate","source_fr":"Moyenne de fréquence cardiaque","target":"Frequenza cardiaca mediana"}
+{"key":"settings_announcements_average_speed_pace","source":"Average speed/pace","source_fr":"Allure/vitesse moyenne","target":"Vitezza è andatura mediane"}
+{"key":"settings_announcements_unit","source":"Distance/speed unit","source_fr":"Unité de Distance/Vitesse","target":"Unità di distanza è di vitezza"}
+{"key":"custom_layout_list_layout_removed","source":"Layout was removed","source_fr":"La mise en page a été retirée","target":"L’accunciamentu hè statu cacciatu"}
+{"key":"stats_custom_layout_default_layout","source":"Default Layout","source_fr":"Disposition par défaut","target":"Accunciamentu predefinitu"}
+{"key":"custom_layout_select_layout","source":"Select Layout","source_fr":"Choisir la mise en page","target":"Selezziunà l’accunciamentu"}
+{"context":{"comment":"Custom Layout Reset"},"key":"settings_layout_reset","source":"Reset Custom Layout","source_fr":"Réinitialiser la disposition personnalisée","target":"Reinizià l’accunciamentu persunalizatu"}
+{"key":"settings_reset_confirm_title","source":"Reset now?","source_fr":"Réinitialiser maintenant ?","target":"Reinizià subitu ?"}
+{"key":"settings_reset_done","source":"All settings have been reverted to the default values","source_fr":"Les valeurs par défaut de tous les paramètres ont bien été rétablies","target":"Tutti i parametri sò stati rimessi à u so valore predefinitu"}
+{"key":"settings_sensor_bluetooth_service_filter_off","source":"Show all discoverable Bluetooth devices","source_fr":"Afficher tout les périphériques Bluetooth découverts","target":"Affissà tutti l’apparechji Bluetooth ch’ella si pò scopre"}
+{"key":"settings_sensor_heart_rate_max","source":"Zones: maximum Heart rate (bpm)","source_fr":"Zones : fréquence cardiaque maximale (bpm)","target":"Zone : frequenza cardiaca massima (bpm)"}
+{"key":"settings_sensor_wheel_circumference","source":"Wheel Circumference (mm)","source_fr":"Circonférence de la roue (mm)","target":"Circunferenza di rota (mm)"}
+{"key":"settings_sensor_bluetooth_service_filter_title","source":"Filter Bluetooth Devices","source_fr":"Filtrer les périphériques Bluetooth","target":"Filtrà l’apparechji Bluetooth"}
+{"key":"settings_sensor_bluetooth_service_filter_on","source":"Only show Bluetooth devices that announce required services","source_fr":"Afficher uniquement les périphériques Bluetooth qui annoncent les services requis","target":"Affissà solu l’apparechji Bluetooth chì annunzianu i servizii richiesti"}
+{"key":"settings_stats_units_imperial","source":"Imperial (mi, ft)","source_fr":"Unités impériales (miles, pieds)","target":"Imperiale (mi, ft)"}
+{"key":"settings_stats_units_imperial_meter","source":"Imperial (mi, m)","source_fr":"Unités impériales (miles, m)","target":"Imperiale (mi, m)"}
+{"key":"settings_stats_units_metric","source":"Metric (km, m)","source_fr":"Unités métriques (km, m)","target":"Metrica (km, m)"}
+{"context":{"comment":"Settings import/export"},"key":"settings_import_section","source":"Import","source_fr":"Importer","target":"Impurtà"}
+{"key":"settings_export_section","source":"Export","source_fr":"Exporter","target":"Espurtà"}
+{"key":"settings_public_api_package_title","source":"Package name for Public API","source_fr":"Nom du paquet pour l'API Publique","target":"Nome di u pacchettu per l’API publica"}
+{"key":"settings_public_api_enabled_summary_off","source":"Only OpenTracks can start and stop recordings.","source_fr":"Seul OpenTracks peut démarrer et arrêter les enregistrements.","target":"Solu OpenTracks pò lancià è piantà l’arregistramenti."}
+{"key":"settings_public_api_enabled_summary_on","source":"Other installed applications can start or stop recordings.","source_fr":"D'autres applications installées peuvent démarrer ou arrêter les enregistrements.","target":"D’altre appiecazioni installate ponu lancià o piantà l’arregistramenti."}
+{"key":"settings_prevent_reimport_tracks_title","source":"Prevent re-import of tracks","source_fr":"Empêcher la réimportation des tracés","target":"Impedisce a reimpurtazione di tracciatu"}
+{"context":{"comment":"Share Track"},"key":"share_track_share_file_body","source":"I think you might be interested in this track.  %1$s","source_fr":"Je pense que ce tracé peut t'intéresser.\n \n %1$s","target":"Pensu chì stu tracciatu puderia interessavvi.\n \n %1$s"}
+{"key":"share_track_subject","source":"I would like to share a track with you","source_fr":"J'aimerais partager un tracé avec toi","target":"Vuleria sparte un tracciatu cù voi"}
+{"key":"settings_public_api_disabled_toast","source":"OpenTracks Public API is disabled: it can be enabled in the settings.","source_fr":"L'API publique d'OpenTracks est désactivé : Elle peut être activé dans les paramètres.","target":"Avà l’API publica d’OpenTracks hè disattivata ma si pò attivalla in i parametri."}
+{"key":"stats_average_moving_speed","source":"Avg moving speed","source_fr":"Vitesse moyenne en déplacement","target":"Vitezza mediana in mossa"}
+{"key":"stats_average_pace","source":"Avg pace","source_fr":"Allure moyenne","target":"Andatura mediana"}
+{"key":"stats_average_speed","source":"Avg speed","source_fr":"Vitesse moyenne","target":"Vitezza mediana"}
+{"key":"stats_max_speed","source":"Max speed","source_fr":"Vitesse max","target":"Vitezza massima"}
+{"key":"stats_pace","source":"Pace","source_fr":"Allure","target":"Andatura"}
+{"key":"stats_moving_time","source":"Moving time","source_fr":"Durée en déplacement","target":"Durata in mossa"}
+{"key":"track_speed_notification","source":"Speed: %1$s","source_fr":"Vitesse : %1$s","target":"Vitezza : %1$s"}
+{"key":"stats_speed","source":"Speed","source_fr":"Vitesse","target":"Vitezza"}
+{"key":"stats_distance","source":"Distance","source_fr":"Distance","target":"Distanza"}
+{"key":"stats_clock","source":"Clock","source_fr":"Horloge","target":"Arilogiu"}
+{"context":{"comment":"Track"},"key":"track_name_format","source":"Track %1$d","source_fr":"Tracé %1$d","target":"Tracciatu %1$d"}
+{"key":"stats_sensors_heart_rate","source":"Heart rate","source_fr":"Fréquence cardiaque","target":"Frequenza cardiaca"}
+{"key":"track_delete_progress_message","source":"Deleting…","source_fr":"Suppression en cours…","target":"Squassatura…"}
+{"key":"track_delete_one_confirm_title","source":"Delete track?","source_fr":"Supprimer le tracé \\?","target":"Squassà u tracciatu ?"}
+{"key":"track_delete_multiple_confirm_message","source":"The selected tracks and their markers will be permanently deleted from the device.","source_fr":"Les tracés sélectionnés et leurs repères respectifs vont être définitivement effacés de l'appareil.","target":"U tracciatu selezziunatu è e so stantelle seranu squassate ab’eternu da l’apparechju."}
+{"key":"track_discarding","source":"Discarding Track","source_fr":"Ignorer le tracé","target":"Tralascià u tracciatu"}
+{"context":{"comment":"Track Detail"},"key":"track_detail_stats_tab","source":"Stats","source_fr":"Statistiques","target":"Statistiche"}
+{"context":{"comment":"Aggregated Statistics"},"key":"aggregated_stats_empty_message","source":"Record your first track to see aggregated statistics","source_fr":"Enregistrez vos premier tracé pour voir les statistiques agrégées","target":"Arregistrate u vostru primu tracciatu per fighjà e statistiche aggregate"}
+{"key":"aggregated_stats_filter_no_results","source":"There are not activities for the specified filter","source_fr":"Il n'y a pas d'activités pour le filtre spécifié","target":"Ùn ci hè nisuna attività per u filtru specificatu"}
+{"key":"unit_meter","source":"m","source_fr":"m","target":"m"}
+{"key":"unit_mile","source":"mi","source_fr":"mile(s)","target":"mi"}
+{"key":"unit_knots","source":"kn","source_fr":"kn","target":"nodi"}
+{"key":"unit_kilometer_per_hour","source":"km/h","source_fr":"km/h","target":"km/o"}
+{"key":"unit_mile_per_hour","source":"mph","source_fr":"mph","target":"mph"}
+{"key":"location_latitude_longitude","source":"%1$s, %2$s","source_fr":"%1$s, %2$s","target":"%1$s, %2$s"}
+{"key":"unit_nautical_mile","source":"NM","source_fr":"MN","target":"NM"}
+{"key":"value_integer_kilometer_hour","source":"%1$d km/h","source_fr":"%1$d km/h","target":"%1$d km/o"}
+{"key":"value_integer_mile_hour","source":"%1$d mi/h","source_fr":"%1$d mi/h","target":"%1$d mi/o"}
+{"key":"value_float_mile_hour_recommended","source":"%1$.1f mi/h (recommended)","source_fr":"%1$.1f mi/h (recommandé)","target":"%1$.1f mi/o (ricumandatu)"}
+{"key":"value_float_knots_recommended","source":"%1$.1f knots (recommended)","source_fr":"%1$.1f nœuds (recommandé)","target":"%1$.1f nodi (ricumandatu)"}
+{"key":"voiceSecondsPlural","source":"{n, plural,\n        =1 {1 second}\n        other {{n,number} seconds}\n        }","source_fr":"{ n, plural,\n        one {{n} seconde}\n        many {{n} secondes}\n        other {{n} secondes}\n        }","target":"{n, plural, =1 {1 seconda} other {{n,number} seconde} }"}
+{"key":"voiceSpeedKilometersPerHourPlural","source":"{n, plural,\n        =1 {1 kilometer per hour}\n        other {{n,number,#.0} kilometers per hour}\n        }","source_fr":"{ n, plural,\n        one {{n,number,#.0} kilomètre-heure}\n        many {{n,number,#.0} kilomètres-heure}\n        other {{n,number,#.0} kilomètres-heure}\n        }","target":"{n, plural, =1 {1 chilometru à l’ora} other {{n,number,#.0} chilometri à l’ora} }"}
+{"key":"voiceSpeedMKnotsPlural","source":"{n, plural,\n        =1 {1 knot}\n        other {{n,number,#.0} knots}\n        }","source_fr":"{ n, plural,\n        one {{n,number,#.0} nœud}\n        many {{n,number,#.0} nœuds}\n        other {{n,number,#.0} nœuds}\n        }","target":"{n, plural, =1 {1 nodu} other {{n,number,#.0} nodi} }"}
+{"key":"voice_per_mile","source":"per mile","source_fr":"par mile","target":"à u mile"}
+{"key":"speed","source":"Average moving speed","source_fr":"Vitesse moyenne","target":"Vitezza mediana in mossa"}
+{"key":"total_distance","source":"Total distance","source_fr":"Distance totale","target":"Distanza tutale"}
+{"key":"voiceDistanceKilometersPlural","source":"{n, plural,\n        =1 {1 kilometer}\n        other {{n,number,#.0} kilometers}\n        }","source_fr":"{ n, plural,\n        one {{n,number,#.0} kilomètre}\n        many {{n,number,#.0} kilomètres}\n        other {{n,number,#.0} kilomètres}\n        }","target":"{n, plural, =1 {1 chilometru} other {{n,number,#.0} chilometri} }"}
+{"key":"average_heart_rate","source":"Average heart rate","source_fr":"Fréquence cardiaque moyenne","target":"Frequenza cardiaca mediana"}
+{"key":"waypoint_type_bar","source":"bar","source_fr":"bar","target":"bivetta"}
+{"key":"waypoint_type_building","source":"building","source_fr":"bâtiment","target":"casamentu"}
+{"key":"waypoint_type_campfire","source":"campfire","source_fr":"feu de camp","target":"focu di campu"}
+{"key":"waypoint_type_drinking_water","source":"drinking water","source_fr":"eau potable","target":"acqua putabile"}
+{"key":"waypoint_type_ferry","source":"ferry","source_fr":"bac","target":"barcu"}
+{"key":"waypoint_type_fire_station","source":"fire station","source_fr":"caserne de pompiers","target":"caserna di spinghjifochi"}
+{"key":"waypoint_type_golf_course","source":"golf course","source_fr":"parcours de golf","target":"percorsu di golf"}
+{"key":"waypoint_type_information","source":"information","source_fr":"informations","target":"infurmazioni"}
+{"key":"waypoint_type_intersection","source":"intersection","source_fr":"croisement","target":"crucivia"}
+{"key":"waypoint_type_mail_box","source":"mail box","source_fr":"boîte aux lettres","target":"scatula à lettere"}
+{"key":"waypoint_type_market","source":"market","source_fr":"marché","target":"mercatu"}
+{"key":"waypoint_type_meeting_point","source":"meeting point","source_fr":"point de rencontre","target":"puntu di scontru"}
+{"key":"waypoint_type_restaurant","source":"restaurant","source_fr":"restaurant","target":"risturante"}
+{"key":"waypoint_type_post_office","source":"post office","source_fr":"bureau de poste","target":"offiziu pustale"}
+{"key":"waypoint_type_shopping","source":"shopping","source_fr":"centre commercial","target":"centru cummerciale"}
+{"key":"waypoint_type_tree","source":"tree","source_fr":"arbre","target":"arburu"}
+{"key":"waypoint_type_tunnel","source":"tunnel","source_fr":"un tunnel","target":"tunellu"}
+{"key":"settings_default_export_uri_title","source":"Track export directory","source_fr":"Répertoire d'exportation des tracés","target":"Cartulare d’espurtazione di i tracciati"}
+{"key":"field_set_secondary","source":"Secondary","source_fr":"Secondaire","target":"Secundariu"}
+{"key":"field_remove_from_layout","source":"Remove","source_fr":"Retirer","target":"Caccià"}
+{"key":"no_compatible_gallery_installed","source":"No compatible image gallery application installed","source_fr":"Aucune application de galerie d'images compatible n'est installée","target":"Nisuna appiecazione cumpatibile di galleria di fiure ùn hè installata"}
+{"key":"always","source":"Always","source_fr":"Toujours","target":"Sempre"}
+{"key":"share_crash_report","source":"Share crash report","source_fr":"Partager le rapport de crash","target":"Sparte u raportu d’accidente"}
+{"key":"settings_announcements_lap_power","source":"Lap power","source_fr":"Puissance par tour","target":"Putenza à u giru"}
+{"key":"introduction_osm_dashboard","source":"OpenTracks itself does not provide a map. Please install OSMDashboard to view your recordings on a map.","source_fr":"OpenTracks ne fournit pas de carte en tant que telle. Veuillez installer OSMDashboard pour visualiser vos tracés sur une carte.","target":"OpenTracks ùn pruvede micca carta da per ellu. Ci vole à installà OSMDashboard per vede i vostri arregistramenti nant’à una carta."}
+{"key":"settings_recording_min_sampling_interval_title","source":"Sampling time interval","source_fr":"Fréquence d'échantillonnage","target":"Intervallu di durata di campiunariu"}
+{"key":"settings_announcements_idle_title","source":"Idle","source_fr":"En veille","target":"Inattività"}
+{"key":"voiceIdle","source":"Becoming idle.","source_fr":"Mise en veille.","target":"Diventà inattivu."}
+{"key":"settings_locale_title","source":"Language","source_fr":"Langue","target":"Lingua"}
+{"key":"settings_locale_system_default","source":"System default","source_fr":"Paramètres par défaut du système","target":"Predefinizione di u sistema"}
+{"key":"stats_gain_loss","source":"Gain & Loss","source_fr":"Gain et perte","target":"Guadagnu è perdita"}
+{"key":"voice_announce_lap_power_key","source":"voiceAnnounceLapPower","source_fr":"voiceAnnounceLapPower","target":"AnnunziamentuVucalePutenzaÀUGiru"}
+{"key":"lap_heart_rate","source":"Lap heart rate","source_fr":"Fréquence cardiaque au tour","target":"Frequenza cardiaca à u giru"}
+{"key":"settings_charts_title","source":"Charts","source_fr":"Graphiques","target":"Grafici"}
+{"key":"settings_chart_display_elevation_title","source":"Display elevation","source_fr":"Afficher l'altitude","target":"Affissà l’altitudine"}
+{"key":"settings_chart_display_heart_rate_title","source":"Display heart rate","source_fr":"Afficher la fréquence cardiaque","target":"Affissà a frequenza cardiaca"}
+{"key":"settings_chart_display_pace_or_speed_title","source":"Display pace or speed","source_fr":"Afficher le pas ou la vitesse","target":"Affissà l’andatura o a vitezza"}
+{"key":"settings_recording_show_gps_disabled_warning_title","source":"GPS disabled warning","source_fr":"Alerte GPS désactivée","target":"Avertimentu di disattivazione di u GPS"}
+{"key":"settings_recording_show_gps_disabled_warning_summary","source":"While recording, show a warning if GPS is disabled.","source_fr":"Pendant l'enregistrement, afficher un avertissement si le GPS est désactivé.","target":"Durante l’arregistramentu, un avertimentu hè affissatu s’è u GPS hè disattivatu."}
+{"source":"empty","source_fr":"vide","target":"viotu"}
+{"key":"track_edit_time_offset","source":"Timezone Offset","source_fr":"Décalage de fuseau horaire","target":"Sfarenza di u fusu orariu"}
+{"key":"marker_detail_title","source":"%1$d of %2$d: %3$s","source_fr":"%1$d de %2$d: %3$s","target":"%1$d nant’à %2$d : %3$s"}
+{"key":"stats_coordinates","source":"Latitude/Longitude","source_fr":"Latitude/Longitude","target":"Latitudine/Lungitudine"}
+{"key":"settings_night_mode_option_system_dynamic","source":"System (DynamicColor)","source_fr":"Système (couleurs dynamiques)","target":"Sistema (DynamicColor)"}
+{"key":"settings_night_mode_option_day_dynamic","source":"Day (DynamicColor)","source_fr":"Jour (couleurs dynamiques)","target":"Ghjornu (DynamicColor)"}
+{"key":"settings_night_mode_option_night_dynamic","source":"Night (DynamicColor)","source_fr":"Nuit (couleurs dynamiques)","target":"Notte (DynamicColor)"}
+{"key":"settings_night_mode_option_night_oled_dynamic","source":"OLED friendly (DynamicColor)","source_fr":"Compatible OLED (Couleurs dynamiques)","target":"Cumpatibile OLED (DynamicColor)"}

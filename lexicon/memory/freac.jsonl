@@ -1,0 +1,1118 @@
+{"_defaults":{"app":"fre:ac","component":"freac","fetched":"2026-10-16","license":"GPL-2.0-or-later","origin":{"branch":"master","path":"i18n/freac/freac_co.xml","repo":"enzo1982/freac"},"review":"upstream-reviewed","source_lang":"en","version":"693ae52a4121b637beb28397b7389586705154f8"}}
+{"key":"/data:#100","source":"OK","source_fr":"OK","target":"Vai"}
+{"key":"/data:#101","source":"Cancel","source_fr":"Annuler","target":"Abbandunà"}
+{"key":"/data:#102","source":"Close","source_fr":"Fermer","target":"Chjode"}
+{"key":"/data:#200","source":"Error","source_fr":"Erreur","target":"Sbagliu"}
+{"key":"/data:#201","source":"Warning","source_fr":"Avertissement","target":"Avertimentu"}
+{"key":"/data:#202","source":"Info","source_fr":"Infos","target":"Infurmazione"}
+{"key":"/data:#210","source":"Do not display this warning again","source_fr":"Ne plus montrer cet avertissement","target":"Ùn affissà più st’avertimentu"}
+{"key":"/data:#211","source":"Do not display this note again","source_fr":"Ne plus montrer ce commentaire","target":"Ùn affissà più sta nota"}
+{"key":"/data:#300","source":"Artist","source_fr":"Artiste","target":"Artista"}
+{"key":"/data:#301","source":"Title","source_fr":"Titre","target":"Titulu"}
+{"key":"/data:#302","source":"Album","source_fr":"Album","target":"Albumu"}
+{"key":"/data:#303","source":"Track","source_fr":"Piste","target":"Traccia"}
+{"key":"/data:#304","source":"Genre","source_fr":"Genre","target":"Generu"}
+{"key":"/data:#305","source":"Comment","source_fr":"Commentaire","target":"Cummentu"}
+{"key":"/data:#306","source":"Year","source_fr":"Année","target":"Annu"}
+{"key":"/data:#307","source":"Disc","source_fr":"Disque","target":"Discu"}
+{"key":"/data:#308","source":"Rating","source_fr":"Évaluation","target":"Valutazione"}
+{"key":"/data:#309","source":"File name","source_fr":"Nom de fichier","target":"Nome di schedariu"}
+{"key":"/data:#310","source":"File type","source_fr":"Type de fichier","target":"Tipu di schedariu"}
+{"key":"/data:#311","source":"Album artist","source_fr":"Artiste de l'album","target":"Artista di l’albumu"}
+{"key":"/data:#312","source":"Conductor","source_fr":"Chef d'orchestre","target":"Sceffu d’orchestru"}
+{"key":"/data:#313","source":"Composer","source_fr":"Compositeur","target":"Cumpositore"}
+{"key":"/data:#314","source":"Tempo","source_fr":"Tempo","target":"Tempo"}
+{"key":"/data:#315","source":"ISRC","source_fr":"ISRC","target":"Codice ISRC"}
+{"key":"/data:#316","source":"Musical key","source_fr":"Clef musicale","target":"Tunalità"}
+{"key":"/data:#350","source":"unknown artist","source_fr":"artiste inconnu","target":"artista scunnisciutu"}
+{"key":"/data:#351","source":"unknown title","source_fr":"titre inconnu","target":"titulu scunnisciutu"}
+{"key":"/data:#352","source":"unknown album","source_fr":"album inconnu","target":"albumu scunnisciutu"}
+{"key":"/data:#353","source":"unknown genre","source_fr":"genre inconnu","target":"generu scunnisciutu"}
+{"key":"/data:#354","source":"unknown year","source_fr":"année inconnue","target":"annu scunnisciutu"}
+{"key":"/data:#355","source":"unknown conductor","source_fr":"chef d'orchestre inconnu","target":"sceffu d’orchestru scunnisciutu"}
+{"key":"/data:#356","source":"unknown composer","source_fr":"compositeur inconnu","target":"cumpositore scunnisciutu"}
+{"key":"/data:#357","source":"unknown album artist","source_fr":"artiste de l'album inconnu","target":"artista di l’albumu scunnisciutu"}
+{"key":"/data:#358","source":"unknown tempo","source_fr":"tempo inconnu","target":"tempo scunnisciutu"}
+{"key":"/data:#359","source":"unknown key","source_fr":"clef inconnue","target":"tunalità scunnisciuta"}
+{"key":"/data:#380","source":"hidden track","source_fr":"piste cachée","target":"traccia piattata"}
+{"key":"/data:/section:Characters#500","source":"%1:","source_fr":"%1 :","target":"%1 :"}
+{"key":"/data:/section:Characters#501","source":"%1...","source_fr":"%1...","target":"%1…"}
+{"key":"/data:/section:Characters#502","source":"%1 (%2)","source_fr":"%1 (%2)","target":"%1 (%2)"}
+{"key":"/data:/section:Technical#510","source":"%1 kbps","source_fr":"%1 kbps","target":"%1 kbps"}
+{"key":"/data:/section:Technical#511","source":"%1 Hz","source_fr":"%1 Hz","target":"%1 Hz"}
+{"key":"/data:/section:Technical#512","source":"%1 kHz","source_fr":"%1 kHz","target":"%1 kHz"}
+{"key":"/data:/section:Technical#513","source":"%1 ms","source_fr":"%1 ms","target":"%1 ms"}
+{"key":"/data:/section:Technical#514","source":"%1 min","source_fr":"%1 min","target":"%1 min"}
+{"key":"/data:/section:Technical#515","source":"%1 bit","source_fr":"%1 bit","target":"%1 bit"}
+{"key":"/data:/section:Technical#516","source":"%1 bytes","source_fr":"%1 octets","target":"%1 ottetti"}
+{"key":"/data:/section:Technical#517","source":"%1 kB","source_fr":"%1 ko","target":"%1 kO"}
+{"key":"/data:/section:Technical#518","source":"%1%","source_fr":"%1%","target":"%1%"}
+{"key":"/data:/section:Media types#600","source":"CD","source_fr":"CD","target":"CD"}
+{"key":"/data:/section:Media types#601","source":"DAT","source_fr":"DAT","target":"DAT"}
+{"key":"/data:/section:Media types#602","source":"MiniDisc","source_fr":"MiniDisc","target":"MiniDisc"}
+{"key":"/data:/section:Media types#603","source":"Compact Cassette","source_fr":"Cassette","target":"Scagninu"}
+{"key":"/data:/section:Media types#604","source":"Reel tape","source_fr":"Bobine","target":"Frisgiu magneticu"}
+{"key":"/data:/section:Media types#605","source":"Vinyl","source_fr":"Vinyle","target":"Discu vinilu"}
+{"key":"/data:/section:Media types#606","source":"DVD","source_fr":"DVD","target":"DVD"}
+{"key":"/data:/section:Media types#607","source":"LaserDisc","source_fr":"LaserDisc","target":"LaserDisc"}
+{"key":"/data:/section:Media types#608","source":"TV","source_fr":"TV","target":"TV"}
+{"key":"/data:/section:Media types#609","source":"Video","source_fr":"Vidéo","target":"Video"}
+{"key":"/data:/section:Media types#610","source":"Radio","source_fr":"Radio","target":"Radiò"}
+{"key":"/data:/section:Media types#611","source":"Telephone","source_fr":"Téléphone","target":"Telefonu"}
+{"key":"/data:/section:Menu#1000","source":"File","source_fr":"Fichier","target":"Schedariu"}
+{"key":"/data:/section:Menu#1001","source":"Options","source_fr":"Options","target":"Ozzioni"}
+{"key":"/data:/section:Menu#1002","source":"Database","source_fr":"Base de données","target":"Basa di dati"}
+{"key":"/data:/section:Menu#1003","source":"Processing","source_fr":"Traitement","target":"Trattamentu"}
+{"key":"/data:/section:Menu#1004","source":"Encode","source_fr":"Encodeur","target":"Cudificà"}
+{"key":"/data:/section:Menu#1005","source":"Help","source_fr":"Aide","target":"Aiutu"}
+{"key":"/data:/section:Menu/section:File#1100","source":"Add","source_fr":"Ajouter","target":"Aghjunghje"}
+{"key":"/data:/section:Menu/section:File#1101","source":"Remove","source_fr":"Supprimer","target":"Caccià"}
+{"key":"/data:/section:Menu/section:File#1102","source":"Load joblist","source_fr":"Charger la liste","target":"Caricà a lista di travagliu"}
+{"key":"/data:/section:Menu/section:File#1103","source":"Save joblist","source_fr":"Enregistrer la liste","target":"Arregistrà a lista di travagliu"}
+{"key":"/data:/section:Menu/section:File#1104","source":"Clear joblist","source_fr":"Effacer la liste","target":"Viutà a lista di travagliu"}
+{"key":"/data:/section:Menu/section:File#1105","source":"Exit","source_fr":"Quitter","target":"Esce"}
+{"key":"/data:/section:Menu/section:File#1106","source":"Audio file(s)","source_fr":"Fichier(s) audio","target":"Schedarii audio"}
+{"key":"/data:/section:Menu/section:File#1107","source":"Audio CD contents","source_fr":"Contenu du CD audio","target":"Cuntenutu di u CD audio"}
+{"key":"/data:/section:Menu/section:File#1108","source":"By pattern","source_fr":"Par modèle","target":"Da mudellu"}
+{"key":"/data:/section:Menu/section:File#1109","source":"From folder","source_fr":"Depuis répertoire","target":"Da u cartulare"}
+{"key":"/data:/section:Menu/section:Database#1200","source":"Query CDDB database","source_fr":"Interroger la base de données CDDB","target":"Interrugà a basa di dati CDDB"}
+{"key":"/data:/section:Menu/section:Database#1201","source":"Submit CDDB data","source_fr":"Soumettre les données CDDB","target":"Sottumette i dati CDDB"}
+{"key":"/data:/section:Menu/section:Database#1202","source":"Query CDDB database later","source_fr":"Interroger la base de données CDDB plus tard","target":"Interrugà a basa di dati CDDB più tardi"}
+{"key":"/data:/section:Menu/section:Database#1203","source":"Show queued CDDB entries","source_fr":"Afficher les entrées CDDB en file d'attente","target":"Affissà l’entrate CDDB in a fila d’attesa"}
+{"key":"/data:/section:Menu/section:Database#1204","source":"Show queued CDDB queries","source_fr":"Afficher les requêtes CDDB en file d'attente","target":"Affissà e richieste CDDB in a fila d’attesa"}
+{"key":"/data:/section:Menu/section:Database#1205","source":"Enable CDDB cache","source_fr":"Activer le cache CDDB","target":"Attivà l’impiatta CDDB"}
+{"key":"/data:/section:Menu/section:Database#1206","source":"Manage CDDB cache entries","source_fr":"Gérer entrées de cache CDDB","target":"Urganizà l’entrate d’impiatta CDDB"}
+{"key":"/data:/section:Menu/section:Database#1207","source":"Automatic CDDB queries","source_fr":"Requêtes CDDB automatiques","target":"Richieste CDDB autumatiche"}
+{"key":"/data:/section:Menu/section:Options#1300","source":"General settings","source_fr":"Paramètres généraux","target":"Parametri generali"}
+{"key":"/data:/section:Menu/section:Options#1301","source":"Configure signal processing","source_fr":"Configurer le traitement du signal","target":"Cunfigurà u trattamentu di u signale"}
+{"key":"/data:/section:Menu/section:Options#1302","source":"Configure selected encoder","source_fr":"Configurer l'encodeur sélectionné","target":"Cunfigurà u cudificatore selezziunatu"}
+{"key":"/data:/section:Menu/section:Options#1303","source":"Active CD-ROM drive","source_fr":"Lecteur de CD-ROM actif","target":"Lettore CD-ROM attivu"}
+{"key":"/data:/section:Menu/section:Options#1304","source":"Active configuration","source_fr":"Configuration active","target":"Cunfigurazione attiva"}
+{"key":"/data:/section:Menu/section:Options#1305","source":"Default configuration","source_fr":"Configuration par défaut","target":"Cunfigurazione predefinita"}
+{"key":"/data:/section:Menu/section:Processing#1400","source":"Enable signal processing","source_fr":"Activer le traitement du signal","target":"Attivà u trattamentu di u signale"}
+{"key":"/data:/section:Menu/section:Processing#1401","source":"Enable processing during playback","source_fr":"Activer le traitement pendant la lecture","target":"Attivà u trattamentu durante a ripruduzzione"}
+{"key":"/data:/section:Menu/section:Processing#1402","source":"Selected signal processors","source_fr":"Sélectionner les traitements du signal","target":"Prucessori di signale selezziunati"}
+{"key":"/data:/section:Menu/section:Encode#1500","source":"Start encoding","source_fr":"Commencer l'encodage","target":"Principià a cudificazione"}
+{"key":"/data:/section:Menu/section:Encode#1501","source":"Start encoding (deleting original files)","source_fr":"Commencer l'encodage (effacer les fichiers d'origine)","target":"Principià a cudificazione (cù a squassatura di i schedarii uriginale)"}
+{"key":"/data:/section:Menu/section:Encode#1502","source":"Start encoding with","source_fr":"Commencer l'encodage avec","target":"Principià a cudificazione cù"}
+{"key":"/data:/section:Menu/section:Encode#1503","source":"Pause/resume encoding","source_fr":"Interrompre/reprendre encodage","target":"Interrompe / cuntinuà a cudificazione"}
+{"key":"/data:/section:Menu/section:Encode#1504","source":"Stop encoding","source_fr":"Arrêter l'encodage","target":"Piantà a cudificazione"}
+{"key":"/data:/section:Menu/section:Encode#1505","source":"Encoder options","source_fr":"Options encodeur","target":"Ozzioni di cudificatore"}
+{"key":"/data:/section:Menu/section:Encode#1506","source":"Encode to a single file","source_fr":"Encoder dans fichier unique","target":"Cudificà in un schedariu unicu"}
+{"key":"/data:/section:Menu/section:Encode#1507","source":"Encode to input file folder if possible","source_fr":"Encoder dans répertoire fichier entrée si possible","target":"Cudificà s’ellu hè pussibule in u cartulare di u schedariu d’origine"}
+{"key":"/data:/section:Menu/section:Encode#1508","source":"Allow overwriting input file","source_fr":"Autoriser remplacement fichier entrée","target":"Permette di rimpiazzà u schedariu d’origine"}
+{"key":"/data:/section:Menu/section:Encode#1509","source":"Delete original files after encoding","source_fr":"Supprimer fichiers initiaux après encodage","target":"Squassà u schedariu d’origine dopu à a cudificazione"}
+{"key":"/data:/section:Menu/section:Encode#1510","source":"Shutdown after encoding","source_fr":"Fermer après encodage","target":"Chjusura di u sistema dopu à a cudificazione"}
+{"key":"/data:/section:Menu/section:Help#1600","source":"Help topics","source_fr":"Rubriques d'aide","target":"Rubriche d’aiutu"}
+{"key":"/data:/section:Menu/section:Help#1601","source":"Show Tip of the Day","source_fr":"Afficher l'astuce du jour","target":"Affissà a minichichja oghjinca"}
+{"key":"/data:/section:Menu/section:Help#1602","source":"Check for updates now","source_fr":"Rechercher des mises à jour maintenant","target":"Circà e nove versioni subitu"}
+{"key":"/data:/section:Menu/section:Help#1603","source":"Check for updates at startup","source_fr":"Rechercher les mises à jour au démarrage","target":"Circà e nove versioni à l’iniziu di u prugramma"}
+{"key":"/data:/section:Menu/section:Help#1604","source":"About %1","source_fr":"A propos de %1","target":"Apprupositu di %1"}
+{"key":"/data:/section:Menu/section:Help#1605","source":"index_en.html","source_fr":"index.html","target":"index.html"}
+{"key":"/data:/section:Menu/section:Help#1606","source":"Report an issue","source_fr":"Signaler un problème","target":"Signalà un penseru"}
+{"key":"/data:/section:Menu/section:Help#1607","source":"Suggest a feature","source_fr":"Suggérer une fonctionnalité","target":"Suggerisce una funzione"}
+{"key":"/data:/section:Toolbar#2000","source":"Add audio file(s) to the joblist","source_fr":"Ajouter le(s) fichier(s) à la liste","target":"Aghjunghje schedarii audio à a lista di travagliu"}
+{"key":"/data:/section:Toolbar#2001","source":"Add audio CD contents to the joblist","source_fr":"Ajouter le contenu du CD audio à la liste","target":"Aghjunghje u cuntenutu di u CD audio à a lista di travagliu"}
+{"key":"/data:/section:Toolbar#2002","source":"Remove the selected entry from the joblist","source_fr":"Supprimer l'entrée sélectionnée de la liste","target":"Caccià l’elementu selezziunatu nant’à a lista di travagliu"}
+{"key":"/data:/section:Toolbar#2003","source":"Clear the entire joblist","source_fr":"Effacer toute la liste","target":"Viutà tutta a lista di travagliu"}
+{"key":"/data:/section:Toolbar#2004","source":"Query CDDB database","source_fr":"Interroger la base de données CDDB","target":"Interrugà a basa di dati CDDB"}
+{"key":"/data:/section:Toolbar#2005","source":"Submit CDDB data","source_fr":"Soumettre les données CDDB","target":"Sottumette i dati CDDB"}
+{"key":"/data:/section:Toolbar#2006","source":"Configure general settings","source_fr":"Configurer les paramètres généraux","target":"Cunfigurà i parametri generali"}
+{"key":"/data:/section:Toolbar#2007","source":"Configure signal processing","source_fr":"Configurer le traitement du signal","target":"Cunfigurà u trattamentu di u signale"}
+{"key":"/data:/section:Toolbar#2008","source":"Configure the selected audio encoder","source_fr":"Configurer l'encodeur audio sélectionné","target":"Cunfigurà u cudificatore audio selezziunatu"}
+{"key":"/data:/section:Toolbar#2009","source":"Start the encoding process","source_fr":"Commencer l'encodage","target":"Principià u trattamentu di cudificazione"}
+{"key":"/data:/section:Toolbar#2010","source":"Start the encoding process (deleting original files)","source_fr":"Commencer le processus d'encodage [éffacer les fichiers originaux]","target":"Principià u trattamentu di cudificazione (cù a squassatura di i schedarii uriginale)"}
+{"key":"/data:/section:Toolbar#2011","source":"Pause/resume encoding","source_fr":"Interrompre/reprendre encodage","target":"Interrompe / cuntinuà a cudificazione"}
+{"key":"/data:/section:Toolbar#2012","source":"Stop encoding","source_fr":"Arrêter l'encodage","target":"Piantà a cudificazione"}
+{"key":"/data:/section:Toolbar#2013","source":"Open the output splitting tool","source_fr":"Ouvrir l’outil de séparation en sortie","target":"Apre l’attrezzu di frazziunamentu d’esciuta"}
+{"key":"/data:/section:Joblist#3000","source":"Time left","source_fr":"Temps restant","target":"Durata rimanente"}
+{"key":"/data:/section:Joblist#3001","source":"File progress","source_fr":"Progression","target":"Prugressione di schedariu"}
+{"key":"/data:/section:Joblist#3002","source":"Output folder","source_fr":"Répertoire de sortie","target":"Cartulare di destinazione"}
+{"key":"/data:/section:Joblist#3003","source":"%1 file(s) in joblist","source_fr":"%1 fichier(s) à traiter","target":"%1 schedariu(i) in a lista di travagliu"}
+{"key":"/data:/section:Joblist#3004","source":"Show title info","source_fr":"Afficher les informations de titre","target":"Affissà l’infurmazione di titulu"}
+{"key":"/data:/section:Joblist#3005","source":"Play","source_fr":"Lire","target":"Leghje"}
+{"key":"/data:/section:Joblist#3006","source":"Stop","source_fr":"Arrêter","target":"Fermà"}
+{"key":"/data:/section:Joblist#3007","source":"Select all","source_fr":"Tout sélectionner","target":"Selezziunà tuttu"}
+{"key":"/data:/section:Joblist#3008","source":"Select none","source_fr":"Ne rien sélectionner","target":"Ùn selezziunà nunda"}
+{"key":"/data:/section:Joblist#3009","source":"Toggle selection","source_fr":"Inverser la sélection","target":"Invertisce a selezzione"}
+{"key":"/data:/section:Joblist#3010","source":"ripping/decoding","source_fr":"extraction/décodage","target":"estrazzione/dicudificazione"}
+{"key":"/data:/section:Joblist#3011","source":"encoding","source_fr":"encodage","target":"cudificazione"}
+{"key":"/data:/section:Joblist#3012","source":"Create playlist","source_fr":"Créer sélection","target":"Creà a lista di lettura"}
+{"key":"/data:/section:Joblist#3013","source":"Create cue sheet","source_fr":"Créer feuille de repères","target":"Creà u fogliu di mischiera cue"}
+{"key":"/data:/section:Joblist#3014","source":"Select","source_fr":"Parcourir","target":"Selezziunà"}
+{"key":"/data:/section:Joblist#3015","source":"Encode to a single file","source_fr":"Encoder dans fichier unique","target":"Cudificà in un schedariu unicu"}
+{"key":"/data:/section:Joblist#3016","source":"Remove","source_fr":"Supprimer","target":"Caccià"}
+{"key":"/data:/section:Joblist#3017","source":"Clear joblist","source_fr":"Effacer la liste","target":"Viutà a lista di travagliu"}
+{"key":"/data:/section:Joblist#3018","source":"Use for all selected tracks","source_fr":"Utiliser pour toutes les pistes sélectionnées","target":"Impiegà per tutte e traccie selezziunate"}
+{"key":"/data:/section:Joblist#3019","source":"Interpret string as","source_fr":"Interpréter la chaîne comme","target":"Interpretà a catena cum’è"}
+{"key":"/data:/section:Joblist#3020","source":"selected tracks","source_fr":"pistes sélectionnées","target":"traccie selezziunate"}
+{"key":"/data:/section:Joblist#3021","source":"Adjust upper/lower case","source_fr":"Ajuster majuscules/minuscules","target":"Aggalabà maiuscule/minuscule"}
+{"key":"/data:/section:Joblist#3022","source":"all words upper case","source_fr":"Tout en majuscules","target":"tutte e parolle in maiuscule"}
+{"key":"/data:/section:Joblist#3023","source":"long words upper case","source_fr":"Mots longs en majuscules","target":"parolle longhe in maiuscule"}
+{"key":"/data:/section:Joblist#3024","source":"first letter upper case","source_fr":"Première lettre en majuscule","target":"prima lettera in maiuscula"}
+{"key":"/data:/section:Joblist#3025","source":"all lower case","source_fr":"tout en minuscules","target":"tuttu in minuscula"}
+{"key":"/data:/section:Joblist#3026","source":"all upper case","source_fr":"tout en majuscules","target":"tuttu in maiuscula"}
+{"key":"/data:/section:Joblist#3027","source":"Select the folder in which the encoded files will be placed","source_fr":"Sélectionnez le dossier de destination des fichiers encodés","target":"Selezziunà u cartulare di destinazione di i schedarii cudificati"}
+{"key":"/data:/section:Joblist#3028","source":"Sampling rate","source_fr":"Taux d'échantillonnage","target":"Frequenza di campiunariu"}
+{"key":"/data:/section:Joblist#3029","source":"Sample resolution","source_fr":"Résolution d'échantillon","target":"Risuluzione di campiunariu"}
+{"key":"/data:/section:Joblist#3030","source":"Number of samples","source_fr":"Nombre d'échantillons","target":"Numeru di campioni"}
+{"key":"/data:/section:Joblist#3031","source":"Channels","source_fr":"Canaux","target":"Canali"}
+{"key":"/data:/section:Joblist#3032","source":"Mono","source_fr":"Mono","target":"Mono"}
+{"key":"/data:/section:Joblist#3033","source":"Stereo","source_fr":"Stéréo","target":"Stereo"}
+{"key":"/data:/section:Joblist#3034","source":"Length","source_fr":"Longueur","target":"Durata"}
+{"key":"/data:/section:Joblist#3035","source":"File","source_fr":"Fichier","target":"Schedariu"}
+{"key":"/data:/section:Joblist#3036","source":"Size","source_fr":"Taille","target":"Dimensione"}
+{"key":"/data:/section:Joblist#3037","source":"Bitrate","source_fr":"Qualité d'encodage","target":"Flussu binariu"}
+{"key":"/data:/section:Joblist#3038","source":"Audio Files","source_fr":"Fichiers audio","target":"Schedarii audio"}
+{"key":"/data:/section:Joblist#3039","source":"All Files","source_fr":"Tous les fichiers","target":"Tutti i schedarii"}
+{"key":"/data:/section:Joblist#3040","source":"Playlist Files","source_fr":"Fichiers des sélections","target":"Schedarii di lista di lettura"}
+{"key":"/data:/section:Joblist#3041","source":"Joblist","source_fr":"Liste des tâches","target":"Lista di travagliu"}
+{"key":"/data:/section:Joblist#3042","source":"Other","source_fr":"Autre","target":"Altra"}
+{"key":"/data:/section:Joblist#3043","source":"Output file name","source_fr":"Nom du fichier résultant","target":"Nome di schedariu d’esciuta"}
+{"key":"/data:/section:Joblist#3044","source":"verifying","source_fr":"vérification","target":"verificazione"}
+{"key":"/data:/section:Joblist#3045","source":"Open","source_fr":"Ouvrir","target":"Apre"}
+{"key":"/data:/section:Joblist#3046","source":"CD drive","source_fr":"Lecteur CD","target":"Lettore CD"}
+{"key":"/data:/section:Joblist#3047","source":"Disc ID","source_fr":"Disque n°","target":"Discu n°"}
+{"key":"/data:/section:Joblist/section:File#3050","source":"Current file","source_fr":"Encodage du fichier","target":"Schedariu attuale"}
+{"key":"/data:/section:Joblist/section:File#3051","source":"none","source_fr":"aucun","target":"nisunu"}
+{"key":"/data:/section:Joblist/section:File#3052","source":"Skip current file","source_fr":"Ignorer","target":"Ignurà u schedariu attuale"}
+{"key":"/data:/section:Joblist/section:Decoder#3060","source":"Active decoder","source_fr":"Activer le décodeur","target":"Discudificatore attivu"}
+{"key":"/data:/section:Joblist/section:Decoder#3061","source":"none","source_fr":"aucun","target":"nisunu"}
+{"key":"/data:/section:Joblist/section:Filters#3070","source":"Selected filters","source_fr":"Filtres sélectionnés","target":"Filtri selezziunati"}
+{"key":"/data:/section:Joblist/section:Filters#3071","source":"none","source_fr":"aucun","target":"nisunu"}
+{"key":"/data:/section:Joblist/section:Filters#3072","source":"disabled","source_fr":"désactivé","target":"disattivatu"}
+{"key":"/data:/section:Joblist/section:Filters#3073","source":"Configure signal processing","source_fr":"Configurer le traitement du signal","target":"Cunfigurà u trattamentu di u signale"}
+{"key":"/data:/section:Joblist/section:Encoder#3080","source":"Selected encoder","source_fr":"Encodeur sélectionné","target":"Cudificatore selezziunatu"}
+{"key":"/data:/section:Joblist/section:Encoder#3081","source":"Configure selected encoder","source_fr":"Configurer l'encodeur sélectionné","target":"Cunfigurà u cudificatore selezziunatu"}
+{"key":"/data:/section:Joblist/section:Add folder#3100","source":"Folder","source_fr":"Répertoire","target":"Cartulare"}
+{"key":"/data:/section:Joblist/section:Add folder#3101","source":"Add folder","source_fr":"Ajouter répertoire","target":"Aghjunghje un cartulare"}
+{"key":"/data:/section:Joblist/section:Add folder#3102","source":"Choose folder","source_fr":"Sélectionnez le répertoire","target":"Sceglie u cartulare"}
+{"key":"/data:/section:Joblist/section:Add folder#3103","source":"Select the folder to add to the joblist","source_fr":"Sélectionnez le dossier à ajouter à la liste","target":"Selezziunà u cartulare à aghjunghje à a lista di travagliu"}
+{"key":"/data:/section:Joblist/section:Add by pattern#3200","source":"Add files by pattern","source_fr":"Ajouter de fichiers par modèles","target":"Aghjunghje schedarii da u mudellu"}
+{"key":"/data:/section:Joblist/section:Add by pattern#3201","source":"Pattern","source_fr":"Modèle","target":"Mudellu"}
+{"key":"/data:/section:Joblist/section:Add by pattern#3202","source":"Start folder","source_fr":"Répertoire de départ","target":"Cartulare di principiu"}
+{"key":"/data:/section:Joblist/section:Add by pattern#3203","source":"Filename pattern","source_fr":"Modèle de nom de fichier","target":"Mudellu di nome di schedariu"}
+{"key":"/data:/section:Joblist/section:Add by pattern#3204","source":"Search subfolders","source_fr":"Rechercher dans les sous-répertoires","target":"Circà in i sottucartulari"}
+{"key":"/data:/section:Joblist/section:Add by pattern#3205","source":"Select the folder to add to the joblist","source_fr":"Sélectionnez le dossier à ajouter à la liste","target":"Selezziunà u cartulare à aghjunghje à a lista di travagliu"}
+{"key":"/data:/section:Joblist/section:Character set#3300","source":"Character set","source_fr":"Jeu de caractères","target":"Inseme di caratteri"}
+{"key":"/data:/section:Joblist/section:Character set#3301","source":"Choose character set","source_fr":"Choisir un jeu de caractères","target":"Sceglie l’inseme di caratteri"}
+{"key":"/data:/section:Joblist/section:Errors#3400","source":"You did not select a track!","source_fr":"Vous n'avez sélectionné aucun fichier !","target":"Ùn avete selezziunatu alcuna traccia !"}
+{"key":"/data:/section:Joblist/section:Errors#3401","source":"No files found matching pattern: %1","source_fr":"Aucun fichier correspondant au modèle : %1","target":"Alcunu schedariu trovu chì currisponde à u mudellu : %1"}
+{"key":"/data:/section:Jobs#3500","source":"Jobs","source_fr":"Tâches","target":"Travaglii"}
+{"key":"/data:/section:Jobs#3501","source":"Progress","source_fr":"Progrès","target":"Prugressione"}
+{"key":"/data:/section:Jobs#3502","source":"Errors / Warnings","source_fr":"Erreurs / Avertissements","target":"Sbaglii / Avertimenti"}
+{"key":"/data:/section:Jobs#3503","source":"Details","source_fr":"Détails","target":"Detaglii"}
+{"key":"/data:/section:Jobs#3504","source":"Error details","source_fr":"Détails de l'erreur","target":"Detaglii di sbagliu"}
+{"key":"/data:/section:Jobs#3505","source":"Time left","source_fr":"Temps restant","target":"Durata rimanente"}
+{"key":"/data:/section:Jobs#3506","source":"Waiting for other jobs to finish","source_fr":"En attente de la fin des autres tâches","target":"In attesa di a cumpiitura di l’altri travaglii"}
+{"key":"/data:/section:Jobs/section:Joblist#3600","source":"Reading folders","source_fr":"Lecture des répertoires","target":"Lettura di i cartulari"}
+{"key":"/data:/section:Jobs/section:Joblist#3601","source":"Filtering duplicates","source_fr":"Filtrer les doublons","target":"Filtratura di i duplicazioni"}
+{"key":"/data:/section:Jobs/section:Joblist#3602","source":"Adding files","source_fr":"Ajouter des fichiers","target":"Aghjuntu di schedarii"}
+{"key":"/data:/section:Jobs/section:Joblist#3603","source":"Adding tracks","source_fr":"Ajouter des pistes","target":"Aghjuntu di traccie"}
+{"key":"/data:/section:Jobs/section:Joblist#3604","source":"Added %1 files, %2 errors occurred","source_fr":"%1 fichiers ajoutés, %2 erreurs se sont produites","target":"%1schedarii aghjunti, %2 sbaglii scuntrati"}
+{"key":"/data:/section:Jobs/section:Joblist#3605","source":"Added %1 tracks, %2 errors occurred","source_fr":"%1 pistes ajoutées, %2 erreurs se sont produites","target":"%traccie aghjunte, %2 sbaglii scuntrati"}
+{"key":"/data:/section:Jobs/section:Joblist#3606","source":"Removing all tracks","source_fr":"Suppression de toutes les pistes","target":"Cacciatura di tutte e traccie"}
+{"key":"/data:/section:Jobs/section:Joblist#3607","source":"Removing tracks of disc in drive %1","source_fr":"Suppression des pistes du disque dans le lecteur %1","target":"Cacciatura di e traccie di u discu in u lettore %1"}
+{"key":"/data:/section:Jobs/section:Joblist#3608","source":"Removed all tracks from joblist","source_fr":"Toutes les pistes ont été retirées de la liste des tâches","target":"Tutte e traccie sò state cacciate nant’à a lista di travagliu"}
+{"key":"/data:/section:Jobs/section:Joblist#3609","source":"Removed tracks of disc in drive %1 from joblist","source_fr":"Les pistes du disque dans le lecteur %1 ont été retirées de la liste des tâches","target":"Traccie di u discu in lettore %1 cacciate nant’à a lista di travagliu"}
+{"key":"/data:/section:Jobs/section:Convert#3700","source":"Checking sample formats","source_fr":"Vérification des formats d'échantillonage","target":"Cuntrollu di i furmati di campiunariu"}
+{"key":"/data:/section:Jobs/section:Convert#3701","source":"Checking for lossy to lossless conversion","source_fr":"Vérification de conversion avec perte vers conversion sans perte","target":"Cuntrollu di cunversione da un furmatu cù perdita d’infurmazione versu un furmatu senza perdita"}
+{"key":"/data:/section:Jobs/section:Convert#3702","source":"Checking output file names","source_fr":"Vérification des noms de fichier résultants","target":"Cuntrollu di i nomi di schedarii d’esciuta"}
+{"key":"/data:/section:Jobs/section:Convert#3703","source":"Converting %1","source_fr":"Conversion %1","target":"Cunversione di %1"}
+{"key":"/data:/section:Jobs/section:Convert#3704","source":"Verifying %1","source_fr":"Vérification %1","target":"Verificazione di %1"}
+{"key":"/data:/section:Jobs/section:Convert#3705","source":"Conversion cancelled","source_fr":"Conversion annulée","target":"Cunversione abbandunata"}
+{"key":"/data:/section:Jobs/section:Convert#3706","source":"Conversion finished","source_fr":"Conversion terminée","target":"Cunversione compia"}
+{"key":"/data:/section:Jobs/section:Convert#3707","source":"Conversion finished with %1 warnings","source_fr":"Conversion terminée avec %1 avertissement","target":"Cunversione compia cù %1 avertimentu(i)"}
+{"key":"/data:/section:Jobs/section:Convert#3708","source":"Conversion finished with %1 errors","source_fr":"Conversion finie avec %1 erreurs","target":"Cunversione compia cù %1 sbagliu(i)"}
+{"key":"/data:/section:Jobs/section:Update#3800","source":"Preparing update check","source_fr":"Preparation de la vérification de mise à jour","target":"Preparazione à u cuntrollu di e nove versioni"}
+{"key":"/data:/section:Jobs/section:Update#3801","source":"Contacting update server","source_fr":"Contact du serveur de mise à jour","target":"Cuntattu di u servitore di e nove versioni"}
+{"key":"/data:/section:Jobs/section:Update#3802","source":"Updates found","source_fr":"Des mises à jour ont été trouvées","target":"Nova versione trova"}
+{"key":"/data:/section:Jobs/section:Update#3803","source":"No updates found","source_fr":"Aucune mise à jour trouvée","target":"Alcuna nova versione trova"}
+{"key":"/data:/section:CDDB/section:Submit#4000","source":"CDDB data","source_fr":"Données CDDB","target":"Dati CDDB"}
+{"key":"/data:/section:CDDB/section:Submit#4001","source":"Submit","source_fr":"Soumettre","target":"Sottumette"}
+{"key":"/data:/section:CDDB/section:Submit#4002","source":"No audio CD in drive!","source_fr":"Il n'y a aucun CD audio dans le lecteur !","target":"Alcunu CD audio in u lettore !"}
+{"key":"/data:/section:CDDB/section:Submit#4003","source":"Submitting CD information","source_fr":"Soumission des informations du CD","target":"Sottumette l’infurmazione CD"}
+{"key":"/data:/section:CDDB/section:Submit#4004","source":"Update joblist with this information","source_fr":"Mettre à jour la liste avec ces informations","target":"Rinfrescà a lista di travagliu cù st’infurmazione"}
+{"key":"/data:/section:CDDB/section:Submit#4005","source":"Status","source_fr":"État","target":"Statu"}
+{"key":"/data:/section:CDDB/section:Submit#4006","source":"Successfully read CD!","source_fr":"Le CD a été lu !","target":"U CD hè statu lettu bè !"}
+{"key":"/data:/section:CDDB/section:Submit#4007","source":"Save entry","source_fr":"Enreg. entrée","target":"Arregistrà l’entrata"}
+{"key":"/data:/section:CDDB/section:Submit#4008","source":"Various artists","source_fr":"Artistes divers","target":"Artisti diversi"}
+{"key":"/data:/section:CDDB/section:Submit#4009","source":"Data track","source_fr":"Piste de données","target":"Traccia di dati"}
+{"key":"/data:/section:CDDB/section:Submit#4010","source":"Submit to online database later","source_fr":"Soumettre dans la base de données en ligne plus tard","target":"Sottumette più tardi à a basa di dati in linea"}
+{"key":"/data:/section:CDDB/section:Submit#4011","source":"Active CD-ROM drive","source_fr":"Lecteur de CD-ROM actif","target":"Lettore CD-ROM attivu"}
+{"key":"/data:/section:CDDB/section:Submit/section:Errors#4050","source":"Some error occurred trying to connect to the freedb server.","source_fr":"Une erreur est survenue lors de la tentative de connexion au serveur freedb.","target":"Qualchì sbagliu hè accadutu pruvendu di cunnettassi à u servitore freedb."}
+{"key":"/data:/section:CDDB/section:Submit/section:Errors#4051","source":"Please fill all fields and track titles before submitting.","source_fr":"Veuillez renseigner tous les champs et tous les titres des pistes avant la soumission.","target":"Ci vole à riempie tutti i campi è i tituli di e traccie nanzu di sottumette."}
+{"key":"/data:/section:CDDB/section:Query#4100","source":"CDDB query","source_fr":"Requête CDDB","target":"Richiesta CDDB"}
+{"key":"/data:/section:CDDB/section:Query#4101","source":"No freedb entry for this disc.","source_fr":"Aucune entrée freedb pour ce CD.","target":"Nisuna entrata freeDB per stu discu."}
+{"key":"/data:/section:CDDB/section:Query#4102","source":"Connecting to freedb server at","source_fr":"Connexion au serveur freedb à","target":"Cunnessione à u servitore freedb à"}
+{"key":"/data:/section:CDDB/section:Query#4103","source":"Requesting CD information","source_fr":"Demande des informations sur le CD","target":"Dumanda d’infurmazione nant’à u CD"}
+{"key":"/data:/section:CDDB/section:Query#4104","source":"No exact matches found","source_fr":"Aucune correspondance n'a été trouvée","target":"Alcuna cuncurdanza esatta trova"}
+{"key":"/data:/section:CDDB/section:Query#4105","source":"Multiple matches found","source_fr":"Plusieurs correspondances ont été trouvées","target":"Parechje cuncurdanze trove"}
+{"key":"/data:/section:CDDB/section:Query#4106","source":"Matches","source_fr":"Correspondances","target":"Cuncurdanze"}
+{"key":"/data:/section:CDDB/section:Query#4107","source":"Select the entry that best fits your CD","source_fr":"Sélectionnez l'entrée correspondant le mieux à votre CD","target":"Selezziunà l’lementu chì currisponde u più à u CD"}
+{"key":"/data:/section:CDDB/section:Query#4108","source":"Would you like to perform this query again later?","source_fr":"Voulez-vous réexécuter cette requête ultérieurement ?","target":"Vulete eseguisce sta richiesta un altra volta più tardi ?"}
+{"key":"/data:/section:CDDB/section:Query#4109","source":"Would you like to perform the remaining queries again later?","source_fr":"Voulez-vous réexécuter toutes les requêtes ultérieurement ?","target":"Vulete eseguisce e richieste rimanente un altra volta più tardi ?"}
+{"key":"/data:/section:CDDB/section:Query#4110","source":"none","source_fr":"aucun","target":"nisunu"}
+{"key":"/data:/section:CDDB/section:Query#4111","source":"Preview","source_fr":"Aperçu","target":"Fighjulata"}
+{"key":"/data:/section:CDDB/section:Query#4112","source":"loading preview","source_fr":"chargement de la prévisualisation","target":"caricamentu di a fighjulata"}
+{"key":"/data:/section:CDDB/section:Query/section:Errors#4150","source":"Some error occurred trying to connect to the freedb server.","source_fr":"Une erreur est survenue lors de la tentative de connexion au serveur freedb.","target":"Qualchì sbagliu hè accadutu pruvendu di cunnettassi à u servitore freedb."}
+{"key":"/data:/section:CDDB/section:Manage queries#4200","source":"Remove entry","source_fr":"Suppr. entrée","target":"Caccià l’entrata"}
+{"key":"/data:/section:CDDB/section:Manage queries#4201","source":"CDDB queries","source_fr":"Requêtes CDDB","target":"Richieste CDDB"}
+{"key":"/data:/section:CDDB/section:Manage queries#4202","source":"Query","source_fr":"Requête","target":"Interrugà"}
+{"key":"/data:/section:CDDB/section:Manage queries#4203","source":"Query all","source_fr":"Interroger tout","target":"Interrugà tuttu"}
+{"key":"/data:/section:CDDB/section:Manage queries#4204","source":"Query string","source_fr":"Chaîne de requête","target":"Catena di richiesta"}
+{"key":"/data:/section:CDDB/section:Manage queries#4205","source":"CDDB queries to perform","source_fr":"Requêtes CDDB à exécuter","target":"Richieste CDDB à eseguisce"}
+{"key":"/data:/section:CDDB/section:Manage queries#4206","source":"Querying CD information","source_fr":"Recherche des informations du CD","target":"Richiesta d’infurmazione nant’à u CD"}
+{"key":"/data:/section:CDDB/section:Manage submits#4300","source":"Remove entry","source_fr":"Suppr. entrée","target":"Caccià l’entrata"}
+{"key":"/data:/section:CDDB/section:Manage submits#4301","source":"CDDB entries to submit","source_fr":"Entrées CDDB à soumettre","target":"Entrate CCDB à sottumette"}
+{"key":"/data:/section:CDDB/section:Manage submits#4302","source":"Submit all","source_fr":"Soumettre tout","target":"Sottumette tuttu"}
+{"key":"/data:/section:CDDB/section:Manage submits#4303","source":"CDDB data","source_fr":"Données CDDB","target":"Dati CDDB"}
+{"key":"/data:/section:CDDB/section:Manage submits#4304","source":"Submit","source_fr":"Soumettre","target":"Sottumette"}
+{"key":"/data:/section:CDDB/section:Manage submits#4305","source":"Disc name","source_fr":"Nom disque","target":"Nome di discu"}
+{"key":"/data:/section:CDDB/section:Manage submits#4306","source":"Preview","source_fr":"Aperçu","target":"Fighjulata"}
+{"key":"/data:/section:CDDB/section:Manage submits#4307","source":"Category","source_fr":"Catégorie","target":"Categuria"}
+{"key":"/data:/section:CDDB/section:Manage submits#4308","source":"Submitting CD information","source_fr":"Soumission des informations du CD","target":"Sottumette l’infurmazione CD"}
+{"key":"/data:/section:CDDB/section:Manage cache#4400","source":"CDDB data","source_fr":"Données CDDB","target":"Dati CDDB"}
+{"key":"/data:/section:CDDB/section:Manage cache#4401","source":"Update joblist with this information","source_fr":"Mettre à jour la liste avec ces informations","target":"Rinfrescà a lista di travagliu cù st’infurmazione"}
+{"key":"/data:/section:CDDB/section:Manage cache#4402","source":"Charset","source_fr":"Jeu car.","target":"Gruppu di caratteri"}
+{"key":"/data:/section:CDDB/section:Manage cache#4403","source":"Downloaded CDDB entries","source_fr":"Entrées CDDB téléchargées","target":"Entrate CDDB scaricate"}
+{"key":"/data:/section:CDDB/section:Manage cache#4404","source":"Disc name","source_fr":"Nom disque","target":"Nome di discu"}
+{"key":"/data:/section:CDDB/section:Manage cache#4405","source":"Preview","source_fr":"Aperçu","target":"Fighjulata"}
+{"key":"/data:/section:CDDB/section:Manage cache#4406","source":"Remove entry","source_fr":"Suppr. entrée","target":"Caccià l’entrata"}
+{"key":"/data:/section:CDDB/section:Manage cache#4407","source":"Save entry","source_fr":"Enreg. entrée","target":"Arregistrà l’entrata"}
+{"key":"/data:/section:Configuration#5000","source":"General settings setup","source_fr":"Configuration des paramètres généraux","target":"Definizione di i parametri generali"}
+{"key":"/data:/section:Configuration#5001","source":"Encoders","source_fr":"Encodeurs","target":"Cudificatori"}
+{"key":"/data:/section:Configuration#5002","source":"Playlists","source_fr":"Sélections","target":"Liste di lettura"}
+{"key":"/data:/section:Configuration#5003","source":"Language","source_fr":"Langue","target":"Lingua"}
+{"key":"/data:/section:Configuration#5004","source":"CDDB","source_fr":"CDDB","target":"CDDB"}
+{"key":"/data:/section:Configuration#5005","source":"Interface","source_fr":"Interface","target":"Interfaccia"}
+{"key":"/data:/section:Configuration#5006","source":"Metadata","source_fr":"Balises infos","target":"Metadati"}
+{"key":"/data:/section:Configuration#5007","source":"Components","source_fr":"Composants","target":"Cumpunenti"}
+{"key":"/data:/section:Configuration#5008","source":"Decoders","source_fr":"Décodeurs","target":"Discudificatori"}
+{"key":"/data:/section:Configuration#5009","source":"Output","source_fr":"Résultat","target":"Destinazione"}
+{"key":"/data:/section:Configuration#5010","source":"DSP","source_fr":"DSP","target":"DSP"}
+{"key":"/data:/section:Configuration#5011","source":"Extensions","source_fr":"Extensions","target":"Estensioni"}
+{"key":"/data:/section:Configuration#5012","source":"Other","source_fr":"Autre","target":"Altra"}
+{"key":"/data:/section:Configuration#5013","source":"Active configuration","source_fr":"Configuration active","target":"Cunfigurazione attiva"}
+{"key":"/data:/section:Configuration#5014","source":"New","source_fr":"Nouveau","target":"Nove"}
+{"key":"/data:/section:Configuration#5015","source":"Delete","source_fr":"Effacer","target":"Squassà"}
+{"key":"/data:/section:Configuration#5016","source":"Command line arguments","source_fr":"Paramètres de démarrage","target":"Parametri di linea di cumanda"}
+{"key":"/data:/section:Configuration#5017","source":"Resulting arguments string","source_fr":"Chaîne de paramètres résultante","target":"Catena risultante di parametri"}
+{"key":"/data:/section:Configuration#5018","source":"Default configuration","source_fr":"Configuration par défaut","target":"Cunfigurazione predefinita"}
+{"key":"/data:/section:Configuration#5019","source":"New configuration","source_fr":"Nouvelle configuration","target":"Nova cunfigurazione"}
+{"key":"/data:/section:Configuration#5020","source":"Ripper","source_fr":"Extracteur CD","target":"Estrattore"}
+{"key":"/data:/section:Configuration#5021","source":"Settings","source_fr":"Réglages","target":"Parametri"}
+{"key":"/data:/section:Configuration#5022","source":"Resources","source_fr":"Ressources","target":"Risorse"}
+{"key":"/data:/section:Configuration#5023","source":"Verifiers","source_fr":"Vérificateurs","target":"Verificadori"}
+{"key":"/data:/section:Configuration#5024","source":"Taggers","source_fr":"Balisage","target":"Creatori d’etichetta"}
+{"key":"/data:/section:Configuration#5025","source":"Processing","source_fr":"Traitement","target":"Trattamentu"}
+{"key":"/data:/section:Configuration#5026","source":"Additional arguments","source_fr":"Paramètres supplémentaires","target":"Parametri addiziunali"}
+{"key":"/data:/section:Configuration#5027","source":"Output files","source_fr":"Fichiers de sortie","target":"Schedarii d’esciuta"}
+{"key":"/data:/section:Configuration/section:Encoders#5100","source":"Configure encoder","source_fr":"Configurer l'encodeur","target":"Cunfigurà u cudificatore"}
+{"key":"/data:/section:Configuration/section:Encoders#5101","source":"Encoder","source_fr":"Encodeur","target":"Cudificatore"}
+{"key":"/data:/section:Configuration/section:Encoders#5102","source":"Options","source_fr":"Options","target":"Ozzioni"}
+{"key":"/data:/section:Configuration/section:Encoders#5103","source":"Encode 'On-The-Fly'","source_fr":"Encoder à la volée","target":"Cudificà da volu"}
+{"key":"/data:/section:Configuration/section:Encoders#5104","source":"Keep ripped Wave files","source_fr":"Conserver fichiers Wave extraits","target":"Cunservà i schedarii Wave estratti"}
+{"key":"/data:/section:Configuration/section:Encoders#5105","source":"Encode to a single file","source_fr":"Encoder dans fichier unique","target":"Cudificà in un schedariu unicu"}
+{"key":"/data:/section:Configuration/section:Encoders#5106","source":"Remove processed tracks from joblist","source_fr":"Retirer les titres traités de la liste des tâches","target":"Caccià e traccie trattate nant’à a lista di travagliu"}
+{"key":"/data:/section:Configuration/section:Encoders#5107","source":"Add output files to joblist","source_fr":"Ajouter les pistes encodées à la liste des tâches","target":"Aghjunghje i schedarii d’esciuta à a lista di travagliu"}
+{"key":"/data:/section:Configuration/section:Files#5150","source":"Output folder","source_fr":"Répertoire de sortie","target":"Cartulare di destinazione"}
+{"key":"/data:/section:Configuration/section:Files#5151","source":"Use input file folder if possible","source_fr":"Utiliser répertoire fichier entrée si possible","target":"Impiegà s’ellu hè pussibule u cartulare di u schedariu d’origine"}
+{"key":"/data:/section:Configuration/section:Files#5152","source":"Allow overwriting input file","source_fr":"Autoriser remplacement fichier entrée","target":"Permette di rimpiazzà u schedariu d’origine"}
+{"key":"/data:/section:Configuration/section:Files#5153","source":"Select","source_fr":"Parcourir","target":"Selezziunà"}
+{"key":"/data:/section:Configuration/section:Files#5154","source":"Select the folder in which the encoded files will be placed","source_fr":"Sélectionnez le dossier de destination des fichiers encodés","target":"Selezziunà u cartulare di destinazione di i schedarii cudificati"}
+{"key":"/data:/section:Configuration/section:Files#5155","source":"Output filenames","source_fr":"Noms de fichiers résultants","target":"Nomi di schedariu d’esciuta"}
+{"key":"/data:/section:Configuration/section:Files#5156","source":"Filename pattern","source_fr":"Modèle de nom de fichier","target":"Mudellu di nome di schedariu"}
+{"key":"/data:/section:Configuration/section:Files#5157","source":"Allow Unicode characters","source_fr":"Autoriser les caractères unicodes","target":"Permette i caratteri Unicode"}
+{"key":"/data:/section:Configuration/section:Files#5158","source":"Replace spaces with underscores","source_fr":"Remplacer les espaces par des souslignages","target":"Rimpiazzà i spazii cù lineette basse (spaziu sottulineatu)"}
+{"key":"/data:/section:Configuration/section:Files#5159","source":"Append sequential numbers to otherwise identical filenames","source_fr":"Adjoindre des numéros séquentiels aux fichiers de mêmes noms","target":"Aghjunghje un numeru sequenziale à i nomi di schedariu uguali"}
+{"key":"/data:/section:Configuration/section:Files#5160","source":"Keep time stamps of source files","source_fr":"Garder les index temporels des fichiers sources","target":"Cunservà a data è l’ora di i schedarii d’origine"}
+{"key":"/data:/section:Configuration/section:Files#5161","source":"Use <filename> when title information is not available","source_fr":"Utilisez <filename> lorsque les informations sur le titre ne sont pas disponibles","target":"Impiegà <filename> quandu l’infurmazione di titulu ùn hè micca dispunibule"}
+{"key":"/data:/section:Configuration/section:Files/section:Errors#5180","source":"The output folder does not exist! Do you want to create it?","source_fr":"Le répertoire de sortie n'existe pas. Voulez-vous le créer ?","target":"U cartulare di destinazione ùn esiste micca ! Vulete creallu ?"}
+{"key":"/data:/section:Configuration/section:Playlists#5200","source":"Create playlists","source_fr":"Créer sélections","target":"Creà e liste di lettura"}
+{"key":"/data:/section:Configuration/section:Playlists#5202","source":"Output folder","source_fr":"Répertoire de sortie","target":"Cartulare di destinazione"}
+{"key":"/data:/section:Configuration/section:Playlists#5203","source":"Select","source_fr":"Parcourir","target":"Selezziunà"}
+{"key":"/data:/section:Configuration/section:Playlists#5204","source":"Use encoder output folder","source_fr":"Utiliser répertoire sortie encodeur","target":"Impiegà u cartulare di destinazione di u cudificatore"}
+{"key":"/data:/section:Configuration/section:Playlists#5205","source":"Filename pattern","source_fr":"Modèle de nom de fichier","target":"Mudellu di nome di schedariu"}
+{"key":"/data:/section:Configuration/section:Playlists#5206","source":"Select the folder in which the playlist files will be placed","source_fr":"Sélectionnez le dossier de destination des fichiers de la playlist","target":"Selezziunà u cartulare di destinazione di e liste di lettura cudificate"}
+{"key":"/data:/section:Configuration/section:Playlists#5207","source":"Output filenames","source_fr":"Nom des fichiers résultants","target":"Nomi di schedariu d’esciuta"}
+{"key":"/data:/section:Configuration/section:Playlists#5208","source":"Configure plugin","source_fr":"Configurer le plugin","target":"Cunfigurà l’estensione"}
+{"key":"/data:/section:Configuration/section:Playlists#5209","source":"Create only a single playlist and/or cue sheet file per conversion","source_fr":"Créer une liste de lecture unique et/ou un fichier-liste de repères par conversion","target":"Creà solu una lista di lettura è/o un fogliu di mischiera cue à a cunversione"}
+{"key":"/data:/section:Configuration/section:Cue Sheets#5250","source":"Cue sheets","source_fr":"Liste des repères","target":"Foglii di mischiera Cue"}
+{"key":"/data:/section:Configuration/section:Cue Sheets#5251","source":"Create cue sheets","source_fr":"Créer liste de repères","target":"Creà i foglii di mischiera Cue"}
+{"key":"/data:/section:Configuration/section:Cue Sheets#5252","source":"Embedded cue sheets","source_fr":"Feuilles de repères intégrées","target":"Foglii di mischiera Cue incurpurati"}
+{"key":"/data:/section:Configuration/section:Cue Sheets#5253","source":"Read cue sheets embedded in metadata","source_fr":"Lire la liste des repères intégrée dans les métadonnées","target":"Leghje i foglii di mischiera Cue incurpurati à i metadati"}
+{"key":"/data:/section:Configuration/section:Cue Sheets#5254","source":"Prefer cue sheets over chapter information","source_fr":"Préfèrer la liste des repères aux informations de chapitre","target":"Preferisce i foglii di mischiera Cue à l’infurmazione di capitulu"}
+{"key":"/data:/section:Configuration/section:Cue Sheets#5255","source":"Output folder and filenames","source_fr":"Dossier de destination et noms de fichiers","target":"Cartulare è schedarii d’esciuta"}
+{"key":"/data:/section:Configuration/section:Cue Sheets#5256","source":"Note","source_fr":"Remarque","target":"Nota"}
+{"key":"/data:/section:Configuration/section:Cue Sheets#5257","source":"Cue sheet output folder and filename settings are configured in the Playlists section.","source_fr":"Dossier de destination des listes de repères et réglage des noms de fichiers configurés à la section Sélections.","target":"I parametri di u cartulare d’esciuta è i nomi di schedariu di u fogliu di mischiera Cue\nsò cunfigurati in a sezzione Liste di lettura."}
+{"key":"/data:/section:Configuration/section:CDDB#5300","source":"Enable local CDDB database","source_fr":"Activer la base de données CDDB locale","target":"Attivà a basa di dati CDDB lucale"}
+{"key":"/data:/section:Configuration/section:CDDB#5301","source":"Enable remote CDDB database","source_fr":"Activer la base distante CDDB","target":"Attivà a basa di dati CDDB alluntanata"}
+{"key":"/data:/section:Configuration/section:CDDB#5302","source":"CDDB path","source_fr":"Répertoire CDDB","target":"Chjassu CDDB"}
+{"key":"/data:/section:Configuration/section:CDDB#5303","source":"Select","source_fr":"Parcourir","target":"Selezziunà"}
+{"key":"/data:/section:Configuration/section:CDDB#5304","source":"Select the folder of the CDDB database","source_fr":"Sélectionnez le dossier de la base de données CDDB","target":"Selezziunà u cartulare di a basa di dati CDDB"}
+{"key":"/data:/section:Configuration/section:CDDB#5305","source":"CDDB access mode","source_fr":"Mode d'accès CDDB","target":"Modu d’accessu CDDB"}
+{"key":"/data:/section:Configuration/section:CDDB#5306","source":"CDDB server","source_fr":"Serveur CDDB","target":"Servitore CDDB"}
+{"key":"/data:/section:Configuration/section:CDDB#5307","source":"Port","source_fr":"Port","target":"Portu"}
+{"key":"/data:/section:Configuration/section:CDDB#5308","source":"eMail address","source_fr":"Adresse de courriel","target":"Indirizzu elettronicu"}
+{"key":"/data:/section:Configuration/section:CDDB#5309","source":"HTTP settings","source_fr":"Paramètres HTTP","target":"Parametri HTTP"}
+{"key":"/data:/section:Configuration/section:CDDB#5310","source":"Proxy settings","source_fr":"Paramètres du proxy","target":"Parametri Proxy"}
+{"key":"/data:/section:Configuration/section:CDDB#5311","source":"Options","source_fr":"Options","target":"Ozzioni"}
+{"key":"/data:/section:Configuration/section:CDDB#5312","source":"Automatic CDDB queries","source_fr":"Requêtes CDDB automatiques","target":"Richieste CDDB autumatiche"}
+{"key":"/data:/section:Configuration/section:CDDB#5313","source":"Prefer CDDB over CD-Text","source_fr":"Préférer CDDB à CD-Text","target":"Preferisce CDDB à u CD-Text"}
+{"key":"/data:/section:Configuration/section:CDDB#5314","source":"Enable CDDB cache","source_fr":"Activer le cache CDDB","target":"Attivà l’impiatta CDDB"}
+{"key":"/data:/section:Configuration/section:CDDB#5315","source":"Automatization","source_fr":"Automatisation","target":"Autumatisazione"}
+{"key":"/data:/section:Configuration/section:CDDB#5316","source":"Always select first entry","source_fr":"Toujours sélectionner la première entrée","target":"Selezziunà sempre u primu elementu"}
+{"key":"/data:/section:Configuration/section:CDDB/section:Extended#5330","source":"Extended CDDB settings","source_fr":"Paramètres CDDB étendus","target":"Parametri CDDB avanzati"}
+{"key":"/data:/section:Configuration/section:CDDB/section:Extended#5331","source":"CGI scripts","source_fr":"Scripts CGI","target":"Scenarii CGI"}
+{"key":"/data:/section:Configuration/section:CDDB/section:Extended#5332","source":"CDDB query script","source_fr":"Script de requête CDDB","target":"Scenariu di richiesta CDDB"}
+{"key":"/data:/section:Configuration/section:CDDB/section:Extended#5333","source":"CDDB submit script","source_fr":"Script de soumission CDDB","target":"Scenariu di sottumissione CDDB"}
+{"key":"/data:/section:Configuration/section:CDDB/section:Extended#5334","source":"no proxy","source_fr":"Aucun proxy","target":"alcunu proxy"}
+{"key":"/data:/section:Configuration/section:CDDB/section:Extended#5335","source":"Proxy type","source_fr":"Type de proxy","target":"Tipu di proxy"}
+{"key":"/data:/section:Configuration/section:CDDB/section:Extended#5336","source":"Proxy server","source_fr":"Serveur proxy","target":"Servitore di proxy"}
+{"key":"/data:/section:Configuration/section:CDDB/section:Extended#5337","source":"User name","source_fr":"Nom utilisateur","target":"Nome d’utilizatore"}
+{"key":"/data:/section:Configuration/section:CDDB/section:Extended#5338","source":"Password","source_fr":"Mot de passe","target":"Parolla d’intesa"}
+{"key":"/data:/section:Configuration/section:CDDB/section:Errors#5350","source":"Please enter a valid eMail address.","source_fr":"Veuillez saisir une adresse de courriel valide.","target":"Ci vole à stampittà un indirizzu elettronicu accettevule."}
+{"key":"/data:/section:Configuration/section:CDDB/section:Errors#5351","source":"The freedb CDDBP protocol cannot be used over HTTP\nForward proxies!\n\nWould you like to change the protocol to HTTP?","source_fr":"Le protocole CDDBP freedb ne peut pas être utilisé sur les serveurs proxy HTTP Forward !\n\nVoulez-vous passer au protocole HTTP ?","target":"U protocollu CDDBP di freedb ùn pò micca esse\nimpiegatu nant’à i servitori proxy HTTP Forward !\n\nVulete cambià u protocollu è impiegà HTTP avà ?"}
+{"key":"/data:/section:Configuration/section:Language#5400","source":"Select language","source_fr":"Sélectionner la langue","target":"Selezziunà a lingua"}
+{"key":"/data:/section:Configuration/section:Language#5401","source":"Edit language file","source_fr":"Modifier le fichier de langue","target":"Mudificà u schedariu di lingua"}
+{"key":"/data:/section:Configuration/section:Language#5402","source":"Information","source_fr":"Informations","target":"Infurmazione"}
+{"key":"/data:/section:Configuration/section:Language#5403","source":"Encoding","source_fr":"Encodage","target":"Cudificazione"}
+{"key":"/data:/section:Configuration/section:Language#5404","source":"Author(s)","source_fr":"Auteur(s)","target":"Autore(i)"}
+{"key":"/data:/section:Configuration/section:Language#5405","source":"URL","source_fr":"URL","target":"Indirizzu web"}
+{"key":"/data:/section:Configuration/section:Tags#5500","source":"Tag formats","source_fr":"Encodages des balises","target":"Furmati d’etichetta"}
+{"key":"/data:/section:Configuration/section:Tags#5501","source":"Tag fields","target":"Campi d’etichetta"}
+{"key":"/data:/section:Configuration/section:Tags#5502","source":"Default comment string","source_fr":"Commentaires par défaut","target":"Cummentu predefinitu"}
+{"key":"/data:/section:Configuration/section:Tags#5503","source":"Replace existing comments with default comment","source_fr":"Remplacer les commentaires existant par ceux par défaut","target":"Rimpiazzà i cummenti chì esistenu da quellu predefinitu"}
+{"key":"/data:/section:Configuration/section:Tags#5504","source":"Filename pattern","source_fr":"Modèle de nom de fichier","target":"Mudellu di nome di schedariu"}
+{"key":"/data:/section:Configuration/section:Tags#5505","source":"Encoding","source_fr":"Encodage","target":"Cudificazione"}
+{"key":"/data:/section:Configuration/section:Tags#5506","source":"Comments","source_fr":"Commentaires","target":"Cummenti"}
+{"key":"/data:/section:Configuration/section:Tags#5507","source":"Album art","source_fr":"Illustration de couverture","target":"Illustrazione di l’albumu"}
+{"key":"/data:/section:Configuration/section:Tags#5509","source":"Read album art from tags","source_fr":"Lire les illustrations à partir des balises","target":"Leghje l’illustrazione di l’albumu nant’à l’etichette"}
+{"key":"/data:/section:Configuration/section:Tags#5510","source":"Read album art from files","source_fr":"Lire les illustrations à partir des fichiers","target":"Leghje l’illustrazione di l’albumu nant’à i schedarii"}
+{"key":"/data:/section:Configuration/section:Tags#5512","source":"Write album art to tags","source_fr":"Écrire les illustrations dans les balises","target":"Scrive l’illustrazione di l’albumu in l’etichette"}
+{"key":"/data:/section:Configuration/section:Tags#5513","source":"Write album art to files","source_fr":"Écrire les illustrations dans les fichiers","target":"Scrive l’illustrazione di l’albumu in i schedarii"}
+{"key":"/data:/section:Configuration/section:Tags#5514","source":"Add reference to audio file tag","source_fr":"Ajouter une référence à la balise d'un fichier audio","target":"Aghjunghje una referenza à l’etichetta di u schedariu audio"}
+{"key":"/data:/section:Configuration/section:Tags#5515","source":"Other","source_fr":"Autre","target":"Altra"}
+{"key":"/data:/section:Configuration/section:Tags#5516","source":"Chapters","source_fr":"Chapitres","target":"Capituli"}
+{"key":"/data:/section:Configuration/section:Tags#5517","source":"Read chapters from files","source_fr":"Lire les chapitres depuis les fichiers","target":"Leghje i capituli nant’à i schedarii"}
+{"key":"/data:/section:Configuration/section:Tags#5518","source":"Write chapters to files","source_fr":"Écrire les chapitres dans les fichiers","target":"Scrive i capituli in i schedarii"}
+{"key":"/data:/section:Configuration/section:Tags#5519","source":"Special fields","source_fr":"Champs spéciaux","target":"Campi speziali"}
+{"key":"/data:/section:Configuration/section:Tags#5520","source":"Write CD table of contents","source_fr":"Écrire la table des matières du CD","target":"Scrive l’indice di cuntenutu di u CD"}
+{"key":"/data:/section:Configuration/section:Tags#5521","source":"Preserve Replay Gain information","source_fr":"Préserver l'information de volume de lecture","target":"Preservà l’infurmazione di guadagnu di ripruduzzione"}
+{"key":"/data:/section:Configuration/section:Tags#5525","source":"Prepend zero to track numbers below 10","source_fr":"Ajout de zéros aux numéros de pistes inférieurs à 10","target":"Principià da un zeru i numeri di traccia sottu 10"}
+{"key":"/data:/section:Configuration/section:Tags#5526","source":"File size limit","source_fr":"Limite de taille de fichier","target":"Limitu di dimensione di schedariu"}
+{"key":"/data:/section:Configuration/section:Tags#5527","source":"unlimited","source_fr":"illimité","target":"senza limitu"}
+{"key":"/data:/section:Configuration/section:Tags#5528","source":"Miscellaneous","source_fr":"Autres","target":"Diversi"}
+{"key":"/data:/section:Configuration/section:Tags#5529","source":"Fill missing fields with information obtained from file names","source_fr":"Remplir les champs manquants avec les informations des noms de fichier","target":"Riempie i campi assente cù l’infurmazione ottinuta da i nomi di schedariu"}
+{"key":"/data:/section:Configuration/section:Tags#5530","source":"Restrict file names","source_fr":"Restreindre les noms de fichiers","target":"Restringhje i nomi di schedariu"}
+{"key":"/data:/section:Configuration/section:Tags#5531","source":"Album art tags","source_fr":"Balises de jacquettes","target":"Etichette di l’illustrazione di l’albumu"}
+{"key":"/data:/section:Configuration/section:Tags#5532","source":"Album art files","source_fr":"Fichier de jacquette","target":"Schedarii di l’illustrazione di l’albumu"}
+{"key":"/data:/section:Configuration/section:Joblist#5600","source":"Joblist","source_fr":"Liste des tâches","target":"Lista di travagliu"}
+{"key":"/data:/section:Configuration/section:Joblist#5601","source":"Columns","source_fr":"Colonnes","target":"Culonne"}
+{"key":"/data:/section:Configuration/section:Joblist#5602","source":"Name","source_fr":"Noms","target":"Nome"}
+{"key":"/data:/section:Configuration/section:Joblist#5603","source":"Description","source_fr":"Description","target":"Discrizzione"}
+{"key":"/data:/section:Configuration/section:Joblist#5604","source":"Up","source_fr":"Haut","target":"Sù"}
+{"key":"/data:/section:Configuration/section:Joblist#5605","source":"Down","source_fr":"Bas","target":"Ghjò"}
+{"key":"/data:/section:Configuration/section:Joblist#5606","source":"Jobs","source_fr":"Tâches","target":"Travaglii"}
+{"key":"/data:/section:Configuration/section:Joblist#5607","source":"Show Jobs tab","source_fr":"Afficher l'onglet des tâches","target":"Affissà l’unghjetta di i travaglii"}
+{"key":"/data:/section:Configuration/section:Joblist/section:Columns#5650","source":"Track artist","source_fr":"Artiste de la piste","target":"Artista di a traccia"}
+{"key":"/data:/section:Configuration/section:Joblist/section:Columns#5651","source":"Track title","source_fr":"Nom de la piste","target":"Titulu di a traccia"}
+{"key":"/data:/section:Configuration/section:Joblist/section:Columns#5652","source":"Track genre","source_fr":"Genre de la piste","target":"Generu di a traccia"}
+{"key":"/data:/section:Configuration/section:Joblist/section:Columns#5653","source":"Album title","source_fr":"Titre de l'album","target":"Titulu di l’albumu"}
+{"key":"/data:/section:Configuration/section:Joblist/section:Columns#5654","source":"Disc number","source_fr":"Numéro du disque","target":"Numeru di u discu"}
+{"key":"/data:/section:Configuration/section:Joblist/section:Columns#5655","source":"Track number","source_fr":"Numéro de la piste","target":"Numeru di a traccia"}
+{"key":"/data:/section:Configuration/section:Joblist/section:Columns#5656","source":"Track rating","source_fr":"Évaluation de la piste","target":"Valutazione di a traccia"}
+{"key":"/data:/section:Configuration/section:Joblist/section:Columns#5657","source":"Track length","source_fr":"Durée de la piste","target":"Durata di a traccia"}
+{"key":"/data:/section:Configuration/section:Joblist/section:Columns#5658","source":"Track size","source_fr":"Taille de la piste","target":"Dimensione di a traccia"}
+{"key":"/data:/section:Configuration/section:Joblist/section:Columns#5659","source":"File name","source_fr":"Nom de fichier","target":"Nome di schedariu"}
+{"key":"/data:/section:Configuration/section:Joblist/section:Columns#5660","source":"File type","source_fr":"Type de fichier","target":"Tipu di schedariu"}
+{"key":"/data:/section:Configuration/section:Joblist/section:Columns#5661","source":"Output file name","source_fr":"Nom du fichier résultant","target":"Nome di schedariu d’esciuta"}
+{"key":"/data:/section:Configuration/section:Joblist/section:Columns#5662","source":"Bitrate","source_fr":"Qualité d'encodage","target":"Flussu binariu"}
+{"key":"/data:/section:Configuration/section:Joblist/section:Columns#5663","source":"Sampling rate","source_fr":"Taux d'échantillonnage","target":"Frequenza di campiunariu"}
+{"key":"/data:/section:Configuration/section:Joblist/section:Columns#5664","source":"Channels","source_fr":"Canaux","target":"Canali"}
+{"key":"/data:/section:Configuration/section:Joblist/section:Columns#5665","source":"Sample resolution","source_fr":"Résolution d'échantillon","target":"Risuluzione di campiunariu"}
+{"key":"/data:/section:Configuration/section:Joblist/section:Columns#5666","source":"CD drive","source_fr":"Lecteur CD","target":"Lettore CD"}
+{"key":"/data:/section:Configuration/section:Joblist/section:Columns#5667","source":"Disc ID","source_fr":"Disque n°","target":"Discu n°"}
+{"key":"/data:/section:Configuration/section:Resources#5700","source":"Parallel processing","source_fr":"Traitement parallèle","target":"Trattamentu parallelu"}
+{"key":"/data:/section:Configuration/section:Resources#5701","source":"Enable parallel processing","source_fr":"Activer le traitement parallèle","target":"Attivà u trattamentu parallelu"}
+{"key":"/data:/section:Configuration/section:Resources#5702","source":"Enable SuperFast mode","source_fr":"Activer le mode SuperRapide","target":"Attivà u modu assai in furia"}
+{"key":"/data:/section:Configuration/section:Resources#5703","source":"Number of conversion threads","source_fr":"Numéro de tâche de conversion","target":"Numeru di flussi di cunversione"}
+{"key":"/data:/section:Configuration/section:Resources#5704","source":"auto","source_fr":"automatique","target":"autumaticu"}
+{"key":"/data:/section:Configuration/section:Resources#5705","source":"Process priority","source_fr":"Priorité du process","target":"Priurità di trattamentu"}
+{"key":"/data:/section:Configuration/section:Resources#5706","source":"lowest","source_fr":"la plus basse","target":"a più bassa"}
+{"key":"/data:/section:Configuration/section:Resources#5707","source":"lower","source_fr":"basse","target":"bassa"}
+{"key":"/data:/section:Configuration/section:Resources#5708","source":"normal","source_fr":"normale","target":"nurmale"}
+{"key":"/data:/section:Configuration/section:Resources#5709","source":"higher","source_fr":"haute","target":"alta"}
+{"key":"/data:/section:Configuration/section:Resources#5710","source":"highest","source_fr":"la plus haute","target":"a più alta"}
+{"key":"/data:/section:Configuration/section:Verification#5800","source":"Verification","source_fr":"Vérification","target":"Verificazione"}
+{"key":"/data:/section:Configuration/section:Verification#5801","source":"Enable input verification","source_fr":"Activer la vérification de la source","target":"Attivà a verificazione di l’origine"}
+{"key":"/data:/section:Configuration/section:Verification#5802","source":"Verify that lossless inputs decode to exactly the data\nthey were originally created from.","source_fr":"Vérifier que l'encodage sans perte est fidèle\naux données du fichier d'origine.","target":"Verificà chì i schedarii d’entrata senza perdita di qualità discudificheghjinu\nesattamente cum’è i dati impiegati à l’origine per crealli."}
+{"key":"/data:/section:Configuration/section:Verification#5803","source":"Enable output verification","source_fr":"Activer la vérification du résultat","target":"Attivà a verificazione di destinazione"}
+{"key":"/data:/section:Configuration/section:Verification#5804","source":"Verify that lossless outputs decode to exactly the data\nused when encoding them.","source_fr":"Vérifier que le décodage sans perte restitue\nexactement les données du fichier d'origine.","target":"Verificà chì i schedarii di destinazione senza perdita di qualità discudificheghjinu\nesattamente cum’è i dati impiegati à l’origine per crealli."}
+{"key":"/data:/section:Configuration/section:Processing#5900","source":"Signal processing","source_fr":"Traitement du signal","target":"Trattamentu di u signale"}
+{"key":"/data:/section:Configuration/section:Processing#5901","source":"Enable signal processing","source_fr":"Activer le traitement du signal","target":"Attivà u trattamentu di u signale"}
+{"key":"/data:/section:Configuration/section:Processing#5902","source":"Enable processing during playback","source_fr":"Activer le traitement pendant la lecture","target":"Attivà u trattamentu durante a ripruduzzione"}
+{"key":"/data:/section:Configuration/section:Processing#5903","source":"Components","source_fr":"Composants","target":"Cumpunenti"}
+{"key":"/data:/section:Configuration/section:Processing#5904","source":"Available","source_fr":"Disponible","target":"Dispunibule"}
+{"key":"/data:/section:Configuration/section:Processing#5905","source":"Selected","source_fr":"Sélectionné","target":"Selezziunati"}
+{"key":"/data:/section:Configuration/section:Processing#5906","source":"Configure component","source_fr":"Configurer le composant","target":"Cunfigurà u cumpunente"}
+{"key":"/data:/section:Configuration/section:Processing#5907","source":"Conversion to a single output file","source_fr":"Conversion vers un fichier cible unique","target":"Cunversione in un schedariu unicu di destinazione"}
+{"key":"/data:/section:Configuration/section:Processing#5908","source":"Process each track individually","source_fr":"Traiter chaque piste individuellement","target":"Trattà ogni traccia individualmente"}
+{"key":"/data:/section:Configuration/section:Processing#5909","source":"Treat the combined tracks like a single track","source_fr":"Traiter les pistes combinées comme une seule piste","target":"Trattà e traccie unite cum’è una traccia unica"}
+{"key":"/data:/section:About#6000","source":"About %1","source_fr":"A propos de %1","target":"Apprupositu di %1"}
+{"key":"/data:/section:About#6001","source":"Translated by %1.","source_fr":"Traduit par %1.","target":"Traduttu da %1."}
+{"key":"/data:/section:About#6002","source":"This program is being distributed under the terms\nof the GNU General Public License (GPL).","source_fr":"Ce programme est diffusé selon les termes\nde la licence GNU GPL (General Public License).","target":"Stu prugramma hè distribuitu sottu à i termi di\na licenza GNU General Public License (GPL)."}
+{"key":"/data:/section:Updates#6100","source":"There are new updates for %1 available online!\nWould you like to see a list of available updates now?","source_fr":"Des mises à jour de %1 sont disponibles en ligne ! Voulez-vous afficher la liste des mises à jour disponibles maintenant ?","target":"Ci hè qualchì rinnovu per %1 chì hè dispunibule in linea !\nVulete ottene subitu una lista di i rinnovi dispunibule ?"}
+{"key":"/data:/section:Updates#6101","source":"There are no updates available at the moment!","source_fr":"Actuellement, aucune mise à jour n'est disponible !","target":"Ùn ci hè alcunu rinnovu dispunibule à st’ora !"}
+{"key":"/data:/section:Updates#6102","source":"Check for updates at startup","source_fr":"Rechercher les mises à jour au démarrage","target":"Circà e nove versioni à l’iniziu di u prugramma"}
+{"key":"/data:/section:Updates#6103","source":"%1 can perform an automatic check for online\nprogram updates at startup.\n\nWould you like %1 to look for updates at startup?","source_fr":"%1 peut vérifier automatiquement la présence en ligne de mises à jour du programme\nau démarrage.\n\nVoulez-vous que %1 recherche des mises à jour au démarrage ?","target":"%1 pò cuntrollà autumaticamente à u principiu\ni rinnovi in linea di u prugramma.\n\nVulete chì %1 cerchi i rinnovi à u principiu ?"}
+{"key":"/data:/section:Messages#7000","source":"Currently converting","source_fr":"Encodage en cours","target":"Cunversione in corsu"}
+{"key":"/data:/section:Messages#7001","source":"A conversion process is still active! Do you really want to quit?","source_fr":"Une tâche d'encodage est toujours en cours d'exécution ! Voulez-vous vraiment quitter ?","target":"Un trattamentu di cunversione hè sempre attivu ! Site sicuru di vulè chità quantunque ?"}
+{"key":"/data:/section:Messages#7002","source":"Delete original files after encoding","source_fr":"Supprimer fichiers initiaux après encodage","target":"Squassà u schedariu d’origine dopu à a cudificazione"}
+{"key":"/data:/section:Messages#7003","source":"This option will remove the original files from your computer\nafter the encoding process!\n\nAre you sure you want to activate this function?","source_fr":"Cette option va supprimer les fichiers initiaux après leur\nencodage ! Voulez-vous vraiment continuer ?","target":"St’ozzione hà da caccià i schedarii d’origine nant’à l’urdinatore\ndopu à a cudificazione !\n\nSite sicuru di vulè attivà sta funzione ?"}
+{"key":"/data:/section:Messages#7004","source":"Keep this option enabled even after restarting %1","source_fr":"Garder cette option activée même après redémarrage","target":"Cunservà st’ozzione attiva ancu dopu u rilanciu di %1"}
+{"key":"/data:/section:Messages#7005","source":"File already exists","source_fr":"Le fichier existe déjà.","target":"U schedariu esiste dighjà"}
+{"key":"/data:/section:Messages#7006","source":"The output file %1\nalready exists! Do you want to overwrite it?","source_fr":"Le fichier de sortie %1\nexiste déjà ! Voulez-vous le remplacer ?","target":"U schedariu di destinazione %1\nesiste dighjà ! Vulete rimpiazzallu ?"}
+{"key":"/data:/section:Messages#7007","source":"Overwrite all further files","source_fr":"Ecraser tous les autres fichiers","target":"Rimpiazzà tutti l’altri schedarii"}
+{"key":"/data:/section:Messages#7008","source":"You seem to be converting from a lossy to a lossless format.\n\nPlease be aware that quality loss cannot be undone, so this process\nwill not improve quality in any way, and most likely increase file size.\n\nWould you like to continue anyway?","source_fr":"Il semble que vous convertissiez d'un format avec perte vers\nun format sans perte.\n\nla perte de qualité ne pourra pas être ratrappée, donc ce traitement ne\nva pas améliorer la qualité, et va plutôt augmenter\nla taille de fichier.\n\nvoulez-vous quand-même continuer ?","target":"Site prontu(a) à cunvertisce un furmatu cù perdita d’infurmazione\nin un furmatu senza perdita. Ci vole à sapè chì ùn si pò riacquistà\nuna perdita di qualità, dunque stu trattamentu ùn migliorerà micca\na qualità, è increscerà a dimensione di u schedariu.\n\nVulete cuntinuà quantunque ?"}
+{"key":"/data:/section:Errors#7100","source":"Could not create decoder component: %1\n\nFile: %1\nPath: %2","source_fr":"Impossible de créer le composant de décodeur : %1\n\nFichier : %1\nChemin : %2","target":"Ùn si pò micca creà u cumpunente di discudificazione : %1\n\nSchedariu : %1\nChjassu : %2"}
+{"key":"/data:/section:Errors#7101","source":"Could not create encoder component: %1","source_fr":"Impossible de créer le composant de d'encodeur : %1","target":"Ùn si pò micca creà u cumpunente di cudificazione : %1"}
+{"key":"/data:/section:Errors#7102","source":"Could not set up decoder for input file: %1\n\nFile: %1\nPath: %2\n\nError: %3","source_fr":"Impossible de mettre en place le décodeur pour le fichier source : %1\n\nFichier : %1\nChemin : %2\n\nErreur : %3","target":"Ùn si pò definisce u discudificatore per u schedariu d’origine : %1\n\nSchedariu : %1\nChjassu : %2\n\nSbagliu : %3"}
+{"key":"/data:/section:Errors#7103","source":"Could not set up encoder for output file: %1\n\nFile: %1\nPath: %2\n\nError: %3","source_fr":"Impossible de mettre en place l'encodeur pour le fichier résultant : %1\n\nFichier : %1\nChemin : %2\n\nErreur : %3","target":"Ùn si pò definisce u cudificatore per u schedariu di destinazione : %1\n\nSchedariu : %1\nChjassu : %2\n\nSbagliu : %3"}
+{"key":"/data:/section:Errors#7104","source":"Could not set up DSP processor: %1\n\nError: %2","source_fr":"Impossible de mettre en place le processeur DSP : %1\n\nErreur : %2","target":"Ùn si pò definisce u prucessore DSP : %1\n\nSbagliu : %2"}
+{"key":"/data:/section:Errors#7105","source":"Unable to access input file: %1\n\nFile: %1\nPath: %2","source_fr":"Impossible d'accéder au fichier d'entrée : %1\n\nFichier : %1\nRépertoire : %2","target":"Ùn si pò accede à u schedariu d’origine : %1\n\nSchedariu : %1\nChjassu : %2"}
+{"key":"/data:/section:Errors#7106","source":"Unable to create output file: %1\n\nFile: %1\nPath: %2","source_fr":"Impossible d'accéder au fichier de sortie : %1\n\nFichier : %1\nRépertoire : %2","target":"Ùn si pò creà u schedariu di destinazione : %1\n\nSchedariu : %1\nChjassu : %2"}
+{"key":"/data:/section:Errors#7107","source":"Failed to verify input file: %1","source_fr":"Échec de la vérification du fichier source : %1","target":"Fiascu di a verificazione di u schedariu d’entrata : %1"}
+{"key":"/data:/section:Errors#7108","source":"Failed to verify input track: %1","source_fr":"Échec de la vérification de la piste en entrée : %1","target":"Fiascu di a verificazione di a traccia d’entrata : %1"}
+{"key":"/data:/section:Errors#7109","source":"Checksum mismatch verifying output file: %1\n\nEncode checksum: %2\nVerify checksum: %3","source_fr":"Non-concordance de la somme de contrôle\nlors de la vérification du fichier de sortie : %1\n\nEncoder somme de controle : %2\nVérifier somme de controle : %3","target":"A somma di cuntrollu verificata ùn currisponde micca à u schedariu di destinazione : %1\n\nSomma cudificata : %2\nSomma verificata : %3"}
+{"key":"/data:/section:Errors#7110","source":"File not found","source_fr":"Fichier non trouvé","target":"U schedariu ùn esiste micca"}
+{"key":"/data:/section:Errors#7111","source":"Unknown file type","source_fr":"Type de fichier inconnu","target":"Tipu di schedariu scunnisciutu"}
+{"key":"/data:/section:Errors#7112","source":"Invalid file format","source_fr":"Format de fichier invalide","target":"Furmatu di schedariu inaccettevule"}
+{"key":"/data:/section:Errors#7113","source":"Unsupported audio format","source_fr":"Format audio non supporté","target":"Furmatu audio micca accettatu"}
+{"key":"/data:/section:Errors#7114","source":"Unknown error","source_fr":"Erreur inconnue","target":"Sbagliu scunnisciutu"}
+{"key":"/data:/section:Errors#7115","source":"Unable to load NT SCSI drivers! CD ripping disabled!","source_fr":"Impossible de charger les pilotes SCSI NT ! Extraction du CD désactivée !","target":"Impussibule di caricà i piloti NT SCSI ! Estrazzione CD disattivata !"}
+{"key":"/data:/section:Errors#7116","source":"Unable to open file: %1\n\nError: %2","source_fr":"Impossible d'ouvrir le fichier : %1\n\nErreur : %2","target":"Impussibule d’apre u schedariu : %1\n\nSbagliu : %2"}
+{"key":"/data:/section:Errors#7117","source":"Cannot play a CD track while ripping from the same drive!","source_fr":"Impossible de jouer une piste de CD pendant l'extraction depuis le même lecteur !","target":"Ùn si pò micca leghje una traccia di CD quandu si face l’estrazzione nant’à u listessu lettore !"}
+{"key":"/data:/section:Errors#7118","source":"Cannot start ripping while playing a track from the same drive!","source_fr":"Impossible de démarrer l'extraction pendant la lecture depuis le même lecteur de CD !","target":"Ùn si pò micca principià l’estrazzione quandu si leghje una traccia nant’à u listessu lettore !"}
+{"key":"/data:/section:Errors#7119","source":"CDDB support is disabled! Please enable local or\nremote CDDB support in the configuration dialog.","source_fr":"La prise en charge CDDB est désactivée ! Activez la prise en charge locale ou\ndistante dans la boîte de dialogue de configuration.","target":"L’accessu à a CDDB hè disattivatu ! Ci vole à attivà un\naccessu lucale o alluntanatu in u dialogu di cunfigurazione."}
+{"key":"/data:/section:Errors#7120","source":"Remote CDDB support is disabled! Please enable\nremote CDDB support in the configuration dialog.","source_fr":"La prise en charge CDDB distante est désactivée ! Activez la prise en charge\ndistante dans la boîte de dialogue de configuration.","target":"L’accessu alluntanatu à a CDDB hè disattivatu !\nCi vole à attivà st’accessu in u dialogu di cunfigurazione."}
+{"key":"/data:/section:Errors#7121","source":"Access to CD-ROM drives was denied by Windows.\n\nPlease contact your system administrator in order\nto be granted the right to access the CD-ROM drive.","source_fr":"Windows a refusé l'accès aux lecteurs de CD-ROM.\n\nAdressez-vous à votre administrateur système pour\nobtenir le droit d'accès au lecteur de CD-ROM.","target":"Windows hà ricusatu l’accessu à i lettori CD-ROM.\n\nCi vole à cuntattà l’amministratore di u vostru sistema\nper dumandallu u dirittu d’accessu à u lettore CD-ROM."}
+{"key":"/data:/section:Errors#7122","source":"No configuration dialog available for:\n\n%1","source_fr":"Pas de dialogue de configuration de disponible\npour:\n\n%1","target":"Nisunu dialogu di cunfigurazione hè dispunibule per :\n\n%1"}
+{"key":"/data:/section:Errors#7123","source":"The selected folder does not exist anymore!","source_fr":"Le répertoire sélectionné n'existe plus !","target":"U cartulare selezziunatu ùn esiste più !"}
+{"key":"/data:/section:Errors#7124","source":"Access denied","source_fr":"Accès refusé","target":"Accessu ricusatu"}
+{"key":"/data:/section:Dialogs/section:Overwrite#8000","source":"Confirm overwrite","source_fr":"Confimer l'écrasement","target":"Cunfirmà u rimpiazzamentu ?"}
+{"key":"/data:/section:Dialogs/section:Overwrite#8001","source":"Confirm","source_fr":"Confirmer","target":"Cunfirmà"}
+{"key":"/data:/section:Dialogs/section:Overwrite#8002","source":"Skip all","source_fr":"Tout ignorer","target":"Tralascià tuttu"}
+{"key":"/data:/section:Dialogs/section:Overwrite#8003","source":"The following %1 files already exist or have duplicate file names","source_fr":"Les %1 fichiers existent déja où ont des noms en doublons","target":"I %1 schedarii chì seguitanu esistenu dighjà o anu un nome in doppiu"}
+{"key":"/data:/section:Dialogs/section:Overwrite#8004","source":"Action","source_fr":"Action","target":"Azzione"}
+{"key":"/data:/section:Dialogs/section:Overwrite#8005","source":"Overwrite","source_fr":"Écraser","target":"Rimpiazzà"}
+{"key":"/data:/section:Dialogs/section:Overwrite#8006","source":"Skip","source_fr":"Ignorer","target":"Ignurà"}
+{"key":"/data:/section:Dialogs/section:Format#8100","source":"Select sample format","source_fr":"Sélectionner le format d'échantillonage","target":"Selezziunà u furmatu di campiunariu"}
+{"key":"/data:/section:Dialogs/section:Format#8101","source":"The selected tracks have different sample formats. Please select\nthe desired sample format of the output file:","source_fr":"Les pistes sélectionnées on des formats d'échantillonnage différents.\nVeuillez sélectionner le format désiré pour les fichiers résultants :","target":"E traccie selezziunate anu furmati di campiunariu sfarente. Ci vole à\nselezziunà u furmatu di campiunariu per u schedariu di destinazione :"}
+{"key":"/data:/section:Dialogs/section:Format#8102","source":"Select","source_fr":"Parcourir","target":"Selezziunà"}
+{"key":"/data:/section:Dialogs/section:Errors#8200","source":"Errors","source_fr":"Erreurs","target":"Sbaglii"}
+{"key":"/data:/section:Dialogs/section:Errors#8201","source":"%1 errors while processing job","source_fr":"%1 erreurs survenues pendant le traitement","target":"%1 sbaglii trovi durante u travagliu di trattamentu"}
+{"key":"/data:/section:Dialogs/section:Errors#8202","source":"select an entry for details","source_fr":"sélectionner une entrée pour le détail","target":"selezziunà un elementu per avè più di detaglii"}
+{"key":"/data:/section:Dialogs/section:Splitter#8300","source":"Output splitting tool","source_fr":"Outils de séparation en sortie","target":"Attrezzu di frazziunamentu d’esciuta"}
+{"key":"/data:/section:Dialogs/section:Splitter#8301","source":"%1 track(s) in joblist","source_fr":"%1 fichier(s) à traiter","target":"%1 traccia(e) in a lista di travagliu"}
+{"key":"/data:/section:Dialogs/section:Splitter#8302","source":"Split mode","source_fr":"Mode de séparation","target":"Modu di frazziunamentu"}
+{"key":"/data:/section:Dialogs/section:Splitter#8303","source":"Split by duration","source_fr":"Filtrer par durée","target":"Frazziunà da a durata"}
+{"key":"/data:/section:Dialogs/section:Splitter#8304","source":"Duration per part","source_fr":"Durée par partie","target":"Durata à a parte"}
+{"key":"/data:/section:Dialogs/section:Splitter#8305","source":"at least","source_fr":"au moins","target":"omancu"}
+{"key":"/data:/section:Dialogs/section:Splitter#8306","source":"approximately","source_fr":"environ","target":"più o menu"}
+{"key":"/data:/section:Dialogs/section:Splitter#8307","source":"at most","source_fr":"au plus","target":"à u più"}
+{"key":"/data:/section:Dialogs/section:Splitter#8308","source":"exactly","source_fr":"exactement","target":"esattamente"}
+{"key":"/data:/section:Dialogs/section:Splitter#8309","source":"second(s)","source_fr":"seconde(s)","target":"seconda(e)"}
+{"key":"/data:/section:Dialogs/section:Splitter#8310","source":"minute(s)","source_fr":"minutes(s)","target":"minutu(i)"}
+{"key":"/data:/section:Dialogs/section:Splitter#8311","source":"hour(s)","source_fr":"heure(s)","target":"ora(e)"}
+{"key":"/data:/section:Dialogs/section:Splitter#8312","source":"Fixed number of parts","source_fr":"Nombre de parties fixe","target":"Numeru fissu di parti"}
+{"key":"/data:/section:Dialogs/section:Splitter#8313","source":"Number of parts","source_fr":"Nombre de parties","target":"Numeru di parti"}
+{"key":"/data:/section:Dialogs/section:Splitter#8314","source":"Split upon metadata change","source_fr":"Séparer au changement de métadonnées","target":"Frazziunà à u cambiamentu di metadati"}
+{"key":"/data:/section:Dialogs/section:Splitter#8315","source":"Metadata pattern to compare","source_fr":"Modèle de métadonnées à comparer","target":"Mudellu di metadati per paragunà"}
+{"key":"/data:/section:Dialogs/section:Splitter#8316","source":"Split at track boundaries","source_fr":"Séparer aux limites de piste","target":"Frazziunà à e cunfine di a traccia"}
+{"key":"/data:/section:Dialogs/section:Splitter#8317","source":"Repeat end of previous part at beginning of each part","source_fr":"Répéter la fin de la partie précédente au début de chaque partie","target":"Ripete a fine di a parte precedente à u principiu d’ogni parte"}
+{"key":"/data:/section:Dialogs/section:Splitter#8318","source":"Repeat duration","source_fr":"Durée de répétition","target":"Durata di ripetizione"}
+{"key":"/data:/section:Dialogs/section:Splitter#8319","source":"Output filenames","source_fr":"Noms de fichiers résultants","target":"Nomi di schedariu d’esciuta"}
+{"key":"/data:/section:Dialogs/section:Splitter#8320","source":"Filename pattern","source_fr":"Modèle de nom de fichier","target":"Mudellu di nome di schedariu"}
+{"key":"/data:/section:Dialogs/section:Splitter#8321","source":"Convert","source_fr":"Convertir","target":"Cunvertisce"}
+{"key":"/data:/section:Dialogs/section:Splitter#8322","source":"Save","source_fr":"Sauvegarder","target":"Arregistrà"}
+{"key":"/data:/section:Ripper#9000","source":"Active CD-ROM drive","source_fr":"Lecteur de CD-ROM actif","target":"Lettore CD-ROM attivu"}
+{"key":"/data:/section:Ripper#9001","source":"Set drive speed limit","source_fr":"Définir la vitesse limite du lecteur","target":"Definisce u limitu di velocità di u lettore"}
+{"key":"/data:/section:Ripper#9002","source":"CD information","source_fr":"Informations sur le CD","target":"Infurmazione CD"}
+{"key":"/data:/section:Ripper#9003","source":"Read CD-Text","source_fr":"Lire CD-Text","target":"Leghje u CD-Text"}
+{"key":"/data:/section:Ripper#9004","source":"Read cdplayer.ini","source_fr":"Lire fichier cdplayer.ini","target":"Leghje cdplayer.ini"}
+{"key":"/data:/section:Ripper#9005","source":"Ripper settings","source_fr":"Paramètres de l'extracteur","target":"Parametri d’estrazzione"}
+{"key":"/data:/section:Ripper#9006","source":"Activate cdparanoia mode","source_fr":"Activer le mode cdparanoia","target":"Attivà u modu cdparanoia"}
+{"key":"/data:/section:Ripper#9007","source":"Overlap only","source_fr":"Recouvrement seulement","target":"Accavalcatura solu"}
+{"key":"/data:/section:Ripper#9008","source":"No verify","source_fr":"Aucune vérification","target":"Senza verificazione"}
+{"key":"/data:/section:Ripper#9009","source":"No scratch repair","source_fr":"Ne pas corriger les éraflures","target":"Alcuna currezzione di sfrisgiatura"}
+{"key":"/data:/section:Ripper#9010","source":"Full cdparanoia mode","source_fr":"Mode cdparanoia complet","target":"Modu cdparanoia sanu"}
+{"key":"/data:/section:Ripper#9011","source":"Activate jitter correction","source_fr":"Activer correction d'instabilité","target":"Attivà a currezzione d’istabilità jitter"}
+{"key":"/data:/section:Ripper#9012","source":"Switch stereo channels","source_fr":"Intervertir canal gauche/droit","target":"Invertisce i canali stereo"}
+{"key":"/data:/section:Ripper#9013","source":"Automatization","source_fr":"Automatisation","target":"Autumatisazione"}
+{"key":"/data:/section:Ripper#9014","source":"Read CD contents on insert","source_fr":"Lire le CD à l'insertion","target":"Leghje u cuntenutu di u CD à l’intruduzzione"}
+{"key":"/data:/section:Ripper#9015","source":"Start ripping automatically","source_fr":"Lancer extraction automatiquement","target":"Principià à estrae autumaticamente"}
+{"key":"/data:/section:Ripper#9016","source":"Eject disc after ripping","source_fr":"Éjecter le CD après extraction","target":"Espulsione di u discu dopu à l’estrazzione"}
+{"key":"/data:/section:Ripper#9017","source":"CD options","source_fr":"Options du CD","target":"Ozzioni di u CD"}
+{"key":"/data:/section:Ripper#9018","source":"Use read offset","source_fr":"Utiliser le décalage de lecture","target":"Impiegà u spustime di lettura"}
+{"key":"/data:/section:Ripper#9019","source":"samples","source_fr":"échantillons","target":"campioni"}
+{"key":"/data:/section:Ripper#9020","source":"Read ISRC when adding tracks to joblist","source_fr":"Lire le code ISRC lors de l’ajout à la liste","target":"Leghje u codice ISRC à l’aghjuntu di e traccie à a lista di travagliu"}
+{"key":"/data:/section:Ripper#9021","source":"Spin up before ripping","source_fr":"Lancer le CD avant l'extraction","target":"Mette in ballu u CD nanzu l’estrazzione"}
+{"key":"/data:/section:Ripper#9022","source":"%1 seconds","source_fr":"%1 secondes","target":"%1 seconde"}
+{"key":"/data:/section:Components/section:Decoders#10000","source":"Cue Sheet Reader","source_fr":"Lecteur de feuille de repères","target":"Lettore di fogliu di mischiera Cue"}
+{"key":"/data:/section:Components/section:Encoders#11000","source":"meh! - multi encoder hub","source_fr":"meh! - concentrateur multi-encodeur","target":"meh ! - noghja multi cudificatore"}
+{"key":"/data:/section:Components/section:Encoders#11001","source":"SndFile Output Component","source_fr":"Composant de sortie de fichier son","target":"Cumpunente d’esciuta SndFile"}
+{"key":"/data:/section:Components/section:DSP#12000","source":"Channel Converter","source_fr":"Convertisseur de canal","target":"Cunvertidore di canali"}
+{"key":"/data:/section:Components/section:DSP#12001","source":"Sample Format Converter","source_fr":"Convertisseur de format d'échantillonage","target":"Cunvertidore di furmatu di campiunariu"}
+{"key":"/data:/section:Components/section:DSP#12002","source":"Sample Rate Converter","source_fr":"Convertisseur de fréquence d'échantillonage","target":"Cunvertidore di frequenza di campiunariu"}
+{"key":"/data:/section:Components/section:DSP#12003","source":"RNNoise Noise Reduction","source_fr":"Réduction de bruit RNNoise","target":"Riduzzione di trostu RNNoise"}
+{"key":"/data:/section:Components/section:DSP#12004","source":"Rubber Band Tempo/Pitch Changer","source_fr":"Modificateur de tempo/tonalité","target":"Cambià a tunalità/tempo di Rubber Band"}
+{"key":"/data:/section:Components/section:DSP#12005","source":"HDCD Decoder","source_fr":"Décodeur HDCD","target":"Discudificatore HDCD"}
+{"key":"/data:/section:Components/section:DSP#12006","source":"Matrix Surround Decoder","source_fr":"Décodeur Matrix Surround","target":"Discudificatore Surround Matrix"}
+{"key":"/data:/section:Components/section:DSP#12007","source":"Volume Adjustment","source_fr":"Réglage du volume","target":"Accumudata di vulume"}
+{"key":"/data:/section:Components/section:Verifiers#14000","source":"AccurateRip Verifier","source_fr":"Vérificateur AccurateRip","target":"Verificadore AccurateRip"}
+{"key":"/data:/section:Components/section:Extensions#15000","source":"Notifications","source_fr":"Notifications","target":"Nutificazioni"}
+{"key":"/data:/section:Components/section:Extensions#15001","source":"Logging","source_fr":"Journalisation","target":"Arregistramentu di i messaghji"}
+{"key":"/data:/section:Components/section:Extensions#15002","source":"Video Downloader","source_fr":"Téléchargement de vidéo","target":"Scaricadore di video"}
+{"key":"/data:/section:Components/section:Extensions#15003","source":"Tag Editor","source_fr":"Éditeur de balises","target":"Mudificatore d’etichetta"}
+{"key":"/data:/section:Decoders/section:MAD#20000","source":"Decoding","source_fr":"Décodage","target":"Discudificazione"}
+{"key":"/data:/section:Decoders/section:MAD#20001","source":"Enable 24 bit decoding","source_fr":"Activer le décodage 24 bits","target":"Permette a discudificazione à 24 bit"}
+{"key":"/data:/section:Decoders/section:mpg123#21000","source":"Decoder","source_fr":"Décodeur","target":"Discudificatore"}
+{"key":"/data:/section:Decoders/section:mpg123#21001","source":"Active decoder","source_fr":"Activer le décodeur","target":"Discudificatore attivu"}
+{"key":"/data:/section:Decoders/section:mpg123#21002","source":"auto select","source_fr":"sélection automatique","target":"Selezzione autumatica"}
+{"key":"/data:/section:Decoders/section:CueSheet#22000","source":"Title information","source_fr":"Informations de la piste","target":"Infurmazione di titulu"}
+{"key":"/data:/section:Decoders/section:CueSheet#22001","source":"Read tags from referenced files","source_fr":"Lire les repères des fichiers mentionnés","target":"Leghje l’etichette nant’à i schedarii referenzati"}
+{"key":"/data:/section:Decoders/section:CueSheet#22002","source":"Prefer cue sheet metadata over referenced files' tags","source_fr":"Préferer les métadonnées de la feuille de repères plutôt que les balises des fichiers mentionnés","target":"Preferisce i metadati di fogliu di mischiera Cue à l’etichette di i schedarii referenzati"}
+{"key":"/data:/section:Decoders/section:CueSheet#22003","source":"Alternative files","source_fr":"Fichiers alternatifs","target":"Schedarii alternativi"}
+{"key":"/data:/section:Decoders/section:CueSheet#22004","source":"Look for compressed alternatives if referenced Wave files cannot be located","source_fr":"Rechercher les fichiers compressés alternatifs si les fichiers waves concernés ne peuvent être trouvés","target":"Circà schedarii alternativi cumpressi s’è ùn si trovanu micca quelli Wave di referenza"}
+{"key":"/data:/section:Decoders/section:CueSheet#22005","source":"Error handling","source_fr":"Traitement des erreurs","target":"Ghjestione di sbagliu"}
+{"key":"/data:/section:Decoders/section:CueSheet#22006","source":"Ignore errors during cue sheet processing","source_fr":"Ignorer les erreurs pendant le traitement de la feuille de repères","target":"Ignurà i sbaglii durante u trattamentu di fogliu di mischiera Cue"}
+{"key":"/data:/section:Decoders/section:Opus#23000","source":"Quality","source_fr":"Qualité","target":"Qualità"}
+{"key":"/data:/section:Decoders/section:Opus#23001","source":"Complexity","source_fr":"Complexité","target":"Cumplessità"}
+{"key":"/data:/section:Decoders/section:Opus#23002","source":"Enable Speech Bandwidth Extension","target":"Attivà l’estensione di larghezza di striscia di discussione"}
+{"key":"/data:/section:Decoders/section:Opus#23003","source":"Format","target":"Furmatu"}
+{"key":"/data:/section:Decoders/section:Opus#23004","source":"Sample format","target":"Furmatu di campiunariu"}
+{"key":"/data:/section:Decoders/section:Opus#23005","source":"16 bit integer","target":"Numeru interu 16 bit"}
+{"key":"/data:/section:Decoders/section:Opus#23006","source":"32 bit float","target":"Virgula mobile 32 bit"}
+{"key":"/data:/section:Encoders/section:BladeEnc#30000","source":"Bitrate","source_fr":"Débit","target":"Flussu binariu"}
+{"key":"/data:/section:Encoders/section:BladeEnc#30001","source":"Copyright bit","source_fr":"Bit de copyright","target":"Bit di dirittu di copia"}
+{"key":"/data:/section:Encoders/section:BladeEnc#30002","source":"CRC","source_fr":"CRC","target":"CRC"}
+{"key":"/data:/section:Encoders/section:BladeEnc#30003","source":"Original bit","source_fr":"Bit d'origine","target":"Bit uriginale"}
+{"key":"/data:/section:Encoders/section:BladeEnc#30004","source":"Channels","source_fr":"Canaux","target":"Canali"}
+{"key":"/data:/section:Encoders/section:BladeEnc#30005","source":"Private bit","source_fr":"Bit privé","target":"Bit privatu"}
+{"key":"/data:/section:Encoders/section:BladeEnc#30006","source":"Set Copyright bit","source_fr":"Bit de copyright","target":"Definisce u bit di dirittu di copia"}
+{"key":"/data:/section:Encoders/section:BladeEnc#30007","source":"Enable CRC","source_fr":"Activer CRC","target":"Permette CRC"}
+{"key":"/data:/section:Encoders/section:BladeEnc#30008","source":"Set Original bit","source_fr":"Bit d'origine","target":"Definisce u bit uriginale"}
+{"key":"/data:/section:Encoders/section:BladeEnc#30009","source":"Dual channel encoding","source_fr":"Encodage en canal double","target":"Cudificazione canale doppiu"}
+{"key":"/data:/section:Encoders/section:BladeEnc#30010","source":"Set Private bit","source_fr":"Définir le bit privé","target":"Definisce u bit privatu"}
+{"key":"/data:/section:Encoders/section:Bonk#31000","source":"Encoder mode","source_fr":"Mode encodeur","target":"Modu di cudificatore"}
+{"key":"/data:/section:Encoders/section:Bonk#31001","source":"Stereo mode","source_fr":"Mode stéréo","target":"Modu stereo"}
+{"key":"/data:/section:Encoders/section:Bonk#31002","source":"Quantization","source_fr":"Quantification","target":"Quantificazione"}
+{"key":"/data:/section:Encoders/section:Bonk#31003","source":"Downsampling ratio","source_fr":"Taux de rééchantillonnage","target":"Percentuale di campiunariu"}
+{"key":"/data:/section:Encoders/section:Bonk#31004","source":"Predictor size","source_fr":"Taille de prédicteur","target":"Dimensione di a predizzione"}
+{"key":"/data:/section:Encoders/section:Bonk#31005","source":"Enable lossless encoding","source_fr":"Encodage sans perte","target":"Attivà a cudificazione senza perdita"}
+{"key":"/data:/section:Encoders/section:Bonk#31006","source":"Enable Joint Stereo","source_fr":"Activer la stéréo combinée","target":"Attivà Joint Stereo"}
+{"key":"/data:/section:Encoders/section:LAME#32000","source":"Basic","source_fr":"Elémentaire","target":"Basicu"}
+{"key":"/data:/section:Encoders/section:LAME#32001","source":"Misc","source_fr":"Divers","target":"Diversu"}
+{"key":"/data:/section:Encoders/section:LAME#32002","source":"Expert","source_fr":"Expert","target":"Espertu"}
+{"key":"/data:/section:Encoders/section:LAME#32003","source":"Audio processing","source_fr":"Traitement audio","target":"Trattamentu audio"}
+{"key":"/data:/section:Encoders/section:LAME/section:Basic#32100","source":"Presets","source_fr":"Paramètres prédéfinis","target":"Prerigature predefinite"}
+{"key":"/data:/section:Encoders/section:LAME/section:Basic#32101","source":"Use preset","source_fr":"Utiliser paramètre prédéfini","target":"Impiegà a prerigatura predefinita"}
+{"key":"/data:/section:Encoders/section:LAME/section:Basic#32102","source":"Custom settings","source_fr":"Paramètres personnalisés","target":"Parametri persunalizati"}
+{"key":"/data:/section:Encoders/section:LAME/section:Basic#32103","source":"Medium","source_fr":"Moyen","target":"Medianu"}
+{"key":"/data:/section:Encoders/section:LAME/section:Basic#32104","source":"Standard","source_fr":"Standard","target":"Classicu"}
+{"key":"/data:/section:Encoders/section:LAME/section:Basic#32105","source":"Extreme","source_fr":"Extrême","target":"Estremu"}
+{"key":"/data:/section:Encoders/section:LAME/section:Basic#32106","source":"Bitrate","source_fr":"Qualité d'encodage","target":"Flussu binariu"}
+{"key":"/data:/section:Encoders/section:LAME/section:Basic#32107","source":"Quality","source_fr":"Qualité","target":"Qualità"}
+{"key":"/data:/section:Encoders/section:LAME/section:Basic#32108","source":"Set bitrate","source_fr":"Débit binaire","target":"Definisce u flussu binariu"}
+{"key":"/data:/section:Encoders/section:LAME/section:Basic#32109","source":"Set ratio","source_fr":"Taux","target":"Definisce u percentuale"}
+{"key":"/data:/section:Encoders/section:LAME/section:Basic#32110","source":"Set quality","source_fr":"Qualité","target":"Definisce a qualità"}
+{"key":"/data:/section:Encoders/section:LAME/section:Basic#32111","source":"worse","source_fr":"moins bonne","target":"pechju"}
+{"key":"/data:/section:Encoders/section:LAME/section:Basic#32112","source":"better","source_fr":"meilleure","target":"più bona"}
+{"key":"/data:/section:Encoders/section:LAME/section:Basic#32113","source":"VBR mode","source_fr":"Mode VBR","target":"Modu VBR"}
+{"key":"/data:/section:Encoders/section:LAME/section:Basic#32114","source":"no VBR","source_fr":"Pas de VBR","target":"senza VBR"}
+{"key":"/data:/section:Encoders/section:LAME/section:Basic#32115","source":"VBR quality","source_fr":"Qualité VBR","target":"Qualità VBR"}
+{"key":"/data:/section:Encoders/section:LAME/section:Basic#32116","source":"ABR target bitrate","source_fr":"Débit binaire ABR de la cible","target":"Flussu binariu ABR di destinazione"}
+{"key":"/data:/section:Encoders/section:LAME/section:Misc#32200","source":"Control bits","source_fr":"Bits de contrôle","target":"Bits di cuntrollu"}
+{"key":"/data:/section:Encoders/section:LAME/section:Misc#32201","source":"Set Copyright bit","source_fr":"Bit de copyright","target":"Definisce u bit Dirittu di copia"}
+{"key":"/data:/section:Encoders/section:LAME/section:Misc#32202","source":"Set Original bit","source_fr":"Bit d'origine","target":"Definisce u bit Uriginale"}
+{"key":"/data:/section:Encoders/section:LAME/section:Misc#32203","source":"Set Private bit","source_fr":"Bit privé","target":"Definisce u bit Privatu"}
+{"key":"/data:/section:Encoders/section:LAME/section:Misc#32204","source":"CRC","source_fr":"CRC","target":"CRC"}
+{"key":"/data:/section:Encoders/section:LAME/section:Misc#32205","source":"Enable CRC","source_fr":"Activer CRC","target":"Permette CRC"}
+{"key":"/data:/section:Encoders/section:LAME/section:Misc#32206","source":"Stereo mode","source_fr":"Mode stéréo","target":"Modu stereo"}
+{"key":"/data:/section:Encoders/section:LAME/section:Misc#32207","source":"auto","source_fr":"automatique","target":"autumaticu"}
+{"key":"/data:/section:Encoders/section:LAME/section:Misc#32208","source":"Stereo","source_fr":"Stéréo","target":"Stereo"}
+{"key":"/data:/section:Encoders/section:LAME/section:Misc#32209","source":"Joint Stereo","source_fr":"Stéréo combinée","target":"Joint Stereo"}
+{"key":"/data:/section:Encoders/section:LAME/section:Misc#32210","source":"Force Joint Stereo","source_fr":"Forcer stéréo comb.","target":"Furzà Joint Stereo"}
+{"key":"/data:/section:Encoders/section:LAME/section:Misc#32211","source":"VBR/ABR bitrate range","source_fr":"Plage de débit binaire VBR/ABR","target":"Stesa di flussu binariu VBR/ABR"}
+{"key":"/data:/section:Encoders/section:LAME/section:Misc#32212","source":"Set minimum VBR/ABR bitrate","source_fr":"Débit binaire VBR/ABR minimum","target":"Definisce u flussu binariu VBR/ABR minimu"}
+{"key":"/data:/section:Encoders/section:LAME/section:Misc#32213","source":"Set maximum VBR/ABR bitrate","source_fr":"Débit binaire VBR/ABR maximum","target":"Definisce u flussu binariu VBR/ABR massimu"}
+{"key":"/data:/section:Encoders/section:LAME/section:Expert#32300","source":"ATH","source_fr":"ATH","target":"ATH"}
+{"key":"/data:/section:Encoders/section:LAME/section:Expert#32301","source":"Enable ATH","source_fr":"Activer ATH","target":"Attivà ATH"}
+{"key":"/data:/section:Encoders/section:LAME/section:Expert#32302","source":"Use default setting","source_fr":"Utiliser le paramètre par défaut","target":"Impiegà u parametru predefinitu"}
+{"key":"/data:/section:Encoders/section:LAME/section:Expert#32303","source":"Psycho acoustic model","source_fr":"Modèle acoustique psycho","target":"Mudellu psico acusticu"}
+{"key":"/data:/section:Encoders/section:LAME/section:Expert#32304","source":"Use Temporal Masking Effect","source_fr":"Utiliser l'effet de masquage temporel","target":"Impiega l’effettu di maschera tempurale"}
+{"key":"/data:/section:Encoders/section:LAME/section:Expert#32305","source":"Stream format","source_fr":"Format de diffusion","target":"Furmatu di flussu"}
+{"key":"/data:/section:Encoders/section:LAME/section:Expert#32306","source":"Enforce strict ISO compliance","source_fr":"Appliquer la compatibilité ISO stricte","target":"Mette in cunfurmità ISO stretta"}
+{"key":"/data:/section:Encoders/section:LAME/section:Expert#32307","source":"automatic","source_fr":"automatique","target":"autumaticu"}
+{"key":"/data:/section:Encoders/section:LAME/section:Expert#32308","source":"always","source_fr":"toujours","target":"sempre"}
+{"key":"/data:/section:Encoders/section:LAME/section:Audio processing#32400","source":"Highpass filter","source_fr":"Filtre passe-haut","target":"Filtru passa-altu"}
+{"key":"/data:/section:Encoders/section:LAME/section:Audio processing#32401","source":"Set Highpass frequency (Hz)","source_fr":"Fréquence passe-haut (Hz)","target":"Definisce a frequenza passa-altu (Hz)"}
+{"key":"/data:/section:Encoders/section:LAME/section:Audio processing#32402","source":"Set Highpass width (Hz)","source_fr":"Largeur passe-haut (Hz)","target":"Definisce a larghezza passa-altu (Hz)"}
+{"key":"/data:/section:Encoders/section:LAME/section:Audio processing#32403","source":"Lowpass filter","source_fr":"Filtre passe-bas","target":"Filtru passa-bassu"}
+{"key":"/data:/section:Encoders/section:LAME/section:Audio processing#32404","source":"Set Lowpass frequency (Hz)","source_fr":"Fréquence passe-bas (Hz)","target":"Definisce a frequenza passa-bassu (Hz)"}
+{"key":"/data:/section:Encoders/section:LAME/section:Audio processing#32405","source":"Set Lowpass width (Hz)","source_fr":"Largeur passe-bas (Hz)","target":"Definisce a larghezza passa-bassu (Hz)"}
+{"key":"/data:/section:Encoders/section:LAME/section:Audio processing#32406","source":"Misc settings","source_fr":"Paramètres divers","target":"Parametri diversi"}
+{"key":"/data:/section:Encoders/section:LAME/section:Audio processing#32407","source":"Disable all filtering","source_fr":"Désactiver filtrage","target":"Disattivà tutti i filtri"}
+{"key":"/data:/section:Encoders/section:AAC#33000","source":"Codec","source_fr":"Codec","target":"Cudecu"}
+{"key":"/data:/section:Encoders/section:AAC#33001","source":"Quality","source_fr":"Qualité","target":"Qualità"}
+{"key":"/data:/section:Encoders/section:AAC#33002","source":"Format","source_fr":"Format","target":"Furmatu"}
+{"key":"/data:/section:Encoders/section:AAC/section:Codec#33100","source":"Audio codec","source_fr":"Codec audio","target":"Cudecu audio"}
+{"key":"/data:/section:Encoders/section:AAC/section:Quality#33200","source":"Bitrate","source_fr":"Qualité d'encodage","target":"Flussu binariu"}
+{"key":"/data:/section:Encoders/section:AAC/section:Quality#33201","source":"Bitrate / Quality","source_fr":"Taux d'encodage / Qualité","target":"Flussu binariu / Qualità"}
+{"key":"/data:/section:Encoders/section:AAC/section:Quality#33202","source":"Bitrate per channel","source_fr":"Débit binaire par canal","target":"Flussu binariu per canale"}
+{"key":"/data:/section:Encoders/section:AAC/section:Quality#33203","source":"Set quality","source_fr":"Qualité","target":"Definisce a qualità"}
+{"key":"/data:/section:Encoders/section:AAC/section:Quality#33204","source":"Stereo mode","source_fr":"Mode stéréo","target":"Modu stereo"}
+{"key":"/data:/section:Encoders/section:AAC/section:Quality#33205","source":"Allow Joint Stereo","source_fr":"Stéréo combinée","target":"Permette Joint Stereo"}
+{"key":"/data:/section:Encoders/section:AAC/section:Quality#33206","source":"Temporal Noise Shaping","source_fr":"Temporal Noise Shaping","target":"Fattura di trostu tempurale (TNS)"}
+{"key":"/data:/section:Encoders/section:AAC/section:Quality#33207","source":"Use Temporal Noise Shaping","source_fr":"Utiliser Temporal Noise Shaping","target":"Impiegà a fattura di trostu tempurale (TNS)"}
+{"key":"/data:/section:Encoders/section:AAC/section:Quality#33208","source":"Maximum bandwidth","source_fr":"Bande passante maximale","target":"Larghezza di fascia massima"}
+{"key":"/data:/section:Encoders/section:AAC/section:Quality#33209","source":"Maximum AAC frequency bandwidth to use (Hz)","source_fr":"Bande de fréquence AAC maximale à utiliser (Hz)","target":"Larghezza di fascia massima di frequenza AAC à impiegà (Hz)"}
+{"key":"/data:/section:Encoders/section:AAC/section:Quality#33210","source":"worse","source_fr":"moins bonne","target":"pechju"}
+{"key":"/data:/section:Encoders/section:AAC/section:Quality#33211","source":"better","source_fr":"meilleure","target":"più bona"}
+{"key":"/data:/section:Encoders/section:AAC/section:Quality#33212","source":"auto","source_fr":"automatique","target":"autumaticu"}
+{"key":"/data:/section:Encoders/section:AAC/section:Quality#33213","source":"Enable Afterburner processing","target":"Attivà u trattamentu Afterburner"}
+{"key":"/data:/section:Encoders/section:AAC/section:Format#33300","source":"MPEG version","source_fr":"Version MPEG","target":"Versione MPEG"}
+{"key":"/data:/section:Encoders/section:AAC/section:Format#33301","source":"AAC object type","source_fr":"Type d'objet AAC","target":"Tipu d’oghjettu AAC"}
+{"key":"/data:/section:Encoders/section:AAC/section:Format#33302","source":"File format","source_fr":"Format de fichier","target":"Furmatu di schedariu"}
+{"key":"/data:/section:Encoders/section:AAC/section:Format#33303","source":"File extension","source_fr":"Extension de fichier","target":"Estensione di schedariu"}
+{"key":"/data:/section:Encoders/section:AAC/section:Format#33304","source":"Tags","source_fr":"Balises infos","target":"Etichette"}
+{"key":"/data:/section:Encoders/section:AAC/section:Format#33305","source":"Allow ID3v2 tags in AAC files","source_fr":"Autoriser les balises ID3v2 dans les fichiers AAC","target":"Permette l’etichette ID3v2 in i schedarii AAC"}
+{"key":"/data:/section:Encoders/section:AAC/section:Format#33306","source":"Note","source_fr":"Remarque","target":"Nota"}
+{"key":"/data:/section:Encoders/section:AAC/section:Format#33307","source":"Some players may have problems playing AAC\nfiles with ID3 tags attached. Please use this option only\nif you are sure that your player can handle these tags.","source_fr":"Certains lecteurs peuvent avoir des difficultés à lire les fichiers AAC\ncomportant des balises ID3. Utilisez cette option seulement\nsi vous êtes certain que votre lecteur sait gérer ces balises.","target":"Ci sò lettori chì anu penseri per leghje i schedarii AAC chì\nanu etichette ID3 ligate. Impiegate st’ozzione solu s’è voi\nsite sicuru(a) chì u vostru lettore pò manighjà st’etichette."}
+{"key":"/data:/section:Encoders/section:FLAC#34000","source":"Basic","source_fr":"Elémentaire","target":"Basicu"}
+{"key":"/data:/section:Encoders/section:FLAC#34001","source":"Format","source_fr":"Format","target":"Furmatu"}
+{"key":"/data:/section:Encoders/section:FLAC#34002","source":"Expert","source_fr":"Expert","target":"Espertu"}
+{"key":"/data:/section:Encoders/section:FLAC/section:Basic#34100","source":"Presets","source_fr":"Paramètres prédéfinis","target":"Prerigature predefinite"}
+{"key":"/data:/section:Encoders/section:FLAC/section:Basic#34101","source":"Use preset","source_fr":"Utiliser paramètre prédéfini","target":"Impiegà a prerigatura predefinita"}
+{"key":"/data:/section:Encoders/section:FLAC/section:Basic#34102","source":"Custom settings","source_fr":"Paramètres personnalisés","target":"Parametri persunalizati"}
+{"key":"/data:/section:Encoders/section:FLAC/section:Basic#34103","source":"Fastest encoding","source_fr":"Encodage le plus rapide","target":"Cudificazione a più rapida"}
+{"key":"/data:/section:Encoders/section:FLAC/section:Basic#34104","source":"Best compression","source_fr":"Compression optimale","target":"Cumpressione ottimale"}
+{"key":"/data:/section:Encoders/section:FLAC/section:Basic#34105","source":"Stereo mode","source_fr":"Mode stéréo","target":"Modu stereo"}
+{"key":"/data:/section:Encoders/section:FLAC/section:Basic#34106","source":"Joint Stereo","source_fr":"Stéréo combinée","target":"Joint Stereo"}
+{"key":"/data:/section:Encoders/section:FLAC/section:Basic#34107","source":"Adaptive Joint Stereo","source_fr":"Adaptive Joint Stereo","target":"Adaptive Joint Stereo"}
+{"key":"/data:/section:Encoders/section:FLAC/section:Basic#34108","source":"File format","source_fr":"Format de fichier","target":"Furmatu di schedariu"}
+{"key":"/data:/section:Encoders/section:FLAC/section:Basic#34109","source":"Default","source_fr":"Défaut","target":"Predefinitu"}
+{"key":"/data:/section:Encoders/section:FLAC/section:Format#34200","source":"Use streamable subset","source_fr":"Utiliser sous-ensemble diffusable","target":"Impiegà un sott’inseme di flussu di cuntinuu"}
+{"key":"/data:/section:Encoders/section:FLAC/section:Format#34201","source":"Blocksize","source_fr":"Taille de bloc","target":"Dimensione di bloccu"}
+{"key":"/data:/section:Encoders/section:FLAC/section:Format#34202","source":"%1 samples","source_fr":"%1 échantillons","target":"%1 campioni"}
+{"key":"/data:/section:Encoders/section:FLAC/section:Expert#34300","source":"Signal processing","source_fr":"Traitement du signal","target":"Trattamentu di u signale"}
+{"key":"/data:/section:Encoders/section:FLAC/section:Expert#34301","source":"Window function(s)","source_fr":"Fonction(s) d'apodisation","target":"Funzioni di finestra (apodizzazione)"}
+{"key":"/data:/section:Encoders/section:FLAC/section:Expert#34302","source":"Note","source_fr":"Remarque","target":"Nota"}
+{"key":"/data:/section:Encoders/section:FLAC/section:Expert#34303","source":"You can specify multiple functions separated by semicolons.","source_fr":"Vous pouvez indiquer plusieurs fonctions séparées\npar des points-virgules.","target":"Pudete specificà parechje funzioni staccate da punti virgule."}
+{"key":"/data:/section:Encoders/section:FLAC/section:Expert#34304","source":"Linear predictor","source_fr":"Prédicteur linéaire","target":"Predizzione lineare"}
+{"key":"/data:/section:Encoders/section:FLAC/section:Expert#34305","source":"Maximum LPC order","source_fr":"Ordre LPC maximal","target":"Ordine LPC massimale"}
+{"key":"/data:/section:Encoders/section:FLAC/section:Expert#34306","source":"disabled","source_fr":"désactivé","target":"disattivatu"}
+{"key":"/data:/section:Encoders/section:FLAC/section:Expert#34307","source":"Exhaustive model search","source_fr":"Recherche de modèle exhaustive","target":"Ricerca cumpleta di mudellu"}
+{"key":"/data:/section:Encoders/section:FLAC/section:Expert#34308","source":"Quantized LPC precision","source_fr":"Précision LPC quantifiée","target":"Pricisione LPC quantificata"}
+{"key":"/data:/section:Encoders/section:FLAC/section:Expert#34309","source":"auto","source_fr":"auto","target":"autumaticu"}
+{"key":"/data:/section:Encoders/section:FLAC/section:Expert#34310","source":"Optimize LPC quantization","source_fr":"Optimiser quantification LPC","target":"Megliurà quantificazione LPC"}
+{"key":"/data:/section:Encoders/section:FLAC/section:Expert#34311","source":"Residual coding","source_fr":"Codage résiduel","target":"Cudificazione residuale"}
+{"key":"/data:/section:Encoders/section:FLAC/section:Expert#34312","source":"Minimum partition order","source_fr":"Ordre de partition minimal","target":"Ordine minimale di partizione"}
+{"key":"/data:/section:Encoders/section:FLAC/section:Expert#34313","source":"Maximum partition order","source_fr":"Ordre de partition maximal","target":"Ordine massimale di partizione"}
+{"key":"/data:/section:Encoders/section:Vorbis#35000","source":"Encoding Mode","source_fr":"Mode d'encodage","target":"Modu di Cudificazione"}
+{"key":"/data:/section:Encoders/section:Vorbis#35001","source":"Variable Bitrate","source_fr":"Débit binaire variable","target":"Flussu binariu Variabile"}
+{"key":"/data:/section:Encoders/section:Vorbis#35002","source":"Average Bitrate","source_fr":"Débit binaire moyen","target":"Flussu binariu Mezu"}
+{"key":"/data:/section:Encoders/section:Vorbis#35003","source":"Quality","source_fr":"Qualité","target":"Qualità"}
+{"key":"/data:/section:Encoders/section:Vorbis#35004","source":"Bitrate","source_fr":"Qualité d'encodage","target":"Flussu binariu"}
+{"key":"/data:/section:Encoders/section:Vorbis#35005","source":"Minimum bitrate","source_fr":"Débit binaire minimum","target":"Flussu binariu minimu"}
+{"key":"/data:/section:Encoders/section:Vorbis#35006","source":"Average bitrate","source_fr":"Débit binaire moyen","target":"Flussu binariu medianu"}
+{"key":"/data:/section:Encoders/section:Vorbis#35007","source":"Maximum bitrate","source_fr":"Débit binaire maximum","target":"Flussu binariu massimu"}
+{"key":"/data:/section:Encoders/section:Vorbis#35008","source":"File extension","source_fr":"Extension de fichier","target":"Estensione di schedariu"}
+{"key":"/data:/section:Encoders/section:WMA#36000","source":"Select codec","source_fr":"Sélectioner le codec","target":"Selezziunà u cudecu"}
+{"key":"/data:/section:Encoders/section:WMA#36001","source":"Select codec format","source_fr":"Sélectionner le format de codec","target":"Selezziunà u furmatu di u cudecu"}
+{"key":"/data:/section:Encoders/section:WMA#36002","source":"Codec settings","source_fr":"Paramètres du codec","target":"Parametri di u cudecu"}
+{"key":"/data:/section:Encoders/section:WMA#36003","source":"Use codec","source_fr":"Utiliser le codec","target":"Impiegà u cudecu"}
+{"key":"/data:/section:Encoders/section:WMA#36004","source":"Use format","source_fr":"Utiliser le format","target":"Impiegà u furmatu"}
+{"key":"/data:/section:Encoders/section:WMA#36005","source":"Write uncompressed WMA files","source_fr":"Ecriture des fichiers WMA non compressés","target":"Scrittura di i schedarii WMA micca cumpressi"}
+{"key":"/data:/section:Encoders/section:WMA#36006","source":"Automatically select format based on settings and input format","source_fr":"Sélectionne automatiquement le format en se basant sur les paramètres et le format d'entrée","target":"Selezziunà autumaticamente u furmatu basatu nant’à i parametri è u furmatu d’entrata"}
+{"key":"/data:/section:Encoders/section:WMA#36007","source":"Use VBR encoding","source_fr":"Utiliser l'encodage VBR","target":"Impiegà a cudificazione VBR"}
+{"key":"/data:/section:Encoders/section:WMA#36008","source":"Quality","source_fr":"Qualité","target":"Qualità"}
+{"key":"/data:/section:Encoders/section:WMA#36009","source":"Target bitrate","source_fr":"Débit binaire de la cible","target":"Flussu binariu di destinazione"}
+{"key":"/data:/section:Encoders/section:WMA#36010","source":"Use 2-pass encoding","source_fr":"Utiliser l'encodage double passe","target":"Impiegà a cudificazione 2-passi"}
+{"key":"/data:/section:Encoders/section:TwinVQ#37000","source":"Bitrate","source_fr":"Qualité d'encodage","target":"Flussu binariu"}
+{"key":"/data:/section:Encoders/section:TwinVQ#37001","source":"Bitrate per channel","source_fr":"Débit binaire par canal","target":"Flussu binariu per canale"}
+{"key":"/data:/section:Encoders/section:TwinVQ#37002","source":"Preselection","source_fr":"Présélection","target":"Preselezzione"}
+{"key":"/data:/section:Encoders/section:TwinVQ#37003","source":"Number of preselection candidates","source_fr":"Nombre de candidats de présélection","target":"Numeru di preselezzioni pussibule"}
+{"key":"/data:/section:Encoders/section:Monkey's Audio#38000","source":"Compression","source_fr":"Compression","target":"Cumpressione"}
+{"key":"/data:/section:Encoders/section:Monkey's Audio#38001","source":"Compression mode","source_fr":"Mode de compression","target":"Modu di cumpressione"}
+{"key":"/data:/section:Encoders/section:Monkey's Audio#38002","source":"Fast","source_fr":"Rapide","target":"Rapidu"}
+{"key":"/data:/section:Encoders/section:Monkey's Audio#38003","source":"Normal","source_fr":"Normal","target":"Nurmale"}
+{"key":"/data:/section:Encoders/section:Monkey's Audio#38004","source":"High","source_fr":"Élevé","target":"Altu"}
+{"key":"/data:/section:Encoders/section:Monkey's Audio#38005","source":"Extra high","source_fr":"Très élevé","target":"Altu altu"}
+{"key":"/data:/section:Encoders/section:Monkey's Audio#38006","source":"Insane","source_fr":"Incroyablement élevé","target":"Scemu"}
+{"key":"/data:/section:Encoders/section:Speex#39000","source":"Profile","source_fr":"Profile","target":"Prufilu"}
+{"key":"/data:/section:Encoders/section:Speex#39001","source":"Select encoding profile","source_fr":"Sélectionner le profile d'encodage","target":"Selezziunà u prufilu di cudificazione"}
+{"key":"/data:/section:Encoders/section:Speex#39002","source":"auto","source_fr":"automatique","target":"autumaticu"}
+{"key":"/data:/section:Encoders/section:Speex#39003","source":"Narrowband (8 kHz)","source_fr":"Bande passante réduite [8 kHz]","target":"Fascia stretta (8 kHz)"}
+{"key":"/data:/section:Encoders/section:Speex#39004","source":"Wideband (16 kHz)","source_fr":"Pleine bande [16 kHz]","target":"Fascia larga (16 kHz)"}
+{"key":"/data:/section:Encoders/section:Speex#39005","source":"Ultra-Wideband (32 kHz)","source_fr":"Bande passante étendue [32 kHz]","target":"Fascia ultra larga (32 kHz)"}
+{"key":"/data:/section:Encoders/section:Speex#39006","source":"VBR mode","source_fr":"Mode VBR","target":"Modu VBR"}
+{"key":"/data:/section:Encoders/section:Speex#39007","source":"CBR (no VBR)","source_fr":"CBR [pas de VBR]","target":"CBR (micca VBR)"}
+{"key":"/data:/section:Encoders/section:Speex#39008","source":"VBR","source_fr":"VBR","target":"VBR"}
+{"key":"/data:/section:Encoders/section:Speex#39009","source":"ABR","source_fr":"ABR","target":"ABR"}
+{"key":"/data:/section:Encoders/section:Speex#39010","source":"Options","source_fr":"Options","target":"Ozzioni"}
+{"key":"/data:/section:Encoders/section:Speex#39011","source":"Voice Activity Detection","source_fr":"Détection d'activité vocale","target":"Avventata di l’attività vucale"}
+{"key":"/data:/section:Encoders/section:Speex#39012","source":"Discontinuous Transmission","source_fr":"Transmission interrompue","target":"Trasmissione discuntinua"}
+{"key":"/data:/section:Encoders/section:Speex#39013","source":"Algorithm complexity","source_fr":"Complexité d'algorythme","target":"Cumplessità di cudificazione"}
+{"key":"/data:/section:Encoders/section:Speex#39014","source":"Complexity","source_fr":"Complexité","target":"Cumplessità"}
+{"key":"/data:/section:Encoders/section:Speex#39015","source":"CBR quality","source_fr":"Qualité de l'encodage CBR","target":"Qualità CBR"}
+{"key":"/data:/section:Encoders/section:Speex#39016","source":"VBR quality","source_fr":"Qualité de l'encodage VBR","target":"Qualità VBR"}
+{"key":"/data:/section:Encoders/section:Speex#39017","source":"ABR target bitrate","source_fr":"Qualité de l'encodage ABR","target":"Flussu binariu ABR di destinazione"}
+{"key":"/data:/section:Encoders/section:Speex#39018","source":"Bitrate","source_fr":"Débit binaire","target":"Flussu binariu"}
+{"key":"/data:/section:Encoders/section:Speex#39019","source":"Quality","source_fr":"Qualité","target":"Qualità"}
+{"key":"/data:/section:Encoders/section:Speex#39020","source":"Max. bitrate","source_fr":"Débit binaire maximum","target":"Massimu Flussu binariu"}
+{"key":"/data:/section:Encoders/section:Opus#40000","source":"Basic settings","source_fr":"Réglages de base","target":"Parametri basichi"}
+{"key":"/data:/section:Encoders/section:Opus#40001","source":"Encoding mode","source_fr":"Mode d'encodage","target":"Modu di cudificazione"}
+{"key":"/data:/section:Encoders/section:Opus#40002","source":"auto","source_fr":"automatique","target":"autumaticu"}
+{"key":"/data:/section:Encoders/section:Opus#40003","source":"Voice","source_fr":"Voix","target":"Voce"}
+{"key":"/data:/section:Encoders/section:Opus#40004","source":"Music","source_fr":"Musique","target":"Musica"}
+{"key":"/data:/section:Encoders/section:Opus#40005","source":"Bandwidth","source_fr":"Bande passante","target":"Larghezza di fascia"}
+{"key":"/data:/section:Encoders/section:Opus#40006","source":"Narrowband","source_fr":"Bande passante réduite","target":"Fascia stretta"}
+{"key":"/data:/section:Encoders/section:Opus#40007","source":"Mediumband","source_fr":"Bande passante moyenne","target":"Fascia mediana"}
+{"key":"/data:/section:Encoders/section:Opus#40008","source":"Wideband","source_fr":"Bande passante étendue","target":"Fascia larga"}
+{"key":"/data:/section:Encoders/section:Opus#40009","source":"Superwideband","source_fr":"Bande passante très étendue","target":"Fascia super larga"}
+{"key":"/data:/section:Encoders/section:Opus#40010","source":"Fullband","source_fr":"Pleine bande","target":"Fascia sana"}
+{"key":"/data:/section:Encoders/section:Opus#40011","source":"File extension","source_fr":"Extension","target":"Estensione di schedariu"}
+{"key":"/data:/section:Encoders/section:Opus#40012","source":"Variable bitrate","source_fr":"Débit binaire variable","target":"Flussu binariu variabile"}
+{"key":"/data:/section:Encoders/section:Opus#40013","source":"Enable variable bitrate encoding","source_fr":"Activer le débit binaire variable","target":"Permette a cudificazione di flussu binariu variabile"}
+{"key":"/data:/section:Encoders/section:Opus#40014","source":"Constrain bitrate to target value","source_fr":"Limiter le débit binaire à la valeur cible","target":"Limità u flussu binariu à u valore di destinazione"}
+{"key":"/data:/section:Encoders/section:Opus#40015","source":"Quality","source_fr":"Qualité","target":"Qualità"}
+{"key":"/data:/section:Encoders/section:Opus#40016","source":"Bitrate","source_fr":"Débit binaire","target":"Flussu binariu"}
+{"key":"/data:/section:Encoders/section:Opus#40017","source":"Complexity","source_fr":"Complexité","target":"Cumplessità"}
+{"key":"/data:/section:Encoders/section:Opus#40018","source":"Stream","source_fr":"Diffuser","target":"Flussu"}
+{"key":"/data:/section:Encoders/section:Opus#40019","source":"Frame length","source_fr":"Longueur de trame","target":"Durata di sequenza"}
+{"key":"/data:/section:Encoders/section:Opus#40020","source":"Options","source_fr":"Options","target":"Ozzioni"}
+{"key":"/data:/section:Encoders/section:Opus#40021","source":"Enable discontinuous transmission","source_fr":"Activer la transmission intermitente","target":"Attivà a trasmissione discuntinua"}
+{"key":"/data:/section:Encoders/section:Opus#40022","source":"Expected packet loss","source_fr":"Perte de paquets attendue","target":"Perdita aspettata di pacchettu"}
+{"key":"/data:/section:Encoders/section:Opus#40023","source":"Disable intensity stereo phase inversion","source_fr":"Désactiver l’inversion d’intensité de phase stéréo","target":"Disattivà l’inversione di fasa per l’intensità stereo"}
+{"key":"/data:/section:Encoders/section:SndFile#41000","source":"Output format","source_fr":"Format de sortie","target":"Furmatu d’esciuta"}
+{"key":"/data:/section:Encoders/section:SndFile#41001","source":"File format","source_fr":"Format de fichier","target":"Furmatu di schedariu"}
+{"key":"/data:/section:Encoders/section:SndFile#41002","source":"Audio format","source_fr":"Format audio","target":"Furmatu audio"}
+{"key":"/data:/section:Encoders/section:SndFile#41003","source":"mono","source_fr":"mono","target":"mono"}
+{"key":"/data:/section:Encoders/section:SndFile#41004","source":"auto select","source_fr":"sélection automatique","target":"Selezzione autumatica"}
+{"key":"/data:/section:Encoders/section:SndFile/section:Errors#41100","source":"Could not find suitable audio format.","source_fr":"Impossible de trouver un format audio qui convienne.","target":"Ùn si pò truvà un furmatu audio adattatu."}
+{"key":"/data:/section:Encoders/section:SndFile/section:Errors#41101","source":"Unable to use selected audio format.","source_fr":"Impossible d'utiliser le format audio sélectionné.","target":"Ùn si pò impiegà u furmatu audio selezziunatu."}
+{"key":"/data:/section:Encoders/section:meh!#42000","source":"Encoders","source_fr":"Encodeurs","target":"Cudificatori"}
+{"key":"/data:/section:Encoders/section:meh!#42001","source":"Available","source_fr":"Disponible","target":"Dispunibule"}
+{"key":"/data:/section:Encoders/section:meh!#42002","source":"Selected","source_fr":"Sélectionné","target":"Selezziunati"}
+{"key":"/data:/section:Encoders/section:meh!#42003","source":"Configure encoder","source_fr":"Configurer l'encodeur","target":"Cunfigurà u cudificatore"}
+{"key":"/data:/section:Encoders/section:meh!#42004","source":"Options","source_fr":"Options","target":"Ozzioni"}
+{"key":"/data:/section:Encoders/section:meh!#42005","source":"Create a separate folder for each output format","source_fr":"Créer un répertoire séparé pour chaque format de sortie","target":"Creà un cartulare staccatu per ogni furmatu d’esciuta"}
+{"key":"/data:/section:DSP/section:Format#50000","source":"Sample format","source_fr":"Format d'échantillonage","target":"Furmatu di campiunariu"}
+{"key":"/data:/section:DSP/section:Format#50001","source":"Number format","source_fr":"Format numérique","target":"Furmatu di numeru"}
+{"key":"/data:/section:DSP/section:Format#50002","source":"Sample resolution","source_fr":"Résolution d'échantillon","target":"Risuluzione di campiunariu"}
+{"key":"/data:/section:DSP/section:Format#50003","source":"bit","source_fr":"bit","target":"bit"}
+{"key":"/data:/section:DSP/section:Format#50004","source":"unsigned","source_fr":"non signé","target":"senza segnu"}
+{"key":"/data:/section:DSP/section:Format#50005","source":"Integer","source_fr":"Entier","target":"Interu"}
+{"key":"/data:/section:DSP/section:Format#50006","source":"Float","source_fr":"Flottant","target":"Decimale"}
+{"key":"/data:/section:DSP/section:Format#50007","source":"Dithering","source_fr":"Bruit de dispersion","target":"Tramatura"}
+{"key":"/data:/section:DSP/section:Format#50008","source":"Apply dither when reducing sample resolution","source_fr":"Appliquer du bruit de dispersion lors de la réduction de la résolution de l'échantillon","target":"Appiecà a trama quandu si riduce a risuluzione di campiunariu"}
+{"key":"/data:/section:DSP/section:Format#50009","source":"Dither type","source_fr":"Type de bruit de dispersion","target":"Tipu di trama"}
+{"key":"/data:/section:DSP/section:Channels#50100","source":"Output channels","source_fr":"Canaux de sortie","target":"Canali d’esciuta"}
+{"key":"/data:/section:DSP/section:Channels#50101","source":"Channel configuration","source_fr":"Configuration des canaux","target":"Cunfigurazione di canale"}
+{"key":"/data:/section:DSP/section:Channels#50102","source":"Mono","source_fr":"Mono","target":"Mono"}
+{"key":"/data:/section:DSP/section:Channels#50103","source":"Stereo","source_fr":"Stéréo","target":"Stereo"}
+{"key":"/data:/section:DSP/section:Channels#50104","source":"Switch stereo channels","source_fr":"Intervertir canal gauche/droit","target":"Invertisce i canali stereo"}
+{"key":"/data:/section:DSP/section:Resample#50200","source":"Converter","source_fr":"Convertisseur","target":"Cunvertidore"}
+{"key":"/data:/section:DSP/section:Resample#50201","source":"Sampling rate","source_fr":"Taux d'échantillonnage","target":"Frequenza di campiunariu"}
+{"key":"/data:/section:DSP/section:Resample#50202","source":"Output sampling rate","source_fr":"Taux d'échantillonage de sortie","target":"Frequenza di campiunariu d’esciuta"}
+{"key":"/data:/section:DSP/section:RubberBand#50300","source":"Basic controls","source_fr":"Contrôles de base","target":"Cuntrolli di basa"}
+{"key":"/data:/section:DSP/section:RubberBand#50301","source":"Tempo","source_fr":"Tempo","target":"Tempo"}
+{"key":"/data:/section:DSP/section:RubberBand#50302","source":"Pitch","source_fr":"Tonalité","target":"Tunalità"}
+{"key":"/data:/section:DSP/section:RubberBand#50303","source":"Semitones","source_fr":"Demi-tons","target":"Semitoni"}
+{"key":"/data:/section:DSP/section:RubberBand#50304","source":"Advanced options","source_fr":"Options avancées","target":"Ozzioni esperte"}
+{"key":"/data:/section:DSP/section:RubberBand#50305","source":"Transient detection","source_fr":"Détection de transitoires","target":"Avventata transitoria"}
+{"key":"/data:/section:DSP/section:RubberBand#50306","source":"Compound","source_fr":"Composé","target":"Cumpostu"}
+{"key":"/data:/section:DSP/section:RubberBand#50307","source":"Percussive","source_fr":"Percussif","target":"Percutente"}
+{"key":"/data:/section:DSP/section:RubberBand#50308","source":"Soft","source_fr":"Doux","target":"Dolce"}
+{"key":"/data:/section:DSP/section:RubberBand#50309","source":"Transient handling","source_fr":"Gestion des transitoires","target":"Ghjestione transitoria"}
+{"key":"/data:/section:DSP/section:RubberBand#50310","source":"Crisp","source_fr":"Croustillant","target":"Vivace"}
+{"key":"/data:/section:DSP/section:RubberBand#50311","source":"Mixed","source_fr":"Mixé","target":"Mistu"}
+{"key":"/data:/section:DSP/section:RubberBand#50312","source":"Smooth","source_fr":"Lisse","target":"Lisciu"}
+{"key":"/data:/section:DSP/section:RubberBand#50313","source":"Transformation window","source_fr":"Fenêtre de transformation","target":"Finestra di trasfurmazione"}
+{"key":"/data:/section:DSP/section:RubberBand#50314","source":"Standard","source_fr":"Standard","target":"Classica"}
+{"key":"/data:/section:DSP/section:RubberBand#50315","source":"Short","source_fr":"Court","target":"Corta"}
+{"key":"/data:/section:DSP/section:RubberBand#50316","source":"Long","source_fr":"Long","target":"Longa"}
+{"key":"/data:/section:DSP/section:RubberBand#50317","source":"Use time-domain smoothing","source_fr":"Utiliser le lissage temporel","target":"Impiegà un’allisciata di duminiu di tempu"}
+{"key":"/data:/section:DSP/section:RubberBand#50318","source":"Phase handling","source_fr":"Gestion de la phase","target":"Ghjestione di fasa"}
+{"key":"/data:/section:DSP/section:RubberBand#50319","source":"Laminar","source_fr":"Laminaire","target":"Laminariu"}
+{"key":"/data:/section:DSP/section:RubberBand#50320","source":"Independent","source_fr":"Indépendant","target":"Indipendente"}
+{"key":"/data:/section:DSP/section:RubberBand#50321","source":"Formant handling","source_fr":"Gestion du format","target":"Ghjestione di formante"}
+{"key":"/data:/section:DSP/section:RubberBand#50322","source":"Shift","source_fr":"Décaler","target":"Sculiscera"}
+{"key":"/data:/section:DSP/section:RubberBand#50323","source":"Preserve","source_fr":"Préserver","target":"Cunservazione"}
+{"key":"/data:/section:DSP/section:RubberBand#50324","source":"Pitch processing","source_fr":"Traitement de la hauteur (tonalité)","target":"Trattamentu di tunalità"}
+{"key":"/data:/section:DSP/section:RubberBand#50325","source":"High quality","source_fr":"Haute qualité","target":"Alta qualità"}
+{"key":"/data:/section:DSP/section:RubberBand#50326","source":"High speed","source_fr":"Vitesse rapide","target":"Alta vitezza"}
+{"key":"/data:/section:DSP/section:RubberBand#50327","source":"High consistency","source_fr":"Forte consistance","target":"Alta unifurmità"}
+{"key":"/data:/section:DSP/section:RubberBand#50328","source":"Stereo processing","source_fr":"Traitement stéréo","target":"Trattamentu stereo"}
+{"key":"/data:/section:DSP/section:RubberBand#50329","source":"Separate","source_fr":"Séparé","target":"Separatu"}
+{"key":"/data:/section:DSP/section:RubberBand#50330","source":"Combined","source_fr":"Combiné","target":"Cumbinatu"}
+{"key":"/data:/section:DSP/section:RubberBand#50331","source":"Frequency ratio","target":"Percentuale di frequenza"}
+{"key":"/data:/section:DSP/section:RubberBand#50332","source":"Hz","target":"Hz"}
+{"key":"/data:/section:DSP/section:RubberBand#50333","source":":","target":":"}
+{"key":"/data:/section:DSP/section:RubberBand#50334","source":"=","target":"="}
+{"key":"/data:/section:DSP/section:RubberBand#50335","source":"invalid","target":"inaccettevule"}
+{"key":"/data:/section:DSP/section:RNNoise#50400","source":"Signal/noise type","source_fr":"Type de signal/bruit","target":"Tipu signale/trostu"}
+{"key":"/data:/section:DSP/section:RNNoise#50401","source":"Signal type","source_fr":"Type de signal","target":"Tipu signale"}
+{"key":"/data:/section:DSP/section:RNNoise#50402","source":"Noise type","source_fr":"Type de bruit","target":"Tipu trostu"}
+{"key":"/data:/section:DSP/section:RNNoise#50403","source":"General","source_fr":"Général","target":"Generale"}
+{"key":"/data:/section:DSP/section:RNNoise#50404","source":"Recording","source_fr":"Enregistrement","target":"Arregistramentu"}
+{"key":"/data:/section:DSP/section:RNNoise#50405","source":"Voice (incl. laughter etc.)","source_fr":"Voix (incluant rires, etc...)","target":"Voce (incl. risata, ecc.)"}
+{"key":"/data:/section:DSP/section:RNNoise#50406","source":"Speech","source_fr":"Discours","target":"Parlatu"}
+{"key":"/data:/section:DSP/section:Surround#50500","source":"Output channels","source_fr":"Canaux de sortie","target":"Canali d’esciuta"}
+{"key":"/data:/section:DSP/section:Surround#50501","source":"Channel configuration","source_fr":"Configuration des canaux","target":"Cunfigurazione di canale"}
+{"key":"/data:/section:DSP/section:Surround#50502","source":"Redirect bass content to LFE channel","source_fr":"Rediriger le contenu de basse vers le canal LFE","target":"Addirizzà u cuntenutu di u bassu versu u canale LFE"}
+{"key":"/data:/section:DSP/section:Volume#50600","source":"Volume adjustment","source_fr":"Réglage du volume","target":"Accumudata di vulume"}
+{"key":"/data:/section:DSP/section:Volume#50601","source":"Adjustment","source_fr":"Réglage","target":"Accumudata"}
+{"key":"/data:/section:DSP/section:Volume#50602","source":"%1 dB","source_fr":"%1 dB","target":"%1 dB"}
+{"key":"/data:/section:Taggers/section:MP4#60000","source":"Chapter format","source_fr":"Format de chapitre","target":"Furmatu di capitulu"}
+{"key":"/data:/section:Taggers/section:MP4#60001","source":"both","source_fr":"les deux","target":"tramindui"}
+{"key":"/data:/section:Verifiers/section:AccurateRip#70000","source":"Configure AccurateRip","source_fr":"Configurer AccurateRip","target":"Cunfigurà AccurateRip"}
+{"key":"/data:/section:Verifiers/section:AccurateRip#70001","source":"General settings","source_fr":"Paramètres généraux","target":"Parametri generali"}
+{"key":"/data:/section:Verifiers/section:AccurateRip#70002","source":"Enable AccurateRip","source_fr":"Activer AccurateRip","target":"Attivà AccurateRip"}
+{"key":"/data:/section:Verifiers/section:AccurateRip#70003","source":"Database URL","source_fr":"URL de la base de données","target":"Indirizzu web di a basa di dati"}
+{"key":"/data:/section:Verifiers/section:AccurateRip#70004","source":"Cache","source_fr":"Cache","target":"Impiatta"}
+{"key":"/data:/section:Verifiers/section:AccurateRip#70005","source":"Enable cache","source_fr":"Activer le cache","target":"Attivà l’impiatta"}
+{"key":"/data:/section:Verifiers/section:AccurateRip#70006","source":"Expires after","source_fr":"Expire après","target":"Scadutu dopu à"}
+{"key":"/data:/section:Verifiers/section:AccurateRip#70007","source":"%1 day(s)","source_fr":"%1 jour(s)","target":"%1 ghjornu(i)"}
+{"key":"/data:/section:Verifiers/section:AccurateRip#70008","source":"%1 week(s)","source_fr":"%1 semaine(s)","target":"%1 settimana(e)"}
+{"key":"/data:/section:Verifiers/section:AccurateRip#70009","source":"%1 month(s)","source_fr":"%1 mois","target":"%1 mese(i)"}
+{"key":"/data:/section:Verifiers/section:AccurateRip#70010","source":"%1 year(s)","source_fr":"%1 année(s)","target":"%1 annu(i)"}
+{"key":"/data:/section:Verifiers/section:AccurateRip#70011","source":"never","source_fr":"jamais","target":"mai"}
+{"key":"/data:/section:Verifiers/section:AccurateRip#70012","source":"Drives","source_fr":"Lecteurs","target":"Lettori"}
+{"key":"/data:/section:Verifiers/section:AccurateRip#70013","source":"Drive","source_fr":"Lecteur","target":"Lettore"}
+{"key":"/data:/section:Verifiers/section:AccurateRip#70014","source":"Offset configuration","source_fr":"Configuration du décalage","target":"Cunfigurazione di u spustime"}
+{"key":"/data:/section:Verifiers/section:AccurateRip#70015","source":"Offset in drive database","source_fr":"Décalage dans la base de données du lecteur","target":"Spustime in a basa di dati di u lettore"}
+{"key":"/data:/section:Verifiers/section:AccurateRip#70016","source":"Detected offset","source_fr":"Décalage détecté","target":"Spustime scupertu"}
+{"key":"/data:/section:Verifiers/section:AccurateRip#70017","source":"Configured offset","source_fr":"Décalage configuré","target":"Spustime cunfiguratu"}
+{"key":"/data:/section:Verifiers/section:AccurateRip#70018","source":"Detect offset now","source_fr":"Détecter le décalage maintenant","target":"Scopre u spustime subitu"}
+{"key":"/data:/section:Verifiers/section:AccurateRip#70019","source":"not configured","source_fr":"non configuré","target":"micca cunfiguratu"}
+{"key":"/data:/section:Verifiers/section:AccurateRip#70020","source":"automatically configured","source_fr":"configuré automatiquement","target":"cunfiguratu autumaticamente"}
+{"key":"/data:/section:Verifiers/section:AccurateRip#70021","source":"configured by offset detection","source_fr":"configuré par détection de décalage","target":"cunfiguratu da a scuperta di u spustime"}
+{"key":"/data:/section:Verifiers/section:AccurateRip#70022","source":"manually configured","source_fr":"configuré manuellement","target":"cunfiguratu manualmente"}
+{"key":"/data:/section:Verifiers/section:AccurateRip#70023","source":"not present","source_fr":"absent","target":"micca presente"}
+{"key":"/data:/section:Verifiers/section:AccurateRip#70024","source":"not detected","source_fr":"non détecté","target":"micca scupertu"}
+{"key":"/data:/section:Verifiers/section:AccurateRip#70025","source":"disabled","source_fr":"désactivé","target":"disattivatu"}
+{"key":"/data:/section:Verifiers/section:AccurateRip#70026","source":"Options","source_fr":"Options","target":"Ozzioni"}
+{"key":"/data:/section:Verifiers/section:AccurateRip#70027","source":"Notify when a disc is not found in the database","source_fr":"Notifier lorsqu'un disque est introuvable dans la base de données","target":"Affissà una nutificazione quandu un discu ùn si trova micca in a basa di dati"}
+{"key":"/data:/section:Verifiers/section:AccurateRip#70028","source":"Notify when all tracks have been successfully verified","source_fr":"Notifier lorsque toutes les pistes ont été vérifiées avec succès","target":"Affissà una nutificazione quandu a verificazione di tutte e traccie hè stata riesciuta"}
+{"key":"/data:/section:Verifiers/section:AccurateRip/section:Messages#70050","source":"AccurateRip configuration","source_fr":"Configuration AccurateRip","target":"Cunfigurazione d’AccurateRip"}
+{"key":"/data:/section:Verifiers/section:AccurateRip/section:Messages#70051","source":"Your CD drive could not be found in the AccurateRip database.\n\nDrive name: %1\n\nWould you like to run an automatic drive offset detection now?","source_fr":"Votre lecteur de CD n'a pas pu être trouvé dans la base de données AccurateRip.\n\nNom du lecteur : %1\n\nVoulez-vous faire une détection automatique de décalage du lecteur maintenant ?","target":"Ùn si pò truvà u vostru lettore CD in a basa di dati AccurateRip.\nNome di u lettore : %1\n\nVulete lancià subitu una scuperta autumatica di u spustime\nnant’à u lettore ?"}
+{"key":"/data:/section:Verifiers/section:AccurateRip/section:Messages#70052","source":"Do not ask again","source_fr":"Ne plus me demander","target":"Ùn mi dumandà più"}
+{"key":"/data:/section:Verifiers/section:AccurateRip/section:Messages#70053","source":"AccurateRip offset detection","source_fr":"Détection de décalage AccurateRip","target":"Scuperta di u spustime AccurateRip"}
+{"key":"/data:/section:Verifiers/section:AccurateRip/section:Messages#70054","source":"The inserted disc could not be found in the AccurateRip database.","source_fr":"Le disque inséré n'a pas pu être trouvé dans la base de données AccurateRip.","target":"U discu framessu ùn si trova micca in a basa di dati AccurateRip."}
+{"key":"/data:/section:Verifiers/section:AccurateRip/section:Messages#70055","source":"Please insert another disc into the CD drive and click OK.\n\nThe disc must be present in the AccurateRip database. The chance for this is\nhighest for popular CDs that have likely been ripped by other users before.","source_fr":"Veuillez insérer un autre disque dans le lecteur de CD et cliquer sur OK.\nLe disque doit être présent dans la base de données AccurateRip.\nLa probabilité pour cela est plus élevée avec les CD populaires qui ont\nprobablement déjà été extraits par d'autres utilisateurs.","target":"Ci vole à framette un altru discu dentru u lettore CD è cliccà Vai.\n\nU discu duve esse presente in a basa di dati AccurateRip. Sta pussibilità hè\npiù maiò per i CD populari chì sò stati dighjà estratti da d’altri utilizatori."}
+{"key":"/data:/section:Verifiers/section:AccurateRip/section:Messages#70056","source":"Offset detection needs to check another disc.","source_fr":"La détection de décalage nécessite de vérifier un autre disque.","target":"A scuperta di u spustime hà bisognu di verificà un altru discu."}
+{"key":"/data:/section:Verifiers/section:AccurateRip/section:Messages#70057","source":"The drive offset has been successfully detected and configured to %1 samples.","source_fr":"Le décalage du lecteur a été détecté avec succès et configuré à %1 échantillons.","target":"U spustime di u lettore hè statu scupertu bè è cunfiguratu à %1 campioni."}
+{"key":"/data:/section:Verifiers/section:AccurateRip/section:Messages#70058","source":"All tracks successfully verified with AccurateRip.","source_fr":"Toutes les pistes ont été vérifiées avec succès avec AccurateRip.","target":"Tutte e traccie sò state verificate currettamente cù AccurateRip."}
+{"key":"/data:/section:External#80000","source":"Downmix multi-channel audio to stereo","source_fr":"Mixer de multicanaux vers stéréo","target":"Cunvertisce in stereo i canali audio multipli"}
+{"key":"/data:/section:External/section:Musepack Audio Encoder#80100","source":"Quality","source_fr":"Qualité","target":"Qualità"}
+{"key":"/data:/section:External/section:Musepack Audio Encoder#80101","source":"poor","source_fr":"faible","target":"bassa"}
+{"key":"/data:/section:External/section:Musepack Audio Encoder#80102","source":"excellent","source_fr":"excellente","target":"eccellente"}
+{"key":"/data:/section:External/section:Musepack Audio Encoder#80103","source":"Mid/Side stereo mode","source_fr":"Mode stéréo milieu/côté","target":"Modu stereo Mid/Side"}
+{"key":"/data:/section:External/section:Musepack Audio Encoder#80104","source":"off","source_fr":"désactivé","target":"spintu"}
+{"key":"/data:/section:External/section:Musepack Audio Encoder#80105","source":"reduced","source_fr":"réduit","target":"riduttu"}
+{"key":"/data:/section:External/section:Musepack Audio Encoder#80106","source":"on","source_fr":"activé","target":"accesu"}
+{"key":"/data:/section:External/section:Musepack Audio Encoder#80107","source":"decoupled","source_fr":"découplé","target":"scuppiatu"}
+{"key":"/data:/section:External/section:Musepack Audio Encoder#80108","source":"enhanced 1.5/3 dB","source_fr":"augmenté 1,5/3 dB","target":"aumentatu 1.5/3 dB"}
+{"key":"/data:/section:External/section:Musepack Audio Encoder#80109","source":"enhanced 2/6 dB","source_fr":"augmenté 2/6 dB","target":"aumentatu 2/6 dB"}
+{"key":"/data:/section:External/section:Musepack Audio Encoder#80110","source":"enhanced 2.5/9 dB","source_fr":"augmenté 2,5/9 dB","target":"aumentatu 2.5/9 dB"}
+{"key":"/data:/section:External/section:Musepack Audio Encoder#80111","source":"enhanced 3/12 dB","source_fr":"augmenté 3/12 dB","target":"aumentatu 3/12 dB"}
+{"key":"/data:/section:External/section:Musepack Audio Encoder#80112","source":"enhanced 3/inf dB","source_fr":"augmenté 3/inf dB","target":"aumentatu 3/inf dB"}
+{"key":"/data:/section:External/section:Musepack Audio Encoder#80113","source":"Adaptive noise shaping order","source_fr":"Ordre de la modélisation adaptive du bruit","target":"Ordine di fattura di trostu adattata"}
+{"key":"/data:/section:External/section:Musepack Audio Encoder#80114","source":"high","source_fr":"élevé","target":"altu"}
+{"key":"/data:/section:External/section:Musepack Audio Encoder#80115","source":"Clear Voice Detection","source_fr":"Retirer la détection de voix","target":"Avventata di voce chjara"}
+{"key":"/data:/section:External/section:Musepack Audio Encoder#80116","source":"dual","source_fr":"dual","target":"doppiu"}
+{"key":"/data:/section:External/section:OptimFROG Lossless Encoder#80200","source":"Encoding mode","source_fr":"Mode d'encodage","target":"Modu di cudificazione"}
+{"key":"/data:/section:External/section:OptimFROG Lossless Encoder#80201","source":"fast","source_fr":"rapide","target":"rapidu"}
+{"key":"/data:/section:External/section:OptimFROG Lossless Encoder#80202","source":"normal","source_fr":"normal","target":"nurmale"}
+{"key":"/data:/section:External/section:OptimFROG Lossless Encoder#80203","source":"high","source_fr":"élevé","target":"altu"}
+{"key":"/data:/section:External/section:OptimFROG Lossless Encoder#80204","source":"extra","source_fr":"extra","target":"estrà"}
+{"key":"/data:/section:External/section:OptimFROG Lossless Encoder#80205","source":"best","source_fr":"meilleur","target":"megliu"}
+{"key":"/data:/section:External/section:OptimFROG Lossless Encoder#80206","source":"high, new","source_fr":"élevé, nouveau","target":"altu, novu"}
+{"key":"/data:/section:External/section:OptimFROG Lossless Encoder#80207","source":"extra, new","source_fr":"extra, nouveau","target":"estrà, novu"}
+{"key":"/data:/section:External/section:OptimFROG Lossless Encoder#80208","source":"best, new","source_fr":"meilleur, nouveau","target":"megliu, novu"}
+{"key":"/data:/section:External/section:OptimFROG Lossless Encoder#80209","source":"Add MD5 checksum","source_fr":"Ajouter somme de contrôle MD5","target":"Aghjunghje somma di cuntrollu MD5"}
+{"key":"/data:/section:External/section:OptimFROG Lossless Encoder#80210","source":"Seeking","source_fr":"Rechercher","target":"Ricerca"}
+{"key":"/data:/section:External/section:OptimFROG Lossless Encoder#80211","source":"slow","source_fr":"lent","target":"piana"}
+{"key":"/data:/section:External/section:OptimFROG Lossless Encoder#80212","source":"minimum","source_fr":"minimum","target":"minima"}
+{"key":"/data:/section:External/section:OptimFROG Lossless Encoder#80213","source":"Optimization","source_fr":"Optimisation","target":"Migliuramentu"}
+{"key":"/data:/section:External/section:OptimFROG Lossless Encoder#80214","source":"disabled","source_fr":"désactivé","target":"disattivatu"}
+{"key":"/data:/section:External/section:OptimFROG Lossless Encoder#80215","source":"low","source_fr":"faible","target":"bassu"}
+{"key":"/data:/section:External/section:Tom's Audiokompressor#80300","source":"Encoder preset","source_fr":"Préréglage d'encodeur","target":"Prerigatura di u cudificatore"}
+{"key":"/data:/section:External/section:Tom's Audiokompressor#80301","source":"fastest","source_fr":"le plus rapide","target":"u più rapidu"}
+{"key":"/data:/section:External/section:Tom's Audiokompressor#80302","source":"strongest","source_fr":"le plus fort","target":"u più forte"}
+{"key":"/data:/section:External/section:Tom's Audiokompressor#80303","source":"Frame size limit","source_fr":"Limite de taille de trame","target":"Limitu di dimensione di sequenza"}
+{"key":"/data:/section:External/section:Tom's Audiokompressor#80304","source":"Add MD5 checksum","source_fr":"Ajouter somme de contrôle MD5","target":"Aghjunghje somma di cuntrollu MD5"}
+{"key":"/data:/section:External/section:WavPack Audio Encoder#80400","source":"Enable lossy compression","source_fr":"Activer la compression destructive","target":"Attivà a cumpressione cù perdita d’infurmazione"}
+{"key":"/data:/section:External/section:WavPack Audio Encoder#80401","source":"Compression mode","source_fr":"Mode de compression","target":"Modu di cumpressione"}
+{"key":"/data:/section:External/section:WavPack Audio Encoder#80402","source":"fast","source_fr":"rapide","target":"rapidu"}
+{"key":"/data:/section:External/section:WavPack Audio Encoder#80403","source":"high quality","source_fr":"haute qualité","target":"alta qualità"}
+{"key":"/data:/section:External/section:WavPack Audio Encoder#80404","source":"very high quality","source_fr":"très haute qualité","target":"assai alta qualità"}
+{"key":"/data:/section:External/section:WavPack Audio Encoder#80405","source":"Extra encode processing","source_fr":"Processus d'encodage supplémentaire","target":"Trattamentu di cudificazione estrà"}
+{"key":"/data:/section:External/section:WavPack Audio Encoder#80406","source":"faster","source_fr":"plus rapide","target":"più rapida"}
+{"key":"/data:/section:External/section:WavPack Audio Encoder#80407","source":"better","source_fr":"meilleure","target":"più bona"}
+{"key":"/data:/section:External/section:WavPack Audio Encoder#80408","source":"%1 kbps","source_fr":"%1 kbps","target":"%1 kbps"}
+{"key":"/data:/section:External/section:WavPack Audio Encoder#80409","source":"Create correction file","source_fr":"Créer fichier de correction","target":"Creà un schedariu di currezzione"}
+{"key":"/data:/section:External/section:Nero AAC Encoder#80500","source":"Encoding mode","source_fr":"Mode d'encodage","target":"Modu di cudificazione"}
+{"key":"/data:/section:External/section:Nero AAC Encoder#80501","source":"auto","source_fr":"automatique","target":"autumaticu"}
+{"key":"/data:/section:External/section:Nero AAC Encoder#80502","source":"Quality","source_fr":"Qualité","target":"Qualità"}
+{"key":"/data:/section:External/section:Nero AAC Encoder#80503","source":"worse","source_fr":"moins bonne","target":"pechju"}
+{"key":"/data:/section:External/section:Nero AAC Encoder#80504","source":"better","source_fr":"meilleure","target":"più bona"}
+{"key":"/data:/section:External/section:Nero AAC Encoder#80505","source":"Bitrate","source_fr":"Qualité d'encodage","target":"Flussu binariu"}
+{"key":"/data:/section:External/section:Nero AAC Encoder#80506","source":"Bitrate (Streaming)","source_fr":"Qualité d'encodage [diffusion]","target":"Flussu binariu (Diffusione)"}
+{"key":"/data:/section:External/section:Nero AAC Encoder#80507","source":"%1 kbps","source_fr":"%1 kbps","target":"%1 kbps"}
+{"key":"/data:/section:External/section:Windows Media Audio Encoder#80600","source":"Bitrate","source_fr":"Qualité d'encodage","target":"Flussu binariu"}
+{"key":"/data:/section:External/section:Windows Media Audio Encoder#80601","source":"%1 kbps","source_fr":"%1 kbps","target":"%1 kbps"}
+{"key":"/data:/section:Extensions/section:Donate#100000","source":"Support this project","source_fr":"Supporter ce projet","target":"Aiutà stu prughjettu"}
+{"key":"/data:/section:Extensions/section:Donate#100001","source":"Please support this project!","source_fr":"S'il vous plait supporter ce projet !","target":"Per piacè aiutate stu prughjettu !"}
+{"key":"/data:/section:Extensions/section:Donate#100002","source":"Please help keep this software free by supporting the %1 project with a\ndonation.","source_fr":"S'il vous plait aider à conserver gratuit ce programme en supportant le projet %1\navec un don.","target":"Aiutateci a cunservà stu prugramma di rigalu sustenendu u prughjettu %1 cù una\ndunazione."}
+{"key":"/data:/section:Extensions/section:Donate#100003","source":"Please write to %1 if you would like to mail a check or send\nmoney by mail.","source_fr":"S'il vous plait écrivez à %1 si vous voulez faire un don en utilisant le\ntransfert électronique, le chèque par mail ou envoyer de l'argent par mail.","target":"Per piacè scrivite à %1 s’è voi vulete mandà un sceccu o trasmette\nsoldi da messaghju elettronicu."}
+{"key":"/data:/section:Extensions/section:Donate#100004","source":"Thank you very much!","source_fr":"Merci beaucoup !","target":"Vi ringraziemu assai !"}
+{"key":"/data:/section:Extensions/section:Donate#100005","source":"Remind me later","source_fr":"Me rappeler plus tard","target":"Rammintatemi un altra volta"}
+{"key":"/data:/section:Extensions/section:Donate#100006","source":"paypal,donorbox,bitcoin,ethereum","source_fr":"paypal,donorbox,sepa,bitcoin,ethereum","target":"paypal,donorbox,bitcoin,ethereum,sepa"}
+{"key":"/data:/section:Extensions/section:Donate#100007","source":"Donate to the %1 project","source_fr":"Faire une donation au projet %1","target":"Fate una dunazione à u prughjettu %1"}
+{"key":"/data:/section:Extensions/section:Donate/section:PayPal#100100","source":"Choose an amount and click the button to make a donation with PayPal:","source_fr":"Cliquer sur un des boutons ci-dessous pour faire un don en utilisant PayPal :","target":"Sciglite una quantità è impiegate u buttone per dà qualchì soldu cù PayPal :"}
+{"key":"/data:/section:Extensions/section:Donate/section:PayPal#100101","source":"You can also send money directly to %1 with PayPal.","source_fr":"Vous pouvez aussi envoyer de l'argent directement à %1 en utilisant\nPayPal.","target":"Pudete dinù mandà i soldi à %1 cù PayPal."}
+{"key":"/data:/section:Extensions/section:Donate/section:PayPal#100102","source":"usd","source_fr":"eur","target":"eur"}
+{"key":"/data:/section:Extensions/section:Donate/section:PayPal#100103","source":"$%1","source_fr":"%1€","target":"%1€"}
+{"key":"/data:/section:Extensions/section:Donate/section:PayPal#100104","source":"10,15,20,other amount","source_fr":"10,15,20,autre montant","target":"10,15,20,altra somma"}
+{"key":"/data:/section:Extensions/section:Donate/section:PayPal#100105","source":"monthly recurring","source_fr":"récurrente mensuelle","target":"ricurrente misincu"}
+{"key":"/data:/section:Extensions/section:Donate/section:PayPal#100106","source":"Donate","source_fr":"Faire un don","target":"Dunazione"}
+{"key":"/data:/section:Extensions/section:Donate/section:Donorbox#100200","source":"Donorbox enables quick and simple donations by credit card. Click this\nbutton to make a donation with Donorbox:","source_fr":"Donorbox permet des donations rapides et simples par carte de crédit. Cliquer ce\nbouton pour faire une donation par Donorbox :","target":"Donorbox permette e dunazioni rapide è simplice impieghendu una carta bancaria.\nImpiegà stu buttone per fà una dunazione via Donorbox :"}
+{"key":"/data:/section:Extensions/section:Donate/section:Donorbox#100201","source":"Donate","source_fr":"Faire une donation","target":"Dunazione"}
+{"key":"/data:/section:Extensions/section:Donate/section:Donorbox#100202","source":"usd","source_fr":"eur","target":"eur"}
+{"key":"/data:/section:Extensions/section:Donate/section:Bitcoin#100300","source":"Please scan or click the QR code or copy the following\naddress to donate Bitcoin:","source_fr":"Scannez s'il vous plait le code QR ou cliquez dessus ou copiez\nl'adresse suivante pour une donation en Bitcoin :","target":"Per fà una dunazione via Bitcoin, ci vole à fà un scan o\ncliccà nant’à u codice QR, o ancu cupià quell’indirizzu :"}
+{"key":"/data:/section:Extensions/section:Donate/section:Bitcoin#100301","source":"This address also accepts Bitcoin Cash and other forks.","source_fr":"Cette adresse accepte aussi les Bitcoin Cash et d'autres\nbranches (\"fork\").","target":"St’indirizzu accetteghja dinù pagamenti via Bitcoin Cash\nè altri imbrancamenti."}
+{"key":"/data:/section:Extensions/section:Donate/section:Ethereum#100400","source":"Please scan or click the QR code or copy the following\naddress to donate Ethereum:","source_fr":"Scannez s'il vous plait le code QR ou cliquez dessus ou copiez\nl'adresse suivante pour une donation Ethereum :","target":"Per fà una dunazione via Ethereum, ci vole à fà un scan o\ncliccà nant’à u codice QR, o ancu cupià quell’indirizzu :"}
+{"key":"/data:/section:Extensions/section:Donate/section:Ethereum#100401","source":"This address also accepts Ether Classic and ERC20 tokens.","source_fr":"Cette adresse accepte aussi les Ether Classic et les tokens ERC20.","target":"St’indirizzu accetteghja dinù e fiscie Ether Classic è ERC20."}
+{"key":"/data:/section:Extensions/section:Donate/section:SEPA#100500","source":"You can donate by making an electronic transfer to the\nfollowing account:","source_fr":"Vous pouvez faire une donation par virement bancaire vers\nle compte suivant :","target":"Pudete fà una dunazione facendu un trasferimentu elettronicu\ndi soldi nant’à stu contu :"}
+{"key":"/data:/section:Extensions/section:Donate/section:SEPA#100501","source":"Account holder:","source_fr":"Titulaire du compte :","target":"Titulare di u contu :"}
+{"key":"/data:/section:Extensions/section:Donate/section:SEPA#100502","source":"IBAN:","source_fr":"IBAN :","target":"IBAN :"}
+{"key":"/data:/section:Extensions/section:Donate/section:SEPA#100503","source":"BIC:","source_fr":"BIC :","target":"BIC :"}
+{"key":"/data:/section:Extensions/section:Winamp Adapter#101000","source":"Configure","source_fr":"Configurer","target":"Cunfigurà"}
+{"key":"/data:/section:Extensions/section:Winamp Adapter#101001","source":"About","source_fr":"A propos de","target":"Apprupositu"}
+{"key":"/data:/section:Extensions/section:Video Downloader#102000","source":"Video","source_fr":"Vidéo","target":"Video"}
+{"key":"/data:/section:Extensions/section:Video Downloader#102001","source":"Enter video URL here","source_fr":"Entrer l'adresse URL ici","target":"Stampittate quì l’indirizzu web di a video"}
+{"key":"/data:/section:Extensions/section:Video Downloader#102002","source":"Download","source_fr":"Télécharger","target":"Scaricà"}
+{"key":"/data:/section:Extensions/section:Video Downloader#102003","source":"Automatically download URLs copied to clipboard","source_fr":"Télécharer automatiquement les URLs copiées dans le presse-papier","target":"Scaricà autumaticamente l’indirizzi web cupiati in u preme’papei"}
+{"key":"/data:/section:Extensions/section:Video Downloader#102004","source":"Save downloaded video files","source_fr":"Sauvegarder les fichiers vidéo téléchargées","target":"Arregistrà i schedarii video scaricati"}
+{"key":"/data:/section:Extensions/section:Video Downloader#102005","source":"Video downloads","source_fr":"Téléchargements vidéo","target":"Scaricamenti video"}
+{"key":"/data:/section:Extensions/section:Video Downloader#102006","source":"Downloaded tracks","source_fr":"Pistes téléchargées","target":"Traccie scaricate"}
+{"key":"/data:/section:Extensions/section:Video Downloader#102007","source":"Uploader","source_fr":"Uploadeur","target":"Incaricadore"}
+{"key":"/data:/section:Extensions/section:Video Downloader#102008","source":"Video URL","source_fr":"URL video","target":"Indirizzu web di a video"}
+{"key":"/data:/section:Extensions/section:Video Downloader#102009","source":"Video title","source_fr":"Titre de la video","target":"Titulu di a video"}
+{"key":"/data:/section:Extensions/section:Video Downloader#102010","source":"Video description","source_fr":"Description de la video","target":"Discrizzione di a video"}
+{"key":"/data:/section:Extensions/section:Video Downloader#102011","source":"Site name","source_fr":"Nom du site","target":"Nome di u situ"}
+{"key":"/data:/section:Extensions/section:Video Downloader#102012","source":"Uploaded by","source_fr":"Mise en ligne par","target":"Incaricatu da"}
+{"key":"/data:/section:Extensions/section:Video Downloader#102013","source":"Uploaded on","source_fr":"Mise en ligne sur","target":"Incaricatu u"}
+{"key":"/data:/section:Extensions/section:Video Downloader#102014","source":"Length","source_fr":"Longueur","target":"Durata"}
+{"key":"/data:/section:Extensions/section:Video Downloader#102015","source":"Size","source_fr":"Taille","target":"Dimensione"}
+{"key":"/data:/section:Extensions/section:Video Downloader#102016","source":"Cancel download","source_fr":"Annuler le téléchargement","target":"Abbandunà u scaricamentu"}
+{"key":"/data:/section:Extensions/section:Video Downloader#102017","source":"unknown","source_fr":"inconnu","target":"scunnisciutu"}
+{"key":"/data:/section:Extensions/section:Video Downloader#102018","source":"Note","source_fr":"Remarque","target":"Nota"}
+{"key":"/data:/section:Extensions/section:Video Downloader/section:Configuration#102101","source":"Automatization","source_fr":"Automatisation","target":"Autumatisazione"}
+{"key":"/data:/section:Extensions/section:Video Downloader/section:Configuration#102102","source":"Video files","source_fr":"Fichiers vidéo","target":"Schedarii video"}
+{"key":"/data:/section:Extensions/section:Video Downloader/section:Configuration#102103","source":"Select","source_fr":"Parcourir","target":"Selezziunà"}
+{"key":"/data:/section:Extensions/section:Video Downloader/section:Configuration#102104","source":"Select the folder to save downloaded video files to","source_fr":"Parcourir le répertoire pour sauvegarder les fichiers\nvidéo téléchargés","target":"Selezziunà u cartulare induve arregistrà i schedarii video scaricati"}
+{"key":"/data:/section:Extensions/section:Video Downloader/section:Configuration#102105","source":"Downloads","source_fr":"Téléchargements","target":"Scaricamenti"}
+{"key":"/data:/section:Extensions/section:Video Downloader/section:Configuration#102106","source":"Maximum number of simultaneous downloads","source_fr":"Nombre maximum de téléchargements simultanés","target":"Numeru massimu di scaricamenti simultanei"}
+{"key":"/data:/section:Extensions/section:Video Downloader/section:Configuration#102107","source":"Output format","source_fr":"Format de sortie","target":"Furmatu d’esciuta"}
+{"key":"/data:/section:Extensions/section:Video Downloader/section:Configuration#102108","source":"keep original format","source_fr":"garder le format original","target":"cunservà u furmatu d’origine"}
+{"key":"/data:/section:Extensions/section:Video Downloader/section:Errors#102201","source":"This URL is not supported or not a video page URL!","source_fr":"Cette URL n'est pas prise en charge ou n'est pas une URL de page vidéo !","target":"St’indirizzu web ùn hè micca accettatu o ùn currisponde micca à una pagina di video."}
+{"key":"/data:/section:Extensions/section:Video Downloader/section:Errors#102202","source":"Error downloading video!","source_fr":"Erreur de téléchargement de la vidéo !","target":"Sbagliu durante u scaricamentu di a video !"}
+{"key":"/data:/section:Extensions/section:Video Downloader/section:Errors#102203","source":"You are already downloading this video!","source_fr":"Vous êtes déja en train de télécharger la vidéo !","target":"Site dighjà in treccia di scaricà sta video !"}
+{"key":"/data:/section:Extensions/section:Video Downloader/section:Errors#102204","source":"Some required video decoders could not be found. Video files\ncannot be added to the joblist for conversion to audio files.\n\nPlease install FFmpeg or avconv to fix this problem!","source_fr":"Certains encodeurs vidéo requis n'ont pu être trouvés. Les\nfichiers vidéo n'ont pu être ajoutés à la conversion vers des\nfichiers audio.","target":"Ùn si pò truvà certi discudificatori video chì sò richiesti.\nI schedarii video ùn ponu micca esse aghjunti à a lista di\ntravagliu per una cunversione audio. Ci vole à installà\nFFmpeg o avconv per currege stu penseru !"}
+{"key":"/data:/section:Extensions/section:Tag Editor#103000","source":"Tags","source_fr":"Balises infos","target":"Etichette"}
+{"key":"/data:/section:Extensions/section:Tag Editor#103001","source":"Length","source_fr":"Longueur","target":"Durata"}
+{"key":"/data:/section:Extensions/section:Tag Editor#103002","source":"Size","source_fr":"Taille","target":"Dimensione"}
+{"key":"/data:/section:Extensions/section:Tag Editor#103003","source":"Albums","source_fr":"Albums","target":"Albumi"}
+{"key":"/data:/section:Extensions/section:Tag Editor#103004","source":"Files","source_fr":"Fichiers","target":"Schedarii"}
+{"key":"/data:/section:Extensions/section:Tag Editor#103005","source":"File","source_fr":"Fichier","target":"Schedariu"}
+{"key":"/data:/section:Extensions/section:Tag Editor#103006","source":"Tracks","source_fr":"Pistes","target":"Traccie"}
+{"key":"/data:/section:Extensions/section:Tag Editor#103007","source":"Save","source_fr":"Sauvegarder","target":"Arregistrà"}
+{"key":"/data:/section:Extensions/section:Tag Editor#103008","source":"Save all","source_fr":"Tout sauvegarder","target":"Tuttu arregistrà"}
+{"key":"/data:/section:Extensions/section:Tag Editor#103009","source":"no audio files found","source_fr":"aucun fichier audio trouvé","target":"alcunu schedariu audio trovu"}
+{"key":"/data:/section:Extensions/section:Tag Editor/section:Basic#103100","source":"Basic","source_fr":"Elémentaire","target":"Basicu"}
+{"key":"/data:/section:Extensions/section:Tag Editor/section:Basic#103101","source":"Title information","source_fr":"Informations de la piste","target":"Infurmazione di titulu"}
+{"key":"/data:/section:Extensions/section:Tag Editor/section:Basic#103102","source":"Disc","source_fr":"Disque","target":"Discu"}
+{"key":"/data:/section:Extensions/section:Tag Editor/section:Basic#103103","source":"Album art","source_fr":"Illustration de couverture","target":"Illustrazione di l’albumu"}
+{"key":"/data:/section:Extensions/section:Tag Editor/section:Basic#103104","source":"Artwork","source_fr":"Couvertures","target":"Illustrazioni"}
+{"key":"/data:/section:Extensions/section:Tag Editor/section:Basic#103105","source":"Type","source_fr":"Type","target":"Tipu"}
+{"key":"/data:/section:Extensions/section:Tag Editor/section:Basic#103106","source":"Description","source_fr":"Description","target":"Discrizzione"}
+{"key":"/data:/section:Extensions/section:Tag Editor/section:Basic#103107","source":"Add","source_fr":"Ajouter","target":"Aghjunghje"}
+{"key":"/data:/section:Extensions/section:Tag Editor/section:Basic#103108","source":"Remove","source_fr":"Supprimer","target":"Caccià"}
+{"key":"/data:/section:Extensions/section:Tag Editor/section:Details#103200","source":"Details","source_fr":"Détails","target":"Detaglii"}
+{"key":"/data:/section:Extensions/section:Tag Editor/section:Details#103201","source":"Detailed information","source_fr":"Information détaillée","target":"Infurmazioni detagliate"}
+{"key":"/data:/section:Extensions/section:Tag Editor/section:Details#103202","source":"Band / orchestra","source_fr":"Groupe / orchestre","target":"Gruppu / orchestru"}
+{"key":"/data:/section:Extensions/section:Tag Editor/section:Details#103205","source":"Lyrics writer","source_fr":"Parolier","target":"Parullaghju"}
+{"key":"/data:/section:Extensions/section:Tag Editor/section:Details#103206","source":"Modified / remixed by","source_fr":"Modifié / remixé par","target":"Mudificatu / mischiatu da"}
+{"key":"/data:/section:Extensions/section:Tag Editor/section:Details#103207","source":"Original information","source_fr":"Information originale","target":"Infurmazioni d’origine"}
+{"key":"/data:/section:Extensions/section:Tag Editor/section:Details#103208","source":"Original artist","source_fr":"Artiste original","target":"Artista d’origine"}
+{"key":"/data:/section:Extensions/section:Tag Editor/section:Details#103209","source":"Original album","source_fr":"Album original","target":"Albumu d’origine"}
+{"key":"/data:/section:Extensions/section:Tag Editor/section:Details#103210","source":"Original lyrics writer","source_fr":"Parolier original","target":"Parullaghju d’origine"}
+{"key":"/data:/section:Extensions/section:Tag Editor/section:Details#103211","source":"Original release year","source_fr":"Année de sortie originale","target":"Annu d’origine di publicazione"}
+{"key":"/data:/section:Extensions/section:Tag Editor/section:Details#103212","source":"Musical key/tempo","source_fr":"Clef musicale/tempo","target":"Tunalità/tempo"}
+{"key":"/data:/section:Extensions/section:Tag Editor/section:Details#103213","source":"BPM","source_fr":"BPM","target":"Ritimu BPM"}
+{"key":"/data:/section:Extensions/section:Tag Editor/section:Details#103214","source":"Initial key","source_fr":"Clef initiale","target":"Tunalità iniziale"}
+{"key":"/data:/section:Extensions/section:Tag Editor/section:Publisher#103300","source":"Publisher","source_fr":"Éditeur","target":"Editore"}
+{"key":"/data:/section:Extensions/section:Tag Editor/section:Publisher#103301","source":"Publisher information","source_fr":"Informations sur l'éditeur","target":"Infurmazione di l’editore"}
+{"key":"/data:/section:Extensions/section:Tag Editor/section:Publisher#103302","source":"Publisher / label","source_fr":"Éditeur / label","target":"Editore / casa"}
+{"key":"/data:/section:Extensions/section:Tag Editor/section:Publisher#103303","source":"Media type","source_fr":"Type de média","target":"Tipu di media"}
+{"key":"/data:/section:Extensions/section:Tag Editor/section:Publisher#103304","source":"Catalog number","source_fr":"Numéro de catalogue","target":"Numeru di catalogu"}
+{"key":"/data:/section:Extensions/section:Tag Editor/section:Publisher#103305","source":"Barcode","source_fr":"Code-barres","target":"Codice à barre"}
+{"key":"/data:/section:Extensions/section:Tag Editor/section:Publisher#103307","source":"Webpage URLs","source_fr":"URLs des pages web","target":"Indirizzi di pagina web"}
+{"key":"/data:/section:Extensions/section:Tag Editor/section:Publisher#103308","source":"Artist webpage","source_fr":"Page web de l'artiste","target":"Pagina web di l’artista"}
+{"key":"/data:/section:Extensions/section:Tag Editor/section:Publisher#103309","source":"Publisher webpage","source_fr":"Page web de l'éditeur","target":"Pagina web di l’editore"}
+{"key":"/data:/section:Extensions/section:Tag Editor/section:Publisher#103310","source":"Internet radio station","source_fr":"Station de radio internet","target":"Radio nant’à Internet"}
+{"key":"/data:/section:Extensions/section:Tag Editor/section:Publisher#103311","source":"Audio source webpage","source_fr":"Page web de la source audio","target":"Pagina web di a fonte audio"}
+{"key":"/data:/section:Extensions/section:Tag Editor/section:Publisher#103312","source":"Copyright information","source_fr":"Informations de copyright","target":"Infurmazioni nant’à i diritti di copia"}
+{"key":"/data:/section:Extensions/section:Tag Editor/section:Publisher#103313","source":"Commercial information","source_fr":"Informations commerciales","target":"Infurmazioni cummerciali"}
+{"key":"/data:/section:Extensions/section:Tag Editor/section:Lyrics#103350","source":"Lyrics","source_fr":"Paroles","target":"Parolle"}
+{"key":"/data:/section:Extensions/section:Tag Editor/section:Rating#103360","source":"Rating","source_fr":"Évaluation","target":"Valutazione"}
+{"key":"/data:/section:Extensions/section:Tag Editor/section:Rating#103361","source":"none","source_fr":"aucun","target":"nisuna"}
+{"key":"/data:/section:Extensions/section:Tag Editor/section:Configuration#103400","source":"Behavior","source_fr":"Comportement","target":"Cumpurtamentu"}
+{"key":"/data:/section:Extensions/section:Tag Editor/section:Configuration#103401","source":"Clear album artist field if it matches track artist","source_fr":"Effacer le champ d'artiste de l'album quand il correspond à celui de la piste","target":"Squassà u campu di l’artista di l’albumu s’ellu currisponde à quellu di a traccia"}
+{"key":"/data:/section:Extensions/section:Tag Editor/section:Errors#103500","source":"Unable to open file: %1\n\nError: %2","source_fr":"Impossible d'ouvrir le fichier : %1\n\nErreur : %2","target":"Impussibule d’apre u schedariu : %1\n\nSbagliu : %2"}
+{"key":"/data:/section:Extensions/section:Tag Editor/section:Errors#103501","source":"Unable to update tag: %1\n\nError: %2","source_fr":"Impossible de mettre à jour la balise : %1\n\nErreur : %2","target":"Impussibule di mudificà l’etichetta : %1\n\nSbagliu : %2"}
+{"key":"/data:/section:Extensions/section:Logging#104000","source":"Logs","source_fr":"Événements","target":"Ghjurnali di messaghji"}
+{"key":"/data:/section:Extensions/section:Logging#104001","source":"Log","source_fr":"Événement","target":"Ghjurnale di messaghji"}
+{"key":"/data:/section:Extensions/section:Logging#104002","source":"Save as","source_fr":"Enregistrer sous","target":"Arregistrà cù u nome"}
+{"key":"/data:/section:Extensions/section:Logging#104003","source":"Log Files","source_fr":"Fichiers d'événements","target":"Schedarii di ghjurnali"}
+{"key":"/data:/section:Extensions/section:Logging#104004","source":"Time","source_fr":"Temps","target":"Ora"}
+{"key":"/data:/section:Extensions/section:Logging#104005","source":"Message","source_fr":"Message","target":"Messaghju"}
+{"key":"/data:/section:Extensions/section:Logging/section:Configuration#104100","source":"User interface","source_fr":"Interface utilisateur","target":"Interfaccia di l’utilizatore"}
+{"key":"/data:/section:Extensions/section:Logging/section:Configuration#104101","source":"Show Logs tab in main window","source_fr":"Montrer l'onglet événements dans la fenêtre principale","target":"Affissa l’unghjetta Ghjurnali di messaghji in a finestra principale"}
+{"key":"/data:/section:Extensions/section:Logging/section:Configuration#104102","source":"Log files","source_fr":"Fichiers d'événements","target":"Schedarii di ghjurnali"}
+{"key":"/data:/section:Extensions/section:Logging/section:Configuration#104103","source":"Archive log files","source_fr":"Archiver les fichiers d'événements","target":"Archivii di i ghjurnali di messaghji"}
+{"key":"/data:/section:Extensions/section:Logging/section:Configuration#104104","source":"Log file folder","source_fr":"Répertoire des fichiers d'événements","target":"Cartulare di i ghjurnali di messaghji"}
+{"key":"/data:/section:Extensions/section:Logging/section:Configuration#104105","source":"Select","source_fr":"Parcourir","target":"Selezziunà"}
+{"key":"/data:/section:Extensions/section:Logging/section:Configuration#104106","source":"Select the folder for saving log files","source_fr":"Sélectionner le répertoire pour sauvegarder les fichiers d'événements","target":"Selezziunà u cartulare induve arregistrà i ghjurnali di messaghji"}
+{"key":"/data:/section:Extensions/section:Logging/section:Configuration#104107","source":"Delete old log files after","source_fr":"Effacer les vieux fichiers d'événements après","target":"Squassà i ghjurnali di messaghji più vechji chì"}
+{"key":"/data:/section:Extensions/section:Logging/section:Configuration#104108","source":"days","source_fr":"jours","target":"ghjorni"}
+{"key":"/data:/section:Extensions/section:Logging/section:Configuration#104109","source":"Conversion logs","source_fr":"Événements de conversion","target":"Ghjurnali di cunversione"}
+{"key":"/data:/section:Extensions/section:Logging/section:Configuration#104110","source":"Save conversion logs with audio files","source_fr":"Enregistrer les événements de conversion avec les fichiers audio","target":"Arregistrà i ghjurnali di cunversione cù i schedarii audio"}
+{"key":"/data:/section:Extensions/section:Logging/section:Configuration#104111","source":"Audio CD ripping logs only","source_fr":"Événements d'extraction de CD audio seulement","target":"Creà i ghjurnali solu per l’estrazzione di e traccie d’un CD audio"}
+{"key":"/data:/section:Extensions/section:Logging/section:Configuration#104112","source":"Filename pattern","source_fr":"Modèle de nom de fichier","target":"Mudellu di nome di schedariu"}
+{"key":"/data:/section:Extensions/section:Logging/section:Configuration#104113","source":"Log complete file paths","source_fr":"Enregistrer les chemins complets des fichiers","target":"Arregistrà i chjassi sani di i schedarii"}
+{"key":"/data:/section:Extensions/section:Notifier#105000","source":"Conversion process finished!","source_fr":"Processus de conversion terminé !","target":"Trattamentu di cunversione compiu !"}
+{"key":"/data:/section:Extensions/section:Notifier/section:Configuration#105100","source":"Notifications","source_fr":"Notifications","target":"Nutificazioni"}
+{"key":"/data:/section:Extensions/section:Notifier/section:Configuration#105101","source":"Notify on finished conversion","source_fr":"Notifer la fin de la conversion","target":"Avisà à a fine d’una cunversione"}
+{"key":"/data:/section:Extensions/section:Notifier/section:Configuration#105102","source":"Play sound","source_fr":"Jouer un son","target":"Sente un sonu"}
+{"key":"/data:/section:Extensions/section:Notifier/section:Configuration#105103","source":"Display message","source_fr":"Afficher un message","target":"Affissà un messaghju"}
+{"key":"/data:/section:Extensions/section:Notifier/section:Configuration#105104","source":"Select","source_fr":"Parcourir","target":"Selezziunà"}
+{"key":"/data:/section:Extensions/section:Notifier/section:Configuration#105105","source":"Only for conversions running longer than","source_fr":"Seulement pour les conversions qui durent plus de","target":"Solu per e cunversioni più longhe chì"}
+{"key":"/data:/section:Extensions/section:Notifier/section:Configuration#105106","source":"second(s)","source_fr":"seconde(s)","target":"seconda(e)"}
+{"key":"/data:/section:Extensions/section:Notifier/section:Configuration#105107","source":"minute(s)","source_fr":"minutes(s)","target":"minutu(i)"}

@@ -138,3 +138,8 @@ Choose a file||Sceglie un schedariu
 # Imported labels whose winning translation fits only their own program.
 |Sélectionné|Selezziunatu
 |Désactivés|Disattivati
+# Discord rows that now take priority over imported ones (full Discord section, 0.22.0) and used a rarer or wrong form.
+Debugging||Spannatura
+Public||Publicu
+Private||Privatu
+Chat||Chjachjarata

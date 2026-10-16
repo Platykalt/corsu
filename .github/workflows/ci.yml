@@ -149,7 +149,8 @@ jobs:
         if: runner.os == 'Linux'
         run: |
           sudo apt-get update -qq
-          sudo apt-get install -y -qq vlc-bin vlc-plugin-base vlc-l10n
+          sudo apt-get install -y -qq vlc vlc-l10n
+          ls /usr/share/applications/vlc.desktop
           ls -l /usr/share/locale/co/LC_MESSAGES/vlc.mo
           python tests/e2e/check_vlc.py
       - name: Chromium — translate Chrome for Testing, read it in Corsican, switch off/on, restore

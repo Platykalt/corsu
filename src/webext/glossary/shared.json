@@ -1,0 +1,319 @@
+{
+ "site": "shared",
+ "source_language": "en",
+ "generated_by": "src/webext/tools/build_shared.py from glossary/shared-labels.txt",
+ "entries": [
+  {
+   "source": "About",
+   "co": "Apprupositu",
+   "status": "reviewed",
+   "origin": "lexicon-mozilla.tsv"
+  },
+  {
+   "source": "Activity",
+   "co": "Attività",
+   "status": "draft",
+   "origin": "lexicon.tsv"
+  },
+  {
+   "source": "Author",
+   "co": "Autore",
+   "status": "reviewed",
+   "origin": "lexicon-mozilla.tsv"
+  },
+  {
+   "source": "Cancel",
+   "co": "Abbandunà",
+   "status": "reviewed",
+   "origin": "lexicon-mozilla.tsv"
+  },
+  {
+   "source": "Close",
+   "co": "Chjode",
+   "status": "reviewed",
+   "origin": "lexicon-mozilla.tsv"
+  },
+  {
+   "source": "Close dialog",
+   "co": "Chjode a finestra di dialogu",
+   "status": "draft",
+   "origin": "lexicon.tsv"
+  },
+  {
+   "source": "Collections",
+   "co": "Cullezzioni",
+   "status": "reviewed",
+   "origin": "lexicon-mozilla.tsv"
+  },
+  {
+   "source": "Community",
+   "co": "Cumunità",
+   "status": "draft",
+   "origin": "lexicon.tsv"
+  },
+  {
+   "source": "Contact",
+   "co": "Cuntattu",
+   "status": "reviewed",
+   "origin": "lexicon-upstream.tsv"
+  },
+  {
+   "source": "Contributors",
+   "co": "Cuntribuenti",
+   "status": "reviewed",
+   "origin": "lexicon-upstream.tsv"
+  },
+  {
+   "source": "Copy",
+   "co": "Cupià",
+   "status": "reviewed",
+   "origin": "lexicon-mozilla.tsv"
+  },
+  {
+   "source": "Copy link",
+   "co": "Cupià u liame",
+   "status": "reviewed",
+   "origin": "lexicon-mozilla.tsv"
+  },
+  {
+   "source": "Delete",
+   "co": "Squassà",
+   "status": "reviewed",
+   "origin": "lexicon-mozilla.tsv"
+  },
+  {
+   "source": "Dismiss",
+   "co": "Ricusà",
+   "status": "reviewed",
+   "origin": "lexicon-mozilla.tsv"
+  },
+  {
+   "source": "Documentation",
+   "co": "Documentazione",
+   "status": "reviewed",
+   "origin": "lexicon-upstream.tsv"
+  },
+  {
+   "source": "Download",
+   "co": "Scaricà",
+   "status": "reviewed",
+   "origin": "lexicon-mozilla.tsv"
+  },
+  {
+   "source": "Edit",
+   "co": "Mudificà",
+   "status": "reviewed",
+   "origin": "lexicon-mozilla.tsv"
+  },
+  {
+   "source": "Files",
+   "co": "Schedarii",
+   "status": "reviewed",
+   "origin": "lexicon-upstream.tsv"
+  },
+  {
+   "source": "Filter",
+   "co": "Filtrà",
+   "status": "reviewed",
+   "origin": "lexicon-mozilla.tsv"
+  },
+  {
+   "source": "Footer",
+   "co": "Bassu di pagina",
+   "status": "reviewed",
+   "origin": "lexicon-upstream.tsv"
+  },
+  {
+   "source": "Help",
+   "co": "Aiutu",
+   "status": "reviewed",
+   "origin": "lexicon-mozilla.tsv"
+  },
+  {
+   "source": "History",
+   "co": "Cronolugia",
+   "status": "reviewed",
+   "origin": "lexicon-mozilla.tsv"
+  },
+  {
+   "source": "Homepage",
+   "co": "Pagina d’accolta",
+   "status": "reviewed",
+   "origin": "lexicon-mozilla.tsv"
+  },
+  {
+   "source": "Labels",
+   "co": "Etichette",
+   "status": "reviewed",
+   "origin": "lexicon-upstream.tsv"
+  },
+  {
+   "source": "Learn more",
+   "co": "Sapene di più",
+   "status": "reviewed",
+   "origin": "lexicon-mozilla.tsv"
+  },
+  {
+   "source": "License",
+   "co": "Licenza",
+   "status": "reviewed",
+   "origin": "lexicon-upstream.tsv"
+  },
+  {
+   "source": "Loading…",
+   "co": "Caricamentu…",
+   "status": "reviewed",
+   "origin": "lexicon-mozilla.tsv"
+  },
+  {
+   "source": "Name",
+   "co": "Nome",
+   "status": "reviewed",
+   "origin": "lexicon-mozilla.tsv"
+  },
+  {
+   "source": "Navigation",
+   "co": "Navigazione",
+   "status": "reviewed",
+   "origin": "lexicon-mozilla.tsv"
+  },
+  {
+   "source": "Newest",
+   "co": "Più recenti",
+   "status": "draft",
+   "origin": "lexicon.tsv"
+  },
+  {
+   "source": "Next",
+   "co": "Seguente",
+   "status": "reviewed",
+   "origin": "lexicon-mozilla.tsv"
+  },
+  {
+   "source": "Next page",
+   "co": "Pagina seguente",
+   "status": "reviewed",
+   "origin": "lexicon-upstream.tsv"
+  },
+  {
+   "source": "Notifications",
+   "co": "Nutificazioni",
+   "status": "reviewed",
+   "origin": "lexicon-mozilla.tsv"
+  },
+  {
+   "source": "Preview",
+   "co": "Fighjulata",
+   "status": "reviewed",
+   "origin": "lexicon-upstream.tsv"
+  },
+  {
+   "source": "Previous",
+   "co": "Precedente",
+   "status": "reviewed",
+   "origin": "lexicon-mozilla.tsv"
+  },
+  {
+   "source": "Previous page",
+   "co": "Pagina precedente",
+   "status": "reviewed",
+   "origin": "lexicon-upstream.tsv"
+  },
+  {
+   "source": "Privacy",
+   "co": "Vita privata",
+   "status": "reviewed",
+   "origin": "lexicon-mozilla.tsv"
+  },
+  {
+   "source": "Reload",
+   "co": "Attualizà",
+   "status": "reviewed",
+   "origin": "lexicon-mozilla.tsv"
+  },
+  {
+   "source": "Resources",
+   "co": "Risorse",
+   "status": "reviewed",
+   "origin": "lexicon-upstream.tsv"
+  },
+  {
+   "source": "Save",
+   "co": "Arregistrà",
+   "status": "reviewed",
+   "origin": "lexicon-mozilla.tsv"
+  },
+  {
+   "source": "Search",
+   "co": "Ricercà",
+   "status": "reviewed",
+   "origin": "lexicon-mozilla.tsv"
+  },
+  {
+   "source": "Security",
+   "co": "Sicurità",
+   "status": "reviewed",
+   "origin": "lexicon-mozilla.tsv"
+  },
+  {
+   "source": "Settings",
+   "co": "Parametri",
+   "status": "reviewed",
+   "origin": "lexicon-mozilla.tsv"
+  },
+  {
+   "source": "Show more",
+   "co": "Affissà di più",
+   "status": "draft",
+   "origin": "lexicon.tsv"
+  },
+  {
+   "source": "Sign in",
+   "co": "Cunnettesi",
+   "status": "reviewed",
+   "origin": "lexicon-mozilla.tsv"
+  },
+  {
+   "source": "Sign out",
+   "co": "Scunnettesi",
+   "status": "reviewed",
+   "origin": "lexicon-mozilla.tsv"
+  },
+  {
+   "source": "Sign up",
+   "co": "Arregistrassi",
+   "status": "reviewed",
+   "origin": "lexicon-mozilla.tsv"
+  },
+  {
+   "source": "Sort",
+   "co": "Ordinà",
+   "status": "reviewed",
+   "origin": "lexicon-upstream.tsv"
+  },
+  {
+   "source": "Status",
+   "co": "Statu",
+   "status": "reviewed",
+   "origin": "lexicon-fixes.tsv"
+  },
+  {
+   "source": "Submit",
+   "co": "Mandà",
+   "status": "reviewed",
+   "origin": "lexicon-mozilla.tsv"
+  },
+  {
+   "source": "Tags",
+   "co": "Etichette",
+   "status": "reviewed",
+   "origin": "lexicon-upstream.tsv"
+  },
+  {
+   "source": "Type",
+   "co": "Tipu",
+   "status": "reviewed",
+   "origin": "lexicon-upstream.tsv"
+  }
+ ]
+}

@@ -1,0 +1,55 @@
+# Generic interface labels shared by every site adapter. tools/build_shared.py looks each one up in Corsu's
+# lexicon (lexicon-fixes, then the reviewed Mozilla and upstream imports, then lexicon.tsv) and writes
+# shared.json. Keep this list short: only labels that mean the same thing on any website.
+About
+Activity
+Author
+Cancel
+Close
+Close dialog
+Collections
+Community
+Contact
+Contributors
+Copy
+Copy link
+Delete
+Dismiss
+Documentation
+Download
+Edit
+Files
+Filter
+Footer
+Help
+History
+Homepage
+Labels
+Learn more
+License
+Loading…
+Name
+Navigation
+Newest
+Next
+Next page
+Notifications
+Preview
+Previous
+Previous page
+Privacy
+Reload
+Resources
+Save
+Search
+Security
+Settings
+Show more
+Sign in
+Sign out
+Sign up
+Sort
+Status
+Submit
+Tags
+Type
