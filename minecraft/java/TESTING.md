@@ -1,4 +1,4 @@
-# Testing the Corsican pack in Minecraft Java 26.3
+# Testing the Corsican pack in Minecraft Java
 
 [Français](../../docs/fr/minecraft-tester.md)
 
@@ -25,8 +25,11 @@ Note "ok" or what is wrong for each step, with a screenshot (F2).
 6. **Switching off**: close Minecraft, switch Minecraft off in the Corsu app, start again: your previous language is
    back, your other packs are still on and in the same order, your settings (FOV, keys…) are unchanged. Switch on
    again: Corsican is back.
-7. **Another instance**: if you have another installation or instance (other version, Prism Launcher…), open it: it
-   must be unchanged if Corsu "left it alone".
+7. **Another version**: Corsu now builds a pack for every release from 1.6.1 to 26.3. Create a Prism Launcher instance
+   of an older release (for example 1.21.1, 1.16.5, 1.12.2 or 1.8.9), start it once, close it, run Corsu, start it
+   again: the menus are in Corsican (1.6 to 1.10 list the language as "Corsu (Corsica)" too). These older texts are
+   the least tested: check the title screen, options and an item tooltip, and note any English left or text cut.
+   An instance Corsu "left alone" must be unchanged.
 
 ## 1. Install
 

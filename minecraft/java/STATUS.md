@@ -1,6 +1,22 @@
-# Minecraft: Java Edition 26.3 in Corsican — status
+# Minecraft: Java Edition in Corsican — status
 
-Updated 2026-10-16. Three measures are kept apart; none implies the next.
+Updated 2026-10-17. Four states are kept apart; none implies the next: translation present, AI review, human
+review, seen in the game.
+
+## Every release from 1.6.1 to 26.3 (87 releases)
+
+| State | Result |
+| --- | --- |
+| Translation present | 87 / 87 releases with every key translated: the 26.3 base (8,557 texts) plus `history.json` (3,978 pairs for older English: 507 reused, 1,755 renamed keys, 482 adapted, 1,234 new) |
+| Technical check | 87 / 87 (`tools/mcversions.py verify all`, 2026-10-17): Python rules for placeholders, `§` codes, file and mcmeta formats; then each release's own client jar (SHA-1 checked) loads the language file, renders every text with its own formatter (0 problems, 0 unknown keys) and accepts the `language` and `pack` sections (exceptions listed in [MULTIVERSION.md](MULTIVERSION.md)) |
+| AI review | every text written and reviewed by AI only; the history pairs got one second AI pass on a 150-entry sample ([history-report.md](history-report.md)) |
+| Human review | 0 |
+| Seen in the game | 26.3 only, on the maintainer's Prism Launcher instance (2026-10-16): the game's log shows the pack loaded and its own messages in Corsican; the maintainer's visual check is listed in [TESTING.md](TESTING.md). No other release has been started with the pack. |
+
+Snapshots, pre-releases, release candidates and versions before 1.6.1 (no resource packs): not claimed
+([other-versions.md](other-versions.md)).
+
+## 26.3 in detail
 
 ## 1. Completeness
 

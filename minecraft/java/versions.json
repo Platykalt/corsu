@@ -13,9 +13,12 @@
    "pack_format": "minecraft.wiki Template:Resource pack format rev 3784632 (2026-09-19); agrees with the jar's own pack.mcmeta (resource pack with a language block)",
    "mcmeta": "minecraft.wiki Pack.mcmeta rev 3821904"
   },
-  "supported": false,
-  "coverage": null,
-  "note": ""
+  "supported": true,
+  "coverage": {
+   "translated": 1354,
+   "total": 1354
+  },
+  "note": "verify 2026-10-17: 0 errors; rendered 1354 Corsican texts with the game's own loader and formatter (3 skipped: the English itself does not format), 0 unknown keys, 0 problems"
  },
  "1.6.2": {
   "lang_format": "lang",
@@ -31,9 +34,12 @@
    "pack_format": "minecraft.wiki Template:Resource pack format rev 3784632 (2026-09-19); agrees with the jar's own pack.mcmeta (resource pack with a language block)",
    "mcmeta": "minecraft.wiki Pack.mcmeta rev 3821904"
   },
-  "supported": false,
-  "coverage": null,
-  "note": ""
+  "supported": true,
+  "coverage": {
+   "translated": 1360,
+   "total": 1360
+  },
+  "note": "verify 2026-10-17: 0 errors; rendered 1360 Corsican texts with the game's own loader and formatter (3 skipped: the English itself does not format), 0 unknown keys, 0 problems"
  },
  "1.6.4": {
   "lang_format": "lang",
@@ -70,9 +76,12 @@
    "pack_format": "minecraft.wiki Template:Resource pack format rev 3784632 (2026-09-19)",
    "mcmeta": "minecraft.wiki Pack.mcmeta rev 3821904"
   },
-  "supported": false,
-  "coverage": null,
-  "note": ""
+  "supported": true,
+  "coverage": {
+   "translated": 1595,
+   "total": 1595
+  },
+  "note": "verify 2026-10-17: 0 errors; rendered 1595 Corsican texts with the game's own loader and formatter (2 skipped: the English itself does not format), 0 unknown keys, 0 problems"
  },
  "1.7.3": {
   "lang_format": "lang",
@@ -88,9 +97,12 @@
    "pack_format": "minecraft.wiki Template:Resource pack format rev 3784632 (2026-09-19)",
    "mcmeta": "minecraft.wiki Pack.mcmeta rev 3821904"
   },
-  "supported": false,
-  "coverage": null,
-  "note": ""
+  "supported": true,
+  "coverage": {
+   "translated": 1685,
+   "total": 1685
+  },
+  "note": "verify 2026-10-17: 0 errors; rendered 1685 Corsican texts with the game's own loader and formatter (2 skipped: the English itself does not format), 0 unknown keys, 0 problems"
  },
  "1.7.4": {
   "lang_format": "lang",
@@ -106,9 +118,12 @@
    "pack_format": "minecraft.wiki Template:Resource pack format rev 3784632 (2026-09-19)",
    "mcmeta": "minecraft.wiki Pack.mcmeta rev 3821904"
   },
-  "supported": false,
-  "coverage": null,
-  "note": ""
+  "supported": true,
+  "coverage": {
+   "translated": 1685,
+   "total": 1685
+  },
+  "note": "verify 2026-10-17: 0 errors; rendered 1685 Corsican texts with the game's own loader and formatter (2 skipped: the English itself does not format), 0 unknown keys, 0 problems"
  },
  "1.7.5": {
   "lang_format": "lang",
@@ -124,9 +139,12 @@
    "pack_format": "minecraft.wiki Template:Resource pack format rev 3784632 (2026-09-19)",
    "mcmeta": "minecraft.wiki Pack.mcmeta rev 3821904"
   },
-  "supported": false,
-  "coverage": null,
-  "note": ""
+  "supported": true,
+  "coverage": {
+   "translated": 1708,
+   "total": 1708
+  },
+  "note": "verify 2026-10-17: 0 errors; rendered 1708 Corsican texts with the game's own loader and formatter (2 skipped: the English itself does not format), 0 unknown keys, 0 problems"
  },
  "1.7.6": {
   "lang_format": "lang",
@@ -142,9 +160,12 @@
    "pack_format": "minecraft.wiki Template:Resource pack format rev 3784632 (2026-09-19)",
    "mcmeta": "minecraft.wiki Pack.mcmeta rev 3821904"
   },
-  "supported": false,
-  "coverage": null,
-  "note": ""
+  "supported": true,
+  "coverage": {
+   "translated": 1725,
+   "total": 1725
+  },
+  "note": "verify 2026-10-17: 0 errors; rendered 1725 Corsican texts with the game's own loader and formatter (2 skipped: the English itself does not format), 0 unknown keys, 0 problems"
  },
  "1.7.7": {
   "lang_format": "lang",
@@ -160,9 +181,12 @@
    "pack_format": "minecraft.wiki Template:Resource pack format rev 3784632 (2026-09-19)",
    "mcmeta": "minecraft.wiki Pack.mcmeta rev 3821904"
   },
-  "supported": false,
-  "coverage": null,
-  "note": ""
+  "supported": true,
+  "coverage": {
+   "translated": 1725,
+   "total": 1725
+  },
+  "note": "verify 2026-10-17: 0 errors; rendered 1725 Corsican texts with the game's own loader and formatter (2 skipped: the English itself does not format), 0 unknown keys, 0 problems"
  },
  "1.7.8": {
   "lang_format": "lang",
@@ -178,9 +202,12 @@
    "pack_format": "minecraft.wiki Template:Resource pack format rev 3784632 (2026-09-19)",
    "mcmeta": "minecraft.wiki Pack.mcmeta rev 3821904"
   },
-  "supported": false,
-  "coverage": null,
-  "note": ""
+  "supported": true,
+  "coverage": {
+   "translated": 1726,
+   "total": 1726
+  },
+  "note": "verify 2026-10-17: 0 errors; rendered 1726 Corsican texts with the game's own loader and formatter (2 skipped: the English itself does not format), 0 unknown keys, 0 problems"
  },
  "1.7.9": {
   "lang_format": "lang",
@@ -196,9 +223,12 @@
    "pack_format": "minecraft.wiki Template:Resource pack format rev 3784632 (2026-09-19)",
    "mcmeta": "minecraft.wiki Pack.mcmeta rev 3821904"
   },
-  "supported": false,
-  "coverage": null,
-  "note": ""
+  "supported": true,
+  "coverage": {
+   "translated": 1726,
+   "total": 1726
+  },
+  "note": "verify 2026-10-17: 0 errors; rendered 1726 Corsican texts with the game's own loader and formatter (2 skipped: the English itself does not format), 0 unknown keys, 0 problems"
  },
  "1.7.10": {
   "lang_format": "lang",
@@ -214,9 +244,12 @@
    "pack_format": "minecraft.wiki Template:Resource pack format rev 3784632 (2026-09-19)",
    "mcmeta": "minecraft.wiki Pack.mcmeta rev 3821904"
   },
-  "supported": false,
-  "coverage": null,
-  "note": ""
+  "supported": true,
+  "coverage": {
+   "translated": 1765,
+   "total": 1765
+  },
+  "note": "verify 2026-10-17: 0 errors; rendered 1765 Corsican texts with the game's own loader and formatter (2 skipped: the English itself does not format), 0 unknown keys, 0 problems"
  },
  "1.8": {
   "lang_format": "lang",
@@ -232,9 +265,12 @@
    "pack_format": "minecraft.wiki Template:Resource pack format rev 3784632 (2026-09-19)",
    "mcmeta": "minecraft.wiki Pack.mcmeta rev 3821904"
   },
-  "supported": false,
-  "coverage": null,
-  "note": ""
+  "supported": true,
+  "coverage": {
+   "translated": 2677,
+   "total": 2677
+  },
+  "note": "verify 2026-10-17: 0 errors; rendered 2677 Corsican texts with the game's own loader and formatter (2 skipped: the English itself does not format), 0 unknown keys, 0 problems"
  },
  "1.8.1": {
   "lang_format": "lang",
@@ -250,9 +286,12 @@
    "pack_format": "minecraft.wiki Template:Resource pack format rev 3784632 (2026-09-19)",
    "mcmeta": "minecraft.wiki Pack.mcmeta rev 3821904"
   },
-  "supported": false,
-  "coverage": null,
-  "note": ""
+  "supported": true,
+  "coverage": {
+   "translated": 2698,
+   "total": 2698
+  },
+  "note": "verify 2026-10-17: 0 errors; rendered 2698 Corsican texts with the game's own loader and formatter (2 skipped: the English itself does not format), 0 unknown keys, 0 problems"
  },
  "1.8.2": {
   "lang_format": "lang",
@@ -268,9 +307,12 @@
    "pack_format": "minecraft.wiki Template:Resource pack format rev 3784632 (2026-09-19)",
    "mcmeta": "minecraft.wiki Pack.mcmeta rev 3821904"
   },
-  "supported": false,
-  "coverage": null,
-  "note": ""
+  "supported": true,
+  "coverage": {
+   "translated": 2719,
+   "total": 2719
+  },
+  "note": "verify 2026-10-17: 0 errors; rendered 2719 Corsican texts with the game's own loader and formatter (2 skipped: the English itself does not format), 0 unknown keys, 0 problems"
  },
  "1.8.3": {
   "lang_format": "lang",
@@ -286,9 +328,12 @@
    "pack_format": "minecraft.wiki Template:Resource pack format rev 3784632 (2026-09-19)",
    "mcmeta": "minecraft.wiki Pack.mcmeta rev 3821904"
   },
-  "supported": false,
-  "coverage": null,
-  "note": ""
+  "supported": true,
+  "coverage": {
+   "translated": 2719,
+   "total": 2719
+  },
+  "note": "verify 2026-10-17: 0 errors; rendered 2719 Corsican texts with the game's own loader and formatter (2 skipped: the English itself does not format), 0 unknown keys, 0 problems"
  },
  "1.8.4": {
   "lang_format": "lang",
@@ -304,9 +349,12 @@
    "pack_format": "minecraft.wiki Template:Resource pack format rev 3784632 (2026-09-19)",
    "mcmeta": "minecraft.wiki Pack.mcmeta rev 3821904"
   },
-  "supported": false,
-  "coverage": null,
-  "note": ""
+  "supported": true,
+  "coverage": {
+   "translated": 2725,
+   "total": 2725
+  },
+  "note": "verify 2026-10-17: 0 errors; rendered 2725 Corsican texts with the game's own loader and formatter (2 skipped: the English itself does not format), 0 unknown keys, 0 problems"
  },
  "1.8.5": {
   "lang_format": "lang",
@@ -322,9 +370,12 @@
    "pack_format": "minecraft.wiki Template:Resource pack format rev 3784632 (2026-09-19)",
    "mcmeta": "minecraft.wiki Pack.mcmeta rev 3821904"
   },
-  "supported": false,
-  "coverage": null,
-  "note": ""
+  "supported": true,
+  "coverage": {
+   "translated": 2725,
+   "total": 2725
+  },
+  "note": "verify 2026-10-17: 0 errors; rendered 2725 Corsican texts with the game's own loader and formatter (2 skipped: the English itself does not format), 0 unknown keys, 0 problems"
  },
  "1.8.6": {
   "lang_format": "lang",
@@ -340,9 +391,12 @@
    "pack_format": "minecraft.wiki Template:Resource pack format rev 3784632 (2026-09-19)",
    "mcmeta": "minecraft.wiki Pack.mcmeta rev 3821904"
   },
-  "supported": false,
-  "coverage": null,
-  "note": ""
+  "supported": true,
+  "coverage": {
+   "translated": 2725,
+   "total": 2725
+  },
+  "note": "verify 2026-10-17: 0 errors; rendered 2725 Corsican texts with the game's own loader and formatter (2 skipped: the English itself does not format), 0 unknown keys, 0 problems"
  },
  "1.8.7": {
   "lang_format": "lang",
@@ -358,9 +412,12 @@
    "pack_format": "minecraft.wiki Template:Resource pack format rev 3784632 (2026-09-19)",
    "mcmeta": "minecraft.wiki Pack.mcmeta rev 3821904"
   },
-  "supported": false,
-  "coverage": null,
-  "note": ""
+  "supported": true,
+  "coverage": {
+   "translated": 2725,
+   "total": 2725
+  },
+  "note": "verify 2026-10-17: 0 errors; rendered 2725 Corsican texts with the game's own loader and formatter (2 skipped: the English itself does not format), 0 unknown keys, 0 problems"
  },
  "1.8.8": {
   "lang_format": "lang",
@@ -376,9 +433,12 @@
    "pack_format": "minecraft.wiki Template:Resource pack format rev 3784632 (2026-09-19)",
    "mcmeta": "minecraft.wiki Pack.mcmeta rev 3821904"
   },
-  "supported": false,
-  "coverage": null,
-  "note": ""
+  "supported": true,
+  "coverage": {
+   "translated": 2749,
+   "total": 2749
+  },
+  "note": "verify 2026-10-17: 0 errors; rendered 2749 Corsican texts with the game's own loader and formatter (2 skipped: the English itself does not format), 0 unknown keys, 0 problems"
  },
  "1.8.9": {
   "lang_format": "lang",
@@ -396,10 +456,10 @@
   },
   "supported": true,
   "coverage": {
-   "translated": 2718,
+   "translated": 2761,
    "total": 2761
   },
-  "note": "verify 2026-10-17: 0 errors; rendered 2718 Corsican texts with the game's own loader and formatter (2 skipped: the English itself does not format), 0 unknown keys, 0 problems"
+  "note": "verify 2026-10-17: 0 errors; rendered 2761 Corsican texts with the game's own loader and formatter (2 skipped: the English itself does not format), 0 unknown keys, 0 problems"
  },
  "1.9": {
   "lang_format": "lang",
@@ -415,9 +475,12 @@
    "pack_format": "minecraft.wiki Template:Resource pack format rev 3784632 (2026-09-19)",
    "mcmeta": "minecraft.wiki Pack.mcmeta rev 3821904"
   },
-  "supported": false,
-  "coverage": null,
-  "note": ""
+  "supported": true,
+  "coverage": {
+   "translated": 3079,
+   "total": 3079
+  },
+  "note": "verify 2026-10-17: 0 errors; rendered 3079 Corsican texts with the game's own loader and formatter (2 skipped: the English itself does not format), 0 unknown keys, 0 problems"
  },
  "1.9.1": {
   "lang_format": "lang",
@@ -433,9 +496,12 @@
    "pack_format": "minecraft.wiki Template:Resource pack format rev 3784632 (2026-09-19)",
    "mcmeta": "minecraft.wiki Pack.mcmeta rev 3821904"
   },
-  "supported": false,
-  "coverage": null,
-  "note": ""
+  "supported": true,
+  "coverage": {
+   "translated": 3079,
+   "total": 3079
+  },
+  "note": "verify 2026-10-17: 0 errors; rendered 3079 Corsican texts with the game's own loader and formatter (2 skipped: the English itself does not format), 0 unknown keys, 0 problems"
  },
  "1.9.2": {
   "lang_format": "lang",
@@ -451,9 +517,12 @@
    "pack_format": "minecraft.wiki Template:Resource pack format rev 3784632 (2026-09-19)",
    "mcmeta": "minecraft.wiki Pack.mcmeta rev 3821904"
   },
-  "supported": false,
-  "coverage": null,
-  "note": ""
+  "supported": true,
+  "coverage": {
+   "translated": 3079,
+   "total": 3079
+  },
+  "note": "verify 2026-10-17: 0 errors; rendered 3079 Corsican texts with the game's own loader and formatter (2 skipped: the English itself does not format), 0 unknown keys, 0 problems"
  },
  "1.9.3": {
   "lang_format": "lang",
@@ -469,9 +538,12 @@
    "pack_format": "minecraft.wiki Template:Resource pack format rev 3784632 (2026-09-19)",
    "mcmeta": "minecraft.wiki Pack.mcmeta rev 3821904"
   },
-  "supported": false,
-  "coverage": null,
-  "note": ""
+  "supported": true,
+  "coverage": {
+   "translated": 3084,
+   "total": 3084
+  },
+  "note": "verify 2026-10-17: 0 errors; rendered 3084 Corsican texts with the game's own loader and formatter (2 skipped: the English itself does not format), 0 unknown keys, 0 problems"
  },
  "1.9.4": {
   "lang_format": "lang",
@@ -487,9 +559,12 @@
    "pack_format": "minecraft.wiki Template:Resource pack format rev 3784632 (2026-09-19)",
    "mcmeta": "minecraft.wiki Pack.mcmeta rev 3821904"
   },
-  "supported": false,
-  "coverage": null,
-  "note": ""
+  "supported": true,
+  "coverage": {
+   "translated": 3084,
+   "total": 3084
+  },
+  "note": "verify 2026-10-17: 0 errors; rendered 3084 Corsican texts with the game's own loader and formatter (2 skipped: the English itself does not format), 0 unknown keys, 0 problems"
  },
  "1.10": {
   "lang_format": "lang",
@@ -505,9 +580,12 @@
    "pack_format": "minecraft.wiki Template:Resource pack format rev 3784632 (2026-09-19)",
    "mcmeta": "minecraft.wiki Pack.mcmeta rev 3821904"
   },
-  "supported": false,
-  "coverage": null,
-  "note": ""
+  "supported": true,
+  "coverage": {
+   "translated": 3123,
+   "total": 3123
+  },
+  "note": "verify 2026-10-17: 0 errors; rendered 3123 Corsican texts with the game's own loader and formatter (2 skipped: the English itself does not format), 0 unknown keys, 0 problems"
  },
  "1.10.1": {
   "lang_format": "lang",
@@ -523,9 +601,12 @@
    "pack_format": "minecraft.wiki Template:Resource pack format rev 3784632 (2026-09-19)",
    "mcmeta": "minecraft.wiki Pack.mcmeta rev 3821904"
   },
-  "supported": false,
-  "coverage": null,
-  "note": ""
+  "supported": true,
+  "coverage": {
+   "translated": 3123,
+   "total": 3123
+  },
+  "note": "verify 2026-10-17: 0 errors; rendered 3123 Corsican texts with the game's own loader and formatter (2 skipped: the English itself does not format), 0 unknown keys, 0 problems"
  },
  "1.10.2": {
   "lang_format": "lang",
@@ -541,9 +622,12 @@
    "pack_format": "minecraft.wiki Template:Resource pack format rev 3784632 (2026-09-19)",
    "mcmeta": "minecraft.wiki Pack.mcmeta rev 3821904"
   },
-  "supported": false,
-  "coverage": null,
-  "note": ""
+  "supported": true,
+  "coverage": {
+   "translated": 3122,
+   "total": 3122
+  },
+  "note": "verify 2026-10-17: 0 errors; rendered 3122 Corsican texts with the game's own loader and formatter (2 skipped: the English itself does not format), 0 unknown keys, 0 problems"
  },
  "1.11": {
   "lang_format": "lang",
@@ -559,9 +643,12 @@
    "pack_format": "minecraft.wiki Template:Resource pack format rev 3784632 (2026-09-19)",
    "mcmeta": "minecraft.wiki Pack.mcmeta rev 3821904"
   },
-  "supported": false,
-  "coverage": null,
-  "note": ""
+  "supported": true,
+  "coverage": {
+   "translated": 3258,
+   "total": 3258
+  },
+  "note": "verify 2026-10-17: 0 errors; rendered 3258 Corsican texts with the game's own loader and formatter (2 skipped: the English itself does not format), 0 unknown keys, 0 problems"
  },
  "1.11.1": {
   "lang_format": "lang",
@@ -577,9 +664,12 @@
    "pack_format": "minecraft.wiki Template:Resource pack format rev 3784632 (2026-09-19)",
    "mcmeta": "minecraft.wiki Pack.mcmeta rev 3821904"
   },
-  "supported": false,
-  "coverage": null,
-  "note": ""
+  "supported": true,
+  "coverage": {
+   "translated": 3261,
+   "total": 3261
+  },
+  "note": "verify 2026-10-17: 0 errors; rendered 3261 Corsican texts with the game's own loader and formatter (2 skipped: the English itself does not format), 0 unknown keys, 0 problems"
  },
  "1.11.2": {
   "lang_format": "lang",
@@ -595,9 +685,12 @@
    "pack_format": "minecraft.wiki Template:Resource pack format rev 3784632 (2026-09-19)",
    "mcmeta": "minecraft.wiki Pack.mcmeta rev 3821904"
   },
-  "supported": false,
-  "coverage": null,
-  "note": ""
+  "supported": true,
+  "coverage": {
+   "translated": 3265,
+   "total": 3265
+  },
+  "note": "verify 2026-10-17: 0 errors; rendered 3265 Corsican texts with the game's own loader and formatter (2 skipped: the English itself does not format), 0 unknown keys, 0 problems"
  },
  "1.12": {
   "lang_format": "lang",
@@ -613,9 +706,12 @@
    "pack_format": "minecraft.wiki Template:Resource pack format rev 3784632 (2026-09-19)",
    "mcmeta": "minecraft.wiki Pack.mcmeta rev 3821904"
   },
-  "supported": false,
-  "coverage": null,
-  "note": ""
+  "supported": true,
+  "coverage": {
+   "translated": 3527,
+   "total": 3527
+  },
+  "note": "verify 2026-10-17: 0 errors; rendered 3527 Corsican texts with the game's own loader and formatter (2 skipped: the English itself does not format), 0 unknown keys, 0 problems"
  },
  "1.12.1": {
   "lang_format": "lang",
@@ -631,9 +727,12 @@
    "pack_format": "minecraft.wiki Template:Resource pack format rev 3784632 (2026-09-19)",
    "mcmeta": "minecraft.wiki Pack.mcmeta rev 3821904"
   },
-  "supported": false,
-  "coverage": null,
-  "note": ""
+  "supported": true,
+  "coverage": {
+   "translated": 3527,
+   "total": 3527
+  },
+  "note": "verify 2026-10-17: 0 errors; rendered 3527 Corsican texts with the game's own loader and formatter (2 skipped: the English itself does not format), 0 unknown keys, 0 problems"
  },
  "1.12.2": {
   "lang_format": "lang",
@@ -651,10 +750,10 @@
   },
   "supported": true,
   "coverage": {
-   "translated": 3511,
+   "translated": 3531,
    "total": 3531
   },
-  "note": "verify 2026-10-17: 0 errors; rendered 3511 Corsican texts with the game's own loader and formatter (2 skipped: the English itself does not format), 0 unknown keys, 0 problems"
+  "note": "verify 2026-10-17: 0 errors; rendered 3531 Corsican texts with the game's own loader and formatter (2 skipped: the English itself does not format), 0 unknown keys, 0 problems"
  },
  "1.13": {
   "lang_format": "json",
@@ -670,9 +769,12 @@
    "pack_format": "minecraft.wiki Template:Resource pack format rev 3784632 (2026-09-19)",
    "mcmeta": "minecraft.wiki Pack.mcmeta rev 3821904"
   },
-  "supported": false,
-  "coverage": null,
-  "note": ""
+  "supported": true,
+  "coverage": {
+   "translated": 4138,
+   "total": 4138
+  },
+  "note": "verify 2026-10-17: 0 errors; rendered 4138 Corsican texts with the game's own loader and formatter (2 skipped: the English itself does not format), 0 unknown keys, 0 problems"
  },
  "1.13.1": {
   "lang_format": "json",
@@ -688,9 +790,12 @@
    "pack_format": "minecraft.wiki Template:Resource pack format rev 3784632 (2026-09-19)",
    "mcmeta": "minecraft.wiki Pack.mcmeta rev 3821904"
   },
-  "supported": false,
-  "coverage": null,
-  "note": ""
+  "supported": true,
+  "coverage": {
+   "translated": 4219,
+   "total": 4219
+  },
+  "note": "verify 2026-10-17: 0 errors; rendered 4219 Corsican texts with the game's own loader and formatter (2 skipped: the English itself does not format), 0 unknown keys, 0 problems"
  },
  "1.13.2": {
   "lang_format": "json",
@@ -708,10 +813,10 @@
   },
   "supported": true,
   "coverage": {
-   "translated": 4200,
+   "translated": 4219,
    "total": 4219
   },
-  "note": "verify 2026-10-17: 0 errors; rendered 4200 Corsican texts with the game's own loader and formatter (2 skipped: the English itself does not format), 0 unknown keys, 0 problems"
+  "note": "verify 2026-10-17: 0 errors; rendered 4219 Corsican texts with the game's own loader and formatter (2 skipped: the English itself does not format), 0 unknown keys, 0 problems"
  },
  "1.14": {
   "lang_format": "json",
@@ -727,9 +832,12 @@
    "pack_format": "client jar version.json pack_version",
    "mcmeta": "minecraft.wiki Pack.mcmeta rev 3821904"
   },
-  "supported": false,
-  "coverage": null,
-  "note": ""
+  "supported": true,
+  "coverage": {
+   "translated": 4557,
+   "total": 4557
+  },
+  "note": "verify 2026-10-17: 0 errors; rendered 4557 Corsican texts with the game's own loader and formatter (2 skipped: the English itself does not format), 0 unknown keys, 0 problems"
  },
  "1.14.1": {
   "lang_format": "json",
@@ -745,9 +853,12 @@
    "pack_format": "client jar version.json pack_version",
    "mcmeta": "minecraft.wiki Pack.mcmeta rev 3821904"
   },
-  "supported": false,
-  "coverage": null,
-  "note": ""
+  "supported": true,
+  "coverage": {
+   "translated": 4559,
+   "total": 4559
+  },
+  "note": "verify 2026-10-17: 0 errors; rendered 4559 Corsican texts with the game's own loader and formatter (2 skipped: the English itself does not format), 0 unknown keys, 0 problems"
  },
  "1.14.2": {
   "lang_format": "json",
@@ -763,9 +874,12 @@
    "pack_format": "client jar version.json pack_version",
    "mcmeta": "minecraft.wiki Pack.mcmeta rev 3821904"
   },
-  "supported": false,
-  "coverage": null,
-  "note": ""
+  "supported": true,
+  "coverage": {
+   "translated": 4559,
+   "total": 4559
+  },
+  "note": "verify 2026-10-17: 0 errors; rendered 4559 Corsican texts with the game's own loader and formatter (2 skipped: the English itself does not format), 0 unknown keys, 0 problems"
  },
  "1.14.3": {
   "lang_format": "json",
@@ -781,9 +895,12 @@
    "pack_format": "client jar version.json pack_version",
    "mcmeta": "minecraft.wiki Pack.mcmeta rev 3821904"
   },
-  "supported": false,
-  "coverage": null,
-  "note": ""
+  "supported": true,
+  "coverage": {
+   "translated": 4561,
+   "total": 4561
+  },
+  "note": "verify 2026-10-17: 0 errors; rendered 4561 Corsican texts with the game's own loader and formatter (2 skipped: the English itself does not format), 0 unknown keys, 0 problems"
  },
  "1.14.4": {
   "lang_format": "json",
@@ -799,9 +916,12 @@
    "pack_format": "client jar version.json pack_version",
    "mcmeta": "minecraft.wiki Pack.mcmeta rev 3821904"
   },
-  "supported": false,
-  "coverage": null,
-  "note": ""
+  "supported": true,
+  "coverage": {
+   "translated": 4565,
+   "total": 4565
+  },
+  "note": "verify 2026-10-17: 0 errors; rendered 4565 Corsican texts with the game's own loader and formatter (2 skipped: the English itself does not format), 0 unknown keys, 0 problems"
  },
  "1.15": {
   "lang_format": "json",
@@ -817,9 +937,12 @@
    "pack_format": "client jar version.json pack_version",
    "mcmeta": "minecraft.wiki Pack.mcmeta rev 3821904"
   },
-  "supported": false,
-  "coverage": null,
-  "note": ""
+  "supported": true,
+  "coverage": {
+   "translated": 4618,
+   "total": 4618
+  },
+  "note": "verify 2026-10-17: 0 errors; rendered 4618 Corsican texts with the game's own loader and formatter (2 skipped: the English itself does not format), 0 unknown keys, 0 problems"
  },
  "1.15.1": {
   "lang_format": "json",
@@ -835,9 +958,12 @@
    "pack_format": "client jar version.json pack_version",
    "mcmeta": "minecraft.wiki Pack.mcmeta rev 3821904"
   },
-  "supported": false,
-  "coverage": null,
-  "note": ""
+  "supported": true,
+  "coverage": {
+   "translated": 4618,
+   "total": 4618
+  },
+  "note": "verify 2026-10-17: 0 errors; rendered 4618 Corsican texts with the game's own loader and formatter (2 skipped: the English itself does not format), 0 unknown keys, 0 problems"
  },
  "1.15.2": {
   "lang_format": "json",
@@ -853,9 +979,12 @@
    "pack_format": "client jar version.json pack_version",
    "mcmeta": "minecraft.wiki Pack.mcmeta rev 3821904"
   },
-  "supported": false,
-  "coverage": null,
-  "note": ""
+  "supported": true,
+  "coverage": {
+   "translated": 4626,
+   "total": 4626
+  },
+  "note": "verify 2026-10-17: 0 errors; rendered 4626 Corsican texts with the game's own loader and formatter (2 skipped: the English itself does not format), 0 unknown keys, 0 problems"
  },
  "1.16": {
   "lang_format": "json",
@@ -871,9 +1000,12 @@
    "pack_format": "client jar version.json pack_version",
    "mcmeta": "minecraft.wiki Pack.mcmeta rev 3821904"
   },
-  "supported": false,
-  "coverage": null,
-  "note": ""
+  "supported": true,
+  "coverage": {
+   "translated": 4988,
+   "total": 4988
+  },
+  "note": "verify 2026-10-17: 0 errors; rendered 4988 Corsican texts with the game's own loader and formatter (2 skipped: the English itself does not format), 0 unknown keys, 0 problems"
  },
  "1.16.1": {
   "lang_format": "json",
@@ -889,9 +1021,12 @@
    "pack_format": "client jar version.json pack_version",
    "mcmeta": "minecraft.wiki Pack.mcmeta rev 3821904"
   },
-  "supported": false,
-  "coverage": null,
-  "note": ""
+  "supported": true,
+  "coverage": {
+   "translated": 4988,
+   "total": 4988
+  },
+  "note": "verify 2026-10-17: 0 errors; rendered 4988 Corsican texts with the game's own loader and formatter (2 skipped: the English itself does not format), 0 unknown keys, 0 problems"
  },
  "1.16.2": {
   "lang_format": "json",
@@ -907,9 +1042,12 @@
    "pack_format": "client jar version.json pack_version",
    "mcmeta": "minecraft.wiki Pack.mcmeta rev 3821904"
   },
-  "supported": false,
-  "coverage": null,
-  "note": ""
+  "supported": true,
+  "coverage": {
+   "translated": 5016,
+   "total": 5016
+  },
+  "note": "verify 2026-10-17: 0 errors; rendered 5016 Corsican texts with the game's own loader and formatter (2 skipped: the English itself does not format), 0 unknown keys, 0 problems"
  },
  "1.16.3": {
   "lang_format": "json",
@@ -925,9 +1063,12 @@
    "pack_format": "client jar version.json pack_version",
    "mcmeta": "minecraft.wiki Pack.mcmeta rev 3821904"
   },
-  "supported": false,
-  "coverage": null,
-  "note": ""
+  "supported": true,
+  "coverage": {
+   "translated": 5016,
+   "total": 5016
+  },
+  "note": "verify 2026-10-17: 0 errors; rendered 5016 Corsican texts with the game's own loader and formatter (2 skipped: the English itself does not format), 0 unknown keys, 0 problems"
  },
  "1.16.4": {
   "lang_format": "json",
@@ -943,9 +1084,12 @@
    "pack_format": "client jar version.json pack_version",
    "mcmeta": "minecraft.wiki Pack.mcmeta rev 3821904"
   },
-  "supported": false,
-  "coverage": null,
-  "note": ""
+  "supported": true,
+  "coverage": {
+   "translated": 5046,
+   "total": 5046
+  },
+  "note": "verify 2026-10-17: 0 errors; rendered 5046 Corsican texts with the game's own loader and formatter (2 skipped: the English itself does not format), 0 unknown keys, 0 problems"
  },
  "1.16.5": {
   "lang_format": "json",
@@ -963,10 +1107,10 @@
   },
   "supported": true,
   "coverage": {
-   "translated": 5038,
+   "translated": 5046,
    "total": 5046
   },
-  "note": "verify 2026-10-17: 0 errors; rendered 5038 Corsican texts with the game's own loader and formatter (2 skipped: the English itself does not format), 0 unknown keys, 0 problems"
+  "note": "verify 2026-10-17: 0 errors; rendered 5046 Corsican texts with the game's own loader and formatter (2 skipped: the English itself does not format), 0 unknown keys, 0 problems"
  },
  "1.17": {
   "lang_format": "json",
@@ -982,9 +1126,12 @@
    "pack_format": "client jar version.json pack_version.resource",
    "mcmeta": "minecraft.wiki Pack.mcmeta rev 3821904"
   },
-  "supported": false,
-  "coverage": null,
-  "note": ""
+  "supported": true,
+  "coverage": {
+   "translated": 5369,
+   "total": 5369
+  },
+  "note": "verify 2026-10-17: 0 errors; rendered 5369 Corsican texts with the game's own loader and formatter (2 skipped: the English itself does not format), 0 unknown keys, 0 problems"
  },
  "1.17.1": {
   "lang_format": "json",
@@ -1000,9 +1147,12 @@
    "pack_format": "client jar version.json pack_version.resource",
    "mcmeta": "minecraft.wiki Pack.mcmeta rev 3821904"
   },
-  "supported": false,
-  "coverage": null,
-  "note": ""
+  "supported": true,
+  "coverage": {
+   "translated": 5372,
+   "total": 5372
+  },
+  "note": "verify 2026-10-17: 0 errors; rendered 5372 Corsican texts with the game's own loader and formatter (2 skipped: the English itself does not format), 0 unknown keys, 0 problems"
  },
  "1.18": {
   "lang_format": "json",
@@ -1018,9 +1168,12 @@
    "pack_format": "client jar version.json pack_version.resource",
    "mcmeta": "minecraft.wiki Pack.mcmeta rev 3821904"
   },
-  "supported": false,
-  "coverage": null,
-  "note": ""
+  "supported": true,
+  "coverage": {
+   "translated": 5387,
+   "total": 5387
+  },
+  "note": "verify 2026-10-17: 0 errors; rendered 5387 Corsican texts with the game's own loader and formatter (2 skipped: the English itself does not format), 0 unknown keys, 0 problems"
  },
  "1.18.1": {
   "lang_format": "json",
@@ -1036,9 +1189,12 @@
    "pack_format": "client jar version.json pack_version.resource",
    "mcmeta": "minecraft.wiki Pack.mcmeta rev 3821904"
   },
-  "supported": false,
-  "coverage": null,
-  "note": ""
+  "supported": true,
+  "coverage": {
+   "translated": 5388,
+   "total": 5388
+  },
+  "note": "verify 2026-10-17: 0 errors; rendered 5388 Corsican texts with the game's own loader and formatter (2 skipped: the English itself does not format), 0 unknown keys, 0 problems"
  },
  "1.18.2": {
   "lang_format": "json",
@@ -1054,9 +1210,12 @@
    "pack_format": "client jar version.json pack_version.resource",
    "mcmeta": "minecraft.wiki Pack.mcmeta rev 3821904"
   },
-  "supported": false,
-  "coverage": null,
-  "note": ""
+  "supported": true,
+  "coverage": {
+   "translated": 5396,
+   "total": 5396
+  },
+  "note": "verify 2026-10-17: 0 errors; rendered 5396 Corsican texts with the game's own loader and formatter (2 skipped: the English itself does not format), 0 unknown keys, 0 problems"
  },
  "1.19": {
   "lang_format": "json",
@@ -1072,9 +1231,12 @@
    "pack_format": "client jar version.json pack_version.resource",
    "mcmeta": "minecraft.wiki Pack.mcmeta rev 3821904"
   },
-  "supported": false,
-  "coverage": null,
-  "note": ""
+  "supported": true,
+  "coverage": {
+   "translated": 5569,
+   "total": 5569
+  },
+  "note": "verify 2026-10-17: 0 errors; rendered 5569 Corsican texts with the game's own loader and formatter (2 skipped: the English itself does not format), 0 unknown keys, 0 problems"
  },
  "1.19.1": {
   "lang_format": "json",
@@ -1090,9 +1252,12 @@
    "pack_format": "client jar version.json pack_version.resource",
    "mcmeta": "minecraft.wiki Pack.mcmeta rev 3821904"
   },
-  "supported": false,
-  "coverage": null,
-  "note": ""
+  "supported": true,
+  "coverage": {
+   "translated": 5665,
+   "total": 5665
+  },
+  "note": "verify 2026-10-17: 0 errors; rendered 5665 Corsican texts with the game's own loader and formatter (2 skipped: the English itself does not format), 0 unknown keys, 0 problems"
  },
  "1.19.2": {
   "lang_format": "json",
@@ -1108,9 +1273,12 @@
    "pack_format": "client jar version.json pack_version.resource",
    "mcmeta": "minecraft.wiki Pack.mcmeta rev 3821904"
   },
-  "supported": false,
-  "coverage": null,
-  "note": ""
+  "supported": true,
+  "coverage": {
+   "translated": 5666,
+   "total": 5666
+  },
+  "note": "verify 2026-10-17: 0 errors; rendered 5666 Corsican texts with the game's own loader and formatter (2 skipped: the English itself does not format), 0 unknown keys, 0 problems"
  },
  "1.19.3": {
   "lang_format": "json",
@@ -1126,9 +1294,12 @@
    "pack_format": "client jar version.json pack_version.resource",
    "mcmeta": "minecraft.wiki Pack.mcmeta rev 3821904"
   },
-  "supported": false,
-  "coverage": null,
-  "note": ""
+  "supported": true,
+  "coverage": {
+   "translated": 5820,
+   "total": 5820
+  },
+  "note": "verify 2026-10-17: 0 errors; rendered 5820 Corsican texts with the game's own loader and formatter (2 skipped: the English itself does not format), 0 unknown keys, 0 problems"
  },
  "1.19.4": {
   "lang_format": "json",
@@ -1144,9 +1315,12 @@
    "pack_format": "client jar version.json pack_version.resource",
    "mcmeta": "minecraft.wiki Pack.mcmeta rev 3821904"
   },
-  "supported": false,
-  "coverage": null,
-  "note": ""
+  "supported": true,
+  "coverage": {
+   "translated": 6063,
+   "total": 6063
+  },
+  "note": "verify 2026-10-17: 0 errors; rendered 6063 Corsican texts with the game's own loader and formatter (2 skipped: the English itself does not format), 0 unknown keys, 0 problems"
  },
  "1.20": {
   "lang_format": "json",
@@ -1162,9 +1336,12 @@
    "pack_format": "client jar version.json pack_version.resource",
    "mcmeta": "minecraft.wiki Pack.mcmeta rev 3821904"
   },
-  "supported": false,
-  "coverage": null,
-  "note": ""
+  "supported": true,
+  "coverage": {
+   "translated": 6217,
+   "total": 6217
+  },
+  "note": "verify 2026-10-17: 0 errors; rendered 6217 Corsican texts with the game's own loader and formatter (2 skipped: the English itself does not format), 0 unknown keys, 0 problems"
  },
  "1.20.1": {
   "lang_format": "json",
@@ -1201,9 +1378,12 @@
    "pack_format": "client jar version.json pack_version.resource",
    "mcmeta": "minecraft.wiki Pack.mcmeta rev 3821904"
   },
-  "supported": false,
-  "coverage": null,
-  "note": ""
+  "supported": true,
+  "coverage": {
+   "translated": 6345,
+   "total": 6345
+  },
+  "note": "verify 2026-10-17: 0 errors; rendered 6345 Corsican texts with the game's own loader and formatter (2 skipped: the English itself does not format), 0 unknown keys, 0 problems"
  },
  "1.20.3": {
   "lang_format": "json",
@@ -1219,9 +1399,12 @@
    "pack_format": "client jar version.json pack_version.resource",
    "mcmeta": "minecraft.wiki Pack.mcmeta rev 3821904"
   },
-  "supported": false,
-  "coverage": null,
-  "note": ""
+  "supported": true,
+  "coverage": {
+   "translated": 6540,
+   "total": 6540
+  },
+  "note": "verify 2026-10-17: 0 errors; rendered 6540 Corsican texts with the game's own loader and formatter (2 skipped: the English itself does not format), 0 unknown keys, 0 problems"
  },
  "1.20.4": {
   "lang_format": "json",
@@ -1237,9 +1420,12 @@
    "pack_format": "client jar version.json pack_version.resource",
    "mcmeta": "minecraft.wiki Pack.mcmeta rev 3821904"
   },
-  "supported": false,
-  "coverage": null,
-  "note": ""
+  "supported": true,
+  "coverage": {
+   "translated": 6540,
+   "total": 6540
+  },
+  "note": "verify 2026-10-17: 0 errors; rendered 6540 Corsican texts with the game's own loader and formatter (2 skipped: the English itself does not format), 0 unknown keys, 0 problems"
  },
  "1.20.5": {
   "lang_format": "json",
@@ -1255,9 +1441,12 @@
    "pack_format": "client jar version.json pack_version.resource",
    "mcmeta": "minecraft.wiki Pack.mcmeta rev 3821904"
   },
-  "supported": false,
-  "coverage": null,
-  "note": ""
+  "supported": true,
+  "coverage": {
+   "translated": 6770,
+   "total": 6770
+  },
+  "note": "verify 2026-10-17: 0 errors; rendered 6770 Corsican texts with the game's own loader and formatter (2 skipped: the English itself does not format), 0 unknown keys, 0 problems"
  },
  "1.20.6": {
   "lang_format": "json",
@@ -1273,9 +1462,12 @@
    "pack_format": "client jar version.json pack_version.resource",
    "mcmeta": "minecraft.wiki Pack.mcmeta rev 3821904"
   },
-  "supported": false,
-  "coverage": null,
-  "note": ""
+  "supported": true,
+  "coverage": {
+   "translated": 6770,
+   "total": 6770
+  },
+  "note": "verify 2026-10-17: 0 errors; rendered 6770 Corsican texts with the game's own loader and formatter (2 skipped: the English itself does not format), 0 unknown keys, 0 problems"
  },
  "1.21": {
   "lang_format": "json",
@@ -1291,9 +1483,12 @@
    "pack_format": "client jar version.json pack_version.resource",
    "mcmeta": "minecraft.wiki Pack.mcmeta rev 3821904"
   },
-  "supported": false,
-  "coverage": null,
-  "note": ""
+  "supported": true,
+  "coverage": {
+   "translated": 6881,
+   "total": 6881
+  },
+  "note": "verify 2026-10-17: 0 errors; rendered 6881 Corsican texts with the game's own loader and formatter (2 skipped: the English itself does not format), 0 unknown keys, 0 problems"
  },
  "1.21.1": {
   "lang_format": "json",
@@ -1330,9 +1525,12 @@
    "pack_format": "client jar version.json pack_version.resource",
    "mcmeta": "minecraft.wiki Pack.mcmeta rev 3821904"
   },
-  "supported": false,
-  "coverage": null,
-  "note": ""
+  "supported": true,
+  "coverage": {
+   "translated": 6972,
+   "total": 6972
+  },
+  "note": "verify 2026-10-17: 0 errors; rendered 6972 Corsican texts with the game's own loader and formatter (2 skipped: the English itself does not format), 0 unknown keys, 0 problems"
  },
  "1.21.3": {
   "lang_format": "json",
@@ -1348,9 +1546,12 @@
    "pack_format": "client jar version.json pack_version.resource",
    "mcmeta": "minecraft.wiki Pack.mcmeta rev 3821904"
   },
-  "supported": false,
-  "coverage": null,
-  "note": ""
+  "supported": true,
+  "coverage": {
+   "translated": 6972,
+   "total": 6972
+  },
+  "note": "verify 2026-10-17: 0 errors; rendered 6972 Corsican texts with the game's own loader and formatter (2 skipped: the English itself does not format), 0 unknown keys, 0 problems"
  },
  "1.21.4": {
   "lang_format": "json",
@@ -1366,9 +1567,12 @@
    "pack_format": "client jar version.json pack_version.resource",
    "mcmeta": "minecraft.wiki Pack.mcmeta rev 3821904"
   },
-  "supported": false,
-  "coverage": null,
-  "note": ""
+  "supported": true,
+  "coverage": {
+   "translated": 7000,
+   "total": 7000
+  },
+  "note": "verify 2026-10-17: 0 errors; rendered 7000 Corsican texts with the game's own loader and formatter (2 skipped: the English itself does not format), 0 unknown keys, 0 problems"
  },
  "1.21.5": {
   "lang_format": "json",
@@ -1384,9 +1588,12 @@
    "pack_format": "client jar version.json pack_version.resource",
    "mcmeta": "minecraft.wiki Pack.mcmeta rev 3821904"
   },
-  "supported": false,
-  "coverage": null,
-  "note": ""
+  "supported": true,
+  "coverage": {
+   "translated": 7161,
+   "total": 7161
+  },
+  "note": "verify 2026-10-17: 0 errors; rendered 7161 Corsican texts with the game's own loader and formatter (2 skipped: the English itself does not format), 0 unknown keys, 0 problems"
  },
  "1.21.6": {
   "lang_format": "json",
@@ -1402,9 +1609,12 @@
    "pack_format": "client jar version.json pack_version.resource",
    "mcmeta": "minecraft.wiki Pack.mcmeta rev 3821904"
   },
-  "supported": false,
-  "coverage": null,
-  "note": ""
+  "supported": true,
+  "coverage": {
+   "translated": 7387,
+   "total": 7387
+  },
+  "note": "verify 2026-10-17: 0 errors; rendered 7387 Corsican texts with the game's own loader and formatter (2 skipped: the English itself does not format), 0 unknown keys, 0 problems"
  },
  "1.21.7": {
   "lang_format": "json",
@@ -1420,9 +1630,12 @@
    "pack_format": "client jar version.json pack_version.resource",
    "mcmeta": "minecraft.wiki Pack.mcmeta rev 3821904"
   },
-  "supported": false,
-  "coverage": null,
-  "note": ""
+  "supported": true,
+  "coverage": {
+   "translated": 7392,
+   "total": 7392
+  },
+  "note": "verify 2026-10-17: 0 errors; rendered 7392 Corsican texts with the game's own loader and formatter (2 skipped: the English itself does not format), 0 unknown keys, 0 problems"
  },
  "1.21.8": {
   "lang_format": "json",
@@ -1438,9 +1651,12 @@
    "pack_format": "client jar version.json pack_version.resource",
    "mcmeta": "minecraft.wiki Pack.mcmeta rev 3821904"
   },
-  "supported": false,
-  "coverage": null,
-  "note": ""
+  "supported": true,
+  "coverage": {
+   "translated": 7392,
+   "total": 7392
+  },
+  "note": "verify 2026-10-17: 0 errors; rendered 7392 Corsican texts with the game's own loader and formatter (2 skipped: the English itself does not format), 0 unknown keys, 0 problems"
  },
  "1.21.9": {
   "lang_format": "json",
@@ -1457,9 +1673,12 @@
    "pack_format": "client jar version.json pack_version.resource_major",
    "mcmeta": "version.json pack_version is {resource_major, resource_minor} (1.21.9 and later); minecraft.wiki Pack.mcmeta rev 3821904"
   },
-  "supported": false,
-  "coverage": null,
-  "note": ""
+  "supported": true,
+  "coverage": {
+   "translated": 7583,
+   "total": 7583
+  },
+  "note": "verify 2026-10-17: 0 errors; rendered 7583 Corsican texts with the game's own loader and formatter (2 skipped: the English itself does not format), 0 unknown keys, 0 problems"
  },
  "1.21.10": {
   "lang_format": "json",
@@ -1476,9 +1695,12 @@
    "pack_format": "client jar version.json pack_version.resource_major",
    "mcmeta": "version.json pack_version is {resource_major, resource_minor} (1.21.9 and later); minecraft.wiki Pack.mcmeta rev 3821904"
   },
-  "supported": false,
-  "coverage": null,
-  "note": ""
+  "supported": true,
+  "coverage": {
+   "translated": 7583,
+   "total": 7583
+  },
+  "note": "verify 2026-10-17: 0 errors; rendered 7583 Corsican texts with the game's own loader and formatter (2 skipped: the English itself does not format), 0 unknown keys, 0 problems"
  },
  "1.21.11": {
   "lang_format": "json",
@@ -1517,9 +1739,12 @@
    "pack_format": "client jar version.json pack_version.resource_major",
    "mcmeta": "version.json pack_version is {resource_major, resource_minor} (1.21.9 and later); minecraft.wiki Pack.mcmeta rev 3821904"
   },
-  "supported": false,
-  "coverage": null,
-  "note": ""
+  "supported": true,
+  "coverage": {
+   "translated": 7886,
+   "total": 7886
+  },
+  "note": "verify 2026-10-17: 0 errors; rendered 7886 Corsican texts with the game's own loader and formatter (2 skipped: the English itself does not format), 0 unknown keys, 0 problems"
  },
  "26.1.1": {
   "lang_format": "json",
@@ -1536,9 +1761,12 @@
    "pack_format": "client jar version.json pack_version.resource_major",
    "mcmeta": "version.json pack_version is {resource_major, resource_minor} (1.21.9 and later); minecraft.wiki Pack.mcmeta rev 3821904"
   },
-  "supported": false,
-  "coverage": null,
-  "note": ""
+  "supported": true,
+  "coverage": {
+   "translated": 7886,
+   "total": 7886
+  },
+  "note": "verify 2026-10-17: 0 errors; rendered 7886 Corsican texts with the game's own loader and formatter (2 skipped: the English itself does not format), 0 unknown keys, 0 problems"
  },
  "26.1.2": {
   "lang_format": "json",
