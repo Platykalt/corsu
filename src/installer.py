@@ -92,6 +92,8 @@ def available_components():
     import minecraft
     if minecraft.game_directories():
         result.append('minecraft')
+    import apps
+    result += apps.found()
     return result
 
 
@@ -394,6 +396,19 @@ DESCRIPTIONS = {
 }
 
 
+def apps_ids():
+    import apps
+    return list(apps.registry())
+
+
+def describe(name):
+    if name in DESCRIPTIONS:
+        return t(*DESCRIPTIONS[name])
+    import apps
+    app = apps.registry()[name]
+    return t(app.description['en'][1], app.description['fr'][1])
+
+
 def choose(available):
     """Ask which detected applications to translate. Rerun the setup later to add more."""
     installed = set()
@@ -405,7 +420,7 @@ def choose(available):
         for number, name in enumerate(available, 1):
             mark = 'x' if selected[name] else ' '
             note = t('  (installed)', '  (déjà installé)') if name in installed else ''
-            print(f'  [{mark}] {number}. {t(*DESCRIPTIONS[name])}{note}')
+            print(f'  [{mark}] {number}. {describe(name)}{note}')
         answer = input(t('Enter installs everything ticked. Type a number to tick or untick it, a for all, n for none, q to quit: ',
                          'Entrée installe tout ce qui est coché. Tapez un numéro pour le cocher ou le décocher, '
                          'a pour tout, n pour rien, q pour quitter : ')).strip().lower()
@@ -479,6 +494,12 @@ def show_plan(components, location):
             state = t('yes', 'oui') if folder.compatible else t('no: version not supported or unknown',
                                                                   'non : version non prise en charge ou inconnue')
             print(f'    - {folder.describe()} : {state}')
+    import apps
+    for app_id in [name for name in components if name in apps.registry()]:
+        for installation in apps.registry()[app_id].find():
+            state = (t('switch to Corsican', 'passer en corse') if installation.usable
+                     else t('left alone: ', 'laissé tel quel : ') + installation.reason)
+            print(f'  {installation.describe()} : {state}')
     print(t(f'\nA copy of every file Corsu changes is kept in {corsu.DATA}, and the Corsu app can undo everything.',
             f'\nUne copie de chaque fichier modifié est gardée dans {corsu.DATA}, et l\'application Corsu peut tout annuler.'))
     print(t('Text without a Corsican translation yet stays in French. Messages are never changed.\n',
@@ -487,7 +508,7 @@ def show_plan(components, location):
 
 def main(argv=None):
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument('--components', nargs='+', choices=['firefox', 'chromium', 'desktop', 'discord', 'vesktop', 'qt', 'minecraft'],
+    parser.add_argument('--components', nargs='+', choices=['firefox', 'chromium', 'desktop', 'discord', 'vesktop', 'qt', 'minecraft', *apps_ids()],
                         help='Default: all supported integrations already installed on this computer.')
     parser.add_argument('--discord-path', type=Path,
                         help='Native Discord location: folder with resources/ (Linux), %%LOCALAPPDATA%%\\Discord (Windows) or Discord.app (macOS)')
@@ -496,7 +517,7 @@ def main(argv=None):
     parser.add_argument('--uninstall', action='store_true')
     # The Windows launcher cannot drop its own --text option before passing the rest on.
     parser.add_argument('--text', action='store_true', help=argparse.SUPPRESS)
-    parts = ['firefox', 'chromium', 'discord', 'vesktop', 'desktop', 'terminal', 'minecraft']
+    parts = ['firefox', 'chromium', 'discord', 'vesktop', 'desktop', 'terminal', 'minecraft', *apps_ids()]
     parser.add_argument('--disable', nargs='*', choices=parts, metavar='PART',
                         help='Go back to the previous language, for everything or for the parts listed: ' + ', '.join(parts))
     parser.add_argument('--enable', nargs='*', choices=parts, metavar='PART', help='Switch Corsican back on, for everything or the parts listed')

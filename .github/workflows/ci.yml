@@ -145,6 +145,13 @@ jobs:
       - name: Discord — patch with the official Vencord installer, then restore (with the archive's own Python)
         shell: bash
         run: '"$CORSU_PYTHON" tests/e2e/e2e.py discord --root "${{ env.CORSU_RELEASE }}"'
+      - name: VLC (Linux) — real VLC package, Corsu switches it to Corsican, VLC shows Corsican, switch back
+        if: runner.os == 'Linux'
+        run: |
+          sudo apt-get update -qq
+          sudo apt-get install -y -qq vlc-bin vlc-plugin-base vlc-l10n
+          ls -l /usr/share/locale/co/LC_MESSAGES/vlc.mo
+          python tests/e2e/check_vlc.py
       - name: Chromium — translate Chrome for Testing, read it in Corsican, switch off/on, restore
         if: runner.os != 'macOS'
         shell: bash

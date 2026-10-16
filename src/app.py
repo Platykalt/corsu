@@ -123,6 +123,17 @@ def detected():
     return DETECTED['names']
 
 
+def components():
+    """The fixed parts, then each program with its own Corsican translation (src/apps)."""
+    import apps
+    return {**COMPONENTS, **{app_id: app.description for app_id, app in apps.registry().items()}}
+
+
+def order():
+    import apps
+    return ORDER + list(apps.registry())
+
+
 def snapshot():
     """Everything the page shows, read fresh each time."""
     state = corsu.load_state()
@@ -133,12 +144,13 @@ def snapshot():
     switchable = set(corsu.switchable(state)) if corsu.STATE.exists() else set()
     paused = corsu.terminal_paused_until() if 'terminal' in switchable else None
     items = []
-    for name in ORDER:
+    texts = components()
+    for name in order():
         if name == 'terminal' and name not in switchable:
             continue
         if name not in available | installed | switchable:
             continue
-        text = COMPONENTS[name]
+        text = texts[name]
         if name == 'chromium':
             import chromium
             found = ', '.join(browser.label for browser in chromium.browsers())
@@ -249,7 +261,7 @@ def make_handler(job, activity, port):
                 return self.send(400, {'error': 'bad request'})
             # The installer speaks French or English; the Corsican window gets French messages.
             language = 'en' if request.get('language') == 'en' else 'fr'
-            names = [name for name in request.get('components', []) if name in COMPONENTS]
+            names = [name for name in request.get('components', []) if name in components()]
             if self.path == '/api/review':
                 try:
                     progress = review.record(request.get('french', ''), request.get('english', ''),
@@ -280,8 +292,10 @@ def make_handler(job, activity, port):
                     lines = lines[1:]
                 plan = '\n'.join(line.strip() for line in lines).strip()
                 return self.send(200, {'plan': plan, 'ok': result.returncode == 0})
-            if self.path in ('/api/install', '/api/uninstall'):
+            if self.path in ('/api/install', '/api/uninstall', '/api/rescan'):
                 DETECTED['time'] = 0.0
+            if self.path == '/api/rescan':
+                return self.send(200, {'ok': True})
             if self.path == '/api/install' and names:
                 arguments = ['--yes', '--components', *[name for name in names if name != 'terminal']]
                 started = job.start('install', arguments, language)
@@ -405,7 +419,7 @@ def run_text():
     language = 'fr' if installer.french() else 'en'
     while True:
         state = corsu.load_state()
-        items = [(name, COMPONENTS[name][language][0], not corsu.is_disabled(name, state)) for name in corsu.switchable(state)]
+        items = [(name, components()[name][language][0], not corsu.is_disabled(name, state)) for name in corsu.switchable(state)]
         print('\nCorsu')
         for number, (name, label, on) in enumerate(items, 1):
             print(f'  [{"x" if on else " "}] {number}. {label}')

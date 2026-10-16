@@ -1194,6 +1194,11 @@ def install(components=None, qt_system=False):
         import minecraft
         progress(85, 'Putting Minecraft in Corsican', 'Minecraft en corse')
         minecraft_stats = minecraft.install(installer)
+    import apps
+    application_stats = {}
+    for app_id in sorted(components & set(apps.registry())):
+        progress(88, 'Switching programs to Corsican', 'Passage des logiciels en corse')
+        application_stats[app_id] = apps.install(installer, app_id)
     installer.state['components'] = sorted(set(installer.state.get('components', [])) | components)
     installer.state['qt_system'] = qt_system or installer.state.get('qt_system', False)
     installer.state['disabled'] = sorted(set(installer.state.get('disabled', [])) - components)
@@ -1202,7 +1207,7 @@ def install(components=None, qt_system=False):
     disabled_marker().unlink(missing_ok=True)
     clients = sorted({'Vesktop' if name == 'vesktop' else 'Discord' for name in components
                       if name in ('vesktop', 'discord')})
-    report = {'kde': kde_stats, 'firefox': firefox_stats, 'chromium': chromium_stats, 'minecraft': minecraft_stats, 'firefox_runtime': str(runtime) if runtime else None,
+    report = {'kde': kde_stats, 'firefox': firefox_stats, 'chromium': chromium_stats, 'minecraft': minecraft_stats, 'applications': application_stats, 'firefox_runtime': str(runtime) if runtime else None,
               'discord': {'clients': clients, 'plugin': 'Corsu', 'dictionary_labels': len(WORDS), 'partial': True},
               'components': sorted(components), 'enabled': True,
               'scope': 'Interface labels only; no translation of messages or arbitrary websites.'}
@@ -1232,7 +1237,10 @@ COMPONENT_LABELS = {
 
 
 def component_names(names):
-    return ', '.join(t(*COMPONENT_LABELS[name]) if name in COMPONENT_LABELS else name for name in sorted(names))
+    import apps
+    known = apps.registry()
+    return ', '.join(t(*COMPONENT_LABELS[name]) if name in COMPONENT_LABELS else known[name].name if name in known
+                     else name for name in sorted(names))
 
 
 def load_state():
@@ -1243,7 +1251,9 @@ def switchable(state=None):
     """The parts that can be switched on and off one by one, in display order."""
     state = state or load_state()
     installed = set(state.get('components', []))
-    parts = [name for name in ('firefox', 'chromium', 'discord', 'vesktop', 'desktop', 'minecraft') if name in installed]
+    import apps
+    parts = [name for name in ('firefox', 'chromium', 'discord', 'vesktop', 'desktop', 'minecraft', *apps.registry())
+             if name in installed]
     if 'desktop' in installed and PLATFORM == 'linux':
         parts.append('terminal')
     return parts
@@ -1338,6 +1348,13 @@ def disable(components=None, hours=None):
             else:
                 preserved.append(name)
             continue
+        if record.get('setting'):
+            from apps import settings
+            if settings.revert(record):
+                installer.state['files'].pop(name)
+            else:
+                preserved.append(name)
+            continue
         if record.get('json_changes'):
             fields = {field: False if field.endswith('/enabled') else saved['original']
                       for field, saved in record['json_changes'].items()
@@ -1427,6 +1444,11 @@ def uninstall():
             if not minecraft.revert(path, record):
                 remaining[name] = record
                 kept_games.add(path.parent)
+            continue
+        if record.get('setting'):
+            from apps import settings
+            if not settings.revert(record):
+                remaining[name] = record
             continue
         if record.get('json_changes') and path.exists():
             document = json.loads(path.read_text(encoding='utf-8'))

@@ -186,6 +186,7 @@ dl.facts dt:not(:first-of-type), dl.facts dd:not(:first-of-type) { border-top: 1
       <ul class="group" id="choices"></ul>
       <div class="buttons"><button type="button" class="button default" id="review" data-t="install_ellipsis"></button></div>
       <p class="muted" style="margin-top:18px" data-t="add_missing"></p>
+      <div class="buttons"><button type="button" class="button" id="rescan" data-t="rescan"></button></div>
     </section>
 
     <section id="review" data-page-panel hidden>
@@ -301,7 +302,8 @@ const text = {
     everything_off: "Rimette tuttu in a lingua d'origine", everything_on: "Rimette tuttu in corsu",
     add_lead: "Prugrammi trovi nant'à st'urdinatore. Corsu mostra ciò ch'ellu hà da mudificà nanzu di fallu, è tuttu si pò annullà.",
     add_none: "Tuttu ciò chì Corsu hà trovu quì hè dighjà stallatu.",
-    add_missing: "Manca un prugramma ? Corsu prupone solu quelli ch'ellu trova. Stallatelu, dopu riapritete Corsu.",
+    add_missing: "Manca un prugramma ? Corsu prupone solu quelli ch'ellu trova. Stallatelu, dopu circate torna.",
+    rescan: "Circà torna i prugrammi stallati",
     install_ellipsis: "Stallà…", install: "Stallà", cancel: "Abbandunà", plan_title: "Mudificazioni previste",
     pick_one: "Marcate almenu un prugramma.",
     help_lead: "E guide sò nant'à GitHub, in francese è in inglese.",
@@ -353,7 +355,8 @@ const text = {
     everything_off: "Tout remettre dans la langue d'origine", everything_on: "Tout remettre en corse",
     add_lead: "Logiciels trouvés sur cet ordinateur. Corsu montre ce qu'il va modifier avant de le faire, et tout peut être annulé.",
     add_none: "Tout ce que Corsu a trouvé ici est déjà installé.",
-    add_missing: "Un logiciel manque ? Corsu ne propose que ceux qu'il trouve. Installez-le, puis rouvrez Corsu.",
+    add_missing: "Un logiciel manque ? Corsu ne propose que ceux qu'il trouve. Installez-le, puis relancez la recherche.",
+    rescan: "Rechercher les logiciels installés",
     install_ellipsis: "Installer…", install: "Installer", cancel: "Annuler", plan_title: "Modifications prévues",
     pick_one: "Cochez au moins un logiciel.",
     help_lead: "Les guides sont sur GitHub, en français et en anglais.",
@@ -405,7 +408,8 @@ const text = {
     everything_off: "Put everything back in the original language", everything_on: "Put everything back in Corsican",
     add_lead: "Programs found on this computer. Corsu shows what it will change before doing it, and everything can be undone.",
     add_none: "Everything Corsu found here is already installed.",
-    add_missing: "A program is missing? Corsu only offers the ones it finds. Install it, then open Corsu again.",
+    add_missing: "A program is missing? Corsu only offers the ones it finds. Install it, then search again.",
+    rescan: "Search for installed programs",
     install_ellipsis: "Install…", install: "Install", cancel: "Cancel", plan_title: "Planned changes",
     pick_one: "Tick at least one program.",
     help_lead: "The guides are on GitHub, in French and English.",
@@ -697,6 +701,7 @@ $("review-send").addEventListener("click", async () => {
 $("switch-original").addEventListener("change", event => call("/api/options", { showOriginal: event.target.checked }).then(refresh));
 $("open-logs").addEventListener("click", () => call("/api/logs", {}));
 $("update-install").addEventListener("click", () => call("/api/update", {}).then(refresh));
+$("rescan").addEventListener("click", () => { picks = null; call("/api/rescan", {}).then(refresh); });
 $("language").addEventListener("change", event => {
   language = event.target.value; chosen = true;
   try { localStorage.setItem("corsu-language", language); } catch (error) {}
