@@ -21921,6 +21921,22 @@
    "review": "ai"
   }
  },
+ "options.chat.opacity": {
+  "f0fa69f38b14": {
+   "co": "Opacità",
+   "kind": "adapted",
+   "from": "options.chat.opacity",
+   "review": "ai"
+  }
+ },
+ "options.chat.scale": {
+  "a29f0256272e": {
+   "co": "Dimensione",
+   "kind": "adapted",
+   "from": "options.chat.scale",
+   "review": "ai"
+  }
+ },
  "options.chat.title": {
   "e42b70874e26": {
    "co": "Parametri di a chjachjerata…",
@@ -22012,6 +22028,14 @@
    "note": "punctuation as in this English"
   }
  },
+ "options.directionalAudio.on.tooltip": {
+  "3155e264354c": {
+   "co": "Impiega l'audio direzziunale basatu nant'à l'HRTF per migliurà a simulazione di u sonu in 3D. Richiede un materiale audio cumpatibile cù l'HRTF, è funziona megliu cù l'ascultadori.",
+   "kind": "reused",
+   "from": "options.directionalAudio.on.tooltip",
+   "review": "ai"
+  }
+ },
  "options.entityDistancePercent": {
   "0291105af6e4": {
    "co": "%s%%",
@@ -22069,6 +22093,22 @@
    "review": "ai"
   }
  },
+ "options.fovEffectScale.tooltip": {
+  "cb217524a5b9": {
+   "co": "Cuntrolla quantu u campu visivu pò cambià cù l'effetti di velocità.",
+   "kind": "adapted",
+   "from": "options.fovEffectScale.tooltip",
+   "review": "ai"
+  }
+ },
+ "options.framerateLimit": {
+  "63c904559993": {
+   "co": "Perfurmenze",
+   "kind": "adapted",
+   "from": "options.framerateLimit",
+   "review": "ai"
+  }
+ },
  "options.framerateLimitDesc0": {
   "91538cf6c6b4": {
    "co": "Sceglie a frequenza massima di fiure :",
@@ -22101,6 +22141,14 @@
    "from": "options.graphics.fancy.tooltip",
    "review": "ai",
    "note": "English changed only in case or punctuation"
+  }
+ },
+ "options.graphics.fast.tooltip": {
+  "460ab558b233": {
+   "co": "A grafica rapida riduce a quantità di piova è di neve visibile.\nL'effetti di trasparenza sò disattivati per parechji blocchi, cum'è e foglie.",
+   "kind": "reused",
+   "from": "options.graphics.fast.tooltip",
+   "review": "ai"
   }
  },
  "options.graphics.warning.accept": {
@@ -22175,6 +22223,28 @@
    "review": "ai"
   }
  },
+ "options.hideLightningFlashes": {
+  "a61ac5fda46e": {
+   "co": "Piattà i lampi di i fulmini",
+   "kind": "adapted",
+   "from": "options.hideLightningFlashes",
+   "review": "ai"
+  }
+ },
+ "options.hideLightningFlashes.tooltip": {
+  "ca4bd9f0d6c1": {
+   "co": "Impedisce à i fulmini di fà lampà u celu. I fulmini stessi fermeranu visibili.",
+   "kind": "adapted",
+   "from": "options.hideLightningFlashes.tooltip",
+   "review": "ai"
+  },
+  "e70198686c33": {
+   "co": "Impedisce à i fulmini di fà lampà u celu. I fulmini stessi fermeranu visibili.",
+   "kind": "adapted",
+   "from": "options.hideLightningFlashes.tooltip",
+   "review": "ai"
+  }
+ },
  "options.hideMatchedNames.tooltip": {
   "3df248e445a2": {
    "co": "I servitori di terzi ponu mandà messaghji di chjachjerata in furmati micca standard.\nS'è st'ozzione hè attivata, i ghjucadori piattati seranu ricunnisciuti secondu u nome di u speditore di a chjachjerata.",
@@ -22203,12 +22273,43 @@
   }
  },
  "options.languageWarning": {
+  "14162e098573": {
+   "co": "E traduzzioni ùn sò forse micca 100% affidabile",
+   "kind": "adapted",
+   "from": "options.languageWarning",
+   "review": "ai",
+   "note": "the English \"100% a\" reads as a format specifier; the Corsican keeps \"100% a\" so both stay identical for the game"
+  },
   "1b52db75189e": {
    "co": "E traduzzioni ponu ùn esse micca esatte à 100%%",
    "kind": "adapted",
    "from": "options.languageWarning",
    "review": "ai",
    "note": "punctuation as in this English"
+  }
+ },
+ "options.modelPart.left_pants_leg": {
+  "3f7ed54917ec": {
+   "co": "Gamba manca di u pantalone",
+   "kind": "reused",
+   "from": "options.modelPart.left_pants_leg",
+   "review": "ai"
+  }
+ },
+ "options.modelPart.right_pants_leg": {
+  "a71bb60a7fc8": {
+   "co": "Gamba diritta di u pantalone",
+   "kind": "reused",
+   "from": "options.modelPart.right_pants_leg",
+   "review": "ai"
+  }
+ },
+ "options.multiplayer.title": {
+  "1c153b3d9ea4": {
+   "co": "Parametri multighjucadore…",
+   "kind": "adapted",
+   "from": "options.multiplayer.title",
+   "review": "ai"
   }
  },
  "options.music": {
@@ -22263,6 +22364,14 @@
    "from": "options.narrator.system",
    "review": "ai",
    "note": "English changed only in case or punctuation"
+  }
+ },
+ "options.needsRestart": {
+  "c54a9932ca95": {
+   "co": "L'ozzione serà applicata dopu à u rilanciu.",
+   "kind": "adapted",
+   "from": "options.needsRestart",
+   "review": "ai"
   }
  },
  "options.particlesDesc0": {
@@ -22337,6 +22446,14 @@
    "review": "ai"
   }
  },
+ "options.prioritizeChunkUpdates.byPlayer.tooltip": {
+  "f9aff5653c79": {
+   "co": "Certe azzioni in un pezzu u ricompileranu subitu. Quessa include a piazzata è a distruzzione di blocchi.",
+   "kind": "reused",
+   "from": "options.prioritizeChunkUpdates.byPlayer.tooltip",
+   "review": "ai"
+  }
+ },
  "options.qualityButton": {
   "582639e0b939": {
    "co": "Parametri di qualità video…",
@@ -22360,6 +22477,14 @@
    "from": "options.rawMouseInput",
    "review": "ai",
    "note": "English changed only in case or punctuation"
+  }
+ },
+ "options.realmsNotifications": {
+  "0e3a4cea16c5": {
+   "co": "Nutificazioni Realms",
+   "kind": "adapted",
+   "from": "options.realmsNotifications",
+   "review": "ai"
   }
  },
  "options.renderCloudsDesc0": {
@@ -22466,6 +22591,14 @@
    "co": "Mustrà a cappa",
    "kind": "new",
    "from": null,
+   "review": "ai"
+  }
+ },
+ "options.showSubtitles": {
+  "917aebba35bc": {
+   "co": "Mustrà i sottutituli",
+   "kind": "adapted",
+   "from": "options.showSubtitles",
    "review": "ai"
   }
  },
@@ -22766,6 +22899,22 @@
    "note": "punctuation as in this English"
   }
  },
+ "options.textureFiltering.anisotropic.tooltip": {
+  "fb8369e9d20b": {
+   "co": "Un metodu di filtratura basatu nant'à u materiale, ma tocca e perfurmenze è cresce assai l'impiegu di a memoria video. Pò ùn esse micca accettatu da tutti i materiali.",
+   "kind": "reused",
+   "from": "options.textureFiltering.anisotropic.tooltip",
+   "review": "ai"
+  }
+ },
+ "options.textureFiltering.rgss.tooltip": {
+  "99d5ae2c484d": {
+   "co": "(Supercampiunatura à griglia girata)\nUn metodu di filtratura basatu nant'à i shaders chì migliura a qualità di e testure cù un impattu mudaratu nant'à e perfurmenze.",
+   "kind": "reused",
+   "from": "options.textureFiltering.rgss.tooltip",
+   "review": "ai"
+  }
+ },
  "options.vbo": {
   "79c3db121f21": {
    "co": "Aduprà i VBO",
@@ -22782,6 +22931,30 @@
    "review": "ai"
   }
  },
+ "options.vsync": {
+  "f969100d9b7e": {
+   "co": "Aduprà a sincrunizazione verticale",
+   "kind": "adapted",
+   "from": "options.vsync",
+   "review": "ai"
+  }
+ },
+ "outOfMemory.message": {
+  "a2cd5f6eac09": {
+   "co": "Minecraft ùn hà più memoria.\n\nQuessu pò esse causatu da un sbagliu in u ghjocu o da a Macchina Virtuale Java chì ùn hà micca ricevutu abbastanza memoria.\n\nPer impedisce chì u mondu sia dannighjatu, a partita attuale hè stata chjosa. Avemu pruvatu à liberà abbastanza memoria per lasciavvi vultà à u listinu principale è torna à ghjucà, ma forse ùn hà micca funziunatu.\n\nRilanciate u ghjocu s'è vo vidite torna stu messaghju.",
+   "kind": "reused",
+   "from": "outOfMemory.message",
+   "review": "ai"
+  }
+ },
+ "pack.dropConfirm": {
+  "daec4a72512f": {
+   "co": "Vulete aghjunghje i pacchetti seguenti à Minecraft ?",
+   "kind": "reused",
+   "from": "pack.dropConfirm",
+   "review": "ai"
+  }
+ },
  "pack.dropRejected.message": {
   "faa4a2573334": {
    "co": "L'elementi seguenti ùn eranu micca pacchetti accettevuli è ùn sò micca stati cupiati :\n%s",
@@ -22789,6 +22962,14 @@
    "from": "pack.dropRejected.message",
    "review": "ai",
    "note": "English changed only in case or punctuation"
+  }
+ },
+ "pack.incompatible.confirm.new": {
+  "7a1daa60daf6": {
+   "co": "Stu pacchettu hè statu fattu per una versione più recente di Minecraft è ùn puderia più funziunà currettamente.",
+   "kind": "adapted",
+   "from": "pack.incompatible.confirm.new",
+   "review": "ai"
   }
  },
  "parsing.bool.invalid": {
@@ -23666,11 +23847,35 @@
    "review": "ai"
   }
  },
+ "quickplay.error.invalid_identifier": {
+  "4137e9cea3f0": {
+   "co": "Impussibule di truvà un mondu cù l'identificadore furnitu",
+   "kind": "reused",
+   "from": "quickplay.error.invalid_identifier",
+   "review": "ai"
+  }
+ },
+ "quickplay.error.realm_connect": {
+  "f0c59df90ad2": {
+   "co": "Impussibule di cunnettesi à u Realm",
+   "kind": "adapted",
+   "from": "quickplay.error.realm_connect",
+   "review": "ai"
+  }
+ },
  "realms.missing.module.error.text": {
   "6b68ff557ce2": {
    "co": "Ùn hè micca statu pussibule d'apre Realms avà, pruvate torna più tardi",
    "kind": "new",
    "from": null,
+   "review": "ai"
+  }
+ },
+ "recipe.toast.title": {
+  "a173e6eb0fde": {
+   "co": "Ricette nove sbluccate !",
+   "kind": "adapted",
+   "from": "recipe.toast.title",
    "review": "ai"
   }
  },
@@ -23772,6 +23977,22 @@
    "review": "ai"
   }
  },
+ "resourcePack.title": {
+  "37b7bba0e788": {
+   "co": "Sceglie un pacchettu di risorse",
+   "kind": "adapted",
+   "from": "resourcePack.title",
+   "review": "ai"
+  }
+ },
+ "resourcePack.vanilla.description": {
+  "3252aa1f2ebb": {
+   "co": "E risorse predefinite di Minecraft",
+   "kind": "adapted",
+   "from": "resourcePack.vanilla.description",
+   "review": "ai"
+  }
+ },
  "selectServer.add": {
   "37a460a1defb": {
    "co": "Aghjunghje un servitore",
@@ -23779,6 +24000,23 @@
    "from": "selectServer.add",
    "review": "ai",
    "note": "English changed only in case or punctuation"
+  }
+ },
+ "selectServer.deleteWarning": {
+  "eaa9e513bfb7": {
+   "co": "serà persu per sempre ! (Hè assai tempu !)",
+   "kind": "adapted",
+   "from": "selectServer.deleteWarning",
+   "review": "ai",
+   "note": "the game writes the server name before this text"
+  }
+ },
+ "selectServer.direct": {
+  "5195671dff34": {
+   "co": "Cunnessione diretta",
+   "kind": "reused",
+   "from": "selectServer.direct",
+   "review": "ai"
   }
  },
  "selectServer.empty": {
@@ -23806,6 +24044,14 @@
    "note": "punctuation as in this English"
   }
  },
+ "selectWorld.allowCommands.info": {
+  "23bc00c47e08": {
+   "co": "Cumande cum'è /gamemode, /xp",
+   "kind": "adapted",
+   "from": "selectWorld.allowCommands.info",
+   "review": "ai"
+  }
+ },
  "selectWorld.backupEraseCache": {
   "87fb78a096ee": {
    "co": "Squassà i dati in memoria tampone",
@@ -23813,6 +24059,14 @@
    "from": "selectWorld.backupEraseCache",
    "review": "ai",
    "note": "English changed only in case or punctuation"
+  }
+ },
+ "selectWorld.backupJoinConfirmButton": {
+  "399ae3175853": {
+   "co": "Salvaguardà è caricà",
+   "kind": "adapted",
+   "from": "selectWorld.backupJoinConfirmButton",
+   "review": "ai"
   }
  },
  "selectWorld.backupJoinSkipButton": {
@@ -23855,6 +24109,20 @@
    "note": "punctuation as in this English"
   }
  },
+ "selectWorld.backupWarning.snapshot": {
+  "25b4f610e06f": {
+   "co": "Stu mondu hè statu ghjucatu l'ultima volta in a versione %s ; site in a versione %s. Fate una salvaguardia in casu chì u mondu sia dannighjatu !",
+   "kind": "adapted",
+   "from": "selectWorld.backupWarning.snapshot",
+   "review": "ai"
+  },
+  "46d7a9d8d1ca": {
+   "co": "Stu mondu hè statu ghjucatu l'ultima volta in a versione %s ; site in a versione %s. Fate una salvaguardia in casu chì u mondu sia dannighjatu.",
+   "kind": "reused",
+   "from": "selectWorld.backupWarning.snapshot",
+   "review": "ai"
+  }
+ },
  "selectWorld.bonusItems": {
   "10814db34994": {
    "co": "Cascia bonus :",
@@ -23881,6 +24149,15 @@
    "review": "ai"
   }
  },
+ "selectWorld.deleteWarning": {
+  "eaa9e513bfb7": {
+   "co": "serà persu per sempre ! (Hè assai tempu !)",
+   "kind": "adapted",
+   "from": "selectWorld.deleteWarning",
+   "review": "ai",
+   "note": "the game writes the world name before this text"
+  }
+ },
  "selectWorld.edit.backupSize": {
   "1078fa288ba9": {
    "co": "Dimensione : %s Mo",
@@ -23888,6 +24165,22 @@
    "from": "selectWorld.edit.backupSize",
    "review": "ai",
    "note": "English changed only in case or punctuation"
+  }
+ },
+ "selectWorld.edit.openFolder": {
+  "027760ffe7da": {
+   "co": "Apre u cartulare",
+   "kind": "adapted",
+   "from": "selectWorld.edit.openFolder",
+   "review": "ai"
+  }
+ },
+ "selectWorld.edit.save": {
+  "968f4a92be02": {
+   "co": "Arregistrà u mondu",
+   "kind": "adapted",
+   "from": "selectWorld.edit.save",
+   "review": "ai"
   }
  },
  "selectWorld.empty": {
@@ -23916,6 +24209,30 @@
    "note": "English changed only in case or punctuation"
   }
  },
+ "selectWorld.experimental.message": {
+  "0d9cec54503b": {
+   "co": "Attenzione !\nCerti pacchetti selezziunati richiedenu funzioni chì sò sempre in sviluppu. U vostru mondu puderia piantassi, guastassi o ùn micca funziunà cù e messe à livellu future.",
+   "kind": "adapted",
+   "from": "selectWorld.experimental.message",
+   "review": "ai"
+  }
+ },
+ "selectWorld.futureworld.error.text": {
+  "96a22e16fa0d": {
+   "co": "Qualcosa hè andatu male pruvendu à caricà un mondu d'una versione futura. Era dighjà un'operazione risicosa ; ci dispiace ch'ella ùn abbia micca funziunatu.",
+   "kind": "reused",
+   "from": "selectWorld.futureworld.error.text",
+   "review": "ai"
+  }
+ },
+ "selectWorld.futureworld.error.title": {
+  "c7fca26ef0f0": {
+   "co": "Un sbagliu hè accadutu !",
+   "kind": "reused",
+   "from": "selectWorld.futureworld.error.title",
+   "review": "ai"
+  }
+ },
  "selectWorld.gameMode": {
   "90174aa994c9": {
    "co": "Modu di ghjocu :",
@@ -23941,6 +24258,14 @@
    "from": "selectWorld.gameMode.hardcore.line1",
    "review": "ai",
    "note": "English changed only in case or punctuation"
+  }
+ },
+ "selectWorld.gameMode.survival.line1": {
+  "56153c1188db": {
+   "co": "Circate risorse, fabbricate, guadagnate",
+   "kind": "reused",
+   "from": "selectWorld.gameMode.survival.line1",
+   "review": "ai"
   }
  },
  "selectWorld.hardcoreMode": {
@@ -23991,6 +24316,14 @@
    "review": "ai"
   }
  },
+ "selectWorld.load_folder_access": {
+  "9920ec9b4db7": {
+   "co": "Impussibule di leghje o d'accede à u cartulare induve sò arregistrati i mondi di u ghjocu !",
+   "kind": "reused",
+   "from": "selectWorld.load_folder_access",
+   "review": "ai"
+  }
+ },
  "selectWorld.loading_list": {
   "4454f4b65bac": {
    "co": "Caricamentu di a lista di mondi",
@@ -24018,6 +24351,20 @@
    "note": "punctuation as in this English"
   }
  },
+ "selectWorld.mapFeatures.info": {
+  "804955ea7991": {
+   "co": "Paesi, segrete, ecc",
+   "kind": "adapted",
+   "from": "selectWorld.mapFeatures.info",
+   "review": "ai"
+  },
+  "cee8f6038d10": {
+   "co": "Paesi, segrete, ecc.",
+   "kind": "adapted",
+   "from": "selectWorld.mapFeatures.info",
+   "review": "ai"
+  }
+ },
  "selectWorld.mapType": {
   "d6553258aed7": {
    "co": "Tipu di mondu :",
@@ -24040,6 +24387,14 @@
    "co": "U caricamentu di i mondi cù altezza allargata hè disattivatu.",
    "kind": "new",
    "from": null,
+   "review": "ai"
+  }
+ },
+ "selectWorld.recreate.error.title": {
+  "c7fca26ef0f0": {
+   "co": "Un sbagliu hè accadutu !",
+   "kind": "reused",
+   "from": "selectWorld.recreate.error.title",
    "review": "ai"
   }
  },
@@ -24067,11 +24422,49 @@
    "review": "ai"
   }
  },
+ "selectWorld.tooltip.fromNewerVersion2": {
+  "164f235e32dd": {
+   "co": "caricà stu mondu puderia causà prublemi !",
+   "kind": "adapted",
+   "from": "selectWorld.tooltip.fromNewerVersion2",
+   "review": "ai"
+  }
+ },
+ "selectWorld.tooltip.snapshot1": {
+  "fd4520e17a73": {
+   "co": "Ùn vi scurdate micca di fà una salvaguardia di stu mondu",
+   "kind": "reused",
+   "from": "selectWorld.tooltip.snapshot1",
+   "review": "ai"
+  }
+ },
  "selectWorld.tooltip.unsupported": {
   "aacd8d369970": {
    "co": "Stu mondu ùn hè più accettatu è si pò ghjucà solu in %s",
    "kind": "new",
    "from": null,
+   "review": "ai"
+  }
+ },
+ "selectWorld.versionJoinButton": {
+  "09c1caa32452": {
+   "co": "Aduprà quantunque",
+   "kind": "adapted",
+   "from": "selectWorld.versionJoinButton",
+   "review": "ai"
+  },
+  "a3240fd90d10": {
+   "co": "Aduprà quantunque",
+   "kind": "adapted",
+   "from": "selectWorld.versionJoinButton",
+   "review": "ai"
+  }
+ },
+ "selectWorld.versionWarning": {
+  "0ddc133ac139": {
+   "co": "Stu mondu hè statu arregistratu in a versione '%s' è caricallu in sta versione puderia dannighjallu !",
+   "kind": "adapted",
+   "from": "selectWorld.versionWarning",
    "review": "ai"
   }
  },
@@ -24091,6 +24484,40 @@
    "from": "slot.only_single_allowed",
    "review": "ai",
    "note": "English changed only in case or punctuation"
+  }
+ },
+ "soundCategory.hostile": {
+  "0ddb3fc5c78d": {
+   "co": "Criature ostile",
+   "kind": "reused",
+   "from": "soundCategory.hostile",
+   "review": "ai",
+   "note": "same meaning (mobs called creatures)"
+  }
+ },
+ "soundCategory.neutral": {
+  "cd783cbcaa59": {
+   "co": "Criature amiche",
+   "kind": "reused",
+   "from": "soundCategory.neutral",
+   "review": "ai",
+   "note": "same meaning (mobs called creatures)"
+  }
+ },
+ "soundCategory.record": {
+  "ce0b1a833a17": {
+   "co": "Ghjiradischi/blocchi musicali",
+   "kind": "reused",
+   "from": "soundCategory.record",
+   "review": "ai"
+  }
+ },
+ "soundCategory.voice": {
+  "a3bec760529b": {
+   "co": "Voce/discorsu",
+   "kind": "adapted",
+   "from": "soundCategory.voice",
+   "review": "ai"
   }
  },
  "splash_potion.effect.awkward": {
@@ -24672,6 +25099,14 @@
    "review": "ai"
   }
  },
+ "stat.minecraft.clean_shulker_box": {
+  "b6ed1a5270db": {
+   "co": "Scatula di Shulker pulita",
+   "kind": "adapted",
+   "from": "stat.minecraft.clean_shulker_box",
+   "review": "ai"
+  }
+ },
  "stat.minecraft.damage_blocked_by_shield": {
   "0eeb529cb572": {
    "co": "Danni parati cù u scudu",
@@ -24702,6 +25137,22 @@
    "co": "Campane sunate",
    "kind": "renamed",
    "from": "stat.minecraft.bell_ring",
+   "review": "ai"
+  }
+ },
+ "stat.minecraft.time_since_death": {
+  "d413b32077e2": {
+   "co": "Dapoi l'ultima morte",
+   "kind": "adapted",
+   "from": "stat.minecraft.time_since_death",
+   "review": "ai"
+  }
+ },
+ "stat.minecraft.time_since_rest": {
+  "b3230a3129c8": {
+   "co": "Dapoi l'ultimu riposu",
+   "kind": "adapted",
+   "from": "stat.minecraft.time_since_rest",
    "review": "ai"
   }
  },
@@ -25349,6 +25800,42 @@
    "note": "English changed only in case or punctuation"
   }
  },
+ "structure_block.mode.corner": {
+  "87e8fda3f658": {
+   "co": "[C]",
+   "kind": "adapted",
+   "from": "structure_block.mode.corner",
+   "review": "ai",
+   "note": "same as English: letter on a button (Corner)"
+  }
+ },
+ "structure_block.mode.data": {
+  "24accc93b432": {
+   "co": "[D]",
+   "kind": "adapted",
+   "from": "structure_block.mode.data",
+   "review": "ai",
+   "note": "same as English: letter on a button (Data)"
+  }
+ },
+ "structure_block.mode.load": {
+  "93775f774f0c": {
+   "co": "[L]",
+   "kind": "adapted",
+   "from": "structure_block.mode.load",
+   "review": "ai",
+   "note": "same as English: letter on a button (Load)"
+  }
+ },
+ "structure_block.mode.save": {
+  "93899ce1bd13": {
+   "co": "[S]",
+   "kind": "adapted",
+   "from": "structure_block.mode.save",
+   "review": "ai",
+   "note": "same as English: letter on a button (Save)"
+  }
+ },
  "structure_block.mode_info.corner": {
   "81a549e9e798": {
    "co": "Modu cantone - Marcatore di piazzamentu è di dimensione",
@@ -25472,6 +25959,48 @@
    "note": "English changed only in case or punctuation"
   }
  },
+ "subtitles.block.bubble_column.upwards_inside": {
+  "0a0e914f6532": {
+   "co": "Bolle sciuscianu",
+   "kind": "reused",
+   "from": "subtitles.block.bubble_column.upwards_inside",
+   "review": "ai"
+  }
+ },
+ "subtitles.block.creaking_heart.hurt": {
+  "c324841747a3": {
+   "co": "Core di scricchjone urla",
+   "kind": "adapted",
+   "from": "subtitles.block.creaking_heart.hurt",
+   "review": "ai"
+  }
+ },
+ "subtitles.block.decorated_pot.shatter": {
+  "8145374657b1": {
+   "co": "Vasu si spezza",
+   "kind": "adapted",
+   "from": "subtitles.block.decorated_pot.shatter",
+   "review": "ai"
+  }
+ },
+ "subtitles.block.iron_trapdoor.close": {
+  "9547f49f46f8": {
+   "co": "Bodula s'apre",
+   "kind": "adapted",
+   "from": "subtitles.block.iron_trapdoor.close",
+   "review": "ai",
+   "note": "Mojang's English swaps open and close here; translated as written"
+  }
+ },
+ "subtitles.block.iron_trapdoor.open": {
+  "62a5572485d8": {
+   "co": "Bodula si chjode",
+   "kind": "adapted",
+   "from": "subtitles.block.iron_trapdoor.open",
+   "review": "ai",
+   "note": "Mojang's English swaps open and close here; translated as written"
+  }
+ },
  "subtitles.block.note.note": {
   "1eac7ce2c327": {
    "co": "Bloccu musicale sona",
@@ -25485,6 +26014,62 @@
    "from": "subtitles.block.note_block.note",
    "review": "ai",
    "note": "same sound as the 26.3 note block subtitle"
+  }
+ },
+ "subtitles.block.respawn_anchor.ambient": {
+  "aa81067bc5f6": {
+   "co": "Portale fruscia",
+   "kind": "adapted",
+   "from": "subtitles.block.respawn_anchor.ambient",
+   "review": "ai"
+  }
+ },
+ "subtitles.block.sculk_sensor.clicking": {
+  "b3f0dcbc2cf9": {
+   "co": "Sensore di sculk principia à scattà",
+   "kind": "adapted",
+   "from": "subtitles.block.sculk_sensor.clicking",
+   "review": "ai"
+  }
+ },
+ "subtitles.block.shulker_box.close": {
+  "a51be0c4b7f5": {
+   "co": "Shulker si chjode",
+   "kind": "adapted",
+   "from": "subtitles.block.shulker_box.close",
+   "review": "ai"
+  }
+ },
+ "subtitles.block.shulker_box.open": {
+  "9b1e19d3f760": {
+   "co": "Shulker s'apre",
+   "kind": "adapted",
+   "from": "subtitles.block.shulker_box.open",
+   "review": "ai"
+  }
+ },
+ "subtitles.block.trial_spawner.ambient_charged": {
+  "a33ac24a4e8a": {
+   "co": "Generatore di prova funestu scuppietta",
+   "kind": "adapted",
+   "from": "subtitles.block.trial_spawner.ambient_charged",
+   "review": "ai"
+  }
+ },
+ "subtitles.block.trial_spawner.spawn_mob": {
+  "b8fde98f4952": {
+   "co": "Criatura apparisce",
+   "kind": "adapted",
+   "from": "subtitles.block.trial_spawner.spawn_mob",
+   "review": "ai"
+  }
+ },
+ "subtitles.block.vault.insert_item_fail": {
+  "00d2b8cbb983": {
+   "co": "Cassaforte ùn si sblocca micca",
+   "kind": "adapted",
+   "from": "subtitles.block.vault.insert_item_fail",
+   "review": "ai"
   }
  },
  "subtitles.chiseled_bookshelf.insert_enchanted": {
@@ -25529,11 +26114,68 @@
    "review": "ai"
   }
  },
+ "subtitles.entity.copper_golem.no_item_get": {
+  "a354bb64c5d2": {
+   "co": "Golem di ramu piglia un ogettu",
+   "kind": "reused",
+   "from": "subtitles.entity.copper_golem.no_item_get",
+   "review": "ai",
+   "note": "same meaning"
+  }
+ },
+ "subtitles.entity.copper_golem.no_item_no_get": {
+  "076d65cc6ffa": {
+   "co": "Golem di ramu ùn pò micca piglià l'ogettu",
+   "kind": "adapted",
+   "from": "subtitles.entity.copper_golem.no_item_no_get",
+   "review": "ai"
+  }
+ },
+ "subtitles.entity.creaking.activate": {
+  "78dd442273da": {
+   "co": "Scricchjone s'attiva",
+   "kind": "adapted",
+   "from": "subtitles.entity.creaking.activate",
+   "review": "ai"
+  }
+ },
  "subtitles.entity.creaking.angry": {
   "5f4aab3ddc66": {
    "co": "Scricchjone vede un ghjucadore",
    "kind": "new",
    "from": null,
+   "review": "ai"
+  }
+ },
+ "subtitles.entity.creaking.deactivate": {
+  "1730c3997b11": {
+   "co": "Scricchjone si disattiva",
+   "kind": "adapted",
+   "from": "subtitles.entity.creaking.deactivate",
+   "review": "ai"
+  }
+ },
+ "subtitles.entity.creaking.death": {
+  "2d763cc134c9": {
+   "co": "Scricchjone more",
+   "kind": "adapted",
+   "from": "subtitles.entity.creaking.death",
+   "review": "ai"
+  }
+ },
+ "subtitles.entity.creaking.spawn": {
+  "2d14fdece8f4": {
+   "co": "Scricchjone campa",
+   "kind": "adapted",
+   "from": "subtitles.entity.creaking.spawn",
+   "review": "ai"
+  }
+ },
+ "subtitles.entity.creaking.sway": {
+  "809da0cb02ac": {
+   "co": "Scricchjone hè prutettu",
+   "kind": "adapted",
+   "from": "subtitles.entity.creaking.sway",
    "review": "ai"
   }
  },
@@ -25712,6 +26354,22 @@
    "review": "ai"
   }
  },
+ "subtitles.entity.generic.small_fall": {
+  "8ce7310065c1": {
+   "co": "Qualcosa hà inciampatu",
+   "kind": "adapted",
+   "from": "subtitles.entity.generic.small_fall",
+   "review": "ai"
+  }
+ },
+ "subtitles.entity.glow_item_frame.break": {
+  "f9b2e83623e9": {
+   "co": "Curnice luminosa si rompe",
+   "kind": "adapted",
+   "from": "subtitles.entity.glow_item_frame.break",
+   "review": "ai"
+  }
+ },
  "subtitles.entity.guardian.ambient.land": {
   "b75fb7a21b17": {
    "co": "Guardianu si sbatte",
@@ -25725,6 +26383,14 @@
    "co": "Guardianu maledice",
    "kind": "new",
    "from": null,
+   "review": "ai"
+  }
+ },
+ "subtitles.entity.husk.converted_to_zombie": {
+  "721f09a36922": {
+   "co": "Zombi seccu diventatu zombi",
+   "kind": "adapted",
+   "from": "subtitles.entity.husk.converted_to_zombie",
    "review": "ai"
   }
  },
@@ -25784,6 +26450,14 @@
    "review": "ai"
   }
  },
+ "subtitles.entity.item_frame.break": {
+  "f6dfd5afacea": {
+   "co": "Curnice si rompe",
+   "kind": "adapted",
+   "from": "subtitles.entity.item_frame.break",
+   "review": "ai"
+  }
+ },
  "subtitles.entity.itemframe.add_item": {
   "2e301a4c3595": {
    "co": "Curnice s'empie",
@@ -25822,6 +26496,20 @@
    "co": "Curnice scatta",
    "kind": "renamed",
    "from": "subtitles.entity.item_frame.rotate_item",
+   "review": "ai"
+  }
+ },
+ "subtitles.entity.leash_knot.break": {
+  "74b6615a1b03": {
+   "co": "Nodu di ligaccia si rompe",
+   "kind": "adapted",
+   "from": "subtitles.entity.leash_knot.break",
+   "review": "ai"
+  },
+  "e08f52796daf": {
+   "co": "Nodu di ligaccia si rompe",
+   "kind": "adapted",
+   "from": "subtitles.entity.leash_knot.break",
    "review": "ai"
   }
  },
@@ -25875,6 +26563,14 @@
    "review": "ai"
   }
  },
+ "subtitles.entity.llama.angry": {
+  "8a0ac6fad50d": {
+   "co": "Lama bela arrabbiatu",
+   "kind": "reused",
+   "from": "subtitles.entity.llama.angry",
+   "review": "ai"
+  }
+ },
  "subtitles.entity.magmacube.death": {
   "d4d4a7bb9bdd": {
    "co": "Cubu di magma more",
@@ -25899,11 +26595,27 @@
    "review": "ai"
   }
  },
+ "subtitles.entity.painting.break": {
+  "9acf66c14213": {
+   "co": "Quadru si stacca",
+   "kind": "adapted",
+   "from": "subtitles.entity.painting.break",
+   "review": "ai"
+  }
+ },
  "subtitles.entity.parrot.imitate.cave_spider": {
   "9ac88e171db0": {
    "co": "Pappagallu fischja",
    "kind": "renamed",
    "from": "subtitles.entity.parrot.imitate.spider",
+   "review": "ai"
+  }
+ },
+ "subtitles.entity.parrot.imitate.elder_guardian": {
+  "546c57a84473": {
+   "co": "Pappagallu si sbatte",
+   "kind": "adapted",
+   "from": "subtitles.entity.parrot.imitate.elder_guardian",
    "review": "ai"
   }
  },
@@ -25955,6 +26667,14 @@
    "review": "ai"
   }
  },
+ "subtitles.entity.parrot.imitate.piglin_brute": {
+  "117e04221e32": {
+   "co": "Pappagallu sbuffa cù forza",
+   "kind": "adapted",
+   "from": "subtitles.entity.parrot.imitate.piglin_brute",
+   "review": "ai"
+  }
+ },
  "subtitles.entity.parrot.imitate.polar_bear": {
   "b8872e115116": {
    "co": "Pappagallu si lamenta",
@@ -25984,6 +26704,14 @@
    "co": "Pappagallu grugna",
    "kind": "renamed",
    "from": "subtitles.entity.parrot.imitate.ravager",
+   "review": "ai"
+  }
+ },
+ "subtitles.entity.polar_bear.ambient_baby": {
+  "1d5107e6eeef": {
+   "co": "Orsu polare canticchja",
+   "kind": "adapted",
+   "from": "subtitles.entity.polar_bear.ambient_baby",
    "review": "ai"
   }
  },
@@ -26029,6 +26757,15 @@
    "review": "ai"
   }
  },
+ "subtitles.entity.turtle.death_baby": {
+  "ac44c79221b7": {
+   "co": "Tartaruga chjuca more",
+   "kind": "reused",
+   "from": "subtitles.entity.turtle.death_baby",
+   "review": "ai",
+   "note": "same meaning"
+  }
+ },
  "subtitles.entity.turtle.egg_break": {
   "18be9ab7150e": {
    "co": "Ovu di tartaruga si rompe",
@@ -26054,6 +26791,24 @@
    "from": "subtitles.entity.turtle.egg_hatch",
    "review": "ai",
    "note": "English changed only in case or punctuation"
+  }
+ },
+ "subtitles.entity.turtle.hurt_baby": {
+  "f69d0a042f5e": {
+   "co": "Tartaruga chjuca hè ferita",
+   "kind": "reused",
+   "from": "subtitles.entity.turtle.hurt_baby",
+   "review": "ai",
+   "note": "same meaning"
+  }
+ },
+ "subtitles.entity.turtle.shamble_baby": {
+  "09216d40ff39": {
+   "co": "Tartaruga chjuca si trascina",
+   "kind": "reused",
+   "from": "subtitles.entity.turtle.shamble_baby",
+   "review": "ai",
+   "note": "same meaning"
   }
  },
  "subtitles.entity.villager.trading": {
@@ -26085,6 +26840,14 @@
    "co": "Vindicatore hè feritu",
    "kind": "renamed",
    "from": "subtitles.entity.vindicator.hurt",
+   "review": "ai"
+  }
+ },
+ "subtitles.entity.zombie.converted_to_drowned": {
+  "a99e8e81bb5a": {
+   "co": "Zombi trasfurmatu in annigatu",
+   "kind": "adapted",
+   "from": "subtitles.entity.zombie.converted_to_drowned",
    "review": "ai"
   }
  },
@@ -26120,6 +26883,39 @@
    "review": "ai"
   }
  },
+ "subtitles.entity.zombie_villager.converted": {
+  "a56907f18839": {
+   "co": "Zombi urla",
+   "kind": "adapted",
+   "from": "subtitles.entity.zombie_villager.converted",
+   "review": "ai"
+  }
+ },
+ "subtitles.entity.zombie_villager.cure": {
+  "3b38de3e1514": {
+   "co": "Zombi tira u nasu",
+   "kind": "adapted",
+   "from": "subtitles.entity.zombie_villager.cure",
+   "review": "ai"
+  }
+ },
+ "subtitles.item.armor.equip": {
+  "a502db3792f2": {
+   "co": "Equipagiu messu",
+   "kind": "reused",
+   "from": "subtitles.item.armor.equip",
+   "review": "ai",
+   "note": "same meaning"
+  }
+ },
+ "subtitles.item.armor.equip_elytra": {
+  "ffd1b0d3d789": {
+   "co": "Elitre fruscianu",
+   "kind": "reused",
+   "from": "subtitles.item.armor.equip_elytra",
+   "review": "ai"
+  }
+ },
  "subtitles.item.armor.equip_turtle": {
   "5c6e10788459": {
    "co": "Scorza di tartaruga batte",
@@ -26127,6 +26923,20 @@
    "from": "subtitles.item.armor.equip_turtle",
    "review": "ai",
    "note": "English changed only in case or punctuation"
+  }
+ },
+ "subtitles.item.axe.strip": {
+  "4ea1ae4345de": {
+   "co": "Scurzatura di troncu",
+   "kind": "adapted",
+   "from": "subtitles.item.axe.strip",
+   "review": "ai"
+  },
+  "b95a663fe611": {
+   "co": "Accetta raspa",
+   "kind": "adapted",
+   "from": "subtitles.item.axe.strip",
+   "review": "ai"
   }
  },
  "subtitles.item.berries.pick": {
@@ -26150,6 +26960,14 @@
    "co": "Pinnellatura",
    "kind": "renamed",
    "from": "subtitles.item.brush.brushing.generic",
+   "review": "ai"
+  }
+ },
+ "subtitles.item.honey_bottle.drink": {
+  "d870dcca073e": {
+   "co": "Sorsate di mele",
+   "kind": "adapted",
+   "from": "subtitles.item.honey_bottle.drink",
    "review": "ai"
   }
  },
@@ -26186,6 +27004,14 @@
    "from": "telemetry.property.frame_rate_samples.title",
    "review": "ai",
    "note": "English changed only in case or punctuation"
+  }
+ },
+ "telemetry_info.button.show_data": {
+  "744f7257d8eb": {
+   "co": "Apre i mo dati",
+   "kind": "adapted",
+   "from": "telemetry_info.button.show_data",
+   "review": "ai"
   }
  },
  "test.error.block_property_mismatch": {
@@ -26276,6 +27102,14 @@
    "from": "test.error.value_not_equal",
    "review": "ai",
    "note": "English changed only in case or punctuation"
+  }
+ },
+ "test_instance.description.batch": {
+  "f55bb1e40a2a": {
+   "co": "Lottu : %s",
+   "kind": "adapted",
+   "from": "test_instance.description.batch",
+   "review": "ai"
   }
  },
  "tile.acaciaFence.name": {
@@ -30209,6 +31043,28 @@
    "co": "Freccia di debulezza",
    "kind": "renamed",
    "from": "item.minecraft.tipped_arrow.effect.weakness",
+   "review": "ai"
+  }
+ },
+ "title.multiplayer.disabled": {
+  "67d2209f2afe": {
+   "co": "U ghjocu à parechji hè disattivatu. Verificate i parametri di u vostru lanciadore.",
+   "kind": "adapted",
+   "from": "title.multiplayer.disabled",
+   "review": "ai"
+  },
+  "b1b8efc1b2b7": {
+   "co": "U ghjocu à parechji hè disattivatu, verificate i parametri di u vostru lanciadore.",
+   "kind": "adapted",
+   "from": "title.multiplayer.disabled",
+   "review": "ai"
+  }
+ },
+ "title.multiplayer.other": {
+  "0b1b12ad9de3": {
+   "co": "Parechji ghjucadori (terzi)",
+   "kind": "adapted",
+   "from": "title.multiplayer.other",
    "review": "ai"
   }
  },
