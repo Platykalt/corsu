@@ -44,17 +44,18 @@ class Fixture:
             '26.3': entry('json', 'co_fr', 97, 'min_max'),
         }
         order = list(versions)
-        (self.folder / 'versions.json').write_text(json.dumps(versions))
-        (self.folder / 'VERSION').write_text('26.3\n')
+        (self.folder / 'versions.json').write_text(json.dumps(versions), encoding='utf-8')
+        (self.folder / 'VERSION').write_text('26.3\n', encoding='utf-8')
         rows = [('gui.done', h('Done'), {0, 1, 2, 3}), ('death.attack.fall', h(OLD_FALL), {0, 1, 2}),
                 ('death.attack.fall', h(ENGLISH['death.attack.fall']), {3}), ('tile.stone.name', h('Stone'), {0, 1})]
         lines = ['key\thash\tversions'] + [f'{k}\t{s}\t{packs.compact_versions(p, order)}' for k, s, p in rows]
-        (self.folder / 'keys.tsv').write_text('\n'.join(lines) + '\n')
+        (self.folder / 'keys.tsv').write_text('\n'.join(lines) + '\n', encoding='utf-8')
         (self.folder / 'co_fr.json').write_text(json.dumps({'gui.done': 'Fattu', 'death.attack.fall':
-                                                            '%1$s hà toccu a terra troppu forte'}, ensure_ascii=False))
-        (self.folder / 'LICENSE.txt').write_text('licence')
+                                                            '%1$s hà toccu a terra troppu forte'}, ensure_ascii=False),
+                                                  encoding='utf-8')
+        (self.folder / 'LICENSE.txt').write_text('licence', encoding='utf-8')
         if history is not None:
-            (self.folder / 'history.json').write_text(json.dumps(history, ensure_ascii=False))
+            (self.folder / 'history.json').write_text(json.dumps(history, ensure_ascii=False), encoding='utf-8')
         self.data = packs.Data(self.folder)
 
     def build(self, version):
@@ -122,7 +123,7 @@ class ResolutionTest(unittest.TestCase):
 
     def test_empty_history_file(self):
         fixture = Fixture()
-        (fixture.folder / 'history.json').write_text('')
+        (fixture.folder / 'history.json').write_text('', encoding='utf-8')
         self.assertEqual(packs.texts_for('26.3', packs.Data(fixture.folder))[0]['gui.done'], 'Fattu')
 
     def test_deterministic(self):

@@ -130,14 +130,15 @@ class InstancesTests(unittest.TestCase):
         data.mkdir(parents=True)
         elsewhere = self.root / 'Ghjochi Minecraft'
         (data / 'prismlauncher.cfg').write_text(
-            f'[General]\nConfigVersion=1.3\nInstanceDir=Mes instances\nAdditionalInstanceDirs="{elsewhere}"\n')
+            # QSettings writes paths with forward slashes (or doubled backslashes), never single backslashes.
+            f'[General]\nConfigVersion=1.3\nInstanceDir=Mes instances\nAdditionalInstanceDirs="{elsewhere.as_posix()}"\n')
         relative = self.instance('A', '26.3', instances=data / 'Mes instances')
         absolute = self.instance('B', '1.21.1', instances=elsewhere)
         ignored = self.instance('C', '26.3')  # instances/ is no longer where Prism Launcher looks
         paths = [folder.path for folder in self.game.find_folders()]
         self.assertEqual(paths, [relative, absolute])
         self.assertNotIn(ignored, paths)
-        (data / 'prismlauncher.cfg').write_text(f'[General]\nInstanceDir={elsewhere}\n')
+        (data / 'prismlauncher.cfg').write_text(f'[General]\nInstanceDir={elsewhere.as_posix()}\n')
         self.assertEqual([folder.path for folder in self.game.find_folders()], [absolute])
 
     def test_flatpak_and_data_dir_variable(self):
