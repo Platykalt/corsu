@@ -718,6 +718,190 @@
    "review": "ai"
   }
  },
+ "attribute.unknown": {
+  "9227bfcefbbb": {
+   "co": "Attributu scunnisciutu",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
+  }
+ },
+ "biome.minecraft.badlands_plateau": {
+  "f55591e2ed8c": {
+   "co": "Altipianu di calanche",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
+  }
+ },
+ "biome.minecraft.bamboo_jungle_hills": {
+  "f0aba456f016": {
+   "co": "Culline di giungla di bambù",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
+  }
+ },
+ "biome.minecraft.birch_forest_hills": {
+  "b2e8eca5c912": {
+   "co": "Culline di furesta di betule",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
+  }
+ },
+ "biome.minecraft.dark_forest_hills": {
+  "ad19699213fb": {
+   "co": "Culline di furesta scura",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
+  }
+ },
+ "biome.minecraft.deep_warm_ocean": {
+  "930dec1c13ed": {
+   "co": "Oceanu caldu prufondu",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
+  }
+ },
+ "biome.minecraft.desert_hills": {
+  "12107681bb70": {
+   "co": "Culline di desertu",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
+  }
+ },
+ "biome.minecraft.desert_lakes": {
+  "74c52c64dc43": {
+   "co": "Laghi di desertu",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
+  }
+ },
+ "biome.minecraft.giant_spruce_taiga": {
+  "5e72b1355bef": {
+   "co": "Taiga d'abeti giganti",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
+  }
+ },
+ "biome.minecraft.giant_spruce_taiga_hills": {
+  "eeda1d1eabe8": {
+   "co": "Culline di taiga d'abeti giganti",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
+  }
+ },
+ "biome.minecraft.giant_tree_taiga": {
+  "56ea323bb5ca": {
+   "co": "Taiga d'arburi giganti",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
+  }
+ },
+ "biome.minecraft.giant_tree_taiga_hills": {
+  "f59f1bc50000": {
+   "co": "Culline di taiga d'arburi giganti",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
+  }
+ },
+ "biome.minecraft.gravelly_mountains": {
+  "db5a252b9bec": {
+   "co": "Muntagne di ghjàira",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
+  }
+ },
+ "biome.minecraft.jungle_edge": {
+  "93b896f6d916": {
+   "co": "Orlu di giungla",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
+  }
+ },
+ "biome.minecraft.jungle_hills": {
+  "bf8768635c0d": {
+   "co": "Culline di giungla",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
+  }
+ },
+ "biome.minecraft.modified_badlands_plateau": {
+  "197cc936c109": {
+   "co": "Altipianu di calanche mudificatu",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
+  }
+ },
+ "biome.minecraft.modified_gravelly_mountains": {
+  "f4f08b98d51e": {
+   "co": "Muntagne di ghjàira+",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
+  }
+ },
+ "biome.minecraft.modified_jungle": {
+  "cbeb3d9af145": {
+   "co": "Giungla mudificata",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
+  }
+ },
+ "biome.minecraft.modified_jungle_edge": {
+  "0935a6f788c8": {
+   "co": "Orlu di giungla mudificatu",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
+  }
+ },
+ "biome.minecraft.modified_wooded_badlands_plateau": {
+  "21878d458eef": {
+   "co": "Altipianu di calanche buscose mudificatu",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
+  }
+ },
+ "biome.minecraft.mountain_edge": {
+  "23354bc67c04": {
+   "co": "Orlu di muntagna",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
+  }
+ },
+ "biome.minecraft.mountains": {
+  "06beda1f7fe3": {
+   "co": "Muntagne",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
+  }
+ },
+ "biome.minecraft.mushroom_field_shore": {
+  "66d604c5e1c1": {
+   "co": "Riva di i campi di funghi",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
+  }
+ },
  "biome.minecraft.nether": {
   "6f606f326c61": {
    "co": "Nether",
@@ -725,6 +909,150 @@
    "from": "advancements.nether.root.title",
    "review": "ai",
    "note": "26.3 key of another family; same meaning checked"
+  }
+ },
+ "biome.minecraft.shattered_savanna": {
+  "fef90ab28860": {
+   "co": "Savana frammentata",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
+  }
+ },
+ "biome.minecraft.shattered_savanna_plateau": {
+  "2910902dd2d7": {
+   "co": "Altipianu di savana frammentata",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
+  }
+ },
+ "biome.minecraft.snowy_mountains": {
+  "910037527b24": {
+   "co": "Muntagne nivose",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
+  }
+ },
+ "biome.minecraft.snowy_taiga_hills": {
+  "8d897e4ab922": {
+   "co": "Culline di taiga nivosa",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
+  }
+ },
+ "biome.minecraft.snowy_taiga_mountains": {
+  "3b4d1231b3d2": {
+   "co": "Muntagne di taiga nivosa",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
+  }
+ },
+ "biome.minecraft.snowy_tundra": {
+  "32000706d5a3": {
+   "co": "Tundra nivosa",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
+  }
+ },
+ "biome.minecraft.stone_shore": {
+  "6d9045bc8cee": {
+   "co": "Riva di petra",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
+  }
+ },
+ "biome.minecraft.swamp_hills": {
+  "1a03693e34ec": {
+   "co": "Culline di padule",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
+  }
+ },
+ "biome.minecraft.taiga_hills": {
+  "8d1e3e938e59": {
+   "co": "Culline di taiga",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
+  }
+ },
+ "biome.minecraft.taiga_mountains": {
+  "ad8f89791cf1": {
+   "co": "Muntagne di taiga",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
+  }
+ },
+ "biome.minecraft.tall_birch_forest": {
+  "1020ae52ff72": {
+   "co": "Furesta di betule alte",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
+  }
+ },
+ "biome.minecraft.tall_birch_hills": {
+  "aebf35d9ca76": {
+   "co": "Culline di betule alte",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
+  }
+ },
+ "biome.minecraft.wooded_badlands_plateau": {
+  "c3c475331b32": {
+   "co": "Altipianu di calanche buscose",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
+  }
+ },
+ "biome.minecraft.wooded_hills": {
+  "47b2cc9e21ca": {
+   "co": "Culline buscose",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
+  }
+ },
+ "biome.minecraft.wooded_mountains": {
+  "2d8fd3747d1a": {
+   "co": "Muntagne buscose",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
+  }
+ },
+ "block.minecraft.banner": {
+  "c8af83fb4c1e": {
+   "co": "Stendardu",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
+  }
+ },
+ "block.minecraft.bed": {
+  "1a706e2365dd": {
+   "co": "Lettu",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
+  }
+ },
+ "block.minecraft.bed.not_valid": {
+  "af28bab4691b": {
+   "co": "U vostru lettu era sparitu o bluccatu",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
   }
  },
  "block.minecraft.bed.set_spawn": {
@@ -735,11 +1063,75 @@
    "review": "ai"
   }
  },
+ "block.minecraft.flowing_lava": {
+  "5d88c33187c4": {
+   "co": "Lava chì corre",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
+  }
+ },
+ "block.minecraft.flowing_water": {
+  "32ae904cd3d6": {
+   "co": "Acqua chì corre",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
+  }
+ },
+ "block.minecraft.four_turtle_eggs": {
+  "96ebdd5b8509": {
+   "co": "Quattru ova di tartaruga",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
+  }
+ },
+ "block.minecraft.grass_path": {
+  "ab1e26547f2c": {
+   "co": "Chjassu d'erba",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
+  }
+ },
  "block.minecraft.sign": {
   "8b3d8d665a76": {
    "co": "Cartellu",
    "kind": "renamed",
    "from": "item.minecraft.sign",
+   "review": "ai"
+  }
+ },
+ "block.minecraft.three_turtle_eggs": {
+  "a1f822ec9385": {
+   "co": "Trè ova di tartaruga",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
+  }
+ },
+ "block.minecraft.two_turtle_eggs": {
+  "b444d384559f": {
+   "co": "Dui ova di tartaruga",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
+  }
+ },
+ "block.minecraft.wall_banner": {
+  "9bf5b93cad0a": {
+   "co": "Stendardu murale",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
+  }
+ },
+ "block.minecraft.wall_sign": {
+  "2693b036904a": {
+   "co": "Cartellu murale",
+   "kind": "new",
+   "from": null,
    "review": "ai"
   }
  },
@@ -1449,6 +1841,14 @@
    "review": "ai"
   }
  },
+ "effect.effectNotFound": {
+  "12ac4ba324f6": {
+   "co": "Effettu scunnisciutu : %s",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
+  }
+ },
  "effect.fireResistance": {
   "a31e37313d09": {
    "co": "Resistenza à u focu",
@@ -1825,6 +2225,14 @@
    "review": "ai"
   }
  },
+ "enchantment.unknown": {
+  "a40bc1afc1c9": {
+   "co": "Incantesimu scunnisciutu : %s",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
+  }
+ },
  "enchantment.untouching": {
   "b16c3f6edaad": {
    "co": "Toccu di seta",
@@ -1866,6 +2274,12 @@
   }
  },
  "entity.Arrow.name": {
+  "39a531d92bbe": {
+   "co": "freccia",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
+  },
   "3a4758c3cc8d": {
    "co": "Freccia",
    "kind": "renamed",
@@ -2121,6 +2535,22 @@
    "review": "ai"
   }
  },
+ "entity.Mob.name": {
+  "3610671ed49b": {
+   "co": "Criatura",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
+  }
+ },
+ "entity.Monster.name": {
+  "e63d88bd7bf3": {
+   "co": "Mostru",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
+  }
+ },
  "entity.Mule.name": {
   "f487a85eea09": {
    "co": "Mulu",
@@ -2169,11 +2599,28 @@
    "review": "ai"
   }
  },
+ "entity.PigZombie.name": {
+  "23f53be69ad2": {
+   "co": "Omu-porcu zombi",
+   "kind": "new",
+   "from": null,
+   "review": "ai",
+   "note": "ambiguous: no 26.3 name (became Zombified Piglin); literal pig-man zombie"
+  }
+ },
  "entity.PolarBear.name": {
   "24310d1fe45e": {
    "co": "Orsu polare",
    "kind": "renamed",
    "from": "entity.minecraft.polar_bear",
+   "review": "ai"
+  }
+ },
+ "entity.PrimedTnt.name": {
+  "a88f599db7c7": {
+   "co": "Bloccu di TNT",
+   "kind": "new",
+   "from": null,
    "review": "ai"
   }
  },
@@ -2393,6 +2840,24 @@
    "review": "ai"
   }
  },
+ "entity.Villager.tool": {
+  "52c2a997b032": {
+   "co": "Ferraghju d'attrezzi",
+   "kind": "adapted",
+   "from": "entity.minecraft.villager.toolsmith",
+   "review": "ai",
+   "note": "same trade as 26.3 Toolsmith"
+  }
+ },
+ "entity.Villager.weapon": {
+  "7a50b6d68c5c": {
+   "co": "Armaghjolu d'arme",
+   "kind": "adapted",
+   "from": "entity.minecraft.villager.weaponsmith",
+   "review": "ai",
+   "note": "same trade as 26.3 Weaponsmith"
+  }
+ },
  "entity.VillagerGolem.name": {
   "baa4025efb7a": {
    "co": "Golem di ferru",
@@ -2507,11 +2972,46 @@
    "note": "English changed only in case or punctuation"
   }
  },
+ "entity.minecraft.villager.tool_smith": {
+  "52c2a997b032": {
+   "co": "Ferraghju d'attrezzi",
+   "kind": "adapted",
+   "from": "entity.minecraft.villager.toolsmith",
+   "review": "ai",
+   "note": "same trade as 26.3 Toolsmith"
+  }
+ },
+ "entity.minecraft.villager.weapon_smith": {
+  "7a50b6d68c5c": {
+   "co": "Armaghjolu d'arme",
+   "kind": "adapted",
+   "from": "entity.minecraft.villager.weaponsmith",
+   "review": "ai",
+   "note": "same trade as 26.3 Weaponsmith"
+  }
+ },
+ "entity.minecraft.zombie_pigman": {
+  "23f53be69ad2": {
+   "co": "Omu-porcu zombi",
+   "kind": "new",
+   "from": null,
+   "review": "ai",
+   "note": "ambiguous: no 26.3 name (became Zombified Piglin); literal pig-man zombie"
+  }
+ },
  "entity.mule.name": {
   "f487a85eea09": {
    "co": "Mulu",
    "kind": "renamed",
    "from": "entity.minecraft.mule",
+   "review": "ai"
+  }
+ },
+ "entity.notFound": {
+  "ca9bc54fe83c": {
+   "co": "Entità scunnisciuta : %s",
+   "kind": "new",
+   "from": null,
    "review": "ai"
   }
  },
@@ -6498,6 +6998,13 @@
   }
  },
  "item.banner.stripe_bottom.black": {
+  "258c179505ed": {
+   "co": "Fascia nera in punta",
+   "kind": "adapted",
+   "from": "block.minecraft.banner.stripe_bottom.black",
+   "review": "ai",
+   "note": "old heraldic name (Black Base Fess); same pattern as 26.3"
+  },
   "c11f964dd871": {
    "co": "Fascia nera in punta",
    "kind": "renamed",
@@ -6511,6 +7018,13 @@
    "kind": "renamed",
    "from": "block.minecraft.banner.stripe_bottom.blue",
    "review": "ai"
+  },
+  "bf83e5deb148": {
+   "co": "Fascia turchina in punta",
+   "kind": "adapted",
+   "from": "block.minecraft.banner.stripe_bottom.blue",
+   "review": "ai",
+   "note": "old heraldic name (Blue Base Fess); same pattern as 26.3"
   }
  },
  "item.banner.stripe_bottom.brown": {
@@ -6519,6 +7033,13 @@
    "kind": "renamed",
    "from": "block.minecraft.banner.stripe_bottom.brown",
    "review": "ai"
+  },
+  "c58dd715ecb3": {
+   "co": "Fascia marrone in punta",
+   "kind": "adapted",
+   "from": "block.minecraft.banner.stripe_bottom.brown",
+   "review": "ai",
+   "note": "old heraldic name (Brown Base Fess); same pattern as 26.3"
   }
  },
  "item.banner.stripe_bottom.cyan": {
@@ -6527,9 +7048,23 @@
    "kind": "renamed",
    "from": "block.minecraft.banner.stripe_bottom.cyan",
    "review": "ai"
+  },
+  "6a9f2fee09b8": {
+   "co": "Fascia ciana in punta",
+   "kind": "adapted",
+   "from": "block.minecraft.banner.stripe_bottom.cyan",
+   "review": "ai",
+   "note": "old heraldic name (Cyan Base Fess); same pattern as 26.3"
   }
  },
  "item.banner.stripe_bottom.gray": {
+  "0af708a63a84": {
+   "co": "Fascia grisgia in punta",
+   "kind": "adapted",
+   "from": "block.minecraft.banner.stripe_bottom.gray",
+   "review": "ai",
+   "note": "old heraldic name (Gray Base Fess); same pattern as 26.3"
+  },
   "10902b1f1907": {
    "co": "Fascia grisgia in punta",
    "kind": "renamed",
@@ -6538,6 +7073,13 @@
   }
  },
  "item.banner.stripe_bottom.green": {
+  "42f43a6b7ba2": {
+   "co": "Fascia verde in punta",
+   "kind": "adapted",
+   "from": "block.minecraft.banner.stripe_bottom.green",
+   "review": "ai",
+   "note": "old heraldic name (Green Base Fess); same pattern as 26.3"
+  },
   "b14eb3fce177": {
    "co": "Fascia verde in punta",
    "kind": "renamed",
@@ -6546,6 +7088,13 @@
   }
  },
  "item.banner.stripe_bottom.lightBlue": {
+  "7832a46f79d7": {
+   "co": "Fascia celeste in punta",
+   "kind": "adapted",
+   "from": "block.minecraft.banner.stripe_bottom.light_blue",
+   "review": "ai",
+   "note": "old heraldic name (Light Blue Base Fess); same pattern as 26.3"
+  },
   "cffe14e73a71": {
    "co": "Fascia celeste in punta",
    "kind": "renamed",
@@ -6559,6 +7108,13 @@
    "kind": "renamed",
    "from": "block.minecraft.banner.stripe_bottom.lime",
    "review": "ai"
+  },
+  "96d6d9815332": {
+   "co": "Fascia verde limone in punta",
+   "kind": "adapted",
+   "from": "block.minecraft.banner.stripe_bottom.lime",
+   "review": "ai",
+   "note": "old heraldic name (Lime Base Fess); same pattern as 26.3"
   }
  },
  "item.banner.stripe_bottom.magenta": {
@@ -6567,6 +7123,13 @@
    "kind": "renamed",
    "from": "block.minecraft.banner.stripe_bottom.magenta",
    "review": "ai"
+  },
+  "7a6567ed7e5c": {
+   "co": "Fascia magenta in punta",
+   "kind": "adapted",
+   "from": "block.minecraft.banner.stripe_bottom.magenta",
+   "review": "ai",
+   "note": "old heraldic name (Magenta Base Fess); same pattern as 26.3"
   }
  },
  "item.banner.stripe_bottom.orange": {
@@ -6575,9 +7138,23 @@
    "kind": "renamed",
    "from": "block.minecraft.banner.stripe_bottom.orange",
    "review": "ai"
+  },
+  "e4f0d4e15b75": {
+   "co": "Fascia arancia in punta",
+   "kind": "adapted",
+   "from": "block.minecraft.banner.stripe_bottom.orange",
+   "review": "ai",
+   "note": "old heraldic name (Orange Base Fess); same pattern as 26.3"
   }
  },
  "item.banner.stripe_bottom.pink": {
+  "4c5a65d8cbdb": {
+   "co": "Fascia rusulina in punta",
+   "kind": "adapted",
+   "from": "block.minecraft.banner.stripe_bottom.pink",
+   "review": "ai",
+   "note": "old heraldic name (Pink Base Fess); same pattern as 26.3"
+  },
   "fcbc71b8ca8e": {
    "co": "Fascia rusulina in punta",
    "kind": "renamed",
@@ -6591,6 +7168,13 @@
    "kind": "renamed",
    "from": "block.minecraft.banner.stripe_bottom.purple",
    "review": "ai"
+  },
+  "8b53bfd16ff8": {
+   "co": "Fascia purpurina in punta",
+   "kind": "adapted",
+   "from": "block.minecraft.banner.stripe_bottom.purple",
+   "review": "ai",
+   "note": "old heraldic name (Purple Base Fess); same pattern as 26.3"
   }
  },
  "item.banner.stripe_bottom.red": {
@@ -6599,6 +7183,13 @@
    "kind": "renamed",
    "from": "block.minecraft.banner.stripe_bottom.red",
    "review": "ai"
+  },
+  "6e450f4dc3eb": {
+   "co": "Fascia rossa in punta",
+   "kind": "adapted",
+   "from": "block.minecraft.banner.stripe_bottom.red",
+   "review": "ai",
+   "note": "old heraldic name (Red Base Fess); same pattern as 26.3"
   }
  },
  "item.banner.stripe_bottom.silver": {
@@ -6607,6 +7198,13 @@
    "kind": "renamed",
    "from": "block.minecraft.banner.stripe_bottom.light_gray",
    "review": "ai"
+  },
+  "56864bbf2e36": {
+   "co": "Fascia grisgia chjara in punta",
+   "kind": "adapted",
+   "from": "block.minecraft.banner.stripe_bottom.light_gray",
+   "review": "ai",
+   "note": "old heraldic name (Light Gray Base Fess); same pattern as 26.3"
   }
  },
  "item.banner.stripe_bottom.white": {
@@ -6615,6 +7213,13 @@
    "kind": "renamed",
    "from": "block.minecraft.banner.stripe_bottom.white",
    "review": "ai"
+  },
+  "ea0c36b0c48b": {
+   "co": "Fascia bianca in punta",
+   "kind": "adapted",
+   "from": "block.minecraft.banner.stripe_bottom.white",
+   "review": "ai",
+   "note": "old heraldic name (White Base Fess); same pattern as 26.3"
   }
  },
  "item.banner.stripe_bottom.yellow": {
@@ -6623,6 +7228,13 @@
    "kind": "renamed",
    "from": "block.minecraft.banner.stripe_bottom.yellow",
    "review": "ai"
+  },
+  "4cad1913dd88": {
+   "co": "Fascia ghjalla in punta",
+   "kind": "adapted",
+   "from": "block.minecraft.banner.stripe_bottom.yellow",
+   "review": "ai",
+   "note": "old heraldic name (Yellow Base Fess); same pattern as 26.3"
   }
  },
  "item.banner.stripe_center.black": {
@@ -7399,9 +8011,23 @@
    "kind": "renamed",
    "from": "block.minecraft.banner.stripe_top.black",
    "review": "ai"
+  },
+  "8ab7a2da22c3": {
+   "co": "Fascia nera in capu",
+   "kind": "adapted",
+   "from": "block.minecraft.banner.stripe_top.black",
+   "review": "ai",
+   "note": "old heraldic name (Black Chief Fess); same pattern as 26.3"
   }
  },
  "item.banner.stripe_top.blue": {
+  "19a0931c0638": {
+   "co": "Fascia turchina in capu",
+   "kind": "adapted",
+   "from": "block.minecraft.banner.stripe_top.blue",
+   "review": "ai",
+   "note": "old heraldic name (Blue Chief Fess); same pattern as 26.3"
+  },
   "95a359ec24f0": {
    "co": "Fascia turchina in capu",
    "kind": "renamed",
@@ -7415,6 +8041,13 @@
    "kind": "renamed",
    "from": "block.minecraft.banner.stripe_top.brown",
    "review": "ai"
+  },
+  "97a9e037a96a": {
+   "co": "Fascia marrone in capu",
+   "kind": "adapted",
+   "from": "block.minecraft.banner.stripe_top.brown",
+   "review": "ai",
+   "note": "old heraldic name (Brown Chief Fess); same pattern as 26.3"
   }
  },
  "item.banner.stripe_top.cyan": {
@@ -7423,9 +8056,23 @@
    "kind": "renamed",
    "from": "block.minecraft.banner.stripe_top.cyan",
    "review": "ai"
+  },
+  "45e5a286ee20": {
+   "co": "Fascia ciana in capu",
+   "kind": "adapted",
+   "from": "block.minecraft.banner.stripe_top.cyan",
+   "review": "ai",
+   "note": "old heraldic name (Cyan Chief Fess); same pattern as 26.3"
   }
  },
  "item.banner.stripe_top.gray": {
+  "e76af99df351": {
+   "co": "Fascia grisgia in capu",
+   "kind": "adapted",
+   "from": "block.minecraft.banner.stripe_top.gray",
+   "review": "ai",
+   "note": "old heraldic name (Gray Chief Fess); same pattern as 26.3"
+  },
   "f9cd085705a6": {
    "co": "Fascia grisgia in capu",
    "kind": "renamed",
@@ -7439,6 +8086,13 @@
    "kind": "renamed",
    "from": "block.minecraft.banner.stripe_top.green",
    "review": "ai"
+  },
+  "c6a21df30874": {
+   "co": "Fascia verde in capu",
+   "kind": "adapted",
+   "from": "block.minecraft.banner.stripe_top.green",
+   "review": "ai",
+   "note": "old heraldic name (Green Chief Fess); same pattern as 26.3"
   }
  },
  "item.banner.stripe_top.lightBlue": {
@@ -7447,9 +8101,23 @@
    "kind": "renamed",
    "from": "block.minecraft.banner.stripe_top.light_blue",
    "review": "ai"
+  },
+  "fc7db873cb8c": {
+   "co": "Fascia celeste in capu",
+   "kind": "adapted",
+   "from": "block.minecraft.banner.stripe_top.light_blue",
+   "review": "ai",
+   "note": "old heraldic name (Light Blue Chief Fess); same pattern as 26.3"
   }
  },
  "item.banner.stripe_top.lime": {
+  "020b0d94cd7b": {
+   "co": "Fascia verde limone in capu",
+   "kind": "adapted",
+   "from": "block.minecraft.banner.stripe_top.lime",
+   "review": "ai",
+   "note": "old heraldic name (Lime Chief Fess); same pattern as 26.3"
+  },
   "8ec7fecce325": {
    "co": "Fascia verde limone in capu",
    "kind": "renamed",
@@ -7463,6 +8131,13 @@
    "kind": "renamed",
    "from": "block.minecraft.banner.stripe_top.magenta",
    "review": "ai"
+  },
+  "e2c4bee681ac": {
+   "co": "Fascia magenta in capu",
+   "kind": "adapted",
+   "from": "block.minecraft.banner.stripe_top.magenta",
+   "review": "ai",
+   "note": "old heraldic name (Magenta Chief Fess); same pattern as 26.3"
   }
  },
  "item.banner.stripe_top.orange": {
@@ -7471,6 +8146,13 @@
    "kind": "renamed",
    "from": "block.minecraft.banner.stripe_top.orange",
    "review": "ai"
+  },
+  "3e18f9d6b471": {
+   "co": "Fascia arancia in capu",
+   "kind": "adapted",
+   "from": "block.minecraft.banner.stripe_top.orange",
+   "review": "ai",
+   "note": "old heraldic name (Orange Chief Fess); same pattern as 26.3"
   }
  },
  "item.banner.stripe_top.pink": {
@@ -7479,6 +8161,13 @@
    "kind": "renamed",
    "from": "block.minecraft.banner.stripe_top.pink",
    "review": "ai"
+  },
+  "b5d1cd9981bc": {
+   "co": "Fascia rusulina in capu",
+   "kind": "adapted",
+   "from": "block.minecraft.banner.stripe_top.pink",
+   "review": "ai",
+   "note": "old heraldic name (Pink Chief Fess); same pattern as 26.3"
   }
  },
  "item.banner.stripe_top.purple": {
@@ -7487,9 +8176,23 @@
    "kind": "renamed",
    "from": "block.minecraft.banner.stripe_top.purple",
    "review": "ai"
+  },
+  "98fbd3068634": {
+   "co": "Fascia purpurina in capu",
+   "kind": "adapted",
+   "from": "block.minecraft.banner.stripe_top.purple",
+   "review": "ai",
+   "note": "old heraldic name (Purple Chief Fess); same pattern as 26.3"
   }
  },
  "item.banner.stripe_top.red": {
+  "2de1f1f8edff": {
+   "co": "Fascia rossa in capu",
+   "kind": "adapted",
+   "from": "block.minecraft.banner.stripe_top.red",
+   "review": "ai",
+   "note": "old heraldic name (Red Chief Fess); same pattern as 26.3"
+  },
   "9e7b01289c68": {
    "co": "Fascia rossa in capu",
    "kind": "renamed",
@@ -7498,6 +8201,13 @@
   }
  },
  "item.banner.stripe_top.silver": {
+  "48dd67ee1fcb": {
+   "co": "Fascia grisgia chjara in capu",
+   "kind": "adapted",
+   "from": "block.minecraft.banner.stripe_top.light_gray",
+   "review": "ai",
+   "note": "old heraldic name (Light Gray Chief Fess); same pattern as 26.3"
+  },
   "78f2a2d1c131": {
    "co": "Fascia grisgia chjara in capu",
    "kind": "renamed",
@@ -7511,6 +8221,13 @@
    "kind": "renamed",
    "from": "block.minecraft.banner.stripe_top.white",
    "review": "ai"
+  },
+  "8d19aeeec23c": {
+   "co": "Fascia bianca in capu",
+   "kind": "adapted",
+   "from": "block.minecraft.banner.stripe_top.white",
+   "review": "ai",
+   "note": "old heraldic name (White Chief Fess); same pattern as 26.3"
   }
  },
  "item.banner.stripe_top.yellow": {
@@ -7519,6 +8236,13 @@
    "kind": "renamed",
    "from": "block.minecraft.banner.stripe_top.yellow",
    "review": "ai"
+  },
+  "3f1eb11f6c2d": {
+   "co": "Fascia ghjalla in capu",
+   "kind": "adapted",
+   "from": "block.minecraft.banner.stripe_top.yellow",
+   "review": "ai",
+   "note": "old heraldic name (Yellow Chief Fess); same pattern as 26.3"
   }
  },
  "item.banner.triangle_bottom.black": {
@@ -8121,6 +8845,14 @@
    "review": "ai"
   }
  },
+ "item.bed.name": {
+  "1a706e2365dd": {
+   "co": "Lettu",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
+  }
+ },
  "item.bed.orange.name": {
   "4e0f75d34753": {
    "co": "Lettu aranciu",
@@ -8306,6 +9038,15 @@
    "review": "ai"
   }
  },
+ "item.bootsChain.name": {
+  "186ddee4d147": {
+   "co": "Stivali di maglia",
+   "kind": "adapted",
+   "from": "item.minecraft.chainmail_boots",
+   "review": "ai",
+   "note": "26.3 Chainmail Boots"
+  }
+ },
  "item.bootsCloth.name": {
   "d1937cc4c440": {
    "co": "Stivali di coghju",
@@ -8448,6 +9189,15 @@
    "kind": "renamed",
    "from": "item.minecraft.charcoal",
    "review": "ai"
+  }
+ },
+ "item.chestplateChain.name": {
+  "173f46b7dd56": {
+   "co": "Curazza di maglia",
+   "kind": "adapted",
+   "from": "item.minecraft.chainmail_chestplate",
+   "review": "ai",
+   "note": "26.3 Chainmail Chestplate"
   }
  },
  "item.chestplateCloth.name": {
@@ -8634,6 +9384,14 @@
    "review": "ai"
   }
  },
+ "item.doorWood.name": {
+  "610e272a6dc2": {
+   "co": "Porta di legnu",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
+  }
+ },
  "item.dragon_breath.name": {
   "fce8a8dae8a4": {
    "co": "Fiatu di dragone",
@@ -8679,6 +9437,14 @@
    "co": "Tintura grisgia",
    "kind": "renamed",
    "from": "item.minecraft.gray_dye",
+   "review": "ai"
+  }
+ },
+ "item.dyePowder.green.name": {
+  "6d74f703b5f5": {
+   "co": "Verde di cactus",
+   "kind": "new",
+   "from": null,
    "review": "ai"
   }
  },
@@ -8730,6 +9496,14 @@
    "review": "ai"
   }
  },
+ "item.dyePowder.red.name": {
+  "74c20a0e5415": {
+   "co": "Rossu di rosa",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
+  }
+ },
  "item.dyePowder.silver.name": {
   "4307a4ac563b": {
    "co": "Tintura grisgia chjara",
@@ -8743,6 +9517,14 @@
    "co": "Farina d'ossu",
    "kind": "renamed",
    "from": "item.minecraft.bone_meal",
+   "review": "ai"
+  }
+ },
+ "item.dyePowder.yellow.name": {
+  "8c4705130989": {
+   "co": "Ghjallu di pisciacane",
+   "kind": "new",
+   "from": null,
    "review": "ai"
   }
  },
@@ -9091,6 +9873,22 @@
    "note": "26.3 key of another family; same meaning checked"
   }
  },
+ "item.fish.cod.cooked.name": {
+  "aa4d718f6f72": {
+   "co": "Pesciu cottu",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
+  }
+ },
+ "item.fish.cod.raw.name": {
+  "9de4f188dc37": {
+   "co": "Pesciu crudu",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
+  }
+ },
  "item.fish.pufferfish.raw.name": {
   "4152564faf4d": {
    "co": "Pesciu palla",
@@ -9112,6 +9910,22 @@
    "co": "Salmone crudu",
    "kind": "renamed",
    "from": "item.minecraft.salmon",
+   "review": "ai"
+  }
+ },
+ "item.fishCooked.name": {
+  "aa4d718f6f72": {
+   "co": "Pesciu cottu",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
+  }
+ },
+ "item.fishRaw.name": {
+  "9de4f188dc37": {
+   "co": "Pesciu crudu",
+   "kind": "new",
+   "from": null,
    "review": "ai"
   }
  },
@@ -9219,6 +10033,15 @@
    "review": "ai"
   }
  },
+ "item.helmetChain.name": {
+  "1b761dd6b982": {
+   "co": "Elmu di maglia",
+   "kind": "adapted",
+   "from": "item.minecraft.chainmail_helmet",
+   "review": "ai",
+   "note": "26.3 Chainmail Helmet"
+  }
+ },
  "item.helmetCloth.name": {
   "2e62307d171d": {
    "co": "Berrettu di coghju",
@@ -9299,6 +10122,15 @@
    "review": "ai"
   }
  },
+ "item.horsearmorgold.name": {
+  "5ae757860218": {
+   "co": "Armatura d'oru per cavallu",
+   "kind": "adapted",
+   "from": "item.minecraft.golden_horse_armor",
+   "review": "ai",
+   "note": "26.3 Golden Horse Armor"
+  }
+ },
  "item.horsearmormetal.name": {
   "ddc60b843e6b": {
    "co": "Armatura di ferru per cavallu",
@@ -9353,6 +10185,23 @@
    "kind": "renamed",
    "from": "item.minecraft.leather",
    "review": "ai"
+  }
+ },
+ "item.leaves.name": {
+  "84c102209b5f": {
+   "co": "Foglie",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
+  }
+ },
+ "item.leggingsChain.name": {
+  "7a5014c79c20": {
+   "co": "Gambali di maglia",
+   "kind": "adapted",
+   "from": "item.minecraft.chainmail_leggings",
+   "review": "ai",
+   "note": "26.3 Chainmail Leggings"
   }
  },
  "item.leggingsCloth.name": {
@@ -9419,6 +10268,14 @@
    "review": "ai"
   }
  },
+ "item.milk.name": {
+  "f2f4decd56d8": {
+   "co": "Latte",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
+  }
+ },
  "item.minecart.name": {
   "fd729ddf2750": {
    "co": "Carrettu",
@@ -9467,6 +10324,14 @@
    "review": "ai"
   }
  },
+ "item.minecraft.cactus_green": {
+  "6d74f703b5f5": {
+   "co": "Verde di cactus",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
+  }
+ },
  "item.minecraft.creeper_head": {
   "f324d77fe47f": {
    "co": "Capu di Creeper",
@@ -9475,11 +10340,27 @@
    "review": "ai"
   }
  },
+ "item.minecraft.dandelion_yellow": {
+  "8c4705130989": {
+   "co": "Ghjallu di pisciacane",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
+  }
+ },
  "item.minecraft.dragon_head": {
   "fcee97247dc3": {
    "co": "Capu di dragone",
    "kind": "renamed",
    "from": "block.minecraft.dragon_head",
+   "review": "ai"
+  }
+ },
+ "item.minecraft.rose_red": {
+  "74c20a0e5415": {
+   "co": "Rossu di rosa",
+   "kind": "new",
+   "from": null,
    "review": "ai"
   }
  },
@@ -9505,6 +10386,15 @@
    "kind": "renamed",
    "from": "block.minecraft.zombie_head",
    "review": "ai"
+  }
+ },
+ "item.minecraft.zombie_pigman_spawn_egg": {
+  "87c730ac8491": {
+   "co": "Ovu generatore d'omu-porcu zombi",
+   "kind": "new",
+   "from": null,
+   "review": "ai",
+   "note": "ambiguous: see entity.minecraft.zombie_pigman"
   }
  },
  "item.modifiers.feet": {
@@ -9550,6 +10440,15 @@
    "from": "item.modifiers.offhand",
    "review": "ai",
    "note": "English changed only in case or punctuation"
+  }
+ },
+ "item.monsterPlacer.name": {
+  "29de5042245a": {
+   "co": "Ovu generatore",
+   "kind": "new",
+   "from": null,
+   "review": "ai",
+   "note": "the game adds the creature's name after it (Spawn Creeper)"
   }
  },
  "item.mushroomStew.name": {
@@ -9897,6 +10796,23 @@
    "review": "ai"
   }
  },
+ "item.redstone.name": {
+  "bee17c9afa59": {
+   "co": "Redstone",
+   "kind": "new",
+   "from": null,
+   "review": "ai",
+   "note": "same as English: the material's name, as in 26.3 texts"
+  }
+ },
+ "item.reeds.name": {
+  "47250c44706b": {
+   "co": "Canne da zuccheru",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
+  }
+ },
  "item.rottenFlesh.name": {
   "3de3299966e2": {
    "co": "Carne fracica",
@@ -9905,11 +10821,27 @@
    "review": "ai"
   }
  },
+ "item.ruby.name": {
+  "b217e98c3bf7": {
+   "co": "Rubinu",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
+  }
+ },
  "item.saddle.name": {
   "530f8483b978": {
    "co": "Sella",
    "kind": "renamed",
    "from": "item.minecraft.saddle",
+   "review": "ai"
+  }
+ },
+ "item.seeds.name": {
+  "505d6a6ad497": {
+   "co": "Sumente",
+   "kind": "new",
+   "from": null,
    "review": "ai"
   }
  },
@@ -10129,6 +11061,14 @@
    "review": "ai"
   }
  },
+ "item.skull.char.name": {
+  "e5ffd15be706": {
+   "co": "Capu",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
+  }
+ },
  "item.skull.creeper.name": {
   "f324d77fe47f": {
    "co": "Capu di Creeper",
@@ -10190,6 +11130,14 @@
    "co": "Palla di neve",
    "kind": "renamed",
    "from": "item.minecraft.snowball",
+   "review": "ai"
+  }
+ },
+ "item.speckledMelon.name": {
+  "29069a5bcd75": {
+   "co": "Pateca luccicante",
+   "kind": "new",
+   "from": null,
    "review": "ai"
   }
  },
@@ -11835,6 +12783,14 @@
    "review": "ai"
   }
  },
+ "potion.absorption.postfix": {
+  "b38b1acc0b65": {
+   "co": "Pozione d'assurbimentu",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
+  }
+ },
  "potion.blindness": {
   "fe268897f4c3": {
    "co": "Cicità",
@@ -11843,11 +12799,27 @@
    "review": "ai"
   }
  },
+ "potion.blindness.postfix": {
+  "fa9eeb095307": {
+   "co": "Pozione di cicità",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
+  }
+ },
  "potion.confusion": {
   "5b4134654027": {
    "co": "Nausea",
    "kind": "renamed",
    "from": "effect.minecraft.nausea",
+   "review": "ai"
+  }
+ },
+ "potion.confusion.postfix": {
+  "cc22551c55d5": {
+   "co": "Pozione di nausea",
+   "kind": "new",
+   "from": null,
    "review": "ai"
   }
  },
@@ -11875,11 +12847,27 @@
    "review": "ai"
   }
  },
+ "potion.digSlowDown.postfix": {
+  "ad13cfdd0314": {
+   "co": "Pozione di fiacchezza",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
+  }
+ },
  "potion.digSpeed": {
   "27b44b7bcfbd": {
    "co": "Prestezza",
    "kind": "renamed",
    "from": "effect.minecraft.haste",
+   "review": "ai"
+  }
+ },
+ "potion.digSpeed.postfix": {
+  "b1340e6a14c1": {
+   "co": "Pozione di prestezza",
+   "kind": "new",
+   "from": null,
    "review": "ai"
   }
  },
@@ -12116,11 +13104,27 @@
    "review": "ai"
   }
  },
+ "potion.healthBoost.postfix": {
+  "65362b3f594f": {
+   "co": "Pozione di rinforzu di salute",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
+  }
+ },
  "potion.hunger": {
   "ad93df41989e": {
    "co": "Fame",
    "kind": "renamed",
    "from": "effect.minecraft.hunger",
+   "review": "ai"
+  }
+ },
+ "potion.hunger.postfix": {
+  "ec441b6fedc3": {
+   "co": "Pozione di fame",
+   "kind": "new",
+   "from": null,
    "review": "ai"
   }
  },
@@ -12220,6 +13224,303 @@
    "review": "ai"
   }
  },
+ "potion.prefix.acrid": {
+  "72507b30986e": {
+   "co": "Acre",
+   "kind": "new",
+   "from": null,
+   "review": "ai",
+   "note": "1.8 and older put this word before the item name (Acre Pozione); adjectives are feminine for Pozione"
+  }
+ },
+ "potion.prefix.artless": {
+  "7eb186e5e471": {
+   "co": "Goffa",
+   "kind": "new",
+   "from": null,
+   "review": "ai",
+   "note": "before the item name; feminine"
+  }
+ },
+ "potion.prefix.awkward": {
+  "c6bd7629fdd4": {
+   "co": "Strana",
+   "kind": "new",
+   "from": null,
+   "review": "ai",
+   "note": "before the item name; feminine"
+  }
+ },
+ "potion.prefix.bland": {
+  "abb0489bb3a8": {
+   "co": "Insipida",
+   "kind": "new",
+   "from": null,
+   "review": "ai",
+   "note": "before the item name; feminine"
+  }
+ },
+ "potion.prefix.bulky": {
+  "73510e705473": {
+   "co": "Ingombrante",
+   "kind": "new",
+   "from": null,
+   "review": "ai",
+   "note": "before the item name; feminine"
+  }
+ },
+ "potion.prefix.bungling": {
+  "ec5de6287e60": {
+   "co": "Maldestra",
+   "kind": "new",
+   "from": null,
+   "review": "ai",
+   "note": "before the item name; feminine"
+  }
+ },
+ "potion.prefix.buttered": {
+  "b47f8eed5249": {
+   "co": "Imburrata",
+   "kind": "new",
+   "from": null,
+   "review": "ai",
+   "note": "before the item name; feminine"
+  }
+ },
+ "potion.prefix.charming": {
+  "b3708494c45f": {
+   "co": "Incantevule",
+   "kind": "new",
+   "from": null,
+   "review": "ai",
+   "note": "before the item name; feminine"
+  }
+ },
+ "potion.prefix.clear": {
+  "719ea396ad92": {
+   "co": "Limpida",
+   "kind": "new",
+   "from": null,
+   "review": "ai",
+   "note": "before the item name; feminine"
+  }
+ },
+ "potion.prefix.cordial": {
+  "713db5c16d86": {
+   "co": "Curdiale",
+   "kind": "new",
+   "from": null,
+   "review": "ai",
+   "note": "before the item name; feminine"
+  }
+ },
+ "potion.prefix.dashing": {
+  "1d22b9f5f9fd": {
+   "co": "Brillante",
+   "kind": "new",
+   "from": null,
+   "review": "ai",
+   "note": "before the item name; feminine"
+  }
+ },
+ "potion.prefix.debonair": {
+  "7515edea1ac5": {
+   "co": "Gentile",
+   "kind": "new",
+   "from": null,
+   "review": "ai",
+   "note": "before the item name; feminine"
+  }
+ },
+ "potion.prefix.diffuse": {
+  "3c550fc092fa": {
+   "co": "Diffusa",
+   "kind": "new",
+   "from": null,
+   "review": "ai",
+   "note": "before the item name; feminine"
+  }
+ },
+ "potion.prefix.elegant": {
+  "4d459dfb9af6": {
+   "co": "Elegante",
+   "kind": "new",
+   "from": null,
+   "review": "ai",
+   "note": "before the item name; feminine"
+  }
+ },
+ "potion.prefix.fancy": {
+  "244195529e30": {
+   "co": "Sfarzosa",
+   "kind": "new",
+   "from": null,
+   "review": "ai",
+   "note": "before the item name; feminine"
+  }
+ },
+ "potion.prefix.flat": {
+  "79c9e13ab7d5": {
+   "co": "Piatta",
+   "kind": "new",
+   "from": null,
+   "review": "ai",
+   "note": "before the item name; feminine"
+  }
+ },
+ "potion.prefix.foul": {
+  "8d42b1e64b64": {
+   "co": "Disgustosa",
+   "kind": "new",
+   "from": null,
+   "review": "ai",
+   "note": "before the item name; feminine"
+  }
+ },
+ "potion.prefix.grenade": {
+  "76ce312eb031": {
+   "co": "Lampabile",
+   "kind": "new",
+   "from": null,
+   "review": "ai",
+   "note": "ambiguous: 1.8 and older write it before the potion name (Lampabile Pozione di cura); 26.3 says Pozione da lampà"
+  }
+ },
+ "potion.prefix.gross": {
+  "9580a6176fdb": {
+   "co": "Schifosa",
+   "kind": "new",
+   "from": null,
+   "review": "ai",
+   "note": "before the item name; feminine"
+  }
+ },
+ "potion.prefix.harsh": {
+  "6bb02d699e69": {
+   "co": "Aspra",
+   "kind": "new",
+   "from": null,
+   "review": "ai",
+   "note": "before the item name; feminine"
+  }
+ },
+ "potion.prefix.milky": {
+  "401b6720e5bc": {
+   "co": "Latticcia",
+   "kind": "new",
+   "from": null,
+   "review": "ai",
+   "note": "before the item name; feminine"
+  }
+ },
+ "potion.prefix.mundane": {
+  "aefe6a5dae1b": {
+   "co": "Banale",
+   "kind": "new",
+   "from": null,
+   "review": "ai",
+   "note": "before the item name; feminine"
+  }
+ },
+ "potion.prefix.odorless": {
+  "eab0d10497c3": {
+   "co": "Inodora",
+   "kind": "new",
+   "from": null,
+   "review": "ai",
+   "note": "before the item name; feminine"
+  }
+ },
+ "potion.prefix.potent": {
+  "6632db0ac123": {
+   "co": "Putente",
+   "kind": "new",
+   "from": null,
+   "review": "ai",
+   "note": "before the item name; feminine"
+  }
+ },
+ "potion.prefix.rank": {
+  "dd48a1149548": {
+   "co": "Rancida",
+   "kind": "new",
+   "from": null,
+   "review": "ai",
+   "note": "before the item name; feminine"
+  }
+ },
+ "potion.prefix.refined": {
+  "a9ffd589d8f1": {
+   "co": "Raffinata",
+   "kind": "new",
+   "from": null,
+   "review": "ai",
+   "note": "before the item name; feminine"
+  }
+ },
+ "potion.prefix.smooth": {
+  "7f93ca7e7665": {
+   "co": "Vellutata",
+   "kind": "new",
+   "from": null,
+   "review": "ai",
+   "note": "before the item name; feminine"
+  }
+ },
+ "potion.prefix.sparkling": {
+  "98e32dd6e1db": {
+   "co": "Frizzante",
+   "kind": "new",
+   "from": null,
+   "review": "ai",
+   "note": "before the item name; feminine"
+  }
+ },
+ "potion.prefix.stinky": {
+  "68d09dd55b55": {
+   "co": "Puzzulente",
+   "kind": "new",
+   "from": null,
+   "review": "ai",
+   "note": "before the item name; feminine"
+  }
+ },
+ "potion.prefix.suave": {
+  "216b3dda316c": {
+   "co": "Delicata",
+   "kind": "new",
+   "from": null,
+   "review": "ai",
+   "note": "before the item name; feminine"
+  }
+ },
+ "potion.prefix.thick": {
+  "4318f26fa32f": {
+   "co": "Spessa",
+   "kind": "new",
+   "from": null,
+   "review": "ai",
+   "note": "before the item name; feminine"
+  }
+ },
+ "potion.prefix.thin": {
+  "027f0b07b1e5": {
+   "co": "Fina",
+   "kind": "new",
+   "from": null,
+   "review": "ai",
+   "note": "before the item name; feminine"
+  }
+ },
+ "potion.prefix.uninteresting": {
+  "2def7406aee8": {
+   "co": "Insignificante",
+   "kind": "new",
+   "from": null,
+   "review": "ai",
+   "note": "before the item name; feminine"
+  }
+ },
  "potion.regeneration": {
   "506eb98f49ae": {
    "co": "Rigenerazione",
@@ -12244,11 +13545,27 @@
    "review": "ai"
   }
  },
+ "potion.resistance.postfix": {
+  "af5e2989d1aa": {
+   "co": "Pozione di resistenza",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
+  }
+ },
  "potion.saturation": {
   "20a32bc870bf": {
    "co": "Saturazione",
    "kind": "renamed",
    "from": "effect.minecraft.saturation",
+   "review": "ai"
+  }
+ },
+ "potion.saturation.postfix": {
+  "cd10b419dfa9": {
+   "co": "Pozione di saturazione",
+   "kind": "new",
+   "from": null,
    "review": "ai"
   }
  },
@@ -12289,6 +13606,14 @@
    "co": "Wither",
    "kind": "renamed",
    "from": "effect.minecraft.wither",
+   "review": "ai"
+  }
+ },
+ "potion.wither.postfix": {
+  "69bdcf22ced4": {
+   "co": "Pozione di decadenza",
+   "kind": "new",
+   "from": null,
    "review": "ai"
   }
  },
@@ -14033,6 +15358,22 @@
    "review": "ai"
   }
  },
+ "tile.anvil.slightlyDamaged.name": {
+  "c95511240825": {
+   "co": "Ancùdina pocu dannighjata",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
+  }
+ },
+ "tile.anvil.veryDamaged.name": {
+  "def56503f65f": {
+   "co": "Ancùdina assai dannighjata",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
+  }
+ },
  "tile.barrier.name": {
   "10c02649e226": {
    "co": "Barriera",
@@ -14065,12 +15406,54 @@
    "review": "ai"
   }
  },
+ "tile.bed.name": {
+  "1a706e2365dd": {
+   "co": "Lettu",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
+  }
+ },
+ "tile.bed.noSleep": {
+  "51e096a3c817": {
+   "co": "Pudete dorme solu di notte",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
+  }
+ },
+ "tile.bed.notSafe": {
+  "eabfa521edb6": {
+   "co": "Ùn pudete micca ripusà avà : ci sò mostri vicinu",
+   "kind": "adapted",
+   "from": "block.minecraft.bed.not_safe",
+   "review": "ai",
+   "note": "same sentence as 26.3 block.minecraft.bed.not_safe"
+  }
+ },
+ "tile.bed.notValid": {
+  "af28bab4691b": {
+   "co": "U vostru lettu era sparitu o bluccatu",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
+  }
+ },
  "tile.bed.occupied": {
   "312fd12f5072": {
    "co": "Stu lettu hè occupatu",
    "kind": "renamed",
    "from": "block.minecraft.bed.occupied",
    "review": "ai"
+  }
+ },
+ "tile.bed.tooFarAway": {
+  "c3d169a2dbd4": {
+   "co": "Ùn pudete micca ripusà avà : u lettu hè troppu luntanu",
+   "kind": "adapted",
+   "from": "block.minecraft.bed.too_far_away",
+   "review": "ai",
+   "note": "same sentence as 26.3 block.minecraft.bed.too_far_away"
   }
  },
  "tile.bedrock.name": {
@@ -14143,6 +15526,15 @@
    "kind": "renamed",
    "from": "block.minecraft.iron_block",
    "review": "ai"
+  }
+ },
+ "tile.blockLapis.name": {
+  "7b2b5362f7d7": {
+   "co": "Bloccu di lapislazuli",
+   "kind": "adapted",
+   "from": "block.minecraft.lapis_block",
+   "review": "ai",
+   "note": "26.3 Block of Lapis Lazuli"
   }
  },
  "tile.blockRedstone.name": {
@@ -14272,17 +15664,52 @@
    "kind": "renamed",
    "from": "block.minecraft.terracotta",
    "review": "ai"
+  },
+  "deec5efa616d": {
+   "co": "Creta indurita",
+   "kind": "new",
+   "from": null,
+   "review": "ai",
+   "note": "terracotta before 1.12"
   }
  },
  "tile.clayHardenedStained.black.name": {
+  "32a37b1ce6a8": {
+   "co": "Creta indurita nera",
+   "kind": "new",
+   "from": null,
+   "review": "ai",
+   "note": "terracotta before 1.12"
+  },
   "cf2e3a60ef80": {
    "co": "Terracotta nera",
    "kind": "renamed",
    "from": "block.minecraft.black_terracotta",
    "review": "ai"
+  },
+  "d40615571263": {
+   "co": "Creta tinta nera",
+   "kind": "new",
+   "from": null,
+   "review": "ai",
+   "note": "terracotta before 1.12"
   }
  },
  "tile.clayHardenedStained.blue.name": {
+  "5185eae98011": {
+   "co": "Creta indurita turchina",
+   "kind": "new",
+   "from": null,
+   "review": "ai",
+   "note": "terracotta before 1.12"
+  },
+  "5cd4badfd2f9": {
+   "co": "Creta tinta turchina",
+   "kind": "new",
+   "from": null,
+   "review": "ai",
+   "note": "terracotta before 1.12"
+  },
   "c0cd7ebef5bb": {
    "co": "Terracotta turchina",
    "kind": "renamed",
@@ -14296,6 +15723,20 @@
    "kind": "renamed",
    "from": "block.minecraft.brown_terracotta",
    "review": "ai"
+  },
+  "68a78fec0f71": {
+   "co": "Creta tinta marrone",
+   "kind": "new",
+   "from": null,
+   "review": "ai",
+   "note": "terracotta before 1.12"
+  },
+  "a2be4dcf87ab": {
+   "co": "Creta indurita marrone",
+   "kind": "new",
+   "from": null,
+   "review": "ai",
+   "note": "terracotta before 1.12"
   }
  },
  "tile.clayHardenedStained.cyan.name": {
@@ -14304,6 +15745,20 @@
    "kind": "renamed",
    "from": "block.minecraft.cyan_terracotta",
    "review": "ai"
+  },
+  "b57bab14abfa": {
+   "co": "Creta tinta ciana",
+   "kind": "new",
+   "from": null,
+   "review": "ai",
+   "note": "terracotta before 1.12"
+  },
+  "e6c7f17af763": {
+   "co": "Creta indurita ciana",
+   "kind": "new",
+   "from": null,
+   "review": "ai",
+   "note": "terracotta before 1.12"
   }
  },
  "tile.clayHardenedStained.gray.name": {
@@ -14312,9 +15767,37 @@
    "kind": "renamed",
    "from": "block.minecraft.gray_terracotta",
    "review": "ai"
+  },
+  "aa3e7ad9c453": {
+   "co": "Creta indurita grisgia",
+   "kind": "new",
+   "from": null,
+   "review": "ai",
+   "note": "terracotta before 1.12"
+  },
+  "cba51224cd92": {
+   "co": "Creta tinta grisgia",
+   "kind": "new",
+   "from": null,
+   "review": "ai",
+   "note": "terracotta before 1.12"
   }
  },
  "tile.clayHardenedStained.green.name": {
+  "66d51c868111": {
+   "co": "Creta tinta verde",
+   "kind": "new",
+   "from": null,
+   "review": "ai",
+   "note": "terracotta before 1.12"
+  },
+  "f4e916818177": {
+   "co": "Creta indurita verde",
+   "kind": "new",
+   "from": null,
+   "review": "ai",
+   "note": "terracotta before 1.12"
+  },
   "fd5cfa4f82e9": {
    "co": "Terracotta verde",
    "kind": "renamed",
@@ -14328,6 +15811,20 @@
    "kind": "renamed",
    "from": "block.minecraft.light_blue_terracotta",
    "review": "ai"
+  },
+  "120accf3b908": {
+   "co": "Creta indurita celeste",
+   "kind": "new",
+   "from": null,
+   "review": "ai",
+   "note": "terracotta before 1.12"
+  },
+  "e31631036764": {
+   "co": "Creta tinta celeste",
+   "kind": "new",
+   "from": null,
+   "review": "ai",
+   "note": "terracotta before 1.12"
   }
  },
  "tile.clayHardenedStained.lime.name": {
@@ -14336,9 +15833,37 @@
    "kind": "renamed",
    "from": "block.minecraft.lime_terracotta",
    "review": "ai"
+  },
+  "a57cdc13059d": {
+   "co": "Creta indurita verde limone",
+   "kind": "new",
+   "from": null,
+   "review": "ai",
+   "note": "terracotta before 1.12"
+  },
+  "b9846dfb849c": {
+   "co": "Creta tinta verde limone",
+   "kind": "new",
+   "from": null,
+   "review": "ai",
+   "note": "terracotta before 1.12"
   }
  },
  "tile.clayHardenedStained.magenta.name": {
+  "9deb34bca3d4": {
+   "co": "Creta tinta magenta",
+   "kind": "new",
+   "from": null,
+   "review": "ai",
+   "note": "terracotta before 1.12"
+  },
+  "9fd7f0d878a9": {
+   "co": "Creta indurita magenta",
+   "kind": "new",
+   "from": null,
+   "review": "ai",
+   "note": "terracotta before 1.12"
+  },
   "cabe49fde008": {
    "co": "Terracotta magenta",
    "kind": "renamed",
@@ -14346,12 +15871,48 @@
    "review": "ai"
   }
  },
+ "tile.clayHardenedStained.name": {
+  "256e866e5f41": {
+   "co": "Terracotta tinta",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
+  },
+  "278dc5765b1f": {
+   "co": "Creta indurita tinta",
+   "kind": "new",
+   "from": null,
+   "review": "ai",
+   "note": "terracotta before 1.12"
+  },
+  "af35b1435aa1": {
+   "co": "Creta tinta",
+   "kind": "new",
+   "from": null,
+   "review": "ai",
+   "note": "terracotta before 1.12"
+  }
+ },
  "tile.clayHardenedStained.orange.name": {
+  "0a7e64591b45": {
+   "co": "Creta indurita arancia",
+   "kind": "new",
+   "from": null,
+   "review": "ai",
+   "note": "terracotta before 1.12"
+  },
   "10f669463dda": {
    "co": "Terracotta arancia",
    "kind": "renamed",
    "from": "block.minecraft.orange_terracotta",
    "review": "ai"
+  },
+  "8b223a194bb1": {
+   "co": "Creta tinta arancia",
+   "kind": "new",
+   "from": null,
+   "review": "ai",
+   "note": "terracotta before 1.12"
   }
  },
  "tile.clayHardenedStained.pink.name": {
@@ -14360,6 +15921,20 @@
    "kind": "renamed",
    "from": "block.minecraft.pink_terracotta",
    "review": "ai"
+  },
+  "27099ecf69da": {
+   "co": "Creta indurita rusulina",
+   "kind": "new",
+   "from": null,
+   "review": "ai",
+   "note": "terracotta before 1.12"
+  },
+  "78768c2d9741": {
+   "co": "Creta tinta rusulina",
+   "kind": "new",
+   "from": null,
+   "review": "ai",
+   "note": "terracotta before 1.12"
   }
  },
  "tile.clayHardenedStained.purple.name": {
@@ -14368,17 +15943,59 @@
    "kind": "renamed",
    "from": "block.minecraft.purple_terracotta",
    "review": "ai"
+  },
+  "220ffabaf94e": {
+   "co": "Creta tinta purpurina",
+   "kind": "new",
+   "from": null,
+   "review": "ai",
+   "note": "terracotta before 1.12"
+  },
+  "b760663c4dd1": {
+   "co": "Creta indurita purpurina",
+   "kind": "new",
+   "from": null,
+   "review": "ai",
+   "note": "terracotta before 1.12"
   }
  },
  "tile.clayHardenedStained.red.name": {
+  "0ad4c8786c21": {
+   "co": "Creta tinta rossa",
+   "kind": "new",
+   "from": null,
+   "review": "ai",
+   "note": "terracotta before 1.12"
+  },
   "2a804a895445": {
    "co": "Terracotta rossa",
    "kind": "renamed",
    "from": "block.minecraft.red_terracotta",
    "review": "ai"
+  },
+  "699ab08ba31a": {
+   "co": "Creta indurita rossa",
+   "kind": "new",
+   "from": null,
+   "review": "ai",
+   "note": "terracotta before 1.12"
   }
  },
  "tile.clayHardenedStained.silver.name": {
+  "47466b0d1244": {
+   "co": "Creta tinta grisgia chjara",
+   "kind": "new",
+   "from": null,
+   "review": "ai",
+   "note": "terracotta before 1.12"
+  },
+  "cd0f84830406": {
+   "co": "Creta indurita grisgia chjara",
+   "kind": "new",
+   "from": null,
+   "review": "ai",
+   "note": "terracotta before 1.12"
+  },
   "d1578c770644": {
    "co": "Terracotta grisgia chjara",
    "kind": "renamed",
@@ -14387,19 +16004,47 @@
   }
  },
  "tile.clayHardenedStained.white.name": {
+  "250fd82e8c2a": {
+   "co": "Creta tinta bianca",
+   "kind": "new",
+   "from": null,
+   "review": "ai",
+   "note": "terracotta before 1.12"
+  },
   "3c6a5fe39772": {
    "co": "Terracotta bianca",
    "kind": "renamed",
    "from": "block.minecraft.white_terracotta",
    "review": "ai"
+  },
+  "8256804fd4fa": {
+   "co": "Creta indurita bianca",
+   "kind": "new",
+   "from": null,
+   "review": "ai",
+   "note": "terracotta before 1.12"
   }
  },
  "tile.clayHardenedStained.yellow.name": {
+  "367a5623bcf0": {
+   "co": "Creta indurita ghjalla",
+   "kind": "new",
+   "from": null,
+   "review": "ai",
+   "note": "terracotta before 1.12"
+  },
   "6486e4954237": {
    "co": "Terracotta ghjalla",
    "kind": "renamed",
    "from": "block.minecraft.yellow_terracotta",
    "review": "ai"
+  },
+  "b7e06e9161f0": {
+   "co": "Creta tinta ghjalla",
+   "kind": "new",
+   "from": null,
+   "review": "ai",
+   "note": "terracotta before 1.12"
   }
  },
  "tile.cloth.black.name": {
@@ -14474,6 +16119,14 @@
    "review": "ai"
   }
  },
+ "tile.cloth.name": {
+  "83bb9c7e3400": {
+   "co": "Lana",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
+  }
+ },
  "tile.cloth.orange.name": {
   "deb54a83c6b6": {
    "co": "Lana arancia",
@@ -14519,6 +16172,12 @@
    "co": "Lana bianca",
    "kind": "renamed",
    "from": "block.minecraft.white_wool",
+   "review": "ai"
+  },
+  "83bb9c7e3400": {
+   "co": "Lana",
+   "kind": "new",
+   "from": null,
    "review": "ai"
   }
  },
@@ -14818,6 +16477,14 @@
    "review": "ai"
   }
  },
+ "tile.crops.name": {
+  "adb5811a42f4": {
+   "co": "Culture",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
+  }
+ },
  "tile.darkOakFence.name": {
   "311d6861c3c7": {
    "co": "Steccatu di quercia scura",
@@ -14831,6 +16498,14 @@
    "co": "Cancellu di quercia scura",
    "kind": "renamed",
    "from": "block.minecraft.dark_oak_fence_gate",
+   "review": "ai"
+  }
+ },
+ "tile.daylightDetector.name": {
+  "ddfac95bb759": {
+   "co": "Sensore di luce di ghjornu",
+   "kind": "new",
+   "from": null,
    "review": "ai"
   }
  },
@@ -14898,11 +16573,35 @@
    "review": "ai"
   }
  },
+ "tile.doorWood.name": {
+  "610e272a6dc2": {
+   "co": "Porta di legnu",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
+  }
+ },
  "tile.doublePlant.fern.name": {
   "fd892d4b439b": {
    "co": "Filetta grande",
    "kind": "renamed",
    "from": "block.minecraft.large_fern",
+   "review": "ai"
+  }
+ },
+ "tile.doublePlant.grass.name": {
+  "748f6f74ad5b": {
+   "co": "Erba alta doppia",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
+  }
+ },
+ "tile.doublePlant.name": {
+  "612687a2ab9b": {
+   "co": "Pianta",
+   "kind": "new",
+   "from": null,
    "review": "ai"
   }
  },
@@ -14954,6 +16653,15 @@
    "review": "ai"
   }
  },
+ "tile.enchantmentTable.name": {
+  "83636ee0a421": {
+   "co": "Bancu d'incantesimi",
+   "kind": "adapted",
+   "from": "block.minecraft.enchanting_table",
+   "review": "ai",
+   "note": "26.3 Enchanting Table"
+  }
+ },
  "tile.endBricks.name": {
   "4702e4812937": {
    "co": "Matoni di petra di l'End",
@@ -15000,9 +16708,21 @@
    "kind": "renamed",
    "from": "block.minecraft.oak_fence",
    "review": "ai"
+  },
+  "a78529916258": {
+   "co": "Steccatu",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
   }
  },
  "tile.fenceGate.name": {
+  "4c099cffa109": {
+   "co": "Cancellu",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
+  },
   "bc7a8c0779ec": {
    "co": "Cancellu di quercia",
    "kind": "renamed",
@@ -15026,11 +16746,27 @@
    "review": "ai"
   }
  },
+ "tile.flower.name": {
+  "ac81468fdc6a": {
+   "co": "Fiore",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
+  }
+ },
  "tile.flower1.dandelion.name": {
   "18154403f3f0": {
    "co": "Pisciacane",
    "kind": "renamed",
    "from": "block.minecraft.dandelion",
+   "review": "ai"
+  }
+ },
+ "tile.flower1.name": {
+  "ac81468fdc6a": {
+   "co": "Fiore",
+   "kind": "new",
+   "from": null,
    "review": "ai"
   }
  },
@@ -15055,6 +16791,14 @@
    "co": "Houstonia celeste",
    "kind": "renamed",
    "from": "block.minecraft.azure_bluet",
+   "review": "ai"
+  }
+ },
+ "tile.flower2.name": {
+  "ac81468fdc6a": {
+   "co": "Fiore",
+   "kind": "new",
+   "from": null,
    "review": "ai"
   }
  },
@@ -15274,6 +17018,14 @@
    "review": "ai"
   }
  },
+ "tile.grassPath.name": {
+  "ab1e26547f2c": {
+   "co": "Chjassu d'erba",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
+  }
+ },
  "tile.gravel.name": {
   "df2bfa225e8d": {
    "co": "Ghjàira",
@@ -15410,6 +17162,14 @@
    "review": "ai"
   }
  },
+ "tile.leaves.name": {
+  "84c102209b5f": {
+   "co": "Foglie",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
+  }
+ },
  "tile.leaves.oak.name": {
   "349e517627c0": {
    "co": "Foglie di quercia",
@@ -15450,6 +17210,14 @@
    "review": "ai"
   }
  },
+ "tile.lockedchest.name": {
+  "7e3e34b87ad3": {
+   "co": "Cascia chjosa à chjave",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
+  }
+ },
  "tile.log.acacia.name": {
   "61b7befc03cb": {
    "co": "Legnu d'acacia",
@@ -15484,6 +17252,14 @@
    "from": "block.minecraft.jungle_wood",
    "review": "ai",
    "note": "the log of 1.12 ('Oak Wood'); same English as the 26.3 wood block"
+  }
+ },
+ "tile.log.name": {
+  "b3b5a34500ef": {
+   "co": "Legnu",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
   }
  },
  "tile.log.oak.name": {
@@ -15525,6 +17301,70 @@
    "co": "Generatore di mostri",
    "kind": "renamed",
    "from": "block.minecraft.spawner",
+   "review": "ai"
+  }
+ },
+ "tile.monsterStoneEgg.brick.name": {
+  "6f73f2993188": {
+   "co": "Ovu di mostru di matoni di petra",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
+  }
+ },
+ "tile.monsterStoneEgg.chiseledbrick.name": {
+  "cc209b2b9eec": {
+   "co": "Ovu di mostru di matoni di petra sculpiti",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
+  }
+ },
+ "tile.monsterStoneEgg.cobble.name": {
+  "f5b4cd836aae": {
+   "co": "Ovu di mostru di petrame",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
+  }
+ },
+ "tile.monsterStoneEgg.crackedbrick.name": {
+  "0181faaf4ded": {
+   "co": "Ovu di mostru di matoni di petra crepati",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
+  }
+ },
+ "tile.monsterStoneEgg.mossybrick.name": {
+  "77815423d717": {
+   "co": "Ovu di mostru di matoni di petra muscosi",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
+  }
+ },
+ "tile.monsterStoneEgg.name": {
+  "65fc9ecf16b2": {
+   "co": "Ovu di mostru di petra",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
+  }
+ },
+ "tile.monsterStoneEgg.stone.name": {
+  "65fc9ecf16b2": {
+   "co": "Ovu di mostru di petra",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
+  }
+ },
+ "tile.mushroom.name": {
+  "aa146572cac4": {
+   "co": "Fungu",
+   "kind": "new",
+   "from": null,
    "review": "ai"
   }
  },
@@ -15665,6 +17505,14 @@
    "review": "ai"
   }
  },
+ "tile.oreRuby.name": {
+  "3e33a938fea9": {
+   "co": "Minerale di rubinu",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
+  }
+ },
  "tile.pistonBase.name": {
   "2dddd64cd29d": {
    "co": "Pistone",
@@ -15681,6 +17529,14 @@
    "review": "ai"
   }
  },
+ "tile.portal.name": {
+  "b55223c7bdc7": {
+   "co": "Portale",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
+  }
+ },
  "tile.potatoes.name": {
   "47a6a46bb943": {
    "co": "Patate",
@@ -15689,11 +17545,27 @@
    "review": "ai"
   }
  },
+ "tile.pressurePlate.name": {
+  "b324d5301200": {
+   "co": "Pedana di pressione",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
+  }
+ },
  "tile.pressurePlateStone.name": {
   "d05deaffa4f1": {
    "co": "Pedana di pressione di petra",
    "kind": "renamed",
    "from": "block.minecraft.stone_pressure_plate",
+   "review": "ai"
+  }
+ },
+ "tile.pressurePlateWood.name": {
+  "d437470774d8": {
+   "co": "Pedana di pressione di legnu",
+   "kind": "new",
+   "from": null,
    "review": "ai"
   }
  },
@@ -15777,6 +17649,15 @@
    "review": "ai"
   }
  },
+ "tile.quartzBlock.lines.name": {
+  "e2b8ccd5162c": {
+   "co": "Pilastru di quarzu",
+   "kind": "adapted",
+   "from": "block.minecraft.quartz_pillar",
+   "review": "ai",
+   "note": "26.3 Quartz Pillar"
+  }
+ },
  "tile.quartzBlock.name": {
   "dddbd4ec5830": {
    "co": "Bloccu di quarzu",
@@ -15791,6 +17672,15 @@
    "kind": "renamed",
    "from": "block.minecraft.rail",
    "review": "ai"
+  }
+ },
+ "tile.redNetherBrick.name": {
+  "a8bda3e1b3bf": {
+   "co": "Matoni rossi di u Nether",
+   "kind": "adapted",
+   "from": "block.minecraft.red_nether_bricks",
+   "review": "ai",
+   "note": "the block (named 'Red Nether Bricks' since 1.13)"
   }
  },
  "tile.redSandStone.chiseled.name": {
@@ -15841,11 +17731,28 @@
    "review": "ai"
   }
  },
+ "tile.reeds.name": {
+  "f938a698eb5f": {
+   "co": "Canna da zuccheru",
+   "kind": "adapted",
+   "from": "block.minecraft.sugar_cane",
+   "review": "ai",
+   "note": "26.3 Sugar Cane"
+  }
+ },
  "tile.repeatingCommandBlock.name": {
   "189bc6652ad2": {
    "co": "Bloccu di cumanda à ripetizione",
    "kind": "renamed",
    "from": "block.minecraft.repeating_command_block",
+   "review": "ai"
+  }
+ },
+ "tile.rose.name": {
+  "51ad0eae3f66": {
+   "co": "Rosa",
+   "kind": "new",
+   "from": null,
    "review": "ai"
   }
  },
@@ -16233,6 +18140,14 @@
    "review": "ai"
   }
  },
+ "tile.stainedGlass.name": {
+  "c4fee0c3aeaf": {
+   "co": "Vetru tintu",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
+  }
+ },
  "tile.stainedGlass.orange.name": {
   "2a7ad60a5514": {
    "co": "Vetru tintu aranciu",
@@ -16359,6 +18274,54 @@
    "review": "ai"
   }
  },
+ "tile.stairsWood.name": {
+  "ac3cbc208236": {
+   "co": "Scala di legnu di quercia",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
+  }
+ },
+ "tile.stairsWoodAcacia.name": {
+  "f27c57750938": {
+   "co": "Scala di legnu d'acacia",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
+  }
+ },
+ "tile.stairsWoodBirch.name": {
+  "e9b3cfc98926": {
+   "co": "Scala di legnu di betula",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
+  }
+ },
+ "tile.stairsWoodDarkOak.name": {
+  "31b535e841c9": {
+   "co": "Scala di legnu di quercia scura",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
+  }
+ },
+ "tile.stairsWoodJungle.name": {
+  "859fbcf992be": {
+   "co": "Scala di legnu di giungla",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
+  }
+ },
+ "tile.stairsWoodSpruce.name": {
+  "9cc04d0f9717": {
+   "co": "Scala di legnu d'abete",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
+  }
+ },
  "tile.stone.andesite.name": {
   "d38d57cc1d19": {
    "co": "Andesite",
@@ -16423,6 +18386,22 @@
    "review": "ai"
   }
  },
+ "tile.stoneMoss.name": {
+  "f9600866ac54": {
+   "co": "Petra muscosa",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
+  }
+ },
+ "tile.stoneSlab.brick.name": {
+  "0b74cd07e76c": {
+   "co": "Lastra di matoni",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
+  }
+ },
  "tile.stoneSlab.cobble.name": {
   "b1a3bd7a03b1": {
    "co": "Lastra di petrame",
@@ -16463,11 +18442,27 @@
    "review": "ai"
   }
  },
+ "tile.stoneSlab.smoothStoneBrick.name": {
+  "9811b8302803": {
+   "co": "Lastra di matoni di petra",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
+  }
+ },
  "tile.stoneSlab.stone.name": {
   "279a3eb0e8fc": {
    "co": "Lastra di petra",
    "kind": "renamed",
    "from": "block.minecraft.stone_slab",
+   "review": "ai"
+  }
+ },
+ "tile.stoneSlab.wood.name": {
+  "f56b8c579374": {
+   "co": "Lastra di legnu",
+   "kind": "new",
+   "from": null,
    "review": "ai"
   }
  },
@@ -16567,6 +18562,14 @@
    "review": "ai"
   }
  },
+ "tile.tallgrass.shrub.name": {
+  "07ddc576465e": {
+   "co": "Arbustinu",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
+  }
+ },
  "tile.thinGlass.name": {
   "62c6b0688d9b": {
    "co": "Pannellu di vetru",
@@ -16647,6 +18650,14 @@
    "review": "ai"
   }
  },
+ "tile.thinStainedGlass.name": {
+  "47b86844ceb9": {
+   "co": "Pannellu di vetru tintu",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
+  }
+ },
  "tile.thinStainedGlass.orange.name": {
   "ed1a38a130f7": {
    "co": "Pannellu di vetru tintu aranciu",
@@ -16719,6 +18730,20 @@
    "review": "ai"
   }
  },
+ "tile.trapdoor.name": {
+  "3c8b937e1808": {
+   "co": "Bodula",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
+  },
+  "69e37e0c0ca2": {
+   "co": "Bodula di legnu",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
+  }
+ },
  "tile.tripWire.name": {
   "76ce401241f7": {
    "co": "Filu d'inciampu",
@@ -16767,11 +18792,139 @@
    "review": "ai"
   }
  },
+ "tile.weightedPlate_heavy.name": {
+  "79c92cc64113": {
+   "co": "Pedana di pressione cù pesu (pisante)",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
+  }
+ },
+ "tile.weightedPlate_light.name": {
+  "1ff095559e77": {
+   "co": "Pedana di pressione cù pesu (ligera)",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
+  }
+ },
  "tile.whiteStone.name": {
   "d1b0646de52c": {
    "co": "Petra di l'End",
    "kind": "renamed",
    "from": "block.minecraft.end_stone",
+   "review": "ai"
+  }
+ },
+ "tile.wood.acacia.name": {
+  "c4e79e4f8241": {
+   "co": "Tavule di legnu d'acacia",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
+  }
+ },
+ "tile.wood.big_oak.name": {
+  "f3cda470564f": {
+   "co": "Tavule di legnu di quercia scura",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
+  }
+ },
+ "tile.wood.birch.name": {
+  "a8babed360ed": {
+   "co": "Tavule di legnu di betula",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
+  }
+ },
+ "tile.wood.jungle.name": {
+  "430e32fe9081": {
+   "co": "Tavule di legnu di giungla",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
+  }
+ },
+ "tile.wood.name": {
+  "db9a47f47e64": {
+   "co": "Tavule di legnu",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
+  }
+ },
+ "tile.wood.oak.name": {
+  "d4b1e66c656c": {
+   "co": "Tavule di legnu di quercia",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
+  }
+ },
+ "tile.wood.spruce.name": {
+  "9ee3fa8e52f9": {
+   "co": "Tavule di legnu d'abete",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
+  }
+ },
+ "tile.woodSlab.acacia.name": {
+  "24fbffdbe18a": {
+   "co": "Lastra di legnu d'acacia",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
+  }
+ },
+ "tile.woodSlab.big_oak.name": {
+  "077715918775": {
+   "co": "Lastra di legnu di quercia scura",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
+  }
+ },
+ "tile.woodSlab.birch.name": {
+  "669598a5df89": {
+   "co": "Lastra di legnu di betula",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
+  }
+ },
+ "tile.woodSlab.jungle.name": {
+  "eca91c015f3e": {
+   "co": "Lastra di legnu di giungla",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
+  }
+ },
+ "tile.woodSlab.name": {
+  "4f7f08a3820b": {
+   "co": "Lastra di legnu",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
+  }
+ },
+ "tile.woodSlab.oak.name": {
+  "74bf332ec7e8": {
+   "co": "Lastra di legnu di quercia",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
+  }
+ },
+ "tile.woodSlab.spruce.name": {
+  "6edf6c5b1745": {
+   "co": "Lastra di legnu d'abete",
+   "kind": "new",
+   "from": null,
    "review": "ai"
   }
  },
@@ -16847,6 +19000,14 @@
    "review": "ai"
   }
  },
+ "tile.woolCarpet.name": {
+  "1f7a7a64c184": {
+   "co": "Tappetu",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
+  }
+ },
  "tile.woolCarpet.orange.name": {
   "0f935ca9b580": {
    "co": "Tappetu aranciu",
@@ -16892,6 +19053,12 @@
    "co": "Tappetu biancu",
    "kind": "renamed",
    "from": "block.minecraft.white_carpet",
+   "review": "ai"
+  },
+  "1f7a7a64c184": {
+   "co": "Tappetu",
+   "kind": "new",
+   "from": null,
    "review": "ai"
   }
  },
