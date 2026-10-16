@@ -31,6 +31,58 @@ const nameArea = [
 ].join(",");
 const protectedArea = contentArea + "," + nameArea;
 
+// What people chose themselves (user names, display names, server nicknames, server, channel and role names) is
+// recognised by where it comes from, not by its look: Discord renders it from its own records, which the React
+// components above the text hold in their props (a user, member, guild, channel or role object, with a numeric id).
+// A text equal to one of those names is never looked up, even when it is also a dictionary word ("Work", "Error"),
+// and inside a label or sentence only the interface text around it changes.
+const snowflake = /^\d{15,21}$/;
+const nameFields = ["username", "globalName", "global_name", "nick", "nickname", "displayName", "display_name", "name"];
+const holders = ["user", "author", "member", "guildMember", "guild", "channel", "role", "recipient", "recipients",
+    "users", "members", "message", "currentUser", "otherUser", "friend", "relationship", "entry", "item"];
+
+function collectNames(value: unknown, into: Set<string>, depth: number) {
+    if (!value || typeof value !== "object" || depth > 3) return;
+    if (Array.isArray(value)) {
+        for (const item of value.slice(0, 50)) collectNames(item, into, depth + 1);
+        return;
+    }
+    const record = value as Record<string, unknown>;
+    if ((typeof record.id === "string" && snowflake.test(record.id)) || typeof record.id === "bigint") {
+        for (const field of nameFields) {
+            const name = record[field];
+            if (typeof name === "string" && name.trim()) into.add(name.trim());
+        }
+    }
+    for (const key of holders) {
+        if (Object.hasOwn(record, key)) collectNames(record[key], into, depth + 1);
+    }
+}
+
+function fiberOf(node: Node): any {
+    for (const key in node) if (key.startsWith("__reactFiber$")) return (node as any)[key];
+    return undefined;
+}
+
+// The names the components that render this node know about; empty outside React (and in tests without it).
+export function userNames(node: Node | null): Set<string> {
+    const names = new Set<string>();
+    let host: Node | null = node;
+    while (host && !fiberOf(host)) host = host.parentNode;
+    let fiber = host ? fiberOf(host) : undefined;
+    for (let depth = 0; fiber && depth < 40; depth++, fiber = fiber.return) {
+        const props = fiber.memoizedProps;
+        if (props && typeof props === "object") collectNames(props, names, 0);
+        for (const key of ["user", "member", "channel", "guild"]) {
+            if (props && typeof props === "object" && Object.hasOwn(props, key)) collectNames(props[key], names, 0);
+        }
+    }
+    return names;
+}
+
+// Names that must stay as written during the current lookup (set by translateLabel for one label at a time).
+let keep: Set<string> = new Set();
+
 // Discord shows dates in its interface language; give the day and month their Corsican names.
 const days: Record<string, string> = { lundi: "luni", mardi: "marti", mercredi: "mercuri", jeudi: "ghjovi",
     vendredi: "venneri", samedi: "sabbatu", dimanche: "dumenica" };
@@ -142,6 +194,7 @@ function normalize(text: string): string {
 }
 
 function direct(text: string): string | undefined {
+    if (keep.size && keep.has(normalize(text.trim()).toLowerCase())) return undefined;
     const key = normalize(text);
     if (Object.hasOwn(corrections, key)) return corrections[key];
     if (Object.hasOwn(words, key)) return words[key];
@@ -237,11 +290,19 @@ function nameLabel(value: string): string {
     return result === undefined ? value : match[1] + result + match[3];
 }
 
-export function translateLabel(value: string): string {
+export function translateLabel(value: string, names: Set<string> = new Set()): string {
     const match = value.match(/^(\s*)(.*?)(\s*)$/s);
     if (!match || !match[2]) return value;
     const [, before, core, after] = match;
-    const result = resolve(core);
+    const folded = new Set(Array.from(names, name => normalize(name).toLowerCase()));
+    if (folded.has(normalize(core).toLowerCase())) return value;
+    keep = folded;
+    let result: string | undefined;
+    try {
+        result = resolve(core);
+    } finally {
+        keep = new Set();
+    }
     if (result === undefined || result === core) return value;
     // Never change a placeholder or markup contract.
     const signature = (text: string) => (text.match(placeholder) ?? []).sort().join("\u0001");
@@ -263,7 +324,7 @@ export function createTranslator(doc: Document, options: { showOriginal?: () => 
         const value = node.data;
         const previous = originalText.get(node);
         if (previous && previous.translated === value) return;
-        const translated = parent.closest(nameArea) ? nameLabel(value) : translateLabel(value);
+        const translated = parent.closest(nameArea) ? nameLabel(value) : translateLabel(value, userNames(node));
         if (translated === value) return;
         originalText.set(node, { original: value, translated });
         node.data = translated;
@@ -277,7 +338,7 @@ export function createTranslator(doc: Document, options: { showOriginal?: () => 
             if (!value) continue;
             let saved = originalAttrs.get(element);
             if (saved?.get(name)?.translated === value) continue;
-            const translated = inName ? nameLabel(value) : translateLabel(value);
+            const translated = inName ? nameLabel(value) : translateLabel(value, userNames(element));
             if (translated === value) continue;
             if (!saved) originalAttrs.set(element, saved = new Map());
             saved.set(name, { original: value, translated });

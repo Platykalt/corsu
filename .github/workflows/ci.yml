@@ -54,6 +54,8 @@ jobs:
           node-version: '22'
       - name: Build the Corsu plugin into Vencord
         run: PYTHONPATH=src python -c "import installer; installer.prepare_build()"
+      - name: Discord plugin in a real browser page — people's names are never translated
+        run: python tests/e2e/check_discord_names.py "$(command -v google-chrome || command -v chromium)" Vencord
       - name: Bundle the French Firefox language pack (offline fallback)
         run: |
           version=$(curl -fsSL https://product-details.mozilla.org/1.0/firefox_versions.json | python -c "import json,sys; print(json.load(sys.stdin)['LATEST_FIREFOX_VERSION'])")

@@ -1,0 +1,175 @@
+#!/usr/bin/env python3
+"""The Discord plugin's translator in a real browser page: people's names stay as they wrote them.
+
+Usage: check_discord_names.py CHROME [VENCORD_DIR]
+Bundles src/discord-plugin/translate.ts with Vencord's esbuild (a small test dictionary replaces the generated one),
+loads it in Chrome headless, builds pages the way Discord renders them (React keeps each component's props on its DOM
+nodes, under __reactFiber$…), and checks: friends named "Work" and "Error" keep their names while the same words are
+translated as interface labels; a name inside a translated sentence or label is kept; mentions in messages are left
+alone and still clickable; and all of it still holds after the page changes conversation.
+"""
+import json
+import os
+from pathlib import Path
+import socket
+import subprocess
+import sys
+import tempfile
+import time
+import urllib.request
+
+HERE = Path(__file__).resolve().parent
+ROOT = HERE.parent.parent
+sys.path.insert(0, str(HERE))
+from check_chromium import DevTools  # noqa: E402
+
+DICTIONARY = {
+    'Work': 'Travagliu', 'Error': 'Sbagliu', 'Online': 'In linea', 'Friends': 'Amichi',
+    '\u00001\u0000 is typing a message…': '\u00001\u0000 scrive un messaghju…',
+    'Send a message to @\u00001\u0000': 'Mandà un messaghju à @\u00001\u0000',
+}
+
+PAGE = r'''
+const user = (id, username, globalName) => ({ id, username, globalName });
+const work = user("111111111111111111", "work.home", "Work"), error = user("222222222222222222", "err", "Error");
+// What React leaves on a host node: the fiber, whose memoizedProps and .return chain hold the component props.
+function fiber(element, ...chain) {
+  let parent = null;
+  for (const props of chain.reverse()) parent = { memoizedProps: props, return: parent };
+  element.__reactFiber$test = { memoizedProps: { children: element.textContent }, return: parent };
+}
+document.body.innerHTML = `
+  <div class="peopleList"><div class="row"><span id="friend1">Work</span></div>
+    <div class="row"><span id="friend2">Error</span></div></div>
+  <h2 id="label1">Error</h2><button id="label2">Work</button><div id="tab">Friends</div>
+  <div id="dm" aria-label="Work, Online"></div>
+  <div id="typing">Work is typing a message…</div><div id="typingSystem">Error is typing a message…</div>
+  <div class="composer"><div id="draft" class="placeholder_x">Send a message to @Work</div><div contenteditable="true"></div></div>
+  <div id="message-content-1">Hello <span id="mention" class="mention" role="button" data-user-id="111111111111111111">@Work</span></div>
+  <div id="profile"><span id="nick">Error</span><div id="bio" class="bio_x">Work</div></div>`;
+fiber(document.getElementById("friend1"), { user: work }, { friend: work });
+fiber(document.getElementById("friend2"), { user: error });
+fiber(document.getElementById("label2"), { onClick: () => 0, look: "filled" });
+fiber(document.getElementById("dm"), { channel: { id: "333333333333333333", name: "", recipients: [work] } });
+fiber(document.getElementById("typing"), { users: [work] });
+fiber(document.getElementById("draft"), { channel: { id: "333333333333333333", recipients: [work] } });
+fiber(document.getElementById("nick"), { member: { id: "222222222222222222", nick: "Error" } });
+window.clicks = 0;
+document.getElementById("mention").addEventListener("click", () => window.clicks++);
+window.mentionNode = document.getElementById("mention");
+window.translator = Corsu.createTranslator(document);
+window.translator.start();
+'''
+
+CHANGE = r'''
+// Another conversation: React reuses the nodes, gives them new text and new props.
+const friend = document.getElementById("friend1");
+friend.__reactFiber$test.return.memoizedProps = { user: { id: "444444444444444444", username: "x", globalName: "Online" } };
+friend.firstChild.data = "Online";
+const label = document.getElementById("label1");
+label.firstChild.data = "Work";
+'''
+
+READ = r'''
+JSON.stringify({
+  friend1: document.getElementById("friend1").textContent, friend2: document.getElementById("friend2").textContent,
+  label1: document.getElementById("label1").textContent, label2: document.getElementById("label2").textContent,
+  tab: document.getElementById("tab").textContent, dm: document.getElementById("dm").getAttribute("aria-label"),
+  typing: document.getElementById("typing").textContent, typingSystem: document.getElementById("typingSystem").textContent,
+  draft: document.getElementById("draft").textContent,
+  message: document.getElementById("message-content-1").textContent, nick: document.getElementById("nick").textContent,
+  bio: document.getElementById("bio").textContent,
+  mentionSame: document.getElementById("mention") === window.mentionNode,
+  mentionId: document.getElementById("mention").dataset.userId,
+  clicks: (document.getElementById("mention").click(), window.clicks)
+})
+'''
+
+EXPECTED = {
+    'friend1': 'Work', 'friend2': 'Error',                  # friends' names, though "Work" and "Error" are dictionary words
+    'label1': 'Sbagliu', 'label2': 'Travagliu', 'tab': 'Amichi',  # the same words as interface labels
+    'dm': 'Work, In linea',                                  # a label made of a name and interface text
+    'typing': 'Work scrive un messaghju…', 'typingSystem': 'Error scrive un messaghju…',  # names inserted in a translated sentence
+    'draft': 'Mandà un messaghju à @Work',
+    'message': 'Hello @Work', 'bio': 'Work',                 # what people write is never translated
+    'nick': 'Error',                                         # a server nickname
+    'mentionSame': True, 'mentionId': '111111111111111111', 'clicks': 1,
+}
+AFTER_CHANGE = {**EXPECTED, 'friend1': 'Online', 'label1': 'Travagliu', 'clicks': 2}
+
+
+def bundle(vencord):
+    script = """
+const { build } = require(process.argv[1]);
+build({ entryPoints: [process.argv[2]], bundle: true, write: false, format: 'iife', globalName: 'Corsu',
+        platform: 'browser', target: 'es2022', logLevel: 'error',
+        plugins: [{ name: 'dictionary', setup(b) {
+            b.onResolve({ filter: /dictionary\\.json$/ }, () => ({ path: process.argv[3] })); } }] })
+  .then(result => process.stdout.write(result.outputFiles[0].text));
+"""
+    with tempfile.TemporaryDirectory() as folder:
+        dictionary = Path(folder) / 'dictionary.json'
+        dictionary.write_text(json.dumps(DICTIONARY, ensure_ascii=False), encoding='utf-8')
+        esbuild = next(Path(vencord, 'node_modules').glob('esbuild/lib/main.js'))
+        result = subprocess.run(['node', '-e', script, str(esbuild), str(ROOT / 'src/discord-plugin/translate.ts'),
+                                 str(dictionary)], capture_output=True, text=True, encoding='utf-8', check=True)
+        return result.stdout
+
+
+def evaluate(devtools, session, expression):
+    result = devtools.call('Runtime.evaluate', {'expression': expression, 'returnByValue': True,
+                                                'awaitPromise': True}, session=session)
+    if 'exceptionDetails' in result:
+        raise SystemExit(f'page error: {result["exceptionDetails"]}')
+    return result['result'].get('value')
+
+
+def compare(label, found, expected):
+    wrong = {key: (found.get(key), value) for key, value in expected.items() if found.get(key) != value}
+    for key, value in expected.items():
+        print(f'{"PASS" if key not in wrong else "FAIL"}: {label} {key} = {found.get(key)!r}')
+    return wrong
+
+
+def main(chrome, vencord):
+    code = bundle(vencord)
+    with tempfile.TemporaryDirectory(prefix='corsu-discord-', ignore_cleanup_errors=True) as profile:
+        with socket.socket() as reserve:
+            reserve.bind(('127.0.0.1', 0))
+            port = reserve.getsockname()[1]
+        command = [chrome, '--headless=new', '--disable-gpu', f'--user-data-dir={profile}',
+                   f'--remote-debugging-port={port}', '--no-first-run', 'about:blank']
+        if sys.platform.startswith('linux'):
+            command.insert(1, '--no-sandbox')
+        process = subprocess.Popen(command, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
+        try:
+            for _ in range(120):
+                try:
+                    with urllib.request.urlopen(f'http://127.0.0.1:{port}/json/version', timeout=2) as response:
+                        endpoint = json.load(response)['webSocketDebuggerUrl']
+                    break
+                except OSError:
+                    time.sleep(0.5)
+            devtools = DevTools(endpoint)
+            target = devtools.call('Target.createTarget', {'url': 'about:blank'})['targetId']
+            session = devtools.call('Target.attachToTarget', {'targetId': target, 'flatten': True})['sessionId']
+            evaluate(devtools, session, code)
+            evaluate(devtools, session, PAGE)
+            wrong = compare('start:', json.loads(evaluate(devtools, session, READ)), EXPECTED)
+            evaluate(devtools, session, CHANGE)
+            # The observer translates in a microtask; give it one turn.
+            evaluate(devtools, session, 'new Promise(resolve => setTimeout(resolve, 50))')
+            wrong.update({f'after change {key}': value for key, value in
+                          compare('after change:', json.loads(evaluate(devtools, session, READ)), AFTER_CHANGE).items()})
+        finally:
+            process.terminate()
+            process.wait(timeout=15)
+    if wrong:
+        raise SystemExit(f'FAIL: {wrong}')
+    print('PASS: names stay as people wrote them; interface labels around them are translated')
+
+
+if __name__ == '__main__':
+    for stream in (sys.stdout, sys.stderr):
+        stream.reconfigure(encoding='utf-8', errors='replace')
+    main(sys.argv[1], sys.argv[2] if len(sys.argv) > 2 else str(ROOT / 'Vencord'))
