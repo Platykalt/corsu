@@ -305,3 +305,17 @@ class MinecraftInstallTests(unittest.TestCase):
         self.assertEqual(dict(lines)['lang'], 'co_fr')
         self.assertEqual(json.loads(dict(lines)['resourcePacks']), ['vanilla', self.game.PACK_ID])
         self.assertEqual(self.game.switch_off(lines, original), [])
+
+    def test_packs_module_gives_the_pack_and_language_of_each_version(self):
+        # Whatever minecraft_packs is (the placeholder or the real module), the supported version's pack is built
+        # offline from committed files and names its language code.
+        import minecraft_packs
+        version = (self.corsu.ROOT / 'minecraft/java/VERSION').read_text(encoding='utf-8').strip()
+        entry = minecraft_packs.target(version)
+        self.assertTrue(entry['supported'])
+        self.assertEqual(entry['language_code'].lower(), 'co_fr')
+        data, report = minecraft_packs.build_pack(version)
+        self.assertTrue(data.startswith(b'PK'))
+        self.assertLessEqual(report['translated'], report['total'])
+        self.assertIsNone(self.game.target('1.6.0'))
+        self.assertEqual(minecraft_packs.base_version('fabric-loader-0.16.9-1.21.1'), '1.21.1')
