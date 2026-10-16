@@ -172,9 +172,10 @@ class MinecraftInstallTests(unittest.TestCase):
         self.corsu.STATE.write_text(json.dumps(installer.state), encoding='utf-8')
         return report
 
-    def test_only_folders_playing_the_supported_version(self):
+    def test_only_folders_playing_a_handled_version(self):
         good = self.instance('Corsu 26.3', '26.3', b'lang:fr_fr\n')
-        old = self.instance('Vechju', '1.21.4', b'lang:fr_fr\n')
+        # 1.5.2 predates resource packs: no pack can add a language there.
+        old = self.instance('Vechju', '1.5.2', b'lang:fr_fr\n')
         official = self.root / '.minecraft'
         official.mkdir()
         (official / 'options.txt').write_text('lang:fr_fr\n')
