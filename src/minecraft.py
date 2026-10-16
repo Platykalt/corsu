@@ -19,8 +19,9 @@ SOURCE = corsu.ROOT / 'minecraft/java'
 PACK = 'corsu-minecraft-java.zip'
 PACK_ID = 'file/' + PACK
 LANGUAGE = 'co_fr'
-# Older and newer game versions show the pack as "made for an older/newer version"; listing it here as well keeps
-# it active instead of asking again.
+# The pack goes in resourcePacks only. Listing it in incompatibleResourcePacks too (earlier versions did, to keep it on
+# in other game versions) made 26.3 skip it at the next start: Options.loadSelectedResourcePacks only takes a
+# compatible pack off that list and does not select it, so the person had to pick it by hand once.
 LIST_OPTIONS = ('resourcePacks', 'incompatibleResourcePacks')
 
 
@@ -290,6 +291,11 @@ def switch_on(lines):
         current = packs(values[option]) if option in values else list(default)
         had = any(ours(name) for name in current)
         original[option] = {'present': option in values, 'had_pack': had}
+        if option == 'incompatibleResourcePacks':
+            # Corsu only switches folders of the pack's own version, where it is compatible.
+            if had:
+                changes[option] = json.dumps([name for name in current if not ours(name)], separators=(',', ':'))
+            continue
         if not had:
             current.append(PACK_ID)
         changes[option] = json.dumps(current, separators=(',', ':'))

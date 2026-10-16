@@ -210,7 +210,9 @@ class MinecraftInstallTests(unittest.TestCase):
         self.install()
         text = options.read_bytes().decode()
         self.assertIn('resourcePacks:["vanilla","file/A.zip","file/B.zip","file/corsu-minecraft-java.zip"]\r\n', text)
-        self.assertEqual(text.count('corsu-minecraft-java.zip'), 2)  # once in each pack list
+        # Only the selected list: listed as incompatible too, the game skipped it at the next start (26.3).
+        self.assertEqual(text.count('corsu-minecraft-java.zip'), 1)
+        self.assertNotIn('incompatibleResourcePacks', text)
         self.assertNotIn('\n', text.replace('\r\n', ''))
         # The player changes settings and adds a pack while Corsu is on: all of it must survive.
         options.write_bytes(text.replace('fov:0.0', 'fov:0.5').replace('"file/B.zip",', '"file/B.zip","file/C.zip",').encode())
@@ -227,6 +229,15 @@ class MinecraftInstallTests(unittest.TestCase):
         text = options.read_bytes().decode()
         self.assertIn('lang:en_us', text)
         self.assertFalse((folder / 'resourcepacks/corsu-minecraft-java.zip').exists())
+
+    def test_pack_listed_as_incompatible_by_0_22_0_is_taken_off_that_list(self):
+        # What Corsu 0.22.0 wrote: Minecraft 26.3 then took the pack off the incompatible list without selecting it.
+        folder = self.instance('Old', '26.3', b'lang:co_fr\nresourcePacks:["file/corsu-minecraft-java.zip"]\n'
+                                              b'incompatibleResourcePacks:["file/corsu-minecraft-java.zip"]\n')
+        self.install()
+        text = (folder / 'options.txt').read_text()
+        self.assertIn('resourcePacks:["file/corsu-minecraft-java.zip"]\n', text)
+        self.assertIn('incompatibleResourcePacks:[]\n', text)
 
     def test_unreadable_options_are_never_rewritten(self):
         broken = self.instance('Broken', '26.3', b'lang:fr_fr\nresourcePacks:[vanilla, oops\n')
