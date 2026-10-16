@@ -39,6 +39,7 @@ BASE_VERSION = (HERE / 'VERSION').read_text().strip() if (HERE / 'VERSION').exis
 KINDS = ('reused', 'renamed', 'adapted', 'new')
 REVIEWS = ('ai', 'human')
 FIELDS = ('co', 'kind', 'from', 'review', 'note')
+EMPTY = 'da39a3ee5e6b'  # digest('')
 TARGETS = ('26.2', '26.1.2', '1.21.11', '1.21.1', '1.20.1', '1.16.5', '1.12.2', '1.8.9')
 
 # java.util.Formatter (old .lang files, I18n.format) and Minecraft's TranslatableContents (JSON files) specifiers.
@@ -250,13 +251,18 @@ def read_tsv(path):
             raise SystemExit(f'{path}:{number}: expected key, hash, co, kind[, from, note]')
         cells += [''] * (6 - len(cells))
         key, h, co, kind, source, note = cells[:6]
-        co = co.replace('\\n', '\n').replace('\\t', '\t')
+        co = unescape(co)
         rows.append({'key': key, 'hash': h, 'co': co, 'kind': kind, 'from': source or None, 'note': note})
     return rows
 
 
 def escape(text):
-    return text.replace('\t', '\\t').replace('\n', '\\n')
+    return text.replace('\\', '\\\\').replace('\t', '\\t').replace('\n', '\\n')
+
+
+def unescape(text):
+    """A TSV cell as text: \\n a line break, \\t a tab, \\\\ one backslash (old Realms texts hold a literal \\n)."""
+    return re.sub(r'\\(.)', lambda m: {'n': '\n', 't': '\t'}.get(m.group(1), m.group(1)), text)
 
 
 def apply(path, english=None):
@@ -333,7 +339,8 @@ def check(english=None, quiet=False):
                 errors.append(f'{where}: unexpected fields')
                 continue
             co = entry.get('co')
-            if not isinstance(co, str) or not co.strip():
+            # Empty only where the English is empty too (three 1.7 option descriptions): the game shows nothing.
+            if not isinstance(co, str) or (not co.strip() and h != EMPTY):
                 errors.append(f'{where}: empty or missing Corsican')
                 continue
             if entry.get('kind') not in KINDS:
@@ -368,7 +375,7 @@ def check(english=None, quiet=False):
                 if left and not kept and entry.get('kind') in ('new', 'adapted'):
                     warnings.append(f'{where}: English words left {left}: {co!r}')
     if english:
-        missing = [p for p, t in texts.items() if t.strip() and p[1] not in history.get(p[0], {})]
+        missing = [p for p, t in texts.items() if p[1] not in history.get(p[0], {})]
         if missing:
             warnings.append(f'{len(missing)} pairs without a decision yet')
     if not quiet:
@@ -463,7 +470,7 @@ def main(argv=None):
         base = english.base()
         out = []
         for r in classify(english).values():
-            if r['entry'] or r['class'] == 'empty':
+            if r['entry']:
                 continue
             old = r['candidates'][0] if r['class'] in ('trivial', 'changed') else ''
             out.append('\t'.join([r['key'], r['hash'], r['class'], r['family'], r['versions'][-1] + '-' +

@@ -37,7 +37,7 @@ class HistorySchemaTests(unittest.TestCase):
                 self.assertRegex(h, HEX12)
                 self.assertLessEqual(set(entry), set(mchistory.FIELDS))
                 self.assertIsInstance(entry['co'], str)
-                self.assertTrue(entry['co'].strip())
+                self.assertTrue(entry['co'].strip() or h == mchistory.EMPTY, 'empty Corsican for a non-empty English')
                 self.assertIn(entry['kind'], mchistory.KINDS)
                 self.assertIn(entry['review'], mchistory.REVIEWS)
                 if entry['kind'] == 'new':
@@ -67,8 +67,8 @@ class HistorySchemaTests(unittest.TestCase):
 
     def test_every_pair_has_a_decision(self):
         missing = [p for p, sig in self.signatures.items() if p[1] not in self.history.get(p[0], {})]
-        # Only pairs whose English is empty may stay without Corsican (the game shows nothing either way).
-        self.assertLessEqual(len(missing), 3)
+        # Every pair has an entry, including the three empty English texts of 1.7 (empty Corsican).
+        self.assertEqual(missing, [])
 
     def test_checker_passes_offline(self):
         errors, _ = mchistory.check(None, quiet=True)

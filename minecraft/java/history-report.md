@@ -5,10 +5,21 @@ speaker** (`review: "ai"` everywhere). Contract: [MULTIVERSION.md](MULTIVERSION.
 
 ## What was handled
 
-Mojang's English of the 86 releases 1.6.1 to 26.2 compared with 26.3: 3,902 unique (key, English) pairs are not
-26.3's own (key, English). 3 of them have an empty English text (`options.aoDesc1`, `options.viewBobbingDesc1`,
-`options.renderCloudsDesc1`, 1.7): they need no Corsican. The other **3,899 pairs all have a decision** in
-`history.json`.
+Mojang's English of the 86 releases 1.6.1 to 26.2 compared with 26.3: **3,978** unique (key, English) pairs are
+not 26.3's own (key, English), and **every one has an entry** in `history.json`; with keys.tsv, no (key, hash)
+of any release resolves to nothing (`python tools/mcversions.py verify all --no-engine`: 87 releases, full
+coverage, 0 errors).
+
+Second pass (after keys.tsv): the first pass used the client jars' `en_us` only (3,902 pairs). The full English
+of each release written by `mcversions.py fetch` (`~/.cache/corsu/minecraft/<id>/multiversion/english.json`)
+also has the Realms texts that lived outside `en_us` (com.mojang:realms jar 1.7.10-1.14.3,
+`assets/realms/lang` 1.14.4-1.19.2) and `narrator.select.list.position` (1.14-1.16.5). This added 78 pairs
+(76 `mco.*`, all translated, 26.3 Realms wording reused where the English is the same or trivially changed;
+the old Realms library writes its line breaks as a literal `\n`, kept as is) and removed 2 entries that turned
+out to be 26.3's own text (`mco.snapshotRealmsPopup.*`, the 26.3 Realms file still has the older wording). The
+3 empty English texts of 1.7 (`options.aoDesc1`, `options.viewBobbingDesc1`, `options.renderCloudsDesc1`) now
+have an empty Corsican entry, so the packs cover them (the checker allows an empty Corsican only for the hash of
+the empty text, `da39a3ee5e6b`).
 
 ## Method
 
@@ -50,9 +61,9 @@ Per class and file format (a pair present in both formats counts as JSON):
 
 | Format | trivial | renamed | absent | changed | ambiguous | empty | total |
 | --- | --- | --- | --- | --- | --- | --- | --- |
-| JSON (1.13 to 26.2) | 313 | 81 | 241 | 374 | 4 | 0 | 1,013 |
-| `.lang` (1.6.1 to 1.12.2) | 22 | 1,677 | 1,012 | 173 | 2 | 3 | 2,889 |
-| total | 335 | 1,758 | 1,253 | 547 | 6 | 3 | 3,902 |
+| JSON (1.13 to 26.2) | 319 | 82 | 252 | 377 | 4 | 0 | 1,034 |
+| `.lang` (1.6.1 to 1.12.2) | 27 | 1,678 | 1,030 | 204 | 2 | 3 | 2,944 |
+| total | 346 | 1,760 | 1,282 | 581 | 6 | 3 | 3,978 |
 
 Per family (class):
 
@@ -63,58 +74,61 @@ Per family (class):
 | entities | 1 | 83 | 9 | 1 | 2 | 0 | 96 |
 | biomes, world generation | 0 | 27 | 107 | 7 | 0 | 0 | 141 |
 | interface (gui, options, keys, menus, Twitch) | 129 | 22 | 234 | 179 | 2 | 3 | 569 |
-| Realms (mco) | 88 | 4 | 25 | 71 | 0 | 0 | 188 |
+| Realms (mco) | 99 | 6 | 53 | 105 | 0 | 0 | 263 |
 | statistics, achievements | 1 | 75 | 90 | 3 | 0 | 0 | 169 |
 | advancements | 41 | 1 | 1 | 17 | 0 | 0 | 60 |
 | commands, arguments, game rules | 59 | 25 | 545 | 173 | 0 | 0 | 802 |
 | subtitles, death messages | 10 | 59 | 20 | 73 | 0 | 0 | 162 |
-| other (`$o`, a stray 1.6 key) | 0 | 1 | 0 | 0 | 0 | 0 | 1 |
+| other (`$o` of 1.7.2, `narrator.select.list.position`) | 0 | 1 | 1 | 0 | 0 | 0 | 2 |
 
 Per family (kind recorded in history.json):
 
-| Family | reused | renamed | adapted | new | none (empty English) |
-| --- | --- | --- | --- | --- | --- |
-| blocks | 1 | 366 | 13 | 114 | 0 |
-| items, potions, effects, enchantments | 5 | 1,092 | 55 | 68 | 0 |
-| entities | 1 | 83 | 5 | 7 | 0 |
-| biomes, world generation | 2 | 27 | 6 | 106 | 0 |
-| interface | 155 | 22 | 154 | 235 | 3 |
-| Realms (mco) | 98 | 4 | 61 | 25 | 0 |
-| statistics, achievements | 1 | 75 | 6 | 87 | 0 |
-| advancements | 43 | 1 | 16 | 0 | 0 |
-| commands, arguments, game rules | 140 | 25 | 93 | 544 | 0 |
-| subtitles, death messages | 49 | 59 | 40 | 14 | 0 |
-| other | 0 | 1 | 0 | 0 | 0 |
-| **total** | **495** | **1,755** | **449** | **1,200** | **3** |
+| Family | reused | renamed | adapted | new |
+| --- | --- | --- | --- | --- |
+| blocks | 1 | 366 | 13 | 114 |
+| items, potions, effects, enchantments | 5 | 1,092 | 55 | 68 |
+| entities | 1 | 83 | 5 | 7 |
+| biomes, world generation | 2 | 27 | 6 | 106 |
+| interface (3 empty entries counted as new) | 155 | 22 | 154 | 238 |
+| Realms (mco) | 110 | 4 | 94 | 55 |
+| statistics, achievements | 1 | 75 | 6 | 87 |
+| advancements | 43 | 1 | 16 | 0 |
+| commands, arguments, game rules | 140 | 25 | 93 | 544 |
+| subtitles, death messages | 49 | 59 | 40 | 14 |
+| other | 0 | 1 | 0 | 1 |
+| **total (3,978)** | **507** | **1,755** | **482** | **1,234** |
 
 ## Per target version
 
-`python3 tools/mchistory.py measure` (English files + history.json + co_fr.json, resolution order of
-MULTIVERSION.md). "Reused" counts history entries of kind `reused` or `renamed` (26.3 Corsican, other key or same
-meaning); "26.3 as is" counts keys whose English is 26.3's (empty English counted there too).
+`python3 tools/mchistory.py measure` (full English of each release + history.json + co_fr.json, resolution order
+of MULTIVERSION.md). "Reused" counts history entries of kind `reused` or `renamed` (26.3 Corsican, other key or
+same meaning); "26.3 as is" counts keys whose English is 26.3's.
 
 | Version | Format | Keys | 26.3 as is | Reused | Adapted | New | Missing |
 | --- | --- | --- | --- | --- | --- | --- | --- |
 | 26.2 | json | 8,123 | 8,067 | 36 | 20 | 0 | 0 |
 | 26.1.2 | json | 7,886 | 7,791 | 73 | 22 | 0 | 0 |
 | 1.21.11 | json | 7,767 | 7,676 | 71 | 20 | 0 | 0 |
-| 1.21.1 | json | 6,881 | 6,578 | 163 | 57 | 83 | 0 |
+| 1.21.1 | json | 6,881 | 6,580 | 161 | 57 | 83 | 0 |
 | 1.20.1 | json | 6,217 | 5,845 | 217 | 72 | 83 | 0 |
-| 1.16.5 | json | 4,812 | 4,394 | 200 | 67 | 151 | 0 |
-| 1.12.2 | lang | 3,303 | 866 | 1,725 | 123 | 589 | 0 |
-| 1.8.9 | lang | 2,553 | 349 | 1,328 | 140 | 736 | 0 |
+| 1.16.5 | json | 5,046 | 4,542 | 269 | 77 | 158 | 0 |
+| 1.12.2 | lang | 3,531 | 994 | 1,797 | 142 | 598 | 0 |
+| 1.8.9 | lang | 2,761 | 456 | 1,369 | 179 | 757 | 0 |
+
+`python tools/mcversions.py verify all --no-engine`: all 87 releases (1.6.1 to 26.3) report every key
+translated (0 left in English) and 0 errors.
 
 ## Quality
 
 - **Checker** (`python3 tools/mchistory.py check`, with the English): placeholders by position and conversion
   (`%s`, `%d`, `%.2f`, `%1$s`…), `%%` count, `§` codes, line breaks, leading/trailing spaces as in the English,
-  no empty text, kind/from/review rules, JSON without duplicate keys, no untranslated English unless the key is in
+  no empty text (except the empty English), kind/from/review rules, JSON without duplicate keys, no untranslated English unless the key is in
   same-as-english.txt or the note says `same as English` (names, codes, keyword-only command syntax). Result:
-  **3,899 entries, 0 errors, 2 warnings** (two false positives of the leftover-English hint: `/gamemode` in a
-  command list, *visità* contains "visit"). Without the English (CI), it checks against
+  **3,978 entries, 0 errors, 5 warnings** (false positives of the leftover-English hint: `/gamemode` in a
+  command list, *visità* contains "visit", names inside the old Realms privacy text, a literal `\n` glued to a word). Without the English (CI), it checks against
   `history-placeholders.tsv` (key, hash, signature only).
 - **Tests**: `tests/test_minecraft_history.py` (schema, 12-hex hashes, placeholders against the TSV for every
-  entry, the TSV holds no English, every non-empty pair has a decision, offline checker, signature rules,
+  entry, the TSV holds no English, every pair has an entry, offline checker, signature rules,
   hashing). `python -m unittest discover -s tests -t .`: all pass.
 - **Second pass (AI review, not human)**: a random sample of 150 entries (seed 263: 69 renamed, 45 new, 21 reused,
   15 adapted) was re-read against the English: 149 kept, 1 corrected (*Prumove à muderatore*). Outside the
@@ -145,7 +159,7 @@ as written.
 
 ## What remains
 
-- Human review by a Corsican speaker of all 3,899 entries (none done); priority: the 1,200 `new` and 449
+- Human review by a Corsican speaker of all 3,978 entries (none done); priority: the 1,234 `new` and 482
   `adapted` entries, the ambiguous list, old achievements (free titles).
 - Seen in the game: no old version has been launched with these texts (packs are built by `mcversions.py`, not
   part of this work); in particular the 1.8 potion names and the old command syntax lines.

@@ -19786,6 +19786,21 @@
    "from": "mco.account.privacyinfo",
    "review": "ai",
    "note": "English changed only in case or punctuation"
+  },
+  "88d8dde5e1bb": {
+   "co": "Mojang applica certe prucedure per aiutà à prutege\\ni zitelli è a so vita privata, in particulare rispittendu u\\nChildren's Online Privacy Protection Act (COPPA) è u\\nRegulamentu generale nant'à a prutezzione di i dati (RGPD).\\n\\nPò esse chì vi tocchi à ottene u cunsensu di i vostri genitori\\nnanzu d'accede à u vostru contu Realms.\\n\\nS'è vo avete un contu Minecraft anticu (vi cunnittite cù\\nu vostru nome d'utilizatore), ci vole à migrà stu contu versu\\nun contu Mojang per accede à Realms.",
+   "kind": "adapted",
+   "from": "mco.account.privacyinfo",
+   "review": "ai",
+   "note": "the old Realms library writes its line breaks as a literal \\n, kept as in the English"
+  }
+ },
+ "mco.account.update": {
+  "7b30dd8ac72a": {
+   "co": "Aghjurnà u contu",
+   "kind": "reused",
+   "from": "mco.account.update",
+   "review": "ai"
   }
  },
  "mco.activity.noactivity": {
@@ -19793,6 +19808,22 @@
    "co": "Nisuna attività dapoi %s ghjorni",
    "kind": "adapted",
    "from": "mco.activity.noactivity",
+   "review": "ai"
+  }
+ },
+ "mco.activity.title": {
+  "431a1e5bedc8": {
+   "co": "Attività di i ghjucadori",
+   "kind": "reused",
+   "from": "mco.activity.title",
+   "review": "ai"
+  }
+ },
+ "mco.backup.backup": {
+  "530cc25bdc7d": {
+   "co": "Salvaguardie",
+   "kind": "new",
+   "from": null,
    "review": "ai"
   }
  },
@@ -19859,11 +19890,26 @@
   }
  },
  "mco.backup.title": {
+  "4f8099c4e81c": {
+   "co": "Mudificà u mondu",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
+  },
   "530cc25bdc7d": {
    "co": "Salvaguardie",
    "kind": "new",
    "from": null,
    "review": "ai"
+  }
+ },
+ "mco.brokenworld.minigame.title": {
+  "23809205450e": {
+   "co": "Stu minighjocu ùn hè più accettatu",
+   "kind": "reused",
+   "from": "mco.brokenworld.minigame.title",
+   "review": "ai",
+   "note": "same meaning"
   }
  },
  "mco.brokenworld.nonowner.error": {
@@ -19891,9 +19937,67 @@
    "review": "ai"
   }
  },
+ "mco.client.incompatible.msg": {
+  "14ea5470d860": {
+   "co": "U vostru cliente ùn hè micca cumpatibile cù Realms !",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
+  },
+  "57e87c4d883f": {
+   "co": "U vostru cliente ùn hè micca cumpatibile cù Realms.\\nImpiegate a versione a più recente di Minecraft.\\nRealms ùn hè micca cumpatibile cù e versioni snapshot.",
+   "kind": "new",
+   "from": null,
+   "review": "ai",
+   "note": "literal \\n kept as in the English"
+  }
+ },
+ "mco.client.incompatible.title": {
+  "7cb1d5a8e25b": {
+   "co": "Cliente incumpatibile !",
+   "kind": "reused",
+   "from": "mco.client.incompatible.title",
+   "review": "ai"
+  }
+ },
  "mco.client.outdated.msg": {
   "5581c9bb5be8": {
    "co": "U vostru cliente ùn hè più à ghjornu : pensate à aghjurnallu per aduprà Realms",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
+  },
+  "c9f7d7bc1ba3": {
+   "co": "U vostru cliente ùn hè più à ghjornu è ùn hè micca cumpatibile cù Realms.\\nAghjurnate à a versione a più recente di Minecraft.",
+   "kind": "new",
+   "from": null,
+   "review": "ai",
+   "note": "literal \\n kept as in the English"
+  },
+  "e0e456f7ae75": {
+   "co": "U vostru cliente ùn hè più à ghjornu è ùn hè micca cumpatibile cù Realms : pensate à aghjurnallu",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
+  },
+  "e2a8135bba01": {
+   "co": "U vostru cliente ùn hè micca cumpatibile cù Realms : pensate à aghjurnallu",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
+  }
+ },
+ "mco.client.outdated.msg.line1": {
+  "84c7a35dc12d": {
+   "co": "U vostru cliente ùn hè più à ghjornu è ùn hè micca cumpatibile cù Realms.",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
+  }
+ },
+ "mco.client.outdated.msg.line2": {
+  "21f21887237a": {
+   "co": "Aghjurnate à a versione a più recente di Minecraft.",
    "kind": "new",
    "from": null,
    "review": "ai"
@@ -19902,6 +20006,18 @@
  "mco.client.outdated.title": {
   "660681d0a18c": {
    "co": "Cliente scadutu !",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
+  },
+  "7a91865b2f95": {
+   "co": "Cliente scadutu !",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
+  },
+  "7cb1d5a8e25b": {
+   "co": "Cliente incumpatibile !",
    "kind": "new",
    "from": null,
    "review": "ai"
@@ -19942,12 +20058,26 @@
   }
  },
  "mco.configure.world.backup": {
+  "530cc25bdc7d": {
+   "co": "Salvaguardie",
+   "kind": "adapted",
+   "from": "mco.configure.world.backup",
+   "review": "ai"
+  },
   "f60bbd3172c5": {
    "co": "Salvaguardie di u mondu",
    "kind": "reused",
    "from": "mco.configure.world.backup",
    "review": "ai",
    "note": "English changed only in case or punctuation"
+  }
+ },
+ "mco.configure.world.buttons.activity": {
+  "431a1e5bedc8": {
+   "co": "Attività di i ghjucadori",
+   "kind": "reused",
+   "from": "mco.configure.world.buttons.activity",
+   "review": "ai"
   }
  },
  "mco.configure.world.buttons.backup": {
@@ -19994,6 +20124,14 @@
    "review": "ai"
   }
  },
+ "mco.configure.world.buttons.editworld": {
+  "4f8099c4e81c": {
+   "co": "Mudificà u mondu",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
+  }
+ },
  "mco.configure.world.buttons.invite": {
   "51c06f119227": {
    "co": "Invità un ghjucadore",
@@ -20010,6 +20148,12 @@
   }
  },
  "mco.configure.world.buttons.modifyMiniGame": {
+  "390471c6c7cf": {
+   "co": "Finisce u minighjocu",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
+  },
   "81fac2408c44": {
    "co": "Mudificà u minighjocu",
    "kind": "new",
@@ -20040,6 +20184,12 @@
   }
  },
  "mco.configure.world.buttons.options": {
+  "6bf5da9c080b": {
+   "co": "Ozzioni",
+   "kind": "adapted",
+   "from": "mco.configure.world.buttons.options",
+   "review": "ai"
+  },
   "b1b34c34c90d": {
    "co": "Ozzioni di u mondu",
    "kind": "reused",
@@ -20057,6 +20207,12 @@
   }
  },
  "mco.configure.world.buttons.resetworld": {
+  "44c57abd888a": {
+   "co": "Reinizià",
+   "kind": "adapted",
+   "from": "mco.configure.world.buttons.resetworld",
+   "review": "ai"
+  },
   "7353fd7f6e30": {
    "co": "Reinizià u mondu",
    "kind": "reused",
@@ -20166,6 +20322,14 @@
    "note": "English changed only in case or punctuation"
   }
  },
+ "mco.configure.world.delete.question.line2": {
+  "bfb850874b6d": {
+   "co": "Site sicuri di vulè fà quessa ?",
+   "kind": "adapted",
+   "from": "mco.configure.world.delete.question.line2",
+   "review": "ai"
+  }
+ },
  "mco.configure.world.description": {
   "341db7ad9710": {
    "co": "Discrizzione di u Realm",
@@ -20188,6 +20352,22 @@
    "from": "mco.configure.world.edit.slot.name",
    "review": "ai",
    "note": "English changed only in case or punctuation"
+  }
+ },
+ "mco.configure.world.edit.subscreen.adventuremap": {
+  "0be4493032ad": {
+   "co": "Certi parametri sò disattivati perchè u vostru mondu attuale hè una carta d'avventura",
+   "kind": "adapted",
+   "from": "mco.configure.world.edit.subscreen.adventuremap",
+   "review": "ai"
+  }
+ },
+ "mco.configure.world.edit.subscreen.title": {
+  "e36f592d2a5a": {
+   "co": "Altre ozzioni",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
   }
  },
  "mco.configure.world.edit.title": {
@@ -20238,6 +20418,12 @@
    "review": "ai",
    "note": "English changed only in case or punctuation"
   },
+  "b23f31eb836c": {
+   "co": "S'è vo lasciate stu Realm, ùn u viderete più fin'à ch'è vo ùn site invitati torna",
+   "kind": "adapted",
+   "from": "mco.configure.world.leave.question.line1",
+   "review": "ai"
+  },
   "f3e44e9537cb": {
    "co": "S'è vo lasciate stu Realm, ùn u viderete più fin'à ch'è vo site invitati torna",
    "kind": "reused",
@@ -20275,6 +20461,22 @@
    "review": "ai"
   }
  },
+ "mco.configure.world.off": {
+  "e3de5ab0ca4c": {
+   "co": "Disattivatu",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
+  }
+ },
+ "mco.configure.world.on": {
+  "e0049a66519c": {
+   "co": "Attivatu",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
+  }
+ },
  "mco.configure.world.opening": {
   "2d192950d303": {
    "co": "Apertura di u Realm…",
@@ -20282,6 +20484,14 @@
    "from": "mco.configure.world.opening",
    "review": "ai",
    "note": "English changed only in case or punctuation"
+  }
+ },
+ "mco.configure.world.players.error": {
+  "86a2fd622904": {
+   "co": "Impussibule d'invità u nome datu",
+   "kind": "adapted",
+   "from": "mco.configure.world.players.error",
+   "review": "ai"
   }
  },
  "mco.configure.world.reset.question.line1": {
@@ -20316,12 +20526,32 @@
   }
  },
  "mco.configure.world.resourcepack.question.line1": {
+  "76cb8e245e18": {
+   "co": "Stu Realm richiede un pacchettu di risorse persunalizatu.",
+   "kind": "adapted",
+   "from": "mco.configure.world.resourcepack.question.line1",
+   "review": "ai"
+  },
   "bfb917afd870": {
    "co": "Ci vole un pacchettu di risorse persunalizatu per ghjucà nant'à stu Realm",
    "kind": "reused",
    "from": "mco.configure.world.resourcepack.question.line1",
    "review": "ai",
    "note": "English changed only in case or punctuation"
+  },
+  "ea60ec695b34": {
+   "co": "Stu Realm richiede un pacchettu di risorse persunalizatu.",
+   "kind": "adapted",
+   "from": "mco.configure.world.resourcepack.question.line1",
+   "review": "ai"
+  }
+ },
+ "mco.configure.world.resourcepack.question.line2": {
+  "c9dbe6f41efc": {
+   "co": "U vulete scaricà è installà autumaticamente per ghjucà ?",
+   "kind": "adapted",
+   "from": "mco.configure.world.resourcepack.question.line2",
+   "review": "ai"
   }
  },
  "mco.configure.world.restore.download.question.line1": {
@@ -20381,6 +20611,30 @@
    "note": "English changed only in case or punctuation"
   }
  },
+ "mco.configure.world.slot.switch.question.line2": {
+  "bfb850874b6d": {
+   "co": "Site sicuri di vulè fà quessa ?",
+   "kind": "adapted",
+   "from": "mco.configure.world.slot.switch.question.line2",
+   "review": "ai"
+  }
+ },
+ "mco.configure.world.slot.tooltip": {
+  "da2b459fcbbd": {
+   "co": "Cambià di mondu",
+   "kind": "adapted",
+   "from": "mco.configure.world.slot.tooltip",
+   "review": "ai"
+  }
+ },
+ "mco.configure.world.slot.tooltip.active": {
+  "7e8993b8d48f": {
+   "co": "Doppiu cliccu per entre",
+   "kind": "adapted",
+   "from": "mco.configure.world.slot.tooltip.active",
+   "review": "ai"
+  }
+ },
  "mco.configure.world.spawnAnimals": {
   "d578b93c6e6e": {
    "co": "Apparizione d'animali",
@@ -20426,6 +20680,22 @@
    "note": "punctuation as in this English"
   }
  },
+ "mco.configure.world.subscription.day": {
+  "987b9ced08d4": {
+   "co": "Ghjornu",
+   "kind": "adapted",
+   "from": "mco.configure.world.subscription.day",
+   "review": "ai"
+  }
+ },
+ "mco.configure.world.subscription.days": {
+  "f6bb0f468a85": {
+   "co": "Ghjorni",
+   "kind": "adapted",
+   "from": "mco.configure.world.subscription.days",
+   "review": "ai"
+  }
+ },
  "mco.configure.world.subscription.daysleft": {
   "c27b0cf1dfbc": {
    "co": "Ghjorni chì fermanu",
@@ -20464,6 +20734,22 @@
    "from": "mco.configure.world.subscription.less_than_a_day",
    "review": "ai",
    "note": "English changed only in case or punctuation"
+  }
+ },
+ "mco.configure.world.subscription.month": {
+  "082bc378cd60": {
+   "co": "Mese",
+   "kind": "adapted",
+   "from": "mco.configure.world.subscription.month",
+   "review": "ai"
+  }
+ },
+ "mco.configure.world.subscription.months": {
+  "200dcdce9b5a": {
+   "co": "Mesi",
+   "kind": "adapted",
+   "from": "mco.configure.world.subscription.months",
+   "review": "ai"
   }
  },
  "mco.configure.world.subscription.start": {
@@ -20509,6 +20795,12 @@
   }
  },
  "mco.configure.world.switch.slot.subtitle": {
+  "33028d40e0a2": {
+   "co": "Stu mondu hè viotu, sciglite ciò chì vulete fà",
+   "kind": "adapted",
+   "from": "mco.configure.world.switch.slot.subtitle",
+   "review": "ai"
+  },
   "df319f458614": {
    "co": "Stu mondu hè viotu. Sciglite cumu creà u vostru mondu",
    "kind": "reused",
@@ -20612,6 +20904,12 @@
    "from": "mco.download.confirmation.line2",
    "review": "ai",
    "note": "English changed only in case or punctuation"
+  },
+  "cc49a23cba4e": {
+   "co": "Ùn puderete più incaricà stu mondu nant'à Realms",
+   "kind": "adapted",
+   "from": "mco.download.confirmation.line2",
+   "review": "ai"
   }
  },
  "mco.download.confirmation.oversized": {
@@ -20631,6 +20929,14 @@
    "review": "ai"
   }
  },
+ "mco.download.preparing": {
+  "2082992283e8": {
+   "co": "Preparazione di u scaricamentu",
+   "kind": "reused",
+   "from": "mco.download.preparing",
+   "review": "ai"
+  }
+ },
  "mco.download.title": {
   "3bd3d68cea10": {
    "co": "Scaricamentu di l'ultimu mondu",
@@ -20641,6 +20947,12 @@
   }
  },
  "mco.error.invalid.session.title": {
+  "03b4039acb86": {
+   "co": "Identificadore di sessione inaccettevule",
+   "kind": "adapted",
+   "from": "mco.error.invalid.session.title",
+   "review": "ai"
+  },
   "1ebf32ac7d03": {
    "co": "Sessione micca valida",
    "kind": "reused",
@@ -20650,6 +20962,13 @@
   }
  },
  "mco.errorMessage.6002": {
+  "45121e8ae7b3": {
+   "co": "Cundizioni d'utilizazione micca accettate",
+   "kind": "reused",
+   "from": "mco.errorMessage.6002",
+   "review": "ai",
+   "note": "same meaning (ToS)"
+  },
   "6cecc42264bc": {
    "co": "Cundizioni d'utilizazione micca accettate",
    "kind": "reused",
@@ -20658,7 +20977,21 @@
    "note": "English changed only in case or punctuation"
   }
  },
+ "mco.errorMessage.6005": {
+  "67372c9109bf": {
+   "co": "U mondu hè bluccatu da un amministratore",
+   "kind": "adapted",
+   "from": "mco.errorMessage.6005",
+   "review": "ai"
+  }
+ },
  "mco.errorMessage.connectionFailure": {
+  "1d13156326c7": {
+   "co": "Un sbagliu hè accadutu. Pruvate torna più tardi.",
+   "kind": "reused",
+   "from": "mco.errorMessage.connectionFailure",
+   "review": "ai"
+  },
   "cd40b60488f8": {
    "co": "Un sbagliu hè accadutu. Pruvate torna più tardi.",
    "kind": "reused",
@@ -20718,6 +21051,23 @@
    "co": "Selezziunà un altru minighjocu",
    "kind": "reused",
    "from": "mco.minigame.world.changeButton",
+   "review": "ai"
+  }
+ },
+ "mco.minigame.world.info": {
+  "427c04c594c0": {
+   "co": "Quessu rimpiazzerà per un pezzu u vostru mondu cù un minighjocu !\\nPuderete vultà dopu à u vostru mondu uriginale senza perde nunda.",
+   "kind": "new",
+   "from": null,
+   "review": "ai",
+   "note": "literal \\n kept as in the English"
+  }
+ },
+ "mco.minigame.world.info.line1": {
+  "486fd8f4c153": {
+   "co": "Quessu rimpiazzerà per un pezzu u vostru mondu cù un minighjocu !",
+   "kind": "reused",
+   "from": "mco.minigame.world.info.line1",
    "review": "ai"
   }
  },
@@ -20853,7 +21203,21 @@
    "note": "English changed only in case or punctuation"
   }
  },
+ "mco.minigame.world.switch.new": {
+  "309c78fe4ab0": {
+   "co": "Selezziunà un altru minighjocu ?",
+   "kind": "reused",
+   "from": "mco.minigame.world.switch.new",
+   "review": "ai"
+  }
+ },
  "mco.minigame.world.switch.title": {
+  "6b43bebe7d05": {
+   "co": "Cambià di minighjocu",
+   "kind": "reused",
+   "from": "mco.minigame.world.switch.title",
+   "review": "ai"
+  },
   "e1fb1ff168ea": {
    "co": "Cambià di minighjocu",
    "kind": "reused",
@@ -20902,6 +21266,14 @@
    "note": "English changed only in case or punctuation"
   }
  },
+ "mco.reset.world.adventure": {
+  "95fb7dad306f": {
+   "co": "Carte d'avventura",
+   "kind": "adapted",
+   "from": "mco.reset.world.adventure",
+   "review": "ai"
+  }
+ },
  "mco.reset.world.generate": {
   "545a5ea2090e": {
    "co": "Mondu novu",
@@ -20911,7 +21283,21 @@
    "note": "English changed only in case or punctuation"
   }
  },
+ "mco.reset.world.generate.title": {
+  "8de4b05c1c35": {
+   "co": "Generà un mondu",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
+  }
+ },
  "mco.reset.world.resetting.screen.title": {
+  "7bff28a8cff5": {
+   "co": "Reiniziu di u mondu…",
+   "kind": "reused",
+   "from": "mco.reset.world.resetting.screen.title",
+   "review": "ai"
+  },
   "b59cbc0cd036": {
    "co": "Reiniziu di u Realm…",
    "kind": "adapted",
@@ -20926,6 +21312,12 @@
    "from": "mco.reset.world.template",
    "review": "ai",
    "note": "English changed only in case or punctuation"
+  },
+  "be8f30d5523f": {
+   "co": "Lochi di partenza in sopravivenza",
+   "kind": "adapted",
+   "from": "mco.reset.world.template",
+   "review": "ai"
   }
  },
  "mco.reset.world.title": {
@@ -20943,9 +21335,24 @@
    "note": "English changed only in case or punctuation"
   }
  },
+ "mco.reset.world.updateBreaksAdventure": {
+  "d3a35ca36d56": {
+   "co": "Nanzu di parte in avventura, nutate bè :\\nl'aghjurnamentu seguente di Minecraft puderia guastà certe di ste carte !",
+   "kind": "new",
+   "from": null,
+   "review": "ai",
+   "note": "literal \\n kept as in the English"
+  }
+ },
  "mco.reset.world.warning": {
   "29d5a20959e7": {
    "co": "Quessu squasserà u vostru Realm per sempre !",
+   "kind": "adapted",
+   "from": "mco.reset.world.warning",
+   "review": "ai"
+  },
+  "4d575d896615": {
+   "co": "Quessu squasserà u mondu attuale di u vostru Realm !",
    "kind": "adapted",
    "from": "mco.reset.world.warning",
    "review": "ai"
@@ -20956,6 +21363,12 @@
    "from": "mco.reset.world.warning",
    "review": "ai",
    "note": "English changed only in case or punctuation"
+  },
+  "9170630a3219": {
+   "co": "Quessu rimpiazzerà u mondu attuale di u vostru Realm !",
+   "kind": "adapted",
+   "from": "mco.reset.world.warning",
+   "review": "ai"
   }
  },
  "mco.selectServer.buy": {
@@ -21008,6 +21421,20 @@
    "note": "English changed only in case or punctuation"
   }
  },
+ "mco.selectServer.configure": {
+  "4745e650d167": {
+   "co": "Cunfigurà u Realm",
+   "kind": "adapted",
+   "from": "mco.selectServer.configure",
+   "review": "ai"
+  },
+  "e3ef38d9a045": {
+   "co": "Cunfigurà u Realm",
+   "kind": "adapted",
+   "from": "mco.selectServer.configure",
+   "review": "ai"
+  }
+ },
  "mco.selectServer.configureRealm": {
   "e3ef38d9a045": {
    "co": "Cunfigurà u Realm",
@@ -21050,6 +21477,22 @@
    "review": "ai"
   }
  },
+ "mco.selectServer.expiredList": {
+  "cb3633722368": {
+   "co": "U vostru Realm hè scadutu",
+   "kind": "adapted",
+   "from": "mco.selectServer.expiredList",
+   "review": "ai"
+  }
+ },
+ "mco.selectServer.info": {
+  "001711ac8f41": {
+   "co": "Chì hè Realms ?",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
+  }
+ },
  "mco.selectServer.leave": {
   "6e37416b73bd": {
    "co": "Lascià u Realm",
@@ -21065,6 +21508,18 @@
    "kind": "new",
    "from": null,
    "review": "ai"
+  },
+  "6761977f4a7c": {
+   "co": "Realm bluccatu",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
+  },
+  "a66193bb5167": {
+   "co": "Realm bluccatu",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
   }
  },
  "mco.selectServer.minigame": {
@@ -21072,6 +21527,14 @@
    "co": "Minighjocu :",
    "kind": "reused",
    "from": "mco.selectServer.minigame",
+   "review": "ai"
+  }
+ },
+ "mco.selectServer.minigameNotSupportedInVersion": {
+  "de1ada624c24": {
+   "co": "Ùn si pò micca ghjucà à stu minighjocu in %s",
+   "kind": "reused",
+   "from": "mco.selectServer.minigameNotSupportedInVersion",
    "review": "ai"
   }
  },
@@ -21114,6 +21577,12 @@
   }
  },
  "mco.selectServer.popup": {
+  "15d72974d6eb": {
+   "co": "Realms hè un modu sicuru è simplice di prufittà d'un mondu Minecraft in linea cù sin'à dece amichi à tempu. Prupone assai minighjochi è parechji mondi persunalizati ! Solu u pruprietariu di u Realm hà da pagà.",
+   "kind": "reused",
+   "from": "mco.selectServer.popup",
+   "review": "ai"
+  },
   "3fcf92e239a1": {
    "co": "Realms hè un modu sicuru è simplice di prufittà d'un mondu Minecraft in linea cù sin'à dece amichi à tempu. Prupone assai minighjochi è parechji mondi persunalizati ! Solu u pruprietariu di u Realm hà da pagà.",
    "kind": "reused",
@@ -21153,6 +21622,14 @@
    "note": "English changed only in case or punctuation"
   }
  },
+ "mco.selectServer.updateBreaksAdventure": {
+  "0247d1dfa867": {
+   "co": "U prossimu aghjurnamentu guasterà sta carta !",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
+  }
+ },
  "mco.selectServer.whatisrealms": {
   "001711ac8f41": {
    "co": "Chì hè Realms ?",
@@ -21166,22 +21643,6 @@
    "co": "Questu hè un Realm snapshot assuciatu à l'abbunamentu di u vostru Realm '%s'. Fermerà attivu fin'à ch'è u so Realm assuciatu u serà.",
    "kind": "reused",
    "from": "mco.snapshot.subscription.info",
-   "review": "ai"
-  }
- },
- "mco.snapshotRealmsPopup.message": {
-  "34b4b52d1d99": {
-   "co": "I Realms sò avà dispunibuli in e snapshot à partesi da a snapshot 23w41a. Ogni abbunamentu Realms vene cù un Realm snapshot gratisi, distintu da u vostru Realm Java nurmale !",
-   "kind": "reused",
-   "from": "mco.snapshotRealmsPopup.message",
-   "review": "ai"
-  }
- },
- "mco.snapshotRealmsPopup.title": {
-  "461c3b444fe4": {
-   "co": "I Realms sò avà dispunibuli in e snapshot",
-   "kind": "reused",
-   "from": "mco.snapshotRealmsPopup.title",
    "review": "ai"
   }
  },
@@ -21235,6 +21696,22 @@
    "note": "26.3 key of another family; same meaning checked"
   }
  },
+ "mco.trial.message": {
+  "36787cebb6f9": {
+   "co": "Vi interessa di pruvà Realms ? \\n Ottenite una prova gratisi di duie settimane cliccendu quì !",
+   "kind": "new",
+   "from": null,
+   "review": "ai",
+   "note": "literal \\n kept as in the English"
+  },
+  "7efff8af9f76": {
+   "co": "Vulete u vostru propiu Realm ? \\n Cliccate quì per sapene di più !",
+   "kind": "new",
+   "from": null,
+   "review": "ai",
+   "note": "literal \\n kept as in the English"
+  }
+ },
  "mco.trial.message.line1": {
   "eb547992db93": {
    "co": "Vulete u vostru propiu Realm ?",
@@ -21244,6 +21721,28 @@
    "note": "English changed only in case or punctuation"
   }
  },
+ "mco.trial.title": {
+  "1376d97ed428": {
+   "co": "Creà un Realm",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
+  },
+  "ce8fc38a2d40": {
+   "co": "Creà un Realm",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
+  }
+ },
+ "mco.trial.unavailable": {
+  "794f81a34702": {
+   "co": "Ci dispiace, e prove ùn sò micca dispunibule per avà !",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
+  }
+ },
  "mco.upload.close.failure": {
   "8e4861140ec4": {
    "co": "Impussibule di chjode u vostru Realm. Pruvate torna più tardi",
@@ -21251,6 +21750,12 @@
    "from": "mco.upload.close.failure",
    "review": "ai",
    "note": "punctuation as in this English"
+  },
+  "b4bb351a3474": {
+   "co": "Impussibule di chjode u vostru servitore, pruvate torna più tardi",
+   "kind": "adapted",
+   "from": "mco.upload.close.failure",
+   "review": "ai"
   },
   "f390563c902b": {
    "co": "Impussibule di chjode u vostru Realm. Pruvate torna più tardi",
@@ -21268,6 +21773,14 @@
    "review": "ai"
   }
  },
+ "mco.upload.preparing": {
+  "d66e42dc06e6": {
+   "co": "Preparazione di i dati di u vostru mondu",
+   "kind": "adapted",
+   "from": "mco.upload.preparing",
+   "review": "ai"
+  }
+ },
  "mco.upload.select.world.title": {
   "0aa5cc24d895": {
    "co": "Incaricà un mondu",
@@ -21275,6 +21788,35 @@
    "from": "mco.upload.select.world.title",
    "review": "ai",
    "note": "English changed only in case or punctuation"
+  },
+  "10bee1525908": {
+   "co": "Incaricà u vostru mondu",
+   "kind": "adapted",
+   "from": "mco.upload.select.world.title",
+   "review": "ai"
+  }
+ },
+ "mco.upload.size.failure": {
+  "1ff3c1865cfa": {
+   "co": "'%s' hè troppu grande !\\nHè di %s. A dimensione massima permessa hè %s.",
+   "kind": "new",
+   "from": null,
+   "review": "ai",
+   "note": "literal \\n kept as in the English"
+  },
+  "67d46682ee8d": {
+   "co": "U mondu sceltu '%s' hè troppu grande !",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
+  }
+ },
+ "mco.upload.verifying": {
+  "b2fb3fd26192": {
+   "co": "Verificazione di a vostra carta",
+   "kind": "adapted",
+   "from": "mco.upload.verifying",
+   "review": "ai"
   }
  },
  "mcoServer.title": {
@@ -21732,6 +22274,14 @@
    "review": "ai"
   }
  },
+ "narrator.select.list.position": {
+  "b3b6f9d1ae71": {
+   "co": "ogettu %s nant'à %s",
+   "kind": "new",
+   "from": null,
+   "review": "ai"
+  }
+ },
  "optimizeWorld.confirm.title": {
   "2480149fb4cc": {
    "co": "Ottimizà u mondu",
@@ -21894,6 +22444,15 @@
    "kind": "new",
    "from": null,
    "review": "ai"
+  }
+ },
+ "options.aoDesc1": {
+  "da39a3ee5e6b": {
+   "co": "",
+   "kind": "new",
+   "from": null,
+   "review": "ai",
+   "note": "empty in the English too (second line of a 1.7 option description)"
   }
  },
  "options.autoJump": {
@@ -22495,6 +23054,15 @@
    "review": "ai"
   }
  },
+ "options.renderCloudsDesc1": {
+  "da39a3ee5e6b": {
+   "co": "",
+   "kind": "new",
+   "from": null,
+   "review": "ai",
+   "note": "empty in the English too (second line of a 1.7 option description)"
+  }
+ },
  "options.renderDistance.far": {
   "49b2cf9ade90": {
    "co": "Luntana",
@@ -22929,6 +23497,15 @@
    "kind": "new",
    "from": null,
    "review": "ai"
+  }
+ },
+ "options.viewBobbingDesc1": {
+  "da39a3ee5e6b": {
+   "co": "",
+   "kind": "new",
+   "from": null,
+   "review": "ai",
+   "note": "empty in the English too (second line of a 1.7 option description)"
   }
  },
  "options.vsync": {
