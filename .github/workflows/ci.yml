@@ -81,6 +81,16 @@ jobs:
           java-version: '25'
       - name: Minecraft Java — load and render every text with the game's own code
         run: python tools/minecraft.py verify
+      - uses: actions/cache@v4
+        with:
+          path: ~/.cache/corsu/minecraft
+          key: minecraft-${{ hashFiles('minecraft/java/versions.json') }}
+          restore-keys: minecraft-
+      - name: Minecraft Java, every release from 1.6.1 — packs built and checked; the first targets in their own game code
+        run: |
+          python tools/mcversions.py fetch all
+          python tools/mcversions.py verify all --no-engine
+          python tools/mcversions.py verify targets
       - uses: actions/upload-artifact@v4
         with:
           name: releases

@@ -216,10 +216,17 @@ def check_archive(root, home, environment):
     missing = [name for name in REQUIRED if not (extracted / name).is_file()]
     assert not missing, f'Archive lacks: {missing}'
     instance = fake_prism_instance(home, (extracted / 'minecraft/java/VERSION').read_text(encoding='utf-8').strip())
+    # An old release: its pack is built by the installed copy from the shared data, in the .lang format.
+    legacy = fake_prism_instance(home, '1.12.2')
     run(extracted, environment, 'src/installer.py', '--components', 'firefox', 'minecraft', '--yes')
     shutil.rmtree(extracted.parent)
     options = (instance / 'options.txt').read_text(encoding='utf-8')
     assert 'lang:co_fr' in options and (instance / 'resourcepacks/corsu-minecraft-java.zip').is_file(), options
+    import zipfile
+    with zipfile.ZipFile(legacy / 'resourcepacks/corsu-minecraft-java.zip') as pack:
+        assert 'assets/minecraft/lang/co_fr.lang' in pack.namelist(), pack.namelist()
+        assert '"pack_format": 3' in pack.read('pack.mcmeta').decode(), pack.read('pack.mcmeta')
+    assert 'lang:co_fr' in (legacy / 'options.txt').read_text(encoding='utf-8')
     copy = installed_copy(home)
     missing = [name for name in REQUIRED if not (copy / name).is_file() and not name.startswith('vendor/')]
     assert not missing, f'Installed copy lacks: {missing}'
@@ -242,6 +249,7 @@ def check_archive(root, home, environment):
     assert state(home)['files'] == {}, state(home)
     assert 'lang:en_us' in (instance / 'options.txt').read_text(encoding='utf-8'), 'Minecraft language not given back'
     assert not list((instance / 'resourcepacks').glob('corsu*.zip')), 'Corsu pack left in the instance'
+    assert not list((legacy / 'resourcepacks').glob('corsu*.zip')), 'Corsu pack left in the 1.12.2 instance'
     for launcher in launchers(home):
         assert not launcher.exists(), f'Launcher left behind: {launcher}'
     print(f'PASS: installed from an extracted archive, used after deleting it, updated from {archives.as_uri()}, removed')

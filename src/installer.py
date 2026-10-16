@@ -147,7 +147,9 @@ DEPLOYED_FILES = ('LICENSE', 'README.md', 'CONTRIBUTING.md')
 DEPLOYED_DIRECTORIES = ('src', 'lexicon', 'install', 'vendor', 'Vencord')
 # What src/minecraft.py reads to build and offer the pack. Missing from the installed copy, Minecraft stopped the
 # installation (pack.mcmeta not found) although the extracted archive had it.
-DEPLOYED_MINECRAFT = tuple(f'minecraft/java/{name}' for name in ('pack.mcmeta', 'co_fr.json', 'LICENSE.txt', 'VERSION'))
+DEPLOYED_MINECRAFT = tuple(f'minecraft/java/{name}' for name in ('pack.mcmeta', 'co_fr.json', 'LICENSE.txt', 'VERSION',
+                                                                # minecraft_packs: one pack per game version, offline.
+                                                                'keys.tsv', 'versions.json', 'history.json'))
 
 
 def deploy_release():
