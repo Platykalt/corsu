@@ -287,5 +287,205 @@ class RenderTests(unittest.TestCase):
         self.assertFalse(zip_['details']['open'])
 
 
+UPDATE_KEYS = [
+    'update_heading', 'update_current', 'update_latest', 'update_checked', 'update_never', 'update_checking',
+    'update_up_to_date', 'update_available', 'update_unknown', 'update_unknown_plain', 'update_ahead', 'update_check',
+    'update_install', 'update_restart', 'update_auto', 'update_auto_detail', 'update_auto_started', 'update_updated',
+    'update_repaired', 'update_unchanged', 'update_failed', 'update_failed_plain', 'update_waiting_one',
+    'update_waiting_many', 'update_restart_text', 'update_restarting', 'update_restart_failed', 'activation_waiting',
+    'minecraft_switch_new', 'busy',
+]
+
+
+class UpdateTextTests(unittest.TestCase):
+    def test_update_texts_exist_everywhere_with_the_same_placeholders(self):
+        found = texts()
+        for language, values in found.items():
+            for key in UPDATE_KEYS:
+                self.assertTrue(values.get(key), f'{key} missing in {language}')
+                self.assertEqual(set(re.findall(r'\{\w+\}', values[key])), set(re.findall(r'\{\w+\}', found['en'][key])),
+                                 f'{key} in {language}')
+
+
+# The same small DOM, then each update scenario rendered in the three languages.
+UPDATE_HARNESS = HARNESS[:HARNESS.index('const out = vm.runInContext(`')] + r'''
+const out = vm.runInContext(`
+  const clean = value => value == null ? value : value.replace(/[\\u00a0\\u202f]/g, " ");
+  const button = id => ({ hidden: Boolean($(id).hidden), disabled: Boolean($(id).disabled) });
+  const result = {};
+  for (const lang of ["en", "fr", "co"]) {
+    language = lang;
+    result[lang] = {};
+    for (const [name, scenario] of Object.entries(fixture)) {
+      state = scenario;
+      restarting = scenario.restarting_now ? { pid: 1, until: Date.now() + 45000 } : null;
+      savingPreference = false;
+      render();
+      const minecraft = $("switches").children.map(row => row.find(node => node.id === "activate-minecraft")[0]).find(Boolean);
+      result[lang][name] = {
+        facts: clean($("update-facts").textContent),
+        status: clean($("update-status").textContent), statusClass: $("update-status").className,
+        result: $("update-result").hidden ? null : $("update-result").children.map(line => clean(line.textContent)),
+        resultClass: $("update-result").className,
+        now: button("update-now"), restart: button("update-restart"), check: button("update-check"),
+        auto: { checked: Boolean($("switch-auto-update").checked), disabled: Boolean($("switch-auto-update").disabled) },
+        banner: $("update-banner").hidden ? null : clean($("update-text").textContent),
+        bannerInstall: button("update-install"), bannerRestart: button("update-banner-restart"),
+        activity: clean($("activity-text").textContent),
+        minecraft: minecraft ? { text: minecraft.textContent, disabled: "disabled" in minecraft.attributes } : null,
+        minecraftDetails: clean($("switches").children.map(row => row.find(node => node.tagName === "DETAILS")[0]).filter(Boolean).map(node => node.textContent).join(" | ")),
+      };
+    }
+  }
+  JSON.stringify(result);
+`, context);
+process.stdout.write(out);
+'''
+
+IDLE = {'title': None, 'lines': [], 'running': False, 'ok': None, 'progress': None, 'result': None, 'busy': False}
+NO_RESTART = {'available': False, 'version': None, 'error': None}
+
+
+def scenario(status=None, latest='0.23.0', error=None, checking=False, job=None, restart=None, auto=False, auto_started=None,
+             items=None, restarting_now=False):
+    return {**FIXTURE, 'version': '0.22.0', 'pid': 1, 'preferences': {'auto_update': auto}, 'restarting_now': restarting_now,
+            'items': items if items is not None else FIXTURE['items'][:1],
+            'update': {'current': '0.22.0', 'latest': latest if status else None, 'status': status, 'checked': 1.7e9 if status else None,
+                       'error': error, 'checking': checking, 'auto_started': auto_started, 'restart': restart or NO_RESTART},
+            'job': {**IDLE, **(job or {})}}
+
+
+WAITING_ITEMS = [
+    entry('Firefox', activation='blocked', coverage=None, validation=None, updated=None, instances=[
+        instance('blocked', 'Firefox est ouvert.', 'Fermez Firefox.')]),
+    entry('Minecraft', activation='active', coverage=None, validation=None, updated=None, waiting=1, instances=[
+        instance('active', kind='Prism', location='/games/a'),
+        {**instance('waiting', 'New game folder: Corsu has not switched it yet.', kind='Prism', location='/games/new'), 'version': '1.21.4'}]),
+]
+UPDATED = {'title': 'update', 'ok': True, 'result': {'corsu': 'updated', 'from': '0.22.0', 'to': '0.23.0', 'restart_app': True, 'error': None}}
+UPDATE_SCENARIOS = {
+    'never': scenario(),
+    'checking': scenario(checking=True),
+    'up_to_date': scenario('up_to_date', latest='0.22.0', auto=True),
+    'available': scenario('available'),
+    'unknown': scenario('unknown', latest=None, error='GitHub could not be reached.'),
+    'unknown_plain': scenario('unknown', latest=None),
+    'ahead': scenario('ahead', latest='0.21.0'),
+    'running': scenario('available', job={'title': 'update', 'running': True, 'progress': {'percent': 30, 'label': 'x'}}),
+    'auto': scenario('available', auto=True, auto_started='0.23.0', job={'title': 'update', 'running': True}),
+    'updated': scenario('up_to_date', job=UPDATED, items=WAITING_ITEMS,
+                        restart={'available': True, 'version': '0.23.0', 'error': None}),
+    'repaired': scenario('up_to_date', latest='0.22.0', job={'title': 'update', 'ok': True, 'result': {'corsu': 'repaired', 'to': '0.22.0'}}),
+    'unchanged': scenario('up_to_date', latest='0.22.0', job={'title': 'update', 'ok': True, 'result': {'corsu': 'unchanged', 'to': '0.22.0'}}),
+    'failed': scenario('available', job={'title': 'update', 'ok': False, 'result': {'corsu': 'failed', 'error': 'Checksum mismatch', 'restart_app': False}}),
+    'failed_plain': scenario('available', job={'title': 'update', 'ok': False}),
+    'busy': scenario('available', job={'title': 'update', 'ok': False, 'busy': True}),
+    'restart_failed': scenario('up_to_date', restart={'available': True, 'version': '0.23.0', 'error': 'la nouvelle copie n\'a pas répondu'}),
+    'restarting': scenario('up_to_date', restart={'available': True, 'version': '0.23.0', 'error': None}, restarting_now=True),
+}
+
+
+@unittest.skipUnless(shutil.which('node'), 'node is not installed')
+class UpdateRenderTests(unittest.TestCase):
+    @classmethod
+    def setUpClass(cls):
+        with tempfile.TemporaryDirectory() as folder:
+            harness, fixture = Path(folder) / 'harness.js', Path(folder) / 'fixture.json'
+            harness.write_text(UPDATE_HARNESS, encoding='utf-8')
+            fixture.write_text(json.dumps(UPDATE_SCENARIOS), encoding='utf-8')
+            done = subprocess.run(['node', str(harness), str(PAGE), str(fixture)], capture_output=True, text=True, encoding='utf-8', timeout=60)
+        if done.returncode:
+            raise AssertionError(done.stderr)
+        cls.result = json.loads(done.stdout)
+        cls.en = cls.result['en']
+
+    def test_no_key_shows_through_in_any_language(self):
+        for language, scenarios in self.result.items():
+            for name, view in scenarios.items():
+                shown = json.dumps(view, ensure_ascii=False)
+                self.assertNotRegex(shown, r'\b(update|activation|minecraft)_[a-z_]+\b', f'{language} {name}')
+                self.assertNotIn('undefined', shown, f'{language} {name}')
+                self.assertNotIn('{', view['status'], f'{language} {name}')
+
+    def test_each_status_reads_differently(self):
+        statuses = {name: self.en[name]['status'] for name in ('never', 'checking', 'up_to_date', 'available', 'unknown', 'ahead')}
+        self.assertEqual(len(set(statuses.values())), len(statuses))
+        self.assertEqual(statuses['up_to_date'], 'Corsu is up to date.')
+        self.assertEqual(statuses['available'], 'Corsu 0.23.0 is available (you have 0.22.0).')
+        self.assertEqual(statuses['unknown'], 'Could not check for updates: GitHub could not be reached.')
+        self.assertEqual(self.en['unknown_plain']['status'], 'Could not check for updates.')
+        self.assertIn('development version', statuses['ahead'])
+        self.assertEqual(statuses['checking'], 'Checking for updates…')
+        self.assertEqual(self.en['ahead']['statusClass'], 'update-status ahead')
+        self.assertEqual(self.en['unknown']['statusClass'], 'update-status unknown')
+        self.assertIn('0.22.0', self.en['available']['facts'])
+        self.assertIn('0.23.0', self.en['available']['facts'])
+        self.assertIn('Last check—', self.en['never']['facts'])
+        for language in ('fr', 'co'):
+            views = self.result[language]
+            self.assertEqual(len({views[name]['status'] for name in statuses}), len(statuses), language)
+
+    def test_update_button_only_for_an_available_release_and_no_job(self):
+        self.assertFalse(self.en['available']['now']['disabled'])
+        for name in ('never', 'checking', 'up_to_date', 'unknown', 'ahead', 'running', 'auto'):
+            self.assertTrue(self.en[name]['now']['disabled'], name)
+        self.assertTrue(self.en['checking']['check']['disabled'])
+        self.assertTrue(self.en['running']['check']['disabled'])
+        self.assertFalse(self.en['unknown']['check']['disabled'])
+        self.assertTrue(self.en['available']['restart']['hidden'])
+        self.assertTrue(self.en['restarting']['restart']['disabled'])
+
+    def test_banner(self):
+        self.assertEqual(self.en['available']['banner'], 'Corsu 0.23.0 is available (you have 0.22.0).')
+        self.assertFalse(self.en['available']['bannerInstall']['hidden'])
+        self.assertTrue(self.en['available']['bannerRestart']['hidden'])
+        for name in ('never', 'up_to_date', 'unknown', 'ahead', 'running', 'restarting'):
+            self.assertIsNone(self.en[name]['banner'], name)
+        self.assertIn('Automatic update to Corsu 0.23.0', self.en['auto']['banner'])
+        self.assertTrue(self.en['auto']['bannerInstall']['hidden'])
+        self.assertEqual(self.en['updated']['banner'], 'Corsu 0.23.0 is installed. Restart Corsu to use it.')
+        self.assertFalse(self.en['updated']['bannerRestart']['hidden'])
+
+    def test_automatic_updates_switch(self):
+        self.assertTrue(self.en['up_to_date']['auto']['checked'])
+        self.assertFalse(self.en['available']['auto']['checked'])
+        self.assertFalse(self.en['available']['auto']['disabled'])
+        self.assertIn('Automatic update to Corsu 0.23.0', self.en['auto']['result'][0])
+
+    def test_result_after_an_update_names_what_waits_and_offers_the_restart(self):
+        updated = self.en['updated']
+        self.assertEqual(updated['result'][0], 'Corsu was updated to version 0.23.0.')
+        self.assertEqual(updated['result'][1], '2 parts are waiting: Firefox (Fermez Firefox); Minecraft (New game folder: Corsu has not switched it yet).')
+        self.assertEqual(len(updated['result']), 2)
+        self.assertEqual(updated['status'], 'Corsu 0.23.0 is installed. Restart Corsu to use it.')
+        self.assertIn('attention', updated['resultClass'])
+        self.assertFalse(updated['restart']['hidden'])
+        self.assertFalse(updated['restart']['disabled'])
+        self.assertTrue(updated['now']['hidden'])
+        self.assertEqual(updated['activity'], 'Update finished.')
+        self.assertIn('2 parties attendent', self.result['fr']['updated']['result'][1])
+        self.assertIn('2 parti aspettanu', self.result['co']['updated']['result'][1])
+        self.assertEqual(self.en['repaired']['result'], ['Corsu 0.22.0 was repaired.'])
+        self.assertEqual(self.en['unchanged']['result'], ['Corsu 0.22.0 was already installed: nothing changed.'])
+
+    def test_failures_are_understandable(self):
+        self.assertEqual(self.en['failed']['result'], ['The update did not complete: Checksum mismatch. The previous version stays in place.'])
+        self.assertIn('problem', self.en['failed']['resultClass'])
+        self.assertIn('details are in the log', self.en['failed_plain']['result'][0])
+        self.assertEqual(self.en['busy']['result'], ['Corsu is busy (another window or the installer is working).'])
+        self.assertEqual(self.en['busy']['activity'], 'Corsu is busy (another window or the installer is working).')
+        self.assertIn("Corsu could not restart: la nouvelle copie n'a pas répondu.", self.en['restart_failed']['result'])
+        self.assertEqual(self.en['restarting']['result'], ['Corsu is restarting…'])
+        self.assertFalse(self.en['restart_failed']['restart']['hidden'])
+
+    def test_new_minecraft_folders_wait_for_activation(self):
+        updated = self.en['updated']
+        self.assertEqual(updated['minecraft'], {'text': 'Switch the new folders to Corsican', 'disabled': False})
+        self.assertIn('Waiting for activation', updated['minecraftDetails'])
+        self.assertIn('1.21.4', updated['minecraftDetails'])
+        self.assertIsNone(self.en['available']['minecraft'])
+        self.assertEqual(self.result['fr']['updated']['minecraft']['text'], 'Passer les nouveaux dossiers en corse')
+
+
 if __name__ == '__main__':
     unittest.main()

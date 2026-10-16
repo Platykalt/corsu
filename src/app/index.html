@@ -143,6 +143,22 @@ dl.facts dt:not(:first-of-type), dl.facts dd:not(:first-of-type) { border-top: 1
 .review textarea { width: 100%; font: inherit; font-size: 16px; color: var(--text); background: var(--window); border: 1px solid var(--line); border-radius: 4px; padding: 6px 8px; resize: vertical; min-height: 2.4em; }
 .review .error { color: var(--danger); font-size: 13px; margin-top: 6px; }
 .toolbar { display: flex; align-items: center; gap: 12px; margin-bottom: 12px; flex-wrap: wrap; }
+.update-status { margin: 12px 2px 0; font-weight: 500; }
+.update-status::before { content: ""; display: inline-block; width: 8px; height: 8px; border-radius: 50%; margin-right: 8px; vertical-align: 1px; background: var(--track); }
+.update-status.up_to_date::before { background: var(--accent); }
+.update-status.available { color: var(--accent); }
+.update-status.available::before { background: var(--accent); }
+.update-status.unknown::before { background: var(--warning); }
+.update-status.ahead::before { background: var(--muted); }
+.update-status.checking::before { border: 2px solid var(--track); border-top-color: var(--accent); background: none; width: 6px; height: 6px; animation: turn .9s linear infinite; }
+.update-result { margin: 8px 2px 0; padding: 9px 12px; border-left: 3px solid var(--accent); background: var(--row); border-radius: 0 4px 4px 0; }
+.update-result.problem { border-left-color: var(--danger); }
+.update-result.attention { border-left-color: var(--warning); }
+.update-result[hidden] { display: none; }
+.update-result span { display: block; }
+.update-result span + span { margin-top: 3px; color: var(--muted); font-size: 13px; }
+.badge.waiting { color: var(--warning); }
+#update-auto { margin-top: 14px; }
 .toolbar select { font: inherit; color: var(--text); background: var(--row); border: 1px solid var(--line); border-radius: 4px; padding: 3px 6px; }
 
 @media (prefers-reduced-motion: reduce) { .busy { animation: none; } .switch i, .switch i::after { transition: none; } }
@@ -178,6 +194,7 @@ dl.facts dt:not(:first-of-type), dl.facts dd:not(:first-of-type) { border-top: 1
     <div class="banner" id="update-banner" hidden aria-live="polite">
       <span id="update-text"></span>
       <button type="button" class="button default" id="update-install" data-t="update_install"></button>
+      <button type="button" class="button default" id="update-banner-restart" data-t="update_restart"></button>
     </div>
     <section id="programs" data-page-panel>
       <h1 data-t="nav_programs"></h1>
@@ -253,6 +270,23 @@ dl.facts dt:not(:first-of-type), dl.facts dd:not(:first-of-type) { border-top: 1
       <h1 data-t="nav_about"></h1>
       <p class="lead" data-t="about_lead"></p>
       <dl class="facts" id="facts"></dl>
+      <h2 id="update-heading" data-t="update_heading"></h2>
+      <section aria-labelledby="update-heading">
+        <dl class="facts" id="update-facts"></dl>
+        <p class="update-status" id="update-status" role="status"></p>
+        <p class="update-result" id="update-result" hidden></p>
+        <div class="buttons">
+          <button type="button" class="button default" id="update-now" data-t="update_install"></button>
+          <button type="button" class="button default" id="update-restart" data-t="update_restart" hidden></button>
+          <button type="button" class="button" id="update-check" data-t="update_check"></button>
+        </div>
+        <ul class="group" id="update-auto">
+          <li>
+            <span class="label"><label for="switch-auto-update" data-t="update_auto"></label><span class="detail" data-t="update_auto_detail"></span></span>
+            <span class="switch"><input type="checkbox" role="switch" id="switch-auto-update"><i></i></span>
+          </li>
+        </ul>
+      </section>
       <h2 data-t="logs"></h2>
       <p class="muted" data-t="logs_text"></p>
       <div class="buttons">
@@ -314,6 +348,22 @@ const text = {
     show_original_detail: "In Discord è nant'à Google, passendu u topu nant'à un testu traduttu, una bolla mostra u testu ch'ellu rimpiazza. S'applica à u prossimu lanciu di Discord è di Firefox, o subitu da i parametri Vencord di Discord.",
     update_available: "Corsu {version} hè dispunibule (avete {current}).", update_install: "Aghjurnà",
     job_update: "Aghjurnamentu",
+    update_heading: "Aghjurnamenti", update_current: "Sta copia", update_latest: "Ultima versione publicata", update_checked: "Ultima verificazione",
+    update_never: "Micca verificatu per avà.", update_checking: "Ricerca di l'aghjurnamenti…", update_up_to_date: "Corsu hè à ghjornu.",
+    update_unknown: "Ùn s'hè micca pussutu verificà : {reason}.", update_unknown_plain: "Ùn s'hè micca pussutu verificà l'aghjurnamenti.",
+    update_ahead: "Sta copia ({current}) hè più nova chè l'ultima versione publicata ({version}) : hè una versione di sviluppu.",
+    update_check: "Circà l'aghjurnamenti", update_restart: "Rilancià Corsu",
+    update_auto: "Stallà da per sè l'aghjurnamenti stabili",
+    update_auto_detail: "À l'apertura di Corsu, una nova versione stabile hè scaricata, verificata è stallata. E versioni di prova ùn sò mai stallate.",
+    update_auto_started: "Aghjurnamentu autumaticu versu Corsu {version} : l'aghjurnamenti autumatichi sò attivi.",
+    update_updated: "Corsu hè statu aghjurnatu à a versione {version}.", update_repaired: "Corsu {version} hè statu riparatu.",
+    update_unchanged: "Corsu {version} era dighjà stallatu : nunda ùn hè cambiatu.",
+    update_failed: "L'aghjurnamentu ùn hè micca compiu : {error} A versione di prima ferma in piazza.",
+    update_failed_plain: "L'aghjurnamentu ùn hè micca compiu. A versione di prima ferma in piazza ; i dettagli sò in u ghjurnale.",
+    update_waiting_one: "Una parte aspetta : {list}.", update_waiting_many: "{n} parti aspettanu : {list}.",
+    update_restart_text: "Corsu {version} hè stallatu. Rilanciate Corsu per aduprallu.",
+    update_restarting: "Corsu si rilancia…", update_restart_failed: "Corsu ùn s'hè micca pussutu rilancià : {error}.",
+    activation_waiting: "Aspetta l'attivazione", minecraft_switch_new: "Mette in corsu i novi cartulari",
     programs_lead: "Ciò chì s'affissa in corsu. Un cambiamentu face effettu à u prossimu lanciu di u prugramma.",
     programs_none: "Nunda ùn hè stallatu per avà.", go_add: "Aghjunghje prugrammi",
     restart: "Rilanciate {name} per vede u cambiamentu.", restart_desktop: "Scunnettitevi è cunnettitevi torna per vede u cambiamentu.",
@@ -356,7 +406,7 @@ const text = {
     job_install: "Stallazione", job_switch: "Cambiamentu di lingua", job_uninstall: "Disinstallazione",
     running: "{job} in corsu…", done: "{job} compia.", failed: "{job} interrotta da un sbagliu.",
     show_details: "Affissà i dettagli", hide_details: "Piattà i dettagli",
-    busy: "Un'operazione hè dighjà in corsu.", closed: "Corsu hè chjosu. Riapritelu da u listinu di l'appiecazioni.",
+    busy: "Corsu hè occupatu (un'altra finestra o u stalladore travaglia).", closed: "Corsu hè chjosu. Riapritelu da u listinu di l'appiecazioni.",
     logs: "Ghjurnale", logs_text: "Tuttu ciò chì Corsu face hè nutatu in un schedariu, nant'à st'urdinatore. S'ellu ci hè un prublema, aghjunghjitelu à u vostru signalamentu.",
     open_logs: "Apre u cartulare di u ghjurnale", report_bug: "Signalà un prublema",
   },
@@ -377,6 +427,22 @@ const text = {
     show_original_detail: "Dans Discord et sur Google, une bulle montre le texte remplacé quand la souris passe sur un texte traduit. S'applique au prochain démarrage de Discord et de Firefox, ou tout de suite depuis les réglages Vencord de Discord.",
     update_available: "Corsu {version} est disponible (vous avez {current}).", update_install: "Mettre à jour",
     job_update: "Mise à jour",
+    update_heading: "Mises à jour", update_current: "Cette copie", update_latest: "Dernière version publiée", update_checked: "Dernière vérification",
+    update_never: "Pas encore vérifié.", update_checking: "Recherche des mises à jour…", update_up_to_date: "Corsu est à jour.",
+    update_unknown: "Vérification impossible : {reason}.", update_unknown_plain: "Les mises à jour n'ont pas pu être vérifiées.",
+    update_ahead: "Cette copie ({current}) est plus récente que la dernière version publiée ({version}) : c'est une version de développement.",
+    update_check: "Rechercher les mises à jour", update_restart: "Redémarrer Corsu",
+    update_auto: "Installer automatiquement les mises à jour stables",
+    update_auto_detail: "À l'ouverture de Corsu, une nouvelle version stable est téléchargée, vérifiée et installée. Les préversions ne le sont jamais.",
+    update_auto_started: "Mise à jour automatique vers Corsu {version} : les mises à jour automatiques sont activées.",
+    update_updated: "Corsu a été mis à jour vers la version {version}.", update_repaired: "Corsu {version} a été réparé.",
+    update_unchanged: "Corsu {version} était déjà installé : rien n'a changé.",
+    update_failed: "La mise à jour n'a pas abouti : {error} La version précédente reste en place.",
+    update_failed_plain: "La mise à jour n'a pas abouti. La version précédente reste en place ; les détails sont dans le journal.",
+    update_waiting_one: "Une partie attend : {list}.", update_waiting_many: "{n} parties attendent : {list}.",
+    update_restart_text: "Corsu {version} est installé. Redémarrez Corsu pour l'utiliser.",
+    update_restarting: "Corsu redémarre…", update_restart_failed: "Corsu n'a pas pu redémarrer : {error}.",
+    activation_waiting: "En attente d'activation", minecraft_switch_new: "Passer les nouveaux dossiers en corse",
     programs_lead: "Ce qui s'affiche en corse. Un changement prend effet au prochain démarrage du logiciel.",
     programs_none: "Rien n'est installé pour l'instant.", go_add: "Ajouter des logiciels",
     restart: "Redémarrez {name} pour voir le changement.", restart_desktop: "Déconnectez-vous puis reconnectez-vous pour voir le changement.",
@@ -419,7 +485,7 @@ const text = {
     job_install: "Installation", job_switch: "Changement de langue", job_uninstall: "Désinstallation",
     running: "{job} en cours…", done: "{job} terminée.", failed: "{job} interrompue par une erreur.",
     show_details: "Afficher les détails", hide_details: "Masquer les détails",
-    busy: "Une opération est déjà en cours.", closed: "Corsu est fermé. Rouvrez-le depuis le menu des applications.",
+    busy: "Corsu est occupé (une autre fenêtre ou l'installateur travaille).", closed: "Corsu est fermé. Rouvrez-le depuis le menu des applications.",
     logs: "Journal", logs_text: "Tout ce que fait Corsu est noté dans un fichier, sur cet ordinateur. En cas de problème, joignez-le à votre signalement.",
     open_logs: "Ouvrir le dossier du journal", report_bug: "Signaler un problème",
   },
@@ -440,6 +506,22 @@ const text = {
     show_original_detail: "In Discord and on Google, a bubble shows the replaced text when the mouse is over a translated text. Applies the next time Discord and Firefox start, or at once from Vencord's settings in Discord.",
     update_available: "Corsu {version} is available (you have {current}).", update_install: "Update",
     job_update: "Update",
+    update_heading: "Updates", update_current: "This copy", update_latest: "Latest release", update_checked: "Last check",
+    update_never: "Not checked yet.", update_checking: "Checking for updates…", update_up_to_date: "Corsu is up to date.",
+    update_unknown: "Could not check for updates: {reason}.", update_unknown_plain: "Could not check for updates.",
+    update_ahead: "This copy ({current}) is newer than the latest release ({version}): it is a development version.",
+    update_check: "Check for updates", update_restart: "Restart Corsu",
+    update_auto: "Install stable updates automatically",
+    update_auto_detail: "When Corsu opens, a new stable release is downloaded, checked and installed. Pre-releases never are.",
+    update_auto_started: "Automatic update to Corsu {version}: automatic updates are on.",
+    update_updated: "Corsu was updated to version {version}.", update_repaired: "Corsu {version} was repaired.",
+    update_unchanged: "Corsu {version} was already installed: nothing changed.",
+    update_failed: "The update did not complete: {error} The previous version stays in place.",
+    update_failed_plain: "The update did not complete. The previous version stays in place; the details are in the log.",
+    update_waiting_one: "One part is waiting: {list}.", update_waiting_many: "{n} parts are waiting: {list}.",
+    update_restart_text: "Corsu {version} is installed. Restart Corsu to use it.",
+    update_restarting: "Corsu is restarting…", update_restart_failed: "Corsu could not restart: {error}.",
+    activation_waiting: "Waiting for activation", minecraft_switch_new: "Switch the new folders to Corsican",
     programs_lead: "What is shown in Corsican. A change takes effect the next time the program starts.",
     programs_none: "Nothing is installed yet.", go_add: "Add programs",
     restart: "Restart {name} to see the change.", restart_desktop: "Log out and back in to see the change.",
@@ -482,7 +564,7 @@ const text = {
     job_install: "Installation", job_switch: "Language change", job_uninstall: "Uninstallation",
     running: "{job} in progress…", done: "{job} finished.", failed: "{job} stopped with an error.",
     show_details: "Show details", hide_details: "Hide details",
-    busy: "Something is already running.", closed: "Corsu is closed. Open it again from the applications menu.",
+    busy: "Corsu is busy (another window or the installer is working).", closed: "Corsu is closed. Open it again from the applications menu.",
     logs: "Log", logs_text: "Everything Corsu does is written to a file on this computer. If something goes wrong, attach it to your report.",
     open_logs: "Open the log folder", report_bug: "Report a problem",
   },
@@ -494,6 +576,8 @@ let language = null;
 try { language = localStorage.getItem("corsu-language"); } catch (error) {}
 let chosen = Boolean(language);
 let state = null, page = null, picks = null, closed = false, showLog = false;
+// Set while Corsu restarts from a newer installed copy: {pid of the old server, give up after}.
+let restarting = null, savingPreference = false;
 const restartHints = new Map(), openDetails = new Map();
 
 const $ = id => document.getElementById(id);
@@ -530,6 +614,7 @@ function show(name) {
     else button.removeAttribute("aria-current");
   }
   for (const panel of document.querySelectorAll("[data-page-panel]")) panel.hidden = panel.id !== name;
+  if (state) renderUpdate();
 }
 
 // Activation (is Corsican switched on?) and coverage (how much of the program is translated) are separate:
@@ -638,7 +723,10 @@ function switchRow(item, busy) {
       make("label", { for: id, text: name }),
       make("span", { class: "detail", text: detail }),
       ...block.nodes,
-      hint ? make("span", { class: "hint", text: hint }) : null),
+      hint ? make("span", { class: "hint", text: hint }) : null,
+      // New Minecraft game folders found since the installation: switched only when the person asks.
+      item.waiting ? make("span", { class: "buttons" }, make("button", { type: "button", class: "button", id: "activate-" + item.name,
+        text: t("minecraft_switch_new"), disabled: busy, onclick: () => { showLog = false; call("/api/install", { components: [item.name] }).then(refresh); } })) : null),
     make("span", { class: "switch" },
       // Always the server's word: after a failed or deferred change, the next refresh puts it back.
       make("input", { type: "checkbox", role: "switch", id, checked: item.on, disabled: busy,
@@ -741,7 +829,7 @@ function renderHelp() {
 }
 
 function renderAbout() {
-  const rows = [[t("version"), state.version], [t("system"), systems[state.platform] || state.platform],
+  const rows = [[t("system"), systems[state.platform] || state.platform],
     [t("lexicon"), t("lexicon_count", { n: state.lexicon_entries.toLocaleString(numbers()) })]];
   if (state.firefox_profile) rows.push([t("profile"), state.firefox_profile]);
   const facts = rows.flatMap(([term, value]) => [make("dt", { text: term }), make("dd", { text: value })]);
@@ -768,7 +856,8 @@ function renderActivity() {
     $("meter").setAttribute("aria-valuenow", percent);
   }
   $("step").textContent = job.running && progress ? progress.label : "";
-  $("activity-text").textContent = t(job.running ? "running" : job.ok ? "done" : "failed", { job: name });
+  // The installer lock stopped the run: another window or installer is at work, nothing failed.
+  $("activity-text").textContent = !job.running && job.busy ? t("busy") : t(job.running ? "running" : job.ok ? "done" : "failed", { job: name });
   if (job.ok === false) showLog = true;
   $("details-toggle").textContent = t(showLog ? "hide_details" : "show_details");
   const log = $("log");
@@ -811,12 +900,118 @@ async function answer(verdict) {
   $("review-corsican").focus();
 }
 
+// Sentences from update.py and the installer come in French or English, sometimes without a final full stop.
+const sentence = value => /[.!?…]$/.test(value.trim()) ? value.trim() : value.trim() + ".";
+const updateInfo = () => state.update || {};
+const restartInfo = () => updateInfo().restart || {};
+
+function updateStatus() {
+  const info = updateInfo();
+  const current = info.current || state.version;
+  if (info.checking) return { kind: "checking", text: t("update_checking") };
+  // Installed but this window still runs the previous copy: that is what matters now.
+  if (restartInfo().available && !restarting) return { kind: "available", text: t("update_restart_text", { version: restartInfo().version }) };
+  if (info.status === "up_to_date") return { kind: "up_to_date", text: t("update_up_to_date") };
+  if (info.status === "available") return { kind: "available", text: t("update_available", { version: info.latest, current }) };
+  if (info.status === "ahead") return { kind: "ahead", text: t("update_ahead", { version: info.latest, current }) };
+  if (info.status === "unknown") return { kind: "unknown", text: info.error ? t("update_unknown", { reason: info.error.trim().replace(/\.$/, "") }) : t("update_unknown_plain") };
+  return { kind: "none", text: t("update_never") };
+}
+
+// The parts an update could not switch yet (a program open, a new Minecraft folder), with the installer's advice.
+function waitingParts() {
+  return state.items.filter(item => item.installed && (["blocked", "restart_required", "partial"].includes(activationOf(item)) || item.waiting))
+    .map(item => {
+      const [name] = item.text[language];
+      const instance = (item.instances || []).find(instance => instance.activation !== "active" && (instance.action || instance.reason));
+      const why = instance ? (instance.action || instance.reason).trim().replace(/[.;:]$/, "") : null;
+      return why ? `${name} (${why})` : name;
+    });
+}
+
+// What the last update did, in a few lines: Corsu itself, then the parts still waiting, then the restart.
+function updateResult() {
+  const job = state.job, info = updateInfo(), restart = restartInfo();
+  const lines = [];
+  let kind = null;
+  if (restarting) lines.push(t("update_restarting"));
+  else if (job.title === "update" && job.running && info.auto_started) lines.push(t("update_auto_started", { version: info.auto_started }));
+  else if (job.title === "update" && !job.running) {
+    const result = job.result || {};
+    if (job.busy) { lines.push(t("busy")); kind = "attention"; }
+    else if (["updated", "repaired", "unchanged"].includes(result.corsu) && job.ok !== false) {
+      lines.push(t("update_" + result.corsu, { version: result.to || info.latest || state.version }));
+      const waiting = waitingParts();
+      if (waiting.length) {
+        lines.push(waiting.length === 1 ? t("update_waiting_one", { list: waiting[0] }) : t("update_waiting_many", { n: waiting.length, list: waiting.join(language === "en" ? "; " : " ; ") }));
+        kind = "attention";
+      }
+    } else if (job.ok === false || result.corsu === "failed") {
+      lines.push(result.error ? t("update_failed", { error: sentence(result.error) }) : t("update_failed_plain"));
+      kind = "problem";
+    }
+  }
+  if (!restarting && restart.error) { lines.push(t("update_restart_failed", { error: restart.error.replace(/\.$/, "") })); kind = "problem"; }
+  return { lines, kind };
+}
+
+function renderUpdate() {
+  const info = updateInfo(), restart = restartInfo(), job = state.job;
+  const checked = info.checked ? new Date(info.checked * 1000).toLocaleString(numbers(), { dateStyle: "medium", timeStyle: "short" }) : "—";
+  $("update-facts").replaceChildren(...[[t("update_current"), info.current || state.version], [t("update_latest"), info.latest || "—"], [t("update_checked"), checked]]
+    .flatMap(([term, value]) => [make("dt", { text: term }), make("dd", { text: value })]));
+  const status = updateStatus();
+  $("update-status").className = "update-status " + status.kind;
+  $("update-status").textContent = status.text;
+  const result = updateResult();
+  $("update-result").hidden = !result.lines.length;
+  $("update-result").className = "update-result" + (result.kind ? " " + result.kind : "");
+  $("update-result").replaceChildren(...result.lines.map(line => make("span", { text: line })));
+  // One job at a time: every button waits while something runs, or while Corsu restarts.
+  const blocked = job.running || Boolean(restarting);
+  $("update-now").hidden = Boolean(restart.available);
+  $("update-now").disabled = info.status !== "available" || blocked;
+  $("update-restart").hidden = !restart.available;
+  $("update-restart").disabled = blocked;
+  $("update-check").disabled = Boolean(info.checking) || blocked;
+  $("switch-auto-update").checked = Boolean(state.preferences && state.preferences.auto_update);
+  $("switch-auto-update").disabled = savingPreference;
+
+  // The banner on every page: a release to install, an automatic update under way, or a restart to do.
+  const autoRunning = job.title === "update" && job.running && info.auto_started;
+  const show = !restarting && page !== "about" && (restart.available || autoRunning || (info.status === "available" && !(job.title === "update" && job.running)));
+  $("update-banner").hidden = !show;
+  if (show) $("update-text").textContent = restart.available ? t("update_restart_text", { version: restart.version })
+    : autoRunning ? t("update_auto_started", { version: info.auto_started }) : t("update_available", { version: info.latest, current: info.current || state.version });
+  $("update-install").hidden = Boolean(restart.available || autoRunning);
+  $("update-install").disabled = blocked;
+  $("update-banner-restart").hidden = !restart.available;
+  $("update-banner-restart").disabled = blocked;
+}
+
 function renderExtras() {
-  const info = state.update;
-  $("update-banner").hidden = !(info && info.newer);
-  if (info && info.newer) $("update-text").textContent = t("update_available", { version: info.version, current: state.version });
-  $("update-install").disabled = state.job.running;
+  renderUpdate();
   $("switch-original").checked = Boolean(state.options && state.options.showOriginal);
+}
+
+async function startUpdate() {
+  showLog = false;
+  await call("/api/update", {}).catch(() => null);
+  refresh();
+}
+
+async function restartCorsu() {
+  const before = state.pid;
+  let result = null;
+  try {
+    const response = await fetch("/api/restart", { method: "POST", headers: { "X-Corsu": "1", "Content-Type": "application/json" }, body: JSON.stringify({ language }) });
+    result = await response.json().catch(() => ({}));
+    if (response.status === 409) { alert(t("busy")); return refresh(); }
+    if (!response.ok) { alert(t("update_restart_failed", { error: String(result.error || response.status).replace(/\.$/, "") })); return refresh(); }
+  } catch (error) { return refresh(); }
+  // The address stays the same: the page waits for the new copy, then reloads from it.
+  restarting = { pid: before, until: Date.now() + 45000 };
+  render();
 }
 
 function render() {
@@ -835,11 +1030,18 @@ function render() {
 async function refresh() {
   try {
     const next = await call("/api/state");
+    if (restarting) {
+      // Another process answers: the new copy, with its own page.
+      if (next.pid !== restarting.pid) { window.location.reload(); return; }
+      if ((next.update && next.update.restart && next.update.restart.error) || Date.now() > restarting.until) restarting = null;
+    }
     if (state && state.job.running && !next.job.running) picks = null;
     state = next;
     if (page === null) show(state.installed ? "programs" : "add");
     render();
   } catch (error) {
+    // While Corsu restarts, the address is silent for a moment.
+    if (restarting && Date.now() < restarting.until) return;
     if (closed) return;
     closed = true;
     document.querySelector("main").replaceChildren(make("p", { class: "closed", text: t("closed") }));
@@ -869,7 +1071,18 @@ $("review-send").addEventListener("click", async () => {
 });
 $("switch-original").addEventListener("change", event => call("/api/options", { showOriginal: event.target.checked }).then(refresh));
 $("open-logs").addEventListener("click", () => call("/api/logs", {}));
-$("update-install").addEventListener("click", () => call("/api/update", {}).then(refresh));
+$("update-install").addEventListener("click", startUpdate);
+$("update-now").addEventListener("click", startUpdate);
+$("update-restart").addEventListener("click", restartCorsu);
+$("update-banner-restart").addEventListener("click", restartCorsu);
+$("update-check").addEventListener("click", () => {
+  $("update-check").disabled = true;
+  call("/api/update/check", {}).catch(() => null).then(refresh);
+});
+$("switch-auto-update").addEventListener("change", event => {
+  savingPreference = true;
+  call("/api/preferences", { auto_update: event.target.checked }).catch(() => null).then(() => { savingPreference = false; refresh(); });
+});
 $("rescan").addEventListener("click", () => { picks = null; call("/api/rescan", {}).then(refresh); });
 $("language").addEventListener("change", event => {
   language = event.target.value; chosen = true;

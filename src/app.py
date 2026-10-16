@@ -7,6 +7,8 @@ in a window of its own (see window.py) or in any browser. `--browser` opens it i
 """
 import json
 import os
+import re
+import shlex
 from pathlib import Path
 import socket
 import subprocess
@@ -62,6 +64,10 @@ COMPONENTS = {
 ORDER = ['firefox', 'chromium', 'discord', 'vesktop', 'desktop', 'qt', 'terminal', 'minecraft']
 
 
+# The installer lock's message when another Corsu window or installer is at work (docs/update-architecture.md).
+BUSY = re.compile(r'already busy|déjà occupé', re.I)
+
+
 class Job:
     """One installer run at a time; its output is shown live in the page."""
 
@@ -72,12 +78,16 @@ class Job:
         self.running = False
         self.ok = None
         self.progress = None
+        # The update script's last word (`@result {json}`), and whether the installer lock stopped the run.
+        self.result = None
+        self.busy = False
 
     def start(self, title, arguments, language, script='installer.py'):
         with self.lock:
             if self.running:
                 return False
             self.title, self.lines, self.running, self.ok, self.progress = title, [], True, None, None
+            self.result, self.busy = None, False
         environment = {**os.environ, 'CORSU_LANG': language, 'PYTHONUNBUFFERED': '1', 'PYTHONIOENCODING': 'utf-8',
                        'CORSU_SETUP_WINDOW': '1', 'CORSU_APP_ROOT': str(corsu.ROOT)}
         command = [sys.executable, str(corsu.SRC / script), *arguments]
@@ -96,6 +106,14 @@ class Job:
                     if percent.isdigit():
                         self.progress = {'percent': int(percent), 'label': label}
                     continue
+                if line.startswith('@result '):
+                    try:
+                        self.result = json.loads(line[8:])
+                    except ValueError:
+                        pass
+                    continue
+                if BUSY.search(line):
+                    self.busy = True
                 if not line.startswith('+ '):
                     self.lines.append(line.rstrip('\n'))
             ok = process.wait() == 0
@@ -110,7 +128,7 @@ class Job:
 
     def snapshot(self):
         return {'title': self.title, 'lines': self.lines[-400:], 'running': self.running, 'ok': self.ok,
-                'progress': self.progress}
+                'progress': self.progress, 'result': self.result, 'busy': self.busy}
 
 
 DETECTED = {'time': 0.0, 'names': set()}
@@ -150,7 +168,7 @@ def status(name, item, state):
             'coverage': result.get('coverage'), 'validation': validation, 'updated': result.get('time')}
 
 
-def snapshot():
+def snapshot(job=None):
     """Everything the page shows, read fresh each time."""
     try:
         state, problem = corsu.load_state(), None
@@ -187,10 +205,15 @@ def snapshot():
         item = {'name': name, 'text': text, 'installed': name in installed or name in switchable,
                 'switchable': name in switchable, 'on': name in switchable and not corsu.is_disabled(name, state)}
         item.update(status(name, item, state))
+        if name == 'minecraft' and item['installed']:
+            waiting = minecraft_waiting(state, state.get('results', {}).get(name))
+            item['instances'] = [*item['instances'], *waiting]
+            item['waiting'] = len(waiting)
         items.append(item)
     profile = corsu.firefox_profile() if 'firefox' in installed else None
     return {
-        'version': json.loads((corsu.SRC / 'release.json').read_text(encoding='utf-8')).get('version'),
+        'version': running_version(),
+        'pid': os.getpid(),
         'platform': corsu.PLATFORM,
         'language': 'fr' if corsu.french() else 'en',
         'installed': bool(installed),
@@ -201,7 +224,11 @@ def snapshot():
         'lexicon_entries': len(corsu.WORDS),
         'review': review.progress_all(),
         'options': review.options(),
-        'update': UPDATE.get('info'),
+        'update': {**(UPDATE['info'] or {'current': running_version(), 'latest': None, 'status': None,
+                                         'checked': None, 'error': None}),
+                   'checking': UPDATE['checking'], 'auto_started': UPDATE['auto_started'],
+                   'restart': restart_info(state, job or Job())},
+        'preferences': preferences(),
         'problem': problem,
     }
 
@@ -220,7 +247,7 @@ def peer_uid(port):
     return None
 
 
-def make_handler(job, activity, port):
+def make_handler(job, activity, port, handover=None):
     page = PAGE.read_bytes()
     icon = (PAGE.parent / 'corsu.svg').read_bytes()
     hosts = {f'127.0.0.1:{port}', f'localhost:{port}'}
@@ -264,7 +291,7 @@ def make_handler(job, activity, port):
                 return self.send(200, icon, 'image/svg+xml')
             if self.path == '/api/state' and self.allowed():
                 activity[0] = time.monotonic()
-                return self.send(200, {**snapshot(), 'job': job.snapshot()})
+                return self.send(200, {**snapshot(job), 'job': job.snapshot()})
             if self.path.startswith('/api/review/next') and self.allowed():
                 section = 'Google' if 'section=Google' in self.path else 'Discord'
                 return self.send(200, {'item': review.next_item(section), 'progress': review.progress_all()})
@@ -300,8 +327,29 @@ def make_handler(job, activity, port):
                 import logbook
                 return self.send(200, {'folder': logbook.open_folder()})
             if self.path == '/api/update':
-                started = job.start('update', ['--install'], language, script='update.py')
+                info = UPDATE['info'] or {}
+                started = start_update(job, language, info.get('latest') if info.get('status') == 'available' else None)
                 return self.send(200 if started else 409, {'started': started})
+            if self.path == '/api/update/check':
+                started = start_check(job, force=True, automatic=False)
+                return self.send(200, {'checking': started or UPDATE['checking']})
+            if self.path == '/api/preferences':
+                value = request.get('auto_update')
+                if not isinstance(value, bool):
+                    return self.send(400, {'error': 'auto_update must be true or false'})
+                try:
+                    set_preference('auto_update', value)
+                except OSError as error:
+                    return self.send(500, {'error': str(error)})
+                return self.send(200, {'preferences': preferences()})
+            if self.path == '/api/restart':
+                if handover is None or job.running:
+                    return self.send(409, {'started': False})
+                try:
+                    handover.start()
+                except RuntimeError as error:
+                    return self.send(400, {'error': str(error)})
+                return self.send(200, {'restarting': True})
             if self.path == '/api/plan':
                 if not names:
                     return self.send(400, {'error': 'nothing selected'})
@@ -339,12 +387,210 @@ def make_handler(job, activity, port):
 
 
 SESSION = corsu.DATA / 'setup-session.json'
-UPDATE = {}
+# The arguments this window was started with, given again to the copy that replaces it.
+ARGUMENTS = []
+# What the window knows about updates: the last check ('info'), whether one runs, the automatic update started in
+# this window session, and how a restart went.
+UPDATE = {'info': None, 'checking': False, 'auto_started': None, 'restart_error': None}
+UPDATE_LOCK = threading.Lock()
+PREFERENCES = 'preferences.json'
+VERSION = re.compile(r'^\d+(\.\d+){1,3}$')
 
 
-def check_update():
-    """Look for a newer release in the background, once per window."""
-    UPDATE['info'] = update.latest()
+def version_tuple(text):
+    return tuple(int(part) for part in str(text).lstrip('v').split('.') if part.isdigit())
+
+
+def running_version():
+    return json.loads((corsu.SRC / 'release.json').read_text(encoding='utf-8')).get('version')
+
+
+def update_check(force=False):
+    """update.check() (docs/update-architecture.md), or the same answer built from the older update.latest().
+    Never raises: a failure is status 'unknown' with its reason."""
+    current = running_version()
+    try:
+        check = getattr(update, 'check', None)
+        if check:
+            return check(force=force)
+        found = update.latest(force=force)
+    except Exception as error:  # A network or parsing failure must never keep the window from opening.
+        return {'current': current, 'latest': None, 'tag': None, 'url': None, 'status': 'unknown', 'checked': None,
+                'error': str(error) or error.__class__.__name__}
+    if not found:
+        return {'current': current, 'latest': None, 'tag': None, 'url': None, 'status': 'unknown', 'checked': None,
+                'error': t('GitHub could not be reached', 'GitHub est injoignable')}
+    latest = found['version']
+    status = ('available' if version_tuple(latest) > version_tuple(current) else
+              'ahead' if version_tuple(latest) < version_tuple(current) else 'up_to_date')
+    return {'current': current, 'latest': latest, 'tag': 'v' + latest, 'url': found.get('url'), 'status': status,
+            'checked': time.time(), 'error': None}
+
+
+def preferences():
+    """update.preferences(), or corsu.DATA/preferences.json read directly. `auto_update` defaults to off."""
+    try:
+        if hasattr(update, 'preferences'):
+            found = update.preferences()
+        else:
+            found = json.loads((corsu.DATA / PREFERENCES).read_text(encoding='utf-8'))
+    except (OSError, ValueError):
+        found = {}
+    found = found if isinstance(found, dict) else {}
+    return {**found, 'auto_update': found.get('auto_update') is True}
+
+
+def set_preference(name, value):
+    if hasattr(update, 'set_preference'):
+        update.set_preference(name, value)
+        return
+    path = corsu.DATA / PREFERENCES
+    try:
+        saved = json.loads(path.read_text(encoding='utf-8'))
+    except (OSError, ValueError):
+        saved = {}
+    saved = {**(saved if isinstance(saved, dict) else {}), name: value}
+    corsu.DATA.mkdir(parents=True, exist_ok=True)
+    temporary = path.with_name(path.name + '.corsu-tmp')
+    temporary.write_text(json.dumps(saved, indent=2), encoding='utf-8')
+    os.replace(temporary, path)
+
+
+def start_update(job, language, version=None):
+    """The update job: update.py --install, for the exact version the window showed when it knows it."""
+    arguments = ['--install'] + (['--version', version] if version and VERSION.match(version) else [])
+    return job.start('update', arguments, language, script='update.py')
+
+
+def claim_check():
+    """Mark a check as running; False when one already is."""
+    with UPDATE_LOCK:
+        if UPDATE['checking']:
+            return False
+        UPDATE['checking'] = True
+        return True
+
+
+def check_update(job=None, force=False, automatic=True):
+    """Look for a newer release (once when the window opens, again on request); the caller claimed the check
+    (claim_check). With automatic updates on and a stable release out, start installing it, once per window session
+    and never over another job."""
+    try:
+        UPDATE['info'] = update_check(force)
+    finally:
+        UPDATE['checking'] = False
+    info = UPDATE['info']
+    if (automatic and job is not None and info.get('status') == 'available' and UPDATE['auto_started'] is None
+            and not job.running and preferences()['auto_update']):
+        if start_update(job, 'fr' if corsu.french() else 'en', info.get('latest')):
+            UPDATE['auto_started'] = info.get('latest') or '?'
+
+
+def start_check(job, force=False, automatic=True):
+    """A check in the background; the page follows it through /api/state. False when one already runs."""
+    if not claim_check():
+        return False
+    threading.Thread(target=check_update, args=(job, force, automatic), daemon=True).start()
+    return True
+
+
+def release_record(state):
+    """installation.json → release ({'folder', 'version', …}), written by the installer since one managed
+    installation per user (docs/update-architecture.md)."""
+    record = state.get('release') if isinstance(state, dict) else None
+    return record if isinstance(record, dict) else {}
+
+
+def shortcut_command():
+    """[python, app.py] from the Corsu menu entry (Linux), or None."""
+    entry = corsu.HOME / '.local/share/applications/corsu-setup.desktop'
+    try:
+        for line in entry.read_text(encoding='utf-8').splitlines():
+            if line.startswith('Exec='):
+                command = shlex.split(line[5:])
+                if len(command) >= 2 and command[1].endswith('app.py'):
+                    return command[:2]
+    except (OSError, ValueError):
+        pass
+    return None
+
+
+def installed_app(state):
+    """[python, app.py] of the installed Corsu copy (the one launchers point to), or None when it cannot be told.
+    From installation.json → release.folder, else the Corsu menu entry."""
+    record = release_record(state)
+    folder = record.get('folder')
+    if folder:
+        folder = Path(folder)
+        app = next((candidate for candidate in (folder / 'src/app.py', folder / 'app.py') if candidate.is_file()), None)
+        if app:
+            python = record.get('python')
+            python = python if python and Path(python).is_file() else str(corsu.python_launcher())
+            return [python, str(app)]
+    command = shortcut_command()
+    if command and Path(command[1]).is_file():
+        if not Path(command[0]).is_file():
+            command[0] = str(corsu.python_launcher())
+        return command
+    return None
+
+
+def installed_version(app):
+    try:
+        return json.loads((Path(app).parent / 'release.json').read_text(encoding='utf-8')).get('version')
+    except (OSError, ValueError):
+        return None
+
+
+def restart_info(state, job):
+    """Whether "Restart Corsu" is offered: the installed copy is another one than this window's, after an update
+    that asked for it (@result restart_app) or with another version than the one running."""
+    command = installed_app(state)
+    if not command:
+        return {'available': False, 'version': None, 'error': UPDATE['restart_error']}
+    app = Path(command[1]).resolve()
+    other = app.parent != corsu.SRC.resolve()
+    version = installed_version(app)
+    asked = bool(job.title == 'update' and isinstance(job.result, dict) and job.result.get('restart_app'))
+    return {'available': other and not job.running and (asked or (version is not None and version != running_version())),
+            'version': version, 'error': UPDATE['restart_error']}
+
+
+MINECRAFT = {'time': 0.0, 'waiting': []}
+
+
+def minecraft_waiting(state, result):
+    """Minecraft game folders found since Corsu switched the others (a new launcher instance, a new profile folder):
+    shown as waiting for activation, with their version. Nothing is written; looked up at most every 20 seconds."""
+    if time.monotonic() - MINECRAFT['time'] < 20:
+        return MINECRAFT['waiting']
+    import minecraft
+    known = set()
+    for path, record in state.get('files', {}).items():
+        if isinstance(record, dict) and record.get('component') == 'minecraft' and Path(path).name == 'options.txt':
+            known.add(Path(path).parent)
+    for instance in (result or {}).get('instances', []):
+        if instance.get('location'):
+            known.add(Path(instance['location']))
+    known = {path.resolve() for path in known}
+    waiting = []
+    try:
+        folders = [folder for folder in minecraft.find_folders()
+                   if folder.path.resolve() not in known and folder.version and minecraft.target(folder.version)]
+        running = minecraft.running_folders() if folders else set()
+    except Exception:
+        folders, running = [], set()
+    for folder in folders:
+        busy = minecraft.in_use(folder.path, running)
+        waiting.append({
+            'kind': folder.launcher, 'location': str(folder.path), 'version': folder.version, 'loader': folder.loader,
+            'activation': 'waiting', 'coverage': None, 'note': None,
+            'reason': t('New game folder: Corsu has not switched it yet.',
+                        'Nouveau dossier de jeu : Corsu ne l\'a pas encore activé.'),
+            'action': (t('Minecraft is running there; close it first.', 'Minecraft y est lancé ; fermez-le d\'abord.')
+                       if busy else None)})
+    MINECRAFT['waiting'], MINECRAFT['time'] = waiting, time.monotonic()
+    return waiting
 
 
 def running_session():
@@ -369,32 +615,140 @@ class Server(ThreadingHTTPServer):
         super().server_bind()
 
 
-def listen(job, activity):
+class Handover:
+    """Restart the window from the newly installed copy, at the same address, so the page only has to reload (and
+    keeps what it saved for that address, such as its language). This server lets go of its port, the new copy
+    starts detached and takes it (`--replace <port>`), and once it answers this process ends as soon as its window
+    allows. When the new copy does not answer, this server takes its port back and the page says why. Nothing
+    else is stopped."""
+
+    WAIT = 30
+
+    def __init__(self, job, activity, holder, port):
+        self.job, self.activity, self.holder, self.port = job, activity, holder, port
+        self.lock = threading.Lock()
+        self.running = False
+        self.done = False
+        self.process = None
+
+    def start(self):
+        with self.lock:
+            if self.running or self.done:
+                return
+            state = corsu.load_state() if corsu.STATE.exists() else {}
+            command = installed_app(state)
+            if not command or not restart_info(state, self.job)['available']:
+                raise RuntimeError(t('There is no newer installed copy of Corsu to restart from.',
+                                     'Il n\'y a pas de copie installée plus récente de Corsu à redémarrer.'))
+            self.running = True
+        UPDATE['restart_error'] = None
+        threading.Thread(target=self.run, args=(command,), daemon=True).start()
+
+    def launch(self, command):
+        options = {'stdin': subprocess.DEVNULL, 'stdout': subprocess.DEVNULL, 'stderr': subprocess.DEVNULL,
+                   'cwd': str(Path(command[1]).parent), 'close_fds': True}
+        if os.name == 'nt':
+            options['creationflags'] = 0x00000008 | 0x00000200  # DETACHED_PROCESS | CREATE_NEW_PROCESS_GROUP
+        else:
+            options['start_new_session'] = True
+        return subprocess.Popen([*command, *ARGUMENTS, '--replace', str(self.port)], **options)
+
+    def answered(self, url):
+        try:
+            request = urllib.request.Request(url + 'api/state', headers={'X-Corsu': '1'})
+            with urllib.request.urlopen(request, timeout=3) as response:
+                return json.load(response).get('pid') not in (None, os.getpid())
+        except (OSError, ValueError, AttributeError):
+            return False
+
+    def run(self, command):
+        time.sleep(0.3)  # The page gets its answer before the port closes.
+        server = self.holder['server']
+        server.shutdown()
+        server.server_close()
+        url = f'http://127.0.0.1:{self.port}/'
+        error = None
+        try:
+            process = self.process = self.launch(command)
+        except OSError as failure:
+            process, error = None, str(failure)
+        deadline = time.monotonic() + self.WAIT
+        while process and time.monotonic() < deadline:
+            if self.answered(url):
+                self.done = True
+                self.running = False
+                return
+            if process.poll() is not None:
+                error = t(f'the new copy stopped (code {process.returncode})',
+                          f'la nouvelle copie s\'est arrêtée (code {process.returncode})')
+                break
+            time.sleep(0.3)
+        else:
+            error = error or t('the new copy did not answer', 'la nouvelle copie n\'a pas répondu')
+        UPDATE['restart_error'] = error
+        self.activity[0] = time.monotonic()
+        try:
+            self.holder['server'] = bind(self.port, self.job, self.activity, self, wait=self.WAIT)
+            threading.Thread(target=self.holder['server'].serve_forever, daemon=True).start()
+        except OSError:
+            # The port went to another program; this window can no longer be reached.
+            self.done = True
+        finally:
+            self.running = False
+
+
+def bind(port, job, activity, handover=None, wait=0):
+    """A server on exactly `port`, retried for `wait` seconds while the copy being replaced lets go of it."""
+    deadline = time.monotonic() + wait
+    while True:
+        try:
+            return Server(('127.0.0.1', port), make_handler(job, activity, port, handover))
+        except OSError:
+            if time.monotonic() >= deadline:
+                raise
+            time.sleep(0.2)
+
+
+def listen(job, activity, handover=None):
     """Serve on the fixed port, or the next free one when another program holds it."""
     for port in PORTS:
         try:
-            return Server(('127.0.0.1', port), make_handler(job, activity, port))
+            return Server(('127.0.0.1', port), make_handler(job, activity, port, handover))
         except OSError:
             continue
     raise RuntimeError(t(f'Ports {PORTS.start} to {PORTS.stop - 1} are all in use; close the program using them.',
                          f'Les ports {PORTS.start} à {PORTS.stop - 1} sont tous utilisés ; fermez le programme qui les occupe.'))
 
 
-def serve(mode='window'):
+def serve(mode='window', replace=None):
     """Run Corsu at its address. `mode`: 'window' (its own window, the browser when none is possible), 'browser'
-    or 'none' (only the address)."""
-    existing = running_session()
-    if existing:
-        if mode != 'none':
-            import window
-            window.show(existing, mode)
-        return
+    or 'none' (only the address). `replace`: the port of the Corsu window this copy takes over after an update;
+    that window keeps showing the page, which reloads from here."""
+    if replace is None:
+        existing = running_session()
+        if existing:
+            if mode != 'none':
+                import window
+                window.show(existing, mode)
+            return
     job = Job()
     activity = [time.monotonic()]
-    server = listen(job, activity)
-    url = f'http://localhost:{server.server_address[1]}/'
+    holder = {}
+    if replace is None:
+        server = listen(job, activity)
+    else:
+        mode = 'none'
+        try:
+            server = bind(replace, job, activity, wait=Handover.WAIT)
+        except OSError:
+            return
+    port = server.server_address[1]
+    handover = Handover(job, activity, holder, port)
+    server.RequestHandlerClass = make_handler(job, activity, port, handover)
+    holder['server'] = server
+    url = f'http://localhost:{port}/'
     threading.Thread(target=server.serve_forever, daemon=True).start()
-    threading.Thread(target=check_update, daemon=True).start()
+    start_check(job)
     try:
         corsu.DATA.mkdir(parents=True, exist_ok=True)
         SESSION.write_text(json.dumps({'url': url}), encoding='utf-8')
@@ -412,11 +766,14 @@ def serve(mode='window'):
             idle = CLOSED_IDLE_SECONDS
             activity[0] = time.monotonic()
     try:
-        while job.running or time.monotonic() - activity[0] < idle:
+        while not handover.done and (handover.running or job.running or time.monotonic() - activity[0] < idle):
             time.sleep(1)
     except KeyboardInterrupt:
         pass
-    server.shutdown()
+    if handover.done:
+        # The new copy serves the address and owns the session file now.
+        return
+    holder['server'].shutdown()
     SESSION.unlink(missing_ok=True)
 
 
@@ -474,7 +831,14 @@ def main():
     try:
         if '--text' in sys.argv:
             return run_text()
-        serve('none' if '--no-browser' in sys.argv else 'browser' if '--browser' in sys.argv else 'window')
+        replace = None
+        if '--replace' in sys.argv:
+            position = sys.argv.index('--replace')
+            value = sys.argv[position + 1] if position + 1 < len(sys.argv) else ''
+            replace = int(value) if value.isdigit() and int(value) in PORTS else None
+            del sys.argv[position:position + 2]
+        ARGUMENTS[:] = [argument for argument in sys.argv[1:] if argument in ('--browser', '--no-browser')]
+        serve('none' if '--no-browser' in sys.argv else 'browser' if '--browser' in sys.argv else 'window', replace)
     except Exception as error:
         print(logbook.failure(error), file=sys.stderr)
         raise SystemExit(1)
