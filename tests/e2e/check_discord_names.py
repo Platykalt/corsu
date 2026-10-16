@@ -110,9 +110,11 @@ build({ entryPoints: [process.argv[2]], bundle: true, write: false, format: 'iif
     with tempfile.TemporaryDirectory() as folder:
         dictionary = Path(folder) / 'dictionary.json'
         dictionary.write_text(json.dumps(DICTIONARY, ensure_ascii=False), encoding='utf-8')
-        esbuild = next(Path(vencord, 'node_modules').glob('esbuild/lib/main.js'))
+        esbuild = next(Path(vencord, 'node_modules').resolve().glob('esbuild/lib/main.js'))
         result = subprocess.run(['node', '-e', script, str(esbuild), str(ROOT / 'src/discord-plugin/translate.ts'),
-                                 str(dictionary)], capture_output=True, text=True, encoding='utf-8', check=True)
+                                 str(dictionary)], capture_output=True, text=True, encoding='utf-8')
+        if result.returncode:
+            raise SystemExit('esbuild could not bundle translate.ts:\n' + result.stderr)
         return result.stdout
 
 
