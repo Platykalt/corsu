@@ -195,6 +195,17 @@ REQUIRED = ['src/app/index.html', 'src/app/corsu.svg', 'src/app/corsu.ico', 'src
             'src/update.py', 'lexicon/lexicon.tsv', 'vendor/firefox-fr.xpi', 'Vencord/dist/vencordDesktopRenderer.js']
 
 
+def fake_prism_instance(home, version):
+    """A Prism Launcher instance of the supported version, as a person who just created it has (no pack, English)."""
+    base = {'windows': home / 'AppData/Roaming', 'macos': home / 'Library/Application Support'}.get(PLATFORM, home / '.local/share')
+    instance = base / 'PrismLauncher/instances' / version
+    (instance / 'minecraft/resourcepacks').mkdir(parents=True)
+    (instance / 'mmc-pack.json').write_text(json.dumps({'components': [{'uid': 'net.minecraft', 'version': version}],
+                                                        'formatVersion': 1}), encoding='utf-8')
+    (instance / 'minecraft/options.txt').write_text('version:4671\nlang:en_us\nresourcePacks:[]\n', encoding='utf-8')
+    return instance / 'minecraft'
+
+
 def check_archive(root, home, environment):
     """The route of a person who downloads an archive: extract it to a folder with a space and an accent, install from
     there, delete that folder, then use, update (from the same archives, checksum checked) and remove Corsu with only
@@ -204,8 +215,11 @@ def check_archive(root, home, environment):
     shutil.copytree(root, extracted, symlinks=True)
     missing = [name for name in REQUIRED if not (extracted / name).is_file()]
     assert not missing, f'Archive lacks: {missing}'
-    run(extracted, environment, 'src/installer.py', '--components', 'firefox', '--yes')
+    instance = fake_prism_instance(home, (extracted / 'minecraft/java/VERSION').read_text(encoding='utf-8').strip())
+    run(extracted, environment, 'src/installer.py', '--components', 'firefox', 'minecraft', '--yes')
     shutil.rmtree(extracted.parent)
+    options = (instance / 'options.txt').read_text(encoding='utf-8')
+    assert 'lang:co_fr' in options and (instance / 'resourcepacks/corsu-minecraft-java.zip').is_file(), options
     copy = installed_copy(home)
     missing = [name for name in REQUIRED if not (copy / name).is_file() and not name.startswith('vendor/')]
     assert not missing, f'Installed copy lacks: {missing}'
@@ -226,6 +240,8 @@ def check_archive(root, home, environment):
     assert status['installation']['missing'] == [], status
     run(copy, environment, 'src/installer.py', '--uninstall', '--yes')
     assert state(home)['files'] == {}, state(home)
+    assert 'lang:en_us' in (instance / 'options.txt').read_text(encoding='utf-8'), 'Minecraft language not given back'
+    assert not list((instance / 'resourcepacks').glob('corsu*.zip')), 'Corsu pack left in the instance'
     for launcher in launchers(home):
         assert not launcher.exists(), f'Launcher left behind: {launcher}'
     print(f'PASS: installed from an extracted archive, used after deleting it, updated from {archives.as_uri()}, removed')

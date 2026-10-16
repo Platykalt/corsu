@@ -145,6 +145,9 @@ def prepare_build():
 
 DEPLOYED_FILES = ('LICENSE', 'README.md', 'CONTRIBUTING.md')
 DEPLOYED_DIRECTORIES = ('src', 'lexicon', 'install', 'vendor', 'Vencord')
+# What src/minecraft.py reads to build and offer the pack. Missing from the installed copy, Minecraft stopped the
+# installation (pack.mcmeta not found) although the extracted archive had it.
+DEPLOYED_MINECRAFT = tuple(f'minecraft/java/{name}' for name in ('pack.mcmeta', 'co_fr.json', 'LICENSE.txt', 'VERSION'))
 
 
 def deploy_release():
@@ -155,7 +158,7 @@ def deploy_release():
         return ROOT
     fingerprint = hashlib.sha256()
     for path in sorted([*(path for path in (ROOT / 'src').rglob('*') if path.is_file() and '__pycache__' not in path.parts),
-                        *(ROOT / name for name in DEPLOYED_FILES if (ROOT / name).is_file()),
+                        *(ROOT / name for name in DEPLOYED_FILES + DEPLOYED_MINECRAFT if (ROOT / name).is_file()),
                         *(ROOT / 'lexicon').glob('*.tsv'), *(ROOT / 'Vencord/dist').glob('*.*')]):
         fingerprint.update(path.relative_to(ROOT).as_posix().encode() + b'\0' + path.read_bytes())
     target = corsu.DATA / 'releases' / fingerprint.hexdigest()[:16]
@@ -164,8 +167,9 @@ def deploy_release():
     target.parent.mkdir(parents=True, exist_ok=True)
     stage = Path(tempfile.mkdtemp(prefix='stage-', dir=target.parent))
     try:
-        for name in DEPLOYED_FILES:
+        for name in DEPLOYED_FILES + DEPLOYED_MINECRAFT:
             if (ROOT / name).is_file():
+                (stage / name).parent.mkdir(parents=True, exist_ok=True)
                 shutil.copy2(ROOT / name, stage / name)
         for name in DEPLOYED_DIRECTORIES:
             if (ROOT / name).is_dir():

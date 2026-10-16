@@ -247,3 +247,20 @@ class InstallerTests(unittest.TestCase):
 
 if __name__ == '__main__':
     unittest.main()
+
+
+class DeployedCopyTests(unittest.TestCase):
+    def test_installed_copy_carries_what_minecraft_reads(self):
+        # The extracted archive had minecraft/java; the copy launchers use did not, and installing Minecraft stopped.
+        with tempfile.TemporaryDirectory() as directory:
+            root, data = Path(directory) / 'extracted', Path(directory) / 'data'
+            for name in ('src/installer.py', *installer.DEPLOYED_MINECRAFT):
+                (root / name).parent.mkdir(parents=True, exist_ok=True)
+                (root / name).write_text(name, encoding='utf-8')
+            with patch.object(installer, 'ROOT', root), patch.object(corsu, 'DATA', data), \
+                    patch.dict(os.environ, {'CORSU_DEPLOYED': ''}):
+                copy = installer.deploy_release()
+                for name in installer.DEPLOYED_MINECRAFT:
+                    self.assertEqual((copy / name).read_text(encoding='utf-8'), name)
+                (root / 'minecraft/java/VERSION').write_text('26.4', encoding='utf-8')
+                self.assertNotEqual(installer.deploy_release(), copy)  # a new pack version is a new copy
