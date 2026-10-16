@@ -1,6 +1,8 @@
 # Minecraft Java: several game versions from one translation
 
-Status: in progress (October 2026). This page is the contract between the tools, the data and the installer.
+Status (2026-10-17): 87 releases from 1.6.1 to 26.3 built, fully translated (AI) and checked with each release's own
+game code; only 26.3 seen in a running game; no human review. This page is the contract between the tools, the
+data and the installer.
 
 ## Measured starting point (2026-10-17)
 

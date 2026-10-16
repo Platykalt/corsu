@@ -96,6 +96,21 @@ seulement : l'icône à l'écran n'a pas été regardée. Corsu 0.21.0 y est enc
   tous les tests de la CI, puis installation en une ligne depuis la version publiée sous Linux et Windows (pas de
   test de ce type sous macOS). Suite : fusionner `integrations-audio`, PDFsam, Poedit.
 
+## Minecraft Java, toutes les versions (17 octobre 2026)
+
+- Corsu construit et installe un pack pour chaque version publiée de 1.6.1 à 26.3 (87 versions), choisi d'après la
+  version de chaque instance (Prism Launcher, MultiMC, lanceur officiel, Fabric/Quilt/Forge/NeoForge). Contrat et
+  formats : [MULTIVERSION.md](../minecraft/java/MULTIVERSION.md) ; état : [STATUS.md](../minecraft/java/STATUS.md).
+- Couverture des traductions : 87/87 versions complètes (base 26.3 + `history.json`, 3 978 paires : 507 reprises,
+  1 755 clés renommées, 482 adaptées, 1 234 nouvelles), toutes écrites par IA.
+- Vérification technique : 87/87 par `tools/mcversions.py verify all` (règles Python, puis le jar de chaque version
+  charge le fichier de langue et rend chaque texte : 0 problème). La CI refait les 87 contrôles Python et 9 versions
+  avec leur propre code.
+- Essais en jeu : 26.3 seulement (instance Prism du mainteneur ; journal du jeu). Relecture humaine : 0.
+- Défaut corrigé : le pack listé aussi dans `incompatibleResourcePacks` n'était pas sélectionné au démarrage.
+- Ordinateur du mainteneur mis à jour avec l'archive CI de `9ad7f09` : `options.txt` de l'instance inchangé.
+- Hors périmètre : snapshots, préversions, versions avant 1.6.1 ([other-versions.md](../minecraft/java/other-versions.md)).
+
 ## Blocages et ce qui demande une personne
 
 - Essai réel de Minecraft Java 26.3 ([TESTING.md](../minecraft/java/TESTING.md)) et de Bedrock.
