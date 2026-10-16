@@ -1,0 +1,257 @@
+"""Programs that ship their Corsican translation and have a language setting of their own, all by Patriccollu di
+Santa Maria è Sichè. Corsu checks that the Corsican file is in the installed program, then sets that one setting.
+Sources for every path and value: docs/apps-research.md.
+
+Not done here: portable installs that keep their settings next to the program (Notepad++ with doLocalConf.xml is
+handled; others are left alone), Flatpak/Snap variants other than VLC's, and Mp3tag / Paint.NET (proprietary, setting
+undocumented).
+"""
+import os
+from pathlib import Path
+
+import corsu
+import apps
+from apps import settings
+
+
+def program_dirs():
+    """Folders where Windows programs are installed, for everyone or for this user."""
+    found = []
+    for variable in ('ProgramFiles', 'ProgramFiles(x86)', 'ProgramW6432'):
+        if os.environ.get(variable):
+            found.append(Path(os.environ[variable]))
+    local = Path(os.environ.get('LOCALAPPDATA', corsu.HOME / 'AppData/Local'))
+    found += [local / 'Programs', local]
+    return list(dict.fromkeys(found))
+
+
+def appdata():
+    return Path(os.environ.get('APPDATA', corsu.HOME / 'AppData/Roaming'))
+
+
+def config_home():
+    return Path(os.environ.get('XDG_CONFIG_HOME', corsu.HOME / '.config'))
+
+
+def running(*names):
+    """True when a process with one of these executable names runs (None from the system counts as not known)."""
+    processes = corsu.running_executables() or set()
+    wanted = {name.lower() for name in names}
+    return any(Path(process.replace('\\', '/')).name.lower() in wanted for process in processes)
+
+
+def close_first(name):
+    return corsu.t(f'{name} is open: close it, then run Corsu again (it rewrites its settings when it quits)',
+                   f'{name} est ouvert : fermez-le, puis relancez Corsu (il réécrit ses réglages en quittant)')
+
+
+class SettingApp(apps.App):
+    """A program found by its executable and its Corsican file, switched by one value in its settings."""
+    executables = ()     # (platform, path relative to a program folder or absolute)
+    corsican = ''        # the Corsican file, relative to the program's folder (or absolute on Linux)
+    processes = ()       # executable names to check before writing, when the program rewrites its settings
+    coverage_note = None
+
+    def installs(self):
+        """(executable path, program folder) found on this platform."""
+        found = []
+        for platform, path in self.executables:
+            if platform != corsu.PLATFORM:
+                continue
+            candidates = [Path(path)] if Path(path).is_absolute() else [base / path for base in program_dirs()]
+            for candidate in candidates:
+                if candidate.exists():
+                    found.append((candidate, candidate.parent))
+        return list(dict.fromkeys(found))
+
+    def corsican_file(self, folder):
+        path = Path(self.corsican)
+        return path if path.is_absolute() else folder / path
+
+    def find(self):
+        result = []
+        for executable, folder in self.installs():
+            catalog = self.corsican_file(folder)
+            reason = None
+            if not catalog.exists():
+                reason = corsu.t(f'its Corsican file is missing ({catalog})', f'son fichier corse manque ({catalog})')
+            else:
+                reason = self.check(folder)
+            if reason is None and self.processes and running(*self.processes):
+                reason = close_first(self.name)
+            result.append(apps.Installation(self, corsu.t('installed', 'installé'), executable, None,
+                                            catalog if catalog.exists() else None, self.coverage_note, reason))
+        return result
+
+    def check(self, folder):
+        """Why this installation cannot be switched (settings file missing…), or None."""
+        return None
+
+
+class SevenZip(SettingApp):
+    id, name = '7zip', '7-Zip'
+    description = {'co': ('7-Zip', "A finestra è u listinu di 7-Zip in corsu (Patriccollu)."),
+                   'fr': ('7-Zip', "La fenêtre et le menu de 7-Zip en corse (Patriccollu)."),
+                   'en': ('7-Zip', "7-Zip's window and menu in Corsican (Patriccollu).")}
+    executables = (('windows', '7-Zip/7zFM.exe'),)
+    corsican = 'Lang/co.txt'
+
+    def enable(self, installer, installation):
+        settings.set_registry(installer, self.id, r'Software\7-Zip', 'Lang', 'co', 1)
+
+
+class NotepadPlusPlus(SettingApp):
+    id, name = 'notepadpp', 'Notepad++'
+    description = {'co': ('Notepad++', "L'interfaccia di Notepad++ in corsu (Patriccollu)."),
+                   'fr': ('Notepad++', "L'interface de Notepad++ en corse (Patriccollu)."),
+                   'en': ('Notepad++', "Notepad++'s interface in Corsican (Patriccollu).")}
+    executables = (('windows', 'Notepad++/notepad++.exe'),)
+    corsican = 'localization/corsican.xml'
+
+    def target(self, folder):
+        # Portable mode (doLocalConf.xml next to the program) keeps its settings in the program's folder.
+        return folder / 'nativeLang.xml' if (folder / 'doLocalConf.xml').exists() else appdata() / 'Notepad++/nativeLang.xml'
+
+    def check(self, folder):
+        target = self.target(folder)
+        if not os.access(target.parent if target.parent.exists() else target.parent.parent, os.W_OK):
+            return corsu.t(f'{target.parent} cannot be written', f'{target.parent} n\'est pas modifiable')
+        return None
+
+    def enable(self, installer, installation):
+        # What Notepad++'s own language menu does: copy the language file to nativeLang.xml. A nativeLang.xml of
+        # another language is kept as the backup and comes back when Corsu is switched off.
+        folder = installation.location.parent
+        installer.write(self.target(folder), self.corsican_file(folder).read_bytes(), toggle=True)
+        installer.state['files'][str(self.target(folder))]['component'] = self.id
+
+
+class WinMerge(SettingApp):
+    id, name = 'winmerge', 'WinMerge'
+    description = {'co': ('WinMerge', "L'interfaccia di WinMerge in corsu (Patriccollu)."),
+                   'fr': ('WinMerge', "L'interface de WinMerge en corse (Patriccollu)."),
+                   'en': ('WinMerge', "WinMerge's interface in Corsican (Patriccollu).")}
+    executables = (('windows', 'WinMerge/WinMergeU.exe'),)
+    corsican = 'Languages/Corsican.po'
+    processes = ('WinMergeU.exe',)
+
+    def check(self, folder):
+        if (folder / 'winmerge.ini').exists():
+            return corsu.t('portable WinMerge (winmerge.ini): left alone', 'WinMerge portable (winmerge.ini) : laissé tel quel')
+        return None
+
+    def enable(self, installer, installation):
+        # 1155 = 0x0483, the Windows language id of Corsican.
+        settings.set_registry(installer, self.id, r'Software\Thingamahoochie\WinMerge\Locale', 'LanguageId', 1155, 4)
+
+
+class SumatraPDF(SettingApp):
+    id, name = 'sumatrapdf', 'SumatraPDF'
+    description = {'co': ('SumatraPDF', "L'interfaccia di SumatraPDF in corsu (Patriccollu)."),
+                   'fr': ('SumatraPDF', "L'interface de SumatraPDF en corse (Patriccollu)."),
+                   'en': ('SumatraPDF', "SumatraPDF's interface in Corsican (Patriccollu).")}
+    executables = (('windows', 'SumatraPDF/SumatraPDF.exe'),)
+    corsican = 'SumatraPDF.exe'  # its translations are built into the program
+    processes = ('SumatraPDF.exe',)
+
+    def settings_file(self):
+        return Path(os.environ.get('LOCALAPPDATA', corsu.HOME / 'AppData/Local')) / 'SumatraPDF/SumatraPDF-settings.txt'
+
+    def check(self, folder):
+        if not self.settings_file().exists():
+            return corsu.t('start SumatraPDF once first (no settings file yet)',
+                           'lancez SumatraPDF une fois d\'abord (pas encore de fichier de réglages)')
+        return None
+
+    def enable(self, installer, installation):
+        settings.set_file_value(installer, self.id, self.settings_file(), 'line', 'UiLanguage', 'co')
+
+
+class FileZilla(SettingApp):
+    id, name = 'filezilla', 'FileZilla'
+    description = {'co': ('FileZilla', "L'interfaccia di FileZilla in corsu (Patriccollu)."),
+                   'fr': ('FileZilla', "L'interface de FileZilla en corse (Patriccollu)."),
+                   'en': ('FileZilla', "FileZilla's interface in Corsican (Patriccollu).")}
+    executables = (('windows', 'FileZilla FTP Client/filezilla.exe'), ('linux', '/usr/bin/filezilla'))
+    processes = ('filezilla.exe', 'filezilla')
+    KEY = ('Setting', 'name', 'Language Code', 'Settings')
+
+    def corsican_file(self, folder):
+        if corsu.PLATFORM == 'linux':
+            return Path('/usr/share/locale/co/LC_MESSAGES/filezilla.mo')
+        return folder / 'locales/co/filezilla.mo'
+
+    def settings_file(self):
+        return appdata() / 'FileZilla/filezilla.xml' if corsu.PLATFORM == 'windows' else config_home() / 'filezilla/filezilla.xml'
+
+    def check(self, folder):
+        if not self.settings_file().exists():
+            return corsu.t('start FileZilla once first (no filezilla.xml yet)',
+                           'lancez FileZilla une fois d\'abord (pas encore de filezilla.xml)')
+        return None
+
+    def enable(self, installer, installation):
+        settings.set_file_value(installer, self.id, self.settings_file(), 'xml', list(self.KEY), 'co')
+
+
+class HandBrake(SettingApp):
+    id, name = 'handbrake', 'HandBrake'
+    description = {'co': ('HandBrake', "L'interfaccia di HandBrake in corsu (Patriccollu)."),
+                   'fr': ('HandBrake', "L'interface de HandBrake en corse (Patriccollu)."),
+                   'en': ('HandBrake', "HandBrake's interface in Corsican (Patriccollu).")}
+    executables = (('windows', 'HandBrake/HandBrake.exe'), ('linux', '/usr/bin/ghb'))
+    processes = ('HandBrake.exe', 'ghb')
+
+    def corsican_file(self, folder):
+        if corsu.PLATFORM == 'linux':
+            return Path('/usr/share/locale/co/LC_MESSAGES/ghb.mo')
+        # HandBrake.exe is a single file with its translations built in (1.11.2).
+        return folder / 'HandBrake.exe'
+
+    def settings_file(self):
+        return appdata() / 'HandBrake/settings.json' if corsu.PLATFORM == 'windows' else config_home() / 'ghb/preferences.json'
+
+    def check(self, folder):
+        if corsu.PLATFORM == 'windows' and (folder / 'portable.ini').exists():
+            return corsu.t('portable HandBrake: left alone', 'HandBrake portable : laissé tel quel')
+        if not self.settings_file().exists():
+            return corsu.t('start HandBrake once first (no settings file yet)',
+                           'lancez HandBrake une fois d\'abord (pas encore de fichier de réglages)')
+        return None
+
+    def corsican_present(self, folder):
+        return self.corsican_file(folder).exists()
+
+    def enable(self, installer, installation):
+        key = 'UiLanguage' if corsu.PLATFORM == 'windows' else 'Preferences/UiLanguage'
+        settings.set_file_value(installer, self.id, self.settings_file(), 'json', key, 'co')
+
+
+class VeraCrypt(SettingApp):
+    id, name = 'veracrypt', 'VeraCrypt'
+    description = {'co': ('VeraCrypt', "L'interfaccia di VeraCrypt in corsu (Patriccollu)."),
+                   'fr': ('VeraCrypt', "L'interface de VeraCrypt en corse (Patriccollu)."),
+                   'en': ('VeraCrypt', "VeraCrypt's interface in Corsican (Patriccollu).")}
+    executables = (('windows', 'VeraCrypt/VeraCrypt.exe'), ('linux', '/usr/bin/veracrypt'))
+    processes = ('VeraCrypt.exe', 'veracrypt')
+    KEY = ('config', 'key', 'Language', 'configuration')
+
+    def corsican_file(self, folder):
+        if corsu.PLATFORM == 'linux':
+            return Path('/usr/share/veracrypt/languages/Language.co.xml')
+        return folder / 'Languages/Language.co.xml'
+
+    def settings_file(self):
+        return appdata() / 'VeraCrypt/Configuration.xml' if corsu.PLATFORM == 'windows' else config_home() / 'VeraCrypt/Configuration.xml'
+
+    def check(self, folder):
+        if not self.settings_file().exists():
+            return corsu.t('start VeraCrypt once first (no Configuration.xml yet)',
+                           'lancez VeraCrypt une fois d\'abord (pas encore de Configuration.xml)')
+        return None
+
+    def enable(self, installer, installation):
+        settings.set_file_value(installer, self.id, self.settings_file(), 'xml', list(self.KEY), 'co')
+
+
+PROGRAMS = (SevenZip, NotepadPlusPlus, WinMerge, SumatraPDF, FileZilla, HandBrake, VeraCrypt)

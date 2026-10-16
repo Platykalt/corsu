@@ -1,0 +1,451 @@
+{
+  "schema": "corsu-apps-catalog/1",
+  "checked": "2026-10-16",
+  "notes": [
+    "Research data, not code: see docs/apps-research.md for the reasoning and every citation.",
+    "shipped: true = Corsican catalog seen in the release package or its build/packaging source; false = absent; 'unknown' = not verified.",
+    "mechanism.value '(?)' or a notes entry ending in (?) = not verified against source code or a real install.",
+    "Paths use Windows environment variables (%APPDATA% = roaming, %LOCALAPPDATA% = local), ~ = home directory.",
+    "linux.variants gives Flatpak/Snap/AppImage specifics; anything not listed there follows the main linux entry."
+  ],
+  "apps": [
+    {
+      "id": "vlc",
+      "name": "VLC media player",
+      "kind": "desktop",
+      "platforms": {
+        "windows": {
+          "shipped": true,
+          "version_checked": "3.0.24 (vlc-3.0.24-win64.7z)",
+          "detection": ["%ProgramFiles%\\VideoLAN\\VLC\\vlc.exe", "HKLM\\SOFTWARE\\VideoLAN\\VLC (InstallDir)", "<install>\\locale\\co\\LC_MESSAGES\\vlc.mo"],
+          "mechanism": {"type": "registry", "location": "HKCU\\Software\\VideoLAN\\VLC", "key": "Lang", "value": "co", "notes": "REG_SZ. winvlc.c reads it at start-up and exports LANG=co before libvlc_new; the Qt Preferences > Interface > Language combo writes the same value ('Corsu' is in the list since 3.0.9). 'auto' or absent = system language. --language on the command line overrides it."},
+          "must_close": false,
+          "sources": [
+            "https://github.com/videolan/vlc/blob/3.0.x/bin/winvlc.c#L238-L255",
+            "https://github.com/videolan/vlc/blob/3.0.x/modules/gui/qt/components/simple_preferences.cpp#L1275-L1286",
+            "https://github.com/videolan/vlc/blob/3.0.x/modules/gui/qt/components/simple_preferences.cpp#L85",
+            "https://download.videolan.org/pub/videolan/vlc/3.0.24/win64/"
+          ]
+        },
+        "macos": {
+          "shipped": true,
+          "version_checked": "3.0.24 (vlc-3.0.24-arm64.dmg)",
+          "detection": ["/Applications/VLC.app", "VLC.app/Contents/MacOS/share/locale/co/LC_MESSAGES/vlc.mo", "bundle id org.videolan.vlc"],
+          "mechanism": {"type": "defaults", "location": "org.videolan.vlc", "key": "language", "value": "co", "notes": "darwinvlc.m reads the app preference 'language' (CFPreferencesCopyAppValue) and exports LANG=co; the Simple Preferences 'Language' popup writes the same key. Command: defaults write org.videolan.vlc language co. AppleLanguages is NOT what VLC uses for its gettext UI."},
+          "must_close": false,
+          "sources": [
+            "https://github.com/videolan/vlc/blob/3.0.x/bin/darwinvlc.m#L252-L266",
+            "https://github.com/videolan/vlc/blob/3.0.x/modules/gui/macosx/VLCSimplePrefsController.m#L924-L926",
+            "https://download.videolan.org/pub/videolan/vlc/3.0.24/macosx/"
+          ]
+        },
+        "linux": {
+          "shipped": true,
+          "version_checked": "Debian 13 vlc-l10n 3.0.24-0+deb13u1; Arch vlc 3.0.24-1",
+          "detection": ["/usr/bin/vlc", "/usr/share/locale/co/LC_MESSAGES/vlc.mo", "vlc.desktop / org.videolan.VLC.desktop"],
+          "mechanism": {"type": "env", "location": "~/.local/share/applications/vlc.desktop (copy with Exec=env LANGUAGE=co:fr ...)", "key": "LANGUAGE", "value": "co:<user languages>", "notes": "No language option on Linux (the Qt combo is hidden when not _WIN32). gettext ignores LANGUAGE when the locale is C/POSIX, so LANG must be a real locale (e.g. fr_FR.UTF-8). Debian puts the catalog in vlc-l10n, which must be installed."},
+          "must_close": false,
+          "sources": [
+            "https://github.com/videolan/vlc/blob/3.0.x/modules/gui/qt/components/simple_preferences.cpp#L740-L742",
+            "https://packages.debian.org/trixie/all/vlc-l10n/filelist",
+            "https://archlinux.org/packages/extra/x86_64/vlc/files/"
+          ],
+          "variants": {
+            "flatpak": {"id": "org.videolan.VLC", "mechanism": {"type": "env", "location": "~/.local/share/flatpak/overrides/org.videolan.VLC", "key": "[Environment] LANGUAGE", "value": "co:fr", "notes": "flatpak override --user --env=LANGUAGE=co:fr org.videolan.VLC. The .Locale extension only contains configured languages: flatpak config --user --set extra-languages co, then flatpak update."}, "sources": ["https://github.com/flathub/org.videolan.VLC/blob/master/org.videolan.VLC.yaml", "https://docs.flatpak.org/en/latest/flatpak-command-reference.html#flatpak-config"]},
+            "snap": {"id": "vlc", "shipped": "unknown", "mechanism": {"type": "env", "location": "desktop override calling 'env LANGUAGE=co:fr snap run vlc' (?)", "key": "LANGUAGE", "value": "co:fr", "notes": "No per-user env override facility for snaps; untested (?)"}}
+          }
+        }
+      },
+      "catalog": {"licence": "GPL-2.0-or-later (po header: 'distributed under the same license as the VLC package')", "upstream_url": "https://code.videolan.org/videolan/vlc/-/blob/3.0.x/po/co.po"},
+      "coverage_note": "3.0.24 (tag 2026-09-17): 4443 translated / 1760 untranslated = 71.6% (msgfmt --statistics; same 4443 in the shipped Windows vlc.mo). 3.0.21: 3147 translated, 11 fuzzy, 3127 untranslated (50.1%). master: 2348 / 331 fuzzy / 3541 (37.7%, untouched since 2017). PO-Revision-Date header is stale (2017-12-10) and does not reflect the 2026-09-16 update."
+    },
+    {
+      "id": "audacity",
+      "name": "Audacity",
+      "kind": "desktop",
+      "platforms": {
+        "windows": {
+          "shipped": true,
+          "version_checked": "4.0.1 (audacity-win-4.0.1-x86_64.7z: locale/audacity_co.qm)",
+          "detection": ["%ProgramFiles%\\Audacity\\Audacity.exe", "<install>\\locale\\audacity_co.qm (4.x)", "<install>\\Languages\\co\\audacity.mo (3.x) (?)"],
+          "mechanism": {"type": "ini", "location": "%APPDATA%\\Audacity\\Audacity4.ini (4.x) | %APPDATA%\\audacity\\audacity.cfg (3.x)", "key": "4.x: [General] language | 3.x: [Locale] Language", "value": "co", "notes": "4.x uses the MuseScore 'muse' framework: Settings key ('languages','language') stored by QSettings IniFormat under organisation 'Audacity', application 'Audacity4' (file path derived from Qt defaults (?)). 3.x reads /Locale/Language from audacity.cfg in AudacityApp.cpp."},
+          "must_close": true,
+          "sources": [
+            "https://github.com/audacity/audacity/releases/tag/Audacity-4.0.1",
+            "https://github.com/musescore/muse_framework/blob/3ba3cd6886433b41759d2d7adef8aef9bbbd546b/framework/languages/internal/languagesconfiguration.cpp#L36",
+            "https://github.com/musescore/muse_framework/blob/3ba3cd6886433b41759d2d7adef8aef9bbbd546b/framework/global/settings.cpp#L49-L61",
+            "https://github.com/audacity/audacity/blob/Audacity-4.0.1/src/app/main.cpp#L95-L114",
+            "https://github.com/audacity/audacity/blob/Audacity-3.7.9/src/AudacityApp.cpp#L208"
+          ]
+        },
+        "macos": {
+          "shipped": "unknown",
+          "version_checked": "4.0.1 (dmg not inspected); audacity_co.ts is in share/locale of the 4.0.1 source",
+          "detection": ["/Applications/Audacity.app"],
+          "mechanism": {"type": "defaults", "location": "org.audacityteam.Audacity4 (4.x, QSettings native format on macOS) (?) | ~/Library/Application Support/audacity/audacity.cfg (3.x)", "key": "4.x: language (?) | 3.x: [Locale] Language", "value": "co", "notes": "Unverified on a real install (?)"},
+          "must_close": true,
+          "sources": ["https://github.com/musescore/muse_framework/blob/3ba3cd6886433b41759d2d7adef8aef9bbbd546b/framework/global/settings.cpp#L56-L58"]
+        },
+        "linux": {
+          "shipped": true,
+          "version_checked": "Arch audacity 3.7.9; Debian 13 audacity 3.7.3 (audacity-data); Flathub org.audacityteam.Audacity builds Audacity-3.7.8",
+          "detection": ["/usr/bin/audacity", "/usr/share/locale/co/LC_MESSAGES/audacity.mo", "audacity.desktop"],
+          "mechanism": {"type": "ini", "location": "~/.config/audacity/audacity.cfg (3.x; legacy ~/.audacity-data/audacity.cfg) | ~/.config/Audacity/Audacity4.ini (4.x AppImage) (?)", "key": "3.x: [Locale] Language | 4.x: language", "value": "co", "notes": "wxFileConfig rewrites the whole file on exit."},
+          "must_close": true,
+          "sources": [
+            "https://archlinux.org/packages/extra/x86_64/audacity/files/",
+            "https://packages.debian.org/trixie/all/audacity-data/filelist",
+            "https://github.com/audacity/audacity/blob/Audacity-3.7.9/libraries/lib-files/FileNames.cpp#L247-L259"
+          ],
+          "variants": {
+            "flatpak": {"id": "org.audacityteam.Audacity", "mechanism": {"type": "ini", "location": "~/.var/app/org.audacityteam.Audacity/config/audacity/audacity.cfg", "key": "[Locale] Language", "value": "co", "notes": "Needs the co .Locale subset (flatpak config extra-languages co) (?)"}, "sources": ["https://github.com/flathub/org.audacityteam.Audacity/blob/master/org.audacityteam.Audacity.yaml"]}
+          }
+        }
+      },
+      "catalog": {"licence": "GPL (Audacity; see LICENSE.txt) (?)", "upstream_url": "https://github.com/audacity/audacity/blob/master/share/locale/audacity_co.ts"},
+      "coverage_note": "4.0.1 audacity_co.ts: 4050/4050 current messages translated (100%). 3.7.9 locale/co.po: 4521 translated, 0 untranslated (100%)."
+    },
+    {
+      "id": "tenacity",
+      "name": "Tenacity",
+      "kind": "desktop",
+      "platforms": {
+        "windows": {"shipped": "unknown", "version_checked": "1.3.5 (no Windows binary in the 1.3.5 release assets; 1.4-alpha1 exe not inspected)", "detection": ["%ProgramFiles%\\Tenacity\\Tenacity.exe (?)"], "mechanism": {"type": "ini", "location": "%APPDATA%\\Tenacity\\tenacity.cfg (?)", "key": "[Locale] Language", "value": "co", "notes": "Same code path as Audacity 3 (TenacityApp.cpp)."}, "must_close": true, "sources": ["https://codeberg.org/tenacityteam/tenacity/src/tag/v1.3.5/src/TenacityApp.cpp#L150"]},
+        "macos": {"shipped": "unknown", "version_checked": "1.3.5 dmg not inspected", "detection": ["/Applications/Tenacity.app"], "mechanism": {"type": "ini", "location": "~/Library/Application Support/tenacity/tenacity.cfg (?)", "key": "[Locale] Language", "value": "co", "notes": "(?)"}, "must_close": true, "sources": []},
+        "linux": {
+          "shipped": true,
+          "version_checked": "1.3.5 source: locale/LINGUAS contains co",
+          "detection": ["/usr/bin/tenacity", "org.tenacityaudio.Tenacity (Flatpak)", "tenacity-linux-1.3.5-x86_64.AppImage"],
+          "mechanism": {"type": "ini", "location": "$XDG_CONFIG_HOME/tenacity/tenacity.cfg (default ~/.config/tenacity/tenacity.cfg)", "key": "[Locale] Language", "value": "co", "notes": "Rewritten on exit."},
+          "must_close": true,
+          "sources": ["https://codeberg.org/tenacityteam/tenacity/src/tag/v1.3.5/libraries/lib-files/FileNames.cpp#L257-L262", "https://codeberg.org/tenacityteam/tenacity/src/tag/v1.3.5/locale/LINGUAS"]
+        }
+      },
+      "catalog": {"licence": "GPL-2.0-or-later (?)", "upstream_url": "https://codeberg.org/tenacityteam/tenacity/src/branch/main/locale/co.po"},
+      "coverage_note": "v1.3.5 co.po: 3851 translated, 205 fuzzy, 50 untranslated (93.8%)."
+    },
+    {
+      "id": "notepad-plus-plus",
+      "name": "Notepad++",
+      "kind": "desktop",
+      "platforms": {
+        "windows": {
+          "shipped": true,
+          "version_checked": "8.9.8.1 (npp.8.9.8.1.portable.x64.zip: localization/corsican.xml)",
+          "detection": ["%ProgramFiles%\\Notepad++\\notepad++.exe", "<install>\\localization\\corsican.xml", "<install>\\doLocalConf.xml (portable mode)"],
+          "mechanism": {"type": "file-copy", "location": "%APPDATA%\\Notepad++\\nativeLang.xml (installed) | <install>\\nativeLang.xml (when doLocalConf.xml exists and the folder is not Program Files) | <cloud dir>\\nativeLang.xml | -settingsDir=<dir>", "key": "nativeLang.xml", "value": "copy of <install>\\localization\\corsican.xml", "notes": "Exactly what the Preferences language switch does: LocalizationSwitcher::switchToLang = CopyFileW(langPath, _nativeLangPath). Read once at start-up; Notepad++ does not rewrite it on exit. Removing nativeLang.xml returns to English. (The portable marker is doLocalConf.xml; there is no doNotUseAppData.xml.)"},
+          "must_close": false,
+          "sources": [
+            "https://github.com/notepad-plus-plus/notepad-plus-plus/blob/v8.9.8.1/PowerEditor/src/Parameters.cpp#L887-L893",
+            "https://github.com/notepad-plus-plus/notepad-plus-plus/blob/v8.9.8.1/PowerEditor/src/Parameters.cpp#L1236-L1248",
+            "https://github.com/notepad-plus-plus/notepad-plus-plus/blob/v8.9.8.1/PowerEditor/src/Parameters.cpp#L1300-L1345",
+            "https://github.com/notepad-plus-plus/notepad-plus-plus/releases/tag/v8.9.8.1"
+          ]
+        }
+      },
+      "catalog": {"licence": "GPL-3.0-or-later (Notepad++)", "upstream_url": "https://github.com/notepad-plus-plus/notepad-plus-plus/blob/master/PowerEditor/installer/nativeLang/corsican.xml"},
+      "coverage_note": "Maintained by Patriccollu since 6.9.2 (2016); file updated with each release. The installer's 'Localization' component must not have been deselected."
+    },
+    {
+      "id": "7-zip",
+      "name": "7-Zip",
+      "kind": "desktop",
+      "platforms": {
+        "windows": {
+          "shipped": true,
+          "version_checked": "26.04 (7z2604-x64.exe: Lang/co.txt, last update line '24.04 : 2024-04-06')",
+          "detection": ["HKCU\\Software\\7-Zip (Path, Path64)", "HKLM\\SOFTWARE\\7-Zip (Path)", "%ProgramFiles%\\7-Zip\\7zFM.exe", "<install>\\Lang\\co.txt"],
+          "mechanism": {"type": "registry", "location": "HKCU\\Software\\7-Zip", "key": "Lang", "value": "co", "notes": "REG_SZ. ReloadLang(): a value without path separator gets '.txt' appended and is resolved in <exe dir>\\Lang\\; '-' = English; absent = automatic from GetUserDefaultLangID (LANG_CORSICAN maps to 'co'). The Explorer context-menu DLL loads the language once per process: restart Explorer (or sign out) for the menu."},
+          "must_close": false,
+          "sources": [
+            "https://github.com/ip7z/7zip/blob/26.04/CPP/7zip/UI/FileManager/RegistryUtils.cpp#L14-L20",
+            "https://github.com/ip7z/7zip/blob/26.04/CPP/7zip/UI/FileManager/RegistryUtils.cpp#L58-L59",
+            "https://github.com/ip7z/7zip/blob/26.04/CPP/7zip/UI/FileManager/LangUtils.cpp#L308",
+            "https://github.com/ip7z/7zip/blob/26.04/CPP/7zip/UI/FileManager/LangUtils.cpp#L178",
+            "https://github.com/ip7z/7zip/releases/tag/26.04"
+          ]
+        },
+        "linux": {"shipped": false, "version_checked": "26.04 (7z2604-linux-x64.tar.xz: console 7zz only, no Lang folder)", "detection": ["7zz"], "mechanism": null, "must_close": false, "sources": ["https://github.com/ip7z/7zip/releases/tag/26.04"]},
+        "macos": {"shipped": false, "version_checked": "26.04 (7z2604-mac.tar.xz: console only, not inspected) (?)", "detection": [], "mechanism": null, "must_close": false, "sources": []}
+      },
+      "catalog": {"licence": "GNU LGPL (7-Zip licence; Lang files are part of the 7-Zip distribution)", "upstream_url": "https://github.com/ip7z/7zip/releases (Lang/co.txt inside each Windows build)"},
+      "coverage_note": "Shipped since 9.20 (2010). The WinMerge 7-Zip plugin carries its own copy (WinMerge/Merge7z/Lang/co.txt)."
+    },
+    {
+      "id": "sumatrapdf",
+      "name": "SumatraPDF",
+      "kind": "desktop",
+      "platforms": {
+        "windows": {
+          "shipped": true,
+          "version_checked": "3.6.1 (translations compiled into the exe; 'co' in gLangCodes)",
+          "detection": ["%LOCALAPPDATA%\\SumatraPDF\\SumatraPDF.exe (per-user install)", "%ProgramFiles%\\SumatraPDF\\SumatraPDF.exe", "HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Uninstall\\SumatraPDF"],
+          "mechanism": {"type": "ini", "location": "%LOCALAPPDATA%\\SumatraPDF\\SumatraPDF-settings.txt (installed) | <exe dir>\\SumatraPDF-settings.txt (portable, when writable)", "key": "UiLanguage", "value": "co", "notes": "Sumatra's own text format 'UiLanguage = co' at top level (not an INI section). Settings are saved on exit, so close every SumatraPDF window first."},
+          "must_close": true,
+          "sources": [
+            "https://github.com/sumatrapdfreader/sumatrapdf/blob/3.6.1rel/src/Settings.h#L494-L495",
+            "https://github.com/sumatrapdfreader/sumatrapdf/blob/3.6.1rel/src/AppSettings.cpp#L80-L87",
+            "https://github.com/sumatrapdfreader/sumatrapdf/blob/3.6.1rel/src/AppTools.cpp#L124-L146",
+            "https://github.com/sumatrapdfreader/sumatrapdf/blob/3.6.1rel/src/TranslationLangs.cpp"
+          ]
+        }
+      },
+      "catalog": {"licence": "GPL-3.0 (SumatraPDF; strings maintained on AppTranslator)", "upstream_url": "https://www.apptranslator.org/app/SumatraPDF/co"},
+      "coverage_note": "Corsican since a 2019 pre-release, official since 3.2 (March 2020)."
+    },
+    {
+      "id": "winmerge",
+      "name": "WinMerge",
+      "kind": "desktop",
+      "platforms": {
+        "windows": {
+          "shipped": true,
+          "version_checked": "2.16.58.2 (winmerge-2.16.58.2-x64-exe.zip: Languages/Corsican.po, Languages/ShellExtension/Corsican.po, Merge7z/Lang/co.txt, Docs/ReadMe-Corsican.txt)",
+          "detection": ["%ProgramFiles%\\WinMerge\\WinMergeU.exe", "%LOCALAPPDATA%\\Programs\\WinMerge\\WinMergeU.exe (per-user setup)", "<install>\\Languages\\Corsican.po"],
+          "mechanism": {"type": "registry", "location": "HKCU\\Software\\Thingamahoochie\\WinMerge\\Locale", "key": "LanguageId", "value": "1155 (REG_DWORD 0x0483 = MAKELANGID(LANG_CORSICAN, SUBLANG_DEFAULT))", "notes": "Default is GetUserDefaultLangID(). If winmerge.ini exists next to WinMergeU.exe (or /inifile is given) options come from it instead: [WinMerge] Locale/LanguageId=1155. Corsican.po declares 'LANG_CORSICAN, SUBLANG_DEFAULT'."},
+          "must_close": true,
+          "sources": [
+            "https://github.com/WinMerge/winmerge/blob/v2.16.58.2/Src/OptionsDef.h#L10-L11",
+            "https://github.com/WinMerge/winmerge/blob/v2.16.58.2/Src/OptionsInit.cpp#L41-L42",
+            "https://github.com/WinMerge/winmerge/blob/v2.16.58.2/Src/Merge.cpp#L143-L157",
+            "https://github.com/WinMerge/winmerge/blob/v2.16.58.2/Src/Common/IniOptionsMgr.cpp#L14",
+            "https://github.com/WinMerge/winmerge/blob/v2.16.58.2/Translations/WinMerge/Corsican.po"
+          ]
+        }
+      },
+      "catalog": {"licence": "GPL-2.0-or-later (WinMerge)", "upstream_url": "https://github.com/WinMerge/winmerge/blob/master/Translations/WinMerge/Corsican.po"},
+      "coverage_note": "Since 2.16.17 (Dec 2021); Corsican.po PO-Revision-Date 2026-06-21. must_close is a safe default: WinMerge writes options individually, so overwriting LanguageId on exit is unlikely (?)."
+    },
+    {
+      "id": "filezilla",
+      "name": "FileZilla Client",
+      "kind": "desktop",
+      "platforms": {
+        "windows": {
+          "shipped": true,
+          "version_checked": "trunk installer script (3.71.x): 'Language files' section installs every compiled locale; installer binary not inspected",
+          "detection": ["%ProgramFiles%\\FileZilla FTP Client\\filezilla.exe", "<install>\\locales\\co\\filezilla.mo"],
+          "mechanism": {"type": "xml", "location": "%APPDATA%\\FileZilla\\filezilla.xml (or the 'Config Location' from fzdefaults.xml)", "key": "<Settings><Setting name=\"Language Code\">", "value": "co", "notes": "CInitializer reads 'Language Code' from filezilla.xml before the UI starts. The 'Language files' installer component can be deselected."},
+          "must_close": true,
+          "sources": [
+            "https://svn.filezilla-project.org/svn/FileZilla3/trunk/src/interface/Options.cpp",
+            "https://svn.filezilla-project.org/svn/FileZilla3/trunk/src/interface/locale_initializer.cpp",
+            "https://svn.filezilla-project.org/svn/FileZilla3/trunk/data/install.nsi.in"
+          ]
+        },
+        "macos": {"shipped": "unknown", "version_checked": "not inspected", "detection": ["/Applications/FileZilla.app"], "mechanism": {"type": "xml", "location": "~/.config/filezilla/filezilla.xml (?)", "key": "Language Code", "value": "co", "notes": "(?)"}, "must_close": true, "sources": []},
+        "linux": {
+          "shipped": true,
+          "version_checked": "Arch filezilla 3.71.1; Debian 13 filezilla-common",
+          "detection": ["/usr/bin/filezilla", "/usr/share/locale/co/LC_MESSAGES/filezilla.mo", "filezilla.desktop"],
+          "mechanism": {"type": "xml", "location": "$XDG_CONFIG_HOME/filezilla/filezilla.xml (default ~/.config/filezilla/filezilla.xml)", "key": "<Setting name=\"Language Code\">", "value": "co", "notes": "Works independently of LANG."},
+          "must_close": true,
+          "sources": ["https://archlinux.org/packages/extra/x86_64/filezilla/files/", "https://packages.debian.org/trixie/all/filezilla-common/filelist"],
+          "variants": {"flatpak": {"id": "org.filezillaproject.Filezilla", "mechanism": {"type": "xml", "location": "~/.var/app/org.filezillaproject.Filezilla/config/filezilla/filezilla.xml", "key": "Language Code", "value": "co", "notes": "Requires the co Locale subset (?)"}, "sources": ["https://github.com/flathub/org.filezillaproject.Filezilla/blob/master/org.filezillaproject.Filezilla.json"]}}
+        }
+      },
+      "catalog": {"licence": "GPL-2.0-or-later (FileZilla)", "upstream_url": "https://svn.filezilla-project.org/svn/FileZilla3/trunk/locales/co.po"},
+      "coverage_note": "trunk co.po (PO-Revision-Date 2026-04-15): 1896 translated, 5 untranslated (99.7%)."
+    },
+    {
+      "id": "poedit",
+      "name": "Poedit",
+      "kind": "desktop",
+      "platforms": {
+        "windows": {"shipped": "unknown", "version_checked": "3.10 source (locales/co.po); Windows installer not inspected", "detection": ["%ProgramFiles%\\Poedit\\Poedit.exe"], "mechanism": {"type": "registry", "location": "HKCU\\Software\\Vaclav Slavik\\Poedit (?)", "key": "ui_language", "value": "co", "notes": "Only Windows has the 'Change UI language' button (NEED_CHOOSELANG_UI is __WXMSW__ only); stored with wxConfig, which on Windows defaults to the registry under Software\\<Vendor>\\<App> (?)."}, "must_close": false, "sources": ["https://github.com/vslavik/poedit/blob/v3.10-oss/src/uilang.h#L34-L39", "https://github.com/vslavik/poedit/blob/v3.10-oss/src/uilang.cpp#L196-L210", "https://github.com/vslavik/poedit/blob/v3.10-oss/src/edapp.cpp#L344-L345"]},
+        "macos": {"shipped": "unknown", "version_checked": "not inspected", "detection": ["/Applications/Poedit.app", "bundle id net.poedit.Poedit (?)"], "mechanism": {"type": "defaults", "location": "net.poedit.Poedit (?)", "key": "AppleLanguages", "value": "(co, fr, en)", "notes": "No in-app choice on macOS; per-app AppleLanguages is the standard macOS mechanism (?)"}, "must_close": false, "sources": []},
+        "linux": {"shipped": true, "version_checked": "Debian 13 poedit-common", "detection": ["/usr/bin/poedit", "/usr/share/locale/co/LC_MESSAGES/poedit.mo", "net.poedit.Poedit (Flatpak)"], "mechanism": {"type": "env", "location": "desktop override (native) | ~/.local/share/flatpak/overrides/net.poedit.Poedit (Flatpak)", "key": "LANGUAGE", "value": "co:fr", "notes": "No in-app choice on Linux."}, "must_close": false, "sources": ["https://packages.debian.org/trixie/all/poedit-common/filelist", "https://github.com/flathub/net.poedit.Poedit/blob/master/net.poedit.Poedit.yaml"]}
+      },
+      "catalog": {"licence": "MIT (Poedit)", "upstream_url": "https://github.com/vslavik/poedit/blob/master/locales/co.po"},
+      "coverage_note": "v3.10 co.po: 736 translated, 1 untranslated (99.9%)."
+    },
+    {
+      "id": "handbrake",
+      "name": "HandBrake",
+      "kind": "desktop",
+      "platforms": {
+        "windows": {
+          "shipped": true,
+          "version_checked": "1.11.2 (HandBrake-1.11.2-x86_64-Win_GUI.zip: single-file HandBrake.exe embeds the satellite resources; 'Corsican (Corsu)' present)",
+          "detection": ["%ProgramFiles%\\HandBrake\\HandBrake.exe", "<install>\\portable.ini (portable mode)"],
+          "mechanism": {"type": "json", "location": "%APPDATA%\\HandBrake\\settings.json (nightly: %APPDATA%\\HandBrake\\Nightly\\settings.json; portable: storage.dir from portable.ini)", "key": "UiLanguage", "value": "co", "notes": "App.xaml.cs sets Thread.CurrentUICulture from UiLanguage; the whole dictionary is re-serialised on save."},
+          "must_close": true,
+          "sources": [
+            "https://github.com/HandBrake/HandBrake/blob/1.11.2/win/CS/HandBrakeWPF/UserSettingConstants.cs#L70",
+            "https://github.com/HandBrake/HandBrake/blob/1.11.2/win/CS/HandBrakeWPF/App.xaml.cs#L150-L160",
+            "https://github.com/HandBrake/HandBrake/blob/1.11.2/win/CS/HandBrakeWPF/Utilities/InterfaceLanguageUtilities.cs#L31",
+            "https://github.com/HandBrake/HandBrake/blob/1.11.2/win/CS/HandBrakeWPF/Services/UserSettingService.cs#L41",
+            "https://github.com/HandBrake/HandBrake/blob/1.11.2/win/CS/HandBrake.App.Core/Utilities/DirectoryUtilities.cs#L29-L98"
+          ]
+        },
+        "macos": {
+          "shipped": true,
+          "version_checked": "1.11.2 (HandBrake-1.11.2.dmg: HandBrake.app/Contents/Resources/co.lproj)",
+          "detection": ["/Applications/HandBrake.app", "bundle id fr.handbrake.HandBrake"],
+          "mechanism": {"type": "defaults", "location": "~/Library/Containers/fr.handbrake.HandBrake/Data/Library/Preferences/fr.handbrake.HandBrake (sandboxed app)", "key": "AppleLanguages", "value": "(co, fr, en)", "notes": "No in-app language option on macOS; standard per-app language. The app is sandboxed (com.apple.security.app-sandbox), so write into the container domain (?)."},
+          "must_close": true,
+          "sources": ["https://github.com/HandBrake/HandBrake/releases/tag/1.11.2", "https://github.com/HandBrake/HandBrake/blob/1.11.2/macosx/HandBrake.entitlements"]
+        },
+        "linux": {
+          "shipped": true,
+          "version_checked": "1.11.2 (gtk/po/LINGUAS has co); Debian 13 handbrake; Arch handbrake",
+          "detection": ["/usr/bin/ghb", "/usr/share/locale/co/LC_MESSAGES/ghb.mo", "fr.handbrake.ghb (Flatpak)"],
+          "mechanism": {"type": "json", "location": "$XDG_CONFIG_HOME/ghb/preferences.json (default ~/.config/ghb/preferences.json)", "key": "Preferences.UiLanguage", "value": "co", "notes": "application.c reads UiLanguage before building the UI and sets LANGUAGE=co for gettext."},
+          "must_close": true,
+          "sources": [
+            "https://github.com/HandBrake/HandBrake/blob/1.11.2/gtk/src/application.c#L763-L770",
+            "https://github.com/HandBrake/HandBrake/blob/1.11.2/gtk/src/hb-backend.c#L420-L428",
+            "https://github.com/HandBrake/HandBrake/blob/1.11.2/gtk/src/presets.c#L1131-L1141",
+            "https://packages.debian.org/trixie/all/handbrake/filelist",
+            "https://archlinux.org/packages/extra/x86_64/handbrake/files/"
+          ],
+          "variants": {"flatpak": {"id": "fr.handbrake.ghb", "mechanism": {"type": "json", "location": "~/.var/app/fr.handbrake.ghb/config/ghb/preferences.json", "key": "Preferences.UiLanguage", "value": "co", "notes": "Requires the co Locale subset (?)"}, "sources": ["https://github.com/flathub/fr.handbrake.ghb/blob/master/fr.handbrake.ghb.json"]}}
+        }
+      },
+      "catalog": {"licence": "GPL-2.0-only (HandBrake)", "upstream_url": "https://github.com/HandBrake/HandBrake/tree/master/gtk/po"},
+      "coverage_note": "Windows since 1.4.0 (2021), Linux and macOS since 1.5.0 (2022)."
+    },
+    {
+      "id": "freac",
+      "name": "fre:ac",
+      "kind": "desktop",
+      "platforms": {
+        "windows": {
+          "shipped": true,
+          "version_checked": "1.1.7 (freac-1.1.7-windows-x64.zip: lang/freac_co.xml, tips_co.xml, eupdate_co.xml)",
+          "detection": ["%ProgramFiles%\\freac\\freac.exe", "<install>\\lang\\freac_co.xml"],
+          "mechanism": {"type": "xml", "location": "<exe dir>\\freac.xml when it exists and the folder is outside Program Files (portable) | %APPDATA%\\freac\\freac.xml", "key": "<ConfigFile><configuration name=\"default\"><section name=\"Settings\"><value name=\"Language\">", "value": "freac_co.xml", "notes": "The value is the language file name ('magic'), not the ISO code. Absent = automatic from the Windows user language (LANG_CORSICAN -> co)."},
+          "must_close": true,
+          "sources": [
+            "https://github.com/enzo1982/freac/blob/v1.1.7/src/config.cpp#L24",
+            "https://github.com/enzo1982/freac/blob/v1.1.7/src/config.cpp#L60-L61",
+            "https://github.com/enzo1982/BoCA/blob/master/runtime/common/config.cpp#L285-L350",
+            "https://github.com/enzo1982/smooth/blob/master/classes/i18n/translator.cpp#L410-L420",
+            "https://github.com/enzo1982/smooth/blob/master/classes/misc/config.cpp#L15-L22"
+          ]
+        },
+        "macos": {"shipped": "unknown", "version_checked": "1.1.7 dmg not inspected", "detection": ["/Applications/freac.app"], "mechanism": {"type": "xml", "location": "<application data>/freac/freac.xml (?)", "key": "Settings/Language", "value": "freac_co.xml", "notes": "(?)"}, "must_close": true, "sources": []},
+        "linux": {"shipped": "unknown", "version_checked": "AppImage/Flathub org.freac.freac not inspected", "detection": ["/usr/bin/freac", "org.freac.freac"], "mechanism": {"type": "xml", "location": "~/.config/freac/freac.xml", "key": "Settings/Language", "value": "freac_co.xml", "notes": "Path from BoCA config.cpp (configDir ends with /.config/) (?)"}, "must_close": true, "sources": ["https://github.com/enzo1982/BoCA/blob/master/runtime/common/config.cpp#L306-L316"]}
+      },
+      "catalog": {"licence": "GPL-2.0-or-later (fre:ac)", "upstream_url": "https://github.com/enzo1982/freac/tree/master/i18n"},
+      "coverage_note": "Since 1.0.27 (Dec 2016)."
+    },
+    {
+      "id": "veracrypt",
+      "name": "VeraCrypt",
+      "kind": "desktop",
+      "platforms": {
+        "windows": {
+          "shipped": true,
+          "version_checked": "1.26.29 (source: Language.co.xml is listed in src/Setup/Setup.rc, Portable.rc and the MSI .wxs files)",
+          "detection": ["%ProgramFiles%\\VeraCrypt\\VeraCrypt.exe", "<install>\\Languages\\Language.co.xml"],
+          "mechanism": {"type": "xml", "location": "%APPDATA%\\VeraCrypt\\Configuration.xml (portable: next to VeraCrypt.exe)", "key": "<config key=\"Language\">", "value": "co", "notes": "Mount.c reads ConfigReadString(\"Language\") and writes it back in SaveSettings, so close VeraCrypt (including the tray instance) first."},
+          "must_close": true,
+          "sources": [
+            "https://github.com/veracrypt/VeraCrypt/blob/VeraCrypt_1.26.29/src/Mount/Mount.c#L1449",
+            "https://github.com/veracrypt/VeraCrypt/blob/VeraCrypt_1.26.29/src/Mount/Mount.c#L1573",
+            "https://github.com/veracrypt/VeraCrypt/blob/VeraCrypt_1.26.29/src/Common/Dlgcode.h#L73",
+            "https://github.com/veracrypt/VeraCrypt/blob/VeraCrypt_1.26.29/src/Setup/Setup.rc"
+          ]
+        },
+        "macos": {
+          "shipped": true,
+          "version_checked": "1.26.29 source (Main.make copies Translations/* to VeraCrypt.app/Contents/Resources/languages)",
+          "detection": ["/Applications/VeraCrypt.app", "VeraCrypt.app/Contents/Resources/languages/Language.co.xml"],
+          "mechanism": {"type": "xml", "location": "~/Library/Application Support/VeraCrypt/Configuration.xml (wxStandardPaths user data dir) (?)", "key": "<config key=\"Language\">", "value": "co", "notes": "'system' = follow LANG."},
+          "must_close": true,
+          "sources": ["https://github.com/veracrypt/VeraCrypt/blob/VeraCrypt_1.26.29/src/Main/Resources.cpp#L51-L100", "https://github.com/veracrypt/VeraCrypt/blob/VeraCrypt_1.26.29/src/Main/Main.make#L229-L252"]
+        },
+        "linux": {
+          "shipped": true,
+          "version_checked": "1.26.29 source (INSTALL_LANGUAGES ?= 1 -> /usr/share/veracrypt/languages; AppImage: $APPDIR/usr/share/veracrypt/languages)",
+          "detection": ["/usr/bin/veracrypt", "/usr/share/veracrypt/languages/Language.co.xml"],
+          "mechanism": {"type": "xml", "location": "$XDG_CONFIG_HOME/VeraCrypt/Configuration.xml (default ~/.config/VeraCrypt/Configuration.xml)", "key": "<config key=\"Language\">", "value": "co", "notes": "Resources::GetLanguageXml uses Preferences.Language; 'system' = derive from LANG."},
+          "must_close": true,
+          "sources": ["https://github.com/veracrypt/VeraCrypt/blob/VeraCrypt_1.26.29/src/Main/Resources.cpp#L51-L100", "https://github.com/veracrypt/VeraCrypt/blob/VeraCrypt_1.26.29/src/Main/Application.cpp#L40-L70", "https://github.com/veracrypt/VeraCrypt/blob/VeraCrypt_1.26.29/src/Main/UserPreferences.cpp#L223"]
+        }
+      },
+      "catalog": {"licence": "VeraCrypt licence (Apache-2.0 + TrueCrypt License 3.0 for inherited parts); translation file has no separate licence statement (?)", "upstream_url": "https://github.com/veracrypt/VeraCrypt/blob/master/Translations/Language.co.xml"},
+      "coverage_note": "Official since 1.26.7 (Oct 2023); file header in 1.26.29 lists updates up to May 2026 (prog-version 1.26.29)."
+    },
+    {
+      "id": "pdfsam-basic",
+      "name": "PDFsam Basic",
+      "kind": "desktop",
+      "platforms": {
+        "windows": {
+          "shipped": true,
+          "version_checked": "6.0.6 (pdfsam-basic-6.0.6-windows-x64.zip: pdfsam-i18n-6.0.6.jar contains org/pdfsam/i18n/Messages_co.properties)",
+          "detection": ["%ProgramFiles%\\PDFsam Basic\\pdfsam.exe (?)"],
+          "mechanism": {"type": "registry", "location": "HKCU\\Software\\JavaSoft\\Prefs\\org\\pdfsam\\user\\conf", "key": "locale", "value": "co", "notes": "Java Preferences node /org/pdfsam/user/conf, key = StringPersistentProperty.LOCALE.name().toLowerCase(). Alternative: JVM property org.pdfsam.default.locale=co."},
+          "must_close": true,
+          "sources": [
+            "https://github.com/torakiki/pdfsam/blob/v6.0.6/pdfsam-core/src/main/java/org/pdfsam/core/context/ApplicationContext.java#L56",
+            "https://github.com/torakiki/pdfsam/blob/v6.0.6/pdfsam-core/src/main/java/org/pdfsam/core/context/StringPersistentProperty.java#L40",
+            "https://github.com/torakiki/pdfsam/blob/v6.0.6/pdfsam-gui/src/main/java/org/pdfsam/gui/PdfsamApp.java#L106-L107",
+            "https://github.com/torakiki/pdfsam/blob/v6.0.6/pdfsam-i18n/src/main/java/org/pdfsam/i18n/I18nContext.java#L47-L54"
+          ]
+        },
+        "macos": {"shipped": true, "version_checked": "6.0.6 (same jar, not opened)", "detection": ["/Applications/PDFsam Basic.app"], "mechanism": {"type": "defaults", "location": "~/Library/Preferences/com.apple.java.util.prefs.plist (node /org/pdfsam/user/conf/)", "key": "locale", "value": "co", "notes": "Nested dictionary; prefer editing through a JVM or the JVM property (?)"}, "must_close": true, "sources": []},
+        "linux": {"shipped": true, "version_checked": "6.0.6 (.deb/.tar.gz use the same jar)", "detection": ["/opt/pdfsam-basic/bin/pdfsam-basic (?)"], "mechanism": {"type": "xml", "location": "~/.java/.userPrefs/org/pdfsam/user/conf/prefs.xml", "key": "<entry key=\"locale\">", "value": "co", "notes": "Standard Java FileSystemPreferences layout."}, "must_close": true, "sources": []}
+      },
+      "catalog": {"licence": "AGPL-3.0 (PDFsam Basic)", "upstream_url": "https://translations.launchpad.net/pdfsam"},
+      "coverage_note": "Since 3.0.0 (Nov 2015)."
+    },
+    {
+      "id": "mp3tag",
+      "name": "Mp3tag",
+      "kind": "desktop",
+      "platforms": {
+        "windows": {"shipped": "unknown", "version_checked": "not inspected (proprietary freeware; Patriccollu reports Corsican.lng since 2.75)", "detection": ["%ProgramFiles%\\Mp3tag\\Mp3tag.exe", "<install>\\lang\\Corsican.lng (?)"], "mechanism": null, "must_close": true, "sources": ["https://docs.mp3tag.de/customization/options/language/"]},
+        "macos": {"shipped": "unknown", "version_checked": "Mac version is paid (App Store); not inspected", "detection": [], "mechanism": null, "must_close": true, "sources": []}
+      },
+      "catalog": {"licence": "proprietary (do not redistribute)", "upstream_url": "https://www.mp3tag.de/en/"},
+      "coverage_note": "Selection storage not documented (Options > Language, applies after restart): user step only."
+    },
+    {
+      "id": "paint-net",
+      "name": "Paint.NET",
+      "kind": "desktop",
+      "platforms": {
+        "windows": {"shipped": true, "version_checked": "4.3.3 release notes ('New translations: ... Corsican (co)'); current 5.x installer not inspected", "detection": ["%ProgramFiles%\\paint.net\\paintdotnet.exe", "HKLM\\SOFTWARE\\paint.net"], "mechanism": {"type": "registry", "location": "HKCU\\Software\\paint.net", "key": "UI/Language", "value": "co (?)", "notes": "Only forum evidence of the value name (example value en-US); HKCU overrides HKLM. Microsoft Store edition stores settings elsewhere (?)"}, "must_close": true, "sources": ["https://blog.getpaint.net/2021/11", "https://forums.getpaint.net/topic/116028-automatic-language-selection-on-terminal-server-windows-server-2016/"]}
+      },
+      "catalog": {"licence": "proprietary freeware (do not redistribute)", "upstream_url": "https://crowdin.net/project/paintdotnet/co"},
+      "coverage_note": "Corsican since 4.3.3 (Nov 2021)."
+    },
+    {"id": "ccleaner", "name": "CCleaner", "kind": "desktop", "platforms": {"windows": {"shipped": "unknown", "version_checked": "not inspected", "detection": [], "mechanism": null, "must_close": true, "sources": []}}, "catalog": {"licence": "proprietary", "upstream_url": "https://crowdin.com/project/avast-ccleaner/co"}, "coverage_note": "Patriccollu: Corsican no longer maintained since April 2023 (Gen Digital); still present in v6.14 but new strings untranslated."},
+    {"id": "omegat", "name": "OmegaT", "kind": "desktop", "platforms": {}, "catalog": {"licence": "GPL-3.0-or-later (OmegaT)", "upstream_url": "https://omegat.org/co/"}, "coverage_note": "Java app, Corsican since 5.3.0 (2020). Language selection mechanism not researched."},
+    {"id": "pdfcreator", "name": "PDFCreator (+ HotFolder, Images2PDF)", "kind": "desktop", "platforms": {}, "catalog": {"licence": "proprietary (free edition)", "upstream_url": "https://translate.pdfforge.org/languages/co_FR/pdfcreator/"}, "coverage_note": "Windows, Inno Setup installer in Corsican; mechanism not researched."},
+    {"id": "virtualmidisynth", "name": "VirtualMIDISynth", "kind": "desktop", "platforms": {}, "catalog": {"licence": "freeware", "upstream_url": "https://coolsoft.altervista.org/en/virtualmidisynth"}, "coverage_note": "Windows MIDI driver; 1155.lang shipped since 2.11.1 (file named after LCID 1155 = Corsican)."},
+    {"id": "den4b", "name": "den4b tools: Colors, Hasher, RandPass, ReNamer, Resizer, Shutter", "kind": "desktop", "platforms": {}, "catalog": {"licence": "freeware", "upstream_url": "https://www.den4b.com/"}, "coverage_note": "Windows freeware; mechanisms not researched."},
+    {"id": "cdex", "name": "CDex", "kind": "desktop", "platforms": {}, "catalog": {"licence": "freeware/GPL history (?)", "upstream_url": "https://cdex.mu/"}, "coverage_note": "Windows; not researched."},
+    {"id": "mozilla-vpn", "name": "Mozilla VPN", "kind": "desktop", "platforms": {}, "catalog": {"licence": "MPL-2.0", "upstream_url": "https://pontoon.mozilla.org/co/"}, "coverage_note": "Paid service; desktop and mobile clients. Not researched."},
+    {"id": "geneweb", "name": "GeneWeb", "kind": "website", "platforms": {}, "catalog": {"licence": "GPL-2.0", "upstream_url": "https://github.com/geneweb/geneweb/blob/master/hd/lang/lexicon.txt"}, "coverage_note": "Local web server; language chosen per URL (lang=co), e.g. https://demo.geneweb.tuxfamily.org/gw7/gwd?b=grimaldi&lang=co. Nothing to configure on the desktop."},
+    {"id": "mozbackup", "name": "MozBackup", "kind": "desktop", "platforms": {}, "catalog": {"licence": "freeware", "upstream_url": "https://github.com/Patriccollu/Lingua_Corsa-Infurmatica/blob/ceppu/Prughjetti/MozBackup/Default.lng"}, "coverage_note": "Awaiting distribution; one language at a time: Default.lng replaced in the install folder (needs admin). Abandoned upstream."},
+    {"id": "wincdemu", "name": "WinCDEmu", "kind": "desktop", "platforms": {}, "catalog": {"licence": "LGPL (WinCDEmu)", "upstream_url": "https://github.com/Patriccollu/Lingua_Corsa-Infurmatica/blob/ceppu/Prughjetti/WinCDEmu/vmnt_corsican.lng"}, "coverage_note": "4.1 does not ship it; manual copy into <install>\\langfiles (needs admin)."},
+    {"id": "video-downloadhelper", "name": "Video DownloadHelper", "kind": "other", "platforms": {}, "catalog": {"licence": "proprietary/MPL mix (?)", "upstream_url": "https://www.downloadhelper.net/"}, "coverage_note": "Browser extension: follows the browser UI language; _locales/co/messages.json is in the .xpi but the v9 UI ignores co."},
+    {"id": "wxwidgets", "name": "wxWidgets", "kind": "library", "platforms": {}, "catalog": {"licence": "wxWindows Library Licence", "upstream_url": "https://github.com/wxWidgets/wxWidgets/blob/master/locale/co.po"}, "coverage_note": "Only stock dialogs/buttons of wx apps, and only if the app ships wxstd.mo for co (e.g. Arch wxwidgets-common installs /usr/share/locale/co/LC_MESSAGES/wxstd-3.2.mo). Does not translate any app by itself."},
+    {"id": "lazarus-lcl", "name": "Lazarus / LCL", "kind": "library", "platforms": {}, "catalog": {"licence": "modified LGPL (LCL)", "upstream_url": "https://gitlab.com/freepascal.org/lazarus/lazarus/-/blob/main/lcl/languages/lclstrconsts.co.po"}, "coverage_note": "LCL stock strings only; each Lazarus app must ship and load lclstrconsts.co.po/.mo."},
+    {"id": "libfilezilla", "name": "libfilezilla", "kind": "library", "platforms": {}, "catalog": {"licence": "GPL-2.0-or-later", "upstream_url": "https://lib.filezilla-project.org/"}, "coverage_note": "Library strings used by FileZilla."},
+    {"id": "winsparkle", "name": "WinSparkle", "kind": "library", "platforms": {}, "catalog": {"licence": "MIT", "upstream_url": "https://github.com/vslavik/winsparkle"}, "coverage_note": "Updater library used by Poedit on Windows."},
+    {"id": "inno-setup", "name": "Inno Setup", "kind": "installer-framework", "platforms": {}, "catalog": {"licence": "Inno Setup License", "upstream_url": "https://github.com/jrsoftware/issrc/blob/main/Files/Languages/Corsican.isl"}, "coverage_note": "Official Corsican.isl: lets setups that include it run in Corsican (Audacity, WinMerge, OmegaT, PDFCreator...). Does not translate the installed program."},
+    {"id": "nsis", "name": "NSIS", "kind": "installer-framework", "platforms": {}, "catalog": {"licence": "zlib/libpng", "upstream_url": "https://github.com/kichik/nsis/tree/master/Contrib/Language%20files"}, "coverage_note": "Corsican.nlf/.nsh: installers of VLC (CorsicanExtra.nsh in the VLC package), Notepad++, FileZilla, Mp3tag, Paint.NET... Does not translate the installed program."},
+    {"id": "unicode-cldr", "name": "Unicode CLDR", "kind": "library", "platforms": {}, "catalog": {"licence": "Unicode License v3", "upstream_url": "https://cldr.unicode.org/"}, "coverage_note": "Locale data (in progress); benefits apps that use ICU/CLDR, no per-app activation."},
+    {"id": "firefox-android", "name": "Firefox for Android", "kind": "mobile", "platforms": {}, "catalog": {"licence": "MPL-2.0", "upstream_url": "https://pontoon.mozilla.org/co/"}, "coverage_note": "Phone only. In-app language setting; also Android 13+ per-app language. Not configurable from a desktop installer."},
+    {"id": "firefox-ios", "name": "Firefox for iOS", "kind": "mobile", "platforms": {}, "catalog": {"licence": "MPL-2.0", "upstream_url": "https://pontoon.mozilla.org/co/"}, "coverage_note": "Phone only. Add Corsu in iOS Settings > General > Language & Region (Patriccollu's tip) or per-app language."},
+    {"id": "focus-android", "name": "Firefox Focus for Android", "kind": "mobile", "platforms": {}, "catalog": {"licence": "MPL-2.0", "upstream_url": "https://pontoon.mozilla.org/co/"}, "coverage_note": "Phone only."},
+    {"id": "focus-ios", "name": "Firefox Focus for iOS", "kind": "mobile", "platforms": {}, "catalog": {"licence": "MPL-2.0", "upstream_url": "https://pontoon.mozilla.org/co/"}, "coverage_note": "Phone only."},
+    {"id": "thunderbird-android", "name": "Thunderbird for Android (ex K-9 Mail)", "kind": "mobile", "platforms": {}, "catalog": {"licence": "Apache-2.0", "upstream_url": "https://hosted.weblate.org/projects/tb-android/-/co/"}, "coverage_note": "Phone only; Corsican since K-9 6.903 / Thunderbird 8.0 (2024). In-app language list or Android 13+ per-app language."},
+    {"id": "vlc-android", "name": "VLC for Android", "kind": "mobile", "platforms": {}, "catalog": {"licence": "GPL-2.0-or-later", "upstream_url": "https://code.videolan.org/videolan/vlc-android"}, "coverage_note": "Phone only; in-app language choice includes Corsican (Patriccollu)."},
+    {"id": "vlc-ios", "name": "VLC for iOS", "kind": "mobile", "platforms": {}, "catalog": {"licence": "LGPL-2.1/MPL-2.0", "upstream_url": "https://code.videolan.org/videolan/vlc-ios"}, "coverage_note": "Phone only; since 3.1.3 (2018)."},
+    {"id": "opentracks", "name": "OpenTracks", "kind": "mobile", "platforms": {}, "catalog": {"licence": "Apache-2.0", "upstream_url": "https://github.com/OpenTracksApp/OpenTracks"}, "coverage_note": "Phone only; in-app interface language option since 4.16.1."},
+    {"id": "osm-dashboard", "name": "OSM Dashboard for OpenTracks", "kind": "mobile", "platforms": {}, "catalog": {"licence": "GPL-3.0 (?)", "upstream_url": "https://play.google.com/store/apps/details?id=de.storchp.opentracks.osmplugin"}, "coverage_note": "Phone only; in-app language option since 6.1.0."},
+    {"id": "nononsense-notes", "name": "NoNonsense Notes", "kind": "mobile", "platforms": {}, "catalog": {"licence": "GPL-3.0 (?)", "upstream_url": "https://play.google.com/store/apps/details?id=com.nononsenseapps.notepad.play"}, "coverage_note": "Phone only; since 7.2.1."},
+    {"id": "freeotp", "name": "FreeOTP", "kind": "mobile", "platforms": {}, "catalog": {"licence": "Apache-2.0", "upstream_url": "https://freeotp.github.io/"}, "coverage_note": "Awaiting distribution; follows system language only (no in-app choice)."},
+    {"id": "lufi", "name": "Lufi", "kind": "website", "platforms": {}, "catalog": {"licence": "AGPL-3.0", "upstream_url": "https://framagit.org/fiat-tux/hat-softwares/lufi"}, "coverage_note": "Web service; follows browser Accept-Language."},
+    {"id": "privatebin", "name": "PrivateBin", "kind": "website", "platforms": {}, "catalog": {"licence": "zlib-style (PrivateBin)", "upstream_url": "https://privatebin.info/"}, "coverage_note": "Web service; follows browser language or its own selector."},
+    {"id": "pdfcreator-online", "name": "PDFCreator Online", "kind": "website", "platforms": {}, "catalog": {"licence": "proprietary", "upstream_url": "https://www.pdfforge.org/online/co-FR"}, "coverage_note": "Web site, Corsican URL /co-FR."},
+    {"id": "worldle", "name": "Worldle", "kind": "website", "platforms": {}, "catalog": {"licence": "proprietary", "upstream_url": "https://worldle.teuteuf.fr/"}, "coverage_note": "Corsican no longer maintained there since Nov 2022."},
+    {"id": "common-voice", "name": "Mozilla Common Voice", "kind": "website", "platforms": {}, "catalog": {"licence": "MPL-2.0", "upstream_url": "https://commonvoice.mozilla.org/co"}, "coverage_note": "In progress; web site in Corsican."}
+  ]
+}

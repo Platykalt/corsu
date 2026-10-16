@@ -1,5 +1,7 @@
 """VLC media player. Its Corsican catalogue is Patriccollu di Santa Maria è Sichè's (po/co.po in videolan/vlc).
 
+Windows: VLC's own language setting (HKCU\Software\VideoLAN\VLC, Lang). macOS: its preference "language" in the
+org.videolan.vlc domain. Both are what VLC's Preferences write since 3.0.9.
 Linux: VLC has no language setting of its own and follows the session language (LANGUAGE/LANG). gettext ignores
 LANGUAGE when the session locale is "C" (no locale configured), as on bare servers; desktop sessions have one. When the Corsican
 catalogue is installed with VLC (/usr/share/locale/co/LC_MESSAGES/vlc.mo), Corsu starts VLC's menu entry with
@@ -37,8 +39,10 @@ class VLC(apps.App):
     }
 
     def find(self):
-        if corsu.PLATFORM != 'linux':
-            return []
+        if corsu.PLATFORM == 'windows':
+            return self.find_windows()
+        if corsu.PLATFORM == 'macos':
+            return self.find_macos()
         found = []
         executable = apps.which('vlc')
         if executable and not executable.startswith('/snap/'):
@@ -67,7 +71,38 @@ class VLC(apps.App):
                 'un paquet Snap ne peut pas recevoir de langue par utilisateur ; rien n\'est changé')))
         return found
 
+    def find_windows(self):
+        from apps import programs
+        found = []
+        for base in programs.program_dirs():
+            executable = base / 'VideoLAN/VLC/vlc.exe'
+            if executable.exists():
+                catalog = executable.parent / 'locale/co/LC_MESSAGES/vlc.mo'
+                coverage = apps.coverage_against(catalog, executable.parent / 'locale/fr/LC_MESSAGES/vlc.mo')
+                reason = None if catalog.exists() else corsu.t('no Corsican catalogue in this VLC',
+                                                               'pas de catalogue corse dans ce VLC')
+                found.append(apps.Installation(self, corsu.t('installed', 'installé'), executable, None,
+                                               catalog if catalog.exists() else None, coverage, reason))
+        return found
+
+    def find_macos(self):
+        bundle = Path('/Applications/VLC.app')
+        if not bundle.exists():
+            return []
+        catalog = bundle / 'Contents/MacOS/share/locale/co/LC_MESSAGES/vlc.mo'
+        coverage = apps.coverage_against(catalog, bundle / 'Contents/MacOS/share/locale/fr/LC_MESSAGES/vlc.mo')
+        reason = None if catalog.exists() else corsu.t('no Corsican catalogue in this VLC', 'pas de catalogue corse dans ce VLC')
+        return [apps.Installation(self, 'VLC.app', bundle, None, catalog if catalog.exists() else None, coverage, reason)]
+
     def enable(self, installer, installation):
+        from apps import settings
+        if corsu.PLATFORM == 'windows':
+            # VLC's own Preferences → Interface → Language writes this value.
+            settings.set_registry(installer, self.id, r'Software\VideoLAN\VLC', 'Lang', 'co', 1)
+            return None
+        if corsu.PLATFORM == 'macos':
+            settings.set_defaults(installer, self.id, 'org.videolan.vlc', 'language', 'co')
+            return None
         if installation.kind == 'Flatpak':
             apps.flatpak_language(installer, self.id, FLATPAK, apps.corsican_first())
             return None

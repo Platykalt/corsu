@@ -155,9 +155,159 @@ def revert(record):
             atomic_write(path, ini_set(text, setting['section'], setting['key'], setting['original'],
                                        newline).encode('utf-8'))
         return True
+    if setting['type'] == 'file':
+        path = Path(setting['file'])
+        if not path.exists():
+            return True
+        get, put = FILE_KINDS[setting['kind']]
+        try:
+            text, _ = read_text(path)
+            if get(text, setting['key']) == setting['installed']:
+                atomic_write(path, put(text, setting['key'], setting['original']).encode('utf-8'))
+        except Exception:
+            return False
+        return True
+    if setting['type'] == 'defaults':
+        if defaults_get(setting['domain'], setting['key']) == setting['installed']:
+            defaults_put(setting['domain'], setting['key'], setting['original'])
+        return True
     if setting['type'] == 'registry':
         current = registry_get(setting['key'], setting['name'])
         if current and list(current) == setting['installed']:
             registry_set(setting['key'], setting['name'], tuple(setting['original']) if setting['original'] else None)
         return True
     return False
+
+
+# Values inside a program's own file. Each kind is a (read, write) pair on the file's text; write(text, None) removes
+# the value Corsu added. The file must already exist: programs create it at their first start, and Corsu never
+# invents a whole configuration file.
+def _json_get(text, key):
+    import json as _json
+    node = _json.loads(text) if text.strip() else {}
+    for part in key.split('/'):
+        if not isinstance(node, dict) or part not in node:
+            return None
+        node = node[part]
+    return node
+
+
+def _json_put(text, key, value):
+    import json as _json
+    document = _json.loads(text) if text.strip() else {}
+    node, parts = document, key.split('/')
+    for part in parts[:-1]:
+        node = node.setdefault(part, {})
+    if value is None:
+        node.pop(parts[-1], None)
+    else:
+        node[parts[-1]] = value
+    return _json.dumps(document, indent=2, ensure_ascii=False) + '\n'
+
+
+def _element(tag, attribute, name):
+    import re as _re
+    return _re.compile(rf'<{tag}\s+{attribute}="{_re.escape(name)}"\s*(?:/>|>(.*?)</{tag}>)', _re.S)
+
+
+def _xml_get(text, spec):
+    tag, attribute, name, _ = spec
+    match = _element(tag, attribute, name).search(text)
+    return (match.group(1) or '') if match else None
+
+
+def _xml_put(text, spec, value):
+    tag, attribute, name, parent = spec
+    pattern = _element(tag, attribute, name)
+    if value is None:
+        import re as _re
+        whole_line = _re.compile(r'^[ \t]*' + pattern.pattern + r'[ \t]*\r?\n', _re.S | _re.M)
+        if whole_line.search(text):
+            return whole_line.sub('', text, count=1)
+        return pattern.sub('', text, count=1)
+    element = f'<{tag} {attribute}="{name}">{value}</{tag}>'
+    if pattern.search(text):
+        return pattern.sub(lambda match: element, text, count=1)
+    closing = text.rfind(f'</{parent}>')
+    if closing < 0:
+        raise ValueError(f'no </{parent}> element')
+    line_start = text.rfind('\n', 0, closing) + 1
+    before = text[line_start:closing]
+    if before.strip():
+        return text[:closing] + element + text[closing:]
+    # On its own line, one step deeper than the closing tag.
+    return text[:line_start] + before + '\t' + element + '\n' + text[line_start:]
+
+
+def _line_get(text, key):
+    import re as _re
+    match = _re.search(rf'^{_re.escape(key)}\s*=\s*(.*?)\s*$', text, _re.M)
+    return match.group(1) if match else None
+
+
+def _line_put(text, key, value):
+    import re as _re
+    pattern = _re.compile(rf'^{_re.escape(key)}\s*=.*\n?', _re.M)
+    if value is None:
+        return pattern.sub('', text, count=1)
+    if pattern.search(text):
+        return pattern.sub(lambda match: f'{key} = {value}\n', text, count=1)
+    return f'{key} = {value}\n' + text
+
+
+FILE_KINDS = {
+    'json': (_json_get, _json_put),
+    'xml': (_xml_get, _xml_put),
+    'line': (_line_get, _line_put),
+}
+
+
+def set_file_value(installer, component, path, kind, key, value):
+    """One value in a program's own settings file, recorded with its original. ValueError if the file is missing
+    or cannot be read safely."""
+    path = Path(path)
+    if not path.exists():
+        raise ValueError(f'{path}: not created yet (start the program once)')
+    text, newline = read_text(path)
+    get, put = FILE_KINDS[kind]
+    spec = list(key) if isinstance(key, (list, tuple)) else key
+    name = f'{path}#{json.dumps(spec)}'
+    record = installer.state['files'].get(name)
+    try:
+        original = record['setting']['original'] if record else get(text, spec)
+        changed = put(text, spec, value)
+    except ValueError:
+        raise
+    except Exception as error:  # a malformed file: never rewritten
+        raise ValueError(f'{path}: {error}') from None
+    installer.state['files'][name] = {'backup': None, 'mode': None, 'toggle': True, 'component': component,
+                                      'setting': {'type': 'file', 'kind': kind, 'file': str(path), 'key': spec,
+                                                  'original': original, 'installed': value},
+                                      'installed_sha256': ''}
+    corsu.STATE.write_text(json.dumps(installer.state, indent=2), encoding='utf-8')
+    atomic_write(path, changed.encode('utf-8'))
+
+
+def defaults_get(domain, key):
+    import subprocess
+    result = subprocess.run(['defaults', 'read', domain, key], capture_output=True, text=True)
+    return result.stdout.strip() if result.returncode == 0 else None
+
+
+def defaults_put(domain, key, value):
+    import subprocess
+    command = ['defaults', 'delete', domain, key] if value is None else ['defaults', 'write', domain, key, '-string', value]
+    subprocess.run(command, capture_output=True, check=value is not None)
+
+
+def set_defaults(installer, component, domain, key, value):
+    """One macOS preference (`defaults write <domain> <key> -string <value>`), recorded with its original."""
+    name = f'defaults:{domain}:{key}'
+    record = installer.state['files'].get(name)
+    original = record['setting']['original'] if record else defaults_get(domain, key)
+    installer.state['files'][name] = {'backup': None, 'mode': None, 'toggle': True, 'component': component,
+                                      'setting': {'type': 'defaults', 'domain': domain, 'key': key,
+                                                  'original': original, 'installed': value},
+                                      'installed_sha256': ''}
+    corsu.STATE.write_text(json.dumps(installer.state, indent=2), encoding='utf-8')
+    defaults_put(domain, key, value)

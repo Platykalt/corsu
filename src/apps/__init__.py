@@ -140,8 +140,8 @@ def coverage_against(corsican, reference):
 
 
 def registry():
-    from apps import vlc
-    return {app.id: app for app in (vlc.VLC(),)}
+    from apps import programs, vlc
+    return {app.id: app for app in (vlc.VLC(), *(program() for program in programs.PROGRAMS))}
 
 
 def detected():
@@ -163,7 +163,7 @@ def install(installer, app_id):
         if reason is None:
             try:
                 reason = app.enable(installer, installation)
-            except (OSError, ValueError) as error:
+            except (OSError, ValueError, ImportError) as error:
                 reason = corsu.t(f'could not write ({error})', f'écriture impossible ({error})')
         entry = {'kind': installation.kind, 'location': str(installation.location), 'version': installation.version,
                  'coverage': installation.coverage}

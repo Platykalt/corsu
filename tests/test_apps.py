@@ -115,3 +115,115 @@ class VLCTests(unittest.TestCase):
 
 if __name__ == '__main__':
     unittest.main()
+
+
+class WindowsProgramsTests(unittest.TestCase):
+    """Programs with a language setting of their own, on simulated Windows folders and registry."""
+
+    def setUp(self):
+        from apps import programs
+        self.programs = programs
+        self.directory = tempfile.TemporaryDirectory()
+        self.root = Path(self.directory.name) / 'Utilizatore è spaziu'
+        self.files = self.root / 'Program Files'
+        self.registry = {}
+        self.stack = ExitStack()
+        for target, name, value in ((corsu, 'HOME', self.root), (corsu, 'DATA', self.root / 'data'),
+                                    (corsu, 'STATE', self.root / 'data/state.json'), (corsu, 'PLATFORM', 'windows'),
+                                    (corsu, 'running_executables', lambda: self.running),
+                                    (settings, 'registry_get', lambda key, name: self.registry.get((key, name))),
+                                    (settings, 'registry_set', self.registry_set)):
+            self.stack.enter_context(patch.object(target, name, value))
+        self.stack.enter_context(patch.dict(os.environ, {'ProgramFiles': str(self.files), 'ProgramFiles(x86)': '',
+                                                         'ProgramW6432': '', 'APPDATA': str(self.root / 'Roaming'),
+                                                         'LOCALAPPDATA': str(self.root / 'Local')}))
+        self.stack.enter_context(redirect_stdout(io.StringIO()))
+        self.running = set()
+
+    def registry_set(self, key, name, value):
+        if value is None:
+            self.registry.pop((key, name), None)
+        else:
+            self.registry[(key, name)] = tuple(value)
+
+    def tearDown(self):
+        self.stack.close()
+        self.directory.cleanup()
+
+    def make(self, *paths):
+        for path in paths:
+            target = self.files / path
+            target.parent.mkdir(parents=True, exist_ok=True)
+            target.write_text('x')
+
+    def run_install(self, app_id):
+        installer = corsu.Installer()
+        report = apps.install(installer, app_id)
+        installer.state['components'] = [app_id]
+        corsu.STATE.write_text(json.dumps(installer.state), encoding='utf-8')
+        return report
+
+    def test_registry_programs_switch_and_give_back_a_value_changed_since(self):
+        self.make('7-Zip/7zFM.exe', '7-Zip/Lang/co.txt', 'VideoLAN/VLC/vlc.exe', 'VideoLAN/VLC/locale/co/LC_MESSAGES/vlc.mo')
+        self.registry[(r'Software\7-Zip', 'Lang')] = ('fr', 1)
+        self.run_install('7zip')
+        self.run_install('7zip')
+        self.assertEqual(self.registry[(r'Software\7-Zip', 'Lang')], ('co', 1))
+        corsu.disable(['7zip'])
+        self.assertEqual(self.registry[(r'Software\7-Zip', 'Lang')], ('fr', 1))
+        self.run_install('vlc')
+        self.assertEqual(self.registry[(r'Software\VideoLAN\VLC', 'Lang')], ('co', 1))
+        # The person picks English in VLC afterwards: uninstalling must not undo that.
+        self.registry[(r'Software\VideoLAN\VLC', 'Lang')] = ('en', 1)
+        corsu.uninstall()
+        self.assertEqual(self.registry[(r'Software\VideoLAN\VLC', 'Lang')], ('en', 1))
+
+    def test_program_without_its_corsican_file_is_left_alone(self):
+        self.make('7-Zip/7zFM.exe')
+        report = self.run_install('7zip')
+        self.assertEqual(self.registry, {})
+        self.assertEqual(len(report['skipped']), 1)
+
+    def test_notepad_plus_plus_keeps_the_previous_language_file(self):
+        self.make('Notepad++/notepad++.exe')
+        corsican = self.files / 'Notepad++/localization/corsican.xml'
+        corsican.parent.mkdir(parents=True)
+        corsican.write_text('<NotepadPlus><Native-Langue name="Corsu"/></NotepadPlus>')
+        previous = self.root / 'Roaming/Notepad++/nativeLang.xml'
+        previous.parent.mkdir(parents=True)
+        previous.write_text('<NotepadPlus><Native-Langue name="Français"/></NotepadPlus>')
+        self.run_install('notepadpp')
+        self.assertIn('Corsu', previous.read_text())
+        corsu.disable(['notepadpp'])
+        self.assertIn('Français', previous.read_text())
+
+    def test_settings_files_open_program_and_missing_file(self):
+        self.make('FileZilla FTP Client/filezilla.exe', 'FileZilla FTP Client/locales/co/filezilla.mo',
+                  'SumatraPDF/SumatraPDF.exe', 'VeraCrypt/VeraCrypt.exe', 'VeraCrypt/Languages/Language.co.xml')
+        report = self.run_install('filezilla')
+        self.assertEqual(len(report['skipped']), 1)  # never started: no filezilla.xml to change
+        config = self.root / 'Roaming/FileZilla/filezilla.xml'
+        config.parent.mkdir(parents=True)
+        original = '<FileZilla3>\n\t<Settings>\n\t\t<Setting name="Ascii Binary mode">0</Setting>\n\t</Settings>\n</FileZilla3>\n'
+        config.write_text(original)
+        self.running = {r'C:\Program Files\FileZilla FTP Client\filezilla.exe'}
+        self.run_install('filezilla')
+        self.assertEqual(config.read_text(), original)  # open: it would write its settings back when quitting
+        self.running = set()
+        self.run_install('filezilla')
+        self.assertIn('<Setting name="Language Code">co</Setting>', config.read_text())
+        corsu.disable(['filezilla'])
+        self.assertEqual(config.read_text(), original)
+        sumatra = self.root / 'Local/SumatraPDF/SumatraPDF-settings.txt'
+        sumatra.parent.mkdir(parents=True)
+        sumatra.write_text('UiLanguage = fr\nShowToolbar = true\n')
+        self.run_install('sumatrapdf')
+        self.assertEqual(sumatra.read_text(), 'UiLanguage = co\nShowToolbar = true\n')
+        corsu.disable(['sumatrapdf'])
+        self.assertEqual(sumatra.read_text(), 'UiLanguage = fr\nShowToolbar = true\n')
+        broken = self.root / 'Roaming/VeraCrypt/Configuration.xml'
+        broken.parent.mkdir(parents=True)
+        broken.write_text('<VeraCrypt><configuration>')
+        report = self.run_install('veracrypt')
+        self.assertEqual(broken.read_text(), '<VeraCrypt><configuration>')  # malformed: never rewritten
+        self.assertEqual(len(report['skipped']), 1)

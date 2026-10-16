@@ -155,6 +155,11 @@ jobs:
           ls /usr/share/applications/vlc.desktop
           ls -l /usr/share/locale/co/LC_MESSAGES/vlc.mo
           python tests/e2e/check_vlc.py
+      - name: Windows programs — 7-Zip, VLC and Notepad++ set to Corsican in the real registry and back
+        if: runner.os == 'Windows'
+        run: |
+          choco install vlc notepadplusplus -y --no-progress
+          python tests/e2e/check_windows_apps.py
       - name: Chromium — translate Chrome for Testing, read it in Corsican, switch off/on, restore
         if: runner.os != 'macOS'
         shell: bash
