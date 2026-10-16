@@ -17,7 +17,7 @@ sys.path.insert(0, str(ROOT / 'src'))
 
 def main():
     home = Path(tempfile.mkdtemp(prefix='corsu-vlc-'))
-    os.environ.update(HOME=str(home), LANG='fr_FR.UTF-8', LANGUAGE='', CORSU_USER_LEXICON=os.devnull)
+    os.environ.update(HOME=str(home), LANG='fr_FR.UTF-8', LANGUAGE='', LC_ALL='', LC_MESSAGES='', CORSU_USER_LEXICON=os.devnull)
     import corsu
     corsu.HOME, corsu.DATA, corsu.STATE = home, home / 'data', home / 'data/state.json'
     import apps

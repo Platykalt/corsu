@@ -50,7 +50,7 @@ class VLCTests(unittest.TestCase):
                                     (vlc, 'SNAP', self.root / 'snap/vlc'), (apps.shutil, 'which', lambda name: '/usr/bin/vlc'),
                                     (vlc, 'version', lambda executable: '3.0.21')):
             self.stack.enter_context(patch.object(target, name, value))
-        self.stack.enter_context(patch.dict(os.environ, {'LANGUAGE': '', 'LANG': 'fr_FR.UTF-8'}))
+        self.stack.enter_context(patch.dict(os.environ, {'LANGUAGE': '', 'LC_ALL': '', 'LC_MESSAGES': '', 'LANG': 'fr_FR.UTF-8'}))
         self.stack.enter_context(redirect_stdout(io.StringIO()))
 
     def tearDown(self):

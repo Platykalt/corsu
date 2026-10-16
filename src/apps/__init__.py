@@ -53,7 +53,8 @@ class App:
 
 def session_languages():
     """The language list programs read on Linux (LANGUAGE, else LANG), without Corsican."""
-    value = os.environ.get('LANGUAGE') or os.environ.get('LC_ALL') or os.environ.get('LANG') or 'fr'
+    value = (os.environ.get('LANGUAGE') or os.environ.get('LC_ALL') or os.environ.get('LC_MESSAGES')
+             or os.environ.get('LANG') or 'fr')
     languages = []
     for item in value.split(':'):
         language = item.split('.')[0].split('@')[0]
