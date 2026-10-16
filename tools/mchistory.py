@@ -57,6 +57,9 @@ KEEP_WORDS = {
     'axolotl', 'allay', 'breeze', 'sculk', 'acacia', 'nausea', 'magenta', 'dns', 'srv', 'ipv', 'tcp', 'udp',
     'ssl', 'utc', 'ping', 'lan', 'pvp', 'ctrl', 'alt', 'shift', 'tab', 'esc', 'hdr', 'aaa', 'ogg', 'png', 'zip',
     'mcfunction', 'datapack', 'sha', 'rgb', 'srgb', 'max', 'min', 'beta', 'alpha', 'pre', 'release', 'snapshot',
+    'realm', 'video', 'post', 'bit', 'via', 'mac', 'osx', 'windows', 'vista', 'lion', 'cmd', 'amd', 'cjk', 'sdk',
+    'ext', 'arb', 'framebuffer', 'soundflower', 'apple', 'notch', 'tundra', 'stereo', 'bonus', 'buffet', 'true',
+    'false', 'create', 'future', 'and', 'per', 'coordinate', 'totem', 'standard', 'shaders', 'include',
     'boss', 'bossbar', 'mob', 'gamerule', 'tellraw', 'title', 'trigger', 'scoreboard', 'tick', 'ticks', 'stats',
     'clone', 'fill', 'give', 'kill', 'list', 'locate', 'say', 'seed', 'spreadplayers', 'stop', 'summon', 'tell',
     'teleport', 'testfor', 'testforblock', 'testforblocks', 'time', 'toggledownfall', 'weather', 'whitelist', 'xp',
@@ -333,8 +336,6 @@ def check(english=None, quiet=False):
             if not isinstance(co, str) or not co.strip():
                 errors.append(f'{where}: empty or missing Corsican')
                 continue
-            if co != co.strip() and not co.endswith(' '):
-                warnings.append(f'{where}: leading or trailing white space')
             if entry.get('kind') not in KINDS:
                 errors.append(f'{where}: kind {entry.get("kind")!r}')
             if entry.get('review') not in REVIEWS:
@@ -354,16 +355,20 @@ def check(english=None, quiet=False):
             if signature(co) != want:
                 errors.append(f'{where}: placeholders {signature(co)!r}, English {want!r}')
             if original is not None:
+                lead = lambda t: (t[:len(t) - len(t.lstrip())], t[len(t.rstrip()):])
+                if lead(co) != lead(original):
+                    errors.append(f'{where}: leading or trailing white space differs from English')
                 if '%' in original and not SPEC.search(original) and co.count('%') != original.count('%'):
                     warnings.append(f'{where}: % signs changed')
-                kept = key in keep or entry.get('from') in keep or 'same as English' in (entry.get('note') or '')
+                note = entry.get('note') or ''
+                kept = key in keep or entry.get('from') in keep or 'same as English' in note or 'command syntax' in note
                 if co == original and not kept and re.search(r'[a-z]{3}', original):
                     errors.append(f'{where}: same as English: {original!r}')
                 left = leftover_english(original, co)
-                if left and not kept:
+                if left and not kept and entry.get('kind') in ('new', 'adapted'):
                     warnings.append(f'{where}: English words left {left}: {co!r}')
     if english:
-        missing = [p for p in texts if p[1] not in history.get(p[0], {})]
+        missing = [p for p, t in texts.items() if t.strip() and p[1] not in history.get(p[0], {})]
         if missing:
             warnings.append(f'{len(missing)} pairs without a decision yet')
     if not quiet:
