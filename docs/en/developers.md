@@ -11,6 +11,8 @@ keyboard/           the Keyman word prediction project; tools/build_keyboard.py 
                     corsu-keyboard.kmp
 install/            Install for Windows.cmd, Install for macOS.command, Install for Linux.sh (placed at the
                     top of each release archive), and get.sh / get.ps1 for one-line installs
+minecraft/java/     Minecraft Java in Corsican: co_fr.json, glossary, conventions, inventory and status (tools/minecraft.py)
+resources/          list of Corsican language resources (tools/fetch_resources.py downloads them)
 lexicon/            the translations: lexicon.tsv (written for Corsu), lexicon-mozilla.tsv and
                     lexicon-upstream.tsv (reviewed translations from other projects, loaded first)
 src/                the program: installer.py (setup), app.py (the Corsu window), corsu.py (Firefox, KDE,

@@ -12,9 +12,14 @@ Corsu met en corse les logiciels de tous les jours. Corsu puts everyday software
 
 ## Français
 
-Corsu met en corse les menus et les réglages de Firefox, Chrome, Opera GX et Discord, ainsi que le bureau KDE Plasma
-et les commandes du terminal sous Linux. Il fonctionne sous Windows, macOS et Linux, et chaque partie peut être
-désactivée puis réactivée à tout moment.
+Corsu met en corse les menus et les réglages de Firefox et de l'application Discord sous Windows, macOS et Linux, et
+ceux de Google Chrome sous Windows et Linux. Sous Linux seulement, il traduit aussi le bureau KDE Plasma, les
+programmes KDE et Qt et les commandes du terminal. Opera GX et les autres navigateurs Chromium sont pris en charge à
+titre expérimental. Chaque partie peut être désactivée puis réactivée à tout moment, et le détail système par système
+est dans [Ce qui marche, et où](docs/fr/compatibilite.md).
+
+Corsu propose aussi **Minecraft: Java Edition en corse** (version 26.3), sous forme de pack de ressources à installer
+dans le jeu : voir [Minecraft en corse](docs/fr/minecraft.md).
 
 ### Pourquoi Corsu
 
@@ -68,10 +73,12 @@ Ce qui est vérifié et ce qui est seulement prévu : [Ce qui marche, et où](do
 
 ### Les traductions
 
-Corsu compte environ 132 000 phrases traduites. Plus de 16 000 viennent d'autres logiciels libres, traduits pour la
-plupart par Patriccollu di Santa Maria è Sichè (Firefox pour Android et iOS, Thunderbird, VLC, Audacity, HandBrake,
-Notepad++, Poedit, WinMerge, Tenacity, OpenTracks…). Les autres ont été écrites pour Corsu avec le même vocabulaire,
-dont environ 20 000 pour Discord et Vencord. Une traduction vous paraît fausse ?
+Le lexique de Corsu compte environ 136 000 lignes de traduction, chacune un texte source et sa traduction corse.
+Plus de 16 000 sont reprises d'autres logiciels libres, traduits pour la plupart par Patriccollu di Santa Maria è Sichè
+(Firefox pour Android et iOS, Thunderbird pour Android, VLC, Audacity, HandBrake, Notepad++, Poedit, WinMerge,
+Tenacity, OpenTracks…). Les autres ont été écrites pour Corsu avec le même vocabulaire, dont plus de 23 000 pour
+Discord et Vencord ; ce sont des premières versions, que chacun peut relire et corriger. Une traduction vous paraît
+fausse ?
 [Ouvrez un ticket](https://github.com/Platykalt/corsu/issues/new?template=translation.yml) ou voyez
 [CONTRIBUTING.md](CONTRIBUTING.md).
 
@@ -82,9 +89,13 @@ Pour aller plus loin : [toute la documentation](docs/README.md), [ce que Corsu m
 
 ## English
 
-Corsu puts the menus and settings of Firefox, Chrome, Opera GX and Discord in Corsican, and on Linux also the KDE
-Plasma desktop and terminal commands. It works on Windows, macOS and Linux, and each part can be switched off and on
-again at any time.
+Corsu puts the menus and settings of Firefox and the Discord app in Corsican on Windows, macOS and Linux, and those of
+Google Chrome on Windows and Linux. On Linux only, it also translates the KDE Plasma desktop, KDE and Qt programs and
+terminal commands. Opera GX and the other Chromium browsers are experimental. Each part can be switched off and on
+again at any time, and the details for each system are in [What works where](docs/en/compatibility.md).
+
+Corsu also offers **Minecraft: Java Edition in Corsican** (version 26.3), as a resource pack you add in the game: see
+[Minecraft in Corsican](docs/en/minecraft.md).
 
 ### Why Corsu
 
@@ -136,10 +147,11 @@ What is verified and what is only expected: [What works where](docs/en/compatibi
 
 ### Translations
 
-Corsu has about 132,000 translated phrases. More than 16,000 come from other free software, most of them translated
-by Patriccollu di Santa Maria è Sichè (Firefox for Android and iOS, Thunderbird, VLC, Audacity, HandBrake, Notepad++,
-Poedit, WinMerge, Tenacity, OpenTracks…). The rest were written for Corsu with the same vocabulary, about 20,000 of
-them for Discord and Vencord. Does a translation look wrong?
+Corsu's lexicon has about 136,000 translation lines, each a source text and its Corsican translation. More than
+16,000 are taken from other free software, most of them translated by Patriccollu di Santa Maria è Sichè (Firefox for
+Android and iOS, Thunderbird for Android, VLC, Audacity, HandBrake, Notepad++, Poedit, WinMerge, Tenacity,
+OpenTracks…). The rest were written for Corsu with the same vocabulary, more than 23,000 of them for Discord and
+Vencord; they are first versions that anyone can review and correct. Does a translation look wrong?
 [Open an issue](https://github.com/Platykalt/corsu/issues/new?template=translation.yml) or see
 [CONTRIBUTING.md](CONTRIBUTING.md).
 

@@ -13,7 +13,8 @@
 | Discord dans un navigateur | Non pris en charge | Non pris en charge | Non pris en charge |
 | Safari | | Impossible | |
 | Boutons et menus de Google (dans Firefox Corsu) | Essayé à la main | Prévu | Essayé à la main |
-| Bureau KDE Plasma et programmes KDE | | | Utilisé tous les jours |
+| Bureau KDE Plasma et programmes KDE | Non pris en charge | Non pris en charge | Utilisé tous les jours |
+| Minecraft: Java Edition 26.3 (pack de ressources) | Vérifié sans lancer le jeu | Vérifié sans lancer le jeu | Vérifié sans lancer le jeu |
 | Programmes GTK et commandes du terminal | | | Prévu |
 
 **Testé** : avant chaque version, la CI installe Corsu sur ce système, lance le logiciel et lit son texte en corse.
@@ -22,6 +23,11 @@
 encore vérifié sur ce système ; dites-nous comment ça se passe. **Non pris en charge** : Corsu ne le fait pas,
 en général parce que le système l'empêche. Safari fait partie de macOS : Apple le protège et ne propose que les
 langues de macOS, où le corse n'existe pas.
+
+KDE Plasma est un bureau pour Linux. Certains programmes KDE (Kate, Krita, Okular…) existent aussi sous Windows et
+macOS, mais Corsu ne les traduit que sous Linux. **Vérifié sans lancer le jeu** : le fichier de traduction est
+complet, et le code de Minecraft 26.3 lui-même le lit et affiche chaque texte sans erreur (`tools/minecraft.py verify`),
+mais personne ne l'a encore chargé dans une partie.
 
 ## Téléphones
 

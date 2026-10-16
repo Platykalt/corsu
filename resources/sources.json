@@ -1,0 +1,95 @@
+{
+  "_comment": "Corsican language resources that may be downloaded and reused. tools/fetch_resources.py downloads them into ~/.local/share/corsu/resources (or $CORSU_RESOURCES) and records the date and checksum in manifest.json there. Lookup-only dictionaries are listed in resources/README.md, not here.",
+  "resources": [
+    {
+      "id": "pontoon-terminology",
+      "name": "Mozilla Pontoon terminology, Corsican",
+      "url": "https://pontoon.mozilla.org/terminology/co.v2.tbx",
+      "file": "pontoon/co.v2.tbx",
+      "license": "Mozilla project content (MPL-2.0); check each project",
+      "coverage": "about 211 software terms with definitions, approved by the Corsican Mozilla team",
+      "variants": "standard written Corsican used in software"
+    },
+    {
+      "id": "pontoon-memory",
+      "name": "Mozilla Pontoon translation memory, Corsican, all projects",
+      "url": "https://pontoon.mozilla.org/translation-memory/co.all-projects.tmx",
+      "file": "pontoon/co.all-projects.tmx",
+      "license": "Mozilla project content (MPL-2.0); check each project",
+      "coverage": "English-Corsican sentence pairs from Firefox for Android and iOS, Focus, Mozilla VPN, Common Voice, SUMO",
+      "variants": "standard written Corsican used in software"
+    },
+    {
+      "id": "kaikki-corsican",
+      "name": "English Wiktionary, Corsican entries (wiktextract JSONL)",
+      "url": "https://kaikki.org/dictionary/Corsican/kaikki.org-dictionary-Corsican.jsonl",
+      "file": "kaikki/kaikki.org-dictionary-Corsican.jsonl",
+      "license": "CC BY-SA 4.0 and GFDL (Wiktionary)",
+      "coverage": "about 900 Corsican words with English glosses, inflections and some regional forms",
+      "variants": "labels such as Cismontane, Ultramontane, Sartenese when the entry has them"
+    },
+    {
+      "id": "cowiktionary",
+      "name": "Wikizziunariu (Corsican Wiktionary) dump",
+      "url": "https://dumps.wikimedia.org/cowiktionary/latest/cowiktionary-latest-pages-articles.xml.bz2",
+      "file": "wikimedia/cowiktionary-latest-pages-articles.xml.bz2",
+      "license": "CC BY-SA 4.0",
+      "coverage": "about 9,600 pages, many of them non-Corsican words",
+      "variants": "mixed"
+    },
+    {
+      "id": "cowiki",
+      "name": "Vikipedia (Corsican Wikipedia) dump",
+      "url": "https://dumps.wikimedia.org/cowiki/latest/cowiki-latest-pages-articles.xml.bz2",
+      "file": "wikimedia/cowiki-latest-pages-articles.xml.bz2",
+      "license": "CC BY-SA 4.0",
+      "coverage": "about 9,500 articles, a corpus to check whether a form is in use",
+      "variants": "mixed, unlabelled"
+    },
+    {
+      "id": "apertium-cos",
+      "name": "Apertium Corsican monolingual dictionary",
+      "url": "https://raw.githubusercontent.com/apertium/apertium-cos/master/apertium-cos.cos.dix",
+      "file": "apertium/apertium-cos.cos.dix",
+      "license": "GPL-3.0",
+      "coverage": "about 6,300 lemmas with inflection paradigms; last updated 2021",
+      "variants": "standard"
+    },
+    {
+      "id": "cldr-co",
+      "name": "Unicode CLDR locale data, Corsican",
+      "url": "https://raw.githubusercontent.com/unicode-org/cldr/main/common/main/co.xml",
+      "file": "cldr/co.xml",
+      "license": "Unicode License v3",
+      "coverage": "language, territory, month and day names",
+      "variants": "standard"
+    },
+    {
+      "id": "tatoeba-cos",
+      "name": "Tatoeba Corsican sentences",
+      "url": "https://downloads.tatoeba.org/exports/per_language/cos/cos_sentences.tsv.bz2",
+      "file": "tatoeba/cos_sentences.tsv.bz2",
+      "license": "CC BY 2.0 FR",
+      "coverage": "about 55 sentences",
+      "variants": "unlabelled"
+    },
+    {
+      "id": "opus-translatewiki",
+      "name": "OPUS translatewiki co-en (MediaWiki interface strings)",
+      "url": "https://object.pouta.csc.fi/OPUS-translatewiki/v2026-07-01/moses/co-en.txt.zip",
+      "file": "opus/translatewiki-co-en.txt.zip",
+      "license": "translatewiki.net content (CC BY-SA / GPL per project)",
+      "coverage": "about 1,300 interface string pairs",
+      "variants": "unlabelled"
+    },
+    {
+      "id": "patriccollu-repo",
+      "name": "Patriccollu, Lingua_Corsa-Infurmatica (notes, translation memories, translated files)",
+      "url": "https://github.com/Patriccollu/Lingua_Corsa-Infurmatica/archive/refs/heads/master.zip",
+      "file": "patriccollu/Lingua_Corsa-Infurmatica.zip",
+      "license": "no license file: kept locally for consultation only, never redistributed",
+      "coverage": "per-program notes and memories (Audacity, Poedit) by the main Corsican software translator",
+      "variants": "standard written Corsican used in software"
+    }
+  ]
+}

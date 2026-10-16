@@ -65,3 +65,31 @@ Detailed List|Vue détaillée|Lista cù Dettagli
 Show/hide the queue details panel|Montrer/Cacher le panneau détaillé de la file d'attente|Affissà o piattà a finestra di i dettagli di fila d’attesa
 There was a problem with your last action. If you think this is a bug, please tell us exactly where it occurred.|Il y a eu un problème lors de votre dernière action. Si vous pensez que c’est un bug, merci de décrire ce qui l’a produit.|Ci hè statu un penseru cù a vostra ultima azzione. S’è vò pensate chì ghjè un penseru ci vole à dicci in dettagli induve hè accadutu.
 Project check found file inconsistencies during automatic recovery. Select 'Help > Diagnostics > Show Log...' to see details.||U cuntrollu di prughjettu hà trovu incuerenze di schedariu durante a ricuperazione autumatica. Selezziunà « Aiutu > Diagnostichi > Affissà u ghjurnale… » per avè più di dettagli.
+# French labels whose imported translation was made for a longer English source (see engine.loose_french).
+# Faithful ones are kept here; wrong ones get their own Corsican.
+|Adresse introuvable|Indirizzu intruvevule
+|Espace insuffisant|Ùn ci hè abbastanza spaziu
+|Aucune correspondance.|Ùn si trova alcuna currispundenza.
+|Intervalle à supprimer|Intervallu di tempu à squassà
+|Nouveautés dans %s|Ciò chì hè novu in %s
+|Personnalisez %1$s|Persunalizate %1$s
+|Malentendants uniquement|Solu per i cionchi
+|Trop de décimales|Troppu cifri dopu à a virgula
+|Code source introuvable|Ùn si pò truvà u codice d’origine
+|Toujours devant|Sempre in primu pianu
+|Document précédent|Ducumentu precedente
+|Document suivant|Ducumentu seguente
+|Zoom adapté|Ingrandamentu adattatu
+|Audacity démarre…|Audacity si mette in ballu…
+|Version Gauche|Versione di manca
+|Version Droite|Versione di diritta
+|Version Milieu|Versione di u centru
+|Actuellement|Attualmente
+|Veille|Veghja
+|Police :|Grafia :
+|Thème :|Tema :
+|Dossiers cachés|Cartulari piattati
+|Opérateurs|Operatori
+|Indentation|Indentazione
+|Clip suivant|Pezzu seguente
+|Taille relative|Dimensione relativa

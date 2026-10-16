@@ -67,6 +67,12 @@ jobs:
           python tools/build_keyboard.py --package
           cp keyboard/build/corsu-keyboard.kmp dist/corsu-keyboard.kmp
           (cd dist && sha256sum corsu-keyboard.kmp > corsu-keyboard.kmp.sha256)
+      - name: Minecraft Java — check every key and placeholder against Mojang's English, build the resource pack
+        run: |
+          python tools/minecraft.py check
+          python tools/minecraft.py build
+          version=$(cat minecraft/java/VERSION)
+          (cd dist && sha256sum "corsu-minecraft-java-$version.zip" > "corsu-minecraft-java-$version.zip.sha256")
       - uses: actions/upload-artifact@v4
         with:
           name: releases

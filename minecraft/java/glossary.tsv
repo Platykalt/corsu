@@ -1,0 +1,804 @@
+english	context	corsican	forms	variants	avoid	sources	status	check
+# Statuses: attested = checked by hand and found with this meaning in a dictionary or a reviewed Corsican translation (see sources);
+# practice = used by the reviewed Corsican software translations in lexicon/ (mostly Patriccollu di Santa Maria è Sichè);
+# proposal = chosen for Corsu, needs a speaker's validation; name = proper name kept as in the game.
+# check=yes makes tools/minecraft.py warn when the English term appears and none of the Corsican forms does.
+# Interface
+Done	button closing a screen	Fattu			Compiu (Firefox, means 'finished')	lexicon-upstream (VLC, Poedit)	practice	no
+Cancel	button	Abbandunà				lexicon-mozilla	practice	no
+Back	button returning to previous screen	Ritornu			Pagina precedente (web only)	lexicon-mozilla	practice	no
+Settings	screen title	Parametri			Impustazioni	lexicon-mozilla	practice	no
+Options	main menu button	Ozzioni				lexicon-upstream	practice	no
+Quit	button	Esce				lexicon-upstream	practice	no
+Save	button	Arregistrà				lexicon-mozilla	practice	no
+Language	setting	Lingua				lexicon-mozilla	practice	no
+Volume	sound	Vulume				lexicon-upstream	practice	no
+Fullscreen	video	Screnu sanu				lexicon-upstream	practice	no
+Brightness	video	Lucidezza			Luminosità	lexicon-mozilla, lexicon-upstream	practice	no
+Subtitles	accessibility	Sottutituli				lexicon-upstream	practice	no
+Chat	in-game messages	Chjachjarata	chjachjar		Chat (English)	lexicon-upstream	practice	no
+Server	multiplayer	Servore	servor	Servitore		lexicon.tsv (Discord)	practice	yes
+Player	person playing	Ghjucadore	ghjucador	Ghjucatore		to check in to check in INFCOR (joueur)	proposal	yes
+Game	the game	Ghjocu	ghjoc			to check in INFCOR	proposal	no
+World	saved Minecraft world	Mondu	mondi			to check in INFCOR	proposal	yes
+Singleplayer	main menu	Ghjocu solu		Un ghjucadore		Corsu	proposal	no
+Multiplayer	main menu	Parechji ghjucadori	parechji ghjucadori	Multighjucadore		Corsu	proposal	no
+Survival	game mode	Sopravivenza	sopraviv			lexicon-upstream	practice	yes
+Creative	game mode	Creativu	creativ			Corsu	proposal	no
+Adventure	game mode	Avventura	avventur			to check in INFCOR	proposal	no
+Spectator	game mode	Spettatore	spettator			Corsu	proposal	yes
+Hardcore	game mode (one life)	Estremu	estrem		Hardcore	Corsu (Italian MC: Estrema)	proposal	no
+Peaceful	difficulty	Pacificu			Tranquillu	Corsu	proposal	no
+Easy	difficulty	Faciule				to check in INFCOR	proposal	no
+Normal	difficulty	Nurmale				lexicon-upstream	practice	no
+Hard	difficulty	Difficiule				to check in INFCOR	proposal	no
+Difficulty	setting	Difficultà				to check in INFCOR	proposal	no
+Seed	world generation number	Sementa	sement	Gramina	Granu	Corsu	proposal	no
+Inventory	player items screen	Inventariu	inventari			Corsu	proposal	yes
+Hotbar	bottom item bar	Barra rapida	barra rapida			Corsu	proposal	no
+Slot	inventory cell	Casella	casell		Slot	Corsu	proposal	no
+Recipe	crafting recipe	Ricetta	ricett			to check in INFCOR	proposal	yes
+Recipe Book	crafting guide	Libru di ricette				Corsu	proposal	no
+Crafting	making items	Fabbricazione	fabbric			Corsu	proposal	no
+Advancement	progress goal	Prugressu	prugress	Avanzamentu	Avanzamentu (calque)	Corsu	proposal	yes
+Achievement	statistics	Successu	success			Corsu	proposal	no
+Statistics	screen	Statistiche	statistic			lexicon-upstream	practice	no
+Resource Pack	content pack	Pacchettu di risorse	pacchett	Pacchettu di risorse	Pack	Corsu	proposal	yes
+Data Pack	content pack	Pacchettu di dati	pacchett		Pack	Corsu	proposal	yes
+Respawn	return after death	Rinasce	rinasc	Riapparisce	Riapparizione (Firefox sense)	Corsu	proposal	no
+Spawn point	place you respawn	Puntu di rinascita	rinascit			Corsu	proposal	no
+Game Mode	setting	Modu di ghjocu				lexicon-upstream	practice	no
+Game Rule	world rule	Regula di ghjocu	regul			Corsu	proposal	no
+Narrator	accessibility	Narratore	narrator			Corsu	proposal	yes
+Sneak	movement key	Accuvacciassi	accuvacci	Piattassi		Corsu	proposal	no
+Sprint	movement key	Corre				Corsu	proposal	no
+Jump	movement key	Saltà				to check in INFCOR	proposal	no
+Attack	key	Attaccà				to check in INFCOR	proposal	no
+Chunk	16x16 world column	Pezzu	pezz	Chunk		Corsu (Italian MC: chunk)	proposal	no
+Tick	game time unit	Tick			Battitu	Corsu	proposal	no
+Render Distance	video	Distanza di visualizazione				Corsu	proposal	no
+Field of View	video	Campu visivu				Corsu	proposal	no
+Health	player status	Salute				lexicon-upstream	practice	yes
+Hunger	player status / effect	Fame				to check in INFCOR	proposal	yes
+Experience	player levels	Sperienza	sperienz			lexicon-upstream	practice	yes
+Level	experience level	Livellu	livell			Patriccollu	practice	no
+Skin	player appearance	Pelle	pell	Skin		Corsu	proposal	no
+Realms	Mojang hosting service	Realms				Mojang	name	no
+Minecraft	product	Minecraft				Mojang	name	no
+Mojang	company	Mojang				Mojang	name	no
+Overworld	main dimension	Mondu di sopra	mondu di sopra	Superficia		Corsu (Italian MC: Sopramondo)	proposal	no
+Nether	dimension	Nether				Mojang	name	no
+The End	dimension	L'End	end			Mojang	name	no
+Redstone	material and circuits	Redstone				Mojang	name	no
+# Creatures (gender in brackets when it drives agreement)
+Mob	creature	Criatura	criatur	Mob		Corsu	proposal	no
+Zombie	mob	Zombi	zombi			to check in to check in INFCOR (zombi)	proposal	yes
+Skeleton	mob	Scheletru	scheletr			to check in INFCOR	proposal	yes
+Spider	mob (m)	Ragnu	ragn			to check in INFCOR	proposal	yes
+Cave Spider	mob	Ragnu di e grotte				Corsu	proposal	no
+Creeper	mob	Creeper				Mojang	name	yes
+Enderman	mob	Enderman				Mojang	name	yes
+Villager	mob (m)	Paisanu	paisan	Paisanu	Abitante	Corsu	proposal	yes
+Wandering Trader	mob	Mercante girandulone			Mercante ambulante	Corsu	proposal	no
+Pillager	illager	Saccheghjadore	saccheghjador	Predone		Corsu	proposal	yes
+Vindicator	illager	Vindicatore	vindicator			Corsu	proposal	yes
+Evoker	illager	Evucadore	evucador			Corsu	proposal	yes
+Illager	hostile villagers	Illager				Mojang	name	no
+Witch	mob (f)	Strega	streg			to check in INFCOR	proposal	yes
+Iron Golem	mob	Golem di ferru				Corsu	proposal	no
+Golem	mob family	Golem				Mojang	name	no
+Cow	mob (f)	Vacca	vacc			to check in INFCOR	proposal	yes
+Pig	mob (m)	Porcu	porc/purcell			to check in INFCOR	proposal	yes
+Sheep	mob (f)	Pecura	pecur			to check in INFCOR	proposal	yes
+Chicken	mob (f) / food	Ghjallina	ghjallin	Pullastru		to check in INFCOR	proposal	yes
+Horse	mob (m)	Cavallu	cavall			to check in INFCOR	proposal	yes
+Donkey	mob (m)	Sumere	sumer	Ciucciu		to check in INFCOR	proposal	yes
+Mule	mob (m)	Mulu	mul			to check in INFCOR	proposal	yes
+Wolf	mob (m)	Lupu	lup			to check in INFCOR	proposal	yes
+Fox	mob (f)	Volpe	volp			to check in INFCOR	proposal	yes
+Rabbit	mob (m) / food	Cunigliulu	cunigli	Cunigliu		to check in INFCOR	proposal	yes
+Cat	mob (m)	Ghjattu	ghjatt			to check in INFCOR	proposal	yes
+Bat	mob (m)	Topu pinnutu	topu pinnut	Pipistrellu		to check in INFCOR	proposal	yes
+Bee	mob (f)	Ape	ap			to check in INFCOR	proposal	yes
+Goat	mob (f)	Capra	capr			to check in INFCOR	proposal	yes
+Frog	mob (f)	Granochja	granochj	Ranochja		to check in INFCOR	proposal	yes
+Tadpole	mob	Capirossulu	capirossul		Ranochjella	Corsu	proposal	yes
+Turtle	mob (f)	Tartaruga	tartarug	Cuppulata (land tortoise)		to check in INFCOR	proposal	yes
+Squid	mob (m)	Calamaru	calamar	Tutanu		to check in INFCOR	proposal	yes
+Glow Squid	mob	Calamaru luminosu				Corsu	proposal	no
+Dolphin	mob (m)	Delfinu	delfin			to check in INFCOR	proposal	yes
+Cod	fish (m)	Merluzzu	merluzz			to check in INFCOR	proposal	yes
+Salmon	fish (m)	Salmone	salmon			to check in INFCOR	proposal	yes
+Pufferfish	fish (m)	Pesciu palla	pesciu palla			Corsu	proposal	yes
+Tropical Fish	fish	Pesciu tropicale				Corsu	proposal	no
+Parrot	mob (m)	Pappagallu	pappagall			to check in INFCOR	proposal	yes
+Panda	mob	Panda				to check in INFCOR	proposal	yes
+Polar Bear	mob (m)	Orsu polare	ors			to check in INFCOR	proposal	yes
+Llama	mob (m)	Lama				to check in INFCOR	proposal	no
+Camel	mob (m)	Cammellu	cammell			to check in INFCOR	proposal	yes
+Ocelot	mob	Ocelot				Corsu	name	no
+Axolotl	mob	Axolotl				Corsu	name	yes
+Armadillo	mob	Armadillu	armadill			Corsu	proposal	yes
+Sniffer	mob (m)	Annusadore	annusador		Fiutatore	Corsu (annusà = to sniff)	proposal	yes
+Strider	mob	Strider				Mojang	name	no
+Mooshroom	mob (f)	Vaccafungu	vaccafung			Corsu (vacca + fungu)	proposal	yes
+Slime	mob	Slime				Mojang	name	no
+Ghast	mob	Ghast				Mojang	name	yes
+Happy Ghast	mob	Ghast cuntentu				Corsu	proposal	no
+Blaze	mob	Blaze				Mojang	name	yes
+Wither	boss	Wither				Mojang	name	yes
+Ender Dragon	boss (m)	Dragone di l'End	dragone			Corsu	proposal	no
+Dragon	creature (m)	Dragone	dragon			to check in INFCOR	proposal	yes
+Guardian	mob (m)	Guardianu	guardian			Corsu	proposal	yes
+Elder Guardian	mob	Guardianu anzianu				Corsu	proposal	no
+Warden	mob (m)	Custode	custod		Guardianu (taken by Guardian)	Corsu	proposal	yes
+Phantom	mob (m)	Fantasma	fantasm			to check in INFCOR	proposal	yes
+Drowned	mob (m)	Annigatu	annigat	Affucatu		Corsu	proposal	no
+Husk	desert zombie (m)	Zombi seccu	zombi secc			Corsu	proposal	no
+Stray	snowy skeleton (m)	Scheletru vagabondu	vagabond			Corsu	proposal	no
+Bogged	swamp skeleton	Scheletru di padule	padule			Corsu	proposal	no
+Shulker	mob	Shulker				Mojang	name	yes
+Silverfish	mob (m)	Pesciu d'argentu	pesciu d'argent		Lepisma	Corsu	proposal	yes
+Endermite	mob	Endermite				Mojang	name	no
+Vex	mob	Vex				Mojang	name	no
+Ravager	mob (m)	Devastatore	devastator			Corsu	proposal	yes
+Piglin	mob	Piglin				Mojang	name	yes
+Hoglin	mob	Hoglin				Mojang	name	no
+Zoglin	mob	Zoglin				Mojang	name	no
+Allay	mob	Allay				Mojang	name	no
+Breeze	mob (m)	Breeze				Mojang	name	no
+Creaking	mob (m)	Scricchjone	scricchjon			Corsu (scricchjà = to creak)	proposal	yes
+Armor Stand	entity (m)	Purtarmatura	purtarmatur			Corsu	proposal	no
+# Villager professions
+Armorer	villager	Armaghjolu	armaghjol			Corsu	proposal	no
+Butcher	villager	Macellaghju	macellaghj			to check in INFCOR	proposal	no
+Cartographer	villager	Cartografu	cartograf			Corsu	proposal	no
+Cleric	villager	Prete	pret	Chjericu		to check in INFCOR	proposal	no
+Farmer	villager	Agricultore	agricultor	Paisanu, Cultivatore		to check in INFCOR	proposal	no
+Fisherman	villager	Piscadore	piscador			to check in INFCOR	proposal	no
+Fletcher	villager	Frecciaghju	frecciaghj			Corsu	proposal	no
+Leatherworker	villager	Cuiaghju	cuiaghj			Corsu	proposal	no
+Librarian	villager	Bibliutecariu	bibliutecari			Corsu	proposal	no
+Mason	villager	Muratore	murator			to check in INFCOR	proposal	no
+Shepherd	villager	Pastore	pastor			to check in INFCOR	proposal	no
+Toolsmith	villager	Ferraghju d'attrezzi	ferraghj			Corsu	proposal	no
+Weaponsmith	villager	Armaghjolu d'arme	armaghjol			Corsu	proposal	no
+Nitwit	villager	Scimitu	scimit			Corsu	proposal	no
+# Materials and blocks (gender m/f drives agreement of adjectives)
+Block	game unit (m)	Bloccu	blocc			to check in INFCOR	proposal	yes
+Stone	block (f)	Petra	petr			to check in INFCOR	proposal	yes
+Cobblestone	block (m)	Petrame	petrame			Corsu	proposal	yes
+Dirt	block (f)	Terra	terr			to check in INFCOR	proposal	yes
+Grass Block	block	Bloccu d'erba				Corsu	proposal	no
+Sand	block (f)	Rena	ren			to check in INFCOR	proposal	yes
+Gravel	block (f)	Ghjàira	ghjair	Ghjaia		to check in INFCOR	proposal	yes
+Clay	block (f)	Creta	cret	Argilla		to check in INFCOR	proposal	yes
+Mud	block (m)	Fangu	fang			to check in INFCOR	proposal	yes
+Snow	block (f)	Neve	nev			to check in INFCOR	proposal	yes
+Ice	block (m)	Ghjacciu	ghjacci			to check in INFCOR	proposal	yes
+Wood	block (m)	Legnu	legn			to check in INFCOR	proposal	yes
+Log	block (m)	Troncu	tronc			to check in INFCOR	proposal	yes
+Planks	block (f pl)	Tavule	tavul			to check in INFCOR	proposal	yes
+Leaves	block (f pl)	Foglie	fogli			to check in INFCOR	proposal	yes
+Sapling	plant (f)	Pianticella	pianticell	Piantone		Corsu	proposal	yes
+Stripped	log without bark	Scurzatu	scurzat			Corsu (scorza = bark)	proposal	yes
+Slab	half block (f)	Lastra	lastr	Teghja (roofing stone)		Corsu	proposal	yes
+Stairs	block (f)	Scala	scal			to check in INFCOR	proposal	yes
+Wall	block (m)	Muru	mur			to check in INFCOR	proposal	yes
+Fence	block (m)	Steccatu	steccat/cancell			to check in INFCOR	proposal	yes
+Fence Gate	block (m)	Cancellu	cancell			to check in INFCOR	proposal	yes
+Door	block (f)	Porta	port			to check in INFCOR	proposal	yes
+Trapdoor	block (f)	Bodula	bodul	Trappa		Corsu (Italian botola)	proposal	yes
+Button	block (m)	Buttone	button/cliccu			to check in INFCOR	proposal	yes
+Pressure Plate	block (f)	Pedana di pressione	pedan			Corsu	proposal	yes
+Sign	block (m)	Cartellu	cartell			to check in INFCOR	proposal	yes
+Hanging Sign	block	Cartellu appesu				Corsu	proposal	no
+Brick	material (m)	Matone	maton			to check in INFCOR	proposal	yes
+Bricks	block (m pl)	Matoni	maton			to check in INFCOR	proposal	yes
+Polished	stone finish	Lisciatu	lisciat			Corsu	proposal	yes
+Smooth	stone finish	Lisciu	lisci			to check in INFCOR	proposal	no
+Chiseled	carved stone	Sculpitu	sculpit			Corsu	proposal	yes
+Cut	cut stone/copper	Tagliatu	tagliat			to check in INFCOR	proposal	no
+Cracked	damaged bricks	Crepatu	crepat			Corsu	proposal	yes
+Mossy	covered with moss	Muscosu	muscos			Corsu	proposal	yes
+Moss	plant (m)	Muscu	musc			to check in INFCOR	proposal	yes
+Glass	block (m)	Vetru	vetr			to check in INFCOR	proposal	yes
+Stained Glass	coloured glass	Vetru tintu	vetru tint			Corsu	proposal	no
+Glass Pane	thin glass (m)	Pannellu di vetru	pannell			Corsu	proposal	no
+Wool	block (f)	Lana	lan			to check in INFCOR	proposal	yes
+Carpet	block (m)	Tappetu	tappet			to check in INFCOR	proposal	yes
+Concrete	block (m)	Betonu	beton	Cimentu		to check in INFCOR	proposal	yes
+Concrete Powder	block (f)	Polvera di betonu				Corsu	proposal	no
+Terracotta	block (f)	Terracotta	terracott			Corsu	proposal	yes
+Glazed Terracotta	block	Terracotta smaltata				Corsu	proposal	no
+Copper	metal (m)	Ramu	ram			to check in INFCOR	proposal	yes
+Exposed	copper stage 1	Espostu	espost			Corsu	proposal	yes
+Weathered	copper stage 2	Corrosu	corros			Corsu	proposal	yes
+Oxidized	copper stage 3	Ossidatu	ossidat			Corsu	proposal	yes
+Waxed	copper protected with wax	Inciratu	incirat			Corsu (cera = wax)	proposal	yes
+Iron	metal (m)	Ferru	ferr			to check in INFCOR	proposal	yes
+Gold	metal (m)	Oru	oru			to check in INFCOR	proposal	yes
+Golden	made of gold	D'oru	d'oru			to check in INFCOR	proposal	no
+Diamond	gem (m)	Diamante	diamant			to check in INFCOR	proposal	yes
+Emerald	gem (m)	Smeraldu	smerald			to check in INFCOR	proposal	yes
+Netherite	metal	Netherite				Mojang	name	yes
+Coal	mineral (m)	Carbone	carbon			to check in INFCOR	proposal	yes
+Charcoal	item (m)	Carbone di legnu				to check in INFCOR	proposal	no
+Lapis Lazuli	mineral (m)	Lapislazuli	lapislazuli			Corsu	proposal	yes
+Quartz	mineral (m)	Quarzu	quarz			to check in INFCOR	proposal	yes
+Amethyst	mineral (f)	Ametista	ametist			Corsu	proposal	yes
+Ore	block (m)	Minerale	mineral	Vena		Corsu	proposal	yes
+Raw	unsmelted ore	Grezzu	grezz	Crudu		Corsu	proposal	no
+Ingot	item (m)	Lingottu	lingott			to check in INFCOR	proposal	yes
+Nugget	item (f)	Pepita	pepit			Corsu	proposal	yes
+Deepslate	deep stone (f)	Ardesia prufonda	ardesia	Lavagna		Corsu (Italian MC: ardesia abissale)	proposal	yes
+Tuff	block (m)	Tufu	tuf			to check in INFCOR	proposal	yes
+Calcite	block (f)	Calcite				Corsu	proposal	no
+Granite	block (m)	Granitu	granit			to check in INFCOR	proposal	yes
+Diorite	block (f)	Diorite	diorit			Corsu	proposal	yes
+Andesite	block (f)	Andesite	andesit			Corsu	proposal	yes
+Basalt	block (m)	Basaltu	basalt			to check in INFCOR	proposal	yes
+Obsidian	block (f)	Ossidiana	ossidian			to check in INFCOR	proposal	yes
+Sandstone	block (f)	Arenaria	arenari	Petra di rena		Corsu	proposal	yes
+Blackstone	block (f)	Petranera	petranera			Corsu	proposal	yes
+Prismarine	block (f)	Prismarina	prismarin			Corsu	proposal	yes
+Purpur	block	Purpur				Mojang	name	no
+Netherrack	block (f)	Petra di u Nether				Corsu	proposal	no
+Glowstone	block (f)	Petra luminosa				Corsu	proposal	no
+Dripstone	block	Stillicciu	stillicci	Concrezione		Corsu (stillà = to drip)	proposal	yes
+Sculk	block	Sculk				Mojang	name	yes
+Resin	material (f)	Resina	resin			to check in INFCOR	proposal	yes
+Coral	block (m)	Curallu	curall			to check in INFCOR	proposal	yes
+Coral Fan	coral (f)	Ventaglia di curallu	ventagli			Corsu	proposal	no
+Sponge	block (f)	Sponga	spong			to check in INFCOR	proposal	yes
+Bedrock	block (m)	Basamentu	basament	Bedrock		Corsu (Italian MC: substrato)	proposal	no
+Lava	fluid (f)	Lava				to check in INFCOR	proposal	yes
+Water	fluid (f)	Acqua	acqu			to check in INFCOR	proposal	yes
+Magma	block (m)	Magma				to check in INFCOR	proposal	no
+Cobweb	block (f)	Tela di ragnu	ragnaghj	Ragnaghju		to check in INFCOR	proposal	yes
+Ladder	block (f)	Scala di manu	scala			Corsu	proposal	yes
+Torch	block (f)	Torcia	torci	Fiaccula		to check in INFCOR	proposal	yes
+Lantern	block (f)	Lanterna	lantern			to check in INFCOR	proposal	yes
+Candle	block (f)	Candela	candel			to check in INFCOR	proposal	yes
+Campfire	block (m)	Fucone	fucon			to check in to check in INFCOR (fucone = foyer)	proposal	yes
+Chest	container (f)	Cascia	casci			to check in INFCOR	proposal	yes
+Barrel	container (m)	Barile	baril			to check in INFCOR	proposal	yes
+Shulker Box	container (f)	Scatula di Shulker			Scatula di shulker (creature names keep their capital)	Corsu	proposal	no
+Furnace	block (m)	Fornu	forn			to check in INFCOR	proposal	yes
+Blast Furnace	block (m)	Altofornu	altoforn			Corsu	proposal	no
+Smoker	block (m)	Affumicatore	affumicator			Corsu	proposal	yes
+Crafting Table	block (m)	Bancu di fabbricazione	bancu di fabbricazione			Corsu	proposal	no
+Crafter	block (m)	Fabbricadore	fabbricador			Corsu	proposal	yes
+Anvil	block (f)	Ancùdina	ancudin			to check in INFCOR	proposal	yes
+Grindstone	block (f)	Mola	mol			to check in INFCOR	proposal	yes
+Smithing Table	block (m)	Bancu di ferraghju				Corsu	proposal	no
+Stonecutter	block (m)	Tagliapetra	tagliapetr			Corsu	proposal	yes
+Loom	block (m)	Telaghju	telaghj			to check in INFCOR	proposal	yes
+Cartography Table	block (m)	Bancu di cartugrafia				Corsu	proposal	no
+Fletching Table	block (m)	Bancu di frecciaghju				Corsu	proposal	no
+Brewing Stand	block (m)	Lambiccu	lambicc	Alambiccu		Corsu	proposal	yes
+Cauldron	block (m)	Paghjolu	paghjol	Caldaia		to check in INFCOR	proposal	yes
+Enchanting Table	block (m)	Bancu d'incantesimi				Corsu	proposal	no
+Bookshelf	block (m)	Scaffale di libri				Corsu	proposal	no
+Lectern	block (m)	Leghju	leghj			Corsu	proposal	yes
+Composter	block (m)	Cumpustatore	cumpustator			Corsu	proposal	yes
+Beehive	block (m)	Bugnu	bugn			to check in INFCOR	proposal	yes
+Bee Nest	block (m)	Nidu d'ape				Corsu	proposal	no
+Honeycomb	item (m)	Favu	fav			to check in INFCOR	proposal	yes
+Honey	food (m)	Mele	mel			to check in INFCOR	proposal	yes
+Bell	block (f)	Campana	campan			to check in INFCOR	proposal	yes
+Jukebox	block	Ghjiradischi	ghjiradischi	Jukebox		Corsu	proposal	yes
+Note Block	block (m)	Bloccu musicale				Corsu	proposal	no
+Piston	block (m)	Pistone	piston			to check in INFCOR	proposal	yes
+Sticky Piston	block (m)	Pistone appiccicosu				Corsu	proposal	no
+Observer	block (m)	Osservatore	osservator			Corsu	proposal	yes
+Dispenser	block (m)	Distributore	distributor			Corsu	proposal	yes
+Dropper	block (m)	Lampatore	lampator		Espulsore	Corsu (lampà = to throw)	proposal	yes
+Hopper	block (f)	Tramoghja	tramoghj			to check in INFCOR	proposal	yes
+Comparator	redstone (m)	Paragunatore	paragunator			Corsu	proposal	yes
+Repeater	redstone (m)	Ripetitore	ripetitor			Corsu	proposal	yes
+Lever	block (f)	Leva	lev			to check in INFCOR	proposal	yes
+Rail	block (m)	Binariu	binari	Rotaia		to check in INFCOR	proposal	yes
+Minecart	vehicle (m)	Carrettu	carrett	Vagunettu		Corsu	proposal	yes
+Boat	vehicle (f)	Barca	barc			to check in INFCOR	proposal	yes
+Raft	vehicle (f)	Zatta	zatt			to check in INFCOR	proposal	yes
+Beacon	block (m)	Faru	far	Fanale		to check in INFCOR	proposal	yes
+Conduit	block (m)	Cundottu	cundott			Corsu	proposal	yes
+Spawner	block (m)	Generatore	generator			Corsu	proposal	yes
+Command Block	block (m)	Bloccu di cumanda			Bloccu di cumandu	Corsu, after Command|Cumanda (lexicon-upstream)	proposal	no
+Structure Block	block (m)	Bloccu di struttura				Corsu	proposal	no
+Jigsaw Block	block (m)	Bloccu puzzle				Corsu	proposal	no
+Barrier	block (f)	Barriera	barrier			to check in INFCOR	proposal	yes
+Scaffolding	block (m)	Ponte	pont	Impalcatura		to check in to check in INFCOR (ponte = échafaudage)	proposal	yes
+Vault	block (f)	Cassaforte	cassafort			Corsu	proposal	yes
+Lodestone	block (f)	Calamita	calamit			to check in INFCOR	proposal	yes
+Respawn Anchor	block (f)	Ancura di rinascita				Corsu	proposal	no
+Banner	block (m)	Stendardu	stendard	Bandera		to check in INFCOR	proposal	yes
+Bed	block (m)	Lettu	lett			to check in INFCOR	proposal	yes
+Head	mob head (m)	Capu	cap			to check in INFCOR	proposal	yes
+Skull	mob head (m)	Cranu	cran			to check in INFCOR	proposal	yes
+Pottery Sherd	item (m)	Cocciu di vasu	cocci			Corsu	proposal	yes
+Decorated Pot	block (m)	Vasu decuratu	vas			Corsu	proposal	no
+Flower Pot	block (m)	Vasu di fiori				Corsu	proposal	no
+Potted	plant in a pot	in vasu	vasu			Corsu	proposal	yes
+Shelf	block (m)	Scaffale	scaffal			to check in INFCOR	proposal	yes
+# Plants and biomes
+Oak	tree (f)	Quercia	querci			to check in INFCOR	proposal	yes
+Dark Oak	tree (f)	Quercia scura				Corsu	proposal	no
+Pale Oak	tree (f)	Quercia pallida				Corsu	proposal	no
+Spruce	tree (m)	Abete	abet			to check in INFCOR	proposal	yes
+Birch	tree (f)	Betula	betul			to check in INFCOR	proposal	yes
+Jungle	biome / tree (f)	Giungla	giungl			to check in INFCOR	proposal	yes
+Acacia	tree (f)	Acacia	acaci			to check in INFCOR	proposal	yes
+Mangrove	tree (f)	Mangrovia	mangrovi			Corsu	proposal	yes
+Cherry	tree (m)	Cirasgiu	cirasg	Ciliegiu		to check in INFCOR	proposal	yes
+Bamboo	plant (m)	Bambù	bambù			to check in INFCOR	proposal	yes
+Crimson	nether wood	Cremisi	cremisi			Corsu	proposal	yes
+Warped	nether wood	Distortu	distort			Corsu	proposal	yes
+Poplar	tree (m)	Piobbu	piobb	Pioppu		to check in INFCOR	proposal	yes
+Azalea	plant (f)	Azalea	azale			Corsu	proposal	yes
+Mushroom	plant (m)	Fungu	fung			to check in INFCOR	proposal	yes
+Fungus	nether plant (m)	Fungu	fung			to check in INFCOR	proposal	yes
+Fern	plant (f)	Filetta	filett			to check in INFCOR	proposal	yes
+Vines	plant (f pl)	Liane	lian			Corsu	proposal	yes
+Kelp	plant (f)	Alga	alg			to check in INFCOR	proposal	yes
+Seagrass	plant (f)	Erba marina				Corsu	proposal	no
+Flower	plant (m)	Fiore	fior/fiur			to check in INFCOR	proposal	yes
+Poppy	flower (m)	Pàparu	paparu	Rosula salvatica		to check in INFCOR	proposal	yes
+Dandelion	flower (m)	Pisciacane	pisciacan	Cicoria salvatica		to check in INFCOR	proposal	yes
+Tulip	flower (m)	Tulipanu	tulipan			to check in INFCOR	proposal	yes
+Sunflower	flower (m)	Girasole	girasol			to check in INFCOR	proposal	yes
+Cactus	plant (m)	Cactus				to check in INFCOR	proposal	yes
+Melon	fruit (f)	Pateca	patec			to check in to check in INFCOR (pateca = pastèque)	proposal	yes
+Pumpkin	fruit (f)	Zucca	zucc			to check in INFCOR	proposal	yes
+Wheat	crop (m)	Granu	gran			to check in INFCOR	proposal	yes
+Carrot	crop (f)	Carotta	carott			to check in INFCOR	proposal	yes
+Potato	crop (f)	Patata	patat	Pomu di terra		to check in INFCOR	proposal	yes
+Beetroot	crop (f)	Barbabietula	barbabietul			Corsu	proposal	yes
+Apple	fruit (f)	Mela	mel	Pomu		to check in INFCOR	proposal	yes
+Sweet Berries	food (f pl)	Baghe dolci			Baghe dolce (dolce is singular)	Corsu	proposal	no
+Sugar Cane	plant (f)	Canna da zuccheru				Corsu	proposal	no
+Biome	world region (m)	Biomu	biom			Corsu	proposal	yes
+Forest	biome (f)	Furesta	furest	Foresta		to check in INFCOR	proposal	yes
+Plains	biome (f pl)	Piane	pian	Pianura		to check in INFCOR	proposal	yes
+Desert	biome (m)	Desertu	desert			to check in INFCOR	proposal	yes
+Swamp	biome (m)	Padule	padul			to check in INFCOR	proposal	yes
+Ocean	biome (m)	Oceanu	ocean			to check in INFCOR	proposal	yes
+River	biome (m)	Fiume	fium			to check in INFCOR	proposal	yes
+Beach	biome (f)	Piaghja	piaghj			to check in INFCOR	proposal	yes
+Badlands	biome (f pl)	Calanche	calanch			Corsu (Italian MC: Calanchi)	proposal	yes
+Savanna	biome (f)	Savana	savan			to check in INFCOR	proposal	yes
+Taiga	biome (f)	Taiga				Corsu	proposal	no
+Cave	natural cavity (f)	Grotta	grott	Tafonu		to check in INFCOR	proposal	yes
+Mountain	terrain (f)	Muntagna	muntagn			to check in INFCOR	proposal	no
+Peaks	biome (m pl)	Pinzi	pinz	Cime		to check in to check in INFCOR (pinzu = sommet)	proposal	yes
+Meadow	biome (m)	Pratu	prat			to check in INFCOR	proposal	yes
+Village	structure (m)	Paese	paes			to check in INFCOR	proposal	yes
+Mineshaft	structure (f)	Galleria di minera				Corsu	proposal	no
+# Items, tools, armour, food
+Item	game object (m)	Ogettu	ogett/curnic	Oggettu	Elementu (UI element)	Corsu	proposal	yes
+Tool	equipment (m)	Attrezzu	attrezz			to check in INFCOR	proposal	yes
+Sword	weapon (f)	Spada	spad			to check in INFCOR	proposal	yes
+Pickaxe	tool (m)	Piccone	piccon			to check in INFCOR	proposal	yes
+Shovel	tool (f)	Pala	pal			to check in INFCOR	proposal	yes
+Axe	tool (f)	Accetta	accett	Scure		to check in INFCOR	proposal	yes
+Hoe	tool (f)	Zappa	zapp			to check in INFCOR	proposal	yes
+Spear	weapon (f)	Lancia	lanci			to check in INFCOR	proposal	yes
+Mace	weapon (f)	Mazza	mazz			to check in INFCOR	proposal	yes
+Bow	weapon (m)	Arcu	arc			to check in INFCOR	proposal	yes
+Crossbow	weapon (f)	Balestra	balestr			to check in INFCOR	proposal	yes
+Arrow	ammunition (f)	Freccia	frecci			to check in INFCOR	proposal	yes
+Trident	weapon (m)	Tridente	trident			to check in INFCOR	proposal	yes
+Shield	armour (m)	Scudu	scud			to check in INFCOR	proposal	yes
+Armor	protection (f)	Armatura	armatur			to check in INFCOR	proposal	yes
+Helmet	armour (m)	Elmu	elm			to check in INFCOR	proposal	yes
+Chestplate	armour (f)	Curazza	curazz			to check in INFCOR	proposal	yes
+Leggings	armour (m pl)	Gambali	gambal			Corsu	proposal	yes
+Boots	armour (m pl)	Stivali	stival			to check in INFCOR	proposal	yes
+Leather	material (m)	Coghju	coghj			to check in INFCOR	proposal	yes
+Chainmail	armour material (f)	Maglia	magli			to check in INFCOR	proposal	yes
+Elytra	wings (f pl)	Elitre	elitr			Corsu	proposal	yes
+Saddle	equipment (f)	Sella	sell			to check in INFCOR	proposal	yes
+Harness	ghast equipment (f)	Imbracatura	imbracatur			Corsu	proposal	yes
+Lead	rope for mobs (f)	Ligaccia	ligacci	Corda		to check in INFCOR	proposal	yes
+Name Tag	item (f)	Etichetta	etichett			to check in INFCOR	proposal	no
+Bucket	item (f)	Secchja	secchj			to check in INFCOR	proposal	yes
+Bottle	item (f)	Buttiglia	buttigli			to check in INFCOR	proposal	yes
+Bowl	item (f)	Scudella	scudell			to check in INFCOR	proposal	yes
+Stick	item (m)	Bastone	baston			to check in INFCOR	proposal	yes
+String	item (m)	Filu	fil			to check in INFCOR	proposal	yes
+Feather	item (f)	Piuma	pium			to check in INFCOR	proposal	yes
+Flint	item (f)	Petra fucaghja	fucaghj/acciarin			to check in INFCOR	proposal	yes
+Bone	item (m)	Ossu	oss			to check in INFCOR	proposal	yes
+Bone Meal	fertiliser (f)	Farina d'ossu				Corsu	proposal	no
+Gunpowder	item (f)	Polvera	polver			to check in INFCOR	proposal	yes
+Paper	item (f)	Carta	cart			to check in INFCOR	proposal	yes
+Book	item (m)	Libru	libr			to check in INFCOR	proposal	yes
+Map	item (f)	Carta	cart	Mappa		to check in INFCOR	proposal	yes
+Compass	item (f)	Bussula	bussul			to check in INFCOR	proposal	yes
+Clock	item (m)	Orologhju	orologhj			to check in INFCOR	proposal	yes
+Spyglass	item (m)	Cannuchjale	cannuchjal			to check in INFCOR	proposal	yes
+Shears	tool (f pl)	Forbice	forbic			to check in INFCOR	proposal	yes
+Brush	tool (m)	Pinnellu	pinnell	Spazzula		to check in INFCOR	proposal	yes
+Fishing Rod	tool (f)	Canna di pesca				to check in INFCOR	proposal	no
+Bundle	container (m)	Sacchettu	sacchett			Corsu	proposal	yes
+Dye	item (f)	Tintura	tintur			to check in INFCOR	proposal	yes
+Potion	item (f)	Pozione	pozion			Corsu	proposal	yes
+Splash Potion	thrown potion (f)	Pozione da lampà				Corsu	proposal	no
+Lingering Potion	cloud potion (f)	Pozione persistente				Corsu	proposal	no
+Firework Rocket	item (m)	Razzu di focu d'artifiziu	razz			Corsu	proposal	no
+Totem of Undying	item (m)	Totem di l'immurtalità				Corsu	proposal	no
+Ender Pearl	item (f)	Perla di l'Ender				Corsu	proposal	no
+Eye of Ender	item (m)	Ochju di l'Ender				Corsu	proposal	no
+Wind Charge	item (f)	Carica di ventu				Corsu	proposal	no
+Fireball	projectile (f)	Palla di focu				Corsu	proposal	no
+Snowball	item (f)	Palla di neve				Corsu	proposal	no
+Egg	item (m)	Ovu	ov			to check in INFCOR	proposal	yes
+Spawn Egg	creative item (m)	Ovu generatore	ovu generator			Corsu	proposal	no
+Bread	food (m)	Pane	pan			to check in INFCOR	proposal	yes
+Cake	food (f)	Torta	tort			to check in INFCOR	proposal	yes
+Cookie	food (m)	Biscottu	biscott			to check in INFCOR	proposal	yes
+Stew	food (m)	Stufatu	stufat			to check in INFCOR	proposal	yes
+Steak	food (f)	Bistecca	bistecc			to check in INFCOR	proposal	yes
+Beef	food (m)	Manzu	manz			to check in INFCOR	proposal	yes
+Porkchop	food (f)	Custuletta di porcu	custulett			Corsu	proposal	no
+Mutton	food (m)	Castratu	castrat			to check in INFCOR	proposal	yes
+Milk	food (m)	Latte	latt			to check in INFCOR	proposal	yes
+Sugar	food (m)	Zuccheru	zuccher			to check in INFCOR	proposal	yes
+Cooked	food	Cottu	cott			to check in INFCOR	proposal	no
+Music Disc	item (m)	Discu musicale				Corsu	proposal	no
+Painting	decoration (m)	Quadru	quadr			to check in INFCOR	proposal	yes
+Item Frame	decoration (f)	Curnice	curnic			to check in INFCOR	proposal	yes
+Smithing Template	item (m)	Mudellu di forgia	mudell			Corsu	proposal	no
+Armor Trim	decoration (f)	Rifinitura d'armatura	rifinitur			Corsu	proposal	no
+# Effects and enchantments
+Effect	status effect (m)	Effettu	effett			to check in INFCOR	proposal	yes
+Enchantment	magic property (m)	Incantesimu	incantesim	Incantu		to check in INFCOR	proposal	yes
+Enchanted	adjective	Incantatu	incantat			to check in INFCOR	proposal	yes
+Curse	bad enchantment (f)	Malidizzione	malidizzion			to check in INFCOR	proposal	yes
+Speed	effect (f)	Velocità	velocit	Vitezza		to check in INFCOR	proposal	no
+Slowness	effect (f)	Lentezza	lentezz			to check in INFCOR	proposal	yes
+Haste	effect (f)	Prestezza	prestezz			Corsu	proposal	yes
+Mining Fatigue	effect (f)	Fatica di scavu				Corsu	proposal	no
+Strength	effect (f)	Forza	forz			to check in INFCOR	proposal	no
+Instant Health	effect (f)	Salute immediata				Corsu	proposal	no
+Instant Damage	effect (m)	Danni immediati				Corsu	proposal	no
+Jump Boost	effect (m)	Saltu putenziatu				Corsu	proposal	no
+Nausea	effect (f)	Nausea				to check in INFCOR	proposal	yes
+Regeneration	effect (f)	Rigenerazione	rigenerazion			Corsu	proposal	yes
+Resistance	effect (f)	Resistenza	resistenz			to check in INFCOR	proposal	no
+Fire Resistance	effect (f)	Resistenza à u focu				Corsu	proposal	no
+Water Breathing	effect (f)	Respirazione in acqua				Corsu	proposal	no
+Invisibility	effect (f)	Invisibilità	invisibilit			to check in INFCOR	proposal	yes
+Blindness	effect (f)	Cicità	cicit			to check in INFCOR	proposal	yes
+Night Vision	effect (f)	Vista nutturna				Corsu	proposal	no
+Weakness	effect (f)	Debulezza	debulezz			to check in INFCOR	proposal	yes
+Poison	effect (m)	Velenu	velen			to check in INFCOR	proposal	yes
+Wither	effect / boss	Wither				Mojang	name	no
+Absorption	effect (m)	Assurbimentu	assurbiment			Corsu	proposal	yes
+Saturation	effect (f)	Saturazione	saturazion			lexicon-upstream	practice	yes
+Glowing	effect (f)	Luminiscenza	luminiscenz			Corsu	proposal	no
+Levitation	effect (f)	Levitazione	levitazion			Corsu	proposal	yes
+Luck	effect (f)	Furtuna	furtun			to check in INFCOR	proposal	yes
+Bad Luck	effect (f)	Sfurtuna				to check in INFCOR	proposal	no
+Slow Falling	effect (f)	Cascata lenta				Corsu	proposal	no
+Darkness	effect (m)	Bughju	bughj			to check in INFCOR	proposal	yes
+Bad Omen	effect (m)	Malu presagiu				Corsu	proposal	no
+Raid	village attack (f)	Incursione	incursion			Corsu	proposal	yes
+Protection	enchantment (f)	Prutezzione	prutezzion			to check in INFCOR	proposal	yes
+Sharpness	enchantment (m)	Filu	fil	Taglientezza		Corsu	proposal	no
+Efficiency	enchantment (f)	Efficacità	efficacit			to check in INFCOR	proposal	yes
+Unbreaking	enchantment (f)	Sulidità	sulidit			Corsu	proposal	no
+Fortune	enchantment (f)	Furtuna	furtun			to check in INFCOR	proposal	yes
+Silk Touch	enchantment (m)	Toccu di seta				Corsu	proposal	no
+Mending	enchantment (m)	Rapezzu	rapezz			Corsu (rapezzà = to mend)	proposal	no
+Infinity	enchantment (m)	Infinitu	infinit			lexicon-upstream	practice	no
+Looting	enchantment (m)	Bottinu	bottin			to check in INFCOR	proposal	no
+Knockback	enchantment (m)	Rinculu	rincul			Corsu	proposal	no
+Thorns	enchantment (f pl)	Spine	spin			to check in INFCOR	proposal	no
+# Generic
+Spawn	to appear / be generated	Apparisce	appar			Corsu	proposal	no
+Craft	to make	Fabbricà	fabbric			to check in INFCOR	proposal	no
+Mine	to dig blocks	Scavà	scav			to check in INFCOR	proposal	no
+Enchant	verb	Incantà	incant			to check in INFCOR	proposal	no
+Tame	verb	Addumisticà	addumestic	Addumà		Corsu	proposal	no
+Breed	verb	Fà ripruduce	ripruduc			Corsu	proposal	no
+Brew	potions	Distillà	distill			Corsu	proposal	no
+Trade	villager trading	Scambià	scambi			to check in INFCOR	proposal	no
+Damage	health loss (m pl)	Danni	dann			to check in INFCOR	proposal	no
+Durability	item wear (f)	Durabilità	durabilit			Corsu	proposal	no
+Entity	game object (f)	Entità	entit			Corsu	proposal	yes
+Dimension	world (f)	Dimensione	dimension			to check in INFCOR	proposal	yes
+Structure	generated building (f)	Struttura	struttur			to check in INFCOR	proposal	yes
+Ancient City	structure (f)	Cità antica				Corsu	proposal	no
+Trial Chambers	structure (f pl)	Camere di prova				Corsu	proposal	no
+Stronghold	structure (f)	Furtezza	furtezz			Corsu	proposal	no
+Fortress	nether structure (f)	Furtezza	furtezz			to check in INFCOR	proposal	no
+# Added by the consistency pass (October 2026): coined terms and harmonisation decisions, see decisions.md
+Command	computer/chat command (f)	Cumanda	cumand/cmd		Cumandu (m)	lexicon-upstream	practice	yes
+Bush	plant block (m)	Arbustu	arbust		Machja (the maquis)	Corsu (coined)	proposal	no
+Dead Bush	plant block (m)	Arbustu seccu				Corsu (coined)	proposal	no
+Stem	plant and Nether stem (m)	Fustu	fust		Gambu	Corsu (coined)	proposal	yes
+Dripleaf	plant block (f)	Foglia à goccia	foglia à goccia		Foglia stillante, Fogliastizza	Corsu (coined)	proposal	no
+Copper Bulb	redstone lamp block (f)	Lampadina di ramu	lampadin		Lampa, Lampada (Lampada is Redstone Lamp)	Corsu (coined)	proposal	no
+Froglight	light block (m)	Granochjalume	granochjalum		Lume di granochja	Corsu (coined)	proposal	yes
+Shroomlight	light block (m)	Fungulume	fungulum			Corsu (coined)	proposal	no
+Ominous	adjective (Ominous Bottle, Banner, Trial Key, Vault)	funestu	funest		minacciosu, di malu presagiu	Corsu (coined)	proposal	no
+Wall (sign, torch, head, fan)	wall-mounted variant, right after the head noun	murale	murale		X di Y murale, à u muru	Corsu (coined)	proposal	no
+Sculk Sensor	block (m)	Sensore di sculk	sensore di sculk		Captore di sculk	Corsu (coined)	proposal	no
+Sculk Catalyst	block (m)	Catalizatore di sculk	catalizatore		Catalizadore	Corsu (coined)	proposal	no
+Sculk Shrieker	block (m)	Urladore di sculk	urladore		Urlatore, sculk urlatore	Corsu (coined)	proposal	no
+Zombified	Zombified Piglin	zumbificatu	zumbificat		zombificatu	Corsu (coined)	proposal	no
+Amethyst Bud	block (f); chjuca/mezana/grande	Gemma d'ametista	gemma		Germogliu (used for Shoot/Sprouts)	Corsu (coined)	proposal	no
+Amethyst Cluster	block (m)	Grappulu d'ametista				Corsu (coined)	proposal	no
+Budding Amethyst	block (f)	Ametista in crescita				Corsu (coined)	proposal	no
+Bars	Iron/Copper Bars (f pl)	Sbarre	sbarr		Barre	Corsu (coined)	proposal	no
+Grate	copper block (f)	Grata	grat			Corsu (coined)	proposal	no
+Chain	block (f)	Catena	caten			Corsu (coined)	proposal	no
+Lightning Rod	block (m)	Parafulmine	parafulmin			Corsu (coined)	proposal	no
+Copper Golem Statue	block (f)	Statua di golem di ramu				Corsu (coined)	proposal	no
+Nylium	Nether block (m)	Niliu	niliu		Nylium	Corsu (coined)	proposal	no
+Hyphae	Nether wood (f pl)	Ife	ife			Corsu (coined)	proposal	no
+Roots	plant (f pl)	Radiche	radich			Corsu (coined)	proposal	no
+Nether Wart	plant (f)	Verruca di u Nether	verruc			Corsu (coined)	proposal	no
+Sprouts	Nether plant (m pl)	Germogli	germogli			Corsu (coined)	proposal	no
+Mycelium	block (m)	Miceliu				Corsu (coined)	proposal	no
+Propagule	mangrove (m)	Propagulu				Corsu (coined)	proposal	no
+Cinnabar	stone (m)	Cinabru	cinabr			Corsu (coined)	proposal	no
+Sulfur	stone and biome (m)	Zolfu	zolf			Corsu (Vikipedia: zolfu)	proposal	no
+Tiles	Deepslate Tiles (f pl)	Piastrelle	piastrell			Corsu (coined)	proposal	no
+Cobbled Deepslate	stone (m)	Petrame d'ardesia prufonda				Corsu (coined)	proposal	no
+Crop	growing plant block (f)	Cultura	cultur			Corsu (coined)	proposal	no
+Torchflower	flower (m)	Fiore torcia				Corsu (coined)	proposal	no
+Pitcher Plant	flower (f)	Pianta à brocca				Corsu (coined)	proposal	no
+Eyeblossom	flower (m); apertu/chjosu	Ochjufiore	ochjufior			Corsu (coined)	proposal	no
+Cornflower	flower (m)	Fiurdalisu			Fiordalisu	Corsu (coined)	proposal	no
+Azure Bluet	flower (f)	Houstonia celeste				Corsu (coined)	proposal	no
+Lily of the Valley	flower (m)	Mughettu				Corsu (Vikipedia: mughettu)	proposal	no
+Shelf Mushroom	block (m)	Fungu à scaffale			Fungu à mensula	Corsu (coined)	proposal	no
+Dead (coral)	adjective	mortu				Corsu (coined)	proposal	no
+Infested	block adjective	infestatu	infestat			Corsu (coined)	proposal	no
+Activator Rail	block (m)	Binariu attivatore				Corsu (coined)	proposal	no
+Detector Rail	block (m)	Binariu rilevatore				Corsu (coined)	proposal	no
+Powered Rail	block (m)	Binariu alimentatu				Corsu (coined)	proposal	no
+Daylight Detector	block (m)	Rilevatore di luce di ghjornu				Corsu (coined)	proposal	no
+Portal	Nether/End Portal (m)	Portale	portal			Corsu (coined)	proposal	no
+End Gateway	block (m)	Passaghju di l'End	passaghj			Corsu (coined)	proposal	no
+End Rod	block (f)	Bacchetta di l'End				Corsu (coined)	proposal	no
+End Stone	block (f)	Petra di l'End				Corsu (coined)	proposal	no
+Chorus	End plant	chorus				name	name	no
+Hay Bale	block (f)	Balla di fenu				Corsu (coined)	proposal	no
+Gilded	Gilded Blackstone	duratu	durat			Corsu (coined)	proposal	no
+Crying Obsidian	block (f)	Ossidiana chì pienghje				Corsu (coined)	proposal	no
+Jack o'Lantern	block (f)	Lanterna di zucca				Corsu (coined)	proposal	no
+Frosted Ice	block (m)	Ghjacciu brinatu				Corsu (coined)	proposal	no
+Frogspawn	block (f pl)	Ova di granochja				Corsu (coined)	proposal	no
+Dirt Path	block (m)	Chjassu di terra				Corsu (coined)	proposal	no
+Farmland	block (f)	Terra arata				Corsu (coined)	proposal	no
+Coarse Dirt	block (f)	Terra grussulana				Corsu (coined)	proposal	no
+Chipped / Damaged (anvil)	adjectives (f)	intaccata / dannighjata				Corsu (coined)	proposal	no
+Soul (Soul Sand, Soul Fire…)	complement	di l'anime				Corsu (coined)	proposal	no
+Sea Pickle	block (m)	Cucumaru di mare				Corsu (coined)	proposal	no
+Void	Structure Void, The Void (m)	Viotu	viot			Corsu (coined)	proposal	no
+Tripwire	block (m)	Filu d'inciampu	filu d'inciamp		Filu di scattu	Corsu (coined)	proposal	no
+Tinted Glass	block (m)	Vetru scuru			Vetru tintu (= Stained Glass)	Corsu (coined)	proposal	no
+Test Block	block (m)	Bloccu di prova				Corsu (coined)	proposal	no
+Twisting Vines	plant (f pl)	Liane torte				Corsu (coined)	proposal	no
+Weeping Vines	plant (f pl)	Liane pendenti			Liane pendente, liane pienghjulente	Corsu (coined)	proposal	no
+Trial Spawner	block (m)	Generatore di prova				Corsu (coined)	proposal	no
+Target	block (m)	Bersagliu				Corsu (coined)	proposal	no
+Banner Pattern	item (m); X Banner Pattern = Motivu di stendardu : x	Motivu di stendardu	motiv		Mudellu (= Smithing Template)	Corsu (coined)	proposal	no
+Bordure	banner pattern (heraldry)	Bordu				Corsu (coined, after Italian heraldry)	proposal	no
+Bordure Indented	banner pattern (heraldry)	Bordu dentatu				Corsu (coined, after Italian heraldry)	proposal	no
+Field	banner pattern (heraldry)	Campu				Corsu (coined, after Italian heraldry)	proposal	no
+Field Masoned	banner pattern (heraldry)	Campu muratu				Corsu (coined, after Italian heraldry)	proposal	no
+Roundel	banner pattern (heraldry)	Tondu				Corsu (coined, after Italian heraldry)	proposal	no
+Creeper Charge	banner pattern (heraldry)	Faccia di Creeper				Corsu (coined, after Italian heraldry)	proposal	no
+Saltire	banner pattern (heraldry)	Croce di Sant'Andria				Corsu (coined, after Italian heraldry)	proposal	no
+Cross	banner pattern (heraldry)	Croce				Corsu (coined, after Italian heraldry)	proposal	no
+Per Bend	banner pattern (heraldry)	Trinciatu				Corsu (coined, after Italian heraldry)	proposal	no
+Per Bend Sinister	banner pattern (heraldry)	Tagliatu				Corsu (coined, after Italian heraldry)	proposal	no
+Per Fess	banner pattern (heraldry)	Troncatu				Corsu (coined, after Italian heraldry)	proposal	no
+Per Pale	banner pattern (heraldry)	Partitu				Corsu (coined, after Italian heraldry)	proposal	no
+Inverted	banner pattern (heraldry)	inversu				Corsu (coined, after Italian heraldry)	proposal	no
+Flow	banner pattern (heraldry)	Vortice				Corsu (coined, after Italian heraldry)	proposal	no
+Guster	banner pattern (heraldry)	Raffica				Corsu (coined, after Italian heraldry)	proposal	no
+Gradient	banner pattern (heraldry)	Sgradatu				Corsu (coined, after Italian heraldry)	proposal	no
+Thing	banner pattern (heraldry)	Cosa				Corsu (coined, after Italian heraldry)	proposal	no
+Snout	banner pattern (heraldry)	Grugnu				Corsu (coined, after Italian heraldry)	proposal	no
+Lozenge	banner pattern (heraldry)	Rombu				Corsu (coined, after Italian heraldry)	proposal	no
+Paly	banner pattern (heraldry)	Palatu				Corsu (coined, after Italian heraldry)	proposal	no
+Pale	banner pattern (heraldry)	Palu				Corsu (coined, after Italian heraldry)	proposal	no
+Fess	banner pattern (heraldry)	Fascia				Corsu (coined, after Italian heraldry)	proposal	no
+Bend	banner pattern (heraldry)	Banda				Corsu (coined, after Italian heraldry)	proposal	no
+Bend Sinister	banner pattern (heraldry)	Sbarra				Corsu (coined, after Italian heraldry)	proposal	no
+Canton	banner pattern (heraldry)	Cantone				Corsu (coined, after Italian heraldry)	proposal	no
+Chevron	banner pattern (heraldry)	Triangulu				Corsu (coined, after Italian heraldry)	proposal	no
+Indented (Base/Chief)	banner pattern (heraldry)	Denti				Corsu (coined, after Italian heraldry)	proposal	no
+Chief / Base	banner pattern (heraldry)	in capu / in punta				Corsu (coined, after Italian heraldry)	proposal	no
+Dexter / Sinister	banner pattern (heraldry)	à diritta / à manca				Corsu (coined, after Italian heraldry)	proposal	no
+Pottery Sherd names	Cocciu di vasu di/d' + noun, no article	Cocciu di vasu d'arcere, di piscadore…				Corsu (coined)	proposal	no
+Bolt	armor trim pattern	Bullone				Corsu (coined)	proposal	no
+Coast	armor trim pattern	Costa				Corsu (coined)	proposal	no
+Dune	armor trim pattern	Duna				Corsu (coined)	proposal	no
+Eye	armor trim pattern	Ochju				Corsu (coined)	proposal	no
+Host	armor trim pattern	Ospite				Corsu (coined)	proposal	no
+Raiser	armor trim pattern	Allevadore				Corsu (coined)	proposal	no
+Rib	armor trim pattern	Costula				Corsu (coined)	proposal	no
+Sentry	armor trim pattern	Sentinella				Corsu (coined)	proposal	no
+Shaper	armor trim pattern	Mudellatore				Corsu (coined)	proposal	no
+Silence	armor trim pattern	Silenziu				Corsu (coined)	proposal	no
+Spire	armor trim pattern	Guglia				Corsu (coined)	proposal	no
+Tide	armor trim pattern	Marea				Corsu (coined)	proposal	no
+Ward	armor trim pattern	Guardia				Corsu (coined)	proposal	no
+Wayfinder	armor trim pattern	Guida				Corsu (coined)	proposal	no
+Wild	armor trim pattern	Salvaticu				Corsu (coined)	proposal	no
+Trim Material	Materiale : x	Materiale				Corsu (coined)	proposal	no
+Seeds	item (f pl)	Sementi	sementi			Corsu (coined)	proposal	no
+Camp (map)	explorer map (m)	Accampamentu				Corsu (coined)	proposal	no
+Explorer Map	item (f)	Carta d'esplorazione				Corsu (coined)	proposal	no
+Buried	map adjective	sepoltu	sepolt			Corsu (coined)	proposal	no
+Shard	Amethyst/Echo/Prismarine Shard (f)	Scheggia	schegg			Corsu (coined)	proposal	no
+Ink Sac	item (f)	Bursa d'inchjostru	bursa		Sacca d'inchjostru, Sacchettu (= Bundle)	Corsu (coined)	proposal	no
+Flint and Steel	item (m)	Acciarinu	acciarin			Corsu (Vikipedia: acciarinu)	proposal	no
+Debug Stick	item (m)	Bastone di spannatura				Corsu (coined)	proposal	no
+Turtle Shell	helmet (f)	Scorza di tartaruga			Carapace	Corsu (coined)	proposal	no
+Nautilus	mob (m)	Nautilu	nautil			Corsu (coined)	proposal	no
+Netherite Upgrade	smithing (m)	Migliuramentu in netherite				Corsu (coined)	proposal	no
+Healing (potion)	potion	di cura				Corsu (coined)	proposal	no
+Mundane / Awkward / Thick (potion)	adjectives (f)	banale / strana / spessa				Corsu (coined)	proposal	no
+Tipped Arrow	item (f)	Freccia à effettu				Corsu (coined)	proposal	no
+Bottle o' Enchanting	item (f)	Buttiglia d'incantesimu				Corsu (coined)	proposal	no
+Lodestone Compass	item (f)	Bussula calamitata			Bussula di calamita	Corsu (coined)	proposal	no
+Leather Cap / Tunic / Pants	armour	Berrettu / Tunica / Calzoni di coghju				Corsu (coined)	proposal	no
+Goat Horn sounds	instrument names	Ammirazione, Chjama, Sognu, Sintimentu, Riflessione, Ricerca, Cantu, Brama				Corsu (coined)	proposal	no
+Firework Star shapes	item tooltip	Scoppiu, Palla grossa, Palla chjuca, In forma di stella, In forma di Creeper				Corsu (coined)	proposal	no
+Wolf Armor	item (f)	Armatura per lupu			Armatura di lupu	Corsu (coined)	proposal	no
+Fishing Bobber	entity (m)	Galleghjante di pesca	galleghjant			Corsu (coined)	proposal	no
+Breath of the Nautilus	effect	Fiatu di u nautilu				Corsu (coined)	proposal	no
+Conduit Power	effect	Putenza di u cundottu				Corsu (coined)	proposal	no
+Dolphin's Grace	effect	Grazia di u delfinu				Corsu (coined)	proposal	no
+Health Boost	effect	Rinforzu di salute				Corsu (coined)	proposal	no
+Hero of the Village	effect	Eroe di u paese				Corsu (coined)	proposal	no
+Oozing	effect	Viscosità				Corsu (coined)	proposal	no
+Raid Omen	effect	Presagiu d'incursione				Corsu (coined)	proposal	no
+Trial Omen	effect	Presagiu di prova				Corsu (coined)	proposal	no
+Weaving	effect	Tessitura				Corsu (coined)	proposal	no
+Wind Charged	effect	Carica di ventu				Corsu (coined)	proposal	no
+Aqua Affinity	enchantment	Affinità acquatica				Corsu (coined)	proposal	no
+Bane of Arthropods	enchantment	Flagellu di l'artropodi				Corsu (coined)	proposal	no
+Curse of Binding	enchantment	Malidizzione di u ligame				Corsu (coined)	proposal	no
+Blast Protection	enchantment	Prutezzione da e splusioni				Corsu (coined)	proposal	no
+Breach	enchantment	Breccia				Corsu (coined)	proposal	no
+Channeling	enchantment	Canalizazione				Corsu (coined)	proposal	no
+Density	enchantment	Densità				Corsu (coined)	proposal	no
+Depth Strider	enchantment	Passu di l'abissi				Corsu (coined)	proposal	no
+Feather Falling	enchantment	Cascata di piuma				Corsu (coined)	proposal	no
+Fire Aspect	enchantment	Aura di focu				Corsu (coined)	proposal	no
+Fire Protection	enchantment	Prutezzione da u focu				Corsu (coined)	proposal	no
+Flame	enchantment	Fiamma				Corsu (coined)	proposal	no
+Frost Walker	enchantment	Passu di ghjacciu				Corsu (coined)	proposal	no
+Impaling	enchantment	Impalamentu				Corsu (coined)	proposal	no
+Loyalty	enchantment	Lealtà				Corsu (coined)	proposal	no
+Luck of the Sea	enchantment	Furtuna di u mare				Corsu (coined)	proposal	no
+Lunge	enchantment	Slanciu				Corsu (coined)	proposal	no
+Lure	enchantment	Esca				Corsu (coined)	proposal	no
+Multishot	enchantment	Tiru multiplu				Corsu (coined)	proposal	no
+Piercing	enchantment	Perforazione				Corsu (coined)	proposal	no
+Power	enchantment	Putenza				Corsu (coined)	proposal	no
+Projectile Protection	enchantment	Prutezzione da i prughjettili				Corsu (coined)	proposal	no
+Punch	enchantment	Pugnu				Corsu (coined)	proposal	no
+Quick Charge	enchantment	Carica rapida				Corsu (coined)	proposal	no
+Respiration	enchantment	Respirazione				Corsu (coined)	proposal	no
+Riptide	enchantment	Risacca				Corsu (coined)	proposal	no
+Smite	enchantment	Castigu				Corsu (coined)	proposal	no
+Soul Speed	enchantment	Velocità di l'anime				Corsu (coined)	proposal	no
+Sweeping Edge	enchantment	Lama spazzante				Corsu (coined)	proposal	no
+Swift Sneak	enchantment	Accuvacciata rapida				Corsu (coined)	proposal	no
+Curse of Vanishing	enchantment	Malidizzione di a sparizione				Corsu (coined)	proposal	no
+Wind Burst	enchantment	Raffica di ventu				Corsu (coined)	proposal	no
+Parched	skeleton variant (m)	Scheletru arsu				Corsu (coined)	proposal	no
+Camel Husk	mob (m)	Cammellu seccu				Corsu (coined)	proposal	no
+Dried Ghast	block (m)	Ghast seccu				Corsu (coined)	proposal	no
+Ghastling	mob (m)	Ghastinu				Corsu (coined)	proposal	no
+Snifflet	baby Sniffer (m)	Annusadurellu				Corsu (coined)	proposal	no
+Sulfur Cube	mob (m)	Cubu di zolfu				Corsu (coined)	proposal	no
+Illusioner	mob (m)	Illusiunistu				Corsu (coined)	proposal	no
+Piglin Brute	mob (m)	Piglin brutale				Corsu (coined)	proposal	no
+Copper Golem	mob (m)	Golem di ramu				Corsu (coined)	proposal	no
+Marker	technical entity (m)	Marcadore				Corsu (coined)	proposal	no
+Display (entity)	Block/Item/Text Display (f)	Affissera				Corsu (coined)	proposal	no
+Firefly	insect (f)	Lucciula				Corsu (coined)	proposal	no
+Kitten / Chick / Foal / Wolf pup / Piglet	baby mobs in subtitles	Ghjattinu / Pulcinu / Pullitru / Lupachjolu / Purcellu				Corsu (coined)	proposal	no
+Grove	biome (m)	Buschettu				Corsu (coined)	proposal	no
+Lukewarm	ocean adjective	tepidu				Corsu (coined)	proposal	no
+Dappled	forest adjective	chjazzatu				Corsu (coined)	proposal	no
+Jagged	peaks adjective	dentatu				Corsu (coined)	proposal	no
+Lush	caves adjective	verdi				Corsu (coined)	proposal	no
+Wastes	Nether biome (f pl)	Lande				Corsu (coined)	proposal	no
+Barrens	End biome (f pl)	Terre sterili				Corsu (coined)	proposal	no
+Highlands	End biome (f pl)	Alture				Corsu (coined)	proposal	no
+Snowy	biome adjective	nivosu				Corsu (coined)	proposal	no
+Slopes	biome (m pl)	Pindii				Corsu (coined)	proposal	no
+Shore	biome (f)	Riva				Corsu (coined)	proposal	no
+Windswept	biome adjective	ventosu				Corsu (coined)	proposal	no
+Wooded	biome adjective	buscosu				Corsu (coined)	proposal	no
+Loot	dropped rewards (m)	Bottinu				Corsu (coined)	proposal	no
+NPC	abbreviation	PNG				Corsu (coined)	proposal	no
+Primed TNT	entity (f)	TNT accesa				Corsu (coined)	proposal	no
+Invalid	adjective	inaccettevule				lexicon-mozilla	practice	no
+Selector	entity selector (m)	selettore				lexicon-mozilla	practice	no
+Tag	data tag (f)	etichetta				lexicon-upstream	practice	no
+Scoreboard	commands (f)	tavula di punti				Corsu (coined)	proposal	no
+Objective	scoreboard (m)	ughjettivu				Corsu (coined)	proposal	no
+Score	points (m)	punteghju				Corsu (coined)	proposal	no
+Attribute	entity attribute (m)	attributu				Corsu (coined)	proposal	no
+Modifier	attribute modifier (m)	mudificatore				Corsu (coined)	proposal	no
+Bossbar	commands (f)	barra di boss				Corsu (coined)	proposal	no
+Ban	server ban (f); banned = esclusu	esclusione				Corsu (coined)	proposal	no
+Kick	server (f); kicked = espulsu	espulsione				Corsu (coined)	proposal	no
+Operator	server operator (m)	operatore				Corsu (coined)	proposal	no
+Whitelist	server (f)	lista bianca				Corsu (coined)	proposal	no
+Storage	data storage (m)	allucamentu				lexicon-upstream	practice	no
+Debug	noun (f); debug screen	spannatura				lexicon-mozilla	practice	no
+Loot Table	data (f)	tavula di bottinu				Corsu (coined)	proposal	no
+Force loading	chunks (m)	caricamentu furzatu				Corsu (coined)	proposal	no
+Post effect	shader (m)	effettu visuale				Corsu (coined)	proposal	no
+Feature	world generation (m)	elementu				Corsu (coined)	proposal	no
+Template	structure/world template (m)	mudellu				lexicon-upstream	practice	no
+Jigsaw	Jigsaw Block	puzzle				Corsu (coined)	proposal	no
+Trigger	scoreboard (m)	attivadore				Corsu (coined)	proposal	no
+Stopwatch	commands (m)	cronometru				Corsu (coined)	proposal	no
+Waypoint	locator bar (m)	puntu di riferimentu				Corsu (coined)	proposal	no
+Timeline	commands (f)	linea tempurale				lexicon-upstream	practice	no
+Time marker	commands (m)	marcatore di tempu				Corsu (coined)	proposal	no
+Summon	verb	invucà				Corsu (coined)	proposal	no
+World Border	commands (m)	cunfine di u mondu				Corsu (coined)	proposal	no
+Clipboard	interface (m)	preme'papei				lexicon-mozilla	practice	no
+Hitbox	debug (f)	scatula di collisione				Corsu (coined)	proposal	no
+Advanced tooltips	debug (f pl)	infurmazioni avanzate				Corsu (coined)	proposal	no
+Game Test	commands (f)	prova				Corsu (coined)	proposal	no
+Whisper	verb	bisbiglià				Corsu (coined)	proposal	no
+Report	abuse report (m)	signalamentu				Corsu (coined)	proposal	no
+Draft	unsent message (f)	bruttacopia				lexicon-upstream	practice	no
+Friends List	social (f)	lista d'amichi				Corsu (coined)	proposal	no
+Friend Request	social (f)	dumanda d'amicizia				Corsu (coined)	proposal	no
+Cheats	world option (m pl)	trucchi				Corsu (coined)	proposal	no
+Backup	world backup (f)	salvaguardia				lexicon-upstream	practice	no
+Screenshot	interface (f)	cattura di screnu				lexicon-upstream	practice	no
+Upgrade (world)	verb / noun	mette à livellu / messa à livellu				lexicon-mozilla	practice	no
+Menu	interface (m)	listinu				lexicon-mozilla	practice	no
+Drop (release)	Mojang game drop (f)	edizione				Corsu (coined)	proposal	no
+Preset	interface (f)	prerigatura				lexicon-upstream	practice	no
+Slider	widget (m)	cursore				lexicon-upstream	practice	no
+Edit box	widget (m)	campu di testu				lexicon-mozilla	practice	no
+Keypad	keyboard (f), abbr. tast. num. after the key	tastera numerica				lexicon-upstream	practice	no
+Key	keyboard key (m)	tastu				lexicon-upstream	practice	no
+Key Binds	controls (f)	assignazione di i tasti				Corsu (coined)	proposal	no
+Texture	graphics (f)	testura				Corsu (coined)	proposal	no
+Smooth Lighting	video (f)	illuminazione addulcita				Corsu (coined)	proposal	no
+Clouds	video (m pl)	nivuli				lexicon-upstream	practice	no
+Particles	video (f pl)	particule				Corsu (coined)	proposal	no
+Graphics	video (f)	grafica				Corsu (coined)	proposal	no
+Toast	notification popup (f)	nutificazione				Corsu (coined)	proposal	no
+Telemetry	data (f)	telemetria				lexicon-mozilla	practice	no
+Peer-to-peer	network	da pare à pare				Corsu (coined)	proposal	no
+Pause Menu	interface (m)	listinu di pausa				Corsu (coined)	proposal	no
+Hotkey	interface (m)	accurtatoghju				lexicon-mozilla	practice	no
+Launcher	Minecraft Launcher (m)	lanciadore				lexicon-upstream	practice	no
+Mouse	device (m)	topu				lexicon-upstream	practice	no
+Scroll	verb / noun	sfilà / sfilarata				lexicon-mozilla	practice	no
+Minigame	Realms (m)	minighjocu				Corsu (coined)	proposal	no
+Upload	verb / noun (m)	incaricà / incaricamentu				lexicon-upstream	practice	no
+Download	verb / noun (m)	scaricà / scaricamentu				lexicon-upstream	practice	no
+Reset (world)	Realms verb / noun	reinizià / reiniziu				lexicon-mozilla	practice	no
+Restore	verb / noun	ristabilisce / ristabilimentu				Corsu (coined)	proposal	no
+Downgrade	verb	retrucede				Corsu (coined)	proposal	no
+Invite	noun (m)	invitu				Corsu (coined)	proposal	no
+Join Code	Realms (m)	codice d'accessu				Corsu (coined)	proposal	no
+Subscription	Realms (m)	abbunamentu				lexicon-mozilla	practice	no
+Free Trial	Realms (f)	prova gratisi				Corsu (coined)	proposal	no
+Expired	adjective	scadutu				lexicon-upstream	practice	no
+Owner	Realms (m)	pruprietariu				lexicon-mozilla	practice	no
+Title Screen	main menu (m)	listinu principale				lexicon-mozilla	practice	no
+Update (world/blocks)	game rules (m pl)	rinnovi				lexicon-upstream	practice	no

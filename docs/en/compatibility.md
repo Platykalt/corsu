@@ -13,7 +13,8 @@
 | Discord in a browser | Not supported | Not supported | Not supported |
 | Safari | | Not possible | |
 | Google's buttons and menus (in Firefox Corsu) | Tried by hand | Expected | Tried by hand |
-| KDE Plasma desktop and KDE programs | | | Used daily |
+| KDE Plasma desktop and KDE programs | Not supported | Not supported | Used daily |
+| Minecraft: Java Edition 26.3 (resource pack) | Checked without running the game | Checked without running the game | Checked without running the game |
 | GTK programs and terminal commands | | | Expected |
 
 **Tested** means the CI installs Corsu on that system before every release, starts the program and reads its text
@@ -22,6 +23,11 @@ Discord itself. **Used daily** means a Corsican speaker uses it every day. **Exp
 nobody has checked it on that system yet: please report how it goes. **Not supported** means Corsu does not do it,
 usually because the system prevents it. Safari is part of macOS: Apple protects it and only offers the
 languages of macOS, which does not include Corsican.
+
+KDE Plasma is a Linux desktop. Some KDE programs (Kate, Krita, Okular…) also run on Windows and macOS, but Corsu
+only translates them on Linux. **Checked without running the game** means the translation file is complete and
+Minecraft 26.3's own code reads it and renders every text without error (`tools/minecraft.py verify`), but nobody has
+loaded it in a game yet.
 
 ## Phones
 

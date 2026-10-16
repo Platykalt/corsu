@@ -1,0 +1,9 @@
+Corsu — Minecraft: Java Edition in Corsican (lingua corsa)
+https://github.com/Platykalt/corsu
+
+The Corsican translation in assets/minecraft/lang/co_fr.json is part of Corsu, free software under the GNU General
+Public License, version 3 or (at your option) any later version: https://www.gnu.org/licenses/gpl-3.0.html
+
+This pack contains only Corsu's Corsican texts. Minecraft itself and its English texts belong to Mojang.
+
+NOT AN OFFICIAL MINECRAFT PRODUCT. NOT APPROVED BY OR ASSOCIATED WITH MOJANG OR MICROSOFT.

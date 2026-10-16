@@ -95,29 +95,47 @@ def unmask(template, tokens):
     return TOKEN.sub(lambda match: tokens[int(match.group(1)) - 1], template)
 
 
+WORD = re.compile(r'\w+')
+
+
+def loose_french(english, french, corsican):
+    """True when an imported row's French is much shorter than its English and Corsican.
+
+    Imported rows pair a project's English and French by message id, and some French translations abbreviate:
+    VLC's "Force Profile" is just "Profil" in French, so "Profil" alone would have become "Forzà un Prufilu".
+    The French side of such a row is not used as a source text; the English side still is."""
+    count = lambda text: len(WORD.findall(text))
+    return count(french) <= 3 and count(english) > count(french) and count(corsican) >= count(french) + 2
+
+
 def load_lexicon(path=None):
     """Read `English|French|Corsican` rows into direct and templated lookup tables."""
     words = {}
     paths = [Path(path)] if path else LEXICONS
-    lines = [line for source in paths if source.exists() for line in source.read_text(encoding='utf-8').splitlines()]
-    for number, line in enumerate(lines, 1):
-        if not line.strip() or line.startswith('#'):
+    for source_path in paths:
+        if not source_path.exists():
             continue
-        fields = line.split('|')
-        if len(fields) != 3:
-            raise ValueError(f'{LEXICON}:{number}: expected English|French|Corsican')
-        english, french, corsican = (field.strip() for field in fields)
-        if not corsican:
-            continue
-        for source in (english, french):
-            if not source:
+        imported = source_path in REVIEWED
+        for number, line in enumerate(source_path.read_text(encoding='utf-8').splitlines(), 1):
+            if not line.strip() or line.startswith('#'):
                 continue
-            words.setdefault(normalize(source), corsican)
-            skeleton, tokens = mask(source)
-            if tokens:
-                template = remask(corsican, tokens)
-                if template is not None:
-                    words.setdefault(normalize(skeleton), template)
+            fields = line.split('|')
+            if len(fields) != 3:
+                raise ValueError(f'{source_path}:{number}: expected English|French|Corsican')
+            english, french, corsican = (field.strip() for field in fields)
+            if not corsican:
+                continue
+            if imported and english and french and loose_french(english, french, corsican):
+                french = ''
+            for source in (english, french):
+                if not source:
+                    continue
+                words.setdefault(normalize(source), corsican)
+                skeleton, tokens = mask(source)
+                if tokens:
+                    template = remask(corsican, tokens)
+                    if template is not None:
+                        words.setdefault(normalize(skeleton), template)
     return words
 
 

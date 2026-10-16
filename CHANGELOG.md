@@ -1,5 +1,26 @@
 # Changelog
 
+## 0.22.0 (2026-10-16)
+
+- Minecraft: Java Edition 26.3 in Corsican, as a resource pack adding the language "Corsu (Corsica)": all 8,557
+  texts of the game's language files (menus, options, blocks, items, creatures, biomes, advancements, subtitles,
+  commands, Realms…). `tools/minecraft.py` fetches Mojang's texts, checks every key and argument, renders every
+  string with the game's own code (`verify`), lists what changes between versions (`diff`, `inventory`) and builds
+  `corsu-minecraft-java-26.3.zip`. The texts still need a review by a speaker and a test in the game: see
+  `minecraft/java/STATUS.md`. Glossary, conventions and open questions in `minecraft/java/`.
+- Fixed a family of wrong translations coming from imported projects whose French was shorter than their English:
+  "Profil" showed as "Forzà un Prufilu" (VLC's "Force Profile"), "Actuellement" as "Ripruduzzione in Corsu", "Police :"
+  as "Ozzioni di grafia"… The French side of such rows is no longer used; 92 labels changed.
+- Discord: 110 short labels corrected after a sense review of about 9,900 (wrong sense, verb vs noun on buttons,
+  calques such as "telecaricà" for upload, agreement). Each change, and the 64 less certain suggestions not applied,
+  are listed in `lexicon/corrections.tsv`.
+- README and compatibility pages say exactly which program is translated on which system (Chrome not on macOS, KDE
+  Plasma and the terminal only on Linux, Opera GX experimental), and give the real size of the lexicon.
+- `tools/fetch_resources.py` downloads the reusable Corsican resources (Mozilla terminology and memory, Wiktionary,
+  Vikipedia, Apertium, CLDR, Tatoeba) with date and checksum; `tools/corsican_words.py` looks words up in them.
+  `resources/README.md` lists them, and the dictionaries that can only be consulted by hand.
+- New roadmap: `docs/fr/feuille-de-route.md`, `docs/en/roadmap.md`.
+
 ## 0.21.0 (2026-10-03)
 
 - Nothing else to install: the Windows, macOS and Linux archives carry their own Python (python-build-standalone,
