@@ -19,7 +19,7 @@ person who speaks Corsican checked the sense and the language).
 | Google Chrome (Windows, Linux) | Available | menus and settings | CI | no |
 | Opera GX, Edge, Brave, Vivaldi | Experimental | same mechanism as Chrome | no | no |
 | Terminal commands, GTK programs (Linux) | Experimental | gettext catalogs built from French | no | no |
-| **Minecraft: Java Edition 26.3** | **Under review** | 8,557 / 8,557 texts | Minecraft 26.3's own code reads the pack and renders all 8,559 keys without error | **no**: written by AI, neither reviewed by a speaker nor tried in the game ([status](../../minecraft/java/STATUS.md)) |
+| **Minecraft: Java Edition, 87 versions (1.6.1 → 26.3)** | **Under review**; in the development version, not yet in a published release | complete language files for every listed version ([table](../../minecraft/java/COMPATIBILITY.md)) | each version's own code reads the pack and renders every text, with the listed exceptions | **no**: written by AI, speaker review: 0; loaded in the game: 26.3 only ([status](../../minecraft/java/STATUS.md)) |
 | Minecraft splash texts, End Poem | Optional pack, every language | see [Minecraft in Corsican](minecraft.md) | — | no |
 | Minecraft Bedrock Edition | Prototype, never tried in the game | 4,288 / 13,340 keys (reused from Java, identical English) | formats checked offline ([status](../../minecraft/bedrock/STATUS.md)) | no |
 

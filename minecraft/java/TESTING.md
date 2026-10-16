@@ -2,7 +2,8 @@
 
 [Français](../../docs/fr/minecraft-tester.md)
 
-Nobody has seen this translation in a running game yet ([STATUS.md](STATUS.md)). If you own Minecraft: Java Edition,
+Only 26.3 has been loaded in a running game so far (the maintainer's instance; no screen-by-screen check recorded,
+[STATUS.md](STATUS.md)), and no older version at all. If you own Minecraft: Java Edition,
 one hour going through the screens below is the most useful help there is. You do not need to speak Corsican to spot
 text that overflows a button or English left behind; if you do speak it, also look at the wording.
 

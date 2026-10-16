@@ -14,7 +14,7 @@
 | Safari | | Not possible | |
 | Google's buttons and menus (in Firefox Corsu) | Tried by hand | Expected | Tried by hand |
 | KDE Plasma desktop and KDE programs | Not supported | Not supported | Used daily |
-| Minecraft: Java Edition 26.3 (resource pack) | Checked without running the game | Checked without running the game | Checked without running the game |
+| Minecraft: Java Edition 1.6.1 → 26.3, 87 versions (resource pack) | Checked without running the game | Checked without running the game | Checked without running the game |
 | GTK programs and terminal commands | | | Expected |
 
 **Tested** means the CI installs Corsu on that system before every release, starts the program and reads its text
@@ -26,8 +26,9 @@ languages of macOS, which does not include Corsican.
 
 KDE Plasma is a Linux desktop. Some KDE programs (Kate, Krita, Okular…) also run on Windows and macOS, but Corsu
 only translates them on Linux. **Checked without running the game** means the translation file is complete and
-Minecraft 26.3's own code reads it and renders every text without error (`tools/minecraft.py verify`), but nobody has
-loaded it in a game yet.
+each Minecraft version's own code reads it and renders every text without error (`tools/mcversions.py verify`,
+exceptions in [COMPATIBILITY.md](../../minecraft/java/COMPATIBILITY.md)). Only 26.3 has been loaded in a game (the
+maintainer's Prism instance), with no visual check of every screen.
 
 ## Phones
 

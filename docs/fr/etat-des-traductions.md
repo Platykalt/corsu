@@ -20,7 +20,7 @@ corse).
 | Google Chrome (Windows, Linux) | Disponible | menus et réglages | CI | non |
 | Opera GX, Edge, Brave, Vivaldi | Expérimental | même mécanisme que Chrome | non | non |
 | Commandes du terminal, programmes GTK (Linux) | Expérimental | catalogues gettext construits depuis le français | non | non |
-| **Minecraft: Java Edition 26.3** | **En cours de relecture** | 8 557 / 8 557 textes | le code de Minecraft 26.3 lit le pack et affiche les 8 559 clés sans erreur | **non** : traduction écrite par IA, ni relue par un locuteur ni essayée en jeu ([état](../../minecraft/java/STATUS.md)) |
+| **Minecraft: Java Edition, 87 versions (1.6.1 → 26.3)** | **En cours de relecture** ; dans la version de développement, pas encore dans une release publiée | fichiers de langue complets pour chaque version listée ([tableau](../../minecraft/java/COMPATIBILITY.md)) | le code de chaque version lit le pack et affiche chaque texte, avec les exceptions listées | **non** : écrite par IA, relue par un locuteur : 0 ; chargée en jeu : 26.3 seulement ([état](../../minecraft/java/STATUS.md)) |
 | Minecraft : phrases d'accueil, poème de fin | Pack facultatif, toutes langues | voir [Minecraft en corse](minecraft.md) | — | non |
 | Minecraft Bedrock Edition | Prototype, jamais essayé en jeu | 4 288 / 13 340 clés (reprises de Java, anglais identique) | formats vérifiés hors jeu ([état](../../minecraft/bedrock/STATUS.md)) | non |
 

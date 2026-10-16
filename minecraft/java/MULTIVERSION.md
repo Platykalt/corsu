@@ -104,7 +104,9 @@ client jar (1.14.4 to 1.19.2), inside `en_us.json` (1.19.3 to 1.20.1) and also t
 `first..last` for a run of three or more consecutive releases (`1.13..26.3`). 12,537 pairs over 87 releases, 0.7 MB.
 
 `versions.json` adds to the contract: `pack_format_minor` (1.21.9 and later), `client_sha1` (as the version JSON
-gives it), `realms` (where Realms' English came from), `sources`. `supported` is written by `verify` only: true when
+gives it), `realms` (where Realms' English came from), `sources`, and `verified` ({`fingerprint`, `date`, `engine`}:
+the SHA-256 of the exact `pack.mcmeta` and language file `verify` checked; `tools/mcreport.py --check` fails when
+today's data builds a different pack, so that release's check must be run again). `supported` is written by `verify` only: true when
 the Python checks give no error and the game's own code accepted the pack.
 
 `verify` runs, per release: keys.tsv against Mojang's English; the zip (files, fixed dates, same bytes twice); the
