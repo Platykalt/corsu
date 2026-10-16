@@ -306,3 +306,93 @@ class SettingsIntegrityTests(WindowsProgramsTests):
         self.assertNotIn('7-Zip', text.split('Installed:')[1].splitlines()[0])
         self.assertIn('Not switched to Corsican (see the reasons above): 7-Zip', text)
         self.assertEqual(corsu.load_state()['components'], ['winmerge'])
+
+
+class StatusTests(WindowsProgramsTests):
+    """One structured status per program, shared by the installation summary and the window."""
+
+    def snapshot_item(self, app_id):
+        import app
+        with patch.object(app, 'detected', lambda: set()):
+            return next(item for item in app.snapshot()['items'] if item['name'] == app_id)
+
+    def test_two_installations_only_one_switched_is_partial_not_failed(self):
+        # 7-Zip in Program Files with its Corsican file, and a second copy for this user without it.
+        self.make('7-Zip/7zFM.exe', '7-Zip/Lang/co.txt')
+        local = self.root / 'Local/Programs/7-Zip/7zFM.exe'
+        local.parent.mkdir(parents=True)
+        local.write_text('x')
+        output = io.StringIO()
+        with redirect_stdout(output), patch.object(corsu, 'ROOT', self.root / 'checkout'):
+            corsu.install(['7zip'])
+        result = corsu.load_state()['results']['7zip']
+        self.assertEqual(result['activation'], 'partial')
+        self.assertEqual(sorted(instance['activation'] for instance in result['instances']), ['active', 'blocked'])
+        blocked = next(instance for instance in result['instances'] if instance['activation'] == 'blocked')
+        self.assertIn('Lang', blocked['reason'])
+        self.assertIn('Reinstall 7-Zip', blocked['action'])
+        self.assertIn('Only some installations switched (see above): 7-Zip', output.getvalue())
+        item = self.snapshot_item('7zip')
+        self.assertEqual((item['activation'], item['on']), ('partial', True))
+        self.assertEqual(item['instances'], result['instances'])
+        self.assertEqual(item['validation']['real_app'], ['windows'])
+
+    def test_switched_program_with_partial_catalogue_is_active_with_partial_coverage(self):
+        self.make('VideoLAN/VLC/vlc.exe')
+        folder = self.files / 'VideoLAN/VLC/locale'
+        for language, entries in (('co', {b'Open': b'Apre'}), ('fr', {b'Open': b'Ouvrir', b'Stop': b'Arr\xc3\xaat'})):
+            (folder / language / 'LC_MESSAGES').mkdir(parents=True)
+            (folder / language / 'LC_MESSAGES/vlc.mo').write_bytes(engine.make_mo({b'': b'Content-Type: text/plain; charset=UTF-8\n', **entries}))
+        with redirect_stdout(io.StringIO()), patch.object(corsu, 'ROOT', self.root / 'checkout'):
+            corsu.install(['vlc'])
+        result = corsu.load_state()['results']['vlc']
+        self.assertEqual(result['activation'], 'active')
+        self.assertEqual(result['coverage'], {'state': 'partial', 'translated': 1, 'total': 2, 'note': None})
+
+    def test_open_program_while_switching_off_stays_active_with_its_reason(self):
+        self.make('FileZilla FTP Client/filezilla.exe', 'FileZilla FTP Client/locales/co/filezilla.mo')
+        config = self.root / 'Roaming/FileZilla/filezilla.xml'
+        config.parent.mkdir(parents=True)
+        config.write_text('<FileZilla3>\n\t<Settings>\n\t</Settings>\n</FileZilla3>\n')
+        with redirect_stdout(io.StringIO()), patch.object(corsu, 'ROOT', self.root / 'checkout'):
+            corsu.install(['filezilla'])
+        self.running = {r'C:\Program Files\FileZilla FTP Client\filezilla.exe'}
+        with redirect_stdout(io.StringIO()):
+            corsu.disable(['filezilla'])
+        item = self.snapshot_item('filezilla')
+        self.assertEqual((item['activation'], item['on']), ('active', True))
+        self.assertIn('FileZilla is open', item['instances'][0]['reason'])
+        self.assertIn('switch it off again', item['instances'][0]['action'])
+        self.running = set()
+        with redirect_stdout(io.StringIO()):
+            corsu.disable(['filezilla'])
+        item = self.snapshot_item('filezilla')
+        self.assertEqual((item['activation'], item['on']), ('inactive', False))
+
+    def test_failure_is_not_blocked_and_an_earlier_switch_stays_on(self):
+        self.make('Notepad++/notepad++.exe')
+        with patch.object(self.programs.NotepadPlusPlus, 'official_file', side_effect=OSError('network is unreachable')), \
+                redirect_stdout(io.StringIO()), patch.object(corsu, 'ROOT', self.root / 'checkout'):
+            corsu.install(['notepadpp'])
+        result = corsu.load_state()['results']['notepadpp']
+        self.assertEqual(result['activation'], 'failed')
+        self.assertIn('network is unreachable', result['instances'][0]['reason'])
+        self.assertNotIn('notepadpp', corsu.load_state()['components'])
+        # 7-Zip switched once, then its Corsican file disappears (program updated): still on, nothing undone.
+        self.make('7-Zip/7zFM.exe', '7-Zip/Lang/co.txt')
+        with redirect_stdout(io.StringIO()), patch.object(corsu, 'ROOT', self.root / 'checkout'):
+            corsu.install(['7zip'])
+            (self.files / '7-Zip/Lang/co.txt').unlink()
+            corsu.install(['7zip'])
+        self.assertEqual(corsu.load_state()['results']['7zip']['activation'], 'active')
+        self.assertEqual(self.registry[(r'Software\7-Zip', 'Lang')], ('co', 1))
+
+    def test_state_saved_before_statuses_existed_still_shows(self):
+        corsu.save_state({'files': {}, 'components': ['7zip'], 'disabled': []})
+        self.registry[(r'Software\7-Zip', 'Lang')] = ('co', 1)
+        corsu.STATE.write_text(json.dumps({'files': {'HKCU\\Software\\7-Zip\\Lang': {
+            'toggle': True, 'component': '7zip', 'setting': {'type': 'registry'}}}, 'components': ['7zip']}),
+            encoding='utf-8')
+        item = self.snapshot_item('7zip')
+        self.assertEqual(item['activation'], 'active')
+        self.assertEqual(item['instances'], [])

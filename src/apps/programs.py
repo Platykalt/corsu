@@ -80,16 +80,29 @@ class SettingApp(apps.App):
         result = []
         for executable, folder in self.installs():
             catalog = self.corsican_file(folder)
-            reason = None
+            reason = action = None
             if not catalog.exists():
                 reason = corsu.t(f'its Corsican file is missing ({catalog})', f'son fichier corse manque ({catalog})')
+                action = corsu.t(f'Reinstall {self.name} with its translations, then run Corsu again',
+                                 f'Réinstallez {self.name} avec ses traductions, puis relancez Corsu')
             else:
                 reason = self.check(folder)
+                if reason:
+                    action = self.check_action(folder)
             if reason is None and self.processes and running(*self.processes):
                 reason = close_first(self.name)
+                action = corsu.t(f'Close {self.name}, then switch it on in Corsu', f'Fermez {self.name}, puis activez-le dans Corsu')
             result.append(apps.Installation(self, corsu.t('installed', 'installé'), executable, None,
-                                            catalog if catalog.exists() else None, self.coverage_note, reason))
+                                            catalog if catalog.exists() else None, self.coverage_note, reason, action))
         return result
+
+    def check_action(self, folder):
+        """What to do about check()'s reason: start the program once when its settings file is not created yet."""
+        settings_file = getattr(self, 'settings_file', None)
+        if settings_file and not settings_file().exists():
+            return corsu.t(f'Start {self.name} once, close it, then run Corsu again',
+                           f'Lancez {self.name} une fois, fermez-le, puis relancez Corsu')
+        return None
 
     def check(self, folder):
         """Why this installation cannot be switched (settings file missing…), or None."""
@@ -101,6 +114,8 @@ class SevenZip(SettingApp):
     description = {'co': ('7-Zip', "A finestra è u listinu di 7-Zip in corsu (Patriccollu)."),
                    'fr': ('7-Zip', "La fenêtre et le menu de 7-Zip en corse (Patriccollu)."),
                    'en': ('7-Zip', "7-Zip's window and menu in Corsican (Patriccollu).")}
+    validation = {'simulated': True, 'real_app': ['windows'], 'visual': False, 'linguistic_review': False}
+    restart_processes = ('7zFM.exe',)
     executables = (('windows', '7-Zip/7zFM.exe'),)
     corsican = 'Lang/co.txt'
 
@@ -116,6 +131,8 @@ class NotepadPlusPlus(SettingApp):
     description = {'co': ('Notepad++', "L'interfaccia di Notepad++ in corsu (Patriccollu)."),
                    'fr': ('Notepad++', "L'interface de Notepad++ en corse (Patriccollu)."),
                    'en': ('Notepad++', "Notepad++'s interface in Corsican (Patriccollu).")}
+    validation = {'simulated': True, 'real_app': ['windows'], 'visual': False, 'linguistic_review': False}
+    restart_processes = ('notepad++.exe',)
     executables = (('windows', 'Notepad++/notepad++.exe'),)
     corsican = 'localization/corsican.xml'
     REPOSITORY = 'notepad-plus-plus/notepad-plus-plus'
@@ -181,7 +198,9 @@ class NotepadPlusPlus(SettingApp):
             try:
                 data, tag = self.official_file(installation.location)
             except (OSError, ValueError, KeyError) as error:
-                return corsu.t(f'could not fetch the Corsican file ({error})', f'téléchargement du fichier corse impossible ({error})')
+                raise RuntimeError(corsu.t(f'could not fetch the Corsican file ({error}); check the connection and retry',
+                                           f'téléchargement du fichier corse impossible ({error}) ; vérifiez la connexion '
+                                           'et réessayez')) from None
             print(corsu.t(f'Notepad++: Corsican file of {tag} fetched from github.com/{self.REPOSITORY}',
                           f'Notepad++ : fichier corse de {tag} téléchargé depuis github.com/{self.REPOSITORY}'))
         target = self.target(folder)

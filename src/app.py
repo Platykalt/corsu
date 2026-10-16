@@ -134,6 +134,22 @@ def order():
     return ORDER + list(apps.registry())
 
 
+def status(name, item, state):
+    """Activation, installations, coverage and validation of one part, from the record the installer keeps
+    (state['results'], also behind its summary). Records from before that field get an activation derived from the
+    switches and no details."""
+    import apps
+    result = state.get('results', {}).get(name)
+    app = apps.registry().get(name)
+    validation = dict(app.validation) if app else None
+    if result is None:
+        activation = 'active' if item['on'] else 'inactive' if item['installed'] else None
+        return {'activation': activation, 'instances': [], 'coverage': None, 'validation': validation, 'updated': None}
+    activation = result['activation']
+    return {'activation': activation, 'on': activation in apps.ACTIVE, 'instances': result['instances'],
+            'coverage': result.get('coverage'), 'validation': validation, 'updated': result.get('time')}
+
+
 def snapshot():
     """Everything the page shows, read fresh each time."""
     try:
@@ -168,9 +184,10 @@ def snapshot():
             text = {'co': ('Vesktop', "Una appiecazione Discord cù Vencord. Corsu a scarica (circa 130 Mo), a verifica è a regula."),
                     'fr': ('Vesktop', 'Une application Discord avec Vencord. Corsu la télécharge (environ 130 Mo), la vérifie et la règle.'),
                     'en': ('Vesktop', 'A Discord app with Vencord. Corsu downloads it (about 130 MB), checks it and sets it up.')}
-        items.append({'name': name, 'text': text, 'installed': name in installed or name in switchable,
-                      'switchable': name in switchable,
-                      'on': name in switchable and not corsu.is_disabled(name, state)})
+        item = {'name': name, 'text': text, 'installed': name in installed or name in switchable,
+                'switchable': name in switchable, 'on': name in switchable and not corsu.is_disabled(name, state)}
+        item.update(status(name, item, state))
+        items.append(item)
     profile = corsu.firefox_profile() if 'firefox' in installed else None
     return {
         'version': json.loads((corsu.SRC / 'release.json').read_text(encoding='utf-8')).get('version'),

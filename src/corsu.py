@@ -1217,14 +1217,22 @@ def install(components=None, qt_system=False):
         minecraft_stats = minecraft.install(installer)
     import apps
     application_stats = {}
+    previous = dict(installer.state.get('results', {}))
     for app_id in sorted(components & set(apps.registry())):
         progress(88, 'Switching programs to Corsican', 'Passage des logiciels en corse')
         application_stats[app_id] = apps.install(installer, app_id)
+        result = installer.state['results'][app_id]
+        owned = any(component_of(name, record) == app_id for name, record in installer.state['files'].items())
+        if result['activation'] in ('blocked', 'failed') and owned:
+            # Switched by an earlier run and still holding Corsu's setting: it stays on, only not refreshed now.
+            result['activation'] = previous.get(app_id, {}).get('activation', 'active')
+            if result['activation'] not in apps.ACTIVE:
+                result['activation'] = 'active'
     # A program none of whose installations could be switched is not installed: it is neither reported as in
     # Corsican nor recorded as a part to switch on and off, unless an earlier run already switched it.
-    left_alone = {app_id for app_id, stats in application_stats.items() if not stats['installed']}
-    left_alone -= {component_of(name, record) for name, record in installer.state['files'].items()}
-    partly = sorted(app_id for app_id, stats in application_stats.items() if stats['installed'] and stats['skipped'])
+    statuses = {app_id: installer.state['results'][app_id] for app_id in application_stats}
+    _, partly, left_alone = apps.summary(statuses)
+    left_alone = set(left_alone)
     components = components - left_alone
     installer.state['components'] = sorted(set(installer.state.get('components', [])) | components)
     installer.state['qt_system'] = qt_system or installer.state.get('qt_system', False)
@@ -1239,7 +1247,7 @@ def install(components=None, qt_system=False):
               'components': sorted(components), 'enabled': True,
               'scope': 'Interface labels only; no translation of messages or arbitrary websites.'}
     (DATA / 'report.json').write_text(json.dumps(report, ensure_ascii=False, indent=2), encoding='utf-8')
-    installed = components & (set(COMPONENT_LABELS) | set(apps.registry()))
+    installed = (components & set(COMPONENT_LABELS)) | set(apps.summary(statuses)[0])
     if installed:
         print(t('Installed: ', 'Installé : ') + component_names(installed))
     if partly:
@@ -1435,6 +1443,25 @@ def disable(components=None, hours=None):
             installer.state['files'].pop(name)
         else:
             preserved.append(name)
+    import apps
+    deferred = dict(busy)
+    for component in targets & set(installer.state.get('results', {})):
+        result = installer.state['results'][component]
+        name = component_names([component])
+        if component in deferred:
+            # Still in Corsican: the window keeps its switch on and says why.
+            result['activation'] = result['activation'] if result['activation'] in apps.ACTIVE else 'active'
+            for instance in result['instances']:
+                if instance['activation'] in ('active', 'restart_required'):
+                    instance['reason'] = deferred[component]
+                    instance['action'] = t(f'Close {name}, then switch it off again',
+                                           f'Fermez {name}, puis désactivez-le à nouveau')
+        else:
+            result['activation'] = 'inactive'
+            for instance in result['instances']:
+                if instance['activation'] in ('active', 'restart_required'):
+                    instance.update(activation='inactive', reason=None, action=None)
+        result.update(operation='disable', time=__import__('time').time())
     # A program left in Corsican because it is open stays switched on, so the app does not show it as off.
     installer.state['disabled'] = sorted(set(installer.state.get('disabled', []))
                                          | (targets - {'terminal'} - {component for component, _ in busy}))

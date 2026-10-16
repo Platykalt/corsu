@@ -31,6 +31,9 @@ def version(executable):
 
 class VLC(apps.App):
     id = 'vlc'
+    # Real VLC: Ubuntu's in CI (help shown in Corsican) and the Windows registry setting on a real runner.
+    validation = {'simulated': True, 'real_app': ['linux', 'windows'], 'visual': False, 'linguistic_review': False}
+    restart_processes = ('vlc', 'vlc.exe')
     name = 'VLC'
     description = {
         'co': ('VLC', "L'interfaccia di VLC, cù a so traduzzione corsa (Patriccollu di Santa Maria è Sichè)."),
