@@ -268,10 +268,77 @@ def _line_put(text, key, value):
     return f'{key} = {value}\n' + text
 
 
+def _xml_path_spans(text, steps):
+    """Spans (outer start, outer end, inner start, inner end) of the elements along steps, each step a
+    [tag, attribute, name] inside the previous one, outermost first; stops at the first one missing. The whole file
+    must be well-formed XML. Elements on the path must not contain an element of their own tag."""
+    import re as _re
+    import xml.etree.ElementTree as _tree
+    _tree.fromstring(text.encode('utf-8'))  # malformed: raises, and the file is never rewritten
+    spans, start, end = [], 0, len(text)
+    for tag, attribute, name in steps:
+        opening = _re.compile(rf'<{tag}\s(?:[^>]*?\s)?{attribute}\s*=\s*(["\']){_re.escape(name)}\1[^>]*?(/?)>')
+        match = opening.search(text, start, end)
+        if not match:
+            break
+        if match.group(2):
+            spans.append((match.start(), match.end(), match.end(), match.end()))
+            break
+        closing = text.find(f'</{tag}>', match.end(), end)
+        if closing < 0:
+            raise ValueError(f'no </{tag}>')
+        spans.append((match.start(), closing + len(tag) + 3, match.end(), closing))
+        start, end = match.end(), closing
+    return spans
+
+
+def _xml_path_get(text, steps):
+    from xml.sax.saxutils import unescape
+    spans = _xml_path_spans(text, steps)
+    if len(spans) < len(steps):
+        return None
+    return unescape(text[spans[-1][2]:spans[-1][3]], {'&quot;': '"', '&apos;': "'"})
+
+
+def _xml_path_put(text, steps, value):
+    from xml.sax.saxutils import escape
+    spans = _xml_path_spans(text, steps)
+    tag, attribute, name = steps[-1]
+    if value is None:
+        if len(spans) < len(steps):
+            return text
+        start, end = spans[-1][:2]
+        line_start, line_end = text.rfind('\n', 0, start) + 1, text.find('\n', end)
+        line_end = len(text) if line_end < 0 else line_end + 1
+        if not text[line_start:start].strip() and not text[end:line_end].strip():
+            start, end = line_start, line_end
+        return text[:start] + text[end:]
+    quoted = escape(name, {'"': '&quot;'})
+    element = f'<{tag} {attribute}="{quoted}">{escape(value)}</{tag}>'
+    if len(spans) == len(steps):
+        start, end = spans[-1][:2]
+        return text[:start] + element + text[end:]
+    if len(spans) < len(steps) - 1 or spans[-1][2] == spans[-1][3] and text[spans[-1][1] - 2] == '/':
+        missing = steps[len(spans)]
+        raise ValueError(f'no <{missing[0]} {missing[1]}="{missing[2]}">')
+    inner_start, closing = spans[-1][2:]
+    line_start = text.rfind('\n', 0, closing) + 1
+    before = text[max(line_start, inner_start):closing]
+    if line_start <= inner_start or before.strip():
+        return text[:closing] + element + text[closing:]
+    import re as _re
+    siblings = _re.findall(r'\n([ \t]*)<', text[inner_start:line_start])
+    indent = siblings[-1] if siblings else before + ' '
+    return text[:line_start] + indent + element + '\n' + text[line_start:]
+
+
 FILE_KINDS = {
     'json': (_json_get, _json_put),
     'xml': (_xml_get, _xml_put),
     'line': (_line_get, _line_put),
+    # One value at a path of named elements, e.g. fre:ac's
+    # <configuration name="default"><section name="Settings"><value name="Language">.
+    'xml-path': (_xml_path_get, _xml_path_put),
 }
 
 
