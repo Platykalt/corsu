@@ -1,7 +1,7 @@
 # Continuité du projet
 
 Document de reprise, tenu à jour à chaque étape. Il renvoie aux documents détaillés plutôt que de les répéter.
-Dernière mise à jour : 16 octobre 2026 (Corsu 0.22.0, non publiée).
+Dernière mise à jour : 16 octobre 2026, après la passe de stabilisation (Corsu 0.22.0, non publiée, aucune étiquette).
 
 ## Objectifs retenus
 
@@ -35,13 +35,52 @@ Dernière mise à jour : 16 octobre 2026 (Corsu 0.22.0, non publiée).
 - Prototype d'extension web pour GitHub ([webext.md](webext.md)) et prototype Bedrock ([STATUS](../minecraft/bedrock/STATUS.md)) :
   jamais essayés dans un navigateur ou un jeu réel.
 
+## Stabilisation du 16 octobre 2026
+
+Correctifs, avec ce qui les prouve :
+
+| Problème | Cause | Preuve |
+| --- | --- | --- |
+| Icône de Firefox en page blanche (barre des tâches, bouton « navigateur préféré ») | Firefox Corsu ne se reconnaissait pas comme navigateur par défaut ; « Définir par défaut » écrivait `userapp-Firefox-*.desktop` sans icône, vers le dossier versionné de la copie, lancé sans le lanceur de Corsu | Reproduit avec le vrai Firefox (Marionette) ; `tests/e2e/check_firefox_default.py` en CI Linux ; test unitaire avec le fichier réel |
+| Échec Windows `FAIL: http://127.0.0.1:9/ ?` | Le chargement about:blank du nouvel onglet remplaçait parfois la navigation (`net::ERR_ABORTED`) ; même Chrome 155.0.8059.84 avant et après | 1 à 3 démarrages sur 40 sur un vrai Windows ; 80/80 après correction, dont 12 récupérés ; la CI finale l'a rencontré et récupéré |
+| `installation.json` perdu si l'écriture est interrompue | Écriture directe | Écriture atomique + version précédente ; test unitaire |
+| Pack de langue, installateur Vencord, copie d'application tronqués pris pour complets | Écriture directe, suppression avant copie | Tests unitaires |
+| Logiciel annoncé « Installé » sans rien changer | Résumé fondé sur la demande | Test unitaire |
+| Notepad++ : une langue choisie ensuite arrêtait l'installation | `RuntimeError` non interceptée | Test unitaire |
+| Logiciel ouvert pendant la désactivation : retour perdu | Il réécrit ses réglages en quittant | Test unitaire : il reste en corse et activé, avec un message |
+| Fichiers Windows : fins de ligne CRLF et BOM | BOM devant la première clé : clé dupliquée | Test unitaire |
+| Fenêtre Corsu « fermée » si l'état est endommagé | Erreur 500 | Capture hors écran : bandeau d'erreur |
+
+Vérifié avec de vrais logiciels : Firefox (Linux, Windows, macOS en CI ; Linux en local), Chrome for Testing
+(Linux, Windows), 7-Zip, VLC et Notepad++ sur un vrai Windows (deux activations, retour, réactivation, choix gardé à
+la désinstallation), VLC sous Linux. Seulement sur des fichiers et un registre simulés : WinMerge, SumatraPDF,
+FileZilla, HandBrake, VeraCrypt, et tout macOS hors Firefox. Aucune fenêtre de ces logiciels n'a été regardée.
+
+Sur l'ordinateur du mainteneur, `userapp-Firefox-DQPWW3.desktop` (5 octobre) est encore le navigateur par défaut :
+la prochaine installation ou mise à jour de Corsu le répare.
+
+## Prête pour des testeurs ?
+
+- Cœur de Corsu (installation, activation, désactivation, désinstallation, mise à jour) : oui, CI verte sur les trois
+  systèmes.
+- Firefox, Chromium (pas macOS), Discord/Vesktop : oui.
+- 7-Zip, VLC, Notepad++ : oui (vrai Windows ; VLC aussi sous Linux). WinMerge, SumatraPDF, FileZilla, HandBrake,
+  VeraCrypt : expérimentaux (fixtures seulement).
+- Minecraft Java 26.3 : expérimental, jamais essayé en jeu ni relu par un locuteur. Bedrock, extension web :
+  prototypes.
+- La version 0.22.0 n'est ni étiquetée ni publiée : à décider par le mainteneur.
+
 ## Blocages et ce qui demande une personne
 
 - Essai réel de Minecraft Java 26.3 ([TESTING.md](../minecraft/java/TESTING.md)) et de Bedrock.
 - Relecture par des locuteurs : lots prêts dans [review-batches](../minecraft/java/review-batches/) ; modèles de
   demande non envoyés.
-- Décisions du mainteneur : licence des textes de Corsu (CC0 recommandé, rien n'est changé) ; « servitore » dans
-  Discord.
+- Décisions du mainteneur : licence des textes de Corsu (CC0 recommandé, rien n'est changé). « Servore » est
+  attesté en informatique (ADECEC, *Lingua corsa è Internet*, Thiers et Filippi, 1999) : ce n'est donc pas une
+  raison de tout remplacer. *Servitore* reste le choix là où il est appliqué (Minecraft). Discord n'est pas
+  modifié ([décision D1](../minecraft/java/decisions-2.md)).
+- Restent visibles : le raccourci Windows « Corsu » montre l'icône de Python ; la fenêtre n'indique pas encore les
+  logiciels activés en partie.
 - macOS : aucun logiciel n'a été essayé sur un vrai Mac ; FileZilla et VeraCrypt sous macOS ne sont pas activés
   (chemins de réglages non confirmés).
 
