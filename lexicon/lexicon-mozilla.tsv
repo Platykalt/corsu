@@ -53,9 +53,9 @@ Content crashed|Le contenu a planté|U cuntenutu s’hè lampatu
 Content Encoding Error|Erreur d’encodage de contenu|Sbagliu di cudificazione di cuntenutu
 <p>The page you are trying to view cannot be shown because it uses an invalid or unsupported form of compression.</p> <ul> <li>Please contact the website owners to inform them of this problem.</li> </ul>|<p>La page que vous essayez de consulter ne peut être affichée car elle utilise un type de compression invalide ou non pris en charge.</p> <ul> <li>Veuillez contacter les propriétaires du site web pour les informer de ce problème.</li> </ul>|<p>A pagina chì vò circate à fighjà ùn pò micca esse affissata, perchè ella impiega una forma di cumpressione scunnisciuta o micca accettata.</p> <ul> <li>Ci vole à cuntattà i prupietarii di u situ web per infurmalli di stu penseru.</li> </ul>
 Address Not Found|Adresse introuvable|L’indirizzu ùn esiste micca
-<p>The browser could not find the host server for the provided address.</p> <ul> <li>Check the address for typing errors such as <strong>ww</strong>.example.com instead of <strong>www</strong>.example.com.</li> <li>If you are unable to load any pages, check your device’s data or Wi-Fi connection.</li> </ul>|<p>Le navigateur n’a pas pu trouver le serveur hôte pour l’adresse indiquée.</p> <ul> <li>Vérifiez la syntaxe de l’adresse (saisie de <strong>ww</strong>.example.com au lieu de <strong>www</strong>.example.com par exemple)\u00a0;</li> <li>Si vous n’arrivez à naviguer sur aucun site, vérifiez la connexion données ou Wi-Fi de votre appareil.</li> </ul>|<p>U navigatore ùn pò micca truvà u servitore ospite per l’indirizzu indicatu.</p> <ul> <li>Verificate a sintassa di l’indirizzu per circà i sbaglii cum’è <strong>ww</strong>.esempiu.com invece di <strong>www</strong>.esempiu.com.</li> <li>S’ella ùn hè mancu pussibule di navigà nant’à un situ, verificate a cunnessione di dati o Wi-Fi di u vostru apparechju.</li> </ul>
+<p>The browser could not find the host server for the provided address.</p> <ul> <li>Check the address for typing errors such as <strong>ww</strong>.example.com instead of <strong>www</strong>.example.com.</li> <li>If you are unable to load any pages, check your device’s data or Wi-Fi connection.</li> </ul>|<p>Le navigateur n’a pas pu trouver le serveur hôte pour l’adresse indiquée.</p> <ul> <li>Vérifiez la syntaxe de l’adresse (saisie de <strong>ww</strong>.example.com au lieu de <strong>www</strong>.example.com par exemple).</li> <li>Si vous n’arrivez à naviguer sur aucun site, vérifiez la connexion données ou Wi-Fi de votre appareil.</li> </ul>|<p>U navigatore ùn pò micca truvà u servitore ospite per l’indirizzu indicatu.</p> <ul> <li>Verificate a sintassa di l’indirizzu per circà i sbaglii cum’è <strong>ww</strong>.esempiu.com invece di <strong>www</strong>.esempiu.com.</li> <li>S’ella ùn hè mancu pussibule di navigà nant’à un situ, verificate a cunnessione di dati o Wi-Fi di u vostru apparechju.</li> </ul>
 Looks like there’s a problem with your internet connection|Il semble y avoir un problème avec votre connexion Internet|Pare ch’ella ci sia un prublema cù a vostra cunnessione internet
-Try connecting on a different device. Check your modem or router. Disconnect and reconnect to Wi-Fi.|Essayez de vous connecter sur un autre appareil. Vérifiez votre modem ou votre routeur. Déconnectez-vous puis reconnectez-vous au Wi-Fi.|Pruvate di cunnettevi nant’à un altru apparechju. Verificate u vostru modem o «\u00a0router\u00a0». Discunnittitevi è ricunnittitevi à u Wi-Fi.
+Try connecting on a different device. Check your modem or router. Disconnect and reconnect to Wi-Fi.|Essayez de vous connecter sur un autre appareil. Vérifiez votre modem ou votre routeur. Déconnectez-vous puis reconnectez-vous au Wi-Fi.|Pruvate di cunnettevi nant’à un altru apparechju. Verificate u vostru modem o «\u00a0router\u00a0». Scunnittitevi è ricunnittitevi à u Wi-Fi.
 Error Code: NS_ERROR_OFFLINE|Code d’erreur\u00a0: NS_ERROR_OFFLINE|Codice di sbagliu\u00a0: NS_ERROR_OFFLINE
 Reload|Actualiser|Attualizà
 Invalid Address|Adresse invalide|Indirizzu inaccettevule
@@ -407,8 +407,21 @@ Importing bookmarks|Importation des marque-pages|Impurtazione di l’indette
 Keep this screen open. It should only take a few seconds.|Laissez cet écran ouvert. Cela ne devrait prendre que quelques secondes.|Lascià apertu stu screnu. Què duveria piglià parechje seconde.
 Continue without VPN?|Continuer sans le VPN\u00a0?|Cuntinuà senza VPN ?
 VPN isn’t working right now so your location may be visible. Continue browsing without VPN, or choose tabs to close.|Le VPN ne fonctionne pas pour l’instant, votre emplacement peut donc être visible. Continuez à naviguer sans VPN ou choisissez des onglets à fermer.|Ora, a VPN ùn hè micca attiva, dunque a vostra pusizione si pò vede. Cuntinuà a navigà senza VPN o sciglite unghjette da chjode.
-Manage Tabs|Gérer les onglets|Amministrà l'unghjette
+Manage Tabs|Gérer les onglets|Amministrà l’unghjette
 Continue|Continuer|Cuntinuà
+Playback rate 75 percent slower|Vitesse de lecture réduite de 75\u00a0%%|Vitezza di lettura ridutta da 75\u00a0%%
+Playback set to half speed|Lecture réglée à la moitié de la vitesse normale|Vitezza di lettura ridutta da metà
+Playback rate 25 percent slower|Vitesse de lecture réduite de 25\u00a0%%|Vitezza di lettura ridutta da 25\u00a0%%
+Playback speed normal|Vitesse de lecture normale|Vitezza di lettura nurmale
+Playback rate 25 percent faster|Vitesse de lecture accélérée de 25\u00a0%%|Vitezza di lettura aumentata da 25\u00a0%%
+Playback rate 50 percent faster|Vitesse de lecture accélérée de 50\u00a0%%|Vitezza di lettura aumentata da metà
+Playback rate 75 percent faster|Vitesse de lecture accélérée de 75\u00a0%%|Vitezza di lettura aumentata da 75\u00a0%%
+Playback set to double speed|Lecture réglée au double de la vitesse normale|Vitezza di lettura duppiata
+Back 10 seconds|Revenir 10\u00a0secondes en arrière|Rinculà di 10 seconde
+Play|Lecture|Lettura
+Pause|Mettre en pause|Pausa
+Forward 30 seconds|Avancer de 30\u00a0secondes|Avanzà di 30 seconde
+change playback speed|modifier la vitesse de lecture|cambià a vitezza di lettura
 Media|Multimédia|Multimedià
 Camera is on|La caméra est activée|L’apparechju-fotò hè attivatu
 Microphone is on|Le microphone est activé|U microfonu hè attivatu
@@ -419,7 +432,6 @@ Tap to open the tab that’s using your microphone and camera.|Appuyez pour ouvr
 Reminder: %1$s is still using your camera. Tap to open the tab.|Rappel\u00a0: %1$s utilise toujours votre appareil photo. Appuyez pour ouvrir l’onglet.|Ramentu\u00a0: %1$s impiegheghja sempre u vostru apparechju-fotò. Picchichjà per apre l’unghjetta.
 Reminder: %1$s is still using your microphone. Tap to open the tab.|Rappel\u00a0: %1$s utilise toujours votre microphone. Appuyez pour ouvrir l’onglet.|Ramentu\u00a0: %1$s impiegheghja sempre u vostru microfonu. Picchichjà per apre l’unghjetta.
 Reminder: %1$s is still using your microphone and camera. Tap to open the tab.|Rappel\u00a0: %1$s utilise toujours votre microphone et votre appareil photo. Appuyez pour ouvrir l’onglet.|Ramentu\u00a0: %1$s impiegheghja sempre i vostri microfonu è apparechju-fotò. Picchichjà per apre l’unghjetta.
-Play|Lecture|Lettura
 Next|Suivant|Seguente
 Previous|Précédent|Precedente
 A site is playing media|Un site lit un élément multimédia|Un situ leghje un elementu multimedià
@@ -630,7 +642,7 @@ Private browsing|Navigation privée|Navigazione privata
 Normal browsing|Navigation classique|Navigazione nurmale
 Search history|Rechercher dans l’historique|Ricercà in a cronolugia
 Search bookmarks|Rechercher dans les marque-pages|Ricercà in l’indette
-Go back and close search|Retourner en arrière et fermer la recherche|Torna darettu è chjode a ricerca
+Go back and close search|Retourner en arrière et fermer la recherche|Torna daretu è chjode a ricerca
 Search tabs|Rechercher dans les onglets|Ricercà in l’unghjette
 Enter search terms|Saisissez les termes à rechercher|Stampittate i termini à ricercà
 %1$s won’t remember any of your history or cookies, but new bookmarks will be saved.|%1$s ne conservera aucun historique ni aucun cookie, cependant les nouveaux marque-pages seront conservés.|%1$s ùn cunserverà alcuna cronolugia nè canistrelli, ma e nove indette seranu arregistrate.
@@ -699,6 +711,8 @@ Manage what you back up and sync|Gérez ce que vous sauvegardez et synchronisez|
 Close menu|Fermer le menu|Chjode u listinu
 Navigation|Navigation|Navigazione
 Close custom tab menu sheet|Fermer le panneau du menu des onglets personnalisés|Chjode u pannellu di u listinu di l’unghjette persunalizate
+Cached|Version en cache|In impiatta
+Live page|Page en ligne|Pagina in linea
 Bookmark page|Marquer cette page|Indettà a pagina
 Edit bookmark|Modifier le marque-page|Mudificà l’indetta
 Save as PDF|Enregistrer en PDF|Arregistrà cum’è PDF
@@ -711,7 +725,6 @@ Print|Imprimer|Stampà
 Quit %1$s|Quitter %1$s|Esce di %1$s
 Make %1$s your default|Définir %1$s comme navigateur par défaut|Definisce %1$s cum’è navigatore predefinitu
 Fast, private, and made for you.|Rapide, confidentiel et conçu pour vous.|Rapidu, cunfidenziale è cuncepitu per voi.
-Dismiss promotion|Refuser l’offre|Ricusà a pruposta
 More info|Plus d’infos|Sapene di più
 No extensions here|Aucune extension disponible|Nisuna estensione dispunibule
 Shake your device to summarize this page in seconds. ⚡️|Secouez votre appareil pour résumer cette page en quelques secondes. ️⚡️|Ciambuttate u vostru apparechju per riassume sta pagina in qualchì seconda. ⚡️
@@ -864,6 +877,7 @@ Accessibility|Accessibilité|Accessibilità
 Custom Mozilla account server|Serveur de compte Mozilla personnalisé|Servitore persunalizatu di contu Mozilla
 Custom Sync server|Serveur de synchronisation personnalisé|Servitore persunalizatu di sincrunizazione
 Account|Compte|Contu
+Sync|Synchronisation|Sincrunizazione
 Address bar location|Emplacement de la barre d’adresse|Pusizione di a barra d’indirizzu
 Toolbar layout|Disposition de la barre d’outils|Dispusizione di a barra d’attrezzi
 Theme|Thème|Tema
@@ -888,6 +902,7 @@ Show clipboard suggestions|Afficher les suggestions du presse-papiers|Affissà e
 Search browsing history|Rechercher dans l’historique de navigation|Ricercà in a cronolugia di navigazione
 Search synced tabs|Rechercher dans les onglets synchronisés|Ricercà in l’unghjette sincrunizate
 Account settings|Paramètres du compte|Parametri di u contu
+Account and sync|Compte et synchronisation|Contu è sincrunizazione
 Autocomplete URLs|Compléter automatiquement les URL|Compie autumaticamente l’indirizzi
 Suggestions from sponsors|Suggestions de sponsors|Suggestioni da i spunsurizatori
 Support %1$s with occasional sponsored suggestions|Soutenir %1$s en affichant de temps en temps des suggestions sponsorisées|Sustene %1$s cù suggestioni occasiunale spunsurizate
@@ -984,10 +999,14 @@ Manage account|Gérer le compte|Ghjestione di u contu
 Change your password, manage data collection, or delete your account|Changer votre mot de passe, gérer la collecte de données ou supprimer votre compte|Cambià a vostra parolla d’intesa, amministrà a culletta di dati o squassà u vostru contu
 Sync now|Synchroniser maintenant|Sincrunizà avà
 Choose what to sync|Choisir les informations à synchroniser|Sceglie l’infurmazioni à sincrunizà
+Synced data|Données synchronisées|Dati sincrunizati
+Manage what syncs on all your connected devices|Gérer les données à synchroniser sur tous vos appareils connectés|Amministrà i dati à sincrunizà nant’à tutti i vostri apparechji cunnessi
+You aren’t syncing anything. Choose what to keep synced across your devices.|Aucun élément n’est synchronisé. Choisissez les données à synchroniser entre vos appareils.|Nisunu elementu hè sincrunizatu. Sciglite i dati à sincrunizà trà i vostri apparechji.
 History|Historique|Cronolugia
 Open tabs|Onglets ouverts|Apre l’unghjette
 Sign out|Déconnexion|Scunnettesi
 Device name|Nom de l’appareil|Nome di l’apparechju
+Change device name|Changer le nom de l’appareil|Cambià u nome di l’apparechju
 Device name cannot be empty.|Le nom de l’appareil ne peut pas être vide.|U nome di l’apparechju ùn pò micca esse viotu.
 Syncing…|Synchronisation…|Sincrunizazione…
 Sync failed. Last success: %s|La synchronisation a échoué. Dernier succès\u00a0: %s|Fiascu di a sincrunizazione. Ultima riesciuta : %s
@@ -1027,7 +1046,6 @@ Remove account|Supprimer le compte|Caccià u contu
 Scan the QR code shown at <b>firefox.com/pair</b>|Scannez le code QR affiché sur <b>firefox.com/pair</b>|Analizate u codice QR affissatu nant’à <b>firefox.com/pair</b>
 Simple|Simple|Simplice
 Expanded|Développée|Allargatu
-Address bar must be on top when tab bar is shown.|La barre d’adresse doit être en haut lorsque la barre d’onglets est affichée.|A barra d’indirizzu deve esse piazzata insù quandu a barra d’unghjette hè affissata.
 Open a new tab|Ouvrir un nouvel onglet|Apre un’unghjetta nova
 Add bookmark|Ajouter un marque-page|Aghjunghje un’indetta
 Translate|Traduire|Traduce
@@ -1057,7 +1075,7 @@ Show full history|Afficher l’historique complet|Affissà a cronolugia sana
 %d tabs|%d onglets|%d unghjette
 %d tab|%d onglet|%d unghjetta
 No recently closed tabs here|Aucun onglet récemment fermé ici|Alcuna unghjetta chjosa pocu fà
-Tab view|Affichage des onglets|Vista di l’unghjette
+Tab layout|Disposition des onglets|Dispusizione di l’unghjette
 List|Liste|Lista
 Grid|Grille|Quadrittere
 Close tabs|Fermer les onglets|Chjode l’unghjette
@@ -1076,9 +1094,11 @@ Close after one month|Fermeture après un mois|Chjusura dopu un mese
 Open on homepage|Ouvrir la page d’accueil|Apre a pagina d’accolta
 Open on last tab|Ouvrir le dernier onglet|Apre l’ultima unghjetta
 Open on homepage after four hours|Ouvrir la page d’accueil après quatre heures|Apre a pagina d’accolta dopu quattru ore
-Move old tabs to inactive|Déplacer les onglets inactifs|Dispiazzà e vechje unghjette in a sezzione inattiva
+Tab organization|Organisation des onglets|Organizazione di l’unghjette
+Inactive tabs|Onglets inactifs|Unghjette inattive
 Tabs you haven’t viewed for two weeks get moved to the inactive section.|Les onglets que vous n’avez pas consultés depuis deux semaines sont déplacés vers la section «\u00a0Onglets inactifs\u00a0».|L’unghjette chì vo ùn avete micca viste dapoi duie settimane sò dispiazzate in a sezzione inattiva.
-Enable Tab Groups|Activer les groupes d’onglets|Attivà i gruppi d’unghjette
+Tab groups|Groupes d’onglets|Gruppi d’unghjette
+Organize your tabs into groups you can name and save.|Organisez vos onglets en groupes que vous pouvez nommer et enregistrer.|Organizà e vostre unghjette in gruppi ch’ella si pò numinà è arregistrà.
 Enable privacy report|Activer le rapport de confidentialité|Attivà u raportu di cunfidenzialità
 Active|Activées|Attivi
 Firefox randomly selects users to test features, which improves quality for everyone.|Firefox sélectionne au hasard des utilisateurs et utilisatrices pour tester des fonctionnalités, ce qui améliore la qualité pour tout le monde.|Firefox selezziuneghja à l’azardu certi utilizatori per pruvà e funzioni, ciò chì aumenteghja a qualità per tutte è tutti.
@@ -1337,6 +1357,8 @@ Copied to clipboard|Copié dans le presse-papiers|Cupiatu in u preme’papei
 Sign in to Sync|Se connecter à Sync|Cunnettesi à Sync
 Send to all devices|Envoyer à tous les appareils|Mandà à tutti l’apparechji
 Reconnect to Sync|Se reconnecter à Sync|Ricunnettesi à Sync
+Send|Envoyer|Mandà
+Selected|Sélectionné|Selezziunatu
 Offline|Hors connexion|Fora di cunnessione
 Connect another device|Connecter un autre appareil|Cunnette un altru apparechju
 To send a tab, sign in to Firefox on at least one other device.|Pour envoyer un onglet, connectez-vous à votre compte Firefox sur au moins un autre appareil.|Per mandà un’unghjetta, cunnittitevi à u vostru contu Firefox nant’à omancu un altru apparechju.
@@ -1383,7 +1405,7 @@ Delete browsing data|Supprimer les données de navigation|Squassà i dati di nav
 Browsing history|Historique de navigation|Cronolugia di navigazione
 %d addresses|%d adresses web|%d indirizzi web
 Cookies and site data|Cookies et données de sites|Canistrelli è dati di siti
-You’ll be logged out of most sites|Vous serez déconnecté·e de la plupart des sites|Serete discunnessu(a) di a maiò parte di i siti
+You’ll be logged out of most sites|Vous serez déconnecté·e de la plupart des sites|Serete scunnessu(a) da a maiò parte di i siti
 Cached images and files|Images et fichiers mis en cache|Fiure è schedarii messi in impiatta
 Frees up storage space|Libère de l’espace de stockage|Libereghja spaziu d’allucamentu
 Site permissions|Permissions des sites|Permessi di situ
@@ -1411,7 +1433,9 @@ Sign in with your camera|Connectez-vous avec votre appareil photo|Cunnittitevi c
 Use email instead|Utiliser plutôt une adresse e-mail|Impiegà piuttostu un messaghju elettronicu
 No account? <u>Create one</u> to sync Firefox between devices.|Vous n’avez pas de compte ? <u>Créez-en un</u> pour synchroniser Firefox entre vos appareils.|Contu, ùn ne avete ? <u>Createne unu</u> per sincrunizà Firefox trà i vostri apparechji.
 %s will stop syncing with your account, but won’t delete any of your browsing data on this device.|%s ne se synchronisera plus avec votre compte, mais ne supprimera aucune donnée de navigation sur cet appareil.|%s ùn si sincruniserà più cù u vostru contu, ma ùn squasserà alcunu datu di navigazione nant’à st’apparechju.
-Disconnect|Se déconnecter|Discunnette
+Sign out of your account?|Se déconnecter de votre compte\u00a0?|Scunnettesi di u vostru contu\u00a0?
+Synced data stays saved in your account.|Les données synchronisées restent enregistrées dans votre compte.|I dati sincrunizati stanu arregistrati in u vostru contu.
+Disconnect|Se déconnecter|Scunnettesi
 Can’t edit default folders|Impossible de modifier les dossiers par défaut|Impussibule di mudificà i cartulari predefiniti
 Enhanced Tracking Protection|Protection renforcée contre le pistage|Prutezzione rinfurzata contr’à u spiunagiu
 Now featuring Total Cookie Protection, our most powerful barrier yet against cross-site trackers.|Maintenant avec la protection totale contre les cookies, notre plus puissante barrière contre les traqueurs intersites à ce jour.|Eccu a prutezzione tutale contr’à i canistrelli, a nostra chjudenda a più putente oghje contr’à l’elementi intersiti di spiunagiu.
@@ -1472,7 +1496,7 @@ Default Protection|Protection par défaut|Prutezzione predefinita
 %1$s decides when to use secure DNS to protect your privacy.|%1$s décide quand utiliser le DNS sécurisé pour protéger votre vie privée.|%1$s decide quandu impiegà u DNS sicuru per prutege a vostra vita privata.
 Use the provider you select|Utiliser le fournisseur que vous avez sélectionné|Impiegà u furnidore chì vo avete selezziunatu
 Use your default DNS resolver if there is a problem with the secure DNS provider|Utiliser votre serveur DNS par défaut s’il y a un problème avec le fournisseur du DNS sécurisé|Impiegà u vostru sistema predefinitu di risuluzione di nome s’ella ci hè un prublema cù u furnidore di DNS sicuru
-Use a local provider, if possible. %1$s|Utiliser un fournisseur local, si possible. %1$s|Impiegà un furnidore lucale, s'ella hè pussibule. %1$s
+Use a local provider, if possible. %1$s|Utiliser un fournisseur local, si possible. %1$s|Impiegà un furnidore lucale, s’ella hè pussibule. %1$s
 Turn off when VPN, parental control, or enterprise policies are active|Désactiver lorsqu’un VPN, un contrôle parental ou des stratégies d’entreprise sont actifs|Disattivà in presenza di VPN, di cuntrollu parentale, o di strategie d’impresa
 Turn off when a network tells %1$s it shouldn’t use secure DNS. %2$s|Désactiver lorsqu’un réseau indique à %1$s qu’il ne doit pas utiliser de DNS sécurisé. %2$s|Disattivà quand’una reta dice à %1$s ch’ellu ùn duveria micca impiegà di DNS sicuru. %2$s
 Increased Protection|Protection renforcée|Prutezzione rinfurzata
@@ -1678,7 +1702,7 @@ Enter a web address|Saisissez une adresse web|Stampittate un indirizzu web
 Speak now|Vous pouvez parler|Parlate avà
 A login with that username already exists|Un identifiant avec ce nom d’utilisateur existe déjà|L’identificazione di cunnessione cù stu nome d’utilizatore esiste dighjà
 https://www.example.com|https://www.example.com|https://www.esempiu.com
-Web address must contain “https://” or “http://”|L’adresse web doit contenir «\u00a0https://\u00a0» ou «\u00a0http://\u00a0».|L’indirizzu web deve cuntene « https:// » o « http:// »
+Web address must contain “https://” or “http://”|L’adresse web doit contenir «\u00a0https://\u00a0» ou «\u00a0http://\u00a0»|L’indirizzu web deve cuntene « https:// » o « http:// »
 Valid hostname required|Un nom d’hôte valide est requis|Un nome d’ospite accettevule hè richiestu
 Connect another device.|Connectez un autre appareil.|Cunnittite un altru apparechju.
 Please re-authenticate.|Veuillez vous authentifier à nouveau.|Ci vole à autenticassi torna.
@@ -1703,7 +1727,6 @@ Shortcut URL|Adresse du raccourci|Indirizzu web di l’accurtatoghju
 Our sponsors & your privacy|Nos sponsors et votre vie privée|I nostri spunsurizatori è a vostra vita privata
 Enter a valid URL|Saisissez une adresse valide|Stampittate un indirizzu web accettevule
 URL|Adresse|Indirizzu web
-Inactive tabs|Onglets inactifs|Unghjette inattive
 Items: %d|Éléments\u00a0: %d|Elementi\u00a0: %d
 Close all inactive tabs|Fermer tous les onglets inactifs|Chjode tutte l’unghjette inattive
 Expand inactive tabs|Développer les onglets inactifs|Spiegà l’unghjette inattive
@@ -1801,7 +1824,7 @@ Trackers blocked: %d|Traqueurs bloqués\u00a0: %d|Perseguitatori bluccati : %d
 Trackers aren’t blocked|Les traqueurs ne sont pas bloqués|I perseguitatori ùn sò micca bluccati
 Privacy Settings|Paramètres de vie privée|Parametri di cunfidenzialità
 Permissions|Autorisations|Permessi
-Removing cookies and site data for <b>%s</b> might log you out of websites and clear shopping carts.|Supprimer les cookies et les données de sites pour <b>%s</b> peut vous déconnecter de sites web et vider vos paniers d’achats.|A squassatura di i canistrelli è di i dati di i siti per <b>%s</b> puderia discunnettevi è viutà e sporte di cumprera.
+Removing cookies and site data for <b>%s</b> might log you out of websites and clear shopping carts.|Supprimer les cookies et les données de sites pour <b>%s</b> peut vous déconnecter de sites web et vider vos paniers d’achats.|A squassatura di i canistrelli è di i dati di i siti per <b>%s</b> puderia scunnettevi è viutà e sporte di cumprera.
 Secure connection|Connexion sécurisée|Cunnessione assicurizata
 Connection not secure|Connexion non sécurisée|Cunnessione micca assicurata
 This page is stored on your device|Cette page est stockée sur votre appareil|Sta pagina hè piazzata nant’à u vostru apparechju
@@ -1990,7 +2013,7 @@ Restart|Redémarrer|Rilancià
 To restore defaults, restart %s.|Pour restaurer les valeurs par défaut, redémarrez %s.|Per risturà i valori predefiniti, rilanciate %s.
 To turn on this feature, restart %s.|Pour activer cette fonctionnalité, redémarrez %s.|Per attivà sta funzione, rilanciate %s.
 To turn off this feature, restart %s.|Pour désactiver cette fonctionnalité, redémarrez %s.|Per disattivà sta funzione, rilanciate %s.
-Feature isn’t available to try.|Cette fonctionnalité n’est pas disponible à l‘essai.|Sta funzione ùn hè micca dispunibule à a prova.
+Feature isn’t available to try.|Cette fonctionnalité n’est pas disponible à l’essai.|Sta funzione ùn hè micca dispunibule à a prova.
 No experimental features to try right now|Aucune fonctionnalité expérimentale à essayer pour l’instant|Ora, ùn ci hè alcuna funzione esperimentale da pruvà
 Website isolation|Isolement de sites web|Isulamentu di situ web
 An extra barrier between websites that helps protect your data across tabs. May affect performance, stability, website compatibility, and how browsing history is saved.|Une couche de protection supplémentaire entre les sites web pour mieux sécuriser vos données d’un onglet à l’autre. L’isolement peut avoir un effet sur les performances, la stabilité, la compatibilité des sites web et la façon dont l’historique de navigation est enregistré.|Una prutezzione addiziunale trà i siti web chì vi aiuta à prutege i vostri dati d’una unghjetta à l’altra. L’isulamentu pò avè un effettu nant’à e perfurmenze, a stabilità, a cumpatibilità di i siti web è cumu a cronolugia di navigazione hè arregistrata.
@@ -2001,6 +2024,9 @@ Share PDF|Partager le PDF|Sparte u PDF
 Add a signature|Ajout d’une signature|Aghjuntu d’una segnatura
 Close PDF signature panel|Fermer le panneau de signature du PDF|Chjode u pannellu di segnatura di u PDF
 Type signature|Saisissez votre signature|Stampittà a segnatura
+Reader Mode Options|Options du mode lecture|Ozzioni di u modu di lettura
+Read Aloud|Lire à haute voix|Leghje ad alta voce
+Media Player|Lecteur multimédia|Lettore multimedià
 Browsing history cleared|Historique de navigation effacé|Cronolugia di navigazione squassata
 Tab’s browsing history has been erased.|L’historique de navigation de l’onglet a été effacé.|A cronolugia di navigazione di l’unghjetta hè stata squassata.
 Share…|Partager…|Sparte…
@@ -2107,7 +2133,6 @@ Close other tabs|Fermer les autres onglets|Chjode l’altre unghjette
 Add new tab|Ajouter un nouvel onglet|Aghjunghje un’unghjetta nova
 Download Firefox|Télécharger Firefox|Scaricà Firefox
 Certificate issued to %1$s|Certificat émis pour %1$s|Certificatu emessu per %1$s
-Qualified as specified in Regulation (EU) 2024/1183.|Qualifié conformément au règlement (UE) n°2024/1183.|Qualificatu cunfurmamente à u regulamentu (UE) 2024/1183.
 URL already exists|L’adresse existe déjà|L’indirizzu esiste dighjà
 Find in Page|Rechercher dans la page|Circà in a pagina
 URL copied|Adresse web copiée|Indirizzu web cupiatu
@@ -2302,7 +2327,7 @@ Firefox Account|Compte Firefox|Contu Firefox
 Manage Account & Devices|Gérer le compte et les appareils|Amministrà u contu è l’apparechji
 No Internet Connection|Aucune connexion internet|Alcuna cunnessione Internet
 Sync Now|Synchroniser maintenant|Sincrunizà avà
-Firefox Sync has connected to %@|Firefox Sync s’est connecté à %@|Firefox Sync s'hè cunnessu à %@
+Firefox Sync has connected to %@|Firefox Sync s’est connecté à %@|Firefox Sync s’hè cunnessu à %@
 Sync Connected|Sync connecté|Sync cunnessu
 This device has been successfully disconnected from Firefox Sync.|Cet appareil a été correctement déconnecté de Firefox Sync.|St’apparechju hè statu discunnessu bè da Firefox Sync.
 Sync Disconnected|Sync déconnecté|Sync discunnessu
@@ -2443,7 +2468,6 @@ Send Tab|Envoyer l’onglet|Mandà l’unghjetta
 You don’t have any other devices connected to this Firefox Account available to sync.|Vous n’avez aucun autre appareil prêt à être synchronisé et connecté à ce compte Firefox.|Ùn avete alcunu altru apparechju prontu à esse sincrunizatu è cunnessu à stu contu Firefox.
 Please open Firefox, go to Settings and sign in to continue.|Veuillez ouvrir Firefox, vous rendre dans les paramètres et vous connecter pour continuer.|Ci vole à apre Firefox, andà in Parametri è identificassi per cuntinuà.
 You are not signed in to your Firefox Account.|Vous n’êtes pas connecté·e à votre compte Firefox.|Ùn site micca cunnessu à u vostru contu Firefox.
-Send|Envoyer|Mandà
 Tap to begin|Appuyer pour commencer|Picchichjà per principià
 New tab arrived from another device.|Nouvel onglet reçu depuis un autre appareil.|Nova unghjetta ricevuta da un’altru apparechju.
 Tab received|Onglet reçu|Unghjetta ricevuta
@@ -2585,7 +2609,7 @@ There was an error converting the page|Une erreur s’est produite lors de la co
 yesterday|hier|eri
 Not Now|Plus tard|Micca subitu
 Open App Store|Ouvrir l’App Store|Apre l’App Store
-Remove page — %@|Supprimer la page - %@|Caccià a pagina - %@
+Remove page — %@|Supprimer la page — %@|Caccià a pagina - %@
 This page appears to be in %1$@. Translate to %2$@ with %3$@?|Cette page semble être en %1$@. La traduire en %2$@ avec %3$@ ?|Sta pagina pare esse in %1$@. Traducella in %2$@ cù %3$@ ?
 Search with Firefox|Rechercher avec Firefox|Ricercà cù Firefox
 Use stage servers|Utiliser les serveurs de simulation|Impiegà i servitori di simulazione
@@ -2682,7 +2706,6 @@ End your private session?|Mettre fin à votre session privée ?|Compie a vostra 
 Restore tabs|Restaurer les onglets|Risturà l’unghjette
 Sorry about that. Restore tabs to pick up where you left off.|Oups ! Restaurez les onglets pour reprendre là où vous en étiez.|Chì peccatu ! Risturà l’unghjette per ripiglià induve vi site piantati.
 %@ crashed. Restore your tabs?|%@ a planté. Restaurer vos onglets ?|%@ s’hè lampatu. Risturà e vostre unghjette ?
-Selected|Sélectionné|Selezziunatu
 Select the %@ app icon|Sélectionner l’icône de l’application %@|Selezziunà l’icona di l’appiecazione %@
 Deselected|Désélectionné|Micca selezziunatu
 Cool|Cool|Simpaticu
@@ -2731,7 +2754,6 @@ To save and autofill credit cards, enable Face ID, Touch ID, or a device passcod
 Privacy Report|Rapport de confidentialité|Raportu di cunfidenzialità
 Articles powered by %@|Articles mis en avant par %@|Articuli selezziunati da %@
 Top Stories|Articles populaires|Articuli pupulari
-World Cup|Coupe du monde|Coppa di u mondu
 Expires|Date d’expiration|Scadenza
 Edit Card|Modifier la carte|Mudificà a carta
 The address will be removed from all of your synced devices.|L’adresse sera supprimée de tous vos appareils synchronisés.|L’indirizzu serà cacciatu da tutti i vostri apparechji sincrunizati.
@@ -3012,7 +3034,6 @@ Automatically Send Crash Reports|Envoyer automatiquement les rapports de plantag
 This helps %@ to estimate active users.|Ce paramètre aide %@ à évaluer le nombre d’utilisateurs actifs.|Què aiuta %@ à prezzà u numeru d’utilizatori attivi.
 Daily Usage Ping|Ping d’utilisation quotidienne|Ping d’aghjovu oghjincu
 This must be turned on to receive tabs and get notified when you sign in on another device.|Cette option doit être activée pour recevoir des onglets et être averti·e lorsque vous vous connectez sur un autre appareil.|St’ozzione deve esse attivata per riceve l’unghjette è esse nutificatu quandu vo site cunnessu nant’à un altru apparechju.
-Sync|Synchronisation|Sincrunizazione
 You turned off all %1$@ notifications. Turn them on by going to device Settings > Notifications > %2$@|Vous avez désactivé toutes les notifications de %1$@. Activez-les depuis Réglages > Notifications > %2$@|Avete disattivatu tutte e nutificazioni di %1$@. Attivatele via Parametri > Nutificazioni > %2$@
 Learn about useful features and how to get the most out of %@.|Découvrez des fonctionnalités utiles et des conseils pour tirer le meilleur parti de %@.|Sapene di più nant’à funzioni ghjuvevule è cumu ottene u più bonu di %@.
 Tips and Features|Conseils et fonctionnalités|Cunsiglii è funzioni
@@ -3146,63 +3167,6 @@ Welcome to a more personal internet|Bienvenue sur un Internet plus personnel|Ben
 Search Image with Google Lens|Rechercher une image avec Google Lens|Circà una fiura cù Google Lens
 Loading Document|Chargement du document|Caricamentu di u ducumentu
 Loading…|Chargement…|Caricamentu…
-Close World Cup country picker|Fermer le sélecteur de pays pour la Coupe du monde|Chjode a selezzione di paese per a Coppa di u mondu
-Central America|Amérique centrale|America centrale
-Europe|Europe|Europa
-North America|Amérique du Nord|America di u Nordu
-South America|Amérique du Sud|America Suttana
-England|Angleterre|Inghilterra
-Scotland|Écosse|Scozia
-Follow Your Team|Suivez votre équipe|Seguitate a vostra squadra
-Group A|Groupe A|Gruppu A
-Group B|Groupe B|Gruppu B
-Group C|Groupe C|Gruppu C
-Group D|Groupe D|Gruppu D
-Group E|Groupe E|Gruppu E
-Group F|Groupe F|Gruppu F
-Group G|Groupe G|Gruppu G
-Group H|Groupe H|Gruppu H
-Group I|Groupe I|Gruppu I
-Group J|Groupe J|Gruppu J
-Group K|Groupe K|Gruppu K
-Group L|Groupe L|Gruppu L
-Group Stage|Phase de groupes|Fasa di gruppi
-Change team|Changer d’équipe|Cambià di squadra
-Countdown to the World Cup|Compte à rebours avant la Coupe du monde|Contu à l'arritrosa prima a Coppa di u mondu
-View Schedule|Voir le calendrier|Affissà u calendariu
-Disable notifications|Désactiver les notifications|Disattivà e nutificazioni
-Choose Team|Choisir l’équipe|Sceglie a squadra
-Choose another team to keep up with the World Cup.|Choisissez une autre équipe pour continuer à suivre la Coupe du monde.|Sciglite un’altra squadra per cuntinuà à seguità a Coppa di u mondu.
-Remove the World Cup widget|Supprimer le widget Coupe du monde|Caccià u widget di a Coppa di u mondu
-Still want to Follow Along?|Voulez-vous continuer à suivre la compétition ?|Vulete cuntinuà à seguità a cumpetizione ?
-We couldn’t load match data. Please refresh.|Nous n’avons pas pu charger les données du match. Veuillez actualiser.|Ùn si pò caricà i dati di a partita. Ci vole à attualizà.
-Extra time|Prolongations|Prulungazioni
-(Full Time)|(Match terminé)|(Partita finita)
-Full Time|Match terminé|Partita finita
-First half|Première mi-temps|Primu mezutempu
-Hide World Cup updates|Masquer les informations sur la Coupe du monde|Piattà l’infurmazioni nant’à a coppa di u mondu
-Get live match updates and more.|Recevez les dernières infos en direct sur les matchs et bien plus encore.|Ricivete in vivu l’ultime nutizie nant’à e partite è ancu di più.
-Keep Tabs on the World Cup|Gardez un œil sur la Coupe du monde|Dà un’ochjata à a Coppa di u mondu
-Follow team|Suivre une équipe|Seguità una squadra
-Full time • Penalties (%@)|Match terminé • Tirs au but (%@)|Partita finita - Tiri à u puntu (%@)
-Get custom wallpaper|Obtenir un fond d’écran personnalisé|Ottene un sfondulu di screnu persunalizatu
-Related matches|Matchs liés|Partite assuciate
-Half time|Mi-temps|Mezutempu
-LIVE|EN DIRECT|IN VIVU
-Match info is not available right now. Try refreshing in a few minutes.|Les informations concernant le match ne sont pas disponibles pour le moment. Essayez d’actualiser dans quelques minutes.|L’infurmazioni apprupositu di a partita ùn sò mica dispunibule avà. Pruvate d’attualizà in qualchì minutu.
-Looks like you’re offline. Check your internet connection and try again.|Il semble que vous soyez hors ligne. Veuillez vérifier votre connexion Internet et réessayer.|Pare chì vo site fora di linea. Ci vole à verificà a vostra cunnessione internet è pruvà torna.
-Penalties (%@)|Tirs au but (%@)|Tiri à u puntu (%@)
-BRONZE FINAL|PETITE FINALE|CHJUCA FINALE
-QUARTER-FINALS|QUARTS DE FINALE|QUARTI DI FINALE
-ROUND OF 16|8ES DE FINALE|OTTESIMI DI FINALE
-ROUND OF 32|16ES DE FINALE|SEDECESIMI DI FINALE
-Scroll to see previous or next matches|Faites défiler pour voir les matchs précédents ou suivants|Fà sfilà per vede e partite precedente o seguente
-SEMI-FINALS|DEMI-FINALES|MEZU FINALE
-THIRD PLACE|TROISIÈME PLACE|TERZA PIAZZA
-Upcoming|À venir|À vene
-2026 WORLD CUP CHAMPIONS|CHAMPIONS DU MONDE 2026|CAMPIONI DI U MONDU 2026
-Second half|Deuxième mi-temps|Secondu mezutempu
-We’ll keep you updated as the World Cup approaches|Nous vous tiendrons au courant à l’approche de la Coupe du monde|Avemu da tenevi infurmati à l’avvicinata di a Coppa di u mondu
 Close Zoom Panel|Fermer le panneau de zoom|Chjode u pannellu d’ingrandamentu
 Current Zoom Level: %@|Niveau de zoom actuel : %@|Livellu attuale d’ingrandamentu : %@
 Decrease Zoom Level|Réduire le niveau de zoom|Diminuisce u livellu d’ingrandamentu

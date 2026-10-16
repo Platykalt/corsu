@@ -7,6 +7,7 @@
     python3 tools/minecraft.py inventory [VERSION]  rewrite minecraft/java/inventory.tsv
     python3 tools/minecraft.py build [VERSION]      write dist/corsu-minecraft-java-<VERSION>.zip
     python3 tools/minecraft.py status               counts per category and status from inventory.tsv
+    python3 tools/minecraft.py texts [VERSION]      write the optional pack of splash texts and End Poem
     python3 tools/minecraft.py verify [VERSION]     render every string with the game's own code (needs a JDK)
 
 The translation lives in minecraft/java/co_fr.json. Mojang's own texts are never committed: `fetch` puts them in
@@ -20,11 +21,12 @@ import json
 import os
 from pathlib import Path
 import re
-import struct
 import sys
 import urllib.request
 import zipfile
-import zlib
+
+sys.path.insert(0, str(Path(__file__).resolve().parent.parent / 'src'))
+import minecraft as game_pack  # noqa: E402
 
 ROOT = Path(__file__).resolve().parent.parent
 HERE = ROOT / 'minecraft/java'
@@ -299,23 +301,21 @@ def verify(version):
         path = separator.join(str(item) for item in classpath)
         subprocess.run(['javac', '-nowarn', '-cp', path, '-d', build, str(ROOT / 'tools/minecraft/LangCheck.java')], check=True)
         # The game's logging writes logs/latest.log in the working directory: keep it in the temporary folder.
-        result = subprocess.run(['java', '-cp', build + separator + path, 'LangCheck', str(english), str(TRANSLATION)],
-                                cwd=build)
+        command = ['java', '-cp', build + separator + path, 'LangCheck', str(english)]
+        result = subprocess.run(command + [str(TRANSLATION)], cwd=build)
+        if result.returncode == 0:
+            # Then the pack as distributed: metadata through the game's codecs, language file from the zip.
+            game = json.loads((folder / 'game-version.json').read_text())['pack_version']
+            pack = build_path(version)
+            if not pack.exists():
+                build(version)
+            result = subprocess.run(command + [str(pack), str(game['resource_major']), str(game['resource_minor'])],
+                                    cwd=build)
     return result.returncode
 
 
-def png(size=64):
-    """pack.png: the white field and black band colours of the Corsican flag, without an image library."""
-    rows = []
-    for y in range(size):
-        row = bytearray([0])
-        for x in range(size):
-            row += bytes((30, 30, 30)) if abs(x - y) < size // 8 else bytes((245, 245, 245))
-        rows.append(bytes(row))
-    def chunk(kind, data):
-        return struct.pack('>I', len(data)) + kind + data + struct.pack('>I', zlib.crc32(kind + data))
-    return (b'\x89PNG\r\n\x1a\n' + chunk(b'IHDR', struct.pack('>IIBBBBB', size, size, 8, 2, 0, 0, 0))
-            + chunk(b'IDAT', zlib.compress(b''.join(rows), 9)) + chunk(b'IEND', b''))
+def build_path(version):
+    return ROOT / 'dist' / f'corsu-minecraft-java-{version}.zip'
 
 
 def build(version):
@@ -324,10 +324,6 @@ def build(version):
         raise SystemExit(f'{len(errors)} errors: run `python3 tools/minecraft.py check {version}` first')
     game = json.loads((cache(version) / 'game-version.json').read_text())
     major = game['pack_version']['resource_major']
-    english = source(version)
-    corsican = strict(TRANSLATION)
-    # Keys in the game's order; anything Mojang dropped stays out of the pack.
-    payload = {key: corsican[key] for key in english if key in corsican}
     mcmeta = {
         'pack': {
             'description': f'Lingua corsa · Corsu, Minecraft {version} · NOT AN OFFICIAL MINECRAFT PRODUCT',
@@ -336,24 +332,58 @@ def build(version):
         },
         'language': {LANGUAGE: {'name': 'Corsu', 'region': 'Corsica', 'bidirectional': False}},
     }
-    target = ROOT / 'dist' / f'corsu-minecraft-java-{version}.zip'
+    # Committed next to co_fr.json, so the Corsu installer builds the very same pack without Mojang's files.
+    (HERE / 'pack.mcmeta').write_text(json.dumps(mcmeta, ensure_ascii=False, indent=2) + '\n', encoding='utf-8')
+    target = build_path(version)
     target.parent.mkdir(exist_ok=True)
-    with zipfile.ZipFile(target, 'w', zipfile.ZIP_DEFLATED) as archive:
-        def add(name, data):
+    target.write_bytes(game_pack.make_pack((HERE / 'pack.mcmeta').read_bytes(), TRANSLATION.read_bytes(),
+                                           (HERE / 'LICENSE.txt').read_bytes()))
+    payload = strict(TRANSLATION)
+    print(f'{target} ({len(payload)} texts, resource pack format {major})')
+    return target
+
+
+def texts(version):
+    """The optional pack: Minecraft reads splashes.txt and end.txt whatever the language, so this pack changes them
+    for every language. It is kept apart from the language pack and never installed without being asked for."""
+    folder = fetch(version)
+    problems = []
+    for name in ('splashes.txt', 'end.txt'):
+        original = (folder / name).read_text(encoding='utf-8').split('\n')
+        corsican = (HERE / 'texts' / name).read_text(encoding='utf-8').split('\n')
+        if len(original) != len(corsican):
+            problems.append(f'{name}: {len(corsican)} lines, Minecraft has {len(original)}')
+        for number, (a, b) in enumerate(zip(original, corsican), 1):
+            if sorted(STYLE.findall(a)) != sorted(STYLE.findall(b)) or a.count('PLAYERNAME') != b.count('PLAYERNAME'):
+                problems.append(f'{name}:{number}: formatting codes or PLAYERNAME changed')
+    if problems:
+        raise SystemExit('\n'.join(problems))
+    game = json.loads((folder / 'game-version.json').read_text())
+    major = game['pack_version']['resource_major']
+    mcmeta = {'pack': {'description': f'Corsu: splash texts and End Poem in Corsican, every language · Minecraft {version}'
+                                      ' · NOT AN OFFICIAL MINECRAFT PRODUCT', 'min_format': major, 'max_format': major}}
+    import io
+    buffer = io.BytesIO()
+    with zipfile.ZipFile(buffer, 'w', zipfile.ZIP_DEFLATED) as archive:
+        for name, data in (('pack.mcmeta', json.dumps(mcmeta, ensure_ascii=False, indent=2) + '\n'),
+                           ('pack.png', game_pack.png()),
+                           ('assets/minecraft/texts/splashes.txt', (HERE / 'texts/splashes.txt').read_bytes()),
+                           ('assets/minecraft/texts/end.txt', (HERE / 'texts/end.txt').read_bytes()),
+                           ('LICENSE.txt', (HERE / 'texts/LICENSE.txt').read_bytes())):
             info = zipfile.ZipInfo(name, (2026, 1, 1, 0, 0, 0))
             info.compress_type = zipfile.ZIP_DEFLATED
+            info.external_attr = 0o644 << 16
             archive.writestr(info, data)
-        add('pack.mcmeta', json.dumps(mcmeta, ensure_ascii=False, indent=2) + '\n')
-        add('pack.png', png())
-        add(f'assets/minecraft/lang/{LANGUAGE}.json', json.dumps(payload, ensure_ascii=False, indent=2) + '\n')
-        add('LICENSE.txt', (HERE / 'LICENSE.txt').read_text(encoding='utf-8'))
-    print(f'{target} ({len(payload)} texts, resource pack format {major})')
+    target = ROOT / 'dist' / f'corsu-minecraft-java-texts-{version}.zip'
+    target.parent.mkdir(exist_ok=True)
+    target.write_bytes(buffer.getvalue())
+    print(target)
     return target
 
 
 def main():
     parser = argparse.ArgumentParser(description=__doc__.split('\n')[0])
-    parser.add_argument('command', choices=['fetch', 'check', 'diff', 'inventory', 'build', 'status', 'verify'])
+    parser.add_argument('command', choices=['fetch', 'check', 'diff', 'inventory', 'build', 'status', 'verify', 'texts'])
     parser.add_argument('versions', nargs='*')
     args = parser.parse_args()
     versions = args.versions or [VERSION]
@@ -373,6 +403,8 @@ def main():
         status()
     elif args.command == 'verify':
         sys.exit(verify(versions[0]))
+    elif args.command == 'texts':
+        texts(versions[0])
     else:
         build(versions[0])
 

@@ -93,3 +93,48 @@ Project check found file inconsistencies during automatic recovery. Select 'Help
 |Indentation|Indentazione
 |Clip suivant|Pezzu seguente
 |Taille relative|Dimensione relativa
+# Labels where the row written for Discord used a rarer or wrong form; Discord's own rows win over imported ones now.
+Language||Lingua
+Colour||Culore
+Create Channel||Creà un canale
+Secondary||Secundariu
+Status||Statu
+Choose a file||Sceglie un schedariu
+# Same family: faithful imported translations restored, and new proposals (written by an AI for Corsu, to review)
+# for French labels whose imported text answered a longer English label.
+|%s, greffons Nyquist|%s, moduli d’estensione Nyquist
+|Ouvrir &Milieu|Apre à u c&entru
+|Ouvrir &Droite|Apre à d&iritta
+|aLÉATOirE|À l’AzarDU
+|Réduire Volume &Enregistrement|Dimi&nuisce u vulume d’arregistramentu
+|roller|pattinaghju in linea
+|trail|corsa nant’à pista
+|Courriels sortants|Messaghji in esciuta
+|&Arguments :|&Argumenti :
+|Continuer avec|Cuntinuà cù
+|Marquer tout|Marcà tuttu
+|Aide en ligne|Aiutu in linea
+|Orientation vidéo|Orientazione video
+|Acquisition vidéo|Cattura video
+|Enregistrement automatique|Arregistramentu autumaticu
+|Saut de lecture|Saltu di lettura
+|Restaurer zoom|Risturà l’ingrandamentu
+|Enregistrer une copie...|Arregistrà una copia…
+|Zoom +|Ingrandà
+|Zoom -|Riduce
+|Pistes synchrones|Traccie sincrunizate
+|&Mot entier uniquement|Solu a &parolla sana
+|Mode ReplayGain|Modu ReplayGain
+|Lissage chromatique:|Allisciata cromatica :
+|Rembobiner 10s|Ritrusà 10 s
+|Compilation…|Compilazione…
+|Langage audio.|Lingua audio.
+|Sinc (bonne qualité)|Sinc (bona qualità)
+|Marge (en mm)|Margine (in mm)
+|Dossier spécifique|Cartulare specificu
+|Sur plusieurs lignes|Nant’à parechje linee
+|▼ Suivant|▼ Seguente
+|Importer un thème...|Impurtà un tema…
+# Imported labels whose winning translation fits only their own program.
+|Sélectionné|Selezziunatu
+|Désactivés|Disattivati

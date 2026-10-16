@@ -17,6 +17,11 @@ body:
     validations:
       required: true
   - type: input
+    id: key
+    attributes:
+      label: Clé (si vous la connaissez) · Key (if you know it)
+      description: Pour Minecraft, la clé de co_fr.json, par exemple « options.language » · For Minecraft, the co_fr.json key, e.g. "options.language".
+  - type: input
     id: proposal
     attributes:
       label: Corse proposé · Corsican you suggest

@@ -15,7 +15,16 @@ pack ne touche pas aux fichiers du jeu : on l'active et on le retire depuis le m
 
 Ce pack n'est pas un produit officiel Minecraft ; il n'est ni approuvé par Mojang ou Microsoft, ni associé à eux.
 
-## Installer
+## Installer avec l'application Corsu (automatique)
+
+Si Minecraft est installé, l'application Corsu propose **Minecraft**. Fermez Minecraft, cochez-le et installez :
+Corsu copie le pack `corsu-minecraft-java.zip` dans le dossier `resourcepacks` de chaque dossier de jeu trouvé (le
+lanceur officiel, et les instances de Prism Launcher et MultiMC), l'active, et met `lang:co_fr` dans `options.txt`.
+Au prochain lancement, Minecraft est en corse. L'interrupteur de l'application remet la langue et les packs d'avant
+sans toucher aux autres réglages du jeu ; désinstaller Corsu retire aussi le pack. Ligne de commande :
+`python3 src/installer.py --components minecraft`.
+
+## Installer à la main
 
 1. Téléchargez `corsu-minecraft-java-26.3.zip`, sans le décompresser.
 2. Dans Minecraft, ouvrez **Options… → Packs de ressources… → Ouvrir le dossier des packs**, et déposez-y le fichier.
@@ -44,13 +53,24 @@ Tout ce que Minecraft 26.3 tire de ses fichiers de langue : menus, réglages, co
 biomes, effets, enchantements, progrès, statistiques, sous-titres, messages de mort, Realms, narrateur. Si une
 chaîne manquait, le jeu afficherait l'anglais à sa place.
 
-Ne passent **pas** par les fichiers de langue, et restent donc en anglais :
+Trois cas différents :
 
-- les phrases d'accueil jaunes du menu (`texts/splashes.txt`), le poème de fin et le générique (`texts/end.txt`,
-  `credits.json`, `postcredits.txt`) : Minecraft les lit sans tenir compte de la langue choisie, et les remplacer
-  les changerait pour toutes les langues ;
-- le lanceur Minecraft, traduit séparément par Mojang (pas de corse) ;
-- les textes envoyés par un serveur, écrits dans un monde ou un livre, ou ajoutés par des mods et des packs de données.
+- **Non conditionnables par langue** : les phrases d'accueil jaunes du menu (`texts/splashes.txt`), le poème de fin
+  (`texts/end.txt`), le générique (`credits.json`, `postcredits.txt`). Un pack de ressources *peut* les remplacer,
+  mais Minecraft n'en a qu'une version, lue quelle que soit la langue choisie : les remplacer les change pour toutes
+  les langues. Corsu les traduit donc dans un **pack facultatif séparé** (voir plus bas), jamais dans le pack de langue.
+- **Composant distinct, non couvert** : le lanceur Minecraft (Microsoft), traduit par Mojang sur Crowdin, où le corse
+  est une langue cible mais n'est pas publié. Il ne fait pas partie du jeu et Corsu ne le modifie pas.
+- **Hors du jeu de base** : les textes envoyés par un serveur, écrits dans un monde ou un livre, ou ajoutés par des
+  mods et des packs de données.
+
+## Pack facultatif : phrases d'accueil et poème de fin
+
+`corsu-minecraft-java-texts-26.3.zip` (construit par `python3 tools/minecraft.py texts`) remplace les 454 phrases
+d'accueil et le poème de fin par leur traduction corse. **Il les change pour toutes les langues**, puisque Minecraft
+n'en lit qu'une version : ne l'activez que si cela vous convient, et retirez-le pour retrouver l'anglais. Corsu ne
+l'installe jamais de lui-même. Le poème de fin est traduit du texte de Julian Gough, placé par lui sous CC0 ; les
+phrases d'accueil traduisent un texte de Mojang. Choix et doutes : [minecraft/java/texts/NOTES.md](../../minecraft/java/texts/NOTES.md).
 
 ## Autres versions
 
@@ -65,6 +85,10 @@ Bedrock accepte aussi une langue ajoutée par un pack global (`texts/languages.j
 `texts/co_FR.lang`), sous Windows, Android et iOS. Ce n'est pas encore fait : Bedrock a ses propres clés (environ
 13 000 lignes) et ne réutilise pas les fichiers Java. Sur consoles, importer un pack est en général impossible, et
 désactiver le pack alors que la langue est choisie fait planter le jeu.
+
+## Tester en jeu
+
+Vous avez Minecraft ? La marche à suivre et les écrans à vérifier : [Tester Minecraft en corse](minecraft-tester.md).
 
 ## Corriger une traduction
 

@@ -1,0 +1,1174 @@
+# Short source labels (1-3 words) with several Corsican translations across lexicon files; the first column's winner comes from an imported program.
+# Queue for review: a different translation may be right for another program. source	winner	winner_section	variants	all_variants
+Try Again	Ripruvà	Firefox for Android, Focu	2	pruvà torna / ripruvà
+Réessayer	Ripruvà	Firefox for Android, Focu	2	pruvà torna / ripruvà
+Retour (recommandé)	Ritornu (ricumandatu)	Firefox for Android, Focu	2	ritornu (ricumandatu) / vultà (ricumandatu)
+Go Back	Ritornu	Firefox for Android, Focu	2	ritornu / vultà
+Retour	Ritornu	Firefox for Android, Focu	4	&ritornu / ritornu / ritrusà / vultà
+Mode hors connexion	Modu fora di cunnessione	Firefox for Android, Focu	2	modu fora di cunnessione / modu senza cunnessione
+Reload	Attualizà	Firefox for Android, Focu	3	attualizà / ricaricà / rinfriscà
+Actualiser	Attualizà	Firefox for Android, Focu	3	attualizà / ricaricà / rinfrescà
+Adresse invalide	Indirizzu inaccettevule	Firefox for Android, Focu	2	indirizzu inaccettevule / indirizzu invalidu
+Fichier introuvable	Schedariu micca trovu	Firefox for Android, Focu	2	schedariu micca trovu / u schedariu ùn esiste micca
+Menu	Listinu	Firefox for Android, Focu	2	listinu / menù
+Sélectionné	Sopralineatu	Firefox for Android, Focu	2	selezziunatu / sopralineatu
+Extensions	Estensioni	Firefox for Android, Focu	2	estensioni / stinzioni
+Gestionnaire d'extensions	Ghjestiunariu d’estensioni	Firefox for Android, Focu	2	ghjestiunariu di mudulli aghjunti / ghjestiunariu d’estensioni
+Effacer	Squassà	Firefox for Android, Focu	3	caccià / sguassà / squassà
+Loading	Caricamentu…	Firefox for Android, Focu	2	caricamentu / caricamentu…
+Supprimer la suggestion	Caccià a suggestione	Firefox for Android, Focu	2	caccià a suggestione / squassà u suggerimentu
+Close	Chjode	Firefox for Android, Focu	3	chjode / chjusura / fine
+Fermer	Chjode	Firefox for Android, Focu	2	chjode / ricusà
+Liens	Liami	Firefox for Android, Focu	2	liami / ligami
+Dismiss	Ricusà	Firefox for Android, Focu	2	ignurà / ricusà
+Ignorer	Ricusà	Firefox for Android, Focu	4	ignurà / ricusà / scartà / tralascià
+Recherche ou adresse	Ricerca o indirizzu	Firefox for Android, Focu	2	circà o stampittà un indirizzu / ricerca o indirizzu
+informations d'authentification	infurmazioni d’autenticazione	Firefox for Android, Focu	2	infurmazioni d'autenticazione / infurmazioni d’autenticazione
+Auteur	Autore	Firefox for Android, Focu	2	autore / metadata d'autore
+Homepage	Pagina d’accolta	Firefox for Android, Focu	2	pagina d'accolta / pagina d’accolta
+Page d'accueil	Pagina d’accolta	Firefox for Android, Focu	2	pagina d'accolta / pagina d’accolta
+Rating	Apprezzazione	Firefox for Android, Focu	4	apprezzazione / percentuale / valutazione / valutazioni
+Appréciation	Apprezzazione	Firefox for Android, Focu	2	apprezzamentu / apprezzazione
+On	Attivatu	Firefox for Android, Focu	4	attivata / attivatu / attivu / iè
+Enabled	Attivatu	Firefox for Android, Focu	3	attivata / attivate / attivatu
+Disabled	Disattivatu	Firefox for Android, Focu	3	disattivata / disattivate / disattivatu
+Désactivés	Disattivatu	Firefox for Android, Focu	2	disattivati / disattivatu
+Supprimer	Caccià	Firefox for Android, Focu	3	caccià / dispiazzà in a curbella / squassà
+Learn more	Sapene di più	Firefox for Android, Focu	2	per sapene di più / sapene di più
+En savoir plus	Sapene di più	Firefox for Android, Focu	2	per sapene di più / sapene di più
+Annuler	Abbandunà	Firefox for Android, Focu	4	&abbandunà / abbandunà / chjode / ùn vocu inlocu
+Add-ons	Moduli addiziunali	Firefox for Android, Focu	2	moduli addiziunali / moduli cumplementarii
+Modules complémentaires	Moduli addiziunali	Firefox for Android, Focu	2	moduli addiziunali / moduli cumplementarii
+Update	Mette à livellu	Firefox for Android, Focu	3	aghjurnà / mette à livellu / mudificà
+Mettre à jour	Mette à livellu	Firefox for Android, Focu	4	aghjurnà / mette à livellu / mudificà / rinnovà subitu
+Successfully updated	Mudificazione riesciuta	Firefox for Android, Focu	2	messa à ghjornu riesciuta / mudificazione riesciuta
+Error	Sbagliu	Firefox for Android, Focu	2	errore / sbagliu
+Erreur	Sbagliu	Firefox for Android, Focu	4	errore / fiascu / sbaglii / sbagliu
+OK	Vai	Firefox for Android, Focu	2	va bè / vai
+Open	Apre	Firefox for Android, Focu	3	apertura / apre / iniziu
+Ouvrir dans l'application	Apre in l’appiecazione	Firefox for Android, Focu	2	apre in l'appiecazione / apre in l’appiecazione
+None	Nisunu	Firefox for Android, Focu	2	nisuna / nisunu
+Aucune	Nisunu	Firefox for Android, Focu	2	nisuna / nisunu
+Yes	Sì	Firefox for Android, Focu	2	iè / sì
+Oui	Sì	Firefox for Android, Focu	4	&sì / iè / sì / sì, per piacè
+No	Nò	Firefox for Android, Focu	2	innò / nò
+Non	Nò	Firefox for Android, Focu	3	innò / innò, vi ringraziemu / nò
+Aller à l'onglet	Passà à l’unghjetta	Firefox for Android, Focu	2	andà à l'unghjetta / passà à l’unghjetta
+Copier le lien	Cupià u liame	Firefox for Android, Focu	2	cupià u liame / cupià u ligame
+Enregistrer l'image	Arregistrà a fiura	Firefox for Android, Focu	2	arregistrà a fiura / arregistrà u ritrattu
+Copier l'image	Cupià a fiura	Firefox for Android, Focu	2	cupià a fiura / cupià u ritrattu
+Afficher	Affissà	Firefox for Android, Focu	2	affissà / palisà
+Copier l'adresse e-mail	Cupià l’indirizzu elettronicu	Firefox for Android, Focu	2	cupià l'indirizzu email / cupià l’indirizzu elettronicu
+Search	Ricercà	Firefox for Android, Focu	3	circà / ricerca / ricercà
+Rechercher	Ricercà	Firefox for Android, Focu	3	circà / ricerca / ricercà
+Email	Mandà un messaghju	Firefox for Android, Focu	3	indirizu elettronicu / indirizzu email / mandà un messaghju
+Envoyer un e-mail	Mandà un messaghju	Firefox for Android, Focu	2	mandà un email / mandà un messaghju
+Refresh	Attualizà	Firefox for Android, Focu	2	attualizà / rinfrescà
+More options	Ozzioni addiziunale	Firefox for Android, Focu	2	altre opzioni / ozzioni addiziunale
+Options supplémentaires	Ozzioni addiziunale	Firefox for Android, Focu	2	altre opzioni / ozzioni addiziunale
+Télécharger	Scaricà	Firefox for Android, Focu	2	scaricà / scaricà avà
+Resume	Cuntinuà	Firefox for Android, Focu	2	cuntinuà / ripiglià
+Reprendre	Cuntinuà	Firefox for Android, Focu	2	cuntinuà / ripiglià
+Sponsored	Spunsurizatu	Firefox for Android, Focu	2	spunsurizata / spunsurizatu
+Importation des marque-pages	Impurtazione di l’indette	Firefox for Android, Focu	2	impurtazione di l'indette / impurtazione di l’indette
+Media	Multimedià	Firefox for Android, Focu	3	cuntenutu multimedia / media / multimedià
+Multimédia	Multimedià	Firefox for Android, Focu	2	multimedia / multimedià
+Play	Lettura	Firefox for Android, Focu	3	ghjucà / lettura / sunà
+Lecture	Lettura	Firefox for Android, Focu	2	lettura / ripruduzzione
+Suivant	Seguente	Firefox for Android, Focu	2	circà a seguente / seguente
+Précédent	Precedente	Firefox for Android, Focu	2	navigazione in daretu / precedente
+Set	Definisce	Firefox for Android, Focu	2	definisce / definite
+Valider	Definisce	Firefox for Android, Focu	4	definisce / vai / validazione / validà
+Sign in	Cunnettesi	Firefox for Android, Focu	2	autenticazione / cunnettesi
+Se connecter	Cunnettesi	Firefox for Android, Focu	3	autenticazione / cunnettassi / cunnettesi
+Username	Nome d’utilizatore	Firefox for Android, Focu	2	nome d'utilizatore / nome d’utilizatore
+Nom d'utilisateur	Nome d’utilizatore	Firefox for Android, Focu	2	nome d'utilizatore / nome d’utilizatore
+Password	Parolla d’intesa	Firefox for Android, Focu	2	parolla d'accessu / parolla d’intesa
+Mot de passe	Parolla d’intesa	Firefox for Android, Focu	2	parolla d'accessu / parolla d’intesa
+Not now	Micca subitu	Firefox for Android, Focu	2	micca subitu / più tardi
+Plus tard	Micca subitu	Firefox for Android, Focu	3	dopu / micca subitu / più tardi
+Enregistrer	Arregistrà	Firefox for Android, Focu	2	arregistrà / vai
+Are you sure?	Cunfirmazione	Firefox for Android, Focu	4	cunfirmazione / cuntinuà a suppressione ? / sì sicuru(a) ? / voli daveru cuntinuà ?
+Quitter	Abbandunà	Firefox for Android, Focu	3	abbandunà / esce / vai
+Oct	utto.	Firefox for Android, Focu	2	ottale / utto.
+Dec	dice.	Firefox for Android, Focu	2	decimale / dice.
+Manage passwords	Amministrà e parolle d’intesa	Firefox for Android, Focu	2	amministrà e parolle d’intesa / gestisce e parolle d'intesa
+Saved passwords	Parolle d’intesa arregistrate	Firefox for Android, Focu	2	parolle d'accessu arregistrate / parolle d’intesa arregistrate
+Upload	Incaricà	Firefox for Android, Focu	3	caricà / incaricà / mandà un schedariu
+Envoyer	Incaricà	Firefox for Android, Focu	2	incaricà / mandà
+Gérer les adresses	Urganizà l’indirizzi	Firefox for Android, Focu	2	gestisce l'indirizzi / urganizà l’indirizzi
+Police sans empattement	Grafia senza patta	Firefox for Android, Focu	2	caratteru senza grazie / grafia senza patta
+Police avec empattement	Grafia cù patta	Firefox for Android, Focu	2	caratteru cù grazie / grafia cù patta
+Search the web	Ricercà nant’à u web	Firefox for Android, Focu	2	circà nant'à u web / ricercà nant’à u web
+Go to settings	Andà à i parametri	Firefox for Android, Focu	2	accede à u parametru / andà à i parametri
+Ouvrir les paramètres	Andà à i parametri	Firefox for Android, Focu	2	andà à i parametri / apre i parametri
+Unknown error	Sbagliu scunnisciutu	Firefox for Android, Focu	2	errore scunnisciutu / sbagliu scunnisciutu
+Erreur inconnue	Sbagliu scunnisciutu	Firefox for Android, Focu	2	errore scunnisciutu / sbagliu scunnisciutu
+Try again	Pruvà torna	Firefox for Android, Focu	2	pruvà torna / riprova
+Réessayez plus tard.	Pruvate torna un’altra volta.	Firefox for Android, Focu	2	pruvate torna più tardi. / pruvate torna un’altra volta.
+Gestures	Mosse	Firefox for Android, Focu	2	gesti / mosse
+Low	Bassa	Firefox for Android, Focu	2	bassa / bassu
+Medium	Mediana	Firefox for Android, Focu	3	mediana / medianu / mediu
+Moyenne	Mediana	Firefox for Android, Focu	3	media / mediana / medianu
+High	Alta	Firefox for Android, Focu	2	alta / altu
+Connexion	Cunnettesi	Firefox for Android, Focu	3	cunnessione / cunnettassi / cunnettesi
+Tabs	Unghjette	Firefox for Android, Focu	2	tabulazioni / unghjette
+Plantages	Accidenti	Firefox for Android, Focu	2	accidenti / crash
+Rapports de plantage	Raporti d’accidente	Firefox for Android, Focu	2	raporti d’accidente / rapporti di crash
+Share via	Sparte via	Firefox for Android, Focu	2	sparte cù / sparte via
+New tab	Nova unghjetta	Firefox for Android, Focu	2	nova unghjetta / unghjetta nova
+Nouvel onglet	Nova unghjetta	Firefox for Android, Focu	2	nova unghjetta / unghjetta nova
+Nouvel onglet privé	Nova unghjetta privata	Firefox for Android, Focu	2	nova unghjetta privata / unghjetta privata nova
+Fermer l'onglet	Chjode l’unghjetta	Firefox for Android, Focu	2	chjode l'unghjetta / chjode l’unghjetta
+Dupliquer l'onglet	Duppià l’unghjetta	Firefox for Android, Focu	2	duplicà l'unghjetta / duppià l’unghjetta
+Plus d'options	Ozzioni addiziunale	Firefox for Android, Focu	2	altre ozzioni / ozzioni addiziunale
+Search history	Ricercà in a cronolugia	Firefox for Android, Focu	2	cronolugia di e ricerche / ricercà in a cronolugia
+Rechercher dans l'historique	Ricercà in a cronolugia	Firefox for Android, Focu	2	circà in a cronolugia / ricercà in a cronolugia
+Search tabs	Ricercà in l’unghjette	Firefox for Android, Focu	2	circà in l'unghjette / ricercà in l’unghjette
+Enter search terms	Stampittate i termini à ricercà	Firefox for Android, Focu	2	scrivite e parolle da circà / stampittate i termini à ricercà
+Add new collection	Creà una nova cullezzione	Firefox for Android, Focu	2	aghjunghje una nova cullezzione / creà una nova cullezzione
+Name	Nome	Firefox for Android, Focu	2	nome / nome cumpletu
+Nom	Nome	Firefox for Android, Focu	2	nome / nome di flussu
+Sélectionner une collection	Selezziunà a cullezzione	Firefox for Android, Focu	2	selezziunà a cullezzione / selezziunà una cullezzione
+Bookmarks	Indette	Firefox for Android, Focu	2	indette / messaghji marcati
+Afficher les options	Fighjà l’ozzioni	Firefox for Android, Focu	2	affissà l'ozzioni / fighjà l’ozzioni
+Passwords	Parolle d’intesa	Firefox for Android, Focu	2	parolle d'accessu / parolle d’intesa
+Mots de passe	Parolle d’intesa	Firefox for Android, Focu	2	parolle d'accessu / parolle d’intesa
+Tout afficher	Tuttu affissà	Firefox for Android, Focu	2	affissà tuttu / tuttu affissà
+Back	Pagina precedente	Firefox for Android, Focu	3	pagina precedente / ritornu / vultà
+Page précédente	Pagina precedente	Firefox for Android, Focu	2	pagina insù / pagina precedente
+Forward	Pagina seguente	Firefox for Android, Focu	5	avanzà / dopu / pagina seguente / seguente / trasferisce
+Page suivante	Pagina seguente	Firefox for Android, Focu	2	pagina inghjò / pagina seguente
+Arrêter	Piantà	Firefox for Android, Focu	2	&interrompe / piantà
+Gérer les extensions	Amministrà l’estensioni	Firefox for Android, Focu	2	amministrà l’estensioni / gestisce l'estensioni
+Plus	Più	Firefox for Android, Focu	2	di più / più
+Désactivé temporairement	Disattivata timpurariamente	Firefox for Android, Focu	2	disattivata timpurariamente / disattivatu pruvisoriamente
+Bibliothèque	Bibliuteca	Firefox for Android, Focu	2	bibbiuteca / bibliuteca
+Fermer le menu	Chjode u listinu	Firefox for Android, Focu	2	chjode u listinu / chjode u menù
+Marquer cette page	Indettà a pagina	Firefox for Android, Focu	4	aghjunghje sta pagina à l'indette / indettà a pagina / indettà sta pagina / indittà sta pagina
+Edit bookmark	Mudificà l’indetta	Firefox for Android, Focu	2	mudificà l'indetta / mudificà l’indetta
+Modifier le marque-page	Mudificà l’indetta	Firefox for Android, Focu	2	mudificà l'indetta / mudificà l’indetta
+Enregistrer en PDF	Arregistrà cum’è PDF	Firefox for Android, Focu	2	arregistrà cum’è pdf / arregistrà in pdf
+Plus d'infos	Sapene di più	Firefox for Android, Focu	2	più d'infurmazioni / sapene di più
+Contrôles de l'IA	Cuntrolli di l’IA	Firefox for Android, Focu	2	cuntrolli di l'ia / cuntrolli di l’ia
+Recherche %s	Ricercà in %s	Firefox for Android, Focu	2	ricerca cù %s / ricercà in %s
+Search settings	Parametri di ricerca	Firefox for Android, Focu	2	circà in i parametri / parametri di ricerca
+No thanks	Innò, vi ringraziu	Firefox for Android, Focu	3	innò, grazie / innò, vi ringraziemu / innò, vi ringraziu
+Non merci	Innò, vi ringraziu	Firefox for Android, Focu	2	innò, grazie / innò, vi ringraziu
+Done	Compiu	Firefox for Android, Focu	3	compiu / fattu / va bè !
+Terminé	Compiu	Firefox for Android, Focu	2	compiu / fattu
+Gérer	Amministrà	Firefox for Android, Focu	2	amministrà / gestisce
+Gérer les paramètres	Amministrà i parametri	Firefox for Android, Focu	2	amministrà i parametri / gestisce i parametri
+Démarrer la synchronisation	Lancià a sincrunizazione	Firefox for Android, Focu	2	lancià a sincrunizazione / principià a sincrunizazione
+Skip	Ignurà	Firefox for Android, Focu	3	ignurà / salta / tralascià
+Manage settings	Amministrà i parametri	Firefox for Android, Focu	2	amministrà i parametri / gestisce i parametri
+Top	Insù	Firefox for Android, Focu	3	cima / insù / quassù
+En haut	Insù	Firefox for Android, Focu	2	in cima / insù
+Bottom	Inghjò	Firefox for Android, Focu	2	fondu / inghjò
+En bas	Inghjò	Firefox for Android, Focu	2	in fondu / inghjò
+Choisissez un thème	Sciglite un tema	Firefox for Android, Focu	2	sceglite un tema / sciglite un tema
+No Thanks	Innò, vi ringraziu	Firefox for Android, Focu	2	innò, grazie / innò, vi ringraziu
+Activer les notifications	Attivà e nutificazioni	Firefox for Android, Focu	2	attivate e nutificazioni / attivà e nutificazioni
+Général	Generale	Firefox for Android, Focu	3	generale / genericu / glubale
+About	Apprupositu	Firefox for Android, Focu	2	apprupositu / à prupositu
+À propos	Apprupositu	Firefox for Android, Focu	2	apprupositu / à prupositu
+Recherche	Ricerca	Firefox for Android, Focu	2	ricerca / ricercà
+Advanced	Espertu	Firefox for Android, Focu	2	avanzatu / espertu
+Site settings	Parametri di i siti	Firefox for Android, Focu	2	parametri di i siti / parametri di situ
+Mode HTTPS uniquement	Modu solu HTTPS	Firefox for Android, Focu	2	modu https solu / modu solu https
+Off	Disattivata	Firefox for Android, Focu	5	disattivata / disattivatu / inattivu / innò / nò
+Désactivé	Disattivata	Firefox for Android, Focu	3	disattivata / disattivatu / nisuna
+App icon	Icona di l’appiecazione	Firefox for Android, Focu	2	icona d'appiecazione / icona di l’appiecazione
+Icône de l'application	Icona di l’appiecazione	Firefox for Android, Focu	2	icona di l'appiecazione / icona di l’appiecazione
+Personnaliser	Persunalizà	Firefox for Android, Focu	2	persunalizatu / persunalizà
+Langues	Lingua	Firefox for Android, Focu	2	lingua / lingue
+Collecte de données	Culletta di dati	Firefox for Android, Focu	2	culletta di dati / racolta di dati
+Suggestions de sponsors	Suggestioni da i spunsurizatori	Firefox for Android, Focu	2	suggerimenti di sponsor / suggestioni da i spunsurizatori
+Notifications	Nutificazioni	Firefox for Android, Focu	2	nutificazione / nutificazioni
+Allowed	Permesse	Firefox for Android, Focu	2	permesse / permessu
+Not allowed	Micca permesse	Firefox for Android, Focu	2	micca permesse / micca permessu
+Non autorisé	Micca permessu	Firefox for Android, Focu	2	micca autorizatu / micca permessu
+Fonds d'écran	Sfonduli di screnu	Firefox for Android, Focu	2	fondi di screnu / sfonduli di screnu
+Default	Predefinitu	Firefox for Android, Focu	2	predefinita / predefinitu
+Par défaut	Predefinitu	Firefox for Android, Focu	4	predefinita / predefinitu / predefinizioni / senza nivulu
+Purple	Purpura	Firefox for Android, Focu	2	purpura / purpurinu
+Violet	Purpura	Firefox for Android, Focu	2	purpura / viulettu
+Violet foncé	Purpura scura	Firefox for Android, Focu	2	purpura scura / viulettu scuru
+Sunrise	Spuntà di u sole	Firefox for Android, Focu	2	alba / spuntà di u sole
+Coucher de soleil	Trapughjata di u sole	Firefox for Android, Focu	2	tramontu / trapughjata di u sole
+Crépuscule	Attrachju	Firefox for Android, Focu	2	attrachju / crepusculu
+Aurores boréales	Albore boreale	Firefox for Android, Focu	2	albore boreale / auròre bureale
+Pride	Fierezze	Firefox for Android, Focu	2	fierezze / fiertà
+Fiertés	Fierezze	Firefox for Android, Focu	2	fierezze / fiertà
+Featured	Cunsigliate	Firefox for Android, Focu	2	cunsigliate / in stu mumentu
+Changer l'icône	Cambià l’icona	Firefox for Android, Focu	2	cambià l'icona / cambià l’icona
+Parcourir les extensions	Esplurà l’estensioni	Firefox for Android, Focu	2	esplurà l’estensioni / sfuglià l'estensioni
+Manage account	Ghjestione di u contu	Firefox for Android, Focu	2	gestisce u contu / ghjestione di u contu
+Gérer le compte	Ghjestione di u contu	Firefox for Android, Focu	2	gestisce u contu / ghjestione di u contu
+Open tabs	Apre l’unghjette	Firefox for Android, Focu	2	apre l’unghjette / unghjette aperte
+Onglets ouverts	Apre l’unghjette	Firefox for Android, Focu	2	apre l’unghjette / unghjette aperte
+Sign out	Scunnettesi	Firefox for Android, Focu	2	scunnettassi / scunnettesi
+Déconnexion	Scunnettesi	Firefox for Android, Focu	3	chjusura di sessione / scunnette / scunnettesi
+Nom de l'appareil	Nome di l’apparechju	Firefox for Android, Focu	2	nome di l’apparechju / nome di u dispusitivu
+Syncing…	Sincrunizazione…	Firefox for Android, Focu	2	sincrunizazione in corsu… / sincrunizazione…
+Payment methods	Metode di pagamentu	Firefox for Android, Focu	2	metode di pagamentu / mezzi di pagamentu
+Moyens de paiement	Metode di pagamentu	Firefox for Android, Focu	2	metode di pagamentu / mezzi di pagamentu
+Supprimer le compte	Caccià u contu	Firefox for Android, Focu	2	caccià u contu / squassà u contu
+Simple	Simplice	Firefox for Android, Focu	2	salvaguardia simplice / simplice
+Add bookmark	Aghjunghje un’indetta	Firefox for Android, Focu	2	aghjunghje un'indetta / aghjunghje un’indetta
+Ajouter un marque-page	Aghjunghje un’indetta	Firefox for Android, Focu	2	aghjunghje un'indetta / aghjunghje un’indetta
+Menu des marque-pages	Listinu di l’indette	Firefox for Android, Focu	2	listinu di l’indette / menù di l'indette
+Bookmarks Toolbar	Barra d’attrezzi di l’indette	Firefox for Android, Focu	2	barra di indette / barra d’attrezzi di l’indette
+Barre personnelle	Barra d’attrezzi di l’indette	Firefox for Android, Focu	2	barra di indette / barra d’attrezzi di l’indette
+Other Bookmarks	Altre indette	Firefox for Android, Focu	2	altre indette / altri indette
+Autres marque-pages	Altre indette	Firefox for Android, Focu	2	altre indette / altri indette
+Ouvrir les onglets	Apre l’unghjette	Firefox for Android, Focu	2	apre l'unghjette / apre l’unghjette
+Afficher l'historique complet	Affissà a cronolugia sana	Firefox for Android, Focu	2	affissà a cronolugia cumpleta / affissà a cronolugia sana
+Grid	Quadrittere	Firefox for Android, Focu	2	griglia / quadrittere
+Grille	Quadrittere	Firefox for Android, Focu	2	griglia / quadrittere
+Fermer les onglets	Chjode l’unghjette	Firefox for Android, Focu	2	chjode l'unghjette / chjode l’unghjette
+Active	Attivi	Firefox for Android, Focu	3	attive / attivi / attivu
+Activées	Attivi	Firefox for Android, Focu	2	attivate / attivi
+Ajouter un onglet	Aghjunghje un’unghjetta	Firefox for Android, Focu	2	aghjunghje un'unghjetta / aghjunghje un’unghjetta
+Tout sélectionner	Tuttu selezziunà	Firefox for Android, Focu	3	selezziunà tuttu / t&uttu selezziunà / tuttu selezziunà
+Aucune correspondance trouvée.	Ùn si trova alcuna currispundenza.	Firefox for Android, Focu	2	nisuna currispundenza truvata. / ùn si trova alcuna currispundenza.
+Nouveau groupe d'onglets	Novu gruppu d’unghjette	Firefox for Android, Focu	2	gruppu di unghjette novu / novu gruppu d’unghjette
+Yellow	Ghjallu	Firefox for Android, Focu	2	ghjallu / giallu
+Jaune	Ghjallu	Firefox for Android, Focu	2	ghjallu / giallu
+Pink	Rusulatu	Firefox for Android, Focu	2	rusulatu / rusulinu
+Rose	Rusulatu	Firefox for Android, Focu	2	rusulatu / rusulinu
+Pourpre	Purpura	Firefox for Android, Focu	2	purpura / purpurinu
+Undo	Abbandunà	Firefox for Android, Focu	2	abbandunà / abbandunà l'azzione
+Older	Più vechju	Firefox for Android, Focu	2	più antichi / più vechju
+Échec du téléchargement	Fiascu di u scaricamentu	Firefox for Android, Focu	2	fiascu di u scaricamentu / scaricamentu fiascatu
+No results found	Nisunu risultatu trovu	Firefox for Android, Focu	2	alcunu risultatu trovu / nisunu risultatu trovu
+Aucun résultat	Nisunu risultatu trovu	Firefox for Android, Focu	3	nisun risultatu / nisunu risultatu / nisunu risultatu trovu
+All	Tutti	Firefox for Android, Focu	2	tutti / tuttu
+Images	Fiure	Firefox for Android, Focu	2	fiure / ritratti
+Videos	Filmetti	Firefox for Android, Focu	2	filmetti / videò
+Vidéos	Filmetti	Firefox for Android, Focu	2	filmetti / videò
+Documents	Ducumenti	Firefox for Android, Focu	2	ducumenti / finestra
+URL	Indirizzu web	Firefox for Android, Focu	2	indirizzu web / metadata d'url
+Envoyer le rapport	Mandà u raportu	Firefox for Android, Focu	2	mandà u ghjurnale di i messaghji / mandà u raportu
+Signalement envoyé	Raportu mandatu	Firefox for Android, Focu	2	raportu mandatu / signalamentu mandatu
+Aperçu du signalement	Fighjulata di u signalamentu	Firefox for Android, Focu	2	fighjulata di u signalamentu / previsualizazione di u signalamentu
+Contenus manquants	Cuntenutu assente	Firefox for Android, Focu	2	cuntenuti mancanti / cuntenutu assente
+Autre chose	Altre cose	Firefox for Android, Focu	2	altra cosa / altre cose
+Restaurer l'onglet	Risturà l’unghjetta	Firefox for Android, Focu	2	risturà l'unghjetta / risturà l’unghjetta
+Ajouter un dossier	Aghjunghje un cartulare	Firefox for Android, Focu	3	aghjunghje un cartulare / aghjunghje un cartulare novu / aghjunghje un chjassu persunalizatu
+Move	Dispiazzà	Firefox for Android, Focu	2	dispiazzà / spustà
+Déplacer	Dispiazzà	Firefox for Android, Focu	2	dispiazzà / spustà
+Sélectionner un dossier	Selezziunà un cartulare	Firefox for Android, Focu	2	selezziunà un cartulare / selezziunà un sfugliaghju
+Invalid URL	Indirizzu inaccettevule	Firefox for Android, Focu	2	indirizzu inaccettevule / indirizzu web inaccettevule
+Remonter	Navigà insù	Firefox for Android, Focu	2	navigazione in daretu / navigà insù
+Supprimer le marque-page	Squassà l’indetta	Firefox for Android, Focu	3	caccià l’indetta / squassà l'indetta / squassà l’indetta
+Nouveau dossier	Novu cartulare	Firefox for Android, Focu	3	aghjunghje un sfugliaghju / cartulare novu / novu cartulare
+Go to Settings	Andà à i parametri	Firefox for Android, Focu	2	andà in i parametri / andà à i parametri
+Clear permissions	Rivucà i permessi	Firefox for Android, Focu	2	rivucà i permessi / squassà i permessi
+Autoplay	Leghje autumaticamente l’elementi multimedià	Firefox for Android, Focu	2	leghje autumaticamente l’elementi multimedià / lettura autumatica
+Camera	Apparechju-fotò	Firefox for Android, Focu	2	apparechju-fotò / videocamera
+Microphone	Microfonu	Firefox for Android, Focu	2	microfonu / micrufonu
+Location	Lucalizazione	Firefox for Android, Focu	2	lucalizazione / piazza
+Cookies intersites	Canistrelli intersiti	Firefox for Android, Focu	2	canistrelli intersiti / cookies trà siti
+Blocked	Bluccatu	Firefox for Android, Focu	3	bluccata / bluccati / bluccatu
+Désactivée	Disattivata	Firefox for Android, Focu	2	disattivata / inattivu
+Standard	Classica	Firefox for Android, Focu	2	classica / classicu
+Strict	Severa	Firefox for Android, Focu	2	severa / severu
+Stricte	Severa	Firefox for Android, Focu	2	severa / stretta
+Custom	Persunalizata	Firefox for Android, Focu	3	persunalizata / persunalizatu / persunalizà
+Tout désélectionner	Ùn selezziunà nunda	Firefox for Android, Focu	2	deselezziunà tuttu / ùn selezziunà nunda
+View	Affissà	Firefox for Android, Focu	2	affissà / vista
+Send to device	Mandà à l’apparechju	Firefox for Android, Focu	2	mandà à l’apparechju / mandà à un apparechju
+Recently used	Impiegate pocu fà	Firefox for Android, Focu	2	aduprati pocu fà / impiegate pocu fà
+Récemment utilisés	Impiegate pocu fà	Firefox for Android, Focu	2	aduprati pocu fà / impiegate pocu fà
+Copy to clipboard	Cupià in u preme’papei	Firefox for Android, Focu	3	cupià in l'appunti / cupià in u preme’papei / cupià ver di u preme’papei
+Copied to clipboard	Cupiatu in u preme’papei	Firefox for Android, Focu	2	cupiata in u preme’papei / cupiatu in u preme’papei
+Offline	Fora di cunnessione	Firefox for Android, Focu	2	fora di cunnessione / scunnessu
+Hors connexion	Fora di cunnessione	Firefox for Android, Focu	2	fora di cunnessione / scunnettu
+Connect another device	Cunnette un altru apparechju	Firefox for Android, Focu	2	cunnette un altru apparechju / cunnette un altru dispusitivu
+Got it	Aghju capitu	Firefox for Android, Focu	2	aghju capitu / capitu
+J'ai compris	Aghju capitu	Firefox for Android, Focu	4	aghju capitu / aghju capitu ! / iè, aghju capitu / iè, aghju capitu !
+Aucun appareil connecté	Alcunu apparechju cunnessu	Firefox for Android, Focu	2	alcunu apparechju cunnessu / nisunu apparechju cunnessu
+Participer au sondage	Risponde à l’inchiesta	Firefox for Android, Focu	2	participà à u sundaghju / risponde à l’inchiesta
+Taille de police	Dimensione di grafia	Firefox for Android, Focu	3	dimensione di a grafia / dimensione di caratteru / dimensione di grafia
+Tout	Tuttu	Firefox for Android, Focu	2	tutti / tuttu
+Prêt·e à scanner	Prontu à numerizà	Firefox for Android, Focu	2	prontu à analizà / prontu à numerizà
+Use email instead	Impiegà piuttostu un messaghju elettronicu	Firefox for Android, Focu	2	impiegà piuttostu un indirizzu mail / impiegà piuttostu un messaghju elettronicu
+Disconnect	Discunnette	Firefox for Android, Focu	2	discunnette / scunnette
+Se déconnecter	Discunnette	Firefox for Android, Focu	4	chjode a sessione / discunnette / discunnettesi / scunnettassi
+Enhanced Tracking Protection	Prutezzione rinfurzata contr’à u spiunagiu	Firefox for Android, Focu	2	prutezzione rinfurzata contr'à u tracciamentu / prutezzione rinfurzata contr’à u spiunagiu
+Standard (par défaut)	Classica (predefinita)	Firefox for Android, Focu	2	classica (predefinita) / standard (predefinitu)
+Tracking content	Cuntenutu impiegatu per u spiunagiu	Firefox for Android, Focu	2	cuntenutu adupratu per u tracciamentu / cuntenutu impiegatu per u spiunagiu
+Cryptominers	Minatori di crittomuneta	Firefox for Android, Focu	2	minatori di criptumunete / minatori di crittomuneta
+Mineurs de cryptomonnaies	Minatori di crittomuneta	Firefox for Android, Focu	2	minatori di criptumunete / minatori di crittomuneta
+Bloqués	Bluccatu	Firefox for Android, Focu	2	bluccati / bluccatu
+Info	Infurmazione	Firefox for Android, Focu	2	infurmazione / infurmazioni
+Informations	Infurmazione	Firefox for Android, Focu	2	infurmazione / infurmazioni
+Fournisseur	Furnidore	Firefox for Android, Focu	2	furnidore / furnitore
+URL invalide	Indirizzu web inaccettevule	Firefox for Android, Focu	2	indirizzu web inaccettevule / url micca validu
+Conditions d'utilisation	Cundizioni d’utilizazione	Firefox for Android, Focu	2	cundizioni d'usu / cundizioni d’utilizazione
+Informations de licence	Infurmazione di licenza	Firefox for Android, Focu	2	infurmazione di licenza / infurmazioni di licenza
+Nom du raccourci	Nome di l’accurtatoghju	Firefox for Android, Focu	2	nome di l'accurtatoghju / nome di l’accurtatoghju
+Add password	Aghjunghje una parolla d’intesa	Firefox for Android, Focu	2	aghjunghje una parolla d'intesa / aghjunghje una parolla d’intesa
+Edit login	Mudificà l’identificazione di cunnessione	Firefox for Android, Focu	2	mudificà l'identificatore / mudificà l’identificazione di cunnessione
+Effacer la recherche	Squassà u testu di ricerca	Firefox for Android, Focu	3	squassà a ricerca / squassà e ricerche / squassà u testu di ricerca
+Show password	Affissa a parolla d’intesa	Firefox for Android, Focu	2	affissa a parolla d’intesa / affissà a parolla d'intesa
+Hide password	Piattà a parolla d’intesa	Firefox for Android, Focu	2	piattà a parolla d'accessu / piattà a parolla d’intesa
+Unlock	Spalancà	Firefox for Android, Focu	2	sbluccà / spalancà
+Déverrouiller	Spalancà	Firefox for Android, Focu	2	sbluccà / spalancà
+Nom (A-Z)	Nome (A à Z)	Firefox for Android, Focu	2	nome (a à z) / nome (a-z)
+Dernière utilisation	Ultimu impiegu	Firefox for Android, Focu	2	ultimu impiegu / ultimu usu
+VPN intégré	VPN integrata	Firefox for Android, Focu	2	vpn integrata / vpn integratu
+Emplacement	Lucalizazione	Firefox for Android, Focu	2	lucalizazione / piazza
+Démarrer	Principià	Firefox for Android, Focu	2	avvià / principià
+Unavailable	Indispunibule	Firefox for Android, Focu	2	indispunibule / micca dispunibile
+Indisponible	Indispunibule	Firefox for Android, Focu	2	indispunibule / micca dispunibile
+Mois d'expiration	Mese di a data di scadenza	Firefox for Android, Focu	2	mese di a data di scadenza / mese di scadenza
+Année d'expiration	Annu di a data di scadenza	Firefox for Android, Focu	2	annu di a data di scadenza / annu di scadenza
+Supprimer la carte	Squassà a carta	Firefox for Android, Focu	2	caccià sta carta / squassà a carta
+Edit address	Mudificà l’indirizzu	Firefox for Android, Focu	2	mudificà l'indirizzu / mudificà l’indirizzu
+Modifier l'adresse	Mudificà l’indirizzu	Firefox for Android, Focu	2	mudificà l'indirizzu / mudificà l’indirizzu
+Organisation	Urganismu	Firefox for Android, Focu	2	urganismu / urganizazione
+Adresse e-mail	Indirizu elettronicu	Firefox for Android, Focu	3	indirizu elettronicu / indirizzu elettronicu / indirizzu email
+Commune	Paisolu	Firefox for Android, Focu	2	cumuna / paisolu
+District	Circundariu	Firefox for Android, Focu	2	circundariu / distrettu
+Banlieue	Circondu	Firefox for Android, Focu	2	circondu / periferia
+County	Pieve	Firefox for Android, Focu	2	pieve / regione o dipartimentu
+Comté	Pieve	Firefox for Android, Focu	2	contea / pieve
+Paroisse	Parochja	Firefox for Android, Focu	2	parochja / parrocchia
+Supprimer l'adresse	Squassà l’indirizzu	Firefox for Android, Focu	3	caccià l’indirizzu / squassà l'indirizzu / squassà l’indirizzu
+Enter a username	Stampittate un nome d’utilizatore	Firefox for Android, Focu	2	scrivi un nome d'utilizatore / stampittate un nome d’utilizatore
+Aucun onglet ouvert	Alcuna unghjetta aperta	Firefox for Android, Focu	2	alcuna unghjetta aperta / nisuna unghjetta aperta
+Adresse	Indirizzu web	Firefox for Android, Focu	2	indirizzu / indirizzu web
+Google Search	Ricerca Google	Firefox for Android, Focu	2	ricerca google / ricerche google
+Veuillez réessayer	Pruvà torna	Firefox for Android, Focu	2	pruvate torna / pruvà torna
+Choisissez une langue	Sciglite una lingua	Firefox for Android, Focu	2	sceglite una lingua / sciglite una lingua
+Langues disponibles	Lingue dispunibule	Firefox for Android, Focu	2	lingue dispunibile / lingue dispunibule
+Activée	Attivata	Firefox for Android, Focu	2	attivata / attivu
+Connexion sécurisée	Cunnessione assicurizata	Firefox for Android, Focu	3	a cunnessione hè assicurata / cunnessione assicurizata / cunnessione sicura
+Connexion non sécurisée	Cunnessione micca assicurata	Firefox for Android, Focu	4	a cunnessione ùn hè micca assicurata / cunnessione micca assicurata / cunnessione micca assicurizata / cunnessione micca sicura
+Revenir	Vultà	Firefox for Android, Focu	2	navigazione in daretu / vultà
+Actif	Attive	Firefox for Android, Focu	2	attive / attivu
+Inactive	Inattive	Firefox for Android, Focu	2	inattiva / inattive
+Inactifs	Inattive	Firefox for Android, Focu	2	inattive / inattivi
+Total	Tutale	Firefox for Android, Focu	2	totale / tutale
+Très satisfait·e	Assai felice	Firefox for Android, Focu	2	assai cuntentu / assai felice
+Satisfait·e	Felice	Firefox for Android, Focu	2	cuntentu / felice
+Neutral	Indifferente	Firefox for Android, Focu	2	indifferente / neutru
+Indifférent·e	Indifferente	Firefox for Android, Focu	2	indiferente / indifferente
+Insatisfait·e	Infelice	Firefox for Android, Focu	2	infelice / scuntentu
+Très insatisfait·e	Assai infelice	Firefox for Android, Focu	2	assai infelice / assai scuntentu
+Check for updates	Ricercà versioni nove	Firefox for Android, Focu	2	ricercà versioni nove / verificà l'attualizazioni
+Tâche terminée	Tacca compia	Firefox for Android, Focu	2	tacca compia / travagliu compiu
+Donner mon avis	Dà u mo avisu	Firefox for Android, Focu	3	dà u mo avisu / dà u mo parè / sparte u mo avisu
+Navigate Back	Navigazione in daretu	Firefox for Android, Focu	2	navigazione in daretu / sfuglià in daretu
+Tout effacer	Tuttu squassà	Firefox for Android, Focu	2	squassà tuttu / tuttu squassà
+Remind me later	Rammintatemi un altra volta	Firefox for Android, Focu	2	rammintatemi un altra volta / rammintàmila più tardi
+Permission denied	Permessu ricusatu	Firefox for Android, Focu	2	auturizazione righjittata / permessu ricusatu
+Try it now	Pruvà subitu	Firefox for Android, Focu	2	pruvate avà / pruvà subitu
+Essayer maintenant	Pruvà subitu	Firefox for Android, Focu	2	pruvate avà / pruvà subitu
+Redémarrage nécessaire	Rilanciu richiestu	Firefox for Android, Focu	2	rilanciu necessariu / rilanciu richiestu
+Ajout d'une signature	Aghjuntu d’una segnatura	Firefox for Android, Focu	2	aghjunta d'una firma / aghjuntu d’una segnatura
+Saisissez votre signature	Stampittà a segnatura	Firefox for Android, Focu	2	scrivite a vostra firma / stampittà a segnatura
+Effacer et ouvrir	Squassà è apre	Firefox for Android, Focu	2	squassà & apre / squassà è apre
+Erase	Squassà	Firefox for Android, Focu	2	sguassà / squassà
+Privacy & Security	Vita privata & sicurità	Firefox for Android, Focu	2	vita privata & sicurità / vita privata è sicurità
+Contenu web	Cuntenutu di u Web	Firefox for Android, Focu	2	cuntenutu di u web / cuntenutu web
+Langue	Lingua	Firefox for Android, Focu	2	lingua / lingua di l’interfaccia
+System default	Valore predefinitu di u sistema	Firefox for Android, Focu	3	lingua predefinita di u sistema / predefinizione di u sistema / valore predefinitu di u sistema
+Stealth	Modu furtivu	Firefox for Android, Focu	2	infiltrazione / modu furtivu
+Passer	Ignurà	Firefox for Android, Focu	2	ignurà / passà
+Outils de développement	Attrezzi di sviluppu	Firefox for Android, Focu	2	arnesi di sviluppu / attrezzi di sviluppu
+Avancé	Espertu	Firefox for Android, Focu	2	avanzatu / espertu
+Autorisations de site	Permessi di situ	Firefox for Android, Focu	2	permessi di situ / permessi di u situ
+Close Tab	Chjode l’unghjetta	Firefox for Android, Focu	2	chjode l'unghjetta / chjode l’unghjetta
+Réseaux sociaux	Suciale	Firefox for Android, Focu	2	rete suciale / suciale
+Statistiques	Statistica	Firefox for Android, Focu	2	statistica / statistiche
+Go back	Ritornu	Firefox for Android, Focu	2	ritornu / vultà
+New Tab	Nova unghjetta	Firefox for iOS (MPL-2.0)	2	nova unghjetta / unghjetta nova
+Scan QR Code	Analizà un codice QR	Firefox for iOS (MPL-2.0)	2	analizà un codice qr / scanna u codice qr
+Ajouter aux marque-pages	Aghjunghje à l’indette	Firefox for iOS (MPL-2.0)	2	aghjunghje à l'indette / aghjunghje à l’indette
+Copier l'URL	Cupià l’indirizzu	Firefox for iOS (MPL-2.0)	2	cupià l'url / cupià l’indirizzu
+Remove Bookmark	Caccià l’indetta	Firefox for iOS (MPL-2.0)	2	caccià l’indetta / ùn marcà più stu messaghju
+Cache	Impiatta	Firefox for iOS (MPL-2.0)	2	cache / impiatta
+Me montrer comment	Scopre cumu fà	Firefox for iOS (MPL-2.0)	3	fatemi vede cumu fà / mustratemi cumu fà / scopre cumu fà
+Ouvrir les réglages	Andà à i parametri	Firefox for iOS (MPL-2.0)	2	andà à i parametri / apre e preferenze
+Depuis toujours	Di sempre	Firefox for iOS (MPL-2.0)	2	dapoi sempre / di sempre
+Sign In	Cunnettesi	Firefox for iOS (MPL-2.0)	2	autenticazione / cunnettesi
+Désépingler	Dispirlà	Firefox for iOS (MPL-2.0)	2	dispirlà / staccà
+Recently Visited	Visitati pocu fà	Firefox for iOS (MPL-2.0)	2	visitati pocu fà / visitatu pocu fà
+Title	Titulu	Firefox for iOS (MPL-2.0)	2	nome / titulu
+Titre	Titulu	Firefox for iOS (MPL-2.0)	2	metadata di titulu / titulu
+New Folder	Novu cartulare	Firefox for iOS (MPL-2.0)	2	cartulare novu / novu cartulare
+Go to	Andà à u situ	Firefox for iOS (MPL-2.0)	2	andà à / andà à u situ
+Brightness	Lucidezza	Firefox for iOS (MPL-2.0)	2	lucidezza / luminosità
+Luminosité	Lucidezza	Firefox for iOS (MPL-2.0)	2	lucidezza / luminosità
+Go	Apre	Firefox for iOS (MPL-2.0)	2	andà / apre
+Copy Image	Cupià a fiura	Firefox for iOS (MPL-2.0)	2	cupià a fiura / cupià u ritrattu
+Copy Image Link	Cupià u liame di a fiura	Firefox for iOS (MPL-2.0)	2	cupià u liame di a fiura / cupià u ligame di u ritrattu
+Copy Link	Cupià u liame	Firefox for iOS (MPL-2.0)	2	cupià u liame / cupià u ligame
+Save Image	Arregistrà a fiura	Firefox for iOS (MPL-2.0)	2	arregistrà a fiura / arregistrà u ritrattu
+Paramètres d'affichage	Parametri per affissà	Firefox for iOS (MPL-2.0)	2	parametri d’affissera / parametri per affissà
+Récemment fermés	Chjosi pocu fà	Firefox for iOS (MPL-2.0)	2	chjose pocu fà / chjosi pocu fà
+Home	Accolta	Firefox for iOS (MPL-2.0)	3	accolta / cartulare persunale / casa
+Bookmark	Indittà sta pagina	Firefox for iOS (MPL-2.0)	2	indetta / indittà sta pagina
+Find	Circà	Firefox for iOS (MPL-2.0)	2	circà / truvà
+Actual Size	Dimensione attuale	Firefox for iOS (MPL-2.0)	2	dimensione attuale / dimensione vera
+Taille réelle	Dimensione attuale	Firefox for iOS (MPL-2.0)	2	dimensione attuale / dimensione vera
+Find Again	Circà torna	Firefox for iOS (MPL-2.0)	2	circà torna / circà u seguente
+Rechercher le suivant	Circà torna	Firefox for iOS (MPL-2.0)	3	circà seguente / circà torna / circà u seguente
+Tools	Attrezzi	Firefox for iOS (MPL-2.0)	2	arnesi / attrezzi
+Outils	Attrezzi	Firefox for iOS (MPL-2.0)	2	arnesi / attrezzi
+Zoom In	Ingrandamentu	Firefox for iOS (MPL-2.0)	3	ingrandamentu / ingrandamentu in più / ingrandà
+Zoom avant	Ingrandamentu	Firefox for iOS (MPL-2.0)	2	ingrandamentu / ingrandà
+Zoom Out	Riduzzione	Firefox for iOS (MPL-2.0)	3	ingrandamentu in menu / riduce / riduzzione
+Zoom arrière	Riduzzione	Firefox for iOS (MPL-2.0)	2	riduce / riduzzione
+Ne pas enregistrer	Ùn arregistrà micca	Firefox for iOS (MPL-2.0)	2	ùn arregistrà &micca / ùn arregistrà micca
+Filter	Filtrà	Firefox for iOS (MPL-2.0)	2	filtru / filtrà
+Mark as Read	Marcà cum’è lettu	Firefox for iOS (MPL-2.0)	2	marcà cum'è lettu / marcà cum’è lettu
+Marquer comme lu	Marcà cum’è lettu	Firefox for iOS (MPL-2.0)	2	marcà cum'è lettu / marcà cum’è lettu
+Copier l'adresse	Cupià l’indirizzu	Firefox for iOS (MPL-2.0)	2	cupià l'indirizzu / cupià l’indirizzu
+Marque-page supprimé	Indetta cacciata	Firefox for iOS (MPL-2.0)	2	indetta cacciata / indetta squassata
+Traqueurs intersites	Perseguitatori intersiti	Firefox for iOS (MPL-2.0)	2	perseguitatori intersiti / tracciatori trà siti
+Fingerprinters	Detettori d’impronta numerica	Firefox for iOS (MPL-2.0)	2	detettori d’impronta numerica / rilevatori d'impronta numerica
+Détecteurs d'empreinte numérique	Detettori d’impronta numerica	Firefox for iOS (MPL-2.0)	2	detettori d’impronta numerica / rilevatori d'impronta numerica
+What's New	Ciò chì hè novu	Firefox for iOS (MPL-2.0)	3	chì ci hè di novu / ciò chì hè novu / novità
+Nouveautés	Nuvità	Firefox for iOS (MPL-2.0)	2	ciò chì hè novu / nuvità
+Privacy	Vita privata	Firefox for iOS (MPL-2.0)	2	cunfidenzialità / vita privata
+Show All	Tuttu affissà	Firefox for iOS (MPL-2.0)	2	affissà tuttu / tuttu affissà
+Rouvrir	Torna à apre	Firefox for iOS (MPL-2.0)	2	riapre / torna à apre
+Sans sérif	Senza patta	Firefox for iOS (MPL-2.0)	2	senza patta / senza serif
+Envoyer l'onglet	Mandà l’unghjetta	Firefox for iOS (MPL-2.0)	2	mandà l'unghjetta / mandà l’unghjetta
+Sérif	Patta (Serif)	Firefox for iOS (MPL-2.0)	2	patta (serif) / serif
+Add Search Engine	Aghjunghje un mutore di ricerca	Firefox for iOS (MPL-2.0)	2	aghjunghje un mutore di ricerca / aghjuntu di mutore di ricerca
+Déconnecter	Discunnette	Firefox for iOS (MPL-2.0)	2	discunnette / scunnette
+Wallpaper	Sfondulu di screnu	Firefox for iOS (MPL-2.0)	2	fondu di screnu / sfondulu di screnu
+Fond d'écran	Sfondulu di screnu	Firefox for iOS (MPL-2.0)	2	fondu di screnu / sfondulu di screnu
+Page vide	Una pagina viota	Firefox for iOS (MPL-2.0)	2	pagina viota / una pagina viota
+Show	Affissà	Firefox for iOS (MPL-2.0)	2	affissera / affissà
+Groupes d'onglets	Gruppi d’unghjette	Firefox for iOS (MPL-2.0)	2	gruppi di unghjette / gruppi d’unghjette
+Résolution de problèmes	Infurmazioni per currege certi penseri	Firefox for iOS (MPL-2.0)	2	infurmazioni per currege certi penseri / risuluzione di i prublemi
+Show More	Affissà più	Firefox for iOS (MPL-2.0)	2	affissà di più / affissà più
+Afficher plus	Affissà più	Firefox for iOS (MPL-2.0)	2	affissà di più / affissà più
+Bookmarked	Aghjunta à l’indette	Firefox for iOS (MPL-2.0)	3	aghjunta à l’indette / indettatu / messaghju marcatu
+Afficher les suggestions	Affissà e sugestioni	Firefox for iOS (MPL-2.0)	2	affissà e sugestioni / affissà i suggerimenti
+Show All Tabs	Affissà tutte l’unghjette	Firefox for iOS (MPL-2.0)	2	affissà tutte l'unghjette / affissà tutte l’unghjette
+Not Now	Micca subitu	Firefox for iOS (MPL-2.0)	2	micca per avà / micca subitu
+unread	Micca lettu	Firefox for iOS (MPL-2.0)	2	micca lettu / micca lettu(i)
+Masquer	Piattà	Firefox for iOS (MPL-2.0)	2	ammascà / piattà
+Select All	Tuttu selezziunà	Firefox for iOS (MPL-2.0)	2	selezziunà tuttu / tuttu selezziunà
+See All	Tuttu affissà	Firefox for iOS (MPL-2.0)	2	tuttu affissà / vede tuttu
+%@ search	Ricerca %@	Firefox for iOS (MPL-2.0)	2	ricerca %@ / ricerche %@
+Mobile Bookmarks	Indette mobile	Firefox for iOS (MPL-2.0)	3	indette di i dispusitivi mobili / indette di u telefuninu / indette mobile
+Nouvelle recherche	Nova ricerca	Firefox for iOS (MPL-2.0)	2	nova ricerca / ricerca nova
+Actions rapides	Azzioni preste	Firefox for iOS (MPL-2.0)	2	azzioni preste / azzioni rapide
+Top Sites	Siti principale	Firefox for iOS (MPL-2.0)	2	siti principale / siti pupulari
+Désélectionné	Micca selezziunatu	Firefox for iOS (MPL-2.0)	2	diselezziunatu / micca selezziunatu
+Changer d'emplacement	Cambià di locu	Firefox for iOS (MPL-2.0)	2	cambià di locu / cambià di lucalizazione
+Desktop	Urdinatore	Firefox for iOS (MPL-2.0)	2	scagnu / urdinatore
+Ordinateur	Urdinatore	Firefox for iOS (MPL-2.0)	2	ordinatore / urdinatore
+Collapsed	Riduttu	Firefox for iOS (MPL-2.0)	2	chjosu / riduttu
+Réduit	Riduttu	Firefox for iOS (MPL-2.0)	2	riduttu / ripiegatu
+Développé	Allargatu	Firefox for iOS (MPL-2.0)	2	allargatu / spiegatu
+Date d'expiration	Scadenza	Firefox for iOS (MPL-2.0)	2	data di scadenza / scadenza
+Adresse supprimée	Indirizzu cacciatu	Firefox for iOS (MPL-2.0)	2	indirizzu cacciatu / indirizzu squassatu
+Nom de l'émetteur	Nome di l’emettidore	Firefox for iOS (MPL-2.0)	2	nome di l'emettitore / nome di l’emettidore
+Aucun traqueur trouvé	Ùn si trova nisunu perseguitatore	Firefox for iOS (MPL-2.0)	2	nisun tracciatore truvatu / ùn si trova nisunu perseguitatore
+Fermer la bannière	Righjittà a striscia	Firefox for iOS (MPL-2.0)	2	chjode a banniera / righjittà a striscia
+Shortcut	Accurtatoghju	Firefox for iOS (MPL-2.0)	2	accurtatoghju / accurtatoia
+Raccourci	Accurtatoghju	Firefox for iOS (MPL-2.0)	2	accurtatoghju / accurtatoia
+Report Broken Site	Signalà prublemi cù stu situ	Firefox for iOS (MPL-2.0)	2	signalà prublemi cù stu situ / signalà un situ chì ùn viaghja micca
+Zoom	Ingrandamentu	Firefox for iOS (MPL-2.0)	2	ingrandamentu / ingrandà a video
+Signaler un problème	Signalà	Firefox for iOS (MPL-2.0)	2	signalà / signalà un prublema
+Menu principal	Listinu principale	Firefox for iOS (MPL-2.0)	2	listinu principale / menù principale
+Less	Menu	Firefox for iOS (MPL-2.0)	2	di menu / menu
+Moins	Menu	Firefox for iOS (MPL-2.0)	2	di menu / menu
+(aucun nom d'utilisateur)	(nisunu nome d’utilizatore)	Firefox for iOS (MPL-2.0)	2	(nisun nome d'utilizatore) / (nisunu nome d’utilizatore)
+Scan QR code	Analizà un codice QR	Firefox for iOS (MPL-2.0)	2	analizà un codice qr / leghje un codice qr
+Terminer	Compiu	Firefox for iOS (MPL-2.0)	2	compie / compiu
+Available	Dispunibule	Firefox for iOS (MPL-2.0)	3	dispunibile / dispunibule / dispunibule(i)
+Disponible	Dispunibule	Firefox for iOS (MPL-2.0)	2	dispunibile / dispunibule
+Réponses rapides	Risposte preste	Firefox for iOS (MPL-2.0)	2	risposte preste / risposte rapide
+Niveau de zoom	Livellu d’ingrandamentu	Firefox for iOS (MPL-2.0)	2	livellu di zoom / livellu d’ingrandamentu
+Block Audio	Bluccà l’audio	Firefox for iOS (MPL-2.0)	2	bluccà l'audiò / bluccà l’audio
+Bloquer l'audio	Bluccà l’audio	Firefox for iOS (MPL-2.0)	2	bluccà l’audio / bluccà l’audiò
+Lecture automatique	Lettura autumatica	Firefox for iOS (MPL-2.0)	2	lettura autumatica / principiu autumaticu
+Bloquer les publicités	Bluccà e publicità	Firefox for iOS (MPL-2.0)	2	blucchime di publicità / bluccà e publicità
+Sync	Sincrunizazione	Firefox for iOS (MPL-2.0)	4	sincronizà / sincrunizate / sincrunizazione / sincrunizà
+Synchronisation	Sincrunizazione	Firefox for iOS (MPL-2.0)	2	sincrunizazione / sincrunizazione in corsu
+Search Bookmarks	Ricercà in l’indette	Firefox for iOS (MPL-2.0)	3	circà in l'indette / circà l'indette / ricercà in l’indette
+How it works	Cumu què funziuneghja	Firefox for iOS (MPL-2.0)	2	cumu funziona / cumu què funziuneghja
+Principes de fonctionnement	Cumu què funziuneghja	Firefox for iOS (MPL-2.0)	2	cumu què funziuneghja / principii di funziunamentu
+Rappeler plus tard	Rammintatemi un altra volta	Firefox for iOS (MPL-2.0)	2	rammintatemi un altra volta / rammintà mi più tardi
+Activer	Attivà	Firefox for iOS (MPL-2.0)	2	attivu / attivà
+Veuillez réessayer.	Pruvate torna.	Firefox for iOS (MPL-2.0)	2	per piacè, ripruvate. / pruvate torna.
+From	Da	Firefox for iOS (MPL-2.0)	2	da / da u
+Langue source :	Da	Firefox for iOS (MPL-2.0)	3	da / lingua d'origine : / traduce da
+To	À	Firefox for iOS (MPL-2.0)	3	ver di / versu / à
+Langue cible :	À	Firefox for iOS (MPL-2.0)	3	lingua di destinazione : / traduce in / à
+Phase de groupes	Fasa di gruppi	Firefox for iOS (MPL-2.0)	2	fasa di gruppi / fase di gruppi
+Voir le calendrier	Affissà u calendariu	Firefox for iOS (MPL-2.0)	2	affissà u calendariu / vede u calendariu
+Match terminé	Partita finita	Firefox for iOS (MPL-2.0)	2	partita compia / partita finita
+Mi-temps	Mezutempu	Firefox for iOS (MPL-2.0)	2	mezutempu / mità tempu
+EN DIRECT	IN VIVU	Firefox for iOS (MPL-2.0)	2	in direttu / in vivu
+Success!	Operazione riesciuta !	Mozilla VPN (MPL-2.0)	3	bravu ! / operazione riesciuta ! / vittoria !
+Désactiver le VPN	Disattivà a VPN	Mozilla VPN (MPL-2.0)	2	disattivà a vpn / disattivà u vpn
+Activer le VPN	Attivà a VPN	Mozilla VPN (MPL-2.0)	2	attivà a vpn / attivà u vpn
+Add application	Aghjunghje un’appiecazione	Mozilla VPN (MPL-2.0)	2	aghjunghje l'appiecazione / aghjunghje un’appiecazione
+%1 sur %2	%1 nant’à %2	Mozilla VPN (MPL-2.0)	2	%1 nant'à %2 / %1 nant’à %2
+Current Device	Apparechju currente	Mozilla VPN (MPL-2.0)	2	apparechju attuale / apparechju currente
+Cet appareil	Apparechju currente	Mozilla VPN (MPL-2.0)	2	apparechju currente / stu dispusitivu
+Supprimer %1	Caccià %1	Mozilla VPN (MPL-2.0)	2	caccià %1 / squassà %1
+Devices	Apparechji	Mozilla VPN (MPL-2.0)	2	apparechji / dispusitivi
+Appareils	Apparechji	Mozilla VPN (MPL-2.0)	2	apparechji / dispusitivi
+Peut-être plus tard	Forse un’altra volta	Mozilla VPN (MPL-2.0)	2	forse più tardi / forse un’altra volta
+Afficher les journaux	Vista di u ghjurnale	Mozilla VPN (MPL-2.0)	2	affissà i ghjurnali / vista di u ghjurnale
+Collapse	Riduce	Mozilla VPN (MPL-2.0)	2	riduce / ripiegà
+Réduire	Riduce	Mozilla VPN (MPL-2.0)	4	impuculì / minimizà / riduce / scresce
+Expand	Allargà	Mozilla VPN (MPL-2.0)	2	allargà / spiegà
+Développer	Allargà	Mozilla VPN (MPL-2.0)	3	allargà / spiegà / sviluppà
+Enter email	Stampittate u vostru indirizzu elettronicu	Mozilla VPN (MPL-2.0)	2	scrivi un e-mail / stampittate u vostru indirizzu elettronicu
+Forgot your password?	Parolla d’intesa scurdata ?	Mozilla VPN (MPL-2.0)	2	ai scurdatu a to parolla d'intesa ? / parolla d’intesa scurdata ?
+Enter your email	Stampittate u vostru indirizzu elettronicu	Mozilla VPN (MPL-2.0)	2	inserisci u to e-mail / stampittate u vostru indirizzu elettronicu
+Merci !	Vi ringraziemu !	Mozilla VPN (MPL-2.0)	2	grazie ! / vi ringraziemu !
+Search languages	Ricercà una lingua	Mozilla VPN (MPL-2.0)	2	lingue di ricerca / ricercà una lingua
+Rechercher des langues	Ricercà una lingua	Mozilla VPN (MPL-2.0)	2	circà lingue / ricercà una lingua
+S'inscrire	Arregistrassi	Mozilla VPN (MPL-2.0)	3	arregistrassi / inscrivesi / iscrivesi
+Vers	ver di	Mozilla VPN (MPL-2.0)	2	ver di / versu
+VPN connecté	VPN cunnessa	Mozilla VPN (MPL-2.0)	2	vpn cunnessa / vpn cunnessu
+Connection failed	Fiascu di a cunnessione	Mozilla VPN (MPL-2.0)	2	a cunnessione hè fiasca / fiascu di a cunnessione
+Connect	Cunnettassi	Mozilla VPN (MPL-2.0)	2	cunnettassi / cunnette
+Data	Dati	Mozilla VPN (MPL-2.0)	2	dati / datu
+Données	Dati	Mozilla VPN (MPL-2.0)	2	dati / datu
+Démarrage	Avviu	Mozilla VPN (MPL-2.0)	2	avviamentu / avviu
+Préférences	Preferenze	Mozilla VPN (MPL-2.0)	3	ozzioni / parametri / preferenze
+Actualiser la liste	Attualizà a lista	Mozilla VPN (MPL-2.0)	2	attualizà a lista / rinfrescà a lista
+Rechercher un pays	Ricercà un paese	Mozilla VPN (MPL-2.0)	2	circà un paese / ricercà un paese
+Installer l'extension	Ottene l’estensione	Mozilla VPN (MPL-2.0)	2	installà l'estensione / ottene l’estensione
+Bloquer les traqueurs	Blucchime di u spiunaghju	Mozilla VPN (MPL-2.0)	2	blucchime di u spiunaghju / bluccà i tracciadori
+Check for Updates	Cuntrollà i rinnovi	Mozilla VPN (MPL-2.0)	3	circà l'aghjurnamenti / cuntrollà e nove versioni / cuntrollà i rinnovi
+Nouvelle session	Sessione nova	Firefox Focus for iOS (MP	2	nova sessione / sessione nova
+Lancez-vous	Principià	Firefox Focus for iOS (MP	2	lanciatevi / principià
+Nom à afficher	Nome à affissà	Firefox Focus for iOS (MP	2	nome d'affissà / nome à affissà
+Raccourci supprimé	Accurtatoghju cacciatu	Firefox Focus for iOS (MP	2	accurtatoghju cacciatu / scurciatoghja squassata
+Ouvrir le lien	Apre u liame	Firefox Focus for iOS (MP	2	apre u liame / apre u ligame
+Changelog	Ghjurnale di i cambiamenti	Thunderbird for Android (	2	ghjurnale di i cambiamenti / lista di i cambiamenti
+Déplacer vers…	Dispiazzà versu…	Thunderbird for Android (	2	dispiazzà versu… / spiazzà versu…
+Archiver	Archiviu	Thunderbird for Android (	2	archiviu / archivià
+Discard	Tralascià	Thunderbird for Android (	2	scartà / tralascià
+Abandonner	Tralascià	Thunderbird for Android (	2	abbandunà / tralascià
+Chercher	Ricercà	Thunderbird for Android (	3	circà / ricercà / truvà
+Erreur de connexion	Sbagliu di cunnessione	Thunderbird for Android (	2	errore di cunnessione / sbagliu di cunnessione
+Tout supprimer	Tuttu squassà	Thunderbird for Android (	2	squassà tuttu / tuttu squassà
+Relève des courriels	Rileva di i messaghji	Thunderbird for Android (	2	riguarera di i messaghji / rileva di i messaghji
+Sending mail	Inviu di i messaghji	Thunderbird for Android (	2	inviu di i messaghji / inviu di messaghju
+Envoi du courriel	Inviu di i messaghji	Thunderbird for Android (	2	inviu di i messaghji / inviu di u messaghju
+Miscellaneous	Diversi	Thunderbird for Android (	2	diversi / varii
+Divers	Diversi	Thunderbird for Android (	3	diversi / diversu / varii
+Objet	Sughjettu	Thunderbird for Android (	2	oggettu / sughjettu
+Signature	Segnatura	Thunderbird for Android (	2	firma / segnatura
+Immédiatement	Subitu subitu	Thunderbird for Android (	2	subitu / subitu subitu
+Spam folder	Cartulare di i merzaghji	Thunderbird for Android (	2	cartulare di i merzaghji / cartulare di i merzaghji (dispiacevule)
+Load more messages	Caricà d’altri messaghji	Thunderbird for Android (	2	caricà d’altri messaghji / caricà più messaghji
+Compact	Cumpatta	Thunderbird for Android (	3	compattu / cumpatta / cumprime
+Vibration	Vibrazione	Thunderbird for Android (	2	vibrazione / vibrà
+Your name	A vostra casata	Thunderbird for Android (	2	a vostra casata / u to nome
+Votre nom	A vostra casata	Thunderbird for Android (	2	a vostra casata / u vostru nome, cugnome, o casata
+Move up	Dispiazzà sopra	Thunderbird for Android (	2	dispiazzà insù / dispiazzà sopra
+Move down	Dispiazzà sottu	Thunderbird for Android (	2	dispiazzà inghjò / dispiazzà sottu
+Date	Data	Thunderbird for Android (	2	data / metadata di data
+Use system default	Impiegà u tema predefinitu di u sistema	Thunderbird for Android (	2	impiegà u tema predefinitu di u sistema / impiegà u valore predefinitu da u sistema
+Display	Affissera	Thunderbird for Android (	3	affissaghju / affissera / affissà
+Affichage	Affissera	Thunderbird for Android (	3	affissaghju / affissera / vista
+Network	Reta	Thunderbird for Android (	2	reta / rete
+Réseau	Reta	Thunderbird for Android (	2	reta / rete
+Debugging	Spannatura	Thunderbird for Android (	3	currezzione di l'errori / debuggazione / spannatura
+Débogage	Spannatura	Thunderbird for Android (	2	currezzione di l'errori / spannatura
+Très petite	Mininninu	Thunderbird for Android (	2	assai chjuca / mininninu
+Small	Chjucu	Thunderbird for Android (	2	chjuca / chjucu
+Petite	Chjucu	Thunderbird for Android (	2	chjuca / chjucu
+Large	Maiò	Thunderbird for Android (	3	grande / largu / maiò
+Preview	Fighjulata	Thunderbird for Android (	2	fighjulata / previsualizazione
+Aperçu	Fighjulata	Thunderbird for Android (	2	fighjulata / previsualizazione
+Sauvegarde	Salvaguardia	Thunderbird for Android (	3	copia di salvezza / salvaguardia / salvaguardia à l’arregistramentu
+Confirmer la suppression	Cunfirmà a squassatura	Thunderbird for Android (	2	cunfirmà a squassatura / cunfirmà a supressione
+Open link	Apre u liame	Thunderbird for Android (	2	apre u liame / apre u ligame
+Image	Fiura	Thunderbird for Android (	2	fiura / ritrattu
+Synchronisation en arrière-plan	Sincrunizazione in tacca di sfondulu	Thunderbird for Android (	2	sincrunizazione in fondu / sincrunizazione in tacca di sfondulu
+Télécharger l'image	Scaricà a fiura	Thunderbird for Android (	2	scaricà a fiura / scaricà u ritrattu
+Garder activé	Cunservà attivatu	Thunderbird for Android (	2	cunservà attivatu / tene attivatu
+Got it!	Aghju capitu !	Thunderbird for Android (	2	aghju capitu ! / hè fattu !
+Texte brut	Testu rozu	Thunderbird for Android (	3	testu bruttu / testu ordinariu / testu rozu
+Initialisation…	Iniziu…	Thunderbird for Android (	2	inizializazione… / iniziu…
+En apprendre davantage	Per sapene di più	Thunderbird for Android (	2	per sapene di più / sapene di più
+Joindre un fichier	Assucià un schedariu	Thunderbird for Android (	2	aghjunghje un schedariu / assucià un schedariu
+Full	Cumpletu	Thunderbird for Android (	2	cumpletu / pienu
+Tout enregistrer	Tuttu arregistrà	Thunderbird for Android (	2	arregistrà tuttu / tuttu arregistrà
+Select file	Selezziunà un schedariu	Thunderbird for Android (	2	selezziunate un schedariu / selezziunà un schedariu
+Sélectionner un fichier	Selezziunà un schedariu	Thunderbird for Android (	2	selezziunà u schedariu / selezziunà un schedariu
+Titre de l'album	Nome di l’albumu	VLC for Android (GPL-2.0-	2	nome di l’albumu / titulu di l’albumu
+Insertion date	Data d’inserzione	VLC for Android (GPL-2.0-	2	data d’aghjuntu / data d’inserzione
+Date d'ajout	Data d’inserzione	VLC for Android (GPL-2.0-	2	data d'aghjunta / data d’inserzione
+Lire	Sunà	VLC for Android (GPL-2.0-	2	leghje / sunà
+Playback	Ripruduzzione	VLC for Android (GPL-2.0-	2	ripruduce / ripruduzzione
+Tracks	Traccie	VLC for Android (GPL-2.0-	2	tracciati / traccie
+Favoris	Indette	VLC for Android (GPL-2.0-	2	favuriti / indette
+Étirer	Riempie	VLC for Android (GPL-2.0-	3	riempie / stinzà / stirà
+Centrer	Centru	VLC for Android (GPL-2.0-	2	centru / centrà
+Piste de sous-titres	Traccia di sottutitulu	VLC for Android (GPL-2.0-	3	traccia di sottutituli / traccia di sottutitulu / traccia di u sottutitulu
+Volume	Vulume	VLC for Android (GPL-2.0-	2	livellu / vulume
+Playback speed	Vitezza di ripruduzzione	VLC for Android (GPL-2.0-	2	velucità di lettura / vitezza di ripruduzzione
+Vitesse de lecture	Vitezza di ripruduzzione	VLC for Android (GPL-2.0-	3	velucità di lettura / vitezza di lettura / vitezza di ripruduzzione
+Aller au temps	Saltà à una stonda	VLC for Android (GPL-2.0-	3	andà à / andà à un mumentu precisu / saltà à una stonda
+Login	Identificazione	VLC for Android (GPL-2.0-	2	cunnessione / identificazione
+Identifiant	Identificazione	VLC for Android (GPL-2.0-	2	identificatore / identificazione
+Flux	Flussi	VLC for Android (GPL-2.0-	2	flussi / flussu
+Sous-titres	Sottutituli	VLC for Android (GPL-2.0-	4	sottu-tituli / sottutituli / sottutituli ditagliati / sottutitulu
+Options avancées	Ozzioni esperte	VLC for Android (GPL-2.0-	2	ozzioni avanzate / ozzioni esperte
+Plus de paramètres	Altri parametri	VLC for Android (GPL-2.0-	2	altri parametri / più parametri
+Portrait inversé	Ritrattu invertitu	VLC for Android (GPL-2.0-	2	ritrattu invertitu / verticale inversu
+Landscape	Orizuntale	VLC for Android (GPL-2.0-	2	orizuntale / orizzontale
+Paysage	Orizuntale	VLC for Android (GPL-2.0-	2	orizuntale / orizzontale
+Paysage inversé	Orizuntale à l’arritrosa	VLC for Android (GPL-2.0-	2	orizuntale à l’arritrosa / orizzontale inversu
+Thème sombre	Tema neru	VLC for Android (GPL-2.0-	2	tema neru / tema scuru
+Artiste	Artista	VLC for Android (GPL-2.0-	2	artista / metadata d'artista
+Track	Traccia	VLC for Android (GPL-2.0-	2	traccia / tracciatu
+Piste	Traccia	VLC for Android (GPL-2.0-	2	pista / traccia
+Genre	Generu	VLC for Android (GPL-2.0-	2	generu / metadata di generu
+Petit	Chjuca	VLC for Android (GPL-2.0-	2	chjuca / chjucu
+Normal	Nurmale	VLC for Android (GPL-2.0-	3	modu nurmale / normale / nurmale
+Grand	Maiò	VLC for Android (GPL-2.0-	2	grande / maiò
+Énorme	Grandissimu	VLC for Android (GPL-2.0-	2	grandissimu / tamantu
+Couleur	Culore	VLC for Android (GPL-2.0-	3	culore / culore di grafia / ozzioni di culore
+Arrière-plan des sous-titres	Sfondulu di i sottutituli	VLC for Android (GPL-2.0-	2	fondu di i sottutituli / sfondulu di i sottutituli
+Middle	Centru	VLC for Android (GPL-2.0-	2	centrale / centru
+Casque	Cascu	VLC for Android (GPL-2.0-	2	ascultadori / cascu
+Casting	Diffusione	VLC for Android (GPL-2.0-	2	diffusione / distribuzione
+Haut	Altu	VLC for Android (GPL-2.0-	3	altu / cima / insù
+Moyen	Medianu	VLC for Android (GPL-2.0-	2	medianu / mediu
+Bas	Bassu	VLC for Android (GPL-2.0-	4	bassu / fondu / ghjò / inghjò
+Contrôles	Cuntrolli	VLC for Android (GPL-2.0-	2	cuntrolli / cuntrollu
+Performance	Perfurmenze	VLC for Android (GPL-2.0-	2	perfurmenze / prestazioni
+Démarrer l'enregistrement	Principià l’arregistramentu di messaghju	VLC for Android (GPL-2.0-	3	principià l'arregistramentu / principià l’arregistramentu di messaghju / principià u ricordu
+Arrêter l'enregistrement	Piantà l’arregistramentu di messaghju	VLC for Android (GPL-2.0-	3	fermà u ricordu / piantà l'arregistramentu / piantà l’arregistramentu di messaghju
+Envoi du rapport…	Inviu di u ghjurnale…	VLC for Android (GPL-2.0-	2	inviu di u ghjurnale… / mandata di u rapportu…
+Aucun résultat trouvé	Alcunu risultatu trovu	VLC for Android (GPL-2.0-	2	alcunu risultatu trovu / nisun risultatu trovu
+Réseau local	Reta lucale	VLC for Android (GPL-2.0-	2	reta lucale / rete lucale
+Taille du fichier	Dimensione di schedariu	VLC for Android (GPL-2.0-	2	dimensione di schedariu / dimensione di u schedariu
+Médiathèque	Mediateca	VLC for Android (GPL-2.0-	2	bibliuteca di media / mediateca
+Plus d'actions	Azzioni di più	VLC for Android (GPL-2.0-	2	altre azzioni / azzioni di più
+Now Playing	Ripruduzzione in corsu	VLC for Android (GPL-2.0-	2	in traccia di ghjucà / ripruduzzione in corsu
+Choisir un fichier	Sceglie un schedariu	VLC for Android (GPL-2.0-	2	sceglie un schedariu / selezziunà un schedariu
+Plugins	Estensioni	VLC for Android (GPL-2.0-	3	estensioni / moduli / moduli d’estensione
+Register	Inscrivesi	VLC for Android (GPL-2.0-	2	inscrivesi / iscrivesi
+Log out	Discunnettesi	VLC for Android (GPL-2.0-	2	chjode a sessione / discunnettesi
+Ouvrir le dossier	Sfuglià u cartulare	VLC for Android (GPL-2.0-	2	apre u cartulare / sfuglià u cartulare
+Accès rapide	Accessu Prestu	VLC for Android (GPL-2.0-	2	accessu prestu / accessu rapidu
+Avance rapide	Avanzà in furia	VLC for Android (GPL-2.0-	2	avanzata rapida / avanzà in furia
+Last year	Annu	VLC for Android (GPL-2.0-	2	annu / l’annu scorsu
+L'année dernière	Annu	VLC for Android (GPL-2.0-	2	annu / l’annu scorsu
+Supprimer la sélection	Squassà a selezzione	VLC for Android (GPL-2.0-	2	squassà a selezzione / toglie selezziunatu
+Créer	Creà	VLC for Android (GPL-2.0-	2	creà / creà una nova
+Device default	Predefinizione d’apparechju	VLC for Android (GPL-2.0-	2	parametru predefinitu di l'apparechju / predefinizione d’apparechju
+Aller à	Saltà à	VLC for Android (GPL-2.0-	3	&andà à / andà à / saltà à
+Reset	Viutà	VLC for Android (GPL-2.0-	2	reinizializà / viutà
+Réinitialiser	Viutà	VLC for Android (GPL-2.0-	3	reinizializà / rimette d'urigine e predefinizioni / viutà
+Signaler un bogue	Signalà un penseru	VLC for Android (GPL-2.0-	2	signalà un bug / signalà un penseru
+Produit par	Pruduttu da	VLC for Android (GPL-2.0-	2	prudottu da / pruduttu da
+Recommencer	Ricumincià	VLC for Android (GPL-2.0-	2	ricumincià / torna à principià
+Nettoyer	Squassà	VLC for Android (GPL-2.0-	2	spurgulà / squassà
+Chaînes	Canali	VLC for Android (GPL-2.0-	2	canali / catene
+Fréquence d'images	Frequenza di fiure	VLC for Android (GPL-2.0-	2	frequenza di fiure / frequenza di ritratti
+Sample rate	Frequenza di campiunariu	VLC for Android (GPL-2.0-	2	frequenza di campiunariu / percentuale di campione
+Fréquence d'échantillonnage	Frequenza di campiunariu	VLC for Android (GPL-2.0-	5	definisce a frequenza di campiunariu / forma di campione / frequenza di campiunariu / intervallu di durata di campiunariu / percentuale di campione
+Bitrate	Ghjettu	VLC for Android (GPL-2.0-	2	flussu binariu / ghjettu
+Codec	Cudecu	VLC for Android (GPL-2.0-	2	cudecu / nome di cudecu
+Texte	Testu	VLC for Android (GPL-2.0-	2	testu / testu inquadratu
+Dégrouper	Disunisce	VLC for Android (GPL-2.0-	2	disunisce / sgruppà
+Merci	Vi ringraziemu	VLC for Android (GPL-2.0-	2	grazie / vi ringraziemu
+Nouveau groupe	Novu gruppu	VLC for Android (GPL-2.0-	2	gruppu novu / novu gruppu
+Augmenter le volume	Aumentà u vulume	VLC for Android (GPL-2.0-	3	accresce u vulumu / aumentà u vulume / vulume insù
+Volume down	Calà u vulume	VLC for Android (GPL-2.0-	2	calà u vulume / menu di vulume
+Réduire le volume	Calà u vulume	VLC for Android (GPL-2.0-	2	calà u vulume / scresce u vulumu
+Mode sans échec	Modu senza fiascu	VLC for Android (GPL-2.0-	2	modu senza fallu / modu senza fiascu
+Ajouter un favori	Aghjunghje un’indetta	VLC for Android (GPL-2.0-	2	aghjunghje un favuritu / aghjunghje un’indetta
+Favori ajouté	Indetta aghjunta	VLC for Android (GPL-2.0-	2	favuritu aghjuntu / indetta aghjunta
+Monter	Dispiazzà insù	VLC for Android (GPL-2.0-	2	cullà / dispiazzà insù
+Descendre	Dispiazzà inghjò	VLC for Android (GPL-2.0-	2	dispiazzà inghjò / falà
+Ajouter tous	Tuttu aghjunghje	VLC for Android (GPL-2.0-	2	_tuttu aghjunghje / tuttu aghjunghje
+Start	Principià	VLC for Android (GPL-2.0-	2	avvià / principià
+Cercle	Chjerchju	VLC for Android (GPL-2.0-	2	chjerchju / linea è chjerchju
+Background	Sfondulu	VLC for Android (GPL-2.0-	2	fondu / sfondulu
+Arrière-plan	Sfondulu	VLC for Android (GPL-2.0-	3	culore di fondu / fondu / sfondulu
+Premier plan	Primu pianu	VLC for Android (GPL-2.0-	2	culore 1ᵘ pianu / primu pianu
+Ascending	Crescente	VLC for Android (GPL-2.0-	2	ascendente / crescente
+Ascendant	Crescente	VLC for Android (GPL-2.0-	2	ascendente / crescente
+Pistes vidéo	Traccie video	VLC for Android (GPL-2.0-	2	piste video / traccie video
+Pistes audio	Traccie audio	VLC for Android (GPL-2.0-	2	piste audio / traccie audio
+Tout télécharger	Tuttu incaricà	VLC for Android (GPL-2.0-	2	scaricà tuttu / tuttu incaricà
+Commande vocale	Cuntrollu di a voce	VLC for Android (GPL-2.0-	2	cumanda vucale / cuntrollu di a voce
+Device	Apparechju	VLC for Android (GPL-2.0-	2	apparechju / dispusitivu
+Périphérique	Apparechju	VLC for Android (GPL-2.0-	2	apparechju / dispusitivu
+Message	Messaghju	VLC for Android (GPL-2.0-	2	mandà un mp / messaghju
+randonnée	girandulata	OpenTracks (Apache-2.0)	2	girandulata / girandulata nant’à pista
+équitation	cavalcatura	OpenTracks (Apache-2.0)	2	cavalcatura / cavalcatura à cavallu
+unknown	scunnisciuta	OpenTracks (Apache-2.0)	2	scunnisciuta / scunnisciutu
+entraînement	addestramentu	OpenTracks (Apache-2.0)	2	addestramentu / allenamentu
+Erreurs	Sbaglii	OpenTracks (Apache-2.0)	2	errori / sbaglii
+Choisissez une option	Sciglite un’ozzione	OpenTracks (Apache-2.0)	2	sceglite un'ozzione / sciglite un’ozzione
+Unsupported file format	Furmatu di schedariu inaccettatu	OpenTracks (Apache-2.0)	2	furmatu di schedariu inaccettatu / furmatu di schedariu micca accettatu
+Markers	Stantelle	OpenTracks (Apache-2.0)	2	marcatori / stantelle
+New Layout	Accunciamentu novu	OpenTracks (Apache-2.0)	2	accunciamentu novu / dispusizione nova
+Time	Durata	OpenTracks (Apache-2.0)	3	durata / ora / tempu
+Fichiers ignorés	Schedarii tralasciati	OpenTracks (Apache-2.0)	2	schedarii ignurati / schedarii tralasciati
+Description	Discrizzione	OpenTracks (Apache-2.0)	2	discrizzione / metadata di discrizzione
+Power	Putenza	OpenTracks (Apache-2.0)	3	accende/spenghje / energia / putenza
+Interface utilisateur	Interfaccia di l’utilizatore	OpenTracks (Apache-2.0)	2	interfaccia d'utilizatore / interfaccia di l’utilizatore
+Cyclisme	Ciclismu	OpenTracks (Apache-2.0)	2	ciclisimu / ciclismu
+Running	Corsa à pedi	OpenTracks (Apache-2.0)	2	corsa à pedi / in corsu d'esecuzione
+Gain	Dislivellu pusitivu	OpenTracks (Apache-2.0)	2	dislivellu pusitivu / guadagnu
+café	caffè	OpenTracks (Apache-2.0)	2	caffeteria / caffè
+Enregistrement	Arregistramentu	OpenTracks (Apache-2.0)	2	arregistramentu / arregistrà
+Énergie	Putenza	OpenTracks (Apache-2.0)	2	energia / putenza
+Disposition par défaut	Accunciamentu predefinitu	OpenTracks (Apache-2.0)	2	accunciamentu predefinitu / dispusizione predefinita
+Vitesse moyenne	Vitezza mediana	OpenTracks (Apache-2.0)	3	velocità media / vitezza mediana / vitezza mediana in mossa
+Speed	Vitezza	OpenTracks (Apache-2.0)	2	velucità / vitezza
+Vitesse	Vitezza	OpenTracks (Apache-2.0)	2	velucità / vitezza
+Clock	Arilogiu	OpenTracks (Apache-2.0)	2	arilogiu / rilogiu
+Horloge	Arilogiu	OpenTracks (Apache-2.0)	2	arilogiu / rilogiu
+Suppression en cours…	Squassatura…	OpenTracks (Apache-2.0)	2	squassatura in corsu… / squassatura…
+bar	bivetta	OpenTracks (Apache-2.0)	2	bivetta / misura
+Idle	Inattività	OpenTracks (Apache-2.0)	2	inattività / inattivu
+En veille	Inattività	OpenTracks (Apache-2.0)	2	in veghja / inattività
+Graphiques	Grafici	OpenTracks (Apache-2.0)	2	grafichi / grafici
+Rectangulaire	Rettangulare	Audacity (GPL-2.0-or-late	2	rettangulare / rettangulu
+Erreur de fichier	Sbagliu di schedariu	Audacity (GPL-2.0-or-late	2	errore di schedariu / sbagliu di schedariu
+Attention	Avertimentu	Audacity (GPL-2.0-or-late	2	attenzione / avertimentu
+Onde	Onda	Audacity (GPL-2.0-or-late	2	marosu / onda
+Interdit	Difesu	Audacity (GPL-2.0-or-late	2	difesu / pruibitu
+Ann&uler	&Disfà	Audacity (GPL-2.0-or-late	2	&disfà / ann&ullà
+Console Nyquist	Cunsola Nyquist	Audacity (GPL-2.0-or-late	2	cunsola nyquist / operatore nyquist
+bar:beat:tick	misura:palitu:16esimu	Audacity (GPL-2.0-or-late	2	misura:palitu:16esimu / misura:palpitu:stonda
+Sauvegarde du projet	Arregistramentu di prughjettu	Audacity (GPL-2.0-or-late	2	arregistramentu di prughjettu / salvaguardia di u prughjettu
+Bar	Misura	Audacity (GPL-2.0-or-late	2	barra / misura
+Millisecondes	Milliseconde	Audacity (GPL-2.0-or-late	2	milliseconde / millisecondi
+No error	Nisunu sbagliu	Audacity (GPL-2.0-or-late	2	nisun errore / nisunu sbagliu
+Simplifié	Semplificatu	Audacity (GPL-2.0-or-late	2	semplificatu / simplificatu
+Noir	Scuru	Audacity (GPL-2.0-or-late	2	neru / scuru
+Contraste élevé	Cuntrastu forte	Audacity (GPL-2.0-or-late	2	cuntrastu altu / cuntrastu forte
+En arrière	In daretu	Audacity (GPL-2.0-or-late	2	arritrusà / in daretu
+Lecture audio	Lettura audio	Audacity (GPL-2.0-or-late	2	lettura audio / lettura audiò
+Enregistrement audio	Arregistramentu audio	Audacity (GPL-2.0-or-late	2	arregistramentu audio / arregistramentu audiò
+&Effacer	&Viutà	Audacity (GPL-2.0-or-late	2	&viutà / s&quassà
+Arrêt	Piantà	Audacity (GPL-2.0-or-late	2	nò / piantà
+Dialog	Dialogu	Audacity (GPL-2.0-or-late	2	dialogu / finestra di dialogu
+Browse...	Navigà…	Audacity (GPL-2.0-or-late	2	na&vigà… / navigà…
+Parcourir…	Navigà…	Audacity (GPL-2.0-or-late	2	navigà… / sfuglià…
+Exporter les préréglages	Espurtà e prerigature	Audacity (GPL-2.0-or-late	2	espurtà a prerigatura / espurtà e prerigature
+Format:	Furmatu :	Audacity (GPL-2.0-or-late	3	furmatu : / furmatu: / prupurzioni :
+Language:	Lingua :	Audacity (GPL-2.0-or-late	2	lingua : / linguaghju :
+Téléchargement	Scaricà	Audacity (GPL-2.0-or-late	2	scaricamentu / scaricà
+Success	Successu	Audacity (GPL-2.0-or-late	2	riuscita / successu
+Succès	Successu	Audacity (GPL-2.0-or-late	2	riuscita / successu
+Préréglage	Prerigatura	Audacity (GPL-2.0-or-late	2	preregulazione / prerigatura
+Qualité	Qualità	Audacity (GPL-2.0-or-late	2	qualità / qualità :
+Speech	Parlatu	Audacity (GPL-2.0-or-late	2	discussione / parlatu
+&Police…	&Grafia…	Audacity (GPL-2.0-or-late	2	&grafia… / selezziunà a &grafia…
+&Horizontal	Sparte &orizuntalmente	Audacity (GPL-2.0-or-late	2	&orizuntale / sparte &orizuntalmente
+Aucune correspondance trouvée	Alcuna occurrenza trova	Audacity (GPL-2.0-or-late	2	alcuna occurrenza trova / nisuna currispundenza trova
+Sans titre	Senza titulu	Audacity (GPL-2.0-or-late	2	nisunu titulu / senza titulu
+Save As	Arregistrà cù u nome	Audacity (GPL-2.0-or-late	2	arregistrà cum'è / arregistrà cù u nome
+Up	Insù	Audacity (GPL-2.0-or-late	2	insù / versu l'altu
+Début	Principià	Audacity (GPL-2.0-or-late	3	iniziu / principiu / principià
+Cloud	Nivulu	Audacity (GPL-2.0-or-late	2	nivulu / nuvula
+Private	Privatu	Audacity (GPL-2.0-or-late	2	privati / privatu
+Public	Publicu	Audacity (GPL-2.0-or-late	2	publichi / publicu
+Credits	Crediti	Audacity (GPL-2.0-or-late	2	crediti / ringraziamenti
+Cross-platform GUI library	Bibliuteca GUI multi piattaforma	Audacity (GPL-2.0-or-late	2	bibliuteca grafica multipiattaforma / bibliuteca gui multi piattaforma
+Features	Caratteristiche	Audacity (GPL-2.0-or-late	3	caratteristiche / funzioni / funziunalità
+Fonctionnalités	Caratteristiche	Audacity (GPL-2.0-or-late	2	caratteristiche / funziunalità
+Sélection	Selezziunà	Audacity (GPL-2.0-or-late	3	selezzione / selezzione attiva / selezziunà
+E&xporter…	&Espurtà…	Audacity (GPL-2.0-or-late	2	&espurtà… / e&spurtà…
+&Insérer	&Framette	Audacity (GPL-2.0-or-late	2	&framette / &inserisce
+&Supprimer	S&quassà	Audacity (GPL-2.0-or-late	2	&squassà / s&quassà
+&Monter	&Cullà	Audacity (GPL-2.0-or-late	2	&cullà / dispiazzà in&sù
+&Descendre	&Falà	Audacity (GPL-2.0-or-late	2	&falà / dispiazzà in&ghjò
+&Save	&Arregistrà	Audacity (GPL-2.0-or-late	2	&arregistrà / a&rregistrà
+Défilement	Sfilà	Audacity (GPL-2.0-or-late	2	scurrimentu / sfilà
+Journal recording failed	Fiascu d’arregistramentu di u ghjurnale d’interazzioni	Audacity (GPL-2.0-or-late	2	fiascu d’arregistramentu di u ghjurnale / fiascu d’arregistramentu di u ghjurnale d’interazzioni
+Start Time	Ora di principiu	Audacity (GPL-2.0-or-late	2	ora di principiu / tempu di principiu
+Heure de démarrage	Ora di principiu	Audacity (GPL-2.0-or-late	2	ora d'iniziu / ora di principiu
+Marqueurs	Etichette	Audacity (GPL-2.0-or-late	2	etichette / marcatori
+Silencer	Mutu	Audacity (GPL-2.0-or-late	2	mutu / silenziu
+Path	Chjassu	Audacity (GPL-2.0-or-late	2	chjassu / passeghju
+Chemin	Chjassu	Audacity (GPL-2.0-or-late	2	chjassu / percorsu
+Outil	Attrezzu	Audacity (GPL-2.0-or-late	2	arnese / attrezzu
+Plugin	Modulu d’estensione	Audacity (GPL-2.0-or-late	3	estensione / moduli d’estensione / modulu d’estensione
+Espace disque insuffisant	Mancanza di spaziu discu	Audacity (GPL-2.0-or-late	2	mancanza di spaziu discu / spaziu discu insufficiente
+Erreur d'importation	Sbagliu d’impurtazione	Audacity (GPL-2.0-or-late	2	errore d'impurtazione / sbagliu d’impurtazione
+Master	Principale	Audacity (GPL-2.0-or-late	2	maestru / principale
+Position	Pusizione	Audacity (GPL-2.0-or-late	2	pusizione / spustime
+Balise	Etichetta	Audacity (GPL-2.0-or-late	2	etichetta / etichette
+Réglages par dé&faut	Pre&ferenze predefinite	Audacity (GPL-2.0-or-late	2	&predefinizioni / pre&ferenze predefinite
+Duration:	Durata :	Audacity (GPL-2.0-or-late	2	durata : / durata:
+Solo	Resu solo	Audacity (GPL-2.0-or-late	2	resu solo / solo attivu
+Rendre muet	Mutu attivu	Audacity (GPL-2.0-or-late	2	ammutulì / mutu attivu
+Comment	Cummentu	Audacity (GPL-2.0-or-late	2	cummentu / cummentà
+Recharger	Ricaricà	Audacity (GPL-2.0-or-late	2	attualizà / ricaricà
+Début du projet	Principiu di u prughjettu	Audacity (GPL-2.0-or-late	2	cursore à u principiu di u prughjettu / principiu di u prughjettu
+Demi onde	Mez’onda	Audacity (GPL-2.0-or-late	2	mezu-onda / mez’onda
+Presets	Prerigature	Audacity (GPL-2.0-or-late	2	predefiniti / prerigature
+Préréglages	Prerigature	Audacity (GPL-2.0-or-late	2	preimpostazioni / prerigature
+Bass	Bassa	Audacity (GPL-2.0-or-late	2	bassa / bassi
+&Aiguë (dB) :	&Pinziu (dB) :	Audacity (GPL-2.0-or-late	2	&pinziu (db) : / &vulume (db) :
+Fréquence	Frequenza	Audacity (GPL-2.0-or-late	2	frequenza / frequenza di tuner
+Fin	Fine	Audacity (GPL-2.0-or-late	2	fine / sdriglia
+Defaults	Predefinizioni	Audacity (GPL-2.0-or-late	2	predefinizioni / valori predefiniti
+Clipping	Saturazione	Audacity (GPL-2.0-or-late	2	cattura di clip / saturazione
+Inverser	Arritrusà	Audacity (GPL-2.0-or-late	2	arritrusà / invertisce
+Paramètres avancés	Parametri d’espertu	Audacity (GPL-2.0-or-late	3	parametri avanzati / parametri d’espertu / preferenze d'espertu
+Stages	Fase	Audacity (GPL-2.0-or-late	2	fase / tappe
+Repeat	Ripete	Audacity (GPL-2.0-or-late	2	ripete / ripetizione
+Tonalité	Tunalità	Audacity (GPL-2.0-or-late	2	tonalità / tunalità
+Basique	Basica	Audacity (GPL-2.0-or-late	2	basica / basicu
+Canaux	Canali	Audacity (GPL-2.0-or-late	2	canali / contu di canali
+Dupliquer	Duppià	Audacity (GPL-2.0-or-late	2	duplicà / duppià
+Détacher	Spiccià	Audacity (GPL-2.0-or-late	2	spiccià / staccà
+Cu&t	&Taglià	Audacity (GPL-2.0-or-late	2	&taglià / ta&glià
+&Delete	S&quassà	Audacity (GPL-2.0-or-late	2	&squassà / s&quassà
+Co&ller	&Incullà	Audacity (GPL-2.0-or-late	2	&incullà / in&cullà
+Open Recent	Apre i schedarii recente	Audacity (GPL-2.0-or-late	2	apre i schedarii recente / apre recente
+Anal&yse	A&nalizà	Audacity (GPL-2.0-or-late	2	a&nalizà / anal&isi
+&Outils	Attre&zzi	Audacity (GPL-2.0-or-late	2	&attrezzi / attre&zzi
+&None	&Nunda	Audacity (GPL-2.0-or-late	2	&nisuna / &nunda
+&Pistes	&Traccie	Audacity (GPL-2.0-or-late	2	&traccia / &traccie
+Mix	Mischià	Audacity (GPL-2.0-or-late	2	mischià / mischju
+Aligner ensemble	Alineà inseme	Audacity (GPL-2.0-or-late	2	alineà &inseme / alineà inseme
+Trier par nom	Ordinà da u nome	Audacity (GPL-2.0-or-late	2	ordinà da u nome / ordinà per nome
+En&registrement	&Arregistramentu	Audacity (GPL-2.0-or-late	2	&arregistramentu / &arregistrà
+&View	&Fighjà	Audacity (GPL-2.0-or-late	2	&affissà / &fighjà
+Zoom &In	Ingrandamentu &più forte	Audacity (GPL-2.0-or-late	2	ingrandamentu &più forte / ingrandamentu più &forte
+Zoom a&rrière	Ingrandamentu &menu forte	Audacity (GPL-2.0-or-late	2	ingrandamentu &menu forte / ri&duce
+Audio Settings	Parametri audio	Audacity (GPL-2.0-or-late	2	parametri audio / preferenze audio
+Latence	Tempu d’attesa	Audacity (GPL-2.0-or-late	2	latenza / tempu d’attesa
+Modules	Moduli	Audacity (GPL-2.0-or-late	2	estensioni / moduli
+Compris dans :	Cù :	Audacity (GPL-2.0-or-late	2	cù : / dentru :
+Zoom par défaut	Ingrandamentu predefinitu	Audacity (GPL-2.0-or-late	2	ingrandamentu predefinitu / zoom predefinitu
+Minutes	Minuti	Audacity (GPL-2.0-or-late	2	minute / minuti
+Stopped	Piantatu	Audacity (GPL-2.0-or-late	2	firmatu / piantatu
+Saturé	Tazzatu	Audacity (GPL-2.0-or-late	2	saturatu / tazzatu
+VU-mètre d'enregistrement	Cuntadore d’arregistramentu	Audacity (GPL-2.0-or-late	2	cuntadore d’arregistramentu / munitore d’arregistramentu
+Centré	Centru	Audacity (GPL-2.0-or-late	2	centratu / centru
+Outil de sélection	Attrezzu di selezzione	Audacity (GPL-2.0-or-late	2	arnese di selezzione / attrezzu di selezzione
+Réinitialiser le zoom	Reinizià l’ingrandamentu	Audacity (GPL-2.0-or-late	2	reinizializà u zoom / reinizià l’ingrandamentu
+Press	Appughjà	Audacity (GPL-2.0-or-late	2	appughjate nant'à / appughjà
+Gradient	Sgradatu	Audacity (GPL-2.0-or-late	2	gradiente / sgradatu
+Horizontal	Orizuntale	Audacity (GPL-2.0-or-late	2	orizuntale / orizzontale
+Filtre coupe-bande	Filtru Shelf	Audacity (GPL-2.0-or-late	2	filtru shelf / filtru taglia-striscia
+None Selected	Nisuna selezzione	Audacity (GPL-2.0-or-late	2	nisuna selezzione / nisunu selezziunatu
+Delay	Cumportu	Audacity (GPL-2.0-or-late	2	cumportu / ritardu
+Délai	Cumportu	Audacity (GPL-2.0-or-late	2	cumportu / ritardu
+Interdire	Difende	Audacity (GPL-2.0-or-late	2	difende / pruibisce
+Right Only	Solu dirittu	Audacity (GPL-2.0-or-late	2	solu dirittu / solu à diritta
+Nouvelles chaînes	Catene nove	Poedit (MIT)	2	catene nove / frase nove
+Save changes	Arregistrà i cambiamenti	Poedit (MIT)	2	arregistrà e mudificazioni / arregistrà i cambiamenti
+Enregistrer les modifications	Arregistrà i cambiamenti	Poedit (MIT)	2	arregistrà e mudificazioni / arregistrà i cambiamenti
+Enregistrer sous…	Arregistrà cù u nome…	Poedit (MIT)	2	arregistrà cù u nome… / arregistrà u schedariu…
+Corriger l'en-tête	Currege l’intestatura	Poedit (MIT)	2	currege a rubrica / currege l’intestatura
+Conserver	Cunservà	Poedit (MIT)	2	cunservà / mantene
+Hide Sidebar	Piattà a barra laterale	Poedit (MIT)	2	piattà a barra laterale / piattà u quadru
+Show Sidebar	Affissà a barra laterale	Poedit (MIT)	2	affissà a barra laterale / affissà u riquadru
+Ignorer la casse	Ùn sfarenzià micca maiuscule è minuscule	Poedit (MIT)	2	ignurà a cassa / ùn sfarenzià micca maiuscule è minuscule
+&Tout remplacer	&Tuttu rimpiazzà	Poedit (MIT)	2	&rimpiazzà tuttu / &tuttu rimpiazzà
+Mettre en minuscules	Mette in minuscule	Poedit (MIT)	2	mette in minuscula / mette in minuscule
+Enter Full Screen	Modu di screnu sanu	Poedit (MIT)	2	modu di screnu sanu / passà à screnu sanu
+Minimize	Impuculì	Poedit (MIT)	2	impuculì / minimizà
+Agrandir	Ingrandamentu	Poedit (MIT)	2	ingrandamentu / ingrandà
+Vérifier l'orthographe	Verificà l’ortugrafia	Poedit (MIT)	2	verificà l'ortugrafia / verificà l’ortugrafia
+Updates	Rinnovi	Poedit (MIT)	2	aghjurnamenti / rinnovi
+Mises à jour	Rinnovi	Poedit (MIT)	2	aghjurnamenti / rinnovi
+&Enregistrer	A&rregistrà	Poedit (MIT)	2	a&rregistrà / arre&gistrà
+Enregistrer &sous…	Arregistrà &cù u nome…	Poedit (MIT)	2	&arregistrà cù u nome… / arregistrà &cù u nome…
+Suggestions	Sugestioni	Poedit (MIT)	2	sugestioni / suggestioni
+Rechercher le précédent	Circà precedente	Poedit (MIT)	2	circà precedente / circà u precedente
+Find Next	Circà seguente	Poedit (MIT)	2	circà a seguente / circà seguente
+&Go	&Và	Poedit (MIT)	2	&andà / &và
+Parcourir les fichiers	Navigazione	Poedit (MIT)	2	navigazione / sfuglià i schedarii
+Fichiers récents	Schedarii recente	Poedit (MIT)	2	schedarii recente / schedarii recenti
+Synchroniser	Sincrunizà	Poedit (MIT)	2	sincronizà / sincrunizà
+Charger	Incaricà	Poedit (MIT)	2	caricà / incaricà
+Enregistrer le fichier	Arregistrà u schedariu	Poedit (MIT)	2	arregistrà cum'è un schedariu / arregistrà u schedariu
+Hide Others	Piattà l’altri	Poedit (MIT)	2	piattà l'altri / piattà l’altri
+Couper	&Taglià	Poedit (MIT)	2	&taglià / taglià
+Enregistrer sous	Arregistrà cù u nome	Poedit (MIT)	4	arregistrà a pagina cum'è / arregistrà cum'è / arregistrà cù n… / arregistrà cù u nome
+Down	Ghjò	Poedit (MIT)	2	ghjò / versu u bassu
+Égal	Uguale	WinMerge (GPL-2.0-or-late	2	hè uguale à / uguale
+Différent	Micca uguale	WinMerge (GPL-2.0-or-late	2	micca uguale / sfarente
+Mixed	Mistu	WinMerge (GPL-2.0-or-late	2	mischiate / mistu
+Respecter la &casse	&Rispettà Maiuscule è minuscule	WinMerge (GPL-2.0-or-late	2	&rispettà maiuscule è minuscule / rispettà e &maiuscule
+&Rogner	&Truncà	WinMerge (GPL-2.0-or-late	2	&rifilà / &truncà
+&Parcourir...	&Navigà…	WinMerge (GPL-2.0-or-late	2	&navigà… / navi&gà…
+&Précédent	Circà &precedente	WinMerge (GPL-2.0-or-late	2	circà &precedente / circà prece&dente
+Couleurs	Culori	WinMerge (GPL-2.0-or-late	2	culori / culori di u stilu
+Ignorer &tout	&Tuttu ignurà	WinMerge (GPL-2.0-or-late	2	&tuttu ignurà / t&uttu tralascià
+Description :	Discrizzione :	WinMerge (GPL-2.0-or-late	2	discrizzione : / stilu :
+Nouveau...	Novu…	WinMerge (GPL-2.0-or-late	2	creà novu… / novu…
+Ignoré	Tralasciatu	WinMerge (GPL-2.0-or-late	2	ignuratu / tralasciatu
+Vers la droite	Da a diritta	WinMerge (GPL-2.0-or-late	2	da a diritta / ver di diritta
+Plug-ins	Moduli d’estensione	WinMerge (GPL-2.0-or-late	2	moduli / moduli d’estensione
+Font	Grafia	WinMerge (GPL-2.0-or-late	2	caratteru / grafia
+Police	Grafia	WinMerge (GPL-2.0-or-late	3	caratteru / grafia / grafia di u stilu
+&Abandonner	Inte&rrompe	WinMerge (GPL-2.0-or-late	2	&abbandunà / inte&rrompe
+&Ignorer	&Ignurà	WinMerge (GPL-2.0-or-late	2	&ignurà / &tralascià
+Oui à &tout	Sì per t&utti	WinMerge (GPL-2.0-or-late	2	iè à &tuttu / sì per t&utti
+Syntaxe	Sintassa	WinMerge (GPL-2.0-or-late	2	sintassa / sintassi
+Answer	Risposta	WinMerge (GPL-2.0-or-late	2	risponde / risposta
+Tout (%1)	Tutti (%1)	WinMerge (GPL-2.0-or-late	2	tutti (%1) / tuttu (%1)
+Contact	Cuntattu	WinMerge (GPL-2.0-or-late	2	cuntattu / cuntattà
+Média	Multimedià	WinMerge (GPL-2.0-or-late	2	media / multimedià
+Note	Nota	WinMerge (GPL-2.0-or-late	3	nota / percentuale / valutazione
+Tâche	Tacca	WinMerge (GPL-2.0-or-late	2	tacca / travagliu
+All Plugins	Tutti i moduli d’estensione	WinMerge (GPL-2.0-or-late	2	tutti i moduli / tutti i moduli d’estensione
+none	nisuna	WinMerge (GPL-2.0-or-late	2	nisuna / nisunu
+Highlight	Sopralineamentu	WinMerge (GPL-2.0-or-late	3	mette in risaltu / mumentu nutevule / sopralineamentu
+Surbrillance	Sopralineamentu	WinMerge (GPL-2.0-or-late	3	messa in evidenza / risaltu / sopralineamentu
+Clignotement	Cinnulamentu	WinMerge (GPL-2.0-or-late	2	cinnulamentu / lampeghjamentu
+Validation	Cunvalidazione	Replacement list # Format	2	cunvalidazione / validazione
+Preview Markdown	Fighjulata Markdown	Replacement list # Format	2	anteprima di a sintassa markdown / fighjulata markdown
+Temperature	Timperatura	Replacement list # Format	2	temperatura / timperatura
+Température	Timperatura	Replacement list # Format	2	temperatura / timperatura
+Longueur maximale	Lunghezza massima	Replacement list # Format	2	longhezza massima / lunghezza massima
+Paramètres des raccourcis	Preferenze di l'accurtatoghji	VLC media player (GPL-2.0	2	parametri di e scurciatoghje / preferenze di l'accurtatoghji
+Visualisations	Visualisazioni	VLC media player (GPL-2.0	2	visualisazioni / visualizazioni
+Modules de sortie	Mudulli d'esciuta	VLC media player (GPL-2.0	2	esciuta d'accessu / mudulli d'esciuta
+Paramètres vidéo	Preferenze video	VLC media player (GPL-2.0	2	parametri videò / preferenze video
+Filtres de flux	Filtri di flussu	VLC media player (GPL-2.0	2	filtri di flussu / mudullu di filtru di flussu
+Codecs vidéo	Cudechi video	VLC media player (GPL-2.0	2	cudechi video / cudecu video
+Codecs audio	Cudechi audio	VLC media player (GPL-2.0	2	cudechi audio / cudecu audio
+Flux de sortie	Flussu d'esciuta	VLC media player (GPL-2.0	3	flussu d'esciuta / flussu di surtita / flussu sout
+Découverte de services	Scuperta di servizii	VLC media player (GPL-2.0	2	scuperta di servizii / scuperta di serviziu
+Advanced settings	Preferenze d'espertu	VLC media player (GPL-2.0	2	parametri avanzati / preferenze d'espertu
+Sélectionnez un dossier	Selezziunà un Cartulare	VLC media player (GPL-2.0	2	sceglite un cartulare / selezziunà un cartulare
+Créer un dossier…	Creà un Cartulare…	VLC media player (GPL-2.0	2	creà un cartulare… / creà un sfugliaghju…
+Ajouter un dossier…	Aghjunghje un Cartulare…	VLC media player (GPL-2.0	2	aghjunghje un cartulare… / aghjunghje un sfugliaghju…
+Flottant	decimale	VLC media player (GPL-2.0	2	decimale / fluttante
+Chaîne	frasa	VLC media player (GPL-2.0	2	catena / frasa
+Décodeur	discudificatore	VLC media player (GPL-2.0	2	decudificatore / discudificatore
+Débit d'images	Percentuale di quadru	VLC media player (GPL-2.0	2	dimensione di u quadru / percentuale di quadru
+Copyright	Diritti di copia	VLC media player (GPL-2.0	4	diritti d'autore / diritti di copia / metadata di diritti di copia / ricunniscenza di diritti di copia
+Paramètre	Preferenza	VLC media player (GPL-2.0	2	parametru / preferenza
+Activer l'audio	Attivà l'audio	VLC media player (GPL-2.0	2	attivà l'audio / attivà l’audio
+Gain automatique	Guadagnu audio	VLC media player (GPL-2.0	2	guadagnu audio / guadagnu autumaticu
+Enable video	Permette a video	VLC media player (GPL-2.0	2	attivà a videò / permette a video
+Activer la vidéo	Permette a video	VLC media player (GPL-2.0	2	attivà a videò / permette a video
+Vidéo intégrée	Video incurpurata	VLC media player (GPL-2.0	2	incurpuratu / video incurpurata
+Toujours au-dessus	Sempre sopra	VLC media player (GPL-2.0	2	sempre in cima / sempre sopra
+Désentrelacer	Sbucinà	VLC media player (GPL-2.0	2	dipettinera / sbucinà
+Langue audio	Lingua audio	VLC media player (GPL-2.0	2	lingua audio / lingua principale
+Langue des sous-titres	Lingua di sottutitulu	VLC media player (GPL-2.0	2	lingua di sottutitulu / lingue di sottutitulu
+Temps d'arrêt	Tempu di fine	VLC media player (GPL-2.0	2	tempu d'arrestu / tempu di fine
+Incrustations	Sottufiure	VLC media player (GPL-2.0	2	permette e sottu-fiure / sottufiure
+Accélérer	Più veloce	VLC media player (GPL-2.0	2	accelerà / più veloce
+Image suivante	Sequenza seguente	VLC media player (GPL-2.0	2	fiura seguente / sequenza seguente
+Baisser le volume	Menu di vulume	VLC media player (GPL-2.0	3	calà u vulume / menu di vulume / vulume inghjò
+Couper le son	Ammutulì	VLC media player (GPL-2.0	2	ammutulì / taglià u sonu
+Paramètres réseau	Preferenze di reta	VLC media player (GPL-2.0	2	parametri di rete / preferenze di reta
+Entrée	Entrata	VLC media player (GPL-2.0	2	entrata / entrate
+Insert	Framette	VLC media player (GPL-2.0	2	framette / inserisce
+Inser	Framette	VLC media player (GPL-2.0	2	framette / ins
+Page Down	Pagina Inghjò	VLC media player (GPL-2.0	2	pag. seg. / pagina inghjò
+Page Up	Pagina Insù	VLC media player (GPL-2.0	2	pag. prec / pagina insù
+Arabic	Arabu	VLC media player (GPL-2.0	2	arabu / àrabu
+Arabe	Arabu	VLC media player (GPL-2.0	2	arabu / àrabu
+Armenian	Armenianu	VLC media player (GPL-2.0	2	armenianu / armenu
+Arménien	Armenianu	VLC media player (GPL-2.0	2	armenianu / armenu
+Avestan	Avestanu	VLC media player (GPL-2.0	2	avestanu / avesticu
+Avestique	Avestanu	VLC media player (GPL-2.0	2	avestanu / avesticu
+Azéri	Azerbaijanu	VLC media player (GPL-2.0	2	azerbaijanu / azeru
+Biélorusse	Belarussiu	VLC media player (GPL-2.0	2	belarussiu / bielorussu
+Breton	Britonnu	VLC media player (GPL-2.0	2	brettone / britonnu
+Bulgare	Bulgarianu	VLC media player (GPL-2.0	2	bulgarianu / bulgaru
+Néerlandais	Neerlandese	VLC media player (GPL-2.0	2	neerlandese / olandese
+Anglais	Corsu	VLC media player (GPL-2.0	2	corsu / inglese
+Estonien	Estonianu	VLC media player (GPL-2.0	2	estone / estonianu
+Français	Corsican	VLC media player (GPL-2.0	3	corsican / corsu / francese
+Hebrew	Ebreu	VLC media player (GPL-2.0	2	ebraicu / ebreu
+Islandais	Icelandicu	VLC media player (GPL-2.0	2	icelandicu / islandese
+Indonésien	Indonesianu	VLC media player (GPL-2.0	2	indonesianu / indunesianu
+Macédonien	Macedonianu	VLC media player (GPL-2.0	2	macedone / macedonianu
+Mongolian	Mongolianu	VLC media player (GPL-2.0	2	mongolianu / mongolu
+Mongol	Mongolianu	VLC media player (GPL-2.0	2	mongolianu / mongolu
+Ossète	Ossetianu; Osseticu	VLC media player (GPL-2.0	2	ossetianu; osseticu / ossetu
+Polonais	Pulunese	VLC media player (GPL-2.0	2	pulaccu / pulunese
+Roumain	Rumanianu	VLC media player (GPL-2.0	2	rumanianu / rumenu
+Russe	Russiu	VLC media player (GPL-2.0	2	russiu / russu
+Serbe	Serbianu	VLC media player (GPL-2.0	2	serbianu / serbu
+Croate	Croatianu	VLC media player (GPL-2.0	2	croatianu / cruatu
+Slovaque	Slovacu	VLC media player (GPL-2.0	2	slovacu / sluvaccu
+Slovène	Slovenianu	VLC media player (GPL-2.0	2	slovenianu / sluvenu
+Sotho du Sud	Sotho, Meziornu	VLC media player (GPL-2.0	2	sotho di u sudu / sotho, meziornu
+Espagnol	Corsican	VLC media player (GPL-2.0	2	corsican / spagnolu
+Tahitien	Taizianu	VLC media player (GPL-2.0	2	tahitianu / taizianu
+Tongien (Îles Tonga)	Tonga (Isule di Tonga)	VLC media player (GPL-2.0	2	tonga (isule di tonga) / tonganu (isule tonga)
+Ukrainien	Ucrainianu	VLC media player (GPL-2.0	2	ucrainianu / ucrainu
+Format d'écran	Prupurzioni	VLC media player (GPL-2.0	3	affissà a prupurzione / furmatu di screnu / prupurzioni
+CD audio	CD Audio	VLC media player (GPL-2.0	2	cd audio / cd audiò
+Connexion vidéo	Cunnessione video	VLC media player (GPL-2.0	2	cunnessione video / cunnessione videò
+Analogique	Analogu	VLC media player (GPL-2.0	2	analogicu / analogu
+Pilote	Pilota	VLC media player (GPL-2.0	2	driver / pilota
+Host	Ospite	VLC media player (GPL-2.0	2	ospite / òspite
+Hôte	Ospite	VLC media player (GPL-2.0	2	ospite / òspite
+Réinitialiser les contrôles	Rimette d'urigine i cuntrolli	VLC media player (GPL-2.0	2	reinizializà i cuntrolli / rimette d'urigine i cuntrolli
+Brillance	Lucidezza	VLC media player (GPL-2.0	2	brillanza / lucidezza
+Luminosité automatique	Lucidezza autumatica	VLC media player (GPL-2.0	2	lucidezza autumatica / luminosità autumatica
+Contrast	Cunstrastu	VLC media player (GPL-2.0	2	cunstrastu / cuntrastu
+Contraste	Cunstrastu	VLC media player (GPL-2.0	2	cunstrastu / cuntrastu
+Rotation (degrés)	Girà (gradi)	VLC media player (GPL-2.0	2	girà (gradi) / rotazione (gradi)
+Noir et blanc	Biancu & neru	VLC media player (GPL-2.0	3	biancu & neru / neru nant’à biancu / neru è biancu
+Negative	Negativu	VLC media player (GPL-2.0	2	negative / negativu
+Sky blue	Celu turchinu	VLC media player (GPL-2.0	2	celeste / celu turchinu
+Bleu ciel	Celu turchinu	VLC media player (GPL-2.0	2	celeste / celu turchinu
+Décodeur Dolby Surround	Discudificatore Dolby Surround	VLC media player (GPL-2.0	2	discudificatore dolby surround / discudificatore simplice per i flussi cudificati cù dolby surround
+Arrière gauche	Manca daretu	VLC media player (GPL-2.0	2	daretu manca / manca daretu
+Arrière droit	Diritta daretu	VLC media player (GPL-2.0	2	daretu diritta / diritta daretu
+Latéral gauche	Latu manca	VLC media player (GPL-2.0	2	laterale manca / latu manca
+Latéral droit	Latu dirittu	VLC media player (GPL-2.0	2	laterale diritta / latu dirittu
+Retard	Cumportu	VLC media player (GPL-2.0	2	cumportu / tempu di cumportu
+Périphérique de sortie	Apparechju d'esciuta	VLC media player (GPL-2.0	2	apparechju d'esciuta / dispusitivu di surtita
+Fichier de sortie	Schedariu d'esciuta	VLC media player (GPL-2.0	2	schedariu d'esciuta / schedariu di surtita
+Décodage matériel	Discudificazione materiale	VLC media player (GPL-2.0	2	decudificazione materiale / discudificazione materiale
+Argent	Argentu	VLC media player (GPL-2.0	2	argentu / soldi
+Marron	Cerriu	VLC media player (GPL-2.0	2	cerriu / marrone
+Fuchsia	Rusulatu	VLC media player (GPL-2.0	2	fucsia / rusulatu
+Profil	Prufilu	VLC media player (GPL-2.0	2	forzà un prufilu / prufilu
+Arabe (ISO-8859-6)	Arabu (ISO 8859-6)	VLC media player (GPL-2.0	2	arabu (iso 8859-6) / arabu (iso-8859-6)
+Grec (ISO-8859-7)	Grecu (ISO 8859-7)	VLC media player (GPL-2.0	2	grecu (iso 8859-7) / grecu (iso-8859-7)
+Turc (ISO-8859-9)	Turcu (ISO 8859-9)	VLC media player (GPL-2.0	2	turcu (iso 8859-9) / turcu (iso-8859-9)
+Fast	Veloce	VLC media player (GPL-2.0	2	rapidu / veloce
+Rapide	Veloce	VLC media player (GPL-2.0	2	rapidu / veloce
+Lent	Pianu	VLC media player (GPL-2.0	2	lentu / pianu
+N/A	M/D	VLC media player (GPL-2.0	2	m/d / n/d
+Compositeur	Cumpositore	VLC media player (GPL-2.0	2	cumpositore / cumpusitore
+Lyrics	Parolle	VLC media player (GPL-2.0	2	parolle / parolle di canzone
+Regroupement	Aggruppamentu	VLC media player (GPL-2.0	2	aggruppamentu / raggruppamentu
+Retard des sous-titres	Cumportu sottutitulu	VLC media player (GPL-2.0	2	cumportu di sottutitulu / cumportu sottutitulu
+Avancer	Dopu	VLC media player (GPL-2.0	2	avanzà / dopu
+Destination	Sceglie Destinazione	VLC media player (GPL-2.0	3	destinazione / sceglie a destinazione / sceglie destinazione
+Stream	Flussu	VLC media player (GPL-2.0	2	flussu / trasmette in diretta
+Channel Name	Nome di canale	VLC media player (GPL-2.0	2	nome di canale / nome di u canale
+Supprimer un profil	Caccià u prufilu	VLC media player (GPL-2.0	2	caccià u prufilu / squassà un prufilu
+Behavior	Andatu	VLC media player (GPL-2.0	2	andatu / cumpurtamentu
+Comportement	Andatu	VLC media player (GPL-2.0	2	andatu / cumpurtamentu
+Plus grand	Più maiò	VLC media player (GPL-2.0	2	più grande / più maiò
+Close Window	Chjode una Finestra	VLC media player (GPL-2.0	2	chjode a finestra / chjode una finestra
+Fermer la fenêtre	Chjode una Finestra	VLC media player (GPL-2.0	2	chjode a finestra / chjode una finestra
+Audio Device	Apparechju Audio	VLC media player (GPL-2.0	2	apparechju audio / dispusitivu audio
+Périphérique audio	Apparechju Audio	VLC media player (GPL-2.0	2	apparechju audio / dispusitivu audio
+Taille du texte	Dimensione di Testu	VLC media player (GPL-2.0	2	dimensione di testu / dimensione di u testu
+Couleur du texte	Culore di Testu	VLC media player (GPL-2.0	2	culore di testu / culore di u testu
+Couleur de l'arrière-plan	Culore di Fondu	VLC media player (GPL-2.0	2	culore di fondu / culore di u sfondu
+Répétition	Ripete	VLC media player (GPL-2.0	2	ripete / ripetizione
+Open Source	Codice Apertu	VLC media player (GPL-2.0	2	apre a fonte / codice apertu
+Capture	Catturà	VLC media player (GPL-2.0	2	cattura / catturà
+Protocole	Protocollu	VLC media player (GPL-2.0	2	protocollu / prutocollu
+Périphériques d'entrée	Appareghji d'Entrata	VLC media player (GPL-2.0	2	appareghji d'entrata / dispusitivi d'entrata
+Open File	Apre u Schedariu	VLC media player (GPL-2.0	2	apre u schedariu / apre un schedariu
+Save File	Arregistrà u Schedariu	VLC media player (GPL-2.0	2	arregistrà u schedariu / salvà u schedariu
+Video Settings	Preferenze Video	VLC media player (GPL-2.0	2	parametri videò / preferenze video
+Format	Forma	VLC media player (GPL-2.0	2	forma / furmatu
+Unmute	Ùn ammutulì	VLC media player (GPL-2.0	4	rende a voce / riattivà u micrufonu / ùn ammutulisce più / ùn ammutulì
+Rétablir le son	Ùn ammutulì	VLC media player (GPL-2.0	2	ristabilisce u sonu / ùn ammutulì
+Éjecter le disque	Espulsione di u discu	VLC media player (GPL-2.0	2	caccià u discu / espulsione di u discu
+Périphériques	Apparechji	VLC media player (GPL-2.0	2	apparechji / dispusitivi
+Créer un dossier	Creà un Cartulare	VLC media player (GPL-2.0	2	creà un cartulare / creà un sfugliaghju
+Renommer le dossier	Rinumà un Sfugliaghju	VLC media player (GPL-2.0	2	rinuminà u cartulare / rinumà un sfugliaghju
+Croissant	Crescente	VLC media player (GPL-2.0	2	ascendente / crescente
+Increase	Cresce	VLC media player (GPL-2.0	2	aumentu / cresce
+Decrease	Scresce	VLC media player (GPL-2.0	2	diminuzione / scresce
+Audio Files	Schedarii Audio	VLC media player (GPL-2.0	2	schedarii audio / schedarii audiò
+Fichiers audio	Schedarii Audio	VLC media player (GPL-2.0	2	schedarii audio / schedarii audiò
+Video Files	Schedarii Video	VLC media player (GPL-2.0	2	schedarii video / schedarii videò
+Fichiers vidéo	Schedarii Video	VLC media player (GPL-2.0	2	schedarii video / schedarii videò
+Source	Urigine	VLC media player (GPL-2.0	2	fonte / urigine
+Effacer l'élément sélectionné	Squassà l'elementu selezziunatu	VLC media player (GPL-2.0	2	squassa l'elementu selezziunatu / squassà l'elementu selezziunatu
+Préférences avancées	Preferenze esperte	VLC media player (GPL-2.0	2	preferenze avanzate / preferenze esperte
+Nouveau profil	Novu prufilu	VLC media player (GPL-2.0	2	novu prufilu / prufilu novu
+Nom du profil	Nome di Prufilu	VLC media player (GPL-2.0	2	nome di prufilu / nome di u prufilu
+Ouvrir un dossier	Apre un Cartulare	VLC media player (GPL-2.0	2	apre un cartulare / apre un sfugliaghju
+Open Folder	Apre un Sfugliaghju	VLC media player (GPL-2.0	2	apre un cartulare / apre un sfugliaghju
+Status Bar	&Barra di Statu	VLC media player (GPL-2.0	2	&barra di statu / barra di statu
+Barre d'état	&Barra di Statu	VLC media player (GPL-2.0	2	&barra di statu / barra di statu
+Ne rien afficher	Stà zittu	VLC media player (GPL-2.0	2	stà zittu / ùn affissà nunda
+Journalisation	Arregistramentu di i messaghji	VLC media player (GPL-2.0	2	arregistramentu di i messaghji / ghjurnalizazione
+Encoder	Cudificatore	VLC media player (GPL-2.0	2	cudificatore / cudificà
+Timeout	Cumportu d'attesa	VLC media player (GPL-2.0	2	cumportu d'attesa / esclude per un tempu
+Position du texte	Pusizione Marquee	VLC media player (GPL-2.0	2	pusizione di u testu / pusizione marquee
+Mosaïque	Musaica	VLC media player (GPL-2.0	2	mosaicu / musaica
+Always visible	Sempre videvule	VLC media player (GPL-2.0	2	sempre videvule / sempre visibile
+Toujours visible	Sempre videvule	VLC media player (GPL-2.0	2	sempre videvule / sempre visibile
+Couleur de l'ombre	Culore di l'umbria	VLC media player (GPL-2.0	2	culore di l'ombra / culore di l'umbria
+Épais	Grossa	VLC media player (GPL-2.0	2	grossa / grossu
+Grain	Grombulu	VLC media player (GPL-2.0	2	granu / grombulu
+Prévisualisation	Chjucu avvistu	VLC media player (GPL-2.0	3	antivista / chjucu avvistu / fighjulata
+Rotation	Rotazione	VLC media player (GPL-2.0	2	girà / rotazione
+Rotate	Girà	VLC media player (GPL-2.0	2	girà / rutazione
+Wave	Marosu	VLC media player (GPL-2.0	2	fà ciau / marosu
+Form	Formulariu	VLC media player (GPL-2.0	2	formulariu / furmulariu
+Formulaire	Formulariu	VLC media player (GPL-2.0	2	formulariu / furmulariu
+Heure de début	Tempu di Principiu	VLC media player (GPL-2.0	2	ora di principiu / tempu di principiu
+Modifier le profil	Mudificazione di prufilu	VLC media player (GPL-2.0	2	mudificazione di prufilu / mudificà u prufilu
+Options diverses	Ozzioni Diversi	VLC media player (GPL-2.0	2	ozzioni diverse / ozzioni diversi
+Modifier les paramètres	Mudificà e preferenze	VLC media player (GPL-2.0	2	mudificà e preferenze / mudificà i parametri
+File d'attente	_Fila d’attesa	HandBrake (GPL-2.0-only)	2	_fila d’attesa / fila d’attesa
+_Supprimer	_Squassà…	HandBrake (GPL-2.0-only)	2	_squassà / _squassà…
+Fill:	Riempiimentu :	HandBrake (GPL-2.0-only)	2	riempiimentu : / riempiimentu:
+Bordure gauche	Riempiimentu à manca	HandBrake (GPL-2.0-only)	2	bordu mancu / riempiimentu à manca
+Bordure droite	Riempiimentu à diritta	HandBrake (GPL-2.0-only)	2	bordu drittu / riempiimentu à diritta
+Économie d'énergie	Ecunumia d’energia	HandBrake (GPL-2.0-only)	2	ecunumia d'energia / ecunumia d’energia
+Eteindre l'ordinateur.	Piantata di l’urdinatore	HandBrake (GPL-2.0-only)	2	piantata di l’urdinatore / spenghje l’urdinatore
+Conservateur	Cunservatrice	HandBrake (GPL-2.0-only)	2	cunservatore / cunservatrice
+Hexagone	Esagunu	HandBrake (GPL-2.0-only)	2	esagonu / esagunu
+Pas de son	Nisunu audio	HandBrake (GPL-2.0-only)	2	nisun sonu / nisunu audio
+Espace colorimétrique	Spaziu culorimetricu	HandBrake (GPL-2.0-only)	2	spaziu culorimetricu / spaziu culurimetricu
+Arrêter l'encodage	Piantà a cudificazione	HandBrake (GPL-2.0-only)	2	_piantà a cudificazione / piantà a cudificazione
+Trier par	Ordinà da	Notepad++ (GPL-3.0-or-lat	2	ordinà da / urdinà per
+Close All	Chjodeli tutti	Notepad++ (GPL-3.0-or-lat	2	chjode tuttu / chjodeli tutti
+Save All	Arregistralli tutti	Notepad++ (GPL-3.0-or-lat	2	arregistralli tutti / arregistrà tuttu
+Save As...	Arregistrà cù u nome…	Notepad++ (GPL-3.0-or-lat	2	arregistrà cù n… / arregistrà cù u nome…
+Sélectionner tout	Tuttu selezziunà	Notepad++ (GPL-3.0-or-lat	2	selezziunà tuttu / tuttu selezziunà
+Stop Recording	Fermà u ricordu	Notepad++ (GPL-3.0-or-lat	2	fermà u ricordu / piantà a cattura
+Plan du document	Cartugrafia di u ducumentu	Notepad++ (GPL-3.0-or-lat	2	cartugrafia di u ducumentu / pianu di u ducumentu
+Always on Top	Sempre in primu pianu	Notepad++ (GPL-3.0-or-lat	2	sempre in cima / sempre in primu pianu
+Recherche :	Circà :	Notepad++ (GPL-3.0-or-lat	2	circà : / cosa à circà :
+Match case	Rispettà a cassa (maiuscule è minuscule)	Notepad++ (GPL-3.0-or-lat	2	rispettà a cassa / rispettà a cassa (maiuscule è minuscule)
+Respecter la casse	Rispettà a cassa (maiuscule è minuscule)	Notepad++ (GPL-3.0-or-lat	2	rispettà a cassa (maiuscule è minuscule) / rispettà maiuscule è minuscule
+Rechercher tout	Marcalle tutte	Notepad++ (GPL-3.0-or-lat	2	circalle tutte / marcalle tutte
+Remplacer tout	Rimpiazzalle tutte	Notepad++ (GPL-3.0-or-lat	3	rimpiazzalle tutte / rimpiazzà in prughjetti / rimpiazzà in schedarii
+Exécuter	Lancià	Notepad++ (GPL-3.0-or-lat	2	eseguisce / lancià
+Copy to Clipboard	Cupià in u preme’papei	Notepad++ (GPL-3.0-or-lat	2	cupià in l'appunti / cupià in u preme’papei
+Italic	Italicu	Notepad++ (GPL-3.0-or-lat	2	corsivu / italicu
+Italique	Italicu	Notepad++ (GPL-3.0-or-lat	2	corsivu / italicu
+Underline	Sottulineatu	Notepad++ (GPL-3.0-or-lat	2	sottulineatu / suttolineà
+Langage :	Linguaghju :	Notepad++ (GPL-3.0-or-lat	2	linguaghju / linguaghju :
+Raccourcis clavier	Accurtatoghju	Notepad++ (GPL-3.0-or-lat	2	accurtatoghji di tastiera / accurtatoghju
+Exécution	Esecuzione	Notepad++ (GPL-3.0-or-lat	2	cumande di lanciu / esecuzione
+Délimiteur 1	Delimitatore 1	Notepad++ (GPL-3.0-or-lat	2	delimitatore 1 / stilu 1 di delimitatore
+Délimiteur 2	Delimitatore 2	Notepad++ (GPL-3.0-or-lat	2	delimitatore 2 / stilu 2 di delimitatore
+Délimiteur 3	Delimitatore 3	Notepad++ (GPL-3.0-or-lat	2	delimitatore 3 / stilu 3 di delimitatore
+Délimiteur 4	Delimitatore 4	Notepad++ (GPL-3.0-or-lat	2	delimitatore 4 / stilu 4 di delimitatore
+Délimiteur 5	Delimitatore 5	Notepad++ (GPL-3.0-or-lat	2	delimitatore 5 / stilu 5 di delimitatore
+Délimiteur 6	Delimitatore 6	Notepad++ (GPL-3.0-or-lat	2	delimitatore 6 / stilu 6 di delimitatore
+Délimiteur 7	Delimitatore 7	Notepad++ (GPL-3.0-or-lat	2	delimitatore 7 / stilu 7 di delimitatore
+Délimiteur 8	Delimitatore 8	Notepad++ (GPL-3.0-or-lat	2	delimitatore 8 / stilu 8 di delimitatore
+Transparent	Trasparenza	Notepad++ (GPL-3.0-or-lat	2	trasparente / trasparenza
+Style	Stilu	Notepad++ (GPL-3.0-or-lat	2	stile / stilu
+Documentation	Documentazione	Notepad++ (GPL-3.0-or-lat	2	documentazione / ducumentazione
+Ouvrant :	Apertura :	Notepad++ (GPL-3.0-or-lat	2	apertura / apertura :
+Fermant :	Chjusura :	Notepad++ (GPL-3.0-or-lat	2	chjusura / chjusura :
+Complete	Sana	Notepad++ (GPL-3.0-or-lat	2	compiu / sana
+Curseur	Cursore	Notepad++ (GPL-3.0-or-lat	2	cursore / parametri di cursore
+Colorer l'arrière-plan	Culurisce u sfondulu	Notepad++ (GPL-3.0-or-lat	2	culurisce u fondu / culurisce u sfondulu
+Carré	Quadratu	Notepad++ (GPL-3.0-or-lat	2	linea è quadratu / quadratu
+Remplissage	Imburrera	Notepad++ (GPL-3.0-or-lat	2	imburrera / riempimentu
+Insérer	Aghjunghje	Notepad++ (GPL-3.0-or-lat	2	aghjunghje / inserisce
+Header and Footer	Intestatura è bassu di pagina	Notepad++ (GPL-3.0-or-lat	2	intestatu è pedi di pagina / intestatura è bassu di pagina

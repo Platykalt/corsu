@@ -4,64 +4,64 @@ english	context	corsican	forms	variants	avoid	sources	status	check
 # proposal = chosen for Corsu, needs a speaker's validation; name = proper name kept as in the game.
 # check=yes makes tools/minecraft.py warn when the English term appears and none of the Corsican forms does.
 # Interface
-Done	button closing a screen	Fattu			Compiu (Firefox, means 'finished')	lexicon-upstream (VLC, Poedit)	practice	no
-Cancel	button	Abbandunà				lexicon-mozilla	practice	no
-Back	button returning to previous screen	Ritornu			Pagina precedente (web only)	lexicon-mozilla	practice	no
-Settings	screen title	Parametri			Impustazioni	lexicon-mozilla	practice	no
-Options	main menu button	Ozzioni				lexicon-upstream	practice	no
-Quit	button	Esce				lexicon-upstream	practice	no
-Save	button	Arregistrà				lexicon-mozilla	practice	no
-Language	setting	Lingua				lexicon-mozilla	practice	no
-Volume	sound	Vulume				lexicon-upstream	practice	no
-Fullscreen	video	Screnu sanu				lexicon-upstream	practice	no
-Brightness	video	Lucidezza			Luminosità	lexicon-mozilla, lexicon-upstream	practice	no
-Subtitles	accessibility	Sottutituli				lexicon-upstream	practice	no
-Chat	in-game messages	Chjachjarata	chjachjar		Chat (English)	lexicon-upstream	practice	no
-Server	multiplayer	Servore	servor	Servitore		lexicon.tsv (Discord)	practice	yes
+Done	button closing a screen	Fattu			Compiu (Firefox, means 'finished')	lexicon-upstream:29 (Done -> Fattu, VLC/Poedit)	attested	no
+Cancel	button	Abbandunà				lexicon-mozilla:257 (Cancel -> Abbandunà); TMX 117 segments	attested	no
+Back	button returning to previous screen	Ritornu			Pagina precedente (web only)	lexicon-mozilla:1034 (Back -> Ritornu), :31 (Go Back -> Ritornu)	attested	no
+Settings	screen title	Parametri			Impustazioni	lexicon-mozilla:230 (Settings -> Parametri); Mozilla TBX settings -> parametri	attested	no
+Options	main menu button	Ozzioni				lexicon-upstream:4181 (Options -> Ozzioni)	attested	no
+Quit	button	Esce				lexicon-upstream:7069 (Quit -> Esce); lexicon-mozilla:711 (Quit %1$s -> Esce di %1$s)	attested	no
+Save	button	Arregistrà				lexicon-mozilla:448 (Save -> Arregistrà)	attested	no
+Language	setting	Lingua				lexicon-mozilla:893 (Language -> Lingua)	attested	no
+Volume	sound	Vulume				lexicon-upstream:975 (Volume -> Vulume)	attested	no
+Fullscreen	video	Screnu sanu				lexicon-upstream:2254 (Fullscreen -> Screnu sanu)	attested	no
+Brightness	video	Lucidezza			Luminosità	lexicon-mozilla:2271 (Brightness -> Lucidezza), lexicon-upstream	attested	no
+Subtitles	accessibility	Sottutituli				lexicon-upstream:1032 (Subtitles -> Sottutituli)	attested	no
+Chat	in-game messages	Chjachjerata	chjachjer		Chjachjarata (spelling found in no resource); Chat (English)	lexicon-upstream:256,257 (chat messages -> messaghji di chjachjerata); Mozilla TMX sumo (Chat and share -> Chjachjerata è spartera); review 2026-10	attested	no
+Server	multiplayer	Servitore	servitor		Servore (only in unreviewed Discord drafts, lexicon.tsv)	lexicon-mozilla:38,56 (server -> servitore; 112 lexicon lines, 101 Mozilla TMX segments, Pontoon); review 2026-10	attested	yes
 Player	person playing	Ghjucadore	ghjucador	Ghjucatore		to check in to check in INFCOR (joueur)	proposal	yes
 Game	the game	Ghjocu	ghjoc			to check in INFCOR	proposal	no
 World	saved Minecraft world	Mondu	mondi			to check in INFCOR	proposal	yes
 Singleplayer	main menu	Ghjocu solu		Un ghjucadore		Corsu	proposal	no
 Multiplayer	main menu	Parechji ghjucadori	parechji ghjucadori	Multighjucadore		Corsu	proposal	no
-Survival	game mode	Sopravivenza	sopraviv			lexicon-upstream	practice	yes
+Survival	game mode	Sopravivenza	sopraviv			Vikipedia 3 hits (corsican_words.py); NOT in lexicon-upstream (earlier note was wrong)	proposal	yes
 Creative	game mode	Creativu	creativ			Corsu	proposal	no
 Adventure	game mode	Avventura	avventur			to check in INFCOR	proposal	no
 Spectator	game mode	Spettatore	spettator			Corsu	proposal	yes
-Hardcore	game mode (one life)	Estremu	estrem		Hardcore	Corsu (Italian MC: Estrema)	proposal	no
+Hardcore	game mode (one life)	Estremu	estrem		Hardcore	Corsu (Italian MC: Estrema); Estremu = Extreme in lexicon-upstream:3211	proposal	no
 Peaceful	difficulty	Pacificu			Tranquillu	Corsu	proposal	no
 Easy	difficulty	Faciule				to check in INFCOR	proposal	no
-Normal	difficulty	Nurmale				lexicon-upstream	practice	no
+Normal	difficulty	Nurmale				lexicon-upstream:1172 (Normal -> Nurmale)	attested	no
 Hard	difficulty	Difficiule				to check in INFCOR	proposal	no
 Difficulty	setting	Difficultà				to check in INFCOR	proposal	no
-Seed	world generation number	Sementa	sement	Gramina	Granu	Corsu	proposal	no
+Seed	world generation number	Grana	gran	Sumente (Vikipedia 6, plant sense)	Sementa (found in no resource)	lexicon-upstream:3807 (Audacity: Random Seed -> Grana di numeru aleatoriu); review 2026-10	attested	no
 Inventory	player items screen	Inventariu	inventari			Corsu	proposal	yes
 Hotbar	bottom item bar	Barra rapida	barra rapida			Corsu	proposal	no
-Slot	inventory cell	Casella	casell		Slot	Corsu	proposal	no
+Slot	inventory cell	Casella	casell		Slot	Corsu; casella = checkbox in Mozilla TMX (mozilla-vpn-client), close sense	proposal	no
 Recipe	crafting recipe	Ricetta	ricett			to check in INFCOR	proposal	yes
 Recipe Book	crafting guide	Libru di ricette				Corsu	proposal	no
 Crafting	making items	Fabbricazione	fabbric			Corsu	proposal	no
 Advancement	progress goal	Prugressu	prugress	Avanzamentu	Avanzamentu (calque)	Corsu	proposal	yes
 Achievement	statistics	Successu	success			Corsu	proposal	no
-Statistics	screen	Statistiche	statistic			lexicon-upstream	practice	no
+Statistics	screen	Statistiche	statistic			lexicon-upstream:10011 (Statistics -> Statistiche)	attested	no
 Resource Pack	content pack	Pacchettu di risorse	pacchett	Pacchettu di risorse	Pack	Corsu	proposal	yes
 Data Pack	content pack	Pacchettu di dati	pacchett		Pack	Corsu	proposal	yes
 Respawn	return after death	Rinasce	rinasc	Riapparisce	Riapparizione (Firefox sense)	Corsu	proposal	no
 Spawn point	place you respawn	Puntu di rinascita	rinascit			Corsu	proposal	no
-Game Mode	setting	Modu di ghjocu				lexicon-upstream	practice	no
+Game Mode	setting	Modu di ghjocu				lexicon-upstream:10534 (Game mode -> Modu di ghjocu)	attested	no
 Game Rule	world rule	Regula di ghjocu	regul			Corsu	proposal	no
 Narrator	accessibility	Narratore	narrator			Corsu	proposal	yes
 Sneak	movement key	Accuvacciassi	accuvacci	Piattassi		Corsu	proposal	no
 Sprint	movement key	Corre				Corsu	proposal	no
 Jump	movement key	Saltà				to check in INFCOR	proposal	no
 Attack	key	Attaccà				to check in INFCOR	proposal	no
-Chunk	16x16 world column	Pezzu	pezz	Chunk		Corsu (Italian MC: chunk)	proposal	no
+Chunk	16x16 world column	Pezzu	pezz	Chunk		lexicon-upstream:3816,3830,3832 (chunks -> pezzi, data chunks in Audacity)	attested	no
 Tick	game time unit	Tick			Battitu	Corsu	proposal	no
 Render Distance	video	Distanza di visualizazione				Corsu	proposal	no
 Field of View	video	Campu visivu				Corsu	proposal	no
 Health	player status	Salute				lexicon-upstream	practice	yes
 Hunger	player status / effect	Fame				to check in INFCOR	proposal	yes
 Experience	player levels	Sperienza	sperienz			lexicon-upstream	practice	yes
-Level	experience level	Livellu	livell			Patriccollu	practice	no
+Level	experience level	Livellu	livell			lexicon-upstream:3185 (Level -> Livellu)	attested	no
 Skin	player appearance	Pelle	pell	Skin		Corsu	proposal	no
 Realms	Mojang hosting service	Realms				Mojang	name	no
 Minecraft	product	Minecraft				Mojang	name	no
@@ -492,7 +492,7 @@ Unbreaking	enchantment (f)	Sulidità	sulidit			Corsu	proposal	no
 Fortune	enchantment (f)	Furtuna	furtun			to check in INFCOR	proposal	yes
 Silk Touch	enchantment (m)	Toccu di seta				Corsu	proposal	no
 Mending	enchantment (m)	Rapezzu	rapezz			Corsu (rapezzà = to mend)	proposal	no
-Infinity	enchantment (m)	Infinitu	infinit			lexicon-upstream	practice	no
+Infinity	enchantment (m)	Infinitu	infinit			lexicon-upstream:6245 (Infinity -> Infinitu)	attested	no
 Looting	enchantment (m)	Bottinu	bottin			to check in INFCOR	proposal	no
 Knockback	enchantment (m)	Rinculu	rincul			Corsu	proposal	no
 Thorns	enchantment (f pl)	Spine	spin			to check in INFCOR	proposal	no
@@ -515,7 +515,7 @@ Trial Chambers	structure (f pl)	Camere di prova				Corsu	proposal	no
 Stronghold	structure (f)	Furtezza	furtezz			Corsu	proposal	no
 Fortress	nether structure (f)	Furtezza	furtezz			to check in INFCOR	proposal	no
 # Added by the consistency pass (October 2026): coined terms and harmonisation decisions, see decisions.md
-Command	computer/chat command (f)	Cumanda	cumand/cmd		Cumandu (m)	lexicon-upstream	practice	yes
+Command	computer/chat command (f)	Cumanda	cumand/cmd		Cumandu (m)	lexicon-upstream:2652 (Command -> Cumanda)	attested	yes
 Bush	plant block (m)	Arbustu	arbust		Machja (the maquis)	Corsu (coined)	proposal	no
 Dead Bush	plant block (m)	Arbustu seccu				Corsu (coined)	proposal	no
 Stem	plant and Nether stem (m)	Fustu	fust		Gambu	Corsu (coined)	proposal	yes
@@ -634,14 +634,14 @@ Ward	armor trim pattern	Guardia				Corsu (coined)	proposal	no
 Wayfinder	armor trim pattern	Guida				Corsu (coined)	proposal	no
 Wild	armor trim pattern	Salvaticu				Corsu (coined)	proposal	no
 Trim Material	Materiale : x	Materiale				Corsu (coined)	proposal	no
-Seeds	item (f pl)	Sementi	sementi			Corsu (coined)	proposal	no
+Seeds	item (f pl)	Sementi	sementi	Sumente / sumenti (Vikipedia 6 / 10)		Corsu (coined); "sementi" found in no resource, see review.md	proposal	no
 Camp (map)	explorer map (m)	Accampamentu				Corsu (coined)	proposal	no
-Explorer Map	item (f)	Carta d'esplorazione				Corsu (coined)	proposal	no
+Explorer Map	item (f)	Carta d'esplurazione				esplurazione: lexicon-mozilla:670; Espluratore: lexicon-upstream:8113; compound coined	proposal	no
 Buried	map adjective	sepoltu	sepolt			Corsu (coined)	proposal	no
 Shard	Amethyst/Echo/Prismarine Shard (f)	Scheggia	schegg			Corsu (coined)	proposal	no
 Ink Sac	item (f)	Bursa d'inchjostru	bursa		Sacca d'inchjostru, Sacchettu (= Bundle)	Corsu (coined)	proposal	no
 Flint and Steel	item (m)	Acciarinu	acciarin			Corsu (Vikipedia: acciarinu)	proposal	no
-Debug Stick	item (m)	Bastone di spannatura				Corsu (coined)	proposal	no
+Debug Stick	item (m)	Bastone di spannatura				spannatura attested for Debug (lexicon-mozilla:881); compound Bastone di spannatura coined	proposal	no
 Turtle Shell	helmet (f)	Scorza di tartaruga			Carapace	Corsu (coined)	proposal	no
 Nautilus	mob (m)	Nautilu	nautil			Corsu (coined)	proposal	no
 Netherite Upgrade	smithing (m)	Migliuramentu in netherite				Corsu (coined)	proposal	no
@@ -728,7 +728,7 @@ NPC	abbreviation	PNG				Corsu (coined)	proposal	no
 Primed TNT	entity (f)	TNT accesa				Corsu (coined)	proposal	no
 Invalid	adjective	inaccettevule				lexicon-mozilla	practice	no
 Selector	entity selector (m)	selettore				lexicon-mozilla	practice	no
-Tag	data tag (f)	etichetta				lexicon-upstream	practice	no
+Tag	data tag (f)	etichetta				lexicon-upstream:3106 (Tag: -> Etichetta :)	attested	no
 Scoreboard	commands (f)	tavula di punti				Corsu (coined)	proposal	no
 Objective	scoreboard (m)	ughjettivu				Corsu (coined)	proposal	no
 Score	points (m)	punteghju				Corsu (coined)	proposal	no
@@ -739,41 +739,41 @@ Ban	server ban (f); banned = esclusu	esclusione				Corsu (coined)	proposal	no
 Kick	server (f); kicked = espulsu	espulsione				Corsu (coined)	proposal	no
 Operator	server operator (m)	operatore				Corsu (coined)	proposal	no
 Whitelist	server (f)	lista bianca				Corsu (coined)	proposal	no
-Storage	data storage (m)	allucamentu				lexicon-upstream	practice	no
-Debug	noun (f); debug screen	spannatura				lexicon-mozilla	practice	no
+Storage	data storage (m)	allucamentu				lexicon-upstream:11162 (storage -> allucamentu)	attested	no
+Debug	noun (f); debug screen	spannatura				lexicon-mozilla:881,1506 (debugging/Debug menu -> spannatura); Mozilla TBX debug -> spannà	attested	no
 Loot Table	data (f)	tavula di bottinu				Corsu (coined)	proposal	no
 Force loading	chunks (m)	caricamentu furzatu				Corsu (coined)	proposal	no
 Post effect	shader (m)	effettu visuale				Corsu (coined)	proposal	no
 Feature	world generation (m)	elementu				Corsu (coined)	proposal	no
-Template	structure/world template (m)	mudellu				lexicon-upstream	practice	no
+Template	structure/world template (m)	mudellu				lexicon-upstream:4121 (Template -> Mudellu)	attested	no
 Jigsaw	Jigsaw Block	puzzle				Corsu (coined)	proposal	no
 Trigger	scoreboard (m)	attivadore				Corsu (coined)	proposal	no
 Stopwatch	commands (m)	cronometru				Corsu (coined)	proposal	no
 Waypoint	locator bar (m)	puntu di riferimentu				Corsu (coined)	proposal	no
-Timeline	commands (f)	linea tempurale				lexicon-upstream	practice	no
+Timeline	commands (f)	linea tempurale				lexicon-upstream:3654 (Timeline -> Linea tempurale)	attested	no
 Time marker	commands (m)	marcatore di tempu				Corsu (coined)	proposal	no
 Summon	verb	invucà				Corsu (coined)	proposal	no
 World Border	commands (m)	cunfine di u mondu				Corsu (coined)	proposal	no
-Clipboard	interface (m)	preme'papei				lexicon-mozilla	practice	no
+Clipboard	interface (m)	preme'papei				lexicon-upstream:10371 (clipboard -> preme'papei)	attested	no
 Hitbox	debug (f)	scatula di collisione				Corsu (coined)	proposal	no
 Advanced tooltips	debug (f pl)	infurmazioni avanzate				Corsu (coined)	proposal	no
 Game Test	commands (f)	prova				Corsu (coined)	proposal	no
 Whisper	verb	bisbiglià				Corsu (coined)	proposal	no
 Report	abuse report (m)	signalamentu				Corsu (coined)	proposal	no
-Draft	unsent message (f)	bruttacopia				lexicon-upstream	practice	no
+Draft	unsent message (f)	bruttacopia				lexicon-upstream:31 (Save as draft -> Arregistrà cum’è bruttacopia)	attested	no
 Friends List	social (f)	lista d'amichi				Corsu (coined)	proposal	no
 Friend Request	social (f)	dumanda d'amicizia				Corsu (coined)	proposal	no
 Cheats	world option (m pl)	trucchi				Corsu (coined)	proposal	no
-Backup	world backup (f)	salvaguardia				lexicon-upstream	practice	no
-Screenshot	interface (f)	cattura di screnu				lexicon-upstream	practice	no
-Upgrade (world)	verb / noun	mette à livellu / messa à livellu				lexicon-mozilla	practice	no
-Menu	interface (m)	listinu				lexicon-mozilla	practice	no
+Backup	world backup (f)	salvaguardia				lexicon-upstream:488 (Backup -> Salvaguardia)	attested	no
+Screenshot	interface (f)	cattura di screnu				lexicon-upstream:10456 (Screen capture -> Cattura di screnu); lexicon-mozilla:861 (screenshots -> catture di screnu)	attested	no
+Upgrade (world)	verb / noun	mette à livellu / messa à livellu				lexicon-mozilla:267 (Update -> Mette à livellu), :1923 (Messa à livellu)	attested	no
+Menu	interface (m)	listinu				lexicon-mozilla:88 (Menu -> Listinu)	attested	no
 Drop (release)	Mojang game drop (f)	edizione				Corsu (coined)	proposal	no
-Preset	interface (f)	prerigatura				lexicon-upstream	practice	no
+Preset	interface (f)	prerigatura				lexicon-upstream:3088 (Preset: -> Prerigatura :)	attested	no
 Slider	widget (m)	cursore				lexicon-upstream	practice	no
-Edit box	widget (m)	campu di testu				lexicon-mozilla	practice	no
+Edit box	widget (m)	campu di testu				lexicon-mozilla:1845 (Text field -> campu di testu)	attested	no
 Keypad	keyboard (f), abbr. tast. num. after the key	tastera numerica				lexicon-upstream	practice	no
-Key	keyboard key (m)	tastu				lexicon-upstream	practice	no
+Key	keyboard key (m)	tastu				lexicon-upstream:4114 (ENTER key -> u tastu Entrée)	attested	no
 Key Binds	controls (f)	assignazione di i tasti				Corsu (coined)	proposal	no
 Texture	graphics (f)	testura				Corsu (coined)	proposal	no
 Smooth Lighting	video (f)	illuminazione addulcita				Corsu (coined)	proposal	no
@@ -784,21 +784,25 @@ Toast	notification popup (f)	nutificazione				Corsu (coined)	proposal	no
 Telemetry	data (f)	telemetria				lexicon-mozilla	practice	no
 Peer-to-peer	network	da pare à pare				Corsu (coined)	proposal	no
 Pause Menu	interface (m)	listinu di pausa				Corsu (coined)	proposal	no
-Hotkey	interface (m)	accurtatoghju				lexicon-mozilla	practice	no
+Hotkey	interface (m)	accurtatoghju				lexicon-mozilla:863 (shortcut -> accurtatoghju)	attested	no
 Launcher	Minecraft Launcher (m)	lanciadore				lexicon-upstream	practice	no
 Mouse	device (m)	topu				lexicon-upstream	practice	no
-Scroll	verb / noun	sfilà / sfilarata				lexicon-mozilla	practice	no
+Scroll	verb / noun	sfilà / sfilarata				lexicon-upstream:3883 (Scroll -> Sfilà); lexicon-mozilla:1043	attested	no
 Minigame	Realms (m)	minighjocu				Corsu (coined)	proposal	no
-Upload	verb / noun (m)	incaricà / incaricamentu				lexicon-upstream	practice	no
-Download	verb / noun (m)	scaricà / scaricamentu				lexicon-upstream	practice	no
-Reset (world)	Realms verb / noun	reinizià / reiniziu				lexicon-mozilla	practice	no
+Upload	verb / noun (m)	incaricà / incaricamentu				lexicon-mozilla:494 (Upload -> Incaricà)	attested	no
+Download	verb / noun (m)	scaricà / scaricamentu				lexicon-mozilla:382 (Download -> Scaricà)	attested	no
+Reset (world)	Realms verb / noun	reinizià / reiniziu				lexicon-mozilla:1900 (Reset CFRs -> Reinizià i CFR)	attested	no
 Restore	verb / noun	ristabilisce / ristabilimentu				Corsu (coined)	proposal	no
 Downgrade	verb	retrucede				Corsu (coined)	proposal	no
 Invite	noun (m)	invitu				Corsu (coined)	proposal	no
 Join Code	Realms (m)	codice d'accessu				Corsu (coined)	proposal	no
-Subscription	Realms (m)	abbunamentu				lexicon-mozilla	practice	no
+Subscription	Realms (m)	abbunamentu				lexicon-mozilla:3391 (Subscription -> Abbunamentu)	attested	no
 Free Trial	Realms (f)	prova gratisi				Corsu (coined)	proposal	no
 Expired	adjective	scadutu				lexicon-upstream	practice	no
 Owner	Realms (m)	pruprietariu				lexicon-mozilla	practice	no
-Title Screen	main menu (m)	listinu principale				lexicon-mozilla	practice	no
-Update (world/blocks)	game rules (m pl)	rinnovi				lexicon-upstream	practice	no
+Title Screen	main menu (m)	listinu principale				lexicon-mozilla:2866 (Main Menu -> Listinu principale); harmonised in review 2026-10	attested	no
+Update (world/blocks)	game rules (m pl)	rinnovi				lexicon-mozilla:272,303 (updates -> rinnovi/rinnovu)	attested	no
+Console	command console (f)	Cunsola	cunsol		Cunsula	lexicon-upstream:9050 (Console -> Cunsola); review 2026-10	attested	no
+Backspace	keyboard key (m)	Ritornu in daretu				lexicon-upstream:12682 (Backspace key -> tastu di ritornu in daretu); review 2026-10	attested	no
+Explore	verb	esplurà	esplur		esplorà	lexicon-mozilla:978 (Explore -> Esplurà); review 2026-10	attested	no
+At most	quantity	à u più			al più (Italian contraction)	lexicon-upstream:5337 (à u più); review 2026-10	proposal	no

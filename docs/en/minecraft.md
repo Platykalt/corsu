@@ -15,7 +15,15 @@ touch the game's files: it is switched on and off from the Resource Packs menu.
 
 NOT AN OFFICIAL MINECRAFT PRODUCT. NOT APPROVED BY OR ASSOCIATED WITH MOJANG OR MICROSOFT.
 
-## Install
+## Install with the Corsu app (automatic)
+
+When Minecraft is installed, the Corsu app offers **Minecraft**. Close Minecraft, tick it and install: Corsu copies
+the pack `corsu-minecraft-java.zip` into the `resourcepacks` folder of every game folder it finds (the official
+launcher's, and Prism Launcher and MultiMC instances), turns it on and sets `lang:co_fr` in `options.txt`. On the next
+start Minecraft is in Corsican. The app's switch puts back the previous language and packs without touching the game's
+other settings; uninstalling Corsu also removes the pack. Command line: `python3 src/installer.py --components minecraft`.
+
+## Install by hand
 
 1. Download `corsu-minecraft-java-26.3.zip` and leave it zipped.
 2. In Minecraft, open **Options… → Resource Packs… → Open Pack Folder** and drop the file there.
@@ -44,13 +52,23 @@ Everything Minecraft 26.3 takes from its language files: menus, settings, comman
 effects, enchantments, advancements, statistics, subtitles, death messages, Realms, the narrator. A missing string
 would show in English.
 
-These do **not** go through the language files and stay in English:
+Three different cases:
 
-- the yellow splash texts on the title screen (`texts/splashes.txt`), the End Poem and credits (`texts/end.txt`,
-  `credits.json`, `postcredits.txt`): Minecraft reads them whatever the language, so replacing them would change them
-  for every language;
-- the Minecraft Launcher, translated separately by Mojang (no Corsican);
-- text sent by a server, written in a world or a book, or added by mods and data packs.
+- **Cannot depend on the language**: the yellow splash texts on the title screen (`texts/splashes.txt`), the End Poem
+  (`texts/end.txt`), the credits (`credits.json`, `postcredits.txt`). A resource pack *can* replace them, but Minecraft
+  has a single version of each, read whatever the language: replacing them changes them for every language. Corsu
+  therefore translates them in a **separate optional pack** (see below), never in the language pack.
+- **A separate component, not covered**: the Minecraft Launcher (Microsoft), translated by Mojang on Crowdin, where
+  Corsican is a target language but not shipped. It is not part of the game and Corsu does not change it.
+- **Outside the base game**: text sent by a server, written in a world or a book, or added by mods and data packs.
+
+## Optional pack: splash texts and End Poem
+
+`corsu-minecraft-java-texts-26.3.zip` (built by `python3 tools/minecraft.py texts`) replaces the 454 splash texts and
+the End Poem with their Corsican translation. **It changes them for every language**, since Minecraft reads only one
+version: turn it on only if that suits you, and remove it to get English back. Corsu never installs it by itself. The
+End Poem translates Julian Gough's text, which he placed under CC0; the splash texts translate Mojang's text. Choices
+and doubts: [minecraft/java/texts/NOTES.md](../../minecraft/java/texts/NOTES.md).
 
 ## Other versions
 
@@ -64,6 +82,10 @@ Bedrock also accepts a language added by a global pack (`texts/languages.json`, 
 `texts/co_FR.lang`) on Windows, Android and iOS. It is not done yet: Bedrock has its own keys (about 13,000 lines)
 and does not reuse the Java files. Consoles generally cannot import packs, and disabling the pack while its language is
 selected crashes the game.
+
+## Test in the game
+
+You own Minecraft? Steps and screens to check: [minecraft/java/TESTING.md](../../minecraft/java/TESTING.md).
 
 ## Correct a translation
 

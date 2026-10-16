@@ -113,6 +113,34 @@ def notepad(data):
     return result
 
 
+def freac(data):
+    """fre:ac language files: <entry id=… string="English">translation</entry> inside named sections."""
+    result = {}
+
+    def walk(element, path):
+        for child in element:
+            if child.tag == 'entry':
+                result[f'{path}#{child.get("id")}'] = (child.get('string') or '', ''.join(child.itertext()))
+            else:
+                walk(child, f'{path}/{child.tag}:{child.get("name") or ""}')
+
+    walk(ET.fromstring(data), '')
+    return result
+
+
+def isl(data):
+    """Inno Setup message files: Key=Value lines, without the [LangOptions] settings."""
+    result, section = {}, ''
+    for line in data.decode('utf-8-sig', 'replace').splitlines():
+        line = line.strip()
+        if line.startswith('[') and line.endswith(']'):
+            section = line[1:-1]
+        elif '=' in line and not line.startswith(';') and section in ('Messages', 'CustomMessages'):
+            key, _, value = line.partition('=')
+            result[f'{section}/{key.strip()}'] = value.replace('%n', ' ').strip()
+    return result
+
+
 def triples(english, french, corsican):
     for key, value in corsican.items():
         yield english.get(key, ''), french.get(key, ''), value
@@ -135,6 +163,7 @@ PO = [
     ('VLC media player', 'GPL-2.0-or-later', 'videolan/vlc', 'master', 'po/fr.po', 'po/co.po'),
     ('HandBrake', 'GPL-2.0-only', 'HandBrake/HandBrake', 'master', 'gtk/po/fr.po', 'gtk/po/co.po'),
     ('Tenacity', 'GPL-2.0-or-later', 'tenacityteam/tenacity', 'main', 'locale/fr.po', 'locale/co.po'),
+    ('wxWidgets', 'wxWindows-exception-3.1', 'wxWidgets/wxWidgets', 'master', 'locale/fr.po', 'locale/co.po'),
 ]
 
 
@@ -144,6 +173,9 @@ def clean(text):
 
 def usable(english, french, corsican):
     if not corsican or corsican in (english, french) or not (english or french):
+        return False
+    # A row starting with '#' would read as a comment (WinMerge's sample replacement lists do).
+    if any(text.startswith('#') for text in (english, french, corsican)):
         return False
     # A lone letter or symbol is a format code or a shortcut, never an interface label.
     if any(source and not re.search(r'[^\W\d_].*[^\W\d_]', source) for source in (english, french)):
@@ -212,6 +244,29 @@ def upstream_po(repo, branch, french_path, corsican_path):
         yield english, french.get(english, ''), value
 
 
+def freac_files():
+    base = 'i18n/freac/'
+    repo, branch = 'enzo1982/freac', 'master'
+    corsican = freac(fetch(repo, branch, base + 'freac_co.xml'))
+    french = freac(fetch(repo, branch, base + 'freac_fr.xml'))
+    for key, (english, value) in corsican.items():
+        yield english, french.get(key, ('', ''))[1], value
+
+
+def inno_setup():
+    repo, branch = 'jrsoftware/issrc', 'main'
+    corsican = isl(fetch(repo, branch, 'Files/Languages/Corsican.isl'))
+    english = isl(fetch(repo, branch, 'Files/Default.isl'))
+    french = isl(fetch(repo, branch, 'Files/Languages/French.isl'))
+    count = lambda text: len(re.findall(r'\w+', text))
+    for row in triples(english, french, corsican):
+        # Window titles such as "Setup" are "Assistente d'installazione" here: right for an installer, wrong as a
+        # general label, so short labels translated much longer are left out.
+        if count(row[2]) >= max(count(row[0]), count(row[1])) + 2 and max(count(row[0]), count(row[1])) <= 2:
+            continue
+        yield row
+
+
 def notepad_plus_plus():
     base = 'PowerEditor/installer/nativeLang/'
     repo, branch = 'notepad-plus-plus/notepad-plus-plus', 'master'
@@ -236,6 +291,8 @@ def main():
     sections += [(title, license, list(upstream_po(repo, branch, french, corsican)))
                  for title, license, repo, branch, french, corsican in PO]
     sections.append(('Notepad++', 'GPL-3.0-or-later', list(notepad_plus_plus())))
+    sections.append(('fre:ac', 'GPL-2.0-or-later', list(freac_files())))
+    sections.append(('Inno Setup', 'Inno Setup License', list(inno_setup())))
     write(ROOT / 'lexicon/lexicon-upstream.tsv', credit, sections)
 
 

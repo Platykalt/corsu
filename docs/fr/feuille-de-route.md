@@ -2,7 +2,7 @@
 
 [English](../en/roadmap.md)
 
-Ce qui suit est **prévu ou envisagé**, pas disponible. Ce qui marche aujourd'hui est dans
+Ce qui suit est **prévu ou envisagé**, pas disponible, sauf les lignes marquées « fait ». Ce qui marche aujourd'hui est dans
 [Ce qui marche, et où](compatibilite.md). État établi le 16 octobre 2026.
 
 ## Ce qui existe déjà en corse ailleurs
@@ -16,7 +16,7 @@ Les pourcentages viennent des API de Pontoon et de Hosted Weblate ; les autres p
 | --- | --- | --- | --- |
 | Firefox pour Android | Pontoon | 2 533 chaînes approuvées sur 2 548 | oui (lexique) |
 | Firefox pour iOS, Focus Android et iOS, Mozilla VPN | Pontoon | 91 à 100 % | oui |
-| **Firefox de bureau, Thunderbird de bureau** | — | **aucun corse chez Mozilla** (pas de paquet `co`) | Corsu fournit sa propre traduction de Firefox |
+| **Firefox de bureau, Thunderbird de bureau** | — | Mozilla ne les publie pas en corse : pas de paquet de langue `co` pour la version 158.0 ([liste des paquets](https://archive.mozilla.org/pub/firefox/releases/158.0/linux-x86_64/xpi/)), projets non ouverts au corse sur [Pontoon](https://pontoon.mozilla.org/api/v2/locales/co/), aucun paquet communautaire trouvé sur addons.mozilla.org | Corsu construit sa propre traduction de Firefox (techniquement possible, non officielle) |
 | Thunderbird pour Android | Hosted Weblate | 92,8 % | oui |
 | Tenacity | Hosted Weblate | 98,4 % | oui |
 | OpenTracks | Hosted Weblate | 76,1 % | oui |
@@ -34,6 +34,7 @@ Les pourcentages viennent des API de Pontoon et de Hosted Weblate ; les autres p
 
 | Chantier | Bénéfice | Solution | Preuve de faisabilité | Volume estimé (méthode) | Effort | Maintenance | Prochaine action |
 | --- | --- | --- | --- | --- | --- | --- | --- |
+| Minecraft Java : installation automatique | le corse devient la langue du jeu sans manipulation | composant `minecraft` de l'installeur : pack copié dans chaque dossier de jeu, `lang:co_fr` dans `options.txt` | fait dans 0.22.0, testé sur des dossiers simulés | — | fait | à chaque version du jeu | essai réel par un joueur |
 | Minecraft Java : relecture | traduction fiable du jeu le plus joué | relecture par un locuteur, clé par clé, statut dans `inventory.tsv` | traduction complète livrée (26.3) | 8 559 chaînes (`en_us.json` 26.3) | élevé | faible | relire d'abord interface, objets, blocs |
 | Minecraft Java : essai en jeu | preuve que le pack se charge | lancer 26.3 avec le pack, parcourir menus, inventaire, mort, sous-titres | mécanisme lu dans le code de 26.3 | 1 parcours | faible | à chaque version | essai par quelqu'un qui possède le jeu |
 | Minecraft Java : versions suivantes | suivre Mojang | `tools/minecraft.py diff` puis `inventory` | outil livré | 26.2 → 26.3 : 436 chaînes ajoutées, 56 modifiées (`tools/minecraft.py diff`) | faible | régulier | lancer `diff 26.3 26.4` à la sortie |
@@ -45,8 +46,9 @@ Les pourcentages viennent des API de Pontoon et de Hosted Weblate ; les autres p
 | Chantier | Bénéfice | Solution envisagée | Contraintes et blocages | Volume (méthode) | Prochaine action |
 | --- | --- | --- | --- | --- | --- |
 | Minecraft Bedrock | Windows, Android, iOS | pack global `texts/co_FR.lang` + `languages.json` + `language_names.json` | clés différentes de Java ; consoles fermées ; plantage si le pack est retiré avec la langue active | environ 13 000 lignes (`en_US.lang` de Mojang) | réutiliser la terminologie Java, aligner les clés par texte anglais |
-| Minecraft officiel (Crowdin) | corse dans le jeu sans pack | proposer les traductions sur crowdin.com/project/minecraft/co | Mojang décide ; droits cédés à Mojang ; pas de réutilisation libre ensuite | 8 559 + lanceur | demander l'avis de l'auteur du projet avant toute contribution |
-| Firefox de bureau officiel | Firefox en corse sans Corsu | demander l'ouverture du projet `firefox` pour `co` sur Pontoon | équipe Mozilla corse peu active ; décision Mozilla | à mesurer sur les fichiers de Firefox | contacter l'équipe `co` de Pontoon |
+| Minecraft officiel (Crowdin) | corse dans le jeu et le lanceur sans pack | le corse est déjà une langue cible du [projet Crowdin de Minecraft](https://crowdin.com/project/minecraft/co) et de celui du lanceur, sans être publié | Mojang décide de la publication ; conditions de cession des droits non trouvées ; il faudrait des textes relus | 8 559 + lanceur | décider d'abord de la licence des textes ([LICENSING.md](../../minecraft/java/LICENSING.md)) |
+| Outil de contribution (Crowdin ou Weblate) pour Corsu | permettre à des locuteurs de relire sans Git | Weblate Libre (gratuit pour les projets libres publics) ou Crowdin open source ; tous deux lisent JSON, Crowdin aussi TSV | Crowdin exige [un projet de plus de 3 mois avec une communauté active et des nouvelles à jour](https://crowdin.com/page/open-source-project-setup-request) : Corsu (commencé le 30 septembre 2026) ne remplit pas encore ces conditions | — | essayer d'abord le formulaire de ticket et `inventory.tsv`, puis Weblate Libre quand des relecteurs se présentent |
+| Firefox de bureau officiel | Firefox en corse sans Corsu | demande à Mozilla, qui [n'accepte pas une nouvelle langue avec un seul traducteur actif](https://discourse.mozilla.org/t/about-requesting-a-new-locale-for-firefox/86515) et demande d'abord plusieurs traducteurs actifs sur les petits projets | une tentative de 2010 a été close sans suite ([bug 599312](https://bugzilla.mozilla.org/show_bug.cgi?id=599312)) | à mesurer sur les fichiers de Firefox | constituer une équipe de plusieurs traducteurs avec l'équipe `co` de Pontoon |
 | Stardew Valley | jeu populaire, langues ajoutées officiellement prises en charge (1.5.5+) | `Data/AdditionalLanguages` via Content Patcher, distribué sur Nexus | polices à fournir ; textes sous droit du jeu | à mesurer sur les fichiers du jeu | vérifier le volume et les conditions de Nexus |
 | RimWorld, Factorio | mods de langue sur Steam Workshop / portail de mods | dossier `Languages/` ou `locale/co/` | non vérifié qu'un code de langue nouveau soit reconnu | à mesurer | test avec un mod minimal |
 | Luanti (Minetest), Mindustry, Wesnoth, SuperTuxKart, OpenTTD | jeux libres | contribuer en amont (Weblate, Transifex, PR) | relecture amont nécessaire | à mesurer | ouvrir le corse sur le Weblate de Luanti |
@@ -54,10 +56,15 @@ Les pourcentages viennent des API de Pontoon et de Hosted Weblate ; les autres p
 
 ### Steam : ce qui est possible et ce qui ne l'est pas
 
-1. **Client Steam** : non. Valve ne propose que ses langues d'interface (31) et n'accepte pas de nouvelle langue sur
-   son serveur de traduction. Modifier les fichiers du client serait écrasé à chaque mise à jour.
-2. **Site et boutique Steam** : non, même raison ; le corse ne figure même pas dans la liste des langues qu'un jeu
-   peut déclarer.
+1. **Client Steam** : pas de corse officiel ni de mécanisme pris en charge. Steamworks [ne gère que ses langues](https://partner.steamgames.com/doc/store/localization/languages)
+   (« the only set of languages supported by Steamworks APIs »), et son serveur de traduction, passé sur
+   valve.crowdin.com, ne propose pas le corse ; aucune procédure publique pour en ajouter une n'a été trouvée.
+   Techniquement, des modifications non officielles du client (injection de CSS ou de JavaScript, comme Millennium)
+   peuvent remplacer des textes sur son propre ordinateur, mais elles ne sont pas prises en charge par Valve, sont
+   effacées par les mises à jour et Corsu ne les propose pas.
+2. **Site et boutique Steam** : pas de corse officiel ; le choix de langue est géré par les serveurs de Valve. Un
+   script dans le navigateur pourrait remplacer des libellés sur sa propre machine, comme Corsu le fait pour Google ;
+   ce n'est pas étudié.
 3. **Jeux distribués sur Steam** : jeu par jeu, selon le mécanisme du jeu (voir le tableau ci-dessus).
 4. **Workshop** : seulement pour les jeux qui l'ouvrent aux mods de langue (RimWorld par exemple), à vérifier pour
    chacun.

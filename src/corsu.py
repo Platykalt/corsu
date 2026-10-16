@@ -703,7 +703,8 @@ def google_modules():
     for line in (SRC / 'firefox/google-labels.txt').read_text(encoding='utf-8').splitlines():
         if line and not line.startswith('#') and WORDS.get(line, line) != line:
             labels[line] = WORDS[line]
-    labels.update({key: WORDS[key] for key in lexicon_section('Google') if key in WORDS})
+    google = engine.application_words('Google')
+    labels.update({key: google[key] for key in lexicon_section('Google') if key in google})
     return {'CorsuChild.sys.mjs': (SRC / 'firefox/CorsuChild.sys.mjs').read_bytes(),
             'dictionary.mjs': ('export const words = ' + json.dumps(labels, ensure_ascii=False, separators=(',', ':'))
                                + ';\n').encode('utf-8')}
@@ -725,9 +726,12 @@ def generate():
     # Discord shows short interface labels: leave out long sentences and terminal messages, which only
     # make the plugin heavier.
     terminal = re.compile(r'%[-0-9.]*[sdlucfx]|(^|\s)--?\w|\\n|\t')
-    words = {key: value for key, value in WORDS.items() if len(key) <= 40 and not terminal.search(key)}
+    # Corrections first, then the rows written for Discord and Vencord, then labels from other programs.
+    everything = engine.application_words('Discord', 'Vencord')
+    words = {key: value for key, value in everything.items() if len(key) <= 40 and not terminal.search(key)}
     # Sentences written for Discord are kept whatever their length.
-    words.update({key: WORDS[key] for name in ('Discord', 'Vencord') for key in lexicon_section(name) if key in WORDS})
+    words.update({key: everything[key] for name in ('Discord', 'Vencord') for key in lexicon_section(name)
+                  if key in everything})
     (plugin / 'dictionary.json').write_text(json.dumps(words, ensure_ascii=False, separators=(',', ':')), encoding='utf-8')
     for name in ('index.ts', 'translate.ts'):
         shutil.copy2(SRC / 'discord-plugin' / name, plugin / name)
@@ -1185,6 +1189,11 @@ def install(components=None, qt_system=False):
         import chromium
         progress(75, 'Translating Chromium browsers', 'Traduction des navigateurs Chromium')
         chromium_stats = chromium.install(installer)
+    minecraft_stats = None
+    if 'minecraft' in components:
+        import minecraft
+        progress(85, 'Putting Minecraft in Corsican', 'Minecraft en corse')
+        minecraft_stats = minecraft.install(installer)
     installer.state['components'] = sorted(set(installer.state.get('components', [])) | components)
     installer.state['qt_system'] = qt_system or installer.state.get('qt_system', False)
     installer.state['disabled'] = sorted(set(installer.state.get('disabled', [])) - components)
@@ -1193,7 +1202,7 @@ def install(components=None, qt_system=False):
     disabled_marker().unlink(missing_ok=True)
     clients = sorted({'Vesktop' if name == 'vesktop' else 'Discord' for name in components
                       if name in ('vesktop', 'discord')})
-    report = {'kde': kde_stats, 'firefox': firefox_stats, 'chromium': chromium_stats, 'firefox_runtime': str(runtime) if runtime else None,
+    report = {'kde': kde_stats, 'firefox': firefox_stats, 'chromium': chromium_stats, 'minecraft': minecraft_stats, 'firefox_runtime': str(runtime) if runtime else None,
               'discord': {'clients': clients, 'plugin': 'Corsu', 'dictionary_labels': len(WORDS), 'partial': True},
               'components': sorted(components), 'enabled': True,
               'scope': 'Interface labels only; no translation of messages or arbitrary websites.'}
@@ -1218,6 +1227,7 @@ COMPONENT_LABELS = {
     'discord': ('Discord', 'Discord'), 'vesktop': ('Vesktop', 'Vesktop'),
     'desktop': ('KDE Plasma desktop and programs', 'Bureau et programmes KDE Plasma'),
     'terminal': ('Terminal commands', 'Commandes du terminal'),
+    'minecraft': ('Minecraft Java Edition', 'Minecraft Java Edition'),
 }
 
 
@@ -1233,7 +1243,7 @@ def switchable(state=None):
     """The parts that can be switched on and off one by one, in display order."""
     state = state or load_state()
     installed = set(state.get('components', []))
-    parts = [name for name in ('firefox', 'chromium', 'discord', 'vesktop', 'desktop') if name in installed]
+    parts = [name for name in ('firefox', 'chromium', 'discord', 'vesktop', 'desktop', 'minecraft') if name in installed]
     if 'desktop' in installed and PLATFORM == 'linux':
         parts.append('terminal')
     return parts
@@ -1321,6 +1331,11 @@ def disable(components=None, hours=None):
         if not record.get('toggle') or component_of(name, record) not in targets:
             continue
         path = Path(name)
+        if record.get('options_original') is not None:
+            import minecraft
+            minecraft.revert(path, record)
+            installer.state['files'].pop(name)
+            continue
         if record.get('json_changes'):
             fields = {field: False if field.endswith('/enabled') else saved['original']
                       for field, saved in record['json_changes'].items()
@@ -1398,6 +1413,10 @@ def uninstall():
             continue
         if record.get('tree'):
             shutil.rmtree(path, ignore_errors=True)
+            continue
+        if record.get('options_original') is not None:
+            import minecraft
+            minecraft.revert(path, record)
             continue
         if record.get('json_changes') and path.exists():
             document = json.loads(path.read_text(encoding='utf-8'))

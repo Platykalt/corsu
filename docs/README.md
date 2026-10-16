@@ -6,6 +6,7 @@
 | [Windows](fr/ordinateur/windows.md) · [macOS](fr/ordinateur/macos.md) · [Linux](fr/ordinateur/linux.md) | [Windows](en/computer/windows.md) · [macOS](en/computer/macos.md) · [Linux](en/computer/linux.md) |
 | [Android](fr/telephone/android.md) · [iPhone](fr/telephone/iphone.md) | [Android](en/phone/android.md) · [iPhone](en/phone/iphone.md) |
 | [Discord en corse](fr/discord.md) | [Discord in Corsican](en/discord.md) |
+| [État des traductions](fr/etat-des-traductions.md) | [Translation status](en/translation-status.md) |
 | [Minecraft en corse](fr/minecraft.md) | [Minecraft in Corsican](en/minecraft.md) |
 | [Feuille de route](fr/feuille-de-route.md) | [Roadmap](en/roadmap.md) |
 | [Ressources linguistiques](../resources/README.md) | [Language resources](../resources/README.md) |

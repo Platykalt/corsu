@@ -18,8 +18,11 @@ programmes KDE et Qt et les commandes du terminal. Opera GX et les autres naviga
 titre expérimental. Chaque partie peut être désactivée puis réactivée à tout moment, et le détail système par système
 est dans [Ce qui marche, et où](docs/fr/compatibilite.md).
 
-Corsu propose aussi **Minecraft: Java Edition en corse** (version 26.3), sous forme de pack de ressources à installer
-dans le jeu : voir [Minecraft en corse](docs/fr/minecraft.md).
+**Minecraft: Java Edition en corse (version 26.3), en cours de relecture** : les 8 557 textes du jeu sont traduits,
+et l'application Corsu ajoute le pack et choisit le corse comme langue du jeu. La traduction n'a pas encore été relue
+par un locuteur ni essayée en jeu : [Minecraft en corse](docs/fr/minecraft.md).
+
+Ce qui est traduit, ce qui est en cours et ce qui est prévu : **[État des traductions](docs/fr/etat-des-traductions.md)**.
 
 ### Pourquoi Corsu
 
@@ -73,12 +76,12 @@ Ce qui est vérifié et ce qui est seulement prévu : [Ce qui marche, et où](do
 
 ### Les traductions
 
-Le lexique de Corsu compte environ 136 000 lignes de traduction, chacune un texte source et sa traduction corse.
-Plus de 16 000 sont reprises d'autres logiciels libres, traduits pour la plupart par Patriccollu di Santa Maria è Sichè
+Le lexique de Corsu compte environ 139 000 lignes de traduction, chacune un texte source et sa traduction corse.
+Plus de 19 000 sont reprises d'autres logiciels libres, traduits pour la plupart par Patriccollu di Santa Maria è Sichè
 (Firefox pour Android et iOS, Thunderbird pour Android, VLC, Audacity, HandBrake, Notepad++, Poedit, WinMerge,
-Tenacity, OpenTracks…). Les autres ont été écrites pour Corsu avec le même vocabulaire, dont plus de 23 000 pour
-Discord et Vencord ; ce sont des premières versions, que chacun peut relire et corriger. Une traduction vous paraît
-fausse ?
+Tenacity, OpenTracks, wxWidgets, fre:ac, Inno Setup…). Les autres ont été écrites pour Corsu avec le même vocabulaire,
+dont plus de 23 000 pour Discord et Vencord ; ce sont des premières versions, que chacun peut relire et corriger.
+Une traduction vous paraît fausse ?
 [Ouvrez un ticket](https://github.com/Platykalt/corsu/issues/new?template=translation.yml) ou voyez
 [CONTRIBUTING.md](CONTRIBUTING.md).
 
@@ -94,8 +97,11 @@ Google Chrome on Windows and Linux. On Linux only, it also translates the KDE Pl
 terminal commands. Opera GX and the other Chromium browsers are experimental. Each part can be switched off and on
 again at any time, and the details for each system are in [What works where](docs/en/compatibility.md).
 
-Corsu also offers **Minecraft: Java Edition in Corsican** (version 26.3), as a resource pack you add in the game: see
-[Minecraft in Corsican](docs/en/minecraft.md).
+**Minecraft: Java Edition in Corsican (version 26.3), under review**: all 8,557 texts of the game are translated, and
+the Corsu app adds the pack and makes Corsican the game's language. The translation has not yet been reviewed by a
+speaker nor tried in the game: [Minecraft in Corsican](docs/en/minecraft.md).
+
+What is translated, in progress and planned: **[Translation status](docs/en/translation-status.md)**.
 
 ### Why Corsu
 
@@ -147,11 +153,12 @@ What is verified and what is only expected: [What works where](docs/en/compatibi
 
 ### Translations
 
-Corsu's lexicon has about 136,000 translation lines, each a source text and its Corsican translation. More than
-16,000 are taken from other free software, most of them translated by Patriccollu di Santa Maria è Sichè (Firefox for
+Corsu's lexicon has about 139,000 translation lines, each a source text and its Corsican translation. More than
+19,000 are taken from other free software, most of them translated by Patriccollu di Santa Maria è Sichè (Firefox for
 Android and iOS, Thunderbird for Android, VLC, Audacity, HandBrake, Notepad++, Poedit, WinMerge, Tenacity,
-OpenTracks…). The rest were written for Corsu with the same vocabulary, more than 23,000 of them for Discord and
-Vencord; they are first versions that anyone can review and correct. Does a translation look wrong?
+OpenTracks, wxWidgets, fre:ac, Inno Setup…). The rest were written for Corsu with the same vocabulary, more than
+23,000 of them for Discord and Vencord; they are first versions that anyone can review and correct.
+Does a translation look wrong?
 [Open an issue](https://github.com/Platykalt/corsu/issues/new?template=translation.yml) or see
 [CONTRIBUTING.md](CONTRIBUTING.md).
 

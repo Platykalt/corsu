@@ -1,0 +1,14 @@
+{
+  "pack": {
+    "description": "Lingua corsa · Corsu, Minecraft 26.3 · NOT AN OFFICIAL MINECRAFT PRODUCT",
+    "min_format": 97,
+    "max_format": 97
+  },
+  "language": {
+    "co_fr": {
+      "name": "Corsu",
+      "region": "Corsica",
+      "bidirectional": false
+    }
+  }
+}

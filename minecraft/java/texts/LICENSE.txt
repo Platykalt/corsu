@@ -1,0 +1,12 @@
+Corsu — Minecraft: Java Edition, splash texts and End Poem in Corsican (optional pack)
+https://github.com/Platykalt/corsu
+
+This pack replaces assets/minecraft/texts/splashes.txt and end.txt. Minecraft reads these files whatever language is
+selected, so with this pack they are in Corsican for every language. Remove the pack to get them back.
+
+End Poem: Corsican translation of the text by Julian Gough, who dedicated it to the public domain under CC0 1.0
+(https://theeggandtherock.com/p/i-wrote-a-story-for-a-friend). Splash texts: Corsican translation of Mojang's text;
+Mojang keeps its rights in the original. Corsu's own contribution is offered under the GNU GPL, version 3 or later.
+Details: https://github.com/Platykalt/corsu/blob/main/minecraft/java/LICENSING.md
+
+NOT AN OFFICIAL MINECRAFT PRODUCT. NOT APPROVED BY OR ASSOCIATED WITH MOJANG OR MICROSOFT.

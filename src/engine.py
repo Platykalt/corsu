@@ -108,6 +108,37 @@ def loose_french(english, french, corsican):
     return count(french) <= 3 and count(english) > count(french) and count(corsican) >= count(french) + 2
 
 
+def add_row(words, english, french, corsican):
+    """Map both sources of one row (and their placeholder templates) to its Corsican; earlier rows win."""
+    for source in (english, french):
+        if not source:
+            continue
+        words.setdefault(normalize(source), corsican)
+        skeleton, tokens = mask(source)
+        if tokens:
+            template = remask(corsican, tokens)
+            if template is not None:
+                words.setdefault(normalize(skeleton), template)
+
+
+def rows(source_path, section=None):
+    """(english, french, corsican) rows of a lexicon file, or of one `# <section>:` part of it."""
+    inside = section is None
+    for number, line in enumerate(source_path.read_text(encoding='utf-8').splitlines(), 1):
+        if line.startswith('#'):
+            if section is not None:
+                inside = line.startswith(f'# {section}:')
+            continue
+        if not line.strip() or not inside:
+            continue
+        fields = line.split('|')
+        if len(fields) != 3:
+            raise ValueError(f'{source_path}:{number}: expected English|French|Corsican')
+        english, french, corsican = (field.strip() for field in fields)
+        if corsican:
+            yield english, french, corsican
+
+
 def load_lexicon(path=None):
     """Read `English|French|Corsican` rows into direct and templated lookup tables."""
     words = {}
@@ -116,26 +147,27 @@ def load_lexicon(path=None):
         if not source_path.exists():
             continue
         imported = source_path in REVIEWED
-        for number, line in enumerate(source_path.read_text(encoding='utf-8').splitlines(), 1):
-            if not line.strip() or line.startswith('#'):
-                continue
-            fields = line.split('|')
-            if len(fields) != 3:
-                raise ValueError(f'{source_path}:{number}: expected English|French|Corsican')
-            english, french, corsican = (field.strip() for field in fields)
-            if not corsican:
-                continue
+        for english, french, corsican in rows(source_path):
             if imported and english and french and loose_french(english, french, corsican):
                 french = ''
-            for source in (english, french):
-                if not source:
-                    continue
-                words.setdefault(normalize(source), corsican)
-                skeleton, tokens = mask(source)
-                if tokens:
-                    template = remask(corsican, tokens)
-                    if template is not None:
-                        words.setdefault(normalize(skeleton), template)
+            add_row(words, english, french, corsican)
+    return words
+
+
+def application_words(*sections):
+    """The words one application sees: corrections first (the person's own, then lexicon-fixes.tsv), then the rows
+    written for that application in lexicon.tsv, then everything else. A label translated for Discord is not
+    replaced by the same label taken from another program, where it may mean something else."""
+    words = {}
+    for source_path in (USER, FIXES):
+        if source_path.exists():
+            for row in rows(source_path):
+                add_row(words, *row)
+    for section in sections:
+        for row in rows(LEXICON, section):
+            add_row(words, *row)
+    for key, value in WORDS.items():
+        words.setdefault(key, value)
     return words
 
 

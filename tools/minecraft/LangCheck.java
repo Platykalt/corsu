@@ -15,7 +15,30 @@ public class LangCheck {
         Map<String, String> english = new LinkedHashMap<>();
         Map<String, String> corsican = new LinkedHashMap<>();
         try (var in = new FileInputStream(args[0])) { Language.loadFromJson(in, english::put); }
-        try (var in = new FileInputStream(args[1])) { Language.loadFromJson(in, corsican::put); }
+        if (args[1].endsWith(".zip")) {
+            // The built pack itself: its metadata through the game's codecs, then its language file.
+            try (var zip = new java.util.zip.ZipFile(args[1])) {
+                var meta = com.google.gson.JsonParser.parseReader(new java.io.InputStreamReader(
+                    zip.getInputStream(zip.getEntry("pack.mcmeta")), java.nio.charset.StandardCharsets.UTF_8)).getAsJsonObject();
+                var ops = com.mojang.serialization.JsonOps.INSTANCE;
+                var languages = net.minecraft.client.resources.metadata.language.LanguageMetadataSection.CODEC
+                    .parse(ops, meta.get("language")).getOrThrow();
+                var range = net.minecraft.server.packs.metadata.pack.PackFormat
+                    .packCodec(net.minecraft.server.packs.PackType.CLIENT_RESOURCES).codec()
+                    .parse(ops, meta.get("pack")).getOrThrow();
+                var current = net.minecraft.server.packs.metadata.pack.PackFormat.of(Integer.parseInt(args[2]), Integer.parseInt(args[3]));
+                System.out.println("pack.mcmeta: languages " + languages.languages() + ", formats " + range
+                    + (range.isValueInRange(current) ? ", accepts " : ", REFUSES ") + current);
+                if (!range.isValueInRange(current)) System.exit(1);
+                for (var code : languages.languages().keySet()) {
+                    var entry = zip.getEntry("assets/minecraft/lang/" + code + ".json");
+                    if (entry == null) { System.out.println("no language file for " + code); System.exit(1); }
+                    try (var in = zip.getInputStream(entry)) { Language.loadFromJson(in, corsican::put); }
+                }
+            }
+        } else {
+            try (var in = new FileInputStream(args[1])) { Language.loadFromJson(in, corsican::put); }
+        }
         Map<String, String> active = new LinkedHashMap<>();
         Language.inject(new Language() {
             public String getOrDefault(String key, String fallback) { return active.getOrDefault(key, fallback); }

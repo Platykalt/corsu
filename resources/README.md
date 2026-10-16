@@ -35,14 +35,14 @@ Wiktionary sometimes marks a form as Cismontane (northern) or Ultramontane (sout
 
 ## Lookup only
 
-These are the larger dictionaries. None offers an export or a license allowing a copy, so Corsu does not download them.
+These are the larger dictionaries. None publishes an export, a dataset or a licence that allows a copy (checked on 2026-10-16), so Corsu does not download them. That is a limit of what they offer, not a technical impossibility.
 Check uncertain words in them by hand.
 
 | Resource | Owner | Contents | Conditions |
 | --- | --- | --- | --- |
-| [INFCOR](https://www.adecec.net/infcor/) | ADECEC | Corsican dictionary with French, Italian and English equivalents and variant forms; the largest one available | No license stated. The site's robots.txt excludes its `/try/` pages, so Corsu does not query it automatically. A bulk copy would need ADECEC's agreement. |
+| [INFCOR](https://www.adecec.net/infcor/) | ADECEC | Corsican dictionary with French, Italian and English equivalents and variant forms; the largest one available | No terms of use, licence or export published (only a copyright mention, ADECEC). The site's robots.txt excludes `/try/` at its root, not literally `/infcor/try/` where the lookup lives; with no stated terms, Corsu does not query it automatically. A copy would also fall under the database producer's right: it needs ADECEC's agreement. |
 | [BDLC, Banca Dati di a Lingua Corsa](https://bdlc.univ-corse.fr/bdlc/corse.php) | Università di Corsica, UMR CNRS LISA 6240 | dialect atlas: forms by village, phonetics, audio | "Aucune reproduction ou représentation ne peut être réalisée en contravention avec les droits de la BDLC". Its TAL corpora are downloadable: Wikipedia 2019 (CC BY-SA 3.0), Bible and A Piazzetta (CC BY-NC-SA 4.0, non-commercial). |
-| [Sapienzia](https://www.sapienzia.io) | private | dictionary, conjugation, machine translation | terms forbid mass extraction; its machine translation is not a reference |
+| [Sapienzia](https://www.sapienzia.io) | private | dictionary, conjugation, machine translation | [terms](https://sapienzia.io/terms.html) forbid "extraire massivement les données du dictionnaire sans autorisation" and unauthorised reuse; its robots.txt blocks AI crawlers; its machine translation is not a reference |
 | [Educorsica lessicu](https://www.educorsica.fr/lessicu/), [cunghjugazione](https://www.educorsica.fr/cunghjugazione/) | Canopé di Corsica | school terminology (with a computing domain), conjugation | no license stated |
 | ADECEC, Bastia and Ajaccio thematic lexicons (PDF) | ADECEC, cities | French-Corsican word lists by topic; Bastia's manga list has *videoghjocu* | no license stated |
 

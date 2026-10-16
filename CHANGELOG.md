@@ -20,6 +20,18 @@
   Vikipedia, Apertium, CLDR, Tatoeba) with date and checksum; `tools/corsican_words.py` looks words up in them.
   `resources/README.md` lists them, and the dictionaries that can only be consulted by hand.
 - New roadmap: `docs/fr/feuille-de-route.md`, `docs/en/roadmap.md`.
+- Minecraft: the Corsu app can make Corsican the game's language: it copies the pack into every Minecraft game
+  folder it finds (official launcher, Prism Launcher, MultiMC) and sets `lang:co_fr` and the pack in `options.txt`;
+  switching off or uninstalling puts back only those settings. Optional separate pack for the splash texts and the
+  End Poem (they change for every language). `verify` also reads the built zip's `pack.mcmeta` with the game's codecs.
+  A third AI review pass changed 242 Minecraft texts with evidence (`minecraft/java/review.md`); still no speaker
+  review and no in-game test (`minecraft/java/STATUS.md`, `TESTING.md`). Licensing notes: `minecraft/java/LICENSING.md`.
+- Discord and Google: their own rows now win over the same label taken from other programs (55 Discord labels).
+- Variants resolved by meaning in 337 rows: storage = allucamentu (not the Spanish-looking almacenamentu), shortcut =
+  accurtatoghju, poll = sundaghju, survey = inchiesta (`lexicon/variants.md`).
+- More of Patriccollu's translations imported: wxWidgets, fre:ac and Inno Setup (about 2,800 rows).
+- Translation status page (`docs/fr/etat-des-traductions.md`, `docs/en/translation-status.md`); claims about
+  Firefox desktop, Steam and the dictionaries rewritten with sources.
 
 ## 0.21.0 (2026-10-03)
 
