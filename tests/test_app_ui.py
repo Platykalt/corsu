@@ -64,7 +64,7 @@ class TextTests(unittest.TestCase):
 HARNESS = r'''
 const fs = require("fs"), vm = require("vm");
 const [page, fixturePath] = process.argv.slice(2);
-const code = fs.readFileSync(page, "utf8").match(/<script>\n([\s\S]*)<\/script>/)[1];
+const code = fs.readFileSync(page, "utf8").match(/<script>\r?\n([\s\S]*)<\/script>/)[1];
 class Element {
   constructor(tag) { this.tagName = tag.toUpperCase(); this.attributes = {}; this.children = []; this.listeners = {};
     this.style = {}; this.dataset = {}; this.hidden = false; this.disabled = false; this.classList = { toggle() {} }; }
