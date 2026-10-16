@@ -109,7 +109,7 @@ def set_ini(installer, component, path, section, key, value):
     text, newline, bom = read_body(path)
     name = f'{path}#[{section}]{key}'
     record = installer.state['files'].get(name)
-    original = record['original'] if record else ini_get(text, section, key)
+    original = record['setting']['original'] if record else ini_get(text, section, key)
     installer.state['files'][name] = {'backup': None, 'mode': None, 'toggle': True, 'component': component,
                                       'setting': {'type': 'ini', 'file': str(path), 'section': section, 'key': key,
                                                   'original': original, 'installed': value},

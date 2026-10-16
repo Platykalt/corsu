@@ -108,6 +108,7 @@ class VLCTests(unittest.TestCase):
             override.parent.mkdir(parents=True)
             override.write_text('[Context]\nfilesystems=home;\n')
             self.install()
+            self.install()  # a second run (update) used to stop with KeyError: 'original'
             self.assertIn('[Environment]\nLANGUAGE=co:fr_FR\n', override.read_text())
             # Something else written to the file since stays.
             override.write_text(override.read_text().replace('home;', 'home;xdg-music;'))
