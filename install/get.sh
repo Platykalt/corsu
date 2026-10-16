@@ -7,7 +7,9 @@ case "$(uname -s)" in
     Darwin) name=corsu-macos.tar.gz; installer="Install for macOS.command" ;;
     *) echo "Corsu supports Linux, macOS and Windows. On Windows, use install/get.ps1." >&2; exit 1 ;;
 esac
-base=https://github.com/Platykalt/corsu/releases/latest/download
+# CORSU_DOWNLOAD_BASE: another folder of the same archives and .sha256 files (a test build, file:// works);
+# the checksum is verified the same way.
+base=${CORSU_DOWNLOAD_BASE:-https://github.com/Platykalt/corsu/releases/latest/download}
 dir=$(mktemp -d "${TMPDIR:-/tmp}/corsu.XXXXXX")
 echo "Downloading $name..."
 curl -fsSL "$base/$name" -o "$dir/$name"

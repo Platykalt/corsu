@@ -1,7 +1,10 @@
 #!/usr/bin/env python3
 """End-to-end installer checks in an isolated home directory. Never touches the real user's apps.
 
-Usage: e2e.py firefox|discord|chromium [--root EXTRACTED_RELEASE]
+Usage: e2e.py firefox|discord|chromium|archive [--root EXTRACTED_RELEASE]
+
+archive: copy the extracted release to a folder with a space and an accent, install, delete that folder, check
+         status, update from CORSU_ARCHIVES (file://, checksum checked) and uninstall with the installed copy.
 
 firefox: install, launch the translated Firefox and read real strings, disable, enable, uninstall.
 chromium: translate a throwaway browser copy (CORSU_CHROMIUM, e.g. Chrome for Testing), read the
@@ -13,6 +16,7 @@ import argparse
 import json
 import os
 import re
+import shutil
 from pathlib import Path
 import subprocess
 import sys
@@ -172,6 +176,61 @@ def check_discord(root, home, environment):
     print('PASS: Discord patch with the official Vencord installer and restore')
 
 
+def installed_copy(home):
+    copies = sorted((data_directory(home) / 'releases').glob('*/src/corsu.py'), key=lambda path: path.stat().st_mtime)
+    assert copies, 'No installed copy of Corsu in the data folder'
+    return copies[-1].parent.parent
+
+
+def mentions(path, text):
+    """Whether a launcher (file, or every file of an application bundle) holds this path, in any encoding."""
+    files = [path] if path.is_file() else [file for file in path.rglob('*') if file.is_file()]
+    forms = {text, text.replace('\\', '/')}
+    encodings = ('utf-8', 'utf-16-le', 'utf-16-be') + (('mbcs',) if PLATFORM == 'windows' else ())
+    return any(form.encode(encoding, errors='ignore') in file.read_bytes()
+               for file in files for form in forms for encoding in encodings)
+
+
+REQUIRED = ['src/app/index.html', 'src/app/corsu.svg', 'src/app/corsu.ico', 'src/release.json', 'src/installer.py',
+            'src/update.py', 'lexicon/lexicon.tsv', 'vendor/firefox-fr.xpi', 'Vencord/dist/vencordDesktopRenderer.js']
+
+
+def check_archive(root, home, environment):
+    """The route of a person who downloads an archive: extract it to a folder with a space and an accent, install from
+    there, delete that folder, then use, update (from the same archives, checksum checked) and remove Corsu with only
+    what was installed."""
+    archives = Path(os.environ['CORSU_ARCHIVES']).resolve()
+    extracted = home / 'Téléchargements corsu' / 'corsu'
+    shutil.copytree(root, extracted, symlinks=True)
+    missing = [name for name in REQUIRED if not (extracted / name).is_file()]
+    assert not missing, f'Archive lacks: {missing}'
+    run(extracted, environment, 'src/installer.py', '--components', 'firefox', '--yes')
+    shutil.rmtree(extracted.parent)
+    copy = installed_copy(home)
+    missing = [name for name in REQUIRED if not (copy / name).is_file() and not name.startswith('vendor/')]
+    assert not missing, f'Installed copy lacks: {missing}'
+    for launcher in launchers(home):
+        assert launcher.exists(), f'Missing launcher: {launcher}'
+        assert not mentions(launcher, str(extracted.parent)), f'{launcher} still points into the extracted folder'
+    for launcher, icon in launcher_icons(home).items():
+        assert icon and icon.is_file(), f'{launcher} shows a missing icon: {icon}'
+    status = json.loads(run(copy, environment, 'src/corsu.py', 'status', capture=True))
+    assert status['installation']['missing'] == [] and status['installation']['changed'] == [], status
+    run(copy, environment, 'src/corsu.py', 'prepare-firefox', capture=True)
+    update = {**environment, 'CORSU_DOWNLOAD_BASE': archives.as_uri()}
+    run(copy, update, 'src/update.py', '--install')
+    copy = installed_copy(home)
+    for launcher, icon in launcher_icons(home).items():
+        assert icon and icon.is_file(), f'After the update, {launcher} shows a missing icon: {icon}'
+    status = json.loads(run(copy, environment, 'src/corsu.py', 'status', capture=True))
+    assert status['installation']['missing'] == [], status
+    run(copy, environment, 'src/installer.py', '--uninstall', '--yes')
+    assert state(home)['files'] == {}, state(home)
+    for launcher in launchers(home):
+        assert not launcher.exists(), f'Launcher left behind: {launcher}'
+    print(f'PASS: installed from an extracted archive, used after deleting it, updated from {archives.as_uri()}, removed')
+
+
 def check_chromium(root, home, environment):
     import hashlib
     browser = Path(os.environ['CORSU_CHROMIUM'])
@@ -193,13 +252,14 @@ def check_chromium(root, home, environment):
 
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument('check', choices=['firefox', 'discord', 'chromium'])
+    parser.add_argument('check', choices=['firefox', 'discord', 'chromium', 'archive'])
     parser.add_argument('--root', type=Path, default=PROJECT)
     args = parser.parse_args()
     with tempfile.TemporaryDirectory(prefix='corsu-home-', ignore_cleanup_errors=True) as directory:
         home = Path(directory)
         environment = isolated_environment(home)
-        checks = {'firefox': check_firefox, 'discord': check_discord, 'chromium': check_chromium}
+        checks = {'firefox': check_firefox, 'discord': check_discord, 'chromium': check_chromium,
+                  'archive': check_archive}
         checks[args.check](args.root.resolve(), home, environment)
 
 

@@ -7,6 +7,7 @@ checksum, and runs its installer for the parts already installed. Nothing runs i
 """
 import hashlib
 import json
+import os
 from pathlib import Path
 import subprocess
 import sys
@@ -20,7 +21,8 @@ import corsu
 from corsu import t
 
 API = 'https://api.github.com/repos/Platykalt/corsu/releases/latest'
-DOWNLOAD = 'https://github.com/Platykalt/corsu/releases/latest/download/'
+# CORSU_DOWNLOAD_BASE, as in install/get.sh: the same archives from another folder (a test build), same checksum.
+DOWNLOAD = os.environ.get('CORSU_DOWNLOAD_BASE', 'https://github.com/Platykalt/corsu/releases/latest/download').rstrip('/') + '/'
 ARCHIVES = {'linux': 'corsu-linux.tar.gz', 'macos': 'corsu-macos.tar.gz', 'windows': 'corsu-windows.zip'}
 CACHE = 'update.json'
 

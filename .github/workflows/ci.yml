@@ -145,6 +145,24 @@ jobs:
         run: test -d /Applications/Firefox.app || brew install --cask firefox
       - name: Firefox — install, launch the translated build, disable, enable, uninstall
         run: python tests/e2e/e2e.py firefox --root "${{ env.CORSU_RELEASE }}"
+      - name: Archive route — install from the extracted archive, delete it, use, update from these archives, remove
+        shell: bash
+        run: |
+          echo "Source commit: $GITHUB_SHA"
+          (cd dist && (sha256sum corsu-*.tar.gz corsu-*.zip 2>/dev/null || shasum -a 256 corsu-*.tar.gz corsu-*.zip))
+          CORSU_ARCHIVES="$GITHUB_WORKSPACE/dist" python tests/e2e/e2e.py archive --root "${{ env.CORSU_RELEASE }}"
+      - name: One-line install script with these archives (CORSU_DOWNLOAD_BASE), checksum checked
+        shell: bash
+        run: |
+          export CORSU_DOWNLOAD_BASE=$(python -c "import pathlib; print(pathlib.Path('dist').resolve().as_uri())")
+          export HOME="$RUNNER_TEMP/get-home" && mkdir -p "$HOME"
+          if [ "$RUNNER_OS" = Windows ]; then
+            export USERPROFILE="$HOME" APPDATA="$HOME/AppData/Roaming" LOCALAPPDATA="$HOME/AppData/Local"
+            pwsh -NoProfile -File install/get.ps1 --dry-run --components firefox | tee out.txt
+          else
+            sh install/get.sh --dry-run --components firefox | tee out.txt
+          fi
+          grep -q Firefox out.txt
       - name: Discord — patch with the official Vencord installer, then restore (with the archive's own Python)
         shell: bash
         run: '"$CORSU_PYTHON" tests/e2e/e2e.py discord --root "${{ env.CORSU_RELEASE }}"'
