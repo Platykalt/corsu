@@ -78,6 +78,13 @@ reason and solidity. `tools/minecraft.py check`: 0 errors; `verify`: 0 problems.
   a speaker: *servitore* also means "servant" in older usage, but the Mozilla team uses it in the computing sense in
   over a hundred strings.
 - **Solidity:** attested. **Applied:** yes in Minecraft (earlier pass); Discord: recommendation only.
+- **Correction (2026-10-16):** *servore* is attested in the computing sense too. ADECEC's
+  [Lingua corsa è Internet](https://adecec.net/parutions/lingua-corsa-%C3%A8-Internet.html) reprints the 1999
+  Ghjurnata di a Lingua Corsa paper by Ghjacumu Thiers and Cristofanu Filippi (Università di Corti), which writes
+  "u servore di testi literarii" and "U servore hà trè rubriche". The statement above that it has no attestation
+  only described the resources consulted, so it does not justify replacing it everywhere. Both forms are valid.
+  *Servitore* stays the editorial choice where it was already applied (Minecraft). Discord keeps *servore* unless
+  the maintainer decides otherwise, and that decision is separate from bug fixing.
 
 ## D2. Feminine plural of adjectives in *-e*
 
