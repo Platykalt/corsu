@@ -15,7 +15,9 @@ import subprocess
 import sys
 import threading
 import time
-import urllib.request
+import http.client
+import socketserver
+import urllib.parse
 from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
 
 import corsu
@@ -65,7 +67,8 @@ ORDER = ['firefox', 'chromium', 'discord', 'vesktop', 'desktop', 'qt', 'terminal
 
 
 # The installer lock's message when another Corsu window or installer is at work (docs/update-architecture.md).
-BUSY = re.compile(r'already busy|déjà occupé', re.I)
+# Matched loosely: output a program writes in the Windows code page instead of UTF-8 arrives with each "é" replaced.
+BUSY = re.compile(r'already busy|d.j. occup.', re.I)
 
 
 class Job:
@@ -116,6 +119,7 @@ class Job:
                     self.busy = True
                 if not line.startswith('+ '):
                     self.lines.append(line.rstrip('\n'))
+            process.stdout.close()
             ok = process.wait() == 0
         except OSError as error:
             self.lines.append(str(error))
@@ -502,16 +506,39 @@ def release_record(state):
 
 
 def shortcut_command():
-    """[python, app.py] from the Corsu menu entry (Linux), or None."""
-    entry = corsu.HOME / '.local/share/applications/corsu-setup.desktop'
+    """[python, app.py] from the Corsu shortcut the installer wrote (corsu.setup_shortcut), or None: the menu entry's
+    Exec line on Linux, the Start menu shortcut on Windows, the Corsu.app applet's script on macOS."""
     try:
-        for line in entry.read_text(encoding='utf-8').splitlines():
-            if line.startswith('Exec='):
-                command = shlex.split(line[5:])
-                if len(command) >= 2 and command[1].endswith('app.py'):
-                    return command[:2]
-    except (OSError, ValueError):
-        pass
+        if corsu.PLATFORM == 'windows':
+            link = corsu.START_MENU / 'Corsu.lnk'
+            if not link.exists():
+                return None
+            path = str(link).replace("'", "''")
+            output = subprocess.run(
+                ['powershell', '-NoProfile', '-NonInteractive', '-Command',
+                 f"$s = (New-Object -ComObject WScript.Shell).CreateShortcut('{path}'); "
+                 "[Console]::OutputEncoding = [Text.Encoding]::UTF8; $s.TargetPath; $s.Arguments"],
+                capture_output=True, text=True, encoding='utf-8', errors='replace', timeout=20).stdout.splitlines()
+            if len(output) >= 2:
+                return [output[0].strip(), output[1].strip().strip('"')]
+            return None
+        if corsu.PLATFORM == 'macos':
+            script = corsu.HOME / 'Applications/Corsu.app/Contents/Resources/Scripts/main.scpt'
+            if not script.exists():
+                return None
+            text = subprocess.run(['osadecompile', str(script)], capture_output=True, text=True, encoding='utf-8',
+                                  errors='replace', timeout=20).stdout
+            found = re.search(r'"exec (.*?) >/dev/null', text)
+            command = shlex.split(found.group(1).replace('\\"', '"')) if found else []
+        else:
+            entry = corsu.HOME / '.local/share/applications/corsu-setup.desktop'
+            exec_line = next((line[5:] for line in entry.read_text(encoding='utf-8').splitlines()
+                              if line.startswith('Exec=')), '')
+            command = shlex.split(exec_line)
+    except (OSError, ValueError, subprocess.SubprocessError):
+        return None
+    if len(command) >= 2 and command[1].endswith('app.py'):
+        return command[:2]
     return None
 
 
@@ -593,15 +620,30 @@ def minecraft_waiting(state, result):
     return waiting
 
 
+def local_state(url, timeout=2):
+    """The /api/state of a Corsu window at `url` (http://localhost:<port>/), or None when nothing answers. Asked
+    directly: urllib would follow the system's proxy settings (environment, macOS network settings), which have
+    nothing to do with a server on this computer."""
+    try:
+        address = urllib.parse.urlsplit(url)
+        connection = http.client.HTTPConnection(address.hostname, address.port, timeout=timeout)
+        try:
+            connection.request('GET', '/api/state', headers={'X-Corsu': '1'})
+            response = connection.getresponse()
+            return json.loads(response.read()) if response.status == 200 else None
+        finally:
+            connection.close()
+    except (OSError, ValueError, http.client.HTTPException):
+        return None
+
+
 def running_session():
     """The address of a Corsu already open, so a second click shows it instead of starting another."""
     try:
         url = json.loads(SESSION.read_text(encoding='utf-8'))['url']
-        request = urllib.request.Request(url + 'api/state', headers={'X-Corsu': '1'})
-        with urllib.request.urlopen(request, timeout=2) as response:
-            return url if response.status == 200 else None
-    except (OSError, ValueError, KeyError):
+    except (OSError, ValueError, KeyError, TypeError):
         return None
+    return url if local_state(url) is not None else None
 
 
 class Server(ThreadingHTTPServer):
@@ -612,7 +654,10 @@ class Server(ThreadingHTTPServer):
     def server_bind(self):
         if os.name == 'nt' and hasattr(socket, 'SO_EXCLUSIVEADDRUSE'):
             self.socket.setsockopt(socket.SOL_SOCKET, socket.SO_EXCLUSIVEADDRUSE, 1)
-        super().server_bind()
+        # HTTPServer.server_bind also looks up the address's host name, which can take seconds on macOS; the name is
+        # never used.
+        socketserver.TCPServer.server_bind(self)
+        self.server_name, self.server_port = 'localhost', self.server_address[1]
 
 
 class Handover:
@@ -654,12 +699,8 @@ class Handover:
         return subprocess.Popen([*command, *ARGUMENTS, '--replace', str(self.port)], **options)
 
     def answered(self, url):
-        try:
-            request = urllib.request.Request(url + 'api/state', headers={'X-Corsu': '1'})
-            with urllib.request.urlopen(request, timeout=3) as response:
-                return json.load(response).get('pid') not in (None, os.getpid())
-        except (OSError, ValueError, AttributeError):
-            return False
+        state = local_state(url, timeout=3)
+        return isinstance(state, dict) and state.get('pid') not in (None, os.getpid())
 
     def run(self, command):
         time.sleep(0.3)  # The page gets its answer before the port closes.

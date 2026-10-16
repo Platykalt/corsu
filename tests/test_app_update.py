@@ -5,6 +5,7 @@ import http.client
 import json
 import os
 from pathlib import Path
+import shlex
 import sys
 import tempfile
 import textwrap
@@ -126,13 +127,17 @@ class AutomaticUpdateTests(Isolated):
 
 
 class JobTests(unittest.TestCase):
-    def run_lines(self, *lines, code=0):
+    def run_program(self, program):
         job = app.Job()
         job.running = True
-        program = ''.join(f'print({line!r})\n' for line in lines) + f'raise SystemExit({code})\n'
+        # The environment Job.start gives the scripts it runs.
+        environment = {**os.environ, 'PYTHONUNBUFFERED': '1', 'PYTHONIOENCODING': 'utf-8'}
         with patch('logbook.path', return_value='log', create=True):
-            job.run([sys.executable, '-c', program], dict(os.environ))
+            job.run([sys.executable, '-c', program], environment)
         return job.snapshot()
+
+    def run_lines(self, *lines, code=0):
+        return self.run_program(''.join(f'print({line!r})\n' for line in lines) + f'raise SystemExit({code})\n')
 
     def test_result_and_progress_lines_stay_out_of_the_log(self):
         result = {'corsu': 'updated', 'from': '1.0.0', 'to': '1.1.0', 'restart_app': True, 'error': None}
@@ -147,6 +152,9 @@ class JobTests(unittest.TestCase):
         self.assertTrue(self.run_lines('Corsu is already busy: update since 10:02', code=1)['busy'])
         self.assertTrue(self.run_lines('Corsu est déjà occupé : mise à jour depuis 10:02', code=1)['busy'])
         self.assertFalse(self.run_lines('Something else failed', code=1)['busy'])
+        # A program writing in the Windows code page rather than UTF-8: each "é" arrives replaced.
+        legacy = 'Corsu est déjà occupé : mise à jour'.encode('cp1252')
+        self.assertTrue(self.run_program(f'import sys\nsys.stdout.buffer.write({legacy!r} + b"\\n")\nraise SystemExit(1)\n')['busy'])
 
 
 class RestartInfoTests(Isolated):
@@ -177,11 +185,34 @@ class RestartInfoTests(Isolated):
 
     def test_the_menu_entry_is_the_fallback(self):
         folder = self.release('def456', '99.0.0')
+        program = str(folder / 'src/app.py')
         entry = app.corsu.HOME / '.local/share/applications/corsu-setup.desktop'
         entry.parent.mkdir(parents=True)
-        entry.write_text(f'[Desktop Entry]\nName=Corsu\nExec={sys.executable} {folder / "src/app.py"}\n', encoding='utf-8')
-        self.assertEqual(app.installed_app({'files': {}}), [sys.executable, str(folder / 'src/app.py')])
-        self.assertTrue(app.restart_info({'files': {}}, app.Job())['available'])
+        # Written as corsu.setup_shortcut writes it: each path quoted for the shell.
+        entry.write_text(f'[Desktop Entry]\nName=Corsu\nExec={shlex.quote(sys.executable)} {shlex.quote(program)}\n', encoding='utf-8')
+        with patch.object(app.corsu, 'PLATFORM', 'linux'):
+            self.assertEqual(app.installed_app({'files': {}}), [sys.executable, program])
+            self.assertTrue(app.restart_info({'files': {}}, app.Job())['available'])
+
+    def test_the_windows_shortcut_is_read_through_the_shell(self):
+        start_menu = self.folder / 'Start Menu'
+        start_menu.mkdir()
+        (start_menu / 'Corsu.lnk').write_bytes(b'L')
+        answer = MagicMock(stdout='C:\\Corsu\\runtime\\pythonw.exe\n"C:\\Corsu\\releases\\abc\\src\\app.py"\n')
+        with patch.object(app.corsu, 'PLATFORM', 'windows'), patch.object(app.corsu, 'START_MENU', start_menu, create=True), \
+                patch.object(app.subprocess, 'run', return_value=answer) as run:
+            self.assertEqual(app.shortcut_command(), ['C:\\Corsu\\runtime\\pythonw.exe', 'C:\\Corsu\\releases\\abc\\src\\app.py'])
+        self.assertIn(str(start_menu / 'Corsu.lnk'), run.call_args[0][0][-1])
+        with patch.object(app.corsu, 'PLATFORM', 'windows'), patch.object(app.corsu, 'START_MENU', self.folder / 'none', create=True):
+            self.assertIsNone(app.shortcut_command())
+
+    def test_the_macos_applet_is_read_through_its_script(self):
+        script = app.corsu.HOME / 'Applications/Corsu.app/Contents/Resources/Scripts/main.scpt'
+        script.parent.mkdir(parents=True)
+        script.write_bytes(b'FasdUAS')
+        answer = MagicMock(stdout='do shell script "exec \'/Users/a b/corsu/python3\' \'/Users/a b/corsu/releases/abc/src/app.py\' >/dev/null 2>&1 &"\n')
+        with patch.object(app.corsu, 'PLATFORM', 'macos'), patch.object(app.subprocess, 'run', return_value=answer):
+            self.assertEqual(app.shortcut_command(), ['/Users/a b/corsu/python3', '/Users/a b/corsu/releases/abc/src/app.py'])
 
 
 class MinecraftWaitingTests(Isolated):
@@ -314,11 +345,17 @@ class ServerTests(Isolated):
 # A stand-in for the newly installed copy: takes the port it is given with --replace, answers /api/state with its
 # own pid for a few seconds, then ends.
 NEW_COPY = textwrap.dedent('''
-    import json, os, sys, time
+    import json, os, socketserver, sys, time
     from http.server import BaseHTTPRequestHandler, HTTPServer
-    if 'fail' in sys.argv[0]:
+    if os.path.basename(os.path.dirname(os.path.dirname(os.path.abspath(sys.argv[0])))) == 'fail':
         raise SystemExit(3)
     port = int(sys.argv[sys.argv.index('--replace') + 1])
+    asked = []
+    class Quick(HTTPServer):
+        # As app.Server: no reverse name lookup, which can take seconds on macOS.
+        def server_bind(self):
+            socketserver.TCPServer.server_bind(self)
+            self.server_name, self.server_port = 'localhost', port
     class Handler(BaseHTTPRequestHandler):
         def log_message(self, *arguments):
             pass
@@ -328,15 +365,17 @@ NEW_COPY = textwrap.dedent('''
             self.send_header('Content-Length', str(len(data)))
             self.end_headers()
             self.wfile.write(data)
-    for _ in range(100):
+            asked.append(time.time())
+    for _ in range(300):
         try:
-            server = HTTPServer(('127.0.0.1', port), Handler)
+            server = Quick(('127.0.0.1', port), Handler)
             break
         except OSError:
             time.sleep(0.1)
     server.timeout = 0.2
-    end = time.time() + 4
-    while time.time() < end:
+    # Serves until a little after the first answer (the old window and the test both ask), at most a minute.
+    end = time.time() + 60
+    while time.time() < end and not (asked and time.time() > asked[0] + 3):
         server.handle_request()
 ''')
 
@@ -355,7 +394,8 @@ class HandoverTests(Isolated):
         threading.Thread(target=server.serve_forever, daemon=True).start()
 
     def wait(self):
-        for _ in range(200):
+        deadline = time.monotonic() + app.Handover.WAIT + 10
+        while time.monotonic() < deadline:
             if not self.handover.running:
                 return
             time.sleep(0.05)
@@ -370,7 +410,7 @@ class HandoverTests(Isolated):
         folder = self.release('new', '99.0.0', NEW_COPY)
         self.write_state({'files': {}, 'release': {'folder': str(folder), 'python': sys.executable}})
         self.start_window()
-        with patch.object(app, 'ARGUMENTS', ['--browser']), patch.object(app.Handover, 'WAIT', 8):
+        with patch.object(app, 'ARGUMENTS', ['--browser']), patch.object(app.Handover, 'WAIT', 30):
             self.handover.start()
             self.wait()
         self.assertTrue(self.handover.done)
@@ -385,7 +425,7 @@ class HandoverTests(Isolated):
         self.write_state({'files': {}, 'release': {'folder': str(folder)}})
         self.start_window()
         try:
-            with patch.object(app.Handover, 'WAIT', 8), patch.object(app, 'snapshot', return_value={'pid': os.getpid()}):
+            with patch.object(app.Handover, 'WAIT', 30), patch.object(app, 'snapshot', return_value={'pid': os.getpid()}):
                 self.handover.start()
                 self.wait()
                 self.assertFalse(self.handover.done)
