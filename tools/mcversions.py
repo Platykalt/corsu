@@ -354,6 +354,8 @@ def formats():
         entry = facts(version, order)
         old = previous.get(version, {})
         entry.update(supported=bool(old.get('supported')), coverage=old.get('coverage'), note=old.get('note', ''))
+        if old.get('verified'):
+            entry['verified'] = old['verified']
         result[version] = entry
     VERSIONS.write_text(json.dumps(result, ensure_ascii=False, indent=1) + '\n', encoding='utf-8')
     print(f'{VERSIONS}: {len(result)} releases')
@@ -627,6 +629,19 @@ def base_equivalent(payload):
     return problems
 
 
+def fingerprint(payload, entry):
+    """What a verify checked, as one value: SHA-256 over the exact bytes of pack.mcmeta and of the language file of
+    the built pack (each preceded by its name and length). The same data and versions.json facts give the same value;
+    any change to a text, a key or the mcmeta style gives another, so tools/mcreport.py can tell a check to redo."""
+    archive = zipfile.ZipFile(io.BytesIO(payload))
+    digest = hashlib.sha256()
+    for name in ('pack.mcmeta', entry['lang_file']):
+        data = archive.read(name)
+        digest.update(f'{name}\n{len(data)}\n'.encode('utf-8'))
+        digest.update(data)
+    return 'sha256:' + digest.hexdigest()
+
+
 def verify(version, engine=True, record=True):
     data = packs.Data(HERE).load()
     if version not in data.versions:
@@ -696,8 +711,14 @@ def verify(version, engine=True, record=True):
         stored[version]['supported'] = supported
         stored[version]['coverage'] = {'translated': report['translated'], 'total': report['total']}
         engine_line = next((line for line in summary if line.startswith('rendered ')), 'game code not run')
-        stored[version]['note'] = (f'verify {datetime.date.today().isoformat()}: {len(errors)} errors; {engine_line}'
+        today = datetime.date.today().isoformat()
+        stored[version]['note'] = (f'verify {today}: {len(errors)} errors; {engine_line}'
                                    + ('' if supported else '; NOT SUPPORTED'))
+        # The exact files this run checked (tools/mcreport.py shows "check to redo" once the data gives others).
+        if supported:
+            stored[version]['verified'] = {'fingerprint': fingerprint(payload, entry), 'date': today, 'engine': True}
+        else:
+            stored[version].pop('verified', None)
         VERSIONS.write_text(json.dumps(stored, ensure_ascii=False, indent=1) + '\n', encoding='utf-8')
     return supported if engine else not errors
 

@@ -1,9 +1,11 @@
-# Tester le corse dans Minecraft Java 26.3
+# Tester le corse dans Minecraft Java
 
 [English](../../minecraft/java/TESTING.md)
 
-Personne n'a encore vu cette traduction dans le jeu ([état](../../minecraft/java/STATUS.md)). Si vous avez
-Minecraft: Java Edition, une heure passée sur les écrans ci-dessous est l'aide la plus utile qui soit. Pas besoin de
+Seule la 26.3 a été lancée avec le pack, une fois, par le mainteneur : le journal du jeu montre le pack chargé, mais
+personne n'a encore noté écran par écran ce qui s'affiche, et aucune autre version n'a été lancée
+([état](../../minecraft/java/STATUS.md)). Si vous avez Minecraft: Java Edition, une heure passée sur les écrans
+ci-dessous est l'aide la plus utile qui soit. Pas besoin de
 parler corse pour repérer un texte qui déborde d'un bouton ou un reste d'anglais ; si vous le parlez, regardez aussi
 les mots.
 
@@ -26,16 +28,21 @@ Notez pour chaque étape « ok » ou ce qui ne va pas, avec une capture (F2).
 6. **Désactivation** : fermez Minecraft, mettez l'interrupteur Minecraft de l'application Corsu sur « arrêt »,
    relancez : la langue d'avant revient, vos autres packs sont toujours actifs et dans le même ordre, vos réglages
    (champ de vision, touches…) n'ont pas changé. Réactivez : le corse revient.
-7. **Autre instance** : si vous avez une autre installation ou instance (autre version, Prism Launcher…), ouvrez-la :
-   elle doit être restée telle quelle si Corsu l'a « laissée telle quelle ».
+7. **Autre version** : Corsu fait un pack pour chaque version stable de 1.6.1 à 26.3. Créez une instance Prism
+   Launcher d'une version plus ancienne (par exemple 1.21.1, 1.16.5, 1.12.2 ou 1.8.9), lancez-la une fois, fermez-la,
+   lancez Corsu, relancez-la : les menus sont en corse (de 1.6 à 1.10 aussi, la langue s'appelle « Corsu (Corsica) »).
+   Ces textes anciens sont les moins essayés : regardez l'écran titre, les options et l'infobulle d'un objet, et notez
+   tout reste d'anglais ou texte coupé. Une instance que Corsu a « laissée telle quelle » doit être inchangée.
 
 ## 1. Installer
 
-1. Utilisez **Minecraft: Java Edition 26.3** (dans le lanceur : Configurations → Nouvelle → version 26.3). Une autre
-   version charge le pack après un avertissement, mais les textes ajoutés ou modifiés depuis restent en anglais.
-2. Récupérez `corsu-minecraft-java-26.3.zip` dans la [dernière version](https://github.com/Platykalt/corsu/releases/latest),
-   ou construisez-le : `python3 tools/minecraft.py build`. Ne le décompressez pas. (L'installeur Corsu peut aussi
-   faire les étapes 3 et 4.)
+1. Choisissez une version stable de **Minecraft: Java Edition** entre 1.6.1 et 26.3 (dans le lanceur :
+   Configurations → Nouvelle → version). Prenez le pack de cette version : le pack d'une autre version peut être
+   refusé ou laisser des textes en anglais.
+2. Le plus simple : l'application Corsu fait les étapes 3 et 4 avec le bon pack (Minecraft fermé). À la main :
+   `corsu-minecraft-java-26.3.zip` est dans la [dernière version](https://github.com/Platykalt/corsu/releases/latest)
+   (26.3 seulement) ; pour une autre version, construisez-le depuis une copie du dépôt :
+   `python3 tools/mcversions.py build <version>`. Ne le décompressez pas.
 3. Dans le jeu : **Options… → Packs de ressources… → Ouvrir le dossier des packs**, déposez-y le zip, revenez, passez
    le pack dans la colonne de droite avec sa flèche, puis **Terminé**.
 4. **Options… → Langue…**, choisissez **Corsu (Corsica)**, puis **Terminé**.
@@ -108,7 +115,7 @@ Ouvrez un ticket avec le modèle **Traduction** :
 <https://github.com/Platykalt/corsu/issues/new?template=translation.yml>
 
 - **Texte vu** : copiez-le exactement.
-- **Où** : « Minecraft Java 26.3 » + l'écran (par exemple *Options → Paramètres vidéo, curseur Distance d'affichage*).
+- **Où** : « Minecraft Java » + la version (par exemple 26.3 ou 1.12.2) + l'écran (par exemple *Options → Paramètres vidéo, curseur Distance d'affichage*).
 - **Clé** : si vous l'avez trouvée.
 - **Corse proposé** : facultatif.
 - **Remarques** : ce qui ne va pas (débordement, sens, anglais restant…), et joignez

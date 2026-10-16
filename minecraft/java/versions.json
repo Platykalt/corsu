@@ -18,7 +18,12 @@
    "translated": 1354,
    "total": 1354
   },
-  "note": "verify 2026-10-17: 0 errors; rendered 1354 Corsican texts with the game's own loader and formatter (3 skipped: the English itself does not format), 0 unknown keys, 0 problems"
+  "note": "verify 2026-10-17: 0 errors; rendered 1354 Corsican texts with the game's own loader and formatter (3 skipped: the English itself does not format), 0 unknown keys, 0 problems; fingerprint recorded on 2026-10-17 without running the game code again, for data unchanged since the verify of 2026-10-17 (data last changed in e64eb2f, verify recorded in 03efded)",
+  "verified": {
+   "fingerprint": "sha256:6e480370038842b7e6502b47a63d7a2b22fa8e444ec94e1d71313758bfc0b567",
+   "date": "2026-10-17",
+   "engine": true
+  }
  },
  "1.6.2": {
   "lang_format": "lang",
@@ -39,7 +44,12 @@
    "translated": 1360,
    "total": 1360
   },
-  "note": "verify 2026-10-17: 0 errors; rendered 1360 Corsican texts with the game's own loader and formatter (3 skipped: the English itself does not format), 0 unknown keys, 0 problems"
+  "note": "verify 2026-10-17: 0 errors; rendered 1360 Corsican texts with the game's own loader and formatter (3 skipped: the English itself does not format), 0 unknown keys, 0 problems; fingerprint recorded on 2026-10-17 without running the game code again, for data unchanged since the verify of 2026-10-17 (data last changed in e64eb2f, verify recorded in 03efded)",
+  "verified": {
+   "fingerprint": "sha256:5db5d5b6f029264d4bcf22b534d6fc40503ac4d88b38ceee239772110d8a2f1f",
+   "date": "2026-10-17",
+   "engine": true
+  }
  },
  "1.6.4": {
   "lang_format": "lang",
@@ -60,7 +70,12 @@
    "translated": 1362,
    "total": 1362
   },
-  "note": "verify 2026-10-17: 0 errors; rendered 1362 Corsican texts with the game's own loader and formatter (3 skipped: the English itself does not format), 0 unknown keys, 0 problems"
+  "note": "verify 2026-10-17: 0 errors; rendered 1362 Corsican texts with the game's own loader and formatter (3 skipped: the English itself does not format), 0 unknown keys, 0 problems; fingerprint recorded on 2026-10-17 without running the game code again, for data unchanged since the verify of 2026-10-17 (data last changed in e64eb2f, verify recorded in 03efded)",
+  "verified": {
+   "fingerprint": "sha256:38d6447916c47f2582583d8fb073c8b9e6299a6171fdd7d6c2f9ecfa76f5f5c7",
+   "date": "2026-10-17",
+   "engine": true
+  }
  },
  "1.7.2": {
   "lang_format": "lang",
@@ -81,7 +96,12 @@
    "translated": 1595,
    "total": 1595
   },
-  "note": "verify 2026-10-17: 0 errors; rendered 1595 Corsican texts with the game's own loader and formatter (2 skipped: the English itself does not format), 0 unknown keys, 0 problems"
+  "note": "verify 2026-10-17: 0 errors; rendered 1595 Corsican texts with the game's own loader and formatter (2 skipped: the English itself does not format), 0 unknown keys, 0 problems; fingerprint recorded on 2026-10-17 without running the game code again, for data unchanged since the verify of 2026-10-17 (data last changed in e64eb2f, verify recorded in 03efded)",
+  "verified": {
+   "fingerprint": "sha256:bdedd3c35456c95f0168f6711bca3f8ba8bd0da2fc44903549f650290b213d87",
+   "date": "2026-10-17",
+   "engine": true
+  }
  },
  "1.7.3": {
   "lang_format": "lang",
@@ -102,7 +122,12 @@
    "translated": 1685,
    "total": 1685
   },
-  "note": "verify 2026-10-17: 0 errors; rendered 1685 Corsican texts with the game's own loader and formatter (2 skipped: the English itself does not format), 0 unknown keys, 0 problems"
+  "note": "verify 2026-10-17: 0 errors; rendered 1685 Corsican texts with the game's own loader and formatter (2 skipped: the English itself does not format), 0 unknown keys, 0 problems; fingerprint recorded on 2026-10-17 without running the game code again, for data unchanged since the verify of 2026-10-17 (data last changed in e64eb2f, verify recorded in 03efded)",
+  "verified": {
+   "fingerprint": "sha256:69cdcd1fe154921af2108e8bfcd2cb44c95736f39375998f529f998bc056c67e",
+   "date": "2026-10-17",
+   "engine": true
+  }
  },
  "1.7.4": {
   "lang_format": "lang",
@@ -123,7 +148,12 @@
    "translated": 1685,
    "total": 1685
   },
-  "note": "verify 2026-10-17: 0 errors; rendered 1685 Corsican texts with the game's own loader and formatter (2 skipped: the English itself does not format), 0 unknown keys, 0 problems"
+  "note": "verify 2026-10-17: 0 errors; rendered 1685 Corsican texts with the game's own loader and formatter (2 skipped: the English itself does not format), 0 unknown keys, 0 problems; fingerprint recorded on 2026-10-17 without running the game code again, for data unchanged since the verify of 2026-10-17 (data last changed in e64eb2f, verify recorded in 03efded)",
+  "verified": {
+   "fingerprint": "sha256:5526fdb94ca1ee08de7524310def86ab0c1e2c2dff2a4f2a78f06a81b40a57f2",
+   "date": "2026-10-17",
+   "engine": true
+  }
  },
  "1.7.5": {
   "lang_format": "lang",
@@ -144,7 +174,12 @@
    "translated": 1708,
    "total": 1708
   },
-  "note": "verify 2026-10-17: 0 errors; rendered 1708 Corsican texts with the game's own loader and formatter (2 skipped: the English itself does not format), 0 unknown keys, 0 problems"
+  "note": "verify 2026-10-17: 0 errors; rendered 1708 Corsican texts with the game's own loader and formatter (2 skipped: the English itself does not format), 0 unknown keys, 0 problems; fingerprint recorded on 2026-10-17 without running the game code again, for data unchanged since the verify of 2026-10-17 (data last changed in e64eb2f, verify recorded in 03efded)",
+  "verified": {
+   "fingerprint": "sha256:cd22b5ef3c3925a8c645534cf5e6fe334b0773578d8558fcfc31ce3c2a5a5ea0",
+   "date": "2026-10-17",
+   "engine": true
+  }
  },
  "1.7.6": {
   "lang_format": "lang",
@@ -165,7 +200,12 @@
    "translated": 1725,
    "total": 1725
   },
-  "note": "verify 2026-10-17: 0 errors; rendered 1725 Corsican texts with the game's own loader and formatter (2 skipped: the English itself does not format), 0 unknown keys, 0 problems"
+  "note": "verify 2026-10-17: 0 errors; rendered 1725 Corsican texts with the game's own loader and formatter (2 skipped: the English itself does not format), 0 unknown keys, 0 problems; fingerprint recorded on 2026-10-17 without running the game code again, for data unchanged since the verify of 2026-10-17 (data last changed in e64eb2f, verify recorded in 03efded)",
+  "verified": {
+   "fingerprint": "sha256:cfd864d9aee7623bb3adaae2e7f1fd832ebb58f1e23c16741477c11eda0a99d8",
+   "date": "2026-10-17",
+   "engine": true
+  }
  },
  "1.7.7": {
   "lang_format": "lang",
@@ -186,7 +226,12 @@
    "translated": 1725,
    "total": 1725
   },
-  "note": "verify 2026-10-17: 0 errors; rendered 1725 Corsican texts with the game's own loader and formatter (2 skipped: the English itself does not format), 0 unknown keys, 0 problems"
+  "note": "verify 2026-10-17: 0 errors; rendered 1725 Corsican texts with the game's own loader and formatter (2 skipped: the English itself does not format), 0 unknown keys, 0 problems; fingerprint recorded on 2026-10-17 without running the game code again, for data unchanged since the verify of 2026-10-17 (data last changed in e64eb2f, verify recorded in 03efded)",
+  "verified": {
+   "fingerprint": "sha256:6a4307a022b3c57a3e71b22215620b12f780080c87553799657f8f4919d3be9d",
+   "date": "2026-10-17",
+   "engine": true
+  }
  },
  "1.7.8": {
   "lang_format": "lang",
@@ -207,7 +252,12 @@
    "translated": 1726,
    "total": 1726
   },
-  "note": "verify 2026-10-17: 0 errors; rendered 1726 Corsican texts with the game's own loader and formatter (2 skipped: the English itself does not format), 0 unknown keys, 0 problems"
+  "note": "verify 2026-10-17: 0 errors; rendered 1726 Corsican texts with the game's own loader and formatter (2 skipped: the English itself does not format), 0 unknown keys, 0 problems; fingerprint recorded on 2026-10-17 without running the game code again, for data unchanged since the verify of 2026-10-17 (data last changed in e64eb2f, verify recorded in 03efded)",
+  "verified": {
+   "fingerprint": "sha256:1ba01b43682f64877f35e0da2391a72b550c43125f94683c5c050bb278bc779f",
+   "date": "2026-10-17",
+   "engine": true
+  }
  },
  "1.7.9": {
   "lang_format": "lang",
@@ -228,7 +278,12 @@
    "translated": 1726,
    "total": 1726
   },
-  "note": "verify 2026-10-17: 0 errors; rendered 1726 Corsican texts with the game's own loader and formatter (2 skipped: the English itself does not format), 0 unknown keys, 0 problems"
+  "note": "verify 2026-10-17: 0 errors; rendered 1726 Corsican texts with the game's own loader and formatter (2 skipped: the English itself does not format), 0 unknown keys, 0 problems; fingerprint recorded on 2026-10-17 without running the game code again, for data unchanged since the verify of 2026-10-17 (data last changed in e64eb2f, verify recorded in 03efded)",
+  "verified": {
+   "fingerprint": "sha256:bee4b1756f011566f0b1cfe21e5841accfc653fadf5c7367e425c5f0148138d6",
+   "date": "2026-10-17",
+   "engine": true
+  }
  },
  "1.7.10": {
   "lang_format": "lang",
@@ -249,7 +304,12 @@
    "translated": 1765,
    "total": 1765
   },
-  "note": "verify 2026-10-17: 0 errors; rendered 1765 Corsican texts with the game's own loader and formatter (2 skipped: the English itself does not format), 0 unknown keys, 0 problems"
+  "note": "verify 2026-10-17: 0 errors; rendered 1765 Corsican texts with the game's own loader and formatter (2 skipped: the English itself does not format), 0 unknown keys, 0 problems; fingerprint recorded on 2026-10-17 without running the game code again, for data unchanged since the verify of 2026-10-17 (data last changed in e64eb2f, verify recorded in 03efded)",
+  "verified": {
+   "fingerprint": "sha256:a98a6525fddfb883179999d11dcf81451119295b042248ced1e27be64229da59",
+   "date": "2026-10-17",
+   "engine": true
+  }
  },
  "1.8": {
   "lang_format": "lang",
@@ -270,7 +330,12 @@
    "translated": 2677,
    "total": 2677
   },
-  "note": "verify 2026-10-17: 0 errors; rendered 2677 Corsican texts with the game's own loader and formatter (2 skipped: the English itself does not format), 0 unknown keys, 0 problems"
+  "note": "verify 2026-10-17: 0 errors; rendered 2677 Corsican texts with the game's own loader and formatter (2 skipped: the English itself does not format), 0 unknown keys, 0 problems; fingerprint recorded on 2026-10-17 without running the game code again, for data unchanged since the verify of 2026-10-17 (data last changed in e64eb2f, verify recorded in 03efded)",
+  "verified": {
+   "fingerprint": "sha256:78958009f8b9bc3c5dde2ec1c9fe6e6dfee693ddee421b827bac1880756bf4fe",
+   "date": "2026-10-17",
+   "engine": true
+  }
  },
  "1.8.1": {
   "lang_format": "lang",
@@ -291,7 +356,12 @@
    "translated": 2698,
    "total": 2698
   },
-  "note": "verify 2026-10-17: 0 errors; rendered 2698 Corsican texts with the game's own loader and formatter (2 skipped: the English itself does not format), 0 unknown keys, 0 problems"
+  "note": "verify 2026-10-17: 0 errors; rendered 2698 Corsican texts with the game's own loader and formatter (2 skipped: the English itself does not format), 0 unknown keys, 0 problems; fingerprint recorded on 2026-10-17 without running the game code again, for data unchanged since the verify of 2026-10-17 (data last changed in e64eb2f, verify recorded in 03efded)",
+  "verified": {
+   "fingerprint": "sha256:b800cc7d36c8b056f0ff910748d34989e5d7fbd4dca21e634bd2c143bb999774",
+   "date": "2026-10-17",
+   "engine": true
+  }
  },
  "1.8.2": {
   "lang_format": "lang",
@@ -312,7 +382,12 @@
    "translated": 2719,
    "total": 2719
   },
-  "note": "verify 2026-10-17: 0 errors; rendered 2719 Corsican texts with the game's own loader and formatter (2 skipped: the English itself does not format), 0 unknown keys, 0 problems"
+  "note": "verify 2026-10-17: 0 errors; rendered 2719 Corsican texts with the game's own loader and formatter (2 skipped: the English itself does not format), 0 unknown keys, 0 problems; fingerprint recorded on 2026-10-17 without running the game code again, for data unchanged since the verify of 2026-10-17 (data last changed in e64eb2f, verify recorded in 03efded)",
+  "verified": {
+   "fingerprint": "sha256:70ce1d224db19c3e855716330822987a148dfb6b356a576a5fa80301dfa7de85",
+   "date": "2026-10-17",
+   "engine": true
+  }
  },
  "1.8.3": {
   "lang_format": "lang",
@@ -333,7 +408,12 @@
    "translated": 2719,
    "total": 2719
   },
-  "note": "verify 2026-10-17: 0 errors; rendered 2719 Corsican texts with the game's own loader and formatter (2 skipped: the English itself does not format), 0 unknown keys, 0 problems"
+  "note": "verify 2026-10-17: 0 errors; rendered 2719 Corsican texts with the game's own loader and formatter (2 skipped: the English itself does not format), 0 unknown keys, 0 problems; fingerprint recorded on 2026-10-17 without running the game code again, for data unchanged since the verify of 2026-10-17 (data last changed in e64eb2f, verify recorded in 03efded)",
+  "verified": {
+   "fingerprint": "sha256:b87dd5b25990667afeb302d31729e4641c64b32a895b62d46fa5e1c72c7ec3e4",
+   "date": "2026-10-17",
+   "engine": true
+  }
  },
  "1.8.4": {
   "lang_format": "lang",
@@ -354,7 +434,12 @@
    "translated": 2725,
    "total": 2725
   },
-  "note": "verify 2026-10-17: 0 errors; rendered 2725 Corsican texts with the game's own loader and formatter (2 skipped: the English itself does not format), 0 unknown keys, 0 problems"
+  "note": "verify 2026-10-17: 0 errors; rendered 2725 Corsican texts with the game's own loader and formatter (2 skipped: the English itself does not format), 0 unknown keys, 0 problems; fingerprint recorded on 2026-10-17 without running the game code again, for data unchanged since the verify of 2026-10-17 (data last changed in e64eb2f, verify recorded in 03efded)",
+  "verified": {
+   "fingerprint": "sha256:88fdb55248cf1be220cc7a8f888474d129f8b6c6bb5f6bb98b9f8bafa4fbeac8",
+   "date": "2026-10-17",
+   "engine": true
+  }
  },
  "1.8.5": {
   "lang_format": "lang",
@@ -375,7 +460,12 @@
    "translated": 2725,
    "total": 2725
   },
-  "note": "verify 2026-10-17: 0 errors; rendered 2725 Corsican texts with the game's own loader and formatter (2 skipped: the English itself does not format), 0 unknown keys, 0 problems"
+  "note": "verify 2026-10-17: 0 errors; rendered 2725 Corsican texts with the game's own loader and formatter (2 skipped: the English itself does not format), 0 unknown keys, 0 problems; fingerprint recorded on 2026-10-17 without running the game code again, for data unchanged since the verify of 2026-10-17 (data last changed in e64eb2f, verify recorded in 03efded)",
+  "verified": {
+   "fingerprint": "sha256:78b91f88c8aacc18ab62049277d0886d71168e76ef9dbf6bc69967a1b4914d9c",
+   "date": "2026-10-17",
+   "engine": true
+  }
  },
  "1.8.6": {
   "lang_format": "lang",
@@ -396,7 +486,12 @@
    "translated": 2725,
    "total": 2725
   },
-  "note": "verify 2026-10-17: 0 errors; rendered 2725 Corsican texts with the game's own loader and formatter (2 skipped: the English itself does not format), 0 unknown keys, 0 problems"
+  "note": "verify 2026-10-17: 0 errors; rendered 2725 Corsican texts with the game's own loader and formatter (2 skipped: the English itself does not format), 0 unknown keys, 0 problems; fingerprint recorded on 2026-10-17 without running the game code again, for data unchanged since the verify of 2026-10-17 (data last changed in e64eb2f, verify recorded in 03efded)",
+  "verified": {
+   "fingerprint": "sha256:6cc1a13f9ac9d8113244d85ccf7c560f17fa3f2c0d900827a5bf4db8ae624185",
+   "date": "2026-10-17",
+   "engine": true
+  }
  },
  "1.8.7": {
   "lang_format": "lang",
@@ -417,7 +512,12 @@
    "translated": 2725,
    "total": 2725
   },
-  "note": "verify 2026-10-17: 0 errors; rendered 2725 Corsican texts with the game's own loader and formatter (2 skipped: the English itself does not format), 0 unknown keys, 0 problems"
+  "note": "verify 2026-10-17: 0 errors; rendered 2725 Corsican texts with the game's own loader and formatter (2 skipped: the English itself does not format), 0 unknown keys, 0 problems; fingerprint recorded on 2026-10-17 without running the game code again, for data unchanged since the verify of 2026-10-17 (data last changed in e64eb2f, verify recorded in 03efded)",
+  "verified": {
+   "fingerprint": "sha256:0e10f6c9e4ce5859eb44f0e2192dbc86f042ce3b34bd94e39eba216c2463e2e0",
+   "date": "2026-10-17",
+   "engine": true
+  }
  },
  "1.8.8": {
   "lang_format": "lang",
@@ -438,7 +538,12 @@
    "translated": 2749,
    "total": 2749
   },
-  "note": "verify 2026-10-17: 0 errors; rendered 2749 Corsican texts with the game's own loader and formatter (2 skipped: the English itself does not format), 0 unknown keys, 0 problems"
+  "note": "verify 2026-10-17: 0 errors; rendered 2749 Corsican texts with the game's own loader and formatter (2 skipped: the English itself does not format), 0 unknown keys, 0 problems; fingerprint recorded on 2026-10-17 without running the game code again, for data unchanged since the verify of 2026-10-17 (data last changed in e64eb2f, verify recorded in 03efded)",
+  "verified": {
+   "fingerprint": "sha256:7a32c6744d6c42fc0715a7fa187043ad2c7e4935f4e549f0b02f241ceb7043b9",
+   "date": "2026-10-17",
+   "engine": true
+  }
  },
  "1.8.9": {
   "lang_format": "lang",
@@ -459,7 +564,12 @@
    "translated": 2761,
    "total": 2761
   },
-  "note": "verify 2026-10-17: 0 errors; rendered 2761 Corsican texts with the game's own loader and formatter (2 skipped: the English itself does not format), 0 unknown keys, 0 problems"
+  "note": "verify 2026-10-17: 0 errors; rendered 2761 Corsican texts with the game's own loader and formatter (2 skipped: the English itself does not format), 0 unknown keys, 0 problems; fingerprint recorded on 2026-10-17 without running the game code again, for data unchanged since the verify of 2026-10-17 (data last changed in e64eb2f, verify recorded in 03efded)",
+  "verified": {
+   "fingerprint": "sha256:ecc164d01b41a372d42dd23598df1087374df0173266fde4c2c5ba47cdf0fad2",
+   "date": "2026-10-17",
+   "engine": true
+  }
  },
  "1.9": {
   "lang_format": "lang",
@@ -480,7 +590,12 @@
    "translated": 3079,
    "total": 3079
   },
-  "note": "verify 2026-10-17: 0 errors; rendered 3079 Corsican texts with the game's own loader and formatter (2 skipped: the English itself does not format), 0 unknown keys, 0 problems"
+  "note": "verify 2026-10-17: 0 errors; rendered 3079 Corsican texts with the game's own loader and formatter (2 skipped: the English itself does not format), 0 unknown keys, 0 problems; fingerprint recorded on 2026-10-17 without running the game code again, for data unchanged since the verify of 2026-10-17 (data last changed in e64eb2f, verify recorded in 03efded)",
+  "verified": {
+   "fingerprint": "sha256:c0864e9a4ef15a6cd14ce86de4e63c4283e29584c28b5a4bcaba8b501fb8cb09",
+   "date": "2026-10-17",
+   "engine": true
+  }
  },
  "1.9.1": {
   "lang_format": "lang",
@@ -501,7 +616,12 @@
    "translated": 3079,
    "total": 3079
   },
-  "note": "verify 2026-10-17: 0 errors; rendered 3079 Corsican texts with the game's own loader and formatter (2 skipped: the English itself does not format), 0 unknown keys, 0 problems"
+  "note": "verify 2026-10-17: 0 errors; rendered 3079 Corsican texts with the game's own loader and formatter (2 skipped: the English itself does not format), 0 unknown keys, 0 problems; fingerprint recorded on 2026-10-17 without running the game code again, for data unchanged since the verify of 2026-10-17 (data last changed in e64eb2f, verify recorded in 03efded)",
+  "verified": {
+   "fingerprint": "sha256:34c2e8c932cee6c4e418f5117152347d30617cbbb2fa3e2c0e5901d1df2e66d6",
+   "date": "2026-10-17",
+   "engine": true
+  }
  },
  "1.9.2": {
   "lang_format": "lang",
@@ -522,7 +642,12 @@
    "translated": 3079,
    "total": 3079
   },
-  "note": "verify 2026-10-17: 0 errors; rendered 3079 Corsican texts with the game's own loader and formatter (2 skipped: the English itself does not format), 0 unknown keys, 0 problems"
+  "note": "verify 2026-10-17: 0 errors; rendered 3079 Corsican texts with the game's own loader and formatter (2 skipped: the English itself does not format), 0 unknown keys, 0 problems; fingerprint recorded on 2026-10-17 without running the game code again, for data unchanged since the verify of 2026-10-17 (data last changed in e64eb2f, verify recorded in 03efded)",
+  "verified": {
+   "fingerprint": "sha256:68e8c379c5a50e234b4747af52bd8a7f25195881edd1a3109508ba4f44f918fd",
+   "date": "2026-10-17",
+   "engine": true
+  }
  },
  "1.9.3": {
   "lang_format": "lang",
@@ -543,7 +668,12 @@
    "translated": 3084,
    "total": 3084
   },
-  "note": "verify 2026-10-17: 0 errors; rendered 3084 Corsican texts with the game's own loader and formatter (2 skipped: the English itself does not format), 0 unknown keys, 0 problems"
+  "note": "verify 2026-10-17: 0 errors; rendered 3084 Corsican texts with the game's own loader and formatter (2 skipped: the English itself does not format), 0 unknown keys, 0 problems; fingerprint recorded on 2026-10-17 without running the game code again, for data unchanged since the verify of 2026-10-17 (data last changed in e64eb2f, verify recorded in 03efded)",
+  "verified": {
+   "fingerprint": "sha256:df9abb415ea3ca82102dedac7a22f0e313de678052235ab12cbd9c0c8eda0c5a",
+   "date": "2026-10-17",
+   "engine": true
+  }
  },
  "1.9.4": {
   "lang_format": "lang",
@@ -564,7 +694,12 @@
    "translated": 3084,
    "total": 3084
   },
-  "note": "verify 2026-10-17: 0 errors; rendered 3084 Corsican texts with the game's own loader and formatter (2 skipped: the English itself does not format), 0 unknown keys, 0 problems"
+  "note": "verify 2026-10-17: 0 errors; rendered 3084 Corsican texts with the game's own loader and formatter (2 skipped: the English itself does not format), 0 unknown keys, 0 problems; fingerprint recorded on 2026-10-17 without running the game code again, for data unchanged since the verify of 2026-10-17 (data last changed in e64eb2f, verify recorded in 03efded)",
+  "verified": {
+   "fingerprint": "sha256:89ae888911d38b5eb56f55252071aa962bc08910e1cc0379caee9a6be1bc7a5a",
+   "date": "2026-10-17",
+   "engine": true
+  }
  },
  "1.10": {
   "lang_format": "lang",
@@ -585,7 +720,12 @@
    "translated": 3123,
    "total": 3123
   },
-  "note": "verify 2026-10-17: 0 errors; rendered 3123 Corsican texts with the game's own loader and formatter (2 skipped: the English itself does not format), 0 unknown keys, 0 problems"
+  "note": "verify 2026-10-17: 0 errors; rendered 3123 Corsican texts with the game's own loader and formatter (2 skipped: the English itself does not format), 0 unknown keys, 0 problems; fingerprint recorded on 2026-10-17 without running the game code again, for data unchanged since the verify of 2026-10-17 (data last changed in e64eb2f, verify recorded in 03efded)",
+  "verified": {
+   "fingerprint": "sha256:659614527d7210022556e53d849d77015c56de34046a6b90171be21580053607",
+   "date": "2026-10-17",
+   "engine": true
+  }
  },
  "1.10.1": {
   "lang_format": "lang",
@@ -606,7 +746,12 @@
    "translated": 3123,
    "total": 3123
   },
-  "note": "verify 2026-10-17: 0 errors; rendered 3123 Corsican texts with the game's own loader and formatter (2 skipped: the English itself does not format), 0 unknown keys, 0 problems"
+  "note": "verify 2026-10-17: 0 errors; rendered 3123 Corsican texts with the game's own loader and formatter (2 skipped: the English itself does not format), 0 unknown keys, 0 problems; fingerprint recorded on 2026-10-17 without running the game code again, for data unchanged since the verify of 2026-10-17 (data last changed in e64eb2f, verify recorded in 03efded)",
+  "verified": {
+   "fingerprint": "sha256:76a572e323c17f297d12ce598846f8f7a58e1aa743d8b2dfac51036dc541c79c",
+   "date": "2026-10-17",
+   "engine": true
+  }
  },
  "1.10.2": {
   "lang_format": "lang",
@@ -627,7 +772,12 @@
    "translated": 3122,
    "total": 3122
   },
-  "note": "verify 2026-10-17: 0 errors; rendered 3122 Corsican texts with the game's own loader and formatter (2 skipped: the English itself does not format), 0 unknown keys, 0 problems"
+  "note": "verify 2026-10-17: 0 errors; rendered 3122 Corsican texts with the game's own loader and formatter (2 skipped: the English itself does not format), 0 unknown keys, 0 problems; fingerprint recorded on 2026-10-17 without running the game code again, for data unchanged since the verify of 2026-10-17 (data last changed in e64eb2f, verify recorded in 03efded)",
+  "verified": {
+   "fingerprint": "sha256:8a3d520ae19d6096e06153f19e1869950b0ec88a6a169b4420a287e35feea136",
+   "date": "2026-10-17",
+   "engine": true
+  }
  },
  "1.11": {
   "lang_format": "lang",
@@ -648,7 +798,12 @@
    "translated": 3258,
    "total": 3258
   },
-  "note": "verify 2026-10-17: 0 errors; rendered 3258 Corsican texts with the game's own loader and formatter (2 skipped: the English itself does not format), 0 unknown keys, 0 problems"
+  "note": "verify 2026-10-17: 0 errors; rendered 3258 Corsican texts with the game's own loader and formatter (2 skipped: the English itself does not format), 0 unknown keys, 0 problems; fingerprint recorded on 2026-10-17 without running the game code again, for data unchanged since the verify of 2026-10-17 (data last changed in e64eb2f, verify recorded in 03efded)",
+  "verified": {
+   "fingerprint": "sha256:31a06f7716452612ea0780fbec6f08935d8e88aec22cb1fc0e7abc4a9e61203c",
+   "date": "2026-10-17",
+   "engine": true
+  }
  },
  "1.11.1": {
   "lang_format": "lang",
@@ -669,7 +824,12 @@
    "translated": 3261,
    "total": 3261
   },
-  "note": "verify 2026-10-17: 0 errors; rendered 3261 Corsican texts with the game's own loader and formatter (2 skipped: the English itself does not format), 0 unknown keys, 0 problems"
+  "note": "verify 2026-10-17: 0 errors; rendered 3261 Corsican texts with the game's own loader and formatter (2 skipped: the English itself does not format), 0 unknown keys, 0 problems; fingerprint recorded on 2026-10-17 without running the game code again, for data unchanged since the verify of 2026-10-17 (data last changed in e64eb2f, verify recorded in 03efded)",
+  "verified": {
+   "fingerprint": "sha256:3fb95b8b6c79696bc5d890b141c0f1026a1d6937788d5496590fd95ad6635a97",
+   "date": "2026-10-17",
+   "engine": true
+  }
  },
  "1.11.2": {
   "lang_format": "lang",
@@ -690,7 +850,12 @@
    "translated": 3265,
    "total": 3265
   },
-  "note": "verify 2026-10-17: 0 errors; rendered 3265 Corsican texts with the game's own loader and formatter (2 skipped: the English itself does not format), 0 unknown keys, 0 problems"
+  "note": "verify 2026-10-17: 0 errors; rendered 3265 Corsican texts with the game's own loader and formatter (2 skipped: the English itself does not format), 0 unknown keys, 0 problems; fingerprint recorded on 2026-10-17 without running the game code again, for data unchanged since the verify of 2026-10-17 (data last changed in e64eb2f, verify recorded in 03efded)",
+  "verified": {
+   "fingerprint": "sha256:12c06a5d4b0c5239b8dee48861c12df53f2cd1d5955b1481b9798e63d40991d2",
+   "date": "2026-10-17",
+   "engine": true
+  }
  },
  "1.12": {
   "lang_format": "lang",
@@ -711,7 +876,12 @@
    "translated": 3527,
    "total": 3527
   },
-  "note": "verify 2026-10-17: 0 errors; rendered 3527 Corsican texts with the game's own loader and formatter (2 skipped: the English itself does not format), 0 unknown keys, 0 problems"
+  "note": "verify 2026-10-17: 0 errors; rendered 3527 Corsican texts with the game's own loader and formatter (2 skipped: the English itself does not format), 0 unknown keys, 0 problems; fingerprint recorded on 2026-10-17 without running the game code again, for data unchanged since the verify of 2026-10-17 (data last changed in e64eb2f, verify recorded in 03efded)",
+  "verified": {
+   "fingerprint": "sha256:f5cc0512d03f567c3e6f5e19d6a5b00bf6a5019260bbf5536062883d7a5e3f8e",
+   "date": "2026-10-17",
+   "engine": true
+  }
  },
  "1.12.1": {
   "lang_format": "lang",
@@ -732,7 +902,12 @@
    "translated": 3527,
    "total": 3527
   },
-  "note": "verify 2026-10-17: 0 errors; rendered 3527 Corsican texts with the game's own loader and formatter (2 skipped: the English itself does not format), 0 unknown keys, 0 problems"
+  "note": "verify 2026-10-17: 0 errors; rendered 3527 Corsican texts with the game's own loader and formatter (2 skipped: the English itself does not format), 0 unknown keys, 0 problems; fingerprint recorded on 2026-10-17 without running the game code again, for data unchanged since the verify of 2026-10-17 (data last changed in e64eb2f, verify recorded in 03efded)",
+  "verified": {
+   "fingerprint": "sha256:9a3ded3465cab120a17d035a43bdcba36d5abbd8e73848d5c861cc3fe924482f",
+   "date": "2026-10-17",
+   "engine": true
+  }
  },
  "1.12.2": {
   "lang_format": "lang",
@@ -753,7 +928,12 @@
    "translated": 3531,
    "total": 3531
   },
-  "note": "verify 2026-10-17: 0 errors; rendered 3531 Corsican texts with the game's own loader and formatter (2 skipped: the English itself does not format), 0 unknown keys, 0 problems"
+  "note": "verify 2026-10-17: 0 errors; rendered 3531 Corsican texts with the game's own loader and formatter (2 skipped: the English itself does not format), 0 unknown keys, 0 problems; fingerprint recorded on 2026-10-17 without running the game code again, for data unchanged since the verify of 2026-10-17 (data last changed in e64eb2f, verify recorded in 03efded)",
+  "verified": {
+   "fingerprint": "sha256:63df66b2d31a8f8baeb45d8ccb8e0b7b831d2dc7f67f2dccd983c590e4c23c44",
+   "date": "2026-10-17",
+   "engine": true
+  }
  },
  "1.13": {
   "lang_format": "json",
@@ -774,7 +954,12 @@
    "translated": 4138,
    "total": 4138
   },
-  "note": "verify 2026-10-17: 0 errors; rendered 4138 Corsican texts with the game's own loader and formatter (2 skipped: the English itself does not format), 0 unknown keys, 0 problems"
+  "note": "verify 2026-10-17: 0 errors; rendered 4138 Corsican texts with the game's own loader and formatter (2 skipped: the English itself does not format), 0 unknown keys, 0 problems; fingerprint recorded on 2026-10-17 without running the game code again, for data unchanged since the verify of 2026-10-17 (data last changed in e64eb2f, verify recorded in 03efded)",
+  "verified": {
+   "fingerprint": "sha256:5efd5ba3252cb29d370e9009be5b8f6e4516e6b311fb3a86ee8cce0b609147fe",
+   "date": "2026-10-17",
+   "engine": true
+  }
  },
  "1.13.1": {
   "lang_format": "json",
@@ -795,7 +980,12 @@
    "translated": 4219,
    "total": 4219
   },
-  "note": "verify 2026-10-17: 0 errors; rendered 4219 Corsican texts with the game's own loader and formatter (2 skipped: the English itself does not format), 0 unknown keys, 0 problems"
+  "note": "verify 2026-10-17: 0 errors; rendered 4219 Corsican texts with the game's own loader and formatter (2 skipped: the English itself does not format), 0 unknown keys, 0 problems; fingerprint recorded on 2026-10-17 without running the game code again, for data unchanged since the verify of 2026-10-17 (data last changed in e64eb2f, verify recorded in 03efded)",
+  "verified": {
+   "fingerprint": "sha256:0016f767d49e7ae45909abb9f811a17cd1d188e86a5e841b16b5d2396c67da7a",
+   "date": "2026-10-17",
+   "engine": true
+  }
  },
  "1.13.2": {
   "lang_format": "json",
@@ -816,7 +1006,12 @@
    "translated": 4219,
    "total": 4219
   },
-  "note": "verify 2026-10-17: 0 errors; rendered 4219 Corsican texts with the game's own loader and formatter (2 skipped: the English itself does not format), 0 unknown keys, 0 problems"
+  "note": "verify 2026-10-17: 0 errors; rendered 4219 Corsican texts with the game's own loader and formatter (2 skipped: the English itself does not format), 0 unknown keys, 0 problems; fingerprint recorded on 2026-10-17 without running the game code again, for data unchanged since the verify of 2026-10-17 (data last changed in e64eb2f, verify recorded in 03efded)",
+  "verified": {
+   "fingerprint": "sha256:c80f7faf5f614acf7be11475cdaec762ccdf172d08c852d79078f17feebcfdab",
+   "date": "2026-10-17",
+   "engine": true
+  }
  },
  "1.14": {
   "lang_format": "json",
@@ -837,7 +1032,12 @@
    "translated": 4557,
    "total": 4557
   },
-  "note": "verify 2026-10-17: 0 errors; rendered 4557 Corsican texts with the game's own loader and formatter (2 skipped: the English itself does not format), 0 unknown keys, 0 problems"
+  "note": "verify 2026-10-17: 0 errors; rendered 4557 Corsican texts with the game's own loader and formatter (2 skipped: the English itself does not format), 0 unknown keys, 0 problems; fingerprint recorded on 2026-10-17 without running the game code again, for data unchanged since the verify of 2026-10-17 (data last changed in e64eb2f, verify recorded in 03efded)",
+  "verified": {
+   "fingerprint": "sha256:90febc17359e6c7788620aa7c00e18e8c515c70587a52c2e878adb56e120a7e6",
+   "date": "2026-10-17",
+   "engine": true
+  }
  },
  "1.14.1": {
   "lang_format": "json",
@@ -858,7 +1058,12 @@
    "translated": 4559,
    "total": 4559
   },
-  "note": "verify 2026-10-17: 0 errors; rendered 4559 Corsican texts with the game's own loader and formatter (2 skipped: the English itself does not format), 0 unknown keys, 0 problems"
+  "note": "verify 2026-10-17: 0 errors; rendered 4559 Corsican texts with the game's own loader and formatter (2 skipped: the English itself does not format), 0 unknown keys, 0 problems; fingerprint recorded on 2026-10-17 without running the game code again, for data unchanged since the verify of 2026-10-17 (data last changed in e64eb2f, verify recorded in 03efded)",
+  "verified": {
+   "fingerprint": "sha256:2c820e7df93146b352d7e72b95da932d7c9c3a532183083a807edbe7bb2e4458",
+   "date": "2026-10-17",
+   "engine": true
+  }
  },
  "1.14.2": {
   "lang_format": "json",
@@ -879,7 +1084,12 @@
    "translated": 4559,
    "total": 4559
   },
-  "note": "verify 2026-10-17: 0 errors; rendered 4559 Corsican texts with the game's own loader and formatter (2 skipped: the English itself does not format), 0 unknown keys, 0 problems"
+  "note": "verify 2026-10-17: 0 errors; rendered 4559 Corsican texts with the game's own loader and formatter (2 skipped: the English itself does not format), 0 unknown keys, 0 problems; fingerprint recorded on 2026-10-17 without running the game code again, for data unchanged since the verify of 2026-10-17 (data last changed in e64eb2f, verify recorded in 03efded)",
+  "verified": {
+   "fingerprint": "sha256:87551947da972a3d864057cbe6b719fdd190a581f5201bfd24c1f861087d1813",
+   "date": "2026-10-17",
+   "engine": true
+  }
  },
  "1.14.3": {
   "lang_format": "json",
@@ -900,7 +1110,12 @@
    "translated": 4561,
    "total": 4561
   },
-  "note": "verify 2026-10-17: 0 errors; rendered 4561 Corsican texts with the game's own loader and formatter (2 skipped: the English itself does not format), 0 unknown keys, 0 problems"
+  "note": "verify 2026-10-17: 0 errors; rendered 4561 Corsican texts with the game's own loader and formatter (2 skipped: the English itself does not format), 0 unknown keys, 0 problems; fingerprint recorded on 2026-10-17 without running the game code again, for data unchanged since the verify of 2026-10-17 (data last changed in e64eb2f, verify recorded in 03efded)",
+  "verified": {
+   "fingerprint": "sha256:97cf8f53ef12d82ef67591e9070ce52959327924573dbfb2f3861777cd44c259",
+   "date": "2026-10-17",
+   "engine": true
+  }
  },
  "1.14.4": {
   "lang_format": "json",
@@ -921,7 +1136,12 @@
    "translated": 4565,
    "total": 4565
   },
-  "note": "verify 2026-10-17: 0 errors; rendered 4565 Corsican texts with the game's own loader and formatter (2 skipped: the English itself does not format), 0 unknown keys, 0 problems"
+  "note": "verify 2026-10-17: 0 errors; rendered 4565 Corsican texts with the game's own loader and formatter (2 skipped: the English itself does not format), 0 unknown keys, 0 problems; fingerprint recorded on 2026-10-17 without running the game code again, for data unchanged since the verify of 2026-10-17 (data last changed in e64eb2f, verify recorded in 03efded)",
+  "verified": {
+   "fingerprint": "sha256:83963723d7a4959314c2492852e7cb9fba69d3f5002c2ed18bf193cc5e3381ae",
+   "date": "2026-10-17",
+   "engine": true
+  }
  },
  "1.15": {
   "lang_format": "json",
@@ -942,7 +1162,12 @@
    "translated": 4618,
    "total": 4618
   },
-  "note": "verify 2026-10-17: 0 errors; rendered 4618 Corsican texts with the game's own loader and formatter (2 skipped: the English itself does not format), 0 unknown keys, 0 problems"
+  "note": "verify 2026-10-17: 0 errors; rendered 4618 Corsican texts with the game's own loader and formatter (2 skipped: the English itself does not format), 0 unknown keys, 0 problems; fingerprint recorded on 2026-10-17 without running the game code again, for data unchanged since the verify of 2026-10-17 (data last changed in e64eb2f, verify recorded in 03efded)",
+  "verified": {
+   "fingerprint": "sha256:9fd2a8ede13f202797c599f5cd6b335dd544956f5542b189b0966144d1a58757",
+   "date": "2026-10-17",
+   "engine": true
+  }
  },
  "1.15.1": {
   "lang_format": "json",
@@ -963,7 +1188,12 @@
    "translated": 4618,
    "total": 4618
   },
-  "note": "verify 2026-10-17: 0 errors; rendered 4618 Corsican texts with the game's own loader and formatter (2 skipped: the English itself does not format), 0 unknown keys, 0 problems"
+  "note": "verify 2026-10-17: 0 errors; rendered 4618 Corsican texts with the game's own loader and formatter (2 skipped: the English itself does not format), 0 unknown keys, 0 problems; fingerprint recorded on 2026-10-17 without running the game code again, for data unchanged since the verify of 2026-10-17 (data last changed in e64eb2f, verify recorded in 03efded)",
+  "verified": {
+   "fingerprint": "sha256:041673e31b69b9773ad3961249775cedec5ff4a934cfdb02d025af7424153c22",
+   "date": "2026-10-17",
+   "engine": true
+  }
  },
  "1.15.2": {
   "lang_format": "json",
@@ -984,7 +1214,12 @@
    "translated": 4626,
    "total": 4626
   },
-  "note": "verify 2026-10-17: 0 errors; rendered 4626 Corsican texts with the game's own loader and formatter (2 skipped: the English itself does not format), 0 unknown keys, 0 problems"
+  "note": "verify 2026-10-17: 0 errors; rendered 4626 Corsican texts with the game's own loader and formatter (2 skipped: the English itself does not format), 0 unknown keys, 0 problems; fingerprint recorded on 2026-10-17 without running the game code again, for data unchanged since the verify of 2026-10-17 (data last changed in e64eb2f, verify recorded in 03efded)",
+  "verified": {
+   "fingerprint": "sha256:a9e6cb2ef0c3a7ff52836ea5b2b7e47382cd3e70018961a7312c7e8348791b03",
+   "date": "2026-10-17",
+   "engine": true
+  }
  },
  "1.16": {
   "lang_format": "json",
@@ -1005,7 +1240,12 @@
    "translated": 4988,
    "total": 4988
   },
-  "note": "verify 2026-10-17: 0 errors; rendered 4988 Corsican texts with the game's own loader and formatter (2 skipped: the English itself does not format), 0 unknown keys, 0 problems"
+  "note": "verify 2026-10-17: 0 errors; rendered 4988 Corsican texts with the game's own loader and formatter (2 skipped: the English itself does not format), 0 unknown keys, 0 problems; fingerprint recorded on 2026-10-17 without running the game code again, for data unchanged since the verify of 2026-10-17 (data last changed in e64eb2f, verify recorded in 03efded)",
+  "verified": {
+   "fingerprint": "sha256:2f3c10277752818f1914bb23b8b664566f8533f2861749df7fd5322692433c73",
+   "date": "2026-10-17",
+   "engine": true
+  }
  },
  "1.16.1": {
   "lang_format": "json",
@@ -1026,7 +1266,12 @@
    "translated": 4988,
    "total": 4988
   },
-  "note": "verify 2026-10-17: 0 errors; rendered 4988 Corsican texts with the game's own loader and formatter (2 skipped: the English itself does not format), 0 unknown keys, 0 problems"
+  "note": "verify 2026-10-17: 0 errors; rendered 4988 Corsican texts with the game's own loader and formatter (2 skipped: the English itself does not format), 0 unknown keys, 0 problems; fingerprint recorded on 2026-10-17 without running the game code again, for data unchanged since the verify of 2026-10-17 (data last changed in e64eb2f, verify recorded in 03efded)",
+  "verified": {
+   "fingerprint": "sha256:8c0edb42f00f0fe322db8e229de194fb6871c9db844d97c72c948ab587155dcc",
+   "date": "2026-10-17",
+   "engine": true
+  }
  },
  "1.16.2": {
   "lang_format": "json",
@@ -1047,7 +1292,12 @@
    "translated": 5016,
    "total": 5016
   },
-  "note": "verify 2026-10-17: 0 errors; rendered 5016 Corsican texts with the game's own loader and formatter (2 skipped: the English itself does not format), 0 unknown keys, 0 problems"
+  "note": "verify 2026-10-17: 0 errors; rendered 5016 Corsican texts with the game's own loader and formatter (2 skipped: the English itself does not format), 0 unknown keys, 0 problems; fingerprint recorded on 2026-10-17 without running the game code again, for data unchanged since the verify of 2026-10-17 (data last changed in e64eb2f, verify recorded in 03efded)",
+  "verified": {
+   "fingerprint": "sha256:0511d0a0b867841c8bf73197fe140a5fb7b8af37c95ae5228f1af317ed4080eb",
+   "date": "2026-10-17",
+   "engine": true
+  }
  },
  "1.16.3": {
   "lang_format": "json",
@@ -1068,7 +1318,12 @@
    "translated": 5016,
    "total": 5016
   },
-  "note": "verify 2026-10-17: 0 errors; rendered 5016 Corsican texts with the game's own loader and formatter (2 skipped: the English itself does not format), 0 unknown keys, 0 problems"
+  "note": "verify 2026-10-17: 0 errors; rendered 5016 Corsican texts with the game's own loader and formatter (2 skipped: the English itself does not format), 0 unknown keys, 0 problems; fingerprint recorded on 2026-10-17 without running the game code again, for data unchanged since the verify of 2026-10-17 (data last changed in e64eb2f, verify recorded in 03efded)",
+  "verified": {
+   "fingerprint": "sha256:2e22fde5a84249ac0050999c96d6c6c255fe695d20f115210324bcc33cd9b29b",
+   "date": "2026-10-17",
+   "engine": true
+  }
  },
  "1.16.4": {
   "lang_format": "json",
@@ -1089,7 +1344,12 @@
    "translated": 5046,
    "total": 5046
   },
-  "note": "verify 2026-10-17: 0 errors; rendered 5046 Corsican texts with the game's own loader and formatter (2 skipped: the English itself does not format), 0 unknown keys, 0 problems"
+  "note": "verify 2026-10-17: 0 errors; rendered 5046 Corsican texts with the game's own loader and formatter (2 skipped: the English itself does not format), 0 unknown keys, 0 problems; fingerprint recorded on 2026-10-17 without running the game code again, for data unchanged since the verify of 2026-10-17 (data last changed in e64eb2f, verify recorded in 03efded)",
+  "verified": {
+   "fingerprint": "sha256:b8dc8ab9386bd937448f44c978d7f9e179a6916ad52bce03c31d245d36cda067",
+   "date": "2026-10-17",
+   "engine": true
+  }
  },
  "1.16.5": {
   "lang_format": "json",
@@ -1110,7 +1370,12 @@
    "translated": 5046,
    "total": 5046
   },
-  "note": "verify 2026-10-17: 0 errors; rendered 5046 Corsican texts with the game's own loader and formatter (2 skipped: the English itself does not format), 0 unknown keys, 0 problems"
+  "note": "verify 2026-10-17: 0 errors; rendered 5046 Corsican texts with the game's own loader and formatter (2 skipped: the English itself does not format), 0 unknown keys, 0 problems; fingerprint recorded on 2026-10-17 without running the game code again, for data unchanged since the verify of 2026-10-17 (data last changed in e64eb2f, verify recorded in 03efded)",
+  "verified": {
+   "fingerprint": "sha256:543e2bacc9c7fecad7763d1c8fcccf82eba138bc516de060c06238f830cc76fe",
+   "date": "2026-10-17",
+   "engine": true
+  }
  },
  "1.17": {
   "lang_format": "json",
@@ -1131,7 +1396,12 @@
    "translated": 5369,
    "total": 5369
   },
-  "note": "verify 2026-10-17: 0 errors; rendered 5369 Corsican texts with the game's own loader and formatter (2 skipped: the English itself does not format), 0 unknown keys, 0 problems"
+  "note": "verify 2026-10-17: 0 errors; rendered 5369 Corsican texts with the game's own loader and formatter (2 skipped: the English itself does not format), 0 unknown keys, 0 problems; fingerprint recorded on 2026-10-17 without running the game code again, for data unchanged since the verify of 2026-10-17 (data last changed in e64eb2f, verify recorded in 03efded)",
+  "verified": {
+   "fingerprint": "sha256:bb2cd906f10dbe6b39abd2622312530eab98e897ce681a9db2a6948c7ee3232c",
+   "date": "2026-10-17",
+   "engine": true
+  }
  },
  "1.17.1": {
   "lang_format": "json",
@@ -1152,7 +1422,12 @@
    "translated": 5372,
    "total": 5372
   },
-  "note": "verify 2026-10-17: 0 errors; rendered 5372 Corsican texts with the game's own loader and formatter (2 skipped: the English itself does not format), 0 unknown keys, 0 problems"
+  "note": "verify 2026-10-17: 0 errors; rendered 5372 Corsican texts with the game's own loader and formatter (2 skipped: the English itself does not format), 0 unknown keys, 0 problems; fingerprint recorded on 2026-10-17 without running the game code again, for data unchanged since the verify of 2026-10-17 (data last changed in e64eb2f, verify recorded in 03efded)",
+  "verified": {
+   "fingerprint": "sha256:45d8300593e2de725e47fcfa4652b3ae72d65cabc857c08da7f077347033ff87",
+   "date": "2026-10-17",
+   "engine": true
+  }
  },
  "1.18": {
   "lang_format": "json",
@@ -1173,7 +1448,12 @@
    "translated": 5387,
    "total": 5387
   },
-  "note": "verify 2026-10-17: 0 errors; rendered 5387 Corsican texts with the game's own loader and formatter (2 skipped: the English itself does not format), 0 unknown keys, 0 problems"
+  "note": "verify 2026-10-17: 0 errors; rendered 5387 Corsican texts with the game's own loader and formatter (2 skipped: the English itself does not format), 0 unknown keys, 0 problems; fingerprint recorded on 2026-10-17 without running the game code again, for data unchanged since the verify of 2026-10-17 (data last changed in e64eb2f, verify recorded in 03efded)",
+  "verified": {
+   "fingerprint": "sha256:2a9ddcabaf3fceee5d10a499953839e0acdafbce180fb9b9a2a83b087b3f03ae",
+   "date": "2026-10-17",
+   "engine": true
+  }
  },
  "1.18.1": {
   "lang_format": "json",
@@ -1194,7 +1474,12 @@
    "translated": 5388,
    "total": 5388
   },
-  "note": "verify 2026-10-17: 0 errors; rendered 5388 Corsican texts with the game's own loader and formatter (2 skipped: the English itself does not format), 0 unknown keys, 0 problems"
+  "note": "verify 2026-10-17: 0 errors; rendered 5388 Corsican texts with the game's own loader and formatter (2 skipped: the English itself does not format), 0 unknown keys, 0 problems; fingerprint recorded on 2026-10-17 without running the game code again, for data unchanged since the verify of 2026-10-17 (data last changed in e64eb2f, verify recorded in 03efded)",
+  "verified": {
+   "fingerprint": "sha256:9db39b51fddba2bb43acbb8d7045b07974295de9048862b20b4d18aa8ef15fdf",
+   "date": "2026-10-17",
+   "engine": true
+  }
  },
  "1.18.2": {
   "lang_format": "json",
@@ -1215,7 +1500,12 @@
    "translated": 5396,
    "total": 5396
   },
-  "note": "verify 2026-10-17: 0 errors; rendered 5396 Corsican texts with the game's own loader and formatter (2 skipped: the English itself does not format), 0 unknown keys, 0 problems"
+  "note": "verify 2026-10-17: 0 errors; rendered 5396 Corsican texts with the game's own loader and formatter (2 skipped: the English itself does not format), 0 unknown keys, 0 problems; fingerprint recorded on 2026-10-17 without running the game code again, for data unchanged since the verify of 2026-10-17 (data last changed in e64eb2f, verify recorded in 03efded)",
+  "verified": {
+   "fingerprint": "sha256:fe80c6fa529b2084e0eec3f4c98333ca856fdb48a54a7adb9908c970fe470bc8",
+   "date": "2026-10-17",
+   "engine": true
+  }
  },
  "1.19": {
   "lang_format": "json",
@@ -1236,7 +1526,12 @@
    "translated": 5569,
    "total": 5569
   },
-  "note": "verify 2026-10-17: 0 errors; rendered 5569 Corsican texts with the game's own loader and formatter (2 skipped: the English itself does not format), 0 unknown keys, 0 problems"
+  "note": "verify 2026-10-17: 0 errors; rendered 5569 Corsican texts with the game's own loader and formatter (2 skipped: the English itself does not format), 0 unknown keys, 0 problems; fingerprint recorded on 2026-10-17 without running the game code again, for data unchanged since the verify of 2026-10-17 (data last changed in e64eb2f, verify recorded in 03efded)",
+  "verified": {
+   "fingerprint": "sha256:e7c3b3218519fd526ee082e14d7299d328546bbde90db1d74da319f031b920e6",
+   "date": "2026-10-17",
+   "engine": true
+  }
  },
  "1.19.1": {
   "lang_format": "json",
@@ -1257,7 +1552,12 @@
    "translated": 5665,
    "total": 5665
   },
-  "note": "verify 2026-10-17: 0 errors; rendered 5665 Corsican texts with the game's own loader and formatter (2 skipped: the English itself does not format), 0 unknown keys, 0 problems"
+  "note": "verify 2026-10-17: 0 errors; rendered 5665 Corsican texts with the game's own loader and formatter (2 skipped: the English itself does not format), 0 unknown keys, 0 problems; fingerprint recorded on 2026-10-17 without running the game code again, for data unchanged since the verify of 2026-10-17 (data last changed in e64eb2f, verify recorded in 03efded)",
+  "verified": {
+   "fingerprint": "sha256:d1bf5f3a64cb5668ed8e581ad90955fcc0d7de5a58e77f726e4831317645f7dd",
+   "date": "2026-10-17",
+   "engine": true
+  }
  },
  "1.19.2": {
   "lang_format": "json",
@@ -1278,7 +1578,12 @@
    "translated": 5666,
    "total": 5666
   },
-  "note": "verify 2026-10-17: 0 errors; rendered 5666 Corsican texts with the game's own loader and formatter (2 skipped: the English itself does not format), 0 unknown keys, 0 problems"
+  "note": "verify 2026-10-17: 0 errors; rendered 5666 Corsican texts with the game's own loader and formatter (2 skipped: the English itself does not format), 0 unknown keys, 0 problems; fingerprint recorded on 2026-10-17 without running the game code again, for data unchanged since the verify of 2026-10-17 (data last changed in e64eb2f, verify recorded in 03efded)",
+  "verified": {
+   "fingerprint": "sha256:d61e0f31331b52b431ee6d9a8085ec74ef3b46bda6e9e9a6f93e1a805d0118f5",
+   "date": "2026-10-17",
+   "engine": true
+  }
  },
  "1.19.3": {
   "lang_format": "json",
@@ -1299,7 +1604,12 @@
    "translated": 5820,
    "total": 5820
   },
-  "note": "verify 2026-10-17: 0 errors; rendered 5820 Corsican texts with the game's own loader and formatter (2 skipped: the English itself does not format), 0 unknown keys, 0 problems"
+  "note": "verify 2026-10-17: 0 errors; rendered 5820 Corsican texts with the game's own loader and formatter (2 skipped: the English itself does not format), 0 unknown keys, 0 problems; fingerprint recorded on 2026-10-17 without running the game code again, for data unchanged since the verify of 2026-10-17 (data last changed in e64eb2f, verify recorded in 03efded)",
+  "verified": {
+   "fingerprint": "sha256:a5cb94ac0693e063cc052f2678a9b183d135ae5df6a9d7bbe5713e5be04ea49a",
+   "date": "2026-10-17",
+   "engine": true
+  }
  },
  "1.19.4": {
   "lang_format": "json",
@@ -1320,7 +1630,12 @@
    "translated": 6063,
    "total": 6063
   },
-  "note": "verify 2026-10-17: 0 errors; rendered 6063 Corsican texts with the game's own loader and formatter (2 skipped: the English itself does not format), 0 unknown keys, 0 problems"
+  "note": "verify 2026-10-17: 0 errors; rendered 6063 Corsican texts with the game's own loader and formatter (2 skipped: the English itself does not format), 0 unknown keys, 0 problems; fingerprint recorded on 2026-10-17 without running the game code again, for data unchanged since the verify of 2026-10-17 (data last changed in e64eb2f, verify recorded in 03efded)",
+  "verified": {
+   "fingerprint": "sha256:273ff517cb1bf8c073fb69c0901fc024de3e14b12412f99cbdc092d0c5813e5f",
+   "date": "2026-10-17",
+   "engine": true
+  }
  },
  "1.20": {
   "lang_format": "json",
@@ -1341,7 +1656,12 @@
    "translated": 6217,
    "total": 6217
   },
-  "note": "verify 2026-10-17: 0 errors; rendered 6217 Corsican texts with the game's own loader and formatter (2 skipped: the English itself does not format), 0 unknown keys, 0 problems"
+  "note": "verify 2026-10-17: 0 errors; rendered 6217 Corsican texts with the game's own loader and formatter (2 skipped: the English itself does not format), 0 unknown keys, 0 problems; fingerprint recorded on 2026-10-17 without running the game code again, for data unchanged since the verify of 2026-10-17 (data last changed in e64eb2f, verify recorded in 03efded)",
+  "verified": {
+   "fingerprint": "sha256:2c17091d1594407ce6c1d25fd0de269396b73b510a9410c92f56a0719dffbed1",
+   "date": "2026-10-17",
+   "engine": true
+  }
  },
  "1.20.1": {
   "lang_format": "json",
@@ -1362,7 +1682,12 @@
    "translated": 6217,
    "total": 6217
   },
-  "note": "verify 2026-10-17: 0 errors; rendered 6217 Corsican texts with the game's own loader and formatter (2 skipped: the English itself does not format), 0 unknown keys, 0 problems"
+  "note": "verify 2026-10-17: 0 errors; rendered 6217 Corsican texts with the game's own loader and formatter (2 skipped: the English itself does not format), 0 unknown keys, 0 problems; fingerprint recorded on 2026-10-17 without running the game code again, for data unchanged since the verify of 2026-10-17 (data last changed in e64eb2f, verify recorded in 03efded)",
+  "verified": {
+   "fingerprint": "sha256:0592c91ff2b8d498b60ec90aa8d0bdc37c22a28c2e85353394af596dfac826d8",
+   "date": "2026-10-17",
+   "engine": true
+  }
  },
  "1.20.2": {
   "lang_format": "json",
@@ -1383,7 +1708,12 @@
    "translated": 6345,
    "total": 6345
   },
-  "note": "verify 2026-10-17: 0 errors; rendered 6345 Corsican texts with the game's own loader and formatter (2 skipped: the English itself does not format), 0 unknown keys, 0 problems"
+  "note": "verify 2026-10-17: 0 errors; rendered 6345 Corsican texts with the game's own loader and formatter (2 skipped: the English itself does not format), 0 unknown keys, 0 problems; fingerprint recorded on 2026-10-17 without running the game code again, for data unchanged since the verify of 2026-10-17 (data last changed in e64eb2f, verify recorded in 03efded)",
+  "verified": {
+   "fingerprint": "sha256:0e986f56e55fd54ffb57eb1d5f6a13fc3c723a635267f661d9d7285de9e4efd6",
+   "date": "2026-10-17",
+   "engine": true
+  }
  },
  "1.20.3": {
   "lang_format": "json",
@@ -1404,7 +1734,12 @@
    "translated": 6540,
    "total": 6540
   },
-  "note": "verify 2026-10-17: 0 errors; rendered 6540 Corsican texts with the game's own loader and formatter (2 skipped: the English itself does not format), 0 unknown keys, 0 problems"
+  "note": "verify 2026-10-17: 0 errors; rendered 6540 Corsican texts with the game's own loader and formatter (2 skipped: the English itself does not format), 0 unknown keys, 0 problems; fingerprint recorded on 2026-10-17 without running the game code again, for data unchanged since the verify of 2026-10-17 (data last changed in e64eb2f, verify recorded in 03efded)",
+  "verified": {
+   "fingerprint": "sha256:ef0e707219c32dc476460c66aef424f7d1302a10fd08825569ad139c908b48af",
+   "date": "2026-10-17",
+   "engine": true
+  }
  },
  "1.20.4": {
   "lang_format": "json",
@@ -1425,7 +1760,12 @@
    "translated": 6540,
    "total": 6540
   },
-  "note": "verify 2026-10-17: 0 errors; rendered 6540 Corsican texts with the game's own loader and formatter (2 skipped: the English itself does not format), 0 unknown keys, 0 problems"
+  "note": "verify 2026-10-17: 0 errors; rendered 6540 Corsican texts with the game's own loader and formatter (2 skipped: the English itself does not format), 0 unknown keys, 0 problems; fingerprint recorded on 2026-10-17 without running the game code again, for data unchanged since the verify of 2026-10-17 (data last changed in e64eb2f, verify recorded in 03efded)",
+  "verified": {
+   "fingerprint": "sha256:e6063c0f285ac4a9dcbbcf23c8efd521f4bcbe7bbb58e6dd65c31597bbc73cbc",
+   "date": "2026-10-17",
+   "engine": true
+  }
  },
  "1.20.5": {
   "lang_format": "json",
@@ -1446,7 +1786,12 @@
    "translated": 6770,
    "total": 6770
   },
-  "note": "verify 2026-10-17: 0 errors; rendered 6770 Corsican texts with the game's own loader and formatter (2 skipped: the English itself does not format), 0 unknown keys, 0 problems"
+  "note": "verify 2026-10-17: 0 errors; rendered 6770 Corsican texts with the game's own loader and formatter (2 skipped: the English itself does not format), 0 unknown keys, 0 problems; fingerprint recorded on 2026-10-17 without running the game code again, for data unchanged since the verify of 2026-10-17 (data last changed in e64eb2f, verify recorded in 03efded)",
+  "verified": {
+   "fingerprint": "sha256:a7c4525158fd8e90791fa3df107cde4f8af655dd9f7bf2c061aea04b127fb969",
+   "date": "2026-10-17",
+   "engine": true
+  }
  },
  "1.20.6": {
   "lang_format": "json",
@@ -1467,7 +1812,12 @@
    "translated": 6770,
    "total": 6770
   },
-  "note": "verify 2026-10-17: 0 errors; rendered 6770 Corsican texts with the game's own loader and formatter (2 skipped: the English itself does not format), 0 unknown keys, 0 problems"
+  "note": "verify 2026-10-17: 0 errors; rendered 6770 Corsican texts with the game's own loader and formatter (2 skipped: the English itself does not format), 0 unknown keys, 0 problems; fingerprint recorded on 2026-10-17 without running the game code again, for data unchanged since the verify of 2026-10-17 (data last changed in e64eb2f, verify recorded in 03efded)",
+  "verified": {
+   "fingerprint": "sha256:02372c3cf084a71eaf30fff50f533e410de8cc2907ed94e255df4b4354b2e198",
+   "date": "2026-10-17",
+   "engine": true
+  }
  },
  "1.21": {
   "lang_format": "json",
@@ -1488,7 +1838,12 @@
    "translated": 6881,
    "total": 6881
   },
-  "note": "verify 2026-10-17: 0 errors; rendered 6881 Corsican texts with the game's own loader and formatter (2 skipped: the English itself does not format), 0 unknown keys, 0 problems"
+  "note": "verify 2026-10-17: 0 errors; rendered 6881 Corsican texts with the game's own loader and formatter (2 skipped: the English itself does not format), 0 unknown keys, 0 problems; fingerprint recorded on 2026-10-17 without running the game code again, for data unchanged since the verify of 2026-10-17 (data last changed in e64eb2f, verify recorded in 03efded)",
+  "verified": {
+   "fingerprint": "sha256:ce66c5879566965e3f57fb934a04a014fb084097fd144c38b375caf3507e00ce",
+   "date": "2026-10-17",
+   "engine": true
+  }
  },
  "1.21.1": {
   "lang_format": "json",
@@ -1509,7 +1864,12 @@
    "translated": 6881,
    "total": 6881
   },
-  "note": "verify 2026-10-17: 0 errors; rendered 6881 Corsican texts with the game's own loader and formatter (2 skipped: the English itself does not format), 0 unknown keys, 0 problems"
+  "note": "verify 2026-10-17: 0 errors; rendered 6881 Corsican texts with the game's own loader and formatter (2 skipped: the English itself does not format), 0 unknown keys, 0 problems; fingerprint recorded on 2026-10-17 without running the game code again, for data unchanged since the verify of 2026-10-17 (data last changed in e64eb2f, verify recorded in 03efded)",
+  "verified": {
+   "fingerprint": "sha256:e3886e3656f0284640f1a45a8236bf65da7264d8112f0bd4d37b83e4582de3ff",
+   "date": "2026-10-17",
+   "engine": true
+  }
  },
  "1.21.2": {
   "lang_format": "json",
@@ -1530,7 +1890,12 @@
    "translated": 6972,
    "total": 6972
   },
-  "note": "verify 2026-10-17: 0 errors; rendered 6972 Corsican texts with the game's own loader and formatter (2 skipped: the English itself does not format), 0 unknown keys, 0 problems"
+  "note": "verify 2026-10-17: 0 errors; rendered 6972 Corsican texts with the game's own loader and formatter (2 skipped: the English itself does not format), 0 unknown keys, 0 problems; fingerprint recorded on 2026-10-17 without running the game code again, for data unchanged since the verify of 2026-10-17 (data last changed in e64eb2f, verify recorded in 03efded)",
+  "verified": {
+   "fingerprint": "sha256:3ee58b3819fab7f440ca5bf60431bf0a189a4e062a9fc53c2541db8b515a11b5",
+   "date": "2026-10-17",
+   "engine": true
+  }
  },
  "1.21.3": {
   "lang_format": "json",
@@ -1551,7 +1916,12 @@
    "translated": 6972,
    "total": 6972
   },
-  "note": "verify 2026-10-17: 0 errors; rendered 6972 Corsican texts with the game's own loader and formatter (2 skipped: the English itself does not format), 0 unknown keys, 0 problems"
+  "note": "verify 2026-10-17: 0 errors; rendered 6972 Corsican texts with the game's own loader and formatter (2 skipped: the English itself does not format), 0 unknown keys, 0 problems; fingerprint recorded on 2026-10-17 without running the game code again, for data unchanged since the verify of 2026-10-17 (data last changed in e64eb2f, verify recorded in 03efded)",
+  "verified": {
+   "fingerprint": "sha256:cfaa16824f44fab17e0e5f3939d54a37d1d085d116efc113b3cd846ad187c5b7",
+   "date": "2026-10-17",
+   "engine": true
+  }
  },
  "1.21.4": {
   "lang_format": "json",
@@ -1572,7 +1942,12 @@
    "translated": 7000,
    "total": 7000
   },
-  "note": "verify 2026-10-17: 0 errors; rendered 7000 Corsican texts with the game's own loader and formatter (2 skipped: the English itself does not format), 0 unknown keys, 0 problems"
+  "note": "verify 2026-10-17: 0 errors; rendered 7000 Corsican texts with the game's own loader and formatter (2 skipped: the English itself does not format), 0 unknown keys, 0 problems; fingerprint recorded on 2026-10-17 without running the game code again, for data unchanged since the verify of 2026-10-17 (data last changed in e64eb2f, verify recorded in 03efded)",
+  "verified": {
+   "fingerprint": "sha256:7dc4cce2e9b3c8747e1fb52cd2dac40d3d2e6553f2fd71af80ddbccbbb57fb2a",
+   "date": "2026-10-17",
+   "engine": true
+  }
  },
  "1.21.5": {
   "lang_format": "json",
@@ -1593,7 +1968,12 @@
    "translated": 7161,
    "total": 7161
   },
-  "note": "verify 2026-10-17: 0 errors; rendered 7161 Corsican texts with the game's own loader and formatter (2 skipped: the English itself does not format), 0 unknown keys, 0 problems"
+  "note": "verify 2026-10-17: 0 errors; rendered 7161 Corsican texts with the game's own loader and formatter (2 skipped: the English itself does not format), 0 unknown keys, 0 problems; fingerprint recorded on 2026-10-17 without running the game code again, for data unchanged since the verify of 2026-10-17 (data last changed in e64eb2f, verify recorded in 03efded)",
+  "verified": {
+   "fingerprint": "sha256:a516c3baf46da454a8716911d8dda0b73999380d392440a018dec1114a274950",
+   "date": "2026-10-17",
+   "engine": true
+  }
  },
  "1.21.6": {
   "lang_format": "json",
@@ -1614,7 +1994,12 @@
    "translated": 7387,
    "total": 7387
   },
-  "note": "verify 2026-10-17: 0 errors; rendered 7387 Corsican texts with the game's own loader and formatter (2 skipped: the English itself does not format), 0 unknown keys, 0 problems"
+  "note": "verify 2026-10-17: 0 errors; rendered 7387 Corsican texts with the game's own loader and formatter (2 skipped: the English itself does not format), 0 unknown keys, 0 problems; fingerprint recorded on 2026-10-17 without running the game code again, for data unchanged since the verify of 2026-10-17 (data last changed in e64eb2f, verify recorded in 03efded)",
+  "verified": {
+   "fingerprint": "sha256:a20fdcaa08830c3e3ebb8601b420094e9194ed735664014add3f38f3f34ba1cc",
+   "date": "2026-10-17",
+   "engine": true
+  }
  },
  "1.21.7": {
   "lang_format": "json",
@@ -1635,7 +2020,12 @@
    "translated": 7392,
    "total": 7392
   },
-  "note": "verify 2026-10-17: 0 errors; rendered 7392 Corsican texts with the game's own loader and formatter (2 skipped: the English itself does not format), 0 unknown keys, 0 problems"
+  "note": "verify 2026-10-17: 0 errors; rendered 7392 Corsican texts with the game's own loader and formatter (2 skipped: the English itself does not format), 0 unknown keys, 0 problems; fingerprint recorded on 2026-10-17 without running the game code again, for data unchanged since the verify of 2026-10-17 (data last changed in e64eb2f, verify recorded in 03efded)",
+  "verified": {
+   "fingerprint": "sha256:ae166ced0a5cdb41c861175dfd4dc3933d6e8d55732f0758414096e8b156be95",
+   "date": "2026-10-17",
+   "engine": true
+  }
  },
  "1.21.8": {
   "lang_format": "json",
@@ -1656,7 +2046,12 @@
    "translated": 7392,
    "total": 7392
   },
-  "note": "verify 2026-10-17: 0 errors; rendered 7392 Corsican texts with the game's own loader and formatter (2 skipped: the English itself does not format), 0 unknown keys, 0 problems"
+  "note": "verify 2026-10-17: 0 errors; rendered 7392 Corsican texts with the game's own loader and formatter (2 skipped: the English itself does not format), 0 unknown keys, 0 problems; fingerprint recorded on 2026-10-17 without running the game code again, for data unchanged since the verify of 2026-10-17 (data last changed in e64eb2f, verify recorded in 03efded)",
+  "verified": {
+   "fingerprint": "sha256:7d7fe6ec8c1c3156ef852348fe36008af5e101f82b08d936422a7a024a072cfb",
+   "date": "2026-10-17",
+   "engine": true
+  }
  },
  "1.21.9": {
   "lang_format": "json",
@@ -1678,7 +2073,12 @@
    "translated": 7583,
    "total": 7583
   },
-  "note": "verify 2026-10-17: 0 errors; rendered 7583 Corsican texts with the game's own loader and formatter (2 skipped: the English itself does not format), 0 unknown keys, 0 problems"
+  "note": "verify 2026-10-17: 0 errors; rendered 7583 Corsican texts with the game's own loader and formatter (2 skipped: the English itself does not format), 0 unknown keys, 0 problems; fingerprint recorded on 2026-10-17 without running the game code again, for data unchanged since the verify of 2026-10-17 (data last changed in e64eb2f, verify recorded in 03efded)",
+  "verified": {
+   "fingerprint": "sha256:3fa578150d7a7de6123c40c6cee37a7cbc85732dd27449d28949060109a9855f",
+   "date": "2026-10-17",
+   "engine": true
+  }
  },
  "1.21.10": {
   "lang_format": "json",
@@ -1700,7 +2100,12 @@
    "translated": 7583,
    "total": 7583
   },
-  "note": "verify 2026-10-17: 0 errors; rendered 7583 Corsican texts with the game's own loader and formatter (2 skipped: the English itself does not format), 0 unknown keys, 0 problems"
+  "note": "verify 2026-10-17: 0 errors; rendered 7583 Corsican texts with the game's own loader and formatter (2 skipped: the English itself does not format), 0 unknown keys, 0 problems; fingerprint recorded on 2026-10-17 without running the game code again, for data unchanged since the verify of 2026-10-17 (data last changed in e64eb2f, verify recorded in 03efded)",
+  "verified": {
+   "fingerprint": "sha256:c2b9990cb4b4f9794f9f2240bb9eca127bdb0936f75e00f2e2d3206ff6c9a500",
+   "date": "2026-10-17",
+   "engine": true
+  }
  },
  "1.21.11": {
   "lang_format": "json",
@@ -1722,7 +2127,12 @@
    "translated": 7767,
    "total": 7767
   },
-  "note": "verify 2026-10-17: 0 errors; rendered 7767 Corsican texts with the game's own loader and formatter (2 skipped: the English itself does not format), 0 unknown keys, 0 problems"
+  "note": "verify 2026-10-17: 0 errors; rendered 7767 Corsican texts with the game's own loader and formatter (2 skipped: the English itself does not format), 0 unknown keys, 0 problems; fingerprint recorded on 2026-10-17 without running the game code again, for data unchanged since the verify of 2026-10-17 (data last changed in e64eb2f, verify recorded in 03efded)",
+  "verified": {
+   "fingerprint": "sha256:64840e754be62ed531202974108e0655f53c9456c5b78f046f09068e9264aa3d",
+   "date": "2026-10-17",
+   "engine": true
+  }
  },
  "26.1": {
   "lang_format": "json",
@@ -1744,7 +2154,12 @@
    "translated": 7886,
    "total": 7886
   },
-  "note": "verify 2026-10-17: 0 errors; rendered 7886 Corsican texts with the game's own loader and formatter (2 skipped: the English itself does not format), 0 unknown keys, 0 problems"
+  "note": "verify 2026-10-17: 0 errors; rendered 7886 Corsican texts with the game's own loader and formatter (2 skipped: the English itself does not format), 0 unknown keys, 0 problems; fingerprint recorded on 2026-10-17 without running the game code again, for data unchanged since the verify of 2026-10-17 (data last changed in e64eb2f, verify recorded in 03efded)",
+  "verified": {
+   "fingerprint": "sha256:a82668dde29f0d716de5d49232425206ebef5b5273af095789196519b136845c",
+   "date": "2026-10-17",
+   "engine": true
+  }
  },
  "26.1.1": {
   "lang_format": "json",
@@ -1766,7 +2181,12 @@
    "translated": 7886,
    "total": 7886
   },
-  "note": "verify 2026-10-17: 0 errors; rendered 7886 Corsican texts with the game's own loader and formatter (2 skipped: the English itself does not format), 0 unknown keys, 0 problems"
+  "note": "verify 2026-10-17: 0 errors; rendered 7886 Corsican texts with the game's own loader and formatter (2 skipped: the English itself does not format), 0 unknown keys, 0 problems; fingerprint recorded on 2026-10-17 without running the game code again, for data unchanged since the verify of 2026-10-17 (data last changed in e64eb2f, verify recorded in 03efded)",
+  "verified": {
+   "fingerprint": "sha256:6aed134b5a65f890d244bbb8663d136a4a5707a19d5a3114989d15773d5eabe8",
+   "date": "2026-10-17",
+   "engine": true
+  }
  },
  "26.1.2": {
   "lang_format": "json",
@@ -1788,7 +2208,12 @@
    "translated": 7886,
    "total": 7886
   },
-  "note": "verify 2026-10-17: 0 errors; rendered 7886 Corsican texts with the game's own loader and formatter (2 skipped: the English itself does not format), 0 unknown keys, 0 problems"
+  "note": "verify 2026-10-17: 0 errors; rendered 7886 Corsican texts with the game's own loader and formatter (2 skipped: the English itself does not format), 0 unknown keys, 0 problems; fingerprint recorded on 2026-10-17 without running the game code again, for data unchanged since the verify of 2026-10-17 (data last changed in e64eb2f, verify recorded in 03efded)",
+  "verified": {
+   "fingerprint": "sha256:e590e6938c52aca95605459a1211c714f8c666cf27b274328a304f60a51183d9",
+   "date": "2026-10-17",
+   "engine": true
+  }
  },
  "26.2": {
   "lang_format": "json",
@@ -1810,7 +2235,12 @@
    "translated": 8123,
    "total": 8123
   },
-  "note": "verify 2026-10-17: 0 errors; rendered 8123 Corsican texts with the game's own loader and formatter (2 skipped: the English itself does not format), 0 unknown keys, 0 problems"
+  "note": "verify 2026-10-17: 0 errors; rendered 8123 Corsican texts with the game's own loader and formatter (2 skipped: the English itself does not format), 0 unknown keys, 0 problems; fingerprint recorded on 2026-10-17 without running the game code again, for data unchanged since the verify of 2026-10-17 (data last changed in e64eb2f, verify recorded in 03efded)",
+  "verified": {
+   "fingerprint": "sha256:1f3f379e15d7661b51ecfea5c737037920b138aa2285affb198f2fda91dbe447",
+   "date": "2026-10-17",
+   "engine": true
+  }
  },
  "26.3": {
   "lang_format": "json",
@@ -1832,6 +2262,11 @@
    "translated": 8559,
    "total": 8559
   },
-  "note": "verify 2026-10-17: 0 errors; rendered 8559 Corsican texts with the game's own loader and formatter (3 skipped: the English itself does not format), 0 unknown keys, 0 problems"
+  "note": "verify 2026-10-17: 0 errors; rendered 8559 Corsican texts with the game's own loader and formatter (3 skipped: the English itself does not format), 0 unknown keys, 0 problems; fingerprint recorded on 2026-10-17 without running the game code again, for data unchanged since the verify of 2026-10-17 (data last changed in e64eb2f, verify recorded in 03efded)",
+  "verified": {
+   "fingerprint": "sha256:12ce14dd998b4a199dc04bfbd6bf388655876b5736fa890cf51e4b5ab7815366",
+   "date": "2026-10-17",
+   "engine": true
+  }
  }
 }

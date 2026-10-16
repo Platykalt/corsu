@@ -18,9 +18,9 @@ programmes KDE et Qt et les commandes du terminal. Opera GX et les autres naviga
 titre expérimental. Chaque partie peut être désactivée puis réactivée à tout moment, et le détail système par système
 est dans [Ce qui marche, et où](docs/fr/compatibilite.md).
 
-**Minecraft: Java Edition en corse (version 26.3), en cours de relecture** : les 8 557 textes du jeu sont traduits,
-et l'application Corsu ajoute le pack et choisit le corse comme langue du jeu. La traduction n'a pas encore été relue
-par un locuteur ni essayée en jeu : [Minecraft en corse](docs/fr/minecraft.md).
+<!-- corsu:minecraft-summary:start -->
+**Minecraft Java en corse pour 87 versions** (versions stables 1.6.1 → 26.3). Traduction complète des fichiers de langue pour les versions listées ; vérifications techniques avec le code de chaque version. L'application Corsu trouve la version de chaque dossier de jeu, y ajoute le pack de cette version et choisit le corse. Textes écrits par IA, sans relecture par un locuteur ; vérifications automatiques, pas visuelles ; seule la 26.3 a été lancée avec le pack. Disponibilité : sur la branche main (développement) aujourd'hui ; dans une version publiée de Corsu seulement quand une version qui contient ces packs sera publiée (la dernière publiée, 0.22.0, ne contient que le pack 26.3). Détails et limites : [Minecraft en corse](docs/fr/minecraft.md), [versions et vérifications](minecraft/java/COMPATIBILITY.md).
+<!-- corsu:minecraft-summary:end -->
 
 **Logiciels déjà traduits en corse** : VLC, 7-Zip, Notepad++, WinMerge, SumatraPDF, FileZilla, HandBrake et VeraCrypt
 ont une traduction corse faite par Patriccollu di Santa Maria è Sichè. Quand ils sont installés, l'application Corsu
@@ -101,9 +101,9 @@ Google Chrome on Windows and Linux. On Linux only, it also translates the KDE Pl
 terminal commands. Opera GX and the other Chromium browsers are experimental. Each part can be switched off and on
 again at any time, and the details for each system are in [What works where](docs/en/compatibility.md).
 
-**Minecraft: Java Edition in Corsican (version 26.3), under review**: all 8,557 texts of the game are translated, and
-the Corsu app adds the pack and makes Corsican the game's language. The translation has not yet been reviewed by a
-speaker nor tried in the game: [Minecraft in Corsican](docs/en/minecraft.md).
+<!-- corsu:minecraft-summary:start -->
+**Minecraft: Java Edition in Corsican for 87 versions** (releases 1.6.1 → 26.3). Complete translation of the language files for the listed versions; technical checks with each version's own code. The Corsu app finds the version of each game folder, adds that version's pack and picks Corsican. AI-written texts, not reviewed by a speaker; automated checks, not visual ones; only 26.3 has been started with the pack. Availability: on the main branch (development) today; in a published Corsu release only once a release containing these packs is published (the last published one, 0.22.0, has only the 26.3 pack). Details and limits: [Minecraft in Corsican](docs/en/minecraft.md), [versions and checks](minecraft/java/COMPATIBILITY.md).
+<!-- corsu:minecraft-summary:end -->
 
 **Programs already translated into Corsican**: VLC, 7-Zip, Notepad++, WinMerge, SumatraPDF, FileZilla, HandBrake and
 VeraCrypt have a Corsican translation by Patriccollu di Santa Maria è Sichè. When they are installed, the Corsu app offers
