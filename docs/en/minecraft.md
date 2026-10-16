@@ -17,9 +17,12 @@ NOT AN OFFICIAL MINECRAFT PRODUCT. NOT APPROVED BY OR ASSOCIATED WITH MOJANG OR 
 
 ## Install with the Corsu app (automatic)
 
-When Minecraft is installed, the Corsu app offers **Minecraft**. Close Minecraft, tick it and install: Corsu copies
-the pack `corsu-minecraft-java.zip` into the `resourcepacks` folder of every game folder it finds (the official
-launcher's, and Prism Launcher and MultiMC instances), turns it on and sets `lang:co_fr` in `options.txt`. On the next
+When Minecraft is installed, the Corsu app offers **Minecraft**. Close Minecraft, tick it and install: Corsu looks for
+game folders (the official launcher's, and Prism Launcher and MultiMC instances) and changes only those playing 26.3:
+the instance's version, or the official launcher's last used profile. There it copies the pack
+`corsu-minecraft-java.zip`, adds it after your other packs and sets `lang:co_fr` in `options.txt`. It leaves alone,
+saying why, folders of another or unknown version, folders where Minecraft is running, an `options.txt` it cannot read
+back safely, and another file that already has the pack's name. On the next
 start Minecraft is in Corsican. The app's switch puts back the previous language and packs without touching the game's
 other settings; uninstalling Corsu also removes the pack. Command line: `python3 src/installer.py --components minecraft`.
 

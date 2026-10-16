@@ -18,8 +18,12 @@ Ce pack n'est pas un produit officiel Minecraft ; il n'est ni approuvé par Moja
 ## Installer avec l'application Corsu (automatique)
 
 Si Minecraft est installé, l'application Corsu propose **Minecraft**. Fermez Minecraft, cochez-le et installez :
-Corsu copie le pack `corsu-minecraft-java.zip` dans le dossier `resourcepacks` de chaque dossier de jeu trouvé (le
-lanceur officiel, et les instances de Prism Launcher et MultiMC), l'active, et met `lang:co_fr` dans `options.txt`.
+Corsu cherche les dossiers de jeu (le lanceur officiel, et les instances de Prism Launcher et MultiMC) et ne change
+que ceux qui jouent la version 26.3 : la version de l'instance, ou celle du dernier profil utilisé dans le lanceur
+officiel. Il y copie le pack `corsu-minecraft-java.zip`, l'ajoute après vos autres packs et met `lang:co_fr` dans
+`options.txt`. Il laisse tels quels, en disant pourquoi, les dossiers d'une autre version ou de version inconnue,
+ceux où Minecraft est lancé, un `options.txt` qu'il ne peut pas relire sans risque, et un autre fichier qui porterait
+déjà le nom du pack.
 Au prochain lancement, Minecraft est en corse. L'interrupteur de l'application remet la langue et les packs d'avant
 sans toucher aux autres réglages du jeu ; désinstaller Corsu retire aussi le pack. Ligne de commande :
 `python3 src/installer.py --components minecraft`.

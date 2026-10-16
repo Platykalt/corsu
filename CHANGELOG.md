@@ -27,9 +27,23 @@
   A third AI review pass changed 242 Minecraft texts with evidence (`minecraft/java/review.md`); still no speaker
   review and no in-game test (`minecraft/java/STATUS.md`, `TESTING.md`). Licensing notes: `minecraft/java/LICENSING.md`.
 - Discord and Google: their own rows now win over the same label taken from other programs (55 Discord labels).
-- Variants resolved by meaning in 337 rows: storage = allucamentu (not the Spanish-looking almacenamentu), shortcut =
+- Variants resolved by meaning in 337 rows: storage = allucamentu (almacenamentu was found in none of the Corsican resources consulted and looks like Spanish almacenamiento), shortcut =
   accurtatoghju, poll = sundaghju, survey = inchiesta (`lexicon/variants.md`).
 - More of Patriccollu's translations imported: wxWidgets, fre:ac and Inno Setup (about 2,800 rows).
+- Minecraft installer, safer: only game folders playing 26.3 are changed (Prism Launcher / MultiMC instance version,
+  or the official launcher's last used profile, including Fabric-style versions); unknown versions, a running game,
+  an `options.txt` that is not UTF-8 or has a malformed pack list, and a different file with the pack's name are left
+  alone and listed; other packs keep their order, Corsu's pack is never added twice, CRLF files stay CRLF, settings
+  are recorded before writing; switching off removes only what Corsu added, keeps a language or pack the player had
+  or chose since, and waits while the game runs.
+- `inventory.tsv` has separate columns for translation, AI review, speaker review and in-game check.
+- Review batches for speakers (`minecraft/java/review-batches/`), a second decision pass (`decisions-2.md`: server =
+  servitore, seeds = sumente, Dappled Forest = Furesta ambrata, -e adjectives after feminine plurals keep -e…), notes
+  for testers (`minecraft/java/TESTERS.md`), licence options with sources (`LICENSING-OPTIONS.md`, no change made),
+  `CREDITS.md`.
+- Bedrock prototype (not tried in the game): `tools/bedrock.py`, `minecraft/bedrock/`; 4,288 of 13,340 keys reused
+  from Java where the English is identical.
+- HandBrake's translations are no longer imported: GPL-2.0-only cannot be combined with Corsu's GPL-3.0-or-later.
 - Translation status page (`docs/fr/etat-des-traductions.md`, `docs/en/translation-status.md`); claims about
   Firefox desktop, Steam and the dictionaries rewritten with sources.
 

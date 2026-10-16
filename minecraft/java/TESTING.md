@@ -6,6 +6,28 @@ Nobody has seen this translation in a running game yet ([STATUS.md](STATUS.md)).
 one hour going through the screens below is the most useful help there is. You do not need to speak Corsican to spot
 text that overflows a button or English left behind; if you do speak it, also look at the wording.
 
+
+## Short path (20 minutes)
+
+Note "ok" or what is wrong for each step, with a screenshot (F2).
+
+1. **Install**: close Minecraft, open the Corsu app, tick Minecraft, install. The log lists every game folder:
+   "Minecraft in Corsican" or "left alone" with the reason (version, game running…). Check the reason is right.
+2. **Language**: start Minecraft 26.3. It should already be in Corsican. In **Ozzioni… → Lingua…**, "Corsu (Corsica)"
+   is listed and selected; the other languages are still there.
+3. **Title screen and options**: every title-screen button, then Ozzioni and its sub-screens (video, sound, controls,
+   accessibility). Hover a few options to read their tooltips.
+4. **Inventory and texts with arguments**: create a creative world, hover items (enchanted book, potion, spawn egg,
+   coloured wool); type `/give @s diamond 5` then `/give @s blabla` for a success and an error message; die once
+   (fall) to read the death message with your name.
+5. **Characters and room**: à, è, ì, ò, ù and apostrophes show; no text overflows a button or is cut; everything is
+   readable at your usual GUI scale.
+6. **Switching off**: close Minecraft, switch Minecraft off in the Corsu app, start again: your previous language is
+   back, your other packs are still on and in the same order, your settings (FOV, keys…) are unchanged. Switch on
+   again: Corsican is back.
+7. **Another instance**: if you have another installation or instance (other version, Prism Launcher…), open it: it
+   must be unchanged if Corsu "left it alone".
+
 ## 1. Install
 
 1. Use **Minecraft: Java Edition 26.3** (in the launcher: Installations → New → version 26.3). Another version works
@@ -85,4 +107,4 @@ Open an issue with the **Translation** template:
 - **Notes**: what is wrong (overflow, sense, English left…), and attach the screenshot.
 
 One issue per problem is easiest to follow; for a whole screen that looks fine, a short "screen X checked, nothing
-to report" comment is useful too: it lets us mark those keys `verified in game` in [inventory.tsv](inventory.tsv).
+to report" comment is useful too: it lets us mark those keys `ok` in the `in_game` column of [inventory.tsv](inventory.tsv) (only that column: a display check is not a language review).

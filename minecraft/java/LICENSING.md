@@ -19,16 +19,22 @@ Status on 2026-10-16. This is not legal advice; it sets out what the sources say
 ## The Corsican texts
 
 A translation of the game's text is a new text, but it is based on Mojang's. The
-[Minecraft EULA](https://www.minecraft.net/en-us/eula) says that Mods are "okay to distribute", that "you only own what
-you created; you do not own our code or content", and that Mojang "will however own things that are copies (or
-substantial copies) or derivatives of our property". It has no clause about translations, and the
-[Usage Guidelines](https://www.minecraft.net/en-us/usage-guidelines) neither. So:
+[Minecraft EULA](https://www.minecraft.net/en-us/eula) says that Mods are "okay to distribute", but defines a Mod as
+"something original … that doesn't contain a substantial part of our copyrightable code or content" and keeps "the
+final say on what constitutes a Mod": whether a translation pack counts as one is not settled. It also says "You only
+own what you created; you do not own our code or content" and, in its Content section, "We will however own things
+that are copies (or substantial copies) or derivatives of our property and creations". The
+[Usage Guidelines](https://www.minecraft.net/en-us/usage-guidelines) add that all rights "in the name, brand, assets,
+and any derivatives are and will remain owned by Mojang and Microsoft". Neither text mentions translations. So:
 
 - What is clear: the pack ships no Mojang file, is free, uses no Minecraft logo and carries the required notice
   "NOT AN OFFICIAL MINECRAFT PRODUCT. NOT APPROVED BY OR ASSOCIATED WITH MOJANG OR MICROSOFT." Free fan language
   packs of this kind are common.
 - What is not settled: whether Mojang would consider the Corsican texts a derivative it owns. No Corsu licence can
   remove a right Mojang may have. Any licence Corsu applies covers only Corsu's own contribution.
+- Also not settled: how much of that contribution is protected by copyright at all. The texts were drafted by an AI
+  model; the US Copyright Office holds that "Copyright does not extend to purely AI-generated material" (Part 2 report,
+  January 2025), and French and EU law has no clear answer yet. Human choices and edits can be protected.
 - The End Poem translation is the clearest case: its source is CC0.
 
 ## Options for the maintainer
@@ -37,8 +43,9 @@ The pack currently states GPL-3.0-or-later for Corsu's contribution, like the re
 
 | Option | Effect | Fits when |
 | --- | --- | --- |
-| Keep GPL-3.0-or-later | One licence for the whole repository. Anyone reusing the Corsican texts must keep them under the GPL. Unusual for text, and awkward for a contribution to Mojang's Crowdin, which needs the texts free of conditions. | the texts should stay copyleft and in Corsu |
-| CC BY-SA 4.0 for the texts | The usual licence for shared translations and dictionaries (Wikipedia uses it). Attribution and share-alike; one-way compatible with GPLv3. | the texts should be reusable by other projects, with credit |
-| CC0 for the texts | No conditions. Makes it simple to offer them to Mojang's official Crowdin project or to any other project. | the goal is the widest reuse, including an official Corsican Minecraft |
+| Keep GPL-3.0-or-later | One licence for the whole repository. Anyone reusing the Corsican texts must keep them under the GPL. Unusual for text. The maintainer can still submit their own texts to Mojang's Crowdin (its terms ask for a broad, unconditional licence, which an author can grant whatever their public licence); third parties could not. | the texts should stay copyleft and in Corsu |
+| CC BY-SA 4.0 for the texts | The usual licence for shared translations and dictionaries (Wikipedia uses it). Attribution and share-alike; one-way compatible with GPLv3 (version 3 only, not "or later"). | the texts should be reusable by other projects, with credit |
+| CC0 for the texts | No conditions. Lets anyone, not only the maintainer, offer them to Mojang's Crowdin project, Mozilla's Pontoon (MPL) or any other project. It cannot clear Mojang's possible rights. Corsican is not yet a Minecraft language, and the Crowdin FAQ asks translators to avoid machine translation. | the goal is the widest reuse, including an official Corsican Minecraft |
 
-Whatever the choice, keep the Mojang notice and do not ship Mojang's files.
+Whatever the choice, keep the Mojang notice and do not ship Mojang's files. Sources, quotes and the proposed file
+changes for each option: [LICENSING-OPTIONS.md](LICENSING-OPTIONS.md).

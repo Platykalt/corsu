@@ -76,9 +76,9 @@ Ce qui est vérifié et ce qui est seulement prévu : [Ce qui marche, et où](do
 
 ### Les traductions
 
-Le lexique de Corsu compte environ 139 000 lignes de traduction, chacune un texte source et sa traduction corse.
-Plus de 19 000 sont reprises d'autres logiciels libres, traduits pour la plupart par Patriccollu di Santa Maria è Sichè
-(Firefox pour Android et iOS, Thunderbird pour Android, VLC, Audacity, HandBrake, Notepad++, Poedit, WinMerge,
+Le lexique de Corsu compte environ 138 000 lignes de traduction, chacune un texte source et sa traduction corse.
+Plus de 18 000 sont reprises d'autres logiciels libres, traduits pour la plupart par Patriccollu di Santa Maria è Sichè
+(Firefox pour Android et iOS, Thunderbird pour Android, VLC, Audacity, Notepad++, Poedit, WinMerge,
 Tenacity, OpenTracks, wxWidgets, fre:ac, Inno Setup…). Les autres ont été écrites pour Corsu avec le même vocabulaire,
 dont plus de 23 000 pour Discord et Vencord ; ce sont des premières versions, que chacun peut relire et corriger.
 Une traduction vous paraît fausse ?
@@ -153,9 +153,9 @@ What is verified and what is only expected: [What works where](docs/en/compatibi
 
 ### Translations
 
-Corsu's lexicon has about 139,000 translation lines, each a source text and its Corsican translation. More than
-19,000 are taken from other free software, most of them translated by Patriccollu di Santa Maria è Sichè (Firefox for
-Android and iOS, Thunderbird for Android, VLC, Audacity, HandBrake, Notepad++, Poedit, WinMerge, Tenacity,
+Corsu's lexicon has about 138,000 translation lines, each a source text and its Corsican translation. More than
+18,000 are taken from other free software, most of them translated by Patriccollu di Santa Maria è Sichè (Firefox for
+Android and iOS, Thunderbird for Android, VLC, Audacity, Notepad++, Poedit, WinMerge, Tenacity,
 OpenTracks, wxWidgets, fre:ac, Inno Setup…). The rest were written for Corsu with the same vocabulary, more than
 23,000 of them for Discord and Vencord; they are first versions that anyone can review and correct.
 Does a translation look wrong?

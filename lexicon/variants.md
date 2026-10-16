@@ -24,7 +24,7 @@ Sources consultées, de la plus forte à la plus faible pour le vocabulaire logi
 
 | Forme | Vikipedia | Apertium | Pontoon TBX/TMX | Patriccollu | Verdict |
 |---|---|---|---|---|---|
-| almacenamentu, almacenà | 0 | 0 | 0 | 0 | emprunt à l'espagnol (*almacenamiento*), non attesté |
+| almacenamentu, almacenà | 0 | 0 | 0 | 0 | aucune attestation trouvée dans les ressources consultées ; ressemble à l'espagnol *almacenamiento* |
 | allucamentu | 1 | – | TBX `storage` = allucamentu ; TMX « Persistent Storage » = Allucamentu permanente, « File storage » = Allucamentu di schedariu | VLC « apparechju d'allucamentu », Audacity « discu d'allucamentu », HandBrake « allucamentu di u flussu » (allocation) | **retenu pour stockage** |
 | allucà | – | – | TMX « store data in persistent storage » = allucà dati | – | **retenu (stocker)** |
 | allucazione | 0 | oui | – | – | retenu (allocation) |
@@ -64,7 +64,7 @@ Aucune ligne n'avait le sens de « chemin plus court » (itinéraire). Quatre li
 | accurtatoghju / accurtatoghji | 1 (« un accurtatoghju Pin ») | ≈ 100 unités, tous les sens : site, écran d'accueil, barre d'outils, Siri | Audacity « accurtatoghji di tastera » (clavier), VLC « accurtatoghju per u lanciadore » (lanceur) ; 24 occurrences dans ses TMX | **retenu, masculin** |
 | scurtatoghji | – | 1 unité isolée (« Shortcuts ») | – | variante isolée |
 | scurciatoia | 1 | 0 | 0 | italianisme (*scorciatoia*) |
-| scurciatoghja, accurtatoia, accurtatoghja | 0 | 0 | 0 | non attestés |
+| scurciatoghja, accurtatoia, accurtatoghja | 0 | 0 | 0 | aucune attestation trouvée dans les ressources consultées |
 
 ### Convention
 
@@ -90,7 +90,7 @@ Un seul terme pour tous les sens : **accurtatoghju** (m.), pluriel **accurtatogh
 |---|---|---|---|---|---|
 | sundaghju | 3 (sondages d'opinion) | – | 0 | 0 | **retenu (poll)** |
 | sundagiu | 0 | oui | 0 | 0 | variante graphique légitime |
-| scandagliu | 0 | 0 | 0 | 0 | non attesté ; en italien *scandaglio* désigne la sonde de profondeur, pas le sondage d'opinion |
+| scandagliu | 0 | 0 | 0 | 0 | aucune attestation trouvée dans les ressources consultées ; en italien *scandaglio* désigne la sonde de profondeur, pas le sondage d'opinion |
 | inchiesta | 11 | oui | 21 unités (Survey = Inchiesta, Take Survey = Risponde à l'inchiesta, Complete this survey = Participà à l'inchiesta) | idem dans lexicon-mozilla | **retenu (survey)** |
 | sullicitazione | – | – | – | Thunderbird : polling = sullicitazione | piste pour le « polling » technique |
 

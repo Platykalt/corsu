@@ -7,6 +7,28 @@ Minecraft: Java Edition, une heure passée sur les écrans ci-dessous est l'aide
 parler corse pour repérer un texte qui déborde d'un bouton ou un reste d'anglais ; si vous le parlez, regardez aussi
 les mots.
 
+## Parcours court (20 minutes)
+
+Notez pour chaque étape « ok » ou ce qui ne va pas, avec une capture (F2).
+
+1. **Installation** : fermez Minecraft, ouvrez l'application Corsu, cochez Minecraft, installez. Le journal liste
+   chaque dossier de jeu : « Minecraft en corse » ou « laissé tel quel » avec la raison (version, jeu lancé…).
+   Vérifiez que la raison est juste.
+2. **Langue** : lancez Minecraft 26.3. Le jeu doit déjà être en corse. Dans **Ozzioni… → Lingua…**, « Corsu
+   (Corsica) » doit apparaître et être sélectionnée ; les autres langues sont toujours là.
+3. **Menu principal et options** : chaque bouton de l'écran titre, puis Ozzioni et ses sous-écrans (vidéo, sons,
+   commandes, accessibilité). Survolez quelques options pour lire leur infobulle.
+4. **Inventaire et textes avec paramètres** : créez un monde créatif, survolez des objets (livre enchanté, potion,
+   œuf, laine de couleur) ; tapez `/give @s diamond 5` puis `/give @s blabla` pour voir un message de réussite et un
+   message d'erreur ; mourez une fois (chute) pour lire le message de mort avec votre nom.
+5. **Caractères et place** : les lettres à, è, ì, ò, ù et les apostrophes s'affichent ; aucun texte ne déborde d'un
+   bouton ni n'est coupé ; tout est lisible à la taille d'interface habituelle.
+6. **Désactivation** : fermez Minecraft, mettez l'interrupteur Minecraft de l'application Corsu sur « arrêt »,
+   relancez : la langue d'avant revient, vos autres packs sont toujours actifs et dans le même ordre, vos réglages
+   (champ de vision, touches…) n'ont pas changé. Réactivez : le corse revient.
+7. **Autre instance** : si vous avez une autre installation ou instance (autre version, Prism Launcher…), ouvrez-la :
+   elle doit être restée telle quelle si Corsu l'a « laissée telle quelle ».
+
 ## 1. Installer
 
 1. Utilisez **Minecraft: Java Edition 26.3** (dans le lanceur : Configurations → Nouvelle → version 26.3). Une autre
@@ -93,5 +115,5 @@ Ouvrez un ticket avec le modèle **Traduction** :
   la capture.
 
 Un ticket par problème est le plus simple à suivre. Pour un écran entier sans souci, un petit « écran X vérifié,
-rien à signaler » est utile aussi : il permet de marquer ces clés `verified in game` dans
+rien à signaler » est utile aussi : il permet de marquer ces clés `ok` dans la colonne `in_game` (et seulement celle-là : un essai d'affichage ne vaut pas relecture de la langue) de
 [inventory.tsv](../../minecraft/java/inventory.tsv).

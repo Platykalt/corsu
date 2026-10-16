@@ -21,7 +21,8 @@ Les pourcentages viennent des API de Pontoon et de Hosted Weblate ; les autres p
 | Tenacity | Hosted Weblate | 98,4 % | oui |
 | OpenTracks | Hosted Weblate | 76,1 % | oui |
 | Notepad++, WinMerge | dépôt du projet | à jour (WinMerge revu le 6 octobre 2026) | oui |
-| Poedit, HandBrake, Audacity | Crowdin / Transifex / dépôt | publiés | oui |
+| Poedit, Audacity | Crowdin / Transifex / dépôt | publiés | oui |
+| HandBrake | Transifex / dépôt | publié | non : GPL-2.0-only, incompatible avec la GPL-3.0 de Corsu (corse disponible dans le logiciel) |
 | VLC (bureau) | Transifex | partiel, dernière révision 2017 | oui |
 | VeraCrypt, SumatraPDF, PDFsam, FileZilla | dépôt du projet | publiés | non : déjà en corse dans le logiciel |
 | 7-Zip, Inno Setup, NSIS, Paint.NET, Mp3tag, OmegaT… | selon le projet | listés par Patriccollu, non vérifiés ici | non |

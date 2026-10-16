@@ -62,7 +62,7 @@ families and the 40 banner patterns × 16 colours (all consistent with the noun'
 ### Q3. Ominous
 - **Keys:** `item.minecraft.ominous_bottle`, `block.minecraft.ominous_banner`, ominous trial key/spawner.
 - **Current:** *funestu/funesta*. **Alternatives:** *minacciosu*, *di malu presagiu*.
-- **Evidence:** *funestu* vik 3, *minacciosu* vik 1, *presagiu* not found (note: Bad Omen is *malu presagiu*, unattested).
+- **Evidence:** *funestu* vik 3, *minacciosu* vik 1, *presagiu* not found (note: Bad Omen is *malu presagiu*, without attestation in the resources consulted).
   FR *funeste*, IT *infausto*.
 - **Proposal:** keep *funestu*. **Solidity:** plausible. **Strings:** 12.
 
@@ -161,7 +161,7 @@ families and the 40 banner patterns × 16 colours (all consistent with the noun'
 
 ### Q18. Snifflet
 - **Key:** `advancements.husbandry.feed_snifflet.description` (+ entity). **Current:** *annusadurellu*.
-- **Evidence:** not found; *annusadore* (Sniffer, 22 strings) also unattested; *-ellu* diminutive is productive.
+- **Evidence:** not found; *annusadore* (Sniffer, 22 strings) also without attestation in the resources consulted; *-ellu* diminutive is productive.
 - **Proposal:** keep. **Solidity:** unresolved. **Strings:** 1.
 
 ### Q19. Ghastling

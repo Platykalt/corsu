@@ -21,14 +21,14 @@ person who speaks Corsican checked the sense and the language).
 | Terminal commands, GTK programs (Linux) | Experimental | gettext catalogs built from French | no | no |
 | **Minecraft: Java Edition 26.3** | **Under review** | 8,557 / 8,557 texts | Minecraft 26.3's own code reads the pack and renders all 8,559 keys without error | **no**: written by AI, neither reviewed by a speaker nor tried in the game ([status](../../minecraft/java/STATUS.md)) |
 | Minecraft splash texts, End Poem | Optional pack, every language | see [Minecraft in Corsican](minecraft.md) | — | no |
-| Minecraft Bedrock Edition | Planned | — | — | — |
+| Minecraft Bedrock Edition | Prototype, never tried in the game | 4,288 / 13,340 keys (reused from Java, identical English) | formats checked offline ([status](../../minecraft/bedrock/STATUS.md)) | no |
 
 ## Translations taken from other projects
 
 Corsu's lexicon reuses the Corsican translations published by other free software, almost all by Patriccollu di
 Santa Maria è Sichè: Audacity (4,075 lines), Firefox for Android and Focus (2,178), VLC (1,733), WinMerge (1,730),
 wxWidgets (1,724), VLC for Android (1,191), Firefox for iOS (1,000), Notepad++ (898), Thunderbird for Android (830),
-fre:ac (784), HandBrake (677), Tenacity (672), Poedit (658), OpenTracks (467), Mozilla VPN (418), Inno Setup (253),
+fre:ac (784), Tenacity (672), Poedit (658), OpenTracks (467), Mozilla VPN (418), Inno Setup (253),
 Focus for iOS (140). Each keeps its licence ([lexicon-upstream.tsv](../../lexicon/lexicon-upstream.tsv),
 [lexicon-mozilla.tsv](../../lexicon/lexicon-mozilla.tsv)). wxWidgets, fre:ac and Inno Setup are new in 0.22.0.
 

@@ -1,0 +1,24 @@
+{
+  "format_version": 2,
+  "header": {
+    "name": "Corsu (lingua corsa)",
+    "description": "Adds the language Corsu (Corsica) · PROTOTYPE · NOT AN OFFICIAL MINECRAFT PRODUCT",
+    "uuid": "46daa2f4-5bbe-4e43-984f-2d1c443d7cb6",
+    "version": [0, 1, 0],
+    "min_engine_version": [1, 26, 50],
+    "pack_scope": "global"
+  },
+  "modules": [
+    {
+      "description": "Corsican texts",
+      "type": "resources",
+      "uuid": "1c053bf3-be3e-437c-8751-e42dcf8dd673",
+      "version": [0, 1, 0]
+    }
+  ],
+  "metadata": {
+    "authors": ["Corsu"],
+    "license": "GPL-3.0-or-later (Corsu's contribution only, see LICENSE.txt)",
+    "url": "https://github.com/Platykalt/corsu"
+  }
+}

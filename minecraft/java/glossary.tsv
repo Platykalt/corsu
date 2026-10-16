@@ -17,7 +17,7 @@ Fullscreen	video	Screnu sanu				lexicon-upstream:2254 (Fullscreen -> Screnu sanu
 Brightness	video	Lucidezza			Luminosità	lexicon-mozilla:2271 (Brightness -> Lucidezza), lexicon-upstream	attested	no
 Subtitles	accessibility	Sottutituli				lexicon-upstream:1032 (Subtitles -> Sottutituli)	attested	no
 Chat	in-game messages	Chjachjerata	chjachjer		Chjachjarata (spelling found in no resource); Chat (English)	lexicon-upstream:256,257 (chat messages -> messaghji di chjachjerata); Mozilla TMX sumo (Chat and share -> Chjachjerata è spartera); review 2026-10	attested	no
-Server	multiplayer	Servitore	servitor		Servore (only in unreviewed Discord drafts, lexicon.tsv)	lexicon-mozilla:38,56 (server -> servitore; 112 lexicon lines, 101 Mozilla TMX segments, Pontoon); review 2026-10	attested	yes
+Server	multiplayer	Servitore	servitor		Servore (only in unreviewed drafts of lexicon.tsv: Discord section and the variants header; no attestation found in the resources consulted)	lexicon-mozilla:38,56 (server -> servitore; 112 lexicon lines, 101 Mozilla TMX segments, Pontoon); review 2026-10; decisions-2.md D1 (same word recommended for Discord servers)	attested	yes
 Player	person playing	Ghjucadore	ghjucador	Ghjucatore		to check in to check in INFCOR (joueur)	proposal	yes
 Game	the game	Ghjocu	ghjoc			to check in INFCOR	proposal	no
 World	saved Minecraft world	Mondu	mondi			to check in INFCOR	proposal	yes
@@ -60,7 +60,7 @@ Render Distance	video	Distanza di visualizazione				Corsu	proposal	no
 Field of View	video	Campu visivu				Corsu	proposal	no
 Health	player status	Salute				lexicon-upstream	practice	yes
 Hunger	player status / effect	Fame				to check in INFCOR	proposal	yes
-Experience	player levels	Sperienza	sperienz			lexicon-upstream	practice	yes
+Experience	player levels	Sperienza	sperienz	Esperienza (lexicon-mozilla:1877, 1930; Mozilla TMX 12), Spirienza (Apertium lemma, Vikipedia 11)		Vikipedia 29 (sperienza, sense "experience"); not in lexicon-upstream (earlier source corrected); decisions-2.md D7	proposal	yes
 Level	experience level	Livellu	livell			lexicon-upstream:3185 (Level -> Livellu)	attested	no
 Skin	player appearance	Pelle	pell	Skin		Corsu	proposal	no
 Realms	Mojang hosting service	Realms				Mojang	name	no
@@ -356,7 +356,7 @@ Carrot	crop (f)	Carotta	carott			to check in INFCOR	proposal	yes
 Potato	crop (f)	Patata	patat	Pomu di terra		to check in INFCOR	proposal	yes
 Beetroot	crop (f)	Barbabietula	barbabietul			Corsu	proposal	yes
 Apple	fruit (f)	Mela	mel	Pomu		to check in INFCOR	proposal	yes
-Sweet Berries	food (f pl)	Baghe dolci			Baghe dolce (dolce is singular)	Corsu	proposal	no
+Sweet Berries	food (f pl)	Baghe dolce			Baghe dolci (provisional: feminine plural -e convention, decisions-2.md D2)	Corsu; agreement per decisions-2.md D2	proposal	no
 Sugar Cane	plant (f)	Canna da zuccheru				Corsu	proposal	no
 Biome	world region (m)	Biomu	biom			Corsu	proposal	yes
 Forest	biome (f)	Furesta	furest	Foresta		to check in INFCOR	proposal	yes
@@ -568,7 +568,7 @@ End Rod	block (f)	Bacchetta di l'End				Corsu (coined)	proposal	no
 End Stone	block (f)	Petra di l'End				Corsu (coined)	proposal	no
 Chorus	End plant	chorus				name	name	no
 Hay Bale	block (f)	Balla di fenu				Corsu (coined)	proposal	no
-Gilded	Gilded Blackstone	duratu	durat			Corsu (coined)	proposal	no
+Gilded	Gilded Blackstone	induratu	indurat		duratu (durata = "duration" in this file)	Vikipedia 1 hit with the gilded sense ("cresta indurata", beside "inargintatu"); decisions-2.md D12	proposal	no
 Crying Obsidian	block (f)	Ossidiana chì pienghje				Corsu (coined)	proposal	no
 Jack o'Lantern	block (f)	Lanterna di zucca				Corsu (coined)	proposal	no
 Frosted Ice	block (m)	Ghjacciu brinatu				Corsu (coined)	proposal	no
@@ -584,7 +584,7 @@ Tripwire	block (m)	Filu d'inciampu	filu d'inciamp		Filu di scattu	Corsu (coined)
 Tinted Glass	block (m)	Vetru scuru			Vetru tintu (= Stained Glass)	Corsu (coined)	proposal	no
 Test Block	block (m)	Bloccu di prova				Corsu (coined)	proposal	no
 Twisting Vines	plant (f pl)	Liane torte				Corsu (coined)	proposal	no
-Weeping Vines	plant (f pl)	Liane pendenti			Liane pendente, liane pienghjulente	Corsu (coined)	proposal	no
+Weeping Vines	plant (f pl)	Liane pendente			Liane pendenti (decisions-2.md D2), liane pienghjulente	Corsu (coined); agreement per decisions-2.md D2	proposal	no
 Trial Spawner	block (m)	Generatore di prova				Corsu (coined)	proposal	no
 Target	block (m)	Bersagliu				Corsu (coined)	proposal	no
 Banner Pattern	item (m); X Banner Pattern = Motivu di stendardu : x	Motivu di stendardu	motiv		Mudellu (= Smithing Template)	Corsu (coined)	proposal	no
@@ -634,7 +634,7 @@ Ward	armor trim pattern	Guardia				Corsu (coined)	proposal	no
 Wayfinder	armor trim pattern	Guida				Corsu (coined)	proposal	no
 Wild	armor trim pattern	Salvaticu				Corsu (coined)	proposal	no
 Trim Material	Materiale : x	Materiale				Corsu (coined)	proposal	no
-Seeds	item (f pl)	Sementi	sementi	Sumente / sumenti (Vikipedia 6 / 10)		Corsu (coined); "sementi" found in no resource, see review.md	proposal	no
+Seeds	item (f pl)	Sumente	sumente	Sumenti (southern spelling, Vikipedia 10)	Sementi, sementa (no attestation found in the resources consulted)	Vikipedia (sumente, seed sense: "frutti è sumente", "catalogu ... di sumente"); singular not confirmed, the strings use the plural; decisions-2.md D5	attested	no
 Camp (map)	explorer map (m)	Accampamentu				Corsu (coined)	proposal	no
 Explorer Map	item (f)	Carta d'esplurazione				esplurazione: lexicon-mozilla:670; Espluratore: lexicon-upstream:8113; compound coined	proposal	no
 Buried	map adjective	sepoltu	sepolt			Corsu (coined)	proposal	no
@@ -712,11 +712,11 @@ Firefly	insect (f)	Lucciula				Corsu (coined)	proposal	no
 Kitten / Chick / Foal / Wolf pup / Piglet	baby mobs in subtitles	Ghjattinu / Pulcinu / Pullitru / Lupachjolu / Purcellu				Corsu (coined)	proposal	no
 Grove	biome (m)	Buschettu				Corsu (coined)	proposal	no
 Lukewarm	ocean adjective	tepidu				Corsu (coined)	proposal	no
-Dappled	forest adjective	chjazzatu				Corsu (coined)	proposal	no
+Dappled	forest adjective	ambratu (Furesta ambrata)		machjatu (spotted; Vikipedia "machjata di biancu")	chjazzatu (no attestation found)	FR Forêt ambrée, IT Foresta ambrata; ambrata Vikipedia 4 (colour); in-game check pending; decisions-2.md D13	proposal	no
 Jagged	peaks adjective	dentatu				Corsu (coined)	proposal	no
-Lush	caves adjective	verdi				Corsu (coined)	proposal	no
+Lush	caves adjective	verde (Grotte verde)				Corsu (coined); agreement per decisions-2.md D2	proposal	no
 Wastes	Nether biome (f pl)	Lande				Corsu (coined)	proposal	no
-Barrens	End biome (f pl)	Terre sterili				Corsu (coined)	proposal	no
+Barrens	End biome (f pl)	Terre sterile				Corsu (coined); agreement per decisions-2.md D2	proposal	no
 Highlands	End biome (f pl)	Alture				Corsu (coined)	proposal	no
 Snowy	biome adjective	nivosu				Corsu (coined)	proposal	no
 Slopes	biome (m pl)	Pindii				Corsu (coined)	proposal	no

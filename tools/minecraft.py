@@ -213,33 +213,52 @@ def digest(text):
     return hashlib.sha1(text.encode('utf-8')).hexdigest()[:12]
 
 
+COLUMNS = ['key', 'category', 'en_sha1', 'translation', 'ai_review', 'human_review', 'in_game']
+
+
+def read_inventory():
+    """Rows by key. Reads the old single-status format too (key, category, en_sha1, status)."""
+    rows = {}
+    if not INVENTORY.exists():
+        return rows
+    lines = INVENTORY.read_text(encoding='utf-8').splitlines()
+    header = lines[0].split('\t')
+    for line in lines[1:]:
+        fields = line.split('\t')
+        if header == COLUMNS:
+            rows[fields[0]] = dict(zip(COLUMNS, fields + [''] * (len(COLUMNS) - len(fields))))
+        else:
+            key, group, sha, status = fields[:4]
+            rows[key] = {'key': key, 'category': group, 'en_sha1': sha, 'translation': '',
+                         # Every text went through the AI passes of October 2026 (decisions.md, review.md).
+                         'ai_review': 'done' if status == 'translated' else '', 'human_review': '', 'in_game': ''}
+    return rows
+
+
 def inventory(version):
-    """key, category, hash of the English text, status. Statuses written by hand (reviewed, verified-in-game)
-    survive as long as the English text keeps its hash; a changed sentence drops back to "to review"."""
+    """One row per key, with four separate columns, because none implies another:
+    translation  present / missing / empty in English (written by this command)
+    ai_review    done, or "redo" when Mojang changed the English since
+    human_review written by hand after a speaker's review: ok, or a date and initials; "redo" when the English changed
+    in_game      written by hand after seeing the text in the game: ok; "redo" when the English changed
+    A speaker reading the file does not check the display, and a tester seeing the screen does not check the language."""
     english = source(version)
     corsican = strict(TRANSLATION) if TRANSLATION.exists() else {}
-    previous = {}
-    if INVENTORY.exists():
-        for line in INVENTORY.read_text(encoding='utf-8').splitlines()[1:]:
-            key, _, sha, status = line.split('\t')[:4]
-            previous[key] = (sha, status)
-    lines = ['key\tcategory\ten_sha1\tstatus']
+    previous = read_inventory()
+    lines = ['\t'.join(COLUMNS)]
     counts = collections.Counter()
     for key, text in english.items():
         sha = digest(text)
-        old_sha, old_status = previous.get(key, (None, None))
-        if not text.strip():
-            status = 'empty in English'
-        elif not corsican.get(key, '').strip():
-            status = 'missing'
-        elif old_sha == sha and old_status not in (None, 'missing', 'to review'):
-            status = old_status
-        elif old_sha not in (None, sha):
-            status = 'to review'
-        else:
-            status = 'translated'
-        counts[status] += 1
-        lines.append(f'{key}\t{category(key)}\t{sha}\t{status}')
+        row = previous.get(key, {})
+        changed = bool(row) and row.get('en_sha1') != sha
+        translation = 'empty in English' if not text.strip() else 'present' if corsican.get(key, '').strip() else 'missing'
+        marks = {}
+        for column in ('ai_review', 'human_review', 'in_game'):
+            value = row.get(column, '')
+            marks[column] = 'redo' if changed and value else value
+        counts[translation] += 1
+        lines.append('\t'.join([key, category(key), sha, translation, marks['ai_review'], marks['human_review'],
+                                marks['in_game']]))
     INVENTORY.write_text('\n'.join(lines) + '\n', encoding='utf-8')
     print(dict(counts))
 
@@ -257,18 +276,21 @@ def diff(old, new):
 
 
 def status():
-    """Coverage, review and in-game checks are different things: count each status per category."""
-    rows = [line.split('\t') for line in INVENTORY.read_text(encoding='utf-8').splitlines()[1:]]
-    statuses = ['missing', 'to review', 'translated', 'reviewed', 'verified in game', 'empty in English']
+    """Per category: texts present, AI-reviewed, reviewed by a speaker, seen in the game. Four separate counts."""
+    rows = read_inventory().values()
     table = collections.defaultdict(collections.Counter)
-    for _, group, _, state in rows:
-        table[group][state] += 1
-        table['all'][state] += 1
-    print('| category | keys | ' + ' | '.join(statuses) + ' |')
-    print('| --- ' * (len(statuses) + 2) + '|')
+    for row in rows:
+        for group in (row['category'], 'all'):
+            table[group]['keys'] += 1
+            table[group]['present'] += row['translation'] == 'present'
+            table[group]['ai'] += row['ai_review'] == 'done'
+            table[group]['human'] += row['human_review'] not in ('', 'redo')
+            table[group]['game'] += row['in_game'] not in ('', 'redo')
+    print('| category | keys | translated | AI review | speaker review | seen in game |')
+    print('| --- | --- | --- | --- | --- | --- |')
     for group in sorted(table, key=lambda g: (g == 'all', g)):
-        counts = table[group]
-        print(f'| {group} | {sum(counts.values())} | ' + ' | '.join(str(counts[s]) for s in statuses) + ' |')
+        c = table[group]
+        print(f"| {group} | {c['keys']} | {c['present']} | {c['ai']} | {c['human']} | {c['game']} |")
 
 
 def verify(version):

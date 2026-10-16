@@ -56,7 +56,7 @@ Wordplay recreated in Corsican rather than copied: 37 *Megliu chè u mele!* (bee
 
 End Poem (`end.txt`):
 - 9 *Ùn hà micca abbandunatu* for "did not give up" (*ùn hà micca mullatu* would be more colloquial).
-- 25 *sculpì* (the infinitive is not attested in the word list; *sculpitu* is).
+- 25 *sculpì* (the infinitive was not found in the local word list; *sculpitu* was).
 - 43 *stu mondu chì vo pigliate*: switches to *voi* because "them" (the players) are addressed.
 - 53 *U ghjucadore perde a pacenzia* for "is growing restless".
 - 71 *cum'è s'è vo fussite cose separate* (you + the universe as plural subject); *movi e dite*, *i to membri*.

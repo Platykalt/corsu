@@ -44,39 +44,40 @@ The texts were written by an AI model, harmonised by a second AI pass, then revi
 [review.md](review.md)). These passes find mistakes; they are not a validation. Open questions for a speaker:
 [decisions.md](decisions.md). Test procedure: [TESTING.md](TESTING.md).
 
-## Per category (statuses from inventory.tsv)
+## Per category (from inventory.tsv)
 
-| category | keys | missing | to review | translated | reviewed | verified in game | empty in English |
-| --- | --- | --- | --- | --- | --- | --- | --- |
-| Realms | 426 | 0 | 0 | 426 | 0 | 0 | 0 |
-| advancements | 260 | 0 | 0 | 260 | 0 | 0 | 0 |
-| armour trims | 29 | 0 | 0 | 29 | 0 | 0 | 0 |
-| attributes | 83 | 0 | 0 | 83 | 0 | 0 | 0 |
-| biomes | 67 | 0 | 0 | 67 | 0 | 0 | 0 |
-| blocks | 1975 | 0 | 0 | 1975 | 0 | 0 | 0 |
-| commands | 821 | 0 | 0 | 821 | 0 | 0 | 0 |
-| controls | 304 | 0 | 0 | 304 | 0 | 0 | 0 |
-| creatures | 219 | 0 | 0 | 219 | 0 | 0 | 0 |
-| death messages | 106 | 0 | 0 | 106 | 0 | 0 | 0 |
-| debug screen | 63 | 0 | 0 | 63 | 0 | 0 | 0 |
-| effects | 51 | 0 | 0 | 50 | 0 | 0 | 1 |
-| enchantments | 54 | 0 | 0 | 54 | 0 | 0 | 0 |
-| game rules | 117 | 0 | 0 | 117 | 0 | 0 | 0 |
-| game tests | 86 | 0 | 0 | 86 | 0 | 0 | 0 |
-| interface | 1275 | 0 | 0 | 1274 | 0 | 0 | 1 |
-| items | 829 | 0 | 0 | 829 | 0 | 0 | 0 |
-| music | 92 | 0 | 0 | 92 | 0 | 0 | 0 |
-| narration | 54 | 0 | 0 | 54 | 0 | 0 | 0 |
-| options | 360 | 0 | 0 | 360 | 0 | 0 | 0 |
-| paintings | 104 | 0 | 0 | 104 | 0 | 0 | 0 |
-| statistics | 91 | 0 | 0 | 91 | 0 | 0 | 0 |
-| subtitles | 1023 | 0 | 0 | 1023 | 0 | 0 | 0 |
-| telemetry | 70 | 0 | 0 | 70 | 0 | 0 | 0 |
-| all | 8559 | 0 | 0 | 8557 | 0 | 0 | 2 |
+| category | keys | translated | AI review | speaker review | seen in game |
+| --- | --- | --- | --- | --- | --- |
+| Realms | 426 | 426 | 426 | 0 | 0 |
+| advancements | 260 | 260 | 260 | 0 | 0 |
+| armour trims | 29 | 29 | 29 | 0 | 0 |
+| attributes | 83 | 83 | 83 | 0 | 0 |
+| biomes | 67 | 67 | 67 | 0 | 0 |
+| blocks | 1975 | 1975 | 1975 | 0 | 0 |
+| commands | 821 | 821 | 821 | 0 | 0 |
+| controls | 304 | 304 | 304 | 0 | 0 |
+| creatures | 219 | 219 | 219 | 0 | 0 |
+| death messages | 106 | 106 | 106 | 0 | 0 |
+| debug screen | 63 | 63 | 63 | 0 | 0 |
+| effects | 51 | 50 | 50 | 0 | 0 |
+| enchantments | 54 | 54 | 54 | 0 | 0 |
+| game rules | 117 | 117 | 117 | 0 | 0 |
+| game tests | 86 | 86 | 86 | 0 | 0 |
+| interface | 1275 | 1274 | 1274 | 0 | 0 |
+| items | 829 | 829 | 829 | 0 | 0 |
+| music | 92 | 92 | 92 | 0 | 0 |
+| narration | 54 | 54 | 54 | 0 | 0 |
+| options | 360 | 360 | 360 | 0 | 0 |
+| paintings | 104 | 104 | 104 | 0 | 0 |
+| statistics | 91 | 91 | 91 | 0 | 0 |
+| subtitles | 1023 | 1023 | 1023 | 0 | 0 |
+| telemetry | 70 | 70 | 70 | 0 | 0 |
+| all | 8559 | 8557 | 8557 | 0 | 0 |
 
-To record a review, set the status column of [inventory.tsv](inventory.tsv) to `reviewed` or `verified in game`.
-`tools/minecraft.py inventory` keeps those statuses while the English text keeps its hash, and puts a key back to
-`to review` when Mojang changes its English.
+[inventory.tsv](inventory.tsv) has four separate columns per key: `translation` (present / missing, written by
+`tools/minecraft.py inventory`), `ai_review`, `human_review` (a speaker read it) and `in_game` (someone saw it in the
+game). A speaker's review does not check the display, and a display check does not review the language. When Mojang
+changes a text's English, the inventory turns its marks into `redo`.
 
 ## Outside the language pack
 

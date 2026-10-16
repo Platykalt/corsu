@@ -471,11 +471,14 @@ def show_plan(components, location):
                 ' les utilisent aussi. Votre mot de passe est demandé une fois.'))
     if 'minecraft' in components:
         import minecraft
-        folders = ', '.join(str(folder) for folder in minecraft.game_directories())
-        print(t(f'  Minecraft Java Edition: add the Corsican resource pack to {folders}, turn it on and choose Corsu as the'
-                ' language in options.txt. Close Minecraft first.',
-                f'  Minecraft Java Edition : ajouter le pack de ressources corse dans {folders}, l\'activer et choisir Corsu'
-                ' comme langue dans options.txt. Fermez Minecraft d\'abord.'))
+        print(t('  Minecraft Java Edition: in each game folder playing a supported version, add the Corsican resource pack,'
+                ' turn it on and choose Corsu as the language in options.txt. Close Minecraft first.',
+                '  Minecraft Java Edition : dans chaque dossier de jeu qui joue une version prise en charge, ajouter le pack'
+                ' de ressources corse, l\'activer et choisir Corsu comme langue dans options.txt. Fermez Minecraft d\'abord.'))
+        for folder in minecraft.find_folders():
+            state = t('yes', 'oui') if folder.compatible else t('no: version not supported or unknown',
+                                                                  'non : version non prise en charge ou inconnue')
+            print(f'    - {folder.describe()} : {state}')
     print(t(f'\nA copy of every file Corsu changes is kept in {corsu.DATA}, and the Corsu app can undo everything.',
             f'\nUne copie de chaque fichier modifié est gardée dans {corsu.DATA}, et l\'application Corsu peut tout annuler.'))
     print(t('Text without a Corsican translation yet stays in French. Messages are never changed.\n',

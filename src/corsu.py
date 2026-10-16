@@ -1333,8 +1333,10 @@ def disable(components=None, hours=None):
         path = Path(name)
         if record.get('options_original') is not None:
             import minecraft
-            minecraft.revert(path, record)
-            installer.state['files'].pop(name)
+            if minecraft.revert(path, record):
+                installer.state['files'].pop(name)
+            else:
+                preserved.append(name)
             continue
         if record.get('json_changes'):
             fields = {field: False if field.endswith('/enabled') else saved['original']
@@ -1402,9 +1404,15 @@ def uninstall():
     if packs:
         import chromium
         chromium.restore(packs)
-    for name, record in state['files'].items():
+    # Minecraft options first: where they cannot be switched back now (the game is running), the pack stays too.
+    kept_games = set()
+    ordered = sorted(state['files'].items(), key=lambda item: item[1].get('options_original') is None)
+    for name, record in ordered:
         path = Path(name)
         if record.get('chromium'):
+            continue
+        if record.get('component') == 'minecraft' and path.parent.parent in kept_games:
+            remaining[name] = record
             continue
         if record.get('line'):
             if path.exists():
@@ -1416,7 +1424,9 @@ def uninstall():
             continue
         if record.get('options_original') is not None:
             import minecraft
-            minecraft.revert(path, record)
+            if not minecraft.revert(path, record):
+                remaining[name] = record
+                kept_games.add(path.parent)
             continue
         if record.get('json_changes') and path.exists():
             document = json.loads(path.read_text(encoding='utf-8'))

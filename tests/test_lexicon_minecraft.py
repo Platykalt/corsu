@@ -130,50 +130,167 @@ if __name__ == '__main__':
 
 
 class MinecraftInstallTests(unittest.TestCase):
-    def test_language_and_pack_switch_on_off_and_uninstall(self):
+    """The risks of changing someone's Minecraft folders: wrong version, lost settings or packs, files Corsu
+    does not own, a running game rewriting options.txt."""
+
+    def setUp(self):
         import io
-        from contextlib import redirect_stdout
+        from contextlib import ExitStack, redirect_stdout
         import corsu
         import minecraft as game
-        with tempfile.TemporaryDirectory() as directory:
-            root = Path(directory)
-            folder = root / '.minecraft'
-            folder.mkdir()
-            options = folder / 'options.txt'
-            options.write_text('version:4555\nlang:fr_fr\nresourcePacks:["vanilla","file/Faithful.zip"]\nfov:0.0\n')
-            with patch.object(corsu, 'HOME', root), patch.object(corsu, 'DATA', root / 'data'), \
-                    patch.object(corsu, 'STATE', root / 'data/state.json'), patch.object(corsu, 'CONFIG', root / 'config'), \
-                    patch.object(corsu, 'PLATFORM', 'linux'), patch.dict(os.environ, {'XDG_DATA_HOME': str(root / 'share')}), \
-                    redirect_stdout(io.StringIO()):
-                installer = corsu.Installer()
-                game.install(installer)
-                installer.state['components'] = ['minecraft']
-                corsu.STATE.write_text(json.dumps(installer.state), encoding='utf-8')
-                pack = folder / 'resourcepacks' / game.PACK
-                self.assertEqual(pack.read_bytes(), game.pack_from_sources())
-                text = options.read_text()
-                self.assertIn('lang:co_fr\n', text)
-                self.assertIn('resourcePacks:["vanilla","file/Faithful.zip","file/corsu-minecraft-java.zip"]', text)
-                # Minecraft rewrites the file while it runs; Corsu must keep those changes.
-                options.write_text(text.replace('fov:0.0', 'fov:0.5'))
-                corsu.disable(['minecraft'])
-                text = options.read_text()
-                self.assertIn('lang:fr_fr\n', text)
-                self.assertIn('fov:0.5', text)
-                self.assertNotIn(game.PACK_ID, text)
-                self.assertTrue(pack.exists())
-                corsu.install(['minecraft'])
-                self.assertIn('lang:co_fr\n', options.read_text())
-                corsu.uninstall()
-                text = options.read_text()
-                self.assertFalse(pack.exists())
-                self.assertIn('lang:fr_fr\n', text)
-                self.assertIn('resourcePacks:["vanilla","file/Faithful.zip"]', text)
-                self.assertIn('fov:0.5', text)
+        self.corsu, self.game = corsu, game
+        self.directory = tempfile.TemporaryDirectory()
+        self.root = Path(self.directory.name) / 'Pròva spaziu'
+        self.root.mkdir()
+        self.stack = ExitStack()
+        self.stack.enter_context(patch.object(corsu, 'HOME', self.root))
+        self.stack.enter_context(patch.object(corsu, 'DATA', self.root / 'data'))
+        self.stack.enter_context(patch.object(corsu, 'STATE', self.root / 'data/state.json'))
+        self.stack.enter_context(patch.object(corsu, 'CONFIG', self.root / 'config'))
+        self.stack.enter_context(patch.object(corsu, 'PLATFORM', 'linux'))
+        self.running = set()
+        self.stack.enter_context(patch.object(game, 'running_folders', lambda: self.running))
+        self.stack.enter_context(patch.dict(os.environ, {'XDG_DATA_HOME': str(self.root / 'share')}))
+        self.stack.enter_context(redirect_stdout(io.StringIO()))
 
-    def test_new_game_folder_starts_in_corsican(self):
-        import minecraft as game
-        lines, original = game.switch_on(game.read_options(Path('/nonexistent/options.txt')))
+    def tearDown(self):
+        self.stack.close()
+        self.directory.cleanup()
+
+    def instance(self, name, version, options=None):
+        instance = self.root / 'share/PrismLauncher/instances' / name
+        (instance / 'minecraft').mkdir(parents=True)
+        (instance / 'mmc-pack.json').write_text(json.dumps({'components': [{'uid': 'net.minecraft', 'version': version}]}))
+        if options is not None:
+            (instance / 'minecraft/options.txt').write_bytes(options)
+        return instance / 'minecraft'
+
+    def install(self):
+        installer = self.corsu.Installer()
+        report = self.game.install(installer)
+        installer.state['components'] = ['minecraft']
+        self.corsu.STATE.write_text(json.dumps(installer.state), encoding='utf-8')
+        return report
+
+    def test_only_folders_playing_the_supported_version(self):
+        good = self.instance('Corsu 26.3', '26.3', b'lang:fr_fr\n')
+        old = self.instance('Vechju', '1.21.4', b'lang:fr_fr\n')
+        official = self.root / '.minecraft'
+        official.mkdir()
+        (official / 'options.txt').write_text('lang:fr_fr\n')
+        report = self.install()
+        self.assertIn('lang:co_fr', (good / 'options.txt').read_text())
+        self.assertEqual((old / 'options.txt').read_text(), 'lang:fr_fr\n')
+        self.assertFalse((old / 'resourcepacks').exists())
+        # The official folder has no launcher profile, so its version is unknown: left alone.
+        self.assertEqual((official / 'options.txt').read_text(), 'lang:fr_fr\n')
+        self.assertEqual(len(report['skipped']), 2)
+
+    def test_official_launcher_follows_the_profile_used_last(self):
+        official = self.root / '.minecraft'
+        for version, kind, inherits in (('26.3', 'release', None), ('26.2', 'release', None),
+                                        ('fabric-26.3', 'release', '26.3')):
+            folder = official / 'versions' / version
+            folder.mkdir(parents=True)
+            data = {'id': version, 'type': kind, 'releaseTime': f'2026-0{9 if version == "26.3" else 6}-01'}
+            if inherits:
+                data = {'id': version, 'inheritsFrom': inherits}
+            (folder / f'{version}.json').write_text(json.dumps(data))
+        profiles = {'profiles': {'a': {'lastVersionId': '26.2', 'lastUsed': '2026-01-01T00:00:00Z'},
+                                 'b': {'lastVersionId': 'fabric-26.3', 'lastUsed': '2026-10-01T00:00:00Z'}}}
+        (official / 'launcher_profiles.json').write_text(json.dumps(profiles))
+        [folder] = self.game.find_folders()
+        self.assertEqual(folder.version, '26.3')
+        self.assertEqual(self.game.resolve_version(official, 'latest-release'), '26.3')
+
+    def test_settings_packs_and_line_endings_survive_on_off_and_uninstall(self):
+        folder = self.instance('Corsu', '26.3', b'lang:fr_fr\r\nresourcePacks:["vanilla","file/A.zip","file/B.zip"]\r\nfov:0.0\r\n')
+        options = folder / 'options.txt'
+        self.install()
+        self.install()
+        text = options.read_bytes().decode()
+        self.assertIn('resourcePacks:["vanilla","file/A.zip","file/B.zip","file/corsu-minecraft-java.zip"]\r\n', text)
+        self.assertEqual(text.count('corsu-minecraft-java.zip'), 2)  # once in each pack list
+        self.assertNotIn('\n', text.replace('\r\n', ''))
+        # The player changes settings and adds a pack while Corsu is on: all of it must survive.
+        options.write_bytes(text.replace('fov:0.0', 'fov:0.5').replace('"file/B.zip",', '"file/B.zip","file/C.zip",').encode())
+        self.corsu.disable(['minecraft'])
+        text = options.read_bytes().decode()
+        self.assertIn('lang:fr_fr\r\n', text)
+        self.assertIn('resourcePacks:["vanilla","file/A.zip","file/B.zip","file/C.zip"]\r\n', text)
+        self.assertIn('fov:0.5', text)
+        self.assertNotIn('corsu-minecraft-java', text)
+        self.corsu.install(['minecraft'])
+        # The player picks English while Corsu is on: switching off must not force French back.
+        options.write_bytes(options.read_bytes().replace(b'lang:co_fr', b'lang:en_us'))
+        self.corsu.uninstall()
+        text = options.read_bytes().decode()
+        self.assertIn('lang:en_us', text)
+        self.assertFalse((folder / 'resourcepacks/corsu-minecraft-java.zip').exists())
+
+    def test_unreadable_options_are_never_rewritten(self):
+        broken = self.instance('Broken', '26.3', b'lang:fr_fr\nresourcePacks:[vanilla, oops\n')
+        latin = self.instance('Latin', '26.3', 'lang:fr_fr\nlastServer:café\n'.encode('latin-1'))
+        report = self.install()
+        self.assertEqual((broken / 'options.txt').read_bytes(), b'lang:fr_fr\nresourcePacks:[vanilla, oops\n')
+        self.assertEqual((latin / 'options.txt').read_bytes(), 'lang:fr_fr\nlastServer:café\n'.encode('latin-1'))
+        self.assertFalse((broken / 'resourcepacks').exists())
+        self.assertEqual(len(report['skipped']), 2)
+
+    def test_a_pack_or_language_the_player_had_before_stays(self):
+        folder = self.instance('Hand', '26.3', b'lang:co_fr\nresourcePacks:["vanilla","corsu-minecraft-java.zip"]\n')
+        pack = folder / 'resourcepacks/corsu-minecraft-java.zip'
+        pack.parent.mkdir()
+        pack.write_bytes(self.game.pack_from_sources())
+        self.install()
+        text = (folder / 'options.txt').read_text()
+        self.assertIn('resourcePacks:["vanilla","corsu-minecraft-java.zip"]', text)  # no duplicate
+        self.corsu.uninstall()
+        self.assertTrue(pack.exists())  # it was there before Corsu: put back, not deleted
+        self.assertIn('lang:co_fr', (folder / 'options.txt').read_text())
+        self.assertIn('"corsu-minecraft-java.zip"', (folder / 'options.txt').read_text())
+
+    def test_a_different_pack_with_the_same_name_is_left_alone(self):
+        folder = self.instance('Other', '26.3', b'lang:fr_fr\n')
+        pack = folder / 'resourcepacks/corsu-minecraft-java.zip'
+        pack.parent.mkdir()
+        pack.write_bytes(b'somebody else')
+        report = self.install()
+        self.assertEqual(pack.read_bytes(), b'somebody else')
+        self.assertEqual((folder / 'options.txt').read_text(), 'lang:fr_fr\n')
+        self.assertEqual(len(report['skipped']), 1)
+
+    def test_running_game_is_left_alone_and_switching_off_waits_for_it(self):
+        folder = self.instance('Live', '26.3', b'lang:fr_fr\n')
+        self.running = {folder.resolve()}
+        self.install()
+        self.assertEqual((folder / 'options.txt').read_text(), 'lang:fr_fr\n')
+        self.running = set()
+        self.install()
+        self.running = {folder.resolve()}
+        self.corsu.disable(['minecraft'])
+        self.assertIn('lang:co_fr', (folder / 'options.txt').read_text())  # not changed under a running game
+        self.running = set()
+        self.corsu.disable(['minecraft'])
+        self.assertIn('lang:fr_fr', (folder / 'options.txt').read_text())
+
+    def test_unwritable_folder_does_not_stop_the_others(self):
+        locked = self.instance('A locked', '26.3', b'lang:fr_fr\n')
+        good = self.instance('B good', '26.3', b'lang:fr_fr\n')
+        real = self.corsu.Installer.write
+
+        def write(installer, path, data, **kwargs):
+            if 'A locked' in str(path):
+                raise PermissionError(13, 'Permission denied')
+            return real(installer, path, data, **kwargs)
+        with patch.object(self.corsu.Installer, 'write', write):
+            report = self.install()
+        self.assertEqual((locked / 'options.txt').read_text(), 'lang:fr_fr\n')
+        self.assertIn('lang:co_fr', (good / 'options.txt').read_text())
+        self.assertEqual(len(report['skipped']), 1)
+
+    def test_new_folder_without_options_starts_in_corsican(self):
+        lines, original = self.game.switch_on([])
         self.assertEqual(dict(lines)['lang'], 'co_fr')
-        self.assertEqual(json.loads(dict(lines)['resourcePacks']), ['vanilla', game.PACK_ID])
-        self.assertEqual(game.switch_off(lines, original), [])
+        self.assertEqual(json.loads(dict(lines)['resourcePacks']), ['vanilla', self.game.PACK_ID])
+        self.assertEqual(self.game.switch_off(lines, original), [])

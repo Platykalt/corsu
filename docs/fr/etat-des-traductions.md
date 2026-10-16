@@ -22,7 +22,7 @@ corse).
 | Commandes du terminal, programmes GTK (Linux) | Expérimental | catalogues gettext construits depuis le français | non | non |
 | **Minecraft: Java Edition 26.3** | **En cours de relecture** | 8 557 / 8 557 textes | le code de Minecraft 26.3 lit le pack et affiche les 8 559 clés sans erreur | **non** : traduction écrite par IA, ni relue par un locuteur ni essayée en jeu ([état](../../minecraft/java/STATUS.md)) |
 | Minecraft : phrases d'accueil, poème de fin | Pack facultatif, toutes langues | voir [Minecraft en corse](minecraft.md) | — | non |
-| Minecraft Bedrock Edition | Prévu | — | — | — |
+| Minecraft Bedrock Edition | Prototype, jamais essayé en jeu | 4 288 / 13 340 clés (reprises de Java, anglais identique) | formats vérifiés hors jeu ([état](../../minecraft/bedrock/STATUS.md)) | non |
 
 ## Traductions reprises d'autres projets
 
@@ -43,7 +43,6 @@ ailleurs. Chaque section garde sa licence ([lexicon-upstream.tsv](../../lexicon/
 | Notepad++ | 898 | GPL-3.0-or-later |
 | Thunderbird pour Android | 830 | Apache-2.0 |
 | fre:ac | 784 | GPL-2.0-or-later |
-| HandBrake | 677 | GPL-2.0-only |
 | Tenacity | 672 | GPL-2.0-or-later |
 | Poedit | 658 | MIT |
 | OpenTracks | 467 | Apache-2.0 |

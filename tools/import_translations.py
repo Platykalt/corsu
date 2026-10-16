@@ -3,7 +3,8 @@
 
 Most of them are the work of Patriccollu di Santa Maria è Sichè
 (https://github.com/Patriccollu/Lingua_Corsa-Infurmatica). Each project's own license applies to its rows;
-every source below is compatible with Corsu's GPL-3.0-or-later.
+every source below is meant to be compatible with Corsu's GPL-3.0-or-later (HandBrake, GPL-2.0-only, is left out
+for that reason).
 
     python3 tools/import_translations.py
 
@@ -161,7 +162,7 @@ PO = [
     ('WinMerge', 'GPL-2.0-or-later', 'WinMerge/winmerge', 'master', 'Translations/WinMerge/French.po',
      'Translations/WinMerge/Corsican.po'),
     ('VLC media player', 'GPL-2.0-or-later', 'videolan/vlc', 'master', 'po/fr.po', 'po/co.po'),
-    ('HandBrake', 'GPL-2.0-only', 'HandBrake/HandBrake', 'master', 'gtk/po/fr.po', 'gtk/po/co.po'),
+    # HandBrake is left out: GPL-2.0-only cannot be combined with Corsu's GPL-3.0-or-later.
     ('Tenacity', 'GPL-2.0-or-later', 'tenacityteam/tenacity', 'main', 'locale/fr.po', 'locale/co.po'),
     ('wxWidgets', 'wxWindows-exception-3.1', 'wxWidgets/wxWidgets', 'master', 'locale/fr.po', 'locale/co.po'),
 ]

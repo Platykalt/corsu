@@ -28,7 +28,7 @@ unless the reviewed lexicon has it).
 | Eyeblossom closed | chjusu, chjosu | **chjosu** | the reviewed lexicon writes chjosu/chjosa |
 | Tube Coral | Curallu à tubu, Curallu tubu | **Curallu tubu** | same pattern as cervellu, bolla, focu, cornu |
 | Cornflower / Azure Bluet | Fiordalisu; Houstonia | **Fiurdalisu**; **Houstonia celeste** (also potted) | match the plant name |
-| Sweet Berries, Weeping Vines, End Barrens | Baghe dolce, Liane pendente / pienghjulente, Terre sterile | **Baghe dolci**, **Liane pendenti**, **Terre sterili** | plural of *-e* adjectives is *-i* |
+| Sweet Berries, Weeping Vines, End Barrens | Baghe dolce, Liane pendente / pienghjulente, Terre sterile | ~~Baghe dolci, Liane pendenti, Terre sterili~~ → now **Baghe dolce**, **Liane pendente**, **Terre sterile** | superseded by [decisions-2.md](decisions-2.md) D2: after a feminine plural noun, *-e* adjectives keep *-e* in the reviewed translations and Vikipedia (a provisional convention, not a grammar rule) |
 | Powder Snow | Neve polverosa, Neve in polvera | **Neve polverosa** (Secchja di neve polverosa) | block name |
 | Turtle Shell, Ink Sac, Lodestone Compass, Shelf Mushroom, Wolf Armor, Tripwire, Fishing Bobber | Carapace, Sacca, Bussula di calamita, Fungu à mensula, Armatura di lupu, Filu di scattu, Galleghjante | name keys: **Scorza di tartaruga, Bursa d'inchjostru, Bussula calamitata, Fungu à scaffale, Armatura per lupu, Filu d'inciampu, Galleghjante di pesca** | subtitles and advancements follow the item name |
 | Screenshot | fiura di screnu, cattura di screnu | **cattura di screnu** | lexicon-upstream: Catture di screnu |
@@ -53,13 +53,13 @@ answered with an attested form and applied (Q30); Q20 and Q22 were only harmonis
 6. `block.minecraft.sculk_shrieker`: *Urladore* (coined from *urlà*); agent nouns mix *-adore* and *-atore* across the file (Urladore, Catalizatore, Fabbricadore, Osservatore) — pick a rule? — *Review 2026-10:* no single suffix rule (both attested); *urladore* unresolved.
 7. `entity.minecraft.zombified_piglin`: *zumbificatu* vs *zombificatu*. — *Review 2026-10:* keep; unresolved.
 8. `block.minecraft.orange_poplar_leaves`: plural *arance* of the colour *arancia* reads like "oranges" (the fruit); keep, or use an invariable form? — *Review 2026-10:* keep; unresolved.
-9. `block.minecraft.nether_wart`: *Verruca di u Nether* unattested. — *Review 2026-10:* ask about *porru*; current doubtful.
+9. `block.minecraft.nether_wart`: *Verruca di u Nether* without attestation in the resources consulted. — *Review 2026-10:* ask about *porru*; current doubtful.
 10. `block.minecraft.sea_pickle`: *Cucumaru di mare* is a guess (the real creature is a pyrosome). — *Review 2026-10:* keep; plausible.
 11. `block.minecraft.allium`, `cornflower` (*Fiurdalisu* vs *Fiordalisu*), `azure_bluet` (*Houstonia*), `lily_pad` (*ninfea*): common Corsican plant names? — *Review 2026-10:* keep; *Agliu salvaticu* plausible, others unresolved.
 12. `block.minecraft.potent_sulfur`: meaning of "Potent" (new 26.3 block) unclear; *Zolfu putente*. — *Review 2026-10:* *Zolfu cuncentratu* if FR/IT reading confirmed; current doubtful.
 13. `block.minecraft.banner.*`: heraldic terms *Trinciatu, Tagliatu, Troncatu, Partitu* calqued on Italian heraldry; dexter/sinister as *à diritta / à manca*. — *Review 2026-10:* keep; unresolved.
-14. `block.minecraft.frosted_ice` (*brinatu*), `gilded_blackstone` (*durata* may read as "duration"), `chipped_anvil` (*intaccata*): unattested adjectives. — *Review 2026-10:* *Petranera indurata* proposed (*durata* clashes with "duration"); doubtful.
-15. `biome.minecraft.deep_lukewarm_ocean`: *tepidu* unattested (tèpidu? calducciu?). — *Review 2026-10:* keep; unresolved.
+14. `block.minecraft.frosted_ice` (*brinatu*), `gilded_blackstone` (*durata* may read as "duration"), `chipped_anvil` (*intaccata*): without attestation in the resources consulted adjectives. — *Review 2026-10:* *Petranera indurata* proposed (*durata* clashes with "duration"); doubtful.
+15. `biome.minecraft.deep_lukewarm_ocean`: *tepidu* without attestation in the resources consulted (tèpidu? calducciu?). — *Review 2026-10:* keep; unresolved.
 16. `biome.minecraft.dappled_forest`: *chjazzata*; `lush_caves`: *verdi* may be too plain; `jagged_peaks`: *dentati*. — *Review 2026-10:* check the biome in game (FR/IT read "amber"); unresolved.
 17. `entity.minecraft.parched` (*Scheletru arsu*), `camel_husk` (*Cammellu seccu*), `entity.minecraft.cushion` (*Cuscinu*): new 26.x mobs, meaning guessed from FR/IT. — *Review 2026-10:* keep; *arsu* doubtful.
 18. `advancements.husbandry.feed_snifflet.description`: Snifflet coined *annusadurellu*. — *Review 2026-10:* keep; unresolved.
@@ -67,10 +67,10 @@ answered with an attested form and applied (Q30); Q20 and Q22 were only harmonis
 20. `subtitles.entity.horse.ambient` / `zombie_horse.angry`: *annitrisce* vs *nitrisce* (neigh). — *Review 2026-10:* harmonised on *annitrisce*; unresolved.
 21. `subtitles.entity.chicken.ambient`: *cocca* for cluck (chjoccia? cucculeghja?). — *Review 2026-10:* keep; unresolved.
 22. `subtitles.entity.wolf.growl`, `baby_wolf.ambient`: *ringhja, ghjappa, ansima* sound Italian; Corsican verbs? — *Review 2026-10:* *abbaghja* attested; *ansima → ansa* harmonised; rest unresolved.
-23. `subtitles.entity.bee.ambient`, `parrot.imitate.breeze`: *ronza* (buzz, whir) unattested. — *Review 2026-10:* keep; unresolved.
+23. `subtitles.entity.bee.ambient`, `parrot.imitate.breeze`: *ronza* (buzz, whir) without attestation in the resources consulted. — *Review 2026-10:* keep; unresolved.
 24. `subtitles.entity.axolotl.splash`, `slime.squish`: coined *sciaccuttuleghja*, *sciaccheghja*. — *Review 2026-10:* keep; unresolved.
 25. `subtitles.entity.parrot.imitate.creaking`: distinction *cricca* (creaks) / *scricchjula* (rattles) is coined. — *Review 2026-10:* keep; unresolved.
-26. `subtitles.entity.drowned.ambient` (*gorgula*), `panda.worried_ambient` (*mugula*), `rabbit.ambient` (*squitta*), `strider.idle` (*piula*), `parrot.imitate.endermite` (*zampetta*): unattested sound verbs. — *Review 2026-10:* keep; unresolved.
+26. `subtitles.entity.drowned.ambient` (*gorgula*), `panda.worried_ambient` (*mugula*), `rabbit.ambient` (*squitta*), `strider.idle` (*piula*), `parrot.imitate.endermite` (*zampetta*): without attestation in the resources consulted sound verbs. — *Review 2026-10:* keep; unresolved.
 27. `subtitles.item.trident.thunder`: *tonu* for thunder. — *Review 2026-10:* keep; plausible.
 28. `advancements.adventure.blowback.title`: proverb *Chì sumena ventu ricoglie timpesta* — wording and spelling. — *Review 2026-10:* keep; plausible.
 29. `advancements.adventure.two_birds_one_arrow.title`: *Dui pichjoni cù una freccia*, adapted from Italian; is there a Corsican idiom? — *Review 2026-10:* keep; plausible.
@@ -78,7 +78,7 @@ answered with an attested form and applied (Q30); Q20 and Q22 were only harmonis
 31. `advancements.husbandry.root.title`: Husbandry as *Agricultura*; *Allevu* possible. — *Review 2026-10:* keep; plausible.
 32. `item.minecraft.debug_stick`: *Bastone di spannatura* may be opaque. — *Review 2026-10:* keep; *spannatura* attested (mozilla:881, 1506).
 33. `enchantment.minecraft.riptide` (*Risacca*), `channeling` (*Canalizazione*, -zione or -zzione?), `depth_strider` (*Passu di l'abissi*). — *Review 2026-10:* keep; *Canalizazione* plausible (attested -izazione pattern), others unresolved.
-34. `item.modifiers.any` / `item.modifiers.saddle`: *equipatu*, *insellatu* unattested. — *Review 2026-10:* keep; unresolved.
+34. `item.modifiers.any` / `item.modifiers.saddle`: *equipatu*, *insellatu* without attestation in the resources consulted. — *Review 2026-10:* keep; unresolved.
 35. `item.minecraft.sheaf_pottery_sherd` (*mannella* vs *gregna*), `snort_pottery_sherd` (*sbuffu*), `mourner_pottery_sherd` (*luttu*). — *Review 2026-10:* keep; plausible / unresolved.
 36. `key.keyboard.backspace` (*Ritornu in daretu*), `key.keyboard.left.shift` (*Maiuscule manca*: gender of the side keys), `key.keyboard.scroll.lock` (*Bloccu sfilà*). — *Review 2026-10:* Backspace and Scroll attested (upstream:12682, :3883); Shift unresolved.
 37. `options.viewBobbing` (*Oscillazione di a vista*), `options.vignette` (*Vignettatura*), `options.prioritizeChunkUpdates` (*Custruttore di pezzi*): coined setting names. — *Review 2026-10:* keep; plausible.

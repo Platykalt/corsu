@@ -32,6 +32,13 @@ revised by a Corsican speaker. Terms live in [glossary.tsv](glossary.tsv).
 - Compound names follow Corsican order: noun + *di* + material, or noun + adjective agreeing in gender and number:
   *Lastra di quercia*, *Lana rossa*, *Vetru tintu turchinu*, *Scale di petra lisciata*.
 
+## Adjectives in -e (provisional)
+
+After a feminine plural noun, adjectives in *-e* keep *-e*: *Baghe dolce*, *Terre sterile*, *Grotte verde*. This
+follows most uses in the reviewed Corsican translations and in Vikipedia; it is a convention for Corsu, not a grammar
+rule, and dictionaries also give *-i*. With masculine plural nouns: *-i* (*Fiori verdi*). See
+[decisions-2.md](decisions-2.md), D2.
+
 ## Colours (masculine / feminine)
 
 | English | Corsican |
