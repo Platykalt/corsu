@@ -1,4 +1,5 @@
 # Download the latest Corsu release for Windows, check its SHA-256 and start the installer.
+# Running it again updates (or repairs) the installed Corsu: parts and choices are kept, parts switched off stay off.
 #   irm https://raw.githubusercontent.com/Platykalt/corsu/main/install/get.ps1 | iex
 $ErrorActionPreference = 'Stop'
 $ProgressPreference = 'SilentlyContinue'

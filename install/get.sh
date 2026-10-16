@@ -1,5 +1,6 @@
 #!/bin/sh
 # Download the latest Corsu release for this computer, check its SHA-256 and start the installer.
+# Running it again updates (or repairs) the installed Corsu: parts and choices are kept, parts switched off stay off.
 #   curl -fsSL https://raw.githubusercontent.com/Platykalt/corsu/main/install/get.sh | sh
 set -eu
 case "$(uname -s)" in

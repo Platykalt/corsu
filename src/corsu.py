@@ -1122,11 +1122,13 @@ def setup_shortcut(installer):
                         'StartupWMClass=corsu\nCategories=Settings;\n')
 
 
-def refresh_launchers(installer):
-    """Point every launcher and shortcut Corsu wrote at this copy of Corsu. Installing one part used to leave the
-    others on the copy they were written with, which then could never be deleted."""
+def refresh_launchers(installer, root=None):
+    """Point every launcher and shortcut Corsu wrote at this copy of Corsu (or at the release folder `root`: an
+    update that failed points them back at the previous copy). Installing one part used to leave the others on the
+    copy they were written with, which then could never be deleted."""
+    root = Path(root) if root else ROOT
     releases = (DATA / 'releases').resolve()
-    if not ROOT.is_relative_to(releases):
+    if not root.resolve().is_relative_to(releases):
         return
     # Launchers hold the path as it was written (C:\Users\RUNNER~1, /var/...), which may differ from the real one.
     prefixes = sorted({str(DATA / 'releases'), str(releases)}, key=len, reverse=True)
@@ -1143,7 +1145,7 @@ def refresh_launchers(installer):
             text = data.decode('utf-8')
         except UnicodeDecodeError:
             continue
-        updated = pattern.sub(lambda match: match.group(1) + match.group(2) + ROOT.name, text)
+        updated = pattern.sub(lambda match: match.group(1) + match.group(2) + root.name, text)
         if updated != text:
             installer.write(path, updated, mode=path.stat().st_mode & 0o777, toggle=record.get('toggle', False))
 
@@ -1330,6 +1332,158 @@ def save_state(state):
         except ValueError:
             pass
     os.replace(temp, STATE)
+
+
+class Busy(RuntimeError):
+    """Another Corsu process is installing, updating, uninstalling or switching parts."""
+
+
+ACTIONS = {'install': ('installing', 'installation'), 'update': ('updating', 'mise à jour'),
+           'repair': ('repairing', 'réparation'), 'uninstall': ('uninstalling', 'désinstallation'),
+           'enable': ('switching on', 'activation'), 'disable': ('switching off', 'désactivation')}
+# A lock this old belongs to a process that died long ago, even if its number was given to another process since.
+LOCK_EXPIRY = 6 * 3600
+
+
+def process_alive(pid):
+    """Whether a process with this number is running (True when it cannot be told)."""
+    if not isinstance(pid, int) or pid <= 0:
+        return False
+    if PLATFORM == 'windows':
+        import ctypes
+        kernel = ctypes.WinDLL('kernel32', use_last_error=True)
+        handle = kernel.OpenProcess(0x1000, False, pid)  # PROCESS_QUERY_LIMITED_INFORMATION
+        if not handle:
+            return ctypes.get_last_error() == 5  # access denied: it exists
+        try:
+            code = ctypes.c_ulong()
+            if not kernel.GetExitCodeProcess(handle, ctypes.byref(code)):
+                return True
+            return code.value == 259  # STILL_ACTIVE
+        finally:
+            kernel.CloseHandle(handle)
+    try:
+        os.kill(pid, 0)
+    except ProcessLookupError:
+        return False
+    except PermissionError:
+        return True
+    except OSError:
+        return True
+    return True
+
+
+def lock_holder():
+    """What the lock file says: {'pid', 'started', 'action', 'token'}, or None."""
+    try:
+        holder = json.loads((DATA / 'lock').read_text(encoding='utf-8'))
+        return holder if isinstance(holder, dict) else {}
+    except FileNotFoundError:
+        return None
+    except (OSError, ValueError):
+        return {}
+
+
+def lock_stale(holder):
+    import time
+    started = holder.get('started')
+    if not isinstance(started, (int, float)):
+        # Written half (the process stopped between creating and filling it): stale after a moment.
+        try:
+            return time.time() - (DATA / 'lock').stat().st_mtime > 10
+        except OSError:
+            return True
+    return not process_alive(holder.get('pid')) or time.time() - started > LOCK_EXPIRY
+
+
+def busy_message(holder):
+    import time
+    action = ACTIONS.get(holder.get('action'), (holder.get('action') or '?',) * 2)
+    started = holder.get('started')
+    when = time.strftime('%H:%M', time.localtime(started)) if isinstance(started, (int, float)) else '?'
+    return t(f'Corsu is already busy: {action[0]} since {when}. Try again once it has finished.',
+             f'Corsu est déjà occupé : {action[1]} depuis {when}. Réessayez quand ce sera terminé.')
+
+
+class lock:
+    """`with corsu.lock('update'):` one Corsu process at a time changes the computer.
+
+    The lock is `DATA/lock`, created with an exclusive open and holding the pid, start time and action. A lock whose
+    process is gone is stale and taken over. Otherwise this waits up to `wait` seconds (CORSU_LOCK_WAIT), then raises
+    Busy. Processes started by the holder (the installer re-running itself from the installed copy, update.py running
+    the new installer) inherit CORSU_LOCK_TOKEN and go through without waiting."""
+
+    def __init__(self, action, wait=None):
+        self.action = action
+        self.wait = float(os.environ.get('CORSU_LOCK_WAIT', 5)) if wait is None else wait
+        self.owned = False
+
+    def __enter__(self):
+        import time
+        import uuid
+        path = DATA / 'lock'
+        inherited = os.environ.get('CORSU_LOCK_TOKEN')
+        holder = lock_holder()
+        if inherited and holder and holder.get('token') == inherited:
+            return self
+        DATA.mkdir(parents=True, exist_ok=True)
+        deadline = time.monotonic() + self.wait
+        token = uuid.uuid4().hex
+        while True:
+            try:
+                handle = os.open(path, os.O_CREAT | os.O_EXCL | os.O_WRONLY, 0o644)
+            except FileExistsError:
+                holder = lock_holder()
+                if holder is None:
+                    continue
+                if lock_stale(holder):
+                    # Move it aside under a unique name first: two processes taking over at once never remove each
+                    # other's new lock.
+                    aside = path.with_name(f'lock.stale-{token}')
+                    try:
+                        os.replace(path, aside)
+                    except OSError:
+                        time.sleep(0.1)
+                        continue
+                    moved = None
+                    try:
+                        moved = json.loads(aside.read_text(encoding='utf-8'))
+                    except (OSError, ValueError):
+                        pass
+                    if moved and holder and moved.get('token') != holder.get('token') and not lock_stale(moved):
+                        # Someone took the lock in between: give it back.
+                        try:
+                            os.link(aside, path)
+                        except OSError:
+                            pass
+                    aside.unlink(missing_ok=True)
+                    continue
+                if time.monotonic() >= deadline:
+                    raise Busy(busy_message(holder))
+                time.sleep(0.2)
+                continue
+            with os.fdopen(handle, 'w', encoding='utf-8') as output:
+                output.write(json.dumps({'pid': os.getpid(), 'started': time.time(), 'action': self.action,
+                                         'token': token}))
+            break
+        self.owned = True
+        self.previous = inherited
+        os.environ['CORSU_LOCK_TOKEN'] = token
+        self.token = token
+        return self
+
+    def __exit__(self, *exc):
+        if not self.owned:
+            return False
+        if self.previous is None:
+            os.environ.pop('CORSU_LOCK_TOKEN', None)
+        else:
+            os.environ['CORSU_LOCK_TOKEN'] = self.previous
+        holder = lock_holder()
+        if holder and holder.get('token') == self.token:
+            (DATA / 'lock').unlink(missing_ok=True)
+        self.owned = False
+        return False
 
 
 def switchable(state=None):
@@ -1695,16 +1849,15 @@ def main():
     args, rest = parser.parse_known_args()
     if args.action == 'generate':
         generate()
-    elif args.action == 'install':
-        install()
-    elif args.action == 'uninstall':
-        uninstall()
+    elif args.action in ('install', 'uninstall', 'enable', 'disable'):
+        try:
+            with lock(args.action):
+                {'install': install, 'uninstall': uninstall, 'enable': enable, 'disable': disable}[args.action]()
+        except Busy as error:
+            print(error, file=sys.stderr)
+            raise SystemExit(75)
     elif args.action == 'status':
         status()
-    elif args.action == 'enable':
-        enable()
-    elif args.action == 'disable':
-        disable()
     elif args.action == 'prepare-firefox':
         runtime, stats = firefox_runtime()
         print(firefox_executable(runtime))

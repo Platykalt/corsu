@@ -422,5 +422,81 @@ class TranslationTests(unittest.TestCase):
                 self.assertIn(str(old), edited.read_text())
 
 
+class OriginalsKeptTests(unittest.TestCase):
+    """A repair or an update runs every step again over what Corsu already changed: the value recorded as original
+    stays the one found before the first change, never one Corsu wrote."""
+
+    def setUp(self):
+        folder = tempfile.TemporaryDirectory()
+        self.addCleanup(folder.cleanup)
+        self.root = Path(folder.name)
+        for name, value in (('HOME', self.root), ('DATA', self.root / 'data'), ('CONFIG', self.root / 'config'),
+                            ('STATE', self.root / 'data/installation.json'), ('repair_default_browser', lambda: None)):
+            patcher = patch.object(corsu, name, value)
+            patcher.start()
+            self.addCleanup(patcher.stop)
+
+    def test_backup_of_a_file(self):
+        path = self.root / 'file.txt'
+        path.write_text('original', encoding='utf-8')
+        for run in range(3):
+            corsu.Installer().write(path, f'corsu {run}')
+        record = corsu.load_state()['files'][str(path)]
+        self.assertEqual(Path(record['backup']).read_text(encoding='utf-8'), 'original')
+        with redirect_stdout(io.StringIO()):
+            corsu.uninstall()
+        self.assertEqual(path.read_text(encoding='utf-8'), 'original')
+
+    def test_json_settings(self):
+        path = self.root / 'settings.json'
+        path.write_text(json.dumps({'autoUpdate': True}), encoding='utf-8')
+        for run in range(3):
+            corsu.Installer().json_settings(path, {'autoUpdate': False, 'plugins/Corsu/enabled': True})
+        saved = corsu.load_state()['files'][str(path)]['json_changes']
+        self.assertEqual(saved['autoUpdate'], {'existed': True, 'original': True, 'installed': False})
+        self.assertFalse(saved['plugins/Corsu/enabled']['existed'])
+        with redirect_stdout(io.StringIO()):
+            corsu.uninstall()
+        self.assertEqual(json.loads(path.read_text(encoding='utf-8')), {'autoUpdate': True, 'plugins': {'Corsu': {}}})
+
+    def test_program_settings(self):
+        from apps import settings
+        path = self.root / 'program.ini'
+        path.write_text('[General]\nLanguage=fr\n', encoding='utf-8')
+        for run in range(3):
+            settings.set_ini(corsu.Installer(), 'vlc', path, 'General', 'Language', 'co')
+        record = next(record for name, record in corsu.load_state()['files'].items() if name.startswith(str(path)))
+        self.assertEqual((record['setting']['original'], record['setting']['installed']), ('fr', 'co'))
+        settings.revert(record)
+        self.assertIn('Language=fr', path.read_text(encoding='utf-8'))
+
+    def test_minecraft_options(self):
+        import minecraft
+        folder = self.root / 'game'
+        (folder / 'resourcepacks').mkdir(parents=True)
+        (folder / 'options.txt').write_text('lang:en_us\nresourcePacks:["vanilla"]\n', encoding='utf-8')
+        for run in range(3):
+            self.assertIsNone(minecraft.install_folder(corsu.Installer(), folder, b'pack'))
+        record = corsu.load_state()['files'][str(folder / 'options.txt')]
+        self.assertEqual(record['options_original']['lang'], 'en_us')
+        self.assertTrue(minecraft.revert(folder / 'options.txt', record))
+        self.assertIn('lang:en_us', (folder / 'options.txt').read_text(encoding='utf-8'))
+
+    def test_menu_entry_override(self):
+        applications = self.root / '.local/share/applications'
+        applications.mkdir(parents=True)
+        mine = '[Desktop Entry]\nName=Firefox\nExec=firefox %u\n'
+        (applications / 'firefox.desktop').write_text(mine, encoding='utf-8')
+        with patch.object(corsu, 'PLATFORM', 'linux'):
+            for run in range(3):
+                corsu.desktop(corsu.Installer(), firefox=True, vesktop=False)
+        entry = (applications / 'firefox.desktop').read_text(encoding='utf-8')
+        self.assertIn('Name=Firefox Corsu', entry)
+        self.assertEqual(entry.count('Name[co]='), 1)
+        with redirect_stdout(io.StringIO()):
+            corsu.uninstall()
+        self.assertEqual((applications / 'firefox.desktop').read_text(encoding='utf-8'), mine)
+
+
 if __name__ == '__main__':
     unittest.main()

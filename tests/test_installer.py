@@ -11,7 +11,58 @@ import corsu
 import installer
 
 
-class InstallerTests(unittest.TestCase):
+def R(name):
+    """A release folder name as Corsu makes them (16 hexadecimal digits), for a readable label."""
+    import hashlib
+    return hashlib.sha256(name.encode()).hexdigest()[:16]
+
+
+def names(*labels):
+    return sorted(R(label) for label in labels)
+
+
+def genuine(folder, version='0.22.0'):
+    (folder / 'src').mkdir(parents=True, exist_ok=True)
+    (folder / 'src/release.json').write_text(json.dumps({'version': version}), encoding='utf-8')
+    return folder
+
+
+class Isolated(unittest.TestCase):
+    """Every path Corsu writes (home, data, settings, Start menu) in a temporary folder: tests that run the installer
+    never touch the real installation, its launchers or its record."""
+
+    def setUp(self):
+        super().setUp()
+        folder = tempfile.TemporaryDirectory()
+        self.addCleanup(folder.cleanup)
+        self.home = Path(folder.name).resolve()
+        self.data = self.home / 'data'
+        self.config = self.home / 'config'
+        for name, value in (('HOME', self.home), ('DATA', self.data), ('CONFIG', self.config),
+                            ('STATE', self.data / 'installation.json'), ('START_MENU', self.home / 'start')):
+            patcher = patch.object(corsu, name, value)
+            patcher.start()
+            self.addCleanup(patcher.stop)
+        environment = patch.dict(os.environ, {'CORSU_LOCK_WAIT': '0.5'})
+        environment.start()
+        self.addCleanup(environment.stop)
+        for name in ('CORSU_LOCK_TOKEN', 'CORSU_DEPLOYED', 'CORSU_APP_ROOT', 'CORSU_DOWNLOAD_BASE'):
+            os.environ.pop(name, None)
+
+    def release(self, version, name=None, files=None):
+        """A Corsu release folder as deploy_release makes them: fingerprint name, src/release.json inside."""
+        import hashlib
+        name = name or hashlib.sha256(version.encode()).hexdigest()[:16]
+        folder = self.data / 'releases' / name
+        (folder / 'src').mkdir(parents=True, exist_ok=True)
+        (folder / 'src/release.json').write_text(json.dumps({'version': version}), encoding='utf-8')
+        for relative, text in (files or {}).items():
+            (folder / relative).parent.mkdir(parents=True, exist_ok=True)
+            (folder / relative).write_text(text, encoding='utf-8')
+        return folder
+
+
+class InstallerTests(Isolated):
     def test_declining_or_previewing_makes_no_changes(self):
         for arguments, consent in (([], 'no'), (['--dry-run'], None)):
             with patch.object(installer, 'available_components', return_value=['firefox']), \
@@ -31,7 +82,7 @@ class InstallerTests(unittest.TestCase):
              patch.object(installer, 'deploy_release', return_value=installer.ROOT), \
              patch.object(installer, 'prepare_build') as build, \
              patch.object(installer, 'install_discord') as discord, \
-             patch.object(corsu, 'install') as install, \
+             patch.object(corsu, 'install') as install, patch.object(corsu, 'firefox_install', return_value=True), \
              patch.object(installer.shutil, 'which', return_value=None), redirect_stdout(io.StringIO()):
             installer.main(['--yes', '--components', 'firefox'])
             install.assert_called_once_with({'firefox'}, qt_system=False)
@@ -80,7 +131,7 @@ class InstallerTests(unittest.TestCase):
              patch.object(installer, 'discord_location', return_value=None), \
              patch.object(installer, 'deploy_release', return_value=installer.ROOT), \
              patch.object(installer, 'prepare_build'), patch.object(installer.sys.stdin, 'isatty', return_value=True), \
-             patch.object(corsu, 'install') as install, \
+             patch.object(corsu, 'install') as install, patch.object(corsu, 'firefox_install', return_value=True), \
              patch('builtins.input', side_effect=['2', '', 'y']), redirect_stdout(io.StringIO()):
             installer.main([])
             install.assert_called_once_with({'firefox'}, qt_system=False)
@@ -129,17 +180,17 @@ class InstallerTests(unittest.TestCase):
         with tempfile.TemporaryDirectory() as directory:
             data = Path(directory) / 'data'
             for name in ('current', 'old', 'discord', 'vesktop'):
-                (data / 'releases' / name).mkdir(parents=True)
+                genuine(data / 'releases' / R(name))
             asar = Path(directory) / 'app.asar'
-            asar.write_text(f'require("{data / "releases/discord/Vencord/dist/patcher.js"}")')
+            asar.write_text(f'require("{data / "releases" / R("discord") / "Vencord/dist/patcher.js"}")')
             config = Path(directory) / 'config'
             (config / 'vesktop').mkdir(parents=True)
-            (config / 'vesktop/state.json').write_text(json.dumps({'vencordDir': str(data / 'releases/vesktop/Vencord/dist')}))
+            (config / 'vesktop/state.json').write_text(json.dumps({'vencordDir': str(data / 'releases' / R('vesktop') / 'Vencord/dist')}))
             state = data / 'installation.json'
             state.write_text(json.dumps({'files': {str(asar): {}}}))
             with patch.object(corsu, 'DATA', data), patch.object(corsu, 'STATE', state), patch.object(corsu, 'CONFIG', config):
-                installer.prune_releases(data / 'releases/current')
-            self.assertEqual(sorted(path.name for path in (data / 'releases').iterdir()), ['current', 'discord', 'vesktop'])
+                installer.prune_releases(data / 'releases' / R('current'))
+            self.assertEqual(sorted(path.name for path in (data / 'releases').iterdir()), names('current', 'discord', 'vesktop'))
 
     def test_releases_used_by_launchers_are_kept(self):
         # Installing only Discord leaves the Firefox launcher and the Corsu shortcut on an earlier copy; deleting that
@@ -147,22 +198,22 @@ class InstallerTests(unittest.TestCase):
         with tempfile.TemporaryDirectory() as directory:
             data = Path(directory) / 'data'
             for name in ('current', 'old', 'firefox', 'shortcut', 'applet'):
-                (data / 'releases' / name).mkdir(parents=True)
+                genuine(data / 'releases' / R(name))
             launcher = Path(directory) / 'firefox-corsu'
-            launcher.write_text(f'#!/bin/sh\nexec python3 {data / "releases/firefox/src/corsu.py"} launch-firefox "$@"\n')
+            launcher.write_text(f'#!/bin/sh\nexec python3 {data / "releases" / R("firefox") / "src/corsu.py"} launch-firefox "$@"\n')
             shortcut = Path(directory) / 'corsu-setup.desktop'
-            shortcut.write_text(f'[Desktop Entry]\nExec=python3 {data / "releases/shortcut/src/app.py"}\n')
+            shortcut.write_text(f'[Desktop Entry]\nExec=python3 {data / "releases" / R("shortcut") / "src/app.py"}\n')
             applet = Path(directory) / 'Corsu.app'
             (applet / 'Contents/Resources/Scripts').mkdir(parents=True)
             (applet / 'Contents/Resources/Scripts/main.scpt').write_bytes(
-                b'\x00' + str(data / 'releases/applet/src/app.py').encode('utf-16-be') + b'\x00')
+                b'\x00' + str(data / 'releases' / R('applet') / 'src/app.py').encode('utf-16-be') + b'\x00')
             state = data / 'installation.json'
             state.write_text(json.dumps({'files': {str(launcher): {}, str(shortcut): {}, str(applet): {'tree': True}}}))
             with patch.object(corsu, 'DATA', data), patch.object(corsu, 'STATE', state), \
                     patch.object(corsu, 'CONFIG', Path(directory) / 'config'):
-                installer.prune_releases(data / 'releases/current')
+                installer.prune_releases(data / 'releases' / R('current'))
             self.assertEqual(sorted(path.name for path in (data / 'releases').iterdir()),
-                             ['applet', 'current', 'firefox', 'shortcut'])
+                             names('applet', 'current', 'firefox', 'shortcut'))
 
 
     def test_records_of_removed_discord_versions_are_forgotten(self):
@@ -181,35 +232,35 @@ class InstallerTests(unittest.TestCase):
         with tempfile.TemporaryDirectory() as directory:
             data = Path(directory) / 'data'
             for name in ('current', 'loaded', 'old'):
-                (data / 'releases' / name).mkdir(parents=True)
+                genuine(data / 'releases' / R(name))
             state = data / 'installation.json'
             state.write_text(json.dumps({'files': {}}))
             with patch.object(corsu, 'DATA', data), patch.object(corsu, 'STATE', state), \
                     patch.object(corsu, 'CONFIG', Path(directory) / 'config'):
                 with patch.object(installer, 'clients_running', return_value=True):
-                    installer.prune_releases(data / 'releases/current', {'loaded'})
-                    self.assertEqual(sorted(path.name for path in (data / 'releases').iterdir()), ['current', 'loaded'])
+                    installer.prune_releases(data / 'releases' / R('current'), {R('loaded')})
+                    self.assertEqual(sorted(path.name for path in (data / 'releases').iterdir()), names('current', 'loaded'))
                     # A later run still knows the open client uses it, even though nothing points there any more.
-                    installer.prune_releases(data / 'releases/current')
-                    self.assertTrue((data / 'releases/loaded').is_dir())
+                    installer.prune_releases(data / 'releases' / R('current'))
+                    self.assertTrue((data / 'releases' / R('loaded')).is_dir())
                 with patch.object(installer, 'clients_running', return_value=False):
-                    installer.prune_releases(data / 'releases/current')
-                self.assertEqual(sorted(path.name for path in (data / 'releases').iterdir()), ['current'])
+                    installer.prune_releases(data / 'releases' / R('current'))
+                self.assertEqual(sorted(path.name for path in (data / 'releases').iterdir()), names('current'))
                 self.assertEqual(json.loads(state.read_text())['running_releases'], [])
 
     def test_the_copy_of_the_open_corsu_app_is_kept(self):
         with tempfile.TemporaryDirectory() as directory:
             data = Path(directory) / 'data'
             for name in ('current', 'app', 'old'):
-                (data / 'releases' / name).mkdir(parents=True)
+                genuine(data / 'releases' / R(name))
             state = data / 'installation.json'
             state.write_text(json.dumps({'files': {}}))
             with patch.object(corsu, 'DATA', data), patch.object(corsu, 'STATE', state), \
                     patch.object(corsu, 'CONFIG', Path(directory) / 'config'), \
                     patch.object(installer, 'clients_running', return_value=False), \
-                    patch.dict(os.environ, {'CORSU_APP_ROOT': str(data / 'releases/app')}):
-                installer.prune_releases(data / 'releases/current')
-            self.assertEqual(sorted(path.name for path in (data / 'releases').iterdir()), ['app', 'current'])
+                    patch.dict(os.environ, {'CORSU_APP_ROOT': str(data / 'releases' / R('app'))}):
+                installer.prune_releases(data / 'releases' / R('current'))
+            self.assertEqual(sorted(path.name for path in (data / 'releases').iterdir()), names('app', 'current'))
 
     def test_the_bundled_python_is_copied_once_and_used(self):
         with tempfile.TemporaryDirectory() as directory:

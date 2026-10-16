@@ -6,10 +6,12 @@ import json
 import os
 from pathlib import Path
 import platform
+import re
 import shutil
 import subprocess
 import sys
 import tempfile
+import time
 import urllib.request
 
 import corsu
@@ -159,13 +161,21 @@ def deploy_release():
     if ROOT.is_relative_to((corsu.DATA / 'releases').resolve()) or os.environ.get('CORSU_DEPLOYED') == str(ROOT):
         return ROOT
     fingerprint = hashlib.sha256()
-    for path in sorted([*(path for path in (ROOT / 'src').rglob('*') if path.is_file() and '__pycache__' not in path.parts),
-                        *(ROOT / name for name in DEPLOYED_FILES + DEPLOYED_MINECRAFT if (ROOT / name).is_file()),
-                        *(ROOT / 'lexicon').glob('*.tsv'), *(ROOT / 'Vencord/dist').glob('*.*')]):
+    printed = sorted([*(path for path in (ROOT / 'src').rglob('*') if path.is_file() and '__pycache__' not in path.parts),
+                      *(ROOT / name for name in DEPLOYED_FILES + DEPLOYED_MINECRAFT if (ROOT / name).is_file()),
+                      *(ROOT / 'lexicon').glob('*.tsv'), *(ROOT / 'Vencord/dist').glob('*.*')])
+    for path in printed:
         fingerprint.update(path.relative_to(ROOT).as_posix().encode() + b'\0' + path.read_bytes())
     target = corsu.DATA / 'releases' / fingerprint.hexdigest()[:16]
     if target.exists():
-        return target
+        # Earlier versions deleted old copies file by file; one in use on Windows could be left half deleted.
+        relative = [path.relative_to(ROOT) for path in printed]
+        if all((target / name).is_file() and (target / name).stat().st_size == (ROOT / name).stat().st_size
+               for name in relative):
+            return target
+        if not discard(target):
+            raise RuntimeError(t(f'{target} is incomplete and in use; close Corsu and the programs it translates, then retry.',
+                                 f'{target} est incomplet et utilisé ; fermez Corsu et les logiciels traduits, puis réessayez.'))
     target.parent.mkdir(parents=True, exist_ok=True)
     stage = Path(tempfile.mkdtemp(prefix='stage-', dir=target.parent))
     try:
@@ -239,7 +249,12 @@ def releases_in_use():
     return folders_in_use(corsu.DATA / 'releases')
 
 
-def folders_in_use(parent):
+def managed_places(state=None):
+    state = corsu.load_state() if state is None else state
+    return [Path(name) for name in state.get('files', {})] + [corsu.CONFIG / 'vesktop/state.json']
+
+
+def folders_in_use(parent, places=None):
     """Names of the folders of `parent` that a file Corsu wrote (or Vesktop's settings) refers to."""
     used = set()
     # Written paths may use either form of the same folder (C:\Users\RUNNER~1 or C:\Users\runneradmin).
@@ -247,9 +262,7 @@ def folders_in_use(parent):
     # Windows paths ignore case, and shortcuts do not always keep it.
     fold = str.lower if corsu.PLATFORM == 'windows' else str
     prefixes = {fold(prefix) for prefix in prefixes}
-    state = corsu.load_state()
-    places = [Path(name) for name in state.get('files', {})]
-    places.append(corsu.CONFIG / 'vesktop/state.json')
+    places = managed_places() if places is None else places
     files = []
     for place in places:
         if place.is_dir():
@@ -273,6 +286,128 @@ def folders_in_use(parent):
                     used.add(text[start + len(prefix) + 1:].split('/', 1)[0])
                     start = text.find(prefix, start + 1)
     return used
+
+
+RELEASE_NAME = re.compile(r'[0-9a-f]{16}')
+# The Corsu entry of the applications menu: the copy it opens is the installed one.
+CORSU_ENTRIES = ('corsu-setup.desktop', 'Corsu.lnk', 'Corsu.app')
+
+
+def version_tuple(text):
+    return tuple(int(part) for part in str(text or '').lstrip('v').split('.') if part.isdigit())
+
+
+def release_version(folder):
+    """The version a Corsu copy (a release folder, an extracted archive, a source folder) says it is, or None."""
+    try:
+        return json.loads((Path(folder) / 'src/release.json').read_text(encoding='utf-8'))['version']
+    except (OSError, ValueError, KeyError, TypeError):
+        return None
+
+
+def genuine_release(folder):
+    """A copy Corsu deployed itself: a fingerprint name in corsu.DATA/releases and its release.json inside. Nothing
+    else there is ever deleted."""
+    folder = Path(folder)
+    return bool(RELEASE_NAME.fullmatch(folder.name)) and folder.is_dir() and release_version(folder) is not None
+
+
+def folder_name(text):
+    """The last part of a path written on any system (C:\\...\\abc or /home/.../abc)."""
+    return re.split(r'[\\/]', str(text).rstrip('\\/'))[-1]
+
+
+def installed_release(state=None):
+    """The installed Corsu release: {'version', 'folder', 'installed_at'}, or None when Corsu is not installed.
+
+    Recorded in installation.json → 'release' from 0.23 on. Versions 0.21 and 0.22 did not record it: the copy their
+    launchers start is the installed one, the Corsu menu entry first; when launchers point at several copies
+    (installations made over time), the newest version among them."""
+    state = corsu.load_state() if state is None else state
+    releases = corsu.DATA / 'releases'
+    recorded = state.get('release')
+    if isinstance(recorded, dict) and recorded.get('folder'):
+        folder = releases / folder_name(recorded['folder'])
+        if genuine_release(folder):
+            return {'version': release_version(folder), 'folder': str(folder),
+                    'installed_at': recorded.get('installed_at'), 'python': recorded.get('python')}
+    places = [place for place in managed_places(state) if place.name != 'app.asar']
+    entries = [place for place in places if place.name in CORSU_ENTRIES]
+    for group in (entries, places):
+        candidates = [releases / name for name in folders_in_use(releases, group) if genuine_release(releases / name)]
+        if candidates:
+            folder = max(candidates, key=lambda path: (version_tuple(release_version(path)), path.stat().st_mtime))
+            return {'version': release_version(folder), 'folder': str(folder), 'installed_at': folder.stat().st_mtime}
+    return None
+
+
+def version_policy(running, installed):
+    """What running this copy does: 'install' (nothing installed), 'update' (newer), 'repair' (same version) or
+    'downgrade' (older: refused unless asked for explicitly)."""
+    if not installed:
+        return 'install'
+    if version_tuple(running) > version_tuple(installed):
+        return 'update'
+    if version_tuple(running) == version_tuple(installed):
+        return 'repair'
+    return 'downgrade'
+
+
+def record_release(before):
+    """The installed release is now this copy; the one it replaces is kept until the next successful update."""
+    state = corsu.load_state()
+    if before and folder_name(before['folder']) != ROOT.name:
+        state['previous_release'] = before
+    # The window restarts Corsu from here: the copy, and the Python its launchers use (this run's, which is the
+    # copied bundled runtime when there is one).
+    state['release'] = {'version': release_version(ROOT), 'folder': str(ROOT), 'python': str(Path(sys.executable)),
+                        'installed_at': time.time()}
+    corsu.save_state(state)
+
+
+def restore_launchers(before, target):
+    """The new copy's installer stopped: point the launchers back at the copy that worked before (complete, and
+    never deleted before a successful update). The new copy stays; the next run reuses it."""
+    if not before or folder_name(before['folder']) == Path(target).name:
+        return
+    previous = corsu.DATA / 'releases' / folder_name(before['folder'])
+    if not genuine_release(previous):
+        return
+    try:
+        corsu.refresh_launchers(corsu.Installer(), previous)
+        print(t(f'The launchers still open Corsu {before["version"]}.',
+                f'Les raccourcis ouvrent toujours Corsu {before["version"]}.'), file=sys.stderr)
+    except (OSError, RuntimeError) as error:
+        print(t(f'Note: the launchers could not all be pointed back ({error}).',
+                f'Note : les raccourcis n\'ont pas tous pu être remis ({error}).'), file=sys.stderr)
+
+
+DAY = 24 * 3600
+
+
+def discard(path):
+    """Delete a folder without ever leaving half of one in use: it is renamed first, which Windows refuses while a
+    program uses a file in it (it then stays, and a later run tries again)."""
+    trash = path.with_name(f'trash-{path.name}-{os.getpid()}')
+    try:
+        path.rename(trash)
+    except OSError:
+        return False
+    shutil.rmtree(trash, ignore_errors=True)
+    return True
+
+
+def clean_leftovers(folder):
+    """Remove what interrupted runs left: copies being made (stage-*) a day old, folders being deleted (trash-*)."""
+    if not folder.is_dir():
+        return
+    for path in folder.iterdir():
+        try:
+            old = time.time() - path.stat().st_mtime > DAY
+        except OSError:
+            continue
+        if path.is_dir() and (path.name.startswith('trash-') or (path.name.startswith('stage-') and old)):
+            shutil.rmtree(path, ignore_errors=True)
 
 
 CLIENTS = ('Discord', 'DiscordPTB', 'DiscordCanary', 'Vesktop', 'vesktop')
@@ -300,16 +435,21 @@ def clients_running():
 
 
 def prune_releases(current, loaded=()):
-    """Delete the copies of earlier Corsu versions, keeping the current one, any still in use, and the ones an open
-    Discord or Vesktop loaded before this run (its new windows and style reloads still read them)."""
+    """Delete the copies of earlier Corsu versions, keeping the current one, the one it replaced (until the next
+    successful update), any still in use, and the ones an open Discord or Vesktop loaded before this run (its new
+    windows and style reloads still read them). Only Corsu's own release folders are ever deleted."""
     folder = corsu.DATA / 'releases'
     if not folder.is_dir():
         return
+    clean_leftovers(folder)
     keep = releases_in_use() | {Path(current).name}
     # The Corsu app that started this installation keeps running from its own copy.
     if os.environ.get('CORSU_APP_ROOT'):
-        keep.add(Path(os.environ['CORSU_APP_ROOT']).name)
+        keep.add(folder_name(os.environ['CORSU_APP_ROOT']))
     state = corsu.load_state()
+    for name in ('release', 'previous_release'):
+        if isinstance(state.get(name), dict) and state[name].get('folder'):
+            keep.add(folder_name(state[name]['folder']))
     running = set(state.get('running_releases', [])) | set(loaded)
     running = {name for name in running if (folder / name).is_dir()} if clients_running() else set()
     keep |= running
@@ -317,8 +457,8 @@ def prune_releases(current, loaded=()):
         state['running_releases'] = sorted(running)
         corsu.save_state(state)
     for release in folder.iterdir():
-        if release.is_dir() and release.name not in keep:
-            shutil.rmtree(release, ignore_errors=True)
+        if release.name not in keep and genuine_release(release):
+            discard(release)
 
 
 def vencord_installer():
@@ -424,15 +564,20 @@ def describe(name):
 
 def choose(available):
     """Ask which detected applications to translate. Rerun the setup later to add more."""
-    installed = set()
+    installed, state = set(), {}
     if corsu.STATE.exists():
-        installed = set(corsu.load_state().get('components', []))
-    selected = {name: True for name in available}
+        state = corsu.load_state()
+        installed = set(state.get('components', []))
+    # Running the installer again keeps what was chosen: only installed parts are ticked, new ones are offered.
+    selected = {name: (name in installed) if installed else True for name in available}
     while True:
         print(t('Select what you want to translate:', 'Choisissez ce que vous voulez traduire :'))
         for number, name in enumerate(available, 1):
             mark = 'x' if selected[name] else ' '
-            note = t('  (installed)', '  (déjà installé)') if name in installed else ''
+            note = ''
+            if name in installed:
+                note = (t('  (installed, switched off)', '  (installé, désactivé)') if corsu.is_disabled(name, state)
+                        else t('  (installed)', '  (déjà installé)'))
             print(f'  [{mark}] {number}. {describe(name)}{note}')
         answer = input(t('Enter installs everything ticked. Type a number to tick or untick it, a for all, n for none, q to quit: ',
                          'Entrée installe tout ce qui est coché. Tapez un numéro pour le cocher ou le décocher, '
@@ -519,15 +664,60 @@ def show_plan(components, location):
             'Le texte sans traduction corse reste en français. Les messages ne sont jamais modifiés.\n'))
 
 
+class Refused(RuntimeError):
+    """This copy is older than the installed Corsu: nothing was changed."""
+
+
+# Exit codes: another Corsu process is busy (EX_TEMPFAIL), or the version policy refused this copy.
+BUSY, REFUSED = 75, 3
+
+
+def keep_choices(components, available, location, state):
+    """The parts to (re)install now, and why the others are left as they are.
+
+    A part installed and switched off stays off: an update or a repair never switches it back on (the Corsu app's
+    switch or --enable does). A part installed earlier whose program is gone is left alone, not an error."""
+    recorded = set(state.get('components', [])) | ({'qt'} if state.get('qt_system') else set())
+    kept, notes = [], []
+    for component in dict.fromkeys(components):
+        part = 'desktop' if component == 'qt' else component
+        name = corsu.component_names([part])
+        if component in recorded and corsu.is_disabled(part, state):
+            notes.append(t(f'{name}: switched off, stays off (switch it on in the Corsu app).',
+                           f'{name} : désactivé, le reste (activez-le dans l\'application Corsu).'))
+            continue
+        found = component in available or (component == 'discord' and location and discord_archive(location).exists())
+        if component in recorded and not found:
+            notes.append(t(f'{name}: no longer found on this computer; left as it is.',
+                           f'{name} : introuvable sur cet ordinateur ; laissé tel quel.'))
+            continue
+        kept.append(component)
+    return kept, notes
+
+
+def announce(action, running, installed):
+    if action == 'update':
+        print(t(f'Corsu {installed} is installed: updating it to {running}. Your choices are kept.',
+                f'Corsu {installed} est installé : mise à jour vers {running}. Vos choix sont gardés.'))
+    elif action == 'repair':
+        print(t(f'Corsu {running} is already installed: repairing it. Your choices are kept.',
+                f'Corsu {running} est déjà installé : réparation. Vos choix sont gardés.'))
+    elif action == 'downgrade':
+        print(t(f'Corsu {installed} is installed: going back to the older {running}, as asked.',
+                f'Corsu {installed} est installé : retour à la version antérieure {running}, comme demandé.'))
+
+
 def main(argv=None):
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('--components', nargs='+', choices=['firefox', 'chromium', 'desktop', 'discord', 'vesktop', 'qt', 'minecraft', *apps_ids()],
-                        help='Default: all supported integrations already installed on this computer.')
+                        help='Default: the parts already installed, or on a first installation every supported integration found on this computer.')
     parser.add_argument('--discord-path', type=Path,
                         help='Native Discord location: folder with resources/ (Linux), %%LOCALAPPDATA%%\\Discord (Windows) or Discord.app (macOS)')
     parser.add_argument('--yes', action='store_true', help='Accept the displayed installation plan')
     parser.add_argument('--dry-run', action='store_true', help='Display the plan without downloading or changing anything')
     parser.add_argument('--uninstall', action='store_true')
+    parser.add_argument('--allow-downgrade', action='store_true',
+                        help='Install this copy even though a newer Corsu is installed')
     # The Windows launcher cannot drop its own --text option before passing the rest on.
     parser.add_argument('--text', action='store_true', help=argparse.SUPPRESS)
     parts = ['firefox', 'chromium', 'discord', 'vesktop', 'desktop', 'terminal', 'minecraft', *apps_ids()]
@@ -541,10 +731,11 @@ def main(argv=None):
     if args.disable is not None or args.enable is not None:
         if args.dry_run:
             return 0
-        if args.enable is not None:
-            corsu.enable(args.enable or None)
-        else:
-            corsu.disable(args.disable or None, hours=args.hours)
+        with corsu.lock('enable' if args.enable is not None else 'disable'):
+            if args.enable is not None:
+                corsu.enable(args.enable or None)
+            else:
+                corsu.disable(args.disable or None, hours=args.hours)
         return 0
     if args.uninstall:
         print(t('This puts back the original files and settings. Files you changed yourself since are left alone.',
@@ -553,8 +744,23 @@ def main(argv=None):
             return 0
         if not args.yes and input(t('Uninstall Corsu? [y/N] ', 'Désinstaller Corsu ? [o/N] ')).strip().lower() not in ('y', 'yes', 'o', 'oui'):
             return 0
-        corsu.uninstall()
+        with corsu.lock('uninstall'):
+            corsu.uninstall()
         return 0
+    # The copy started by the installer that deployed it: that one already decided, holds the lock and showed the plan.
+    child = bool(os.environ.get('CORSU_DEPLOYED')) and os.environ.get('CORSU_DEPLOYED') == str(ROOT)
+    state = corsu.load_state()
+    installed = installed_release(state)
+    running = release_version(ROOT)
+    action = version_policy(running, installed and installed['version'])
+    if not child:
+        if action == 'downgrade' and not args.allow_downgrade:
+            raise Refused(t(
+                f'Corsu {installed["version"]} is installed and this copy is the older {running}; nothing was changed. '
+                'To go back to it anyway, run the installer again with --allow-downgrade.',
+                f'Corsu {installed["version"]} est installé et cette copie est la version antérieure {running} ; rien n\'a été '
+                'modifié. Pour y revenir quand même, relancez l\'installeur avec --allow-downgrade.'))
+        announce(action, running, installed and installed['version'])
     available = available_components()
     location = args.discord_path.resolve() if args.discord_path else discord_location()
     if args.discord_path and not discord_archive(location).exists():
@@ -563,15 +769,25 @@ def main(argv=None):
                 f'Note : {location} n\'existe plus ; utilisation du Discord trouvé sur cet ordinateur.'))
         location = discord_location()
     forget_removed_discord()
+    state = corsu.load_state()
     if args.discord_path and 'discord' not in available and discord_archive(location).exists():
         available = [*available, 'discord']
-    components = args.components if args.components is not None else available
+    recorded = [name for name in state.get('components', []) if name != 'terminal']
+    if state.get('qt_system'):
+        recorded.append('qt')
+    # Without a list, running the installer again repairs what is installed; it never adds parts nobody chose.
+    components = args.components if args.components is not None else (recorded or available)
     if args.components is None and available and not (args.yes or args.dry_run) and sys.stdin.isatty():
         components = choose(available)
         if not components:
             print(t('Nothing selected, nothing was changed.', 'Rien de sélectionné, rien n\'a été modifié.'))
             return 0
-    if not components:
+    requested = list(components)
+    components, notes = keep_choices(components, available, location, state)
+    if not child:
+        for note in notes:
+            print(note)
+    if not requested:
         parser.error(t('Corsu found nothing to translate here. Install Firefox, a Chromium browser, Discord or KDE Plasma first.',
                        'Corsu n\'a rien trouvé à traduire ici. Installez d\'abord Firefox, un navigateur Chromium, Discord ou KDE Plasma.'))
     for component in components:
@@ -580,23 +796,37 @@ def main(argv=None):
                 parser.error(f'{component} is for KDE Plasma on Linux.')
             parser.error(f'{component} was not found on this computer.')
     # The Corsu app shows the plan before starting; its log only needs what happens next.
-    if not os.environ.get('CORSU_SETUP_WINDOW'):
+    if not os.environ.get('CORSU_SETUP_WINDOW') and not child:
         show_plan(components, location)
     if args.dry_run:
         return 0
     if not args.yes and input(t('Go ahead? [y/N] ', 'On y va ? [o/N] ')).strip().lower() not in ('y', 'yes', 'o', 'oui'):
         print(t('Nothing was changed.', 'Rien n\'a été modifié.'))
         return 0
+    with corsu.lock(action if action in corsu.ACTIONS else 'install'):
+        return apply(args, requested, components, location)
+
+
+def apply(args, requested, components, location):
     corsu.progress(3, 'Preparing', 'Préparation')
+    # The installed copy before this run: kept until the next successful update, and used again if this one fails.
+    before = installed_release()
     # What Discord and Vesktop loaded at their start: they keep using it until they restart.
     loaded = releases_in_use()
     target = deploy_release()
     python = deploy_runtime()
     if target != ROOT:
-        command = [str(python), str(target / 'src/installer.py'), '--yes', '--components', *components]
+        # The installed copy decides again from the same state: parts switched off stay off.
+        command = [str(python), str(target / 'src/installer.py'), '--yes', '--components', *requested]
         if 'discord' in components:
             command.extend(['--discord-path', str(location)])
-        run(command, env={**os.environ, 'CORSU_DEPLOYED': str(target.resolve())})
+        if args.allow_downgrade:
+            command.append('--allow-downgrade')
+        try:
+            run(command, env={**os.environ, 'CORSU_DEPLOYED': str(target.resolve())})
+        except BaseException:
+            restore_launchers(before, target)
+            raise
         return 0
     if {'discord', 'vesktop'} & set(components):
         corsu.progress(5, 'Preparing the Discord plugin', 'Préparation du plugin Discord')
@@ -622,6 +852,7 @@ def main(argv=None):
     corsu.setup_shortcut(shortcuts)
     corsu.refresh_launchers(shortcuts)
     if ROOT.is_relative_to((corsu.DATA / 'releases').resolve()):
+        record_release(before)
         prune_releases(ROOT, loaded)
     prune_runtimes()
     applications = corsu.HOME / '.local/share/applications'
@@ -652,6 +883,11 @@ if __name__ == '__main__':
     except (EOFError, KeyboardInterrupt):
         print(t('\nNo answer received; nothing was changed.', '\nAucune réponse reçue ; rien n\'a été modifié.'), file=sys.stderr)
         raise SystemExit(1)
+    except (corsu.Busy, Refused) as error:
+        # Nothing was changed: no "stopped" message, and an exit code callers can tell apart.
+        logbook.failure(error)
+        print(error, file=sys.stderr)
+        raise SystemExit(BUSY if isinstance(error, corsu.Busy) else REFUSED)
     except (RuntimeError, OSError, subprocess.CalledProcessError) as error:
         logbook.failure(error)
         print(t(f'Corsu stopped: {error}\nDetails: {logbook.path()}\nAnything already changed can be undone with the Corsu app.',
