@@ -45,7 +45,9 @@ buttons in French, German, Italian, dates in the file list and "50 %" in the sta
 .po file in a folder with accents opened, no locale error. This relies on how glibc resolves locale names, which is
 not a documented interface: before writing the menu entry Corsu checks it with `locale` (LC_ALL=/C.UTF-8 must load
 without "Cannot set"). Where it fails (another C library, a glibc without the C.UTF-8 folder), Corsu falls back to the
-first way and says what it costs: Poedit in Corsican, GTK's dialogs in English. When the session sets LC_ALL (which
+first way and says what it costs: Poedit in Corsican, GTK's dialogs in English (with "C" instead of "C.UTF-8" where
+that locale does not load either: LC_MESSAGES=C.UTF-8 would make setlocale(LC_ALL, "") fail as a whole and take the
+session's formats away, seen in a Debian 13 container without C.UTF-8). When the session sets LC_ALL (which
 beats LC_MESSAGES everywhere), Corsu empties it and gives its value to LANG and to the categories the session sets.
 For the Flatpak, the same variables go in its user override (no check there: the runtime's glibc is the one seen).
 Debian's package (3.6.3, Debian 13; wxWidgets 3.2.8) installs /usr/bin/poeditor, the entries
@@ -99,14 +101,24 @@ def is_c(locale):
     return locale.split('.')[0].split('@')[0] in ('', 'C', 'POSIX')
 
 
-def messages_name_works():
-    """Whether this computer's C library loads LC_MESSAGES=/C.UTF-8 (glibc 2.35+ with its C.UTF-8 folder)."""
+def locale_loads(name):
+    """Whether this computer's C library loads the locale `name` (`locale` with LC_ALL=name says nothing wrong)."""
     try:
-        result = subprocess.run(['locale'], env={'LC_ALL': MESSAGES, 'PATH': os.environ.get('PATH') or '/usr/bin:/bin'},
+        result = subprocess.run(['locale'], env={'LC_ALL': name, 'PATH': os.environ.get('PATH') or '/usr/bin:/bin'},
                                 capture_output=True, text=True, timeout=10)
     except (OSError, subprocess.SubprocessError):
         return False
-    return result.returncode == 0 and not result.stderr.strip() and MESSAGES in result.stdout
+    return result.returncode == 0 and not result.stderr.strip() and name in result.stdout
+
+
+def messages_name_works():
+    """Whether this computer's C library loads LC_MESSAGES=/C.UTF-8 (glibc 2.35+ with its C.UTF-8 folder)."""
+    return locale_loads(MESSAGES)
+
+
+def c_utf8_works():
+    """Whether C.UTF-8 loads at all (the fallback's LANG and LC_MESSAGES; plain "C" otherwise)."""
+    return locale_loads('C.UTF-8')
 
 
 def environment(separate=True):
@@ -123,7 +135,8 @@ def environment(separate=True):
                 if os.environ.get(name):
                     result[name] = everything
         return result
-    result = {'LANG': 'C.UTF-8', 'LC_MESSAGES': 'C.UTF-8'}
+    neutral = 'C.UTF-8' if c_utf8_works() else 'C'  # a locale that does not load would lose every category
+    result = {'LANG': neutral, 'LC_MESSAGES': neutral}
     if everything:
         result['LC_ALL'] = ''
     for name in FORMATS:
