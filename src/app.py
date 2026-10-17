@@ -5,6 +5,7 @@ The window is a local page served on 127.0.0.1 at a fixed address (http://localh
 in a window of its own (see window.py) or in any browser. `--browser` opens it in the browser instead of a window,
 `--text` gives a menu in the terminal.
 """
+import ipaddress
 import json
 import os
 import re
@@ -17,6 +18,7 @@ import threading
 import time
 import http.client
 import socketserver
+import struct
 import urllib.parse
 from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
 
@@ -283,13 +285,36 @@ def switch_complement(job, value, language):
     return 200, {'started': True}
 
 
-TIME_WAIT = '06'
+ESTABLISHED = '01'
 
 
-def peer_uid(port, server_port=None):
-    """The user owning the local TCP connection from `port` to `server_port` (Linux only; None elsewhere or when
-    unknown). Only that connection counts: a closed one waiting in TIME_WAIT on the same port shows uid 0, and another
-    program's connection may use the same local port towards another address."""
+def proc_address(text):
+    """An address as /proc/net/tcp{,6} prints it: each 32-bit word in the kernel's byte order. IPv4-mapped IPv6
+    addresses (::ffff:a.b.c.d, a dual-stack socket talking IPv4) count as their IPv4 address."""
+    host, port = text.rsplit(':', 1)
+    packed = b''.join(struct.pack('=I', int(host[i:i + 8], 16)) for i in range(0, len(host), 8))
+    address = ipaddress.ip_address(packed)
+    if address.version == 6 and address.ipv4_mapped:
+        address = address.ipv4_mapped
+    return address, int(port, 16)
+
+
+def endpoint(address):
+    host, port = address[:2]
+    address = ipaddress.ip_address(host.split('%', 1)[0])
+    if address.version == 6 and address.ipv4_mapped:
+        address = address.ipv4_mapped
+    return address, port
+
+
+def peer_uid(client, server):
+    """The user owning the client end of the live connection `client` -> `server` ((host, port) as the server sees
+    them), from /proc/net/tcp and /proc/net/tcp6 (Linux). Only an ESTABLISHED row whose local end is `client` and
+    remote end is `server` is that socket: the window's own end of the connection (local and remote swapped), its
+    listening socket, closed connections (TIME_WAIT rows show uid 0) and other connections from the same port to
+    elsewhere are not. None when no such row exists or matching rows disagree on the user: the caller is unknown."""
+    client, server = endpoint(client), endpoint(server)
+    uids = set()
     for table in ('/proc/net/tcp', '/proc/net/tcp6'):
         try:
             lines = Path(table).read_text().splitlines()[1:]
@@ -297,10 +322,14 @@ def peer_uid(port, server_port=None):
             continue
         for line in lines:
             fields = line.split()
-            if (len(fields) > 7 and int(fields[1].rsplit(':', 1)[1], 16) == port and fields[3] != TIME_WAIT
-                    and (server_port is None or int(fields[2].rsplit(':', 1)[1], 16) == server_port)):
-                return int(fields[7])
-    return None
+            if len(fields) < 8 or fields[3] != ESTABLISHED:
+                continue
+            try:
+                if proc_address(fields[1]) == client and proc_address(fields[2]) == server:
+                    uids.add(int(fields[7]))
+            except ValueError:
+                continue
+    return uids.pop() if len(uids) == 1 else None
 
 
 def make_handler(job, activity, port, handover=None):
@@ -329,13 +358,14 @@ def make_handler(job, activity, port, handover=None):
             """Only Corsu's own page may drive Corsu. The Host check stops other sites reaching it through a
             rebound domain name; the custom header can only be sent by a page of this address (a page elsewhere
             would need permission the server never gives); on Linux the connection must also come from this user,
-            so another account on the same computer cannot use it."""
+            so another account on the same computer cannot use it: the client end of this very connection must belong
+            to this user, and a caller that cannot be identified is refused (see docs/window-security.md)."""
             if self.headers.get('Host', '') not in hosts or self.headers.get('X-Corsu') != '1':
                 return False
             if self.headers.get('Origin') and self.headers['Origin'] not in origins:
                 return False
             if corsu.PLATFORM == 'linux' and hasattr(os, 'getuid'):
-                return peer_uid(self.client_address[1], self.server.server_address[1]) in (None, os.getuid())
+                return peer_uid(self.client_address, self.connection.getsockname()) == os.getuid()
             return True
 
         def do_GET(self):

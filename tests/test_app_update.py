@@ -276,6 +276,10 @@ class ServerTests(Isolated):
             with patch.object(app.corsu, 'PLATFORM', 'linux'), patch.object(app, 'peer_uid', return_value=-5), \
                     patch.object(app.os, 'getuid', create=True, return_value=1000):
                 self.assertEqual(self.request('POST', '/api/restart')[0], 403)
+            # A caller whose connection cannot be found, or found twice with different users, is refused too.
+            with patch.object(app.corsu, 'PLATFORM', 'linux'), patch.object(app, 'peer_uid', return_value=None):
+                for path in ('/api/update/check', '/api/preferences', '/api/restart'):
+                    self.assertEqual(self.request('POST', path, body={'auto_update': True})[0], 403, path)
         check.assert_not_called()
         save.assert_not_called()
         self.handover.start.assert_not_called()
