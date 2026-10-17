@@ -27,6 +27,13 @@ Les sections datées après « État actuel » sont l'historique : ce qui y est 
   limitée à la vraie connexion (test instable du tag 0.24.0). Notes dans [.github/RELEASE_NOTES.md](../.github/RELEASE_NOTES.md) et le CHANGELOG.
 - **Candidate 0.25.0** (`src/release.json`) sur `next-0.25`, non taguée. Migration depuis la 0.24.0 publiée vérifiée
   dans un conteneur Debian avec vrais VLC (entrée de menu), Poedit, PDFsam, fre:ac et Firefox.
+- **`fix-discord-labels`** (depuis `next-0.25`, non fusionnée) : « Dans un appel » traduit dans la liste des MP,
+  activités et noms laissés tels quels, « Bio » au lieu de « Organicu », 51 libellés Discord pris à d'autres
+  logiciels corrigés (revue IA, propositions restantes dans `lexicon/review-discord-2026-10.tsv`), diagnostic
+  sans données personnelles. Vérifié sur pages simulées et sur le module construit ; pas dans un vrai Discord. Le
+  Discord personnel charge encore le module de la 0.23.0 (empreinte `126646-…`).
+- **`redesign-window`** (depuis `next-0.25`, non fusionnée) : refonte de la fenêtre et rubrique Apparence
+  (docs/window-design.md).
 - **`fix-0.24.1`** (`3e43459`, depuis `v0.24.0`) : seulement le correctif de sécurité de la fenêtre ; attend une
   décision de publication.
 - Tests unitaires : `HOME=$(mktemp -d) python3 -m unittest discover -s tests -t . -q` (sans `-t .`, 13 erreurs
@@ -197,6 +204,11 @@ Sans partager de message ; noter seulement l'endroit d'un défaut, pas le conten
    l'ancien nom ne réapparaît pas.
 7. Un pseudo égal à un mot de l'interface (« Online », « Home ») n'est jamais traduit.
 8. Aucun message, bio ou statut traduit.
+9. Liste des MP : un contact en appel montre « In una chjama » ; son pseudo, un jeu ou un statut personnalisé
+   restent tels quels. Profil : titre « Bio », texte de la bio intact.
+10. Version chargée : Paramètres › Vencord › Plugins › Corsu, option cachée `reportMissing` (dans
+    `settings.json` de Vencord) puis redémarrage : la console affiche `[CorsuMissing] {"revision":"2026-10-activity-2",
+    "dictionary":"…"}`. Rien de tel avec le module de la 0.23.0.
 
 ## Blocages et ce qui demande une personne
 
