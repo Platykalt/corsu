@@ -79,6 +79,13 @@ p { margin: 0 0 10px; }
 .instances .where { font: 12px/1.4 ui-monospace, "Cascadia Mono", "DejaVu Sans Mono", Menlo, monospace; color: var(--muted); overflow-wrap: anywhere; }
 .instances .hint { margin-top: 0; }
 .instances .when { color: var(--muted); font-size: 12px; }
+/* A switch of its own inside a program's row (VLC's experimental complement). */
+/* It reaches under the row's own switch, so both switches stand in one column (36px switch + 14px gap). */
+.option { display: flex; align-items: flex-start; gap: 14px; margin: 10px -50px 0 0; padding-top: 9px; border-top: 1px dashed var(--line); }
+.option > .label { flex: 1; min-width: 0; }
+.option > .label > label { display: block; font-weight: 500; }
+.option > .switch { margin-top: 2px; }
+.option.off > .label > label { color: var(--muted); }
 
 .switch { position: relative; flex: none; width: 36px; height: 20px; }
 .switch input { position: absolute; inset: 0; margin: 0; opacity: 0; cursor: pointer; }
@@ -364,6 +371,10 @@ const text = {
     update_restart_text: "Corsu {version} hè stallatu. Rilanciate Corsu per aduprallu.",
     update_restarting: "Corsu si rilancia…", update_restart_failed: "Corsu ùn s'hè micca pussutu rilancià : {error}.",
     activation_waiting: "Aspetta l'attivazione", minecraft_switch_new: "Mette in corsu i novi cartulari",
+    complement_label: "Cumplementu sperimentale",
+    complement_detail: "Traduzzioni in più fatte è riviste da IA, micca rilette da un parlante.",
+    complement_detail_count: "{n} traduzzioni in più fatte è riviste da IA, micca rilette da un parlante.",
+    complement_vlc_off: "Mettite prima VLC in corsu.", complement_unavailable: "Ùn si pò aduprà quì : {reason}.",
     programs_lead: "Ciò chì s'affissa in corsu. Un cambiamentu face effettu à u prossimu lanciu di u prugramma.",
     programs_none: "Nunda ùn hè stallatu per avà.", go_add: "Aghjunghje prugrammi",
     restart: "Rilanciate {name} per vede u cambiamentu.", restart_desktop: "Scunnettitevi è cunnettitevi torna per vede u cambiamentu.",
@@ -443,6 +454,10 @@ const text = {
     update_restart_text: "Corsu {version} est installé. Redémarrez Corsu pour l'utiliser.",
     update_restarting: "Corsu redémarre…", update_restart_failed: "Corsu n'a pas pu redémarrer : {error}.",
     activation_waiting: "En attente d'activation", minecraft_switch_new: "Passer les nouveaux dossiers en corse",
+    complement_label: "Complément expérimental",
+    complement_detail: "Traductions supplémentaires produites et revues par IA, non relues par un locuteur.",
+    complement_detail_count: "{n} traductions supplémentaires produites et revues par IA, non relues par un locuteur.",
+    complement_vlc_off: "Activez d'abord VLC en corse.", complement_unavailable: "Indisponible ici : {reason}.",
     programs_lead: "Ce qui s'affiche en corse. Un changement prend effet au prochain démarrage du logiciel.",
     programs_none: "Rien n'est installé pour l'instant.", go_add: "Ajouter des logiciels",
     restart: "Redémarrez {name} pour voir le changement.", restart_desktop: "Déconnectez-vous puis reconnectez-vous pour voir le changement.",
@@ -522,6 +537,10 @@ const text = {
     update_restart_text: "Corsu {version} is installed. Restart Corsu to use it.",
     update_restarting: "Corsu is restarting…", update_restart_failed: "Corsu could not restart: {error}.",
     activation_waiting: "Waiting for activation", minecraft_switch_new: "Switch the new folders to Corsican",
+    complement_label: "Experimental complement",
+    complement_detail: "Extra translations made and reviewed by AI, not proofread by a speaker.",
+    complement_detail_count: "{n} extra translations made and reviewed by AI, not proofread by a speaker.",
+    complement_vlc_off: "Switch VLC to Corsican first.", complement_unavailable: "Not available here: {reason}.",
     programs_lead: "What is shown in Corsican. A change takes effect the next time the program starts.",
     programs_none: "Nothing is installed yet.", go_add: "Add programs",
     restart: "Restart {name} to see the change.", restart_desktop: "Log out and back in to see the change.",
@@ -712,13 +731,45 @@ function rowClass(block) {
   return [block.nodes.length > 1 || block.nodes.some(node => node.tagName === "DETAILS") ? "tall" : null, block.kind].filter(Boolean).join(" ") || null;
 }
 
+// VLC's experimental complement (apps/vlc_complement.py): its own switch, off unless the person asks for it. Switching
+// it re-applies VLC (with or without the complement); VLC's own switch stays as it is.
+function complementOption(item, name, busy) {
+  const complement = item.complement;
+  if (!complement) return null;
+  const id = "switch-" + item.name + "-complement";
+  const count = Number.isFinite(complement.translations) && complement.translations > 0 ? complement.translations : null;
+  // The reason comes from the server, in French or English: shown as it is.
+  const why = !item.on ? t("complement_vlc_off")
+    : !complement.available ? t("complement_unavailable", { reason: String(complement.reason || "?").trim().replace(/[.;:]$/, "") }) : null;
+  // Still switchable off when the choice is on but cannot be used here, so it never comes back unasked.
+  const usable = item.on && (complement.available || complement.enabled);
+  return make("span", { class: "option" + (usable ? "" : " off") },
+    make("span", { class: "label" },
+      make("label", { for: id, text: t("complement_label") }),
+      make("span", { class: "detail", id: id + "-detail", text: count ? t("complement_detail_count", { n: count.toLocaleString(numbers()) }) : t("complement_detail") }),
+      // Switching VLC on is something to do (a hint); a VLC the complement cannot work with is only explained.
+      why ? make("span", { class: item.on ? "detail" : "hint", id: id + "-why", text: why }) : null),
+    make("span", { class: "switch" },
+      make("input", { type: "checkbox", role: "switch", id, checked: Boolean(complement.enabled), disabled: busy || !usable,
+        "aria-describedby": [id + "-detail", why ? id + "-why" : null].filter(Boolean).join(" "), onchange: event => {
+        showLog = false;
+        restartHints.set(item.name, t("restart", { name }));
+        call("/api/vlc-complement", { on: event.target.checked }).catch(() => null).then(refresh);
+      } }),
+      make("i")));
+}
+
 function switchRow(item, busy) {
   const [name, detail] = item.text[language];
   const id = "switch-" + item.name;
   const block = statusBlock(item);
   // A restart cannot show a change that did not happen.
   const hint = troubled(activationOf(item)) ? null : restartHints.get(item.name);
-  return make("li", { class: rowClass(block) },
+  const option = complementOption(item, name, busy);
+  // The complement's own switch makes the row tall: VLC's switch stays at the top, next to its name.
+  const classes = new Set((rowClass(block) || "").split(" ").filter(Boolean));
+  if (option) classes.add("tall");
+  return make("li", { class: [...classes].join(" ") || null },
     make("span", { class: "label" },
       make("label", { for: id, text: name }),
       make("span", { class: "detail", text: detail }),
@@ -726,7 +777,8 @@ function switchRow(item, busy) {
       hint ? make("span", { class: "hint", text: hint }) : null,
       // New Minecraft game folders found since the installation: switched only when the person asks.
       item.waiting ? make("span", { class: "buttons" }, make("button", { type: "button", class: "button", id: "activate-" + item.name,
-        text: t("minecraft_switch_new"), disabled: busy, onclick: () => { showLog = false; call("/api/install", { components: [item.name] }).then(refresh); } })) : null),
+        text: t("minecraft_switch_new"), disabled: busy, onclick: () => { showLog = false; call("/api/install", { components: [item.name] }).then(refresh); } })) : null,
+      option),
     make("span", { class: "switch" },
       // Always the server's word: after a failed or deferred change, the next refresh puts it back.
       make("input", { type: "checkbox", role: "switch", id, checked: item.on, disabled: busy,
