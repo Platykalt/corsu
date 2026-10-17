@@ -123,7 +123,11 @@ def copies_in_use(home):
             if file.name == 'app.asar' or file.stat().st_size > 4_000_000:
                 continue
             for release in folder.iterdir():
-                if e2e.mentions(file, str(release)):
+                # Windows shortcuts keep the long form of the path (runneradmin, not RUNNER~1), in any case.
+                forms = {str(release), str(release.resolve())}
+                if os.name == 'nt':
+                    forms |= {form.lower() for form in forms} | {form.upper() for form in forms}
+                if any(e2e.mentions(file, form) for form in forms):
                     used.add(release.name)
     return used
 

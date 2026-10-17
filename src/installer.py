@@ -850,6 +850,11 @@ def apply(args, requested, components, location):
     corsu.progress(95, 'Creating shortcuts', 'Création des raccourcis')
     shortcuts = corsu.Installer()
     corsu.setup_shortcut(shortcuts)
+    applet = corsu.HOME / 'Applications/Firefox Corsu.app'
+    if corsu.PLATFORM == 'macos' and str(applet) in shortcuts.state['files'] and corsu.firefox_install():
+        # A compiled applet cannot be rewritten like the text launchers; rebuilt here even while Firefox is
+        # switched off (it then opens the ordinary Firefox), so it never keeps an old copy of Corsu in use.
+        corsu.macos_application(shortcuts, corsu.firefox_install())
     corsu.refresh_launchers(shortcuts)
     if ROOT.is_relative_to((corsu.DATA / 'releases').resolve()):
         record_release(before)
