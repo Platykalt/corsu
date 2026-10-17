@@ -14928,6 +14928,40 @@ Baltic|Baltique|Balticu
 |Trop de connexions en attente.|Troppu cunnessioni in attesa.
 |La mise à niveau vers WebSocket a échoué.|L'attualizazione versu WebSocket hà fiascatu.
 
+# Firefox labels still shown in French in the October 2026 audit (main menu, downloads): new proposals written by an AI
+# for Corsu, to review. Terms follow Mozilla's Corsican (spannatura alluntanata, prugramma maliziosu) and this file.
+Remote Debugging|Débogage distant|Spannatura alluntanata
+Browser Console|Console du navigateur|Cunsola di u navigatore
+Browser Toolbox|Boîte à outils du navigateur|Cascia d'arnesi di u navigatore
+Responsive Design Mode|Vue adaptative|Vista adattativa
+Blocked by Parental Controls|Bloqué par les contrôles parentaux|Bluccatu da u cuntrollu parentale
+This file contains a virus or malware.|Ce fichier contient un virus ou un logiciel malveillant.|Stu schedariu cuntene un virus o un prugramma maliziosu.
+This file may harm your computer.|Ce fichier peut endommager votre ordinateur.|Stu schedariu pò danneghjà u vostru urdinatore.
+File not downloaded: Potential security risk.|Fichier non téléchargé : risque de sécurité potentiel.|Schedariu micca scaricatu : risicu putenziale di sicurità.
+This file is not commonly downloaded.|Ce fichier est rarement téléchargé.|Stu schedariu hè scaricatu raramente.
+This file was blocked by your organization.|Ce fichier a été bloqué par votre organisation.|Stu schedariu hè statu bluccatu da a vostra urganizazione.
+File was blocked because %1 is not reachable.|Le fichier a été bloqué car %1 n’est pas accessible.|U schedariu hè statu bluccatu perchè %1 ùn hè micca accessibile.
+File was blocked because %1 failed signature verification.|Le fichier a été bloqué suite à l’échec de la vérification de la signature par %1.|U schedariu hè statu bluccatu perchè a verificazione di a firma da %1 hà fiascatu.
+File was blocked because of an error in communicating with %1.|Le fichier a été bloqué en raison d’une erreur de communication avec %1.|U schedariu hè statu bluccatu per via d'un sbagliu di cumunicazione cù %1.
+%1 timed out, so this file was blocked.|%1 a dépassé le délai de connexion, ce fichier a donc été bloqué.|%1 hà oltrepassatu u tempu di cunnessione, dunque stu schedariu hè statu bluccatu.
+This download may be unsafe and requires confirmation.|Ce téléchargement n’est peut-être pas sûr et nécessite une confirmation.|Stu scaricamentu ùn hè forse micca sicuru è richiede una cunferma.
+File moved or missing|Fichier déplacé ou manquant|Schedariu spiazzatu o mancante
+File deleted|Fichier supprimé|Schedariu squassatu
+File discarded (Blocked)|Fichier supprimé (bloqué)|Schedariu squassatu (bluccatu)
+Are you sure you want to allow this download?|Voulez-vous vraiment autoriser ce téléchargement ?|Vulete veramente permette stu scaricamentu ?
+Are you sure you want to open this file?|Voulez-vous vraiment ouvrir ce fichier ?|Vulete veramente apre stu schedariu ?
+This file contains a virus or other malware that will harm your computer.|Ce fichier contient un virus ou un logiciel malveillant qui peut endommager votre ordinateur.|Stu schedariu cuntene un virus o un prugramma maliziosu chì pò danneghjà u vostru urdinatore.
+This file is disguised as a helpful download, but it can make unexpected changes to your programs and settings.|Ce fichier est présenté comme un téléchargement légitime, mais il pourrait modifier vos programmes et paramètres.|Stu schedariu hè presentatu cum'è un scaricamentu legittimu, ma puderia mudificà i vostri prugrammi è parametri.
+Your organization uses data-loss prevention software that has flagged this content as unsafe.|Votre organisation utilise un logiciel de protection contre la perte de données qui a signalé ce contenu comme étant non sûr.|A vostra urganizazione usa un lugiziale di prutezzione contr'à a perdita di dati chì hà signalatu stu cuntenutu cum'è micca sicuru.
+This file is not commonly downloaded and may not be safe to open. It may contain a virus or make unexpected changes to your programs and settings.|Ce fichier est rarement téléchargé et l’ouvrir peut présenter un risque. Il pourrait contenir un virus ou modifier vos programmes et paramètres.|Stu schedariu hè scaricatu raramente è aprelu pò presentà un risicu. Puderia cuntene un virus o mudificà i vostri prugrammi è parametri.
+The download is offered over HTTP even though the current document was delivered over a secure HTTPS connection. If you proceed, the download may be corrupted or tampered with during the download process.|Le téléchargement est proposé via HTTP bien que le document actuel ait été chargé via une connexion sécurisée HTTPS. Si vous poursuivez, le téléchargement peut être corrompu ou falsifié pendant le processus de transfert.|U scaricamentu hè prupostu via HTTP benchè u ducumentu attuale sia statu caricatu via una cunnessione sicura HTTPS. S'è vo cuntinuate, u scaricamentu pò esse alteratu o falsificatu durante u trasferimentu.
+You can search for an alternate download source or try again later.|Vous pouvez rechercher une source alternative de téléchargement ou essayer à nouveau plus tard.|Pudete circà un'altra fonte di scaricamentu o pruvà torna un'altra volta.
+You can choose to download it anyway.|Vous pouvez tout de même le télécharger.|Pudete scaricallu quantunque.
+Your organization uses data-loss prevention software that has blocked this download.|Votre organisation utilise un logiciel de protection contre la perte de données qui a bloqué ce téléchargement.|A vostra urganizazione usa un lugiziale di prutezzione contr'à a perdita di dati chì hà bluccatu stu scaricamentu.
+This decision can only be overridden by your organization.|Seule votre organisation peut outrepasser cette décision.|Solu a vostra urganizazione pò annullà sta decisione.
+You may continue your download or cancel it.|Vous pouvez continuer le téléchargement ou l’annuler.|Pudete cuntinuà u scaricamentu o annullallu.
+Unknown size|Taille inconnue|Dimensione scunnisciuta
+
 # Chrome, Chromium and Opera interface — draft translations aligned with Mozilla co terminology, review welcomed
 |# favori|# indetta
 |Cette extension ne sera peut-être bientôt plus prise en charge|St'estensione ùn serà forse più supportata prestu

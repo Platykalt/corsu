@@ -44,10 +44,12 @@ REVIEW_RANK = {'to-review': 0, 'untranslated': 0, 'corsu-draft': 1, 'ai-reviewed
 GENERIC_APPS = {'wxwidgets'}
 
 # Placeholders that must survive translation untouched: Fluent placeables, printf
-# specifiers, Qt/KDE numbered arguments and shell-style variables.
+# specifiers (with Mozilla's %S and %1$S, used by Firefox's .properties files, but not Nyquist's ~% line break),
+# Qt/KDE numbered arguments and shell-style variables.
 PLACEHOLDER = re.compile(
     r'\{\s*[$-]?[\w.-]+(?:\([^{}]*\))?\s*\}'
     r'|%(?:\d+\$)?[0-9]*\.?[0-9]*(?:ll|l|h)?[sdiufgexXop]'
+    r'|(?<!~)%(?:\d+\$)?S'
     r'|%[Ln]?\d+'
     r'|%[Ln]\b'
     r'|\$\{[A-Za-z_]\w*\}'
@@ -56,7 +58,7 @@ PLACEHOLDER = re.compile(
     r'|\$\d'
 )
 # Markup and entities are contracts with the application, never translated content.
-SIGNATURE = re.compile(r'\$\d|%(?:\d+\$)?[0-9]*\.?[0-9]*(?:ll|l|h)?[sdiufgexXop]|%[Ln]?\d+|</?[A-Za-z][^>]*>|&[a-zA-Z]+;|\{[^{}]*\}')
+SIGNATURE = re.compile(r'\$\d|%(?:\d+\$)?[0-9]*\.?[0-9]*(?:ll|l|h)?[sdiufgexXop]|(?<!~)%(?:\d+\$)?S|%[Ln]?\d+|</?[A-Za-z][^>]*>|&[a-zA-Z]+;|\{[^{}]*\}')
 ACCELERATOR = re.compile(r'(?<![&\w])&(?=[^\W\d_])|(?<![_\w])_(?=[^\W\d_])')
 TRAILING = re.compile(r'^(.*?)([\s  ]*(?:\.\.\.|…|:|\?|!|;|\.))$', re.S)
 WRAPPERS = (('«', '»'), ('"', '"'), ('“', '”'), ('(', ')'), ('[', ']'), ("'", "'"))

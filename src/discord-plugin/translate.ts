@@ -38,8 +38,11 @@ const protectedArea = contentArea + "," + nameArea;
 // and inside a label or sentence only the interface text around it changes.
 const snowflake = /^\d{15,21}$/;
 const nameFields = ["username", "globalName", "global_name", "nick", "nickname", "displayName", "display_name", "name"];
+// Discord's records: a channel keeps its DM recipients' ids in `recipients` and the people themselves in
+// `rawRecipients`, with group DM nicknames in `nicks` (by user id); a server member is identified by `userId`.
 const holders = ["user", "author", "member", "guildMember", "guild", "channel", "role", "recipient", "recipients",
-    "users", "members", "message", "currentUser", "otherUser", "friend", "relationship", "entry", "item"];
+    "rawRecipients", "users", "members", "message", "currentUser", "otherUser", "friend", "relationship", "entry", "item"];
+const isId = (id: unknown) => (typeof id === "string" && snowflake.test(id)) || typeof id === "bigint";
 
 function collectNames(value: unknown, into: Set<string>, depth: number) {
     if (!value || typeof value !== "object" || depth > 3) return;
@@ -48,10 +51,15 @@ function collectNames(value: unknown, into: Set<string>, depth: number) {
         return;
     }
     const record = value as Record<string, unknown>;
-    if ((typeof record.id === "string" && snowflake.test(record.id)) || typeof record.id === "bigint") {
+    if (isId(record.id) || isId(record.userId)) {
         for (const field of nameFields) {
             const name = record[field];
             if (typeof name === "string" && name.trim()) into.add(name.trim());
+        }
+        if (record.nicks && typeof record.nicks === "object") {
+            for (const [id, nick] of Object.entries(record.nicks as Record<string, unknown>).slice(0, 50)) {
+                if (snowflake.test(id) && typeof nick === "string" && nick.trim()) into.add(nick.trim());
+            }
         }
     }
     for (const key of holders) {
@@ -64,20 +72,59 @@ function fiberOf(node: Node): any {
     return undefined;
 }
 
+function hostProps(node: Node): any {
+    for (const key in node) if (key.startsWith("__reactProps$")) return (node as any)[key];
+    return undefined;
+}
+
+// React keeps two versions of each component (the one on screen and the one being prepared) and leaves on a DOM
+// node the version that created it: after a re-render, such as another conversation shown in the same nodes, that
+// version and the components above it can hold the previous props. The version on screen is the one whose props
+// React last gave the node (its text, for a text node). When this cannot be told, both are read.
+function currentFibers(host: Node, fiber: any): any[] {
+    const alternate = fiber?.alternate;
+    if (!alternate) return [fiber];
+    const shown = host.nodeType === Node.TEXT_NODE ? (host as Text).data : hostProps(host);
+    if (shown !== undefined) {
+        if (fiber.memoizedProps === shown && alternate.memoizedProps !== shown) return [fiber];
+        if (alternate.memoizedProps === shown && fiber.memoizedProps !== shown) return [alternate];
+    }
+    return [fiber, alternate];
+}
+
 // The names the components that render this node know about; empty outside React (and in tests without it).
 export function userNames(node: Node | null): Set<string> {
     const names = new Set<string>();
     let host: Node | null = node;
     while (host && !fiberOf(host)) host = host.parentNode;
-    let fiber = host ? fiberOf(host) : undefined;
-    for (let depth = 0; fiber && depth < 40; depth++, fiber = fiber.return) {
-        const props = fiber.memoizedProps;
-        if (props && typeof props === "object") collectNames(props, names, 0);
-        for (const key of ["user", "member", "channel", "guild"]) {
-            if (props && typeof props === "object" && Object.hasOwn(props, key)) collectNames(props[key], names, 0);
+    if (!host) return names;
+    for (let fiber of currentFibers(host, fiberOf(host))) {
+        for (let depth = 0; fiber && depth < 40; depth++, fiber = fiber.return) {
+            const props = fiber.memoizedProps;
+            if (props && typeof props === "object") collectNames(props, names, 0);
+            for (const key of ["user", "member", "channel", "guild"]) {
+                if (props && typeof props === "object" && Object.hasOwn(props, key)) collectNames(props[key], names, 0);
+            }
         }
     }
     return names;
+}
+
+// Discord's typing indicator writes the names of the people typing in <strong>, from its own store: its props only
+// hold the channel ({channel, isThreadCreation}). Only "Several people are typing…" puts interface text there.
+function typingName(element: Element | null): boolean {
+    const strong = element?.closest("strong");
+    if (!strong) return false;
+    let typing = Boolean(strong.closest('[class*="typing"]'));
+    for (let fiber = fiberOf(strong), depth = 0; !typing && fiber && depth < 12; depth++, fiber = fiber.return) {
+        const props = fiber.memoizedProps;
+        typing = Boolean(props && typeof props === "object" && Object.hasOwn(props, "isThreadCreation"));
+    }
+    if (!typing) return false;
+    const parent = strong.parentElement;
+    const alone = parent ? Array.from(parent.children).filter(child => child.localName === "strong").length === 1 : true;
+    const following = strong.nextSibling?.textContent ?? "";
+    return !(alone && /^\s*(are|sont)\b/i.test(following));
 }
 
 // Names that must stay as written during the current lookup (set by translateLabel for one label at a time).
@@ -250,7 +297,7 @@ function resolve(text: string, segments = true): string | undefined {
     if (parts.length < 3) return composite(text) ?? translateDate(text);
     const output: string[] = [];
     for (const [index, part] of parts.entries()) {
-        if (index % 2 || !/[^\W\d_]/.test(part)) { output.push(part); continue; }
+        if (index % 2 || !/[^\W\d_]/.test(part) || nameToken.test(part.trim())) { output.push(part); continue; }
         const piece = resolve(part.trim(), false);
         if (piece === undefined) return composite(text);
         output.push(part.replace(part.trim(), piece));
@@ -290,19 +337,40 @@ function nameLabel(value: string): string {
     return result === undefined ? value : match[1] + result + match[3];
 }
 
+// A name holding ", " or a separator ("Smith, Ann", "Paul | Work") would be cut where labels are cut, and its pieces
+// looked up: it stands in the label as one placeholder while the label is translated.
+const nameToken = /^\{\$corsuName\d+\}$/;
+
+function maskNames(core: string, names: Set<string>): [string, string[]] {
+    const masked: string[] = [];
+    const cut = Array.from(names).filter(name => name.includes(", ") || separators.test(name))
+        .sort((a, b) => b.length - a.length);
+    let text = core;
+    for (const name of cut) {
+        const pattern = new RegExp(`(?<![\\p{L}\\p{N}])${escape(name)}(?![\\p{L}\\p{N}])`, "gu");
+        text = text.replace(pattern, () => {
+            masked.push(name);
+            return `{$corsuName${masked.length}}`;
+        });
+    }
+    return [text, masked];
+}
+
 export function translateLabel(value: string, names: Set<string> = new Set()): string {
     const match = value.match(/^(\s*)(.*?)(\s*)$/s);
     if (!match || !match[2]) return value;
     const [, before, core, after] = match;
     const folded = new Set(Array.from(names, name => normalize(name).toLowerCase()));
     if (folded.has(normalize(core).toLowerCase())) return value;
+    const [masked, cut] = maskNames(core, names);
     keep = folded;
     let result: string | undefined;
     try {
-        result = resolve(core);
+        result = resolve(masked);
     } finally {
         keep = new Set();
     }
+    if (result !== undefined) result = result.replace(/\{\$corsuName(\d+)\}/g, (token, n) => cut[Number(n) - 1] ?? token);
     if (result === undefined || result === core) return value;
     // Never change a placeholder or markup contract.
     const signature = (text: string) => (text.match(placeholder) ?? []).sort().join("\u0001");
@@ -324,7 +392,8 @@ export function createTranslator(doc: Document, options: { showOriginal?: () => 
         const value = node.data;
         const previous = originalText.get(node);
         if (previous && previous.translated === value) return;
-        const translated = parent.closest(nameArea) ? nameLabel(value) : translateLabel(value, userNames(node));
+        const translated = parent.closest(nameArea) || typingName(parent) ? nameLabel(value)
+            : translateLabel(value, userNames(node));
         if (translated === value) return;
         originalText.set(node, { original: value, translated });
         node.data = translated;

@@ -143,3 +143,6 @@ Debugging||Spannatura
 Public||Publicu
 Private||Privatu
 Chat||Chjachjarata
+# "Onglets ouverts" is always a noun in Firefox (Firefox View, sidebar, Settings): the imported Firefox for Android row
+# paired it with a button's "Apre l'unghjette" (open the tabs). Mozilla's Corsican headings use Unghjette aperte.
+|Onglets ouverts|Unghjette aperte

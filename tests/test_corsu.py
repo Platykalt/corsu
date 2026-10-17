@@ -274,6 +274,11 @@ class TranslationTests(unittest.TestCase):
         merged, count = corsu.merge_properties('# c\nkept=Keep\nshared=Hello %S\n', 'shared=Bonjour %S\ngone=x\n')
         self.assertEqual((merged, count), ('# c\nkept=Keep\nshared=Bonjour %S\n', 1))
 
+    def test_firefox_copy_is_rebuilt_when_the_translation_engine_changes(self):
+        # A fix in engine.py (such as Mozilla's %S arguments) must reach copies built before it.
+        self.assertIn(Path(corsu.engine.__file__).resolve(), corsu.FIREFOX_BUILD_CODE)
+        self.assertIn(Path(corsu.__file__).resolve(), corsu.FIREFOX_BUILD_CODE)
+
     def test_french_pack_directories_follow_the_chrome_manifest(self):
         import zipfile
         buffer = io.BytesIO()

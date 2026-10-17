@@ -13,6 +13,26 @@ class TranslationTests(unittest.TestCase):
         self.assertEqual(engine.translate('Obtenir { -mozilla-vpn-brand-name }'),
                          'Ottene { -mozilla-vpn-brand-name }')
 
+    def test_mozilla_properties_placeholders_are_arguments(self):
+        # Firefox's .properties files write their arguments %S and %1$S; rows written with %1 cover them.
+        self.assertEqual(engine.translate('Fichier %S'), 'Schedariu %S')
+        self.assertEqual(engine.translate('Ouverture de %S'), 'Apertura di %S')
+        self.assertEqual(engine.translate('Le fichier a été bloqué car %1$S n’est pas accessible.'),
+                         'U schedariu hè statu bluccatu perchè %1$S ùn hè micca accessibile.')
+        self.assertEqual(engine.signature('Fichier %1$S'), ['%1$S'])
+
+    def test_firefox_labels_found_in_french_by_the_audit(self):
+        # Firefox 157's French text for the main menu's browser tools and the downloads panel and dialogs.
+        for french in ('Débogage distant', 'Console du navigateur', 'Boîte à outils du navigateur', 'Vue adaptative',
+                       'Fichier supprimé', 'Fichier déplacé ou manquant', 'Fichier supprimé (bloqué)', 'Taille inconnue',
+                       'Bloqué par les contrôles parentaux', 'Ce fichier est rarement téléchargé.',
+                       'Voulez-vous vraiment autoriser ce téléchargement\xa0?', '%S (par défaut)'):
+            with self.subTest(french=french):
+                self.assertNotEqual(engine.translate(french), french)
+        # A heading in Firefox View, the sidebar and Settings, not the button "open the tabs".
+        self.assertEqual(engine.translate('Onglets ouverts'), 'Unghjette aperte')
+        self.assertEqual(engine.normalize(engine.translate('Ouvrir les onglets')), "Apre l'unghjette")
+
     def test_accelerator_marker_is_preserved(self):
         self.assertEqual(engine.translate('&Cancel'), '&Abbandunà')
         self.assertEqual(engine.translate('Co&uper'), 'Ta&glià')

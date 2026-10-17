@@ -158,6 +158,14 @@ seulement : l'icône à l'écran n'a pas été regardée. Corsu 0.21.0 y est enc
   `msgfmt -c --check-format`. À relire par un locuteur avant tout envoi en amont (Transifex de VLC, idéalement avec
   Patriccollu) ; rien n'a été envoyé. (Depuis : tous contrôlés et relus par IA, voir plus bas.)
 
+- Audit Firefox et Discord (branche `audit-firefox-discord`) : le Firefox de Corsu lancé dans un profil jetable
+  et lu par Marionette (menu principal, Paramètres > Général, téléchargements, onglets, Firefox View). Corrigé :
+  outils du navigateur et messages de téléchargement restés en français (31 lignes IA à relire), arguments `%S` de
+  Mozilla ignorés par le moteur, « Onglets ouverts » traduit comme un bouton. Discord : surnoms de serveur
+  (`userId`), destinataires de MP (`rawRecipients`, `nicks`), noms dans l'indicateur « écrit… », nœuds réutilisés
+  par React (fibre `alternate`) et noms contenant « , » ou « | » sont protégés (`tests/e2e/check_discord_content.py`,
+  page simulée dans Chrome, pas le vrai Discord). Reste : dates et heures du Firefox au format `en-US`.
+
 ## Blocages et ce qui demande une personne
 
 - Essai réel de Minecraft Java 26.3 ([TESTING.md](../minecraft/java/TESTING.md)) et de Bedrock.
