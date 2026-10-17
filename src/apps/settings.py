@@ -332,6 +332,56 @@ def _xml_path_put(text, steps, value):
     return text[:line_start] + indent + element + '\n' + text[line_start:]
 
 
+def _java_prefs_entry(text, key):
+    """The <entry key=… value=…/> of one key in a Java Preferences file (java.util.prefs on Linux: prefs.xml of one
+    node, <map><entry key="…" value="…"/>…</map>), as (regex match, element), or (None, None). The whole file must be
+    a well-formed <map>."""
+    import re as _re
+    import xml.etree.ElementTree as _tree
+    if _tree.fromstring(text.encode('utf-8')).tag != 'map':
+        raise ValueError('not a Java preferences file')
+    for match in _re.finditer(r'<entry\b[^>]*?(?:/>|>\s*</entry>)', text):
+        element = _tree.fromstring(match.group(0))
+        if element.get('key') == key:
+            return match, element
+    return None, None
+
+
+def _java_prefs_get(text, key):
+    element = _java_prefs_entry(text, key)[1]
+    return None if element is None else element.get('value')
+
+
+def _java_prefs_put(text, key, value):
+    import re as _re
+    from xml.sax.saxutils import escape
+    match, _ = _java_prefs_entry(text, key)
+    if value is None:
+        if not match:
+            return text
+        start, end = match.span()
+        line_start, line_end = text.rfind('\n', 0, start) + 1, text.find('\n', end)
+        line_end = len(text) if line_end < 0 else line_end + 1
+        if not text[line_start:start].strip() and not text[end:line_end].strip():
+            start, end = line_start, line_end
+        return text[:start] + text[end:]
+    # Written as Java writes it: double quotes, and line breaks kept through character references.
+    quoted = {'"': '&quot;', '\n': '&#10;', '\r': '&#13;', '\t': '&#9;'}
+    element = f'<entry key="{escape(key, quoted)}" value="{escape(value, quoted)}"/>'
+    if match:
+        return text[:match.start()] + element + text[match.end():]
+    empty = _re.search(r'<map\b([^>]*?)\s*/>', text)
+    if empty:  # what Java writes for a node without keys: <map MAP_XML_VERSION="1.0"/>
+        return text[:empty.start()] + f'<map{empty.group(1)}>\n  {element}\n</map>' + text[empty.end():]
+    closing = text.rfind('</map>')
+    line_start = text.rfind('\n', 0, closing) + 1
+    if text[line_start:closing].strip():
+        return text[:closing] + element + text[closing:]
+    siblings = _re.findall(r'\n([ \t]*)<entry\b', text[:line_start])
+    indent = siblings[-1] if siblings else text[line_start:closing] + '  '
+    return text[:line_start] + indent + element + '\n' + text[line_start:]
+
+
 FILE_KINDS = {
     'json': (_json_get, _json_put),
     'xml': (_xml_get, _xml_put),
@@ -339,6 +389,8 @@ FILE_KINDS = {
     # One value at a path of named elements, e.g. fre:ac's
     # <configuration name="default"><section name="Settings"><value name="Language">.
     'xml-path': (_xml_path_get, _xml_path_put),
+    # One key of a Java Preferences node on Linux (~/.java/.userPrefs/<node>/prefs.xml), e.g. PDFsam's locale.
+    'java-prefs': (_java_prefs_get, _java_prefs_put),
 }
 
 
