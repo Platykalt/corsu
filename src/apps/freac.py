@@ -58,8 +58,10 @@ def coverage(folder):
 
 def linux_settings():
     xdg = os.environ.get('XDG_CONFIG_HOME')
-    folder = (xdg.rstrip('/') + '/') if xdg else str(corsu.HOME / '.config') + '/'
-    return Path(folder + ('freac' if folder.endswith('/.config/') else '.freac')) / 'freac.xml'
+    folder = Path(xdg) if xdg else corsu.HOME / '.config'
+    # fre:ac's rule on the text of the path ("…/.config/" gets freac/, anything else .freac/), by path component so it
+    # reads the same whatever the separator.
+    return folder / ('freac' if folder.name == '.config' else '.freac') / 'freac.xml'
 
 
 def under_program_files(folder):
