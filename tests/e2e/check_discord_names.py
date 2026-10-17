@@ -176,9 +176,7 @@ def main(chrome, vencord):
     # The pages built on Discord's own record shapes and markup (check_discord_content.py) run here too, so the CI
     # job that runs this file checks them.
     import check_discord_content as content
-    wrong.update({f'content {key}': value for key, value in run(
-        chrome, vencord, content.DICTIONARY, content.PAGE, content.READ, content.EXPECTED, content.CHANGE,
-        content.AFTER_CHANGE).items()})
+    wrong.update({f'content {key}': value for key, value in content.run_all(chrome, vencord).items()})
     if wrong:
         raise SystemExit(f'FAIL: {wrong}')
     print('PASS: names stay as people wrote them; interface labels around them are translated')

@@ -127,8 +127,10 @@ function typingName(element: Element | null): boolean {
     return !(alone && /^\s*(are|sont)\b/i.test(following));
 }
 
-// Names that must stay as written during the current lookup (set by translateLabel for one label at a time).
+// Names that must stay as written during the current lookup (set by translateLabel for one label at a time). Every
+// way of reading a label checks it, so no part of a name is read as a word, a template, a count or a date.
 let keep: Set<string> = new Set();
+const kept = (text: string) => keep.size > 0 && keep.has(normalize(text.trim()).toLowerCase());
 
 // Discord shows dates in its interface language; give the day and month their Corsican names.
 const days: Record<string, string> = { lundi: "luni", mardi: "marti", mercredi: "mercuri", jeudi: "ghjovi",
@@ -157,6 +159,7 @@ function relativeTime(text: string): string | undefined {
 }
 
 function translateDate(text: string): string | undefined {
+    if (kept(text)) return undefined;
     const ago = relativeTime(text);
     if (ago) return ago;
     if (!/\d/.test(text) || !/^[\p{L}\d\s:,./’'-]+$/u.test(text)) return undefined;
@@ -201,6 +204,7 @@ function templateIndex() {
 }
 
 function fromTemplate(text: string): string | undefined {
+    if (kept(text)) return undefined;
     const key = normalize(text);
     const words = key.trim().split(/\s+/);
     const candidates = [...(templateIndex().get("^" + words[0]?.toLowerCase()) ?? []),
@@ -240,11 +244,23 @@ function normalize(text: string): string {
     return text.replace(/[\u2019\u02bc]/g, "'").replace(/[\u00a0\u202f\u2009]/g, " ");
 }
 
+// Discord ends some labels with "…" where the dictionary has "..." ("est en train d'écrire…"), or the reverse.
+function ellipsis(key: string): string | undefined {
+    const other = key.endsWith("…") ? key.slice(0, -1) + "..." : key.endsWith("...") ? key.slice(0, -3) + "…" : undefined;
+    if (other === undefined) return undefined;
+    const value = Object.hasOwn(corrections, other) ? corrections[other] : Object.hasOwn(words, other) ? words[other] : undefined;
+    if (value === undefined) return undefined;
+    const end = key.endsWith("…") ? "…" : "...";
+    return value.endsWith("...") ? value.slice(0, -3) + end : value.endsWith("…") ? value.slice(0, -1) + end : value;
+}
+
 function direct(text: string): string | undefined {
-    if (keep.size && keep.has(normalize(text.trim()).toLowerCase())) return undefined;
+    if (kept(text)) return undefined;
     const key = normalize(text);
     if (Object.hasOwn(corrections, key)) return corrections[key];
     if (Object.hasOwn(words, key)) return words[key];
+    const dotted = ellipsis(key);
+    if (dotted !== undefined) return dotted;
     const tokens: string[] = [];
     const skeleton = key.replace(placeholder, found => {
         if (!tokens.includes(found)) tokens.push(found);
@@ -261,6 +277,7 @@ function direct(text: string): string | undefined {
 }
 
 function resolve(text: string, segments = true): string | undefined {
+    if (kept(text)) return undefined;
     const found = direct(text);
     if (found !== undefined) return found;
     const trailing = text.match(/^(.*?)([\s\u00a0]*(?:\.\.\.|…|:|\?|!|;|\.))$/s);
@@ -297,7 +314,8 @@ function resolve(text: string, segments = true): string | undefined {
     if (parts.length < 3) return composite(text) ?? translateDate(text);
     const output: string[] = [];
     for (const [index, part] of parts.entries()) {
-        if (index % 2 || !/[^\W\d_]/.test(part) || nameToken.test(part.trim())) { output.push(part); continue; }
+        // A name between separators ("Work — Online") stays as it is and the labels around it are translated.
+        if (index % 2 || !/[^\W\d_]/.test(part) || nameToken.test(part.trim()) || kept(part)) { output.push(part); continue; }
         const piece = resolve(part.trim(), false);
         if (piece === undefined) return composite(text);
         output.push(part.replace(part.trim(), piece));
