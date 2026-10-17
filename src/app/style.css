@@ -270,14 +270,14 @@ input[type="checkbox"].pick { width: 1.125rem; height: 1.125rem; margin: 0; acce
 .segmented > label { position: relative; display: inline-flex; align-items: center; gap: var(--space-2); min-height: 2rem; padding: .3125rem var(--space-3);
   border-radius: var(--radius-s); cursor: pointer; font-size: .875rem; color: var(--text); white-space: nowrap; }
 .segmented > label:hover { background: var(--hover); }
-.segmented > label:has(input:checked) { background: var(--surface); box-shadow: 0 0 0 1px var(--track), 0 1px 2px rgba(0, 0, 0, .08); font-weight: 600; }
+.segmented > label:has(input:checked), .segmented > label[data-checked] { background: var(--surface); box-shadow: 0 0 0 1px var(--track), 0 1px 2px rgba(0, 0, 0, .08); font-weight: 600; }
 .segmented input[type="radio"], .swatches input[type="radio"] { position: absolute; inset: 0; width: 100%; height: 100%; margin: 0; opacity: 0; cursor: pointer; }
 .segmented > label:has(input:focus-visible), .swatches > label:has(input:focus-visible) { outline: 2px solid var(--focus); outline-offset: 2px; }
 .swatches { display: flex; flex-wrap: wrap; gap: var(--space-2); }
 .swatches > label { position: relative; display: inline-flex; align-items: center; gap: var(--space-2); min-height: 2.25rem; padding: .3125rem var(--space-3) .3125rem .3125rem;
   border: 1px solid var(--line); border-radius: 999px; background: var(--surface); cursor: pointer; font-size: .875rem; color: var(--text); }
 .swatches > label:hover { background: var(--hover); }
-.swatches > label:has(input:checked) { border-color: var(--accent); box-shadow: inset 0 0 0 1px var(--accent); font-weight: 600; }
+.swatches > label:has(input:checked), .swatches > label[data-checked] { border-color: var(--accent); box-shadow: inset 0 0 0 1px var(--accent); font-weight: 600; }
 input[type="range"].range { width: 100%; min-width: 8rem; height: 1.5rem; margin: 0; accent-color: var(--accent); cursor: pointer; }
 .button.danger { color: var(--danger); border-color: var(--danger); }
 .button.danger .icon { color: currentColor; }

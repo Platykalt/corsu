@@ -604,7 +604,13 @@
 
   function sync() {
     if (!refs) return;
-    const check = (group, value) => { for (const input of group.querySelectorAll("input[type=radio]")) input.checked = input.value === value; };
+    // data-checked mirrors the radio for engines without :has() (WebKitGTK before 2.42), so the chosen item shows.
+    const check = (group, value) => {
+      for (const input of group.querySelectorAll("input[type=radio]")) {
+        input.checked = input.value === value;
+        input.closest("label")?.toggleAttribute("data-checked", input.checked);
+      }
+    };
     check(refs.theme, settings.theme);
     check(refs.palette, settings.palette);
     check(refs.density, settings.density);

@@ -626,8 +626,20 @@ function render() {
 }
 
 async function refresh() {
+  let next;
   try {
-    const next = await call("/api/state");
+    next = await call("/api/state");
+  } catch (error) {
+    // While Corsu restarts, the address is silent for a moment.
+    if (restarting && Date.now() < restarting.until) return;
+    if (closed) return;
+    closed = true;
+    document.querySelector("main").replaceChildren(make("p", { class: "closed", text: t("closed") }));
+    $("activity").hidden = true;
+    return;
+  }
+  // A mistake while drawing is not Corsu closing: it is reported, and the next refresh draws again.
+  try {
     if (restarting) {
       // Another process answers: the new copy, with its own page.
       if (next.pid !== restarting.pid) { window.location.reload(); return; }
@@ -638,12 +650,7 @@ async function refresh() {
     if (page === null) show(state.installed ? "programs" : "add");
     render();
   } catch (error) {
-    // While Corsu restarts, the address is silent for a moment.
-    if (restarting && Date.now() < restarting.until) return;
-    if (closed) return;
-    closed = true;
-    document.querySelector("main").replaceChildren(make("p", { class: "closed", text: t("closed") }));
-    $("activity").hidden = true;
+    console.error(error);
   }
 }
 
