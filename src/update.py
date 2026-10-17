@@ -302,6 +302,13 @@ def extract_tar(archive, root):
                 raise UnsafeArchive(f'link to an absolute path in the archive: {member.name} -> {link}')
             if not inside(target.parent, root):
                 raise UnsafeArchive(f'link leaving the folder in the archive: {member.name}')
+            # A rule that does not depend on how the system resolves links (Windows does not follow a chain the same
+            # way): relative, no "..", and not reached through another link of the archive. Corsu's own archives
+            # only link a file to its neighbour (python3 -> python3.13).
+            if '..' in re.split(r'[\\/]', link) or any(other is not member and (
+                    relative.as_posix() + '/').startswith(member_path(other.name).as_posix() + '/') for other, _, _ in links
+                    if other.issym() and member_path(other.name)):
+                raise UnsafeArchive(f'link leaving the folder in the archive: {member.name} -> {link}')
             destination = posixpath.normpath(posixpath.join(relative.parent.as_posix(), link))
             if destination.startswith('..') or not inside(target.parent / link, root):
                 raise UnsafeArchive(f'link leaving the folder in the archive: {member.name} -> {link}')

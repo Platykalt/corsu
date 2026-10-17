@@ -1178,7 +1178,7 @@ def desktop(installer, firefox=True, vesktop=True):
             continue
         text = original.read_text(encoding='utf-8')
         if executable:
-            text = re.sub(r'^Exec=(?:/usr/lib/firefox/firefox|/usr/bin/firefox|firefox)(?=\s|$)', f'Exec={executable}', text, flags=re.M)
+            text = re.sub(r'^Exec=(?:/usr/lib/firefox/firefox|/usr/bin/firefox|firefox)(?=\s|$)', lambda _: f'Exec={executable}', text, flags=re.M)
         name = 'Firefox Corsu' if executable else 'Vesktop Corsu'
         text = re.sub(r'^Name=.*$', 'Name=' + name, text, count=1, flags=re.M)
         text = re.sub(r'^Name\[(?:co|fr)\]=.*\n?', '', text, flags=re.M)
