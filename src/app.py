@@ -213,6 +213,9 @@ def snapshot(job=None):
             waiting = minecraft_waiting(state, state.get('results', {}).get(name))
             item['instances'] = [*item['instances'], *waiting]
             item['waiting'] = len(waiting)
+        if name == 'vlc' and item['installed']:
+            # VLC's experimental complement: its own switch in VLC's row (the same preference as --vlc-complement).
+            item['complement'] = complement_status()
         items.append(item)
     profile = corsu.firefox_profile() if 'firefox' in installed else None
     return {
@@ -235,6 +238,49 @@ def snapshot(job=None):
         'preferences': preferences(),
         'problem': problem,
     }
+
+
+COMPLEMENT = {'time': 0.0, 'status': None}
+
+
+def complement_status():
+    """vlc_complement.status() for VLC's row. What VLC is installed (it runs `vlc --version`) is looked up again at
+    most every 20 seconds, and at once after an installation or a change of the complement; the choice is read fresh
+    each time. None when it cannot be told: the row then has no complement switch."""
+    try:
+        from apps import vlc_complement
+        if COMPLEMENT['status'] is None or time.monotonic() - COMPLEMENT['time'] > 20:
+            COMPLEMENT['status'], COMPLEMENT['time'] = vlc_complement.status(), time.monotonic()
+        return {**COMPLEMENT['status'], 'enabled': vlc_complement.enabled()}
+    except Exception:  # A broken VLC or catalogue must not keep the window from showing.
+        return None
+
+
+def switch_complement(job, value, language):
+    """VLC's experimental complement on or off: (HTTP status, answer). The installer writes the preference and applies
+    VLC again (`--vlc-complement on|off --components vlc`), in the window's job, so progress, busy and errors read as
+    for any other change; VLC's own switch is not touched. The preference is also written here once the job started,
+    so the page shows the choice at once. With VLC switched off there is nothing to apply: switching the complement
+    off only records the choice, switching it on is refused."""
+    if not isinstance(value, bool):
+        return 400, {'error': 'on must be true or false'}
+    state = corsu.load_state() if corsu.STATE.exists() else {'files': {}}
+    vlc_on = 'vlc' in corsu.switchable(state) and not corsu.is_disabled('vlc', state)
+    status = complement_status() or {}
+    if value and not vlc_on:
+        return 400, {'error': t('Switch VLC to Corsican first.', 'Activez d\'abord VLC en corse.')}
+    if value and not status.get('available'):
+        return 400, {'error': status.get('reason') or t('The complement cannot be used here.',
+                                                        'Le complément ne peut pas être utilisé ici.')}
+    COMPLEMENT['time'] = 0.0
+    if not vlc_on:
+        set_preference('vlc_complement', False)
+        return 200, {'started': False, 'preferences': preferences()}
+    started = job.start('switch', ['--vlc-complement', 'on' if value else 'off', '--yes', '--components', 'vlc'], language)
+    if not started:
+        return 409, {'started': False}
+    set_preference('vlc_complement', value)
+    return 200, {'started': True}
 
 
 def peer_uid(port):
@@ -346,6 +392,12 @@ def make_handler(job, activity, port, handover=None):
                 except OSError as error:
                     return self.send(500, {'error': str(error)})
                 return self.send(200, {'preferences': preferences()})
+            if self.path == '/api/vlc-complement':
+                DETECTED['time'] = 0.0
+                try:
+                    return self.send(*switch_complement(job, request.get('on'), language))
+                except (OSError, RuntimeError, ValueError) as error:
+                    return self.send(500, {'error': str(error)})
             if self.path == '/api/restart':
                 if handover is None or job.running:
                     return self.send(409, {'started': False})
@@ -367,7 +419,7 @@ def make_handler(job, activity, port, handover=None):
                 plan = '\n'.join(line.strip() for line in lines).strip()
                 return self.send(200, {'plan': plan, 'ok': result.returncode == 0})
             if self.path in ('/api/install', '/api/uninstall', '/api/rescan'):
-                DETECTED['time'] = 0.0
+                DETECTED['time'] = COMPLEMENT['time'] = 0.0
             if self.path == '/api/rescan':
                 return self.send(200, {'ok': True})
             if self.path == '/api/install' and names:
