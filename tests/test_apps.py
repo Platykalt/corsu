@@ -138,6 +138,8 @@ class VLCComplementTests(VLCTests):
         self.assertNotIn('VLC_DATA_PATH', self.entry())
         self.assertFalse((corsu.DATA / 'vlc').exists())
 
+    @unittest.skipIf(os.name == 'nt', 'the complement is Linux only: it links to VLC\'s folders, which Windows '
+                     'allows only with developer mode or administrator rights')
     def test_on_then_off(self):
         update.set_preference('vlc_complement', True)
         [installation] = vlc.VLC().find()
@@ -165,6 +167,8 @@ class VLCComplementTests(VLCTests):
         self.assertIn('Exec=env LANGUAGE=co:fr_FR /usr/bin/vlc --started-from-file %U', self.entry())
         self.assertFalse((corsu.DATA / 'vlc').exists())
 
+    @unittest.skipIf(os.name == 'nt', 'the complement is Linux only: it links to VLC\'s folders, which Windows '
+                     'allows only with developer mode or administrator rights')
     def test_switching_vlc_off_and_uninstalling(self):
         update.set_preference('vlc_complement', True)
         self.install()
@@ -177,6 +181,8 @@ class VLCComplementTests(VLCTests):
         self.assertFalse((corsu.DATA / 'vlc').exists())
         self.assertTrue(self.data.exists())
 
+    @unittest.skipIf(os.name == 'nt', 'the complement is Linux only: it links to VLC\'s folders, which Windows '
+                     'allows only with developer mode or administrator rights')
     def test_without_vlc_corsican_catalogue(self):
         """The complement alone makes VLC Corsican; switched off, its menu entry and folder go."""
         (self.locale / 'co/LC_MESSAGES/vlc.mo').unlink()
