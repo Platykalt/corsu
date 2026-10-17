@@ -130,6 +130,16 @@ seulement : l'icône à l'écran n'a pas été regardée. Corsu 0.21.0 y est enc
 - Incident : deux tests de l'installeur réécrivaient la vraie entrée de menu Corsu du mainteneur quand ils tournaient
   sur sa machine (corrigé : tests isolés ; l'entrée est réparée par la mise à jour 0.23.0).
 
+## Nuit du 17 octobre 2026 (version de développement, rien de publié)
+
+- Audacity 3 et 4, Tenacity et fre:ac intégrés à la liste des logiciels (branche `integrations-audio` fusionnée),
+  avec la marche à suivre quand Corsu les laisse tels quels. Audacity 3, Audacity 4 et Tenacity lancés pour de vrai
+  sous Linux (AppImages officielles, dossier jetable) : corse à l'écran ; le reste sur dossiers simulés.
+- VLC 3.0.x : brouillons IA des 1 760 messages manquants dans `contrib/vlc/co.po` (marqués `#, fuzzy`, non relus ;
+  1 réemploi exact, 61 adaptés d'une suggestion de la mémoire, 1 698 nouveaux ; amont `e66842d`), validés par
+  `msgfmt -c --check-format`. À relire par un locuteur avant tout envoi en amont (Transifex de VLC, idéalement avec
+  Patriccollu) ; rien n'a été envoyé ni mis en service. Mots à vérifier d'abord : [contrib/vlc/README.md](../contrib/vlc/README.md).
+
 ## Blocages et ce qui demande une personne
 
 - Essai réel de Minecraft Java 26.3 ([TESTING.md](../minecraft/java/TESTING.md)) et de Bedrock.
