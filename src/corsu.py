@@ -1690,6 +1690,10 @@ def enable(components=None):
         rebuild.discard('vesktop')
     if rebuild:
         install(rebuild, qt_system=state.get('qt_system', False) and 'desktop' in rebuild)
+    if not targets:
+        print(t('Nothing to switch on: Corsu has not changed these programs.',
+                'Rien à réactiver : Corsu n\'a pas modifié ces logiciels.'))
+        return
     names = component_names(targets)
     print(t(f'In Corsican again: {names}. Restart these programs'
             + ('; log out and back in for the desktop.' if 'desktop' in targets else '.'),
@@ -1752,8 +1756,9 @@ def uninstall():
             continue
         if path.exists() and digest(path.read_bytes()) != record['installed_sha256']:
             remaining[name] = record
-            print(t(f'Left alone because you changed it: {name} (original copy: {record["backup"]})',
-                    f'Laissé tel quel car vous l\'avez modifié : {name} (copie d\'origine : {record["backup"]})'))
+            copy = record.get('backup')
+            print(t(f'Left alone because you changed it: {name}' + (f' (original copy: {copy})' if copy else ''),
+                    f'Laissé tel quel car vous l\'avez modifié : {name}' + (f' (copie d\'origine : {copy})' if copy else '')))
             continue
         if record.get('system'):
             system_remove([path])

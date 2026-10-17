@@ -303,6 +303,13 @@ class Poedit(apps.App):
         if installation.setting == 'defaults':
             name = f'defaults:{MAC_DOMAIN}:AppleLanguages'
             current = settings.defaults_value(MAC_DOMAIN, 'AppleLanguages')  # ValueError: reported as a failure
+            if current is None and installer.state['files'].get(name):
+                # Corsu's list is gone while still recorded (switching off drops the record): the person chose
+                # "System default" for Poedit in System Settings, which deletes the key. Keep that choice, and forget
+                # the original so uninstalling does not bring back a list from before it.
+                installer.state['files'].pop(name)
+                corsu.save_state(installer.state)
+                return changed_message()
             if changed_since(installer, name, None if current is None else settings.plist_fragment(current)):
                 return changed_message()
             # What System Settings → Language & Region → Applications writes: an array in Poedit's own domain.

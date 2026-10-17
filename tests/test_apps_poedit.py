@@ -496,6 +496,19 @@ class MacTests(PoeditTests):
         corsu.uninstall()
         self.assertEqual(self.languages(), ['it'])
 
+    def test_system_default_chosen_since_is_kept(self):
+        self.install_poedit()
+        self.fake.save(self.DOMAIN, {'AppleLanguages': ['de']})
+        self.run_install()
+        # The person picks "System default" for Poedit in System Settings, which deletes the key.
+        self.fake.save(self.DOMAIN, {})
+        report = self.run_install()
+        self.assertEqual(report['activation'], 'blocked')
+        self.assertIn('your choice is kept', report['skipped'][0]['reason'])
+        self.assertIsNone(self.languages())
+        corsu.uninstall()
+        self.assertIsNone(self.languages())  # not the list from before that choice
+
     def test_system_list_changed_later_is_followed(self):
         self.install_poedit()
         self.run_install()
