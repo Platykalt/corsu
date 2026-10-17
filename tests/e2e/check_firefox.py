@@ -51,7 +51,12 @@ const [checks, properties, done] = [arguments[0], arguments[1], arguments[argume
   for (const [url, key] of properties) {
     try { result.push(Services.strings.createBundle(url).GetStringFromName(key)); } catch (error) { result.push(null); }
   }
-  done({values: result, locale: Services.locale.appLocaleAsBCP47});
+  // Times, dates and numbers follow the computer's regional formats, not the English slot the copy runs in.
+  const os = Cc["@mozilla.org/intl/ospreferences;1"].getService(Ci.mozIOSPreferences).regionalPrefsLocales;
+  const time = new Services.intl.DateTimeFormat(undefined, {timeStyle: "short"});
+  done({values: result, locale: Services.locale.appLocaleAsBCP47, regional: Services.locale.regionalPrefsLocales, os,
+        useOs: Services.prefs.getDefaultBranch("").getBoolPref("intl.regional_prefs.use_os_locales", false),
+        time: time.format(new Date(2026, 9, 17, 15, 32)), timeLocale: time.resolvedOptions().locale});
 })().catch(error => done({error: String(error)}));
 '''
 
@@ -130,6 +135,10 @@ def main(executable):
                 if status == 'FAIL':
                     failures.append(label)
             print(f'Interface locale: {result["locale"]}')
+            print(f'Regional formats: {result["regional"]} (system {result["os"]}), 15:32 shown as {result["time"]!r} '
+                  f'({result["timeLocale"]})')
+            if not result['useOs'] or result['regional'] != result['os']:
+                failures.append('regional formats do not follow the system')
             if failures:
                 raise SystemExit('Untranslated in the running Firefox: ' + ', '.join(failures))
         finally:

@@ -31,6 +31,12 @@ dont Google, l'affichent alors. L'interface corse de Google est incomplète et l
 français ou en anglais ; sur les pages de Google, la copie complète ces libellés avec le lexique de Corsu. Les
 résultats de recherche et le reste du texte des pages ne sont jamais modifiés, et aucun autre site n'est touché.
 
+Les heures, les dates et les nombres gardent le format régional de votre ordinateur (15:32 et 17/10/2026 sur un
+système français, par exemple), pas le format américain. C'est le réglage de Firefox « Utiliser les paramètres de
+votre système d'exploitation … pour formater les dates, les heures, les nombres et les mesures », activé
+par défaut dans la copie seulement ; si vous le changez dans les paramètres de la copie, votre choix est gardé.
+Votre Firefox habituel garde son réglage par défaut.
+
 Quand Firefox se met à jour, la copie est reconstruite à la prochaine ouverture. Le système de mise à jour propre à
 la copie est donc coupé. Les réglages de sécurité de Firefox et la vérification des extensions ne changent pas.
 

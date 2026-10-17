@@ -53,6 +53,19 @@ class TranslationTests(unittest.TestCase):
                 (base / 'profiles.ini').write_text('[InstallXYZ]\nDefault=Profiles/abc.default-release\n')
                 self.assertEqual(corsu.firefox_profile(), base / 'Profiles/abc.default-release')
 
+    def test_firefox_copy_follows_the_system_formats_by_default_only(self):
+        # Measured in Firefox 157: in defaults/pref the browser's own default (false) is read later and wins, and the
+        # copy then shows "11:32 AM" on a French or German system. browser/defaults/preferences is read after it.
+        with tempfile.TemporaryDirectory() as directory:
+            resources = Path(directory)
+            corsu.regional_formats(resources)
+            text = (resources / 'browser/defaults/preferences/corsu.js').read_text(encoding='utf-8')
+            self.assertEqual(text, 'pref("intl.regional_prefs.use_os_locales", true);\n')
+            # A default, never a user value or a locked one: the user's own choice in the profile keeps priority.
+            self.assertNotIn('user_pref', text)
+            self.assertNotIn('lockPref', text)
+            self.assertFalse((resources / 'defaults').exists())
+
     def test_install_sections_match_firefox(self):
         # Sections Firefox wrote itself, for its usual folders on Linux and Windows and for a long path.
         self.assertEqual(corsu.install_section('/usr/lib/firefox'), 'Install4F96D1932A9F858E')

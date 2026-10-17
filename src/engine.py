@@ -394,8 +394,27 @@ def lookup(text, app=None, context=None, directory=None):
     return max(top, key=lambda value: counts[value])
 
 
+PRINTF = re.compile(r'%(\d+\$)?((?:[0-9]*\.?[0-9]*(?:ll|l|h)?[sdiufgexXop])|S)')
+
+
 def signature(text):
-    return sorted(SIGNATURE.findall(text))
+    """What a translation must keep of its source: placeholders, markup and entities, in any order where the order
+    does not decide which value goes where. Unnumbered printf arguments (%s, %d, Mozilla's %S) are taken in order,
+    so each one is counted with its position: `%s … %d` is not `%d … %s`. Mozilla numbers %S arguments the same way,
+    so a translation may reorder `%S … %S` as `%2$S … %1$S`. A string that mixes numbered and unnumbered arguments
+    never matches a well-formed source. `%%` is a literal percent sign, not an argument."""
+    items = SIGNATURE.findall(text.replace('%%', '\0\0'))
+    conversions = [PRINTF.fullmatch(item) for item in items]
+    plain = [match for match in conversions if match and not match[1]]
+    numbered = [match for match in conversions if match and match[1]]
+    if plain and numbered:
+        return sorted(items) + ['<mixed numbered and unnumbered arguments>']
+    result = [item for item, match in zip(items, conversions) if not match or match[1]]
+    for position, match in enumerate(plain, 1):
+        # %S is Mozilla's: plain or numbered, nsTextFormatter gives the n-th one the n-th value. Other printf
+        # strings may be Python's, where %1$s does not exist, so they stay unnumbered, at their position.
+        result.append(f'%{position}${match[2]}' if match[2] == 'S' else f'%{position}:{match[2]}')
+    return sorted(result)
 
 
 def _direct(text):

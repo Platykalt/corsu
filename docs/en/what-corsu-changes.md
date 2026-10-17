@@ -30,6 +30,11 @@ then show it. Google's own Corsican interface is incomplete and falls back to Fr
 menus; on Google's pages the copy completes those labels with the Corsu lexicon. Search results and other page
 text are never changed, and no other website is touched.
 
+Times, dates and numbers keep your computer's regional format (15:32 and 17/10/2026 on a French system, for
+example), not the American one. This is Firefox's setting "Use your operating system settings … to format dates,
+times, numbers, and measurements", switched on by default in the copy only; if you change it in the copy's settings,
+your choice is kept. Your own Firefox keeps its usual default.
+
 When Firefox updates, the copy is rebuilt the next time you open it. The copy's own updater is turned off for
 that reason. Firefox's security settings and add-on checks are left as they are.
 

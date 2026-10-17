@@ -1,6 +1,7 @@
 """Tests for the translation engine and the catalog formats it writes."""
 from pathlib import Path
 import unittest
+from unittest.mock import patch
 
 import corsu
 import engine
@@ -20,6 +21,46 @@ class TranslationTests(unittest.TestCase):
         self.assertEqual(engine.translate('Le fichier a été bloqué car %1$S n’est pas accessible.'),
                          'U schedariu hè statu bluccatu perchè %1$S ùn hè micca accessibile.')
         self.assertEqual(engine.signature('Fichier %1$S'), ['%1$S'])
+
+    def test_mozilla_arguments_keep_their_values(self):
+        """Firefox gives the n-th %S, or %n$S, the n-th value: a translation must give each value the same place."""
+        rows = {}
+        for english, corsican in (
+                ('Copy %S to %S', 'Cupià %S in %S'),
+                ('Move %1$S to %2$S', 'In %2$S, mette %1$S'),
+                ('Profile: %S, path: %S', 'Chjassu: %2$S, prufilu: %1$S'),
+                ('Uploading %S of %S', 'Mandata di %S'),
+                ('Opening %S (%S%%)', 'Apertura di %S (%S%%)'),
+                ('Saved %S (%S)', 'Arregistratu %S (%1$S)'),
+                ('Error.~%Line %S', 'Sbagliu.~%Linea %S'),
+                ('%s has %d files', '%d schedarii in %s'),
+                ('%1$s has %2$d files', '%2$d schedarii in %1$s'),
+                ('Downloading %S', 'Scaricamentu di %1$S %2$S')):
+            engine.add_row(rows, english, '', corsican)
+        with patch.dict(engine.WORDS, rows):
+            # Plain arguments in the same order, and a template applied to %1$S: every value where it was.
+            self.assertEqual(engine.translate('Copy %S to %S'), 'Cupià %S in %S')
+            self.assertEqual(engine.translate('Move %1$S to %2$S'), 'In %2$S, mette %1$S')
+            self.assertEqual(engine.translate('Move %2$S to %1$S'), 'In %1$S, mette %2$S')
+            # Reordered plain %S written with numbers: Mozilla's formatter reads them the same way, so it is kept.
+            self.assertEqual(engine.translate('Profile: %S, path: %S'), 'Chjassu: %2$S, prufilu: %1$S')
+            self.assertEqual(engine.signature('%S then %S'), engine.signature('%2$S, then %1$S'))
+            # A dropped or added value, or plain and numbered arguments mixed together, is refused.
+            self.assertEqual(engine.translate('Uploading %S of %S'), 'Uploading %S of %S')
+            self.assertEqual(engine.translate('Downloading %S'), 'Downloading %S')
+            self.assertEqual(engine.translate('Saved %S (%S)'), 'Saved %S (%S)')
+            self.assertNotEqual(engine.signature('%S and %1$S'), engine.signature('%1$S and %2$S'))
+            # %% is a literal percent sign beside the arguments; Nyquist's ~% is a line break, not an argument.
+            self.assertEqual(engine.translate('Opening %S (%S%%)'), 'Apertura di %S (%S%%)')
+            self.assertEqual(engine.signature('100%%S'), [])
+            self.assertEqual(engine.signature('%%%S'), ['%1$S'])
+            self.assertEqual(engine.translate('Error.~%Line %S'), 'Sbagliu.~%Linea %S')
+            # Unnumbered C or Python arguments are read in order: swapping %s and %d would hand a number to %s.
+            self.assertEqual(engine.translate('%s has %d files'), '%s has %d files')
+            self.assertNotEqual(engine.signature('%s %d'), engine.signature('%d %s'))
+            # Numbered ones may move; Python has no %1$s, so plain %s never becomes numbered.
+            self.assertEqual(engine.translate('%1$s has %2$d files'), '%2$d schedarii in %1$s')
+            self.assertNotEqual(engine.signature('%s'), engine.signature('%1$s'))
 
     def test_firefox_labels_found_in_french_by_the_audit(self):
         # Firefox 157's French text for the main menu's browser tools and the downloads panel and dialogs.

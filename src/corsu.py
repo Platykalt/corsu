@@ -657,6 +657,7 @@ def firefox_runtime():
                          # Set in the Corsu app: hovering a completed Google label shows the original text.
                          f'pref("corsu.showOriginal", {str(bool(review_options().get("showOriginal"))).lower()});\n',
                          encoding='utf-8')
+        regional_formats(app / install.resources)
         google_labels(app / install.resources)
         # Corsu rebuilds this copy when the system Firefox updates; its own updater would undo the translation.
         policies_path = app / install.resources / 'distribution/policies.json'
@@ -678,6 +679,19 @@ def firefox_runtime():
     finally:
         if fr:
             fr.close()
+
+
+def regional_formats(resources):
+    """Keep the computer's own formats for times, dates and numbers. The copy runs in Firefox's English slot (that
+    is the text Corsu translates), and Firefox only follows the system's regional formats when they share the
+    interface's language: a French or German system would otherwise get "11:32 AM" and "10/17/26". The same choice
+    as the Firefox setting "Use your operating system settings … to format dates, times, numbers, and measurements",
+    given as a default: a choice the user made in that setting (a user value in the profile) still wins, and the
+    system Firefox, which never reads this file, keeps its own default. Firefox reads browser/defaults/preferences
+    after the browser's built-in defaults, which set this preference to false; defaults/pref comes too early."""
+    path = resources / 'browser/defaults/preferences/corsu.js'
+    path.parent.mkdir(parents=True, exist_ok=True)
+    path.write_text('pref("intl.regional_prefs.use_os_locales", true);\n', encoding='utf-8')
 
 
 GOOGLE_DOMAINS = ('google.com', 'google.fr', 'google.it', 'google.be', 'google.ch', 'google.ca', 'google.co.uk',
