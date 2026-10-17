@@ -1,5 +1,30 @@
 # Changelog
 
+## 0.23.0 (2026-10-17)
+
+- Minecraft: Java Edition in Corsican for 87 versions, releases 1.6.1 to 26.3: one pack per version, built from the
+  26.3 translation and `history.json` (3,978 older texts: reused, renamed keys, adapted, new). Each version's own
+  game code loaded the pack and rendered every text, with the exceptions listed in
+  `minecraft/java/COMPATIBILITY.md`; texts written by AI, not reviewed by a speaker; only 26.3 loaded in a game.
+  Corsu detects each game folder's version (Prism Launcher, MultiMC, official launcher, Fabric, Quilt, Forge,
+  NeoForge) and installs the matching pack. `tools/mcreport.py` regenerates the pages and counters from the data,
+  and each check is tied to a fingerprint of the files it checked.
+- The Minecraft pack is selected from the first start (it was also listed as incompatible, which made the game skip
+  it once).
+- Updates: an Update section in the app (installed and latest stable version, check at start, update button,
+  optional automatic installation of stable releases, off by default, restart into the new copy). Re-running the
+  installer, the one-line command or the button runs the same code: newer → update, same → repair, older → refused
+  (`--allow-downgrade`), keeping the chosen parts and those switched off. Downloads name the exact tag, check the
+  SHA-256 and the archive's own version, and extract safely on every supported Python. A lock lets one Corsu task run
+  at a time. The new copy is complete before launchers move to it; a failed update leaves them on the previous copy.
+- Discord: people's names (user names, display names, server nicknames, server, channel and role names) are no
+  longer looked up in the dictionary: "Work" and "Error" stayed "Travagliu" and "Sbagliu". The plugin recognises them
+  from the data React keeps on Discord's nodes; checked in a real browser page in CI.
+- Tests no longer touch the real installation: two installer tests rewrote the Corsu menu entry when run on a
+  developer's computer.
+- Installed copy of Corsu now carries the Minecraft data; a second VLC Flatpak activation no longer stops with
+  KeyError.
+
 ## 0.22.0 (2026-10-16)
 
 - The Corsu window shows each program's real state: in Corsican, partly (some installations switched, others not,

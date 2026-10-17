@@ -19,7 +19,7 @@ titre expérimental. Chaque partie peut être désactivée puis réactivée à t
 est dans [Ce qui marche, et où](docs/fr/compatibilite.md).
 
 <!-- corsu:minecraft-summary:start -->
-**Minecraft Java en corse pour 87 versions** (versions stables 1.6.1 → 26.3). Traduction complète des fichiers de langue pour les versions listées ; vérifications techniques avec le code de chaque version. L'application Corsu trouve la version de chaque dossier de jeu, y ajoute le pack de cette version et choisit le corse. Textes écrits par IA, sans relecture par un locuteur ; vérifications automatiques, pas visuelles ; seule la 26.3 a été lancée avec le pack. Disponibilité : sur la branche main (développement) aujourd'hui ; dans une version publiée de Corsu seulement quand une version qui contient ces packs sera publiée (la dernière publiée, 0.22.0, ne contient que le pack 26.3). Détails et limites : [Minecraft en corse](docs/fr/minecraft.md), [versions et vérifications](minecraft/java/COMPATIBILITY.md).
+**Minecraft Java en corse pour 87 versions** (versions stables 1.6.1 → 26.3). Traduction complète des fichiers de langue pour les versions listées ; vérifications techniques avec le code de chaque version. L'application Corsu trouve la version de chaque dossier de jeu, y ajoute le pack de cette version et choisit le corse. Textes écrits par IA, sans relecture par un locuteur ; vérifications automatiques, pas visuelles ; seule la 26.3 a été lancée avec le pack. Disponibilité : dans les versions publiées de Corsu à partir de 0.23.0. Détails et limites : [Minecraft en corse](docs/fr/minecraft.md), [versions et vérifications](minecraft/java/COMPATIBILITY.md).
 <!-- corsu:minecraft-summary:end -->
 
 **Logiciels déjà traduits en corse** : VLC, 7-Zip, Notepad++, WinMerge, SumatraPDF, FileZilla, HandBrake et VeraCrypt
@@ -73,6 +73,14 @@ par exemple) ou tout retirer.
 
 <img src="docs/images/corsu-setup-fr.png" alt="L'application Corsu : Firefox, Discord et le bureau KDE Plasma en corse, chacun avec son interrupteur" width="570">
 
+**Mettre à jour ou réparer.** Relancez la même commande (ou l'installeur de l'archive téléchargée), ou utilisez le
+bouton « Mettre à jour » de l'application Corsu (rubrique À propos) : c'est le même mécanisme. Corsu trouve la version
+installée : il la met à jour si celle-ci est plus récente, ou la répare si c'est la même ; une version plus ancienne est
+refusée, sauf avec `--allow-downgrade`. Vos choix sont gardés : les logiciels choisis le restent, ce que vous avez
+désactivé reste désactivé, et rien de nouveau n'est ajouté sans votre accord. Le téléchargement est vérifié avec sa
+somme SHA-256 publiée avant toute modification. Une seule opération Corsu à la fois : si une autre est en cours, Corsu
+affiche « Corsu est déjà occupé » et ne change rien.
+
 Discord : réglez sa langue sur Français ou English, voir [Discord en corse](docs/fr/discord.md).
 Google en corse : choisissez Corsu dans la langue de votre compte Google, voir [ce guide](docs/fr/compatibilite.md#google-et-les-autres-sites). Dans Firefox Corsu, les boutons que Google laisse en français ou en anglais sont complétés en corse.
 Téléphones : [Android](docs/fr/telephone/android.md), [iPhone](docs/fr/telephone/iphone.md). Prédiction et correction des mots corses pour le clavier Keyman : [corsu-keyboard.kmp](https://github.com/Platykalt/corsu/releases/latest/download/corsu-keyboard.kmp).
@@ -102,7 +110,7 @@ terminal commands. Opera GX and the other Chromium browsers are experimental. Ea
 again at any time, and the details for each system are in [What works where](docs/en/compatibility.md).
 
 <!-- corsu:minecraft-summary:start -->
-**Minecraft: Java Edition in Corsican for 87 versions** (releases 1.6.1 → 26.3). Complete translation of the language files for the listed versions; technical checks with each version's own code. The Corsu app finds the version of each game folder, adds that version's pack and picks Corsican. AI-written texts, not reviewed by a speaker; automated checks, not visual ones; only 26.3 has been started with the pack. Availability: on the main branch (development) today; in a published Corsu release only once a release containing these packs is published (the last published one, 0.22.0, has only the 26.3 pack). Details and limits: [Minecraft in Corsican](docs/en/minecraft.md), [versions and checks](minecraft/java/COMPATIBILITY.md).
+**Minecraft: Java Edition in Corsican for 87 versions** (releases 1.6.1 → 26.3). Complete translation of the language files for the listed versions; technical checks with each version's own code. The Corsu app finds the version of each game folder, adds that version's pack and picks Corsican. AI-written texts, not reviewed by a speaker; automated checks, not visual ones; only 26.3 has been started with the pack. Availability: in published Corsu releases from 0.23.0. Details and limits: [Minecraft in Corsican](docs/en/minecraft.md), [versions and checks](minecraft/java/COMPATIBILITY.md).
 <!-- corsu:minecraft-summary:end -->
 
 **Programs already translated into Corsican**: VLC, 7-Zip, Notepad++, WinMerge, SumatraPDF, FileZilla, HandBrake and
@@ -153,6 +161,13 @@ doing it, and Corsu keeps a copy of every file it changes. Open it again from th
 put a part back in its original language (the terminal for an hour, for example) or remove everything.
 
 <img src="docs/images/corsu-setup-en.png" alt="The Corsu app: Firefox, Discord and the KDE Plasma desktop in Corsican, each with its own switch" width="570">
+
+**Updating or repairing.** Run the same command again (or the downloaded archive's installer), or use the Corsu app's
+"Update" button (in About): it is the same mechanism. Corsu finds the installed version and updates it if this one is
+newer, or repairs it if it is the same; an older version is refused unless you add `--allow-downgrade`. Your choices
+are kept: the programs you chose stay chosen, parts you switched off stay off, and nothing new is added unless you
+select it. The download is checked against its published SHA-256 before anything changes. Only one Corsu task runs at
+a time; if another is running, Corsu says "Corsu is already busy" and changes nothing.
 
 Discord: set its language to Français or English, see [Discord in Corsican](docs/en/discord.md).
 Google in Corsican: choose Corsu as your Google account language, see [this guide](docs/en/compatibility.md#google-and-other-websites). In Firefox Corsu, the buttons Google leaves in French or English are completed in Corsican.

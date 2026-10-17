@@ -165,6 +165,9 @@ jobs:
           echo "Source commit: $GITHUB_SHA"
           (cd dist && (sha256sum corsu-*.tar.gz corsu-*.zip 2>/dev/null || shasum -a 256 corsu-*.tar.gz corsu-*.zip))
           CORSU_ARCHIVES="$GITHUB_WORKSPACE/dist" python tests/e2e/e2e.py archive --root "${{ env.CORSU_RELEASE }}"
+      - name: Update — from published 0.21.0 and 0.22.0 to these archives, repair, refusal, recovery, lock, uninstall
+        shell: bash
+        run: python tests/e2e/check_update.py --archives "$GITHUB_WORKSPACE/dist" --from 0.21.0 0.22.0
       - name: One-line install script with these archives (CORSU_DOWNLOAD_BASE), checksum checked
         shell: bash
         run: |

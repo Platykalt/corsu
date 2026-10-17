@@ -43,7 +43,7 @@ EMPTY = packs.digest('')
 IN_GAME = {'26.3': {'date': '2026-10-16', 'evidence': 'log'}}
 # The first published Corsu release that ships the packs of every listed version; None until it is published. The
 # last published release and the only Minecraft version its pack is for.
-PUBLISHED_IN = None
+PUBLISHED_IN = '0.23.0'
 LAST_PUBLISHED = ('0.22.0', '26.3')
 
 SUMMARY = ('<!-- corsu:minecraft-summary:start -->', '<!-- corsu:minecraft-summary:end -->')
