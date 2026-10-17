@@ -63,7 +63,12 @@ System Settings → General → Language & Region → Applications, an array. Co
 only (net.poedit.Poedit, not sandboxed: PRODUCT_BUNDLE_IDENTIFIER in Poedit.xcodeproj, no entitlements for the app):
 Corsican, then your own list (read from the global AppleLanguages, never written), so AppKit's own panels, which have
 no Corsican, take your language. The earlier value (or its absence) is recorded with its type and given back; a list
-changed since (in System Settings) is yours and stays. Experimental: not run on a Mac yet (simulated `defaults` only).
+changed since (in System Settings) is yours and stays. Experimental: Poedit itself was not run on a Mac. Seen on a
+GitHub Actions macOS 26 runner (tests/test_apps_settings.py, RealMacTests, 2026-10-17): Corsu's `defaults` helper
+writes the array and gives back an absent key, an array, a string, a number, a boolean and a dictionary exactly, and a
+small tool with its own bundle identifier gets [NSLocale preferredLanguages] = co,fr-FR from that per-application
+list (en-US without it). Not seen: Poedit's window, and AppKit's panels taking the second language. A string written
+in AppleLanguages reads back as absent on macOS (seen on that runner): Foundation only takes an array there.
 """
 import os
 from pathlib import Path

@@ -378,10 +378,16 @@ Implemented in [`src/apps/poedit.py`](../src/apps/poedit.py) (checked 2026-10-17
       changed since stays.
     - It refuses `NSGlobalDomain`/`-g`/`.GlobalPreferences`.
 
-    **Experimental:** not run on a Mac. The unit tests use a simulated `defaults`. `tests/test_apps_settings.py`
-    has `RealMacTests`, which runs only on a GitHub Actions macOS runner on throwaway domains: a real `defaults`
-    round trip, and NSLocale of a small tool with its own bundle id seeing `co` first. The Poedit window itself, and
-    whether AppKit panels really fall back to the second language, are unverified (?).
+    **Experimental:** Poedit itself was not run on a Mac. The unit tests use a simulated `defaults`.
+    `tests/test_apps_settings.py` `RealMacTests` runs only on GitHub Actions macOS runners, on throwaway domains. On
+    the macOS 26 arm64 runner (2026-10-17, workflow_dispatch run 39034793266):
+    - The helper's real `defaults` round trip passed: an absent key and an array `AppleLanguages`, and string, int,
+      bool and dict values on another key, all came back with the same type.
+    - A tool with its own bundle id got `NSLocale.preferredLanguages` = `co,fr-FR` from the per-app list (`en-US`
+      without it).
+    - A *string* written to `AppleLanguages` reads back as absent there: Foundation only takes an array.
+
+    The Poedit window and whether AppKit panels fall back to the second language are still unverified (?).
 - **Close?** No: neither the registry value nor the menu entry is rewritten by Poedit; a restart is enough.
 - **Licence:** MIT.
 
