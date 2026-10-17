@@ -98,7 +98,7 @@ EXPECTED = {
 AFTER_CHANGE = {**EXPECTED, 'friend1': 'Online', 'label1': 'Travagliu', 'clicks': 2}
 
 
-def bundle(vencord):
+def bundle(vencord, dictionary_words=None):
     script = """
 const { build } = require(process.argv[1]);
 build({ entryPoints: [process.argv[2]], bundle: true, write: false, format: 'iife', globalName: 'Corsu',
@@ -109,7 +109,7 @@ build({ entryPoints: [process.argv[2]], bundle: true, write: false, format: 'iif
 """
     with tempfile.TemporaryDirectory() as folder:
         dictionary = Path(folder) / 'dictionary.json'
-        dictionary.write_text(json.dumps(DICTIONARY, ensure_ascii=False), encoding='utf-8')
+        dictionary.write_text(json.dumps(dictionary_words or DICTIONARY, ensure_ascii=False), encoding='utf-8')
         esbuild = next(Path(vencord, 'node_modules').resolve().glob('esbuild/lib/main.js'))
         result = subprocess.run(['node', '-e', script, str(esbuild), str(ROOT / 'src/discord-plugin/translate.ts'),
                                  str(dictionary)], capture_output=True, text=True, encoding='utf-8')
@@ -133,8 +133,10 @@ def compare(label, found, expected):
     return wrong
 
 
-def main(chrome, vencord):
-    code = bundle(vencord)
+def run(chrome, vencord, dictionary, page, read, expected, change, after_change):
+    """Load the bundled translator and `page` in Chrome headless, read the page, apply `change`, read it again.
+    Returns the values that differ from what was expected."""
+    code = bundle(vencord, dictionary)
     with tempfile.TemporaryDirectory(prefix='corsu-discord-', ignore_cleanup_errors=True) as profile:
         with socket.socket() as reserve:
             reserve.bind(('127.0.0.1', 0))
@@ -156,16 +158,27 @@ def main(chrome, vencord):
             target = devtools.call('Target.createTarget', {'url': 'about:blank'})['targetId']
             session = devtools.call('Target.attachToTarget', {'targetId': target, 'flatten': True})['sessionId']
             evaluate(devtools, session, code)
-            evaluate(devtools, session, PAGE)
-            wrong = compare('start:', json.loads(evaluate(devtools, session, READ)), EXPECTED)
-            evaluate(devtools, session, CHANGE)
+            evaluate(devtools, session, page)
+            wrong = compare('start:', json.loads(evaluate(devtools, session, read)), expected)
+            evaluate(devtools, session, change)
             # The observer translates in a microtask; give it one turn.
             evaluate(devtools, session, 'new Promise(resolve => setTimeout(resolve, 50))')
             wrong.update({f'after change {key}': value for key, value in
-                          compare('after change:', json.loads(evaluate(devtools, session, READ)), AFTER_CHANGE).items()})
+                          compare('after change:', json.loads(evaluate(devtools, session, read)), after_change).items()})
         finally:
             process.terminate()
             process.wait(timeout=15)
+    return wrong
+
+
+def main(chrome, vencord):
+    wrong = run(chrome, vencord, DICTIONARY, PAGE, READ, EXPECTED, CHANGE, AFTER_CHANGE)
+    # The pages built on Discord's own record shapes and markup (check_discord_content.py) run here too, so the CI
+    # job that runs this file checks them.
+    import check_discord_content as content
+    wrong.update({f'content {key}': value for key, value in run(
+        chrome, vencord, content.DICTIONARY, content.PAGE, content.READ, content.EXPECTED, content.CHANGE,
+        content.AFTER_CHANGE).items()})
     if wrong:
         raise SystemExit(f'FAIL: {wrong}')
     print('PASS: names stay as people wrote them; interface labels around them are translated')
