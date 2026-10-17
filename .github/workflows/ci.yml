@@ -202,11 +202,10 @@ jobs:
           python tools/vlcpo.py build "$RUNNER_TEMP/vlc-upstream.mo" --include=none
           python tests/e2e/check_vlc_experimental.py --mo "$RUNNER_TEMP/vlc-experimental.mo" --upstream "$RUNNER_TEMP/vlc-upstream.mo"
           HOME="$(mktemp -d)" XDG_DATA_HOME= XDG_CONFIG_HOME= python tests/e2e/check_vlc_complement.py
-      - name: Update from 0.23.0 with VLC, its complement and fre:ac (Linux, real packages)
+      - name: Update from 0.23.0 with VLC and its complement (Linux, real VLC package)
         if: runner.os == 'Linux'
-        run: |
-          sudo apt-get install -y -qq freac
-          python tests/e2e/check_update_apps.py --archives "$GITHUB_WORKSPACE/dist" --from 0.23.0
+        # Ubuntu has no fre:ac package: its part of this check runs where fre:ac is installed (Debian).
+        run: python tests/e2e/check_update_apps.py --archives "$GITHUB_WORKSPACE/dist" --from 0.23.0
       - name: VLC complement declared unavailable (Windows, macOS)
         if: runner.os != 'Linux'
         shell: bash
