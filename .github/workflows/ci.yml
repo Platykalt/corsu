@@ -167,7 +167,7 @@ jobs:
           CORSU_ARCHIVES="$GITHUB_WORKSPACE/dist" python tests/e2e/e2e.py archive --root "${{ env.CORSU_RELEASE }}"
       - name: Update — from published 0.21.0 and 0.22.0 to these archives, repair, refusal, recovery, lock, uninstall
         shell: bash
-        run: python tests/e2e/check_update.py --archives "$GITHUB_WORKSPACE/dist" --from 0.21.0 0.22.0 0.23.0
+        run: python tests/e2e/check_update.py --archives "$GITHUB_WORKSPACE/dist" --from 0.21.0 0.22.0 0.23.0 0.24.0
       - name: One-line install script with these archives (CORSU_DOWNLOAD_BASE), checksum checked
         shell: bash
         run: |
@@ -205,7 +205,7 @@ jobs:
       - name: Update from 0.23.0 with VLC and its complement (Linux, real VLC package)
         if: runner.os == 'Linux'
         # Ubuntu has no fre:ac package: its part of this check runs where fre:ac is installed (Debian).
-        run: python tests/e2e/check_update_apps.py --archives "$GITHUB_WORKSPACE/dist" --from 0.23.0
+        run: python tests/e2e/check_update_apps.py --archives "$GITHUB_WORKSPACE/dist" --from 0.24.0
       - name: VLC complement declared unavailable (Windows, macOS)
         if: runner.os != 'Linux'
         shell: bash
