@@ -154,17 +154,31 @@ class RealMacTests(unittest.TestCase):
         state.start()
         self.addCleanup(state.stop)
 
-    def test_array_written_read_and_given_back(self):
-        subprocess.run(['defaults', 'write', self.domain, 'AppleLanguages', '-string', 'de'], check=True)
-        settings.set_defaults_value(self.installer, 'app', self.domain, 'AppleLanguages', ['co', 'fr-FR'])
-        self.assertEqual(settings.defaults_value(self.domain, 'AppleLanguages'), ['co', 'fr-FR'])
-        read = subprocess.run(['defaults', 'read-type', self.domain, 'AppleLanguages'], capture_output=True, text=True)
+    def round_trip(self, key, original, write_original):
+        if write_original:
+            subprocess.run(['defaults', 'write', self.domain, key, *write_original], check=True)
+        self.installer = Installer()
+        before = settings.defaults_value(self.domain, key)
+        print(f'\n{key}: before {before!r}')
+        self.assertEqual((before, type(before)), (original, type(original)))
+        settings.set_defaults_value(self.installer, 'app', self.domain, key, ['co', 'fr-FR'])
+        self.assertEqual(settings.defaults_value(self.domain, key), ['co', 'fr-FR'])
+        read = subprocess.run(['defaults', 'read-type', self.domain, key], capture_output=True, text=True)
         self.assertIn('array', read.stdout)
-        record = self.installer.state['files'][f'defaults:{self.domain}:AppleLanguages']
+        record = self.installer.state['files'][f'defaults:{self.domain}:{key}']
         self.assertTrue(settings.revert(record))
-        self.assertEqual(settings.defaults_value(self.domain, 'AppleLanguages'), 'de')
-        subprocess.run(['defaults', 'delete', self.domain, 'AppleLanguages'], check=True)
-        self.assertIsNone(settings.defaults_value(self.domain, 'AppleLanguages'))
+        after = settings.defaults_value(self.domain, key)
+        print(f'{key}: given back {after!r}')
+        self.assertEqual((after, type(after)), (original, type(original)))
+
+    def test_array_written_read_and_given_back(self):
+        self.round_trip('AppleLanguages', None, None)  # absent: removed again
+        self.round_trip('AppleLanguages', ['de-DE', 'en'], ['-array', 'de-DE', 'en'])
+        # Other types, on a key of the throwaway domain's own:
+        self.round_trip('CorsuString', 'de', ['-string', 'de'])
+        self.round_trip('CorsuNumber', 3, ['-int', '3'])
+        self.round_trip('CorsuFlag', True, ['-bool', 'true'])
+        self.round_trip('CorsuDict', {'a': 'b'}, ['-dict', 'a', 'b'])
 
     @unittest.skipUnless(shutil.which('swiftc'), 'no swiftc')
     def test_nslocale_puts_corsican_first_for_that_application_only(self):
