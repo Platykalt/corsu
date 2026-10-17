@@ -25,6 +25,10 @@ Les sections datées après « État actuel » sont l'historique : ce qui y est 
   `GetRegionalPrefsLocales`), protections Discord (page simulée dans Chrome), raccourcis du complément VLC
   (« A&ttrezzi » ; la 0.24.0 garde le double Alt+A), vérification d'utilisateur de la fenêtre
   limitée à la vraie connexion (test instable du tag 0.24.0). Notes dans [.github/RELEASE_NOTES.md](../.github/RELEASE_NOTES.md) et le CHANGELOG.
+- **Candidate 0.25.0** (`src/release.json`) sur `next-0.25`, non taguée. Migration depuis la 0.24.0 publiée vérifiée
+  dans un conteneur Debian avec vrais VLC (entrée de menu), Poedit, PDFsam, fre:ac et Firefox.
+- **`fix-0.24.1`** (`3e43459`, depuis `v0.24.0`) : seulement le correctif de sécurité de la fenêtre ; attend une
+  décision de publication.
 - Tests unitaires : `HOME=$(mktemp -d) python3 -m unittest discover -s tests -t . -q` (sans `-t .`, 13 erreurs
   d'import qui ne signalent rien).
 - **Attend une personne** : relecture par un locuteur (VLC : 3 cas ouverts dans

@@ -24,6 +24,11 @@
   while the window was open; and a closed connection in TIME_WAIT on the same port (uid 0) refused the user's own
   actions at random (0.23 % of requests on a quiet machine, 75 % under heavy connection churn). See
   docs/window-security.md.
+- VLC: `vlc --version` is read with `LC_ALL=C` (German VLC prints "VLC-Version 3.0.24"): the complement was refused
+  as "unknown version" in 63 session languages, with no message.
+- Firefox: switching it off and uninstalling take the copies' `[Install…]` sections back out of `profiles.ini` and
+  `installs.ini` (`unlink_profile` only ran when pruning old copies).
+- Poedit: plain `C` fallback where C.UTF-8 does not load; on macOS a "System default" chosen since is kept.
 - VLC complement: "A&ttrezzi", "Sempre s&opra"; `tools/vlcpo.py check` reports accelerator clashes per VLC menu
   (error for drafts, note for upstream).
 

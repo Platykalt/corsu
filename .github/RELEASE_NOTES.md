@@ -21,15 +21,19 @@ publication (tests automatiques ; personne n'a regardé les écrans).
   avec des sessions française, allemande et italienne : Poedit en corse, fenêtres de fichiers et boutons standard
   dans la langue habituelle, formats régionaux inchangés. Compromis : cette séparation repose sur la façon dont la
   bibliothèque C de Linux (glibc) lit les noms de langue ; si Corsu ne peut pas la vérifier, Poedit passe quand même
-  en corse mais les fenêtres de fichiers restent en anglais, et l'application le dit. Windows : réglage de langue de
+  en corse mais les fenêtres de fichiers restent en anglais (formats de la session gardés), et l'application le
+  dit. Windows : réglage de langue de
   Poedit, vérifié sur fichiers simulés seulement. macOS, **expérimental** : liste de langues propre à Poedit (jamais
-  la langue du système) ; mécanisme vérifié sur une machine macOS de la CI, fenêtre de Poedit jamais regardée sur un
-  Mac.
+  la langue du système), remise telle quelle à la désactivation, et un choix « Par défaut du système » fait ensuite
+  est respecté ; écriture des préférences vérifiée sur une machine macOS de la CI, Poedit lui-même jamais lancé sur
+  un Mac.
 - **PDFsam** (5.0 et plus) : Corsu règle sa langue sur le corse. Essai réel sous Linux (paquet officiel 6.0.6) ;
   PDFsam doit être fermé pendant l'activation. Windows : vérifié sur fichiers simulés seulement. macOS : laissé tel
   quel, avec la marche à suivre.
 - **Firefox** : les heures, dates et nombres suivent de nouveau les réglages régionaux de l'ordinateur (on voyait
-  « 11:32 AM » sur un système français) ; un choix fait dans les paramètres de Firefox reste prioritaire. Outils du
+  « 11:32 AM » sur un système français) : ceux de la catégorie des dates du système (`LC_TIME`), y compris pour les
+  nombres ; un choix fait dans les paramètres de Firefox reste prioritaire. `profiles.ini` et `installs.ini`
+  reviennent à l'identique quand Firefox est désactivé ou Corsu désinstallé (une section de Corsu y restait). Outils du
   navigateur et messages de téléchargement traduits (31 textes IA, à relire) ; « Onglets ouverts » n'est plus traduit
   comme un verbe ; le contrôle des textes vérifie l'ordre des valeurs insérées.
 - **Discord** : noms de personnes, surnoms, conversations privées et noms contenant une virgule protégés partout ;
@@ -42,7 +46,11 @@ publication (tests automatiques ; personne n'a regardé les écrans).
   `docs/window-security.md`).
 - **Complément VLC** : Outils devient « A&ttrezzi » (Alt+T), il prenait Alt+A comme Audio ; « Sempre s&opra » ne
   double plus Alt+S. Corrections de brouillons IA, la traduction amont de VLC est inchangée. Les 3 traductions
-  incertaines restent exclues.
+  incertaines restent exclues. Le complément était refusé sans le dire dans les sessions où VLC traduit sa ligne de
+  version (allemand, italien, corse…) : corrigé.
+- **Mise à jour depuis la 0.24.0** vérifiée sous Linux (conteneur Debian, session française) : composants désactivés
+  gardés, complément VLC gardé et réellement chargé par VLC, réglages régionaux et fichiers personnels inchangés,
+  Poedit et PDFsam détectés puis activés, désactivation et désinstallation rendant les originaux à l'identique.
 
 ### Rappel : nouveautés de la 0.24.0
 
@@ -104,14 +112,18 @@ looked at the screens).
 - **Poedit**: Corsu switches on its Corsican translation. Linux: Debian package (3.6.3) and Flatpak (3.10) run for
   real with French, German and Italian sessions: Poedit in Corsican, file dialogs and standard buttons in the usual
   language, regional formats unchanged. Trade-off: this relies on how Linux's C library (glibc) reads language names;
-  when Corsu cannot check it, Poedit still turns Corsican but file dialogs stay in English, and the app says so.
+  when Corsu cannot check it, Poedit still turns Corsican but file dialogs stay in English (the session's formats
+  are kept), and the app says so.
   Windows: Poedit's language setting, checked on simulated files only. macOS, **experimental**: Poedit's own language
-  list (never the system language); mechanism checked on a CI macOS machine, Poedit's window never seen on a Mac.
+  list (never the system language), given back as it was when switched off, and a later "System default" choice
+  is respected; writing the preference checked on a CI macOS machine, Poedit itself never started on a Mac.
 - **PDFsam** (5.0 and later): Corsu sets its language to Corsican. Run for real on Linux (official 6.0.6 package);
   PDFsam must be closed while it is switched. Windows: checked on simulated files only. macOS: left alone, with what
   to do.
 - **Firefox**: times, dates and numbers follow the computer's regional settings again ("11:32 AM" showed on a French
-  system); a choice made in Firefox's settings still wins. Browser tools and download messages translated (31 AI
+  system): those of the system's date category (`LC_TIME`), numbers included; a choice made in Firefox's settings
+  still wins. `profiles.ini` and `installs.ini` come back unchanged when Firefox is switched off or Corsu
+  uninstalled (a Corsu section stayed there). Browser tools and download messages translated (31 AI
   texts, to be reviewed); "Onglets ouverts" no longer translated as a verb; the text check verifies the order of
   inserted values.
 - **Discord**: people's names, nicknames, private conversations and names containing a comma are protected
@@ -123,6 +135,11 @@ looked at the screens).
   check (see `docs/window-security.md`).
 - **VLC complement**: Tools becomes "A&ttrezzi" (Alt+T), it took Alt+A like Audio; "Sempre s&opra" no longer doubles
   Alt+S. Fixes to AI drafts, VLC's upstream translation is unchanged. The 3 uncertain translations stay left out.
+  The complement was silently refused in sessions where VLC translates its version line (German, Italian,
+  Corsican…): fixed.
+- **Update from 0.24.0** checked on Linux (Debian container, French session): parts switched off stay off, the VLC
+  complement stays on and is really loaded by VLC, regional settings and personal files unchanged, Poedit and PDFsam
+  detected then switched on, switching off and uninstalling give the originals back unchanged.
 
 ### Earlier: new in 0.24.0
 
