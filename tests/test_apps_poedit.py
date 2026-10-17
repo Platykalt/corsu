@@ -1,8 +1,11 @@
 """Poedit on simulated folders, menu entries, Flatpak overrides, registry and preferences (no real program runs here;
-the Linux package was also run for real, see src/apps/poedit.py)."""
+the Linux package and the Flatpak were also run for real, see src/apps/poedit.py). SIMULATED: macOS's `defaults` is a
+fake here (FakeDefaults, plist files written with plistlib), and `locale` is never run."""
 import io
 import json
 import os
+import plistlib
+import subprocess
 from contextlib import ExitStack, redirect_stdout
 from pathlib import Path
 import tempfile
@@ -20,7 +23,9 @@ URI_ENTRY = ('[Desktop Entry]\nName=Poedit\nNoDisplay=true\nMimeType=x-scheme-ha
              'Exec=poeditor --handle-poedit-uri %u\n')
 FORMATS = ('LC_CTYPE=fr_FR.UTF-8 LC_NUMERIC=fr_FR.UTF-8 LC_TIME=fr_FR.UTF-8 LC_COLLATE=fr_FR.UTF-8 '
            'LC_MONETARY=fr_FR.UTF-8 LC_PAPER=fr_FR.UTF-8 LC_MEASUREMENT=fr_FR.UTF-8')
-PREFIX = f'env LANGUAGE=co:fr_FR LANG=C.UTF-8 LC_MESSAGES=C.UTF-8 {FORMATS} '
+REAL_CHECK = poedit.messages_name_works  # patched in every test but test_messages_name_check
+PREFIX = 'env LANGUAGE=co:fr_FR LC_MESSAGES=/C.UTF-8 '
+FALLBACK_PREFIX = f'env LANGUAGE=co:fr_FR LANG=C.UTF-8 LC_MESSAGES=C.UTF-8 {FORMATS} '
 
 
 def write_mo(path, extra=False):
@@ -48,6 +53,7 @@ class PoeditTests(unittest.TestCase):
         self.registry = {}
         self.defaults = {}
         self.which = {}
+        self.separate = True
         known = {'poedit': poedit.Poedit()}
         self.stack = ExitStack()
         for target, name, value in (
@@ -59,12 +65,13 @@ class PoeditTests(unittest.TestCase):
                 (apps.shutil, 'which', lambda name: self.which.get(name)),
                 (poedit, 'LOCALE', self.root / 'nowhere/locale'), (poedit, 'SNAP', self.root / 'snap/poedit'),
                 (poedit, 'APPLICATIONS', (self.root / 'Applications',)),
+                (poedit, 'messages_name_works', lambda: self.separate),
                 (settings, 'registry_get', lambda key, name: self.registry.get((key, name))),
                 (settings, 'registry_set', self.registry_set),
                 (settings, 'defaults_get', lambda domain, key: self.defaults.get((domain, key))),
                 (settings, 'defaults_put', self.defaults_put)):
             self.stack.enter_context(patch.object(target, name, value))
-        environment = {name: '' for name in ('LANGUAGE', 'LC_ALL', 'LC_MESSAGES', *poedit.FORMATS)}
+        environment = {name: '' for name in ('LANGUAGE', 'LC_ALL', 'LC_MESSAGES', *poedit.CATEGORIES)}
         environment.update({'LANG': 'fr_FR.UTF-8', 'ProgramFiles': str(self.root / 'Program Files'),
                             'ProgramFiles(x86)': '', 'ProgramW6432': '', 'APPDATA': str(self.root / 'Roaming'),
                             'LOCALAPPDATA': str(self.root / 'Local')})
@@ -129,20 +136,62 @@ class LinuxTests(PoeditTests):
         self.assertFalse(self.entry('net.poedit.PoeditURI.desktop').exists())
 
     def test_session_locale_variables(self):
-        self.assertEqual(poedit.environment(), {'LANG': 'C.UTF-8', 'LC_MESSAGES': 'C.UTF-8',
-                                                **{name: 'fr_FR.UTF-8' for name in poedit.FORMATS}})
+        # GTK keeps the session's language: only LC_MESSAGES changes, LANG and the formats stay the session's.
+        self.assertEqual(poedit.environment(), {'LC_MESSAGES': '/C.UTF-8'})
         with patch.dict(os.environ, {'LC_ALL': 'de_DE.UTF-8', 'LC_TIME': 'en_GB.UTF-8'}):
-            values = poedit.environment()
-            self.assertEqual((values['LC_ALL'], values['LC_TIME'], values['LC_NUMERIC']), ('', 'de_DE.UTF-8', 'de_DE.UTF-8'))
-        with patch.dict(os.environ, {'LC_TIME': 'en_GB.UTF-8'}):
-            self.assertNotIn('LC_TIME', poedit.environment())  # the session's own value is inherited as it is
-        with patch.dict(os.environ, {'LANG': 'C'}):
-            self.assertEqual(poedit.environment(), {'LANG': 'C.UTF-8', 'LC_MESSAGES': 'C.UTF-8'})
+            # LC_ALL beats LC_MESSAGES: emptied, its value goes to LANG and to the categories the session sets.
+            self.assertEqual(poedit.environment(), {'LC_MESSAGES': '/C.UTF-8', 'LC_ALL': '', 'LANG': 'de_DE.UTF-8',
+                                                    'LC_TIME': 'de_DE.UTF-8'})
+        with patch.dict(os.environ, {'LC_TIME': 'en_GB.UTF-8', 'LANG': 'C'}):
+            self.assertEqual(poedit.environment(), {'LC_MESSAGES': '/C.UTF-8'})
         self.system_poedit()
         with patch.dict(os.environ, {'LC_ALL': 'fr_FR.UTF-8'}):
             self.run_install()
-        self.assertIn('Exec=env LANGUAGE=co:fr_FR LANG=C.UTF-8 LC_MESSAGES=C.UTF-8 "LC_ALL=" LC_CTYPE=fr_FR.UTF-8',
+        self.assertIn('Exec=env LANGUAGE=co:fr_FR LC_MESSAGES=/C.UTF-8 "LC_ALL=" LANG=fr_FR.UTF-8 poeditor %F',
                       self.entry().read_text())
+
+    def test_fallback_locale_variables(self):
+        self.assertEqual(poedit.environment(separate=False), {'LANG': 'C.UTF-8', 'LC_MESSAGES': 'C.UTF-8',
+                                                              **{name: 'fr_FR.UTF-8' for name in poedit.FORMATS}})
+        with patch.dict(os.environ, {'LC_ALL': 'de_DE.UTF-8', 'LC_TIME': 'en_GB.UTF-8'}):
+            values = poedit.environment(separate=False)
+            self.assertEqual((values['LC_ALL'], values['LC_TIME'], values['LC_NUMERIC']), ('', 'de_DE.UTF-8', 'de_DE.UTF-8'))
+        with patch.dict(os.environ, {'LC_TIME': 'en_GB.UTF-8'}):
+            self.assertNotIn('LC_TIME', poedit.environment(separate=False))  # the session's own value is inherited
+        with patch.dict(os.environ, {'LANG': 'C'}):
+            self.assertEqual(poedit.environment(separate=False), {'LANG': 'C.UTF-8', 'LC_MESSAGES': 'C.UTF-8'})
+
+    def test_without_the_c_utf8_folder_the_fallback_says_what_it_costs(self):
+        self.system_poedit()
+        self.separate = False
+        [installation] = poedit.Poedit().find()
+        self.assertIn('file dialogs will be in English', installation.kind)
+        self.assertIsNone(installation.reason)
+        self.run_install()
+        self.assertEqual(self.entry().read_text(), SYSTEM_ENTRY.replace('Exec=', 'Exec=' + FALLBACK_PREFIX))
+        self.separate = True  # e.g. glibc updated: the next run writes the separate way
+        self.run_install()
+        self.assertEqual(self.entry().read_text(), SYSTEM_ENTRY.replace('Exec=', 'Exec=' + PREFIX))
+        corsu.uninstall()
+        self.assertFalse(self.entry().exists())
+
+    def test_messages_name_check(self):
+        calls, outcome = [], {}
+
+        def run(command, **options):
+            calls.append((command, options['env']))
+            return subprocess.CompletedProcess(command, 0, outcome['out'], outcome['err'])
+        with patch.object(poedit.subprocess, 'run', run):
+            outcome.update(out='LANG=\nLC_MESSAGES="/C.UTF-8"\nLC_ALL=/C.UTF-8\n', err='')
+            self.assertTrue(REAL_CHECK())
+            self.assertEqual((calls[0][0], calls[0][1]['LC_ALL']), (['locale'], '/C.UTF-8'))
+            outcome.update(out='LC_ALL=/C.UTF-8\n', err='locale: Cannot set LC_ALL to default locale: No such file\n')
+            self.assertFalse(REAL_CHECK())
+
+        def missing(command, **options):
+            raise FileNotFoundError(command[0])
+        with patch.object(poedit.subprocess, 'run', missing):
+            self.assertFalse(REAL_CHECK())
 
     def test_without_catalogue_or_in_a_corsican_session_nothing_is_written(self):
         self.system_poedit(catalogue=False)
@@ -209,8 +258,9 @@ class LinuxTests(PoeditTests):
         self.assertEqual(report['activation'], 'active')
         text = override.read_text()
         self.assertIn('LANGUAGE=co:fr_FR\n', text)
-        self.assertIn('LANG=C.UTF-8\n', text)
-        self.assertIn('LC_TIME=fr_FR.UTF-8\n', text)
+        self.assertIn('LC_MESSAGES=/C.UTF-8\n', text)
+        self.assertIn('LANG=fr_FR.UTF-8\n', text)  # the person's own variable, untouched
+        self.assertNotIn('LC_TIME', text)
         self.assertIn('[Context]\nfilesystems=home;\n', text)
         corsu.disable(['poedit'])
         self.assertEqual(override.read_text(), original)
@@ -233,6 +283,23 @@ class LinuxTests(PoeditTests):
         self.assertNotIn('LC_ALL', override.read_text())
         corsu.uninstall()
         self.assertEqual(override.read_text(), '[Context]\nshared=network;\n')
+
+    def test_flatpak_override_from_the_earlier_way_is_brought_up_to_date(self):
+        override = self.flatpak()
+        original = write(override, '[Context]\nshared=network;\n\n[Environment]\nLC_TIME=en_GB.UTF-8\n')
+        # What Corsu 0.25's first way wrote (LANG and LC_MESSAGES C.UTF-8, formats given back):
+        earlier = {'LANG': 'C.UTF-8', 'LC_MESSAGES': 'C.UTF-8', 'LC_TIME': 'fr_FR.UTF-8'}
+        with patch.object(poedit, 'environment', lambda separate=True: dict(earlier)):
+            self.run_install()
+        self.assertIn('LANG=C.UTF-8\n', override.read_text())
+        self.assertIn('LC_TIME=fr_FR.UTF-8\n', override.read_text())
+        self.run_install()
+        text = override.read_text()
+        self.assertNotIn('LANG=', text)
+        self.assertIn('LC_TIME=en_GB.UTF-8\n', text)  # the person's own value is back
+        self.assertIn('LC_MESSAGES=/C.UTF-8\n', text)
+        corsu.uninstall()
+        self.assertEqual(override.read_text(), original)
 
     def test_snap_is_left_alone(self):
         (self.root / 'snap/poedit').mkdir(parents=True)
@@ -298,20 +365,157 @@ class WindowsTests(PoeditTests):
         self.assertNotIn(self.KEY, self.registry)
 
 
+class FakeDefaults:
+    """SIMULATED macOS `defaults` (export, write, delete) over plist files written with plistlib, one per domain:
+    what the real command does through cfprefsd, without a Mac. The global domain's file is .GlobalPreferences.plist."""
+
+    GLOBAL = ('NSGlobalDomain', '-g', '-globalDomain')
+
+    def __init__(self, folder):
+        self.folder, self.writes = Path(folder), []
+        self.folder.mkdir(parents=True, exist_ok=True)
+
+    def path(self, domain):
+        return self.folder / ('.GlobalPreferences.plist' if domain in self.GLOBAL else f'{domain}.plist')
+
+    def load(self, domain):
+        path = self.path(domain)
+        return plistlib.loads(path.read_bytes()) if path.exists() else None
+
+    def save(self, domain, values):
+        self.path(domain).write_bytes(plistlib.dumps(values, fmt=plistlib.FMT_BINARY))
+
+    def __call__(self, command, **options):
+        if command[0] != 'defaults':
+            raise FileNotFoundError(command[0])
+        verb, domain = command[1], command[2]
+        values = self.load(domain)
+        if verb == 'export':
+            if values is None:
+                return subprocess.CompletedProcess(command, 1, b'', f'Domain {domain} does not exist\n'.encode())
+            return subprocess.CompletedProcess(command, 0, plistlib.dumps(values, fmt=plistlib.FMT_XML), b'')
+        self.writes.append(list(command))
+        if verb == 'write':
+            text = command[4]
+            value = settings.plist_value(text) if text.startswith('<') else text
+            self.save(domain, {**(values or {}), command[3]: value})
+            return subprocess.CompletedProcess(command, 0, b'', b'')
+        if verb == 'delete':
+            if values is None or command[3] not in values:
+                if options.get('check'):
+                    raise subprocess.CalledProcessError(1, command)
+                return subprocess.CompletedProcess(command, 1, b'', b'not found')
+            del values[command[3]]
+            self.save(domain, values)
+            return subprocess.CompletedProcess(command, 0, b'', b'')
+        raise AssertionError(command)
+
+
 class MacTests(PoeditTests):
     platform = 'macos'
+    DOMAIN = 'net.poedit.Poedit'
 
-    def test_left_alone_with_the_system_way_to_do_it(self):
+    def setUp(self):
+        super().setUp()
+        self.fake = FakeDefaults(self.root / 'Library/Preferences')
+        self.fake.save('NSGlobalDomain', {'AppleLanguages': ['fr-FR', 'en-FR', 'co-FR'], 'AppleLocale': 'fr_FR'})
+        self.stack.enter_context(patch.object(subprocess, 'run', self.fake))
+
+    def install_poedit(self, catalogue=True):
         bundle = self.root / 'Applications/Poedit.app'
-        write_mo(bundle / 'Contents/Resources/co.lproj/poedit.mo')
+        write_mo(bundle / 'Contents/Resources/fr.lproj/poedit.mo', extra=True)
+        if catalogue:
+            write_mo(bundle / 'Contents/Resources/co.lproj/poedit.mo')
+        return bundle
+
+    def languages(self):
+        return (self.fake.load(self.DOMAIN) or {}).get('AppleLanguages')
+
+    def test_per_application_language_list_set_and_removed_again(self):
+        self.install_poedit()
+        self.fake.save(self.DOMAIN, {'NSNavLastRootDirectory': '~/po', 'SUEnableAutomaticChecks': True})
+        [installation] = poedit.Poedit().find()
+        self.assertEqual((installation.coverage, installation.reason), ('2/3', None))
+        self.assertIn('experimental', installation.kind)
+        report = self.run_install()
+        self.run_install()
+        self.assertEqual(report['activation'], 'active')
+        # Corsican, then the person's own list (Corsican taken out of it): AppKit's panels take French.
+        self.assertEqual(self.languages(), ['co', 'fr-FR', 'en-FR'])
+        corsu.disable(['poedit'])
+        self.assertEqual(self.fake.load(self.DOMAIN), {'NSNavLastRootDirectory': '~/po', 'SUEnableAutomaticChecks': True})
+        corsu.enable(['poedit'])
+        self.assertEqual(self.languages(), ['co', 'fr-FR', 'en-FR'])
+        corsu.uninstall()
+        self.assertIsNone(self.languages())
+        self.assertEqual(self.fake.load(self.DOMAIN)['SUEnableAutomaticChecks'], True)
+        # The system's own list is read, never written.
+        self.assertFalse([command for command in self.fake.writes if command[2] in FakeDefaults.GLOBAL])
+        self.assertEqual(self.fake.load('NSGlobalDomain')['AppleLanguages'], ['fr-FR', 'en-FR', 'co-FR'])
+
+    def test_before_the_first_start_there_is_no_domain_yet(self):
+        self.install_poedit()
+        self.run_install()
+        self.assertEqual(self.languages(), ['co', 'fr-FR', 'en-FR'])
+        corsu.uninstall()
+        self.assertEqual(self.fake.load(self.DOMAIN), {})
+
+    def test_earlier_value_comes_back_with_its_type(self):
+        self.install_poedit()
+        for earlier in (['de-DE', 'en'], 'de'):  # an array, and a stray string some tool wrote
+            self.fake.save(self.DOMAIN, {'AppleLanguages': earlier})
+            report = self.run_install()
+            self.assertEqual(self.languages(), ['co', 'fr-FR', 'en-FR'], report)
+            corsu.disable(['poedit'])
+            self.assertEqual(self.languages(), earlier)
+            self.assertIs(type(self.languages()), type(earlier))
+            corsu.enable(['poedit'])
+            corsu.uninstall()
+            self.assertEqual(self.languages(), earlier)
+
+    def test_a_list_changed_since_is_kept(self):
+        self.install_poedit()
+        self.fake.save(self.DOMAIN, {'AppleLanguages': ['de']})
+        self.run_install()
+        # The person chooses Italian for Poedit in System Settings → Language & Region → Applications.
+        self.fake.save(self.DOMAIN, {'AppleLanguages': ['it']})
         report = self.run_install()
         self.assertEqual(report['activation'], 'blocked')
-        self.assertIn('Language & Region', report['skipped'][0]['action'])
-        self.assertEqual(report['instances'][0]['coverage']['translated'], 2)
-        self.assertEqual(self.defaults, {})
-        (bundle / 'Contents/Resources/co.lproj/poedit.mo').unlink()
+        self.assertIn('your choice is kept', report['skipped'][0]['reason'])
+        self.assertEqual(self.languages(), ['it'])
+        corsu.disable(['poedit'])
+        self.assertEqual(self.languages(), ['it'])
+        corsu.uninstall()
+        self.assertEqual(self.languages(), ['it'])
+
+    def test_system_list_changed_later_is_followed(self):
+        self.install_poedit()
+        self.run_install()
+        self.fake.save('NSGlobalDomain', {'AppleLanguages': ['it-IT']})
+        self.run_install()
+        self.assertEqual(self.languages(), ['co', 'it-IT'])
+        corsu.disable(['poedit'])
+        self.assertIsNone(self.languages())  # absent at first: removed, not set to the list of the first run
+
+    def test_without_a_readable_system_list_the_session_language_follows(self):
+        self.install_poedit()
+        self.fake.path('NSGlobalDomain').unlink()
+        self.run_install()
+        self.assertEqual(self.languages(), ['co', 'fr-FR'])
+
+    def test_missing_catalogue_and_open_poedit(self):
+        self.install_poedit(catalogue=False)
         report = self.run_install()
         self.assertIn('Reinstall Poedit', report['skipped'][0]['action'])
+        self.assertIsNone(self.languages())
+        write_mo(self.root / 'Applications/Poedit.app/Contents/Resources/co.lproj/poedit.mo')
+        self.running = {'/Applications/Poedit.app/Contents/MacOS/Poedit'}
+        report = self.run_install()
+        self.assertEqual(report['activation'], 'restart_required')
+        self.assertEqual(self.languages(), ['co', 'fr-FR', 'en-FR'])
+        (self.root / 'Applications/Poedit.app/Contents/Resources/co.lproj/poedit.mo').unlink()
+        self.run_install()  # catalogue gone: the list goes back
+        self.assertIsNone(self.languages())
 
     def test_not_installed(self):
         self.assertEqual(poedit.Poedit().find(), [])

@@ -184,6 +184,16 @@ def revert(record):
         if defaults_get(setting['domain'], setting['key']) == setting['installed']:
             defaults_put(setting['domain'], setting['key'], setting['original'])
         return True
+    if setting['type'] == 'defaults-plist':
+        try:
+            current = defaults_value(setting['domain'], setting['key'])
+        except ValueError:
+            return False  # unreadable now: kept, tried again next time
+        if current is not None and plist_fragment(current) == setting['installed']:
+            original = setting['original']
+            defaults_write_value(setting['domain'], setting['key'],
+                                 None if original is None else plist_value(original))
+        return True
     if setting['type'] == 'registry':
         current = registry_get(setting['key'], setting['name'])
         if current and list(current) == setting['installed']:
@@ -443,3 +453,80 @@ def set_defaults(installer, component, domain, key, value):
                                       'installed_sha256': ''}
     corsu.save_state(installer.state)
     defaults_put(domain, key, value)
+
+
+# Typed macOS preferences: an array such as a per-application AppleLanguages, or any other property list value, kept
+# with its exact type. Read with `defaults export <domain> -` (the whole domain as an XML property list, parsed with
+# plistlib) and written with `defaults write <domain> <key> '<XML fragment>'`, so cfprefsd, which caches preferences,
+# stays the only one writing the file. The values are recorded in Corsu's state as XML fragments (`<array>…</array>`),
+# which keep strings, numbers, booleans, dates and data apart. Only one application's own domain: the global domain
+# (the system's language list) is never written.
+GLOBAL_DOMAINS = ('-g', '-globaldomain', 'nsglobaldomain', '.globalpreferences')
+
+
+def check_app_domain(domain):
+    name = str(domain).strip()
+    if not name or name.lower() in GLOBAL_DOMAINS or name.lower().endswith(('/.globalpreferences',
+                                                                          '/.globalpreferences.plist')):
+        raise ValueError(f'{domain!r}: not an application\'s own preferences')
+    return name
+
+
+def plist_fragment(value):
+    """The XML element of one property list value: ['co', 'fr'] -> '<array><string>co</string>…</array>'."""
+    import plistlib
+    import re as _re
+    document = plistlib.dumps(value, fmt=plistlib.FMT_XML, sort_keys=False).decode('utf-8')
+    inner = document[document.index('<plist version="1.0">') + len('<plist version="1.0">'):document.rindex('</plist>')]
+    return _re.sub(r'>\s+<', '><', inner.strip())
+
+
+def plist_value(fragment):
+    import plistlib
+    return plistlib.loads(('<?xml version="1.0" encoding="UTF-8"?>\n<plist version="1.0">'
+                           f'{fragment}</plist>').encode('utf-8'))
+
+
+def defaults_value(domain, key):
+    """The typed value of one key (None when absent). ValueError when `defaults` cannot read the domain."""
+    import plistlib
+    import subprocess
+    result = subprocess.run(['defaults', 'export', str(domain), '-'], capture_output=True)
+    if result.returncode != 0:
+        if b'does not exist' in result.stderr:
+            return None
+        raise ValueError(f'defaults export {domain}: {result.stderr.decode("utf-8", "replace").strip()}')
+    try:
+        values = plistlib.loads(result.stdout) if result.stdout.strip() else {}
+    except Exception as error:
+        raise ValueError(f'defaults export {domain}: {error}') from None
+    return values.get(key) if isinstance(values, dict) else None
+
+
+def defaults_write_value(domain, key, value):
+    """Write one typed value in an application's own domain (None: delete the key)."""
+    import subprocess
+    domain = check_app_domain(domain)
+    if value is None:
+        subprocess.run(['defaults', 'delete', domain, key], capture_output=True)
+    else:
+        subprocess.run(['defaults', 'write', domain, key, plist_fragment(value)], capture_output=True, check=True)
+
+
+def set_defaults_value(installer, component, domain, key, value):
+    """One typed preference of an application (e.g. the array AppleLanguages), recorded with its original value and
+    type, or its absence. Put back by revert() only while it still holds Corsu's value."""
+    domain = check_app_domain(domain)
+    name = f'defaults:{domain}:{key}'
+    record = installer.state['files'].get(name)
+    if record:
+        original = record['setting']['original']
+    else:
+        current = defaults_value(domain, key)
+        original = None if current is None else plist_fragment(current)
+    installer.state['files'][name] = {'backup': None, 'mode': None, 'toggle': True, 'component': component,
+                                      'setting': {'type': 'defaults-plist', 'domain': domain, 'key': key,
+                                                  'original': original, 'installed': plist_fragment(value)},
+                                      'installed_sha256': ''}
+    corsu.save_state(installer.state)
+    defaults_write_value(domain, key, value)

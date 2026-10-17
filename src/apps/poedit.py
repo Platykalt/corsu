@@ -17,32 +17,62 @@ The value can be written before Poedit's first start (nothing to create first). 
 Translations\co\poedit.mo (1089 messages, as many as Translations\fr\poedit.mo). Poedit.exe itself could not be
 started under Wine (it needs Windows' own icu.dll), so the registry value is checked against the source only.
 
-Linux: no setting; Poedit follows the session language, but through wxWidgets 3.2, not gettext: the language of
-LC_ALL, else LC_MESSAGES, else LANG comes first, and LANGUAGE's list only after it; a "C" locale counts as none
-(https://github.com/wxWidgets/wxWidgets/blob/v3.2.8/src/unix/uilocale.cpp#L886-L956, #L56-L99). So LANGUAGE=co:fr
-alone, enough for VLC, still gives French in a French session (seen for real). Corsu starts Poedit's menu entry with
-LANGUAGE=co:<your languages>, LANG=C.UTF-8 and LC_MESSAGES=C.UTF-8 (and LC_ALL emptied when the session sets it),
-and gives back the session's own locale for the format categories (LC_CTYPE, LC_NUMERIC, LC_TIME, LC_COLLATE,
-LC_MONETARY, LC_PAPER, LC_MEASUREMENT), so numbers, dates and sorting stay as they were. A Corsican locale name
-instead (LC_MESSAGES=co_FR.UTF-8) does not exist in glibc: the whole C library locale then fails and Poedit shows
-"locale::facet::_S_create_c_locale name not valid" in its suggestions panel (seen for real), so it is not used. The cost:
-GTK's own dialogs (the file chooser) show English instead of French, GTK having no Corsican; Poedit's own windows,
-menus and messages are Corsican. For the Flatpak, the same variables go in its user override.
+Linux: no setting (NEED_CHOOSELANG_UI is 0, src/uilang.h#L35-L39 in 3.6.3 and 3.10): Poedit follows the session
+language, but through wxWidgets 3.2, not gettext. PoeditApp::SetupLanguage (edapp.cpp#L543-L590 in 3.6.3) asks
+wxUILocale::GetPreferredUILanguages, which puts the language of LC_ALL, else LC_MESSAGES, else LANG first and
+LANGUAGE's list only after it, a "C"/"POSIX" value (the part before "." and "@") counting as none
+(https://github.com/wxWidgets/wxWidgets/blob/v3.2.8/src/unix/uilocale.cpp#L56-L99, #L886-L956; the same in 3.2.12,
+Flathub's build); ICU's uloc_acceptLanguage then takes the first of these Poedit has a catalogue for. So LANGUAGE=co:fr
+alone, enough for VLC, still gives French in a French session (seen for real). Then wxLocale::Init(wxLANGUAGE_DEFAULT)
+does setlocale(LC_ALL, "") (src/common/intl.cpp#L486), and GTK (the file chooser, its buttons) translates with
+glibc's gettext from that locale. Corsu 0.25's first way, LANG=C.UTF-8 and LC_MESSAGES=C.UTF-8 with the formats given
+back, made wxWidgets read LANGUAGE first, but glibc ignores LANGUAGE when LC_MESSAGES is "C" or "C.<codeset>"
+(intl/dcigettext.c, guess_category_value, release/2.41 lines 1527-1543): GTK's dialogs came out in English (seen for
+real, in the Debian package and the Flatpak). A Corsican locale name (LC_MESSAGES=co_FR.UTF-8) does not exist in
+glibc: setlocale(LC_ALL, "") then fails as a whole and Poedit shows "locale::facet::_S_create_c_locale name not
+valid" in its suggestions panel (seen for real).
+
+What Corsu does: LANGUAGE=co:<your languages> and LC_MESSAGES=/C.UTF-8, LANG and the format categories left as they
+are. The two readers disagree on that one value. wxWidgets keeps "/C" (before the "."): not "C", not a language it
+knows, so nothing goes before LANGUAGE's list and Poedit takes Corsican. glibc accepts a locale name starting with "/"
+(locale/findlocale.c, valid_locale_name) and looks it up under its own locale folder: /usr/lib/locale//C.UTF-8, the
+C.UTF-8 locale that glibc 2.35+ ships as a folder (Debian, Ubuntu, Fedora, Arch; the Flatpak runtimes too). Only
+LC_MESSAGES comes from it (yes/no answers in English, unused by Poedit), and its name is not "C", so gettext follows
+LANGUAGE: GTK, which has no Corsican, takes the next language, yours. Seen for real (2026-10-17) with Debian 13's
+package (Poedit 3.6.3, wxWidgets 3.2.8, glibc 2.41) and Flathub's Poedit 3.10 (GNOME 51 runtime, glibc 2.44), in
+containers under Xvfb, sessions fr_FR, de_DE and it_IT: Poedit's windows in Corsican, the GTK file chooser and its
+buttons in French, German, Italian, dates in the file list and "50 %" in the status bar in the session's format, a
+.po file in a folder with accents opened, no locale error. This relies on how glibc resolves locale names, which is
+not a documented interface: before writing the menu entry Corsu checks it with `locale` (LC_ALL=/C.UTF-8 must load
+without "Cannot set"). Where it fails (another C library, a glibc without the C.UTF-8 folder), Corsu falls back to the
+first way and says what it costs: Poedit in Corsican, GTK's dialogs in English. When the session sets LC_ALL (which
+beats LC_MESSAGES everywhere), Corsu empties it and gives its value to LANG and to the categories the session sets.
+For the Flatpak, the same variables go in its user override (no check there: the runtime's glibc is the one seen).
 Debian's package (3.6.3, Debian 13; wxWidgets 3.2.8) installs /usr/bin/poeditor, the entries
 net.poedit.Poedit.desktop and net.poedit.PoeditURI.desktop (both "Exec=poeditor …"), and poedit-common's
 /usr/share/locale/co/LC_MESSAGES/poedit.mo; Poedit reads its catalogues in <prefix of the executable>/share/locale
-(edapp.cpp#L386-L395, #L549-L551). Run for real in a container: the window showed Corsican, a file in a folder with
-accents opened, and ~/.config/poedit/config (rewritten by Poedit when it quits) is never touched by Corsu.
-Flathub's net.poedit.Poedit keeps its catalogues in its .Locale extension (co present: 736 messages), so Corsican is
-there only when Flatpak's languages include it; the Flatpak was not run (fixtures only). Snap: left alone (no
-per-user environment override).
+(edapp.cpp#L386-L395, #L549-L551). ~/.config/poedit/config (rewritten by Poedit when it quits) is never touched by
+Corsu. Flathub's net.poedit.Poedit keeps its catalogues in its .Locale extension (co present: 736 messages), so
+Corsican is there only when Flatpak's languages include it. Snap: left alone (no per-user environment override).
 
-macOS: no setting either (the 3.10 binary has no ui_language string); Poedit.app/Contents/Resources/co.lproj has the
-catalogue, and Poedit follows the system's language list for the application. Corsu would need the per-application
-AppleLanguages array, which its preference helper cannot write yet: left alone, with the system's own way to do it.
+macOS: no setting of Poedit's own (NEED_CHOOSELANG_UI is 0; the 3.10 binary has no ui_language string);
+Poedit.app/Contents/Resources/co.lproj has the catalogue. wxUILocale::GetPreferredUILanguages is
+[NSLocale preferredLanguages] there (https://github.com/wxWidgets/wxWidgets/blob/v3.2.8/src/osx/core/uilocale.mm#L314-L325),
+which reads AppleLanguages from the application's own domain before the global one: the per-application language of
+System Settings → General → Language & Region → Applications, an array. Corsu writes that array in Poedit's domain
+only (net.poedit.Poedit, not sandboxed: PRODUCT_BUNDLE_IDENTIFIER in Poedit.xcodeproj, no entitlements for the app):
+Corsican, then your own list (read from the global AppleLanguages, never written), so AppKit's own panels, which have
+no Corsican, take your language. The earlier value (or its absence) is recorded with its type and given back; a list
+changed since (in System Settings) is yours and stays. Experimental: Poedit itself was not run on a Mac. Seen on a
+GitHub Actions macOS 26 runner (tests/test_apps_settings.py, RealMacTests, 2026-10-17): Corsu's `defaults` helper
+writes the array and gives back an absent key, an array, a string, a number, a boolean and a dictionary exactly, and a
+small tool with its own bundle identifier gets [NSLocale preferredLanguages] = co,fr-FR from that per-application
+list (en-US without it). Not seen: Poedit's window, and AppKit's panels taking the second language. A string written
+in AppleLanguages reads back as absent on macOS (seen on that runner): Foundation only takes an array there.
 """
 import os
 from pathlib import Path
+import subprocess
 
 import corsu
 import apps
@@ -57,18 +87,42 @@ DESKTOP = 'net.poedit.Poedit.desktop'
 DESKTOP_URI = 'net.poedit.PoeditURI.desktop'
 REGISTRY_KEY = r'Software\Vaclav Slavik\Poedit'
 REGISTRY_VALUE = 'ui_language'
-# Categories that keep the session's locale while LANG and LC_MESSAGES are C.UTF-8 (see the module docstring).
+MAC_DOMAIN = 'net.poedit.Poedit'
+# LC_MESSAGES for Poedit: "/C" to wxWidgets, glibc's C.UTF-8 messages under another name to gettext (module docstring).
+MESSAGES = '/C.UTF-8'
+# Categories that keep the session's locale while LANG and LC_MESSAGES are C.UTF-8 (the fallback, module docstring).
 FORMATS = ('LC_CTYPE', 'LC_NUMERIC', 'LC_TIME', 'LC_COLLATE', 'LC_MONETARY', 'LC_PAPER', 'LC_MEASUREMENT')
+CATEGORIES = (*FORMATS, 'LC_NAME', 'LC_ADDRESS', 'LC_TELEPHONE', 'LC_IDENTIFICATION')
 
 
 def is_c(locale):
     return locale.split('.')[0].split('@')[0] in ('', 'C', 'POSIX')
 
 
-def environment():
-    """The variables besides LANGUAGE that make Poedit (wxWidgets) take LANGUAGE's list first, keeping the session's
-    formats: {name: value}, an empty value clearing the variable."""
+def messages_name_works():
+    """Whether this computer's C library loads LC_MESSAGES=/C.UTF-8 (glibc 2.35+ with its C.UTF-8 folder)."""
+    try:
+        result = subprocess.run(['locale'], env={'LC_ALL': MESSAGES, 'PATH': os.environ.get('PATH') or '/usr/bin:/bin'},
+                                capture_output=True, text=True, timeout=10)
+    except (OSError, subprocess.SubprocessError):
+        return False
+    return result.returncode == 0 and not result.stderr.strip() and MESSAGES in result.stdout
+
+
+def environment(separate=True):
+    """The variables besides LANGUAGE that make Poedit (wxWidgets) take LANGUAGE's list first: {name: value}, an empty
+    value clearing the variable. separate: GTK keeps the session's language (LC_MESSAGES=/C.UTF-8); otherwise the
+    fallback, LANG and LC_MESSAGES C.UTF-8 with the session's formats given back (GTK then in English)."""
     everything = os.environ.get('LC_ALL', '')
+    if separate:
+        result = {'LC_MESSAGES': MESSAGES}
+        if everything:  # LC_ALL beats LC_MESSAGES: its value goes where it applied
+            result['LC_ALL'] = ''
+            result['LANG'] = everything
+            for name in CATEGORIES:
+                if os.environ.get(name):
+                    result[name] = everything
+        return result
     result = {'LANG': 'C.UTF-8', 'LC_MESSAGES': 'C.UTF-8'}
     if everything:
         result['LC_ALL'] = ''
@@ -79,6 +133,17 @@ def environment():
         if not is_c(value):
             result[name] = value
     return result
+
+
+def mac_languages():
+    """Corsican, then the person's own list for the rest (the global AppleLanguages, read only)."""
+    try:
+        system = settings.defaults_value('NSGlobalDomain', 'AppleLanguages')
+    except (OSError, ValueError):
+        system = None
+    if not isinstance(system, list) or not all(isinstance(item, str) for item in system):
+        system = [language.replace('_', '-') for language in apps.session_languages()]
+    return ['co', *dict.fromkeys(item for item in system if item and not item.lower().startswith('co'))]
 
 
 def flatpak_override():
@@ -101,8 +166,9 @@ class Poedit(apps.App):
     description = {'co': ('Poedit', "L'interfaccia di Poedit in corsu (Patriccollu)."),
                    'fr': ('Poedit', "L'interface de Poedit en corse (Patriccollu)."),
                    'en': ('Poedit', "Poedit's interface in Corsican (Patriccollu).")}
-    # Real: Debian 13's package (3.6.3) in a container, the menu entry's command started under Xvfb and the window
-    # seen in Corsican, switched off, run again, uninstalled (2026-10-17). Windows and macOS: fixtures only.
+    # Real: Debian 13's package (3.6.3) and Flathub's 3.10 in containers, started under Xvfb with the variables Corsu
+    # writes, the window and the GTK file chooser seen (fr, de, it sessions), switched off, run again, uninstalled
+    # (2026-10-17). Windows and macOS: fixtures only (macOS experimental).
     validation = {'simulated': True, 'real_app': ['linux'], 'visual': True, 'linguistic_review': False}
     # Poedit reads its language at start only and keeps one instance: an open Poedit shows Corsican once restarted.
     restart_processes = ('poedit', 'poeditor', 'Poedit.exe', 'Poedit')
@@ -135,11 +201,19 @@ class Poedit(apps.App):
             elif apps.session_is_corsican():
                 reason = corsu.t('already in Corsican: your session language is Corsican',
                                  'déjà en corse : la langue de votre session est le corse')
-            item = apps.Installation(self, corsu.t('system package', 'paquet du système'), executable, None,
+            separate = reason is None and messages_name_works()
+            kind = corsu.t('system package', 'paquet du système')
+            if reason is None and not separate:
+                kind = corsu.t('system package; its file dialogs will be in English: this system\'s C library has no '
+                               'C.UTF-8 locale folder to keep them in your language',
+                               'paquet du système ; ses fenêtres de fichiers seront en anglais : la bibliothèque C de ce '
+                               'système n\'a pas le dossier de locale C.UTF-8 qui les garderait dans votre langue')
+            item = apps.Installation(self, kind, executable, None,
                                      catalog if catalog.exists() else None,
                                      apps.coverage_against(catalog, locale / 'fr/LC_MESSAGES/poedit.mo')
                                      if catalog.exists() else None, reason, action)
             item.setting = 'menu'
+            item.separate = separate
             found.append(item)
         base = apps.flatpak_installed(FLATPAK)
         if base:
@@ -191,21 +265,16 @@ class Poedit(apps.App):
                 continue
             resources = bundle / 'Contents/Resources'
             catalog = resources / 'co.lproj/poedit.mo'
-            if catalog.exists():
-                reason = corsu.t('Poedit on macOS has no language setting of its own; Corsu does not change the '
-                                 'system\'s language list for it yet',
-                                 'Poedit sur macOS n\'a pas de réglage de langue à lui ; Corsu ne change pas encore la '
-                                 'liste de langues du système pour lui')
-                action = corsu.t('In System Settings → General → Language & Region → Applications, add Poedit and '
-                                 'choose Corsican if it is offered (not checked by Corsu)',
-                                 'Dans Réglages Système → Général → Langue et région → Applications, ajoutez Poedit et '
-                                 'choisissez le corse s\'il est proposé (non vérifié par Corsu)')
-            else:
+            reason = action = None
+            if not catalog.exists():
                 reason, action = self.missing(catalog)
-            item = apps.Installation(self, 'Poedit.app', bundle, None, catalog if catalog.exists() else None,
+            # Experimental: the per-application language list was not tried on a Mac yet (module docstring).
+            kind = corsu.t('Poedit.app, experimental: not checked on a Mac yet',
+                           'Poedit.app, expérimental : pas encore vérifié sur un Mac')
+            item = apps.Installation(self, kind, bundle, None, catalog if catalog.exists() else None,
                                      apps.coverage_against(catalog, resources / 'fr.lproj/poedit.mo')
                                      if catalog.exists() else None, reason, action)
-            item.setting = None
+            item.setting = 'defaults'
             found.append(item)
         return found
 
@@ -218,23 +287,32 @@ class Poedit(apps.App):
             # What Poedit's "Change UI language" writes (REG_SZ).
             settings.set_registry(installer, self.id, REGISTRY_KEY, REGISTRY_VALUE, 'co', 1)
             return None
+        if installation.setting == 'defaults':
+            name = f'defaults:{MAC_DOMAIN}:AppleLanguages'
+            current = settings.defaults_value(MAC_DOMAIN, 'AppleLanguages')  # ValueError: reported as a failure
+            if changed_since(installer, name, None if current is None else settings.plist_fragment(current)):
+                return changed_message()
+            # What System Settings → Language & Region → Applications writes: an array in Poedit's own domain.
+            settings.set_defaults_value(installer, self.id, MAC_DOMAIN, 'AppleLanguages', mac_languages())
+            return None
         if installation.setting == 'flatpak':
             override = flatpak_override()
             text, _, _ = settings.read_body(override)  # ValueError (not UTF-8): left alone, reported as a failure
             if changed_since(installer, f'{override}#[Environment]LANGUAGE',
                              settings.ini_get(text, 'Environment', 'LANGUAGE')):
                 return changed_message()
-            values = {'LANGUAGE': apps.corsican_first(), **environment()}
+            values = {'LANGUAGE': apps.corsican_first(), **environment(separate=True)}
             # A variable Corsu set at an earlier run and no longer needs (the session changed) goes back first.
             self.take_back(installer, keep=set(values))
             for key, value in values.items():
                 settings.set_ini(installer, self.id, override, 'Environment', key, value)
             return None
         language = apps.corsican_first()
-        reason = apps.desktop_override(installer, self.id, DESKTOP, language, environment())
+        variables = environment(separate=getattr(installation, 'separate', True))
+        reason = apps.desktop_override(installer, self.id, DESKTOP, language, variables)
         if reason is None and any((folder / DESKTOP_URI).exists() for folder in apps.APPLICATION_DIRS):
             # Secondary: a menu entry of the person's own for links is simply left as it is.
-            apps.desktop_override(installer, self.id, DESKTOP_URI, language, environment())
+            apps.desktop_override(installer, self.id, DESKTOP_URI, language, variables)
         return reason
 
     def take_back(self, installer, keep=()):
@@ -253,6 +331,12 @@ class Poedit(apps.App):
         setting = getattr(installation, 'setting', None)
         if setting == 'flatpak':
             self.take_back(installer)
+        if setting == 'defaults':
+            name = f'defaults:{MAC_DOMAIN}:AppleLanguages'
+            record = installer.state['files'].get(name)
+            if record and record.get('component') == self.id and settings.revert(record):
+                installer.state['files'].pop(name)
+                corsu.save_state(installer.state)
         if setting != 'menu':
             return
         for desktop_id in (DESKTOP, DESKTOP_URI):
