@@ -54,6 +54,7 @@ class PoeditTests(unittest.TestCase):
         self.defaults = {}
         self.which = {}
         self.separate = True
+        self.c_utf8 = True
         known = {'poedit': poedit.Poedit()}
         self.stack = ExitStack()
         for target, name, value in (
@@ -66,6 +67,7 @@ class PoeditTests(unittest.TestCase):
                 (poedit, 'LOCALE', self.root / 'nowhere/locale'), (poedit, 'SNAP', self.root / 'snap/poedit'),
                 (poedit, 'APPLICATIONS', (self.root / 'Applications',)),
                 (poedit, 'messages_name_works', lambda: self.separate),
+                (poedit, 'c_utf8_works', lambda: self.c_utf8),
                 (settings, 'registry_get', lambda key, name: self.registry.get((key, name))),
                 (settings, 'registry_set', self.registry_set),
                 (settings, 'defaults_get', lambda domain, key: self.defaults.get((domain, key))),
@@ -160,6 +162,9 @@ class LinuxTests(PoeditTests):
             self.assertNotIn('LC_TIME', poedit.environment(separate=False))  # the session's own value is inherited
         with patch.dict(os.environ, {'LANG': 'C'}):
             self.assertEqual(poedit.environment(separate=False), {'LANG': 'C.UTF-8', 'LC_MESSAGES': 'C.UTF-8'})
+        self.c_utf8 = False  # no C.UTF-8 at all: plain C, which always loads, so the formats still apply
+        self.assertEqual(poedit.environment(separate=False), {'LANG': 'C', 'LC_MESSAGES': 'C',
+                                                              **{name: 'fr_FR.UTF-8' for name in poedit.FORMATS}})
 
     def test_without_the_c_utf8_folder_the_fallback_says_what_it_costs(self):
         self.system_poedit()
@@ -187,6 +192,9 @@ class LinuxTests(PoeditTests):
             self.assertEqual((calls[0][0], calls[0][1]['LC_ALL']), (['locale'], '/C.UTF-8'))
             outcome.update(out='LC_ALL=/C.UTF-8\n', err='locale: Cannot set LC_ALL to default locale: No such file\n')
             self.assertFalse(REAL_CHECK())
+            outcome.update(out='LC_ALL=C.UTF-8\n', err='')
+            self.assertTrue(poedit.locale_loads('C.UTF-8'))
+            self.assertEqual(calls[-1][1]['LC_ALL'], 'C.UTF-8')
 
         def missing(command, **options):
             raise FileNotFoundError(command[0])
