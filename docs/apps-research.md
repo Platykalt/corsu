@@ -382,21 +382,62 @@ Common columns: *shipped* (where the catalog sits in the package), *mechanism* (
 
 ### 3.13 PDFsam Basic
 
-- **Shipped.** 6.0.6 (2026-10-02): `pdfsam-i18n-6.0.6.jar` contains `org/pdfsam/i18n/Messages_co.properties`.
-  `Locale.of("co")` is in the supported set
+**Switched by Corsu (`src/apps/pdfsam.py`, component `pdfsam`) on Linux and Windows.** Checked on Linux with the real
+program; Windows and macOS with simulated files only.
+
+- **Shipped.** 6.0.6 (2026-10-02): `pdfsam-i18n-6.0.6.jar` contains `org/pdfsam/i18n/Messages_co.properties`
+  (466/466 entries, like French). It's the same jar in the .deb, the Linux tar.gz, the Windows zip/MSI
+  (`app/mods/`) and the macOS zip. Corsican has been there since **3.0.0**: `Locale("co")` and `po/co.po` came in
+  commit 6d075b1b (2015-08-03), first tag v3.0.0.M2. `co` is in the supported set
   ([I18nContext.java L47-L54](https://github.com/torakiki/pdfsam/blob/v6.0.6/pdfsam-i18n/src/main/java/org/pdfsam/i18n/I18nContext.java#L47-L54)).
-  The same jar is used on every platform.
 - **Mechanism.** Java Preferences node `/org/pdfsam/user/conf`
   ([ApplicationContext.java L56](https://github.com/torakiki/pdfsam/blob/v6.0.6/pdfsam-core/src/main/java/org/pdfsam/core/context/ApplicationContext.java#L56)),
-  key `locale` (enum name lower-cased,
-  [StringPersistentProperty.java](https://github.com/torakiki/pdfsam/blob/v6.0.6/pdfsam-core/src/main/java/org/pdfsam/core/context/StringPersistentProperty.java#L40)),
-  value `co`. The value is applied at start
+  key `locale`: the enum name lower-cased
+  ([StringPersistentProperty.java L40, L64-L66](https://github.com/torakiki/pdfsam/blob/v6.0.6/pdfsam-core/src/main/java/org/pdfsam/core/context/StringPersistentProperty.java#L40)).
+  4.x used `LOCALE`; the lower-case key came with 5.0.0, so Corsu leaves versions before 5 alone. The value is a
+  language tag, `co`
+  ([ComboItem.java L70-L72](https://github.com/torakiki/pdfsam/blob/v6.0.6/pdfsam-model/src/main/java/org/pdfsam/model/ui/ComboItem.java#L70-L72)).
+  PDFsam reads it once, at start
   ([PdfsamApp.java L106-L107](https://github.com/torakiki/pdfsam/blob/v6.0.6/pdfsam-gui/src/main/java/org/pdfsam/gui/PdfsamApp.java#L106-L107)).
-  - Windows: `HKCU\Software\JavaSoft\Prefs\org\pdfsam\user\conf`, `locale`.
-  - Linux: `~/.java/.userPrefs/org/pdfsam/user/conf/prefs.xml`, `<entry key="locale" value="co"/>`.
-  - macOS: `com.apple.java.util.prefs.plist` (nested; awkward) (?).
-  - Fallback: the JVM property `org.pdfsam.default.locale=co`.
-- **Close?** Yes (to be safe).
+  It also writes it back at every start, with the language it shows: the settings page sets its language list, and
+  the list's listener saves the value
+  ([PreferenceAppearencePane.java L55-L57](https://github.com/torakiki/pdfsam/blob/v6.0.6/pdfsam-gui/src/main/java/org/pdfsam/gui/components/content/preference/PreferenceAppearencePane.java#L55-L57),
+  [PreferenceComboBox.java L46-L49](https://github.com/torakiki/pdfsam/blob/v6.0.6/pdfsam-gui/src/main/java/org/pdfsam/gui/components/content/preference/PreferenceComboBox.java#L46-L49)).
+  The first start wrote `locale="en"`. Before that first start there's nothing to change, so Corsu leaves PDFsam
+  alone and asks the person to start it once (an `action`, not an error).
+  - Linux: `~/.java/.userPrefs/org/pdfsam/user/conf/prefs.xml`, `<entry key="locale" value="co"/>`
+    ([FileSystemPreferences](https://github.com/openjdk/jdk/blob/master/src/java.prefs/unix/classes/java/util/prefs/FileSystemPreferences.java)).
+    These node names need no escaping.
+  - Windows: `HKCU\Software\JavaSoft\Prefs\org\pdfsam\user\conf`, `locale` (REG_SZ) = `co`. Java escapes capital
+    letters as `/X` in names and values
+    ([WindowsPreferences](https://github.com/openjdk/jdk/blob/master/src/java.prefs/windows/classes/java/util/prefs/WindowsPreferences.java)
+    `toWindowsName`, `toWindowsValueString`). `locale` and `co` have none; 4.x's `LOCALE` was `/L/O/C/A/L/E`.
+  - macOS: **not switched.** Nodes three or more levels deep live in the CFPreferences domain of their first three
+    names: `org.pdfsam.user`, `~/Library/Preferences/org.pdfsam.user.plist`. The whole `/org/pdfsam/user/` tree is
+    one nested dictionary there
+    ([MacOSXPreferences.cfFileForNode](https://github.com/openjdk/jdk/blob/master/src/java.prefs/macosx/classes/java/util/prefs/MacOSXPreferences.java),
+    [MacOSXPreferencesFile.m copyTreeForPath](https://github.com/openjdk/jdk/blob/master/src/java.prefs/macosx/native/libprefs/MacOSXPreferencesFile.m)),
+    and `defaults` can't change one key inside it. Corsu shows the step instead (Settings > Language).
+  - The JVM property `org.pdfsam.default.locale` is only a default: the MSI may write it into `app\pdfsam.cfg`, and
+    the preference wins over it.
+- **Close?** Linux: **yes**, also to switch off. A running PDFsam keeps the node in memory and writes it back when
+  it quits, without reading a change another program made in the meantime: Java only reloads when another JVM
+  touches `.userRootModFile`. In the real run, `co` written while PDFsam was open came back as `en` after it quit.
+  Corsu recognizes the process by the Java command line, which names `org.pdfsam.basic`. Windows: no. The registry
+  is read and written live, so PDFsam only needs a restart (`restart_required`).
+- **Installations.** Every installation on an account shares the one preference, portable zips included.
+  - Detected: `/opt/pdfsam-basic` (official .deb, AUR `pdfsam-bin`), `/usr/share/java/pdfsam` (AUR `pdfsam`), a
+    tar.gz reached through `pdfsam`/`pdfsam-basic` in `PATH`, `%ProgramFiles%\PDFsam Basic\pdfsam.exe` (MSI,
+    `pdfsam.wxs`), and `/Applications/PDFsam Basic.app`.
+  - Not on Flathub (`org.pdfsam.basic`: 404, 2026-10-17) or the Snap Store, so there's no sandboxed variant to target.
+- **After Corsu.**
+  - If the person picks another language in PDFsam, it's kept: a later Corsu run leaves it alone, and switching off
+    or uninstalling doesn't touch it.
+  - Switching off brings back the earlier value. With no earlier value, the key is removed.
+- **Real run** (Debian 13 container, official `pdfsam-basic_6.0.6-1_amd64.deb`, Xvfb, isolated account). Never
+  started gives "start once". Switched on twice: one line of `prefs.xml` changed. PDFsam showed Corsican ("Accolta",
+  "Attrezzi per frazziunà"), and `co` was still there after it quit. While open, Corsu waited. Switched off: the file
+  was byte-identical to before. A later `fr` survived Corsu runs and uninstallation.
 - **Licence:** AGPL-3.0.
 
 ### 3.14 Mp3tag (Windows; Mac paid)
