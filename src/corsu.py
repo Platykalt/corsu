@@ -893,6 +893,16 @@ def unlink_profile(directory):
                     write_ini(path, config)
 
 
+def unlink_profiles():
+    """Take the sections every Corsu Firefox copy added to profiles.ini and installs.ini back out (switching Firefox
+    off, uninstalling): the rest of those files is left as Firefox wrote it."""
+    folder = DATA / 'firefox'
+    if folder.is_dir():
+        for directory in folder.iterdir():
+            if directory.is_dir():
+                unlink_profile(firefox_directory(directory))
+
+
 def firefox_profile_roots():
     if PLATFORM == 'windows':
         return [CONFIG / 'Mozilla/Firefox']
@@ -1587,6 +1597,8 @@ def disable(components=None, hours=None):
         until = '' if not hours else str(int(__import__('time').time() + hours * 3600))
         (DATA / TERMINAL_OFF).write_text(until, encoding='utf-8')
     preserved, busy = [], []
+    if 'firefox' in targets:
+        unlink_profiles()
     packs = {name: record for name, record in installer.state['files'].items()
              if record.get('chromium') and 'chromium' in targets}
     if packs:
@@ -1707,6 +1719,7 @@ def uninstall():
         return
     state = load_state()
     remaining = {}
+    unlink_profiles()
     packs = {name: record for name, record in state['files'].items() if record.get('chromium')}
     if packs:
         import chromium

@@ -12,6 +12,7 @@ Corsican complement (experimental, Linux system package, only when the person sw
 apps/vlc_complement.py.
 """
 from pathlib import Path
+import os
 import re
 import subprocess
 
@@ -26,7 +27,11 @@ SNAP = Path('/snap/vlc')
 
 def version(executable):
     try:
-        output = subprocess.run([executable, '--version'], capture_output=True, text=True, timeout=10).stdout
+        # VLC translates its --version line ("VLC-Version 3.0.24" in German): ask for the untranslated one.
+        environment = {key: value for key, value in os.environ.items()
+                       if key != 'LANGUAGE' and not key.startswith('LC_')}
+        output = subprocess.run([executable, '--version'], capture_output=True, text=True, timeout=10,
+                                env={**environment, 'LC_ALL': 'C', 'LANG': 'C'}).stdout
     except (OSError, subprocess.SubprocessError):
         return None
     match = re.search(r'VLC (?:media player |version )?(\d+\.\d+[\w.-]*)', output)

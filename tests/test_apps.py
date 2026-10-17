@@ -3,6 +3,7 @@ import json
 import os
 from contextlib import ExitStack, redirect_stdout
 from pathlib import Path
+import subprocess
 import tempfile
 import unittest
 from unittest.mock import patch
@@ -115,6 +116,24 @@ class VLCTests(unittest.TestCase):
             override.write_text(override.read_text().replace('home;', 'home;xdg-music;'))
             corsu.disable(['vlc'])
             self.assertEqual(override.read_text(), '[Context]\nfilesystems=home;xdg-music;\n')
+
+
+class VLCVersionTests(unittest.TestCase):
+    def test_the_version_line_is_asked_for_untranslated(self):
+        # A German session: VLC would print "VLC-Version 3.0.24 Vetinari", which the pattern does not read.
+        seen = {}
+
+        def run(command, **options):
+            seen.update(options['env'])
+            line = 'VLC media player 3.0.24 Vetinari' if options['env'].get('LC_ALL') == 'C' else 'VLC-Version 3.0.24'
+            return subprocess.CompletedProcess(command, 0, line + '\n', '')
+
+        with patch.dict(os.environ, {'LANG': 'de_DE.UTF-8', 'LANGUAGE': 'de', 'LC_MESSAGES': 'de_DE.UTF-8'}), \
+                patch.object(vlc.subprocess, 'run', run):
+            self.assertEqual(vlc.version('/usr/bin/vlc'), '3.0.24')
+        self.assertEqual((seen['LC_ALL'], seen['LANG']), ('C', 'C'))
+        self.assertNotIn('LANGUAGE', seen)
+        self.assertNotIn('LC_MESSAGES', seen)
 
 
 class VLCComplementTests(VLCTests):

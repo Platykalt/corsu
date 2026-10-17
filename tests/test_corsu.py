@@ -95,6 +95,28 @@ class TranslationTests(unittest.TestCase):
                 corsu.unlink_profile(copy)
                 self.assertNotIn(corsu.install_section(copy), (base / 'profiles.ini').read_text())
 
+    def test_switching_firefox_off_takes_the_copies_sections_back_out(self):
+        with tempfile.TemporaryDirectory() as directory:
+            home = Path(directory)
+            base = home / '.config/mozilla/firefox'
+            (base / 'mine').mkdir(parents=True)
+            original = {'profiles.ini': '[Profile0]\nName=default-release\nPath=mine\nDefault=1\n\n'
+                                        '[General]\nStartWithLastProfile=1\nVersion=2\n\n',
+                        'installs.ini': '[4F96D1932A9F858E]\nDefault=mine\nLocked=1\n\n'}
+            for name, text in original.items():
+                (base / name).write_text(text)
+            data = home / 'data'
+            copies = [data / 'firefox/old', data / 'firefox/new']
+            with patch.object(corsu, 'HOME', home), patch.object(corsu, 'PLATFORM', 'linux'), \
+                    patch.object(corsu, 'DATA', data):
+                for copy in copies:
+                    copy.mkdir(parents=True)
+                    corsu.link_profile(copy, base / 'mine')
+                self.assertIn(corsu.install_section(copies[0]), (base / 'installs.ini').read_text())
+                corsu.unlink_profiles()
+            for name, text in original.items():
+                self.assertEqual((base / name).read_text(), text, name)
+
     def test_default_browser_entry_of_a_copy_is_replaced(self):
         with tempfile.TemporaryDirectory() as directory:
             home = Path(directory)
