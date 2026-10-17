@@ -24,11 +24,14 @@ publication (tests automatiques ; personne n'a regardé les écrans).
   seulement ; Audacity 4 y est expérimental. Quand un logiciel est laissé tel quel, l'application dit quoi faire.
 - **VLC, complément corse expérimental (Linux, désactivé par défaut)** : la traduction de VLC laisse 1 760 textes de
   VLC 3.0.x en anglais. Corsu propose pour eux des traductions écrites par IA puis relues par IA (1 757 ; 3 cas
-  incertains exclus), **non relues par un locuteur**. Elles ne sont utilisées que si vous le demandez :
-  `--vlc-complement on` (et `off` pour revenir au catalogue de VLC). Rien n'est modifié dans les fichiers du système :
-  VLC lit le complément depuis le dossier de Corsu par sa variable `VLC_DATA_PATH`, donnée par l'entrée de menu.
-  Vérifié avec VLC 3.0.20 (Ubuntu 24.04) et 3.0.24 (Debian 13) : textes de l'aide et fenêtres Qt en corse. Pas sous
-  Windows, macOS, Flatpak ni Snap.
+  incertains exclus), **non relues par un locuteur**. Elles ne sont utilisées que si vous le demandez : interrupteur
+  « Complément expérimental » dans la fiche VLC de l'application, ou `--vlc-complement on` (`off` revient au
+  catalogue de VLC, toujours en corse). Rien n'est modifié dans les fichiers du système : VLC lit le complément
+  depuis le dossier de Corsu par sa variable `VLC_DATA_PATH`, donnée par l'entrée de menu. Seulement pour le VLC 3.0.x
+  installé par les paquets de Linux ; pas sous Windows, macOS, ni en Flatpak ou Snap (l'application dit pourquoi).
+  Vérifications : chargement constaté dans l'aide en ligne de commande de VLC 3.0.20 (Ubuntu 24.04, 741 nouveaux
+  textes en corse) et 3.0.24 (Debian 13, 685) ; affichage regardé dans la fenêtre de VLC 3.0.24 seulement (barre de
+  menus, menus Attrezzi et Affissà, préférences Video et Entrata / Cudechi), pas dans toute l'interface.
 - Les traductions amont de VLC restent intactes, octet pour octet ; chaque brouillon et chaque relecture est suivi
   dans `contrib/vlc/review.json`. Rien n'a été envoyé à VLC.
 
@@ -76,10 +79,13 @@ looked at the screens).
   there. When a program is left alone, the app says what to do.
 - **VLC, experimental Corsican complement (Linux, off by default)**: VLC's translation leaves 1,760 texts of VLC 3.0.x
   in English. Corsu offers AI translations for them, reviewed by AI (1,757; 3 uncertain ones left out), **not reviewed
-  by a Corsican speaker**. They are used only when you ask: `--vlc-complement on` (`off` goes back to VLC's own
-  catalogue). No system file changes: VLC reads the complement from Corsu's folder through its `VLC_DATA_PATH`
-  variable, set by the menu entry. Checked with VLC 3.0.20 (Ubuntu 24.04) and 3.0.24 (Debian 13): help texts and Qt
-  windows in Corsican. Not on Windows, macOS, Flatpak or Snap.
+  by a Corsican speaker**. They are used only when you ask: the "Experimental complement" switch in VLC's row of the
+  app, or `--vlc-complement on` (`off` goes back to VLC's own catalogue, still Corsican). No system file changes: VLC
+  reads the complement from Corsu's folder through its `VLC_DATA_PATH` variable, set by the menu entry. Only for VLC
+  3.0.x installed from Linux packages; not on Windows, macOS, Flatpak or Snap (the app says why). Checks: loading seen
+  in the command-line help of VLC 3.0.20 (Ubuntu 24.04, 741 new texts in Corsican) and 3.0.24 (Debian 13, 685);
+  display looked at in VLC 3.0.24's window only (menu bar, Tools and View menus, Video and Input / Codecs
+  preferences), not the whole interface.
 - VLC's upstream translations stay byte for byte; every draft and every review is tracked in
   `contrib/vlc/review.json`. Nothing was sent to VLC.
 

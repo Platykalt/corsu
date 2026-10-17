@@ -16,6 +16,11 @@
   AI (1,757 kept in the build, 3 uncertain left out), none by a speaker. VLC reads it from Corsu's folder through
   `VLC_DATA_PATH` set in its menu entry; no system file is touched. Real VLC 3.0.20 and 3.0.24 showed the new texts
   in their help and Qt windows (CI: `tests/e2e/check_vlc_experimental.py`, `check_vlc_complement.py`).
+- The window: VLC's row has its own "Experimental complement" switch (off by default, disabled with the reason
+  where unavailable, separate from VLC's own switch); it writes the same preference as `--vlc-complement`, saved
+  only once the installer holds its lock. VLC 3.0.24's own window was looked at with the complement (container).
+- Updates are checked from the published 0.23.0 too, and from 0.23.0 with real VLC and fre:ac packages
+  (`tests/e2e/check_update_apps.py`).
 - `tools/vlcpo.py`: checks every VLC draft (msgfmt with the fuzzy entries, arguments, plurals, tags, accelerators,
   punctuation; the upstream file must come back byte for byte), records reviews in `contrib/vlc/review.json`, builds
   the experimental catalogue.

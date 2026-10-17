@@ -1,7 +1,24 @@
 # Continuité du projet
 
 Document de reprise, tenu à jour à chaque étape. Il renvoie aux documents détaillés plutôt que de les répéter.
-Dernière mise à jour : 16 octobre 2026, après la passe de stabilisation (Corsu 0.22.0, publiée le 16 octobre 2026).
+Les sections datées après « État actuel » sont l'historique : ce qui y est dit ouvert a pu être corrigé depuis.
+
+## État actuel (17 octobre 2026)
+
+- **Publié** : 0.23.0. **Candidate** : 0.24.0 sur `main` (version dans `src/release.json`), non taguée ;
+  notes prêtes dans [.github/RELEASE_NOTES.md](../.github/RELEASE_NOTES.md).
+- **0.24.0 contient** : Audacity 3 et 4, Tenacity, fre:ac (traductions de Patriccollu, par leur réglage de langue) ;
+  le complément VLC expérimental, désactivé par défaut, Linux seulement, avec son interrupteur dans la fiche VLC de
+  la fenêtre et `--vlc-complement on|off` (même préférence `vlc_complement`).
+- **Vérifié pour la candidate** : mise à jour réelle depuis la 0.23.0 publiée (`tests/e2e/check_update.py --from
+  0.21.0 0.22.0 0.23.0` sur les trois systèmes ; `tests/e2e/check_update_apps.py` avec vrais VLC et fre:ac Debian) ;
+  complément VLC chargé par VLC 3.0.20 et 3.0.24 (aide) et vu dans la fenêtre Qt de 3.0.24 (menus, préférences).
+- **Branches de travail, hors candidate** : `apps-poedit`, `apps-pdfsam`, `audit-firefox-discord`.
+- **Attend une personne** : relecture par un locuteur (VLC : 3 cas ouverts dans
+  [contrib/vlc/TERMS.md](../contrib/vlc/TERMS.md) ; Minecraft) ; essais Minecraft en jeu ; noms Discord observés
+  dans un vrai Discord ; décision de publier la 0.24.0.
+- **Limites connues** : complément VLC absent sous Windows, macOS, Flatpak, Snap ; Audacity 4 expérimental sous
+  Windows et macOS ; fre:ac et Audacity vérifiés seulement sur dossiers simulés hors Linux.
 
 ## Objectifs retenus
 
@@ -70,9 +87,10 @@ seulement : l'icône à l'écran n'a pas été regardée. Corsu 0.21.0 y est enc
 - Firefox, Chromium (pas macOS), Discord/Vesktop : oui.
 - 7-Zip, VLC, Notepad++ : oui (vrai Windows ; VLC aussi sous Linux). WinMerge, SumatraPDF, FileZilla, HandBrake,
   VeraCrypt : expérimentaux (fixtures seulement).
-- Minecraft Java 26.3 : expérimental, jamais essayé en jeu ni relu par un locuteur. Bedrock, extension web :
+- Minecraft Java : expérimental, non relu par un locuteur ; la 26.3 lancée une fois avec le pack (Prism Launcher
+  du mainteneur, 16 octobre), sans contrôle visuel clé par clé. Bedrock, extension web :
   prototypes.
-- La version 0.22.0 n'est ni étiquetée ni publiée : à décider par le mainteneur.
+- (Historique : la 0.22.0 a été publiée le 16 octobre 2026, puis la 0.23.0 le 17.)
 
 ## Itération du 16 octobre 2026 (soir)
 
@@ -138,7 +156,7 @@ seulement : l'icône à l'écran n'a pas été regardée. Corsu 0.21.0 y est enc
 - VLC 3.0.x : brouillons IA des 1 760 messages manquants dans `contrib/vlc/co.po` (marqués `#, fuzzy`, non relus ;
   1 réemploi exact, 61 adaptés d'une suggestion de la mémoire, 1 698 nouveaux ; amont `e66842d`), validés par
   `msgfmt -c --check-format`. À relire par un locuteur avant tout envoi en amont (Transifex de VLC, idéalement avec
-  Patriccollu) ; rien n'a été envoyé ni mis en service. Mots à vérifier d'abord : [contrib/vlc/README.md](../contrib/vlc/README.md).
+  Patriccollu) ; rien n'a été envoyé. (Depuis : tous contrôlés et relus par IA, voir plus bas.)
 
 ## Blocages et ce qui demande une personne
 
@@ -149,8 +167,7 @@ seulement : l'icône à l'écran n'a pas été regardée. Corsu 0.21.0 y est enc
   attesté en informatique (ADECEC, *Lingua corsa è Internet*, Thiers et Filippi, 1999) : ce n'est donc pas une
   raison de tout remplacer. *Servitore* reste le choix là où il est appliqué (Minecraft). Discord n'est pas
   modifié ([décision D1](../minecraft/java/decisions-2.md)).
-- Restent visibles : le raccourci Windows « Corsu » montre l'icône de Python ; la fenêtre n'indique pas encore les
-  logiciels activés en partie.
+- (Corrigé en 0.22.0 : icône de Python du raccourci Windows ; logiciels activés en partie indiqués dans la fenêtre.)
 - macOS : la CI tourne sur un vrai Mac de GitHub (macos-latest). Firefox y est installé, lancé et lu par les
   vérifications automatiques, et l'archive y est installée puis mise à jour. Personne n'a regardé l'écran d'un Mac.
   Les autres logiciels n'y sont testés que sur fixtures ; FileZilla et VeraCrypt n'y sont pas activés (chemins de
@@ -173,13 +190,13 @@ seulement : l'icône à l'écran n'a pas été regardée. Corsu 0.21.0 y est enc
   deux lots thématiques : 1 580 gardés, 177 corrigés, 3 incertains (« Soften », « Shaping delay » et son aide).
   Aucun n'est validé par un locuteur ; détails dans [contrib/vlc/TERMS.md](../contrib/vlc/TERMS.md).
 - Activation : `--vlc-complement on|off`, Linux, VLC 3.0.x du système, par `VLC_DATA_PATH` dans l'entrée de menu.
-  Vu avec un vrai VLC 3.0.20 et 3.0.24 (conteneurs, CI). Pas encore d'interrupteur dans la fenêtre de Corsu.
+  Vu avec un vrai VLC 3.0.20 et 3.0.24 (conteneurs, CI). Interrupteur ajouté ensuite dans la fenêtre (fiche VLC).
 - fre:ac lancé pour de vrai (paquet Debian, conteneur) : fenêtre en corse.
 
 ## Prochaines étapes
 
-1. PDFsam, Poedit : même mécanisme, sources dans [apps-research.md](apps-research.md). VLC : relecture des
-   brouillons par un locuteur, puis éventuel envoi en amont avec l'accord du mainteneur.
+1. Poedit et PDFsam : branches `apps-poedit`, `apps-pdfsam` (sources dans [apps-research.md](apps-research.md)).
+   VLC : relecture des brouillons par un locuteur, puis éventuel envoi en amont avec l'accord du mainteneur.
 2. Bedrock : un essai en jeu, puis traduire les écrans les plus visibles.
 3. Telegram : un même nom de pack et un même lien pour toutes les applications, mais chaque application (Desktop,
    Android, iOS, macOS, Web) a ses propres textes à traduire ([roadmap-candidates.md](roadmap-candidates.md)).
