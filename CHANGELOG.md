@@ -17,8 +17,13 @@
   `%S` as `%n$S`). 31 lexicon rows for devtools and downloads; "Onglets ouverts".
 - Discord: protected names checked in every lookup (templates, counts, dates), labels around a name still translated,
   "…" and "..." equivalent; English typing words in the lexicon. Simulated page in Chrome only.
-- Window: the caller's user is read from its live connection only (a closed connection on the same port in
-  TIME_WAIT reads as uid 0 and could refuse an action with 403; seen once in CI on the v0.24.0 tag).
+- Window (security, Linux): an action is accepted only from the client end of that very connection: both addresses
+  and ports, ESTABLISHED, exactly one owner equal to the window's user; an unidentified caller is refused. Until
+  0.24.0 the owner was looked up by port alone: another local account could make its connection read as the
+  window's user (bind 127.0.0.2:<window port>, connect to the window) and trigger installs, updates or uninstalls
+  while the window was open; and a closed connection in TIME_WAIT on the same port (uid 0) refused the user's own
+  actions at random (0.23 % of requests on a quiet machine, 75 % under heavy connection churn). See
+  docs/window-security.md.
 - VLC complement: "A&ttrezzi", "Sempre s&opra"; `tools/vlcpo.py check` reports accelerator clashes per VLC menu
   (error for drafts, note for upstream).
 

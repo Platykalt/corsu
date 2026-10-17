@@ -35,6 +35,11 @@ publication (tests automatiques ; personne n'a regardé les écrans).
 - **Discord** : noms de personnes, surnoms, conversations privées et noms contenant une virgule protégés partout ;
   indicateur « est en train d'écrire » traduit en français et en anglais, noms intacts. Vérifié sur une page simulée
   dans Chrome, pas encore dans un vrai Discord.
+- **Sécurité de la fenêtre (Linux)** : sur un ordinateur partagé, un autre compte pouvait déclencher les actions de
+  la fenêtre de Corsu (installer, mettre à jour, désinstaller) pendant qu'elle était ouverte. La fenêtre vérifie
+  maintenant la connexion exacte et refuse un appelant non identifié. Corrige aussi des refus aléatoires des
+  actions de l'utilisateur lui-même. Windows et macOS n'ont pas ce contrôle de propriétaire (voir
+  `docs/window-security.md`).
 - **Complément VLC** : Outils devient « A&ttrezzi » (Alt+T), il prenait Alt+A comme Audio ; « Sempre s&opra » ne
   double plus Alt+S. Corrections de brouillons IA, la traduction amont de VLC est inchangée. Les 3 traductions
   incertaines restent exclues.
@@ -112,6 +117,10 @@ looked at the screens).
 - **Discord**: people's names, nicknames, private conversations and names containing a comma are protected
   everywhere; the "is typing" indicator is translated in French and English, names untouched. Checked on a simulated
   page in Chrome, not yet in a real Discord.
+- **Window security (Linux)**: on a shared computer, another account could trigger the Corsu window's actions
+  (install, update, uninstall) while it was open. The window now checks the exact connection and refuses a caller
+  it cannot identify. This also fixes random refusals of the user's own actions. Windows and macOS have no owner
+  check (see `docs/window-security.md`).
 - **VLC complement**: Tools becomes "A&ttrezzi" (Alt+T), it took Alt+A like Audio; "Sempre s&opra" no longer doubles
   Alt+S. Fixes to AI drafts, VLC's upstream translation is unchanged. The 3 uncertain translations stay left out.
 
