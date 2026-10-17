@@ -17,6 +17,8 @@
   `%S` as `%n$S`). 31 lexicon rows for devtools and downloads; "Onglets ouverts".
 - Discord: protected names checked in every lookup (templates, counts, dates), labels around a name still translated,
   "…" and "..." equivalent; English typing words in the lexicon. Simulated page in Chrome only.
+- Window: the caller's user is read from its live connection only (a closed connection on the same port in
+  TIME_WAIT reads as uid 0 and could refuse an action with 403; seen once in CI on the v0.24.0 tag).
 - VLC complement: "A&ttrezzi", "Sempre s&opra"; `tools/vlcpo.py check` reports accelerator clashes per VLC menu
   (error for drafts, note for upstream).
 
