@@ -79,9 +79,9 @@ class Base(Isolated):
         found = {}
         for path in sorted(Path(root).rglob('*')):
             if path.is_symlink():
-                found[str(path.relative_to(root))] = 'link:' + os.readlink(path)
+                found[path.relative_to(root).as_posix()] = 'link:' + os.readlink(path)
             elif path.is_file():
-                found[str(path.relative_to(root))] = hashlib.sha256(path.read_bytes()).hexdigest()
+                found[path.relative_to(root).as_posix()] = hashlib.sha256(path.read_bytes()).hexdigest()
         return found
 
 
