@@ -2,6 +2,12 @@
 // The window's texts in Corsican, French and English: every label of the page comes from here.
 const text = {
   co: {
+    summary_update_available: "Aghjurnamentu dispunibule", summary_update_installed: "Aghjurnamentu stallatu", summary_update_versions: "Corsu {version} (avete {current})",
+    nav_appearance: "Aspettu", skip: "Andà à u cuntenutu", opens_browser: "(s'apre in u navigatore)", review_section: "Sezzione",
+    summary_label: "Riassuntu", summary_on: "{n} nant'à {total} in corsu", summary_off: "{n} in lingua d'origine",
+    summary_all: "Tuttu ciò ch'hè stallatu", summary_ok: "Nisun prublema", summary_ok_detail: "Nunda ùn hà bisognu di voi.",
+    summary_attention_one: "1 prugramma da verificà", summary_attention_many: "{n} prugrammi da verificà",
+    waiting_folders: "Novi cartulari da attivà", row_details: "Dettagli",
     nav_programs: "Prugrammi", nav_add: "Aghjunghje", nav_help: "Aiutu", nav_about: "À prupositu", language: "Lingua",
     nav_review: "Rilege",
     review_lead: "Verificate e traduzzioni scritte per Corsu, e più corte prima. Una currezzione s'applica à u prossimu lanciu di Discord o di Firefox.",
@@ -85,6 +91,12 @@ const text = {
     open_logs: "Apre u cartulare di u ghjurnale", report_bug: "Signalà un prublema",
   },
   fr: {
+    summary_update_available: "Mise à jour disponible", summary_update_installed: "Mise à jour installée", summary_update_versions: "Corsu {version} (vous avez {current})",
+    nav_appearance: "Apparence", skip: "Aller au contenu", opens_browser: "(s'ouvre dans le navigateur)", review_section: "Section",
+    summary_label: "Résumé", summary_on: "{n} sur {total} en corse", summary_off: "{n} en langue d'origine",
+    summary_all: "Tout ce qui est installé", summary_ok: "Aucun problème", summary_ok_detail: "Rien n'attend votre intervention.",
+    summary_attention_one: "1 logiciel à vérifier", summary_attention_many: "{n} logiciels à vérifier",
+    waiting_folders: "Nouveaux dossiers à activer", row_details: "Détails",
     nav_programs: "Logiciels", nav_add: "Ajouter", nav_help: "Aide", nav_about: "À propos", language: "Langue",
     nav_review: "Relire",
     review_lead: "Vérifiez les traductions écrites pour Corsu, les plus courtes d'abord. Une correction s'applique au prochain démarrage de Discord ou de Firefox.",
@@ -168,6 +180,12 @@ const text = {
     open_logs: "Ouvrir le dossier du journal", report_bug: "Signaler un problème",
   },
   en: {
+    summary_update_available: "Update available", summary_update_installed: "Update installed", summary_update_versions: "Corsu {version} (you have {current})",
+    nav_appearance: "Appearance", skip: "Skip to content", opens_browser: "(opens in your browser)", review_section: "Section",
+    summary_label: "Summary", summary_on: "{n} of {total} in Corsican", summary_off: "{n} in the original language",
+    summary_all: "Everything installed", summary_ok: "No problems", summary_ok_detail: "Nothing needs you right now.",
+    summary_attention_one: "1 program needs attention", summary_attention_many: "{n} programs need attention",
+    waiting_folders: "New folders to switch", row_details: "Details",
     nav_programs: "Programs", nav_add: "Add", nav_help: "Help", nav_about: "About", language: "Language",
     nav_review: "Review",
     review_lead: "Check the translations written for Corsu, shortest first. A correction applies the next time Discord or Firefox starts.",

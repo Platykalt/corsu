@@ -124,7 +124,25 @@ SCENES = [
     ('about', 'update', 'about', 1040, 900, 'light', 1, 16),
     ('appearance', 'active', 'appearance', 1040, 900, 'light', 1, 16),
     ('appearance-dark', 'active', 'appearance', 1040, 900, 'dark', 1, 16),
+    # The appearance contract on <html> (docs/window-design.md), set before the page draws.
+    ('help', 'active', 'help', 1040, 780, 'light', 1, 16),
+    ('review-dark', 'active', 'review', 1040, 780, 'dark', 1, 16),
+    ('attention-narrow', 'attention', 'programs', 420, 1000, 'light', 1, 16),
+    ('palette-mare', 'attention', 'programs', 1040, 780, 'light', 1, 16, {'data-palette': 'mare'}),
+    ('palette-granitu-dark', 'attention', 'programs', 1040, 780, 'dark', 1, 16, {'data-palette': 'granitu', 'data-theme': 'dark'}),
+    ('palette-tramontu', 'update', 'programs', 1040, 780, 'light', 1, 16, {'data-palette': 'tramontu'}),
+    ('palette-notte-dark', 'running', 'programs', 1040, 780, 'light', 1, 16, {'data-palette': 'notte', 'data-theme': 'dark'}),
+    ('compact', 'many', 'programs', 1040, 1100, 'light', 1, 16, {'data-density': 'compact'}),
+    ('image', 'attention', 'programs', 1040, 780, 'light', 1, 16, {'data-background': 'image', '--bg-dim': '0.15', '--bg-blur': '14px'}),
+    ('image-dark-opaque', 'attention', 'programs', 1040, 780, 'dark', 1, 16,
+     {'data-background': 'image', 'data-reduced-transparency': '', '--bg-dim': '0.3', '--accent-user': '#c46a9a'}),
 ]
+
+# A busy, high-contrast picture: text over it must stay readable.
+SAMPLE_IMAGE = ('url("data:image/svg+xml,' + "%3Csvg xmlns='http://www.w3.org/2000/svg' width='400' height='300'%3E"
+                "%3Crect width='400' height='300' fill='%23f2c14e'/%3E%3Cpath d='M0 300 120 90 210 200 300 40 400 180V300z' fill='%23123b2f'/%3E"
+                "%3Cpath d='M0 300 90 220 200 260 320 150 400 230V300z' fill='%23e8eef0'/%3E%3Ccircle cx='330' cy='60' r='34' fill='%23ffffff'/%3E"
+                '%3C/svg%3E")')
 
 
 def serve(folder, state_holder, data):
@@ -203,18 +221,38 @@ def chrome(executable, profile, font):
             time.sleep(0.3)
 
 
+def appearance_script(settings):
+    """JavaScript that puts the scene's appearance attributes and properties on <html> before the page draws."""
+    lines = ['const root = document.documentElement;']
+    for key, value in settings.items():
+        if key.startswith('--'):
+            lines.append(f'root.style.setProperty({json.dumps(key)}, {json.dumps(value)});')
+        else:
+            lines.append(f'root.setAttribute({json.dumps(key)}, {json.dumps(value)});')
+    if settings.get('data-background') == 'image':
+        lines.append(f'root.style.setProperty("--bg-image", {json.dumps(SAMPLE_IMAGE)});')
+    return '\n'.join(lines)
+
+
 def shoot(devtools, url, scene, output, language='fr'):
-    name, _, page, width, height, scheme, zoom, _ = scene
+    name, _, page, width, height, scheme, zoom, font = scene[:8]
+    settings = scene[8] if len(scene) > 8 else {}
     target = devtools.call('Target.createTarget', {'url': 'about:blank'})['targetId']
     session = devtools.call('Target.attachToTarget', {'targetId': target, 'flatten': True})['sessionId']
     try:
         devtools.call('Page.enable', session=session)
+        # The person's default text size (headless browsers ignore the profile's preference): rem and em follow it.
+        devtools.call('Page.setFontSizes', {'fontSizes': {'standard': font, 'fixed': round(font * 13 / 16)}}, session=session)
         devtools.call('Emulation.setDeviceMetricsOverride', {'width': int(width / zoom), 'height': int(height / zoom),
                                                              'deviceScaleFactor': zoom, 'mobile': False}, session=session)
         devtools.call('Emulation.setEmulatedMedia', {'features': [{'name': 'prefers-color-scheme', 'value': scheme}]},
                       session=session)
         devtools.call('Page.addScriptToEvaluateOnNewDocument', {'source':
                       f'try {{ localStorage.setItem("corsu-language", "{language}"); }} catch (e) {{}}'}, session=session)
+        if settings:
+            devtools.call('Page.addScriptToEvaluateOnNewDocument', {'source':
+                          'document.addEventListener("readystatechange", () => {' + appearance_script(settings) + '}, { once: true });'},
+                          session=session)
         devtools.call('Page.navigate', {'url': url}, session=session)
         time.sleep(1.5)
         devtools.call('Runtime.evaluate', {'expression':
