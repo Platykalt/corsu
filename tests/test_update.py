@@ -252,7 +252,14 @@ LOCK_SCRIPT = textwrap.dedent('''
         with corsu.lock('install'):
             state = corsu.load_state()
             state['runs'] = state.get('runs', 0) + 1
-            time.sleep(float(sys.argv[2]))
+            if len(sys.argv) > 3:
+                # Hold the lock until the test says so: a slow computer cannot let the other run slip past it.
+                from pathlib import Path
+                deadline = time.monotonic() + 60
+                while not Path(sys.argv[3]).exists() and time.monotonic() < deadline:
+                    time.sleep(0.05)
+            else:
+                time.sleep(float(sys.argv[2]))
             corsu.save_state(state)
         print('done')
     except corsu.Busy as error:
@@ -340,13 +347,15 @@ class LockTests(Isolated):
 
     def test_two_installers_at_once(self):
         home = self.home / 'other home'
-        script = [sys.executable, '-c', LOCK_SCRIPT, str(SRC), '2']
-        first = subprocess.Popen(script, stdout=subprocess.PIPE, text=True, env=environment_for(home))
+        release = self.home / 'release'
+        script = [sys.executable, '-c', LOCK_SCRIPT, str(SRC), '0']
+        first = subprocess.Popen([*script, str(release)], stdout=subprocess.PIPE, text=True, env=environment_for(home))
         lock = data_for(home) / 'lock'
         deadline = time.monotonic() + 20
         while not lock.exists() and time.monotonic() < deadline:
             time.sleep(0.05)
         second = subprocess.run(script, capture_output=True, text=True, env=environment_for(home), timeout=60)
+        release.write_text('', encoding='utf-8')
         self.assertIn('busy: Corsu is already busy: installing since', second.stdout)
         self.assertEqual(first.communicate(timeout=60)[0].strip(), 'done')
         state = json.loads((data_for(home) / 'installation.json').read_text(encoding='utf-8'))
