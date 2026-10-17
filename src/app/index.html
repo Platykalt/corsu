@@ -6,141 +6,241 @@
 <title>Corsu</title>
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%231f2a2e'/%3E%3Ctext x='16' y='22.5' font-family='Georgia,serif' font-size='19' font-weight='700' fill='white' text-anchor='middle'%3Eco%3C/text%3E%3C/svg%3E">
 <link rel="stylesheet" href="style.css">
+<link rel="stylesheet" href="appearance.css">
+<!-- Before the first paint: the saved theme, palette and background apply at once (they wait for the page themselves). -->
+<script src="texts-appearance.js"></script>
+<script src="appearance.js"></script>
 </head>
 <body>
+<!-- One icon set: 24px grid, 1.75 stroke, round caps, currentColor. Each use is decorative or the control is named. -->
+<svg class="sprite" aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg">
+  <symbol id="i-programs" viewBox="0 0 24 24"><rect x="3.5" y="3.5" width="7" height="7" rx="1.8"/><rect x="13.5" y="3.5" width="7" height="7" rx="1.8"/><rect x="3.5" y="13.5" width="7" height="7" rx="1.8"/><rect x="13.5" y="13.5" width="7" height="7" rx="1.8"/></symbol>
+  <symbol id="i-add" viewBox="0 0 24 24"><circle cx="12" cy="12" r="8.5"/><path d="M12 8v8M8 12h8"/></symbol>
+  <symbol id="i-review" viewBox="0 0 24 24"><path d="M4 6h10M4 11h7M4 16h5"/><path d="M13 20l3-.6 5.6-5.6a1.8 1.8 0 0 0-2.5-2.5l-5.6 5.6z"/></symbol>
+  <symbol id="i-help" viewBox="0 0 24 24"><circle cx="12" cy="12" r="8.5"/><path d="M9.6 9.6a2.5 2.5 0 0 1 4.9.7c0 1.7-2.5 2.1-2.5 3.7"/><path d="M12 17h.01"/></symbol>
+  <symbol id="i-about" viewBox="0 0 24 24"><circle cx="12" cy="12" r="8.5"/><path d="M12 11v5.5M12 7.8h.01"/></symbol>
+  <symbol id="i-appearance" viewBox="0 0 24 24"><path d="M12 3.5a8.5 8.5 0 1 0 0 17c1 0 1.6-.7 1.6-1.6 0-.5-.2-.8-.5-1.2a1.6 1.6 0 0 1 1.2-2.7h2a4.2 4.2 0 0 0 4.2-4.2c0-4.1-3.8-7.3-8.5-7.3z"/><circle cx="7.6" cy="11.2" r="1" fill="currentColor"/><circle cx="10.4" cy="7.4" r="1" fill="currentColor"/><circle cx="15" cy="7.8" r="1" fill="currentColor"/></symbol>
+  <symbol id="i-ok" viewBox="0 0 24 24"><circle cx="12" cy="12" r="8.5"/><path d="M8.4 12.3l2.5 2.4 4.7-5"/></symbol>
+  <symbol id="i-warn" viewBox="0 0 24 24"><path d="M10.3 4.7 3.5 16.8a2 2 0 0 0 1.7 3h13.6a2 2 0 0 0 1.7-3L13.7 4.7a2 2 0 0 0-3.4 0z"/><path d="M12 9.5v4.2M12 16.6h.01"/></symbol>
+  <symbol id="i-error" viewBox="0 0 24 24"><circle cx="12" cy="12" r="8.5"/><path d="M9.3 9.3l5.4 5.4M14.7 9.3l-5.4 5.4"/></symbol>
+  <symbol id="i-blocked" viewBox="0 0 24 24"><circle cx="12" cy="12" r="8.5"/><path d="M6 6l12 12"/></symbol>
+  <symbol id="i-partial" viewBox="0 0 24 24"><circle cx="12" cy="12" r="8.5"/><path d="M12 3.5a8.5 8.5 0 0 1 0 17z" fill="currentColor"/></symbol>
+  <symbol id="i-off" viewBox="0 0 24 24"><circle cx="12" cy="12" r="8.5"/><path d="M8.5 12h7"/></symbol>
+  <symbol id="i-restart" viewBox="0 0 24 24"><path d="M19.5 12.5a7.5 7.5 0 1 1-2.2-5.8"/><path d="M19.5 4.5v4h-4"/></symbol>
+  <symbol id="i-clock" viewBox="0 0 24 24"><circle cx="12" cy="12" r="8.5"/><path d="M12 7.5V12l3 2"/></symbol>
+  <symbol id="i-update" viewBox="0 0 24 24"><path d="M12 4v11M7.5 10.5 12 15l4.5-4.5M5 19.5h14"/></symbol>
+  <symbol id="i-chevron" viewBox="0 0 24 24"><path d="M9.5 6l6 6-6 6"/></symbol>
+  <symbol id="i-external" viewBox="0 0 24 24"><path d="M14 4.5h5.5V10M19.5 4.5 11 13"/><path d="M17.5 14v4a1.5 1.5 0 0 1-1.5 1.5H6A1.5 1.5 0 0 1 4.5 18V8A1.5 1.5 0 0 1 6 6.5h4"/></symbol>
+  <symbol id="i-terminal" viewBox="0 0 24 24"><rect x="3.5" y="4.5" width="17" height="15" rx="2.5"/><path d="M7.5 9.5l3 2.5-3 2.5M12.5 15h4"/></symbol>
+  <symbol id="i-globe" viewBox="0 0 24 24"><circle cx="12" cy="12" r="8.5"/><path d="M3.5 12h17M12 3.5c2.2 2.4 3.3 5.2 3.3 8.5s-1.1 6.1-3.3 8.5c-2.2-2.4-3.3-5.2-3.3-8.5S9.8 5.9 12 3.5z"/></symbol>
+  <symbol id="i-chat" viewBox="0 0 24 24"><path d="M5 19V6.5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2v7.5a2 2 0 0 1-2 2H8.5z"/><path d="M9 9.5h6M9 12.5h3.5"/></symbol>
+  <symbol id="i-monitor" viewBox="0 0 24 24"><rect x="3.5" y="4.5" width="17" height="11.5" rx="2"/><path d="M9 20h6M12 16v4"/></symbol>
+  <symbol id="i-cube" viewBox="0 0 24 24"><path d="M12 3.5 19.5 7.5v9L12 20.5 4.5 16.5v-9z"/><path d="M4.5 7.5 12 11.5l7.5-4M12 11.5v9"/></symbol>
+  <symbol id="i-play" viewBox="0 0 24 24"><circle cx="12" cy="12" r="8.5"/><path d="M10.2 8.9v6.2l4.9-3.1z"/></symbol>
+  <symbol id="i-wave" viewBox="0 0 24 24"><path d="M4 10.5v3M8 8v8M12 4.5v15M16 7.5v9M20 10.5v3"/></symbol>
+  <symbol id="i-translate" viewBox="0 0 24 24"><path d="M3.5 6.5h9M8 4.5v2M5.5 6.5c.7 3 2.6 5.2 5 6.4M10.5 6.5c-.7 2.8-2.7 5.4-6 7"/><path d="M12.5 19.5l3.5-8 3.5 8M13.6 17h4.8"/></symbol>
+  <symbol id="i-file" viewBox="0 0 24 24"><path d="M14 3.5H7.5a2 2 0 0 0-2 2v13a2 2 0 0 0 2 2h9a2 2 0 0 0 2-2V8z"/><path d="M14 3.5V8h4.5M8.5 13h7M8.5 16.5h5"/></symbol>
+  <symbol id="i-app" viewBox="0 0 24 24"><rect x="4" y="4" width="16" height="16" rx="4"/><path d="M4 9h16"/></symbol>
+  <symbol id="i-book" viewBox="0 0 24 24"><path d="M12 6.5C10.5 5.3 8.4 4.5 4.5 4.5v13c3.9 0 6 .8 7.5 2 1.5-1.2 3.6-2 7.5-2v-13c-3.9 0-6 .8-7.5 2zM12 6.5v13"/></symbol>
+  <symbol id="i-power" viewBox="0 0 24 24"><path d="M12 3.5v8"/><path d="M7.2 6.6a7.5 7.5 0 1 0 9.6 0"/></symbol>
+  <symbol id="i-log" viewBox="0 0 24 24"><path d="M4 5.5h16M4 10h16M4 14.5h10M4 19h7"/></symbol>
+  <symbol id="i-trash" viewBox="0 0 24 24"><path d="M4.5 7h15M9.5 7V4.5h5V7M6.5 7l1 12.5h9l1-12.5"/></symbol>
+  <symbol id="i-search" viewBox="0 0 24 24"><circle cx="11" cy="11" r="6.5"/><path d="M16 16l4 4"/></symbol>
+  <symbol id="i-pause" viewBox="0 0 24 24"><circle cx="12" cy="12" r="8.5"/><path d="M10 9v6M14 9v6"/></symbol>
+  <symbol id="i-flask" viewBox="0 0 24 24"><path d="M9.5 3.5h5M10.5 3.5v5.2L5.2 17.6a1.9 1.9 0 0 0 1.6 2.9h10.4a1.9 1.9 0 0 0 1.6-2.9l-5.3-8.9V3.5"/><path d="M7.5 14.5h9"/></symbol>
+</svg>
+
+<a class="skip" href="#main" data-t="skip"></a>
 <div class="app" id="app">
-  <aside>
-    <div class="brand"><img src="corsu.svg" alt=""><b>Corsu</b><small id="version"></small></div>
+  <aside class="sidebar">
+    <div class="brand"><img src="corsu.svg" alt="" width="28" height="28"><b>Corsu</b><small id="version"></small></div>
     <nav aria-label="Corsu">
-      <button type="button" data-page="programs" data-t="nav_programs"></button>
-      <button type="button" data-page="add" data-t="nav_add"></button>
-      <button type="button" data-page="review" data-t="nav_review"></button>
-      <button type="button" data-page="help" data-t="nav_help"></button>
-      <button type="button" data-page="about" data-t="nav_about"></button>
+      <button type="button" data-page="programs"><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-programs"/></svg><span class="nav-label" data-t="nav_programs"></span></button>
+      <button type="button" data-page="add"><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-add"/></svg><span class="nav-label" data-t="nav_add"></span></button>
+      <button type="button" data-page="review"><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-review"/></svg><span class="nav-label" data-t="nav_review"></span></button>
+      <button type="button" data-page="appearance"><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-appearance"/></svg><span class="nav-label" data-t="nav_appearance"></span></button>
+      <button type="button" data-page="help"><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-help"/></svg><span class="nav-label" data-t="nav_help"></span></button>
+      <button type="button" data-page="about"><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-about"/></svg><span class="nav-label" data-t="nav_about"></span></button>
     </nav>
     <label class="language"><span data-t="language"></span>
       <select id="language"><option value="co">Corsu</option><option value="fr">Français</option><option value="en">English</option></select>
     </label>
   </aside>
 
-  <main>
-    <p class="banner problem" id="problem" hidden role="alert"></p>
+  <main id="main" tabindex="-1">
+    <div class="banner problem" id="problem" hidden role="alert">
+      <svg class="icon" aria-hidden="true" focusable="false"><use href="#i-error"/></svg><span id="problem-text"></span>
+    </div>
     <div class="banner" id="update-banner" hidden aria-live="polite">
+      <svg class="icon" aria-hidden="true" focusable="false"><use href="#i-update"/></svg>
       <span id="update-text"></span>
       <button type="button" class="button default" id="update-install" data-t="update_install"></button>
       <button type="button" class="button default" id="update-banner-restart" data-t="update_restart"></button>
     </div>
+
     <section id="programs" data-page-panel>
-      <h1 data-t="nav_programs"></h1>
-      <p class="lead" id="programs-lead"></p>
-      <ul class="group" id="switches"></ul>
+      <header class="page-head">
+        <h1 data-t="nav_programs"></h1>
+        <p class="lead" id="programs-lead"></p>
+      </header>
+      <section class="summary" id="summary" data-t-label="summary_label" hidden>
+        <div class="stat" id="summary-on">
+          <span class="stat-icon"><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-ok"/></svg></span>
+          <span class="stat-body"><strong id="summary-on-value"></strong><span class="stat-sub" id="summary-on-sub"></span></span>
+        </div>
+        <div class="stat" id="summary-attention">
+          <span class="stat-icon"><svg class="icon" aria-hidden="true" focusable="false"><use id="summary-attention-icon" href="#i-ok"/></svg></span>
+          <span class="stat-body"><strong id="summary-attention-value"></strong><span class="stat-sub jumps" id="summary-attention-list"></span></span>
+        </div>
+        <div class="stat" id="summary-update">
+          <span class="stat-icon"><svg class="icon" aria-hidden="true" focusable="false"><use id="summary-update-icon" href="#i-ok"/></svg></span>
+          <span class="stat-body"><strong id="summary-update-value"></strong><span class="stat-sub" id="summary-update-text"></span>
+            <span class="stat-actions">
+              <button type="button" class="button default small" id="summary-update-install" data-t="update_install"></button>
+              <button type="button" class="button default small" id="summary-update-restart" data-t="update_restart"></button>
+            </span>
+          </span>
+        </div>
+      </section>
+      <ul class="group list" id="switches"></ul>
+
       <div id="terminal-block" hidden>
         <h2 data-t="terminal"></h2>
         <ul class="group">
           <li>
+            <span class="app-icon" aria-hidden="true"><svg class="icon" focusable="false"><use href="#i-terminal"/></svg></span>
             <span class="label"><label for="switch-terminal" data-t="terminal_label"></label><span class="detail" id="terminal-detail"></span></span>
-            <span class="switch"><input type="checkbox" role="switch" id="switch-terminal"><i></i></span>
+            <span class="switch"><input type="checkbox" role="switch" id="switch-terminal" aria-describedby="terminal-detail"><i></i></span>
           </li>
         </ul>
-        <div class="buttons"><button type="button" class="button" id="pause-hour" data-t="pause_hour"></button></div>
+        <div class="buttons"><button type="button" class="button" id="pause-hour"><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-pause"/></svg><span data-t="pause_hour"></span></button></div>
       </div>
       <h2 data-t="learn"></h2>
       <ul class="group">
         <li>
-          <span class="label"><label for="switch-original" data-t="show_original"></label><span class="detail" data-t="show_original_detail"></span></span>
-          <span class="switch"><input type="checkbox" role="switch" id="switch-original"><i></i></span>
+          <span class="app-icon" aria-hidden="true"><svg class="icon" focusable="false"><use href="#i-book"/></svg></span>
+          <span class="label"><label for="switch-original" data-t="show_original"></label><span class="detail" id="show-original-detail" data-t="show_original_detail"></span></span>
+          <span class="switch"><input type="checkbox" role="switch" id="switch-original" aria-describedby="show-original-detail"><i></i></span>
         </li>
       </ul>
       <h2 data-t="everything"></h2>
-      <p class="muted" id="everything-text"></p>
-      <div class="buttons"><button type="button" class="button" id="everything"></button></div>
+      <div class="group panel">
+        <p class="muted" id="everything-text"></p>
+        <div class="buttons"><button type="button" class="button" id="everything-button"><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-power"/></svg><span id="everything"></span></button></div>
+      </div>
     </section>
 
     <section id="add" data-page-panel hidden>
-      <h1 data-t="nav_add"></h1>
-      <p class="lead" id="add-lead"></p>
-      <ul class="group" id="choices"></ul>
-      <div class="buttons"><button type="button" class="button default" id="review" data-t="install_ellipsis"></button></div>
-      <p class="muted" style="margin-top:18px" data-t="add_missing"></p>
-      <div class="buttons"><button type="button" class="button" id="rescan" data-t="rescan"></button></div>
+      <header class="page-head">
+        <h1 data-t="nav_add"></h1>
+        <p class="lead" id="add-lead"></p>
+      </header>
+      <ul class="group list" id="choices"></ul>
+      <div class="buttons"><button type="button" class="button default" id="plan-open" data-t="install_ellipsis"></button></div>
+      <div class="note">
+        <p class="muted" data-t="add_missing"></p>
+        <button type="button" class="button" id="rescan"><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-search"/></svg><span data-t="rescan"></span></button>
+      </div>
     </section>
 
     <section id="review" data-page-panel hidden>
-      <h1 data-t="nav_review"></h1>
-      <p class="lead" data-t="review_lead"></p>
+      <header class="page-head">
+        <h1 data-t="nav_review"></h1>
+        <p class="lead" data-t="review_lead"></p>
+      </header>
       <div class="toolbar">
-        <select id="review-section" aria-label="Section"><option value="Discord">Discord</option><option value="Google">Google</option></select>
-        <span class="muted" id="review-progress"></span>
+        <label class="field"><span data-t="review_section"></span>
+          <select id="review-section"><option value="Discord">Discord</option><option value="Google">Google</option></select>
+        </label>
+        <span class="muted" id="review-progress" role="status"></span>
       </div>
-      <div class="review" id="review-card">
+      <div class="review group panel" id="review-card">
         <dl>
           <dt data-t="review_french"></dt><dd class="source" id="review-french"></dd>
           <dt data-t="review_english"></dt><dd class="muted" id="review-english"></dd>
           <dt><label for="review-corsican" data-t="review_corsican"></label></dt>
-          <dd><textarea id="review-corsican" rows="2" spellcheck="false"></textarea><div class="error" id="review-error" hidden></div></dd>
+          <dd><textarea id="review-corsican" rows="2" spellcheck="false"></textarea><div class="error" id="review-error" hidden role="alert"></div></dd>
         </dl>
         <div class="buttons">
           <button type="button" class="button default" id="review-ok" data-t="review_ok"></button>
           <button type="button" class="button" id="review-fix" data-t="review_fix"></button>
-          <button type="button" class="button" id="review-skip" data-t="review_skip"></button>
+          <button type="button" class="button quiet" id="review-skip" data-t="review_skip"></button>
         </div>
       </div>
-      <p class="muted" id="review-done" hidden data-t="review_done"></p>
+      <p class="empty-note" id="review-done" hidden><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-ok"/></svg><span data-t="review_done"></span></p>
       <h2 data-t="review_share"></h2>
-      <p class="muted" data-t="review_share_text"></p>
-      <div class="buttons"><button type="button" class="button" id="review-send" data-t="review_send"></button></div>
+      <div class="group panel">
+        <p class="muted" data-t="review_share_text"></p>
+        <div class="buttons"><button type="button" class="button" id="review-send"><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-external"/></svg><span data-t="review_send"></span></button></div>
+      </div>
+    </section>
+
+    <section id="appearance" data-page-panel hidden>
+      <header class="page-head">
+        <h1 data-t="nav_appearance"></h1>
+      </header>
     </section>
 
     <section id="help" data-page-panel hidden>
-      <h1 data-t="nav_help"></h1>
-      <p class="lead" data-t="help_lead"></p>
-      <ul class="group" id="guides"></ul>
+      <header class="page-head">
+        <h1 data-t="nav_help"></h1>
+        <p class="lead" data-t="help_lead"></p>
+      </header>
+      <ul class="group list" id="guides"></ul>
       <h2 data-t="practice"></h2>
-      <p class="muted" data-t="practice_text"></p>
-      <ul class="group" id="practice"></ul>
+      <p class="muted section-text" data-t="practice_text"></p>
+      <ul class="group list" id="practice"></ul>
     </section>
 
     <section id="about" data-page-panel hidden>
-      <h1 data-t="nav_about"></h1>
-      <p class="lead" data-t="about_lead"></p>
+      <header class="page-head">
+        <h1 data-t="nav_about"></h1>
+        <p class="lead" data-t="about_lead"></p>
+      </header>
       <dl class="facts" id="facts"></dl>
       <h2 id="update-heading" data-t="update_heading"></h2>
-      <section aria-labelledby="update-heading">
-        <dl class="facts" id="update-facts"></dl>
+      <section class="group panel update-panel" aria-labelledby="update-heading">
         <p class="update-status" id="update-status" role="status"></p>
-        <p class="update-result" id="update-result" hidden></p>
+        <div class="update-result" id="update-result" hidden></div>
         <div class="buttons">
           <button type="button" class="button default" id="update-now" data-t="update_install"></button>
           <button type="button" class="button default" id="update-restart" data-t="update_restart" hidden></button>
           <button type="button" class="button" id="update-check" data-t="update_check"></button>
         </div>
-        <ul class="group" id="update-auto">
-          <li>
-            <span class="label"><label for="switch-auto-update" data-t="update_auto"></label><span class="detail" data-t="update_auto_detail"></span></span>
-            <span class="switch"><input type="checkbox" role="switch" id="switch-auto-update"><i></i></span>
-          </li>
-        </ul>
+        <dl class="facts inner" id="update-facts"></dl>
+        <div class="option-row">
+          <span class="label"><label for="switch-auto-update" data-t="update_auto"></label><span class="detail" id="update-auto-detail" data-t="update_auto_detail"></span></span>
+          <span class="switch"><input type="checkbox" role="switch" id="switch-auto-update" aria-describedby="update-auto-detail"><i></i></span>
+        </div>
       </section>
       <h2 data-t="logs"></h2>
-      <p class="muted" data-t="logs_text"></p>
-      <div class="buttons">
-        <button type="button" class="button" id="open-logs" data-t="open_logs"></button>
-        <a class="button" style="text-decoration:none;color:inherit" href="https://github.com/Platykalt/corsu/issues/new?template=bug.yml" target="_blank" rel="noopener noreferrer" data-t="report_bug"></a>
+      <div class="group panel">
+        <p class="muted" data-t="logs_text"></p>
+        <div class="buttons">
+          <button type="button" class="button" id="open-logs"><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-log"/></svg><span data-t="open_logs"></span></button>
+          <a class="button" href="https://github.com/Platykalt/corsu/issues/new?template=bug.yml" target="_blank" rel="noopener noreferrer"><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-external"/></svg><span data-t="report_bug"></span><span class="sr-only" data-t="opens_browser"></span></a>
+        </div>
       </div>
       <h2 data-t="remove_heading"></h2>
-      <p class="muted" data-t="remove_text"></p>
-      <div class="buttons"><button type="button" class="button destructive" id="remove" data-t="remove_ellipsis"></button></div>
+      <div class="group panel danger-zone">
+        <p class="muted" data-t="remove_text"></p>
+        <div class="buttons"><button type="button" class="button destructive" id="remove"><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-trash"/></svg><span data-t="remove_ellipsis"></span></button></div>
+      </div>
     </section>
   </main>
 
   <div class="activity" id="activity" hidden aria-live="polite">
     <div class="line">
-      <span class="busy" id="busy"></span><span id="activity-text"></span>
-      <button type="button" class="textbutton" id="details-toggle"></button>
+      <span class="activity-icon" aria-hidden="true">
+        <span class="busy" id="busy"></span>
+        <svg class="icon state-ok"><use href="#i-ok"/></svg>
+        <svg class="icon state-failed"><use href="#i-error"/></svg>
+      </span>
+      <span class="activity-text"><span id="activity-text"></span><span class="step" id="step"></span></span>
+      <button type="button" class="button quiet small" id="details-toggle" aria-controls="log"></button>
     </div>
-    <div class="meter" id="meter" hidden role="progressbar" aria-valuemin="0" aria-valuemax="100"><span id="meter-fill"></span></div>
-    <div class="step" id="step"></div>
-    <pre id="log" hidden></pre>
+    <div class="meter" id="meter" hidden role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-labelledby="activity-text"><span id="meter-fill"></span></div>
+    <pre id="log" hidden tabindex="0"></pre>
   </div>
 </div>
 
@@ -153,12 +253,12 @@
   </div>
 </dialog>
 
-<dialog id="remove-dialog" aria-labelledby="remove-title">
+<dialog id="remove-dialog" aria-labelledby="remove-title" aria-describedby="remove-dialog-text">
   <h3 id="remove-title" data-t="remove_question"></h3>
-  <p data-t="remove_text"></p>
+  <p id="remove-dialog-text" data-t="remove_text"></p>
   <div class="buttons end">
     <button type="button" class="button" data-close data-t="cancel"></button>
-    <button type="button" class="button destructive" id="remove-confirm" data-t="remove"></button>
+    <button type="button" class="button destructive solid" id="remove-confirm" data-t="remove"></button>
   </div>
 </dialog>
 

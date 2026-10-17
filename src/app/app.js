@@ -13,7 +13,14 @@ const restartHints = new Map(), openDetails = new Map();
 const $ = id => document.getElementById(id);
 // Browsers have no Corsican number and time formats; the French ones match Corsican usage.
 const numbers = () => language === "co" ? "fr" : language;
-const t = (name, values = {}) => (text[language || "fr"][name] ?? name).replace(/\{(\w+)\}/g, (_, k) => values[k]);
+// The page's own texts, then those of the Appearance page (texts-appearance.js, same {co, fr, en} shape) when loaded.
+function lookup(name) {
+  const lang = language || "fr";
+  if (name in text[lang]) return text[lang][name];
+  const extra = typeof textsAppearance === "undefined" ? null : textsAppearance;
+  return extra && extra[lang] && name in extra[lang] ? extra[lang][name] : undefined;
+}
+const t = (name, values = {}) => (lookup(name) ?? name).replace(/\{(\w+)\}/g, (_, k) => values[k]);
 function make(tag, attributes = {}, ...children) {
   const node = document.createElement(tag);
   for (const [name, value] of Object.entries(attributes)) {
@@ -24,6 +31,34 @@ function make(tag, attributes = {}, ...children) {
   }
   node.append(...children.filter(child => child != null));
   return node;
+}
+
+// An icon of the page's sprite (index.html): decorative, the text next to it or the control's name says it all.
+const SVG = "http://www.w3.org/2000/svg";
+function icon(name, extra) {
+  const svg = document.createElementNS(SVG, "svg");
+  svg.setAttribute("class", extra ? "icon " + extra : "icon");
+  svg.setAttribute("aria-hidden", "true");
+  svg.setAttribute("focusable", "false");
+  const use = document.createElementNS(SVG, "use");
+  use.setAttribute("href", "#i-" + name);
+  svg.append(use);
+  return svg;
+}
+
+// A recognisable shape for each kind of program; any other gets the plain application icon.
+const programIcons = { firefox: "globe", chromium: "globe", discord: "chat", vesktop: "chat", desktop: "monitor", kde: "monitor",
+  qt: "monitor", terminal: "terminal", minecraft: "cube", vlc: "play", audacity: "wave", tenacity: "wave", freac: "wave",
+  poedit: "translate", pdfsam: "file" };
+const appIcon = name => make("span", { class: "app-icon", "aria-hidden": "true" }, icon(programIcons[name] || "app"));
+
+// Each state's tone and icon: a chip always carries a word, the colour only repeats it.
+const tones = { active: ["ok", "ok"], inactive: ["neutral", "off"], partial: ["warn", "partial"], restart_required: ["info", "restart"],
+  blocked: ["danger", "blocked"], failed: ["danger", "error"], waiting: ["warn", "clock"] };
+function chip(activation, attributes = {}, label = null, tone = null) {
+  const [own, glyph] = tones[activation] || ["neutral", "about"];
+  return make("span", { ...attributes, class: `badge chip ${activation} tone-${tone || own}` },
+    icon(tone === "warn" && own !== "warn" ? "warn" : glyph), make("span", { text: label || activationLabel(activation) }));
 }
 
 async function call(path, body) {
@@ -44,7 +79,9 @@ function show(name) {
     else button.removeAttribute("aria-current");
   }
   for (const panel of document.querySelectorAll("[data-page-panel]")) panel.hidden = panel.id !== name;
-  if (state) renderUpdate();
+  if (state) { renderSummary(); renderUpdate(); }
+  // The Appearance page (appearance.js) and anything else that renders on demand listens to this.
+  if (typeof CustomEvent === "function" && document.dispatchEvent) document.dispatchEvent(new CustomEvent("corsu:page", { detail: name }));
 }
 
 // Activation (is Corsican switched on?) and coverage (how much of the program is translated) are separate:
@@ -58,7 +95,7 @@ function activationOf(item) {
 
 function activationLabel(activation) {
   const key = "activation_" + activation;
-  return key in text[language || "fr"] ? t(key) : activation;
+  return lookup(key) != null ? t(key) : activation;
 }
 
 function coverageText(coverage) {
@@ -88,37 +125,39 @@ function validationText(validation) {
 
 const troubled = activation => activation === "blocked" || activation === "failed";
 const noted = instance => Boolean(instance.reason || instance.action);
+const ordinaryState = activation => activation === "active" || activation === "inactive" || activation === null;
 
-// What a row adds under the program's description: status, coverage, testing, and each installation when useful.
-// Empty for the fixed parts (Firefox, Discord…) and old saved states: the switch already says it all.
+// What a row says about its program. The chip (state as icon + word) only when something is unusual; coverage, tests and
+// each installation sit in a disclosure, opened by default when something needs the person's attention.
+// Nothing for the fixed parts (Firefox, Discord…) and old saved states: the switch already says it all.
 function statusBlock(item) {
   const activation = activationOf(item);
   const instances = Array.isArray(item.instances) ? item.instances : [];
   const coverage = coverageText(item.coverage);
   const tested = validationText(item.validation);
-  const ordinary = activation === "active" || activation === "inactive" || activation === null;
-  if (ordinary && !instances.length && !coverage && !tested) return { nodes: [], kind: null };
-  const nodes = [];
-  if (activation !== null || coverage) {
-    nodes.push(make("span", { class: "status", id: "status-" + item.name },
-      activation !== null ? make("span", { class: "badge " + activation, text: activationLabel(activation) }) : null,
-      activation !== null && coverage ? " · " : null, coverage));
-  }
-  if (tested) nodes.push(make("span", { class: "tested", text: tested }));
+  const ordinary = ordinaryState(activation);
+  if (ordinary && !instances.length && !coverage && !tested) return { chip: null, nodes: [], kind: null };
   const attention = !ordinary || instances.some(instance => instance.activation !== "active" && instance.activation !== "inactive") || instances.some(noted);
-  if (instances.length > 1 || instances.some(instance => instance.activation !== "active") || instances.some(noted)) {
-    // Opened by default when something needs the person's attention; then it stays as they leave it.
-    const open = openDetails.has(item.name) ? openDetails.get(item.name) : attention;
-    nodes.push(make("details", { open, ontoggle: event => {
-      // The first event only echoes the default; from then on the person's choice is kept.
-      if (event.target.open !== open || openDetails.has(item.name)) openDetails.set(item.name, event.target.open);
-    } },
-      make("summary", { id: "details-" + item.name, text: instances.length === 1 ? t("instances_one") : t("instances_many", { n: instances.length }) }),
-      make("ul", { class: "instances" }, ...instances.map(instanceRow),
-        item.updated ? make("li", { class: "when", text: t("status_as_of", { time: new Date(item.updated * 1000).toLocaleString(numbers(), { dateStyle: "short", timeStyle: "short" }) }) }) : null)));
-  }
   const kind = troubled(activation) ? "problem" : attention ? "attention" : null;
-  return { nodes, kind };
+  let badge = null;
+  if (activation !== null && kind) {
+    const waiting = ordinary && item.waiting;
+    badge = chip(waiting ? "waiting" : activation, { id: "status-" + item.name }, waiting ? t("waiting_folders") : null, ordinary && !waiting ? "warn" : null);
+  }
+  // Opened by default when something needs the person's attention; then it stays as they leave it.
+  const open = openDetails.has(item.name) ? openDetails.get(item.name) : attention;
+  const details = make("details", { class: "more", open, ontoggle: event => {
+    // The first event only echoes the default; from then on the person's choice is kept.
+    if (event.target.open !== open || openDetails.has(item.name)) openDetails.set(item.name, event.target.open);
+  } },
+    make("summary", { id: "details-" + item.name }, icon("chevron", "turn"),
+      make("span", { text: !instances.length ? t("row_details") : instances.length === 1 ? t("instances_one") : t("instances_many", { n: instances.length }) })),
+    make("div", { class: "more-body" },
+      coverage ? make("span", { class: "coverage", text: coverage }) : null,
+      tested ? make("span", { class: "tested", text: tested }) : null,
+      instances.length ? make("ul", { class: "instances" }, ...instances.map(instanceRow)) : null,
+      item.updated ? make("span", { class: "when", text: t("status_as_of", { time: new Date(item.updated * 1000).toLocaleString(numbers(), { dateStyle: "short", timeStyle: "short" }) }) }) : null));
+  return { chip: badge, nodes: [details], kind };
 }
 
 function instanceRow(instance) {
@@ -127,19 +166,18 @@ function instanceRow(instance) {
   const coverage = coverageText(instance.coverage);
   const note = instance.coverage && instance.coverage.note;
   // Reason and action come written by the installer, in French or English: shown as they are.
-  return make("li", {},
-    make("span", {}, title ? make("b", { text: title }) : null, title ? " · " : null,
-      make("span", { class: "badge " + instance.activation, text: activationLabel(instance.activation) }),
-      coverage ? " · " + coverage : null),
+  return make("li", { class: "instance tone-" + ((tones[instance.activation] || ["neutral"])[0]) },
+    make("span", { class: "instance-head" }, title ? make("b", { text: title }) : null, " ",
+      chip(instance.activation), coverage ? make("span", { class: "muted", text: " " + coverage }) : null),
     instance.location ? make("span", { class: "where", text: instance.location }) : null,
-    instance.reason ? make("span", { text: instance.reason }) : null,
+    instance.reason ? make("span", { class: "reason", text: instance.reason }) : null,
     instance.action ? make("span", { class: "hint", text: instance.action }) : null,
     note ? make("span", { class: "muted", text: note }) : null,
     instance.note ? make("span", { class: "hint", text: instance.note }) : null);
 }
 
 function rowClass(block) {
-  return [block.nodes.length > 1 || block.nodes.some(node => node.tagName === "DETAILS") ? "tall" : null, block.kind].filter(Boolean).join(" ") || null;
+  return [block.nodes.length ? "tall" : null, block.kind].filter(Boolean).join(" ") || null;
 }
 
 // VLC's experimental complement (apps/vlc_complement.py): its own switch, off unless the person asks for it. Switching
@@ -170,6 +208,11 @@ function complementOption(item, name, busy) {
       make("i")));
 }
 
+// The program's name with its chip, then its description.
+function headline(forId, name, block) {
+  return make("span", { class: "headline" }, forId ? make("label", { for: forId, text: name }) : make("span", { class: "name", text: name }), block.chip);
+}
+
 function switchRow(item, busy) {
   const [name, detail] = item.text[language];
   const id = "switch-" + item.name;
@@ -180,20 +223,21 @@ function switchRow(item, busy) {
   // The complement's own switch makes the row tall: VLC's switch stays at the top, next to its name.
   const classes = new Set((rowClass(block) || "").split(" ").filter(Boolean));
   if (option) classes.add("tall");
-  return make("li", { class: [...classes].join(" ") || null },
+  return make("li", { class: [...classes].join(" ") || null, id: "row-" + item.name },
+    appIcon(item.name),
     make("span", { class: "label" },
-      make("label", { for: id, text: name }),
-      make("span", { class: "detail", text: detail }),
+      headline(id, name, block),
+      make("span", { class: "detail", id: "desc-" + item.name, text: detail }),
       ...block.nodes,
       hint ? make("span", { class: "hint", text: hint }) : null,
       // New Minecraft game folders found since the installation: switched only when the person asks.
-      item.waiting ? make("span", { class: "buttons" }, make("button", { type: "button", class: "button", id: "activate-" + item.name,
+      item.waiting ? make("span", { class: "buttons" }, make("button", { type: "button", class: "button small", id: "activate-" + item.name,
         text: t("minecraft_switch_new"), disabled: busy, onclick: () => { showLog = false; call("/api/install", { components: [item.name] }).then(refresh); } })) : null,
       option),
     make("span", { class: "switch" },
       // Always the server's word: after a failed or deferred change, the next refresh puts it back.
       make("input", { type: "checkbox", role: "switch", id, checked: item.on, disabled: busy,
-        "aria-describedby": block.nodes.some(node => node.id === "status-" + item.name) ? "status-" + item.name : null, onchange: event => {
+        "aria-describedby": [block.chip ? "status-" + item.name : null, "desc-" + item.name].filter(Boolean).join(" "), onchange: event => {
         restartHints.set(item.name, item.name === "desktop" ? t("restart_desktop") : t("restart", { name }));
         call("/api/switch", { components: [item.name], on: event.target.checked }).catch(() => null).then(refresh);
       } }),
@@ -207,24 +251,27 @@ function replaceKeepingFocus(list, rows) {
   if (focused && $(focused)) $(focused).focus();
 }
 
+// Problems first, then what needs attention, then the rest in their usual order.
+const rank = item => ({ problem: 0, attention: 1 })[statusBlock(item).kind] ?? 2;
+const shown = () => state.items.filter(item => item.name !== "terminal" && item.installed);
+
 function renderPrograms() {
   const busy = state.job.running;
   const list = $("switches");
-  const rows = [];
-  for (const item of state.items) {
-    if (item.name === "terminal") continue;
-    if (item.switchable) rows.push(switchRow(item, busy));
-    else if (item.installed) {
+  const rows = shown().map((item, index) => ({ item, index, rank: rank(item) }))
+    .sort((a, b) => a.rank - b.rank || a.index - b.index)
+    .map(({ item }) => {
+      if (item.switchable) return switchRow(item, busy);
       const [name, detail] = item.text[language];
       const block = statusBlock(item);
-      rows.push(make("li", { class: rowClass(block) },
-        make("span", { class: "label" }, make("span", { text: name }), make("span", { class: "detail", text: detail }), ...block.nodes),
-        make("span", { class: "state", text: t("installed") })));
-    }
-  }
+      return make("li", { class: rowClass(block), id: "row-" + item.name }, appIcon(item.name),
+        make("span", { class: "label" }, headline(null, name, block), make("span", { class: "detail", text: detail }), ...block.nodes),
+        make("span", { class: "state" }, icon("ok"), make("span", { text: t("installed") })));
+    });
   if (!rows.length) {
-    rows.push(make("li", {}, make("span", { class: "label muted", text: t("programs_none") }),
-      make("button", { type: "button", class: "button", text: t("go_add"), onclick: () => show("add") })));
+    rows.push(make("li", { class: "empty-row" }, make("span", { class: "app-icon", "aria-hidden": "true" }, icon("add")),
+      make("span", { class: "label muted", text: t("programs_none") }),
+      make("button", { type: "button", class: "button default", text: t("go_add"), onclick: () => show("add") })));
   }
   replaceKeepingFocus(list, rows);
   $("programs-lead").textContent = t("programs_lead");
@@ -244,7 +291,66 @@ function renderPrograms() {
   const off = state.everything_off;
   $("everything-text").textContent = t(off ? "everything_off_text" : "everything_on_text");
   $("everything").textContent = t(off ? "everything_on" : "everything_off");
-  $("everything").disabled = busy || !state.installed;
+  $("everything-button").disabled = busy || !state.installed;
+}
+
+// Opens a program's details from the summary and brings its row into view, focus on its switch.
+function jumpTo(name) {
+  openDetails.set(name, true);
+  render();
+  const row = $("row-" + name);
+  if (row && row.scrollIntoView) row.scrollIntoView({ block: "center" });
+  const target = $("switch-" + name) || $("details-" + name);
+  if (target) target.focus({ preventScroll: true });
+}
+
+// Programs at a glance: how many speak Corsican, which need the person, whether Corsu has an update.
+function renderSummary() {
+  const installed = shown();
+  $("summary").hidden = !installed.length;
+  if (!installed.length) return;
+  const on = installed.filter(item => ["active", "partial", null].includes(activationOf(item))).length;
+  $("summary-on-value").textContent = t("summary_on", { n: on.toLocaleString(numbers()), total: installed.length.toLocaleString(numbers()) });
+  $("summary-on-sub").textContent = on < installed.length ? t("summary_off", { n: (installed.length - on).toLocaleString(numbers()) }) : t("summary_all");
+  $("summary-on").className = "stat tone-" + (on ? "ok" : "neutral");
+
+  const flagged = installed.map(item => ({ item, kind: statusBlock(item).kind })).filter(entry => entry.kind)
+    .sort((a, b) => (a.kind === "problem" ? 0 : 1) - (b.kind === "problem" ? 0 : 1));
+  const worst = flagged.some(entry => entry.kind === "problem") ? "danger" : flagged.length ? "warn" : "ok";
+  $("summary-attention").className = "stat tone-" + worst;
+  $("summary-attention-icon").setAttribute("href", "#i-" + (worst === "danger" ? "error" : worst === "warn" ? "warn" : "ok"));
+  $("summary-attention-value").textContent = !flagged.length ? t("summary_ok")
+    : flagged.length === 1 ? t("summary_attention_one") : t("summary_attention_many", { n: flagged.length.toLocaleString(numbers()) });
+  $("summary-attention-list").replaceChildren(...(!flagged.length ? [t("summary_ok_detail")] : flagged.map(({ item }) => {
+    const [name] = item.text[language];
+    const activation = activationOf(item);
+    const instance = (item.instances || []).find(instance => noted(instance) && instance.activation !== "inactive");
+    const why = item.waiting && ordinaryState(activation) ? t("waiting_folders") : !ordinaryState(activation) ? activationLabel(activation)
+      : instance ? (instance.action || instance.reason).trim().replace(/[.;:]$/, "") : activationLabel(activation);
+    return make("button", { type: "button", class: "jump", onclick: () => jumpTo(item.name) },
+      make("span", { class: "jump-text" }, make("b", { text: name }), " ", make("span", { text: why })), icon("chevron"));
+  })));
+
+  const info = updateInfo(), restart = restartInfo(), job = state.job;
+  const blocked = job.running || Boolean(restarting);
+  const updating = job.title === "update" && job.running;
+  let tone = "ok", glyph = "ok", value = "Corsu " + (info.current || state.version), text = updateStatus().text;
+  if (restart.available && !restarting) { tone = "info"; glyph = "restart"; value = t("summary_update_installed"); text = t("update_restart_text", { version: restart.version }); }
+  else if (updating) { tone = "info"; glyph = "update"; text = info.auto_started ? t("update_auto_started", { version: info.auto_started }) : t("running", { job: t("job_update") }); }
+  else if (info.status === "available") {
+    tone = "info"; glyph = "update"; value = t("summary_update_available");
+    text = t("summary_update_versions", { version: info.latest, current: info.current || state.version });
+  }
+  else if (info.status === "unknown") { tone = "warn"; glyph = "warn"; }
+  else if (info.status !== "up_to_date") { tone = "neutral"; glyph = "about"; }
+  $("summary-update").className = "stat tone-" + tone;
+  $("summary-update-icon").setAttribute("href", "#i-" + glyph);
+  $("summary-update-value").textContent = value;
+  $("summary-update-text").textContent = text;
+  $("summary-update-install").hidden = Boolean(restart.available) || updating || info.status !== "available";
+  $("summary-update-install").disabled = blocked;
+  $("summary-update-restart").hidden = !restart.available || Boolean(restarting);
+  $("summary-update-restart").disabled = blocked;
 }
 
 function renderAdd() {
@@ -257,22 +363,27 @@ function renderAdd() {
     // A first attempt that switched nothing leaves the program here: say why.
     const block = statusBlock(item);
     return make("li", { class: rowClass(block) },
-      make("input", { type: "checkbox", class: "pick", id, checked: picks.has(item.name), onchange: event => {
+      make("input", { type: "checkbox", class: "pick", id, checked: picks.has(item.name), "aria-describedby": "add-desc-" + item.name, onchange: event => {
         if (event.target.checked) picks.add(item.name); else picks.delete(item.name);
       } }),
-      make("span", { class: "label" }, make("label", { for: id, text: name }), make("span", { class: "detail", text: detail }), ...block.nodes));
+      appIcon(item.name),
+      make("span", { class: "label" }, headline(id, name, block), make("span", { class: "detail", id: "add-desc-" + item.name, text: detail }), ...block.nodes));
   });
-  replaceKeepingFocus($("choices"), rows.length ? rows : [make("li", {}, make("span", { class: "label muted", text: t("add_none") }))]);
-  $("review").hidden = !candidates.length;
-  $("review").disabled = state.job.running;
+  replaceKeepingFocus($("choices"), rows.length ? rows : [make("li", { class: "empty-row" },
+    make("span", { class: "app-icon", "aria-hidden": "true" }, icon("ok")), make("span", { class: "label muted", text: t("add_none") }))]);
+  $("plan-open").hidden = !candidates.length;
+  $("plan-open").disabled = state.job.running;
 }
 
-function linkRow(href, title, detail) {
+function linkRow(href, title, detail, glyph = "book") {
   return make("li", { class: "link" },
+    make("span", { class: "app-icon", "aria-hidden": "true" }, icon(glyph)),
     make("a", { class: "label", href, target: "_blank", rel: "noopener noreferrer" },
-      make("span", { text: title }), detail ? make("span", { class: "detail", text: detail }) : null),
-    make("span", { class: "external", "aria-hidden": "true", text: "↗" }));
+      make("span", { class: "name", text: title }), detail ? make("span", { class: "detail", text: detail }) : null,
+      make("span", { class: "sr-only", text: " " + t("opens_browser") })),
+    make("span", { class: "external", "aria-hidden": "true" }, icon("external")));
 }
+
 
 function renderHelp() {
   const fr = language !== "en";
@@ -284,11 +395,11 @@ function renderHelp() {
     linkRow(docs + (fr ? "fr/compatibilite.md" : "en/compatibility.md"), t("guide_compat")),
     linkRow(docs + (fr ? "fr/ce-que-corsu-modifie.md" : "en/what-corsu-changes.md"), t("guide_changes")),
     linkRow(docs + (fr ? "fr/pourquoi-corsu.md" : "en/why-corsu.md"), t("guide_why")),
-    linkRow("https://github.com/Platykalt/corsu/issues/new?template=translation.yml", t("report")));
+    linkRow("https://github.com/Platykalt/corsu/issues/new?template=translation.yml", t("report"), null, "review"));
   $("practice").replaceChildren(
-    linkRow("https://www.sapienzia.io", "Sapienzia", t("sapienzia")),
-    linkRow("https://astutu.corsica", "Astutu", t("astutu")),
-    linkRow("https://liv.corsica", "LIV", t("liv")));
+    linkRow("https://www.sapienzia.io", "Sapienzia", t("sapienzia"), "translate"),
+    linkRow("https://astutu.corsica", "Astutu", t("astutu"), "chat"),
+    linkRow("https://liv.corsica", "LIV", t("liv"), "chat"));
 }
 
 function renderAbout() {
@@ -308,11 +419,12 @@ function renderActivity() {
   bar.hidden = !job.title;
   if (!job.title) return;
   const name = t("job_" + job.title);
-  bar.classList.toggle("failed", job.ok === false);
+  // running, done or failed: the icon beside the sentence follows it (the sentence says it in words).
+  bar.className = "activity " + (job.running ? "running" : job.ok === false || job.busy ? "failed" : "done");
   // A filling bar when the task reports its progress; the small spinner only for quick changes.
   const progress = job.progress;
   $("meter").hidden = !progress;
-  $("busy").hidden = !job.running || Boolean(progress);
+  $("busy").hidden = !job.running;
   if (progress) {
     const percent = job.running ? progress.percent : job.ok ? 100 : progress.percent;
     $("meter-fill").style.width = percent + "%";
@@ -323,6 +435,7 @@ function renderActivity() {
   $("activity-text").textContent = !job.running && job.busy ? t("busy") : t(job.running ? "running" : job.ok ? "done" : "failed", { job: name });
   if (job.ok === false) showLog = true;
   $("details-toggle").textContent = t(showLog ? "hide_details" : "show_details");
+  $("details-toggle").setAttribute("aria-expanded", String(showLog));
   const log = $("log");
   log.hidden = !showLog;
   const atEnd = log.scrollTop + log.clientHeight >= log.scrollHeight - 8;
@@ -425,7 +538,9 @@ function renderUpdate() {
     .flatMap(([term, value]) => [make("dt", { text: term }), make("dd", { text: value })]));
   const status = updateStatus();
   $("update-status").className = "update-status " + status.kind;
-  $("update-status").textContent = status.text;
+  const glyph = { up_to_date: "ok", available: "update", unknown: "warn", ahead: "about", none: "clock" }[status.kind];
+  $("update-status").replaceChildren(status.kind === "checking" ? make("span", { class: "busy", "aria-hidden": "true" }) : icon(glyph),
+    make("span", { text: status.text }));
   const result = updateResult();
   $("update-result").hidden = !result.lines.length;
   $("update-result").className = "update-result" + (result.kind ? " " + result.kind : "");
@@ -442,7 +557,8 @@ function renderUpdate() {
 
   // The banner on every page: a release to install, an automatic update under way, or a restart to do.
   const autoRunning = job.title === "update" && job.running && info.auto_started;
-  const show = !restarting && page !== "about" && (restart.available || autoRunning || (info.status === "available" && !(job.title === "update" && job.running)));
+  // On Programs the summary carries it (when there is one); About has its own section.
+  const show = !restarting && page !== "about" && !(page === "programs" && !$("summary").hidden) && (restart.available || autoRunning || (info.status === "available" && !(job.title === "update" && job.running)));
   $("update-banner").hidden = !show;
   if (show) $("update-text").textContent = restart.available ? t("update_restart_text", { version: restart.version })
     : autoRunning ? t("update_auto_started", { version: info.auto_started }) : t("update_available", { version: info.latest, current: info.current || state.version });
@@ -481,13 +597,17 @@ function render() {
   document.documentElement.lang = language;
   document.title = "Corsu";
   for (const node of document.querySelectorAll("[data-t]")) node.textContent = t(node.dataset.t);
+  for (const node of document.querySelectorAll("[data-t-label]")) node.setAttribute("aria-label", t(node.dataset.tLabel));
+  // Icon-only navigation on narrow windows: the label stays the name, the tooltip shows it to the pointer.
+  for (const node of document.querySelectorAll("[data-page]")) node.title = t("nav_" + node.dataset.page);
   $("language").value = language;
   if (!state) return;
   $("version").textContent = state.version;
   // Shown as the server wrote it (French or English): it names the damaged file and what was kept.
-  $("problem").textContent = state.problem || "";
+  $("problem-text").textContent = state.problem || "";
   $("problem").hidden = !state.problem;
-  renderPrograms(); renderAdd(); renderHelp(); renderAbout(); renderActivity(); renderExtras();
+  renderPrograms(); renderSummary(); renderAdd(); renderHelp(); renderAbout(); renderActivity(); renderExtras();
+  if (typeof CustomEvent === "function" && document.dispatchEvent) document.dispatchEvent(new CustomEvent("corsu:render", { detail: language }));
 }
 
 async function refresh() {
@@ -535,6 +655,8 @@ $("review-send").addEventListener("click", async () => {
 $("switch-original").addEventListener("change", event => call("/api/options", { showOriginal: event.target.checked }).then(refresh));
 $("open-logs").addEventListener("click", () => call("/api/logs", {}));
 $("update-install").addEventListener("click", startUpdate);
+$("summary-update-install").addEventListener("click", startUpdate);
+$("summary-update-restart").addEventListener("click", restartCorsu);
 $("update-now").addEventListener("click", startUpdate);
 $("update-restart").addEventListener("click", restartCorsu);
 $("update-banner-restart").addEventListener("click", restartCorsu);
@@ -556,9 +678,9 @@ $("switch-terminal").addEventListener("change", event => {
   call(event.target.checked ? "/api/switch" : "/api/pause", { components: ["terminal"], on: true }).then(refresh);
 });
 $("pause-hour").addEventListener("click", () => call("/api/pause", { hours: 1 }).then(refresh));
-$("everything").addEventListener("click", () => call("/api/all", { on: state.everything_off }).then(refresh));
+$("everything-button").addEventListener("click", () => call("/api/all", { on: state.everything_off }).then(refresh));
 $("details-toggle").addEventListener("click", () => { showLog = !showLog; renderActivity(); });
-$("review").addEventListener("click", async () => {
+$("plan-open").addEventListener("click", async () => {
   if (!picks.size) { alert(t("pick_one")); return; }
   const result = await call("/api/plan", { components: [...picks] });
   if (!result) return;
@@ -577,6 +699,9 @@ $("remove-confirm").addEventListener("click", () => {
   call("/api/uninstall", {}).then(refresh);
 });
 for (const button of document.querySelectorAll("[data-close]")) button.addEventListener("click", () => button.closest("dialog").close());
+
+// What appearance.js (the Appearance page) needs from the page: texts, elements, the server, the language.
+window.corsu = { t, make, call, icon, language: () => language };
 
 // Corsican first: the app speaks the language it puts on the computer.
 language = language || "co";
