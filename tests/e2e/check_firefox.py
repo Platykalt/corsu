@@ -2,8 +2,8 @@
 """Start a translated Firefox headless in a throwaway profile and read real interface strings.
 
 Usage: check_firefox.py FIREFOX_EXECUTABLE
-Fails when a checked string is still English or French: that catches a missing French pack,
-a broken omni.ja and labels the lexicon no longer covers.
+Fails when a checked string is still English or French (or not the Corsican given): that catches a missing French
+pack, a broken omni.ja, labels the lexicon no longer covers and .properties arguments (%S) the engine misses.
 """
 import json
 import pathlib
@@ -22,10 +22,23 @@ CHECKS = [
      'Sorry. We’re having trouble getting your pages back.', 'Désolé, nous ne parvenons pas à récupérer vos pages.'),
     ('browser/aboutSessionRestore.ftl', 'restore-page-try-again-button', 'label', 'Restore Session', 'Restaurer la session'),
     ('browser/genai.ftl', 'genai-menu-ask-generic-2', 'label', 'Ask an AI chatbot', 'Demander à un chatbot IA'),
+    # A heading (Firefox View, sidebar), not the button "Apre l’unghjette" an imported Android row once gave it.
+    ('browser/firefoxView.ftl', 'firefoxview-opentabs-nav', None, 'Open tabs', 'Onglets ouverts', 'Unghjette aperte'),
+]
+
+# Older interface text still lives in .properties files: (file, key, English, French). Mozilla writes their
+# arguments %S and %1$S.
+PROPERTIES = [
+    ('chrome://devtools/locale/menus.properties', 'browserConsoleCmd.label', 'Browser Console', 'Console du navigateur'),
+    ('chrome://devtools/locale/menus.properties', 'devtoolsRemoteDebugging.label', 'Remote Debugging', 'Débogage distant'),
+    ('chrome://browser/locale/downloads/downloads.properties', 'fileDeleted', 'File deleted', 'Fichier supprimé'),
+    ('chrome://browser/locale/downloads/downloads.properties', 'fileMovedOrMissing', 'File moved or missing',
+     'Fichier déplacé ou manquant'),
+    ('chrome://mozapps/locale/downloads/unknownContentType.properties', 'title', 'Opening %S', 'Ouverture de %S'),
 ]
 
 SCRIPT = '''
-const [checks, done] = [arguments[0], arguments[arguments.length - 1]];
+const [checks, properties, done] = [arguments[0], arguments[1], arguments[arguments.length - 1]];
 (async () => {
   const result = [];
   for (const [resource, id, attribute] of checks) {
@@ -34,6 +47,9 @@ const [checks, done] = [arguments[0], arguments[arguments.length - 1]];
     let value = message ? message.value : null;
     if (message && attribute) value = (message.attributes || []).find(a => a.name === attribute)?.value ?? null;
     result.push(value);
+  }
+  for (const [url, key] of properties) {
+    try { result.push(Services.strings.createBundle(url).GetStringFromName(key)); } catch (error) { result.push(null); }
   }
   done({values: result, locale: Services.locale.appLocaleAsBCP47});
 })().catch(error => done({error: String(error)}));
@@ -97,14 +113,19 @@ def main(executable):
             command('WebDriver:NewSession', {'capabilities': {'alwaysMatch': {}}})
             command('Marionette:SetContext', {'value': 'chrome'})
             result = command('WebDriver:ExecuteAsyncScript', {
-                'script': SCRIPT, 'args': [[check[:3] for check in CHECKS]], 'newSandbox': True,
+                'script': SCRIPT, 'args': [[check[:3] for check in CHECKS], [check[:2] for check in PROPERTIES]],
+                'newSandbox': True,
                 'sandbox': 'default', 'scriptTimeout': 30000})['value']
             if 'error' in result:
                 raise RuntimeError(result['error'])
             failures = []
-            for (resource, identifier, attribute, english, french), value in zip(CHECKS, result['values']):
-                label = f'{resource} {identifier}{"." + attribute if attribute else ""}'
-                status = 'FAIL' if not value or value in (english, french) else 'PASS'
+            expected = [(f'{resource} {identifier}{"." + attribute if attribute else ""}', english, french, corsican)
+                        for resource, identifier, attribute, english, french, *corsican in CHECKS]
+            expected += [(f'{url.rsplit("/", 1)[1]} {key}', english, french, [])
+                         for url, key, english, french in PROPERTIES]
+            for (label, english, french, corsican), value in zip(expected, result['values']):
+                status = 'FAIL' if not value or value in (english, french) or (corsican and value != corsican[0]) \
+                    else 'PASS'
                 print(f'{status}: {label} = {value!r}')
                 if status == 'FAIL':
                     failures.append(label)

@@ -562,6 +562,10 @@ def review_options():
         return {}
 
 
+# The code that turns Firefox's text into Corsican: a change to either rebuilds the copy, like a lexicon change.
+FIREFOX_BUILD_CODE = (Path(__file__).resolve(), Path(engine.__file__).resolve())
+
+
 def firefox_runtime():
     install = firefox_install()
     if install is None:
@@ -569,7 +573,7 @@ def firefox_runtime():
     app_version = install.version()
     resources = install.root / install.resources
     fingerprint = hashlib.sha256(b''.join(path.read_bytes() for path in engine.LEXICONS if path.exists())
-                                 + Path(__file__).read_bytes()
+                                 + b''.join(path.read_bytes() for path in FIREFOX_BUILD_CODE)
                                  + b''.join(path.read_bytes() for path in sorted((SRC / 'firefox').glob('*'))))
     fingerprint.update(json.dumps(review_options(), sort_keys=True).encode())
     for file in ('omni.ja', 'browser/omni.ja', 'application.ini', 'platform.ini'):

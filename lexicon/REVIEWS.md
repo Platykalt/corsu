@@ -9,6 +9,19 @@ Three kinds of checks exist and are never counted as one another:
 
 Every change is logged in [corrections.tsv](corrections.tsv) with its status.
 
+## 2026-10-17 — Firefox main menu, Settings, downloads and tabs, read in the running copy (automatic detection, AI proposals)
+
+Method: Corsu's Firefox 157 built in a throwaway home, started headless, and its labels read through Marionette (app
+menu and its sub-views, Settings > General, downloads panel and about:downloads, tab context menu, list of all tabs,
+Firefox View), then compared with Firefox's English and French text; every built message was also compared with the
+French pack. Found in French: the browser tools of the main menu (`menus.properties`), the downloads panel's states,
+warnings and dialogs (`downloads.properties`, `unknownContentType.properties`). Causes: 31 French labels had no row
+(added at the end of the Firefox section of `lexicon.tsv`, new proposals written by an AI, to review), and the engine
+did not read Mozilla's `%S` and `%1$S` arguments as placeholders, so rows such as `Fichier %1` never matched
+`Fichier %S` (50 more labels translated across Firefox once fixed). "Onglets ouverts", a heading, showed the button
+"Apre l’unghjette" from an imported Android row; corrected in `lexicon-fixes.tsv` (logged in corrections.tsv).
+Not changed: dates and times follow the copy's `en-US` locale (`11:32 AM` in the downloads list).
+
 ## 2026-10-16 — imported French that answered a longer English label (automatic detection)
 
 `tools/import_translations.py` pairs each project's English, French and Corsican by message id. Some French
