@@ -167,7 +167,7 @@ jobs:
           CORSU_ARCHIVES="$GITHUB_WORKSPACE/dist" python tests/e2e/e2e.py archive --root "${{ env.CORSU_RELEASE }}"
       - name: Update — from published 0.21.0 and 0.22.0 to these archives, repair, refusal, recovery, lock, uninstall
         shell: bash
-        run: python tests/e2e/check_update.py --archives "$GITHUB_WORKSPACE/dist" --from 0.21.0 0.22.0
+        run: python tests/e2e/check_update.py --archives "$GITHUB_WORKSPACE/dist" --from 0.21.0 0.22.0 0.23.0
       - name: One-line install script with these archives (CORSU_DOWNLOAD_BASE), checksum checked
         shell: bash
         run: |
@@ -202,6 +202,16 @@ jobs:
           python tools/vlcpo.py build "$RUNNER_TEMP/vlc-upstream.mo" --include=none
           python tests/e2e/check_vlc_experimental.py --mo "$RUNNER_TEMP/vlc-experimental.mo" --upstream "$RUNNER_TEMP/vlc-upstream.mo"
           HOME="$(mktemp -d)" XDG_DATA_HOME= XDG_CONFIG_HOME= python tests/e2e/check_vlc_complement.py
+      - name: Update from 0.23.0 with VLC, its complement and fre:ac (Linux, real packages)
+        if: runner.os == 'Linux'
+        run: |
+          sudo apt-get install -y -qq freac
+          python tests/e2e/check_update_apps.py --archives "$GITHUB_WORKSPACE/dist" --from 0.23.0
+      - name: VLC complement declared unavailable (Windows, macOS)
+        if: runner.os != 'Linux'
+        shell: bash
+        run: |
+          python -c "import sys; sys.path.insert(0, 'src'); from apps import vlc_complement; s = vlc_complement.status(); print(s); assert s['available'] is False and 'Linux' in s['reason'], s"
       - name: Windows programs — 7-Zip, VLC and Notepad++ set to Corsican in the real registry and back
         if: runner.os == 'Windows'
         env:

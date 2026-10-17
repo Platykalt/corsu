@@ -1,6 +1,6 @@
 # Changelog
 
-## Unreleased
+## 0.24.0 (2026-10-17)
 
 - Audacity 3 and 4, Tenacity and fre:ac: Corsu switches on their own Corsican translation through their language
   setting, version by version and platform by platform (Audacity 4 on Windows and macOS experimental; fre:ac Flatpak
