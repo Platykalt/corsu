@@ -118404,6 +118404,61 @@ are typing...|sont en train d'écrire...|sò à scrive...
 |Nous utilisons des technologies qui évaluent les groupes d'âge des utilisateurs en fonction des modèles de comportement et d'autres signaux associés aux comptes des utilisateurs sur Discord.|Utilizemu tecnulugie chì valutanu i gruppi d'età di l'utilizatori secondu i mudelli di cumpurtamentu è altri signali associati à i conti di l'utilizatori nant'à Discord.
 |S'il est confirmé que tu es un(e) adulte (18+), tu auras accès au contenu et aux paramètres soumis à une limite d'âge. Besoin d'aide ? Découvre|S'ellu hè cunfirmatu chì tù sì un(a) adultu(a) (18+), averai accessu à u cuntenutu è à i parametri sottumessi à un limitu d'età. Bisognu d'aiutu ? Scopri
 |ou nos|o i nostri
+
+# Discord: labels that came from another program with another sense (Bio > Organicu, Salon > Salottu, Envoyer > Incaricà…).
+# Discord: rows of the October 2026 review, an AI second pass not yet read by a Corsican speaker; the source, evidence and
+# Discord: rows not applied are in lexicon/review-discord-2026-10.tsv.
+Bio|Bio|Bio
+Create Channel|Créer un salon|Creà un canale
+Channel Settings|Paramètres du salon|Parametri di u canale
+Edit Channel|Modifier le salon|Mudificà u canale
+Delete Channel|Supprimer le salon|Squassà u canale
+Text Channels|Salons textuels|Canali di testu
+Voice Channels|Salons vocaux|Canali vucali
+Create Thread|Créer un fil|Creà un filu
+Create Event|Créer un événement|Creà un avvenimentu
+Events|Événements|Avvenimenti
+events|événements|avvenimenti
+Server Boost|Boost de serveur|Boost di u servore
+Boost|Boost|Boost
+Pin Message|Épingler le message|Puntà u messaghju
+Unpin|Désépingler|Spuntà
+Unpin Message|Désépingler le message|Spuntà u messaghju
+Send|Envoyer|Mandà
+Edit Profile|Modifier le profil|Mudificà u prufilu
+Mute|Rendre muet|Ammutulisce
+Reset|Réinitialiser|Reinizializà
+Ignore|Ignorer|Ignurà
+Leave Call|Quitter l'appel|Lascià a chjama
+Approve|Valider|Validà
+Finish|Terminer|Finisce
+Cut|Couper|Taglià
+Favorites|Favoris|Preferiti
+Directory|Répertoire|Repertoriu
+Discount|Réduction|Riduzzione
+Browse|Naviguer|Sfuglià
+Address|Adresse|Indirizzu
+Single Player|Solo|Solu
+Achievements|Succès|Successi
+Poll closed|Sondage terminé|Sundaghju chjosu
+Keybinds|Raccourcis clavier|Accurtatoghji di tastera
+Languages|Langues|Lingue
+English|Anglais|Inglese
+French|Français|Francese
+Spanish|Espagnol|Spagnolu
+Windows|Windows|Windows
+Last Year|L'année dernière|L'annu scorsu
+Off|Désactivé|Disattivatu
+Report a Problem|Signaler un problème|Signalà un prublema
+Connecting…|Connexion...|Cunnessione…
+Member|Membre|Membru
+Role|Rôle|Rolu
+{count} minutes|{count} minutes|{count} minuti
+Clear after {hours} hours|Effacer après {hours} heures|Squassà dopu {hours} ore
+Clear after {minutes} minutes|Effacer après {minutes} minutes|Squassà dopu {minutes} minuti
+Playing for {time} minutes|Joue depuis {time} minutes|Ghjoca dapoi {time} minuti
+Playing for {time} hours|Joue depuis {time} heures|Ghjoca dapoi {time} ore
+{names} from {guildName}|{names} de {guildName}|{names} di {guildName}
 # Vencord: settings pages and plugin descriptions of Vencord, which only exist in English.
 A Vencord update is available!||Un aghjurnamentu di Vencord hè dispunibule!
 A restart is required to apply this change||Ci vole à rilancià per applicà stu cambiamentu
