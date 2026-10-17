@@ -7,7 +7,7 @@ try { language = localStorage.getItem("corsu-language"); } catch (error) {}
 let chosen = Boolean(language);
 let state = null, page = null, picks = null, closed = false, showLog = false;
 // Set while Corsu restarts from a newer installed copy: {pid of the old server, give up after}.
-let restarting = null, savingPreference = false;
+let restarting = null, savingPreference = false, failureShown = null;
 const restartHints = new Map(), openDetails = new Map();
 
 const $ = id => document.getElementById(id);
@@ -244,6 +244,16 @@ function switchRow(item, busy) {
       make("i")));
 }
 
+// Parts redrawn at every refresh (every 1.5 s) are only replaced when what they show (the key) changed: a link or button keeps
+// the keyboard focus, and a live region (role=status, aria-live) is not announced again with the same words.
+const drawn = new Map();
+function replaceWhenChanged(parent, key, build) {
+  if (drawn.get(parent) === key) return;
+  drawn.set(parent, key);
+  parent.replaceChildren(...build());
+}
+const setText = (node, value) => { if (node.textContent !== String(value)) node.textContent = value; };
+
 // Rows are rebuilt at every refresh: keep the focused control and the opened details where they were.
 function replaceKeepingFocus(list, rows) {
   const focused = list.contains(document.activeElement) ? document.activeElement.id : null;
@@ -274,7 +284,7 @@ function renderPrograms() {
       make("button", { type: "button", class: "button default", text: t("go_add"), onclick: () => show("add") })));
   }
   replaceKeepingFocus(list, rows);
-  $("programs-lead").textContent = t("programs_lead");
+  setText($("programs-lead"), t("programs_lead"));
 
   const terminal = state.items.find(item => item.name === "terminal");
   $("terminal-block").hidden = !terminal;
@@ -282,15 +292,15 @@ function renderPrograms() {
     const until = state.terminal_paused_until;
     $("switch-terminal").checked = until === null;
     $("switch-terminal").disabled = busy;
-    $("terminal-detail").textContent = until === null ? t("terminal_on") : until === 0 ? t("terminal_off")
-      : t("terminal_until", { time: new Date(until * 1000).toLocaleTimeString(numbers(), { hour: "2-digit", minute: "2-digit" }) });
+    setText($("terminal-detail"), until === null ? t("terminal_on") : until === 0 ? t("terminal_off")
+      : t("terminal_until", { time: new Date(until * 1000).toLocaleTimeString(numbers(), { hour: "2-digit", minute: "2-digit" }) }));
     $("pause-hour").hidden = until !== null;
     $("pause-hour").disabled = busy;
   }
 
   const off = state.everything_off;
-  $("everything-text").textContent = t(off ? "everything_off_text" : "everything_on_text");
-  $("everything").textContent = t(off ? "everything_on" : "everything_off");
+  setText($("everything-text"), t(off ? "everything_off_text" : "everything_on_text"));
+  setText($("everything"), t(off ? "everything_on" : "everything_off"));
   $("everything-button").disabled = busy || !state.installed;
 }
 
@@ -310,8 +320,8 @@ function renderSummary() {
   $("summary").hidden = !installed.length;
   if (!installed.length) return;
   const on = installed.filter(item => ["active", "partial", null].includes(activationOf(item))).length;
-  $("summary-on-value").textContent = t("summary_on", { n: on.toLocaleString(numbers()), total: installed.length.toLocaleString(numbers()) });
-  $("summary-on-sub").textContent = on < installed.length ? t("summary_off", { n: (installed.length - on).toLocaleString(numbers()) }) : t("summary_all");
+  setText($("summary-on-value"), t("summary_on", { n: on.toLocaleString(numbers()), total: installed.length.toLocaleString(numbers()) }));
+  setText($("summary-on-sub"), on < installed.length ? t("summary_off", { n: (installed.length - on).toLocaleString(numbers()) }) : t("summary_all"));
   $("summary-on").className = "stat tone-" + (on ? "ok" : "neutral");
 
   const flagged = installed.map(item => ({ item, kind: statusBlock(item).kind })).filter(entry => entry.kind)
@@ -319,17 +329,19 @@ function renderSummary() {
   const worst = flagged.some(entry => entry.kind === "problem") ? "danger" : flagged.length ? "warn" : "ok";
   $("summary-attention").className = "stat tone-" + worst;
   $("summary-attention-icon").setAttribute("href", "#i-" + (worst === "danger" ? "error" : worst === "warn" ? "warn" : "ok"));
-  $("summary-attention-value").textContent = !flagged.length ? t("summary_ok")
-    : flagged.length === 1 ? t("summary_attention_one") : t("summary_attention_many", { n: flagged.length.toLocaleString(numbers()) });
-  $("summary-attention-list").replaceChildren(...(!flagged.length ? [t("summary_ok_detail")] : flagged.map(({ item }) => {
+  setText($("summary-attention-value"), !flagged.length ? t("summary_ok")
+    : flagged.length === 1 ? t("summary_attention_one") : t("summary_attention_many", { n: flagged.length.toLocaleString(numbers()) }));
+  const jumps = flagged.map(({ item }) => {
     const [name] = item.text[language];
     const activation = activationOf(item);
     const instance = (item.instances || []).find(instance => noted(instance) && instance.activation !== "inactive");
     const why = item.waiting && ordinaryState(activation) ? t("waiting_folders") : !ordinaryState(activation) ? activationLabel(activation)
       : instance ? (instance.action || instance.reason).trim().replace(/[.;:]$/, "") : activationLabel(activation);
-    return make("button", { type: "button", class: "jump", onclick: () => jumpTo(item.name) },
-      make("span", { class: "jump-text" }, make("b", { text: name }), " ", make("span", { text: why })), icon("chevron"));
-  })));
+    return [item.name, name, why];
+  });
+  replaceWhenChanged($("summary-attention-list"), JSON.stringify([language, jumps]), () => !jumps.length ? [t("summary_ok_detail")]
+    : jumps.map(([id, name, why]) => make("button", { type: "button", class: "jump", onclick: () => jumpTo(id) },
+      make("span", { class: "jump-text" }, make("b", { text: name }), " ", make("span", { text: why })), icon("chevron"))));
 
   const info = updateInfo(), restart = restartInfo(), job = state.job;
   const blocked = job.running || Boolean(restarting);
@@ -345,8 +357,8 @@ function renderSummary() {
   else if (info.status !== "up_to_date") { tone = "neutral"; glyph = "about"; }
   $("summary-update").className = "stat tone-" + tone;
   $("summary-update-icon").setAttribute("href", "#i-" + glyph);
-  $("summary-update-value").textContent = value;
-  $("summary-update-text").textContent = text;
+  setText($("summary-update-value"), value);
+  setText($("summary-update-text"), text);
   $("summary-update-install").hidden = Boolean(restart.available) || updating || info.status !== "available";
   $("summary-update-install").disabled = blocked;
   $("summary-update-restart").hidden = !restart.available || Boolean(restarting);
@@ -356,7 +368,7 @@ function renderSummary() {
 function renderAdd() {
   const candidates = state.items.filter(item => !item.installed && item.name !== "terminal");
   if (picks === null) picks = new Set(candidates.map(item => item.name));
-  $("add-lead").textContent = t("add_lead");
+  setText($("add-lead"), t("add_lead"));
   const rows = candidates.map(item => {
     const [name, detail] = item.text[language];
     const id = "pick-" + item.name;
@@ -388,28 +400,28 @@ function linkRow(href, title, detail, glyph = "book") {
 function renderHelp() {
   const fr = language !== "en";
   const computer = fr ? `fr/ordinateur/${state.platform}.md` : `en/computer/${state.platform}.md`;
-  $("guides").replaceChildren(
+  replaceWhenChanged($("guides"), language + state.platform, () => [
     linkRow(docs + computer, t("guide_install", { system: systems[state.platform] || state.platform })),
     linkRow(docs + (fr ? "fr/discord.md" : "en/discord.md"), t("guide_discord")),
     linkRow(docs + (fr ? "fr/telephone/android.md" : "en/phone/android.md"), t("guide_phone")),
     linkRow(docs + (fr ? "fr/compatibilite.md" : "en/compatibility.md"), t("guide_compat")),
     linkRow(docs + (fr ? "fr/ce-que-corsu-modifie.md" : "en/what-corsu-changes.md"), t("guide_changes")),
     linkRow(docs + (fr ? "fr/pourquoi-corsu.md" : "en/why-corsu.md"), t("guide_why")),
-    linkRow("https://github.com/Platykalt/corsu/issues/new?template=translation.yml", t("report"), null, "review"));
-  $("practice").replaceChildren(
+    linkRow("https://github.com/Platykalt/corsu/issues/new?template=translation.yml", t("report"), null, "review")]);
+  replaceWhenChanged($("practice"), language, () => [
     linkRow("https://www.sapienzia.io", "Sapienzia", t("sapienzia"), "translate"),
     linkRow("https://astutu.corsica", "Astutu", t("astutu"), "chat"),
-    linkRow("https://liv.corsica", "LIV", t("liv"), "chat"));
+    linkRow("https://liv.corsica", "LIV", t("liv"), "chat")]);
 }
 
 function renderAbout() {
   const rows = [[t("system"), systems[state.platform] || state.platform],
     [t("lexicon"), t("lexicon_count", { n: state.lexicon_entries.toLocaleString(numbers()) })]];
   if (state.firefox_profile) rows.push([t("profile"), state.firefox_profile]);
-  const facts = rows.flatMap(([term, value]) => [make("dt", { text: term }), make("dd", { text: value })]);
-  facts.push(make("dt", { text: t("source") }),
-    make("dd", {}, make("a", { href: "https://github.com/Platykalt/corsu", target: "_blank", rel: "noopener noreferrer", text: "github.com/Platykalt/corsu" })));
-  $("facts").replaceChildren(...facts);
+  replaceWhenChanged($("facts"), JSON.stringify([language, rows]), () => [
+    ...rows.flatMap(([term, value]) => [make("dt", { text: term }), make("dd", { text: value })]),
+    make("dt", { text: t("source") }),
+    make("dd", {}, make("a", { href: "https://github.com/Platykalt/corsu", target: "_blank", rel: "noopener noreferrer", text: "github.com/Platykalt/corsu" }))]);
   $("remove").disabled = !state.installed || state.job.running;
 }
 
@@ -430,16 +442,19 @@ function renderActivity() {
     $("meter-fill").style.width = percent + "%";
     $("meter").setAttribute("aria-valuenow", percent);
   }
-  $("step").textContent = job.running && progress ? progress.label : "";
+  setText($("step"), job.running && progress ? progress.label : "");
   // The installer lock stopped the run: another window or installer is at work, nothing failed.
-  $("activity-text").textContent = !job.running && job.busy ? t("busy") : t(job.running ? "running" : job.ok ? "done" : "failed", { job: name });
-  if (job.ok === false) showLog = true;
-  $("details-toggle").textContent = t(showLog ? "hide_details" : "show_details");
+  setText($("activity-text"), !job.running && job.busy ? t("busy") : t(job.running ? "running" : job.ok ? "done" : "failed", { job: name }));
+  // A failed run opens its log once; «Hide details» then keeps it closed (the next run may open it again).
+  const failure = job.ok === false && !job.running ? [job.title, job.lines.length, job.lines[job.lines.length - 1]].join("\n") : null;
+  if (job.running) failureShown = null;
+  else if (failure && failure !== failureShown) { showLog = true; failureShown = failure; }
+  setText($("details-toggle"), t(showLog ? "hide_details" : "show_details"));
   $("details-toggle").setAttribute("aria-expanded", String(showLog));
   const log = $("log");
   log.hidden = !showLog;
   const atEnd = log.scrollTop + log.clientHeight >= log.scrollHeight - 8;
-  log.textContent = job.lines.join("\n");
+  setText(log, job.lines.join("\n"));
   if (atEnd) log.scrollTop = log.scrollHeight;
 }
 
@@ -534,17 +549,17 @@ function updateResult() {
 function renderUpdate() {
   const info = updateInfo(), restart = restartInfo(), job = state.job;
   const checked = info.checked ? new Date(info.checked * 1000).toLocaleString(numbers(), { dateStyle: "medium", timeStyle: "short" }) : "—";
-  $("update-facts").replaceChildren(...[[t("update_current"), info.current || state.version], [t("update_latest"), info.latest || "—"], [t("update_checked"), checked]]
-    .flatMap(([term, value]) => [make("dt", { text: term }), make("dd", { text: value })]));
+  const updateFacts = [[t("update_current"), info.current || state.version], [t("update_latest"), info.latest || "—"], [t("update_checked"), checked]];
+  replaceWhenChanged($("update-facts"), JSON.stringify(updateFacts), () => updateFacts.flatMap(([term, value]) => [make("dt", { text: term }), make("dd", { text: value })]));
   const status = updateStatus();
   $("update-status").className = "update-status " + status.kind;
   const glyph = { up_to_date: "ok", available: "update", unknown: "warn", ahead: "about", none: "clock" }[status.kind];
-  $("update-status").replaceChildren(status.kind === "checking" ? make("span", { class: "busy", "aria-hidden": "true" }) : icon(glyph),
-    make("span", { text: status.text }));
+  replaceWhenChanged($("update-status"), status.kind + "\n" + status.text, () => [status.kind === "checking" ? make("span", { class: "busy", "aria-hidden": "true" }) : icon(glyph),
+    make("span", { text: status.text })]);
   const result = updateResult();
   $("update-result").hidden = !result.lines.length;
   $("update-result").className = "update-result" + (result.kind ? " " + result.kind : "");
-  $("update-result").replaceChildren(...result.lines.map(line => make("span", { text: line })));
+  replaceWhenChanged($("update-result"), JSON.stringify(result.lines), () => result.lines.map(line => make("span", { text: line })));
   // One job at a time: every button waits while something runs, or while Corsu restarts.
   const blocked = job.running || Boolean(restarting);
   $("update-now").hidden = Boolean(restart.available);
@@ -560,8 +575,8 @@ function renderUpdate() {
   // On Programs the summary carries it (when there is one); About has its own section.
   const show = !restarting && page !== "about" && !(page === "programs" && !$("summary").hidden) && (restart.available || autoRunning || (info.status === "available" && !(job.title === "update" && job.running)));
   $("update-banner").hidden = !show;
-  if (show) $("update-text").textContent = restart.available ? t("update_restart_text", { version: restart.version })
-    : autoRunning ? t("update_auto_started", { version: info.auto_started }) : t("update_available", { version: info.latest, current: info.current || state.version });
+  if (show) setText($("update-text"), restart.available ? t("update_restart_text", { version: restart.version })
+    : autoRunning ? t("update_auto_started", { version: info.auto_started }) : t("update_available", { version: info.latest, current: info.current || state.version }));
   $("update-install").hidden = Boolean(restart.available || autoRunning);
   $("update-install").disabled = blocked;
   $("update-banner-restart").hidden = !restart.available;
@@ -596,15 +611,15 @@ async function restartCorsu() {
 function render() {
   document.documentElement.lang = language;
   document.title = "Corsu";
-  for (const node of document.querySelectorAll("[data-t]")) node.textContent = t(node.dataset.t);
+  for (const node of document.querySelectorAll("[data-t]")) setText(node, t(node.dataset.t));
   for (const node of document.querySelectorAll("[data-t-label]")) node.setAttribute("aria-label", t(node.dataset.tLabel));
   // Icon-only navigation on narrow windows: the label stays the name, the tooltip shows it to the pointer.
   for (const node of document.querySelectorAll("[data-page]")) node.title = t("nav_" + node.dataset.page);
   $("language").value = language;
   if (!state) return;
-  $("version").textContent = state.version;
+  setText($("version"), state.version);
   // Shown as the server wrote it (French or English): it names the damaged file and what was kept.
-  $("problem-text").textContent = state.problem || "";
+  setText($("problem-text"), state.problem || "");
   $("problem").hidden = !state.problem;
   renderPrograms(); renderSummary(); renderAdd(); renderHelp(); renderAbout(); renderActivity(); renderExtras();
   if (typeof CustomEvent === "function" && document.dispatchEvent) document.dispatchEvent(new CustomEvent("corsu:render", { detail: language }));

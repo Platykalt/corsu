@@ -32,6 +32,14 @@ APP = ROOT / 'src' / 'app'
 sys.path.insert(0, str(HERE))
 from check_chromium import DevTools  # noqa: E402
 
+
+def sample_state():
+    """The window's state with nothing installed, as window_screens.py builds it (every field the page reads)."""
+    from window_screens import states
+    if not hasattr(sample_state, 'value'):
+        sample_state.value = states()['empty']
+    return sample_state.value
+
 # The window's own policy (src/app.py, send()), with the img-src the wiring adds.
 CSP = ("default-src 'self'; style-src 'self' 'unsafe-inline'; script-src 'self' 'unsafe-inline'; "
        "img-src 'self' blob: data:; frame-ancestors 'none'")
@@ -170,7 +178,9 @@ def serve(appearance, port_holder):
             if method == 'GET' and path in extra:
                 return self.reply(200, *extra[path])
             if method == 'GET' and path == '/api/state':
-                return self.reply(200, {'items': [], 'installed': False, 'job': {}, 'preferences': {}, 'update': {}})
+                # A complete sample state (window_screens.py): with fields missing, the window's own render fails and
+                # the page reads as closed, taking the Appearance section with it.
+                return self.reply(200, sample_state())
             name = 'index.html' if path == '/' else path.lstrip('/')
             file = (APP / name).resolve()
             if method == 'GET' and file.is_file() and APP in file.parents:
@@ -225,6 +235,8 @@ class Page:
         self.call('Runtime.enable')
         self.call('Emulation.setDeviceMetricsOverride', {'width': 1100, 'height': 1250, 'deviceScaleFactor': 1, 'mobile': False})
         self.scheme(scheme)
+        # The messages checked below are the French ones; the window itself starts in Corsican.
+        self.call('Page.addScriptToEvaluateOnNewDocument', {'source': 'try { localStorage.setItem("corsu-language", "fr"); } catch (e) {}'})
         self.url = url
 
     def call(self, method, params=None):
@@ -254,6 +266,8 @@ class Page:
         self.call('Page.navigate', {'url': self.url})
         self.wait('document.readyState === "complete" && !!document.getElementById("ap-theme-dark")')
         self.wait('window.corsuAppearance && document.documentElement.dataset.palette')
+        # The Appearance page shown, as a person opening it (a hidden page cannot take the focus).
+        self.run('(document.querySelector(\'[data-page="appearance"]\') || { click() {} }).click()')
         time.sleep(0.4)
 
     def files(self, selector, paths):

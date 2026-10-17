@@ -462,6 +462,7 @@
     const focused = document.activeElement && section.contains(document.activeElement) ? document.activeElement.id : null;
     section.replaceChildren();
     refs = {};
+    renderedLanguage = language();
     const group = (...items) => make("ul", { class: "group" }, ...items);
     const heading = (key, id) => make("h2", { id, text: t(key) });
     const segmented = (name, values, current, labelKey) => make("div", { class: "segmented", role: "radiogroup", "aria-labelledby": `ap-${name}-label` },
@@ -651,7 +652,10 @@
   apply();
   darkScheme.addEventListener("change", () => { apply(); sync(); });
   lessTransparency.addEventListener("change", () => { apply(); sync(); });
-  document.addEventListener("corsu:render", render);
+  // The window redraws itself every 1.5 s (corsu:render): this page is rebuilt only when the language changed, so a
+  // slider being dragged, the colour picker and the messages (live regions) are left alone.
+  let renderedLanguage = null;
+  document.addEventListener("corsu:render", () => { if (!refs || renderedLanguage !== language()) render(); });
   document.addEventListener("corsu:page", () => {
     const section = document.getElementById("appearance");
     if (section && (!refs || !section.contains(refs.status))) render();
