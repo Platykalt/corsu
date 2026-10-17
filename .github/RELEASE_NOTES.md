@@ -15,7 +15,31 @@ Chaque fichier a sa somme de contrôle `.sha256`. Les archives contiennent leur 
 installée, utilisée après suppression du dossier extrait, mise à jour et désinstallée sur son système avant la
 publication (tests automatiques ; personne n'a regardé les écrans).
 
-### Nouveautés de la 0.24.0
+### Nouveautés de la 0.25.0 (en préparation, pas publiée)
+
+- **Poedit** : Corsu active sa traduction corse. Linux : essais réels du paquet Debian (3.6.3) et du Flatpak (3.10)
+  avec des sessions française, allemande et italienne : Poedit en corse, fenêtres de fichiers et boutons standard
+  dans la langue habituelle, formats régionaux inchangés. Compromis : cette séparation repose sur la façon dont la
+  bibliothèque C de Linux (glibc) lit les noms de langue ; si Corsu ne peut pas la vérifier, Poedit passe quand même
+  en corse mais les fenêtres de fichiers restent en anglais, et l'application le dit. Windows : réglage de langue de
+  Poedit, vérifié sur fichiers simulés seulement. macOS, **expérimental** : liste de langues propre à Poedit (jamais
+  la langue du système) ; mécanisme vérifié sur une machine macOS de la CI, fenêtre de Poedit jamais regardée sur un
+  Mac.
+- **PDFsam** (5.0 et plus) : Corsu règle sa langue sur le corse. Essai réel sous Linux (paquet officiel 6.0.6) ;
+  PDFsam doit être fermé pendant l'activation. Windows : vérifié sur fichiers simulés seulement. macOS : laissé tel
+  quel, avec la marche à suivre.
+- **Firefox** : les heures, dates et nombres suivent de nouveau les réglages régionaux de l'ordinateur (on voyait
+  « 11:32 AM » sur un système français) ; un choix fait dans les paramètres de Firefox reste prioritaire. Outils du
+  navigateur et messages de téléchargement traduits (31 textes IA, à relire) ; « Onglets ouverts » n'est plus traduit
+  comme un verbe ; le contrôle des textes vérifie l'ordre des valeurs insérées.
+- **Discord** : noms de personnes, surnoms, conversations privées et noms contenant une virgule protégés partout ;
+  indicateur « est en train d'écrire » traduit en français et en anglais, noms intacts. Vérifié sur une page simulée
+  dans Chrome, pas encore dans un vrai Discord.
+- **Complément VLC** : Outils devient « A&ttrezzi » (Alt+T), il prenait Alt+A comme Audio ; « Sempre s&opra » ne
+  double plus Alt+S. Corrections de brouillons IA, la traduction amont de VLC est inchangée. Les 3 traductions
+  incertaines restent exclues.
+
+### Rappel : nouveautés de la 0.24.0
 
 - **Audacity 3 et 4, Tenacity, fre:ac** : Corsu active leur propre traduction corse (celle de Patriccollu) par leur
   réglage de langue. Audacity 3, Audacity 4 et Tenacity lancés pour de vrai sous Linux (AppImages officielles) ;
@@ -70,7 +94,28 @@ Each file has a `.sha256` checksum. The archives carry their own Python. Every a
 deleting the extracted folder, updated and uninstalled on its own system before publication (automated checks; no one
 looked at the screens).
 
-### New in 0.24.0
+### New in 0.25.0 (in preparation, not published)
+
+- **Poedit**: Corsu switches on its Corsican translation. Linux: Debian package (3.6.3) and Flatpak (3.10) run for
+  real with French, German and Italian sessions: Poedit in Corsican, file dialogs and standard buttons in the usual
+  language, regional formats unchanged. Trade-off: this relies on how Linux's C library (glibc) reads language names;
+  when Corsu cannot check it, Poedit still turns Corsican but file dialogs stay in English, and the app says so.
+  Windows: Poedit's language setting, checked on simulated files only. macOS, **experimental**: Poedit's own language
+  list (never the system language); mechanism checked on a CI macOS machine, Poedit's window never seen on a Mac.
+- **PDFsam** (5.0 and later): Corsu sets its language to Corsican. Run for real on Linux (official 6.0.6 package);
+  PDFsam must be closed while it is switched. Windows: checked on simulated files only. macOS: left alone, with what
+  to do.
+- **Firefox**: times, dates and numbers follow the computer's regional settings again ("11:32 AM" showed on a French
+  system); a choice made in Firefox's settings still wins. Browser tools and download messages translated (31 AI
+  texts, to be reviewed); "Onglets ouverts" no longer translated as a verb; the text check verifies the order of
+  inserted values.
+- **Discord**: people's names, nicknames, private conversations and names containing a comma are protected
+  everywhere; the "is typing" indicator is translated in French and English, names untouched. Checked on a simulated
+  page in Chrome, not yet in a real Discord.
+- **VLC complement**: Tools becomes "A&ttrezzi" (Alt+T), it took Alt+A like Audio; "Sempre s&opra" no longer doubles
+  Alt+S. Fixes to AI drafts, VLC's upstream translation is unchanged. The 3 uncertain translations stay left out.
+
+### Earlier: new in 0.24.0
 
 - **Audacity 3 and 4, Tenacity, fre:ac**: Corsu switches on their own Corsican translation (Patriccollu's) through
   their language setting. Audacity 3, Audacity 4 and Tenacity started for real on Linux (official AppImages); fre:ac

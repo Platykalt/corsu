@@ -600,7 +600,7 @@ Next in line:
 - Audacity 4 `Audacity4.ini` / plist location and key on a real install; whether the macOS 4.0.1 dmg contains
   `audacity_co.qm`.
 - FileZilla Windows/macOS binaries (installer contents not downloaded); FileZilla macOS config path.
-- Poedit on a real Windows and Mac (registry value and per-app language list not run).
+- Poedit's window on a real Mac and Windows (macOS per-app list helper and NSLocale seen on a CI runner; registry value not run).
 - HandBrake macOS sandbox container domain for `AppleLanguages`.
 - Paint.NET `UI/Language` value format for `co`; Mp3tag storage.
 - VLC Snap: catalog presence and a workable per-user override.

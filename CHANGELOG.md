@@ -1,5 +1,25 @@
 # Changelog
 
+## 0.25.0 (in preparation, not published)
+
+- Poedit: Corsican through `LANGUAGE=co:<session languages> LC_MESSAGES=/C.UTF-8` on Linux (wxWidgets reads
+  "/C.UTF-8" as no language, so LANGUAGE wins; glibc loads it as C.UTF-8 without the C exception, so GTK follows the
+  next language). The former `LANG=C.UTF-8 LC_MESSAGES=C.UTF-8` put GTK's dialogs in English. Checked first with
+  `LC_ALL=/C.UTF-8 locale`, falling back to the old variables with a stated trade-off. Real runs: Debian 3.6.3 and
+  Flathub 3.10, fr/de/it sessions. Windows `ui_language` (simulated). macOS: per-app `AppleLanguages` array in
+  `net.poedit.Poedit` (new `defaults-plist` record in `settings.py`, type-preserving revert, global domain refused);
+  experimental, `defaults` round trip checked on a CI macOS runner.
+- PDFsam 5.0+: Java preferences `locale=co` (new `java-prefs` kind); real run on Linux (6.0.6 deb), Windows simulated,
+  macOS left alone.
+- Firefox: `intl.regional_prefs.use_os_locales` true as a default of Corsu's copy (`browser/defaults/preferences`):
+  the copy runs in the en-US slot and `LocaleService::GetRegionalPrefsLocales` only uses the system's regional locale
+  when languages match or that pref is set. Profile choices still win. `signature()` checks argument order (plain
+  `%S` as `%n$S`). 31 lexicon rows for devtools and downloads; "Onglets ouverts".
+- Discord: protected names checked in every lookup (templates, counts, dates), labels around a name still translated,
+  "…" and "..." equivalent; English typing words in the lexicon. Simulated page in Chrome only.
+- VLC complement: "A&ttrezzi", "Sempre s&opra"; `tools/vlcpo.py check` reports accelerator clashes per VLC menu
+  (error for drafts, note for upstream).
+
 ## 0.24.0 (2026-10-17)
 
 - Audacity 3 and 4, Tenacity and fre:ac: Corsu switches on their own Corsican translation through their language

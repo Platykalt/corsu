@@ -13,7 +13,13 @@ Les sections datées après « État actuel » sont l'historique : ce qui y est 
 - **Vérifié pour la candidate** : mise à jour réelle depuis la 0.23.0 publiée (`tests/e2e/check_update.py --from
   0.21.0 0.22.0 0.23.0` sur les trois systèmes ; `tests/e2e/check_update_apps.py` avec vrais VLC et fre:ac Debian) ;
   complément VLC chargé par VLC 3.0.20 et 3.0.24 (aide) et vu dans la fenêtre Qt de 3.0.24 (menus, préférences).
-- **Branches de travail, hors candidate** : `apps-poedit`, `apps-pdfsam`, `audit-firefox-discord`.
+- **Préparation 0.25 sur `next-0.25`** (hors candidate, non fusionnée dans `main`) : Poedit (dialogues GTK dans
+  la langue de la session, essais réels Debian 3.6.3 et Flatpak 3.10 ; macOS expérimental), PDFsam (Linux réel),
+  formats régionaux de Firefox (suivent le système, cause : copie dans l'emplacement en-US et règle de
+  `GetRegionalPrefsLocales`), protections Discord (page simulée dans Chrome), raccourcis du complément VLC
+  (« A&ttrezzi »). Notes dans [.github/RELEASE_NOTES.md](../.github/RELEASE_NOTES.md) et le CHANGELOG.
+- Tests unitaires : `HOME=$(mktemp -d) python3 -m unittest discover -s tests -t . -q` (sans `-t .`, 13 erreurs
+  d'import qui ne signalent rien).
 - **Attend une personne** : relecture par un locuteur (VLC : 3 cas ouverts dans
   [contrib/vlc/TERMS.md](../contrib/vlc/TERMS.md) ; Minecraft) ; essais Minecraft en jeu ; noms Discord observés
   dans un vrai Discord ; décision de publier la 0.24.0.
@@ -164,7 +170,22 @@ seulement : l'icône à l'écran n'a pas été regardée. Corsu 0.21.0 y est enc
   Mozilla ignorés par le moteur, « Onglets ouverts » traduit comme un bouton. Discord : surnoms de serveur
   (`userId`), destinataires de MP (`rawRecipients`, `nicks`), noms dans l'indicateur « écrit… », nœuds réutilisés
   par React (fibre `alternate`) et noms contenant « , » ou « | » sont protégés (`tests/e2e/check_discord_content.py`,
-  page simulée dans Chrome, pas le vrai Discord). Reste : dates et heures du Firefox au format `en-US`.
+  page simulée dans Chrome, pas le vrai Discord). Reste : dates et heures du Firefox au format `en-US`
+  (corrigé depuis sur `next-0.25`).
+
+## Vérifier Discord à la main (après redémarrage)
+
+Sans partager de message ; noter seulement l'endroit d'un défaut, pas le contenu.
+
+1. Redémarrer Discord (Corsu activé), interface en français.
+2. Quand une personne écrit : « … hè à scrive… », son nom tel quel.
+3. Deux puis trois personnes : seuls « è » et « sò à scrive… » changent ; les noms, même avec une virgule, restent.
+4. Serveur animé : « Parechje persone sò à scrive… ».
+5. Liste des membres : « Cunnessu — N » traduit ; noms de rôles et de membres intacts.
+6. Passer d'un MP à un autre, d'un serveur et d'un salon à l'autre : nouveau nom intact, libellés voisins en corse,
+   l'ancien nom ne réapparaît pas.
+7. Un pseudo égal à un mot de l'interface (« Online », « Home ») n'est jamais traduit.
+8. Aucun message, bio ou statut traduit.
 
 ## Blocages et ce qui demande une personne
 
