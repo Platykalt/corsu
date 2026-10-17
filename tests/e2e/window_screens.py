@@ -153,7 +153,7 @@ def serve(folder, state_holder, data):
             if appearance and hasattr(appearance, 'handle'):
                 length = int(self.headers.get('Content-Length') or 0)
                 body = self.rfile.read(length) if length else b''
-                found = appearance.handle(method, path, body, self.headers)
+                found = appearance.handle(method, path, body, self.headers, True)
                 if found is not None:
                     return self.reply(*found)
             if method == 'GET' and path == '/api/state':
