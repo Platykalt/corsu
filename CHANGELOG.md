@@ -8,6 +8,17 @@
   started for real on Linux (official AppImages, throwaway home) and showed Corsican; the rest is checked on
   simulated folders. The window says what to do when one is left alone (reinstall with translations, start it once,
   close it).
+- fre:ac started for real on Linux (Debian's package, in a container): Corsican window, setting kept when fre:ac
+  rewrites its settings, switched off, kept off through an update, uninstalled. Its coverage now counts the English
+  template's empty entries (it showed no total).
+- VLC: an experimental Corsican complement, off unless asked for (`--vlc-complement on|off`, Linux system package of
+  VLC 3.0.x): VLC's own catalogue plus AI translations of the 1,760 messages it leaves in English, each reviewed by
+  AI (1,757 kept in the build, 3 uncertain left out), none by a speaker. VLC reads it from Corsu's folder through
+  `VLC_DATA_PATH` set in its menu entry; no system file is touched. Real VLC 3.0.20 and 3.0.24 showed the new texts
+  in their help and Qt windows (CI: `tests/e2e/check_vlc_experimental.py`, `check_vlc_complement.py`).
+- `tools/vlcpo.py`: checks every VLC draft (msgfmt with the fuzzy entries, arguments, plurals, tags, accelerators,
+  punctuation; the upstream file must come back byte for byte), records reviews in `contrib/vlc/review.json`, builds
+  the experimental catalogue.
 
 ## 0.23.0 (2026-10-17)
 

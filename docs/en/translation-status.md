@@ -33,6 +33,7 @@ which it gives back when switched off. Corsu never installs the programs. Mechan
 | Program | Upstream translation | How Corsu switches it | Coverage (measured) | Automatic tests | Real check | Human review |
 | --- | --- | --- | --- | --- | --- | --- |
 | VLC | Patriccollu, VLC's `po/co.po` | Linux: menu entry started with `LANGUAGE=co:…` (system package), Flatpak override; Windows: VLC's `Lang` setting; macOS: `language` preference | 3.0.24: 4,443 / 6,203 texts (71.6%); Ubuntu's 3.0.20 package: 3,144 Corsican messages for 6,254 French | unit (simulated Linux, Windows, Flatpak); CI: Ubuntu's real VLC shows its help in Corsican, then back | CI Linux only (command-line help, not the window) | upstream (Patriccollu) |
+| VLC, experimental complement (off by default, `--vlc-complement on`) | upstream + 1,757 AI drafts reviewed by AI (`contrib/vlc`) | Linux system package of 3.0.x: menu entry adds `VLC_DATA_PATH` to Corsu's folder; no system file touched | 6,200 / 6,203 texts of 3.0.24 (3 uncertain left out) | unit; CI: real VLC (Ubuntu 3.0.20) shows 741 new texts in Corsican, then off; also Debian's 3.0.24 in a container | Qt windows seen in a container (3.0.24) | AI only, not a speaker |
 | 7-Zip (Windows) | Patriccollu, `Lang/co.txt` | 7-Zip's `Lang` setting | not measured | unit; CI: real 7-Zip and Windows registry | no | upstream |
 | Notepad++ (Windows) | Patriccollu, `corsican.xml` | copied to `nativeLang.xml`, as Notepad++'s own menu does (portable mode too) | not measured | unit; CI: real Notepad++ | no | upstream |
 | WinMerge (Windows) | Patriccollu, `Corsican.po` | `LanguageId` = 1155 (portable left alone) | not measured | unit | no | upstream |
@@ -43,7 +44,7 @@ which it gives back when switched off. Corsu never installs the programs. Mechan
 | Audacity 3 (Linux, Flatpak, Windows, macOS), development version | upstream, `audacity.mo` | `[Locale] Language=co` in `audacity.cfg` | measured against French when both catalogues are there | unit (simulated) | Linux: the official 3.7.7 AppImage, menus seen in Corsican | upstream |
 | Audacity 4 (Linux; Windows, macOS experimental), development version | upstream, `audacity_co.qm` | `language=co` in `[General]` of `Audacity4.ini` (macOS: preference) | 4,050 / 4,050 (4.0.1 source) | unit (simulated) | Linux: the official 4.0.1 AppImage, window seen in Corsican | upstream |
 | Tenacity 1.3 (Linux, Flatpak, Windows, macOS), development version | upstream, `tenacity.mo` | `[Locale] Language=co` in `tenacity.cfg` | 3,851 / 4,106 (93.8 %) | unit (simulated) | Linux: the official 1.3.5 AppImage, menus seen in Corsican | upstream |
-| fre:ac 1.1 (Windows, Linux), development version | upstream, `freac_co.xml` | `Language` = `freac_co.xml` in `freac.xml` | 1,104 / 1,104 (1.1.7) | unit (simulated) | no | upstream |
+| fre:ac 1.1 (Windows, Linux), development version | upstream, `freac_co.xml` | `Language` = `freac_co.xml` in `freac.xml` | 1,104 / 1,104 (1.1.7 zip); Debian's 1.1.7+git20260412: 1,111 / 1,117 | unit (simulated); real Debian package in a container (Linux) | Linux: window seen in Corsican (container) | upstream |
 
 A program that rewrites its settings when it quits must be closed (otherwise it is left alone, and Corsu says so); a
 missing settings file (program never started) or an unreadable one is neither created nor rewritten; a value you

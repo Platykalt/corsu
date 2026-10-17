@@ -167,9 +167,19 @@ seulement : l'icône à l'écran n'a pas été regardée. Corsu 0.21.0 y est enc
 - Transmission (essai de l'outil, catalogue sans corse) : 597 textes uniques, 39 réutilisations exactes, 36
   suggestions, 30 conflits refusés.
 
+## VLC : complément expérimental (17/10/2026, non publié)
+
+- Les 1 760 brouillons sont tous contrôlés (`tools/vlcpo.py check`, avec les entrées fuzzy) et relus par IA en
+  deux lots thématiques : 1 580 gardés, 177 corrigés, 3 incertains (« Soften », « Shaping delay » et son aide).
+  Aucun n'est validé par un locuteur ; détails dans [contrib/vlc/TERMS.md](../contrib/vlc/TERMS.md).
+- Activation : `--vlc-complement on|off`, Linux, VLC 3.0.x du système, par `VLC_DATA_PATH` dans l'entrée de menu.
+  Vu avec un vrai VLC 3.0.20 et 3.0.24 (conteneurs, CI). Pas encore d'interrupteur dans la fenêtre de Corsu.
+- fre:ac lancé pour de vrai (paquet Debian, conteneur) : fenêtre en corse.
+
 ## Prochaines étapes
 
-1. Audacity / Tenacity, fre:ac, PDFsam, Poedit : même mécanisme, sources dans [apps-research.md](apps-research.md).
+1. PDFsam, Poedit : même mécanisme, sources dans [apps-research.md](apps-research.md). VLC : relecture des
+   brouillons par un locuteur, puis éventuel envoi en amont avec l'accord du mainteneur.
 2. Bedrock : un essai en jeu, puis traduire les écrans les plus visibles.
 3. Telegram : un même nom de pack et un même lien pour toutes les applications, mais chaque application (Desktop,
    Android, iOS, macOS, Web) a ses propres textes à traduire ([roadmap-candidates.md](roadmap-candidates.md)).
