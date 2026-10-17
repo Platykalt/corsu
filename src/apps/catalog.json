@@ -325,7 +325,7 @@
           ]
         },
         "macos": {"shipped": "unknown", "version_checked": "1.1.7 dmg not inspected", "detection": ["/Applications/freac.app"], "mechanism": {"type": "xml", "location": "<application data>/freac/freac.xml (?)", "key": "Settings/Language", "value": "freac_co.xml", "notes": "(?)"}, "must_close": true, "sources": []},
-        "linux": {"shipped": "unknown", "version_checked": "AppImage/Flathub org.freac.freac not inspected", "detection": ["/usr/bin/freac", "org.freac.freac"], "mechanism": {"type": "xml", "location": "~/.config/freac/freac.xml", "key": "Settings/Language", "value": "freac_co.xml", "notes": "Path from BoCA config.cpp (configDir ends with /.config/) (?)"}, "must_close": true, "sources": ["https://github.com/enzo1982/BoCA/blob/master/runtime/common/config.cpp#L306-L316"]}
+        "linux": {"shipped": true, "version_checked": "Debian package 1.1.7+git20260412.6402dcb7+ds-2 (/usr/share/freac/lang/freac_co.xml, 1111/1117 entries; run for real); AppImage/Flathub org.freac.freac not inspected", "detection": ["/usr/bin/freac", "org.freac.freac"], "mechanism": {"type": "xml", "location": "~/.config/freac/freac.xml", "key": "Settings/Language", "value": "freac_co.xml", "notes": "Path from BoCA config.cpp (configDir ends with /.config/); seen with Debian's package"}, "must_close": true, "sources": ["https://github.com/enzo1982/BoCA/blob/master/runtime/common/config.cpp#L306-L316"]}
       },
       "catalog": {"licence": "GPL-2.0-or-later (fre:ac)", "upstream_url": "https://github.com/enzo1982/freac/tree/master/i18n"},
       "coverage_note": "Since 1.0.27 (Dec 2016)."

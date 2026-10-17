@@ -20,7 +20,9 @@ the folder can be written; otherwise in the user's settings folder:
     Catalogue of a system install: <prefix>/share/freac/lang/freac_co.xml
     (https://github.com/enzo1982/freac/blob/v1.1.7/Makefile#L170-L178).
 Checked in the release files: freac-1.1.7-windows-x64.zip has freac.exe and lang/freac_co.xml (1104 entries, as
-many as the English template lang/freac.xml); the AppImage and the macOS dmg have it too.
+many as the English template lang/freac.xml); the AppImage and the macOS dmg have it too. Debian's package
+1.1.7+git20260412 has /usr/share/freac/lang/freac_co.xml with 1111 of the template's 1117 entries; run for real in a
+container: the window and the tips in Corsican, freac_co.xml kept when fre:ac rewrote its settings on quitting.
 
 Not handled: the Flatpak (org.freac.freac: by the rule above its file would be
 ~/.var/app/org.freac.freac/config/.freac/freac.xml, not checked), AppImages (Corsu cannot look inside one), macOS
@@ -41,18 +43,20 @@ APPLICATIONS = (Path('/Applications'),)
 KEY = (('configuration', 'name', 'default'), ('section', 'name', 'Settings'), ('value', 'name', 'Language'))
 VALUE = 'freac_co.xml'
 ENTRY = re.compile(r'<entry\b[^>]*>([^<]*\S[^<]*)</entry>')
+# The English template's entries are empty elements: <entry id="100" string="OK"/>.
+ANY_ENTRY = re.compile(r'<entry\b')
 
 
-def entries(path):
+def entries(path, pattern=ENTRY):
     try:
-        return len(ENTRY.findall(Path(path).read_text(encoding='utf-8')))
+        return len(pattern.findall(Path(path).read_text(encoding='utf-8')))
     except (OSError, ValueError):
         return 0
 
 
 def coverage(folder):
-    """'N/M': translated entries of freac_co.xml against the English template freac.xml next to it."""
-    have, total = entries(folder / 'freac_co.xml'), entries(folder / 'freac.xml')
+    """'N/M': translated entries of freac_co.xml against every entry of the English template freac.xml next to it."""
+    have, total = entries(folder / 'freac_co.xml'), entries(folder / 'freac.xml', ANY_ENTRY)
     return f'{have}/{total}' if total else (f'{have}' if have else None)
 
 
@@ -76,7 +80,9 @@ class Freac(apps.App):
                    'fr': ('fre:ac', "L'interface de fre:ac en corse (Patriccollu)."),
                    'en': ('fre:ac', "fre:ac's interface in Corsican (Patriccollu).")}
     processes = ('freac', 'freac.exe')
-    validation = {'simulated': True, 'real_app': [], 'visual': False, 'linguistic_review': False}
+    # Real: Debian's package (1.1.7+git20260412) in a container, window seen in Corsican, setting kept after fre:ac quit,
+    # switched off, kept off through an update, uninstalled (2026-10-17).
+    validation = {'simulated': True, 'real_app': ['linux'], 'visual': True, 'linguistic_review': False}
     FLATPAK = 'org.freac.freac'
 
     def windows_settings(self, folder):

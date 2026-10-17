@@ -308,7 +308,8 @@ class WindowsTests(AudioAppsTests):
     def freac_install(self, folder):
         write(folder / 'freac.exe', b'x')
         write(folder / 'lang/freac_co.xml', '<LangFile><entry id="1" string="OK">Vai</entry></LangFile>')
-        write(folder / 'lang/freac.xml', '<LangFile><entry id="1" string="OK">OK</entry></LangFile>')
+        # As fre:ac ships it: the template's entries are empty elements, and Corsican may miss some.
+        write(folder / 'lang/freac.xml', '<LangFile><entry id="1" string="OK"/>\n<entry id="2" string="New"/></LangFile>')
 
     def test_freac_installed_in_program_files_uses_appdata(self):
         self.freac_install(self.files / 'freac')
@@ -317,7 +318,7 @@ class WindowsTests(AudioAppsTests):
         self.assertIn('once', report['skipped'][0]['reason'])
         original = write(config, FREAC_XML.replace('\n', '\r\n'))
         [installation] = freac.Freac().find()
-        self.assertEqual(installation.coverage, '1/1')
+        self.assertEqual(installation.coverage, '1/2')
         self.run_install('freac')
         self.run_install('freac')
         self.assertEqual(config.read_bytes(), original.replace(b'freac_fr.xml', b'freac_co.xml'))
