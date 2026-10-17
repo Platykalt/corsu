@@ -318,14 +318,33 @@ def scenario(old_version, archives, work):
     step('7. Two installers at once')
     busy = {**environment, 'CORSU_LOCK_WAIT': '0'}
     command = [python_of(current), str(current / 'src/installer.py'), '--yes']
+    # Another Corsu task holds the lock (as a running installation or update would): the installer must stop, busy.
+    holder = subprocess.Popen([python_of(current), '-c', 'import sys, time; sys.path.insert(0, sys.argv[1]); import corsu\n'
+                               'with corsu.lock("test"):\n    print("held", flush=True); time.sleep(60)',
+                               str(current / 'src')], env=environment, stdout=subprocess.PIPE, text=True)
+    try:
+        check(holder.stdout.readline().strip() == 'held', 'another task holds the lock')
+        before = json.dumps(state(home), sort_keys=True)
+        blocked = subprocess.run(command, cwd=current, env=busy, capture_output=True, text=True, encoding='utf-8',
+                                 errors='replace', timeout=900)
+        print(blocked.stdout[-2000:] + blocked.stderr[-2000:])
+        check(blocked.returncode == 75, f'stopped as busy while another task runs: exit {blocked.returncode}')
+        check('already busy' in blocked.stdout + blocked.stderr, 'the busy message names it')
+        check(json.dumps(state(home), sort_keys=True) == before, 'nothing written while busy')
+    finally:
+        holder.kill()
+        holder.wait(timeout=30)
+    # Two at once: either the second finds the lock (75), or the first was already done and it runs after it (0);
+    # never both writing together, and the record stays whole.
     runs = [subprocess.Popen(command, cwd=current, env=busy, stdout=subprocess.PIPE, stderr=subprocess.STDOUT,
                              text=True, encoding='utf-8', errors='replace') for _ in range(2)]
     outputs = [process.communicate(timeout=900) for process in runs]
     codes = sorted(process.returncode for process in runs)
     for output in outputs:
         print(output[0][-3000:])
-    check(codes == [0, 75], f'one ran, the other stopped as busy: exit codes {codes}')
-    check(any('already busy' in output[0] for output in outputs), 'the busy message names it')
+    check(codes in ([0, 75], [0, 0]), f'one after the other, or the other stopped as busy: exit codes {codes}')
+    if codes == [0, 75]:
+        check(any('already busy' in output[0] for output in outputs), 'the busy message names it')
     check(recorded(home) == current.name and len(state(home)['files']) >= 1, 'state consistent after both')
 
     step('8. Uninstall')
