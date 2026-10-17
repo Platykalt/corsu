@@ -5,18 +5,25 @@ Les sections datées après « État actuel » sont l'historique : ce qui y est 
 
 ## État actuel (17 octobre 2026)
 
-- **Publié** : 0.23.0. **Candidate** : 0.24.0 sur `main` (version dans `src/release.json`), non taguée ;
-  notes prêtes dans [.github/RELEASE_NOTES.md](../.github/RELEASE_NOTES.md).
-- **0.24.0 contient** : Audacity 3 et 4, Tenacity, fre:ac (traductions de Patriccollu, par leur réglage de langue) ;
-  le complément VLC expérimental, désactivé par défaut, Linux seulement, avec son interrupteur dans la fiche VLC de
-  la fenêtre et `--vlc-complement on|off` (même préférence `vlc_complement`).
-- **Vérifié pour la candidate** : mise à jour réelle depuis la 0.23.0 publiée (`tests/e2e/check_update.py --from
+- **0.24.0 publiée** (17 octobre 2026) : tag `v0.24.0` sur `78697ea`, release
+  https://github.com/Platykalt/corsu/releases/tag/v0.24.0 marquée dernière version (run CI 39040761519 : tests,
+  archives, essais de bout en bout sur les trois systèmes, publication et installation en une ligne réussis ; un
+  test unitaire instable relancé, cause corrigée sur `next-0.25`). Contenu : Audacity 3 et 4, Tenacity, fre:ac ; le
+  complément VLC expérimental, désactivé par défaut, Linux seulement, avec son interrupteur dans la fiche VLC et
+  `--vlc-complement on|off`.
+- **Vérifié depuis les téléchargements publics** (conteneur Debian jetable) : release dernière pour l'API GitHub ;
+  archives Linux, Windows, macOS et autres fichiers conformes à leurs `.sha256` et à la version 0.24.0 ; une 0.23.0
+  publiée installée, Firefox désactivé, puis mise à jour par son propre `update.py` depuis GitHub : Firefox reste
+  désactivé, complément VLC désactivé ; lanceur sur la nouvelle copie, fenêtre servie sans dossier de
+  téléchargement ; installation en une ligne réelle (`get.sh`) en 0.24.0.
+- **0.25 en développement** sur `next-0.25`, non fusionnée : Poedit, PDFsam, formats régionaux de Firefox,
+  protections Discord, raccourcis du complément VLC (« A&ttrezzi » : la 0.24.0 garde le double Alt+A).
+- **Vérifié avant publication** : mise à jour réelle depuis la 0.23.0 publiée (`tests/e2e/check_update.py --from
   0.21.0 0.22.0 0.23.0` sur les trois systèmes ; `tests/e2e/check_update_apps.py` avec vrais VLC et fre:ac Debian) ;
   complément VLC chargé par VLC 3.0.20 et 3.0.24 (aide) et vu dans la fenêtre Qt de 3.0.24 (menus, préférences).
-- **Branches de travail, hors candidate** : `apps-poedit`, `apps-pdfsam`, `audit-firefox-discord`.
 - **Attend une personne** : relecture par un locuteur (VLC : 3 cas ouverts dans
   [contrib/vlc/TERMS.md](../contrib/vlc/TERMS.md) ; Minecraft) ; essais Minecraft en jeu ; noms Discord observés
-  dans un vrai Discord ; décision de publier la 0.24.0.
+  dans un vrai Discord.
 - **Limites connues** : complément VLC absent sous Windows, macOS, Flatpak, Snap ; Audacity 4 expérimental sous
   Windows et macOS ; fre:ac et Audacity vérifiés seulement sur dossiers simulés hors Linux.
 
