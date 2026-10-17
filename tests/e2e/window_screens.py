@@ -128,21 +128,56 @@ SCENES = [
     ('help', 'active', 'help', 1040, 780, 'light', 1, 16),
     ('review-dark', 'active', 'review', 1040, 780, 'dark', 1, 16),
     ('attention-narrow', 'attention', 'programs', 420, 1000, 'light', 1, 16),
-    ('palette-mare', 'attention', 'programs', 1040, 780, 'light', 1, 16, {'data-palette': 'mare'}),
-    ('palette-granitu-dark', 'attention', 'programs', 1040, 780, 'dark', 1, 16, {'data-palette': 'granitu', 'data-theme': 'dark'}),
-    ('palette-tramontu', 'update', 'programs', 1040, 780, 'light', 1, 16, {'data-palette': 'tramontu'}),
-    ('palette-notte-dark', 'running', 'programs', 1040, 780, 'light', 1, 16, {'data-palette': 'notte', 'data-theme': 'dark'}),
-    ('compact', 'many', 'programs', 1040, 1100, 'light', 1, 16, {'data-density': 'compact'}),
-    ('image', 'attention', 'programs', 1040, 780, 'light', 1, 16, {'data-background': 'image', '--bg-dim': '0.15', '--bg-blur': '14px'}),
-    ('image-dark-opaque', 'attention', 'programs', 1040, 780, 'dark', 1, 16,
-     {'data-background': 'image', 'data-reduced-transparency': '', '--bg-dim': '0.3', '--accent-user': '#c46a9a'}),
+    # Appearance settings saved through src/appearance.py (as the Appearance page saves them), with sample pictures.
+    ('palette-mare', 'attention', 'programs', 1040, 780, 'light', 1, 16, {'palette': 'mare'}),
+    ('palette-granitu-dark', 'attention', 'programs', 1040, 780, 'dark', 1, 16, {'palette': 'granitu', 'theme': 'dark'}),
+    ('palette-tramontu', 'update', 'programs', 1040, 780, 'light', 1, 16, {'palette': 'tramontu'}),
+    ('palette-notte-dark', 'running', 'programs', 1040, 780, 'light', 1, 16, {'palette': 'notte', 'theme': 'dark'}),
+    ('compact', 'many', 'programs', 1040, 1100, 'light', 1, 16, {'density': 'compact'}),
+    ('accent-yellow', 'attention', 'programs', 1040, 780, 'light', 1, 16, {'accent': '#ffe600'}),
+    ('image-busy', 'attention', 'programs', 1040, 780, 'light', 1, 16, {'picture': 'busy', 'dim': 0.15, 'blur': 14}),
+    ('image-busy-dark', 'attention', 'programs', 1040, 780, 'dark', 1, 16, {'picture': 'busy', 'dim': 0.55}),
+    ('image-light', 'active', 'programs', 1040, 780, 'light', 1, 16, {'picture': 'light', 'dim': 0}),
+    ('image-dark', 'active', 'programs', 1040, 780, 'light', 1, 16, {'picture': 'dark', 'dim': 0}),
+    ('image-busy-narrow', 'attention', 'programs', 420, 900, 'dark', 1, 16, {'picture': 'busy', 'dim': 0.3, 'blur': 8}),
+    ('image-appearance', 'active', 'appearance', 1040, 900, 'light', 1, 16, {'picture': 'busy', 'dim': 0.55, 'blur': 6}),
 ]
 
 # A busy, high-contrast picture: text over it must stay readable.
-SAMPLE_IMAGE = ('url("data:image/svg+xml,' + "%3Csvg xmlns='http://www.w3.org/2000/svg' width='400' height='300'%3E"
-                "%3Crect width='400' height='300' fill='%23f2c14e'/%3E%3Cpath d='M0 300 120 90 210 200 300 40 400 180V300z' fill='%23123b2f'/%3E"
-                "%3Cpath d='M0 300 90 220 200 260 320 150 400 230V300z' fill='%23e8eef0'/%3E%3Ccircle cx='330' cy='60' r='34' fill='%23ffffff'/%3E"
-                '%3C/svg%3E")')
+def sample_png(kind, width=1200, height=800):
+    """A synthetic picture: 'busy' (strong colours and fine detail), 'light' (almost white) or 'dark' (almost black)."""
+    import struct
+    import zlib
+    rows = bytearray()
+    for y in range(height):
+        rows.append(0)
+        for x in range(width):
+            if kind == 'busy':
+                pixel = ((x * 7 ^ y * 3) & 255, (x * y // 97) & 255, (255 - x // 5 + (y // 9 % 2) * 120) & 255)
+            elif kind == 'light':
+                pixel = (250 - y // 80, 248, 244 - x // 200)
+            else:
+                pixel = (8 + y // 100, 10 + x // 150, 14)
+            rows += bytes(pixel)
+
+    def chunk(name, data):
+        return struct.pack('>I', len(data)) + name + data + struct.pack('>I', zlib.crc32(name + data) & 0xffffffff)
+    return (b'\x89PNG\r\n\x1a\n' + chunk(b'IHDR', struct.pack('>IIBBBBB', width, height, 8, 2, 0, 0, 0))
+            + chunk(b'IDAT', zlib.compress(bytes(rows), 6)) + chunk(b'IEND', b''))
+
+
+def prepare_appearance(settings):
+    """Save the scene's appearance in the temporary Corsu data, as the Appearance page would."""
+    sys.path.insert(0, str(ROOT / 'src'))
+    import appearance
+    appearance.reset()
+    settings = dict(settings)
+    picture = settings.pop('picture', None)
+    if picture:
+        appearance.store_background(sample_png(picture))
+        settings['background'] = 'image'
+    if settings:
+        appearance.update(settings)
 
 
 def serve(folder, state_holder, data):
@@ -221,19 +256,6 @@ def chrome(executable, profile, font):
             time.sleep(0.3)
 
 
-def appearance_script(settings):
-    """JavaScript that puts the scene's appearance attributes and properties on <html> before the page draws."""
-    lines = ['const root = document.documentElement;']
-    for key, value in settings.items():
-        if key.startswith('--'):
-            lines.append(f'root.style.setProperty({json.dumps(key)}, {json.dumps(value)});')
-        else:
-            lines.append(f'root.setAttribute({json.dumps(key)}, {json.dumps(value)});')
-    if settings.get('data-background') == 'image':
-        lines.append(f'root.style.setProperty("--bg-image", {json.dumps(SAMPLE_IMAGE)});')
-    return '\n'.join(lines)
-
-
 def shoot(devtools, url, scene, output, language='fr'):
     name, _, page, width, height, scheme, zoom, font = scene[:8]
     settings = scene[8] if len(scene) > 8 else {}
@@ -249,10 +271,8 @@ def shoot(devtools, url, scene, output, language='fr'):
                       session=session)
         devtools.call('Page.addScriptToEvaluateOnNewDocument', {'source':
                       f'try {{ localStorage.setItem("corsu-language", "{language}"); }} catch (e) {{}}'}, session=session)
-        if settings:
-            devtools.call('Page.addScriptToEvaluateOnNewDocument', {'source':
-                          'document.addEventListener("readystatechange", () => {' + appearance_script(settings) + '}, { once: true });'},
-                          session=session)
+        if (ROOT / 'src' / 'appearance.py').exists():
+            prepare_appearance(settings)
         devtools.call('Page.navigate', {'url': url}, session=session)
         time.sleep(1.5)
         devtools.call('Runtime.evaluate', {'expression':
