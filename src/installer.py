@@ -733,12 +733,6 @@ def main(argv=None):
     args = parser.parse_args(argv)
     if args.disable is not None and args.enable is not None:
         parser.error('Choose either --disable or --enable.')
-    if args.vlc_complement and not args.dry_run:
-        import update
-        update.set_preference('vlc_complement', args.vlc_complement == 'on')
-        print(t(f'VLC\'s experimental Corsican complement: {args.vlc_complement}. It is applied with VLC.',
-                f'Complément corse expérimental de VLC : {"activé" if args.vlc_complement == "on" else "désactivé"}. '
-                'Il s\'applique avec VLC.'))
     if args.disable is not None or args.enable is not None:
         if args.dry_run:
             return 0
@@ -815,6 +809,13 @@ def main(argv=None):
         print(t('Nothing was changed.', 'Rien n\'a été modifié.'))
         return 0
     with corsu.lock(action if action in corsu.ACTIONS else 'install'):
+        if args.vlc_complement:
+            # Saved once the lock is held: a run refused as busy changes nothing, the choice included.
+            import update
+            update.set_preference('vlc_complement', args.vlc_complement == 'on')
+            print(t(f'VLC\'s experimental Corsican complement: {args.vlc_complement}. It is applied with VLC.',
+                    f'Complément corse expérimental de VLC : {"activé" if args.vlc_complement == "on" else "désactivé"}. '
+                    'Il s\'applique avec VLC.'))
         return apply(args, requested, components, location)
 
 

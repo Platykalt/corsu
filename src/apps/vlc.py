@@ -35,8 +35,9 @@ def version(executable):
 
 class VLC(apps.App):
     id = 'vlc'
-    # Real VLC: Ubuntu's in CI (help shown in Corsican) and the Windows registry setting on a real runner.
-    validation = {'simulated': True, 'real_app': ['linux', 'windows'], 'visual': False, 'linguistic_review': False}
+    # Real VLC: Ubuntu's in CI (help shown in Corsican) and the Windows registry setting on a real runner. Window looked
+    # at: Debian's 3.0.24 in a container (menus and preferences, with and without the complement), Linux only.
+    validation = {'simulated': True, 'real_app': ['linux', 'windows'], 'visual': True, 'linguistic_review': False}
     restart_processes = ('vlc', 'vlc.exe')
     name = 'VLC'
     description = {

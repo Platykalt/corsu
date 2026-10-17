@@ -294,6 +294,12 @@ class LockTests(Isolated):
                 patch.object(installer, 'deploy_release') as deploy, quiet():
             installer.main(['--yes', '--components', 'firefox'])
         deploy.assert_not_called()
+        # Nor the VLC complement's choice.
+        with self.assertRaises(corsu.Busy), patch.object(installer, 'available_components', return_value=['firefox']), \
+                patch.object(installer, 'discord_location', return_value=None), \
+                patch.object(installer, 'deploy_release'), quiet():
+            installer.main(['--yes', '--components', 'firefox', '--vlc-complement', 'on'])
+        self.assertIs(update.preferences()['vlc_complement'], False)
 
     def test_stale_lock_of_a_finished_process_is_taken_over(self):
         finished = subprocess.run([sys.executable, '-c', 'import os; print(os.getpid())'], capture_output=True, text=True)
