@@ -203,7 +203,8 @@ class LinuxTests(PdfsamTests):
         self.deb()
         write(self.prefs, PREFS)
         installations = pdfsam.PDFsam().find()
-        self.assertEqual([item.location for item in installations], [self.opt, folder])
+        # The command is followed to its real folder (/private/var on macOS, long names on Windows).
+        self.assertEqual([item.location for item in installations], [self.opt, folder.resolve()])
         report = self.run_install()
         self.assertEqual(len(report['installed']), 2)
         corsu.disable(['pdfsam'])
