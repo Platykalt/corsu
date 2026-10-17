@@ -27,8 +27,9 @@ checked against source code or a real package.
   stock dialogs, or the setup wizard itself. That only happens when the application or setup ships and loads the
   `co` file. Example: Arch's `wxwidgets-common` installs `/usr/share/locale/co/LC_MESSAGES/wxstd-3.2.mo`, but a wx
   app still shows its own strings in another language unless it has its own `co` catalog.
-- **Linux environment.** gettext programs without their own setting (VLC, Poedit, GTK apps) follow
-  `LANGUAGE=co:fr`. gettext ignores `LANGUAGE` when the locale is `C`/`POSIX`, so `LANG` must be a real locale.
+- **Linux environment.** gettext programs without their own setting (VLC, GTK apps) follow
+  `LANGUAGE=co:fr` (not Poedit: wxWidgets reads `LANG` first, §3.9). gettext ignores `LANGUAGE` when the locale
+  is `C`/`POSIX`, so `LANG` must be a real locale.
   Per-app options are a copied `.desktop` file in `~/.local/share/applications` with `Exec=env LANGUAGE=co:fr …`,
   or for Flatpak `flatpak override --user --env=LANGUAGE=co:fr <app-id>`, which writes
   `~/.local/share/flatpak/overrides/<app-id>`.
@@ -302,20 +303,31 @@ Common columns: *shipped* (where the catalog sits in the package), *mechanism* (
 
 ### 3.9 Poedit
 
+Implemented in [`src/apps/poedit.py`](../src/apps/poedit.py) (checked 2026-10-17).
+
 - **Shipped.**
-  - Source v3.10-oss (2026-10-14) has `locales/co.po`, 736/737 (99.9%).
-  - Debian 13 `poedit-common` has `/usr/share/locale/co/LC_MESSAGES/poedit.mo`.
-  - Windows and macOS binaries weren't inspected (?).
+  - Source v3.10-oss (2026-10-14) has `locales/co.po`, 736/737 (99.9%); Corsican since at least 3.4.2.
+  - Windows 3.10 (`Poedit-3.10-setup.exe`, installed silently with Wine in a container): `Program Files\Poedit\Translations\co\poedit.mo`.
+  - macOS 3.10 (`Poedit-3.10.zip`): `Poedit.app/Contents/Resources/co.lproj/poedit.mo`; bundle id `net.poedit.Poedit`, not sandboxed.
+  - Debian 13 `poedit` + `poedit-common` 3.6.3: `/usr/bin/poeditor`, `/usr/share/locale/co/LC_MESSAGES/poedit.mo`.
+  - Flathub `net.poedit.Poedit`: `co` in its `.Locale` extension (needs `extra-languages co`).
 - **Mechanism.**
   - **Windows** is the only platform with an in-app choice (`NEED_CHOOSELANG_UI` is `__WXMSW__` only,
-    [uilang.h L34-L39](https://github.com/vslavik/poedit/blob/v3.10-oss/src/uilang.h#L34-L39)). It stores
-    `wxConfig` key `ui_language` = `co`, or `default`
-    ([uilang.cpp L196-L210](https://github.com/vslavik/poedit/blob/v3.10-oss/src/uilang.cpp#L196-L210)). With the
-    vendor "Vaclav Slavik" and app "Poedit" ([edapp.cpp L344-L345](https://github.com/vslavik/poedit/blob/v3.10-oss/src/edapp.cpp#L344-L345)),
-    that should be `HKCU\Software\Vaclav Slavik\Poedit`, `ui_language` (?).
-  - **Linux:** `LANGUAGE=co:fr` through a desktop or Flatpak override.
-  - **macOS:** per-app `AppleLanguages` (?).
-- **Close?** No for the registry value, which is read at start.
+    [uilang.h L34-L38](https://github.com/vslavik/poedit/blob/v3.10-oss/src/uilang.h#L34-L38)). Poedit's wxConfig has
+    no file there ([edapp.cpp L405-L411](https://github.com/vslavik/poedit/blob/v3.10-oss/src/edapp.cpp#L405-L411)), so
+    it is wxRegConfig: `HKCU\Software\Vaclav Slavik\Poedit`, REG_SZ `ui_language` = `co` (or `default`)
+    ([uilang.cpp L196-L222](https://github.com/vslavik/poedit/blob/v3.10-oss/src/uilang.cpp#L196-L222),
+    [edapp.cpp L344-L345](https://github.com/vslavik/poedit/blob/v3.10-oss/src/edapp.cpp#L344-L345)). Read at start,
+    written only by that dialog; can be set before the first start. Not run on Windows (Poedit.exe needs Windows' own
+    `icu.dll`, missing under Wine).
+  - **Linux:** no setting, and `LANGUAGE` alone is not enough: wxWidgets 3.2 puts the language of
+    `LC_ALL`/`LC_MESSAGES`/`LANG` before `LANGUAGE`'s list ([uilocale.cpp L886-L956](https://github.com/wxWidgets/wxWidgets/blob/v3.2.8/src/unix/uilocale.cpp#L886-L956)).
+    Corsu's menu entry (and Flatpak override) sets `LANGUAGE=co:<languages> LANG=C.UTF-8 LC_MESSAGES=C.UTF-8` and keeps
+    the session's locale for the format categories. Run for real (Debian 3.6.3): Corsican window; GTK's own dialogs
+    show English. A `co_FR` locale name breaks the C++ locale (glibc has none).
+  - **macOS:** no setting; Poedit follows the per-app language list (`AppleLanguages`, an array). Corsu leaves it and
+    points to System Settings → Language & Region → Applications (?).
+- **Close?** No: neither the registry value nor the menu entry is rewritten by Poedit; a restart is enough.
 - **Licence:** MIT.
 
 ### 3.10 HandBrake
@@ -518,7 +530,7 @@ Next in line:
 - **Audacity:** 3.x is fully verified; the 4.x file location still needs checking on a real install.
 - **fre:ac:** value `freac_co.xml`.
 - **PDFsam:** Java Preferences.
-- **Poedit (Windows):** registry path (?).
+- **Poedit:** done (§3.9).
 - **Tenacity.**
 - **Paint.NET and Mp3tag:** mechanism unverified.
 
@@ -527,7 +539,7 @@ Next in line:
 - Audacity 4 `Audacity4.ini` / plist location and key on a real install; whether the macOS 4.0.1 dmg contains
   `audacity_co.qm`.
 - FileZilla Windows/macOS binaries (installer contents not downloaded); FileZilla macOS config path.
-- Poedit Windows registry path and binary contents; macOS behaviour.
+- Poedit on a real Windows and Mac (registry value and per-app language list not run).
 - HandBrake macOS sandbox container domain for `AppleLanguages`.
 - Paint.NET `UI/Language` value format for `co`; Mp3tag storage.
 - VLC Snap: catalog presence and a workable per-user override.

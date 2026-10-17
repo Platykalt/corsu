@@ -165,9 +165,10 @@ def coverage_against(corsican, reference):
 
 
 def registry():
-    from apps import audacity, freac, pdfsam, programs, vlc
+    from apps import audacity, freac, pdfsam, poedit, programs, vlc
     return {app.id: app for app in (vlc.VLC(), *(program() for program in
-                                                 (*programs.PROGRAMS, *audacity.PROGRAMS, *freac.PROGRAMS, *pdfsam.PROGRAMS)))}
+                                                 (*programs.PROGRAMS, *audacity.PROGRAMS, *freac.PROGRAMS,
+                                                  *poedit.PROGRAMS, *pdfsam.PROGRAMS)))}
 
 
 def detected():
