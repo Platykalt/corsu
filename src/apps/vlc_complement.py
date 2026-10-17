@@ -158,3 +158,33 @@ def remove(installer):
     if installer.state['files'].pop(str(path), None) is not None:
         shutil.rmtree(path, ignore_errors=True)
         corsu.save_state(installer.state)
+
+
+def drafts_included():
+    """How many Corsu translations the complement holds (review statuses in STATUSES), without compiling it."""
+    try:
+        review = json.loads((FOLDER / 'review.json').read_text(encoding='utf-8'))
+    except (OSError, ValueError):
+        return 0
+    return sum(1 for record in review.values() if record.get('status') in STATUSES)
+
+
+def status():
+    """What the window and the command line show: {'enabled': the person's choice, 'available': whether this
+    computer has a VLC the complement works with, 'reason': why not, 'translations': how many it adds}. The choice is
+    the preference 'vlc_complement' (update.preferences), the same one --vlc-complement on|off writes."""
+    import apps
+    from apps import vlc
+    reason = None
+    if corsu.PLATFORM != 'linux':
+        reason = unsupported(None, None)
+    else:
+        executable = apps.which('vlc')
+        if not executable:
+            reason = corsu.t('only for VLC installed from the system\'s packages; none found',
+                             'seulement pour le VLC installé par les paquets du système ; aucun trouvé')
+        elif executable.startswith('/snap/'):
+            reason = corsu.t('not for the Snap of VLC', 'pas pour le Snap de VLC')
+        else:
+            reason = unsupported(executable, vlc.version(executable))
+    return {'enabled': enabled(), 'available': reason is None, 'reason': reason, 'translations': drafts_included()}

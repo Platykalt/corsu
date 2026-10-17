@@ -194,6 +194,20 @@ class VLCComplementTests(VLCTests):
         self.assertFalse((self.root / '.local/share/applications/vlc.desktop').exists())
         self.assertFalse((corsu.DATA / 'vlc').exists())
 
+    def test_status(self):
+        status = vlc_complement.status()
+        self.assertEqual((status['enabled'], status['available'], status['reason']), (False, True, None))
+        self.assertEqual(status['translations'], vlc_complement.catalog()[2])
+        update.set_preference('vlc_complement', True)
+        self.assertTrue(vlc_complement.status()['enabled'])
+        with patch.object(apps.shutil, 'which', lambda name: '/snap/bin/vlc'):
+            self.assertIn('Snap', vlc_complement.status()['reason'])
+        for platform in ('windows', 'macos'):
+            with patch.object(corsu, 'PLATFORM', platform):
+                status = vlc_complement.status()
+                self.assertFalse(status['available'])
+                self.assertIn('Linux', status['reason'])
+
     def test_other_versions_keep_the_upstream_catalogue(self):
         update.set_preference('vlc_complement', True)
         with patch.object(vlc, 'version', lambda executable: '4.0.0'):
