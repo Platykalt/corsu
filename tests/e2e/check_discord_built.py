@@ -113,10 +113,10 @@ for (const text of ["Dans un appel", "Work", "Bio", "En ligne", "Ne pas dérange
   add("rich presence button", card(`<button id="t">Envoyer</button>`), props, "Envoyer");
   add("rich presence details in an activity-classed header", card(`<h3 id="t" class="activityHeader_x">Work</h3>`), props, "Work");
   add("activity card label around the game", card(`<h3 id="t" class="activityHeader_x">Joue à Control</h3>`), props, "Ghjoca à Control");
-  // KNOWN (also in Corsu 0.23.0): a value from the records with text added by Discord (the party size) is only
-  // protected when the whole text equals it; the template "Dans un appel ({1})" takes it.
+  // A value from the records with text added by Discord (the party size): the template "Dans un appel ({1})" must not
+  // take it (it did in Corsu 0.23.0).
   add("rich presence state with party size", card(`<div id="t" class="state_x">Dans un appel (1 sur 4)</div>`), props,
-    "Dans un appel (1 sur 4)", undefined, false);
+    "Dans un appel (1 sur 4)");
 }
 // KNOWN (also in 0.23.0): a game shown under another name than its record's (the application's name).
 add("game shown under another name than its record", subtext(`<div id="t" class="statusText__19b6d">Control</div>`),
@@ -275,12 +275,10 @@ def main(chrome, vencord, strict):
                 if not ok:
                     (failures if case['strict'] else known).append(case['name'])
             leaked = json.loads(evaluate(devtools, page(), PRIVACY))
-            # KNOWN: outside name rules the diagnostic gives a text it does not know when it reads like interface text,
-            # and inside them a text found in the dictionary; either can be something a person chose.
-            print(f'{"PASS" if not leaked else "KNOWN"}: diagnostic prints none of the synthetic personal data'
+            print(f'{"PASS" if not leaked else "FAIL"}: diagnostic prints none of the synthetic personal data'
                   + (f' (printed: {leaked})' if leaked else ''))
             if leaked:
-                known.append('diagnostic privacy')
+                failures.append('diagnostic privacy')
         finally:
             process.terminate()
             process.wait(timeout=15)

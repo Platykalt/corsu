@@ -19,7 +19,7 @@ export function setCorrections(value: Record<string, string> | undefined) {
 // with this file's way of reading the page; the fingerprint is computed from the dictionary itself (its entry count
 // and two sums of FNV-1a hashes over each key and value's UTF-16 code units, which do not depend on the order of the
 // entries), so it can be compared with the dictionary.json of any build.
-export const translatorRevision = "2026-10-activity";
+export const translatorRevision = "2026-10-activity-2";
 let fingerprint: string | undefined;
 
 export function dictionaryFingerprint(): string {
@@ -42,7 +42,9 @@ const contentArea = [
     "script", "style", "textarea", "input", "[contenteditable]", "[data-corsu-ignore]",
     '[id^="message-content"]', '[id^="message-accessories"]', '[class*="messageContent"]', '[class*="markup"]',
     '[class*="embed"]', '[class*="attachment"]', '[class*="topic"]', '[class*="customStatus"]', '[class*="bio"]',
-    '[class*="aboutMe"]', '[class*="forumPost"]', '[class*="searchResult"]'
+    '[class*="aboutMe"]', '[class*="forumPost"]', '[class*="searchResult"]',
+    // The status people write on a voice channel ("On joue ce soir").
+    '[class*="voiceChannelStatus"]'
 ].join(",");
 // Names of people, servers, channels and roles: only labels around them change (templates like "Send a message in
 // {channel}" and dates); a name itself is never looked up in the dictionary. Kept as a list so that the diagnostic
@@ -305,7 +307,7 @@ function fromTemplate(text: string): string | undefined {
         // Too little fixed text ("Send {x}") would match labels that only start the same way; such short templates
         // apply only when what they capture is a number ("{count} mentions").
         // A value Discord's records give for this node (a name, a game) also counts: "Playing {game}" with the game.
-        if (match && fixed < 12 && !match.slice(1).every(group => /^[\d\s.,\u00a0\u202f+]+$/.test(group) || kept(group))) continue;
+        if (match && fixed < 12 && !match.slice(1).every(group => /^[\d\s.,\u00a0\u202f+]+$/.test(group) || kept(group) || nameToken.test(group.trim()))) continue;
         if (match) return value.replace(/\u0000(\d+)\u0000/g, (_, n) => match[Number(n)] ?? "");
     }
     return undefined;
@@ -453,7 +455,9 @@ const nameToken = /^\{\$corsuName\d+\}$/;
 
 function maskNames(core: string, names: Set<string>): [string, string[]] {
     const masked: string[] = [];
-    const cut = Array.from(names).filter(name => name.includes(", ") || separators.test(name))
+    // Names and activity values of several words are masked too, so that a value inside a longer text ("Dans un
+    // appel (1 sur 4)" where "Dans un appel" is the activity's state) is never read as the start of a template.
+    const cut = Array.from(names).filter(name => name.includes(", ") || separators.test(name) || /\S\s+\S/.test(name.trim()))
         .sort((a, b) => b.length - a.length);
     let text = core;
     for (const name of cut) {
@@ -606,14 +610,14 @@ export function createTranslator(doc: Document, options: { showOriginal?: () => 
     }
 
     // Diagnostic (off unless the hidden reportMissing option is on): the visible texts and interface attributes that
-    // were left as they are, each with the reason. It never gives what people wrote or chose:
+    // were left as they are, each with the reason. It is written not to give what people wrote or chose:
     // - text inside what people write (messages, bios, statuses, embeds, the text being typed) is only counted;
     // - a text equal to a name or an activity value from the React records around it is only counted, and inside a
     //   longer text those values are replaced by {name};
-    // - inside a name rule, only a text found in the dictionary (as it is, or as the shape of one of its templates) is
-    //   given; anything else there could be a name and is only counted;
-    // - outside them, a text missing from the dictionary is given with the known values replaced, and only when it
-    //   reads like French or English interface text.
+    // - a text kept by a name rule is only counted, with the rule: a nickname can also be a dictionary word;
+    // - any other text is given word by word: a word that no dictionary entry uses becomes {?} and digits become #,
+    //   and a text where such words are the majority is only counted. A name made only of dictionary words ("Paris",
+    //   "Rose") can still show: it cannot be told from an interface label.
     // Each finding has a kind:
     //   missing      not in the dictionary;
     //   unapplied    in the dictionary, nothing protects it, yet it is shown untranslated (never seen by the translator);
@@ -624,13 +628,38 @@ export function createTranslator(doc: Document, options: { showOriginal?: () => 
     const reported = new Set<string>();
     const looksLikeText = /[éèêàçùûôîâ]|\b(le|la|les|des|un|une|de|du|et|à|en|pour|the|and|to|of|your|in|on)\b|^[A-Z][a-zé]+$/i;
 
-    function redact(text: string, names: Set<string>): string {
+    function redact(text: string, names: Set<string>): string | undefined {
         let result = text;
         for (const name of Array.from(names).sort((a, b) => b.length - a.length)) {
             if (name.length < 2) continue;
             result = result.replace(new RegExp(`(?<![\\p{L}\\p{N}])${escape(name)}(?![\\p{L}\\p{N}])`, "giu"), "{name}");
         }
-        return result;
+        return scrub(result);
+    }
+
+    // The words of the dictionary's own entries (French and English, lower case), read once.
+    let vocabulary: Set<string> | undefined;
+    function known(word: string) {
+        if (!vocabulary) {
+            vocabulary = new Set();
+            for (const key of [...Object.keys(words), ...Object.keys(corrections)]) {
+                for (const found of normalize(key).toLowerCase().match(/\p{L}+/gu) ?? []) vocabulary.add(found);
+            }
+        }
+        return vocabulary.has(word.toLowerCase());
+    }
+
+    // A text as the report may give it: words no entry uses become {?}, digits #; undefined when most words are unknown.
+    function scrub(text: string): string | undefined {
+        let total = 0, unknown = 0;
+        const result = text.replace(/\{name\}|\{\d+\}/g, found => `\u0001${found}\u0001`).split("\u0001").map(part =>
+            /^\{(name|\d+)\}$/.test(part) ? part : normalize(part).replace(/\p{L}+/gu, word => {
+                total++;
+                if (known(word)) return word;
+                unknown++;
+                return "{?}";
+            }).replace(/\p{N}/gu, "#")).join("");
+        return total && unknown * 2 >= total ? undefined : result;
     }
 
     // The template a text nearly matches: one indexed under its first or last word whose fixed parts all appear in it,
@@ -687,15 +716,18 @@ export function createTranslator(doc: Document, options: { showOriginal?: () => 
         const inName = Boolean(element.closest(nameArea)) || typingName(element);
         if (lookedUp !== text) {
             const shape = inCatalogue(text);
-            const given = shape ?? (inName ? undefined : redact(text, names));
+            const given = shape !== undefined ? scrub(shape) : inName ? undefined : redact(text, names);
             if (applied !== text) return add({ kind: saved === undefined ? "unapplied" : "stale", text: given });
-            return add({ kind: "excluded", rule: rule(element) ?? "typing indicator", text: shape });
+            // A name rule kept it: a nickname or a server name can be a dictionary word, so only the rule is given.
+            return add({ kind: "excluded", rule: rule(element) ?? "typing indicator" });
         }
         const template = nearTemplate(text);
         if (template) return add({ kind: "template", text: template });
         if (!looksLikeText.test(text)) return;
         if (inName) return count("unknownInName");
-        add({ kind: "missing", text: redact(text, names) });
+        const given = redact(text, names);
+        if (given === undefined) return count("missingUnreadable");
+        add({ kind: "missing", text: given });
     }
 
     function report() {

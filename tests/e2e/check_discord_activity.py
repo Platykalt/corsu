@@ -223,6 +223,9 @@ AFTER_CHANGE = {
 DIAGNOSTIC_DICTIONARY = {
     'Online': 'In linea', 'Dans un appel': 'In una chjama', 'Paramètres': 'Parametri',
     'Joue à \u00001\u0000': 'Ghjoca à \u00001\u0000', 'Work': 'Travagliu',
+    # Words the diagnostic may give (it gives a word only when some entry uses it).
+    'Paramètres avancés': 'Parametri avanzati', 'Paramètres du serveur': 'Parametri di u servore',
+    'Appel avec': 'Chjama cù', 'en cours': 'in corsu',
 }
 
 DIAGNOSTIC_PAGE = HELPERS + r'''
@@ -265,7 +268,8 @@ const has = (kind, text, rule) => report.findings.some(f => f.kind === kind && (
 return JSON.stringify({
   revision: typeof report.revision === "string" && report.revision.length > 0,
   dictionary: report.dictionary,
-  excluded: has("excluded", "Online", '[class*="username"]'),
+  // A text kept by a name rule is never given (a nickname can be a dictionary word): only the rule.
+  excluded: has("excluded", undefined, '[class*="username"]') && !report.findings.some(f => f.kind === "excluded" && f.text),
   missing: has("missing", "Paramètres avancés du serveur"),
   redacted: has("missing", "Appel avec {name} en cours"),
   template: has("template", "Joue à {1}"),
