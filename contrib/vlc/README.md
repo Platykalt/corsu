@@ -1,46 +1,57 @@
-# VLC 3.0.x — brouillons corses / Corsican drafts
+# VLC 3.0.x — complément corse / Corsican complement
 
 ## Français
 
 `co.po` est le catalogue corse de VLC (branche `3.0.x`, `po/co.po`, dernier commit amont du fichier
-`e66842dbd5223d41a8ad88f85ffce3637c57aa23` du 17/09/2026, lu le 17/10/2026, sha256
-`40a24505…c17cddd`), traduit par Patriccollu di Santa Maria è Sichè. Les 1 760 messages qui n’y étaient pas
-traduits ont reçu un **brouillon écrit par une IA, non relu**. Les 4 443 traductions de l’amont sont gardées à
-l’identique, octet pour octet, ainsi que l’en-tête.
+`e66842dbd5223d41a8ad88f85ffce3637c57aa23` du 17/09/2026, lu le 17/10/2026), traduit par Patriccollu di Santa Maria
+è Sichè. Les 1 760 messages qui n’y étaient pas traduits ont reçu un brouillon écrit par une IA.
 
-| | Messages |
-|---|---:|
-| Traduits en amont (inchangés) | 4 443 |
-| Brouillons IA (`#, fuzzy`) | 1 760 |
-| — dont réemploi exact de la mémoire (`tools/tm.py`) | 1 |
-| — dont adaptés d’une suggestion de la mémoire | 61 |
-| — dont nouveaux | 1 698 |
-| Encore vides | 0 |
+| Provenance et statut | Messages | Dans le catalogue expérimental |
+|---|---:|---|
+| Traduction amont (Patriccollu), inchangée octet pour octet | 4 443 | oui |
+| Brouillon IA, relu par IA (2 lots thématiques + passe de cohérence, 17/10/2026) | 1 757 | oui |
+| — dont gardés tels quels / corrigés | 1 580 / 177 | |
+| Brouillon IA incertain après relecture IA | 3 | non |
+| Validé par un locuteur | 0 | |
 
-Chaque brouillon porte `# Corsu: AI draft, not reviewed (source: tm exact|suggestion|new)` et le drapeau
-`#, fuzzy` : `msgfmt` et VLC l’ignorent tant qu’il n’a pas été relu. La terminologie suit les choix de Patriccollu
-dans ce même fichier (esciuta, flussu, fiura, schedariu, cartulare, parolla d’intesa…).
+Les brouillons gardent le drapeau `#, fuzzy` tant qu’un locuteur ne les a pas validés, et un commentaire
+`# Corsu:` qui dit leur statut. `review.json` garde pour chacun le brouillon d’origine, chaque relecture (qui, quand,
+verdict, note) et le statut : `ai_draft`, `ai_reviewed`, `uncertain`, `human`. `TERMS.md` documente la
+terminologie (termes attestés et sources, propositions, mots signalés, noms de genres musicaux) et les cas
+incertains.
 
-**Relire** : ouvrir `co.po` dans Poedit ou Lokalize, corriger chaque entrée « approximative », puis retirer le
-drapeau fuzzy (et le commentaire `# Corsu:`). Vérifier : `msgfmt -c --check-format -o /dev/null co.po`.
+**Contrôler** : `python3 tools/vlcpo.py check` compile tout le catalogue **avec** les brouillons
+(`msgfmt --use-fuzzy -c --check-format`) — une compilation normale les ignore et ne prouve rien sur eux — puis
+vérifie chaque brouillon : formes plurielles, arguments (`%s`, `%1$s`, `%@`, `%1`, macros `PRI`), balises HTML,
+raccourcis `&`, espaces, retours à la ligne, `:` et `...` finaux ; et que le catalogue privé des ajouts redonne
+exactement le fichier amont (SHA-256).
 
-**Rien n’a été envoyé** à VLC ni à personne. Un envoi éventuel (Transifex de VLC, idéalement avec Patriccollu)
-se fera seulement après relecture humaine. Ce fichier n’est pas utilisé par Corsu.
+**Construire le catalogue expérimental** (jamais installé par cette commande) :
+`python3 tools/vlcpo.py build vlc.mo` (amont + statuts `ai_reviewed` et `human`).
 
-Licence : les fichiers `po` de VLC sont distribués sous la même licence que VLC (GPL-2.0-or-later, LGPL pour
-libVLC) ; l’en-tête d’origine est conservé.
+**L’utiliser avec Corsu** (Linux, VLC 3.0.x du système, désactivé par défaut) : `--vlc-complement on`, puis
+`--vlc-complement off` pour revenir au catalogue de VLC. Voir `src/apps/vlc_complement.py`. Essayé avec un vrai
+VLC 3.0.20 et 3.0.24 (`tests/e2e/check_vlc_experimental.py`, `tests/e2e/check_vlc_complement.py`).
+
+**Rien n’a été envoyé** à VLC ni à Patriccollu. Un envoi éventuel (Transifex de VLC, idéalement avec
+Patriccollu) se fera seulement après relecture par un locuteur et avec l’accord du mainteneur de Corsu.
+
+Licence : celle de VLC (GPL-2.0-or-later, LGPL pour libVLC) ; l’en-tête d’origine est conservé.
 
 ## English
 
-`co.po` is VLC's Corsican catalogue (`3.0.x` branch, `po/co.po`, last upstream commit of the file
+`co.po` is VLC's Corsican catalogue (`3.0.x` branch, `po/co.po`, upstream commit
 `e66842dbd5223d41a8ad88f85ffce3637c57aa23`, 2026-09-17, fetched 2026-10-17), translated by Patriccollu di Santa
-Maria è Sichè. Its 1,760 untranslated messages now carry an **AI-written draft, not reviewed**. The 4,443
-upstream translations and the header are kept byte-identical. Counts are in the table above.
+Maria è Sichè. Its 1,760 untranslated messages received an AI draft. Counts by provenance and status are in the
+table above: 4,443 upstream (byte-identical), 1,757 drafts reviewed by AI (1,580 kept, 177 corrected), 3 uncertain
+(left out of the experimental build), 0 validated by a speaker.
 
-Each draft has `# Corsu: AI draft, not reviewed (source: …)` and `#, fuzzy`, so `msgfmt` and VLC ignore it
-until reviewed. **To review**: open `co.po` in Poedit or Lokalize, fix each fuzzy entry, then clear the fuzzy flag
-(and the `# Corsu:` comment); check with `msgfmt -c --check-format -o /dev/null co.po`.
+Drafts keep `#, fuzzy` until a speaker validates them, plus a `# Corsu:` comment with their status; `review.json`
+keeps each original draft, each review and the status. `TERMS.md` documents terminology and the open cases.
 
-**Nothing has been submitted** to VLC or anyone else; submission (VLC's Transifex, ideally with Patriccollu) comes
-only after human review. Corsu does not ship or use this file. Licence: same as VLC (GPL-2.0-or-later, LGPL for
-libVLC); the original header is kept.
+Check: `python3 tools/vlcpo.py check` (msgfmt with the fuzzy entries included, then Corsu's per-draft rules, and the
+upstream file must come back byte for byte). Build: `python3 tools/vlcpo.py build vlc.mo`. Use with Corsu (Linux,
+system VLC 3.0.x, off by default): `--vlc-complement on|off`; see `src/apps/vlc_complement.py`.
+
+**Nothing has been submitted** to VLC or Patriccollu; any submission comes only after a speaker's review and with
+the Corsu maintainer's agreement. Licence: VLC's (GPL-2.0-or-later, LGPL for libVLC); the original header is kept.

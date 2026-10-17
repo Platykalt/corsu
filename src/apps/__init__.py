@@ -59,6 +59,10 @@ class App:
         """Switch one installation to Corsican. Returns None when done, else why it was left alone."""
         raise NotImplementedError
 
+    def leave(self, installer, installation):
+        """Called instead of enable() when an installation is left alone: take back what an earlier run did there
+        and no longer applies (nothing by default)."""
+
 
 def session_languages():
     """The language list programs read on Linux (LANGUAGE, else LANG), without Corsican."""
@@ -83,13 +87,24 @@ def session_is_corsican():
 
 APPLICATION_DIRS = (Path('/usr/share/applications'), Path('/usr/local/share/applications'),
                     Path('/var/lib/flatpak/exports/share/applications'))
-EXEC = re.compile(r'^(Exec=)(?:env LANGUAGE=\S+ )?(.*)$', re.M)
+# What Corsu puts in front of a command; taken away before it writes it again.
+EXEC = re.compile(r'^(Exec=)(?:env (?:(?:LANGUAGE|VLC_DATA_PATH)=\S+ |"(?:LANGUAGE|VLC_DATA_PATH)=(?:[^"\\]|\\.)*" )+)?(.*)$',
+                  re.M)
 
 
-def desktop_override(installer, component, desktop_id, language):
+def exec_value(name, value):
+    """NAME=value as one argument of a menu entry's Exec line, quoted when it holds spaces. Characters that need a
+    double escape there (" ` $ \\) are refused rather than risked."""
+    value = str(value).replace('%', '%%')
+    if re.search(r'["`$\\]', value):
+        raise ValueError(f'{value!r} cannot go in a menu entry')
+    return f'{name}={value}' if re.fullmatch(r'[\w@%+=:,./-]+', value) else f'"{name}={value}"'
+
+
+def desktop_override(installer, component, desktop_id, language, environment=None):
     """A user menu entry that starts the program with Corsican first. It has the system entry's name, so the menu,
     pinned launchers and file associations open it; it is rebuilt from the system entry each time Corsu runs.
-    Returns None when written, else why not."""
+    `environment`: more variables for the program ({name: value}). Returns None when written, else why not."""
     system = next((folder / desktop_id for folder in APPLICATION_DIRS if (folder / desktop_id).exists()), None)
     if system is None:
         return corsu.t(f'no menu entry {desktop_id}', f'pas d\'entrée de menu {desktop_id}')
@@ -104,7 +119,8 @@ def desktop_override(installer, component, desktop_id, language):
     if re.search(r'^DBusActivatable=true', text, re.M):
         return corsu.t('started through D-Bus: the menu entry cannot set its language',
                        'lancé par D-Bus : l\'entrée de menu ne peut pas choisir sa langue')
-    text = EXEC.sub(lambda match: f'{match.group(1)}env LANGUAGE={language} {match.group(2)}', text)
+    variables = ' '.join(exec_value(name, value) for name, value in {'LANGUAGE': language, **(environment or {})}.items())
+    text = EXEC.sub(lambda match: f'{match.group(1)}env {variables} {match.group(2)}', text)
     installer.write(user, text, toggle=True)
     installer.state['files'][str(user)]['component'] = component
     return None
@@ -218,6 +234,8 @@ def install(installer, app_id):
     instances = []
     for installation in app.find():
         reason, action, activation = installation.reason, installation.action, 'blocked'
+        if reason is not None:
+            app.leave(installer, installation)
         if reason is None:
             try:
                 reason = app.enable(installer, installation)

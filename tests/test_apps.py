@@ -10,7 +10,8 @@ from unittest.mock import patch
 import corsu
 import engine
 import apps
-from apps import settings, vlc
+from apps import settings, vlc, vlc_complement
+import update
 
 
 class IniTests(unittest.TestCase):
@@ -114,6 +115,108 @@ class VLCTests(unittest.TestCase):
             override.write_text(override.read_text().replace('home;', 'home;xdg-music;'))
             corsu.disable(['vlc'])
             self.assertEqual(override.read_text(), '[Context]\nfilesystems=home;xdg-music;\n')
+
+
+class VLCComplementTests(VLCTests):
+    """VLC's experimental Corsican complement: only when asked for, through VLC_DATA_PATH, and fully reversible."""
+
+    def setUp(self):
+        super().setUp()
+        self.data = self.root / 'share/vlc'
+        (self.data / 'lua').mkdir(parents=True)
+        for language in ('co', 'fr'):
+            folder = self.root / 'share/locale' / language / 'LC_MESSAGES'
+            folder.mkdir(parents=True)
+            (folder / 'vlc.mo').write_bytes((self.locale / language / 'LC_MESSAGES/vlc.mo').read_bytes())
+        self.stack.enter_context(patch.object(vlc_complement, 'data_folder', lambda executable: self.data))
+
+    def entry(self):
+        return (self.root / '.local/share/applications/vlc.desktop').read_text()
+
+    def test_off_unless_asked_for(self):
+        self.install()
+        self.assertNotIn('VLC_DATA_PATH', self.entry())
+        self.assertFalse((corsu.DATA / 'vlc').exists())
+
+    def test_on_then_off(self):
+        update.set_preference('vlc_complement', True)
+        [installation] = vlc.VLC().find()
+        self.assertIn('complement', installation.kind)
+        report = self.install()
+        self.assertEqual(len(report['installed']), 1)
+        tree = corsu.DATA / 'vlc/share'
+        # The path holds a space: quoted as one argument, before VLC's own command.
+        self.assertIn(f'Exec=env LANGUAGE=co:fr_FR "VLC_DATA_PATH={tree / "vlc"}" /usr/bin/vlc --started-from-file %U',
+                      self.entry())
+        self.assertEqual(self.entry().count('VLC_DATA_PATH='), 2)
+        self.assertEqual((tree / 'vlc/lua').resolve(), (self.data / 'lua').resolve())
+        self.assertEqual((tree / 'locale/fr/LC_MESSAGES/vlc.mo').resolve(),
+                         (self.root / 'share/locale/fr/LC_MESSAGES/vlc.mo').resolve())
+        catalog = engine.read_mo((tree / 'locale/co/LC_MESSAGES/vlc.mo').read_bytes())
+        self.assertEqual(catalog, engine.read_mo(vlc_complement.catalog()[0]))
+        _, added = vlc_complement.entries()
+        self.assertGreater(len(added), 1000)
+        self.install()  # a second run replaces, never stacks, the variables
+        self.assertEqual(self.entry().count('VLC_DATA_PATH='), 2)
+
+        update.set_preference('vlc_complement', False)
+        self.install()
+        self.assertNotIn('VLC_DATA_PATH', self.entry())
+        self.assertIn('Exec=env LANGUAGE=co:fr_FR /usr/bin/vlc --started-from-file %U', self.entry())
+        self.assertFalse((corsu.DATA / 'vlc').exists())
+
+    def test_switching_vlc_off_and_uninstalling(self):
+        update.set_preference('vlc_complement', True)
+        self.install()
+        corsu.disable(['vlc'])
+        self.assertFalse((self.root / '.local/share/applications/vlc.desktop').exists())
+        corsu.install(['vlc'])
+        self.assertIn('VLC_DATA_PATH', self.entry())
+        corsu.uninstall()
+        self.assertFalse((self.root / '.local/share/applications/vlc.desktop').exists())
+        self.assertFalse((corsu.DATA / 'vlc').exists())
+        self.assertTrue(self.data.exists())
+
+    def test_without_vlc_corsican_catalogue(self):
+        """The complement alone makes VLC Corsican; switched off, its menu entry and folder go."""
+        (self.locale / 'co/LC_MESSAGES/vlc.mo').unlink()
+        update.set_preference('vlc_complement', True)
+        self.assertEqual(len(self.install()['installed']), 1)
+        self.assertIn('VLC_DATA_PATH', self.entry())
+        update.set_preference('vlc_complement', False)
+        self.assertEqual(len(self.install()['skipped']), 1)
+        self.assertFalse((self.root / '.local/share/applications/vlc.desktop').exists())
+        self.assertFalse((corsu.DATA / 'vlc').exists())
+
+    def test_other_versions_keep_the_upstream_catalogue(self):
+        update.set_preference('vlc_complement', True)
+        with patch.object(vlc, 'version', lambda executable: '4.0.0'):
+            [installation] = vlc.VLC().find()
+            self.assertIn('complement not used', installation.kind)
+            self.install()
+        self.assertNotIn('VLC_DATA_PATH', self.entry())
+
+
+@unittest.skipUnless(__import__('shutil').which('msgfmt'), 'gettext tools not installed')
+class VLCComplementCatalogTests(unittest.TestCase):
+    def test_same_catalogue_as_msgfmt(self):
+        """Compiled here without gettext tools; tools/vlcpo.py build (msgfmt, checked) gives the same messages."""
+        import sys
+        sys.path.insert(0, str(corsu.ROOT / 'tools'))
+        import vlcpo
+        with tempfile.TemporaryDirectory() as folder:
+            target = Path(folder) / 'vlc.mo'
+            with redirect_stdout(io.StringIO()):
+                vlcpo.build(target)
+            expected = engine.read_mo(target.read_bytes())
+        data, upstream, added = vlc_complement.catalog()
+        found = engine.read_mo(data)
+        # msgfmt leaves POT-Creation-Date out of the header; every message is the same.
+        self.assertEqual({key: value for key, value in found.items() if key},
+                         {key: value for key, value in expected.items() if key})
+        self.assertEqual(upstream, 4443)
+        self.assertEqual(added, sum(1 for record in json.loads((vlc_complement.FOLDER / 'review.json').read_text(
+            encoding='utf-8')).values() if record['status'] in vlc_complement.STATUSES))
 
 
 if __name__ == '__main__':

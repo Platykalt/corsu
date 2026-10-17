@@ -152,6 +152,8 @@ DEPLOYED_DIRECTORIES = ('src', 'lexicon', 'install', 'vendor', 'Vencord')
 DEPLOYED_MINECRAFT = tuple(f'minecraft/java/{name}' for name in ('pack.mcmeta', 'co_fr.json', 'LICENSE.txt', 'VERSION',
                                                                 # minecraft_packs: one pack per game version, offline.
                                                                 'keys.tsv', 'versions.json', 'history.json'))
+# apps/vlc_complement.py compiles VLC's experimental Corsican complement from these, offline.
+DEPLOYED_VLC = ('contrib/vlc/co.po', 'contrib/vlc/review.json', 'contrib/vlc/README.md')
 
 
 def deploy_release():
@@ -162,7 +164,7 @@ def deploy_release():
         return ROOT
     fingerprint = hashlib.sha256()
     printed = sorted([*(path for path in (ROOT / 'src').rglob('*') if path.is_file() and '__pycache__' not in path.parts),
-                      *(ROOT / name for name in DEPLOYED_FILES + DEPLOYED_MINECRAFT if (ROOT / name).is_file()),
+                      *(ROOT / name for name in DEPLOYED_FILES + DEPLOYED_MINECRAFT + DEPLOYED_VLC if (ROOT / name).is_file()),
                       *(ROOT / 'lexicon').glob('*.tsv'), *(ROOT / 'Vencord/dist').glob('*.*')])
     for path in printed:
         fingerprint.update(path.relative_to(ROOT).as_posix().encode() + b'\0' + path.read_bytes())
@@ -179,7 +181,7 @@ def deploy_release():
     target.parent.mkdir(parents=True, exist_ok=True)
     stage = Path(tempfile.mkdtemp(prefix='stage-', dir=target.parent))
     try:
-        for name in DEPLOYED_FILES + DEPLOYED_MINECRAFT:
+        for name in DEPLOYED_FILES + DEPLOYED_MINECRAFT + DEPLOYED_VLC:
             if (ROOT / name).is_file():
                 (stage / name).parent.mkdir(parents=True, exist_ok=True)
                 shutil.copy2(ROOT / name, stage / name)
@@ -724,10 +726,19 @@ def main(argv=None):
     parser.add_argument('--disable', nargs='*', choices=parts, metavar='PART',
                         help='Go back to the previous language, for everything or for the parts listed: ' + ', '.join(parts))
     parser.add_argument('--enable', nargs='*', choices=parts, metavar='PART', help='Switch Corsican back on, for everything or the parts listed')
+    parser.add_argument('--vlc-complement', choices=['on', 'off'],
+                        help='VLC on Linux: also use Corsu\'s experimental Corsican complement (AI translations of the '
+                             'messages VLC\'s catalogue leaves in English, not reviewed by a speaker), or stop using it')
     parser.add_argument('--hours', type=float, help='With --disable terminal: switch the terminal back on after this many hours')
     args = parser.parse_args(argv)
     if args.disable is not None and args.enable is not None:
         parser.error('Choose either --disable or --enable.')
+    if args.vlc_complement and not args.dry_run:
+        import update
+        update.set_preference('vlc_complement', args.vlc_complement == 'on')
+        print(t(f'VLC\'s experimental Corsican complement: {args.vlc_complement}. It is applied with VLC.',
+                f'Complément corse expérimental de VLC : {"activé" if args.vlc_complement == "on" else "désactivé"}. '
+                'Il s\'applique avec VLC.'))
     if args.disable is not None or args.enable is not None:
         if args.dry_run:
             return 0

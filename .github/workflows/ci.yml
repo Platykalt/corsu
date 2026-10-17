@@ -193,6 +193,15 @@ jobs:
           ls /usr/share/applications/vlc.desktop
           ls -l /usr/share/locale/co/LC_MESSAGES/vlc.mo
           python tests/e2e/check_vlc.py
+      - name: VLC (Linux) — every Corsican draft checked; the experimental complement shown by real VLC, through Corsu
+        if: runner.os == 'Linux'
+        run: |
+          sudo apt-get install -y -qq gettext
+          python tools/vlcpo.py check
+          python tools/vlcpo.py build "$RUNNER_TEMP/vlc-experimental.mo"
+          python tools/vlcpo.py build "$RUNNER_TEMP/vlc-upstream.mo" --include=none
+          python tests/e2e/check_vlc_experimental.py --mo "$RUNNER_TEMP/vlc-experimental.mo" --upstream "$RUNNER_TEMP/vlc-upstream.mo"
+          HOME="$(mktemp -d)" XDG_DATA_HOME= XDG_CONFIG_HOME= python tests/e2e/check_vlc_complement.py
       - name: Windows programs — 7-Zip, VLC and Notepad++ set to Corsican in the real registry and back
         if: runner.os == 'Windows'
         env:

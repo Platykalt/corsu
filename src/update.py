@@ -36,7 +36,8 @@ API = 'https://api.github.com/repos/Platykalt/corsu/releases?per_page=30'
 ARCHIVES = {'linux': 'corsu-linux.tar.gz', 'macos': 'corsu-macos.tar.gz', 'windows': 'corsu-windows.zip'}
 CACHE = 'update.json'
 PREFERENCES = 'preferences.json'
-DEFAULTS = {'auto_update': False}
+# vlc_complement: VLC's experimental Corsican complement (apps/vlc_complement.py), only when asked for.
+DEFAULTS = {'auto_update': False, 'vlc_complement': False}
 CHECK_EVERY = 6 * 3600
 # After a failed check (offline, GitHub's rate limit), wait this long before asking again.
 RETRY_AFTER = 15 * 60
