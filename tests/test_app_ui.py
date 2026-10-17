@@ -156,6 +156,17 @@ const out = vm.runInContext(`
   result.summary = { on: textOf("summary-on-value"), off: textOf("summary-on-sub"), attention: textOf("summary-attention-value"),
     jumps: $("summary-attention-list").children.map(node => clean(node.textContent)), attentionClass: $("summary-attention").className,
     update: textOf("summary-update-text"), hidden: Boolean($("summary").hidden) };
+  // The page redraws itself every 1.5 s: what did not change keeps its nodes (focus stays on a link or button, live
+  // regions are not announced again); what changed is redrawn.
+  const redrawn = ["summary-attention-list", "guides", "practice", "facts", "update-facts", "update-status"];
+  const firsts = () => redrawn.map(id => $(id).children[0]);
+  let before = firsts();
+  render();
+  result.unchangedKept = firsts().map((node, index) => Boolean(node) && node === before[index]);
+  before = firsts();
+  language = "fr"; render();
+  result.changedRedrawn = firsts().map((node, index) => node !== before[index]);
+  language = "en"; render();
   // The hooks the Appearance page (appearance.js) relies on.
   result.renderEvents = events.filter(event => event.type === "corsu:render").map(event => event.detail);
   show("appearance");
@@ -327,6 +338,10 @@ class RenderTests(unittest.TestCase):
         # Active but deferred: the installer's advice says what to do.
         self.assertEqual(summary['jumps'][2], 'FileZilla Fermez FileZilla')
         self.assertEqual(summary['update'], self.result['en']['never'])
+
+    def test_unchanged_parts_keep_their_nodes_across_refreshes(self):
+        self.assertEqual(self.result['unchangedKept'], [True] * 6)
+        self.assertEqual(self.result['changedRedrawn'], [True] * 6)
 
     def test_hooks_for_the_appearance_page(self):
         self.assertEqual(self.result['renderEvents'][-1], 'en')
