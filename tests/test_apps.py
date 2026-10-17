@@ -194,6 +194,19 @@ class VLCComplementTests(VLCTests):
         self.assertFalse((self.root / '.local/share/applications/vlc.desktop').exists())
         self.assertFalse((corsu.DATA / 'vlc').exists())
 
+    def test_uncertain_drafts_left_out_and_menu_accelerator_carried(self):
+        """The three drafts still uncertain after review are not in the complement; "Tool&s" is, as "A&ttrezzi"
+        (Alt+T: Alt+A is "&Audio" in the same menu bar)."""
+        upstream, added = vlc_complement.entries()
+        catalog = engine.read_mo(vlc_complement.catalog()[0])
+        for msgid in ('Soften', 'Shaping delay (ms)'):
+            self.assertNotIn(msgid, added)
+            self.assertNotIn(msgid, upstream)
+            self.assertNotIn(msgid.encode(), catalog)
+        self.assertFalse([key for key in catalog if key.startswith(b'If enabled, and shaping is specified')])
+        self.assertEqual((added['Tool&s'], catalog[b'Tool&s']), ('A&ttrezzi', 'A&ttrezzi'.encode()))
+        self.assertEqual(catalog[b'&Audio'], b'&Audio')
+
     def test_status(self):
         status = vlc_complement.status()
         self.assertEqual((status['enabled'], status['available'], status['reason']), (False, True, None))

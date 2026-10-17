@@ -95,6 +95,20 @@ class CatalogTest(unittest.TestCase):
         self.assertEqual(code, 1)
         self.assertIn('validated by a speaker', errors[0])
 
+    def test_a_draft_must_not_take_a_letter_already_used_in_its_menu(self):
+        upstream = '#: modules/gui/qt/menus.cpp:338\nmsgid "&Audio"\nmsgstr "&Audio"\n'
+        self.write(upstream, draft('Tool&s', '&Attrezzi'))
+        code, errors = self.errors()
+        self.assertEqual(code, 1)
+        self.assertTrue(any('menu bar' in error and 'accelerator A' in error for error in errors), errors)
+        self.write(upstream, draft('Tool&s', 'A&ttrezzi'))
+        self.assertEqual(self.errors(), (0, []))
+        # A clash between upstream translations is only reported: Corsu does not change them.
+        self.write(upstream, '#: modules/gui/qt/menus.cpp:342\nmsgid "Tool&s"\nmsgstr "&Attrezzi"\n')
+        with mock.patch('builtins.print') as printed:
+            self.assertEqual(vlcpo.check(self.catalog), 0)
+        self.assertTrue(any(call.args[0] == 'NOTE' for call in printed.call_args_list))
+
     def proposals(self, *items):
         path = self.catalog.parent / f'proposals{len(list(self.catalog.parent.glob("proposals*")))}.jsonl'
         path.write_text(''.join(json.dumps(item) + '\n' for item in items), encoding='utf-8')
@@ -149,6 +163,38 @@ class RealCatalogTest(unittest.TestCase):
         with mock.patch('builtins.print') as printed:
             code = vlcpo.check()
         self.assertEqual(code, 0, [call.args for call in printed.call_args_list])
+
+    def test_menu_accelerators(self):
+        """VLC 3.0.x's menus as listed in vlcpo.MENUS: every entry is in the catalogue, the menu bar's letters are all
+        different ("Tool&s" was "&Attrezzi", Alt+A like "&Audio") and no Corsu draft shares a letter in its menu."""
+        _, entries = vlcpo.read()
+        msgids = {entry.msgid for entry in entries if entry.msgctxt is None}
+        self.assertEqual([msgid for menu in vlcpo.MENUS.values() for msgid in menu if msgid not in msgids], [])
+        clashes = vlcpo.menu_clashes(entries)
+        self.assertEqual([clash for clash in clashes if clash[3]], [])
+        self.assertEqual([clash for clash in clashes if clash[0].startswith('menu bar')], [])
+        tools = next(entry for entry in entries if entry.msgid == 'Tool&s')
+        self.assertEqual((tools.translations[0], tools.draft), ('A&ttrezzi', True))
+
+    def test_uncertain_drafts_stay_out_of_the_build(self):
+        uncertain = {'002095affa24': 'Soften', 'e6440397f117': 'Shaping delay (ms)', 'cab4a543cc92': 'If enabled, '}
+        review = vlcpo.load_review()
+        self.assertEqual(sorted(name for name, record in review.items() if record['status'] == 'uncertain'),
+                         sorted(uncertain))
+        _, entries = vlcpo.read()
+        drafts = {entry.id: entry for entry in entries if entry.draft}
+        for name, start in uncertain.items():
+            self.assertTrue(drafts[name].msgid.startswith(start))
+            self.assertTrue(drafts[name].translations[0] and drafts[name].fuzzy)
+        with tempfile.TemporaryDirectory() as folder:
+            mo = Path(folder) / 'vlc.mo'
+            counts = vlcpo.build(mo)
+            with open(mo, 'rb') as stream:
+                catalog = gettext.GNUTranslations(stream)
+        self.assertEqual(counts['drafts_left_out'], 3)
+        for name in uncertain:
+            self.assertEqual(catalog.gettext(drafts[name].msgid), drafts[name].msgid)
+        self.assertEqual(catalog.gettext('Tool&s'), 'A&ttrezzi')
 
     def test_status_counts(self):
         counts = vlcpo.counts()

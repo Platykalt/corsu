@@ -8804,6 +8804,13 @@
     "by": "ai",
     "date": "2026-10-17",
     "verdict": "keep"
+   },
+   {
+    "by": "ai",
+    "date": "2026-10-17",
+    "msgstr": "A&ttrezzi",
+    "note": "Menu accelerator: \"&Attrezzi\" took Alt+A, already \"&Audio\" in the same menu bar (menus.cpp:338/342) and popup menu (1055/1085). \"A&ttrezzi\" (Alt+T) is free in both (Media M, Ripruduzzione R, Audio A, Video V, Sottutitulu S, Affissà F, Aiutu U), like upstream \"A&ffissà\" marks a later letter.",
+    "verdict": "fix"
    }
   ],
   "status": "ai_reviewed"
@@ -11009,6 +11016,13 @@
     "date": "2026-10-17",
     "msgstr": "Sempre &sopra",
     "note": "Upstream \"Always on top\" = \"Sempre sopra\" (and \"Float on Top\").",
+    "verdict": "fix"
+   },
+   {
+    "by": "ai",
+    "date": "2026-10-17",
+    "msgstr": "Sempre s&opra",
+    "note": "Menu accelerator: \"Sempre &sopra\" took S, already upstream \"Interfaccia &Screnu Sanu\" in the same View menu (menus.cpp:504/522). O is free there (L, A, M, S, E, B).",
     "verdict": "fix"
    }
   ],
