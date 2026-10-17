@@ -320,13 +320,68 @@ Implemented in [`src/apps/poedit.py`](../src/apps/poedit.py) (checked 2026-10-17
     [edapp.cpp L344-L345](https://github.com/vslavik/poedit/blob/v3.10-oss/src/edapp.cpp#L344-L345)). Read at start,
     written only by that dialog; can be set before the first start. Not run on Windows (Poedit.exe needs Windows' own
     `icu.dll`, missing under Wine).
-  - **Linux:** no setting, and `LANGUAGE` alone is not enough: wxWidgets 3.2 puts the language of
-    `LC_ALL`/`LC_MESSAGES`/`LANG` before `LANGUAGE`'s list ([uilocale.cpp L886-L956](https://github.com/wxWidgets/wxWidgets/blob/v3.2.8/src/unix/uilocale.cpp#L886-L956)).
-    Corsu's menu entry (and Flatpak override) sets `LANGUAGE=co:<languages> LANG=C.UTF-8 LC_MESSAGES=C.UTF-8` and keeps
-    the session's locale for the format categories. Run for real (Debian 3.6.3): Corsican window; GTK's own dialogs
-    show English. A `co_FR` locale name breaks the C++ locale (glibc has none).
-  - **macOS:** no setting; Poedit follows the per-app language list (`AppleLanguages`, an array). Corsu leaves it and
-    points to System Settings → Language & Region → Applications (?).
+  - **Linux:** no setting (`NEED_CHOOSELANG_UI` is 0, so no `ui_language` key is read, 3.6.3 and 3.10), and
+    `LANGUAGE` alone is not enough. Two readers of the same variables:
+    - Poedit's own strings: `PoeditApp::SetupLanguage` ([edapp.cpp L543-L590](https://github.com/vslavik/poedit/blob/v3.6.3-oss/src/edapp.cpp#L543-L590))
+      asks `wxUILocale::GetPreferredUILanguages`, which puts the language of `LC_ALL`, else `LC_MESSAGES`, else
+      `LANG` before `LANGUAGE`'s list, a `C`/`POSIX` value (the part before `.`/`@`) counting as none
+      ([uilocale.cpp L56-L99, L886-L956](https://github.com/wxWidgets/wxWidgets/blob/v3.2.8/src/unix/uilocale.cpp#L886-L956);
+      identical in 3.2.12, Flathub's build); ICU's `uloc_acceptLanguage` then picks the first language with a catalogue.
+    - GTK's dialogs (file chooser, its buttons): glibc gettext, after `wxLocale::Init(wxLANGUAGE_DEFAULT)` did
+      `setlocale(LC_ALL, "")` ([intl.cpp L486](https://github.com/wxWidgets/wxWidgets/blob/v3.2.8/src/common/intl.cpp#L486)).
+      glibc ignores `LANGUAGE` when `LC_MESSAGES` is `C` or `C.<codeset>`
+      ([dcigettext.c, release/2.41, L1527-L1543](https://sourceware.org/git/?p=glibc.git;a=blob;f=intl/dcigettext.c;hb=refs/heads/release/2.41/master#l1527)).
+
+    So the first way (0.25 before this fix: `LANG=C.UTF-8 LC_MESSAGES=C.UTF-8`, formats given back) had Poedit in
+    Corsican but GTK's dialogs in English (reproduced: Debian 3.6.3 and Flathub 3.10). A `co_FR` locale name does not
+    exist in glibc: `setlocale` fails as a whole and the C++ locale breaks.
+
+    **Now:** `LANGUAGE=co:<languages> LC_MESSAGES=/C.UTF-8`, `LANG` and the formats untouched (when the session sets
+    `LC_ALL`, it is emptied and its value given to `LANG` and the categories the session sets). wxWidgets sees `/C`:
+    not `C`, no known language, so `LANGUAGE`'s list comes first → Corsican. glibc accepts a name starting with `/`
+    (`valid_locale_name`, [findlocale.c L95](https://sourceware.org/git/?p=glibc.git;a=blob;f=locale/findlocale.c;hb=refs/heads/release/2.41/master#l95))
+    and finds it under its locale folder (`/usr/lib/locale//C.UTF-8`, the C.UTF-8 folder glibc ≥ 2.35 ships): only
+    `LC_MESSAGES` comes from it, and since its name is not `C`, gettext follows `LANGUAGE` → GTK, which has no
+    Corsican, uses the person's language.
+
+    Run for real on 2026-10-17, in containers under Xvfb:
+    - Debian 13 `poedit` 3.6.3 (wxWidgets 3.2.8, glibc 2.41, GTK 3.24.49).
+    - Flathub `net.poedit.Poedit` 3.10 (wxWidgets 3.2.12, GNOME 51 runtime, glibc 2.44).
+    - Sessions `fr_FR`, `de_DE`, `it_IT`, plus `LC_ALL=it_IT` over `LANG=en_US`.
+
+    Observed: Poedit's trace says `using UI language 'co'`, its window is in Corsican, File → Open's GTK chooser and
+    its buttons are in French/German/Italian, the file-list dates and "50 %" use the session's format, a `.po` in an
+    accented folder opens, and there is no locale error. Corsu's own code wrote the entry or override; switching off,
+    on and uninstalling gave the files back.
+
+    **Trade-offs:**
+    - This depends on how glibc resolves locale names, not on a documented interface. Before writing the menu entry,
+      Corsu checks it with `LC_ALL=/C.UTF-8 locale` (no "Cannot set").
+    - Where the check fails (musl, a glibc without the C.UTF-8 folder), Corsu falls back to the first way. The
+      installation's label then says the file dialogs will be in English.
+    - The Flatpak is not checked by Corsu: its runtime's glibc is the one seen.
+    - `LC_MESSAGES` data (yes/no regexes) is C's: Poedit does not use it.
+    - Programs Poedit starts (msgfmt…) inherit the same variables, and their messages follow `LANGUAGE` too.
+  - **macOS:** no setting of Poedit's own; `wxUILocale::GetPreferredUILanguages` is `[NSLocale preferredLanguages]`
+    ([osx/core/uilocale.mm L314-L325](https://github.com/wxWidgets/wxWidgets/blob/v3.2.8/src/osx/core/uilocale.mm#L314-L325)),
+    which reads `AppleLanguages` from the app's own domain before the global one, the same array System Settings →
+    Language & Region → Applications writes.
+
+    Corsu writes `AppleLanguages` = `co` + the person's global list (read only; `co*` taken out) in
+    `net.poedit.Poedit` (bundle id from Poedit.xcodeproj; the app has no entitlements, so it is not sandboxed).
+    AppKit's own panels have no Corsican, so they should take the next language.
+
+    The new typed-preference helper (`settings.set_defaults_value`) works as follows:
+    - It reads with `defaults export <domain> -` and plistlib, and writes `defaults write <domain> <key> '<array>…</array>'`
+      (XML fragment, any plist type).
+    - It records the original as an XML fragment, or as absent, and gives back exactly that type and value. A value
+      changed since stays.
+    - It refuses `NSGlobalDomain`/`-g`/`.GlobalPreferences`.
+
+    **Experimental:** not run on a Mac. The unit tests use a simulated `defaults`. `tests/test_apps_settings.py`
+    has `RealMacTests`, which runs only on a GitHub Actions macOS runner on throwaway domains: a real `defaults`
+    round trip, and NSLocale of a small tool with its own bundle id seeing `co` first. The Poedit window itself, and
+    whether AppKit panels really fall back to the second language, are unverified (?).
 - **Close?** No: neither the registry value nor the menu entry is rewritten by Poedit; a restart is enough.
 - **Licence:** MIT.
 
