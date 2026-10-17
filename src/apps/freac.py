@@ -88,16 +88,21 @@ class Freac(apps.App):
     def installation(self, kind, location, lang, target):
         from apps import programs
         catalog = lang / VALUE
-        reason = None
+        reason = action = None
         if not catalog.exists():
             reason = corsu.t(f'its Corsican file is missing ({catalog})', f'son fichier corse manque ({catalog})')
+            action = corsu.t('Reinstall fre:ac with its languages, then run Corsu again',
+                             'Réinstallez fre:ac avec ses langues, puis relancez Corsu')
         elif not target.exists():
             reason = corsu.t('start fre:ac once first (no freac.xml yet)',
                              'lancez fre:ac une fois d\'abord (pas encore de freac.xml)')
+            action = corsu.t('Start fre:ac once, close it, then run Corsu again',
+                             'Lancez fre:ac une fois, fermez-le, puis relancez Corsu')
         elif programs.running(*self.processes):
             reason = programs.close_first(self.name)
+            action = corsu.t('Close fre:ac, then switch it on in Corsu', 'Fermez fre:ac, puis activez-le dans Corsu')
         item = apps.Installation(self, kind, location, None, catalog if catalog.exists() else None,
-                                 coverage(lang) if catalog.exists() else None, reason)
+                                 coverage(lang) if catalog.exists() else None, reason, action)
         item.target = target
         return item
 

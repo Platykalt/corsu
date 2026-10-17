@@ -41,6 +41,10 @@ installés par Corsu. Détail des mécanismes et des sources : [docs/apps-resear
 | FileZilla (Windows, Linux) | Patriccollu, `filezilla.mo` | `Language Code` dans `filezilla.xml` | 99,7 % (catalogue amont) | unitaires | non | amont |
 | HandBrake (Windows, Linux) | Patriccollu, intégrée / `ghb.mo` | `UiLanguage` dans ses réglages (portable laissé tel quel) | non mesurée | unitaires | non | amont |
 | VeraCrypt (Windows, Linux) | Patriccollu, `Language.co.xml` | `Language` dans `Configuration.xml` | non mesurée | unitaires | non | amont |
+| Audacity 3 (Linux, Flatpak, Windows, macOS), version de développement | amont, `audacity.mo` | `[Locale] Language=co` dans `audacity.cfg` | mesurée par rapport au français quand les deux catalogues sont là | unitaires (simulés) | Linux : AppImage officielle 3.7.7, menus vus en corse | amont |
+| Audacity 4 (Linux ; Windows, macOS expérimentaux), version de développement | amont, `audacity_co.qm` | `language=co` dans `[General]` d'`Audacity4.ini` (macOS : préférence) | 4 050 / 4 050 (source 4.0.1) | unitaires (simulés) | Linux : AppImage officielle 4.0.1, fenêtre vue en corse | amont |
+| Tenacity 1.3 (Linux, Flatpak, Windows, macOS), version de développement | amont, `tenacity.mo` | `[Locale] Language=co` dans `tenacity.cfg` | 3 851 / 4 106 (93,8 %) | unitaires (simulés) | Linux : AppImage officielle 1.3.5, menus vus en corse | amont |
+| fre:ac 1.1 (Windows, Linux), version de développement | amont, `freac_co.xml` | `Language` = `freac_co.xml` dans `freac.xml` | 1 104 / 1 104 (1.1.7) | unitaires (simulés) | non | amont |
 
 Règles communes : un logiciel qui réécrit ses réglages en quittant doit être fermé (sinon il est laissé tel quel, et
 Corsu le dit) ; un fichier de réglages absent (logiciel jamais lancé) ou illisible n'est pas créé ni réécrit ; une

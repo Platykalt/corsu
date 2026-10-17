@@ -141,9 +141,11 @@ class LinuxTests(AudioAppsTests):
         self.which['audacity'] = '/usr/bin/audacity'
         report = self.run_install('audacity')
         self.assertEqual(len(report['skipped']), 1)  # no Corsican catalogue
+        self.assertIn('Reinstall Audacity', report['skipped'][0]['action'])  # what the window says to do next
         self.system_audacity()
         report = self.run_install('audacity')
         self.assertIn('once', report['skipped'][0]['reason'])
+        self.assertIn('Start Audacity once', report['skipped'][0]['action'])
         self.assertFalse((self.root / '.config/audacity/audacity.cfg').exists())  # never invented
         config = self.root / '.config/audacity/audacity.cfg'
         write(config, AUDACITY_CFG)
@@ -151,6 +153,7 @@ class LinuxTests(AudioAppsTests):
         report = self.run_install('audacity')
         self.assertEqual(config.read_text(), AUDACITY_CFG)
         self.assertIn('Audacity', report['skipped'][0]['reason'])
+        self.assertIn('Close Audacity', report['skipped'][0]['action'])
 
     def test_value_changed_since_and_malformed_file_are_kept(self):
         self.system_audacity()

@@ -24,7 +24,8 @@ est dans [Ce qui marche, et où](docs/fr/compatibilite.md).
 
 **Logiciels déjà traduits en corse** : VLC, 7-Zip, Notepad++, WinMerge, SumatraPDF, FileZilla, HandBrake et VeraCrypt
 ont une traduction corse faite par Patriccollu di Santa Maria è Sichè. Quand ils sont installés, l'application Corsu
-les propose et règle leur langue sur le corse, puis la rend à la désactivation.
+les propose et règle leur langue sur le corse, puis la rend à la désactivation. Dans la version de développement
+(pas encore publiée) : Audacity 3 et 4, Tenacity et fre:ac, avec leur propre traduction corse.
 
 Ce qui est traduit, ce qui est en cours et ce qui est prévu : **[État des traductions](docs/fr/etat-des-traductions.md)**.
 
@@ -115,7 +116,8 @@ again at any time, and the details for each system are in [What works where](doc
 
 **Programs already translated into Corsican**: VLC, 7-Zip, Notepad++, WinMerge, SumatraPDF, FileZilla, HandBrake and
 VeraCrypt have a Corsican translation by Patriccollu di Santa Maria è Sichè. When they are installed, the Corsu app offers
-them and sets their language to Corsican, and gives it back when switched off.
+them and sets their language to Corsican, and gives it back when switched off. In the development version (not yet
+published): Audacity 3 and 4, Tenacity and fre:ac, with their own Corsican translation.
 
 What is translated, in progress and planned: **[Translation status](docs/en/translation-status.md)**.
 

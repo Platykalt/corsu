@@ -1,5 +1,14 @@
 # Changelog
 
+## Unreleased
+
+- Audacity 3 and 4, Tenacity and fre:ac: Corsu switches on their own Corsican translation through their language
+  setting, version by version and platform by platform (Audacity 4 on Windows and macOS experimental; fre:ac Flatpak
+  and macOS, AppImages and Audacity 4 Flatpak left alone with the reason). Audacity 3, Audacity 4 and Tenacity were
+  started for real on Linux (official AppImages, throwaway home) and showed Corsican; the rest is checked on
+  simulated folders. The window says what to do when one is left alone (reinstall with translations, start it once,
+  close it).
+
 ## 0.23.0 (2026-10-17)
 
 - Minecraft: Java Edition in Corsican for 87 versions, releases 1.6.1 to 26.3: one pack per version, built from the

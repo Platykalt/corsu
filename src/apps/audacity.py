@@ -114,21 +114,26 @@ class WxAudioApp(apps.App):
 
     def installation(self, kind, location, version, catalog, coverage, setting, extra=None):
         """One installation. setting: ('ini', file, section, key) or ('defaults', domain, None, key)."""
-        reason = None
+        reason = action = None
         if not catalog or not Path(catalog).exists():
             reason = corsu.t(f'its Corsican catalogue is missing ({catalog})' if catalog else 'its Corsican catalogue is missing',
                              f'son catalogue corse manque ({catalog})' if catalog else 'son catalogue corse manque')
+            action = corsu.t(f'Reinstall {self.name} with its translations, then run Corsu again',
+                             f'Réinstallez {self.name} avec ses traductions, puis relancez Corsu')
         elif extra:
             reason = extra
         elif setting[0] == 'ini' and not Path(setting[1]).exists():
             reason = self.start_once()
+            action = corsu.t(f'Start {self.name} once, close it, then run Corsu again',
+                             f'Lancez {self.name} une fois, fermez-le, puis relancez Corsu')
         elif self.processes:
             from apps import programs
             if programs.running(*self.processes):
                 reason = programs.close_first(self.name)
+                action = corsu.t(f'Close {self.name}, then switch it on in Corsu', f'Fermez {self.name}, puis activez-le dans Corsu')
         present = bool(catalog) and Path(catalog).exists()
         item = apps.Installation(self, kind, location, version, catalog if present else None,
-                                 coverage if present else None, reason)
+                                 coverage if present else None, reason, action)
         item.setting = setting
         return item
 

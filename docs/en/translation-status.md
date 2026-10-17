@@ -40,6 +40,10 @@ which it gives back when switched off. Corsu never installs the programs. Mechan
 | FileZilla (Windows, Linux) | Patriccollu, `filezilla.mo` | `Language Code` in `filezilla.xml` | 99.7% (upstream catalogue) | unit | no | upstream |
 | HandBrake (Windows, Linux) | Patriccollu, built in / `ghb.mo` | `UiLanguage` in its settings (portable left alone) | not measured | unit | no | upstream |
 | VeraCrypt (Windows, Linux) | Patriccollu, `Language.co.xml` | `Language` in `Configuration.xml` | not measured | unit | no | upstream |
+| Audacity 3 (Linux, Flatpak, Windows, macOS), development version | upstream, `audacity.mo` | `[Locale] Language=co` in `audacity.cfg` | measured against French when both catalogues are there | unit (simulated) | Linux: the official 3.7.7 AppImage, menus seen in Corsican | upstream |
+| Audacity 4 (Linux; Windows, macOS experimental), development version | upstream, `audacity_co.qm` | `language=co` in `[General]` of `Audacity4.ini` (macOS: preference) | 4,050 / 4,050 (4.0.1 source) | unit (simulated) | Linux: the official 4.0.1 AppImage, window seen in Corsican | upstream |
+| Tenacity 1.3 (Linux, Flatpak, Windows, macOS), development version | upstream, `tenacity.mo` | `[Locale] Language=co` in `tenacity.cfg` | 3,851 / 4,106 (93.8 %) | unit (simulated) | Linux: the official 1.3.5 AppImage, menus seen in Corsican | upstream |
+| fre:ac 1.1 (Windows, Linux), development version | upstream, `freac_co.xml` | `Language` = `freac_co.xml` in `freac.xml` | 1,104 / 1,104 (1.1.7) | unit (simulated) | no | upstream |
 
 A program that rewrites its settings when it quits must be closed (otherwise it is left alone, and Corsu says so); a
 missing settings file (program never started) or an unreadable one is neither created nor rewritten; a value you
