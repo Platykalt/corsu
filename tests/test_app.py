@@ -53,6 +53,18 @@ class SetupWindowTests(unittest.TestCase):
                 patch.object(app.os, 'getuid', create=True, return_value=1000):
             self.assertEqual(self.request('POST', '/api/logs', corsu=True)[0], 403)
 
+    def test_peer_is_the_live_connection_to_the_window(self):
+        # /proc/net/tcp: a closed connection in TIME_WAIT (state 06, uid 0) and another program's connection share
+        # local port 0xC350 (50000) with the window's caller, which talks to port 0x1E40 (7744) as uid 1000.
+        header = '  sl  local_address rem_address   st tx_queue rx_queue tr tm->when retrnsmt   uid  timeout inode'
+        rows = ['   0: 0100007F:C350 0100007F:1E40 06 00000000:00000000 03:00000000 00000000     0        0 0',
+                '   1: 0100007F:C350 0100007F:0050 01 00000000:00000000 00:00000000 00000000   999        0 1',
+                '   2: 0100007F:C350 0100007F:1E40 01 00000000:00000000 00:00000000 00000000  1000        0 2']
+        table = '\n'.join([header, *rows]) + '\n'
+        with patch.object(app.Path, 'read_text', lambda path, *a, **k: table if path.name == 'tcp' else ''):
+            self.assertEqual(app.peer_uid(50000, 7744), 1000)
+            self.assertIsNone(app.peer_uid(50001, 7744))
+
     def test_state_needs_corsus_page(self):
         self.assertEqual(self.request('GET', '/api/state')[0], 404)
         with patch.object(app, 'snapshot', return_value={'installed': False}):

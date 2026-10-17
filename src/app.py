@@ -283,8 +283,13 @@ def switch_complement(job, value, language):
     return 200, {'started': True}
 
 
-def peer_uid(port):
-    """The user owning the local TCP connection from `port` (Linux only; None elsewhere or when unknown)."""
+TIME_WAIT = '06'
+
+
+def peer_uid(port, server_port=None):
+    """The user owning the local TCP connection from `port` to `server_port` (Linux only; None elsewhere or when
+    unknown). Only that connection counts: a closed one waiting in TIME_WAIT on the same port shows uid 0, and another
+    program's connection may use the same local port towards another address."""
     for table in ('/proc/net/tcp', '/proc/net/tcp6'):
         try:
             lines = Path(table).read_text().splitlines()[1:]
@@ -292,7 +297,8 @@ def peer_uid(port):
             continue
         for line in lines:
             fields = line.split()
-            if len(fields) > 7 and int(fields[1].rsplit(':', 1)[1], 16) == port:
+            if (len(fields) > 7 and int(fields[1].rsplit(':', 1)[1], 16) == port and fields[3] != TIME_WAIT
+                    and (server_port is None or int(fields[2].rsplit(':', 1)[1], 16) == server_port)):
                 return int(fields[7])
     return None
 
@@ -329,7 +335,7 @@ def make_handler(job, activity, port, handover=None):
             if self.headers.get('Origin') and self.headers['Origin'] not in origins:
                 return False
             if corsu.PLATFORM == 'linux' and hasattr(os, 'getuid'):
-                return peer_uid(self.client_address[1]) in (None, os.getuid())
+                return peer_uid(self.client_address[1], self.server.server_address[1]) in (None, os.getuid())
             return True
 
         def do_GET(self):
