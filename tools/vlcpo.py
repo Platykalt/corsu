@@ -3,7 +3,9 @@
 
   vlcpo.py check                 msgfmt with the fuzzy drafts included (--use-fuzzy -c --check-format) and Corsu's own
                                  rules on every draft: plural forms, printf / %@ / %1 arguments, markup tags, menu
-                                 accelerators, surrounding spaces and line breaks. Exit 1 on any error.
+                                 accelerators, surrounding spaces and line breaks; no draft may reuse an accelerator
+                                 letter of its VLC menu (MENUS; clashes between upstream translations are only
+                                 reported as NOTE). Exit 1 on any error.
   vlcpo.py status                counts per provenance and review status.
   vlcpo.py export OUT.jsonl      the drafts with their id, references and flags, for reviewing in batches.
   vlcpo.py merge PROPOSALS...    apply review proposals (JSONL: id, verdict keep|fix|uncertain, msgstr, note) to co.po
@@ -221,6 +223,59 @@ def problems(entry, nplurals):
     return found
 
 
+# Menus of VLC 3.0.x's Qt interface whose entries are shown together (modules/gui/qt/menus.cpp and the I_MENU_*
+# strings of include/vlc_intf_strings.h): within one menu, an accelerator letter should open one entry only. Qt
+# accepts a letter twice (pressing it cycles between the entries) but Alt+letter in the menu bar then opens the
+# first one only. A Corsu draft must not add such a clash; the clashes between upstream translations are reported.
+MENUS = {
+    'menu bar (createMenuBar)': ['&Media', 'P&layback', '&Audio', '&Video', 'Subti&tle', 'Tool&s', 'V&iew', '&Help'],
+    'right-click menu (PopupMenu)': ['&Play', 'Pause', '&Stop', 'Pre&vious', 'Ne&xt', 'Record', 'Leave Fullscreen',
+                                     '&Audio', '&Video', 'Subti&tle', '&Playback', 'Tool&s', 'V&iew', 'Playlist',
+                                     'Open Media', 'Quit'],
+    'Media (FileMenu)': ['Open &File...', '&Open Multiple Files...', 'Open D&irectory...', 'Open &Disc...',
+                         'Open &Network Stream...', 'Open &Capture Device...', 'Open &Location from clipboard',
+                         'Open &Recent Media', 'Save Playlist to &File...', 'Conve&rt / Save...', '&Stream...',
+                         'Quit at the end of playlist', 'Close to systray', '&Quit'],
+    'Playback (NavigMenu)': ['T&itle', '&Chapter', '&Program', 'Custom &Bookmarks', '&Renderer', 'Sp&eed',
+                             '&Jump Forward', 'Jump Bac&kward', 'Jump to Specific &Time', '&Play', '&Stop',
+                             'Pre&vious', 'Ne&xt', 'Record'],
+    'Audio (AudioMenu)': ['Audio &Track', 'Audio &Device', '&Stereo Mode', '&Visualizations', '&Increase Volume',
+                          'D&ecrease Volume', '&Mute'],
+    'Video (VideoMenu)': ['Video &Track', '&Fullscreen', 'Always Fit &Window', 'Set as Wall&paper', '&Zoom',
+                          '&Aspect Ratio', '&Crop', '&Deinterlace', '&Deinterlace mode', 'Take &Snapshot'],
+    'Subtitle (SubtitleMenu)': ['Add &Subtitle File...', 'Sub &Track'],
+    'Tools (ToolsMenu)': ['&Effects and Filters', '&Track Synchronization', 'Media &Information', '&Codec Information',
+                          '&VLM Configuration', 'Program Guide', '&Messages', 'Plu&gins and extensions',
+                          'Customi&ze Interface...', '&Preferences'],
+    'View (ViewMenu)': ['Play&list', 'Docked Playlist', 'Always on &top', 'Mi&nimal Interface',
+                        '&Fullscreen Interface', '&Advanced Controls', 'Status Bar', 'Visualizations selector'],
+    'Help (HelpMenu)': ['&Help', 'Check for &Updates...', '&About'],
+}
+
+
+def accelerator(text):
+    """The letter after the first '&' (lower case), or ''."""
+    match = ACCELERATOR.search(ENTITY.sub('', text))
+    return text[match.end()].lower() if match else ''
+
+
+def menu_clashes(entries):
+    """[(menu, letter, [msgid, ...], whether a Corsu draft is among them)] for letters used twice in one menu."""
+    by_msgid = {entry.msgid: entry for entry in entries if entry.msgctxt is None and entry.msgid}
+    clashes = []
+    for menu, msgids in MENUS.items():
+        letters = {}
+        for msgid in dict.fromkeys(msgids):
+            entry = by_msgid.get(msgid)
+            letter = accelerator(entry.translations[0]) if entry and entry.translations[0] else ''
+            if letter:
+                letters.setdefault(letter, []).append(entry)
+        for letter, found in letters.items():
+            if len(found) > 1:
+                clashes.append((menu, letter, [entry.msgid for entry in found], any(entry.draft for entry in found)))
+    return clashes
+
+
 def nplurals(entries):
     header = next(entry for entry in entries if entry.msgid == '')
     return int(re.search(r'nplurals=(\d+)', header.fields['msgstr']).group(1))
@@ -261,6 +316,10 @@ def check(path=None):
     if hashlib.sha256(upstream(blocks).encode('utf-8')).hexdigest() != UPSTREAM_SHA256:
         errors.append('the upstream translations or header changed: co.po without the Corsu entries is no longer '
                       'upstream\'s file (UPSTREAM_SHA256)')
+    notes = []
+    for menu, letter, msgids, draft in menu_clashes(entries):
+        text = f'{menu}: accelerator {letter.upper()} on {", ".join(repr(msgid) for msgid in msgids)}'
+        (errors if draft else notes).append(text + (' (a Corsu draft adds it)' if draft else ' (upstream)'))
     unknown = set(review) - {entry.id for entry in drafts}
     errors += [f'review.json names {name}, which is not a Corsu entry of co.po' for name in sorted(unknown)]
     with tempfile.TemporaryDirectory() as folder:
@@ -270,6 +329,8 @@ def check(path=None):
     kept = [entry for entry in entries if not entry.draft and entry.msgid]
     print(f'checked: {len(drafts)} Corsu drafts with msgfmt (fuzzy included) and Corsu rules; '
           f'{len(kept)} upstream entries unchanged')
+    for note in notes:
+        print('NOTE', note)
     for error in errors:
         print('ERROR', error)
     return 1 if errors else 0

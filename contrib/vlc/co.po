@@ -22335,7 +22335,7 @@ msgstr "&Sottutitulu"
 #: modules/gui/qt/menus.cpp:342 modules/gui/qt/menus.cpp:1085
 #, fuzzy
 msgid "Tool&s"
-msgstr "&Attrezzi"
+msgstr "A&ttrezzi"
 
 #: modules/gui/qt/menus.cpp:345 modules/gui/qt/menus.cpp:1092
 msgid "V&iew"
@@ -22433,7 +22433,7 @@ msgstr "Lista di Lettura &Ancurata"
 #: modules/gui/qt/menus.cpp:504
 #, fuzzy
 msgid "Always on &top"
-msgstr "Sempre &sopra"
+msgstr "Sempre s&opra"
 
 #: modules/gui/qt/menus.cpp:512
 msgid "Mi&nimal Interface"
