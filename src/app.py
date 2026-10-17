@@ -29,6 +29,8 @@ import update
 from installer import t
 
 PAGE = Path(__file__).resolve().parent / 'app/index.html'
+STATIC = {'corsu.svg': 'image/svg+xml', 'style.css': 'text/css; charset=utf-8',
+          'texts.js': 'text/javascript; charset=utf-8', 'app.js': 'text/javascript; charset=utf-8'}
 # The page asks for news every few seconds; without any for this long, the window was closed.
 IDLE_SECONDS = 600
 # Once Corsu's own window is closed, a browser tab on the address keeps it running; without one it stops sooner.
@@ -334,7 +336,9 @@ def peer_uid(client, server):
 
 def make_handler(job, activity, port, handover=None):
     page = PAGE.read_bytes()
-    icon = (PAGE.parent / 'corsu.svg').read_bytes()
+    # The page's own files, read once: nothing else of the folder (or the disk) is ever served.
+    files = {f'/{name}': ((PAGE.parent / name).read_bytes(), kind) for name, kind in STATIC.items()
+             if (PAGE.parent / name).is_file()}
     hosts = {f'127.0.0.1:{port}', f'localhost:{port}'}
     origins = {f'http://{host}' for host in hosts}
 
@@ -373,8 +377,8 @@ def make_handler(job, activity, port, handover=None):
                 if self.headers.get('Host', '') not in hosts:
                     return self.send(403, {'error': 'forbidden'})
                 return self.send(200, page, 'text/html; charset=utf-8')
-            if self.path == '/corsu.svg':
-                return self.send(200, icon, 'image/svg+xml')
+            if self.path in files:
+                return self.send(200, *files[self.path])
             if self.path == '/api/state' and self.allowed():
                 activity[0] = time.monotonic()
                 return self.send(200, {**snapshot(job), 'job': job.snapshot()})

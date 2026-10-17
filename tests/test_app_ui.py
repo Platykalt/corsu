@@ -18,8 +18,10 @@ NEW_KEYS = [
 
 
 def script():
+    """The page's markup and its scripts (src/app/<name>.js in the page's order), as one program."""
     html = PAGE.read_text(encoding='utf-8')
-    return html, re.search(r'<script>\n(.*)</script>', html, re.S).group(1)
+    names = re.findall(r'<script src="([\w.-]+\.js)"></script>', html)
+    return html, '\n'.join((PAGE.parent / name).read_text(encoding='utf-8') for name in names)
 
 
 def texts():
@@ -64,7 +66,10 @@ class TextTests(unittest.TestCase):
 HARNESS = r'''
 const fs = require("fs"), vm = require("vm");
 const [page, fixturePath] = process.argv.slice(2);
-const code = fs.readFileSync(page, "utf8").match(/<script>\r?\n([\s\S]*)<\/script>/)[1];
+const path = require("path");
+const html = fs.readFileSync(page, "utf8");
+const code = [...html.matchAll(/<script src="([\w.-]+\.js)"><\/script>/g)]
+  .map(found => fs.readFileSync(path.join(path.dirname(page), found[1]), "utf8")).join("\n");
 class Element {
   constructor(tag) { this.tagName = tag.toUpperCase(); this.attributes = {}; this.children = []; this.listeners = {};
     this.style = {}; this.dataset = {}; this.hidden = false; this.disabled = false; this.classList = { toggle() {} }; }
