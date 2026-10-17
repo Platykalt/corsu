@@ -8,7 +8,7 @@ import { showNotification } from "@api/Notifications";
 import { definePluginSettings } from "@api/Settings";
 import definePlugin, { OptionType } from "@utils/types";
 
-import { createTranslator, setCorrections } from "./translate";
+import { createTranslator, dictionaryFingerprint, setCorrections, translatorRevision } from "./translate";
 
 // Written by the Corsu app: corrections from its Review page, and whether hovering shows the original text.
 const settings = definePluginSettings({
@@ -19,7 +19,7 @@ const settings = definePluginSettings({
     },
     reportMissing: {
         type: OptionType.BOOLEAN,
-        description: "Diagnostic: list untranslated texts in the console.",
+        description: "Diagnostic: list untranslated texts in the console, with the reason (no names or messages).",
         default: false,
         hidden: true
     },
@@ -47,10 +47,14 @@ export default definePlugin({
         }
         // Read on every hover, so switching the option in Vencord's settings applies at once.
         translator = createTranslator(document, { showOriginal: () => Boolean(settings.store.showOriginal) });
+        // Off by default and only in the local console: which build is loaded, then every 10 seconds the texts left
+        // untranslated that were not reported yet, each with its reason (see report() in translate.ts for what it
+        // never gives).
         if (settings.store.reportMissing) {
+            console.info("[CorsuMissing] " + JSON.stringify({ revision: translatorRevision, dictionary: dictionaryFingerprint() }));
             timer = setInterval(() => {
-                const found = translator?.report() ?? [];
-                if (found.length) console.info("[CorsuMissing] " + JSON.stringify(found));
+                const report = translator?.report();
+                if (report?.findings.length) console.info("[CorsuMissing] " + JSON.stringify(report));
             }, 10000);
         }
         translator.start();
