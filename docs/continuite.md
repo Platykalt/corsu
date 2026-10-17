@@ -111,6 +111,25 @@ seulement : l'icône à l'écran n'a pas été regardée. Corsu 0.21.0 y est enc
 - Ordinateur du mainteneur mis à jour avec l'archive CI de `9ad7f09` : `options.txt` de l'instance inchangé.
 - Hors périmètre : snapshots, préversions, versions avant 1.6.1 ([other-versions.md](../minecraft/java/other-versions.md)).
 
+## Version 0.23.0 (17 octobre 2026)
+
+- Une seule installation gérée par utilisateur : archive, commande en une ligne et bouton « Mettre à jour » passent
+  par `src/installer.py` (contrat : [update-architecture.md](update-architecture.md)). Plus récente → mise à jour ;
+  même version → réparation ; plus ancienne → refusée (`--allow-downgrade`). Parties désactivées gardées désactivées,
+  originaux jamais réenregistrés, verrou `DATA/lock`, téléchargement de l'étiquette exacte (SHA-256 + version de
+  l'archive), extraction sûre, copie complète avant bascule, retour des lanceurs en cas d'échec.
+- Fenêtre : rubrique Mise à jour (versions, vérification au démarrage, mise à jour, installation automatique
+  facultative désactivée par défaut, redémarrage vers la nouvelle copie), instances Minecraft en attente.
+- CI : mise à jour depuis les 0.21.0 et 0.22.0 publiées sur les trois systèmes (`tests/e2e/check_update.py`),
+  réparation, refus d'une version plus ancienne, archive tronquée, interruption, deux installeurs simultanés,
+  désinstallation.
+- Discord : les noms des personnes (pseudonymes, noms d'affichage, surnoms, noms de serveurs, salons, rôles) ne sont
+  plus traduits ; reconnus par leur origine (props React), vérifié dans une vraie page Chrome en CI
+  (`tests/e2e/check_discord_names.py`). Pas encore observé dans le Discord du mainteneur.
+- Minecraft : pages générées par `tools/mcreport.py` (87 versions, limites, empreinte de chaque vérification).
+- Incident : deux tests de l'installeur réécrivaient la vraie entrée de menu Corsu du mainteneur quand ils tournaient
+  sur sa machine (corrigé : tests isolés ; l'entrée est réparée par la mise à jour 0.23.0).
+
 ## Blocages et ce qui demande une personne
 
 - Essai réel de Minecraft Java 26.3 ([TESTING.md](../minecraft/java/TESTING.md)) et de Bedrock.
