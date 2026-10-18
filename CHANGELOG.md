@@ -10,13 +10,17 @@
   death messages naming the Wither effect. Pecura kept for Sheep (generic use attested). 68 proposals rejected with
   reasons, 41 deferred. Sources: ADECEC lexicons, INFCOR, Vikipedia, Mozilla/Patriccollu translations; no human
   review. All 87 versions checked against their own game code: 0 errors. `tools/minecraft.py verify` no longer
-  crashes when the pack is missing.
+  crashes when the pack is missing. Second round on the older texts and deferred rows: 27 texts (Thunder
+  "Tronu" = throne > Tonu, Ladder > Scaletta, five spellings harmonised); 28 cases still deferred with the exact
+  dictionary entry to check.
 - Keyman: the dictionary keeps the case typed (Eccu, ECCU; Keyman's `languageUsesCasing`), suggestions at a
   sentence start are capitalised, the package shows as "Corsu" instead of `platykalt.co.corsu`. Vocabulary rebuilt
   (keyboard/data, sources in docs/keyboard-sources.md): 5,375 entries removed (English words, product names, other
   scripts, fragments, unattested rare forms), daily vocabulary added, weights from everyday text instead of
   software labels. Two experimental regional preferences, corsu-keyboard-cismuntincu.kmp and
   corsu-keyboard-pumuntincu.kmp (361 words weighted differently, each from a cited source; partial coverage).
+  446 Corsican place names from Wikidata (CC0), kept with their capital and protected from correction;
+  "parlle" now offers "parolle" first (an editorial weight on parleti had no corpus support).
   Checked in Keyman for Android 18.0.254's own engine (CI) and in the real app on an Android 14 emulator; not on a
   phone, not on iOS. Keyman 18 has no automatic correction; going back into a word replaces only the part left of
   the caret (engine limits, documented).

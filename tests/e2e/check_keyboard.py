@@ -142,6 +142,13 @@ def checks(results, models):
         expect(s('sentence start: suggestion before', 0)['suggestions'][:1] == ['Di'],
                f'{model}: the first suggestion of a sentence must be capitalised')
         expect(s('sentence start: suggestion before', 1)['text'] == 'Di ', f'{model}: sentence-start suggestion tap')
+        places = next(r for r in results if r['name'].startswith('places: Corsican') and r['model'] == model)
+        expect(places['steps'][-1]['text'].startswith('in Zicavu Aiacciu Bastia Portivechju Corti Calvi Bunifaziu Sartè Bastilicaccia '),
+               f'{model}: auto-correction changed a place name: {places["steps"][-1]["text"]!r}')
+        for index, name in zip(range(2, 20, 2), ('Zicavu', 'Aiacciu', 'Bastia', 'Portivechju', 'Corti', 'Calvi', 'Bunifaziu', 'Sartè', 'Bastilicaccia')):
+            expect(s('places: a lowercase prefix', index)['suggestions'][:1] == [name], f'{model}: prefix must offer {name}')
+        if model != 'platykalt.co.corsu_pumuntincu':
+            expect(s('ranking: parlle', 1)['suggestions'][:1] == ['parolle'], f'{model}: "parlle" must rank parolle first')
         expect(s('sentence start: field start', 2)['layer'] == 'shift', f'{model}: shift after ". "')
         expect(s('auto-correct off', 2)['text'] == 'lingau ', f'{model}: without auto-correction a typo must stay')
         # Auto-correction (setting 3) is the engine's: it may replace a word it does not know when the model offers
