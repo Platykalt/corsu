@@ -15,7 +15,7 @@ Chaque fichier a sa somme de contrôle `.sha256`. Les archives contiennent leur 
 installée, utilisée après suppression du dossier extrait, mise à jour et désinstallée sur son système avant la
 publication (tests automatiques ; personne n'a regardé les écrans).
 
-### Nouveautés de la 0.25.0 (en préparation, pas publiée)
+### Nouveautés de la 0.25.0
 
 - **Poedit** : Corsu active sa traduction corse. Linux : essais réels du paquet Debian (3.6.3) et du Flatpak (3.10)
   avec des sessions française, allemande et italienne : Poedit en corse, fenêtres de fichiers et boutons standard
@@ -122,7 +122,7 @@ Each file has a `.sha256` checksum. The archives carry their own Python. Every a
 deleting the extracted folder, updated and uninstalled on its own system before publication (automated checks; no one
 looked at the screens).
 
-### New in 0.25.0 (in preparation, not published)
+### New in 0.25.0
 
 - **Poedit**: Corsu switches on its Corsican translation. Linux: Debian package (3.6.3) and Flatpak (3.10) run for
   real with French, German and Italian sessions: Poedit in Corsican, file dialogs and standard buttons in the usual

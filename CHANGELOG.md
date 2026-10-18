@@ -1,6 +1,6 @@
 # Changelog
 
-## 0.25.0 (in preparation, not published)
+## 0.25.0 (2026-10-18)
 
 - Poedit: Corsican through `LANGUAGE=co:<session languages> LC_MESSAGES=/C.UTF-8` on Linux (wxWidgets reads
   "/C.UTF-8" as no language, so LANGUAGE wins; glibc loads it as C.UTF-8 without the C exception, so GTK follows the
