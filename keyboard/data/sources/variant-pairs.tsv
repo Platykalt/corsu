@@ -1,0 +1,66 @@
+# Northern (cismuntincu) / southern (pumuntincu) word pairs, each copied from the reference given on its row.
+# Nothing here is derived by a letter rule: a pair is listed only when the source prints both forms.
+# Verb conjugations come from cunghjugarellu.tsv and are paired by tools/make_vocab.py, not listed here.
+# Several forms in one cell are separated by "/". lower_other = yes: in one variety's preference list the other
+# variety's form keeps a lower weight; no: both forms are used in that area or the form has another common sense,
+# so its weight is left as in shared.tsv. Sources (docs/keyboard-sources.md):
+#   cowiki-lingua-corsa  https://co.wikipedia.org/wiki/Lingua_corsa (revision 403108), table "Esempii di parolle in
+#                        pumuntincu è in cismuntincu (Taravesu è Sartinesu)": columns Cismunticu / Taravesu / Sartinesu
+#   frwiki-corse-langue  https://fr.wikipedia.org/wiki/Corse_(langue) (revision 239896905), sections "Zone de
+#                        transition" and "Sud de la Corse"
+#   wiktionary           Wiktionary entries (via kaikki.org extract) tagged Cismontane / Ultramontane; entry named
+# tier: as in daily.tsv, the minimum weight of the pair for words that are common in messages (empty: none).
+cismuntincu	pumuntincu	gloss	source	reference	lower_other	note	tier
+giuventù	ghjuvantù	youth	cowiki-lingua-corsa	row "a giuventù"	yes	same form in Taravesu and Sartinesu	3
+zitellu	ziteddu	child	cowiki-lingua-corsa	row "zitellu"	yes		2
+cavallu	cavaddu	horse	cowiki-lingua-corsa	row "cavallu"	yes		3
+collu	coddu	neck	cowiki-lingua-corsa	row "collu"	yes	also Wiktionary "coddu: Ultramontane form of collu"	
+stella	stedda/stidda	star	cowiki-lingua-corsa	row "stella"	yes	stedda Taravesu, stidda Sartinesu	3
+pelle	peddi	skin	cowiki-lingua-corsa	row "pelle"	yes		3
+ellu	eddu/iddu	he	cowiki-lingua-corsa	row "ellu/ella"	yes	eddu Taravesu, iddu Sartinesu	1
+ella	edda/idda	she	cowiki-lingua-corsa	row "ellu/ella"	yes	edda Taravesu, idda Sartinesu	1
+piglià	piddà	to take	cowiki-lingua-corsa	row "piglià"	no	Taravesu keeps piglià; piddà is Sartinesu	3
+famiglia	famidda	family	cowiki-lingua-corsa	row "famiglia"	no	Taravesu keeps famiglia; famidda is Sartinesu	2
+paglia	padda	straw	cowiki-lingua-corsa	row "paglia"	no	Taravesu keeps paglia; padda is Sartinesu	
+fornu	forru/furru	oven	cowiki-lingua-corsa	row "fornu"	yes	forru Taravesu, furru Sartinesu	
+carne	carri	meat	cowiki-lingua-corsa	row "carne"	yes		2
+parlate	parleti	you (pl.) speak	cowiki-lingua-corsa	row "parlate"	yes		2
+parlanu	parlani	they speak	cowiki-lingua-corsa	row "pàrlanu"	yes	the table writes the stress (pàrlanu, pàrlani); usual spelling has no accent	2
+simu	semi	we are	cowiki-lingua-corsa	row "simu/semu"	yes	semu is given for both groups and stays shared	1
+cane	ghjacaru	dog	cowiki-lingua-corsa	row "cane"	yes	table writes ghjàcaru (stress); frwiki notes Ajaccio (transition zone) says cane	2
+sì	s'è	if	cowiki-lingua-corsa	row "sì"	no	sì has other senses (you are); s'è is also common in northern writing	
+esse	essa	to be	cowiki-lingua-corsa	row "esse"	yes	also Wiktionary "essa: Ultramontane form of esse"	2
+accende	accenda/accinda	to light	cowiki-lingua-corsa	row "accende"	yes	accenda Taravesu, accinda Sartinesu	
+corre	corra/curra	to run	cowiki-lingua-corsa	row "corre"	yes	corra Taravesu, curra Sartinesu	3
+cunnosce	cunnoscia	to know	cowiki-lingua-corsa	row "cunnosce"	yes		3
+induve	induva	where	cowiki-lingua-corsa	row "induve"	yes		1
+mare	mari	sea	cowiki-lingua-corsa	row "u mare"	yes		2
+pane	pani	bread	cowiki-lingua-corsa	row "u pane"	yes		2
+volpe	volpi/vulpi	fox	cowiki-lingua-corsa	row "a volpe"	yes	volpi Taravesu, vulpi Sartinesu	
+ghjugne	ghjugna	to arrive	cowiki-lingua-corsa	row "ghjunghje, ghjugne"	yes	U Cunghjugarellu gives ghjunghje / ghjunghja instead	
+manghjà	magnà	to eat	cowiki-lingua-corsa	row "manghjà, magnà"	no	the northern column gives both manghjà and magnà	1
+fratellu	frateddu	brother	frwiki-corse-langue	Sud de la Corse, Taravo	yes		2
+surella	suredda	sister	frwiki-corse-langue	Sud de la Corse, Taravo	yes		2
+bellu	beddu	beautiful	frwiki-corse-langue	Sud de la Corse, Taravo	yes	also Wiktionary "beddu: Ultramontane form of bellu"	2
+figliolu	fiddolu	son	frwiki-corse-langue	Sud de la Corse, Sartène	no	Taravo keeps figliolu	2
+vogliu	voddu	I want	frwiki-corse-langue	Sud de la Corse, Sartène	no	Taravo keeps vogliu; U Cunghjugarellu suttanacciu also gives vogliu	1
+pastore	pastori	shepherd	frwiki-corse-langue	Sud de la Corse (final unstressed e)	yes		
+nazione	nazioni	nation	frwiki-corse-langue	Sud de la Corse (final unstressed e)	yes		
+accattà	cumprà	to buy	frwiki-corse-langue	Zone de transition (Ajaccio says cane and accattà instead of ghjacaru and cumprà)	no	cumprà is also written in the north; only a preference	3
+ondeci	ondici	eleven	wiktionary	ondici	yes		
+dodeci	dodici	twelve	wiktionary	dodici	yes		
+tredeci	tredici	thirteen	wiktionary	tredici	yes		
+quattordeci	quattordici	fourteen	wiktionary	quattordici	yes		
+quindeci	quindici	fifteen	wiktionary	quindici	yes		
+sedeci	sedici	sixteen	wiktionary	sedici	yes		
+dicessette	dicessetti/diciassetti	seventeen	wiktionary	dicessetti, diciassetti	yes		
+dicennove	dicinnove	nineteen	wiktionary	dicinnove	yes		
+dece	deci	ten	wiktionary	deci	yes		2
+nove	novi	nine	wiktionary	novi	no	nove and novi are also forms of novu (new)	2
+sette	setti	seven	wiktionary	setti	yes		2
+cinque	cinqui	five	wiktionary	cinqui	yes		2
+bellula	beddula	weasel	wiktionary	beddula	yes		
+vindette	vindetti	sold	wiktionary	vindette (alternative form vindetti, Ultramontane)	yes		
+ride	rida	to laugh	wiktionary	rida	yes		
+spende	spenda	to spend	wiktionary	spenda	yes		
+ottene	uttena	to obtain	wiktionary	uttena	yes		
