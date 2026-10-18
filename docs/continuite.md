@@ -50,8 +50,8 @@ Les sections datées après « État actuel » sont l'historique : ce qui y est 
     titre sous KDE Plasma 6 (Wayland, X11, conteneur). Non observé : Windows, macOS, GNOME.
   - **Clavier** : fin du mot effacée sous Android quand on choisit une suggestion au milieu (iPhone : non, limite de
     Keyman) ; noms officiels de communes ; cas dépendant des données dans `tests/e2e/keyboard_data_cases.tsv`.
-    Avertissements restants (correction automatique) : Vizzani → Vezzani, corti → Corti, calvi → Calvi,
-    ADECEC → DECE. Paquets 1.1 : 13 197 mots chacun (`tools/count_kmp.py`).
+    Correction automatique (moteurs 18.0.254 et 19.0.309 bêta) : Vizzani, corti, ADECEC gardés (données
+    ajoutées) ; reste calvi → Calvi (adjectif non attesté dans les sources consultées). Paquets 1.1 : 13 213 mots chacun (`tools/count_kmp.py`).
   - **Canopé** : `sources/cunghjugarellu.tsv` contient 511 lignes (368 formes de 21 verbes, avec numéro de tableau) ;
     les paquets n'ont que mots et poids. Correction ciblée proposée, non appliquée : règles propres pour les verbes
     réguliers, formes irrégulières seules listées (aucun effet sur les paquets).

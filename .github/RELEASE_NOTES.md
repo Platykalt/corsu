@@ -31,7 +31,7 @@ publication (tests automatiques ; personne n'a regardé les écrans).
   sur une ancienne version, le bouton « Rechercher » ou l'installation en une ligne ci-dessus la rattrape, en gardant
   vos réglages.
 - **Clavier sur téléphone** (paquets 1.1) : la majuscule tapée est gardée et les suggestions de début de phrase en
-  prennent une ; vocabulaire refait à partir de sources citées (13 197 mots) ; noms de lieux corses et noms
+  prennent une ; vocabulaire refait à partir de sources citées (13 213 mots) ; noms de lieux corses et noms
   officiels des communes ; deux préférences régionales expérimentales. Sous Android, une suggestion choisie au milieu
   d'un mot remplace le mot entier ; sur iPhone, Keyman ne remplace que le début (gestes conseillés dans le guide).
   Vérifié dans le moteur de Keyman 18.0.254 et dans l'application sur émulateur Android 14 ; **pas sur un vrai
@@ -175,7 +175,7 @@ looked at the screens).
   release and when GitHub answered. If your Corsu is stuck on an old version, the "Rechercher" button or the
   one-line install above catches up and keeps your settings.
 - **Phone keyboard** (packages 1.1): the case typed is kept and suggestions at a sentence start get a capital;
-  vocabulary rebuilt from cited sources (13,197 words); Corsican place names and the communes' official names; two
+  vocabulary rebuilt from cited sources (13,213 words); Corsican place names and the communes' official names; two
   experimental regional preferences. On Android a suggestion chosen inside a word replaces the whole word; on iPhone
   Keyman replaces only its beginning (safe gestures in the guide). Checked in Keyman 18.0.254's engine and in the app
   on an Android 14 emulator; **not on a real phone, not on iPhone**. Keyman 18 has no automatic correction.

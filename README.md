@@ -80,7 +80,7 @@ Corsu pour ordinateur n'est pas nécessaire : le dictionnaire se télécharge se
 **Guides pas à pas : [Android](docs/fr/telephone/android.md) · [iPhone](docs/fr/telephone/iphone.md).**
 
 Dictionnaire publié (le même fichier pour Android et iPhone, paquet 1.1 depuis Corsu 0.26.0) :
-[corsu-keyboard.kmp](https://github.com/Platykalt/corsu/releases/latest/download/corsu-keyboard.kmp), 13 197
+[corsu-keyboard.kmp](https://github.com/Platykalt/corsu/releases/latest/download/corsu-keyboard.kmp), 13 213
 mots (compte fait dans le paquet publié). Deux préférences régionales **expérimentales**, même vocabulaire avec les
 formes d'une région en tête (361 mots pondérés autrement, couverture partielle) :
 [corsu-keyboard-cismuntincu.kmp](https://github.com/Platykalt/corsu/releases/latest/download/corsu-keyboard-cismuntincu.kmp)
@@ -296,7 +296,7 @@ dictionary is downloaded on its own, on the phone.
 **Step-by-step guides: [Android](docs/en/phone/android.md) · [iPhone](docs/en/phone/iphone.md).**
 
 Published dictionary (the same file for Android and iPhone, package 1.1 since Corsu 0.26.0):
-[corsu-keyboard.kmp](https://github.com/Platykalt/corsu/releases/latest/download/corsu-keyboard.kmp), 13,197
+[corsu-keyboard.kmp](https://github.com/Platykalt/corsu/releases/latest/download/corsu-keyboard.kmp), 13,213
 words (counted in the published package). Two **experimental** regional preferences, same vocabulary with one
 region's forms first (361 words weighted differently, partial coverage):
 [corsu-keyboard-cismuntincu.kmp](https://github.com/Platykalt/corsu/releases/latest/download/corsu-keyboard-cismuntincu.kmp)
