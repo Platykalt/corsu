@@ -94,7 +94,7 @@ real phone.
 
 1. **Sign in to GitHub** in the phone's browser (a free account is enough): GitHub only hands these files to signed-in
    accounts (signed out, the link shows a "404" page).
-2. **Download the archive** [keyboard-packages](https://github.com/Platykalt/corsu/actions/runs/39140018508/artifacts/12141617671) (opening the link starts the download). It arrives as `keyboard-packages.zip`.
+2. **Download the archive** [keyboard-packages](https://github.com/Platykalt/corsu/actions/runs/39161059937/artifacts/12149352996) (commit `146d2cf` on `next-0.26`) (opening the link starts the download). It arrives as `keyboard-packages.zip`.
    GitHub deletes it after 90 days (on 16 January 2027); a newer link will then be given here.
 3. **Extract it** with the phone's files app (Files by Google: tap the `.zip` file, then **Extract**). The folder you get holds `corsu-keyboard.kmp`, `corsu-keyboard-cismuntincu.kmp`,
    `corsu-keyboard-pumuntincu.kmp` and their `.sha256` checksums. For the general dictionary, take
