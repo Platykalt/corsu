@@ -342,6 +342,15 @@ class LauncherPythonTests(Isolated):
         installer.prune_runtimes()
         self.assertEqual(sorted(path.name for path in (self.data / 'runtime').iterdir()), ['3.13.16-20261001'])
 
+    def test_a_macos_repair_from_another_python_keeps_the_bundled_copy(self):
+        # check_update.py on macOS: a repair run with the system's Python recorded a wrapper and moved the launchers
+        # to that Python, which lacks the window's bindings.
+        fallback = self.bundled()
+        with patch.object(corsu, 'PLATFORM', 'macos'), patch.object(corsu.sys, 'executable', '/usr/local/bin/python3'):
+            self.assertEqual(corsu.launcher_python(corsu.Installer()), fallback)
+        self.assertFalse((self.data / 'bin/corsu-python').exists())
+        self.assertEqual(corsu.load_state()['files'], {})
+
     def test_corsu_running_on_the_bundled_copy_and_windows_use_it_directly(self):
         fallback = self.bundled()
         with patch.object(corsu, 'PLATFORM', 'linux'), patch.object(corsu.sys, 'executable', str(fallback)):
@@ -353,8 +362,8 @@ class LauncherPythonTests(Isolated):
         self.assertFalse((self.data / 'bin/corsu-python').exists())
 
     @unittest.skipIf(os.name == 'nt', 'Linux and macOS launchers hold POSIX paths, which a Windows test run cannot make')
-    def test_launchers_on_linux_and_macos_go_through_the_wrapper(self):
-        self.bundled()
+    def test_launchers_use_the_wrapper_on_linux_and_the_copy_on_macos(self):
+        fallback = self.bundled()
         commands = []
 
         def osacompile(command, **_):
@@ -367,7 +376,8 @@ class LauncherPythonTests(Isolated):
         wrapper = shlex.quote(str(self.data / 'bin/corsu-python'))
         entry = (self.home / '.local/share/applications/corsu-setup.desktop').read_text()
         self.assertIn(f'Exec={wrapper} ', entry)
-        self.assertIn(f'exec {wrapper} ', commands[0][-1])
+        # macOS: the bundled copy itself, which has the window's bindings, even when another Python runs a repair.
+        self.assertIn(f'exec {shlex.quote(str(fallback))} ', commands[0][-1])
 
     @unittest.skipIf(os.name == 'nt', 'Linux and macOS launchers hold POSIX paths, which a Windows test run cannot make')
     def test_launchers_written_before_get_the_chosen_python(self):

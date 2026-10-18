@@ -123,7 +123,9 @@ class Window:
         browser.chmod(0o755)
         self.environment = {**environment, 'BROWSER': str(browser)}
         line = next(line for line in launchers(home)[1].read_text(encoding='utf-8').splitlines() if line.startswith('Exec='))
-        self.command = shlex.split(line[5:])
+        # In browser mode: the window would otherwise use a Chromium app window when one is installed (GitHub's
+        # runners have Chrome), which BROWSER does not catch. Key, ticket and relay work the same in both modes.
+        self.command = shlex.split(line[5:]) + ['--browser']
         self.process = None
         self.key = None
 

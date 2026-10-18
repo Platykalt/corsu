@@ -66,7 +66,9 @@ launchers)
     version=$(timeout 300 "$HOME/.local/bin/firefox-corsu" --version 2>/dev/null)
     check $? "Firefox Corsu starts Firefox: $version"
     # The page the window would open is caught through BROWSER, with its ticket, and exchanged for the key as the
-    # page does it; a second launch must show the same window (a fresh ticket for the same server) and end.
+    # page does it; a second launch must show the same window (a fresh ticket for the same server) and end. Browser
+    # mode (--browser): with Chrome or Chromium installed, the window would be their app window, out of BROWSER's reach.
+    set -- "$@" --browser
     opened=$(mktemp)
     browser=$(mktemp)
     printf '#!/bin/sh\necho "$1" >> %s\n' "$opened" >"$browser"

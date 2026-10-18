@@ -33,8 +33,8 @@ Published archives carry their own Python (`runtime/<processor>/python`, from
 [python-build-standalone](https://github.com/astral-sh/python-build-standalone), pinned with its SHA-256 in
 `src/release.json`), without Tk, IDLE, pip and the tests; the Windows and macOS ones have pywebview and its bindings.
 `tools/package_release.py --no-runtime` builds archives without it. An archive's installer copies it once to
-`runtime/<version>` in the data folder. Run from that Python, the shortcuts then use the copy; run from another one (on
-Linux, the distribution's, for the GTK window), the shortcuts go through `bin/corsu-python`, which starts that Python
+`runtime/<version>` in the data folder. Run from that Python, and always on macOS, the shortcuts then use the copy; run
+from another one on Linux (the distribution's, for the GTK window), the shortcuts go through `bin/corsu-python`, which starts that Python
 while it is 3.10 or newer with its whole standard library, else the copy (`corsu.launcher_python`).
 
 The Corsu app (`src/app.py`) is a small web server bound to 127.0.0.1 at the fixed address `http://localhost:7744`

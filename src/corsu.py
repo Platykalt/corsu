@@ -1101,15 +1101,18 @@ PYTHON_CHECK = 'import sys, shlex; sys.exit(sys.version_info < (3, 10))'
 
 def launcher_python(installer=None):
     """The interpreter Linux and macOS launchers start Corsu with. Normally the Python running Corsu now. When that
-    is another Python than Corsu's own copy of the bundled one, while such a copy exists (an archive installed with
-    the system's Python, which on Linux gives the window its GTK bindings), launchers go through a small script
-    instead: it starts that Python while it still works, else the bundled copy, so removing, downgrading or
-    splitting the system's Python never leaves Corsu's shortcuts broken. With `installer`, the script is written."""
+    is another Python than Corsu's own copy of the bundled one, while such a copy exists: on macOS the copy, which
+    carries what the window needs (pywebview and its Cocoa bindings), whatever Python ran the installer (a repair
+    from a terminal, say); on Linux, where the system's Python gives the window its GTK bindings, a small script
+    that starts that Python while it still works, else the bundled copy, so removing, downgrading or splitting the
+    system's Python never leaves Corsu's shortcuts broken. With `installer`, the script is written."""
     executable = Path(sys.executable)
     fallback = bundled_python()
     wrapper = DATA / 'bin/corsu-python'
     if PLATFORM == 'windows' or fallback is None or executable.resolve().is_relative_to((DATA / 'runtime').resolve()):
         return executable
+    if PLATFORM == 'macos':
+        return fallback
     if installer is not None:
         candidates = ' '.join(shlex.quote(str(python)) for python in (executable, fallback))
         installer.write(wrapper,
