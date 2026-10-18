@@ -65,20 +65,45 @@ launchers)
     check $? "Corsu runs on the $expected Python"
     version=$(timeout 300 "$HOME/.local/bin/firefox-corsu" --version 2>/dev/null)
     check $? "Firefox Corsu starts Firefox: $version"
-    log=$(mktemp)
-    setsid "$@" >"$log" 2>&1 &
+    # The page the window would open is caught through BROWSER, with its ticket, and exchanged for the key as the
+    # page does it; a second launch must show the same window (a fresh ticket for the same server) and end.
+    opened=$(mktemp)
+    browser=$(mktemp)
+    printf '#!/bin/sh\necho "$1" >> %s\n' "$opened" >"$browser"
+    chmod +x "$browser"
+    BROWSER=$browser setsid "$@" >/dev/null 2>&1 &
     app=$!
-    address=
-    for _ in $(seq 1 60); do
-        address=$(sed -n 's|.*\(http://localhost:[0-9]*/\).*|\1|p' "$log" | head -n 1)
-        [ -n "$address" ] && break
-        sleep 1
-    done
-    code=$(curl -s -o /dev/null -w '%{http_code}' "$address" 2>/dev/null)
+    for _ in $(seq 1 60); do [ -s "$opened" ] && break; sleep 1; done
+    first=$(head -n 1 "$opened")
+    address=${first%%#*}
+    host=$(echo "$address" | sed 's|http://\([^/]*\)/.*|\1|')
+    call() {  # call PATH [KEY] [BODY]: the HTTP status, the answer in $answer_file
+        curl -s -o "$answer_file" -w '%{http_code}' -H "Host: $host" -H 'X-Corsu: 1' ${2:+-H "X-Corsu-Key: $2"} \
+            ${3:+-H 'Content-Type: application/json' -d "$3"} "${address%/}$1"
+    }
+    answer_file=$(mktemp)
+    redeem() {
+        [ "$(call /api/key '' "{\"ticket\": \"${1#*#t=}\"}")" = 200 ] && sed 's/.*"key": *"\([^"]*\)".*/\1/' "$answer_file"
+    }
+    [ "$(call /)" = 200 ]
+    check $? "the Corsu menu entry opens the window: $address"
+    key=$(redeem "$first")
+    [ -n "$key" ]
+    check $? 'the page exchanges its ticket for the key'
+    [ "$(call /api/state)" = 403 ]
+    check $? '/api/state without the key: 403'
+    [ "$(call /api/state "$key")" = 200 ]
+    check $? '/api/state with the key: 200'
+    pid=$(sed 's/.*"pid": *\([0-9]*\).*/\1/' "$answer_file")
+    BROWSER=$browser timeout 120 "$@" >/dev/null 2>&1
+    status=$?
+    second=$(sed -n 2p "$opened")
+    [ "$status" = 0 ] && [ "${second%%#*}" = "$address" ] && [ "$(redeem "$second")" = "$key" ]
+    check $? "a second launch reuses the open window (exit $status)"
+    [ "$(call /api/state "$key")" = 200 ] && [ "$(sed 's/.*"pid": *\([0-9]*\).*/\1/' "$answer_file")" = "$pid" ]
+    check $? 'the same server still answers'
     kill -TERM -"$app" 2>/dev/null
-    rm -f "$log"
-    [ "$code" = 200 ]
-    check $? "the Corsu menu entry starts the window (${address:-no address}, HTTP $code)"
+    rm -f "$opened" "$browser" "$answer_file"
     ;;
 update)
     archives=$2
