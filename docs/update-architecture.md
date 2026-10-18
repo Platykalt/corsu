@@ -10,8 +10,8 @@ Contract between the installer, the updater and the Corsu window (October 2026).
   there. Launchers and shortcuts only ever point into `corsu.DATA`. An extracted archive or a git clone is never
   registered as an installation.
 - An archive's Python (`runtime/<processor>/python`) is always copied to `corsu.DATA/runtime/<version>`. Launchers
-  start it when the installer ran on it; when it ran on another Python (on Linux the distribution's, for the GTK
-  window), they go through `corsu.DATA/bin/corsu-python`, which starts that Python while it is 3.10 or newer with its
+  start it when the installer ran on it, and always on macOS (it carries the window's bindings); when the installer
+  ran on another Python on Linux (the distribution's, for the GTK window), they go through `corsu.DATA/bin/corsu-python`, which starts that Python while it is 3.10 or newer with its
   whole standard library, else the copy. Deleting the archive, removing or breaking the system's Python then leaves
   every launcher working (an archive built with `--no-runtime` has no copy to fall back to). Copies no launcher names
   are deleted (`installer.prune_runtimes`).

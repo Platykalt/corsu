@@ -33,8 +33,9 @@ Les archives publiées contiennent leur propre Python (`runtime/<processeur>/pyt
 [python-build-standalone](https://github.com/astral-sh/python-build-standalone), épinglé avec sa somme SHA-256 dans
 `src/release.json`), allégé de Tk, IDLE, pip et des tests ; ceux de Windows et macOS ont pywebview et ses liaisons.
 `tools/package_release.py --no-runtime` construit des archives sans lui. L'installeur d'une archive le copie une
-seule fois dans `runtime/<version>` du dossier de données. Lancé depuis ce Python, les raccourcis l'utilisent ensuite ;
-lancé depuis un autre (sous Linux, celui de la distribution, pour la fenêtre GTK), les raccourcis passent par
+seule fois dans `runtime/<version>` du dossier de données. Lancé depuis ce Python, et toujours sous macOS, les
+raccourcis l'utilisent ensuite ; lancé depuis un autre sous Linux (celui de la distribution, pour la fenêtre GTK), les
+raccourcis passent par
 `bin/corsu-python`, qui démarre ce Python tant qu'il est en 3.10 ou plus avec sa bibliothèque standard complète, et
 sinon la copie (`corsu.launcher_python`).
 
