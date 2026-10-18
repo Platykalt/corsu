@@ -1,5 +1,7 @@
 # Minecraft Java: concrete vocabulary review (October 2026)
 
+> **Verified 2026-10-18.** A separate AI verification checked every change proposal below against its source and applied part of them: see [APPLIED.tsv](APPLIED.tsv), [REJECTED.tsv](REJECTED.tsv) and [TRACKING.md](TRACKING.md). The text below is the proposal as written; "nothing was changed" was true when it was written.
+
 **Proposals only.** Nothing in `co_fr.json`, `history.json`, `glossary.tsv`, `keys.tsv`, `inventory.tsv`, `texts/` or
 `lexicon/` was changed. An AI model wrote this review by looking words up in the sources listed below. It is
 **not** a speaker's validation; a second AI pass would not be one either. Every proposal waits for the maintainer

@@ -16,7 +16,7 @@ unless the reviewed lexicon has it).
 | Ominous | minacciosu, funestu, di malu presagiu | **funestu** (Buttiglia funesta, Chjave di prova funesta, Stendardu funestu, Generatore d'ogetti funestu) | majority in subtitles; same sense as FR *funeste*; one adjective for the whole Ominous family |
 | Command | cumandu (m), cumanda (f) | **cumanda / cumande** (f) | reviewed lexicon: Command → Cumanda, Commands → Cumande; Command Block → **Bloccu di cumanda** |
 | Sculk Shrieker | Urladore, Urlatore, sculk urlatore | **Urladore di sculk** | block name; Catalyst = Catalizatore di sculk, Sensor = Sensore di sculk (block names) |
-| Wall X | X di Y murale, X murale di Y | **X murale di Y**: Cartellu murale di quercia, Torcia murale di redstone, Capu murale di Piglin, Cranu murale di scheletru, Ventaglia murale di curallu tubu; hanging signs: Cartellu appesu murale di Y | rule given; *Cartellu appesu* is treated as the head noun |
+| Wall X | X di Y murale, X murale di Y | **X murale di Y**: Cartella murale di querciu, Torchja murale di redstone, Capu murale di Piglin, Cranu murale di scheletru, Ventaglia murale di curallu tubu; hanging signs: Cartella appesa murale di Y | rule given; *Cartella appesa* is treated as the head noun (names changed by the 2026-10 review, see below) |
 | Colour plurals | aranci/arance, invariable forms | regular inflection: **aranciu/arancia, pl. aranci/arance**; grisgiu chjaru → grisgi chjari; celeste → celesti; marrone → marroni; verde → verdi; *verde limone* and *magenta* invariable | grammatical and already used consistently (Denti aranci, Foglie di piobbu arance) |
 | Zombified Piglin | zombificatu, zumbificatu | **Piglin zumbificatu** | the name key; regular Corsican *o → u* before the stress |
 | Speed | Velocità, Vitezza | kept: **Velocità** effect/potion, **vitezza** in settings | as decided |
@@ -37,6 +37,16 @@ unless the reviewed lexicon has it).
 | Typography | `word:`, `word :`, `...` | space before `: ; ! ?`, `…` for `...` | reviewed lexicon; never inside placeholders, times (`%s:%s`, `1:%s`), ids, key labels, `???`, or pure format strings (`%s: %s`) |
 | Elision | di un, una entità, stu ogettu | **d'un, d'una, d'ogni, un'entità, st'ogettu** | lexicon: d'un 56 vs di un 4 |
 
+## October 2026 review, verified
+
+Two AI review sets (concrete names, language and context) were checked entry by entry by a separate AI verification
+before anything was applied; nothing of it is a speaker's validation. Applied changes with their references:
+[review-2026-10/APPLIED.tsv](review-2026-10/APPLIED.tsv); proposals not applied and why:
+[review-2026-10/REJECTED.tsv](review-2026-10/REJECTED.tsv); summary: [review-2026-10/TRACKING.md](review-2026-10/TRACKING.md).
+The harmonisations it made (one spelling for the product; the other form is attested and not wrong): *dighjà* (not
+*digià*), *seranu/serete* (not *saranu/sarete*), *perfurmenze* (not *prestazioni*), *evenimenti* (not
+*avvenimenti*), polite *voi* with a singular adjective (*Site sicuru*, *Site esclusu*).
+
 ## Open questions for a Corsican speaker
 
 An AI terminology review (October 2026, **not** a speaker validation) gave each question a proposal and a solidity
@@ -55,13 +65,13 @@ answered with an attested form and applied (Q30); Q20 and Q22 were only harmonis
 8. `block.minecraft.orange_poplar_leaves`: plural *arance* of the colour *arancia* reads like "oranges" (the fruit); keep, or use an invariable form? — *Review 2026-10:* keep; unresolved.
 9. `block.minecraft.nether_wart`: *Verruca di u Nether* without attestation in the resources consulted. — *Review 2026-10:* ask about *porru*; current doubtful.
 10. `block.minecraft.sea_pickle`: *Cucumaru di mare* is a guess (the real creature is a pyrosome). — *Review 2026-10:* keep; plausible.
-11. `block.minecraft.allium`, `cornflower` (*Fiurdalisu* vs *Fiordalisu*), `azure_bluet` (*Houstonia*), `lily_pad` (*ninfea*): common Corsican plant names? — *Review 2026-10:* keep; *Agliu salvaticu* plausible, others unresolved.
+11. `block.minecraft.allium`, `cornflower` (*Fiurdalisu* vs *Fiordalisu*), `azure_bluet` (*Houstonia*), `lily_pad` (*ninfea*): common Corsican plant names? — *Review 2026-10:* keep; *Agliu salvaticu* plausible, others unresolved. — *Verification 2026-10-18:* *Fiurdalisu* kept (INFCOR lists it as a synonym of *turchinellu*); Lily Pad changed to *Nenufaru* (INFCOR, EN "lily pad").
 12. `block.minecraft.potent_sulfur`: meaning of "Potent" (new 26.3 block) unclear; *Zolfu putente*. — *Review 2026-10:* *Zolfu cuncentratu* if FR/IT reading confirmed; current doubtful.
 13. `block.minecraft.banner.*`: heraldic terms *Trinciatu, Tagliatu, Troncatu, Partitu* calqued on Italian heraldry; dexter/sinister as *à diritta / à manca*. — *Review 2026-10:* keep; unresolved.
 14. `block.minecraft.frosted_ice` (*brinatu*), `gilded_blackstone` (*durata* may read as "duration"), `chipped_anvil` (*intaccata*): without attestation in the resources consulted adjectives. — *Review 2026-10:* *Petranera indurata* proposed (*durata* clashes with "duration"); doubtful.
 15. `biome.minecraft.deep_lukewarm_ocean`: *tepidu* without attestation in the resources consulted (tèpidu? calducciu?). — *Review 2026-10:* keep; unresolved.
 16. `biome.minecraft.dappled_forest`: *chjazzata*; `lush_caves`: *verdi* may be too plain; `jagged_peaks`: *dentati*. — *Review 2026-10:* check the biome in game (FR/IT read "amber"); unresolved.
-17. `entity.minecraft.parched` (*Scheletru arsu*), `camel_husk` (*Cammellu seccu*), `entity.minecraft.cushion` (*Cuscinu*): new 26.x mobs, meaning guessed from FR/IT. — *Review 2026-10:* keep; *arsu* doubtful.
+17. `entity.minecraft.parched` (*Scheletru arsu*), `camel_husk` (*Camellu seccu*, spelling verified 2026-10), `entity.minecraft.cushion` (*Cuscinu*): new 26.x mobs, meaning guessed from FR/IT. — *Review 2026-10:* keep; *arsu* doubtful.
 18. `advancements.husbandry.feed_snifflet.description`: Snifflet coined *annusadurellu*. — *Review 2026-10:* keep; unresolved.
 19. `subtitles.entity.ghastling.ambient`: Ghastling coined *Ghastinu*. — *Review 2026-10:* keep; plausible.
 20. `subtitles.entity.horse.ambient` / `zombie_horse.angry`: *annitrisce* vs *nitrisce* (neigh). — *Review 2026-10:* harmonised on *annitrisce*; unresolved.

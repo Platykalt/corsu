@@ -1,5 +1,7 @@
 # Minecraft Java in Corsican: language and context review (October 2026)
 
+> **Verified 2026-10-18.** A separate AI verification checked every change proposal below against its source and applied part of them: see [APPLIED.tsv](APPLIED.tsv), [REJECTED.tsv](REJECTED.tsv) and [TRACKING.md](TRACKING.md). The text below is the proposal as written; "nothing was changed" was true when it was written.
+
 **This is an AI review, not a speaker validation.** Nothing here has been applied to `co_fr.json` or `history.json`:
 [language.tsv](language.tsv) holds proposals only. Coverage is in [tracking-language.tsv](tracking-language.tsv).
 Concrete nouns (animals, plants, blocks, items, materials) belong to the parallel review (`concrete.tsv`); where a

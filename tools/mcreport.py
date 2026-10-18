@@ -572,7 +572,10 @@ def status_block(f):
         f'({number(f["history"], "en")} pairs for older English: {kinds_text(f, "en")}) |',
         f'| Technical check | {check} |',
         f'| AI review | {capital(ai_text(f, "en"))}. The {f["base"]} base also got a '
-        'harmonising and a reviewing AI pass (section 3 below). An AI pass finds mistakes; it is not a validation. |',
+        'harmonising and a reviewing AI pass (section 3 below), then in October 2026 a review of the concrete names '
+        'and of the language with sources, checked by a separate AI verification before part of it was applied '
+        '([review-2026-10/TRACKING.md](review-2026-10/TRACKING.md)). An AI pass finds mistakes; it is not a '
+        'validation. |',
         f'| Human review | {number(f["human"], "en")} |',
         f'| Seen in the game | {capital(in_game_text(f, "en", STATUS_FILE))} |',
         '', 'Snapshots, pre-releases, release candidates and versions before 1.6.1 (no resource packs): not claimed '
