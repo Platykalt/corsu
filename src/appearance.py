@@ -67,8 +67,8 @@ def settings_path():
 # Image checks ------------------------------------------------------------------------------------------------------
 
 def png_size(data):
-    """(width, height) of a complete PNG: every chunk inside the data with a correct CRC, IHDR first, IDAT present,
-    IEND last and nothing after it."""
+    """(width, height) of a complete, still PNG: every chunk inside the data with a correct CRC, IHDR first, IDAT
+    present, IEND last and nothing after it; an animated PNG (acTL) is refused, as an animated WebP is."""
     if not data.startswith(b'\x89PNG\r\n\x1a\n'):
         raise Invalid('not_image')
     position, size, seen_data = 8, None, False
@@ -86,6 +86,8 @@ def png_size(data):
             if kind != b'IHDR' or length != 13:
                 raise Invalid('damaged', 'PNG without IHDR')
             size = struct.unpack('>II', body[:8])
+        elif kind == b'acTL':
+            raise Invalid('not_image', 'animated PNG')
         elif kind == b'IDAT':
             seen_data = True
         elif kind == b'IEND':
@@ -365,11 +367,18 @@ def store_background(data, x=50, y=50):
     extension, width, height = inspect(data)
     name = f'background-{hashlib.sha256(data).hexdigest()[:16]}.{extension}'
     with LOCK:
-        write_atomic(folder() / name, data)
         settings = load()
+        current = settings['image'] and settings['image']['file']
+        write_atomic(folder() / name, data)
         settings.update(background='image', image={'file': name, 'type': KINDS[extension], 'bytes': len(data),
                                                    'width': width, 'height': height, 'x': x, 'y': y})
-        settings = save(settings)
+        try:
+            settings = save(settings)
+        except BaseException:
+            # Nothing names the new copy: it goes, unless it is the very picture already in use.
+            if name != current:
+                (folder() / name).unlink(missing_ok=True)
+            raise
         remove_backgrounds(keep=name)
         return settings
 

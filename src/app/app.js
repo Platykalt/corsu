@@ -62,9 +62,10 @@ function chip(activation, attributes = {}, label = null, tone = null) {
 }
 
 async function call(path, body) {
+  await corsuAccess.ready;
   const response = await fetch(path, {
     method: body ? "POST" : "GET",
-    headers: { "X-Corsu": "1", "Content-Type": "application/json" },
+    headers: corsuAccess.headers({ "Content-Type": "application/json" }),
     body: body ? JSON.stringify({ language, ...body }) : undefined,
   });
   if (response.status === 409) { alert(t("busy")); return null; }
@@ -479,7 +480,7 @@ async function loadReview() {
 async function answer(verdict) {
   if (!reviewItem) return;
   const corsican = $("review-corsican").value;
-  const response = await fetch("/api/review", { method: "POST", headers: { "X-Corsu": "1", "Content-Type": "application/json" },
+  const response = await fetch("/api/review", { method: "POST", headers: corsuAccess.headers({ "Content-Type": "application/json" }),
     body: JSON.stringify({ language, french: reviewItem.french, english: reviewItem.english, verdict, corsican }) });
   if (!response.ok) {
     const result = await response.json().catch(() => ({}));
@@ -598,7 +599,7 @@ async function restartCorsu() {
   const before = state.pid;
   let result = null;
   try {
-    const response = await fetch("/api/restart", { method: "POST", headers: { "X-Corsu": "1", "Content-Type": "application/json" }, body: JSON.stringify({ language }) });
+    const response = await fetch("/api/restart", { method: "POST", headers: corsuAccess.headers({ "Content-Type": "application/json" }), body: JSON.stringify({ language }) });
     result = await response.json().catch(() => ({}));
     if (response.status === 409) { alert(t("busy")); return refresh(); }
     if (!response.ok) { alert(t("update_restart_failed", { error: String(result.error || response.status).replace(/\.$/, "") })); return refresh(); }
@@ -634,7 +635,9 @@ async function refresh() {
     if (restarting && Date.now() < restarting.until) return;
     if (closed) return;
     closed = true;
-    document.querySelector("main").replaceChildren(make("p", { class: "closed", text: t("closed") }));
+    // Refused: this page has no key (an old tab or bookmark, a key replaced), Corsu is open but not for it.
+    const refused = error.message === "403";
+    document.querySelector("main").replaceChildren(make("p", { class: "closed", text: t(refused ? "locked" : "closed") }));
     $("activity").hidden = true;
     return;
   }

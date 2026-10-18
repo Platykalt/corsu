@@ -51,6 +51,10 @@ shared component classes (`.group` rows, `.switch`, `.button`, `.segmented`, `.s
 
 ## Server interface (src/appearance.py, wired in src/app.py)
 
+Every route below, reads included, needs allowed(): Host, `X-Corsu: 1`, Origin, the window's key in `X-Corsu-Key`
+and, on Linux, the connection's owner (docs/window-security.md). The page gets the key from `src/app/key.js`
+(`corsuAccess.ready`, `corsuAccess.headers(extra)`), loaded before every other script.
+
 - `GET /appearance/settings` → current settings JSON (defaults when missing or damaged).
 - `POST /api/appearance` (allowed() checks) → validated settings saved to `DATA/appearance/settings.json`.
 - `POST /api/appearance/background` (allowed() checks, raw image bytes, size-limited) → stored copy in

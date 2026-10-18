@@ -5,10 +5,12 @@ The window is a local page served on 127.0.0.1 at a fixed address (http://localh
 in a window of its own (see window.py) or in any browser. `--browser` opens it in the browser instead of a window,
 `--text` gives a menu in the terminal.
 """
+import hmac
 import ipaddress
 import json
 import os
 import re
+import secrets
 import shlex
 from pathlib import Path
 import socket
@@ -33,7 +35,7 @@ PAGE = Path(__file__).resolve().parent / 'app/index.html'
 STATIC = {'corsu.svg': 'image/svg+xml', 'style.css': 'text/css; charset=utf-8',
           'texts.js': 'text/javascript; charset=utf-8', 'app.js': 'text/javascript; charset=utf-8',
           'appearance.css': 'text/css; charset=utf-8', 'appearance.js': 'text/javascript; charset=utf-8',
-          'texts-appearance.js': 'text/javascript; charset=utf-8'}
+          'texts-appearance.js': 'text/javascript; charset=utf-8', 'key.js': 'text/javascript; charset=utf-8'}
 # The page asks for news every few seconds; without any for this long, the window was closed.
 IDLE_SECONDS = 600
 # Once Corsu's own window is closed, a browser tab on the address keeps it running; without one it stops sooner.
@@ -337,6 +339,82 @@ def peer_uid(client, server):
     return uids.pop() if len(uids) == 1 else None
 
 
+class Access:
+    """The window's key: a secret made at each launch that every API call must carry (X-Corsu-Key), so that only the
+    page Corsu opened itself reads or drives Corsu, on every system (another local account can send any header, but
+    does not know the key). The page never gets the key on a command line or in the address: Corsu opens it with a
+    ticket after `#` (never sent to the server), which the page exchanges once, through POST /api/key, for the key;
+    it keeps the key in its sessionStorage for reloads. A ticket works once and for TICKET_SECONDS. A ticket shown a
+    second time means someone else read it (a browser's command line can be read by other accounts on macOS and
+    Linux): the key is then replaced, so whoever exchanged it first is shut out too, and the window says to reopen
+    Corsu. The key also sits in SESSION (readable by this user only), for the copy that replaces this one after an
+    update and for a second launch, which asks this server for a fresh ticket. See docs/window-security.md."""
+
+    TICKET_SECONDS = 120
+
+    def __init__(self, key=None):
+        self.lock = threading.Lock()
+        self.key = key or secrets.token_urlsafe(32)
+        self.tickets = {}
+        self.used = set()
+        self.url = None
+
+    def valid(self, offered):
+        return isinstance(offered, str) and hmac.compare_digest(offered.encode(), self.key.encode())
+
+    def ticket(self):
+        ticket = secrets.token_urlsafe(24)
+        with self.lock:
+            now = time.monotonic()
+            self.tickets = {name: end for name, end in self.tickets.items() if end > now}
+            self.tickets[ticket] = now + self.TICKET_SECONDS
+        return ticket
+
+    def redeem(self, ticket):
+        """The key for a ticket given out and not used yet, else None (a ticket used before replaces the key)."""
+        if not isinstance(ticket, str):
+            return None
+        with self.lock:
+            end = self.tickets.pop(ticket, None)
+            if end is not None and end > time.monotonic():
+                self.used.add(ticket)
+                return self.key
+            if ticket not in self.used:
+                return None
+            self.key = secrets.token_urlsafe(32)
+            self.tickets.clear()
+        if self.url:
+            write_session(self.url)
+        return None
+
+
+ACCESS = Access()
+
+
+def write_session(url):
+    """Note the address and key of this window for the copy that replaces it and for a second launch, readable by
+    this user only: created 0600 (Linux, macOS); on Windows the data folder (%LOCALAPPDATA%) is the user's own."""
+    corsu.DATA.mkdir(parents=True, exist_ok=True)
+    temporary = SESSION.with_name(SESSION.name + '.corsu-tmp')
+    temporary.unlink(missing_ok=True)
+    descriptor = os.open(temporary, os.O_WRONLY | os.O_CREAT | os.O_EXCL, 0o600)
+    with os.fdopen(descriptor, 'w', encoding='utf-8') as output:
+        output.write(json.dumps({'url': url, 'key': ACCESS.key}))
+    os.replace(temporary, SESSION)
+
+
+def read_session():
+    """(url, key) of the last window noted in SESSION; either may be None."""
+    try:
+        saved = json.loads(SESSION.read_text(encoding='utf-8'))
+    except (OSError, ValueError):
+        return None, None
+    if not isinstance(saved, dict):
+        return None, None
+    url, key = saved.get('url'), saved.get('key')
+    return (url if isinstance(url, str) else None), (key if isinstance(key, str) and len(key) >= 32 else None)
+
+
 def make_handler(job, activity, port, handover=None):
     page = PAGE.read_bytes()
     # The page's own files, read once: nothing else of the folder (or the disk) is ever served.
@@ -364,15 +442,19 @@ def make_handler(job, activity, port, handover=None):
             self.end_headers()
             self.wfile.write(data)
 
-        def allowed(self):
-            """Only Corsu's own page may drive Corsu. The Host check stops other sites reaching it through a
+        def allowed(self, keyed=True):
+            """Only Corsu's own page may read or drive Corsu. The Host check stops other sites reaching it through a
             rebound domain name; the custom header can only be sent by a page of this address (a page elsewhere
-            would need permission the server never gives); on Linux the connection must also come from this user,
-            so another account on the same computer cannot use it: the client end of this very connection must belong
-            to this user, and a caller that cannot be identified is refused (see docs/window-security.md)."""
+            would need permission the server never gives); the window's key (Access) is known only to the page Corsu
+            opened, so another account on the same computer, which can send any header, is refused on every system;
+            on Linux the client end of this very connection must also belong to this user, and a caller that cannot
+            be identified is refused (see docs/window-security.md). `keyed=False` is for the one call that obtains
+            the key with a ticket."""
             if self.headers.get('Host', '') not in hosts or self.headers.get('X-Corsu') != '1':
                 return False
             if self.headers.get('Origin') and self.headers['Origin'] not in origins:
+                return False
+            if keyed and not ACCESS.valid(self.headers.get('X-Corsu-Key')):
                 return False
             if corsu.PLATFORM == 'linux' and hasattr(os, 'getuid'):
                 return peer_uid(self.client_address, self.connection.getsockname()) == os.getuid()
@@ -384,15 +466,19 @@ def make_handler(job, activity, port, handover=None):
                     return self.send(403, {'error': 'forbidden'})
                 return self.send(200, page, 'text/html; charset=utf-8')
             if self.path in files:
+                # The page's own code and styles: the same for everyone, nothing of this person in them.
                 return self.send(200, *files[self.path])
-            if self.path == '/api/state' and self.allowed():
-                activity[0] = time.monotonic()
-                return self.send(200, {**snapshot(job), 'job': job.snapshot()})
-            if self.path.startswith('/api/review/next') and self.allowed():
-                section = 'Google' if 'section=Google' in self.path else 'Discord'
-                return self.send(200, {'item': review.next_item(section), 'progress': review.progress_all()})
-            if self.path == '/api/review/issue' and self.allowed():
-                return self.send(200, review.issue_link())
+            if self.path.startswith('/api/'):
+                if not self.allowed():
+                    return self.send(403, {'error': 'forbidden'})
+                if self.path == '/api/state':
+                    activity[0] = time.monotonic()
+                    return self.send(200, {**snapshot(job), 'job': job.snapshot()})
+                if self.path.startswith('/api/review/next'):
+                    section = 'Google' if 'section=Google' in self.path else 'Discord'
+                    return self.send(200, {'item': review.next_item(section), 'progress': review.progress_all()})
+                if self.path == '/api/review/issue':
+                    return self.send(200, review.issue_link())
             # Settings and the background picture: allowed() is checked inside, for the picture too.
             found = appearance.handle('GET', self.path, b'', self.headers, self.allowed)
             if found is not None:
@@ -400,9 +486,22 @@ def make_handler(job, activity, port, handover=None):
             self.send(404, {'error': 'not found'})
 
         def do_POST(self):
+            if self.path == '/api/key':
+                # The page exchanges the ticket of its address for the key: every check but the key itself.
+                if not self.allowed(keyed=False):
+                    return self.send(403, {'error': 'forbidden'})
+                try:
+                    request = json.loads(self.rfile.read(min(int(self.headers.get('Content-Length') or 0), 1024)) or b'{}')
+                except ValueError:
+                    return self.send(400, {'error': 'bad request'})
+                key = ACCESS.redeem(request.get('ticket') if isinstance(request, dict) else None)
+                return self.send(200, {'key': key}) if key else self.send(403, {'error': 'ticket'})
             if not self.allowed():
                 return self.send(403, {'error': 'forbidden'})
             activity[0] = time.monotonic()
+            if self.path == '/api/ticket':
+                # A second launch of Corsu shows this window again: its new window gets a ticket of its own.
+                return self.send(200, {'ticket': ACCESS.ticket()})
             if urllib.parse.urlsplit(self.path).path.startswith('/api/appearance'):
                 # Raw picture bytes or settings: the size is checked before anything is read.
                 try:
@@ -735,15 +834,18 @@ def minecraft_waiting(state, result):
     return waiting
 
 
-def local_state(url, timeout=2):
-    """The /api/state of a Corsu window at `url` (http://localhost:<port>/), or None when nothing answers. Asked
-    directly: urllib would follow the system's proxy settings (environment, macOS network settings), which have
-    nothing to do with a server on this computer."""
+def local_call(url, key, path='/api/state', method='GET', timeout=2):
+    """The answer of the Corsu window at `url` (http://localhost:<port>/) to `path`, asked with its key, or None
+    when nothing answers or it refuses. Asked directly: urllib would follow the system's proxy settings
+    (environment, macOS network settings), which have nothing to do with a server on this computer."""
     try:
         address = urllib.parse.urlsplit(url)
         connection = http.client.HTTPConnection(address.hostname, address.port, timeout=timeout)
+        headers = {'X-Corsu': '1', 'X-Corsu-Key': key or ''}
+        if method == 'POST':
+            headers['Content-Type'] = 'application/json'
         try:
-            connection.request('GET', '/api/state', headers={'X-Corsu': '1'})
+            connection.request(method, path, body=b'{}' if method == 'POST' else None, headers=headers)
             response = connection.getresponse()
             return json.loads(response.read()) if response.status == 200 else None
         finally:
@@ -752,13 +854,19 @@ def local_state(url, timeout=2):
         return None
 
 
+def local_state(url, key=None, timeout=2):
+    return local_call(url, key or ACCESS.key, timeout=timeout)
+
+
 def running_session():
-    """The address of a Corsu already open, so a second click shows it instead of starting another."""
-    try:
-        url = json.loads(SESSION.read_text(encoding='utf-8'))['url']
-    except (OSError, ValueError, KeyError, TypeError):
+    """The address of a Corsu already open, with a fresh ticket for a new window on it, so a second click shows it
+    instead of starting another. None when none answers to the key noted in SESSION."""
+    url, key = read_session()
+    if not url or not key or local_state(url, key) is None:
         return None
-    return url if local_state(url) is not None else None
+    answer = local_call(url, key, '/api/ticket', 'POST')
+    ticket = answer.get('ticket') if isinstance(answer, dict) else None
+    return url + '#t=' + ticket if isinstance(ticket, str) else url
 
 
 class Server(ThreadingHTTPServer):
@@ -885,7 +993,7 @@ def serve(mode='window', replace=None):
         if existing:
             if mode != 'none':
                 import window
-                window.show(existing, mode)
+                window.show(existing.replace('localhost', '127.0.0.1'), mode)
             return
     job = Job()
     activity = [time.monotonic()]
@@ -893,7 +1001,12 @@ def serve(mode='window', replace=None):
     if replace is None:
         server = listen(job, activity)
     else:
-        mode = 'none'
+        # The window being replaced keeps its page, which reloads from here with the key it already has. A copy
+        # before 0.25 had no key to hand over: the page it keeps cannot get one, so this copy opens its own window.
+        inherited = read_session()[1]
+        if inherited:
+            ACCESS.key = inherited
+            mode = 'none'
         try:
             server = bind(replace, job, activity, wait=Handover.WAIT)
         except OSError:
@@ -905,20 +1018,21 @@ def serve(mode='window', replace=None):
     url = f'http://localhost:{port}/'
     threading.Thread(target=server.serve_forever, daemon=True).start()
     start_check(job)
+    ACCESS.url = url
     try:
-        corsu.DATA.mkdir(parents=True, exist_ok=True)
-        SESSION.write_text(json.dumps({'url': url}), encoding='utf-8')
-        if corsu.PLATFORM != 'windows':
-            SESSION.chmod(0o600)
+        write_session(url)
     except OSError:
         pass
-    print(t(f'Corsu is open at {url} until you close it.', f'Corsu est ouvert à l\'adresse {url} jusqu\'à sa fermeture.'),
+    # The address to open: with a ticket after '#', which only the page sees (see Access).
+    opening = url.replace('localhost', '127.0.0.1') + '#t=' + ACCESS.ticket()
+    shown = opening if mode == 'none' and replace is None else url
+    print(t(f'Corsu is open at {shown} until you close it.', f'Corsu est ouvert à l\'adresse {shown} jusqu\'à sa fermeture.'),
           flush=True)
     idle = IDLE_SECONDS
     if mode != 'none':
         import window
         # The window blocks until it is closed; a browser tab returns at once and the idle timer decides.
-        if window.show(url.replace('localhost', '127.0.0.1'), mode):
+        if window.show(opening, mode):
             idle = CLOSED_IDLE_SECONDS
             activity[0] = time.monotonic()
     try:

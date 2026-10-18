@@ -126,6 +126,18 @@ class ImageCheckTests(Base):
         self.assertRefused(b'RIFF' + struct.pack('<I', len(html) + 4) + b'WEBP' + html, 'damaged')
         self.assertRefused(webp_extended(flags=0x02), 'not_image')  # animated
 
+    def test_animated_pictures_are_refused(self):
+        # Only still pictures: the page sends the first frame re-encoded, so an animation reaching the server was
+        # sent some other way. An animated PNG carries acTL before its first IDAT.
+        def chunk(kind, body):
+            return struct.pack('>I', len(body)) + kind + body + struct.pack('>I', zlib.crc32(kind + body))
+        still = png()
+        animated = still[:33] + chunk(b'acTL', struct.pack('>II', 2, 0)) + still[33:]
+        self.assertEqual(appearance.inspect(still)[0], 'png')
+        self.assertRefused(animated, 'not_image')
+        self.assertRefused(riff((b'VP8X', bytes([0x02]) + bytes(9)), (b'ANIM', bytes(6))), 'not_image')
+        self.assertRefused(b'GIF89a' + bytes(20), 'not_image')
+
     def test_dimensions(self):
         self.assertRefused(png_header_only(appearance.MAX_SIDE + 1, 10), 'dimensions')
         self.assertRefused(png_header_only(10, 100000), 'dimensions')
@@ -198,6 +210,8 @@ class RouteTests(Base):
             status, body, _ = self.handle('POST', '/api/appearance/background', second)
         self.assertEqual(status, 500)
         self.assertTrue(old.exists(), 'the previous picture stays when the new settings could not be saved')
+        self.assertEqual([path.name for path in (self.data / 'appearance').glob('background-*')], [old.name],
+                         'and the new copy, which nothing names, is not left behind')
         self.assertEqual(appearance.load()['image']['file'], old.name)
         self.assertEqual(self.handle('GET', '/appearance/background')[1], first)
         self.assertEqual(list((self.data / 'appearance').glob('*.corsu-tmp')), [])

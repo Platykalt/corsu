@@ -3,8 +3,11 @@ import ipaddress
 import json
 import socket
 import struct
+import os
 import sys
+import tempfile
 import threading
+import time
 import unittest
 from pathlib import Path
 from unittest.mock import patch
@@ -28,7 +31,7 @@ class SetupWindowTests(unittest.TestCase):
         connection = http.client.HTTPConnection('127.0.0.1', self.port, timeout=5)
         headers = {'Host': host or f'127.0.0.1:{self.port}', 'Content-Type': 'application/json'}
         if corsu:
-            headers['X-Corsu'] = '1'
+            headers.update({'X-Corsu': '1', 'X-Corsu-Key': app.ACCESS.key})
         if origin:
             headers['Origin'] = origin
         connection.request(method, path, body=json.dumps(body or {}) if method == 'POST' else None, headers=headers)
@@ -70,7 +73,7 @@ class SetupWindowTests(unittest.TestCase):
         save.assert_not_called()
 
     def test_state_needs_corsus_page(self):
-        self.assertEqual(self.request('GET', '/api/state')[0], 404)
+        self.assertEqual(self.request('GET', '/api/state')[0], 403)
         with patch.object(app, 'snapshot', return_value={'installed': False}):
             status, body = self.request('GET', '/api/state', corsu=True)
         self.assertEqual(status, 200)
@@ -92,6 +95,172 @@ class SetupWindowTests(unittest.TestCase):
             start.reset_mock()
             self.request('POST', '/api/pause', corsu=True, body={'hours': 1})
             start.assert_called_once_with('switch', ['--disable', 'terminal', '--hours', '1.0'], 'fr')
+
+
+class WindowKeyTests(unittest.TestCase):
+    """The window's key (app.Access): what another local account can read or do when it sends every header the page
+    sends but not the key, on every system (Windows and macOS have no owner check, so it is the only barrier there)."""
+
+    def setUp(self):
+        folder = Path(tempfile.mkdtemp(prefix='corsu-key-'))
+        self.addCleanup(lambda: __import__('shutil').rmtree(folder, ignore_errors=True))
+        self.data = folder / 'data'
+        for patcher in (patch.object(app.corsu, 'DATA', self.data), patch.object(app, 'SESSION', self.data / 'setup-session.json'),
+                        patch.object(app, 'ACCESS', app.Access())):
+            patcher.start()
+            self.addCleanup(patcher.stop)
+        import appearance
+        # A personal picture and settings, as the Appearance page keeps them.
+        appearance.store_background(b'\x89PNG\r\n\x1a\n' + self.chunk(b'IHDR', struct.pack('>IIBBBBB', 2, 2, 8, 2, 0, 0, 0))
+                                    + self.chunk(b'IDAT', __import__('zlib').compress(b'\0' + bytes(6) + b'\0' + bytes(6)))
+                                    + self.chunk(b'IEND', b''))
+        self.job = app.Job()
+        self.server = app.Server(('127.0.0.1', 0), app.make_handler(self.job, [0.0], 0))
+        self.port = self.server.server_address[1]
+        self.server.RequestHandlerClass = app.make_handler(self.job, [0.0], self.port)
+        threading.Thread(target=self.server.serve_forever, daemon=True).start()
+        self.addCleanup(self.server.server_close)
+        self.addCleanup(self.server.shutdown)
+
+    @staticmethod
+    def chunk(kind, body):
+        import zlib
+        return struct.pack('>I', len(body)) + kind + body + struct.pack('>I', zlib.crc32(kind + body))
+
+    def request(self, method, path, key=None, body=None, origin=None):
+        connection = http.client.HTTPConnection('127.0.0.1', self.port, timeout=5)
+        # Everything the page sends, as another account would copy it: Host, X-Corsu, Origin.
+        headers = {'Host': f'127.0.0.1:{self.port}', 'X-Corsu': '1', 'Origin': origin or f'http://127.0.0.1:{self.port}',
+                   'Content-Type': 'application/json'}
+        if key is not None:
+            headers['X-Corsu-Key'] = key
+        connection.request(method, path, body=json.dumps(body or {}) if method == 'POST' else None, headers=headers)
+        response = connection.getresponse()
+        return response.status, response.read()
+
+    READS = ('/api/state', '/appearance/settings', '/appearance/background', '/appearance/background?v=1',
+             '/api/review/issue', '/api/review/next?section=Discord')
+
+    def test_reads_without_the_key_are_refused_on_every_system(self):
+        with patch.object(app, 'snapshot', return_value={'installed': True, 'items': []}), \
+                patch.object(app.review, 'issue_link', return_value={'count': 0}), \
+                patch.object(app.review, 'next_item', return_value=None), patch.object(app.review, 'progress_all', return_value={}):
+            # Windows and macOS: no owner check at all, the key is what stands.
+            for system in ('windows', 'macos', 'linux'):
+                with patch.object(app.corsu, 'PLATFORM', system):
+                    for path in self.READS:
+                        for key in (None, '', 'x' * 43, app.ACCESS.key[:-1] + ('A' if app.ACCESS.key[-1] != 'A' else 'B')):
+                            with self.subTest(system=system, path=path, key=key):
+                                status, body = self.request('GET', path, key=key)
+                                self.assertEqual(status, 403)
+                                self.assertNotIn(b'PNG', body)
+                                self.assertNotIn(b'installed', body)
+            for path in self.READS:
+                with self.subTest(path=path, key='right'):
+                    self.assertEqual(self.request('GET', path, key=app.ACCESS.key)[0], 200)
+
+    def test_actions_without_the_key_are_refused(self):
+        with patch.object(app.corsu, 'PLATFORM', 'windows'), patch.object(self.job, 'start', return_value=True) as start, \
+                patch.object(app, 'set_preference') as save:
+            for path in ('/api/uninstall', '/api/preferences', '/api/appearance/reset', '/api/appearance/background/remove',
+                         '/api/ticket'):
+                with self.subTest(path=path):
+                    self.assertEqual(self.request('POST', path, body={'auto_update': True})[0], 403)
+            start.assert_not_called()
+            save.assert_not_called()
+        self.assertTrue(list((self.data / 'appearance').glob('background-*')), 'nothing removed by a refused call')
+
+    def test_the_key_does_not_replace_the_other_checks(self):
+        key = app.ACCESS.key
+        self.assertEqual(self.request('GET', '/api/state', key=key, origin='https://attacker.example')[0], 403)
+        connection = http.client.HTTPConnection('127.0.0.1', self.port, timeout=5)
+        connection.request('GET', '/appearance/settings', headers={'Host': 'attacker.example', 'X-Corsu': '1', 'X-Corsu-Key': key})
+        self.assertEqual(connection.getresponse().status, 403)
+        connection = http.client.HTTPConnection('127.0.0.1', self.port, timeout=5)
+        connection.request('GET', '/appearance/settings', headers={'Host': f'127.0.0.1:{self.port}', 'X-Corsu-Key': key})
+        self.assertEqual(connection.getresponse().status, 403)
+        with patch.object(app.corsu, 'PLATFORM', 'linux'), patch.object(app, 'peer_uid', return_value=-5), \
+                patch.object(app.os, 'getuid', create=True, return_value=1000):
+            self.assertEqual(self.request('GET', '/appearance/background', key=key)[0], 403)
+            self.assertEqual(self.request('POST', '/api/key', body={'ticket': app.ACCESS.ticket()})[0], 403)
+
+    def test_the_page_files_carry_nothing_personal(self):
+        # The page and its scripts are served to anyone at the address: they are the same for everyone.
+        for path in ('/', '/key.js', '/app.js', '/appearance.js', '/style.css'):
+            with self.subTest(path=path):
+                status, body = self.request('GET', path)
+                self.assertEqual(status, 200)
+                self.assertNotIn(app.ACCESS.key.encode(), body)
+
+    def test_a_ticket_gives_the_key_once(self):
+        ticket = app.ACCESS.ticket()
+        status, body = self.request('POST', '/api/key', body={'ticket': ticket})
+        self.assertEqual((status, json.loads(body)), (200, {'key': app.ACCESS.key}))
+        for wrong in ('', 'nope', None, 42, ['x']):
+            with self.subTest(ticket=wrong):
+                self.assertEqual(self.request('POST', '/api/key', body={'ticket': wrong})[0], 403)
+        self.assertEqual(self.request('GET', '/appearance/settings', key=json.loads(body)['key'])[0], 200)
+
+    def test_a_ticket_seen_twice_replaces_the_key(self):
+        app.ACCESS.url = 'http://localhost:7744/'
+        app.write_session(app.ACCESS.url)
+        ticket = app.ACCESS.ticket()
+        first = json.loads(self.request('POST', '/api/key', body={'ticket': ticket})[1])['key']
+        # Someone else read the ticket (a browser's command line): whoever comes second, the key is replaced.
+        self.assertEqual(self.request('POST', '/api/key', body={'ticket': ticket})[0], 403)
+        self.assertNotEqual(app.ACCESS.key, first)
+        self.assertEqual(self.request('GET', '/appearance/settings', key=first)[0], 403)
+        self.assertEqual(app.read_session(), (app.ACCESS.url, app.ACCESS.key), 'the new key is noted for a second launch')
+        self.assertEqual(self.request('GET', '/appearance/settings', key=app.ACCESS.key)[0], 200)
+
+    def test_tickets_expire_without_replacing_the_key(self):
+        key = app.ACCESS.key
+        with patch.object(app.Access, 'TICKET_SECONDS', -1):
+            ticket = app.ACCESS.ticket()
+        self.assertEqual(self.request('POST', '/api/key', body={'ticket': ticket})[0], 403)
+        self.assertEqual(app.ACCESS.key, key)
+
+    def test_a_second_launch_gets_a_ticket_with_the_noted_key(self):
+        url = f'http://localhost:{self.port}/'
+        app.write_session(url)
+        if os.name == 'posix':
+            self.assertEqual(app.SESSION.stat().st_mode & 0o777, 0o600)
+        self.assertEqual(json.loads(app.SESSION.read_text(encoding='utf-8')), {'url': url, 'key': app.ACCESS.key})
+        with patch.object(app, 'snapshot', return_value={'installed': False}):
+            opened = app.running_session()
+            self.assertTrue(opened.startswith(url + '#t='), opened)
+            status, body = self.request('POST', '/api/key', body={'ticket': opened.split('#t=')[1]})
+            self.assertEqual((status, json.loads(body)['key']), (200, app.ACCESS.key))
+            # A session file without the key (or another one) does not reach this window.
+            app.SESSION.write_text(json.dumps({'url': url}), encoding='utf-8')
+            self.assertIsNone(app.running_session())
+            app.SESSION.write_text(json.dumps({'url': url, 'key': 'y' * 43}), encoding='utf-8')
+            self.assertIsNone(app.running_session())
+
+    def test_the_copy_after_an_update_keeps_the_key_or_opens_its_own_window(self):
+        app.write_session('http://localhost:7744/')
+        inherited = app.ACCESS.key
+        with socket.socket() as probe:
+            probe.bind(('127.0.0.1', 0))
+            port = probe.getsockname()[1]
+        for noted, expected_mode in ((True, None), (False, 'window')):
+            with self.subTest(noted=noted):
+                if not noted:
+                    app.SESSION.write_text(json.dumps({'url': 'http://localhost:7744/'}), encoding='utf-8')
+                shown = []
+                fresh = app.Access()
+                window = type(sys)('window')
+                window.show = lambda url, mode: shown.append((url, mode)) or False
+                with patch.object(app, 'ACCESS', fresh), patch.object(app, 'start_check'), patch.object(app, 'IDLE_SECONDS', 0), \
+                        patch.dict(sys.modules, {'window': window}):
+                    app.serve('window', replace=port)
+                if noted:
+                    self.assertEqual(fresh.key, inherited)
+                    self.assertEqual(shown, [])
+                else:
+                    self.assertNotEqual(fresh.key, inherited)
+                    self.assertEqual([mode for _, mode in shown], [expected_mode])
+                    self.assertIn('#t=', shown[0][0])
 
 
 if __name__ == '__main__':
