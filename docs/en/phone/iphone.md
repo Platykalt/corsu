@@ -140,18 +140,28 @@ Before they are published, both variants are in the same archive as the candidat
 
 ## Automatic correction
 
-Keyman 18.0, the stable version, **has no automatic correction**: corrections are offered in the banner and only
-apply when you tap them. The Corsu dictionary does not control this setting. Keyman 19, still in beta, adds **Apply
+Keyman 18.0, the stable version, **has no automatic correction**: corrections are offered in the banner and only apply
+when you tap them. The Corsu dictionary does not control this setting. Keyman 19, still in beta, adds **Apply
 corrections automatically**; it will appear on the Corsican screen once Keyman 19 is the stable version. It stays
-optional: in our tests with the beta, automatic correction sometimes wrongly replaced names that are not in the
-dictionary.
+optional. In our tests of the 19.0.309 beta's engine (outside the app), a word that is in the dictionary is always
+kept as typed, but a missing word may be replaced: a name by a close name ("Bastelicaccia" by "Bastilicaccia" when
+only the latter is in the dictionary), or a lowercase word by the name spelled the same ("corti" by "Corti" when
+"corti" is missing).
 
 ## Returning to a word
 
 Moving the cursor changes nothing in the text. Suggestions follow the part of the word **left of the cursor**, and a
-chosen suggestion replaces only that part: with the cursor inside `ell|a`, choosing "ellu" gives "ellu a". This is a
-Keyman limit: it deletes nothing right of the cursor. So put the cursor **at the end of the word** (or delete the word
-and type it again) before picking a suggestion.
+chosen suggestion replaces only that part: the end of the old word stays right of the cursor. In "Dopu ell|a vene",
+choosing "ellu" gives "Dopu ellu a vene": that "a" is not an added word but the end of "ella", to be deleted by hand.
+Likewise, `ca|sa` then "casa" gives "casa sa".
+
+On iPhone this is also true with the next version's dictionary: it asks Keyman to delete the end of the word (which
+Keyman for Android does), but Keyman for iPhone ignores that request, in 18.0 as in the 19.0 beta (from its code; not
+tried on an iPhone). The safe gestures:
+
+- put the cursor **at the end of the word** before picking a suggestion: it then replaces the whole word;
+- or select the word, type its first letters (they replace the selection), then pick the suggestion;
+- or delete the word and type it again.
 
 ## If something goes wrong
 

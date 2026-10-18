@@ -1,0 +1,48 @@
+Android emulator (system image android-34 google_apis x86_64, KVM, headless, AVD started read-only), Keyman for Android
+18.0.254 (official APK), EuroLatin (SIL) for Corsican (co), Keyman's in-app text field; keys and suggestions tapped by adb
+on their screen nodes (uiautomator), caret moved with DPAD_LEFT (key 21). Suggestions: Predictions with corrections.
+Packages built by tools/build_keyboard.py with keyboard/whole-word.js, installed over the earlier ones (same package
+ids), Keyman force-stopped and relaunched. Active dictionary: Corsu – Pumuntincu (experimental), the one this AVD had
+active ("u zite" ranks ziteddu first); its installed model.js contains corsuWholeWord.
+Not a phone; not an iPhone.
+
+## Before: the same AVD with the earlier, unwrapped Pumuntincu model active
+{"text": "Start typing here…", "banner": ["Di", "U", "A", "In", "À", "È", "I", "Hè"], "layer": "shift", "step": ["clear", ""]}
+{"text": "Dopu ella vene", "banner": ["vene", "venetu", "venenu", "generale", "generali", "generalmente", "generazione", "generu"], "layer": "default", "step": ["type", "Dopu ella vene"]}
+{"text": "Dopu ella vene", "banner": ["vene", "vengu", "ventu", "venite", "venneri", "veni", "venutu", "venti"], "layer": "default", "step": ["key", "21"]}
+{"text": "Dopu ella vene", "banner": ["vecu", "vedi", "vene", "vengu", "versu", "venite", "veni", "venneri"], "layer": "default", "step": ["key", "21"]}
+{"text": "Dopu ella vene", "banner": ["voi", "voddu", "vogliu", "và", "vedi", "vene", "vengu", "vò"], "layer": "default", "step": ["key", "21"]}
+{"text": "Dopu ella vene", "banner": ["di", "u", "a", "in", "à", "è", "i", "hè"], "layer": "default", "step": ["key", "21"]}
+{"text": "Dopu ella vene", "banner": ["", "", "", "", "", "", "", ""], "layer": "default", "step": ["key", "21"]}
+{"text": "Dopu ella vene", "banner": ["ella", "ellu", "elli", "elle", "ellittica", "ellitticu", "ellisse", ""], "layer": "default", "step": ["key", "21"]}
+{"text": "Dopu ellu a vene", "banner": ["di", "u", "a", "in", "à", "è", "i", "hè"], "layer": "default", "step": ["accept", "ellu"]}
+{"text": "Start typing here…", "banner": ["Di", "U", "A", "In", "À", "È", "I", "Hè"], "layer": "shift", "step": ["clear", ""]}
+{"text": "Eccu a casa di", "banner": ["di", "dì", "dicu", "dinù", "dici", "digià", "dispiace", "diu"], "layer": "default", "step": ["type", "Eccu a casa di"]}
+{"text": "Eccu a casa di", "banner": ["di", "da", "dopu", "dicu", "duve", "dui", "dumane", "de"], "layer": "default", "step": ["key", "21"]}
+{"text": "Eccu a casa di", "banner": ["di", "u", "a", "in", "à", "è", "i", "hè"], "layer": "default", "step": ["key", "21"]}
+{"text": "Eccu a casa di", "banner": ["casata", "casalinghi", "", "", "", "", "", ""], "layer": "default", "step": ["key", "21"]}
+{"text": "Eccu a casa di", "banner": ["casa", "casgiu", "casata", "casu", "casi", "castellu", "castagna", "castagne"], "layer": "default", "step": ["key", "21"]}
+{"text": "Eccu a casa di", "banner": ["cà", "casa", "caffè", "casgiu", "capisce", "capiscu", "Calvi", "caldu"], "layer": "default", "step": ["key", "21"]}
+{"text": "Eccu a casa sa di", "banner": ["di", "u", "a", "in", "à", "è", "i", "hè"], "layer": "default", "step": ["accept", "casa"]}
+
+## After: wrapped Pumuntincu model active
+{"text": "Start typing here…", "banner": ["Di", "U", "A", "In", "À", "È", "I", "Hè"], "layer": "shift", "step": ["clear", ""]}
+{"text": "u zite", "banner": ["ziteddu", "zitella", "zitelli", "zitellu", "site", "zittu", "", ""], "layer": "default", "step": ["type", "u zite"]}
+{"text": "Start typing here…", "banner": ["Di", "U", "A", "In", "À", "È", "I", "Hè"], "layer": "shift", "step": ["clear", ""]}
+{"text": "Dopu ella vene", "banner": ["vene", "venetu", "venenu", "generale", "generali", "generalmente", "generazione", "generu"], "layer": "default", "step": ["type", "Dopu ella vene"]}
+{"text": "Dopu ella vene", "banner": ["vene", "vengu", "ventu", "veni", "venneri", "venite", "venutu", "venti"], "layer": "default", "step": ["key", "21"]}
+{"text": "Dopu ella vene", "banner": ["vecu", "vedi", "vene", "vengu", "versu", "venutu", "venneri", "ventu"], "layer": "default", "step": ["key", "21"]}
+{"text": "Dopu ella vene", "banner": ["vò", "voi", "voddu", "vogliu", "voli", "và", "vedi", "vene"], "layer": "default", "step": ["key", "21"]}
+{"text": "Dopu ella vene", "banner": ["di", "u", "a", "in", "à", "è", "i", "hè"], "layer": "default", "step": ["key", "21"]}
+{"text": "Dopu ella vene", "banner": ["", "", "", "", "", "", "", ""], "layer": "default", "step": ["key", "21"]}
+{"text": "Dopu ella vene", "banner": ["ella", "ellu", "elli", "elle", "ellittica", "ellitticu", "ellisse", ""], "layer": "default", "step": ["key", "21"]}
+{"text": "Dopu ellu vene", "banner": ["venetu", "venenu", "", "", "", "", "", ""], "layer": "default", "step": ["accept", "ellu"]}
+{"text": "Start typing here…", "banner": ["Di", "U", "A", "In", "À", "È", "I", "Hè"], "layer": "shift", "step": ["clear", ""]}
+{"text": "Eccu a casa di", "banner": ["di", "dì", "dicu", "dinù", "dici", "digià", "dispiace", "diu"], "layer": "default", "step": ["type", "Eccu a casa di"]}
+{"text": "Eccu a casa di", "banner": ["di", "da", "dopu", "dicu", "duve", "dui", "dumane", "de"], "layer": "default", "step": ["key", "21"]}
+{"text": "Eccu a casa di", "banner": ["di", "u", "a", "in", "à", "è", "i", "hè"], "layer": "default", "step": ["key", "21"]}
+{"text": "Eccu a casa di", "banner": ["casata", "Casanova", "Casalta", "Casabianca", "Casacconi", "Casalabriva", "Casàccuni", "Casaglionu"], "layer": "default", "step": ["key", "21"]}
+{"text": "Eccu a casa di", "banner": ["casa", "casgiu", "casata", "casu", "casi", "castellu", "castagna", "castagne"], "layer": "default", "step": ["key", "21"]}
+{"text": "Eccu a casa di", "banner": ["cà", "casa", "caffè", "casgiu", "Calvi", "cara", "caru", "carri"], "layer": "default", "step": ["key", "21"]}
+{"text": "Eccu a casa di", "banner": ["dì", "dicu", "dinù", "dici", "digià", "dispiace", "diu", "dipartimentu"], "layer": "default", "step": ["accept", "casa"]}
+{"text": "Eccu a casa xdi", "banner": ["", "", "", "", "", "", "", ""], "layer": "default", "step": ["type", "x"]}

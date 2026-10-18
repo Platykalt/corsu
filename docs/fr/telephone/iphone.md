@@ -149,18 +149,28 @@ Avant leur publication, les deux variantes sont dans la même archive que le dic
 
 ## Correction automatique
 
-Keyman 18.0, la version stable, **n'a pas de correction automatique** : les corrections sont proposées dans le
-bandeau et ne s'appliquent que si vous les touchez. Le dictionnaire Corsu ne commande pas ce réglage. Keyman 19,
-encore en version bêta, ajoute **Apply corrections automatically** ; il apparaîtra sur l'écran Corsican quand
-Keyman 19 sera la version stable. Il restera facultatif : dans nos essais avec la bêta, la correction automatique a
-parfois remplacé à tort des noms absents du dictionnaire.
+Keyman 18.0, la version stable, **n'a pas de correction automatique** : les corrections sont proposées dans le bandeau
+et ne s'appliquent que si vous les touchez. Le dictionnaire Corsu ne commande pas ce réglage. Keyman 19, encore en
+version bêta, ajoute **Apply corrections automatically** ; il apparaîtra sur l'écran Corsican quand Keyman 19 sera la
+version stable. Il restera facultatif. Dans nos essais du moteur de la bêta 19.0.309 (hors de l'application), un mot
+présent dans le dictionnaire est toujours gardé tel qu'il est tapé, mais un mot absent peut être remplacé : un nom par
+un nom proche (« Bastelicaccia » par « Bastilicaccia » quand seule la seconde graphie est dans le dictionnaire), ou un
+mot en minuscules par le nom qui s'écrit pareil (« corti » par « Corti » quand « corti » y manque).
 
 ## Revenir sur un mot
 
 Déplacer le curseur ne change rien au texte. Les suggestions suivent la partie du mot **à gauche du curseur**, et une
-suggestion choisie ne remplace que cette partie : avec le curseur dans `ell|a`, choisir « ellu » donne « ellu a ».
-C'est une limite de Keyman, qui n'efface rien à droite du curseur. Placez donc le curseur **à la fin du mot** (ou
-effacez le mot et retapez-le) avant de choisir une suggestion.
+suggestion choisie ne remplace que cette partie : la fin de l'ancien mot reste à droite du curseur. Dans
+« Dopu ell|a vene », choisir « ellu » donne « Dopu ellu a vene » : ce « a » n'est pas un mot ajouté, c'est la fin de
+« ella », qu'il faut effacer à la main. De même, `ca|sa` puis « casa » donne « casa sa ».
+
+Sur iPhone, c'est vrai aussi avec le dictionnaire de la prochaine version : il demande à Keyman d'effacer la fin du
+mot (ce que fait Keyman pour Android), mais Keyman pour iPhone ignore cette demande, en 18.0 comme dans la bêta 19.0
+(d'après son code ; pas essayé sur un iPhone). Les gestes sûrs :
+
+- placez le curseur **à la fin du mot** avant de choisir une suggestion : elle remplace alors le mot entier ;
+- ou sélectionnez le mot, tapez ses premières lettres (elles remplacent la sélection), puis choisissez la suggestion ;
+- ou effacez le mot et retapez-le.
 
 ## Si ça ne marche pas
 

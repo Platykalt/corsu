@@ -25,6 +25,10 @@ Les sections datées après « État actuel » sont l'historique : ce qui y est 
   - **Clavier Keyman** (paquets 1.1) : casse gardée, vocabulaire refait (`keyboard/data`), 446 noms de lieux
     (Wikidata, CC0), préférences Cismuntincu et Pumuntincu **expérimentales** (361 mots pondérés autrement). Vérifié
     dans le moteur de Keyman 18.0.254 (CI) et sur émulateur Android 14 ; **pas sur téléphone, pas sur iOS**.
+    Suggestion choisie au milieu d'un mot : Keyman ne remplace que la partie à gauche du curseur ; les modèles 1.1
+    (`keyboard/whole-word.js`) effacent la fin du mot sous Android (moteurs 18.0.254 et 19.0.309, application
+    18.0.254 sur émulateur), pas sous iOS, où Keyman ignore l'effacement à droite. Ticket préparé, non envoyé :
+    `docs/keyman/ticket-mid-word-suggestion.md`.
   - **Téléphone** : page « Sur téléphone » de la fenêtre, guides ; bascules de publication dans
     [release-checklist-phone.md](release-checklist-phone.md).
   - Corrigés pour les prochaines publications : une somme `.sha256` par pack Minecraft ; version des captures lue
