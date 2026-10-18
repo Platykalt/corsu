@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.27.0 (in development on next-0.27, not published)
+
+Started from 0.26.0 (`9868066`, tag `v0.26.0`). Changes inherited from 0.26 are listed under 0.26.0 below.
+
 ## 0.26.0 (2026-10-18)
 
 - Wording review (AI, not reviewed by a speaker): Minecraft main and pause menus, worlds, servers, options
