@@ -38,9 +38,9 @@ Notation: "¶" marks a line break in the game text; `%s` is filled in by the gam
 
 | Clé · Key | English | Français (officiel) | Corse actuel · Corsican now |
 | --- | --- | --- | --- |
-| `menu.singleplayer` | Singleplayer | Solo | **Ghjocu solu** |
+| `menu.singleplayer` | Singleplayer | Solo | **Ghjucà solu** |
 
-**Question:** Is *Ghjocu solu* ("game alone") natural for this button? Alternative: *Un ghjucadore* ("one player").
+**Question:** Is *Ghjucà solu* (AI proposal of round 4, was *Ghjocu solu*) natural for this button, beside *Ghjucà cù l'altri*? *solu* stays masculine whoever plays: acceptable, or would you write it otherwise?
 
 **Votre réponse / Your answer:**
 
@@ -48,13 +48,13 @@ Notation: "¶" marks a line break in the game text; `%s` is filled in by the gam
 
 ### 01.02 — Multiplayer
 
-**Où / Where:** Title screen, second button; opens the server list. Button: full-width button, about 30 characters fit; longest Corsican label here: 19 characters.
+**Où / Where:** Title screen, second button; opens the server list. Button: full-width button, about 30 characters fit; longest Corsican label here: 17 characters.
 
 | Clé · Key | English | Français (officiel) | Corse actuel · Corsican now |
 | --- | --- | --- | --- |
-| `menu.multiplayer` | Multiplayer | Multijoueur | **Parechji ghjucadori** |
+| `menu.multiplayer` | Multiplayer | Multijoueur | **Ghjucà cù l'altri** |
 
-**Question:** *Parechji ghjucadori* ("several players") or *Multighjucadore* (used in two tooltips of this file)? Which would you expect on the button?
+**Question:** *Ghjucà cù l'altri* (AI proposal of round 4, was *Parechji ghjucadori*; the server list screen has the same title) for the button that opens servers, LAN games and friends' worlds: natural, and wide enough in meaning?
 
 **Votre réponse / Your answer:**
 
@@ -300,13 +300,13 @@ Notation: "¶" marks a line break in the game text; `%s` is filled in by the gam
 
 ### 01.19 — Save and Quit to Title
 
-**Où / Where:** Pause menu, last button: saves and goes back to the title screen. Button: full-width button, about 30 characters fit; longest Corsican label here: 29 characters.
+**Où / Where:** Pause menu, last button: saves and goes back to the title screen. Button: full-width button, about 30 characters fit; longest Corsican label here: 28 characters.
 
 | Clé · Key | English | Français (officiel) | Corse actuel · Corsican now |
 | --- | --- | --- | --- |
-| `menu.returnToMenu` | Save and Quit to Title | Sauvegarder et quitter la partie | **Arregistrà è vultà à u titulu** |
+| `menu.returnToMenu` | Save and Quit to Title | Sauvegarder et quitter la partie | **Arregistrà è esce da u mondu** |
 
-**Question:** *Arregistrà è vultà à u titulu*: the rest of the file calls the title screen *listinu principale*, but the full form would be 41 characters. Is *u titulu* understandable here, or is there a shorter natural phrase?
+**Question:** *Arregistrà è esce da u mondu* (round 4, was *Arregistrà è vultà à u titulu*, where *titulu* reads as a heading): clear for "save, leave this world and go back to the main menu"?
 
 **Votre réponse / Your answer:**
 

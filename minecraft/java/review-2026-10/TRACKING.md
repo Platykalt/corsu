@@ -135,3 +135,29 @@ Details: [ROUND3.md](ROUND3.md), per decision [round3.tsv](round3.tsv).
 | AI review with sources | 11 decisions re-read against the passages; 7 also checked by a separate AI sub-agent |
 | Human validation | 0 |
 
+## Round 4 (2026-10-18): full phrasings and fit to the interface, first lot
+
+AI work (agent E, then a separate AI sub-agent that read the contexts and references itself). **Human validation:
+0.** Details: [ROUND4.md](ROUND4.md), per change [round4.tsv](round4.tsv); recorded in the contextual memory
+(`lexicon/memory/minecraft-java.jsonl`, 1,201 entries).
+
+- Scope: title screen and pause menu (`menu.*`), generic buttons (`gui.*`), world selection, creation and editing
+  (`selectWorld.*`, `createWorld.*`), servers and connection (`selectServer.*`, `addServer.*`, `manageServer.*`,
+  `connect.*`, `disconnect.*`, `multiplayer.*`), LAN and world options (`lanServer.*`, `menu.multiplayerOptions.*`,
+  `options.worldOptions.*`), death screen, short labels of the options screens, window titles (`title.*`), and every
+  text using *parechji ghjucadori*, *à parechji* or *ghjocu solu*.
+- Changed: 18 texts (14 in 26.3, 4 older pairs): main-menu buttons *Ghjucà solu* / *Ghjucà cù l'altri* and the server
+  list title; *Arregistrà è esce da u mondu* (was *… vultà à u titulu*: mistranslation; closes deferred L58-r2); two
+  "in parechji ghjucadori" grammar slips; multiplayer-disabled messages harmonised; four clumsy or ambiguous texts.
+- Kept on purpose: *Ritornu à u ghjocu* (series of nominal "Back" buttons), window titles, control categories.
+- Open for a speaker: the button pair, generic masculine *solu*, the *Parechji ghjucadori* / *multighjucadore*
+  labels left, the label/value agreement of the multiplayer-scope setting, *ghjucà ci*.
+
+| State | Result after round 4 |
+| --- | --- |
+| Translation present | unchanged: every non-empty text of the 87 releases has Corsican |
+| Technical check | Python, no game code: `tools/minecraft.py check` 0 errors (37 warnings, unchanged); `tools/mchistory.py check` 3,978 entries, 0 errors, 0 warnings; `tools/mcreport.py --check` up to date; `tools/mcmemory.py --check` up to date (1,201 entries); unit tests 561 run, OK (3 skipped). With each release's own client jar: `tools/mcversions.py verify all` exit 0, 87/87 releases, 0 problems and 0 unknown keys (fingerprints in versions.json). |
+| AI review | 13 changes and 3 kept or open decisions recorded; the changes also reviewed by a separate AI sub-agent |
+| Seen in the game | no: no game window was opened; nothing was rendered on screen |
+| Human validation | 0 |
+

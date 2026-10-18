@@ -21,8 +21,8 @@ Server	multiplayer	Servitore	servitor		Servore (only in unreviewed drafts of lex
 Player	person playing	Ghjucadore	ghjucador	Ghjucatore		to check in to check in INFCOR (joueur)	proposal	yes
 Game	the game	Ghjocu	ghjoc			to check in INFCOR	proposal	no
 World	saved Minecraft world	Mondu	mondi			to check in INFCOR	proposal	yes
-Singleplayer	main menu	Ghjocu solu		Un ghjucadore		Corsu	proposal	no
-Multiplayer	main menu	Parechji ghjucadori	parechji ghjucadori	Multighjucadore		Corsu	proposal	no
+Singleplayer	main menu	Ghjucà solu	ghjucà solu	Ghjocu solu (window title title.singleplayer)		round 4 (review-2026-10/ROUND4.md): button = action; verb + solu as in Vikipedia "campò solu", "cantà solu"	proposal	no
+Multiplayer	main menu	Ghjucà cù l'altri	cù l'altri	Parechji ghjucadori (window titles, controls category); partita à parechji ghjucadori (nouns)	Ghjucà à parechji (adverbial à parechji not found in the sources consulted); in gruppu / in cumunu (narrow the sense)	round 4 (review-2026-10/ROUND4.md)	proposal	no
 Survival	game mode	Sopravivenza	sopraviv			Vikipedia 3 hits (corsican_words.py); NOT in lexicon-upstream (earlier note was wrong)	proposal	yes
 Creative	game mode	Creativu	creativ			Corsu	proposal	no
 Adventure	game mode	Avventura	avventur			to check in INFCOR	proposal	no

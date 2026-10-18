@@ -21,7 +21,10 @@ Les sections datées après « État actuel » sont l'historique : ce qui y est 
     distincts ; 30 lignes différées), 11 décisions sensibles relues sur leurs sources (rail : *Ragliu* gardé, ADECEC
     *La chaudronnerie* et lexique des Chemins de fer de la Corse p. 101 ; *Tonu* gardé ; raisonnements « ce mot veut
     dire autre chose » corrigés), aucun texte changé ; décisions dans `lexicon/memory/minecraft-java.jsonl` (jamais
-    réutilisées pour un autre logiciel) ; consultations manuelles à faire listées. Relecture humaine : 0.
+    réutilisées pour un autre logiciel) ; consultations manuelles à faire listées. Quatrième tour (`ROUND4.md`, `round4.tsv`) : formulations et
+    adéquation à l'interface, premier lot (menus principal et pause, mondes, serveurs, options) ; 18 textes changés
+    (« Ghjucà solu » / « Ghjucà cù l'altri », « Arregistrà è esce da u mondu » au lieu de « … vultà à u titulu ») ;
+    aucun essai visuel en jeu. Relecture humaine : 0.
   - **Clavier Keyman** (paquets 1.1) : casse gardée, vocabulaire refait (`keyboard/data`), 446 noms de lieux
     (Wikidata, CC0), préférences Cismuntincu et Pumuntincu **expérimentales** (361 mots pondérés autrement). Vérifié
     dans le moteur de Keyman 18.0.254 (CI) et sur émulateur Android 14 ; **pas sur téléphone, pas sur iOS**.
