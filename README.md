@@ -188,7 +188,9 @@ Le lexique de Corsu compte environ 138 000 lignes, chacune un texte source et sa
   d'usage](resources/README.md)). Les consulter ne veut pas dire que ces organismes ont relu ou approuvé Corsu : aucun
   ne l'a fait. Les droits d'un éditeur portent sur son œuvre ou sa base de données (un dictionnaire, un tableau, une
   base comme INFCOR), pas sur les mots eux-mêmes : un mot corse n'appartient à personne. Corsu ne copie pas ces
-  ouvrages ; il y vérifie des mots un par un et dit lesquels.
+  ouvrages ; il y vérifie des mots un par un et dit lesquels. Pour le clavier,
+  les formes verbales vérifiées dans *U Cunghjugarellu* (Canopé) et ce qui en entre dans les paquets sont décrits à
+  part ([sources du clavier](docs/keyboard-sources.md#u-cunghjugarellu-canopé-de-corse)).
 
 Une traduction vous paraît fausse ? [Ouvrez un ticket](https://github.com/Platykalt/corsu/issues/new?template=translation.yml)
 ou corrigez-la : [CONTRIBUTING.md](CONTRIBUTING.md). Règles de traduction et de provenance : [AGENTS.md](AGENTS.md).
@@ -399,7 +401,9 @@ Corsu's lexicon has about 138,000 lines, each a source text and its Corsican tra
   Corsica), Educorsica (Canopé), Wiktionary, Vikipedia, Apertium… ([list and terms of use](resources/README.md)).
   Consulting them does not mean these organisations reviewed or approved Corsu: none has. A publisher's rights cover
   its work or its database (a dictionary, a table, a database such as INFCOR), not the words themselves: a Corsican
-  word belongs to nobody. Corsu does not copy these works; it checks words in them one by one and says which.
+  word belongs to nobody. Corsu does not copy these works; it checks words in them one by one and says which. For the keyboard, the verb forms checked in
+  *U Cunghjugarellu* (Canopé) and what reaches the packages are described apart
+  ([keyboard sources](docs/keyboard-sources.md#u-cunghjugarellu-canopé-de-corse)).
 
 Does a translation look wrong? [Open an issue](https://github.com/Platykalt/corsu/issues/new?template=translation.yml)
 or correct it: [CONTRIBUTING.md](CONTRIBUTING.md). Translation and provenance rules: [AGENTS.md](AGENTS.md).

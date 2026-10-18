@@ -32,6 +32,19 @@ none has. Rights apply to a work or a database (a dictionary, a table, a collect
 linguistic facts in it: a Corsican word or its spelling belongs to no publisher. Corsu does not copy works or
 databases whose terms do not allow it; when a correction rests on one, the entry consulted is named.
 
+### U Cunghjugarellu (Canopé de Corse)
+
+*U Cunghjugarellu, la conjugaison corse* (Ghjuvan Battistu Paoli, Canopé de Corse, 2024) was consulted to check
+Corsican verb forms: the present and imperfect indicative of 21 everyday verbs, with the northern and southern
+versions as the book labels them. The words and conjugated forms of Corsican belong to no one; the book describes
+them. Its page on Educorsica places the downloadable documents under CC BY-NC-ND 2.0 France, and the PDF reserves
+reproduction: these notices concern the publication (its text, tables, layout and examples), not the language. No
+explanation or example of the book is reproduced. The forms checked are listed one per row, with the book's table
+number, in `keyboard/data/sources/cunghjugarellu.tsv`; the keyboard packages contain only words and their weights.
+What was taken, how, and a possible narrower form of that file are in
+[docs/keyboard-sources.md](docs/keyboard-sources.md#u-cunghjugarellu-canopé-de-corse). Our thanks go to Canopé de
+Corse and to the author for this reference.
+
 ## Source texts
 
 - **Julian Gough**, the End Poem of Minecraft, dedicated by him to the public domain (CC0 1.0); Corsu's optional
