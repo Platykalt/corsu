@@ -1,14 +1,19 @@
-# Discord linguistic review, October 2026 (AI second pass)
+# Discord linguistic review, October 2026 (AI passes)
 
-Proposals only: nothing in `lexicon/lexicon.tsv`, `lexicon/lexicon-fixes.tsv` or the code was changed. Every
-proposal is listed in [lexicon/review-discord-2026-10.tsv](../lexicon/review-discord-2026-10.tsv) (79 rows) and was
-written by an AI (Claude) as a second pass. None of it has been validated by a Corsican speaker. The `evidence_type`
-column says what backs each one:
+Every row of [lexicon/review-discord-2026-10.tsv](../lexicon/review-discord-2026-10.tsv) (92 rows) was written by an
+AI (Claude). None of it has been validated by a Corsican speaker. Proposals and applied corrections are kept apart by
+the `status` column: `applied af45709` (first pass, 17 October), `applied c67715b` (second pass, 18 October, below),
+or `not applied` with the reason. The `provenance_class` column says what backs each row:
 
-- **ATTESTED**: the same wording exists in a reviewed translation (`lexicon-mozilla.tsv`, `lexicon-upstream.tsv`);
-- **EDITORIAL CONVENTION**: a choice the project already made (`lexicon-fixes.tsv`, Discord rows of `lexicon.tsv`,
-  `lexicon/variants.md`), with the file and line;
-- **AI PROPOSAL**: no attestation was found in the local resources. That does not mean the word does not exist.
+- **external source**: a source outside Corsu was consulted and is cited in `external_source` (INFCOR, Corsican
+  Wikipedia, Mozilla's Corsican translations on Pontoon or as imported in `lexicon-mozilla.tsv` and
+  `lexicon-upstream.tsv`);
+- **corsu-usage (not independent validation)**: the same wording is already used elsewhere in Corsu, cited by file and
+  line. This shows consistency with the project, not that the wording is right;
+- **ai-proposal**: nothing outside the AI's own reading backs it.
+
+The older `evidence_type` column (ATTESTED, EDITORIAL CONVENTION, AI PROPOSAL) is kept as it was written in the first
+pass.
 
 ## Method
 
@@ -129,5 +134,72 @@ The main ones:
 - `lexicon/lexicon-mozilla.tsv` and `lexicon/lexicon-upstream.tsv` (attested translations), `lexicon/lexicon.tsv`
   (Discord section, as the project's convention), `lexicon/lexicon-fixes.tsv`, `lexicon/variants.md`,
   `lexicon/REVIEWS.md`.
-- No online dictionary was queried. The absence of a word from these files is not taken as proof that it does not
-  exist.
+- First pass: no online dictionary was queried. Second pass: INFCOR, Corsican Wikipedia and Mozilla Pontoon, as
+  described above. The absence of a word from a source is not taken as proof that it does not exist.
+
+## Second pass (0.25 candidate, 18 October 2026)
+
+### Method
+
+Each correction starts from where Discord shows the string: its message ids in the en-US/fr catalogue, then the code
+chunks that use these ids (the same anonymous download as the first pass), to tell a button from a title, a noun from
+a verb, an abbreviation's full expression and its function. A French string used for several senses is not replaced
+globally: the safest form is kept and the case is listed as uncertain. Spellings were checked outside Corsu:
+
+- **INFCOR** (ADECEC's Corsican dictionary, https://infcor.adecec.net, queried through its public search on
+  2026-10-18): headwords, variants, French, Italian and English equivalents;
+- **Corsican Wikipedia** (co.wikipedia.org, public search API, 2026-10-18): counts and use of competing spellings;
+- **Mozilla Pontoon**, Corsican translations of all Mozilla projects (TMX export, 2026-10-17).
+
+The BDLC (Banca di dati di a lingua corsa, Università di Corsica) answers but was not queried through its forms.
+
+**Abbreviation rule** (new project rule): when a label holds an abbreviation, its full expression and its function in
+the interface are identified first, then it is translated in context; full words are preferred when natural and when
+they fit; usual technical acronyms, identifiers and proper nouns stay (AFK, GIF, FPS, PC, MP, Nitro). In the Discord
+catalogue: *sec* (seconds, was *seccu* "dry"), *max* / *max.* / *min.* written out (*massimu*, *massima*, *minimu*),
+*Sync* (a button: *Sincrunizà*), *Infos*/*Info* (kept *Infurmazione*, as Mozilla writes it), *Micro* (already the full
+*Micrufonu*), *Mod* (*Muderatore*, right), *Auto* (*Autumaticu*, right), *Pro* for the level Expert (proposal only).
+*min* for minutes stays the unit in "{count} min", "il y a {count} min"; the dictionary has no bare *Min* or *Max*,
+so there is no minimum/minutes collision. A lighter scan of labels other programs bring into Discord found the
+English keys *Playing* (a player's *Lettura*), *Watch* (*Surveglianza*), *Go* (Mozilla's *Apre*), *Arcade*
+(*Arcata*, an arch) and *Cri* (*Cree*).
+
+### Corrections applied (commit c67715b)
+
+| Source (en / fr) | Old | New | Provenance | Justification |
+|---|---|---|---|---|
+| Bio / Bio (ZzAR2Y, YWo+Zd) | Bio | Biugrafia | external source | User's decision to write out "Biographie". INFCOR: headword *biografia*, variants *biugrafia*, *biograffia*, *biugraffia*. Corsican Wikipedia: *biugrafia* 1222 pages, *biografia* 42; *Biugrafia* is its section title over a person's life, the same function. Pontoon: neither. |
+| Server Bio / Bio du serveur, and "de {guildName}" | Bio di u servore | Biugrafia di u servore | external source | Same titles. Sentences keep *bio*. |
+| Message / Message (BAB0yK) | Mandà un MP | Messaghju | corsu-usage (lexicon.tsv:566), Mozilla (upstream:2014) | A noun: screen-reader role of every message, icon of text channels. The button is "Envoyer un message". |
+| sec / s (DLBuoP) | seccu | s | external source (SI, Mozilla keeps units) | Seconds, not "dry". |
+| Sync / Synchroniser (BkuOO6) | Sincrunizazione | Sincrunizà | external source (Mozilla "Sync now" > "Sincrunizà avà") | A button. |
+| Playing / Joue à (BMTj28) | Lettura | Ghjoca à | corsu-usage | Activity card header. |
+| Watch / Regarder | Surveglianza | Fighjà | corsu-usage | Watch a stream or activity. |
+| Go / Aller (rK4Gqv) | Apre | Andà | external source (lexicon-upstream.tsv:13443) | A "go" button, not "open". |
+| Max : {statisticName} | Mass. : {statisticName} | Massimu : {statisticName} | external source (INFCOR, Mozilla "massima") | Abbreviation written out, as "Minimu di" beside it. |
+| Longueur max du message atteinte | Lunghezza max… | Lunghezza massima… | external source | Abbreviation written out. |
+| Nombre max. d'utilisateurs affichés | Numeru max. … | Numeru massimu … | external source | Abbreviation written out. |
+| Durée max d'inactivité (brhYaR) | Durata max … | Durata massima … | external source | AFK timeout label. |
+| min. requis (A+mTPq) | min. richiestu | minimu richiestu | ai-proposal | Minimum required, under a percentage. |
+| Arcade (Sbxowr) | Arcata | Arcade | external source shows the old one wrong (INFCOR: arcata = arch); new: ai-proposal | Game genre. |
+| fashion / mode (4J2PYL) | modu | moda | external source (INFCOR moda vs modu) | Topic suggestion "fashion". |
+| Shouting / Cri (3gqpuo) | Cree | Brionu | external source (INFCOR brionu: EN shout, outcry) | Clip signal. |
+| Banner / Bannière (BSVog8, JaecVH) | (French shown) | Bandera | external source (INFCOR bannière > bandera; banderola = small pennant) | Profile banner label only. |
+| Close Window / Fermer la fenêtre | Chjode una Finestra | Chjode a finestra | corsu-usage (lexicon.tsv:392) | A close button. |
+| No command found / Aucune commande trouvée | Nisuna cumanda trova | Nisuna cumanda trovata | corsu-usage | Agreement. |
+
+### Uncertain cases of this pass (left as they are)
+
+1. *Quitter*: Leave (a server, an activity, a voice channel: F3qExp, Hi1/aQ, wH/wDO) and Exit (confirm buttons of
+   "discard changes?" dialogs: 7WGI4H, h0bti/, TzJA4g) share one key. *Abbandunà* (Mozilla) reads for both and stays.
+2. *Mars*: the catalogue string is a gradient preset (planet), but the month shows bare in date-of-birth selects.
+   *Marzu* stays.
+3. *Message* in English Discord is also the button (verb); the key is shared, the noun wins.
+4. *Bannière*: only the label was set (*Bandera*); the 76 Discord rows with six forms in sentences are not harmonised.
+5. *Biugrafia* in titles, *bio* in sentences (*Aghjunghje una bio*), and three Discord rows that write *biografia*:
+   both spellings are attested (INFCOR); harmonising is left to a speaker.
+6. *Micrufonu* (51 Discord rows) is not in INFCOR (*microfunu*, *microfonu*, *micro*).
+7. *Pro* (level Expert), *Entreprise* (context not downloaded), *Active*, *Petit*, *Privée* (gender of an implied
+   noun): proposals only.
+8. *Pseudonyme* stays *Pseudonimu* (INFCOR *pseudonimu*), *Pseudo* stays *Cugnome*: Discord's French keeps display
+   name and nickname apart, and so does Corsu.
