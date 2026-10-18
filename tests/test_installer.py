@@ -327,6 +327,7 @@ class LauncherPythonTests(Isolated):
             self.assertEqual(corsu.launcher_python(corsu.Installer()), Path(sys.executable))
         self.assertFalse((self.data / 'bin/corsu-python').exists())
 
+    @unittest.skipIf(os.name == 'nt', 'Linux and macOS launchers hold POSIX paths, which a Windows test run cannot make')
     def test_the_system_python_falls_back_to_the_bundled_copy(self):
         fallback = self.bundled()
         with patch.object(corsu, 'PLATFORM', 'linux'), patch.object(corsu.sys, 'executable', '/usr/bin/python3'):
@@ -351,6 +352,7 @@ class LauncherPythonTests(Isolated):
         self.assertTrue(windows.exists())
         self.assertFalse((self.data / 'bin/corsu-python').exists())
 
+    @unittest.skipIf(os.name == 'nt', 'Linux and macOS launchers hold POSIX paths, which a Windows test run cannot make')
     def test_launchers_on_linux_and_macos_go_through_the_wrapper(self):
         self.bundled()
         commands = []
@@ -367,6 +369,7 @@ class LauncherPythonTests(Isolated):
         self.assertIn(f'Exec={wrapper} ', entry)
         self.assertIn(f'exec {wrapper} ', commands[0][-1])
 
+    @unittest.skipIf(os.name == 'nt', 'Linux and macOS launchers hold POSIX paths, which a Windows test run cannot make')
     def test_launchers_written_before_get_the_chosen_python(self):
         # 0.24.0 wrote the system Python into each launcher; Firefox switched off keeps its launcher unrewritten.
         old = self.data / 'releases' / R('old')

@@ -32,6 +32,8 @@ import sys
 import tarfile
 import tempfile
 import time
+import http.client
+import urllib.parse
 import urllib.request
 
 HERE = Path(__file__).resolve().parent
@@ -109,32 +111,114 @@ def check_personal_files(files, moment):
     check(not changed, f'{moment}: personal files untouched {changed or ""}')
 
 
+class Window:
+    """The Corsu window started by its menu entry, headless: the page it would open is caught through BROWSER (a
+    small script noting the address, with its #t= ticket), and its key is obtained the way the page does it."""
+
+    def __init__(self, home, environment):
+        self.home = home
+        self.opened = home / 'opened.txt'
+        browser = home / 'browser.sh'
+        browser.write_text(f'#!/bin/sh\necho "$1" >> {shlex.quote(str(self.opened))}\n', encoding='utf-8')
+        browser.chmod(0o755)
+        self.environment = {**environment, 'BROWSER': str(browser)}
+        line = next(line for line in launchers(home)[1].read_text(encoding='utf-8').splitlines() if line.startswith('Exec='))
+        self.command = shlex.split(line[5:])
+        self.process = None
+        self.key = None
+
+    def addresses(self):
+        return self.opened.read_text(encoding='utf-8').split() if self.opened.exists() else []
+
+    def launch(self, wait=True):
+        """Start the menu entry's command; the address it opens (with its ticket), once it opened one."""
+        seen = len(self.addresses())
+        process = subprocess.Popen(self.command, env=self.environment, stdout=subprocess.DEVNULL,
+                                   stderr=subprocess.DEVNULL, start_new_session=True)
+        for _ in range(90):
+            if len(self.addresses()) > seen:
+                return process, self.addresses()[-1]
+            if process.poll() is not None and not wait:
+                break
+            time.sleep(1)
+        return process, None
+
+    def call(self, address, path, key=None, method='GET', body=None):
+        """(status, answer) of the window at `address`, asked as its page does."""
+        parts = urllib.parse.urlsplit(address)
+        connection = http.client.HTTPConnection(parts.hostname, parts.port, timeout=30)
+        headers = {'Host': parts.netloc, 'X-Corsu': '1'}
+        if key:
+            headers['X-Corsu-Key'] = key
+        if body is not None:
+            headers['Content-Type'] = 'application/json'
+        try:
+            connection.request(method, path, body=json.dumps(body).encode() if body is not None else None, headers=headers)
+            response = connection.getresponse()
+            data = response.read()
+            try:
+                return response.status, json.loads(data)
+            except ValueError:
+                return response.status, None
+        finally:
+            connection.close()
+
+    def redeem(self, address):
+        ticket = urllib.parse.urlsplit(address).fragment.removeprefix('t=')
+        status, answer = self.call(address, '/api/key', method='POST', body={'ticket': ticket})
+        return answer.get('key') if status == 200 and isinstance(answer, dict) else None
+
+    def open(self):
+        """First launch: the page gets its key; the API refuses calls without it."""
+        self.process, address = self.launch()
+        self.first = address
+        check(address is not None and '#t=' in address, f'the Corsu menu entry opens the window with a ticket ({" ".join(self.command)})')
+        self.address = address.split('#')[0]
+        check(self.call(self.address, '/')[0] == 200, f'the page is served at {self.address}')
+        self.key = self.redeem(address)
+        check(bool(self.key), 'the page exchanges its ticket for the key')
+        check(self.call(self.address, '/api/state')[0] == 403, '/api/state without the key: 403')
+        check(self.call(self.address, '/api/state', 'not-the-key-' * 3)[0] == 403, '/api/state with a wrong key: 403')
+        status, state = self.call(self.address, '/api/state', self.key)
+        check(status == 200, '/api/state with the key: 200')
+        return state
+
+    def replayed(self, address):
+        """A ticket shown twice means someone else read it: refused, and the key is replaced."""
+        check(self.redeem(address) is None, 'the ticket works only once')
+        check(self.call(self.address, '/api/state', self.key)[0] == 403, 'a ticket used twice replaces the key')
+        self.key = None
+
+    def second_launch(self, first):
+        """A second launch shows the open window (a fresh ticket for the same server) and ends."""
+        process, address = self.launch(wait=False)
+        code = process.wait(timeout=120)
+        check(code == 0 and address is not None and address.split('#')[0] == self.address,
+              f'a second launch reuses the open window: exit {code}, {address and address.split("#")[0]}')
+        key = self.redeem(address)
+        check(bool(key) and (self.key is None or key == self.key), 'its ticket gives the window\'s current key')
+        self.key = key
+        status, state = self.call(self.address, '/api/state', self.key)
+        check(status == 200 and state['pid'] == first['pid'], 'the same server still answers')
+
+    def close(self):
+        if self.process and self.process.poll() is None:
+            os.killpg(self.process.pid, signal.SIGTERM)
+            self.process.wait(timeout=30)
+
+
 def check_launchers_work(home, environment):
-    """Firefox Corsu starts Firefox; the Corsu menu entry opens the window's server."""
+    """Firefox Corsu starts Firefox; the Corsu menu entry opens the window, keyed, and a second launch reuses it."""
     firefox = subprocess.run([str(home / '.local/bin/firefox-corsu'), '--version'], env=environment, capture_output=True,
                              text=True, timeout=300)
     check(firefox.returncode == 0 and 'Firefox' in firefox.stdout, f'Firefox Corsu starts Firefox: {firefox.stdout.strip()}')
-    line = next(line for line in launchers(home)[1].read_text(encoding='utf-8').splitlines() if line.startswith('Exec='))
-    command = shlex.split(line[5:])
-    with tempfile.TemporaryFile() as output:
-        app = subprocess.Popen(command, env=environment, stdout=output, stderr=subprocess.STDOUT, start_new_session=True)
-        try:
-            address = None
-            for _ in range(60):
-                output.seek(0)
-                found = re.search(rb'http://localhost:(\d+)/', output.read())
-                if found:
-                    address = f'http://127.0.0.1:{found[1].decode()}/'
-                    break
-                if app.poll() is not None:
-                    break
-                time.sleep(1)
-            check(address is not None, f'the Corsu menu entry starts the window ({" ".join(command)})')
-            with urllib.request.urlopen(address, timeout=30) as response:
-                check(response.status == 200, f'the window answers at {address}')
-        finally:
-            os.killpg(app.pid, signal.SIGTERM)
-            app.wait(timeout=30)
+    window = Window(home, environment)
+    try:
+        first = window.open()
+        window.replayed(window.first)
+        window.second_launch(first)
+    finally:
+        window.close()
 
 
 def check_runtime(home):
@@ -236,8 +320,48 @@ def main():
     check(state(home)['release']['folder'] == str(copy), 'the repair kept the same copy')
     later = later_archive(extract(archives / check_update.ARCHIVE, work / 'again'), work, '99.0.0')
     shutil.rmtree(work / 'again')
-    run(copy, {**environment, 'CORSU_DOWNLOAD_BASE': later.as_uri()}, 'src/update.py', '--install', '--version', '99.0.0')
-    check(state(home)['release']['version'] == '99.0.0', 'updated again, to 99.0.0')
+    # The later update from the window, then its restart from the new copy at the same address (the relay).
+    window = Window(home, {**environment, 'CORSU_DOWNLOAD_BASE': later.as_uri()})
+    relayed = None
+    try:
+        first = window.open()
+        status, answer = window.call(window.address, '/api/update', window.key, 'POST', {})
+        check(status in (200, 409), f'the window starts the update: {status} {answer}')
+        for _ in range(900):
+            status, current = window.call(window.address, '/api/state', window.key)
+            if status == 200 and current['job']['title'] == 'update' and not current['job']['running']:
+                break
+            time.sleep(1)
+        check(current['job']['ok'] and (current['job']['result'] or {}).get('corsu') == 'updated',
+              f'the window\'s update finished: {current["job"]["result"]}')
+        check(state(home)['release']['version'] == '99.0.0', 'updated again, to 99.0.0')
+        check(current['update']['restart']['available'], 'the window offers to restart from the new copy')
+        status, answer = window.call(window.address, '/api/restart', window.key, 'POST', {})
+        check(status == 200, f'restart asked: {status} {answer}')
+        relayed = None
+        for _ in range(60):
+            try:
+                status, relayed = window.call(window.address, '/api/state', window.key)
+            except OSError:
+                status = None
+            if status == 200 and relayed['pid'] != first['pid']:
+                break
+            time.sleep(1)
+        check(status == 200 and relayed['pid'] != first['pid'] and relayed['version'] == '99.0.0',
+              f'the new copy took over the address and the page\'s key: {status}, version {relayed and relayed.get("version")}')
+        check(window.call(window.address, '/api/state')[0] == 403, 'the new copy refuses calls without the key')
+        window.process.wait(timeout=60)
+        check(window.process.returncode is not None, 'the window that handed over has ended')
+        command = Path(f'/proc/{relayed["pid"]}/cmdline').read_bytes().split(b'\0')
+        check(command[1].decode() == state(home)['release']['folder'] + '/src/app.py' and '--replace' in map(bytes.decode, command),
+              f'the new copy was started from the installed copy: {[part.decode() for part in command[:4]]}')
+    finally:
+        window.close()
+        if relayed and relayed.get('pid'):
+            try:
+                os.killpg(os.getpgid(relayed['pid']), signal.SIGTERM)
+            except (OSError, TypeError):
+                pass
     check(saved.read_bytes() == kept, 'the later update keeps them')
     check('firefox' in state(home).get('disabled', []) and 'VLC_DATA_PATH=' in entry(home), 'Firefox still off, complement on')
     if update.installer.clients_running():
