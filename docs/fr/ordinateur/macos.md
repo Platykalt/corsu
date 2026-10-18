@@ -21,7 +21,9 @@ Il n'y a rien d'autre à installer : l'archive contient son propre Python, pour 
 Apple Silicon. Depuis le code source, il faut Python 3.10 ou plus récent, disponible sur
 [python.org](https://www.python.org/downloads/macos/).
 
-Sur macOS, Corsu traduit Firefox et Discord. Firefox en corse s'ouvre avec l'application Firefox Corsu du dossier
+Sur macOS, Corsu traduit Firefox et Discord, met en corse Minecraft: Java Edition, et règle sur le corse la langue
+des logiciels qui ont leur propre traduction corse (VLC, Audacity, Tenacity ; Audacity 4 et Poedit à titre
+expérimental), voir [État des traductions](../etat-des-traductions.md). Firefox en corse s'ouvre avec l'application Firefox Corsu du dossier
 Applications. Chrome, Opera GX et les autres navigateurs Chromium ne sont pas pris en charge sur macOS : modifier
 leurs fichiers casse leur signature et leur accès aux mots de passe enregistrés. Pour Discord, voir
 [Discord](../discord.md).

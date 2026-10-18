@@ -2,12 +2,15 @@
 
 [Français](../fr/etat-des-traductions.md)
 
-What is translated, what is in progress and what is only planned. Updated 16 October 2026 (Corsu 0.22.0). Which
+What is translated, what is in progress and what is only planned. Updated 18 October 2026 (Corsu 0.25.1, the published release). Which
 systems each program works on is in [What works where](compatibility.md).
 
 Three different things are tracked, and none implies the next: **translated** (a Corsican text exists for every
 string), **technically checked** (the files are valid and the program loads them) and **reviewed by a speaker** (a
 person who speaks Corsican checked the sense and the language).
+
+Statuses: **available** (in the published release 0.25.1), **experimental** (available, little checked on that
+system), **candidate** (in the next version, not published yet), **prototype** or **planned** (not available).
 
 ## Programs Corsu translates
 
@@ -19,8 +22,8 @@ person who speaks Corsican checked the sense and the language).
 | Google Chrome (Windows, Linux) | Available | menus and settings | CI | no |
 | Opera GX, Edge, Brave, Vivaldi | Experimental | same mechanism as Chrome | no | no |
 | Terminal commands, GTK programs (Linux) | Experimental | gettext catalogs built from French | no | no |
-| **Minecraft: Java Edition, 87 versions (1.6.1 → 26.3)** | **Under review**; in the development version, not yet in a published release | complete language files for every listed version ([table](../../minecraft/java/COMPATIBILITY.md)) | each version's own code reads the pack and renders every text, with the listed exceptions | **no**: written by AI, speaker review: 0; loaded in the game: 26.3 only ([status](../../minecraft/java/STATUS.md)) |
-| Minecraft splash texts, End Poem | Optional pack, every language | see [Minecraft in Corsican](minecraft.md) | — | no |
+| **Minecraft: Java Edition, 87 versions (1.6.1 → 26.3)** | **Available** since 0.23.0; speaker review still to do | complete language files for every listed version ([table](../../minecraft/java/COMPATIBILITY.md)) | each version's own code reads the pack and renders every text, with the listed exceptions | **no**: written by AI, speaker review: 0; loaded in the game: 26.3 only ([status](../../minecraft/java/STATUS.md)) |
+| Minecraft splash texts, End Poem | Available, optional pack you install yourself (changes these texts for every language) | see [Minecraft in Corsican](minecraft.md) | — | no |
 | Minecraft Bedrock Edition | Prototype, never tried in the game | 4,288 / 13,340 keys (reused from Java, identical English) | formats checked offline ([status](../../minecraft/bedrock/STATUS.md)) | no |
 
 ## Programs that already have a Corsican translation: Corsu switches it on
@@ -41,20 +44,22 @@ which it gives back when switched off. Corsu never installs the programs. Mechan
 | FileZilla (Windows, Linux) | Patriccollu, `filezilla.mo` | `Language Code` in `filezilla.xml` | 99.7% (upstream catalogue) | unit | no | upstream |
 | HandBrake (Windows, Linux) | Patriccollu, built in / `ghb.mo` | `UiLanguage` in its settings (portable left alone) | not measured | unit | no | upstream |
 | VeraCrypt (Windows, Linux) | Patriccollu, `Language.co.xml` | `Language` in `Configuration.xml` | not measured | unit | no | upstream |
-| Audacity 3 (Linux, Flatpak, Windows, macOS), development version | upstream, `audacity.mo` | `[Locale] Language=co` in `audacity.cfg` | measured against French when both catalogues are there | unit (simulated) | Linux: the official 3.7.7 AppImage, menus seen in Corsican | upstream |
-| Audacity 4 (Linux; Windows, macOS experimental), development version | upstream, `audacity_co.qm` | `language=co` in `[General]` of `Audacity4.ini` (macOS: preference) | 4,050 / 4,050 (4.0.1 source) | unit (simulated) | Linux: the official 4.0.1 AppImage, window seen in Corsican | upstream |
-| Tenacity 1.3 (Linux, Flatpak, Windows, macOS), development version | upstream, `tenacity.mo` | `[Locale] Language=co` in `tenacity.cfg` | 3,851 / 4,106 (93.8 %) | unit (simulated) | Linux: the official 1.3.5 AppImage, menus seen in Corsican | upstream |
-| fre:ac 1.1 (Windows, Linux), development version | upstream, `freac_co.xml` | `Language` = `freac_co.xml` in `freac.xml` | 1,104 / 1,104 (1.1.7 zip); Debian's 1.1.7+git20260412: 1,111 / 1,117 | unit (simulated); real Debian package in a container (Linux) | Linux: window seen in Corsican (container) | upstream |
+| Audacity 3 (Linux, Flatpak, Windows, macOS) | upstream, `audacity.mo` | `[Locale] Language=co` in `audacity.cfg` | measured against French when both catalogues are there | unit (simulated) | Linux: the official 3.7.7 AppImage, menus seen in Corsican | upstream |
+| Audacity 4 (Linux; Windows, macOS experimental) | upstream, `audacity_co.qm` | `language=co` in `[General]` of `Audacity4.ini` (macOS: preference) | 4,050 / 4,050 (4.0.1 source) | unit (simulated) | Linux: the official 4.0.1 AppImage, window seen in Corsican | upstream |
+| Tenacity 1.3 (Linux, Flatpak, Windows, macOS) | upstream, `tenacity.mo` | `[Locale] Language=co` in `tenacity.cfg` | 3,851 / 4,106 (93.8 %) | unit (simulated) | Linux: the official 1.3.5 AppImage, menus seen in Corsican | upstream |
+| fre:ac 1.1 (Windows, Linux) | upstream, `freac_co.xml` | `Language` = `freac_co.xml` in `freac.xml` | 1,104 / 1,104 (1.1.7 zip); Debian's 1.1.7+git20260412: 1,111 / 1,117 | unit (simulated); real Debian package in a container (Linux) | Linux: window seen in Corsican (container) | upstream |
+| Poedit (Linux, Flatpak, Windows; macOS experimental) | Patriccollu, Poedit's `co.po` | Linux: menu entry started with `LANGUAGE=co:…` and `LC_MESSAGES=/C.UTF-8`; Windows: `ui_language` = `co` in the registry; macOS: Poedit's `AppleLanguages` preference | 1,089 messages (Windows 3.10, as many as French) | unit (Windows, macOS simulated; `defaults` round trip on a CI Mac) | Linux: Debian's 3.6.3 package and Flathub's 3.10, window and GTK dialogs seen in Corsican (container) | upstream |
+| PDFsam Basic 5.0+ (Linux, Windows; not macOS) | Patriccollu, `Messages_co.properties` | Java preference `locale` = `co` | not measured | unit (Windows simulated) | Linux: 6.0.6 .deb package (container) | upstream |
 
 A program that rewrites its settings when it quits must be closed (otherwise it is left alone, and Corsu says so); a
 missing settings file (program never started) or an unreadable one is neither created nor rewritten; a value you
-change afterwards is yours and is not reset when Corsu is switched off. Next: Audacity, Tenacity, fre:ac, PDFsam,
-Poedit. Phone apps cannot be set from the computer; on Android 13+, pick each app's language in the phone settings.
+change afterwards is yours and is not reset when Corsu is switched off. Audacity, Tenacity and fre:ac are
+available since 0.24.0, Poedit and PDFsam since 0.25.1. Phone apps cannot be set from the computer; on Android 13+, pick each app's language in the phone settings.
 
 ## Translations taken from other projects
 
-Corsu's lexicon reuses the Corsican translations published by other free software, almost all by Patriccollu di
-Santa Maria è Sichè: Audacity (4,075 lines), Firefox for Android and Focus (2,178), VLC (1,733), WinMerge (1,730),
+Corsu's lexicon reuses the Corsican translations published by other free software, most of them by Patriccollu di
+Santa Maria è Sichè and the Mozilla ones by the Corsican Mozilla team: Audacity (4,075 lines), Firefox for Android and Focus (2,178), VLC (1,733), WinMerge (1,730),
 wxWidgets (1,724), VLC for Android (1,191), Firefox for iOS (1,000), Notepad++ (898), Thunderbird for Android (830),
 fre:ac (784), Tenacity (672), Poedit (658), OpenTracks (467), Mozilla VPN (418), Inno Setup (253),
 Focus for iOS (140). Each keeps its licence ([lexicon-upstream.tsv](../../lexicon/lexicon-upstream.tsv),

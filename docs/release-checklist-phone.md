@@ -96,3 +96,20 @@ Lines to change, found by their markers:
 - [ ] Download `corsu-keyboard.kmp` from `releases/latest/download/` on a phone or an emulator, install it over the
       1.0 package, restart Keyman, and check that Keyman shows « Corsu », version 1.1.
 - [ ] Run `HOME=$(mktemp -d) python3 -m unittest discover -s tests -t .` on `main`.
+
+## Downloads table for the 0.26 release notes (`.github/RELEASE_NOTES.md`)
+
+Replace the table at the top of the French part with this one (the English part gets the same rows, headings
+"Downloads" | "For" | "File" | "Then", guides under `docs/en/phone/`):
+
+| Pour | Fichier | Ensuite |
+| --- | --- | --- |
+| Windows 10 ou 11 | `corsu-windows.zip` | décompresser, double-cliquer sur `Install for Windows.cmd` |
+| macOS | `corsu-macos.tar.gz` | double-cliquer sur `Install for macOS.command` |
+| Linux | `corsu-linux.tar.gz` | lancer `./"Install for Linux.sh"` |
+| Téléphone Android ou iPhone (clavier Keyman) | `corsu-keyboard.kmp` | dictionnaire corse pour Keyman, **utilisable seul** : aucune installation sur ordinateur. Paquet 1.1, nom dans Keyman : « Corsu ». Guides : [Android](https://github.com/Platykalt/corsu/blob/main/docs/fr/telephone/android.md), [iPhone](https://github.com/Platykalt/corsu/blob/main/docs/fr/telephone/iphone.md) |
+| Téléphone, variante régionale (expérimentale) | `corsu-keyboard-cismuntincu.kmp` ou `corsu-keyboard-pumuntincu.kmp` | même vocabulaire, préférence pour les formes du Cismonte ou du Pumonte (361 mots pondérés autrement, couverture partielle) ; paquet 1.1. Sous Android, un seul dictionnaire actif par langue : désinstaller l'autre puis relancer Keyman |
+| Minecraft Java 26.3, sans l'application | `corsu-minecraft-java-26.3.zip` | pack de ressources : Options › Packs de ressources, l'activer, puis Options › Langue › Corsu ; pack facultatif des textes d'accueil et de fin : `corsu-minecraft-java-texts-26.3.zip`. Les autres versions (1.6.1 → 26.2) : par l'application Corsu ([versions et vérifications](https://github.com/Platykalt/corsu/blob/main/minecraft/java/COMPATIBILITY.md)) |
+
+Chaque fichier a sa somme de contrôle `.sha256`. Keep the existing tag scheme: no separate keyboard release (it would
+change `releases/latest` and the app's update check).

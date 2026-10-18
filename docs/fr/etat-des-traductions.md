@@ -2,13 +2,16 @@
 
 [English](../en/translation-status.md)
 
-Ce qui est traduit, ce qui est en cours et ce qui est seulement prévu. Mis à jour le 16 octobre 2026 (Corsu 0.22.0).
+Ce qui est traduit, ce qui est en cours et ce qui est seulement prévu. Mis à jour le 18 octobre 2026 (Corsu 0.25.1, la version publiée).
 Les systèmes pris en charge par chaque logiciel sont dans [Ce qui marche, et où](compatibilite.md).
 
 Trois choses différentes sont suivies, et l'une n'entraîne pas l'autre :
 **traduit** (un texte corse existe pour chaque chaîne), **vérifié techniquement** (les fichiers sont valides et le
 logiciel les charge) et **relu par un locuteur** (le sens et la langue ont été contrôlés par une personne qui parle
 corse).
+
+Statuts : **disponible** (dans la version publiée 0.25.1), **expérimental** (disponible, peu vérifié sur ce système),
+**candidat** (dans la prochaine version, pas encore publiée), **prototype** ou **prévu** (pas disponible).
 
 ## Logiciels traduits par Corsu
 
@@ -20,8 +23,8 @@ corse).
 | Google Chrome (Windows, Linux) | Disponible | menus et réglages | CI | non |
 | Opera GX, Edge, Brave, Vivaldi | Expérimental | même mécanisme que Chrome | non | non |
 | Commandes du terminal, programmes GTK (Linux) | Expérimental | catalogues gettext construits depuis le français | non | non |
-| **Minecraft: Java Edition, 87 versions (1.6.1 → 26.3)** | **En cours de relecture** ; dans la version de développement, pas encore dans une release publiée | fichiers de langue complets pour chaque version listée ([tableau](../../minecraft/java/COMPATIBILITY.md)) | le code de chaque version lit le pack et affiche chaque texte, avec les exceptions listées | **non** : écrite par IA, relue par un locuteur : 0 ; chargée en jeu : 26.3 seulement ([état](../../minecraft/java/STATUS.md)) |
-| Minecraft : phrases d'accueil, poème de fin | Pack facultatif, toutes langues | voir [Minecraft en corse](minecraft.md) | — | non |
+| **Minecraft: Java Edition, 87 versions (1.6.1 → 26.3)** | **Disponible** depuis 0.23.0 ; relecture par un locuteur à faire | fichiers de langue complets pour chaque version listée ([tableau](../../minecraft/java/COMPATIBILITY.md)) | le code de chaque version lit le pack et affiche chaque texte, avec les exceptions listées | **non** : écrite par IA, relue par un locuteur : 0 ; chargée en jeu : 26.3 seulement ([état](../../minecraft/java/STATUS.md)) |
+| Minecraft : phrases d'accueil, poème de fin | Disponible, pack facultatif à installer soi-même (change ces textes pour toutes les langues) | voir [Minecraft en corse](minecraft.md) | — | non |
 | Minecraft Bedrock Edition | Prototype, jamais essayé en jeu | 4 288 / 13 340 clés (reprises de Java, anglais identique) | formats vérifiés hors jeu ([état](../../minecraft/bedrock/STATUS.md)) | non |
 
 ## Logiciels qui ont déjà leur traduction corse : Corsu l'active
@@ -42,15 +45,17 @@ installés par Corsu. Détail des mécanismes et des sources : [docs/apps-resear
 | FileZilla (Windows, Linux) | Patriccollu, `filezilla.mo` | `Language Code` dans `filezilla.xml` | 99,7 % (catalogue amont) | unitaires | non | amont |
 | HandBrake (Windows, Linux) | Patriccollu, intégrée / `ghb.mo` | `UiLanguage` dans ses réglages (portable laissé tel quel) | non mesurée | unitaires | non | amont |
 | VeraCrypt (Windows, Linux) | Patriccollu, `Language.co.xml` | `Language` dans `Configuration.xml` | non mesurée | unitaires | non | amont |
-| Audacity 3 (Linux, Flatpak, Windows, macOS), version de développement | amont, `audacity.mo` | `[Locale] Language=co` dans `audacity.cfg` | mesurée par rapport au français quand les deux catalogues sont là | unitaires (simulés) | Linux : AppImage officielle 3.7.7, menus vus en corse | amont |
-| Audacity 4 (Linux ; Windows, macOS expérimentaux), version de développement | amont, `audacity_co.qm` | `language=co` dans `[General]` d'`Audacity4.ini` (macOS : préférence) | 4 050 / 4 050 (source 4.0.1) | unitaires (simulés) | Linux : AppImage officielle 4.0.1, fenêtre vue en corse | amont |
-| Tenacity 1.3 (Linux, Flatpak, Windows, macOS), version de développement | amont, `tenacity.mo` | `[Locale] Language=co` dans `tenacity.cfg` | 3 851 / 4 106 (93,8 %) | unitaires (simulés) | Linux : AppImage officielle 1.3.5, menus vus en corse | amont |
-| fre:ac 1.1 (Windows, Linux), version de développement | amont, `freac_co.xml` | `Language` = `freac_co.xml` dans `freac.xml` | 1 104 / 1 104 (zip 1.1.7) ; paquet Debian 1.1.7+git20260412 : 1 111 / 1 117 | unitaires (simulés) ; vrai paquet Debian dans un conteneur (Linux) | Linux : fenêtre vue en corse (conteneur) | amont |
+| Audacity 3 (Linux, Flatpak, Windows, macOS) | amont, `audacity.mo` | `[Locale] Language=co` dans `audacity.cfg` | mesurée par rapport au français quand les deux catalogues sont là | unitaires (simulés) | Linux : AppImage officielle 3.7.7, menus vus en corse | amont |
+| Audacity 4 (Linux ; Windows, macOS expérimentaux) | amont, `audacity_co.qm` | `language=co` dans `[General]` d'`Audacity4.ini` (macOS : préférence) | 4 050 / 4 050 (source 4.0.1) | unitaires (simulés) | Linux : AppImage officielle 4.0.1, fenêtre vue en corse | amont |
+| Tenacity 1.3 (Linux, Flatpak, Windows, macOS) | amont, `tenacity.mo` | `[Locale] Language=co` dans `tenacity.cfg` | 3 851 / 4 106 (93,8 %) | unitaires (simulés) | Linux : AppImage officielle 1.3.5, menus vus en corse | amont |
+| fre:ac 1.1 (Windows, Linux) | amont, `freac_co.xml` | `Language` = `freac_co.xml` dans `freac.xml` | 1 104 / 1 104 (zip 1.1.7) ; paquet Debian 1.1.7+git20260412 : 1 111 / 1 117 | unitaires (simulés) ; vrai paquet Debian dans un conteneur (Linux) | Linux : fenêtre vue en corse (conteneur) | amont |
+| Poedit (Linux, Flatpak, Windows ; macOS expérimental) | Patriccollu, `co.po` de Poedit | Linux : entrée de menu lancée avec `LANGUAGE=co:…` et `LC_MESSAGES=/C.UTF-8` ; Windows : `ui_language` = `co` dans le registre ; macOS : préférence `AppleLanguages` de Poedit | 1 089 messages (Windows 3.10, autant que le français) | unitaires (Windows, macOS simulés ; aller-retour `defaults` sur un Mac de CI) | Linux : paquet Debian 3.6.3 et Flatpak 3.10, fenêtre et dialogues GTK vus en corse (conteneur) | amont |
+| PDFsam Basic 5.0+ (Linux, Windows ; pas macOS) | Patriccollu, `Messages_co.properties` | préférence Java `locale` = `co` | non mesurée | unitaires (Windows simulé) | Linux : paquet .deb 6.0.6 (conteneur) | amont |
 
 Règles communes : un logiciel qui réécrit ses réglages en quittant doit être fermé (sinon il est laissé tel quel, et
 Corsu le dit) ; un fichier de réglages absent (logiciel jamais lancé) ou illisible n'est pas créé ni réécrit ; une
-valeur que vous changez ensuite vous appartient et n'est pas remise à la désactivation. Prochains : Audacity,
-Tenacity, fre:ac, PDFsam, Poedit. Applications de téléphone : Corsu ne peut pas les régler depuis l'ordinateur ;
+valeur que vous changez ensuite vous appartient et n'est pas remise à la désactivation. Audacity, Tenacity et fre:ac sont
+disponibles depuis 0.24.0, Poedit et PDFsam depuis 0.25.1. Applications de téléphone : Corsu ne peut pas les régler depuis l'ordinateur ;
 sur Android 13 et plus, choisissez la langue de chaque application dans les réglages du téléphone.
 
 ## Traductions reprises d'autres projets

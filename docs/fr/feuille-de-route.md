@@ -3,7 +3,11 @@
 [English](../en/roadmap.md)
 
 Ce qui suit est **prévu ou envisagé**, pas disponible, sauf les lignes marquées « fait ». Ce qui marche aujourd'hui est dans
-[Ce qui marche, et où](compatibilite.md). État établi le 16 octobre 2026.
+[Ce qui marche, et où](compatibilite.md). État établi le 18 octobre 2026 (version publiée : 0.25.1).
+
+**Candidat, dans la prochaine version (pas encore publiée)** : pour le clavier Keyman, un dictionnaire qui garde les
+majuscules tapées et des préférences régionales expérimentales (Cismuntincu, Pumuntincu) ; pour Minecraft Java, une
+nouvelle relecture par IA des textes (octobre 2026), toujours sans relecture par un locuteur.
 
 ## Ce qui existe déjà en corse ailleurs
 
@@ -35,9 +39,9 @@ Les pourcentages viennent des API de Pontoon et de Hosted Weblate ; les autres p
 
 | Chantier | Bénéfice | Solution | Preuve de faisabilité | Volume estimé (méthode) | Effort | Maintenance | Prochaine action |
 | --- | --- | --- | --- | --- | --- | --- | --- |
-| Minecraft Java : installation automatique | le corse devient la langue du jeu sans manipulation | composant `minecraft` de l'installeur : pack copié dans chaque dossier de jeu, `lang:co_fr` dans `options.txt` | fait dans 0.22.0, testé sur des dossiers simulés | — | fait | à chaque version du jeu | essai réel par un joueur |
+| Minecraft Java : installation automatique | le corse devient la langue du jeu sans manipulation | composant `minecraft` de l'installeur : pack copié dans chaque dossier de jeu, `lang:co_fr` dans `options.txt` | fait : 26.3 dans 0.22.0, 87 versions dans 0.23.0 ; testé sur des dossiers simulés | — | fait | à chaque version du jeu | essai réel par un joueur |
 | Minecraft Java : relecture | traduction fiable du jeu le plus joué | relecture par un locuteur, clé par clé, statut dans `inventory.tsv` | traduction complète livrée (26.3) | 8 559 chaînes (`en_us.json` 26.3) | élevé | faible | relire d'abord interface, objets, blocs |
-| Minecraft Java : essai en jeu | preuve que le pack se charge | lancer 26.3 avec le pack, parcourir menus, inventaire, mort, sous-titres | mécanisme lu dans le code de 26.3 | 1 parcours | faible | à chaque version | essai par quelqu'un qui possède le jeu |
+| Minecraft Java : essai en jeu | preuve que le pack se charge | lancer 26.3 avec le pack, parcourir menus, inventaire, mort, sous-titres | 26.3 lancée une fois avec le pack sur l'instance du mainteneur (16 octobre 2026), journal du jeu seulement | 1 parcours | faible | à chaque version | parcours écran par écran, captures à l'appui |
 | Minecraft Java : versions suivantes | suivre Mojang | `tools/minecraft.py diff` puis `inventory` | outil livré | 26.2 → 26.3 : 436 chaînes ajoutées, 56 modifiées (`tools/minecraft.py diff`) | faible | régulier | lancer `diff 26.3 26.4` à la sortie |
 | Discord : relecture des libellés courts | corriger les contresens visibles | relecture sémantique par lots, corrections tracées | premier lot fait (voir `lexicon/corrections.tsv`) | environ 9 900 libellés de 1 à 5 mots | moyen | faible | relire les lignes « medium/low » |
 | Lexique : traductions importées incohérentes | éviter les « Profil → Forzà un Prufilu » | `engine.loose_french` + `lexicon-fixes.tsv` | fait | 92 entrées touchées | fait | nulle | signaler les erreurs aux projets d'origine |

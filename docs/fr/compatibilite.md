@@ -17,6 +17,9 @@
 | Minecraft: Java Edition 1.6.1 → 26.3, 87 versions (pack de ressources) | Vérifié sans lancer le jeu | Vérifié sans lancer le jeu | Vérifié sans lancer le jeu |
 | Programmes GTK et commandes du terminal | | | Prévu |
 
+Les logiciels qui ont déjà leur propre traduction corse (VLC, Audacity, Poedit, 7-Zip…) et les systèmes de chacun
+sont dans [État des traductions](etat-des-traductions.md).
+
 **Testé** : avant chaque version, la CI installe Corsu sur ce système, lance le logiciel et lit son texte en corse.
 **Testé en partie** : la CI vérifie que Corsu modifie Discord puis le restaure, sans ouvrir Discord lui-même.
 **Utilisé tous les jours** : un locuteur corse s'en sert chaque jour. **Prévu** : le code existe mais personne ne l'a
@@ -38,9 +41,10 @@ partie (instance Prism du mainteneur), sans relecture visuelle de chaque écran.
 | Firefox, Firefox Focus | En corse (Mozilla) | En corse (Mozilla) |
 | Thunderbird, VLC | En corse | VLC en corse |
 | Discord | Impossible | Impossible |
-| Clavier corse | Gboard, ou Keyman avec la prédiction Corsu | Keyman avec la prédiction Corsu |
+| Clavier corse | Gboard, ou Keyman avec le dictionnaire Corsu | Keyman avec le dictionnaire Corsu |
 
-Ces applications sont proposées en corse par leurs éditeurs ; Corsu ne les modifie pas. Voir [Android](telephone/android.md)
+Ces applications sont proposées en corse par leurs éditeurs ; Corsu ne les modifie pas. Le dictionnaire Corsu pour
+Keyman propose des mots et des corrections ; avec Keyman 18, il n'y a pas de correction automatique. Voir [Android](telephone/android.md)
 et [iPhone](telephone/iphone.md).
 
 ## Google et les autres sites

@@ -3,7 +3,7 @@
 [Français](../fr/feuille-de-route.md)
 
 Everything below is **planned or under consideration**, not available. What works today is in
-[What works where](compatibility.md). Status as of 16 October 2026. The French page has the full tables, including
+[What works where](compatibility.md). Status as of 18 October 2026 (published release: 0.25.1). The French page has the full tables, including
 the inventory of software already in Corsican elsewhere; this is a summary.
 
 ## Already in Corsican elsewhere
@@ -17,12 +17,20 @@ Thunderbird for Android (92.8 %), Tenacity (98.4 %) and OpenTracks (76.1 %) are 
 Corsican in their own releases. No Corsican was found for LibreOffice, GIMP, Inkscape, KeePassXC, F-Droid, OsmAnd or
 Luanti.
 
+## Candidate: in the next version, not published yet
+
+- Phone keyboard: a Corsu dictionary for Keyman that keeps the capitals you type, and experimental regional
+  preferences (Cismuntincu, Pumuntincu).
+- Minecraft Java: a further AI review of the texts (October 2026). Still no review by a speaker.
+
 ## Next, in order
 
 **Ready now**
-- Minecraft Java: done in 0.22.0, Corsu can make Corsican the game's language (component `minecraft`).
+- Minecraft Java: done; Corsu makes Corsican the game's language (component `minecraft`; 26.3 since 0.22.0, 87
+  versions since 0.23.0).
 - Minecraft Java: review by a speaker, key by key, with statuses in `minecraft/java/inventory.tsv` (8,559 strings).
-- Minecraft Java: one in-game test of 26.3 (menus, inventory, death screen, subtitles) by someone who owns the game.
+- Minecraft Java: a screen-by-screen in-game test of 26.3 (menus, inventory, death screen, subtitles). So far 26.3
+  has only been started once with the pack, on the maintainer's instance (game log checked, no screens recorded).
 - Minecraft Java: follow new versions with `tools/minecraft.py diff` (26.2 → 26.3 added 436 strings and changed 56).
 - Discord: finish the semantic review of short labels (about 9,900 labels of 1 to 5 words).
 - Lexicon: report the imported translations whose French did not match their English back to the original projects.
