@@ -10,7 +10,8 @@ Inputs:
     northern/southern pairs);
   - the project lexicons (Corsu's own software translations), counted all alike: a word does not become more
     trustworthy because of the file it comes from;
-  - the Corsican place names of sources/places.tsv (Wikidata, fetched by tools/fetch_places.py);
+  - the Corsican place names of sources/places.tsv (Wikidata, fetched by tools/fetch_places.py) and the official
+    commune names of sources/communes-official.tsv (INSEE, fetched by tools/fetch_communes.py);
   - the old generated word list keyboard/platykalt.co.corsu/source/wordlist.tsv as of version 0.9.0 (read from git:
     tools/build_keyboard.py now rewrites that file from these lists), only to report what changed.
 
@@ -49,6 +50,7 @@ LICENSES = {
     'vikipedia': 'CC-BY-SA-4.0',
     'apertium': 'GPL-3.0',
     'wikidata': 'CC0-1.0',
+    'cog': 'etalab-2.0',
     'corsu-lexicon': 'corsu-lexicon-mixed',
     'ai': 'GPL-3.0-or-later',
 }
@@ -67,6 +69,13 @@ LEXICON_SHARE = 0.02
 # Bastia, Corti) keep their own weight.
 PLACE_FLOOR = 50
 PLACE_CAP = 900
+# Weight of a word of an official commune name that the Corsican names do not already give (Bastelicaccia, Zicavo,
+# Ajaccio; sources/communes-official.tsv): its Vikipedia frequency, between these bounds. Low on purpose: the name
+# must be known, so that auto-correction keeps it as typed, but it must not outrank a Corsican place name (at least
+# PLACE_FLOOR) or an everyday word; Vikipedia counts Florent or Martino mostly as first names, so the cap is low.
+# Official names are spelled as INSEE writes them, so the Corsican spelling checks do not apply.
+OFFICIAL_FLOOR = 20
+OFFICIAL_CAP = PLACE_FLOOR
 # In a variety's preference list, the other variety's form keeps this share of the pair's weight.
 OTHER_SHARE = 0.25
 # About 1,380 Vikipedia articles are botanical stubs generated from one table ("spezia", "pianta", "sinonimi",
@@ -238,6 +247,18 @@ def place_names():
             token = token.rsplit("'", 1)[-1]
             if len(token) >= 3 and token[0].isupper() and token == token[0] + token[1:].lower():
                 words.setdefault(token, row['qid'])
+    return words
+
+
+def official_names():
+    """{word: INSEE code} for the words of the official commune names of sources/communes-official.tsv, split as
+    place_names() splits the Corsican labels (Sainte-Lucie-de-Tallano: Sainte, Lucie, Tallano)."""
+    words = {}
+    for row in read_tsv(SOURCES / 'communes-official.tsv'):
+        for token in re.split(r'[\s-]+', nfc(row['name'])):
+            token = token.rsplit("'", 1)[-1]
+            if len(token) >= 3 and token[0].isupper() and token == token[0] + token[1:].lower():
+                words.setdefault(token, row['code'])
     return words
 
 
@@ -455,6 +476,19 @@ def main():
             entries[low] = dict(word=low if common else word, weight=round(weight), source=f'wikidata:{qid}',
                                 status='attested')
             removed.pop(low, None)
+
+    # 5. Official commune names (INSEE): Bastelicaccia next to Bastilicaccia. A legitimate spelling typed on purpose
+    #    must be known, or auto-correction replaces it with a close Corsican name. Words already known (same search
+    #    key) are left as they are; the others get a low weight (OFFICIAL_FLOOR..OFFICIAL_CAP).
+    for word, code in official_names().items():
+        if fold(word) in known:
+            place_stats['official_already_known'] += 1
+            continue
+        known.add(fold(word))
+        place_stats['official_added'] += 1
+        weight = min(max(frequency_weight(word.lower()), OFFICIAL_FLOOR), OFFICIAL_CAP)
+        entries[word.lower()] = dict(word=word, weight=round(weight), source=f'cog:{code}', status='attested')
+        removed.pop(word.lower(), None)
 
     def license_of(source):
         return LICENSES[source.split(':')[0]]

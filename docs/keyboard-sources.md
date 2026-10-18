@@ -2,7 +2,7 @@
 
 The Corsican word lists of the Keyman keyboard (`keyboard/data/shared.tsv`, `cismuntincu.tsv`, `pumuntincu.tsv`) are
 built by `keyboard/data/tools/make_vocab.py`. Each row names, in its `source` column, the source that attests the
-word (the strongest one when several do), and in its `license` column the licence of that source. The weights and
+word (an openly licensed one first when several do), and in its `license` column the licence of that source. The weights and
 their scale are explained in [keyboard/data/REVIEW.md](../keyboard/data/REVIEW.md).
 
 No message, conversation or personal data was collected. Online pages were consulted one at a time; the large
@@ -21,6 +21,8 @@ under GPL-3.0-or-later.
 - **CC BY 2.0 FR** (Tatoeba): a permissive licence that asks for attribution, given here.
 - **GPL-3.0** (Apertium): the same licence.
 - **CC0 1.0** (Wikidata): a public domain dedication; no condition. The source is still named on every row.
+- **Licence Ouverte / Etalab 2.0** (INSEE's official commune names, through geo.api.gouv.fr): free reuse with
+  attribution, given here; compatible with CC BY and the GPL.
 - **Corsu's lexicon**: the words come from Corsu's own translations (GPL-3.0-or-later) and from translations
   imported from other projects, which keep their licence (MPL-2.0, Apache-2.0, GPL-2.0-or-later, MIT, wxWindows,
   Inno Setup licence; see `lexicon/`). All allow redistribution; their `license` value is `corsu-lexicon-mixed`.
@@ -44,6 +46,7 @@ under GPL-3.0-or-later.
 | `cowiki-lingua-corsa` | Vikipedia, article "Lingua corsa", revision 403108 (2026-06-07), table "Esempii di parolle in pumuntincu è in cismuntincu (Taravesu è Sartinesu)", https://co.wikipedia.org/wiki/Lingua_corsa | CC BY-SA 4.0 | 28 northern/southern word pairs, with the Taravesu and Sartinesu columns kept apart. |
 | `frwiki-corse-langue` | Wikipédia, article "Corse (langue)", revision 239896905 (2026-09-28), sections "Zone de transition" and "Sud de la Corse", https://fr.wikipedia.org/wiki/Corse_(langue) | CC BY-SA 4.0 | 7 northern/southern pairs (fratellu/frateddu, surella/suredda, figliolu/fiddolu, vogliu/voddu, pastore/pastori, nazione/nazioni, accattà/cumprà) and the description of the varieties and transition zones. |
 | `wikidata` | Wikidata, Corsican labels (`rdfs:label`, language `co`) of the communes of Haute-Corse and Corse-du-Sud and of Corsica's main places (pievi, natural regions, departments, mountains, passes, rivers, lakes, islands, capes), three SPARQL queries to https://query.wikidata.org/sparql run on 2026-10-18 by `keyboard/data/tools/fetch_places.py` (`keyboard/data/sources/places.tsv`, 548 items). The `source` column gives the item, e.g. `wikidata:Q1153494` (Zicavu) | CC0 1.0 | The words of the labels as place names (446 words; details in REVIEW.md, "Place names"). Aliases and other languages' labels are not used. The Vikipedia dump only cross-checks them (case, frequency). |
+| `cog` | INSEE, Code officiel géographique: official names of the 360 communes of Corse-du-Sud and Haute-Corse, two requests to https://geo.api.gouv.fr/departements/{2A,2B}/communes on 2026-10-18 by `keyboard/data/tools/fetch_communes.py` (`keyboard/data/sources/communes-official.tsv`). The `source` column gives the commune code, e.g. `cog:2A032` (Bastelicaccia) | Licence Ouverte / Etalab 2.0 | The words of the official names that the Corsican names do not already give (221 words: *Bastelicaccia*, *Zicavo*, *Ajaccio*, *Sartène*…), at a low weight, so that a legitimate official spelling typed on purpose is known and kept (REVIEW.md, "Place names"). |
 | `corsu-lexicon` | Corsu's own lexicons: `lexicon/lexicon.tsv`, `lexicon-fixes.tsv`, `lexicon-mozilla.tsv`, `lexicon-upstream.tsv` | `corsu-lexicon-mixed` (see above) | Words of software interfaces. Used only for words no external source has, with status `corsu-lexicon`, and as a small part of the weight (2 % of a Vikipedia occurrence). Being in a "reviewed" file (Mozilla, Patriccollu's translations) does not make a word attested here. |
 | `ai` | Words proposed by the AI agent that built the list | GPL-3.0-or-later | 11 everyday words found in no source above (status `ai-proposal`), listed in REVIEW.md for checking. |
 
@@ -67,7 +70,7 @@ book's table number, tense, person and version as its reference. No explanation,
 page layout was copied. All 368 forms occur in the PDF's text (automated check, 2026-10-18; not a human review).
 
 **What reaches the keyboard packages.** Only words and weights (`keyboard/*/source/wordlist.tsv`): the 368 forms
-among 12,976 words, with no table number, tense, person or label. Of the 368, 187 are also written by an openly
+among the list's words, with no table number, tense, person or label. Of the 368, 187 are also written by an openly
 licensed source (Wiktionary, Tatoeba, Vikipedia at least 5 times, Apertium); 181 have no such second source (84 seen
 fewer than 5 times in Vikipedia or only in Corsu's lexicon, 97 nowhere else: mostly imperfect plurals such as
 *pudiami*, *scriviate*, *tiniami*). The book's *supranacciu* / *suttanacciu* versions decide 253 of the 361 words
