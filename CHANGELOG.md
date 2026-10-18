@@ -1,5 +1,29 @@
 # Changelog
 
+## 0.26.0 (in development on next-0.26, not published)
+
+- Minecraft Java: verified part of an October 2026 AI review (minecraft/java/review-2026-10: APPLIED.tsv,
+  REJECTED.tsv, TRACKING.md): 1,131 texts in 26.3 and older versions. Wrong senses corrected (Squid "Calamaru" =
+  inkwell > Totanu; Clay "Creta" = chalk > Arzilla; Rail "Binariu" > Ragliu; Moss "Muscu" = musk > Murzu; Smithing
+  Table "ferraghju" = February > Bancu di stazzunaru; Sign "cartellu" > cartella), Italian forms replaced by attested
+  Corsican ones, oak masculine (querciu) through every variant, dighjà, polite-voi agreement, left/right click,
+  death messages naming the Wither effect. Pecura kept for Sheep (generic use attested). 68 proposals rejected with
+  reasons, 41 deferred. Sources: ADECEC lexicons, INFCOR, Vikipedia, Mozilla/Patriccollu translations; no human
+  review. All 87 versions checked against their own game code: 0 errors. `tools/minecraft.py verify` no longer
+  crashes when the pack is missing.
+- Keyman: the dictionary keeps the case typed (Eccu, ECCU; Keyman's `languageUsesCasing`), suggestions at a
+  sentence start are capitalised, the package shows as "Corsu" instead of `platykalt.co.corsu`. Vocabulary rebuilt
+  (keyboard/data, sources in docs/keyboard-sources.md): 5,375 entries removed (English words, product names, other
+  scripts, fragments, unattested rare forms), daily vocabulary added, weights from everyday text instead of
+  software labels. Two experimental regional preferences, corsu-keyboard-cismuntincu.kmp and
+  corsu-keyboard-pumuntincu.kmp (361 words weighted differently, each from a cited source; partial coverage).
+  Checked in Keyman for Android 18.0.254's own engine (CI) and in the real app on an Android 14 emulator; not on a
+  phone, not on iOS. Keyman 18 has no automatic correction; going back into a word replaces only the part left of
+  the caret (engine limits, documented).
+- Phones: "Write Corsican on Android and iPhone" at the top of the README; guides rewritten from Keyman 18.0's help
+  and source; the window's new "Sur téléphone" page with QR codes (generated locally) to the public guides.
+- Project rules for agents (AGENTS.md): full meaning before abbreviations; provenance of every translation.
+
 ## 0.25.1 (2026-10-18)
 
 0.25.0 was tagged but never published: the release run's Windows check found the fault below, so nothing was
