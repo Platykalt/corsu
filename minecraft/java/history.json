@@ -22105,7 +22105,7 @@
  },
  "multiplayer.info1": {
   "3eb22b50040d": {
-   "co": "U modu parechji ghjucadori di Minecraft ùn hè ancu finitu, ma ci sò",
+   "co": "U ghjocu cù l'altri in Minecraft ùn hè ancu finitu, ma ci sò",
    "kind": "new",
    "from": null,
    "review": "ai"
@@ -22865,7 +22865,7 @@
  },
  "options.multiplayer.title": {
   "1c153b3d9ea4": {
-   "co": "Parametri di u ghjocu à parechji…",
+   "co": "Parametri di u ghjocu cù l'altri…",
    "kind": "adapted",
    "from": "options.multiplayer.title",
    "review": "ai"
@@ -31625,13 +31625,13 @@
  },
  "title.multiplayer.disabled": {
   "67d2209f2afe": {
-   "co": "U ghjocu à parechji hè disattivatu. Verificate i parametri di u vostru lanciadore.",
+   "co": "U ghjocu cù l'altri hè disattivatu. Verificate i parametri di u vostru lanciadore.",
    "kind": "adapted",
    "from": "title.multiplayer.disabled",
    "review": "ai"
   },
   "b1b8efc1b2b7": {
-   "co": "U ghjocu à parechji hè disattivatu, verificate i parametri di u vostru lanciadore.",
+   "co": "U ghjocu cù l'altri hè disattivatu, verificate i parametri di u vostru lanciadore.",
    "kind": "adapted",
    "from": "title.multiplayer.disabled",
    "review": "ai"
