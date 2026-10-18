@@ -108,6 +108,14 @@ jobs:
           # Pages and recorded checks against the committed data, before verify rewrites today's dates.
           python tools/mcreport.py --check
           python tools/mcversions.py verify targets
+      - name: Every file to publish has its own .sha256, and it matches
+        run: |
+          cd dist
+          for file in corsu-*; do
+            case "$file" in *.sha256) continue ;; esac
+            test -f "$file.sha256" || { echo "missing $file.sha256"; exit 1; }
+            sha256sum -c "$file.sha256"
+          done
       - uses: actions/upload-artifact@v4
         with:
           name: releases
@@ -275,6 +283,14 @@ jobs:
           path: dist
       - name: Check the tag matches src/release.json
         run: test "v$(python3 -c "import json; print(json.load(open('src/release.json'))['version'])")" = "$GITHUB_REF_NAME"
+      - name: Every file to publish has its own .sha256, and it matches
+        run: |
+          cd dist
+          for file in corsu-*; do
+            case "$file" in *.sha256) continue ;; esac
+            test -f "$file.sha256" || { echo "missing $file.sha256"; exit 1; }
+            sha256sum -c "$file.sha256"
+          done
       - name: Create the release
         env:
           GH_TOKEN: ${{ github.token }}
