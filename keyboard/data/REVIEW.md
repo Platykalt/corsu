@@ -51,8 +51,11 @@ Range: 1 to 715,754 (*di*); median 33; 977 words at 1,000 or more.
 
 ### Status
 
-- `attested`: the word is written so in at least one external source (`source` column, strongest first:
-  cunghjugarellu, adecec, wiktionary, tatoeba, vikipedia ≥ 5 occurrences, apertium; place names: wikidata).
+- `attested`: the word is written so in at least one external source. The `source` column cites, in this order:
+  wiktionary, tatoeba, vikipedia ≥ 5 occurrences, apertium, then the reference works consulted without a reuse
+  licence, cunghjugarellu and adecec, when they are the only ones (place names: wikidata). A variety-specific form
+  cites the reference of its pair when no dictionary has it. The order changes no weight; every form checked in
+  a reference work stays listed in `sources/`.
 - `corsu-lexicon`: only Corsu's own software lexicon has it (6,640 words). This includes words from the Mozilla and
   Patriccollu imports: their file of origin does not make them attested here.
 - `ai-proposal`: 11 everyday words found in no source (listed below).
@@ -173,7 +176,7 @@ choice. Treat the two settings as experimental until a speaker of each area has 
 | | Count |
 |---|---|
 | Words whose weight differs between the merged northern and southern lists | **361** |
-| — from U Cunghjugarellu (21 verbs, present and imperfect indicative, tables 1–100) | 253 |
+| — from U Cunghjugarellu (21 verbs, present and imperfect indicative, 21 of its 100 tables) | 253 |
 | — from Vikipedia "Lingua corsa" (Taravesu / Sartinesu table) | 60 |
 | — from Wiktionary (Cismontane / Ultramontane entries) | 34 |
 | — from Wikipédia "Corse (langue)" | 14 |
@@ -248,9 +251,12 @@ Other everyday-word questions:
 
 ## Licences
 
-See [docs/keyboard-sources.md](../../docs/keyboard-sources.md). To decide before a release: whether the
-`attestation-only` use of U Cunghjugarellu (all rights reserved) and of the ADECEC pages is acceptable; the forms
-are single words checked in them, no table is reproduced.
+See [docs/keyboard-sources.md](../../docs/keyboard-sources.md), section "U Cunghjugarellu (Canopé de Corse)", for
+what the publisher states (book page: CC BY-NC-ND 2.0 FR; PDF: general reproduction reservation; neither is a
+licence on the words), what `sources/cunghjugarellu.tsv` holds (511 rows, 368 forms: two tenses of 21 tables, one
+form per row with its table number), what the packages receive (words and weights only) and the three uses told
+apart: checking a fact, reusing the book's texts or editorial choices, extracting a data collection. The ADECEC
+pages were used only to check 53 single words.
 
 ## Rebuilding
 

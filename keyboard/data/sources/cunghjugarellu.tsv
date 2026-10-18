@@ -1,10 +1,15 @@
-# Individual verb forms checked in U Cunghjugarellu (Canopé de Corse, author Ghjuvan Battistu Paoli,
-# ISBN 978-2-240-05710-5, dépôt légal décembre 2024; https://educorsica.fr/phocadownload/pdf/u_cunghjugarellu.pdf),
-# consulted 2026-10-18. Only the present and imperfect indicative of 21 everyday verbs are cited, as attestations
-# of single word forms; the book is "all rights reserved" and its tables are not reproduced. table = the book's
-# own table number; version = suttanacciu (southern) or supranacciu (northern), as the book labels them.
+# Verb forms checked in U Cunghjugarellu, la conjugaison corse (Ghjuvan Battistu Paoli, Canopé de Corse,
+# ISBN 978-2-240-05710-5, dépôt légal décembre 2024), PDF https://www.educorsica.fr/phocadownload/pdf/u_cunghjugarellu.pdf
+# consulted 2026-10-18. What this file holds: the present and imperfect indicative of 21 everyday verbs (the book's
+# tables 1, 2, 3, 23-27, 29, 30, 32, 35, 64, 81, 87, 89, 92, 94-96, 100), in its supranacciu (northern) and
+# suttanacciu (southern) versions: 511 rows, 368 distinct forms, one form per row with the book's table number,
+# tense, person and version as references. The book's layout, other tenses, explanations and examples are not copied.
+# Rights, as stated by the publisher (they concern the publication, not the Corsican words): the educorsica page of
+# the book (https://www.educorsica.fr/ouvrages/536-u-cunghjugarellu) places its downloadable documents under
+# CC BY-NC-ND 2.0 France; the PDF itself carries a general reproduction reservation. See docs/keyboard-sources.md.
 # Forms written with a final apostrophe (da', va', po', sa', vo', a') are left out. When the book prints two
-# imperfects (Sud / Rocca), the Sud one is cited.
+# imperfects (Sud / Rocca), the Sud one is cited. Every form was found again in the PDF's text on 2026-10-18 (an
+# automated consistency check of this file, not a human review).
 form	verb	table	version	tense	person
 socu	essa	1	suttanacciu	present	1
 eru	essa	1	suttanacciu	imperfect	1

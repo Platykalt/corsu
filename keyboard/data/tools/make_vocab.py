@@ -260,11 +260,10 @@ def main():
         return wiki[low] * 1e7 / wiki_total + LEXICON_SHARE * lexicon[low] * 1e7 / lexicon_total
 
     def attestation(low):
-        """The strongest external source that has the word, or None."""
-        if low in conjugation_forms:
-            return 'cunghjugarellu'
-        if low in adecec:
-            return 'adecec'
+        """The external source cited for the word, or None. An openly licensed source that has the word is cited
+        first; the reference works consulted without a reuse licence (U Cunghjugarellu, the ADECEC pages) are
+        cited when they are the only ones. Every form checked in them stays listed in sources/, whatever is
+        cited here; the order changes no weight."""
         if low in wiktionary:
             return 'wiktionary'
         if low in tatoeba:
@@ -273,6 +272,10 @@ def main():
             return 'vikipedia'
         if low in apertium:
             return 'apertium'
+        if low in conjugation_forms:
+            return 'cunghjugarellu'
+        if low in adecec:
+            return 'adecec'
         return None
 
     def natural_case(low):
