@@ -1,0 +1,25 @@
+lot	distinct_entries	examined	remaining	note
+26.3 options	350	350	0	all distinct (English, Corsican) pairs read
+26.3 controls (key.*)	297	297	0	
+26.3 interface (menus, chat, multiplayer, worlds, reports, friends…)	1181	1181	0	
+26.3 narration	54	54	0	
+26.3 subtitles	950	950	0	sound verbs: speaker questions kept from decisions.md Q20–Q26
+26.3 death messages	104	104	0	
+26.3 advancements	258	258	0	titles are free adaptations; only grammar and consistency checked
+26.3 game rules	116	116	0	
+26.3 statistics	91	91	0	
+26.3 attributes	47	47	0	
+26.3 effects	50	50	0	
+26.3 enchantments	53	53	0	names reviewed in review-batches/03; only checked here
+26.3 telemetry	70	70	0	
+26.3 debug screen	63	63	0	
+26.3 game tests	86	86	0	
+26.3 commands	804	804	0	
+26.3 Realms	398	398	0	legal/billing texts (decisions-2 D15) not re-read for legal meaning
+26.3 UI texts inside noun categories (bed messages, tooltips, item modifiers, smithing templates)	195	195	0	music/painting credits only checked for markup
+history.json new+adapted, UI (pre-26.3 English)	644	644	0	
+history.json new+adapted, Realms	150	150	0	
+history.json new+adapted, commands/arguments	628	628	0	about 10 long usage lines read only to 250 characters
+history.json renamed+reused	2262	0 (pattern scan only)	2262	reuse 26.3 decisions; scanned for the faulty forms listed in language.md
+history.json new+adapted, nouns (tile/item/entity/biome/potion names)	~250	0	~250	left to the concrete-nouns agent
+26.3 nouns (blocks, items, creatures, biomes, paintings, trims, music titles)	—	0	—	out of scope (concrete.tsv)

@@ -417,7 +417,7 @@
  },
  "achievement.onARail": {
   "945a0fe42f1d": {
-   "co": "Nant'à i binarii",
+   "co": "Nant'à e raglie",
    "kind": "new",
    "from": null,
    "review": "ai"
@@ -425,7 +425,7 @@
  },
  "achievement.onARail.desc": {
   "ee6e91ec2be5": {
-   "co": "Viaghjate in carrettu almenu 1 km da u vostru puntu di partenza",
+   "co": "Viaghjate in vagunettu almenu 1 km da u vostru puntu di partenza",
    "kind": "new",
    "from": null,
    "review": "ai"
@@ -814,7 +814,7 @@
  },
  "advancements.adventure.trim_with_any_armor_pattern.description": {
   "a1cf89c53770": {
-   "co": "Fabbricate un'armatura rifinita nant'à un bancu di ferraghju",
+   "co": "Fabbricate un'armatura rifinita nant'à un bancu di stazzunaru",
    "kind": "reused",
    "from": "advancements.adventure.trim_with_any_armor_pattern.description",
    "review": "ai"
@@ -924,13 +924,13 @@
  },
  "advancements.husbandry.make_a_sign_glow.description": {
   "00e3d13c49d0": {
-   "co": "Fate brillà u testu d'un cartellu",
+   "co": "Fate brillà u testu d'una cartella",
    "kind": "adapted",
    "from": "advancements.husbandry.make_a_sign_glow.description",
    "review": "ai"
   },
   "619fa27f50e5": {
-   "co": "Fate brillà u testu d'un cartellu",
+   "co": "Fate brillà u testu d'una cartella",
    "kind": "adapted",
    "from": "advancements.husbandry.make_a_sign_glow.description",
    "review": "ai"
@@ -1592,7 +1592,7 @@
  },
  "biome.minecraft.birch_forest_hills": {
   "b2e8eca5c912": {
-   "co": "Culline di furesta di betule",
+   "co": "Culline di furesta di bioli",
    "kind": "new",
    "from": null,
    "review": "ai"
@@ -1664,7 +1664,7 @@
  },
  "biome.minecraft.gravelly_mountains": {
   "db5a252b9bec": {
-   "co": "Muntagne di ghjàira",
+   "co": "Muntagne di gravetta",
    "kind": "new",
    "from": null,
    "review": "ai"
@@ -1696,7 +1696,7 @@
  },
  "biome.minecraft.modified_gravelly_mountains": {
   "f4f08b98d51e": {
-   "co": "Muntagne di ghjàira+",
+   "co": "Muntagne di gravetta+",
    "kind": "new",
    "from": null,
    "review": "ai"
@@ -1841,7 +1841,7 @@
  },
  "biome.minecraft.tall_birch_forest": {
   "1020ae52ff72": {
-   "co": "Furesta di betule alte",
+   "co": "Furesta di bioli alti",
    "kind": "new",
    "from": null,
    "review": "ai"
@@ -1849,7 +1849,7 @@
  },
  "biome.minecraft.tall_birch_hills": {
   "aebf35d9ca76": {
-   "co": "Culline di betule alte",
+   "co": "Culline di bioli alti",
    "kind": "new",
    "from": null,
    "review": "ai"
@@ -1961,7 +1961,7 @@
  },
  "block.minecraft.lapis_block": {
   "7b2b5362f7d7": {
-   "co": "Bloccu di lapislazuli",
+   "co": "Bloccu di lapislazzuli",
    "kind": "reused",
    "from": "block.minecraft.lapis_block",
    "review": "ai"
@@ -1978,7 +1978,7 @@
  },
  "block.minecraft.sign": {
   "8b3d8d665a76": {
-   "co": "Cartellu",
+   "co": "Cartella",
    "kind": "renamed",
    "from": "item.minecraft.sign",
    "review": "ai"
@@ -2026,7 +2026,7 @@
  },
  "block.minecraft.wall_sign": {
   "2693b036904a": {
-   "co": "Cartellu murale",
+   "co": "Cartella murale",
    "kind": "new",
    "from": null,
    "review": "ai"
@@ -2309,7 +2309,7 @@
  },
  "commands.achievement.alreadyHave": {
   "4049ad6b2dbf": {
-   "co": "U ghjucadore %s hà digià u successu %s",
+   "co": "U ghjucadore %s hà dighjà u successu %s",
    "kind": "new",
    "from": null,
    "review": "ai"
@@ -2430,7 +2430,7 @@
  },
  "commands.advancement.grant.criterion.failed": {
   "577e5c246055": {
-   "co": "Impussibule d'accurdà u criteriu '%3$s' di u prugressu '%1$s' à %2$s chì l'hà digià",
+   "co": "Impussibule d'accurdà u criteriu '%3$s' di u prugressu '%1$s' à %2$s chì l'hà dighjà",
    "kind": "new",
    "from": null,
    "review": "ai"
@@ -2446,7 +2446,7 @@
  },
  "commands.advancement.grant.everything.failed": {
   "46ccadc7c796": {
-   "co": "Impussibule d'accurdà prugressi à %1$s chì li hà digià tutti",
+   "co": "Impussibule d'accurdà prugressi à %1$s chì li hà dighjà tutti",
    "kind": "new",
    "from": null,
    "review": "ai"
@@ -2471,7 +2471,7 @@
  },
  "commands.advancement.grant.from.failed": {
   "6933028317b4": {
-   "co": "Impussibule d'accurdà u prugressu '%1$s' o i so discendenti à %2$s chì li hà digià tutti",
+   "co": "Impussibule d'accurdà u prugressu '%1$s' o i so discendenti à %2$s chì li hà dighjà tutti",
    "kind": "new",
    "from": null,
    "review": "ai"
@@ -2496,7 +2496,7 @@
  },
  "commands.advancement.grant.only.failed": {
   "7864c2a3d339": {
-   "co": "Impussibule d'accurdà u prugressu '%1$s' à %2$s chì l'hà digià",
+   "co": "Impussibule d'accurdà u prugressu '%1$s' à %2$s chì l'hà dighjà",
    "kind": "new",
    "from": null,
    "review": "ai"
@@ -2521,7 +2521,7 @@
  },
  "commands.advancement.grant.through.failed": {
   "6dbd51af6522": {
-   "co": "Impussibule d'accurdà u prugressu '%1$s', i so antenati o i so discendenti à %2$s chì li hà digià tutti",
+   "co": "Impussibule d'accurdà u prugressu '%1$s', i so antenati o i so discendenti à %2$s chì li hà dighjà tutti",
    "kind": "new",
    "from": null,
    "review": "ai"
@@ -2546,7 +2546,7 @@
  },
  "commands.advancement.grant.until.failed": {
   "28a0a27c87b7": {
-   "co": "Impussibule d'accurdà u prugressu '%1$s' o i so antenati à %2$s chì li hà digià tutti",
+   "co": "Impussibule d'accurdà u prugressu '%1$s' o i so antenati à %2$s chì li hà dighjà tutti",
    "kind": "new",
    "from": null,
    "review": "ai"
@@ -2820,7 +2820,7 @@
  },
  "commands.ban.failed": {
   "3615e57a8c3e": {
-   "co": "Impussibule d'escludere u ghjucadore %s",
+   "co": "Impussibule d'esclude u ghjucadore %s",
    "kind": "adapted",
    "from": "commands.ban.failed",
    "review": "ai"
@@ -3010,7 +3010,7 @@
  },
  "commands.bossbar.set.max.unchanged": {
   "a0baf848f275": {
-   "co": "Nisun cambiamentu. Hè digià u massimu di sta barra di boss",
+   "co": "Nisun cambiamentu. Hè dighjà u massimu di sta barra di boss",
    "kind": "reused",
    "from": "commands.bossbar.set.max.unchanged",
    "review": "ai"
@@ -3224,7 +3224,7 @@
    "note": "command syntax: names of arguments translated, keywords kept"
   },
   "d10dc3fd0abc": {
-   "co": "/clear [ghjucadore] [ogettu] [dati] [numeru mass] [etichetta di dati]",
+   "co": "/clear [ghjucadore] [ogettu] [dati] [numeru massimu] [etichetta di dati]",
    "kind": "new",
    "from": null,
    "review": "ai",
@@ -3368,7 +3368,7 @@
  },
  "commands.data.merge.failed": {
   "a3b53b51e394": {
-   "co": "Nisun cambiamentu. E pruprietà specificate anu digià sti valori",
+   "co": "Nisun cambiamentu. E pruprietà specificate anu dighjà sti valori",
    "kind": "reused",
    "from": "commands.data.merge.failed",
    "review": "ai",
@@ -3442,7 +3442,7 @@
  },
  "commands.debug.alreadyRunning": {
   "86dbcdad1719": {
-   "co": "L'analizatore di spannatura hè digià in corsu",
+   "co": "L'analizatore di spannatura hè dighjà in corsu",
    "kind": "adapted",
    "from": "commands.debug.alreadyRunning",
    "review": "ai"
@@ -3887,7 +3887,7 @@
  },
  "commands.fill.failed": {
   "b478b00c47b6": {
-   "co": "Nisunu bloccu riempiutu",
+   "co": "Nisunu bloccu empiutu",
    "kind": "adapted",
    "from": "commands.fill.failed",
    "review": "ai"
@@ -3903,19 +3903,19 @@
  },
  "commands.fill.success": {
   "4fdac4a229bc": {
-   "co": "Blocchi riempiuti : %s",
+   "co": "Blocchi empiuti : %s",
    "kind": "reused",
    "from": "commands.fill.success",
    "review": "ai"
   },
   "b9172448560c": {
-   "co": "Blocchi riempiuti : %s",
+   "co": "Blocchi empiuti : %s",
    "kind": "reused",
    "from": "commands.fill.success",
    "review": "ai"
   },
   "c75da8bfc26f": {
-   "co": "Blocchi riempiuti : %d",
+   "co": "Blocchi empiuti : %d",
    "kind": "adapted",
    "from": "commands.fill.success",
    "review": "ai"
@@ -4646,7 +4646,7 @@
  },
  "commands.op.failed": {
   "108d5c1d987e": {
-   "co": "Nisun cambiamentu. Stu ghjucadore hè digià operatore",
+   "co": "Nisun cambiamentu. Stu ghjucadore hè dighjà operatore",
    "kind": "reused",
    "from": "commands.op.failed",
    "review": "ai"
@@ -4723,7 +4723,7 @@
  },
  "commands.perf.started": {
   "900615034535": {
-   "co": "Analisi di prestazioni di 10 seconde principiata (impiegate '/perf stop' per piantà prima)",
+   "co": "Analisi di perfurmenze di 10 seconde principiata (impiegate '/perf stop' per piantà prima)",
    "kind": "reused",
    "from": "commands.perf.started",
    "review": "ai"
@@ -4731,7 +4731,7 @@
  },
  "commands.perf.stopped": {
   "9b41339f5fff": {
-   "co": "Analisi di prestazioni piantata dopu à %s s è %s tick (%s tick/s)",
+   "co": "Analisi di perfurmenze piantata dopu à %s s è %s tick (%s tick/s)",
    "kind": "reused",
    "from": "commands.perf.stopped",
    "review": "ai"
@@ -4877,7 +4877,7 @@
  },
  "commands.recipe.alreadyHave": {
   "8d9802d82d3f": {
-   "co": "U ghjucadore %s hà digià a ricetta di %s",
+   "co": "U ghjucadore %s hà dighjà a ricetta di %s",
    "kind": "new",
    "from": null,
    "review": "ai"
@@ -5007,7 +5007,7 @@
  },
  "commands.replaceitem.block.failed": {
   "3dfac1da297b": {
-   "co": "U bloccu di destinazione ùn hè micca un cuntenitore",
+   "co": "U bloccu di destinazione ùn hè micca un cuntenidore",
    "kind": "new",
    "from": null,
    "review": "ai"
@@ -5132,13 +5132,13 @@
  },
  "commands.save-off.alreadyOff": {
   "0f41689e1862": {
-   "co": "L'arregistramentu hè digià disattivatu",
+   "co": "L'arregistramentu hè dighjà disattivatu",
    "kind": "renamed",
    "from": "commands.save.alreadyOff",
    "review": "ai"
   },
   "37cd377789bc": {
-   "co": "L'arregistramentu hè digià disattivatu.",
+   "co": "L'arregistramentu hè dighjà disattivatu.",
    "kind": "new",
    "from": null,
    "review": "ai"
@@ -5155,13 +5155,13 @@
  },
  "commands.save-on.alreadyOn": {
   "750d35fbb19c": {
-   "co": "L'arregistramentu hè digià attivatu.",
+   "co": "L'arregistramentu hè dighjà attivatu.",
    "kind": "new",
    "from": null,
    "review": "ai"
   },
   "bb7412ea185d": {
-   "co": "L'arregistramentu hè digià attivatu",
+   "co": "L'arregistramentu hè dighjà attivatu",
    "kind": "renamed",
    "from": "commands.save.alreadyOn",
    "review": "ai"
@@ -5202,7 +5202,7 @@
  },
  "commands.save.flushEnd": {
   "c894c5bd6700": {
-   "co": "Scrittura compiuta",
+   "co": "Scrittura compia",
    "kind": "new",
    "from": null,
    "review": "ai"
@@ -5331,7 +5331,7 @@
  },
  "commands.scoreboard.objectives.add.alreadyExists": {
   "44e7730808eb": {
-   "co": "Un ughjettivu chjamatu '%s' esiste digià",
+   "co": "Un ughjettivu chjamatu '%s' esiste dighjà",
    "kind": "new",
    "from": null,
    "review": "ai"
@@ -5969,7 +5969,7 @@
  },
  "commands.scoreboard.teams.add.alreadyExists": {
   "d7c1e6bc46cf": {
-   "co": "Una squadra chjamata '%s' esiste digià",
+   "co": "Una squadra chjamata '%s' esiste dighjà",
    "kind": "new",
    "from": null,
    "review": "ai"
@@ -6022,7 +6022,7 @@
  },
  "commands.scoreboard.teams.empty.alreadyEmpty": {
   "081ca078480b": {
-   "co": "A squadra %s hè digià viota : impussibule di caccià ghjucadori chì ùn ci sò micca",
+   "co": "A squadra %s hè dighjà viota : impussibule di caccià ghjucadori chì ùn ci sò micca",
    "kind": "new",
    "from": null,
    "review": "ai"
@@ -6446,7 +6446,7 @@
  },
  "commands.setworldspawn.failure.not_overworld": {
   "cd4fa8facdfb": {
-   "co": "U puntu di nascita di u mondu si pò definisce solu in u Mondu di sopra",
+   "co": "U puntu d'apparizione di u mondu si pò definisce solu in u Mondu di sopra",
    "kind": "reused",
    "from": "commands.setworldspawn.failure.not_overworld",
    "review": "ai"
@@ -6454,19 +6454,19 @@
  },
  "commands.setworldspawn.success": {
   "5810ae4d4d98": {
-   "co": "Puntu di nascita di u mondu definitu à %s, %s, %s",
+   "co": "Puntu d'apparizione di u mondu definitu à %s, %s, %s",
    "kind": "adapted",
    "from": "commands.setworldspawn.success",
    "review": "ai"
   },
   "5f9809be21b5": {
-   "co": "Puntu di nascita di u mondu definitu à (%s, %s, %s)",
+   "co": "Puntu d'apparizione di u mondu definitu à (%s, %s, %s)",
    "kind": "adapted",
    "from": "commands.setworldspawn.success",
    "review": "ai"
   },
   "d20918d6c72d": {
-   "co": "Puntu di nascita di u mondu definitu à (%d, %d, %d)",
+   "co": "Puntu d'apparizione di u mondu definitu à (%d, %d, %d)",
    "kind": "adapted",
    "from": "commands.setworldspawn.success",
    "review": "ai"
@@ -6734,7 +6734,7 @@
  },
  "commands.spreadplayers.usage": {
   "1cd823b1d469": {
-   "co": "/spreadplayers <x> <z> <distanza di sparghjera> <portata mass> <rispettà e squadre true|false> <ghjucadore ...>",
+   "co": "/spreadplayers <x> <z> <distanza di sparghjera> <portata massima> <rispettà e squadre true|false> <ghjucadore ...>",
    "kind": "new",
    "from": null,
    "review": "ai",
@@ -8026,7 +8026,7 @@
  },
  "container.enchant.lapis.many": {
   "5645dc81d7ab": {
-   "co": "%d lapislazuli",
+   "co": "%d lapislazzuli",
    "kind": "adapted",
    "from": "container.enchant.lapis.many",
    "review": "ai"
@@ -8051,7 +8051,7 @@
  },
  "container.minecart": {
   "fd729ddf2750": {
-   "co": "Carrettu",
+   "co": "Vagunettu",
    "kind": "renamed",
    "from": "item.minecraft.minecart",
    "review": "ai",
@@ -8060,7 +8060,7 @@
  },
  "container.minecart.chest": {
   "a436e80133c3": {
-   "co": "Carrettu cù cascia",
+   "co": "Vagunettu cù cascia",
    "kind": "new",
    "from": null,
    "review": "ai"
@@ -8068,7 +8068,7 @@
  },
  "container.minecart.hopper": {
   "323767a31a59": {
-   "co": "Carrettu cù tramoghja",
+   "co": "Vagunettu cù trimoghja",
    "kind": "new",
    "from": null,
    "review": "ai"
@@ -8108,7 +8108,7 @@
  },
  "createWorld.customize.buffet.generator": {
   "719b3a92446e": {
-   "co": "Sceglite un tipu di generatore",
+   "co": "Sciglite un tipu di generatore",
    "kind": "new",
    "from": null,
    "review": "ai"
@@ -8343,7 +8343,7 @@
    "review": "ai"
   },
   "32b206768a1e": {
-   "co": "Altezza mass.",
+   "co": "Altezza massima",
    "kind": "new",
    "from": null,
    "review": "ai"
@@ -8351,7 +8351,7 @@
  },
  "createWorld.customize.custom.minHeight": {
   "1394c154bf08": {
-   "co": "Altezza min.",
+   "co": "Altezza minima",
    "kind": "new",
    "from": null,
    "review": "ai"
@@ -8845,7 +8845,7 @@
  },
  "death.attack.anvil.player": {
   "9c67b0ff72f9": {
-   "co": "Un'ancùdina chì cascava hà sciacciatu à %1$s mentre luttava contr'à %2$s",
+   "co": "Un'incudine chì cascava hà sciacciatu à %1$s mentre luttava contr'à %2$s",
    "kind": "reused",
    "from": "death.attack.anvil.player",
    "review": "ai"
@@ -8949,7 +8949,7 @@
  },
  "death.attack.hotFloor.player": {
   "26a1efe161f8": {
-   "co": "%2$s hà spintu à %1$s in a zona periculosa",
+   "co": "%1$s hè intrutu in a zona periculosa per via di %2$s",
    "kind": "reused",
    "from": "death.attack.hotFloor.player",
    "review": "ai"
@@ -9099,7 +9099,7 @@
  },
  "death.attack.wither.player": {
   "1785437f1d82": {
-   "co": "U Wither hà cunsumatu à %1$s mentre luttava contr'à %2$s",
+   "co": "L'effettu Wither hà cunsumatu à %1$s mentre luttava contr'à %2$s",
    "kind": "reused",
    "from": "death.attack.wither.player",
    "review": "ai"
@@ -9345,7 +9345,7 @@
  },
  "disconnect.disconnected": {
   "b2d9f523c6cd": {
-   "co": "Scunnettatu da u servitore",
+   "co": "Discunnettu da u servitore",
    "kind": "new",
    "from": null,
    "review": "ai"
@@ -10158,7 +10158,7 @@
  },
  "entity.Minecart.name": {
   "fd729ddf2750": {
-   "co": "Carrettu",
+   "co": "Vagunettu",
    "kind": "renamed",
    "from": "entity.minecraft.minecart",
    "review": "ai"
@@ -10166,7 +10166,7 @@
  },
  "entity.MinecartChest.name": {
   "970b387b5f73": {
-   "co": "Carrettu cù cascia",
+   "co": "Vagunettu cù cascia",
    "kind": "renamed",
    "from": "entity.minecraft.chest_minecart",
    "review": "ai"
@@ -10174,7 +10174,7 @@
  },
  "entity.MinecartHopper.name": {
   "d0cdabed9a86": {
-   "co": "Carrettu cù tramoghja",
+   "co": "Vagunettu cù trimoghja",
    "kind": "renamed",
    "from": "entity.minecraft.hopper_minecart",
    "review": "ai"
@@ -10359,7 +10359,7 @@
  },
  "entity.Squid.name": {
   "44eb68d7f8fb": {
-   "co": "Calamaru",
+   "co": "Totanu",
    "kind": "renamed",
    "from": "entity.minecraft.squid",
    "review": "ai"
@@ -10447,7 +10447,7 @@
  },
  "entity.Villager.leather": {
   "3a4e2e4709ce": {
-   "co": "Cuiaghju",
+   "co": "Cunciadore",
    "kind": "renamed",
    "from": "entity.minecraft.villager.leatherworker",
    "review": "ai"
@@ -10487,7 +10487,7 @@
  },
  "entity.Villager.tool": {
   "52c2a997b032": {
-   "co": "Ferraghju d'attrezzi",
+   "co": "Stazzunaru d'attrezzi",
    "kind": "adapted",
    "from": "entity.minecraft.villager.toolsmith",
    "review": "ai",
@@ -10610,7 +10610,7 @@
  },
  "entity.minecraft.spawner_minecart": {
   "4d0d4e108809": {
-   "co": "Carrettu cù generatore",
+   "co": "Vagunettu cù generatore",
    "kind": "adapted",
    "from": "entity.minecraft.spawner_minecart",
    "review": "ai"
@@ -10627,7 +10627,7 @@
  },
  "entity.minecraft.villager.tool_smith": {
   "52c2a997b032": {
-   "co": "Ferraghju d'attrezzi",
+   "co": "Stazzunaru d'attrezzi",
    "kind": "adapted",
    "from": "entity.minecraft.villager.toolsmith",
    "review": "ai",
@@ -10771,7 +10771,7 @@
  },
  "gamerule.doEntityDrops.description": {
   "31def2c11127": {
-   "co": "Decide ciò chì lascianu i carretti (cumpresu u so inventariu), e curnice, e barche, ecc.",
+   "co": "Decide ciò chì lascianu i vagunetti (cumpresu u so inventariu), e curnice, e barche, ecc.",
    "kind": "reused",
    "from": "gamerule.doEntityDrops.description",
    "review": "ai",
@@ -16857,7 +16857,7 @@
  },
  "item.boat.birch.name": {
   "d61579421387": {
-   "co": "Barca di betula",
+   "co": "Barca di biolu",
    "kind": "renamed",
    "from": "item.minecraft.birch_boat",
    "review": "ai"
@@ -16865,7 +16865,7 @@
  },
  "item.boat.dark_oak.name": {
   "aa3e02b11b23": {
-   "co": "Barca di quercia scura",
+   "co": "Barca di querciu scuru",
    "kind": "renamed",
    "from": "item.minecraft.dark_oak_boat",
    "review": "ai"
@@ -16890,7 +16890,7 @@
  },
  "item.boat.oak.name": {
   "b8699f0c4564": {
-   "co": "Barca di quercia",
+   "co": "Barca di querciu",
    "kind": "renamed",
    "from": "item.minecraft.oak_boat",
    "review": "ai"
@@ -16898,7 +16898,7 @@
  },
  "item.boat.spruce.name": {
   "97a53e5a87c4": {
-   "co": "Barca d'abete",
+   "co": "Barca d'abetu",
    "kind": "renamed",
    "from": "item.minecraft.spruce_boat",
    "review": "ai"
@@ -16995,7 +16995,7 @@
  },
  "item.brick.name": {
   "26abf7a42caa": {
-   "co": "Matone",
+   "co": "Mattone",
    "kind": "renamed",
    "from": "item.minecraft.brick",
    "review": "ai"
@@ -17027,7 +17027,7 @@
  },
  "item.cake.name": {
   "9c6e5a3f44fc": {
-   "co": "Torta",
+   "co": "Pastadolce",
    "kind": "renamed",
    "from": "block.minecraft.cake",
    "review": "ai"
@@ -17148,7 +17148,7 @@
  },
  "item.clay.name": {
   "e00d5664a78e": {
-   "co": "Creta",
+   "co": "Arzilla",
    "kind": "renamed",
    "from": "block.minecraft.clay",
    "review": "ai"
@@ -17156,7 +17156,7 @@
  },
  "item.clock.name": {
   "04f6b3ea183e": {
-   "co": "Orologhju",
+   "co": "Orillogiu",
    "kind": "renamed",
    "from": "item.minecraft.clock",
    "review": "ai"
@@ -17220,7 +17220,7 @@
  },
  "item.doorBirch.name": {
   "b2c83959bd4d": {
-   "co": "Porta di betula",
+   "co": "Porta di biolu",
    "kind": "renamed",
    "from": "block.minecraft.birch_door",
    "review": "ai"
@@ -17228,7 +17228,7 @@
  },
  "item.doorDarkOak.name": {
   "0c0eb8afe5d0": {
-   "co": "Porta di quercia scura",
+   "co": "Porta di querciu scuru",
    "kind": "renamed",
    "from": "block.minecraft.dark_oak_door",
    "review": "ai"
@@ -17252,7 +17252,7 @@
  },
  "item.doorOak.name": {
   "ea22be6c2d82": {
-   "co": "Porta di quercia",
+   "co": "Porta di querciu",
    "kind": "renamed",
    "from": "block.minecraft.oak_door",
    "review": "ai"
@@ -17260,7 +17260,7 @@
  },
  "item.doorSpruce.name": {
   "1f38162239bc": {
-   "co": "Porta d'abete",
+   "co": "Porta d'abetu",
    "kind": "renamed",
    "from": "block.minecraft.spruce_door",
    "review": "ai"
@@ -17292,7 +17292,7 @@
  },
  "item.dyePowder.blue.name": {
   "681b24920e79": {
-   "co": "Lapislazuli",
+   "co": "Lapislazzuli",
    "kind": "renamed",
    "from": "item.minecraft.lapis_lazuli",
    "review": "ai"
@@ -17300,7 +17300,7 @@
  },
  "item.dyePowder.brown.name": {
   "de43ab9917f3": {
-   "co": "Fave di cacau",
+   "co": "Fave di caccaò",
    "kind": "renamed",
    "from": "item.minecraft.cocoa_beans",
    "review": "ai"
@@ -17308,7 +17308,7 @@
  },
  "item.dyePowder.cyan.name": {
   "7cd7e10b6688": {
-   "co": "Tintura ciana",
+   "co": "Tinta ciana",
    "kind": "renamed",
    "from": "item.minecraft.cyan_dye",
    "review": "ai"
@@ -17316,7 +17316,7 @@
  },
  "item.dyePowder.gray.name": {
   "23901ac6deb1": {
-   "co": "Tintura grisgia",
+   "co": "Tinta grisgia",
    "kind": "renamed",
    "from": "item.minecraft.gray_dye",
    "review": "ai"
@@ -17332,7 +17332,7 @@
  },
  "item.dyePowder.lightBlue.name": {
   "ee7b2e4b76f5": {
-   "co": "Tintura celeste",
+   "co": "Tinta celeste",
    "kind": "renamed",
    "from": "item.minecraft.light_blue_dye",
    "review": "ai"
@@ -17340,7 +17340,7 @@
  },
  "item.dyePowder.lime.name": {
   "09b94b3df2a2": {
-   "co": "Tintura verde limone",
+   "co": "Tinta verde limone",
    "kind": "renamed",
    "from": "item.minecraft.lime_dye",
    "review": "ai"
@@ -17348,7 +17348,7 @@
  },
  "item.dyePowder.magenta.name": {
   "dbfe1ccc2409": {
-   "co": "Tintura magenta",
+   "co": "Tinta magenta",
    "kind": "renamed",
    "from": "item.minecraft.magenta_dye",
    "review": "ai"
@@ -17356,7 +17356,7 @@
  },
  "item.dyePowder.orange.name": {
   "7a0d6c7be93d": {
-   "co": "Tintura arancia",
+   "co": "Tinta arancia",
    "kind": "renamed",
    "from": "item.minecraft.orange_dye",
    "review": "ai"
@@ -17364,7 +17364,7 @@
  },
  "item.dyePowder.pink.name": {
   "cde0bf458f6a": {
-   "co": "Tintura rusulina",
+   "co": "Tinta rusulina",
    "kind": "renamed",
    "from": "item.minecraft.pink_dye",
    "review": "ai"
@@ -17372,7 +17372,7 @@
  },
  "item.dyePowder.purple.name": {
   "d85088ec5399": {
-   "co": "Tintura purpurina",
+   "co": "Tinta purpurina",
    "kind": "renamed",
    "from": "item.minecraft.purple_dye",
    "review": "ai"
@@ -17388,7 +17388,7 @@
  },
  "item.dyePowder.silver.name": {
   "4307a4ac563b": {
-   "co": "Tintura grisgia chjara",
+   "co": "Tinta grisgia chjara",
    "kind": "renamed",
    "from": "item.minecraft.light_gray_dye",
    "review": "ai"
@@ -17404,7 +17404,7 @@
  },
  "item.dyePowder.yellow.name": {
   "8c4705130989": {
-   "co": "Ghjallu di pisciacane",
+   "co": "Ghjallu di radichju",
    "kind": "new",
    "from": null,
    "review": "ai"
@@ -18055,7 +18055,7 @@
  },
  "item.leash.name": {
   "c6f71d85aeaa": {
-   "co": "Ligaccia",
+   "co": "Catinetta",
    "kind": "renamed",
    "from": "item.minecraft.lead",
    "review": "ai"
@@ -18144,7 +18144,7 @@
  },
  "item.melon.name": {
   "26e65e893ae5": {
-   "co": "Pateca",
+   "co": "Patecca",
    "kind": "renamed",
    "from": "block.minecraft.melon",
    "review": "ai"
@@ -18160,7 +18160,7 @@
  },
  "item.minecart.name": {
   "fd729ddf2750": {
-   "co": "Carrettu",
+   "co": "Vagunettu",
    "kind": "renamed",
    "from": "item.minecraft.minecart",
    "review": "ai"
@@ -18168,7 +18168,7 @@
  },
  "item.minecartChest.name": {
   "970b387b5f73": {
-   "co": "Carrettu cù cascia",
+   "co": "Vagunettu cù cascia",
    "kind": "renamed",
    "from": "item.minecraft.chest_minecart",
    "review": "ai"
@@ -18176,7 +18176,7 @@
  },
  "item.minecartCommandBlock.name": {
   "f9ddb92ab637": {
-   "co": "Carrettu cù bloccu di cumanda",
+   "co": "Vagunettu cù bloccu di cumanda",
    "kind": "renamed",
    "from": "item.minecraft.command_block_minecart",
    "review": "ai"
@@ -18184,7 +18184,7 @@
  },
  "item.minecartFurnace.name": {
   "d905ae8f61ff": {
-   "co": "Carrettu cù fornu",
+   "co": "Vagunettu cù fornu",
    "kind": "renamed",
    "from": "item.minecraft.furnace_minecart",
    "review": "ai"
@@ -18192,7 +18192,7 @@
  },
  "item.minecartHopper.name": {
   "d0cdabed9a86": {
-   "co": "Carrettu cù tramoghja",
+   "co": "Vagunettu cù trimoghja",
    "kind": "renamed",
    "from": "item.minecraft.hopper_minecart",
    "review": "ai"
@@ -18200,7 +18200,7 @@
  },
  "item.minecartTnt.name": {
   "4b73f82d414a": {
-   "co": "Carrettu cù TNT",
+   "co": "Vagunettu cù TNT",
    "kind": "renamed",
    "from": "item.minecraft.tnt_minecart",
    "review": "ai"
@@ -18216,7 +18216,7 @@
  },
  "item.minecraft.clay_ball": {
   "e00d5664a78e": {
-   "co": "Creta",
+   "co": "Arzilla",
    "kind": "adapted",
    "from": "item.minecraft.clay_ball",
    "review": "ai"
@@ -18232,7 +18232,7 @@
  },
  "item.minecraft.dandelion_yellow": {
   "8c4705130989": {
-   "co": "Ghjallu di pisciacane",
+   "co": "Ghjallu di radichju",
    "kind": "new",
    "from": null,
    "review": "ai"
@@ -18446,7 +18446,7 @@
  },
  "item.netherbrick.name": {
   "3b942d118517": {
-   "co": "Matone di u Nether",
+   "co": "Mattone di u Nether",
    "kind": "renamed",
    "from": "item.minecraft.nether_brick",
    "review": "ai"
@@ -18527,7 +18527,7 @@
  },
  "item.porkchopCooked.name": {
   "9b45ee3e1afe": {
-   "co": "Custuletta di porcu cotta",
+   "co": "Custelletta di porcu cotta",
    "kind": "renamed",
    "from": "item.minecraft.cooked_porkchop",
    "review": "ai"
@@ -18535,7 +18535,7 @@
  },
  "item.porkchopRaw.name": {
   "0b4e2d752fce": {
-   "co": "Custuletta di porcu cruda",
+   "co": "Custelletta di porcu cruda",
    "kind": "renamed",
    "from": "item.minecraft.porkchop",
    "review": "ai"
@@ -18792,7 +18792,7 @@
  },
  "item.seeds_melon.name": {
   "f3deab7971e5": {
-   "co": "Sumente di pateca",
+   "co": "Sumente di patecca",
    "kind": "renamed",
    "from": "item.minecraft.melon_seeds",
    "review": "ai"
@@ -19000,7 +19000,7 @@
  },
  "item.sign.name": {
   "8b3d8d665a76": {
-   "co": "Cartellu",
+   "co": "Cartella",
    "kind": "renamed",
    "from": "item.minecraft.sign",
    "review": "ai"
@@ -19080,7 +19080,7 @@
  },
  "item.speckledMelon.name": {
   "29069a5bcd75": {
-   "co": "Pateca luccicante",
+   "co": "Patecca luccicante",
    "kind": "new",
    "from": null,
    "review": "ai"
@@ -19373,7 +19373,7 @@
    "review": "ai"
   },
   "b52b36b7269f": {
-   "co": "Ritornu",
+   "co": "In daretu",
    "kind": "adapted",
    "from": "key.back",
    "review": "ai"
@@ -20163,7 +20163,7 @@
  },
  "mco.configure.world.buttons.op": {
   "1e5c03c4ca5d": {
-   "co": "Operatore",
+   "co": "Fà operatore",
    "kind": "new",
    "from": null,
    "review": "ai"
@@ -20254,7 +20254,7 @@
    "review": "ai"
   },
   "8a55f7ad56ac": {
-   "co": "Pudete chjode u vostru Realm per un pezzu, ciò chì impedisce di ghjucà ci mentre chì voi fate cambiamenti. Apritelu torna quandu site pronti.\n\nQuessu ùn annulleghja micca u vostru abbunamentu Realms.",
+   "co": "Pudete chjode u vostru Realm per un pezzu, ciò chì impedisce di ghjucà ci mentre chì voi fate cambiamenti. Apritelu torna quandu site prontu.\n\nQuessu ùn annulleghja micca u vostru abbunamentu Realms.",
    "kind": "reused",
    "from": "mco.configure.world.close.question.line1",
    "review": "ai",
@@ -20269,13 +20269,13 @@
  },
  "mco.configure.world.close.question.line2": {
   "46171b1327b0": {
-   "co": "Site sicuri di vulè fà quessa ?",
+   "co": "Site sicuru di vulè fà quessa ?",
    "kind": "adapted",
    "from": "mco.configure.world.close.question.line2",
    "review": "ai"
   },
   "bfb850874b6d": {
-   "co": "Site sicuri di vulè fà quessa ?",
+   "co": "Site sicuru di vulè fà quessa ?",
    "kind": "adapted",
    "from": "mco.configure.world.close.question.line2",
    "review": "ai"
@@ -20324,7 +20324,7 @@
  },
  "mco.configure.world.delete.question.line2": {
   "bfb850874b6d": {
-   "co": "Site sicuri di vulè fà quessa ?",
+   "co": "Site sicuru di vulè fà quessa ?",
    "kind": "adapted",
    "from": "mco.configure.world.delete.question.line2",
    "review": "ai"
@@ -20406,26 +20406,26 @@
  },
  "mco.configure.world.leave.question.line1": {
   "2c13beebb8c3": {
-   "co": "S'è vo lasciate stu Realm, ùn u viderete più fin'à ch'è vo ùn site invitati torna",
+   "co": "S'è vo lasciate stu Realm, ùn u viderete più fin'à ch'è vo ùn site invitatu torna",
    "kind": "adapted",
    "from": "mco.configure.world.leave.question.line1",
    "review": "ai"
   },
   "7a55f9d7d23e": {
-   "co": "S'è vo lasciate stu Realm, ùn u viderete più fin'à ch'è vo site invitati torna",
+   "co": "S'è vo lasciate stu Realm, ùn u viderete più fin'à ch'è vo site invitatu torna",
    "kind": "reused",
    "from": "mco.configure.world.leave.question.line1",
    "review": "ai",
    "note": "English changed only in case or punctuation"
   },
   "b23f31eb836c": {
-   "co": "S'è vo lasciate stu Realm, ùn u viderete più fin'à ch'è vo ùn site invitati torna",
+   "co": "S'è vo lasciate stu Realm, ùn u viderete più fin'à ch'è vo ùn site invitatu torna",
    "kind": "adapted",
    "from": "mco.configure.world.leave.question.line1",
    "review": "ai"
   },
   "f3e44e9537cb": {
-   "co": "S'è vo lasciate stu Realm, ùn u viderete più fin'à ch'è vo site invitati torna",
+   "co": "S'è vo lasciate stu Realm, ùn u viderete più fin'à ch'è vo site invitatu torna",
    "kind": "reused",
    "from": "mco.configure.world.leave.question.line1",
    "review": "ai",
@@ -20434,13 +20434,13 @@
  },
  "mco.configure.world.leave.question.line2": {
   "46171b1327b0": {
-   "co": "Site sicuri di vulè fà quessa ?",
+   "co": "Site sicuru di vulè fà quessa ?",
    "kind": "adapted",
    "from": "mco.configure.world.leave.question.line2",
    "review": "ai"
   },
   "bfb850874b6d": {
-   "co": "Site sicuri di vulè fà quessa ?",
+   "co": "Site sicuru di vulè fà quessa ?",
    "kind": "adapted",
    "from": "mco.configure.world.leave.question.line2",
    "review": "ai"
@@ -20504,13 +20504,13 @@
  },
  "mco.configure.world.reset.question.line2": {
   "46171b1327b0": {
-   "co": "Site sicuri di vulè fà quessa ?",
+   "co": "Site sicuru di vulè fà quessa ?",
    "kind": "adapted",
    "from": "mco.configure.world.reset.question.line2",
    "review": "ai"
   },
   "bfb850874b6d": {
-   "co": "Site sicuri di vulè fà quessa ?",
+   "co": "Site sicuru di vulè fà quessa ?",
    "kind": "adapted",
    "from": "mco.configure.world.reset.question.line2",
    "review": "ai"
@@ -20556,7 +20556,7 @@
  },
  "mco.configure.world.restore.download.question.line1": {
   "23e8079ada34": {
-   "co": "Serete mandati à u vostru navigatore predefinitu per scaricà a carta di u vostru mondu.",
+   "co": "Serete mandatu à u vostru navigatore predefinitu per scaricà a carta di u vostru mondu.",
    "kind": "adapted",
    "from": "mco.configure.world.restore.download.question.line1",
    "review": "ai"
@@ -20590,13 +20590,13 @@
  },
  "mco.configure.world.restore.question.line2": {
   "46171b1327b0": {
-   "co": "Site sicuri di vulè fà quessa ?",
+   "co": "Site sicuru di vulè fà quessa ?",
    "kind": "adapted",
    "from": "mco.configure.world.restore.question.line2",
    "review": "ai"
   },
   "bfb850874b6d": {
-   "co": "Site sicuri di vulè fà quessa ?",
+   "co": "Site sicuru di vulè fà quessa ?",
    "kind": "adapted",
    "from": "mco.configure.world.restore.question.line2",
    "review": "ai"
@@ -20613,7 +20613,7 @@
  },
  "mco.configure.world.slot.switch.question.line2": {
   "bfb850874b6d": {
-   "co": "Site sicuri di vulè fà quessa ?",
+   "co": "Site sicuru di vulè fà quessa ?",
    "kind": "adapted",
    "from": "mco.configure.world.slot.switch.question.line2",
    "review": "ai"
@@ -20655,7 +20655,7 @@
  },
  "mco.configure.world.spawnProtection": {
   "1d2607aaceed": {
-   "co": "Prutezzione di u puntu di rinascita",
+   "co": "Prutezzione di u puntu d'apparizione",
    "kind": "reused",
    "from": "mco.configure.world.spawnProtection",
    "review": "ai",
@@ -21143,7 +21143,7 @@
  },
  "mco.minigame.world.restore.question.line2": {
   "bfb850874b6d": {
-   "co": "Site sicuri di vulè fà quessa ?",
+   "co": "Site sicuru di vulè fà quessa ?",
    "kind": "adapted",
    "from": "mco.minigame.world.restore.question.line2",
    "review": "ai"
@@ -21243,7 +21243,7 @@
  },
  "mco.more.info.question.line1": {
   "a2d4de45b40c": {
-   "co": "Serete mandati à u vostru navigatore predefinitu per vede a pagina.",
+   "co": "Serete mandatu à u vostru navigatore predefinitu per vede a pagina.",
    "kind": "new",
    "from": null,
    "review": "ai"
@@ -21986,7 +21986,7 @@
  },
  "multiplayer.disconnect.banned": {
   "4da7615730ec": {
-   "co": "Site esclusi da stu servitore.",
+   "co": "Site esclusu da stu servitore.",
    "kind": "adapted",
    "from": "multiplayer.disconnect.banned",
    "review": "ai",
@@ -22228,7 +22228,7 @@
  },
  "narration.slider.usage.focused": {
   "568bffba1937": {
-   "co": "Appughjate nant'à i tasti manca o diritta di a tastera per cambià u valore",
+   "co": "Appughjate nant'à e frecce manca o diritta di a tastera per cambià u valore",
    "kind": "reused",
    "from": "narration.slider.usage.focused",
    "review": "ai"
@@ -24863,7 +24863,7 @@
  },
  "selectWorld.import_worldgen_settings.deprecated.question": {
   "c8dc6f38f708": {
-   "co": "Certe funzioni impiegate sò obsulete è piantaranu di funziunà in u futuru. Vulete cuntinuà ?",
+   "co": "Certe funzioni impiegate sò obsulete è pianteranu di funziunà in u futuru. Vulete cuntinuà ?",
    "kind": "renamed",
    "from": "selectWorld.warning.deprecated.question",
    "review": "ai"
@@ -25047,7 +25047,7 @@
  },
  "sign.edit": {
   "8bd8fc0ef5e0": {
-   "co": "Mudificà u messaghju di u cartellu",
+   "co": "Mudificà u messaghju di a cartella",
    "kind": "reused",
    "from": "sign.edit",
    "review": "ai",
@@ -25332,7 +25332,7 @@
  },
  "stat.cakeSlicesEaten": {
   "7f6e73d406ba": {
-   "co": "Fette di torta manghjate",
+   "co": "Fette di pastadolce manghjate",
    "kind": "renamed",
    "from": "stat.minecraft.eat_cake_slice",
    "review": "ai"
@@ -25580,7 +25580,7 @@
  },
  "stat.hopperInspected": {
   "bbce03b463f8": {
-   "co": "Tramoghje frugate",
+   "co": "Trimoghje frugate",
    "kind": "renamed",
    "from": "stat.minecraft.inspect_hopper",
    "review": "ai"
@@ -25670,7 +25670,7 @@
  },
  "stat.minecartOneCm": {
   "1cd84e2710a4": {
-   "co": "Distanza in carrettu",
+   "co": "Distanza in vagunettu",
    "kind": "renamed",
    "from": "stat.minecraft.minecart_one_cm",
    "review": "ai"
@@ -26313,7 +26313,7 @@
  },
  "stream.userinfo.ban": {
   "bfa1bfbf6c1c": {
-   "co": "Escludere",
+   "co": "Esclude",
    "kind": "new",
    "from": null,
    "review": "ai"
@@ -26562,7 +26562,7 @@
  },
  "subtitles.block.iron_trapdoor.close": {
   "9547f49f46f8": {
-   "co": "Bodula s'apre",
+   "co": "Caterazza s'apre",
    "kind": "adapted",
    "from": "subtitles.block.iron_trapdoor.close",
    "review": "ai",
@@ -26571,7 +26571,7 @@
  },
  "subtitles.block.iron_trapdoor.open": {
   "62a5572485d8": {
-   "co": "Bodula si chjode",
+   "co": "Caterazza si chjode",
    "kind": "adapted",
    "from": "subtitles.block.iron_trapdoor.open",
    "review": "ai",
@@ -27078,13 +27078,13 @@
  },
  "subtitles.entity.leash_knot.break": {
   "74b6615a1b03": {
-   "co": "Nodu di ligaccia si rompe",
+   "co": "Nodu di catinetta si rompe",
    "kind": "adapted",
    "from": "subtitles.entity.leash_knot.break",
    "review": "ai"
   },
   "e08f52796daf": {
-   "co": "Nodu di ligaccia si rompe",
+   "co": "Nodu di catinetta si rompe",
    "kind": "adapted",
    "from": "subtitles.entity.leash_knot.break",
    "review": "ai"
@@ -27092,7 +27092,7 @@
  },
  "subtitles.entity.leash_knot.place": {
   "2b888cf1f619": {
-   "co": "Nodu di ligaccia attaccatu",
+   "co": "Nodu di catinetta attaccatu",
    "kind": "reused",
    "from": "subtitles.entity.leash_knot.place",
    "review": "ai",
@@ -27101,7 +27101,7 @@
  },
  "subtitles.entity.leashknot.break": {
   "74b6615a1b03": {
-   "co": "Nodu di ligaccia rottu",
+   "co": "Nodu di catinetta rottu",
    "kind": "adapted",
    "from": "subtitles.entity.leash_knot.break",
    "review": "ai",
@@ -27110,7 +27110,7 @@
  },
  "subtitles.entity.leashknot.place": {
   "2b888cf1f619": {
-   "co": "Nodu di ligaccia attaccatu",
+   "co": "Nodu di catinetta attaccatu",
    "kind": "adapted",
    "from": "subtitles.entity.leash_knot.place",
    "review": "ai",
@@ -27238,7 +27238,7 @@
  },
  "subtitles.entity.parrot.imitate.panda": {
   "f40bcf937aa3": {
-   "co": "Pappagallu ansima",
+   "co": "Pappagallu ansa",
    "kind": "new",
    "from": null,
    "review": "ai"
@@ -27478,7 +27478,7 @@
  },
  "subtitles.item.armor.equip": {
   "a502db3792f2": {
-   "co": "Equipagiu messu",
+   "co": "Equipaghju messu",
    "kind": "reused",
    "from": "subtitles.item.armor.equip",
    "review": "ai",
@@ -27510,7 +27510,7 @@
    "review": "ai"
   },
   "b95a663fe611": {
-   "co": "Accetta raspa",
+   "co": "Accetta raschja",
    "kind": "adapted",
    "from": "subtitles.item.axe.strip",
    "review": "ai"
@@ -27526,7 +27526,7 @@
  },
  "subtitles.item.brush.brush_sand_completed": {
   "c3726f3f89b3": {
-   "co": "Pinnellatura di rena compiuta",
+   "co": "Pinnellatura di rena compia",
    "kind": "new",
    "from": null,
    "review": "ai"
@@ -27691,7 +27691,7 @@
  },
  "tile.acaciaFence.name": {
   "5aa670e08920": {
-   "co": "Steccatu d'acacia",
+   "co": "Chjudenda d'acacia",
    "kind": "renamed",
    "from": "block.minecraft.acacia_fence",
    "review": "ai"
@@ -27707,7 +27707,7 @@
  },
  "tile.activatorRail.name": {
   "7048b9dbe0e3": {
-   "co": "Binariu attivatore",
+   "co": "Ragliu attivatore",
    "kind": "renamed",
    "from": "block.minecraft.activator_rail",
    "review": "ai"
@@ -27723,7 +27723,7 @@
  },
  "tile.anvil.intact.name": {
   "f0537d9559f3": {
-   "co": "Ancùdina",
+   "co": "Incudine",
    "kind": "renamed",
    "from": "block.minecraft.anvil",
    "review": "ai"
@@ -27731,7 +27731,7 @@
  },
  "tile.anvil.name": {
   "f0537d9559f3": {
-   "co": "Ancùdina",
+   "co": "Incudine",
    "kind": "renamed",
    "from": "block.minecraft.anvil",
    "review": "ai"
@@ -27739,7 +27739,7 @@
  },
  "tile.anvil.slightlyDamaged.name": {
   "c95511240825": {
-   "co": "Ancùdina pocu dannighjata",
+   "co": "Incudine pocu dannighjata",
    "kind": "new",
    "from": null,
    "review": "ai"
@@ -27747,7 +27747,7 @@
  },
  "tile.anvil.veryDamaged.name": {
   "def56503f65f": {
-   "co": "Ancùdina assai dannighjata",
+   "co": "Incudine assai dannighjata",
    "kind": "new",
    "from": null,
    "review": "ai"
@@ -27853,7 +27853,7 @@
  },
  "tile.birchFence.name": {
   "c596fe8d819e": {
-   "co": "Steccatu di betula",
+   "co": "Chjudenda di biolu",
    "kind": "renamed",
    "from": "block.minecraft.birch_fence",
    "review": "ai"
@@ -27861,7 +27861,7 @@
  },
  "tile.birchFenceGate.name": {
   "804c485b3649": {
-   "co": "Cancellu di betula",
+   "co": "Cancellu di biolu",
    "kind": "renamed",
    "from": "block.minecraft.birch_fence_gate",
    "review": "ai"
@@ -27909,7 +27909,7 @@
  },
  "tile.blockLapis.name": {
   "7b2b5362f7d7": {
-   "co": "Bloccu di lapislazuli",
+   "co": "Bloccu di lapislazzuli",
    "kind": "adapted",
    "from": "block.minecraft.lapis_block",
    "review": "ai",
@@ -27942,7 +27942,7 @@
  },
  "tile.brick.name": {
   "c1271a380ddf": {
-   "co": "Matoni",
+   "co": "Mattoni",
    "kind": "renamed",
    "from": "block.minecraft.bricks",
    "review": "ai"
@@ -27967,7 +27967,7 @@
  },
  "tile.cake.name": {
   "9c6e5a3f44fc": {
-   "co": "Torta",
+   "co": "Pastadolce",
    "kind": "renamed",
    "from": "block.minecraft.cake",
    "review": "ai"
@@ -28031,7 +28031,7 @@
  },
  "tile.clay.name": {
   "e00d5664a78e": {
-   "co": "Creta",
+   "co": "Arzilla",
    "kind": "renamed",
    "from": "block.minecraft.clay",
    "review": "ai"
@@ -28045,7 +28045,7 @@
    "review": "ai"
   },
   "deec5efa616d": {
-   "co": "Creta indurita",
+   "co": "Arzilla indurita",
    "kind": "new",
    "from": null,
    "review": "ai",
@@ -28054,7 +28054,7 @@
  },
  "tile.clayHardenedStained.black.name": {
   "32a37b1ce6a8": {
-   "co": "Creta indurita nera",
+   "co": "Arzilla indurita nera",
    "kind": "new",
    "from": null,
    "review": "ai",
@@ -28067,7 +28067,7 @@
    "review": "ai"
   },
   "d40615571263": {
-   "co": "Creta tinta nera",
+   "co": "Arzilla tinta nera",
    "kind": "new",
    "from": null,
    "review": "ai",
@@ -28076,14 +28076,14 @@
  },
  "tile.clayHardenedStained.blue.name": {
   "5185eae98011": {
-   "co": "Creta indurita turchina",
+   "co": "Arzilla indurita turchina",
    "kind": "new",
    "from": null,
    "review": "ai",
    "note": "terracotta before 1.12"
   },
   "5cd4badfd2f9": {
-   "co": "Creta tinta turchina",
+   "co": "Arzilla tinta turchina",
    "kind": "new",
    "from": null,
    "review": "ai",
@@ -28104,14 +28104,14 @@
    "review": "ai"
   },
   "68a78fec0f71": {
-   "co": "Creta tinta marrone",
+   "co": "Arzilla tinta marrone",
    "kind": "new",
    "from": null,
    "review": "ai",
    "note": "terracotta before 1.12"
   },
   "a2be4dcf87ab": {
-   "co": "Creta indurita marrone",
+   "co": "Arzilla indurita marrone",
    "kind": "new",
    "from": null,
    "review": "ai",
@@ -28126,14 +28126,14 @@
    "review": "ai"
   },
   "b57bab14abfa": {
-   "co": "Creta tinta ciana",
+   "co": "Arzilla tinta ciana",
    "kind": "new",
    "from": null,
    "review": "ai",
    "note": "terracotta before 1.12"
   },
   "e6c7f17af763": {
-   "co": "Creta indurita ciana",
+   "co": "Arzilla indurita ciana",
    "kind": "new",
    "from": null,
    "review": "ai",
@@ -28148,14 +28148,14 @@
    "review": "ai"
   },
   "aa3e7ad9c453": {
-   "co": "Creta indurita grisgia",
+   "co": "Arzilla indurita grisgia",
    "kind": "new",
    "from": null,
    "review": "ai",
    "note": "terracotta before 1.12"
   },
   "cba51224cd92": {
-   "co": "Creta tinta grisgia",
+   "co": "Arzilla tinta grisgia",
    "kind": "new",
    "from": null,
    "review": "ai",
@@ -28164,14 +28164,14 @@
  },
  "tile.clayHardenedStained.green.name": {
   "66d51c868111": {
-   "co": "Creta tinta verde",
+   "co": "Arzilla tinta verde",
    "kind": "new",
    "from": null,
    "review": "ai",
    "note": "terracotta before 1.12"
   },
   "f4e916818177": {
-   "co": "Creta indurita verde",
+   "co": "Arzilla indurita verde",
    "kind": "new",
    "from": null,
    "review": "ai",
@@ -28192,14 +28192,14 @@
    "review": "ai"
   },
   "120accf3b908": {
-   "co": "Creta indurita celeste",
+   "co": "Arzilla indurita celeste",
    "kind": "new",
    "from": null,
    "review": "ai",
    "note": "terracotta before 1.12"
   },
   "e31631036764": {
-   "co": "Creta tinta celeste",
+   "co": "Arzilla tinta celeste",
    "kind": "new",
    "from": null,
    "review": "ai",
@@ -28214,14 +28214,14 @@
    "review": "ai"
   },
   "a57cdc13059d": {
-   "co": "Creta indurita verde limone",
+   "co": "Arzilla indurita verde limone",
    "kind": "new",
    "from": null,
    "review": "ai",
    "note": "terracotta before 1.12"
   },
   "b9846dfb849c": {
-   "co": "Creta tinta verde limone",
+   "co": "Arzilla tinta verde limone",
    "kind": "new",
    "from": null,
    "review": "ai",
@@ -28230,14 +28230,14 @@
  },
  "tile.clayHardenedStained.magenta.name": {
   "9deb34bca3d4": {
-   "co": "Creta tinta magenta",
+   "co": "Arzilla tinta magenta",
    "kind": "new",
    "from": null,
    "review": "ai",
    "note": "terracotta before 1.12"
   },
   "9fd7f0d878a9": {
-   "co": "Creta indurita magenta",
+   "co": "Arzilla indurita magenta",
    "kind": "new",
    "from": null,
    "review": "ai",
@@ -28258,14 +28258,14 @@
    "review": "ai"
   },
   "278dc5765b1f": {
-   "co": "Creta indurita tinta",
+   "co": "Arzilla indurita tinta",
    "kind": "new",
    "from": null,
    "review": "ai",
    "note": "terracotta before 1.12"
   },
   "af35b1435aa1": {
-   "co": "Creta tinta",
+   "co": "Arzilla tinta",
    "kind": "new",
    "from": null,
    "review": "ai",
@@ -28274,7 +28274,7 @@
  },
  "tile.clayHardenedStained.orange.name": {
   "0a7e64591b45": {
-   "co": "Creta indurita arancia",
+   "co": "Arzilla indurita arancia",
    "kind": "new",
    "from": null,
    "review": "ai",
@@ -28287,7 +28287,7 @@
    "review": "ai"
   },
   "8b223a194bb1": {
-   "co": "Creta tinta arancia",
+   "co": "Arzilla tinta arancia",
    "kind": "new",
    "from": null,
    "review": "ai",
@@ -28302,14 +28302,14 @@
    "review": "ai"
   },
   "27099ecf69da": {
-   "co": "Creta indurita rusulina",
+   "co": "Arzilla indurita rusulina",
    "kind": "new",
    "from": null,
    "review": "ai",
    "note": "terracotta before 1.12"
   },
   "78768c2d9741": {
-   "co": "Creta tinta rusulina",
+   "co": "Arzilla tinta rusulina",
    "kind": "new",
    "from": null,
    "review": "ai",
@@ -28324,14 +28324,14 @@
    "review": "ai"
   },
   "220ffabaf94e": {
-   "co": "Creta tinta purpurina",
+   "co": "Arzilla tinta purpurina",
    "kind": "new",
    "from": null,
    "review": "ai",
    "note": "terracotta before 1.12"
   },
   "b760663c4dd1": {
-   "co": "Creta indurita purpurina",
+   "co": "Arzilla indurita purpurina",
    "kind": "new",
    "from": null,
    "review": "ai",
@@ -28340,7 +28340,7 @@
  },
  "tile.clayHardenedStained.red.name": {
   "0ad4c8786c21": {
-   "co": "Creta tinta rossa",
+   "co": "Arzilla tinta rossa",
    "kind": "new",
    "from": null,
    "review": "ai",
@@ -28353,7 +28353,7 @@
    "review": "ai"
   },
   "699ab08ba31a": {
-   "co": "Creta indurita rossa",
+   "co": "Arzilla indurita rossa",
    "kind": "new",
    "from": null,
    "review": "ai",
@@ -28362,14 +28362,14 @@
  },
  "tile.clayHardenedStained.silver.name": {
   "47466b0d1244": {
-   "co": "Creta tinta grisgia chjara",
+   "co": "Arzilla tinta grisgia chjara",
    "kind": "new",
    "from": null,
    "review": "ai",
    "note": "terracotta before 1.12"
   },
   "cd0f84830406": {
-   "co": "Creta indurita grisgia chjara",
+   "co": "Arzilla indurita grisgia chjara",
    "kind": "new",
    "from": null,
    "review": "ai",
@@ -28384,7 +28384,7 @@
  },
  "tile.clayHardenedStained.white.name": {
   "250fd82e8c2a": {
-   "co": "Creta tinta bianca",
+   "co": "Arzilla tinta bianca",
    "kind": "new",
    "from": null,
    "review": "ai",
@@ -28397,7 +28397,7 @@
    "review": "ai"
   },
   "8256804fd4fa": {
-   "co": "Creta indurita bianca",
+   "co": "Arzilla indurita bianca",
    "kind": "new",
    "from": null,
    "review": "ai",
@@ -28406,7 +28406,7 @@
  },
  "tile.clayHardenedStained.yellow.name": {
   "367a5623bcf0": {
-   "co": "Creta indurita ghjalla",
+   "co": "Arzilla indurita ghjalla",
    "kind": "new",
    "from": null,
    "review": "ai",
@@ -28419,7 +28419,7 @@
    "review": "ai"
   },
   "b7e06e9161f0": {
-   "co": "Creta tinta ghjalla",
+   "co": "Arzilla tinta ghjalla",
    "kind": "new",
    "from": null,
    "review": "ai",
@@ -28570,7 +28570,7 @@
  },
  "tile.cobbleWall.mossy.name": {
   "b815a5a281bf": {
-   "co": "Muru di petrame muscosu",
+   "co": "Muru di petrame murzosu",
    "kind": "renamed",
    "from": "block.minecraft.mossy_cobblestone_wall",
    "review": "ai"
@@ -28586,7 +28586,7 @@
  },
  "tile.cocoa.name": {
   "6517f8be2c6a": {
-   "co": "Cacau",
+   "co": "Caccaò",
    "kind": "renamed",
    "from": "block.minecraft.cocoa",
    "review": "ai"
@@ -28602,7 +28602,7 @@
  },
  "tile.concrete.black.name": {
   "184f4118df62": {
-   "co": "Betonu neru",
+   "co": "Cimentu neru",
    "kind": "renamed",
    "from": "block.minecraft.black_concrete",
    "review": "ai"
@@ -28610,7 +28610,7 @@
  },
  "tile.concrete.blue.name": {
   "5abcffaba98c": {
-   "co": "Betonu turchinu",
+   "co": "Cimentu turchinu",
    "kind": "renamed",
    "from": "block.minecraft.blue_concrete",
    "review": "ai"
@@ -28618,7 +28618,7 @@
  },
  "tile.concrete.brown.name": {
   "fb689447a404": {
-   "co": "Betonu marrone",
+   "co": "Cimentu marrone",
    "kind": "renamed",
    "from": "block.minecraft.brown_concrete",
    "review": "ai"
@@ -28626,7 +28626,7 @@
  },
  "tile.concrete.cyan.name": {
   "30ecc3bf691e": {
-   "co": "Betonu cianu",
+   "co": "Cimentu cianu",
    "kind": "renamed",
    "from": "block.minecraft.cyan_concrete",
    "review": "ai"
@@ -28634,7 +28634,7 @@
  },
  "tile.concrete.gray.name": {
   "87f967476421": {
-   "co": "Betonu grisgiu",
+   "co": "Cimentu grisgiu",
    "kind": "renamed",
    "from": "block.minecraft.gray_concrete",
    "review": "ai"
@@ -28642,7 +28642,7 @@
  },
  "tile.concrete.green.name": {
   "2dfd3da60bd9": {
-   "co": "Betonu verde",
+   "co": "Cimentu verde",
    "kind": "renamed",
    "from": "block.minecraft.green_concrete",
    "review": "ai"
@@ -28650,7 +28650,7 @@
  },
  "tile.concrete.lightBlue.name": {
   "9682d40cf1c1": {
-   "co": "Betonu celeste",
+   "co": "Cimentu celeste",
    "kind": "renamed",
    "from": "block.minecraft.light_blue_concrete",
    "review": "ai"
@@ -28658,7 +28658,7 @@
  },
  "tile.concrete.lime.name": {
   "136217352e0c": {
-   "co": "Betonu verde limone",
+   "co": "Cimentu verde limone",
    "kind": "renamed",
    "from": "block.minecraft.lime_concrete",
    "review": "ai"
@@ -28666,7 +28666,7 @@
  },
  "tile.concrete.magenta.name": {
   "be081451e146": {
-   "co": "Betonu magenta",
+   "co": "Cimentu magenta",
    "kind": "renamed",
    "from": "block.minecraft.magenta_concrete",
    "review": "ai"
@@ -28674,7 +28674,7 @@
  },
  "tile.concrete.orange.name": {
   "02c491651c11": {
-   "co": "Betonu aranciu",
+   "co": "Cimentu aranciu",
    "kind": "renamed",
    "from": "block.minecraft.orange_concrete",
    "review": "ai"
@@ -28682,7 +28682,7 @@
  },
  "tile.concrete.pink.name": {
   "9d3a72149c03": {
-   "co": "Betonu rusulinu",
+   "co": "Cimentu rusulinu",
    "kind": "renamed",
    "from": "block.minecraft.pink_concrete",
    "review": "ai"
@@ -28690,7 +28690,7 @@
  },
  "tile.concrete.purple.name": {
   "3196030cd6ae": {
-   "co": "Betonu purpurinu",
+   "co": "Cimentu purpurinu",
    "kind": "renamed",
    "from": "block.minecraft.purple_concrete",
    "review": "ai"
@@ -28698,7 +28698,7 @@
  },
  "tile.concrete.red.name": {
   "9eb7df26d0a8": {
-   "co": "Betonu rossu",
+   "co": "Cimentu rossu",
    "kind": "renamed",
    "from": "block.minecraft.red_concrete",
    "review": "ai"
@@ -28706,7 +28706,7 @@
  },
  "tile.concrete.silver.name": {
   "02519f351217": {
-   "co": "Betonu grisgiu chjaru",
+   "co": "Cimentu grisgiu chjaru",
    "kind": "renamed",
    "from": "block.minecraft.light_gray_concrete",
    "review": "ai"
@@ -28714,7 +28714,7 @@
  },
  "tile.concrete.white.name": {
   "5adda00b5525": {
-   "co": "Betonu biancu",
+   "co": "Cimentu biancu",
    "kind": "renamed",
    "from": "block.minecraft.white_concrete",
    "review": "ai"
@@ -28722,7 +28722,7 @@
  },
  "tile.concrete.yellow.name": {
   "e838fa88d545": {
-   "co": "Betonu ghjallu",
+   "co": "Cimentu ghjallu",
    "kind": "renamed",
    "from": "block.minecraft.yellow_concrete",
    "review": "ai"
@@ -28730,7 +28730,7 @@
  },
  "tile.concretePowder.black.name": {
   "ff9bbd81b659": {
-   "co": "Polvera di betonu nera",
+   "co": "Polvera di cimentu nera",
    "kind": "renamed",
    "from": "block.minecraft.black_concrete_powder",
    "review": "ai"
@@ -28738,7 +28738,7 @@
  },
  "tile.concretePowder.blue.name": {
   "0fe6bca384ec": {
-   "co": "Polvera di betonu turchina",
+   "co": "Polvera di cimentu turchina",
    "kind": "renamed",
    "from": "block.minecraft.blue_concrete_powder",
    "review": "ai"
@@ -28746,7 +28746,7 @@
  },
  "tile.concretePowder.brown.name": {
   "426916dd073b": {
-   "co": "Polvera di betonu marrone",
+   "co": "Polvera di cimentu marrone",
    "kind": "renamed",
    "from": "block.minecraft.brown_concrete_powder",
    "review": "ai"
@@ -28754,7 +28754,7 @@
  },
  "tile.concretePowder.cyan.name": {
   "4cb0c03c596c": {
-   "co": "Polvera di betonu ciana",
+   "co": "Polvera di cimentu ciana",
    "kind": "renamed",
    "from": "block.minecraft.cyan_concrete_powder",
    "review": "ai"
@@ -28762,7 +28762,7 @@
  },
  "tile.concretePowder.gray.name": {
   "31222ba3c7f0": {
-   "co": "Polvera di betonu grisgia",
+   "co": "Polvera di cimentu grisgia",
    "kind": "renamed",
    "from": "block.minecraft.gray_concrete_powder",
    "review": "ai"
@@ -28770,7 +28770,7 @@
  },
  "tile.concretePowder.green.name": {
   "5cacf220b6b0": {
-   "co": "Polvera di betonu verde",
+   "co": "Polvera di cimentu verde",
    "kind": "renamed",
    "from": "block.minecraft.green_concrete_powder",
    "review": "ai"
@@ -28778,7 +28778,7 @@
  },
  "tile.concretePowder.lightBlue.name": {
   "0b5f38cbc7a2": {
-   "co": "Polvera di betonu celeste",
+   "co": "Polvera di cimentu celeste",
    "kind": "renamed",
    "from": "block.minecraft.light_blue_concrete_powder",
    "review": "ai"
@@ -28786,7 +28786,7 @@
  },
  "tile.concretePowder.lime.name": {
   "537604f3eac8": {
-   "co": "Polvera di betonu verde limone",
+   "co": "Polvera di cimentu verde limone",
    "kind": "renamed",
    "from": "block.minecraft.lime_concrete_powder",
    "review": "ai"
@@ -28794,7 +28794,7 @@
  },
  "tile.concretePowder.magenta.name": {
   "bd9260d79388": {
-   "co": "Polvera di betonu magenta",
+   "co": "Polvera di cimentu magenta",
    "kind": "renamed",
    "from": "block.minecraft.magenta_concrete_powder",
    "review": "ai"
@@ -28802,7 +28802,7 @@
  },
  "tile.concretePowder.orange.name": {
   "a2402e6d6779": {
-   "co": "Polvera di betonu arancia",
+   "co": "Polvera di cimentu arancia",
    "kind": "renamed",
    "from": "block.minecraft.orange_concrete_powder",
    "review": "ai"
@@ -28810,7 +28810,7 @@
  },
  "tile.concretePowder.pink.name": {
   "f39e785001e1": {
-   "co": "Polvera di betonu rusulina",
+   "co": "Polvera di cimentu rusulina",
    "kind": "renamed",
    "from": "block.minecraft.pink_concrete_powder",
    "review": "ai"
@@ -28818,7 +28818,7 @@
  },
  "tile.concretePowder.purple.name": {
   "2ecc52e49ced": {
-   "co": "Polvera di betonu purpurina",
+   "co": "Polvera di cimentu purpurina",
    "kind": "renamed",
    "from": "block.minecraft.purple_concrete_powder",
    "review": "ai"
@@ -28826,7 +28826,7 @@
  },
  "tile.concretePowder.red.name": {
   "a02e6eaeff95": {
-   "co": "Polvera di betonu rossa",
+   "co": "Polvera di cimentu rossa",
    "kind": "renamed",
    "from": "block.minecraft.red_concrete_powder",
    "review": "ai"
@@ -28834,7 +28834,7 @@
  },
  "tile.concretePowder.silver.name": {
   "7502ff4b1edb": {
-   "co": "Polvera di betonu grisgia chjara",
+   "co": "Polvera di cimentu grisgia chjara",
    "kind": "renamed",
    "from": "block.minecraft.light_gray_concrete_powder",
    "review": "ai"
@@ -28842,7 +28842,7 @@
  },
  "tile.concretePowder.white.name": {
   "49c494afb714": {
-   "co": "Polvera di betonu bianca",
+   "co": "Polvera di cimentu bianca",
    "kind": "renamed",
    "from": "block.minecraft.white_concrete_powder",
    "review": "ai"
@@ -28850,7 +28850,7 @@
  },
  "tile.concretePowder.yellow.name": {
   "a0cbc6056c4a": {
-   "co": "Polvera di betonu ghjalla",
+   "co": "Polvera di cimentu ghjalla",
    "kind": "renamed",
    "from": "block.minecraft.yellow_concrete_powder",
    "review": "ai"
@@ -28866,7 +28866,7 @@
  },
  "tile.darkOakFence.name": {
   "311d6861c3c7": {
-   "co": "Steccatu di quercia scura",
+   "co": "Chjudenda di querciu scuru",
    "kind": "renamed",
    "from": "block.minecraft.dark_oak_fence",
    "review": "ai"
@@ -28874,7 +28874,7 @@
  },
  "tile.darkOakFenceGate.name": {
   "252878fd689b": {
-   "co": "Cancellu di quercia scura",
+   "co": "Cancellu di querciu scuru",
    "kind": "renamed",
    "from": "block.minecraft.dark_oak_fence_gate",
    "review": "ai"
@@ -28898,7 +28898,7 @@
  },
  "tile.detectorRail.name": {
   "e9a958974ecc": {
-   "co": "Binariu rilevatore",
+   "co": "Ragliu rilevatore",
    "kind": "renamed",
    "from": "block.minecraft.detector_rail",
    "review": "ai"
@@ -28986,7 +28986,7 @@
  },
  "tile.doublePlant.paeonia.name": {
   "c969263880e3": {
-   "co": "Peonia",
+   "co": "Pigonia",
    "kind": "renamed",
    "from": "block.minecraft.peony",
    "review": "ai"
@@ -28994,7 +28994,7 @@
  },
  "tile.doublePlant.rose.name": {
   "de58af38cf68": {
-   "co": "Rusaghju",
+   "co": "Rosulaghju",
    "kind": "renamed",
    "from": "block.minecraft.rose_bush",
    "review": "ai"
@@ -29010,7 +29010,7 @@
  },
  "tile.doublePlant.syringa.name": {
   "a742758d952b": {
-   "co": "Lilà",
+   "co": "Lillà",
    "kind": "renamed",
    "from": "block.minecraft.lilac",
    "review": "ai"
@@ -29043,7 +29043,7 @@
  },
  "tile.endBricks.name": {
   "4702e4812937": {
-   "co": "Matoni di petra di l'End",
+   "co": "Mattoni di petra di l'End",
    "kind": "renamed",
    "from": "block.minecraft.end_stone_bricks",
    "review": "ai"
@@ -29083,13 +29083,13 @@
  },
  "tile.fence.name": {
   "93e58d27edf0": {
-   "co": "Steccatu di quercia",
+   "co": "Chjudenda di querciu",
    "kind": "renamed",
    "from": "block.minecraft.oak_fence",
    "review": "ai"
   },
   "a78529916258": {
-   "co": "Steccatu",
+   "co": "Chjudenda",
    "kind": "new",
    "from": null,
    "review": "ai"
@@ -29103,7 +29103,7 @@
    "review": "ai"
   },
   "bc7a8c0779ec": {
-   "co": "Cancellu di quercia",
+   "co": "Cancellu di querciu",
    "kind": "renamed",
    "from": "block.minecraft.oak_fence_gate",
    "review": "ai"
@@ -29135,7 +29135,7 @@
  },
  "tile.flower1.dandelion.name": {
   "18154403f3f0": {
-   "co": "Pisciacane",
+   "co": "Radichju",
    "kind": "renamed",
    "from": "block.minecraft.dandelion",
    "review": "ai"
@@ -29191,7 +29191,7 @@
  },
  "tile.flower2.poppy.name": {
   "3636d753a951": {
-   "co": "Pàparu",
+   "co": "Pappaveru",
    "kind": "renamed",
    "from": "block.minecraft.poppy",
    "review": "ai"
@@ -29383,7 +29383,7 @@
  },
  "tile.goldenRail.name": {
   "0f451f6c9515": {
-   "co": "Binariu alimentatu",
+   "co": "Ragliu alimentatu",
    "kind": "renamed",
    "from": "block.minecraft.powered_rail",
    "review": "ai"
@@ -29407,7 +29407,7 @@
  },
  "tile.gravel.name": {
   "df2bfa225e8d": {
-   "co": "Ghjàira",
+   "co": "Gravetta",
    "kind": "renamed",
    "from": "block.minecraft.gravel",
    "review": "ai"
@@ -29439,7 +29439,7 @@
  },
  "tile.hopper.name": {
   "1eb8e6de5d9f": {
-   "co": "Tramoghja",
+   "co": "Trimoghja",
    "kind": "renamed",
    "from": "block.minecraft.hopper",
    "review": "ai"
@@ -29463,7 +29463,7 @@
  },
  "tile.ironTrapdoor.name": {
   "7e856e089d06": {
-   "co": "Bodula di ferru",
+   "co": "Caterazza di ferru",
    "kind": "renamed",
    "from": "block.minecraft.iron_trapdoor",
    "review": "ai"
@@ -29479,7 +29479,7 @@
  },
  "tile.jungleFence.name": {
   "48fc5a621a48": {
-   "co": "Steccatu di giungla",
+   "co": "Chjudenda di giungla",
    "kind": "renamed",
    "from": "block.minecraft.jungle_fence",
    "review": "ai"
@@ -29519,7 +29519,7 @@
  },
  "tile.leaves.big_oak.name": {
   "2a8722de009b": {
-   "co": "Foglie di quercia scura",
+   "co": "Foglie di querciu scuru",
    "kind": "renamed",
    "from": "block.minecraft.dark_oak_leaves",
    "review": "ai"
@@ -29527,7 +29527,7 @@
  },
  "tile.leaves.birch.name": {
   "9a7fa7dc39cd": {
-   "co": "Foglie di betula",
+   "co": "Foglie di biolu",
    "kind": "renamed",
    "from": "block.minecraft.birch_leaves",
    "review": "ai"
@@ -29551,7 +29551,7 @@
  },
  "tile.leaves.oak.name": {
   "349e517627c0": {
-   "co": "Foglie di quercia",
+   "co": "Foglie di querciu",
    "kind": "renamed",
    "from": "block.minecraft.oak_leaves",
    "review": "ai"
@@ -29559,7 +29559,7 @@
  },
  "tile.leaves.spruce.name": {
   "2f648ef8fa0a": {
-   "co": "Foglie d'abete",
+   "co": "Foglie d'abetu",
    "kind": "renamed",
    "from": "block.minecraft.spruce_leaves",
    "review": "ai"
@@ -29608,7 +29608,7 @@
  },
  "tile.log.big_oak.name": {
   "777cca64631f": {
-   "co": "Legnu di quercia scura",
+   "co": "Legnu di querciu scuru",
    "kind": "renamed",
    "from": "block.minecraft.dark_oak_wood",
    "review": "ai",
@@ -29617,7 +29617,7 @@
  },
  "tile.log.birch.name": {
   "430677e43520": {
-   "co": "Legnu di betula",
+   "co": "Legnu di biolu",
    "kind": "renamed",
    "from": "block.minecraft.birch_wood",
    "review": "ai",
@@ -29643,7 +29643,7 @@
  },
  "tile.log.oak.name": {
   "226beeb9094f": {
-   "co": "Legnu di quercia",
+   "co": "Legnu di querciu",
    "kind": "renamed",
    "from": "block.minecraft.oak_wood",
    "review": "ai",
@@ -29652,7 +29652,7 @@
  },
  "tile.log.spruce.name": {
   "b53524d23fbb": {
-   "co": "Legnu d'abete",
+   "co": "Legnu d'abetu",
    "kind": "renamed",
    "from": "block.minecraft.spruce_wood",
    "review": "ai",
@@ -29669,7 +29669,7 @@
  },
  "tile.melon.name": {
   "26e65e893ae5": {
-   "co": "Pateca",
+   "co": "Patecca",
    "kind": "renamed",
    "from": "block.minecraft.melon",
    "review": "ai"
@@ -29685,7 +29685,7 @@
  },
  "tile.monsterStoneEgg.brick.name": {
   "6f73f2993188": {
-   "co": "Ovu di mostru di matoni di petra",
+   "co": "Ovu di mostru di mattoni di petra",
    "kind": "new",
    "from": null,
    "review": "ai"
@@ -29693,7 +29693,7 @@
  },
  "tile.monsterStoneEgg.chiseledbrick.name": {
   "cc209b2b9eec": {
-   "co": "Ovu di mostru di matoni di petra sculpiti",
+   "co": "Ovu di mostru di mattoni di petra sculpiti",
    "kind": "new",
    "from": null,
    "review": "ai"
@@ -29709,7 +29709,7 @@
  },
  "tile.monsterStoneEgg.crackedbrick.name": {
   "0181faaf4ded": {
-   "co": "Ovu di mostru di matoni di petra crepati",
+   "co": "Ovu di mostru di mattoni di petra crepati",
    "kind": "new",
    "from": null,
    "review": "ai"
@@ -29717,7 +29717,7 @@
  },
  "tile.monsterStoneEgg.mossybrick.name": {
   "77815423d717": {
-   "co": "Ovu di mostru di matoni di petra muscosi",
+   "co": "Ovu di mostru di mattoni di petra murzosi",
    "kind": "new",
    "from": null,
    "review": "ai"
@@ -29765,7 +29765,7 @@
  },
  "tile.netherBrick.name": {
   "3b942d118517": {
-   "co": "Matoni di u Nether",
+   "co": "Mattoni di u Nether",
    "kind": "adapted",
    "from": "block.minecraft.nether_bricks",
    "review": "ai",
@@ -29774,7 +29774,7 @@
  },
  "tile.netherFence.name": {
   "905979adebad": {
-   "co": "Steccatu di matoni di u Nether",
+   "co": "Chjudenda di mattoni di u Nether",
    "kind": "renamed",
    "from": "block.minecraft.nether_brick_fence",
    "review": "ai"
@@ -29806,7 +29806,7 @@
  },
  "tile.notGate.name": {
   "4e05c62d90e4": {
-   "co": "Torcia di redstone",
+   "co": "Torchja di redstone",
    "kind": "renamed",
    "from": "block.minecraft.redstone_torch",
    "review": "ai"
@@ -29870,7 +29870,7 @@
  },
  "tile.oreLapis.name": {
   "a17e5568532a": {
-   "co": "Minerale di lapislazuli",
+   "co": "Minerale di lapislazzuli",
    "kind": "renamed",
    "from": "block.minecraft.lapis_ore",
    "review": "ai"
@@ -29950,7 +29950,7 @@
  },
  "tile.prismarine.bricks.name": {
   "1a5fe6551fd6": {
-   "co": "Matoni di prismarina",
+   "co": "Mattoni di prismarina",
    "kind": "renamed",
    "from": "block.minecraft.prismarine_bricks",
    "review": "ai"
@@ -30047,7 +30047,7 @@
  },
  "tile.rail.name": {
   "0ed8670d3969": {
-   "co": "Binariu",
+   "co": "Ragliu",
    "kind": "renamed",
    "from": "block.minecraft.rail",
    "review": "ai"
@@ -30055,7 +30055,7 @@
  },
  "tile.redNetherBrick.name": {
   "a8bda3e1b3bf": {
-   "co": "Matoni rossi di u Nether",
+   "co": "Mattoni rossi di u Nether",
    "kind": "adapted",
    "from": "block.minecraft.red_nether_bricks",
    "review": "ai",
@@ -30064,7 +30064,7 @@
  },
  "tile.redSandStone.chiseled.name": {
   "79ccf1a1caba": {
-   "co": "Arenaria rossa sculpita",
+   "co": "Petra rinaghja rossa sculpita",
    "kind": "renamed",
    "from": "block.minecraft.chiseled_red_sandstone",
    "review": "ai"
@@ -30072,7 +30072,7 @@
  },
  "tile.redSandStone.default.name": {
   "1511143a6e7d": {
-   "co": "Arenaria rossa",
+   "co": "Petra rinaghja rossa",
    "kind": "renamed",
    "from": "block.minecraft.red_sandstone",
    "review": "ai"
@@ -30080,7 +30080,7 @@
  },
  "tile.redSandStone.name": {
   "1511143a6e7d": {
-   "co": "Arenaria rossa",
+   "co": "Petra rinaghja rossa",
    "kind": "renamed",
    "from": "block.minecraft.red_sandstone",
    "review": "ai"
@@ -30088,7 +30088,7 @@
  },
  "tile.redSandStone.smooth.name": {
   "ea0fbb9d4c42": {
-   "co": "Arenaria rossa liscia",
+   "co": "Petra rinaghja rossa liscia",
    "kind": "renamed",
    "from": "block.minecraft.smooth_red_sandstone",
    "review": "ai"
@@ -30161,7 +30161,7 @@
  },
  "tile.sandStone.chiseled.name": {
   "1d12c05f4d5a": {
-   "co": "Arenaria sculpita",
+   "co": "Petra rinaghja sculpita",
    "kind": "renamed",
    "from": "block.minecraft.chiseled_sandstone",
    "review": "ai"
@@ -30169,7 +30169,7 @@
  },
  "tile.sandStone.default.name": {
   "ad1ef409fa52": {
-   "co": "Arenaria",
+   "co": "Petra rinaghja",
    "kind": "renamed",
    "from": "block.minecraft.sandstone",
    "review": "ai"
@@ -30177,7 +30177,7 @@
  },
  "tile.sandStone.name": {
   "ad1ef409fa52": {
-   "co": "Arenaria",
+   "co": "Petra rinaghja",
    "kind": "renamed",
    "from": "block.minecraft.sandstone",
    "review": "ai"
@@ -30185,7 +30185,7 @@
  },
  "tile.sandStone.smooth.name": {
   "bc0eba50759c": {
-   "co": "Arenaria liscia",
+   "co": "Petra rinaghja liscia",
    "kind": "renamed",
    "from": "block.minecraft.smooth_sandstone",
    "review": "ai"
@@ -30201,7 +30201,7 @@
  },
  "tile.sapling.big_oak.name": {
   "a92d51df797a": {
-   "co": "Pianticella di quercia scura",
+   "co": "Pianticella di querciu scuru",
    "kind": "renamed",
    "from": "block.minecraft.dark_oak_sapling",
    "review": "ai"
@@ -30209,7 +30209,7 @@
  },
  "tile.sapling.birch.name": {
   "73345dea75f5": {
-   "co": "Pianticella di betula",
+   "co": "Pianticella di biolu",
    "kind": "renamed",
    "from": "block.minecraft.birch_sapling",
    "review": "ai"
@@ -30225,7 +30225,7 @@
  },
  "tile.sapling.oak.name": {
   "b6b55632432e": {
-   "co": "Pianticella di quercia",
+   "co": "Pianticella di querciu",
    "kind": "renamed",
    "from": "block.minecraft.oak_sapling",
    "review": "ai"
@@ -30233,7 +30233,7 @@
  },
  "tile.sapling.roofed_oak.name": {
   "a92d51df797a": {
-   "co": "Pianticella di quercia scura",
+   "co": "Pianticella di querciu scuru",
    "kind": "renamed",
    "from": "block.minecraft.dark_oak_sapling",
    "review": "ai"
@@ -30241,7 +30241,7 @@
  },
  "tile.sapling.spruce.name": {
   "cda677719c38": {
-   "co": "Pianticella d'abete",
+   "co": "Pianticella d'abetu",
    "kind": "renamed",
    "from": "block.minecraft.spruce_sapling",
    "review": "ai"
@@ -30385,7 +30385,7 @@
  },
  "tile.sign.name": {
   "8b3d8d665a76": {
-   "co": "Cartellu",
+   "co": "Cartella",
    "kind": "renamed",
    "from": "item.minecraft.sign",
    "review": "ai"
@@ -30409,7 +30409,7 @@
  },
  "tile.sponge.dry.name": {
   "0fdc449a338d": {
-   "co": "Sponga",
+   "co": "Spunga",
    "kind": "renamed",
    "from": "block.minecraft.sponge",
    "review": "ai"
@@ -30417,7 +30417,7 @@
  },
  "tile.sponge.name": {
   "0fdc449a338d": {
-   "co": "Sponga",
+   "co": "Spunga",
    "kind": "renamed",
    "from": "block.minecraft.sponge",
    "review": "ai"
@@ -30425,7 +30425,7 @@
  },
  "tile.sponge.wet.name": {
   "eab255f288f3": {
-   "co": "Sponga bagnata",
+   "co": "Spunga bagnata",
    "kind": "renamed",
    "from": "block.minecraft.wet_sponge",
    "review": "ai"
@@ -30433,7 +30433,7 @@
  },
  "tile.spruceFence.name": {
   "70fb58cb4628": {
-   "co": "Steccatu d'abete",
+   "co": "Chjudenda d'abetu",
    "kind": "renamed",
    "from": "block.minecraft.spruce_fence",
    "review": "ai"
@@ -30441,7 +30441,7 @@
  },
  "tile.spruceFenceGate.name": {
   "ccf160c56b30": {
-   "co": "Cancellu d'abete",
+   "co": "Cancellu d'abetu",
    "kind": "renamed",
    "from": "block.minecraft.spruce_fence_gate",
    "review": "ai"
@@ -30585,7 +30585,7 @@
  },
  "tile.stairsBrick.name": {
   "656fc0660098": {
-   "co": "Scala di matoni",
+   "co": "Scala di mattoni",
    "kind": "renamed",
    "from": "block.minecraft.brick_stairs",
    "review": "ai"
@@ -30593,7 +30593,7 @@
  },
  "tile.stairsNetherBrick.name": {
   "306e613ea9fb": {
-   "co": "Scala di matoni di u Nether",
+   "co": "Scala di mattoni di u Nether",
    "kind": "renamed",
    "from": "block.minecraft.nether_brick_stairs",
    "review": "ai"
@@ -30617,7 +30617,7 @@
  },
  "tile.stairsRedSandStone.name": {
   "6c6a6fdc34f0": {
-   "co": "Scala d'arenaria rossa",
+   "co": "Scala di petra rinaghja rossa",
    "kind": "renamed",
    "from": "block.minecraft.red_sandstone_stairs",
    "review": "ai"
@@ -30625,7 +30625,7 @@
  },
  "tile.stairsSandStone.name": {
   "44744bcad0c5": {
-   "co": "Scala d'arenaria",
+   "co": "Scala di petra rinaghja",
    "kind": "renamed",
    "from": "block.minecraft.sandstone_stairs",
    "review": "ai"
@@ -30647,7 +30647,7 @@
  },
  "tile.stairsStoneBrickSmooth.name": {
   "d99e1f8eb885": {
-   "co": "Scala di matoni di petra",
+   "co": "Scala di mattoni di petra",
    "kind": "renamed",
    "from": "block.minecraft.stone_brick_stairs",
    "review": "ai"
@@ -30655,7 +30655,7 @@
  },
  "tile.stairsWood.name": {
   "ac3cbc208236": {
-   "co": "Scala di legnu di quercia",
+   "co": "Scala di legnu di querciu",
    "kind": "new",
    "from": null,
    "review": "ai"
@@ -30671,7 +30671,7 @@
  },
  "tile.stairsWoodBirch.name": {
   "e9b3cfc98926": {
-   "co": "Scala di legnu di betula",
+   "co": "Scala di legnu di biolu",
    "kind": "new",
    "from": null,
    "review": "ai"
@@ -30679,7 +30679,7 @@
  },
  "tile.stairsWoodDarkOak.name": {
   "31b535e841c9": {
-   "co": "Scala di legnu di quercia scura",
+   "co": "Scala di legnu di querciu scuru",
    "kind": "new",
    "from": null,
    "review": "ai"
@@ -30695,7 +30695,7 @@
  },
  "tile.stairsWoodSpruce.name": {
   "9cc04d0f9717": {
-   "co": "Scala di legnu d'abete",
+   "co": "Scala di legnu d'abetu",
    "kind": "new",
    "from": null,
    "review": "ai"
@@ -30767,7 +30767,7 @@
  },
  "tile.stoneMoss.name": {
   "f9600866ac54": {
-   "co": "Petra muscosa",
+   "co": "Petra murzosa",
    "kind": "new",
    "from": null,
    "review": "ai"
@@ -30775,7 +30775,7 @@
  },
  "tile.stoneSlab.brick.name": {
   "0b74cd07e76c": {
-   "co": "Lastra di matoni",
+   "co": "Lastra di mattoni",
    "kind": "new",
    "from": null,
    "review": "ai"
@@ -30799,7 +30799,7 @@
  },
  "tile.stoneSlab.netherBrick.name": {
   "16bce83d2c8a": {
-   "co": "Lastra di matoni di u Nether",
+   "co": "Lastra di mattoni di u Nether",
    "kind": "renamed",
    "from": "block.minecraft.nether_brick_slab",
    "review": "ai"
@@ -30815,7 +30815,7 @@
  },
  "tile.stoneSlab.sand.name": {
   "79de1579c1f5": {
-   "co": "Lastra d'arenaria",
+   "co": "Lastra di petra rinaghja",
    "kind": "renamed",
    "from": "block.minecraft.sandstone_slab",
    "review": "ai"
@@ -30823,7 +30823,7 @@
  },
  "tile.stoneSlab.smoothStoneBrick.name": {
   "9811b8302803": {
-   "co": "Lastra di matoni di petra",
+   "co": "Lastra di mattoni di petra",
    "kind": "new",
    "from": null,
    "review": "ai"
@@ -30847,7 +30847,7 @@
  },
  "tile.stoneSlab2.red_sandstone.name": {
   "8e713056447f": {
-   "co": "Lastra d'arenaria rossa",
+   "co": "Lastra di petra rinaghja rossa",
    "kind": "renamed",
    "from": "block.minecraft.red_sandstone_slab",
    "review": "ai"
@@ -30863,7 +30863,7 @@
  },
  "tile.stonebricksmooth.chiseled.name": {
   "840b821ac532": {
-   "co": "Matoni di petra sculpiti",
+   "co": "Mattoni di petra sculpiti",
    "kind": "renamed",
    "from": "block.minecraft.chiseled_stone_bricks",
    "review": "ai"
@@ -30871,7 +30871,7 @@
  },
  "tile.stonebricksmooth.cracked.name": {
   "f90a6a892724": {
-   "co": "Matoni di petra crepati",
+   "co": "Mattoni di petra crepati",
    "kind": "renamed",
    "from": "block.minecraft.cracked_stone_bricks",
    "review": "ai"
@@ -30879,7 +30879,7 @@
  },
  "tile.stonebricksmooth.default.name": {
   "df53e0016695": {
-   "co": "Matoni di petra",
+   "co": "Mattoni di petra",
    "kind": "renamed",
    "from": "block.minecraft.stone_bricks",
    "review": "ai"
@@ -30887,7 +30887,7 @@
  },
  "tile.stonebricksmooth.mossy.name": {
   "4e0842dc4f05": {
-   "co": "Matoni di petra muscosi",
+   "co": "Mattoni di petra murzosi",
    "kind": "renamed",
    "from": "block.minecraft.mossy_stone_bricks",
    "review": "ai"
@@ -30895,7 +30895,7 @@
  },
  "tile.stonebricksmooth.name": {
   "df53e0016695": {
-   "co": "Matoni di petra",
+   "co": "Mattoni di petra",
    "kind": "renamed",
    "from": "block.minecraft.stone_bricks",
    "review": "ai"
@@ -30951,7 +30951,7 @@
  },
  "tile.thinGlass.name": {
   "62c6b0688d9b": {
-   "co": "Pannellu di vetru",
+   "co": "Vetru di finestra",
    "kind": "renamed",
    "from": "block.minecraft.glass_pane",
    "review": "ai"
@@ -30959,7 +30959,7 @@
  },
  "tile.thinStainedGlass.black.name": {
   "5faa495e2d25": {
-   "co": "Pannellu di vetru tintu neru",
+   "co": "Vetru di finestra tintu neru",
    "kind": "renamed",
    "from": "block.minecraft.black_stained_glass_pane",
    "review": "ai"
@@ -30967,7 +30967,7 @@
  },
  "tile.thinStainedGlass.blue.name": {
   "be982d99cbd6": {
-   "co": "Pannellu di vetru tintu turchinu",
+   "co": "Vetru di finestra tintu turchinu",
    "kind": "renamed",
    "from": "block.minecraft.blue_stained_glass_pane",
    "review": "ai"
@@ -30975,7 +30975,7 @@
  },
  "tile.thinStainedGlass.brown.name": {
   "74f98d10fc21": {
-   "co": "Pannellu di vetru tintu marrone",
+   "co": "Vetru di finestra tintu marrone",
    "kind": "renamed",
    "from": "block.minecraft.brown_stained_glass_pane",
    "review": "ai"
@@ -30983,7 +30983,7 @@
  },
  "tile.thinStainedGlass.cyan.name": {
   "ae0708748aa6": {
-   "co": "Pannellu di vetru tintu cianu",
+   "co": "Vetru di finestra tintu cianu",
    "kind": "renamed",
    "from": "block.minecraft.cyan_stained_glass_pane",
    "review": "ai"
@@ -30991,7 +30991,7 @@
  },
  "tile.thinStainedGlass.gray.name": {
   "b1a2ec76e108": {
-   "co": "Pannellu di vetru tintu grisgiu",
+   "co": "Vetru di finestra tintu grisgiu",
    "kind": "renamed",
    "from": "block.minecraft.gray_stained_glass_pane",
    "review": "ai"
@@ -30999,7 +30999,7 @@
  },
  "tile.thinStainedGlass.green.name": {
   "987da43567a9": {
-   "co": "Pannellu di vetru tintu verde",
+   "co": "Vetru di finestra tintu verde",
    "kind": "renamed",
    "from": "block.minecraft.green_stained_glass_pane",
    "review": "ai"
@@ -31007,7 +31007,7 @@
  },
  "tile.thinStainedGlass.lightBlue.name": {
   "43c48a690771": {
-   "co": "Pannellu di vetru tintu celeste",
+   "co": "Vetru di finestra tintu celeste",
    "kind": "renamed",
    "from": "block.minecraft.light_blue_stained_glass_pane",
    "review": "ai"
@@ -31015,7 +31015,7 @@
  },
  "tile.thinStainedGlass.lime.name": {
   "0a2571b2bfab": {
-   "co": "Pannellu di vetru tintu verde limone",
+   "co": "Vetru di finestra tintu verde limone",
    "kind": "renamed",
    "from": "block.minecraft.lime_stained_glass_pane",
    "review": "ai"
@@ -31023,7 +31023,7 @@
  },
  "tile.thinStainedGlass.magenta.name": {
   "76431b1140c4": {
-   "co": "Pannellu di vetru tintu magenta",
+   "co": "Vetru di finestra tintu magenta",
    "kind": "renamed",
    "from": "block.minecraft.magenta_stained_glass_pane",
    "review": "ai"
@@ -31031,7 +31031,7 @@
  },
  "tile.thinStainedGlass.name": {
   "47b86844ceb9": {
-   "co": "Pannellu di vetru tintu",
+   "co": "Vetru di finestra tintu",
    "kind": "new",
    "from": null,
    "review": "ai"
@@ -31039,7 +31039,7 @@
  },
  "tile.thinStainedGlass.orange.name": {
   "ed1a38a130f7": {
-   "co": "Pannellu di vetru tintu aranciu",
+   "co": "Vetru di finestra tintu aranciu",
    "kind": "renamed",
    "from": "block.minecraft.orange_stained_glass_pane",
    "review": "ai"
@@ -31047,7 +31047,7 @@
  },
  "tile.thinStainedGlass.pink.name": {
   "6c1d75331779": {
-   "co": "Pannellu di vetru tintu rusulinu",
+   "co": "Vetru di finestra tintu rusulinu",
    "kind": "renamed",
    "from": "block.minecraft.pink_stained_glass_pane",
    "review": "ai"
@@ -31055,7 +31055,7 @@
  },
  "tile.thinStainedGlass.purple.name": {
   "3e163de42104": {
-   "co": "Pannellu di vetru tintu purpurinu",
+   "co": "Vetru di finestra tintu purpurinu",
    "kind": "renamed",
    "from": "block.minecraft.purple_stained_glass_pane",
    "review": "ai"
@@ -31063,7 +31063,7 @@
  },
  "tile.thinStainedGlass.red.name": {
   "4abfe5db82e4": {
-   "co": "Pannellu di vetru tintu rossu",
+   "co": "Vetru di finestra tintu rossu",
    "kind": "renamed",
    "from": "block.minecraft.red_stained_glass_pane",
    "review": "ai"
@@ -31071,7 +31071,7 @@
  },
  "tile.thinStainedGlass.silver.name": {
   "db6107807640": {
-   "co": "Pannellu di vetru tintu grisgiu chjaru",
+   "co": "Vetru di finestra tintu grisgiu chjaru",
    "kind": "renamed",
    "from": "block.minecraft.light_gray_stained_glass_pane",
    "review": "ai"
@@ -31079,7 +31079,7 @@
  },
  "tile.thinStainedGlass.white.name": {
   "b37ef67e43fe": {
-   "co": "Pannellu di vetru tintu biancu",
+   "co": "Vetru di finestra tintu biancu",
    "kind": "renamed",
    "from": "block.minecraft.white_stained_glass_pane",
    "review": "ai"
@@ -31087,7 +31087,7 @@
  },
  "tile.thinStainedGlass.yellow.name": {
   "70ec311949b8": {
-   "co": "Pannellu di vetru tintu ghjallu",
+   "co": "Vetru di finestra tintu ghjallu",
    "kind": "renamed",
    "from": "block.minecraft.yellow_stained_glass_pane",
    "review": "ai"
@@ -31103,7 +31103,7 @@
  },
  "tile.torch.name": {
   "917904ac8c83": {
-   "co": "Torcia",
+   "co": "Torchja",
    "kind": "renamed",
    "from": "block.minecraft.torch",
    "review": "ai"
@@ -31111,13 +31111,13 @@
  },
  "tile.trapdoor.name": {
   "3c8b937e1808": {
-   "co": "Bodula",
+   "co": "Caterazza",
    "kind": "new",
    "from": null,
    "review": "ai"
   },
   "69e37e0c0ca2": {
-   "co": "Bodula di legnu",
+   "co": "Caterazza di legnu",
    "kind": "new",
    "from": null,
    "review": "ai"
@@ -31157,7 +31157,7 @@
  },
  "tile.waterlily.name": {
   "3b1638646161": {
-   "co": "Foglia di ninfea",
+   "co": "Nenufaru",
    "kind": "renamed",
    "from": "block.minecraft.lily_pad",
    "review": "ai"
@@ -31205,7 +31205,7 @@
  },
  "tile.wood.big_oak.name": {
   "f3cda470564f": {
-   "co": "Tavule di legnu di quercia scura",
+   "co": "Tavule di legnu di querciu scuru",
    "kind": "new",
    "from": null,
    "review": "ai"
@@ -31213,7 +31213,7 @@
  },
  "tile.wood.birch.name": {
   "a8babed360ed": {
-   "co": "Tavule di legnu di betula",
+   "co": "Tavule di legnu di biolu",
    "kind": "new",
    "from": null,
    "review": "ai"
@@ -31237,7 +31237,7 @@
  },
  "tile.wood.oak.name": {
   "d4b1e66c656c": {
-   "co": "Tavule di legnu di quercia",
+   "co": "Tavule di legnu di querciu",
    "kind": "new",
    "from": null,
    "review": "ai"
@@ -31245,7 +31245,7 @@
  },
  "tile.wood.spruce.name": {
   "9ee3fa8e52f9": {
-   "co": "Tavule di legnu d'abete",
+   "co": "Tavule di legnu d'abetu",
    "kind": "new",
    "from": null,
    "review": "ai"
@@ -31261,7 +31261,7 @@
  },
  "tile.woodSlab.big_oak.name": {
   "077715918775": {
-   "co": "Lastra di legnu di quercia scura",
+   "co": "Lastra di legnu di querciu scuru",
    "kind": "new",
    "from": null,
    "review": "ai"
@@ -31269,7 +31269,7 @@
  },
  "tile.woodSlab.birch.name": {
   "669598a5df89": {
-   "co": "Lastra di legnu di betula",
+   "co": "Lastra di legnu di biolu",
    "kind": "new",
    "from": null,
    "review": "ai"
@@ -31293,7 +31293,7 @@
  },
  "tile.woodSlab.oak.name": {
   "74bf332ec7e8": {
-   "co": "Lastra di legnu di quercia",
+   "co": "Lastra di legnu di querciu",
    "kind": "new",
    "from": null,
    "review": "ai"
@@ -31301,7 +31301,7 @@
  },
  "tile.woodSlab.spruce.name": {
   "6edf6c5b1745": {
-   "co": "Lastra di legnu d'abete",
+   "co": "Lastra di legnu d'abetu",
    "kind": "new",
    "from": null,
    "review": "ai"
@@ -31309,7 +31309,7 @@
  },
  "tile.woolCarpet.black.name": {
   "47318d3c5022": {
-   "co": "Tappetu neru",
+   "co": "Tappettu neru",
    "kind": "renamed",
    "from": "block.minecraft.black_carpet",
    "review": "ai"
@@ -31317,7 +31317,7 @@
  },
  "tile.woolCarpet.blue.name": {
   "2f01a6f4a0f6": {
-   "co": "Tappetu turchinu",
+   "co": "Tappettu turchinu",
    "kind": "renamed",
    "from": "block.minecraft.blue_carpet",
    "review": "ai"
@@ -31325,7 +31325,7 @@
  },
  "tile.woolCarpet.brown.name": {
   "8218e19b470c": {
-   "co": "Tappetu marrone",
+   "co": "Tappettu marrone",
    "kind": "renamed",
    "from": "block.minecraft.brown_carpet",
    "review": "ai"
@@ -31333,7 +31333,7 @@
  },
  "tile.woolCarpet.cyan.name": {
   "91f39a4b704b": {
-   "co": "Tappetu cianu",
+   "co": "Tappettu cianu",
    "kind": "renamed",
    "from": "block.minecraft.cyan_carpet",
    "review": "ai"
@@ -31341,7 +31341,7 @@
  },
  "tile.woolCarpet.gray.name": {
   "b0e02d316292": {
-   "co": "Tappetu grisgiu",
+   "co": "Tappettu grisgiu",
    "kind": "renamed",
    "from": "block.minecraft.gray_carpet",
    "review": "ai"
@@ -31349,7 +31349,7 @@
  },
  "tile.woolCarpet.green.name": {
   "a3dff47803b7": {
-   "co": "Tappetu verde",
+   "co": "Tappettu verde",
    "kind": "renamed",
    "from": "block.minecraft.green_carpet",
    "review": "ai"
@@ -31357,7 +31357,7 @@
  },
  "tile.woolCarpet.lightBlue.name": {
   "760e9ebf9f60": {
-   "co": "Tappetu celeste",
+   "co": "Tappettu celeste",
    "kind": "renamed",
    "from": "block.minecraft.light_blue_carpet",
    "review": "ai"
@@ -31365,7 +31365,7 @@
  },
  "tile.woolCarpet.lime.name": {
   "e9470ead9ec2": {
-   "co": "Tappetu verde limone",
+   "co": "Tappettu verde limone",
    "kind": "renamed",
    "from": "block.minecraft.lime_carpet",
    "review": "ai"
@@ -31373,7 +31373,7 @@
  },
  "tile.woolCarpet.magenta.name": {
   "23e1ecd42aa0": {
-   "co": "Tappetu magenta",
+   "co": "Tappettu magenta",
    "kind": "renamed",
    "from": "block.minecraft.magenta_carpet",
    "review": "ai"
@@ -31381,7 +31381,7 @@
  },
  "tile.woolCarpet.name": {
   "1f7a7a64c184": {
-   "co": "Tappetu",
+   "co": "Tappettu",
    "kind": "new",
    "from": null,
    "review": "ai"
@@ -31389,7 +31389,7 @@
  },
  "tile.woolCarpet.orange.name": {
   "0f935ca9b580": {
-   "co": "Tappetu aranciu",
+   "co": "Tappettu aranciu",
    "kind": "renamed",
    "from": "block.minecraft.orange_carpet",
    "review": "ai"
@@ -31397,7 +31397,7 @@
  },
  "tile.woolCarpet.pink.name": {
   "b99510b91eef": {
-   "co": "Tappetu rusulinu",
+   "co": "Tappettu rusulinu",
    "kind": "renamed",
    "from": "block.minecraft.pink_carpet",
    "review": "ai"
@@ -31405,7 +31405,7 @@
  },
  "tile.woolCarpet.purple.name": {
   "c217e7cc105b": {
-   "co": "Tappetu purpurinu",
+   "co": "Tappettu purpurinu",
    "kind": "renamed",
    "from": "block.minecraft.purple_carpet",
    "review": "ai"
@@ -31413,7 +31413,7 @@
  },
  "tile.woolCarpet.red.name": {
   "189295248eec": {
-   "co": "Tappetu rossu",
+   "co": "Tappettu rossu",
    "kind": "renamed",
    "from": "block.minecraft.red_carpet",
    "review": "ai"
@@ -31421,7 +31421,7 @@
  },
  "tile.woolCarpet.silver.name": {
   "a548338c004b": {
-   "co": "Tappetu grisgiu chjaru",
+   "co": "Tappettu grisgiu chjaru",
    "kind": "renamed",
    "from": "block.minecraft.light_gray_carpet",
    "review": "ai"
@@ -31429,13 +31429,13 @@
  },
  "tile.woolCarpet.white.name": {
   "1233b97b1a34": {
-   "co": "Tappetu biancu",
+   "co": "Tappettu biancu",
    "kind": "renamed",
    "from": "block.minecraft.white_carpet",
    "review": "ai"
   },
   "1f7a7a64c184": {
-   "co": "Tappetu",
+   "co": "Tappettu",
    "kind": "new",
    "from": null,
    "review": "ai"
@@ -31443,7 +31443,7 @@
  },
  "tile.woolCarpet.yellow.name": {
   "41f01ac8466b": {
-   "co": "Tappetu ghjallu",
+   "co": "Tappettu ghjallu",
    "kind": "renamed",
    "from": "block.minecraft.yellow_carpet",
    "review": "ai"

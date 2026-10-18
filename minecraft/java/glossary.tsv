@@ -99,12 +99,12 @@ Fox	mob (f)	Volpe	volp			to check in INFCOR	proposal	yes
 Rabbit	mob (m) / food	Cunigliulu	cunigli	Cunigliu		to check in INFCOR	proposal	yes
 Cat	mob (m)	Ghjattu	ghjatt			to check in INFCOR	proposal	yes
 Bat	mob (m)	Topu pinnutu	topu pinnut	Pipistrellu		to check in INFCOR	proposal	yes
-Bee	mob (f)	Ape	ap			to check in INFCOR	proposal	yes
+Bee	mob (f; plural ape)	Apa	ap		Ape (plural form used as singular)	INFCOR (cached lookups, review-2026-10) apa/aba EN bee (verified 2026-10-18, review-2026-10/APPLIED.tsv)	attested	yes
 Goat	mob (f)	Capra	capr			to check in INFCOR	proposal	yes
 Frog	mob (f)	Granochja	granochj	Ranochja		to check in INFCOR	proposal	yes
-Tadpole	mob	Capirossulu	capirossul		Ranochjella	Corsu	proposal	yes
+Tadpole	mob (m)	Cudutu	cudut		Ranochjella; Capirossulu (not found)	INFCOR (cached lookups, review-2026-10) cudutu/codutu EN tadpole (verified 2026-10-18, review-2026-10/APPLIED.tsv)	attested	yes
 Turtle	mob (f)	Tartaruga	tartarug	Cuppulata (land tortoise)		to check in INFCOR	proposal	yes
-Squid	mob (m)	Calamaru	calamar	Tutanu		to check in INFCOR	proposal	yes
+Squid	mob (m)	Totanu	totan	Tutanu	Calamaru (= inkwell)	INFCOR (cached lookups, review-2026-10) totanu EN squid; calamaru EN inkwell (verified 2026-10-18, review-2026-10/APPLIED.tsv)	attested	yes
 Glow Squid	mob	Calamaru luminosu				Corsu	proposal	no
 Dolphin	mob (m)	Delfinu	delfin			to check in INFCOR	proposal	yes
 Cod	fish (m)	Merluzzu	merluzz			to check in INFCOR	proposal	yes
@@ -115,7 +115,7 @@ Parrot	mob (m)	Pappagallu	pappagall			to check in INFCOR	proposal	yes
 Panda	mob	Panda				to check in INFCOR	proposal	yes
 Polar Bear	mob (m)	Orsu polare	ors			to check in INFCOR	proposal	yes
 Llama	mob (m)	Lama				to check in INFCOR	proposal	no
-Camel	mob (m)	Cammellu	cammell			to check in INFCOR	proposal	yes
+Camel	mob (m)	Camellu	camell		Cammellu (Italian spelling)	INFCOR (cached lookups, review-2026-10) camellu/camelu EN camel (verified 2026-10-18, review-2026-10/APPLIED.tsv)	attested	yes
 Ocelot	mob	Ocelot				Corsu	name	no
 Axolotl	mob	Axolotl				Corsu	name	yes
 Armadillo	mob	Armadillu	armadill			Corsu	proposal	yes
@@ -157,11 +157,11 @@ Cleric	villager	Prete	pret	Chjericu		to check in INFCOR	proposal	no
 Farmer	villager	Agricultore	agricultor	Paisanu, Cultivatore		to check in INFCOR	proposal	no
 Fisherman	villager	Piscadore	piscador			to check in INFCOR	proposal	no
 Fletcher	villager	Frecciaghju	frecciaghj			Corsu	proposal	no
-Leatherworker	villager	Cuiaghju	cuiaghj			Corsu	proposal	no
+Leatherworker	villager	Cunciadore	cunciador		Cuiaghju (not found)	INFCOR (cached lookups, review-2026-10) cunciadore FR tanneur (verified 2026-10-18, review-2026-10/APPLIED.tsv)	attested	no
 Librarian	villager	Bibliutecariu	bibliutecari			Corsu	proposal	no
 Mason	villager	Muratore	murator			to check in INFCOR	proposal	no
 Shepherd	villager	Pastore	pastor			to check in INFCOR	proposal	no
-Toolsmith	villager	Ferraghju d'attrezzi	ferraghj			Corsu	proposal	no
+Toolsmith	villager	Stazzunaru d'attrezzi	stazzunar		Ferraghju (= February)	INFCOR (cached lookups, review-2026-10) stazzunaru FR forgeron; ADECEC a-frutta "ferraghju : février" (verified 2026-10-18, review-2026-10/APPLIED.tsv)	proposal	no
 Weaponsmith	villager	Armaghjolu d'arme	armaghjol			Corsu	proposal	no
 Nitwit	villager	Scimitu	scimit			Corsu	proposal	no
 # Materials and blocks (gender m/f drives agreement of adjectives)
@@ -171,8 +171,8 @@ Cobblestone	block (m)	Petrame	petrame			Corsu	proposal	yes
 Dirt	block (f)	Terra	terr			to check in INFCOR	proposal	yes
 Grass Block	block	Bloccu d'erba				Corsu	proposal	no
 Sand	block (f)	Rena	ren			to check in INFCOR	proposal	yes
-Gravel	block (f)	Ghjàira	ghjair	Ghjaia		to check in INFCOR	proposal	yes
-Clay	block (f)	Creta	cret	Argilla		to check in INFCOR	proposal	yes
+Gravel	block (f)	Gravetta	gravett	Ghjaia	Ghjàira (not found)	INFCOR (cached lookups, review-2026-10) gravetta EN gravel; ADECEC la-maison "Gravier: gravetta" (verified 2026-10-18, review-2026-10/APPLIED.tsv)	attested	yes
+Clay	block (f)	Arzilla	arzill	Argilla	Creta (= chalk)	ADECEC la-géographie "argile : arzilla", "craie : creta"; INFCOR (cached lookups, review-2026-10) (verified 2026-10-18, review-2026-10/APPLIED.tsv)	attested	yes
 Mud	block (m)	Fangu	fang			to check in INFCOR	proposal	yes
 Snow	block (f)	Neve	nev			to check in INFCOR	proposal	yes
 Ice	block (m)	Ghjacciu	ghjacci			to check in INFCOR	proposal	yes
@@ -185,29 +185,29 @@ Stripped	log without bark	Scurzatu	scurzat			Corsu (scorza = bark)	proposal	yes
 Slab	half block (f)	Lastra	lastr	Teghja (roofing stone)		Corsu	proposal	yes
 Stairs	block (f)	Scala	scal			to check in INFCOR	proposal	yes
 Wall	block (m)	Muru	mur			to check in INFCOR	proposal	yes
-Fence	block (m)	Steccatu	steccat/cancell			to check in INFCOR	proposal	yes
+Fence	block (f)	Chjudenda	chjudend/cancell		Steccatu (only the participle in INFCOR)	ADECEC la-maison "Clôture: chjudenda, serrenda - fencing" (verified 2026-10-18, review-2026-10/APPLIED.tsv)	attested	yes
 Fence Gate	block (m)	Cancellu	cancell			to check in INFCOR	proposal	yes
 Door	block (f)	Porta	port			to check in INFCOR	proposal	yes
-Trapdoor	block (f)	Bodula	bodul	Trappa		Corsu (Italian botola)	proposal	yes
+Trapdoor	block (f)	Caterazza	caterazz	Trappa	Bodula (Italian botola)	ADECEC la-maison "Trappe: trappula, caterazza"; INFCOR (cached lookups, review-2026-10) caterazza EN trap door (verified 2026-10-18, review-2026-10/APPLIED.tsv)	attested	yes
 Button	block (m)	Buttone	button/cliccu			to check in INFCOR	proposal	yes
 Pressure Plate	block (f)	Pedana di pressione	pedan			Corsu	proposal	yes
-Sign	block (m)	Cartellu	cartell			to check in INFCOR	proposal	yes
+Sign	block (f)	Cartella	cartell		Cartellu (INFCOR: challenge letter, sachet)	INFCOR (cached lookups, review-2026-10) cartella FR écriteau, pancarte EN placard, sign (verified 2026-10-18, review-2026-10/APPLIED.tsv)	attested	yes
 Hanging Sign	block	Cartellu appesu				Corsu	proposal	no
-Brick	material (m)	Matone	maton			to check in INFCOR	proposal	yes
-Bricks	block (m pl)	Matoni	maton			to check in INFCOR	proposal	yes
+Brick	material (m)	Mattone	matton		Matone	ADECEC la-maison "Brique: mattone"; INFCOR (cached lookups, review-2026-10) mattone (verified 2026-10-18, review-2026-10/APPLIED.tsv)	attested	yes
+Bricks	block (m pl)	Mattoni	matton		Matoni	ADECEC la-maison "Brique: mattone"; INFCOR (cached lookups, review-2026-10) mattone (verified 2026-10-18, review-2026-10/APPLIED.tsv)	attested	yes
 Polished	stone finish	Lisciatu	lisciat			Corsu	proposal	yes
 Smooth	stone finish	Lisciu	lisci			to check in INFCOR	proposal	no
 Chiseled	carved stone	Sculpitu	sculpit			Corsu	proposal	yes
 Cut	cut stone/copper	Tagliatu	tagliat			to check in INFCOR	proposal	no
 Cracked	damaged bricks	Crepatu	crepat			Corsu	proposal	yes
-Mossy	covered with moss	Muscosu	muscos			Corsu	proposal	yes
-Moss	plant (m)	Muscu	musc			to check in INFCOR	proposal	yes
+Mossy	covered with moss	Murzosu	murzos		Muscosu (muscu = musk)	INFCOR (cached lookups, review-2026-10) murzosu FR moussu (verified 2026-10-18, review-2026-10/APPLIED.tsv)	attested	yes
+Moss	plant (m)	Murzu	murz		Muscu (= musk, scent)	INFCOR (cached lookups, review-2026-10) marmuzzu FR mousse SIN murzu (verified 2026-10-18, review-2026-10/APPLIED.tsv)	attested	yes
 Glass	block (m)	Vetru	vetr			to check in INFCOR	proposal	yes
 Stained Glass	coloured glass	Vetru tintu	vetru tint			Corsu	proposal	no
-Glass Pane	thin glass (m)	Pannellu di vetru	pannell			Corsu	proposal	no
+Glass Pane	thin glass (m)	Vetru di finestra	vetru di finestra		Pannellu di vetru	ADECEC la-maison "Carreau (de fenêtre): vetru di finestra - window-pane" (verified 2026-10-18, review-2026-10/APPLIED.tsv)	attested	no
 Wool	block (f)	Lana	lan			to check in INFCOR	proposal	yes
-Carpet	block (m)	Tappetu	tappet			to check in INFCOR	proposal	yes
-Concrete	block (m)	Betonu	beton	Cimentu		to check in INFCOR	proposal	yes
+Carpet	block (m)	Tappettu	tappett		Tappetu	INFCOR (cached lookups, review-2026-10) tappettu EN carpet; ADECEC filage-et-tissage (verified 2026-10-18, review-2026-10/APPLIED.tsv)	attested	yes
+Concrete	block (m)	Cimentu	ciment	Cimentu	Betonu (not found)	ADECEC la-maison "Béton: cimentu" (verified 2026-10-18, review-2026-10/APPLIED.tsv)	attested	yes
 Concrete Powder	block (f)	Polvera di betonu				Corsu	proposal	no
 Terracotta	block (f)	Terracotta	terracott			Corsu	proposal	yes
 Glazed Terracotta	block	Terracotta smaltata				Corsu	proposal	no
@@ -224,7 +224,7 @@ Emerald	gem (m)	Smeraldu	smerald			to check in INFCOR	proposal	yes
 Netherite	metal	Netherite				Mojang	name	yes
 Coal	mineral (m)	Carbone	carbon			to check in INFCOR	proposal	yes
 Charcoal	item (m)	Carbone di legnu				to check in INFCOR	proposal	no
-Lapis Lazuli	mineral (m)	Lapislazuli	lapislazuli			Corsu	proposal	yes
+Lapis Lazuli	mineral (m)	Lapislazzuli	lapislazzuli		Lapislazuli	INFCOR (cached lookups, review-2026-10) lapisi/lapislazzuli (verified 2026-10-18, review-2026-10/APPLIED.tsv)	attested	yes
 Quartz	mineral (m)	Quarzu	quarz			to check in INFCOR	proposal	yes
 Amethyst	mineral (f)	Ametista	ametist			Corsu	proposal	yes
 Ore	block (m)	Minerale	mineral	Vena		Corsu	proposal	yes
@@ -239,7 +239,7 @@ Diorite	block (f)	Diorite	diorit			Corsu	proposal	yes
 Andesite	block (f)	Andesite	andesit			Corsu	proposal	yes
 Basalt	block (m)	Basaltu	basalt			to check in INFCOR	proposal	yes
 Obsidian	block (f)	Ossidiana	ossidian			to check in INFCOR	proposal	yes
-Sandstone	block (f)	Arenaria	arenari	Petra di rena		Corsu	proposal	yes
+Sandstone	block (f)	Petra rinaghja	rinaghj	Petra di rena	Arenaria (plant genus in Corsican texts)	INFCOR (cached lookups, review-2026-10) petra rinaghja EN sandstone; ADECEC la-géographie "grès : … rinaghja" (verified 2026-10-18, review-2026-10/APPLIED.tsv)	attested	yes
 Blackstone	block (f)	Petranera	petranera			Corsu	proposal	yes
 Prismarine	block (f)	Prismarina	prismarin			Corsu	proposal	yes
 Purpur	block	Purpur				Mojang	name	no
@@ -250,14 +250,14 @@ Sculk	block	Sculk				Mojang	name	yes
 Resin	material (f)	Resina	resin			to check in INFCOR	proposal	yes
 Coral	block (m)	Curallu	curall			to check in INFCOR	proposal	yes
 Coral Fan	coral (f)	Ventaglia di curallu	ventagli			Corsu	proposal	no
-Sponge	block (f)	Sponga	spong			to check in INFCOR	proposal	yes
+Sponge	block (f)	Spunga	spung		Sponga	INFCOR (cached lookups, review-2026-10) spunga EN sponge (verified 2026-10-18, review-2026-10/APPLIED.tsv)	attested	yes
 Bedrock	block (m)	Basamentu	basament	Bedrock		Corsu (Italian MC: substrato)	proposal	no
 Lava	fluid (f)	Lava				to check in INFCOR	proposal	yes
 Water	fluid (f)	Acqua	acqu			to check in INFCOR	proposal	yes
 Magma	block (m)	Magma				to check in INFCOR	proposal	no
 Cobweb	block (f)	Tela di ragnu	ragnaghj	Ragnaghju		to check in INFCOR	proposal	yes
 Ladder	block (f)	Scala di manu	scala			Corsu	proposal	yes
-Torch	block (f)	Torcia	torci	Fiaccula		to check in INFCOR	proposal	yes
+Torch	block (f)	Torchja	torchj	Fiaccula	Torcia (Italian)	INFCOR (cached lookups, review-2026-10) torchja/torchia FR torche (verified 2026-10-18, review-2026-10/APPLIED.tsv)	attested	yes
 Lantern	block (f)	Lanterna	lantern			to check in INFCOR	proposal	yes
 Candle	block (f)	Candela	candel			to check in INFCOR	proposal	yes
 Campfire	block (m)	Fucone	fucon			to check in to check in INFCOR (fucone = foyer)	proposal	yes
@@ -269,9 +269,9 @@ Blast Furnace	block (m)	Altofornu	altoforn			Corsu	proposal	no
 Smoker	block (m)	Affumicatore	affumicator			Corsu	proposal	yes
 Crafting Table	block (m)	Bancu di fabbricazione	bancu di fabbricazione			Corsu	proposal	no
 Crafter	block (m)	Fabbricadore	fabbricador			Corsu	proposal	yes
-Anvil	block (f)	Ancùdina	ancudin			to check in INFCOR	proposal	yes
+Anvil	block (f)	Incudine	incudin		Ancùdina (not among the INFCOR variants)	ADECEC chaudronnerie "enclume : incudine"; INFCOR (cached lookups, review-2026-10) (verified 2026-10-18, review-2026-10/APPLIED.tsv)	attested	yes
 Grindstone	block (f)	Mola	mol			to check in INFCOR	proposal	yes
-Smithing Table	block (m)	Bancu di ferraghju				Corsu	proposal	no
+Smithing Table	block (m)	Bancu di stazzunaru	stazzunar		Bancu di ferraghju (= February)	INFCOR (cached lookups, review-2026-10) stazzunaru FR forgeron (compound built) (verified 2026-10-18, review-2026-10/APPLIED.tsv)	proposal	no
 Stonecutter	block (m)	Tagliapetra	tagliapetr			Corsu	proposal	yes
 Loom	block (m)	Telaghju	telaghj			to check in INFCOR	proposal	yes
 Cartography Table	block (m)	Bancu di cartugrafia				Corsu	proposal	no
@@ -280,7 +280,7 @@ Brewing Stand	block (m)	Lambiccu	lambicc	Alambiccu		Corsu	proposal	yes
 Cauldron	block (m)	Paghjolu	paghjol	Caldaia		to check in INFCOR	proposal	yes
 Enchanting Table	block (m)	Bancu d'incantesimi				Corsu	proposal	no
 Bookshelf	block (m)	Scaffale di libri				Corsu	proposal	no
-Lectern	block (m)	Leghju	leghj			Corsu	proposal	yes
+Lectern	block (m)	Pulpitru	pulpitr		Leghju (not found)	INFCOR (cached lookups, review-2026-10) pulpitru FR pupitre (verified 2026-10-18, review-2026-10/APPLIED.tsv)	attested	yes
 Composter	block (m)	Cumpustatore	cumpustator			Corsu	proposal	yes
 Beehive	block (m)	Bugnu	bugn			to check in INFCOR	proposal	yes
 Bee Nest	block (m)	Nidu d'ape				Corsu	proposal	no
@@ -294,14 +294,14 @@ Sticky Piston	block (m)	Pistone appiccicosu				Corsu	proposal	no
 Observer	block (m)	Osservatore	osservator			Corsu	proposal	yes
 Dispenser	block (m)	Distributore	distributor			Corsu	proposal	yes
 Dropper	block (m)	Lampatore	lampator		Espulsore	Corsu (lampà = to throw)	proposal	yes
-Hopper	block (f)	Tramoghja	tramoghj			to check in INFCOR	proposal	yes
+Hopper	block (f)	Trimoghja	trimoghj		Tramoghja	INFCOR (cached lookups, review-2026-10) trimoghja EN hopper (verified 2026-10-18, review-2026-10/APPLIED.tsv)	attested	yes
 Comparator	redstone (m)	Paragunatore	paragunator			Corsu	proposal	yes
 Repeater	redstone (m)	Ripetitore	ripetitor			Corsu	proposal	yes
 Lever	block (f)	Leva	lev			to check in INFCOR	proposal	yes
-Rail	block (m)	Binariu	binari	Rotaia		to check in INFCOR	proposal	yes
-Minecart	vehicle (m)	Carrettu	carrett	Vagunettu		Corsu	proposal	yes
+Rail	block (m)	Ragliu	ragli/ragl	Rotaia	Binariu (= binary)	INFCOR (cached lookups, review-2026-10) ragliu/raglia EN rail (verified 2026-10-18, review-2026-10/APPLIED.tsv)	attested	yes
+Minecart	vehicle (m)	Vagunettu	vagunett	Vagunettu	Carrettu (hand cart)	INFCOR (cached lookups, review-2026-10) vagunettu FR wagonnet (verified 2026-10-18, review-2026-10/APPLIED.tsv)	attested	yes
 Boat	vehicle (f)	Barca	barc			to check in INFCOR	proposal	yes
-Raft	vehicle (f)	Zatta	zatt			to check in INFCOR	proposal	yes
+Raft	vehicle (f)	Zattera	zatter		Zatta	INFCOR (cached lookups, review-2026-10) zattera FR radeau (verified 2026-10-18, review-2026-10/APPLIED.tsv)	attested	yes
 Beacon	block (m)	Faru	far	Fanale		to check in INFCOR	proposal	yes
 Conduit	block (m)	Cundottu	cundott			Corsu	proposal	yes
 Spawner	block (m)	Generatore	generator			Corsu	proposal	yes
@@ -323,15 +323,15 @@ Flower Pot	block (m)	Vasu di fiori				Corsu	proposal	no
 Potted	plant in a pot	in vasu	vasu			Corsu	proposal	yes
 Shelf	block (m)	Scaffale	scaffal			to check in INFCOR	proposal	yes
 # Plants and biomes
-Oak	tree (f)	Quercia	querci			to check in INFCOR	proposal	yes
+Oak	tree (m)	Querciu	querci		Quercia (Italian; f.)	INFCOR (cached lookups, review-2026-10) querciu/quarciu n.m. EN oak (verified 2026-10-18, review-2026-10/APPLIED.tsv)	attested	yes
 Dark Oak	tree (f)	Quercia scura				Corsu	proposal	no
 Pale Oak	tree (f)	Quercia pallida				Corsu	proposal	no
-Spruce	tree (m)	Abete	abet			to check in INFCOR	proposal	yes
-Birch	tree (f)	Betula	betul			to check in INFCOR	proposal	yes
+Spruce	tree (m)	Abetu	abet		Abete (Italian)	INFCOR (cached lookups, review-2026-10) abetu/abbetu FR sapin (verified 2026-10-18, review-2026-10/APPLIED.tsv)	attested	yes
+Birch	tree (m)	Biolu	biol		Betula (Latin genus)	INFCOR (cached lookups, review-2026-10) biolu/violu EN birch (verified 2026-10-18, review-2026-10/APPLIED.tsv)	attested	yes
 Jungle	biome / tree (f)	Giungla	giungl			to check in INFCOR	proposal	yes
 Acacia	tree (f)	Acacia	acaci			to check in INFCOR	proposal	yes
 Mangrove	tree (f)	Mangrovia	mangrovi			Corsu	proposal	yes
-Cherry	tree (m)	Cirasgiu	cirasg	Ciliegiu		to check in INFCOR	proposal	yes
+Cherry	tree (m)	Chjarasgiu	chjarasg	Ciliegiu	Cirasgiu (not found)	INFCOR (cached lookups, review-2026-10) chjarasgiu EN cherry tree (verified 2026-10-18, review-2026-10/APPLIED.tsv)	attested	yes
 Bamboo	plant (m)	Bambù	bambù			to check in INFCOR	proposal	yes
 Crimson	nether wood	Cremisi	cremisi			Corsu	proposal	yes
 Warped	nether wood	Distortu	distort			Corsu	proposal	yes
@@ -344,12 +344,12 @@ Vines	plant (f pl)	Liane	lian			Corsu	proposal	yes
 Kelp	plant (f)	Alga	alg			to check in INFCOR	proposal	yes
 Seagrass	plant (f)	Erba marina				Corsu	proposal	no
 Flower	plant (m)	Fiore	fior/fiur			to check in INFCOR	proposal	yes
-Poppy	flower (m)	Pàparu	paparu	Rosula salvatica		to check in INFCOR	proposal	yes
-Dandelion	flower (m)	Pisciacane	pisciacan	Cicoria salvatica		to check in INFCOR	proposal	yes
+Poppy	flower (m)	Pappaveru	pappaver	Rosula salvatica	Pàparu (not found)	INFCOR (cached lookups, review-2026-10) pappaveru FR coquelicot (verified 2026-10-18, review-2026-10/APPLIED.tsv)	attested	yes
+Dandelion	flower (m)	Radichju	radichj	Cicoria salvatica	Pisciacane (not found)	INFCOR (cached lookups, review-2026-10) radichju EN dandelion; ADECEC la-cuisine "pissenlit : radichju" (speaker to confirm: Vikipedia article = radish) (verified 2026-10-18, review-2026-10/APPLIED.tsv)	attested	yes
 Tulip	flower (m)	Tulipanu	tulipan			to check in INFCOR	proposal	yes
 Sunflower	flower (m)	Girasole	girasol			to check in INFCOR	proposal	yes
 Cactus	plant (m)	Cactus				to check in INFCOR	proposal	yes
-Melon	fruit (f)	Pateca	patec			to check in to check in INFCOR (pateca = pastèque)	proposal	yes
+Melon	fruit (f)	Patecca	patecc		Pateca	ADECEC la-cuisine "pastèque : pastecca, patecca"; INFCOR (cached lookups, review-2026-10) (verified 2026-10-18, review-2026-10/APPLIED.tsv)	attested	yes
 Pumpkin	fruit (f)	Zucca	zucc			to check in INFCOR	proposal	yes
 Wheat	crop (m)	Granu	gran			to check in INFCOR	proposal	yes
 Carrot	crop (f)	Carotta	carott			to check in INFCOR	proposal	yes
@@ -400,7 +400,7 @@ Chainmail	armour material (f)	Maglia	magli			to check in INFCOR	proposal	yes
 Elytra	wings (f pl)	Elitre	elitr			Corsu	proposal	yes
 Saddle	equipment (f)	Sella	sell			to check in INFCOR	proposal	yes
 Harness	ghast equipment (f)	Imbracatura	imbracatur			Corsu	proposal	yes
-Lead	rope for mobs (f)	Ligaccia	ligacci	Corda		to check in INFCOR	proposal	yes
+Lead	rope for mobs (f)	Catinetta	catinett	Corda	Ligaccia (not found)	INFCOR (cached lookups, review-2026-10) catinetta EN leash (verified 2026-10-18, review-2026-10/APPLIED.tsv)	attested	yes
 Name Tag	item (f)	Etichetta	etichett			to check in INFCOR	proposal	no
 Bucket	item (f)	Secchja	secchj			to check in INFCOR	proposal	yes
 Bottle	item (f)	Buttiglia	buttigli			to check in INFCOR	proposal	yes
@@ -416,13 +416,13 @@ Paper	item (f)	Carta	cart			to check in INFCOR	proposal	yes
 Book	item (m)	Libru	libr			to check in INFCOR	proposal	yes
 Map	item (f)	Carta	cart	Mappa		to check in INFCOR	proposal	yes
 Compass	item (f)	Bussula	bussul			to check in INFCOR	proposal	yes
-Clock	item (m)	Orologhju	orologhj			to check in INFCOR	proposal	yes
+Clock	item (m)	Orillogiu	orillogi		Orologhju (not found)	INFCOR (cached lookups, review-2026-10) orillogiu FR montre, horloge (verified 2026-10-18, review-2026-10/APPLIED.tsv)	attested	yes
 Spyglass	item (m)	Cannuchjale	cannuchjal			to check in INFCOR	proposal	yes
 Shears	tool (f pl)	Forbice	forbic			to check in INFCOR	proposal	yes
 Brush	tool (m)	Pinnellu	pinnell	Spazzula		to check in INFCOR	proposal	yes
 Fishing Rod	tool (f)	Canna di pesca				to check in INFCOR	proposal	no
 Bundle	container (m)	Sacchettu	sacchett			Corsu	proposal	yes
-Dye	item (f)	Tintura	tintur			to check in INFCOR	proposal	yes
+Dye	item (f)	Tinta	tint		Tintura (not found)	INFCOR (cached lookups, review-2026-10) tinta EN dye; ADECEC filage-et-tissage "teinture : tinta" (verified 2026-10-18, review-2026-10/APPLIED.tsv)	attested	yes
 Potion	item (f)	Pozione	pozion			Corsu	proposal	yes
 Splash Potion	thrown potion (f)	Pozione da lampà				Corsu	proposal	no
 Lingering Potion	cloud potion (f)	Pozione persistente				Corsu	proposal	no
@@ -436,12 +436,12 @@ Snowball	item (f)	Palla di neve				Corsu	proposal	no
 Egg	item (m)	Ovu	ov			to check in INFCOR	proposal	yes
 Spawn Egg	creative item (m)	Ovu generatore	ovu generator			Corsu	proposal	no
 Bread	food (m)	Pane	pan			to check in INFCOR	proposal	yes
-Cake	food (f)	Torta	tort			to check in INFCOR	proposal	yes
+Cake	food (m)	Pastadolce	pastadolce		Torta (= tart, pie)	ADECEC la-cuisine "gâteau : pastadolce", "tarte : torta"; INFCOR (cached lookups, review-2026-10) (verified 2026-10-18, review-2026-10/APPLIED.tsv)	attested	yes
 Cookie	food (m)	Biscottu	biscott			to check in INFCOR	proposal	yes
 Stew	food (m)	Stufatu	stufat			to check in INFCOR	proposal	yes
 Steak	food (f)	Bistecca	bistecc			to check in INFCOR	proposal	yes
 Beef	food (m)	Manzu	manz			to check in INFCOR	proposal	yes
-Porkchop	food (f)	Custuletta di porcu	custulett			Corsu	proposal	no
+Porkchop	food (f)	Custelletta di porcu	custellett		Custuletta	ADECEC la-cuisine "côtelette : custelletta"; INFCOR (cached lookups, review-2026-10) (verified 2026-10-18, review-2026-10/APPLIED.tsv)	attested	no
 Mutton	food (m)	Castratu	castrat			to check in INFCOR	proposal	yes
 Milk	food (m)	Latte	latt			to check in INFCOR	proposal	yes
 Sugar	food (m)	Zuccheru	zuccher			to check in INFCOR	proposal	yes
