@@ -86,6 +86,8 @@ class DiscordWordsTests(unittest.TestCase):
         for key, value in expected.items():
             self.assertEqual(self.words[key], value, key)
         self.assertEqual(self.words['Quitter'], 'Abbandunà')
+        # Found by the bounded search of Discord's settings (docs/untranslated-inventory.md).
+        self.assertEqual(self.words['Durée minimale des notifications'], 'Durata minima di e nutificazioni')
 
     def test_templates_keep_their_placeholders(self):
         key = engine.normalize('Effacer après \u00001\u0000 heures')
