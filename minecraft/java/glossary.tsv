@@ -89,7 +89,7 @@ Iron Golem	mob	Golem di ferru				Corsu	proposal	no
 Golem	mob family	Golem				Mojang	name	no
 Cow	mob (f)	Vacca	vacc			to check in INFCOR	proposal	yes
 Pig	mob (m)	Porcu	porc/purcell			to check in INFCOR	proposal	yes
-Sheep	mob (f)	Pecura	pecur			to check in INFCOR	proposal	yes
+Sheep	mob (f)	Pecura	pecur			INFCOR pecura FR brebis, mouton, ovin, "Estens. l'inseme di a sterpa pecurina" (cached lookups); A matina p. 108; Vikipedia article Pecura (says the term is reserved for the ewe) (round 3: kept, review-2026-10/round3.tsv T07)	proposal	yes
 Chicken	mob (f) / food	Ghjallina	ghjallin	Pullastru		to check in INFCOR	proposal	yes
 Horse	mob (m)	Cavallu	cavall			to check in INFCOR	proposal	yes
 Donkey	mob (m)	Sumere	sumer	Ciucciu		to check in INFCOR	proposal	yes
@@ -235,7 +235,7 @@ Deepslate	deep stone (f)	Ardesia prufonda	ardesia	Lavagna		Corsu (Italian MC: ar
 Tuff	block (m)	Tufu	tuf			to check in INFCOR	proposal	yes
 Calcite	block (f)	Calcite				Corsu	proposal	no
 Granite	block (m)	Granitu	granit			to check in INFCOR	proposal	yes
-Diorite	block (f)	Diorite	diorit			Corsu	proposal	yes
+Diorite	block (f)	Diorite	diorit			diorita only inside INFCOR petra uchjata; diurita 1 southern spelling in Vikipedia; not forced (round 3: deferred, review-2026-10/round3.tsv T08)	proposal	yes
 Andesite	block (f)	Andesite	andesit			Corsu	proposal	yes
 Basalt	block (m)	Basaltu	basalt			to check in INFCOR	proposal	yes
 Obsidian	block (f)	Ossidiana	ossidian			to check in INFCOR	proposal	yes
@@ -298,7 +298,7 @@ Hopper	block (f)	Trimoghja	trimoghj		Tramoghja	INFCOR (cached lookups, review-20
 Comparator	redstone (m)	Paragunatore	paragunator			Corsu	proposal	yes
 Repeater	redstone (m)	Ripetitore	ripetitor			Corsu	proposal	yes
 Lever	block (f)	Leva	lev			to check in INFCOR	proposal	yes
-Rail	block (m)	Ragliu	ragli/ragl	Rotaia	Binariu (= binary)	INFCOR (cached lookups, review-2026-10) ragliu/raglia EN rail (verified 2026-10-18, review-2026-10/APPLIED.tsv)	attested	yes
+Rail	block (m)	Ragliu	ragli/ragl (sg. ragliu m.; pl. raglie, feminine agreement)	Raglia (f. sg., ADECEC La chaudronnerie)	Binariu (same file: binary keypad key; not proven wrong)	INFCOR ragliu/raglia EN rail, railroad (cached lookups, to re-check by hand); ADECEC La chaudronnerie "rail (nm) : raglia (nf)"; Chemins de fer de la Corse, Lexique, printed p. 101 (ragliu esterioru dirittu, raglie unte) (round 3, review-2026-10/round3.tsv T01)	attested	yes
 Minecart	vehicle (m)	Vagunettu	vagunett	Vagunettu	Carrettu (hand cart)	INFCOR (cached lookups, review-2026-10) vagunettu FR wagonnet (verified 2026-10-18, review-2026-10/APPLIED.tsv)	attested	yes
 Boat	vehicle (f)	Barca	barc			to check in INFCOR	proposal	yes
 Raft	vehicle (f)	Zattera	zatter		Zatta	INFCOR (cached lookups, review-2026-10) zattera FR radeau (verified 2026-10-18, review-2026-10/APPLIED.tsv)	attested	yes
@@ -345,7 +345,7 @@ Kelp	plant (f)	Alga	alg			to check in INFCOR	proposal	yes
 Seagrass	plant (f)	Erba marina				Corsu	proposal	no
 Flower	plant (m)	Fiore	fior/fiur			to check in INFCOR	proposal	yes
 Poppy	flower (m)	Pappaveru	pappaver	Rosula salvatica	Pàparu (not found)	INFCOR (cached lookups, review-2026-10) pappaveru FR coquelicot (verified 2026-10-18, review-2026-10/APPLIED.tsv)	attested	yes
-Dandelion	flower (m)	Radichju	radichj	Cicoria salvatica	Pisciacane (not found)	INFCOR (cached lookups, review-2026-10) radichju EN dandelion; ADECEC la-cuisine "pissenlit : radichju" (speaker to confirm: Vikipedia article = radish) (verified 2026-10-18, review-2026-10/APPLIED.tsv)	attested	yes
+Dandelion	flower (m)	Radichju	radichj	Strigliulu (INFCOR, yellow flower)	Pisciacane (not found in the sources consulted)	INFCOR (cached lookups, review-2026-10) radichju EN dandelion; ADECEC la-cuisine "pissenlit : radichju" (speaker to confirm: Vikipedia article = radish) (verified 2026-10-18, review-2026-10/APPLIED.tsv)	attested	yes
 Tulip	flower (m)	Tulipanu	tulipan			to check in INFCOR	proposal	yes
 Sunflower	flower (m)	Girasole	girasol			to check in INFCOR	proposal	yes
 Cactus	plant (m)	Cactus				to check in INFCOR	proposal	yes
@@ -806,3 +806,4 @@ Console	command console (f)	Cunsola	cunsol		Cunsula	lexicon-upstream:9050 (Conso
 Backspace	keyboard key (m)	Ritornu in daretu				lexicon-upstream:12682 (Backspace key -> tastu di ritornu in daretu); review 2026-10	attested	no
 Explore	verb	esplurà	esplur		esplorà	lexicon-mozilla:978 (Explore -> Esplurà); review 2026-10	attested	no
 At most	quantity	à u più			al più (Italian contraction)	lexicon-upstream:5337 (à u più); review 2026-10	proposal	no
+Thunder	weather (m)	Tonu	ton		Tronu (throne in the texts consulted; a regional thunder sense is unchecked)	ADECEC Le temps qu'il fait "Tonnerre : tonu", La géographie "tonnerre : tonu"; Vikipedia thunder-sense uses (round 3, review-2026-10/round3.tsv T02)	attested	no

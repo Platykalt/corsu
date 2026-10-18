@@ -73,7 +73,9 @@ October 2026: two AI agents proposed corrections with sources (concrete names: 1
 support them, 41 deferred to a speaker; 1,131 texts changed in 26.3 and the older versions. Every applied change is
 in [review-2026-10/APPLIED.tsv](review-2026-10/APPLIED.tsv) with its reference, and every proposal not applied in
 [review-2026-10/REJECTED.tsv](review-2026-10/REJECTED.tsv) with the reason
-([review-2026-10/TRACKING.md](review-2026-10/TRACKING.md)). Still no speaker has validated any of it. Open questions for a speaker:
+([review-2026-10/TRACKING.md](review-2026-10/TRACKING.md)). A second round (27 texts) and a third round (counts reconciled: 1,158 edits, 1,157
+distinct texts; sensitive decisions re-read against their sources, no text changed; 30 cases still deferred) are in
+[review-2026-10/TRACKING.md](review-2026-10/TRACKING.md) and [review-2026-10/ROUND3.md](review-2026-10/ROUND3.md). Still no speaker has validated any of it. Open questions for a speaker:
 [decisions.md](decisions.md). Test procedure: [TESTING.md](TESTING.md).
 
 ## Per category (from inventory.tsv)

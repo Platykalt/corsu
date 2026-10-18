@@ -347,7 +347,8 @@ def match_entry(entry, memory):
     key = engine.normalize(entry['source']).strip()
     plural = bool(entry.get('plural'))
     candidates = [candidate for candidate in memory.exact.get(key, [])
-                  if bool(candidate.get('plural')) == plural and candidate is not entry]
+                  if bool(candidate.get('plural')) == plural and candidate is not entry
+                  and not engine.app_only(candidate, entry.get('app'))]
     if candidates:
         app = (entry.get('app') or '').casefold()
         contexts = context_values(entry)
@@ -386,7 +387,10 @@ def match_entry(entry, memory):
             return entry
     suggestions = []
     for ratio, source in memory.similar(entry['source']):
-        candidate = max(memory.exact[source], key=lambda item: REVIEWED.get(item.get('review'), 0))
+        usable = [item for item in memory.exact[source] if not engine.app_only(item, entry.get('app'))]
+        if not usable:
+            continue
+        candidate = max(usable, key=lambda item: REVIEWED.get(item.get('review'), 0))
         suggestions.append({'source': candidate.get('source'), 'target': candidate['target'],
                             'app': candidate.get('app'), 'ratio': round(ratio, 3)})
     if suggestions:

@@ -16,7 +16,12 @@ Les sections datées après « État actuel » sont l'historique : ce qui y est 
   crédits, guides téléphone pour le paquet 1.0, [provenance du lexique](../lexicon/PROVENANCE.md)).
 - **`next-0.26`** (en préparation, non publiée ; la publication attend l'accord du mainteneur) :
   - **Minecraft** : revue IA d'octobre 2026 (`minecraft/java/review-2026-10/` : APPLIED, REJECTED, TRACKING), deux
-    tours appliqués, vérifiés sur les 87 versions avec le code de chaque jeu. Relecture humaine : 0.
+    tours appliqués, vérifiés sur les 87 versions avec le code de chaque jeu. Troisième tour
+    (`review-2026-10/ROUND3.md`, `round3.tsv`) : comptes réconciliés (1 131 + 27 = 1 158 modifications, 1 157 textes
+    distincts ; 30 lignes différées), 11 décisions sensibles relues sur leurs sources (rail : *Ragliu* gardé, ADECEC
+    *La chaudronnerie* et lexique des Chemins de fer de la Corse p. 101 ; *Tonu* gardé ; raisonnements « ce mot veut
+    dire autre chose » corrigés), aucun texte changé ; décisions dans `lexicon/memory/minecraft-java.jsonl` (jamais
+    réutilisées pour un autre logiciel) ; consultations manuelles à faire listées. Relecture humaine : 0.
   - **Clavier Keyman** (paquets 1.1) : casse gardée, vocabulaire refait (`keyboard/data`), 446 noms de lieux
     (Wikidata, CC0), préférences Cismuntincu et Pumuntincu **expérimentales** (361 mots pondérés autrement). Vérifié
     dans le moteur de Keyman 18.0.254 (CI) et sur émulateur Android 14 ; **pas sur téléphone, pas sur iOS**.
@@ -28,7 +33,8 @@ Les sections datées après « État actuel » sont l'historique : ce qui y est 
   (« Fermer Discord », « Display Configuration ») et logo, clavier (majuscules, retour sur un mot, noms propres,
   variantes, Canopé), revue sémantique Minecraft. Résultats et preuves ajoutés ici à la fin du chantier.
 - **INFCOR** : un agent a lancé 219 requêtes par script (une par mot, 3 s d'intervalle) ; arrêté. Aucune
-  interrogation automatisée d'INFCOR ni d'un autre dictionnaire : consultation page par page seulement.
+  interrogation automatisée d'INFCOR ni d'un autre dictionnaire : consultation page par page seulement ([AGENTS.md](../AGENTS.md), test `tests/test_sources_policy.py`, incident
+  décrit dans `minecraft/java/review-2026-10/ROUND3.md`).
 - Tests unitaires : `HOME=$(mktemp -d) python3 -m unittest discover -s tests -t . -q` (sans `-t .`, 13 erreurs
   d'import qui ne signalent rien). CI d'une branche autre que `main` : `gh workflow run ci.yml --ref <branche>`.
 - **Attend une personne** : essai du clavier sur un vrai téléphone (Android, iPhone) ; relecture par un locuteur

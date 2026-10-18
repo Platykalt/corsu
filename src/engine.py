@@ -231,7 +231,7 @@ def read_memory(path):
             if 'params' not in entry:
                 entry['params'] = placeholders(entry['source'])
             for field in ('app', 'component', 'context', 'source_fr', 'target', 'plural', 'origin', 'version',
-                          'license', 'review', 'fetched'):
+                          'license', 'review', 'fetched', 'reuse'):
                 entry.setdefault(field, None)
             yield entry
 
@@ -251,6 +251,12 @@ def memory_entries(directory=None, exported=True):
                     entries.extend(read_memory(path))
         _MEMORY_CACHE[(directory, exported)] = entries
     return _MEMORY_CACHE[(directory, exported)]
+
+
+def app_only(entry, app=None):
+    """True when an entry is restricted to its own application (`"reuse": "same-app"`, e.g. the Minecraft review
+    decisions: "Sign" is a wooden sign there, not a signature or a sign-in) and `app` is another application."""
+    return entry.get('reuse') == 'same-app' and (entry.get('app') or '').casefold() != (app or '').casefold()
 
 
 def _from_lexicon(entry):
@@ -362,6 +368,8 @@ def lookup(text, app=None, context=None, directory=None):
             value = unmask(template, tokens) if count == len(tokens) else None
             if value is not None:
                 candidates.append((entry, value))
+    # Entries kept for their own application only never answer for another one.
+    candidates = [(entry, value) for entry, value in candidates if not app_only(entry, app)]
     if not candidates:
         return None
     candidates.sort(key=lambda item: -REVIEW_RANK.get(item[0].get('review'), 0))

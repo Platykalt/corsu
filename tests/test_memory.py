@@ -167,6 +167,16 @@ class LookupTests(MemoryCase):
         engine._INDEX_CACHE.clear()
         self.assertEqual(engine.lookup('Profile'), 'Prufilu')
 
+    def test_app_only_entry_answers_only_its_application(self):
+        # A Minecraft decision ("Sign" = a wooden sign) must not become the Corsican of "Sign" elsewhere.
+        self.memory('minecraft', [entry('Minecraft: Java Edition', 'Sign', 'Cartella', review='ai-reviewed',
+                                        reuse='same-app')])
+        engine._MEMORY_CACHE.clear()
+        engine._INDEX_CACHE.clear()
+        self.assertIsNone(engine.lookup('Sign'))
+        self.assertIsNone(engine.lookup('Sign', app='Discord'))
+        self.assertEqual(engine.lookup('Sign', app='Minecraft: Java Edition'), 'Cartella')
+
     def test_application_words_reads_reviewed_memory_of_the_application(self):
         self.memory('discord-reviewed', [entry('Discord', 'Go Live', 'In direttu', review='human-reviewed')])
         engine._MEMORY_CACHE.clear()
@@ -218,6 +228,20 @@ class MatchTests(MemoryCase):
         self.assertEqual(result['match']['type'], 'suggestion')
         self.assertEqual(result['match']['suggestions'][0]['target'], 'Scaricà u schedariu')
         self.assertGreaterEqual(result['match']['suggestions'][0]['ratio'], 0.85)
+
+    def test_app_only_entry_is_neither_reused_nor_suggested_elsewhere(self):
+        self.memory('minecraft', [entry('Minecraft: Java Edition', 'Rail', 'Ragliu', review='ai-reviewed',
+                                        reuse='same-app'),
+                                  entry('Minecraft: Java Edition', 'Detector Rails', 'Ragliu rilevatore',
+                                        review='ai-reviewed', reuse='same-app')])
+        engine._MEMORY_CACHE.clear()
+        store = tm.Memory(directory=self.directory)
+        result = tm.match_entry(self.work('Rail'), store)
+        self.assertIsNone(result['target'])
+        self.assertNotIn('match', result)
+        self.assertNotIn('match', tm.match_entry(self.work('Detector Rail'), store))
+        mine = tm.match_entry(self.work('Rail', app='Minecraft: Java Edition'), store)
+        self.assertEqual((mine['target'], mine['match']['reason']), ('Ragliu', 'same-app'))
 
     def test_placeholders_must_match(self):
         self.assertEqual(tm.match_entry(self.work('Delete %s'), self.store)['target'], 'Squassà %s')

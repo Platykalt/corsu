@@ -21,7 +21,11 @@ These rules apply to every person or program (AI assistants included) that chang
    an external source consulted (named), a usage already present in Corsu (cited, and not counted as an independent
    validation: repeating a word in our own lexicon proves nothing), or an AI proposal. An AI review is never
    presented as a human validation; review proposals are kept apart from corrections actually applied.
-4. **User content stays as written**: names, nicknames, statuses, server, channel and role names, messages. Only
+4. **No automated querying of dictionaries.** INFCOR (ADECEC), the BDLC and other online dictionaries are consulted
+   by hand, one entry at a time, within their terms of use; never by script or in bulk (an agent once sent 219
+   scripted requests to INFCOR: see `minecraft/java/review-2026-10/ROUND3.md`). Pass this rule on to any agent you
+   start. `tests/test_sources_policy.py` fails if code in the repository contains an INFCOR address.
+5. **User content stays as written**: names, nicknames, statuses, server, channel and role names, messages. Only
    the interface part of a mixed label is translated.
 
 ## Testing and publishing
