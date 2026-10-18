@@ -476,6 +476,7 @@ def make_handler(job, activity, port, handover=None):
                     return self.send(403, {'error': 'forbidden'})
                 if self.path == '/api/state':
                     activity[0] = time.monotonic()
+                    refresh_update(job)
                     return self.send(200, {**snapshot(job), 'job': job.snapshot()})
                 if self.path.startswith('/api/review/next'):
                     section = 'Google' if 'section=Google' in self.path else 'Discord'
@@ -503,7 +504,9 @@ def make_handler(job, activity, port, handover=None):
                 return self.send(403, {'error': 'forbidden'})
             activity[0] = time.monotonic()
             if self.path == '/api/ticket':
-                # A second launch of Corsu shows this window again: its new window gets a ticket of its own.
+                # A second launch of Corsu shows this window again: its new window gets a ticket of its own, and
+                # an answer about updates older than OPEN_MAX_AGE is asked again, as for a window just opened.
+                refresh_update(job, OPEN_MAX_AGE, automatic=True)
                 return self.send(200, {'ticket': ACCESS.ticket()})
             if urllib.parse.urlsplit(self.path).path.startswith('/api/appearance'):
                 # Raw picture bytes or settings: the size is checked before anything is read.
@@ -611,9 +614,15 @@ SESSION = corsu.DATA / 'setup-session.json'
 # The arguments this window was started with, given again to the copy that replaces it.
 ARGUMENTS = []
 # What the window knows about updates: the last check ('info'), whether one runs, the automatic update started in
-# this window session, and how a restart went.
+# this window session, how a restart went, and when a check last started ('attempted', wall clock).
 UPDATE = {'info': None, 'checking': False, 'auto_started': None, 'restart_error': None}
 UPDATE_LOCK = threading.Lock()
+# A window that stays open checks again by itself (until 0.25.1 it checked only when it opened, so a window open
+# before a release said "up to date" until the button was pressed: docs/update-diagnosis.md). Wall-clock seconds, so
+# a computer coming back from sleep counts the time it slept.
+REFRESH_EVERY = 3600
+# When Corsu is opened (a new window, or a second launch showing this one), an answer older than this is asked again.
+OPEN_MAX_AGE = 600
 PREFERENCES = 'preferences.json'
 VERSION = re.compile(r'^\d+(\.\d+){1,3}$')
 
@@ -626,14 +635,14 @@ def running_version():
     return json.loads((corsu.SRC / 'release.json').read_text(encoding='utf-8')).get('version')
 
 
-def update_check(force=False):
+def update_check(force=False, max_age=None):
     """update.check() (docs/update-architecture.md), or the same answer built from the older update.latest().
     Never raises: a failure is status 'unknown' with its reason."""
     current = running_version()
     try:
         check = getattr(update, 'check', None)
         if check:
-            return check(force=force)
+            return check(force=force) if max_age is None else check(force=force, max_age=max_age)
         found = update.latest(force=force)
     except Exception as error:  # A network or parsing failure must never keep the window from opening.
         return {'current': current, 'latest': None, 'tag': None, 'url': None, 'status': 'unknown', 'checked': None,
@@ -692,12 +701,13 @@ def claim_check():
         return True
 
 
-def check_update(job=None, force=False, automatic=True):
-    """Look for a newer release (once when the window opens, again on request); the caller claimed the check
-    (claim_check). With automatic updates on and a stable release out, start installing it, once per window session
-    and never over another job."""
+def check_update(job=None, force=False, automatic=True, max_age=None):
+    """Look for a newer release (when the window opens, every REFRESH_EVERY while it stays open, and on request); the
+    caller claimed the check (claim_check). With automatic updates on and a stable release out, start installing it,
+    once per window session and never over another job."""
+    UPDATE['attempted'] = time.time()
     try:
-        UPDATE['info'] = update_check(force)
+        UPDATE['info'] = update_check(force) if max_age is None else update_check(force, max_age)
     finally:
         UPDATE['checking'] = False
     info = UPDATE['info']
@@ -707,12 +717,24 @@ def check_update(job=None, force=False, automatic=True):
             UPDATE['auto_started'] = info.get('latest') or '?'
 
 
-def start_check(job, force=False, automatic=True):
+def start_check(job, force=False, automatic=True, max_age=None):
     """A check in the background; the page follows it through /api/state. False when one already runs."""
     if not claim_check():
         return False
-    threading.Thread(target=check_update, args=(job, force, automatic), daemon=True).start()
+    threading.Thread(target=check_update, args=(job, force, automatic, max_age), daemon=True).start()
     return True
+
+
+def refresh_update(job, every=REFRESH_EVERY, automatic=False):
+    """Check again in the background when the last check started `every` seconds ago or more (wall clock), so an open
+    window never keeps an old "up to date". Not while a job runs (an update checks for itself). Automatic updates
+    start only when Corsu is opened (`automatic`), as their switch says. True when started."""
+    now = time.time()
+    attempted = UPDATE.get('attempted')
+    # Before the first check (serve() starts it), nothing to refresh.
+    if not attempted or UPDATE['checking'] or (job is not None and job.running) or 0 <= now - attempted < every:
+        return False
+    return start_check(job, automatic=automatic, max_age=every)
 
 
 def release_record(state):
@@ -788,7 +810,8 @@ def installed_version(app):
 
 def restart_info(state, job):
     """Whether "Restart Corsu" is offered: the installed copy is another one than this window's, after an update
-    that asked for it (@result restart_app) or with another version than the one running."""
+    that asked for it (@result restart_app) or newer than the one running (a window opened before an update keeps
+    serving its own code). An older installed copy, under a development copy, is never offered."""
     command = installed_app(state)
     if not command:
         return {'available': False, 'version': None, 'error': UPDATE['restart_error']}
@@ -796,7 +819,8 @@ def restart_info(state, job):
     other = app.parent != corsu.SRC.resolve()
     version = installed_version(app)
     asked = bool(job.title == 'update' and isinstance(job.result, dict) and job.result.get('restart_app'))
-    return {'available': other and not job.running and (asked or (version is not None and version != running_version())),
+    newer = version is not None and version_tuple(version) > version_tuple(running_version())
+    return {'available': other and not job.running and (asked or newer),
             'version': version, 'error': UPDATE['restart_error']}
 
 
@@ -865,7 +889,15 @@ def running_session():
     """The address of a Corsu already open, with a fresh ticket for a new window on it, so a second click shows it
     instead of starting another. None when none answers to the key noted in SESSION."""
     url, key = read_session()
-    if not url or not key or local_state(url, key) is None:
+    found = local_state(url, key) if url and key else None
+    if not isinstance(found, dict):
+        return None
+    if isinstance(found.get('version'), str) and version_tuple(found['version']) < version_tuple(running_version()):
+        # A window of an older copy is still open (started before an update, or this is a newer archive run to
+        # catch up): showing it would show its old code and its old answer about updates. This copy opens its own.
+        print(t(f'An older Corsu window ({found.get("version")}) is still open; this copy opens its own.',
+                f'Une fenêtre d\'une version plus ancienne de Corsu ({found.get("version")}) est encore ouverte ; '
+                'cette copie ouvre la sienne.'), flush=True)
         return None
     answer = local_call(url, key, '/api/ticket', 'POST')
     ticket = answer.get('ticket') if isinstance(answer, dict) else None
@@ -1020,7 +1052,7 @@ def serve(mode='window', replace=None):
     holder['server'] = server
     url = f'http://localhost:{port}/'
     threading.Thread(target=server.serve_forever, daemon=True).start()
-    start_check(job)
+    start_check(job, max_age=OPEN_MAX_AGE)
     ACCESS.url = url
     try:
         write_session(url)

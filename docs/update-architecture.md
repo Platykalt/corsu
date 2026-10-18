@@ -34,10 +34,19 @@ window maps it to "busy".
 ## Update
 
 `src/update.py`:
-- `check(force=False) -> dict`: `{'current', 'latest', 'tag', 'url', 'status', 'checked', 'error'}`. `status` is
-  `up_to_date`, `available`, `unknown` (could not check: offline, rate limit — with `error`) or `ahead` (the running
-  copy is newer than the latest release, e.g. a development build). Cached in `corsu.DATA/update.json` for 6 hours;
-  only stable releases (not drafts, not pre-releases) are considered.
+- `check(force=False, max_age=3600) -> dict`: `{'current', 'installed', 'latest', 'tag', 'url', 'status', 'checked',
+  'fresh', 'error', 'error_kind'}`. `status` is `up_to_date`, `available`, `unknown` (could not check — `error_kind`
+  `network`, `rate_limit`, `http` or `bad_response`, with `error`; never read as up to date) or `ahead` (the running
+  copy is newer than the latest release, e.g. a development build). The comparison is made with the newest of the
+  running and the installed copy: an installed copy newer than the window is reached by restarting. GitHub's answer
+  is saved in `corsu.DATA/update.json` with its time (`checked`, shown with it; `fresh` is true only when GitHub
+  answered during the call) and reused for `max_age` seconds at most, never when it is older than the running or
+  installed copy; after a failure GitHub is not asked again before its `Retry-After`/rate-limit reset or 15 minutes,
+  unless `force`. Only stable releases (not drafts, not pre-releases, not tags without a release) are considered.
+- The window (`src/app.py`) checks when it opens (an answer older than 10 minutes is asked again), when a second
+  launch shows it, every hour while it stays open (that one never starts an automatic update), and on the button
+  (`force`). A newer copy never shows the window
+  of an older copy still open: it opens its own. See [update-diagnosis.md](update-diagnosis.md).
 - `python update.py --install [--version X.Y.Z]`: downloads the archive of that exact tag
   (`releases/download/vX.Y.Z/…`, never `latest`), checks its `.sha256` and that its `src/release.json` names the same
   version, extracts safely (no path leaving the folder, no links, on every supported Python), runs its installer with

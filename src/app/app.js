@@ -500,6 +500,8 @@ async function answer(verdict) {
 const sentence = value => /[.!?…]$/.test(value.trim()) ? value.trim() : value.trim() + ".";
 const updateInfo = () => state.update || {};
 const restartInfo = () => updateInfo().restart || {};
+// When GitHub gave the answer shown: a saved answer keeps its own date, it never reads as a check just made.
+const checkedAt = info => info.checked ? new Date(info.checked * 1000).toLocaleString(numbers(), { dateStyle: "medium", timeStyle: "short" }) : "—";
 
 function updateStatus() {
   const info = updateInfo();
@@ -507,7 +509,7 @@ function updateStatus() {
   if (info.checking) return { kind: "checking", text: t("update_checking") };
   // Installed but this window still runs the previous copy: that is what matters now.
   if (restartInfo().available && !restarting) return { kind: "available", text: t("update_restart_text", { version: restartInfo().version }) };
-  if (info.status === "up_to_date") return { kind: "up_to_date", text: t("update_up_to_date") };
+  if (info.status === "up_to_date") return { kind: "up_to_date", text: t("update_up_to_date", { version: info.latest, date: checkedAt(info) }) };
   if (info.status === "available") return { kind: "available", text: t("update_available", { version: info.latest, current }) };
   if (info.status === "ahead") return { kind: "ahead", text: t("update_ahead", { version: info.latest, current }) };
   if (info.status === "unknown") return { kind: "unknown", text: info.error ? t("update_unknown", { reason: info.error.trim().replace(/\.$/, "") }) : t("update_unknown_plain") };
@@ -553,8 +555,10 @@ function updateResult() {
 
 function renderUpdate() {
   const info = updateInfo(), restart = restartInfo(), job = state.job;
-  const checked = info.checked ? new Date(info.checked * 1000).toLocaleString(numbers(), { dateStyle: "medium", timeStyle: "short" }) : "—";
-  const updateFacts = [[t("update_current"), info.current || state.version], [t("update_latest"), info.latest || "—"], [t("update_checked"), checked]];
+  // The window's own version, the installed copy's (another one after an update until Corsu restarts), GitHub's.
+  const installed = info.installed || restart.version || "—";
+  const updateFacts = [[t("update_current"), info.current || state.version], [t("update_installed"), installed],
+    [t("update_latest"), info.latest || "—"], [t("update_checked"), checkedAt(info)]];
   replaceWhenChanged($("update-facts"), JSON.stringify(updateFacts), () => updateFacts.flatMap(([term, value]) => [make("dt", { text: term }), make("dd", { text: value })]));
   const status = updateStatus();
   $("update-status").className = "update-status " + status.kind;
