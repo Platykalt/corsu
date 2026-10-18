@@ -29,7 +29,7 @@ Research note, 16 October 2026. Nothing here is started. Numbers were measured o
 | SuperTuxKart | None (Transifex, 76 languages, no Corsican) | 1,256 strings / 6.61k words | 14.9 % | Options → UI → Language; `config.xml` | `co` must be requested on Transifex; `.po` read from install `data/po/` |
 | KeePassXC | None (Transifex, 59 languages, no Corsican) | 2,501 messages (55 plural) / 11,572 words; Transifex: 23.14k words | 14.6 % | `keepassxc.ini` `[GUI] Language=co` | `.qm` only loaded from install data dir (root/admin; breaks macOS signature) |
 | Godot editor | None (`co` absent: Weblate 85 langs, repo 39 `.po`) | Editor 6,422 / 36,662 words; properties 4,306 / 10,000 words; class ref 24,064 / 659,593 words | 6.6 % | `interface/editor/editor_language` in `editor_settings-4.x.tres` | Translations compiled into the binary; only languages ≥ 20 % editor UI are included |
-| Minecraft Bedrock | Corsu prototype, never loaded in game | 13,340 keys | 4,272 (32.0 %) already reused | Global resource pack + Language setting | Untested; 9,052 keys need new work |
+| Minecraft Bedrock | Corsu prototype, never loaded in game | 13,340 keys | 4,272 (32.0 %) already reused | Global resource pack + Language setting | Untested; 9,068 keys need new work |
 | VLC | Upstream `co`, by Patriccollu: 3.0.x 4,443/6,203 (71.6 %); master 2,348 + 331 fuzzy / 6,220 (37.7 %); last revision 2017 | 6,220 (master) | 32.7 % (lexicon already imports Patriccollu's work) | Already selectable ("Corsu" in Qt prefs language list) | Upstream Transifex (`vlc-trans`); 1,760 (3.0) / 3,872 (master) strings left |
 | Web extensions | `docs/webext.md` not present when this note was written | — | — | — | Read that file when it exists |
 
@@ -98,7 +98,7 @@ Research note, 16 October 2026. Nothing here is started. Numbers were measured o
 
 ### Minecraft Bedrock
 - Prototype in `minecraft/bedrock/` (see its `STATUS.md`): 4,272 / 13,340 keys reused from Java, 0 errors offline,
-  **never loaded in the game**. Remaining 9,052 keys include `howtoplay` 778, `store` 544, `commands` 919, `options`
+  **never loaded in the game**. Remaining 9,068 keys include `howtoplay` 778, `store` 544, `commands` 919, `options`
   1,114. Next step is the manual test on Windows/Android, not more translation.
 
 ### VLC (completion)
