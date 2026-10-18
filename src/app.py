@@ -35,7 +35,10 @@ PAGE = Path(__file__).resolve().parent / 'app/index.html'
 STATIC = {'corsu.svg': 'image/svg+xml', 'style.css': 'text/css; charset=utf-8',
           'texts.js': 'text/javascript; charset=utf-8', 'app.js': 'text/javascript; charset=utf-8',
           'appearance.css': 'text/css; charset=utf-8', 'appearance.js': 'text/javascript; charset=utf-8',
-          'texts-appearance.js': 'text/javascript; charset=utf-8', 'key.js': 'text/javascript; charset=utf-8'}
+          'texts-appearance.js': 'text/javascript; charset=utf-8', 'key.js': 'text/javascript; charset=utf-8',
+          'phone.css': 'text/css; charset=utf-8', 'phone.js': 'text/javascript; charset=utf-8',
+          'texts-phone.js': 'text/javascript; charset=utf-8',
+          **{f'qr/{name}.svg': 'image/svg+xml' for name in ('android-fr', 'android-en', 'iphone-fr', 'iphone-en')}}
 # The page asks for news every few seconds; without any for this long, the window was closed.
 IDLE_SECONDS = 600
 # Once Corsu's own window is closed, a browser tab on the address keeps it running; without one it stops sooner.

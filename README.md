@@ -8,6 +8,9 @@
 
 Corsu met en corse les logiciels de tous les jours. Corsu puts everyday software in Corsican.
 
+**[Écrire en corse sur Android et iPhone](#écrire-en-corse-sur-android-et-iphone)** ·
+**[Write Corsican on Android and iPhone](#write-corsican-on-android-and-iphone)**
+
 ---
 
 ## Français
@@ -84,8 +87,25 @@ affiche « Corsu est déjà occupé » et ne change rien.
 
 Discord : réglez sa langue sur Français ou English, voir [Discord en corse](docs/fr/discord.md).
 Google en corse : choisissez Corsu dans la langue de votre compte Google, voir [ce guide](docs/fr/compatibilite.md#google-et-les-autres-sites). Dans Firefox Corsu, les boutons que Google laisse en français ou en anglais sont complétés en corse.
-Téléphones : [Android](docs/fr/telephone/android.md), [iPhone](docs/fr/telephone/iphone.md). Prédiction et correction des mots corses pour le clavier Keyman : [corsu-keyboard.kmp](https://github.com/Platykalt/corsu/releases/latest/download/corsu-keyboard.kmp).
 Ce qui est vérifié et ce qui est seulement prévu : [Ce qui marche, et où](docs/fr/compatibilite.md).
+
+### Écrire en corse sur Android et iPhone
+
+Le clavier gratuit [Keyman](https://keyman.com) fournit les touches (disposition EuroLatin (SIL), langue Corsican) ;
+Corsu fournit le dictionnaire, qui propose des mots corses pendant que vous écrivez et corrige leur orthographe.
+L'application Corsu pour ordinateur n'est pas nécessaire. Ce n'est ni un traducteur de phrases ni un correcteur de
+grammaire complet.
+
+| Téléphone | Keyman | Guide pas à pas |
+| --- | --- | --- |
+| Android | [Play Store](https://play.google.com/store/apps/details?id=com.tavultesoft.kmapro) | [Android](docs/fr/telephone/android.md) |
+| iPhone | [App Store](https://apps.apple.com/app/keyman/id933676545) | [iPhone](docs/fr/telephone/iphone.md) |
+
+Dictionnaire publié (le même fichier pour Android et iPhone) :
+[corsu-keyboard.kmp](https://github.com/Platykalt/corsu/releases/latest/download/corsu-keyboard.kmp), le dictionnaire
+général (environ 17 000 mots corses courants).
+<!-- corsu:phone-variants:fr Ne lister que les fichiers joints à la dernière version publiée. -->
+D'autres variantes sont en préparation ; elles seront listées ici une fois publiées.
 
 ### Les traductions
 
@@ -173,8 +193,24 @@ a time; if another is running, Corsu says "Corsu is already busy" and changes no
 
 Discord: set its language to Français or English, see [Discord in Corsican](docs/en/discord.md).
 Google in Corsican: choose Corsu as your Google account language, see [this guide](docs/en/compatibility.md#google-and-other-websites). In Firefox Corsu, the buttons Google leaves in French or English are completed in Corsican.
-Phones: [Android](docs/en/phone/android.md), [iPhone](docs/en/phone/iphone.md). Corsican word prediction and correction for the Keyman keyboard: [corsu-keyboard.kmp](https://github.com/Platykalt/corsu/releases/latest/download/corsu-keyboard.kmp).
 What is verified and what is only expected: [What works where](docs/en/compatibility.md).
+
+### Write Corsican on Android and iPhone
+
+The free [Keyman](https://keyman.com) keyboard gives the keys (EuroLatin (SIL) layout, Corsican language); Corsu gives
+the dictionary, which suggests Corsican words as you type and corrects their spelling. The Corsu desktop app is not
+needed. It is neither a sentence translator nor a full grammar checker.
+
+| Phone | Keyman | Step-by-step guide |
+| --- | --- | --- |
+| Android | [Play Store](https://play.google.com/store/apps/details?id=com.tavultesoft.kmapro) | [Android](docs/en/phone/android.md) |
+| iPhone | [App Store](https://apps.apple.com/app/keyman/id933676545) | [iPhone](docs/en/phone/iphone.md) |
+
+Published dictionary (the same file for Android and iPhone):
+[corsu-keyboard.kmp](https://github.com/Platykalt/corsu/releases/latest/download/corsu-keyboard.kmp), the general
+dictionary (about 17,000 common Corsican words).
+<!-- corsu:phone-variants:en List only the files attached to the latest published release. -->
+Other variants are being prepared; they will be listed here once published.
 
 ### Translations
 

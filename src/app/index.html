@@ -7,6 +7,7 @@
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%231f2a2e'/%3E%3Ctext x='16' y='22.5' font-family='Georgia,serif' font-size='19' font-weight='700' fill='white' text-anchor='middle'%3Eco%3C/text%3E%3C/svg%3E">
 <link rel="stylesheet" href="style.css">
 <link rel="stylesheet" href="appearance.css">
+<link rel="stylesheet" href="phone.css">
 <!-- Before the first paint: the saved theme, palette and background apply at once (they wait for the page themselves). -->
 <script src="key.js"></script>
 <script src="texts-appearance.js"></script>
@@ -48,6 +49,7 @@
   <symbol id="i-trash" viewBox="0 0 24 24"><path d="M4.5 7h15M9.5 7V4.5h5V7M6.5 7l1 12.5h9l1-12.5"/></symbol>
   <symbol id="i-search" viewBox="0 0 24 24"><circle cx="11" cy="11" r="6.5"/><path d="M16 16l4 4"/></symbol>
   <symbol id="i-pause" viewBox="0 0 24 24"><circle cx="12" cy="12" r="8.5"/><path d="M10 9v6M14 9v6"/></symbol>
+  <symbol id="i-phone" viewBox="0 0 24 24"><rect x="6.5" y="3" width="11" height="18" rx="2.2"/><path d="M10.5 17.8h3"/></symbol>
   <symbol id="i-flask" viewBox="0 0 24 24"><path d="M9.5 3.5h5M10.5 3.5v5.2L5.2 17.6a1.9 1.9 0 0 0 1.6 2.9h10.4a1.9 1.9 0 0 0 1.6-2.9l-5.3-8.9V3.5"/><path d="M7.5 14.5h9"/></symbol>
 </svg>
 
@@ -59,6 +61,7 @@
       <button type="button" data-page="programs"><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-programs"/></svg><span class="nav-label" data-t="nav_programs"></span></button>
       <button type="button" data-page="add"><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-add"/></svg><span class="nav-label" data-t="nav_add"></span></button>
       <button type="button" data-page="review"><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-review"/></svg><span class="nav-label" data-t="nav_review"></span></button>
+      <button type="button" data-page="phone"><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-phone"/></svg><span class="nav-label" data-t="nav_phone"></span></button>
       <button type="button" data-page="appearance"><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-appearance"/></svg><span class="nav-label" data-t="nav_appearance"></span></button>
       <button type="button" data-page="help"><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-help"/></svg><span class="nav-label" data-t="nav_help"></span></button>
       <button type="button" data-page="about"><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-about"/></svg><span class="nav-label" data-t="nav_about"></span></button>
@@ -176,6 +179,14 @@
       </div>
     </section>
 
+    <section id="phone" data-page-panel hidden>
+      <header class="page-head">
+        <h1 data-t="nav_phone"></h1>
+        <p class="lead" data-t="ph_lead"></p>
+      </header>
+      <div id="phone-body"></div>
+    </section>
+
     <section id="appearance" data-page-panel hidden>
       <header class="page-head">
         <h1 data-t="nav_appearance"></h1>
@@ -264,6 +275,8 @@
 </dialog>
 
 <script src="texts.js"></script>
+<script src="texts-phone.js"></script>
+<script src="phone.js"></script>
 <script src="app.js"></script>
 </body>
 </html>

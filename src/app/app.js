@@ -13,12 +13,16 @@ const restartHints = new Map(), openDetails = new Map();
 const $ = id => document.getElementById(id);
 // Browsers have no Corsican number and time formats; the French ones match Corsican usage.
 const numbers = () => language === "co" ? "fr" : language;
-// The page's own texts, then those of the Appearance page (texts-appearance.js, same {co, fr, en} shape) when loaded.
+// The page's own texts, then those of the Appearance and phone pages (texts-appearance.js, texts-phone.js, same
+// {co, fr, en} shape) when loaded.
 function lookup(name) {
   const lang = language || "fr";
   if (name in text[lang]) return text[lang][name];
-  const extra = typeof textsAppearance === "undefined" ? null : textsAppearance;
-  return extra && extra[lang] && name in extra[lang] ? extra[lang][name] : undefined;
+  for (const extra of [typeof textsAppearance === "undefined" ? null : textsAppearance,
+    typeof textsPhone === "undefined" ? null : textsPhone]) {
+    if (extra && extra[lang] && name in extra[lang]) return extra[lang][name];
+  }
+  return undefined;
 }
 const t = (name, values = {}) => (lookup(name) ?? name).replace(/\{(\w+)\}/g, (_, k) => values[k]);
 function make(tag, attributes = {}, ...children) {

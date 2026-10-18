@@ -1,0 +1,27 @@
+/* The « On the phone » page's own parts; everything else (.group, .segmented, links, buttons) comes from style.css. */
+
+#phone .ph-not { margin-top: var(--space-3); max-width: 42rem; }
+/* Not colour alone: the chosen phone also gets a check mark. */
+#phone .segmented > label:has(input:checked) > span::before { content: "✓ "; }
+
+#phone .ph-columns { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: var(--space-4); align-items: start;
+  margin-top: var(--space-4); margin-bottom: var(--space-4); }
+#phone .ph-steps h3 { margin: 0 0 var(--space-2); font-size: 1rem; font-weight: 600; }
+#phone .ph-steps ol { margin: 0 0 var(--space-3); padding-left: 1.4rem; }
+#phone .ph-steps li + li { margin-top: var(--space-2); }
+#phone .ph-steps li { overflow-wrap: anywhere; }
+#phone .ph-steps p { font-size: .875rem; margin: 0; }
+
+/* The code stays dark on white in every theme (phones read it best that way), with a light frame around it. */
+#phone .ph-qr { margin: 0; width: 15rem; display: flex; flex-direction: column; align-items: center; gap: var(--space-3); }
+#phone .ph-qr img { display: block; width: 180px; height: 180px; background: #fff; border-radius: var(--radius-s);
+  box-shadow: 0 0 0 1px var(--line); image-rendering: pixelated; }
+#phone .ph-qr figcaption { display: flex; flex-direction: column; gap: var(--space-1); text-align: center; }
+#phone .ph-qr .detail { color: var(--muted); font-size: .875rem; }
+#phone .ph-url { font-size: .75rem; color: var(--muted); overflow-wrap: anywhere; user-select: all; }
+#phone .ph-more { margin-top: var(--space-3); }
+
+@media (max-width: 720px) {
+  #phone .ph-columns { grid-template-columns: minmax(0, 1fr); }
+  #phone .ph-qr { width: auto; }
+}
