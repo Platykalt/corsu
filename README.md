@@ -80,8 +80,8 @@ Corsu pour ordinateur n'est pas nécessaire : le dictionnaire se télécharge se
 **Guides pas à pas : [Android](docs/fr/telephone/android.md) · [iPhone](docs/fr/telephone/iphone.md).**
 
 Dictionnaire publié (le même fichier pour Android et iPhone) :
-[corsu-keyboard.kmp](https://github.com/Platykalt/corsu/releases/latest/download/corsu-keyboard.kmp), environ 17 000
-mots corses courants.
+[corsu-keyboard.kmp](https://github.com/Platykalt/corsu/releases/latest/download/corsu-keyboard.kmp), 19 805
+mots tirés du lexique de Corsu (compte fait dans le paquet publié).
 <!-- corsu:phone-variants:fr Ne lister ci-dessus que les fichiers joints à la dernière version publiée ; à la
      publication, y déplacer ceux de la phrase suivante, sans écrire « expérimental » à la place des limites. -->
 Dans la prochaine version (pas encore publiée) : des préférences régionales expérimentales, Cismuntincu et
@@ -292,8 +292,8 @@ dictionary is downloaded on its own, on the phone.
 **Step-by-step guides: [Android](docs/en/phone/android.md) · [iPhone](docs/en/phone/iphone.md).**
 
 Published dictionary (the same file for Android and iPhone):
-[corsu-keyboard.kmp](https://github.com/Platykalt/corsu/releases/latest/download/corsu-keyboard.kmp), about 17,000
-common Corsican words.
+[corsu-keyboard.kmp](https://github.com/Platykalt/corsu/releases/latest/download/corsu-keyboard.kmp), 19,805
+words taken from Corsu's lexicon (counted in the published package).
 <!-- corsu:phone-variants:en List above only the files attached to the latest published release; at release time,
      move there those of the next sentence, keeping the word "experimental" with them. -->
 In the next version (not published yet): experimental regional preferences, Cismuntincu and Pumuntincu, which favour
