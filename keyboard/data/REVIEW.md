@@ -175,6 +175,16 @@ Measured with `simulate.py`'s ranking on every 1-4 letter prefix (4,962 prefixes
 *Florent* (158) and *Martino* (136), counted mostly as first names, then pushed *flussi* and *martellu* out, hence
 the cap at 50.
 
+Seen in the Keyman engine 18.0.254 (2026-10-18, agent C's `tests/e2e/check_keyboard.py` from its work in progress,
+headless Chrome, packages built from this data, setting 3 = auto-correction as the 18.0 engine applies it when
+asked; not Keyman 19, not a phone): the 22 cases of `tests/e2e/keyboard_data_cases.tsv` pass in the three models —
+*Bastelicaccia*, *Bastilicaccia*, *Zicavo*, *Zicavu*, *Ajaccio*, *Aiacciu*, *Bonifacio*, *Solenzara*,
+*Porto-Vecchio*, *Sari-Solenzara* and an unknown *Platykalt* stay as typed; *bastelic* offers *Bastelicaccia*;
+*Sartene* offers *Sartène*; *lingua parlle* becomes *lingua parolle*; *paro* still offers *parò*. One warning:
+*Vizzani* (Vikipedia's spelling, not in the list) becomes *Vezzani*. Adding the Vikipedia article titles of the
+communes next to the Wikidata labels would fix that kind of case; it needs the titles (Wikidata sitelinks), not
+fetched yet.
+
 ## Northern and southern preferences
 
 ### What the names cover
