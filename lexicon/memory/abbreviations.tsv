@@ -1,0 +1,39 @@
+# Short labels whose form alone does not say their sense (AGENTS.md, rule 1). tools/tm.py match and engine.lookup
+# never reuse a translation of one of these from another application automatically: the candidates are listed as
+# suggestions, one per meaning, for a person to choose in context. A label ending with a period after at most five
+# letters ("Min.", "Réf.") is treated the same way without being listed here. Case is ignored.
+# abbreviation	senses it can stand for (examples, not translations)
+Bio	biography (Discord profile); organic (Chrome image styles)
+Min	minimum; minutes; minor
+Max	maximum; a first name
+Mod	moderator; modification (game mod); modulo
+Pro	professional; paid "Pro" edition
+Prof	profile; professor
+Doc	document; doctor
+Dev	developer; device; development
+Gen	generation; general; generator
+Sec	seconds; security; secondary
+Ref	reference; referee
+Rec	recording; record button; recommended
+Spec	specification; spectator
+Stat	statistic; status
+Stats	statistics; status values
+Sub	subscriber; subtitle; subscription; subscript
+Res	resolution; resource; reserved
+Var	variable; variant
+Vol	volume; flight (French "vol"); theft (French "vol")
+Ext	extension; external
+Int	integer; internal; interior
+Exp	experience; expert; export; exponent
+Pos	position; positive
+Def	default; definition; defence
+Rel	relative; release
+Opt	option; optimal; opt-in
+Lib	library; liberal
+Reg	registry; region; regular
+Cap	capacity; capital letter; cap (limit)
+Dist	distance; distribution
+Temp	temporary; temperature
+Auto	automatic; car
+Info	information; informatics
+Perso	personal; character (French "perso")

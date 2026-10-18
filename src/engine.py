@@ -253,6 +253,35 @@ def memory_entries(directory=None, exported=True):
     return _MEMORY_CACHE[(directory, exported)]
 
 
+ABBREVIATIONS = ROOT / 'lexicon/memory/abbreviations.tsv'
+_ABBREVIATIONS = []
+SHORT_WITH_PERIOD = re.compile(r'^[^\W\d_]{1,5}\.$')
+
+
+def abbreviation(text):
+    """True for a short label whose form alone does not tell its sense (lexicon/memory/abbreviations.tsv, or at
+    most five letters and a period: "Min.", "Réf."). Its translation is never borrowed from another application
+    automatically (AGENTS.md, rule 1: "Bio" in a Discord profile is a biography, in Chrome's image styles "organic")."""
+    if not _ABBREVIATIONS:
+        found = set()
+        if ABBREVIATIONS.exists():
+            for line in ABBREVIATIONS.read_text(encoding='utf-8').splitlines():
+                if line.strip() and not line.startswith('#'):
+                    found.add(line.split('\t')[0].strip().casefold())
+        _ABBREVIATIONS.append(found)
+    core = ACCELERATOR.sub('', normalize(text or '')).strip()
+    return core.casefold() in _ABBREVIATIONS[0] or bool(SHORT_WITH_PERIOD.match(core))
+
+
+def sense_of(entry):
+    """The sense an entry was written for, when it says so: `sense` (a short phrase, "user profile", "encoding
+    profile"), or `context.sense` (the Minecraft decisions). None when unknown."""
+    sense = entry.get('sense')
+    if not sense and isinstance(entry.get('context'), dict):
+        sense = entry['context'].get('sense')
+    return re.sub(r'\s+', ' ', sense).strip().casefold() if isinstance(sense, str) and sense.strip() else None
+
+
 def app_only(entry, app=None):
     """True when an entry is restricted to its own application (`"reuse": "same-app"`, e.g. the Minecraft review
     decisions: "Sign" is a wooden sign there, not a signature or a sign-in) and `app` is another application."""
@@ -342,14 +371,16 @@ def _context_matches(entry, context):
     return bool(wanted & found)
 
 
-def lookup(text, app=None, context=None, directory=None):
+def lookup(text, app=None, context=None, directory=None, sense=None):
     """The Corsican of one exact source text (English or French) chosen with its application and context.
 
     Order: the person's corrections and lexicon-fixes.tsv; an entry of the same application; an entry with the same
-    context (msgctxt, file, section or key); a reviewed entry of a generic toolkit. Otherwise, when the candidates
+    context (msgctxt, file, section or key); with `sense` given, an entry written for that sense; a reviewed entry
+    of a generic toolkit. An entry written for another sense never answers (sense_of). Otherwise, when the candidates
     disagree in meaning across applications (two or more distinct translations from different applications, none
     of them the requested one), the answer is None: keep the source rather than borrow another program's sense.
-    When they agree, the best reviewed one is returned. Unknown text gives None."""
+    An abbreviation (abbreviation()) is never borrowed from another application, even when only one translation
+    exists. When they agree, the best reviewed one is returned. Unknown text gives None."""
     if not text or not text.strip():
         return None
     core = normalize(text).strip()
@@ -370,6 +401,10 @@ def lookup(text, app=None, context=None, directory=None):
                 candidates.append((entry, value))
     # Entries kept for their own application only never answer for another one.
     candidates = [(entry, value) for entry, value in candidates if not app_only(entry, app)]
+    # Written for another sense: never, whatever the application ("Profile" of a codec is not a user's profile).
+    wanted_sense = re.sub(r'\s+', ' ', sense).strip().casefold() if sense else None
+    if wanted_sense:
+        candidates = [(entry, value) for entry, value in candidates if sense_of(entry) in (None, wanted_sense)]
     if not candidates:
         return None
     candidates.sort(key=lambda item: -REVIEW_RANK.get(item[0].get('review'), 0))
@@ -382,6 +417,12 @@ def lookup(text, app=None, context=None, directory=None):
         for entry, value in candidates:
             if _context_matches(entry, context):
                 return value
+    if wanted_sense:
+        for entry, value in candidates:
+            if sense_of(entry) == wanted_sense:
+                return value
+    if abbreviation(core):
+        return None
     for entry, value in candidates:
         if ((entry.get('app') or '').casefold() in GENERIC_APPS or not entry.get('app')) \
                 and REVIEW_RANK.get(entry.get('review'), 0) >= REVIEW_RANK['ai-reviewed']:

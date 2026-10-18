@@ -1,7 +1,25 @@
 name: Traduction · Translation
 description: Une traduction corse fausse, manquante ou maladroite · A wrong, missing or clumsy Corsican translation
 labels: [translation]
+# The window's « Signaler » page (src/app/report.js) prefills these fields by their id: keep the ids.
 body:
+  - type: markdown
+    attributes:
+      value: |
+        N'y mettez ni conversation, ni pseudonyme, ni nom de personne, ni chemin de vos dossiers.
+        Do not put conversations, nicknames, people's names or your folder paths in it.
+  - type: input
+    id: app
+    attributes:
+      label: Logiciel · Program
+      description: Par exemple Discord, Firefox, Minecraft · For example Discord, Firefox, Minecraft.
+    validations:
+      required: true
+  - type: input
+    id: version
+    attributes:
+      label: Version du logiciel · Program version
+      description: Si vous la connaissez · If you know it.
   - type: input
     id: seen
     attributes:
@@ -13,7 +31,7 @@ body:
     id: where
     attributes:
       label: Où · Where
-      description: Logiciel et endroit, par exemple « Firefox, menu du clic droit » · Program and place, e.g. "Firefox, right-click menu".
+      description: L'endroit dans le logiciel, par exemple « menu du clic droit » · The place in the program, e.g. "right-click menu".
     validations:
       required: true
   - type: input
@@ -29,3 +47,8 @@ body:
     id: notes
     attributes:
       label: Remarques · Notes
+  - type: input
+    id: corsu
+    attributes:
+      label: Version de Corsu · Corsu version
+      description: Remplie par la fenêtre de Corsu · Filled in by Corsu's window.

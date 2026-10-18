@@ -9,6 +9,9 @@ Notes pour le mainteneur (à retirer avant l'envoi) :
   03 enchantements (48 / 53), 04 bannières et héraldique (47 / 53), 05 sons des animaux (68 / 150),
   06 Realms : textes juridiques et facturation (30 / 70), 07 questions ouvertes (34 / 66).
 - Une version corse du message est dans REQUEST-co.md ; elle a elle aussi été écrite par une IA.
+- Lots courts (une dizaine de questions, page HTML qui prépare une réponse à copier ou un ticket prérempli) :
+  review/sets/ (review/README.md). Ils reprennent ces lots ; [LIEN DU LOT] peut pointer vers l'un d'eux. Les
+  réponses s'importent comme propositions avec tools/review_sets.py.
 -->
 
 Objet : Relire une partie de Minecraft en corse (30 à 60 minutes)

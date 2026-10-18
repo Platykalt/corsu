@@ -36,10 +36,11 @@ def texts(name='texts.js', variable='text'):
 
 
 def all_texts():
-    """The page's texts and, once they exist, the Appearance and phone pages' (texts-appearance.js, texts-phone.js):
-    t() reads them all."""
+    """The page's texts and, once they exist, the Appearance, phone and report pages' (texts-appearance.js,
+    texts-phone.js, texts-report.js): t() reads them all."""
     found = texts()
-    for name, variable in (('texts-appearance.js', 'textsAppearance'), ('texts-phone.js', 'textsPhone')):
+    for name, variable in (('texts-appearance.js', 'textsAppearance'), ('texts-phone.js', 'textsPhone'),
+                           ('texts-report.js', 'textsReport')):
         if (PAGE.parent / name).exists():
             for language, values in texts(name, variable).items():
                 found[language] = {**values, **found[language]}
@@ -350,7 +351,7 @@ class RenderTests(unittest.TestCase):
     def test_hooks_for_the_appearance_page(self):
         self.assertEqual(self.result['renderEvents'][-1], 'en')
         self.assertEqual(self.result['pageEvent'], 'appearance')
-        self.assertEqual(self.result['hooks'], ['call', 'icon', 'language', 'make', 't'])
+        self.assertEqual(self.result['hooks'], ['call', 'icon', 'language', 'make', 'state', 't'])
         self.assertEqual(self.result['hookLanguage'], 'en')
         self.assertEqual(self.result['appearanceText'][0], self.result['appearanceText'][1])
         self.assertEqual(self.result['ownTextFirst'], 'Appearance')

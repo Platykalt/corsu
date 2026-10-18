@@ -8,7 +8,8 @@ One entry per Corsican text that a recorded decision of the October 2026 review 
 minecraft/java/review-2026-10/APPLIED.tsv (rounds 1 and 2) and every key of round3.tsv (decisions re-examined in
 round 3, including kept and deferred ones) and of round4.tsv (phrasings and fit to the interface). Each entry keeps the key, the component, the versions that show it (from
 keys.tsv), the sense in the game, the current Corsican, the decision with its references, and three separate
-validation levels (AI proposal, AI review, human validation).
+validation levels (AI proposal, AI review, human validation: `none`, or a speaker's answer from
+review/answers.jsonl that the maintainer accepted, for that exact English text; `to-re-examine` once the text changed).
 
 Mojang's English is not stored (see minecraft/java/LICENSING.md): an entry has no `source`, only `source_hash`, the
 same 12-character SHA-1 that keys.tsv and history.json use. Without a source text the engine cannot offer the entry
@@ -24,6 +25,7 @@ import sys
 ROOT = Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(ROOT / 'tools'))
 import tm  # noqa: E402
+import review_sets  # noqa: E402
 
 DATA = ROOT / 'minecraft/java'
 REVIEW = DATA / 'review-2026-10'
@@ -136,6 +138,13 @@ def entries():
                     k: v for k, v in record.items() if k != 'id'}}, 4,
                     {'ai_proposal': PROPOSERS[4] if applied else 'none in round 4 (the text was kept as it was)',
                      'ai_review': row['validation'], 'human': 'none'})
+    # Speakers' answers (review/answers.jsonl, tools/review_sets.py) count only once the maintainer accepted them,
+    # and only for the exact English text they were given for.
+    speakers = review_sets.human_validations()
+    for name, entry in result.items():
+        found = speakers.get((name.split('@', 1)[0], entry['source_hash']))
+        if found:
+            entry['validation']['human'] = found
     return [result[key] for key in sorted(result)]
 
 

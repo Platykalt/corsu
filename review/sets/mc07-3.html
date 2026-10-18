@@ -1,0 +1,132 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Relecture mc07-3</title>
+<style>
+:root { --bg: #f7f5f0; --surface: #fff; --line: #d9d4c8; --text: #1f2421; --muted: #5b625d; --accent: #1d6b5a;
+  --on-accent: #fff; --soft: #e3f0ec; --warn: #8a5300; --warn-soft: #fbefd9; color-scheme: light dark; }
+@media (prefers-color-scheme: dark) { :root { --bg: #151917; --surface: #1e2421; --line: #36403b; --text: #e8ece9;
+  --muted: #a7b0ab; --accent: #6cc3ad; --on-accent: #0f1513; --soft: #203a33; --warn: #f0b867; --warn-soft: #3a2e1b; } }
+* { box-sizing: border-box; }
+body { margin: 0; background: var(--bg); color: var(--text); font: 1rem/1.5 system-ui, sans-serif; }
+main { max-width: 52rem; margin: 0 auto; padding: 1.5rem 1rem 4rem; }
+h1 { font-size: 1.5rem; margin: 0 0 .25rem; } h2 { font-size: 1.1rem; margin: 2rem 0 .75rem; }
+.muted { color: var(--muted); } .note { background: var(--soft); border-radius: .5rem; padding: .75rem 1rem; }
+article { background: var(--surface); border: 1px solid var(--line); border-radius: .75rem; padding: 1rem; margin: 1rem 0; }
+article h3 { margin: 0 0 .5rem; font-size: 1rem; }
+table { border-collapse: collapse; width: 100%; font-size: .9rem; margin: .5rem 0; display: block; overflow-x: auto; }
+th, td { text-align: left; border-bottom: 1px solid var(--line); padding: .35rem .5rem; vertical-align: top; }
+td.co { font-weight: 600; } code { font-size: .8rem; overflow-wrap: anywhere; }
+.asked { background: var(--warn-soft); color: var(--warn); border-radius: .4rem; padding: .25rem .5rem; font-size: .875rem; }
+fieldset { border: 0; padding: 0; margin: .75rem 0 0; display: flex; flex-wrap: wrap; gap: .5rem 1rem; }
+label { cursor: pointer; } input[type=text], textarea { width: 100%; font: inherit; padding: .4rem .5rem;
+  border: 1px solid var(--line); border-radius: .4rem; background: var(--bg); color: var(--text); }
+.field { display: block; margin-top: .5rem; font-size: .9rem; }
+button { font: inherit; padding: .5rem .9rem; border-radius: .5rem; border: 1px solid var(--line); background: var(--surface);
+  color: var(--text); cursor: pointer; } button.main { background: var(--accent); border-color: var(--accent); color: var(--on-accent); }
+:focus-visible { outline: 3px solid var(--accent); outline-offset: 2px; }
+.buttons { display: flex; flex-wrap: wrap; gap: .5rem; margin: .75rem 0; }
+#reply { font-family: ui-monospace, monospace; font-size: .8rem; min-height: 12rem; }
+#said { min-height: 1.5rem; }
+</style>
+</head>
+<body>
+<main>
+<h1>Relecture mc07-3 · Review mc07-3</h1>
+<p class="muted" id="intro"></p>
+<p class="note"><b>Fr.</b> Ces traductions ont été produites puis revues par une IA, sans relecture humaine. Votre réponse
+est une <b>proposition</b>, examinée ensuite : rien ne change dans le jeu sans cet examen. Rien n'est envoyé tant que vous
+ne cliquez pas sur « Ouvrir un ticket » ; aucun nom n'est demandé.<br><b>En.</b> These translations were produced and
+revised by an AI, with no human review. Your answer is a <b>proposal</b>, examined afterwards. Nothing is sent unless you
+click "Open an issue"; no name is asked.</p>
+<p class="muted">« ¶ » = retour à la ligne · line break ; <code>%s</code> = rempli par le jeu · filled in by the game.</p>
+<div id="items"></div>
+<h2>Votre réponse · Your reply</h2>
+<p class="muted">Relisez-la avant de l'envoyer · Read it before sending it. Par courriel, en fichier ou par ticket GitHub (compte GitHub
+nécessaire) · By e-mail, as a file or as a GitHub issue (needs a GitHub account).</p>
+<textarea id="reply" readonly aria-label="Réponse à copier · Reply to copy"></textarea>
+<div class="buttons">
+<button type="button" class="main" id="copy">Copier · Copy</button>
+<button type="button" id="save">Enregistrer le fichier · Save as a file</button>
+<button type="button" id="issue">Ouvrir un ticket GitHub · Open a GitHub issue</button>
+</div>
+<p id="said" role="status" class="muted"></p>
+</main>
+<script type="application/json" id="data">{"id":"mc07-3","batch":"07-open-questions.md","title":"Lot 07 · Batch 07 — Questions ouvertes / Open questions","description":["Les décisions qui restent à prendre (voir decisions-2.md, decisions.md, review.md).","The decisions still to be made (see decisions-2.md, decisions.md, review.md)."],"part":3,"parts":6,"app":"Minecraft: Java Edition","version":"26.3","items":[{"id":"07.12","title":"Dappled Forest","where":"D13. New 26.3 forest biome; FR and IT call it amber. Changed from *chjazzata* (not found) to *ambrata*.","question":"*Furesta ambrata* or *Furesta machjata* (spotted)? Please check the biome in game if you can.","texts":[{"key":"biome.minecraft.dappled_forest","english":"Dappled Forest","french":"Forêt ambrée","corsican":"Furesta ambrata","source_hash":"8e1cdb2f613a","corsican_hash":"9f3e9e635d05","asked":null}]},{"id":"07.13","title":"Novice","where":"D14. Villager trade levels (Novice, Apprentice, Journeyman).","question":"*Principiante*, *Apprendista*, *Cumpagnu*: natural for trade ranks? Alternative for Apprentice: *Garzone*?","texts":[{"key":"merchant.level.1","english":"Novice","french":"Novice","corsican":"Principiante","source_hash":"16ca44702a9b","corsican_hash":"0daca1d04c78","asked":null},{"key":"merchant.level.2","english":"Apprentice","french":"Apprenti","corsican":"Apprendista","source_hash":"e22cccd20b15","corsican_hash":"a22a0e8f20c8","asked":null},{"key":"merchant.level.3","english":"Journeyman","french":"Compagnon","corsican":"Cumpagnu","source_hash":"42b72e421501","corsican_hash":"35a732bc6bc8","asked":null}]},{"id":"07.14","title":"Copper Bulb","where":"Q2. Two light blocks.","question":"*Lampadina di ramu* and *Lampada di redstone*, or *Lampa* for one of them?","texts":[{"key":"block.minecraft.copper_bulb","english":"Copper Bulb","french":"Ampoule en cuivre","corsican":"Lampadina di ramu","source_hash":"6c60d69177d6","corsican_hash":"b2bebb7f485b","asked":null},{"key":"block.minecraft.redstone_lamp","english":"Redstone Lamp","french":"Lampe à redstone","corsican":"Lampada di redstone","source_hash":"1c8ccccd6ffd","corsican_hash":"e862a63b4ff9","asked":null}]},{"id":"07.15","title":"Sculk Shrieker","where":"Q6. Sculk block that shrieks.","question":"*Urladore di sculk* (from *urlà*): natural? *-adore* or *-atore*?","texts":[{"key":"block.minecraft.sculk_shrieker","english":"Sculk Shrieker","french":"Hurleur sculk","corsican":"Urladore di sculk","source_hash":"dff43d6d5309","corsican_hash":"ca0ef1a802cd","asked":null}]},{"id":"07.16","title":"Zombified Piglin","where":"Q7.","question":"*Piglin zumbificatu* or *zombificatu*?","texts":[{"key":"entity.minecraft.zombified_piglin","english":"Zombified Piglin","french":"Piglin zombifié","corsican":"Piglin zumbificatu","source_hash":"2ec9a4abf0e4","corsican_hash":"4de12006e1db","asked":null}]},{"id":"07.17","title":"Orange Poplar Leaves","where":"Q8. Colour adjective *aranciu/arancia*, plural *arance*.","question":"*Foglie di piobbu arance* reads like \"oranges\" (fruit). Better: invariable *aranciu*, or *di culore aranciu*?","texts":[{"key":"block.minecraft.orange_poplar_leaves","english":"Orange Poplar Leaves","french":"Feuilles de peuplier orange","corsican":"Foglie di piobbu arance","source_hash":"4bebac757d31","corsican_hash":"4d6f044e0f61","asked":null}]},{"id":"07.18","title":"Nether Wart","where":"Q9. A red fungus of the Nether.","question":"*Verruca di u Nether* looks Italian. Is *porru* the Corsican word for wart, and would *Porru di u Nether* work?","texts":[{"key":"block.minecraft.nether_wart","english":"Nether Wart","french":"Verrues du Nether","corsican":"Verruca di u Nether","source_hash":"a6f1334c6db2","corsican_hash":"151bc1f5237a","asked":null},{"key":"item.minecraft.nether_wart","english":"Nether Wart","french":"Verrues du Nether","corsican":"Verruca di u Nether","source_hash":"a6f1334c6db2","corsican_hash":"151bc1f5237a","asked":null}]},{"id":"07.19","title":"Sea Pickle","where":"Q10. Glowing sea creature.","question":"*Cucumaru di mare*: natural?","texts":[{"key":"block.minecraft.sea_pickle","english":"Sea Pickle","french":"Cornichon de mer","corsican":"Cucumaru di mare","source_hash":"c9f838dad149","corsican_hash":"0825451d08eb","asked":null}]}]}</script>
+<script>
+"use strict";
+const set = JSON.parse(document.getElementById("data").textContent);
+const STORE = "corsu-review-" + set.id;
+let saved = {};
+try { saved = JSON.parse(localStorage.getItem(STORE) || "{}"); } catch (error) {}
+const el = (tag, attributes = {}, ...children) => {
+  const node = document.createElement(tag);
+  for (const [name, value] of Object.entries(attributes)) {
+    if (name === "text") node.textContent = value; else if (name.startsWith("on")) node.addEventListener(name.slice(2), value);
+    else if (value !== false && value != null) node.setAttribute(name, value === true ? "" : value);
+  }
+  node.append(...children.filter(child => child != null));
+  return node;
+};
+// *word* in the questions is emphasis; everything else is plain text.
+const rich = text => text.split(/(\*[^*]+\*)/).map(part => /^\*[^*]+\*$/.test(part) ? el("em", { text: part.slice(1, -1) }) : part);
+const answers = () => set.items.map(item => saved[item.id] || {});
+function remember() { try { localStorage.setItem(STORE, JSON.stringify(saved)); } catch (error) {} reply(); }
+const line = value => (value || "").replace(/\s*\n\s*/g, " / ").trim();
+function reply() {
+  const lines = ["corsu-review v1", "set: " + set.id, "data: " + set.app + " " + set.version];
+  set.items.forEach((item, index) => {
+    const answer = answers()[index];
+    lines.push("item: " + item.id, "texts: " + item.texts.map(text => `${text.key}@${text.source_hash}:${text.corsican_hash}`).join(" "),
+      "answer: " + (answer.kind || "skip"), "proposal: " + (answer.kind === "other" ? line(answer.proposal) : ""), "comment: " + line(answer.comment));
+  });
+  lines.push("end");
+  document.getElementById("reply").value = lines.join("\n");
+}
+const count = set.items.reduce((sum, item) => sum + item.texts.length, 0);
+document.getElementById("intro").textContent = `${set.title} — ${set.part}/${set.parts}. ${set.items.length} questions, ${count} textes · texts. ${set.app} ${set.version}.`;
+const box = document.getElementById("items");
+for (const item of set.items) {
+  const state = saved[item.id] = saved[item.id] || {};
+  const name = "q-" + item.id;
+  const proposal = el("input", { type: "text", id: name + "-proposal", value: state.proposal || "", disabled: state.kind !== "other",
+    oninput: event => { state.proposal = event.target.value; remember(); } });
+  const choice = (kind, label) => el("label", {}, el("input", { type: "radio", name, value: kind, checked: (state.kind || "skip") === kind,
+    onchange: () => { state.kind = kind; proposal.disabled = kind !== "other"; if (kind === "other") proposal.focus(); remember(); } }), " " + label);
+  box.append(el("article", { "aria-labelledby": name + "-title" },
+    el("h3", { id: name + "-title", text: `${item.id} — ${item.title}` }),
+    el("p", {}, el("b", { text: "Où · Where : " }), ...rich(item.where)),
+    el("table", {}, el("thead", {}, el("tr", {}, ...["Clé · Key", "English", "Français (officiel)", "Corse actuel · Corsican now"].map(text => el("th", { scope: "col", text })))),
+      el("tbody", {}, ...item.texts.map(text => el("tr", {}, el("td", {}, el("code", { text: text.key })), el("td", { text: text.english }),
+        el("td", { text: text.french }), el("td", { class: "co", lang: "co", text: text.corsican }))))),
+    ...item.texts.filter(text => text.asked).map(text => el("p", { class: "asked", text: `La question a été écrite pour · The question was written for : ${text.asked} (${text.key})` })),
+    el("p", {}, el("b", { text: "Question : " }), ...rich(item.question)),
+    el("fieldset", {}, el("legend", { class: "muted", text: "Votre avis · Your view" }),
+      choice("ok", "OK, naturel · natural"), choice("other", "J'écrirais autrement · I would write it otherwise"), choice("skip", "Passer · Skip")),
+    el("label", { class: "field", for: name + "-proposal", text: "Votre forme · Your form" }), proposal,
+    el("label", { class: "field", for: name + "-comment", text: "Remarque (facultatif) · Comment (optional)" }),
+    el("textarea", { id: name + "-comment", rows: "2", oninput: event => { state.comment = event.target.value; remember(); } }, state.comment || "")));
+}
+reply();
+const say = text => { document.getElementById("said").textContent = text; };
+document.getElementById("copy").addEventListener("click", async () => {
+  const area = document.getElementById("reply");
+  try { await navigator.clipboard.writeText(area.value); say("Copié · Copied."); }
+  catch (error) { area.select(); say("Sélectionnée : Ctrl+C pour copier · Selected: Ctrl+C to copy."); }
+});
+document.getElementById("save").addEventListener("click", () => {
+  const link = el("a", { href: URL.createObjectURL(new Blob([document.getElementById("reply").value], { type: "text/plain" })), download: `relecture-${set.id}.txt` });
+  document.body.append(link); link.click(); link.remove();
+});
+document.getElementById("issue").addEventListener("click", () => {
+  const body = "Réponse à la relecture " + set.id + " · Reply to review " + set.id + "\n\n```text\n" + document.getElementById("reply").value + "\n```\n";
+  let url = "https://github.com/Platykalt/corsu/issues/new?" + new URLSearchParams({ title: "Relecture " + set.id, body });
+  // Browsers and GitHub refuse very long addresses: then the issue opens empty and the reply is pasted by hand.
+  if (url.length > 7500) { url = "https://github.com/Platykalt/corsu/issues/new?" + new URLSearchParams({ title: "Relecture " + set.id }); say("Réponse trop longue pour l'adresse : copiez-la dans le ticket · Reply too long for the address: paste it into the issue."); }
+  window.open(url, "_blank", "noopener");
+});
+</script>
+</body>
+</html>

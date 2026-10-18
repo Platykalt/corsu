@@ -1,0 +1,132 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Relecture mc01-4</title>
+<style>
+:root { --bg: #f7f5f0; --surface: #fff; --line: #d9d4c8; --text: #1f2421; --muted: #5b625d; --accent: #1d6b5a;
+  --on-accent: #fff; --soft: #e3f0ec; --warn: #8a5300; --warn-soft: #fbefd9; color-scheme: light dark; }
+@media (prefers-color-scheme: dark) { :root { --bg: #151917; --surface: #1e2421; --line: #36403b; --text: #e8ece9;
+  --muted: #a7b0ab; --accent: #6cc3ad; --on-accent: #0f1513; --soft: #203a33; --warn: #f0b867; --warn-soft: #3a2e1b; } }
+* { box-sizing: border-box; }
+body { margin: 0; background: var(--bg); color: var(--text); font: 1rem/1.5 system-ui, sans-serif; }
+main { max-width: 52rem; margin: 0 auto; padding: 1.5rem 1rem 4rem; }
+h1 { font-size: 1.5rem; margin: 0 0 .25rem; } h2 { font-size: 1.1rem; margin: 2rem 0 .75rem; }
+.muted { color: var(--muted); } .note { background: var(--soft); border-radius: .5rem; padding: .75rem 1rem; }
+article { background: var(--surface); border: 1px solid var(--line); border-radius: .75rem; padding: 1rem; margin: 1rem 0; }
+article h3 { margin: 0 0 .5rem; font-size: 1rem; }
+table { border-collapse: collapse; width: 100%; font-size: .9rem; margin: .5rem 0; display: block; overflow-x: auto; }
+th, td { text-align: left; border-bottom: 1px solid var(--line); padding: .35rem .5rem; vertical-align: top; }
+td.co { font-weight: 600; } code { font-size: .8rem; overflow-wrap: anywhere; }
+.asked { background: var(--warn-soft); color: var(--warn); border-radius: .4rem; padding: .25rem .5rem; font-size: .875rem; }
+fieldset { border: 0; padding: 0; margin: .75rem 0 0; display: flex; flex-wrap: wrap; gap: .5rem 1rem; }
+label { cursor: pointer; } input[type=text], textarea { width: 100%; font: inherit; padding: .4rem .5rem;
+  border: 1px solid var(--line); border-radius: .4rem; background: var(--bg); color: var(--text); }
+.field { display: block; margin-top: .5rem; font-size: .9rem; }
+button { font: inherit; padding: .5rem .9rem; border-radius: .5rem; border: 1px solid var(--line); background: var(--surface);
+  color: var(--text); cursor: pointer; } button.main { background: var(--accent); border-color: var(--accent); color: var(--on-accent); }
+:focus-visible { outline: 3px solid var(--accent); outline-offset: 2px; }
+.buttons { display: flex; flex-wrap: wrap; gap: .5rem; margin: .75rem 0; }
+#reply { font-family: ui-monospace, monospace; font-size: .8rem; min-height: 12rem; }
+#said { min-height: 1.5rem; }
+</style>
+</head>
+<body>
+<main>
+<h1>Relecture mc01-4 · Review mc01-4</h1>
+<p class="muted" id="intro"></p>
+<p class="note"><b>Fr.</b> Ces traductions ont été produites puis revues par une IA, sans relecture humaine. Votre réponse
+est une <b>proposition</b>, examinée ensuite : rien ne change dans le jeu sans cet examen. Rien n'est envoyé tant que vous
+ne cliquez pas sur « Ouvrir un ticket » ; aucun nom n'est demandé.<br><b>En.</b> These translations were produced and
+revised by an AI, with no human review. Your answer is a <b>proposal</b>, examined afterwards. Nothing is sent unless you
+click "Open an issue"; no name is asked.</p>
+<p class="muted">« ¶ » = retour à la ligne · line break ; <code>%s</code> = rempli par le jeu · filled in by the game.</p>
+<div id="items"></div>
+<h2>Votre réponse · Your reply</h2>
+<p class="muted">Relisez-la avant de l'envoyer · Read it before sending it. Par courriel, en fichier ou par ticket GitHub (compte GitHub
+nécessaire) · By e-mail, as a file or as a GitHub issue (needs a GitHub account).</p>
+<textarea id="reply" readonly aria-label="Réponse à copier · Reply to copy"></textarea>
+<div class="buttons">
+<button type="button" class="main" id="copy">Copier · Copy</button>
+<button type="button" id="save">Enregistrer le fichier · Save as a file</button>
+<button type="button" id="issue">Ouvrir un ticket GitHub · Open a GitHub issue</button>
+</div>
+<p id="said" role="status" class="muted"></p>
+</main>
+<script type="application/json" id="data">{"id":"mc01-4","batch":"01-interface-options.md","title":"Lot 01 · Batch 01 — Interface et options / Interface and options","description":["Les textes les plus visibles : écran titre, menu pause, écrans d'options, langue, accessibilité.","The most visible texts: title screen, pause menu, options screens, language, accessibility."],"part":4,"parts":12,"app":"Minecraft: Java Edition","version":"26.3","items":[{"id":"01.22","title":"Server Links...","where":"Pause menu on some servers: links published by the server. Button: half-width button, about 14 characters fit; longest Corsican label here: 21 characters (may not fit; the game scrolls labels that are too long).","question":"Is *Liami di u servitore…* natural?","texts":[{"key":"menu.server_links","english":"Server Links...","french":"Liens du serveur...","corsican":"Liami di u servitore…","source_hash":"e9f9ff5578fa","corsican_hash":"cb073a175308","asked":null}]},{"id":"01.23","title":"Saving world","where":"Progress text while the world is saved.","question":"*Arregistramentu di u mondu* / *di i pezzi* (chunk = *pezzu*): natural?","texts":[{"key":"menu.savingLevel","english":"Saving world","french":"Sauvegarde du monde...","corsican":"Arregistramentu di u mondu","source_hash":"2485c8595449","corsican_hash":"6b23d751de65","asked":null},{"key":"menu.savingChunks","english":"Saving chunks","french":"Sauvegarde des chunks...","corsican":"Arregistramentu di i pezzi","source_hash":"238f9b0766fd","corsican_hash":"58a17a1add84","asked":null}]},{"id":"01.24","title":"Preparing spawn area: %s%%","where":"Loading screen when a world opens.","question":"Is *Preparazione di a zona d'apparizione : 42%* natural (spawn = *apparizione*)?","texts":[{"key":"menu.preparingSpawn","english":"Preparing spawn area: %s%%","french":"Préparation de la zone d'apparition : %s %%","corsican":"Preparazione di a zona d'apparizione : %s%%","source_hash":"8f7cdcaefc16","corsican_hash":"f8c038d1fc19","asked":null}]},{"id":"01.25","title":"Done","where":"Button closing almost every settings screen. Button: options button, about 22 characters fit including \": value\"; longest Corsican label here: 5 characters.","question":"*Fattu* (as in upstream:29) for Done: natural on a button? Alternative: *Compiu* (mozilla:761).","texts":[{"key":"gui.done","english":"Done","french":"Terminé","corsican":"Fattu","source_hash":"e9b450d14bc2","corsican_hash":"fff4b448c6b7","asked":null}]},{"id":"01.26","title":"Back","where":"Back button on many screens. Button: half-width button, about 14 characters fit; longest Corsican label here: 7 characters.","question":"Is the noun *Ritornu* fine on a button, or should it be the infinitive *Vultà*?","texts":[{"key":"gui.back","english":"Back","french":"Retour","corsican":"Ritornu","source_hash":"b52b36b7269f","corsican_hash":"3e71905c9777","asked":null}]},{"id":"01.27","title":"Cancel","where":"Cancel button in dialogs. Button: half-width button, about 14 characters fit; longest Corsican label here: 9 characters.","question":"*Abbandunà* is the Mozilla term for Cancel. Does it read as \"cancel\" (not \"abandon\") to you?","texts":[{"key":"gui.cancel","english":"Cancel","french":"Annuler","corsican":"Abbandunà","source_hash":"77dfd2135f4d","corsican_hash":"b5c3bba84531","asked":null}]},{"id":"01.28","title":"Yes","where":"Yes / No buttons in confirmation dialogs. Button: half-width button, about 14 characters fit; longest Corsican label here: 2 characters.","question":"*Sì / Nò*: correct accents and natural?","texts":[{"key":"gui.yes","english":"Yes","french":"Oui","corsican":"Sì","source_hash":"5397e0583f14","corsican_hash":"13ba2ac252a0","asked":null},{"key":"gui.no","english":"No","french":"Non","corsican":"Nò","source_hash":"816c52fd2bdd","corsican_hash":"d024bb217b96","asked":null}]},{"id":"01.29","title":"Ok","where":"OK button in some dialogs. Button: half-width button, about 14 characters fit; longest Corsican label here: 3 characters.","question":"*Vai* (\"go\") for OK: natural? Alternatives: *OK*, *D'accordu*.","texts":[{"key":"gui.ok","english":"Ok","french":"Ok","corsican":"Vai","source_hash":"b0a98216a324","corsican_hash":"4f374392fc82","asked":null}]},{"id":"01.30","title":"Proceed","where":"Buttons to go on past a warning. Button: half-width button, about 14 characters fit; longest Corsican label here: 8 characters.","question":"*Cuntinuà* for both Proceed and Continue: fine?","texts":[{"key":"gui.proceed","english":"Proceed","french":"Continuer","corsican":"Cuntinuà","source_hash":"02ed4a4a3934","corsican_hash":"ee8c9b1ff588","asked":null},{"key":"gui.continue","english":"Continue","french":"Continuer","corsican":"Cuntinuà","source_hash":"2e02623966f9","corsican_hash":"ee8c9b1ff588","asked":null}]}]}</script>
+<script>
+"use strict";
+const set = JSON.parse(document.getElementById("data").textContent);
+const STORE = "corsu-review-" + set.id;
+let saved = {};
+try { saved = JSON.parse(localStorage.getItem(STORE) || "{}"); } catch (error) {}
+const el = (tag, attributes = {}, ...children) => {
+  const node = document.createElement(tag);
+  for (const [name, value] of Object.entries(attributes)) {
+    if (name === "text") node.textContent = value; else if (name.startsWith("on")) node.addEventListener(name.slice(2), value);
+    else if (value !== false && value != null) node.setAttribute(name, value === true ? "" : value);
+  }
+  node.append(...children.filter(child => child != null));
+  return node;
+};
+// *word* in the questions is emphasis; everything else is plain text.
+const rich = text => text.split(/(\*[^*]+\*)/).map(part => /^\*[^*]+\*$/.test(part) ? el("em", { text: part.slice(1, -1) }) : part);
+const answers = () => set.items.map(item => saved[item.id] || {});
+function remember() { try { localStorage.setItem(STORE, JSON.stringify(saved)); } catch (error) {} reply(); }
+const line = value => (value || "").replace(/\s*\n\s*/g, " / ").trim();
+function reply() {
+  const lines = ["corsu-review v1", "set: " + set.id, "data: " + set.app + " " + set.version];
+  set.items.forEach((item, index) => {
+    const answer = answers()[index];
+    lines.push("item: " + item.id, "texts: " + item.texts.map(text => `${text.key}@${text.source_hash}:${text.corsican_hash}`).join(" "),
+      "answer: " + (answer.kind || "skip"), "proposal: " + (answer.kind === "other" ? line(answer.proposal) : ""), "comment: " + line(answer.comment));
+  });
+  lines.push("end");
+  document.getElementById("reply").value = lines.join("\n");
+}
+const count = set.items.reduce((sum, item) => sum + item.texts.length, 0);
+document.getElementById("intro").textContent = `${set.title} — ${set.part}/${set.parts}. ${set.items.length} questions, ${count} textes · texts. ${set.app} ${set.version}.`;
+const box = document.getElementById("items");
+for (const item of set.items) {
+  const state = saved[item.id] = saved[item.id] || {};
+  const name = "q-" + item.id;
+  const proposal = el("input", { type: "text", id: name + "-proposal", value: state.proposal || "", disabled: state.kind !== "other",
+    oninput: event => { state.proposal = event.target.value; remember(); } });
+  const choice = (kind, label) => el("label", {}, el("input", { type: "radio", name, value: kind, checked: (state.kind || "skip") === kind,
+    onchange: () => { state.kind = kind; proposal.disabled = kind !== "other"; if (kind === "other") proposal.focus(); remember(); } }), " " + label);
+  box.append(el("article", { "aria-labelledby": name + "-title" },
+    el("h3", { id: name + "-title", text: `${item.id} — ${item.title}` }),
+    el("p", {}, el("b", { text: "Où · Where : " }), ...rich(item.where)),
+    el("table", {}, el("thead", {}, el("tr", {}, ...["Clé · Key", "English", "Français (officiel)", "Corse actuel · Corsican now"].map(text => el("th", { scope: "col", text })))),
+      el("tbody", {}, ...item.texts.map(text => el("tr", {}, el("td", {}, el("code", { text: text.key })), el("td", { text: text.english }),
+        el("td", { text: text.french }), el("td", { class: "co", lang: "co", text: text.corsican }))))),
+    ...item.texts.filter(text => text.asked).map(text => el("p", { class: "asked", text: `La question a été écrite pour · The question was written for : ${text.asked} (${text.key})` })),
+    el("p", {}, el("b", { text: "Question : " }), ...rich(item.question)),
+    el("fieldset", {}, el("legend", { class: "muted", text: "Votre avis · Your view" }),
+      choice("ok", "OK, naturel · natural"), choice("other", "J'écrirais autrement · I would write it otherwise"), choice("skip", "Passer · Skip")),
+    el("label", { class: "field", for: name + "-proposal", text: "Votre forme · Your form" }), proposal,
+    el("label", { class: "field", for: name + "-comment", text: "Remarque (facultatif) · Comment (optional)" }),
+    el("textarea", { id: name + "-comment", rows: "2", oninput: event => { state.comment = event.target.value; remember(); } }, state.comment || "")));
+}
+reply();
+const say = text => { document.getElementById("said").textContent = text; };
+document.getElementById("copy").addEventListener("click", async () => {
+  const area = document.getElementById("reply");
+  try { await navigator.clipboard.writeText(area.value); say("Copié · Copied."); }
+  catch (error) { area.select(); say("Sélectionnée : Ctrl+C pour copier · Selected: Ctrl+C to copy."); }
+});
+document.getElementById("save").addEventListener("click", () => {
+  const link = el("a", { href: URL.createObjectURL(new Blob([document.getElementById("reply").value], { type: "text/plain" })), download: `relecture-${set.id}.txt` });
+  document.body.append(link); link.click(); link.remove();
+});
+document.getElementById("issue").addEventListener("click", () => {
+  const body = "Réponse à la relecture " + set.id + " · Reply to review " + set.id + "\n\n```text\n" + document.getElementById("reply").value + "\n```\n";
+  let url = "https://github.com/Platykalt/corsu/issues/new?" + new URLSearchParams({ title: "Relecture " + set.id, body });
+  // Browsers and GitHub refuse very long addresses: then the issue opens empty and the reply is pasted by hand.
+  if (url.length > 7500) { url = "https://github.com/Platykalt/corsu/issues/new?" + new URLSearchParams({ title: "Relecture " + set.id }); say("Réponse trop longue pour l'adresse : copiez-la dans le ticket · Reply too long for the address: paste it into the issue."); }
+  window.open(url, "_blank", "noopener");
+});
+</script>
+</body>
+</html>

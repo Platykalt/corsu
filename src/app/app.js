@@ -13,13 +13,13 @@ const restartHints = new Map(), openDetails = new Map();
 const $ = id => document.getElementById(id);
 // Browsers have no Corsican number and time formats; the French ones match Corsican usage.
 const numbers = () => language === "co" ? "fr" : language;
-// The page's own texts, then those of the Appearance and phone pages (texts-appearance.js, texts-phone.js, same
-// {co, fr, en} shape) when loaded.
+// The page's own texts, then those of the Appearance, phone and report pages (texts-appearance.js, texts-phone.js,
+// texts-report.js, same {co, fr, en} shape) when loaded.
 function lookup(name) {
   const lang = language || "fr";
   if (name in text[lang]) return text[lang][name];
   for (const extra of [typeof textsAppearance === "undefined" ? null : textsAppearance,
-    typeof textsPhone === "undefined" ? null : textsPhone]) {
+    typeof textsPhone === "undefined" ? null : textsPhone, typeof textsReport === "undefined" ? null : textsReport]) {
     if (extra && extra[lang] && name in extra[lang]) return extra[lang][name];
   }
   return undefined;
@@ -734,7 +734,8 @@ $("remove-confirm").addEventListener("click", () => {
 for (const button of document.querySelectorAll("[data-close]")) button.addEventListener("click", () => button.closest("dialog").close());
 
 // What appearance.js (the Appearance page) needs from the page: texts, elements, the server, the language.
-window.corsu = { t, make, call, icon, language: () => language };
+// The report page (report.js) also reads the state: the programs to choose from, Corsu's version and system.
+window.corsu = { t, make, call, icon, language: () => language, state: () => state };
 
 // Corsican first: the app speaks the language it puts on the computer.
 language = language || "co";
