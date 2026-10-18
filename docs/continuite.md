@@ -5,6 +5,19 @@ Les sections datées après « État actuel » sont l'historique : ce qui y est 
 
 ## État actuel (18 octobre 2026)
 
+- **0.25.1 publiée** (18 octobre 2026) : tag `v0.25.1` sur `bb64655`, release
+  https://github.com/Platykalt/corsu/releases/tag/v0.25.1, dernière version (run CI 39121451094 : tests, archives,
+  bout en bout sur les trois systèmes, publication, installation en une ligne Linux et Windows). La 0.25.0 a été
+  étiquetée (`v0.25.0` sur `467174c`) mais **jamais publiée** : son run Windows a trouvé une course sur
+  `installation.json` (corrigée en 0.25.1) ; le tag reste tel quel, sans release.
+- **Vérifié depuis les téléchargements publics** (conteneur Debian `corsu-migration-test`, home jetable) : six
+  fichiers conformes à leurs `.sha256`, trois archives en 0.25.1 ; `check_migration.py --from 0.24.0` sur les archives
+  publiques : 84 PASS, exit 0 (empreinte du plugin non recalculée faute de Node.js dans le conteneur ; faite en CI) ;
+  0.24.0 publiée installée, Firefox désactivé, puis mise à jour réelle par son propre `update.py` depuis GitHub :
+  `updated 0.24.0 → 0.25.1`, Firefox reste désactivé, entrée de menu sur `bin/corsu-python`.
+- **Ensuite** : `next-0.26` (Minecraft, revue linguistique ; clavier Keyman : casse, variantes ; page « Sur
+  téléphone »).
+
 - **0.24.0 publiée** (17 octobre 2026) : tag `v0.24.0` sur `78697ea`, release
   https://github.com/Platykalt/corsu/releases/tag/v0.24.0 marquée dernière version (run CI 39040761519 : tests,
   archives, essais de bout en bout sur les trois systèmes, publication et installation en une ligne réussis ; un
