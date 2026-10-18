@@ -180,6 +180,12 @@ add("bio editor content Bio", `<div class="bioEditor_x"><div id="t" contentedita
 add("bio text Bio", `<div class="userBio_x"><div id="t" class="markup_x">Bio</div></div>`, [{ user: work }], "Bio");
 add("bio text Dans un appel", `<div class="bio_x"><span id="t">Dans un appel</span></div>`, [{ user: work }], "Dans un appel");
 add("Créer un salon", `<button id="t">Créer un salon</button>`, [], "Creà un canale");
+// "Supprimer" is Discord's Delete and Remove: in a dialog it takes the verb of the title, elsewhere the dictionary's.
+add("Supprimer in a delete dialog", `<div role="dialog"><h1 class="title_x">Supprimer le message</h1><button id="t">Supprimer</button></div>`,
+  [], "Squassà");
+add("Supprimer in a menu", `<div role="menu"><div id="t" role="menuitem">Supprimer</div></div>`, [], "Caccià");
+add("person named Supprimer in a delete dialog", `<div role="dialog"><h1 class="title_x">Supprimer le message</h1><span id="t" class="username_x">Supprimer</span></div>`,
+  [{ user: user(9, "Supprimer") }], "Supprimer");
 add("message", `<div id="message-content-1" class="markup_x"><span id="t">Dans un appel</span></div>`, [], "Dans un appel");
 
 then("game Control", "Dans un appel", [{ variant: "x" }, { text: "Dans un appel" }, { channel: dm(work) },

@@ -1326,7 +1326,7 @@
  },
  "argument.pos.mixed": {
   "bcf3a9529464": {
-   "co": "Impussibule di mischjà coordinate di mondu è lucale (tuttu deve impiegà ^ o nunda)",
+   "co": "Impussibule di mischjà coordinate di mondu è lucale (o tutte e coordinate impieganu ^, o nisuna)",
    "kind": "reused",
    "from": "argument.pos.mixed",
    "review": "ai"
@@ -24912,7 +24912,7 @@
  },
  "selectWorld.locked": {
   "655f839842db": {
-   "co": "Bluccatu da un'altra istanza di Minecraft in corsu",
+   "co": "Bluccatu da un'altra istanza di Minecraft aperta",
    "kind": "adapted",
    "from": "selectWorld.locked",
    "review": "ai",

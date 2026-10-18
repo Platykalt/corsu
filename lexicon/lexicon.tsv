@@ -86,7 +86,7 @@ Number|Nombre|Numeru
 Blocked|Bloqué|Bluccatu
 Private browsing|Navigation privée|Navigazione privata
 Debugging|Débogage|Currezzione di l'errori
-Timer|Minuteur|Cronumetru
+Timer|Minuteur|Minuteria
 Open link|Ouvrir le lien|Apre u ligame
 Subtitles|Sous-titres|Sottutituli
 Picture-in-Picture|Incrustation vidéo|Videò in finestra
@@ -477,8 +477,8 @@ System Default|Paramètre système|Predefinitu di u sistema
 Friends|Amis|Amichi
 Add Friend|Ajouter un ami|Aghjunghje un amicu
 Add Friends|Ajouter des amis|Aghjunghje amichi
-Online|En ligne|Cunnessu
-Offline|Hors ligne|Scunnessu
+Online|En ligne|In linea
+Offline|Hors ligne|Fora di linea
 Pending|En attente|In attesa
 Blocked|Bloqués|Bluccati
 Direct Messages|Messages privés|Messaghji privati
@@ -572,7 +572,7 @@ Copy Message Link|Copier le lien du message|Cupià u ligame di u messaghju
 Copy Message ID|Copier l'identifiant du message|Cupià l'identificatore di u messaghju
 Pin Message|Épingler le message|Appuntà u messaghju
 Unpin Message|Désépingler le message|Staccà u messaghju
-Pinned Messages|Messages épinglés|Messaghji appuntati
+Pinned Messages|Messages épinglés|Messaghji spirlati
 Add Reaction|Ajouter une réaction|Aghjunghje una reazzione
 Reactions|Réactions|Reazzioni
 Create Thread|Créer un fil|Creà una discussione
@@ -3365,10 +3365,10 @@ Baltic|Baltique|Balticu
 |Ouvrez les sites que vous visitez fréquemment en tant qu’application web depuis votre barre des tâches. Recherchez l’icône « Ajouter l’onglet à la barre des tâches » à droite de la barre d’adresse pour ouvrir ce site dans une fenêtre épurée mais qui conserve toutes les protections de %1. <a data-l10n-name="connect">Donnez votre avis</a>|Aprite i siti chì vo visitate à spessu cum'è appiecazione web da a vostra barra di l'attività. Circate l'icona « Aghjunghje l'unghjetta à a barra di l'attività » à diritta di a barra d'indirizzu per apre stu situ in una finestra purificata ma chì mantene tutte e prutezzioni di %1. <a data-l10n-name="connect">Date u vostru parè</a>
 |Listes sur la %1|Liste nant'à a %1
 |Gardez votre liste de tâches en tête lorsque vous ouvrez un nouvel onglet. Qu’il s’agisse de listes pour faire vos valises ou faire les courses, concrétisez vos projets dans %1. <a data-l10n-name="connect">Donnez votre avis</a>|Tenite a vostra lista di travagli in mente quandu vo aprite un'unghjetta nova. Ch'ella sia una lista per fà e valisge o fà a spesa, cuncretizate i vostri prughjetti in %1. <a data-l10n-name="connect">Date u vostru parè</a>
-|Minuteur sur la %1|Cronumetru nant'à a %1
-|Réglez un minuteur pour maintenir votre concentration, vous encourager à ne pas vous égarer, ou vous rappeler de faire une pause. <a data-l10n-name="connect">Donnez votre avis</a>|Regulate un cronumetru per mantene a vostra cuncentrazione, incuraghjivvi à ùn sviavvi, o ramintavvi di fà una pausa. <a data-l10n-name="connect">Date u vostru parè</a>
-|Listes et minuteur sur la %1|Liste è cronumetru nant'à a %1
-|Gardez votre liste de tâches en tête lorsque vous ouvrez un nouvel onglet. Qu’il s’agisse de listes pour faire vos valises ou faire les courses, concrétisez vos projets dans %1. Réglez un minuteur pour maintenir votre concentration, vous encourager à ne pas vous égarer, ou vous rappeler de faire une pause. <a data-l10n-name="connect">Donnez votre avis</a>|Tenite a vostra lista di travagli in mente quandu vo aprite un'unghjetta nova. Ch'ella sia una lista per fà e valisge o fà a spesa, cuncretizate i vostri prughjetti in %1. Regulate un cronumetru per mantene a vostra cuncentrazione, incuraghjivvi à ùn sviavvi, o ramintavvi di fà una pausa. <a data-l10n-name="connect">Date u vostru parè</a>
+|Minuteur sur la %1|Minuteria nant'à a %1
+|Réglez un minuteur pour maintenir votre concentration, vous encourager à ne pas vous égarer, ou vous rappeler de faire une pause. <a data-l10n-name="connect">Donnez votre avis</a>|Regulate una minuteria per mantene a vostra cuncentrazione, incuraghjivvi à ùn sviavvi, o ramintavvi di fà una pausa. <a data-l10n-name="connect">Date u vostru parè</a>
+|Listes et minuteur sur la %1|Liste è minuteria nant'à a %1
+|Gardez votre liste de tâches en tête lorsque vous ouvrez un nouvel onglet. Qu’il s’agisse de listes pour faire vos valises ou faire les courses, concrétisez vos projets dans %1. Réglez un minuteur pour maintenir votre concentration, vous encourager à ne pas vous égarer, ou vous rappeler de faire une pause. <a data-l10n-name="connect">Donnez votre avis</a>|Tenite a vostra lista di travagli in mente quandu vo aprite un'unghjetta nova. Ch'ella sia una lista per fà e valisge o fà a spesa, cuncretizate i vostri prughjetti in %1. Regulate una minuteria per mantene a vostra cuncentrazione, incuraghjivvi à ùn sviavvi, o ramintavvi di fà una pausa. <a data-l10n-name="connect">Date u vostru parè</a>
 |Prévisions météorologiques|Previsioni meteurulogiche
 |Consultez la météo du jour en détail grâce aux prévisions heure par heure. <a data-l10n-name="connect">Donnez votre avis</a>|Cunsultate u tempu di u ghjornu in dettagliu grazia à e previsioni ora per ora. <a data-l10n-name="connect">Date u vostru parè</a>
 |La photo du jour|A foto di u ghjornu
@@ -8154,7 +8154,7 @@ Baltic|Baltique|Balticu
 |Notifications désactivées|Nutificazioni disattivate
 |Désactiver les notifications|Disattivà e nutificazioni
 |Activer les notifications|Attivà e nutificazioni
-|Options du minuteur|Ozzioni di u cronumetru
+|Options du minuteur|Ozzioni di a minuteria
 |Voir le calendrier|Vede u calendariu
 |Voir les matchs à venir|Vede e partite à vene
 |Gardez un œil sur la Coupe du monde|Tenite d’ochju a Cuppa di u mondu
@@ -8235,18 +8235,18 @@ Baltic|Baltique|Balticu
 |Qu’avez-vous pensé du widget Coupe du monde ?|Chì ne pensate di u widget Cuppa di u mondu ?
 |Faites-nous part de votre avis pour nous aider à améliorer nos futurs widgets. Essayez ensuite un nouveau widget.|Dateci u vostru parè per aiutacci à migliurà i nostri widgets futuri. Pruvate dopu un widget novu.
 |Participer au sondage|Participà à l'inchiesta
-|Démarrer le chronomètre de %1 minute|Avvià u cronumetru di %1 minuta
-|Démarrer le chronomètre de %1 minutes|Avvià u cronumetru di %1 minute
-|Mettre en pause le minuteur|Mette in pausa u cronumetru
+|Démarrer le chronomètre de %1 minute|Avvià a minuteria di %1 minuta
+|Démarrer le chronomètre de %1 minutes|Avvià a minuteria di %1 minute
+|Mettre en pause le minuteur|Mette in pausa a minuteria
 |%1 minute|%1 minuta
 |%1 minutes|%1 minute
 |Diminuer d’une minute|Calà d’una minuta
 |Augmenter d’une minute|Cresce d’una minuta
-|Mode minuteur|Modu cronumetru
+|Mode minuteur|Modu minuteria
 |Votre pause est terminée|A vostra pausa hè compia
 |Besoin de faire une pause ?|Avete bisognu di fà una pausa ?
 |Prêt·e à vous concentrer ?|Prontu à cuncentravvi ?
-|Gardez votre concentration grâce aux listes et au minuteur intégré|Firmate cuncentrati grazia à e liste è à u cronumetru integratu
+|Gardez votre concentration grâce aux listes et au minuteur intégré|Firmate cuncentrati grazia à e liste è à a minuteria integrata
 |Qu’il s’agisse de rappels rapides ou de tâches quotidiennes, de sessions de réflexion ou de pauses détente, gardez le cap et respectez vos horaires.|Ch’ellu si tratti di ramenti rapidi o di travagli d’ogni ghjornu, di sessioni di riflessione o di pause di riposu, tenite a rotta è rispettate i vostri orarii.
 |Un espace dédié pour la concentration, les prévisions météo et bien plus|Un spaziu dedicatu à a cuncentrazione, à e previsioni di u tempu è assai di più
 |Gardez le rythme avec les widgets %1. Consultez les prévisions météo, concentrez-vous sur une tâche ou suivez l’heure partout dans le monde.|Tenite u ritmu cù i widgets %1. Cunsultate e previsioni di u tempu, cuncentratevi nant’à un travagliu o seguitate l’ora in tuttu u mondu.
@@ -14157,7 +14157,7 @@ Baltic|Baltique|Balticu
 |Contexte2|Cuntestu2
 |Contexte3|Cuntestu3
 |Contexte4|Cuntestu4
-|Suppr|Supr
+|Suppr|Squas
 |Éjecter|Caccià
 |Exécuter|Eseguisce
 |Finances|Finanze
@@ -42418,8 +42418,8 @@ Unknown size|Taille inconnue|Dimensione scunnisciuta
 |%1 est en cours d'exécution|%1 hè in corsu d'esecuzione
 |%1 pas en cours d'exécution|%1 ùn hè micca in corsu d'esecuzione
 |Arrê&ter|Pian&tà
-|Mettre le minuteur en pause|Mette u minutadore in pausa
-|Démarrer un minuteur|Lancià un minutadore
+|Mettre le minuteur en pause|Mette a minuteria in pausa
+|Démarrer un minuteur|Lancià una minuteria
 |Exécuter une commande :|Eseguisce un cumandu :
 |Afficher la notification :|Affissà a nutificazione :
 |Afficher la barre d'avancement|Affissà a barra d'avanzamentu
@@ -73887,7 +73887,7 @@ Switch Display|Basculer l'affichage|Cambià l'affissaghju
 |Impossible de transférer les données à la fenêtre|Impussibule di trasferisce i dati à a finestra
 |Impossible d'ajouter une image à la liste des images.|Impussibule d'aghjunghje una fiura à a lista di e fiure.
 |N'a pas pu créer le contexte OpenGL|Impussibule di creà u cuntestu OpenGL
-|Impossible de créer un minuteur|Impussibule di creà un temporizatore
+|Impossible de créer un minuteur|Impussibule di creà una minuteria
 |Impossible d'énumérer les traductions|Impussibule d'enumerà e traduzzioni
 |Impossible de trouver le symbole « %1 » dans la bibliothèque dynamique|Impussibule di truvà u simbulu « %1 » in a bibliuteca dinamica
 |Impossible d'obtenir le pointeur du processus actuel|Impussibule d'ottene u puntadore di u prucessu attuale
@@ -96891,7 +96891,7 @@ Change Vote|Changer de vote|Cambià u votu
 Slash Commands|Commandes slash|Cumande slash
 Create a Poll|Crée un sondage|Crea un sundaghju
 Vietnamese Dong|Dong (Viêt Nam)|Dong (Viet Nam)
-Online via VR|En ligne via VR|Cunnessu via VR
+Online via VR|En ligne via VR|In linea via VR
 Spam Filters|Filtres de spam|Filtri di spam
 Crude Humour|Humour grossier|Umore grussulanu
 Play on Steam|Jouer sur Steam|Ghjucà nant'à Steam
@@ -97001,7 +97001,7 @@ Use my theme|Utiliser mon thème|Impiegà u mo tema
 View Reward|Voir la récompense|Vede a ricumpensa
 american-football|football-américain|football-americanu
 To current time|À l'heure actuelle|À l'ora attuale
-Only @mentions|@mentions seulement|@mintuvate solu
+Only @mentions|@mentions seulement|Solu e @mintuvate
 Enable Alerts|Activer les alertes|Attivà l'alerte
 Add pronouns|Ajouter des pronoms|Aghjunghje prunomi
 English, US|Anglais, États-Unis|Inglese, Stati Uniti
@@ -97298,7 +97298,7 @@ Refresh my game data|Rafraîchir mes données de jeu|Rinfriscà i mo dati di ghj
 Wrap Text|Retour à la ligne automatique|Ritornu autumaticu à a linea
 Disconnect from Voice Channel|Se déconnecter du salon vocal|Scunnettesi da u canale vucale
 Your Nitro discount is active|Ta réduction Nitro est active|A to riduzzione Nitro hè attiva
-You’ve reached a Checkpoint!|Tu as atteint un Checkpoint !|Hai ghjuntu un Checkpoint !
+You’ve reached a Checkpoint!|Tu as atteint un Checkpoint !|Hai righjuntu un Checkpoint !
 Your Promo Page URL|URL de ta page promotionnelle|URL di a to pagina prumuziunale
 removed their manual verification|Vérification manuelle retirée|Verificazione manuale cacciata
 Upcoming Server Events|Événements de serveur à venir|Avvenimenti di servore à vene
@@ -97915,7 +97915,7 @@ Remove Super Reaction|Retirer la super réaction|Caccià a super reazzione
 Enter an email address|Saisir une adresse e-mail|Inserisce un indirizzu e-mail
 Display Name Styles|Styles de nom d'affichage|Stili di nome d'affissu
 Select Servers|Sélectionner des serveurs|Selezziunà servori
-You will appear offline|Tu apparaîtras hors ligne|Parerai scunnessu
+You will appear offline|Tu apparaîtras hors ligne|Parerai fora di linea
 Wrong account?|Tu te trompes de compte ?|Ti sbagli di contu ?
 View Badge Details|Voir les détails du badge|Vede i dettagli di u badge
 Previous bundle item|Élément du pack précédent|Elementu di u pacchettu precedente
@@ -98223,7 +98223,7 @@ Windowed|Fenêtré|In finestra
 Language|Langage|Linguaghju
 Published|Publiée|Publicata
 assignments|devoirs|cumpiti
-Pinned|Épinglé|Puntatu
+Pinned|Épinglé|Spirlatu
 Quote|Citation|Citazione
 Reviewed|Examinée|Esaminata
 Indexing|Indexage|Indicizazione
@@ -98346,7 +98346,7 @@ Enter a tag...|Entrer un tag...|Scrive un tag...
 Manage Server|Gérer le serveur|Gestisce u servore
 Install game|Installer le jeu|Installà u ghjocu
 Client Locale|Langue du client|Lingua di u cliente
-Message pinned.|Message épinglé.|Messaghju puntatu.
+Message pinned.|Message épinglé.|Messaghju spirlatu.
 My View|Mon point de vue|U mo puntu di vista
 Subscriber Count|Nombre d'abonnés|Numeru d'abbunati
 Required options|Options requises|Ozzioni richieste
@@ -98360,7 +98360,7 @@ Clear tomorrow|Supprimer demain|Squassà dumane
 Upload Successful|Transfert réussi|Trasferimentu riesciutu
 Mild Violence|Violence modérée|Viulenza muderata
 homework-help|aide-aux-devoirs|aiutu-cumpiti
-Pin Post|Épingler le post|Puntà a publicazione
+Pin Post|Épingler le post|Spirlà a publicazione
 Nitro Plans|Abonnements Nitro|Abbunamenti Nitro
 Widget Actions|Actions du widget|Azzioni di u widget
 Add Widget|Ajouter un widget|Aghjunghje un widget
@@ -98437,7 +98437,7 @@ Strong Lyrics|Chansons ordurières|Canzone grossulane
 Connect Your Account|Connecte ton compte|Cunnetti u to contu
 Indie Spotlight|Coups de cœur indés|Preferiti indipendenti
 Pending Requests|Demandes en attente|Dumande in attesa
-Unpin Post|Désépingler le post|Spuntà a publicazione
+Unpin Post|Désépingler le post|Dispirlà a publicazione
 Sending later?|Envoyer plus tard ?|Mandà più tardi ?
 Friendship Management|Gestion de l'amitié|Gestione di l'amicizia
 Custom Image|Image personnalisée|Fiura persunalizata
@@ -98626,7 +98626,7 @@ Select Plan|Sélectionner l'abonnement|Selezziunà l'abbunamentu
 You got a Quadra Kill!|Tu as fait un quadruplé !|Ai fattu un quadruplu !
 Download App|Télécharger l'application|Scaricà l'appiecazione
 Jump to Surrounding|Voir les messages proches|Vede i messaghji vicini
-Pin Channel to Top|Épingler le salon en haut|Puntà u canale in cima
+Pin Channel to Top|Épingler le salon en haut|Spirlà u canale in cima
 Check out your new badge!|Admire ton nouveau badge !|Ammira u to novu badge !
 Join Raid Alerts|Alertes de raid d'adhésion|Alerte di raid d'adesione
 Suggested items for you|Articles suggérés pour toi|Articuli suggeriti per tè
@@ -98638,7 +98638,7 @@ Enter a username|Entre un nom d'utilisateur|Scrivi un nome d'utilizatore
 User avatar icon|Icône d'avatar utilisateur|Icona d'avatar di l'utilizatore
 Debug Logging|Journalisation du débugage|Ghjurnalizazione di u debugging
 Invalid Invite|Lien d'invitation invalide|Liame d'invitu micca validu
-Pins, unread|Messages épinglés, non lus|Messaghji puntati, micca letti
+Pins, unread|Messages épinglés, non lus|Messaghji spirlati, micca letti
 Invalid server template|Modèle de serveur invalide|Mudellu di servore micca validu
 Get this sticker from|Obtiens cet autocollant de|Ottieni st'etichetta da
 Share Stream Audio|Partager l'audio du stream|Sparte l'audio di u stream
@@ -98929,7 +98929,7 @@ Followers|Abonnés|Abbunati
 Oh, okay.|Oh, OK.|Oh, va bè.
 Reminders|Rappels|Rammenti
 mentee|filleul|fiozzu
-pinned|épinglé|puntatu
+pinned|épinglé|spirlatu
 Announcements|Annonces|Annunzii
 MFA Code|Code MFA|Codice MFA
 Timed out|Exclu(e)|Esclusu(a)
@@ -98945,7 +98945,7 @@ Working|Travaille|Travaglia
 unread|non lu(s)|micca lettu(i)
 Heart badge|Badge cœur|Badge core
 Clipped On|Capturé le|Catturatu u
-Unpinned|Désépinglé|Spuntatu
+Unpinned|Désépinglé|Dispirlatu
 Shooter|Jeu de tir|Ghjocu di tiru
 Most Popular|Plus prisé|Più apprezzatu
 Linked Roles|Rôles liés|Roli ligati
@@ -100251,7 +100251,7 @@ Reason shared with user|Raison partagée avec l'utilisateur|Ragione sparta cù l
 Removed channel from Active Now|Salon supprimé de la page En ligne|Canale cacciatu da a pagina In linea
 Your stream is still running!|Ton stream est toujours en cours !|U to stream hè sempre in corsu !
 Yours to keep if you dare...|Tu pourras la garder si tu l'oses…|A puderai tene s'è tù l'osi…
-Switch to Online?|Veux-tu vraiment passer en ligne ?|Voli daveru passà cunnessu ?
+Switch to Online?|Veux-tu vraiment passer en ligne ?|Voli daveru passà in linea ?
 Nitro access for each member|Accès à Nitro pour tous les membres|Accessu à Nitro per tutti i membri
 Add Nitro to your Wishlist|Ajoute Nitro à ta liste de souhaits|Aghjunghji Nitro à a to lista di brami
 Mod approval required|Approbation d'un modérateur requise|Appruvazione d'un muderatore richiesta
@@ -100559,7 +100559,7 @@ Download Sound|Télécharger le son|Scaricà u sonu
 Visit Server|Visiter le serveur|Visità u servore
 Verify Account|Vérifier le compte|Verificà u contu
 window seat|siège côté fenêtre|sedia à cantu à a finestra
-Pin this post?|Épingler ce post ?|Puntà stu post ?
+Pin this post?|Épingler ce post ?|Spirlà stu post ?
 Accept Request|Accepter la demande|Accettà a dumanda
 Show Styles|Afficher les styles|Affissà i stili
 Let's add some friends!|Ajoutons des amis !|Aghjunghjimu amichi !
@@ -100812,7 +100812,7 @@ Your DMs live here now!|Tes MP sont ici désormais !|I to MP sò quì avà !
 Already have an invite?|Tu as déjà une invitation ?|Hai digià un invitu ?
 Get Discord at Home|Télécharge Discord chez toi|Scarica Discord in casa toia
 See new perks|Voir les nouveaux avantages|Vede i novi vantaghji
-Pin window to top|Épingler la fenêtre en haut|Puntà a finestra in cima
+Pin window to top|Épingler la fenêtre en haut|Spirlà a finestra in cima
 Enable Server Widget|Activer le widget du serveur|Attivà u widget di u servore
 Add Role or Member|Ajouter un rôle ou un membre|Aghjunghje un rolu o un membru
 Double-tap to react|Appuie deux fois pour réagir|Tocca duie volte per reagisce
@@ -100835,7 +100835,7 @@ Keep up with book news|Suivre les actus littéraires|Seguità l'attualità liter
 Your account has limited access|Ton compte a un accès limité|U to contu hà un accessu limitatu
 The strong silent type.|Tu n'es pas du genre bavard.|Ùn sì micca chjachjarone.
 View Backup Codes|Voir les codes de sauvegarde|Vede i codici di salvaguardia
-Pin It. Pin It Good.|Épingle ça. Épingle ça bien.|Puntalu. Puntalu bè.
+Pin It. Pin It Good.|Épingle ça. Épingle ça bien.|Spirlalu. Spirlalu bè.
 Show Role Mentions|Afficher les mentions de rôle|Affissà e mintuvate di rolu
 Added to your Wishlist|Ajouté à ta liste de souhaits|Aghjuntu à a to lista di desideri
 No keywords have been added.|Aucun mot-clé n'a été ajouté.|Nisuna parolla chjave hè stata aghjunta.
@@ -100923,7 +100923,7 @@ SUBSCRIBE AND PLAY MORE|S'ABONNER POUR CONTINUER À JOUER|ABBUNATI PER CUNTINUÀ
 Select number of gifts|Sélectionne le nombre de cadeaux|Selezziuna u numeru di rigali
 Find your community on Discord|Trouve ta communauté sur Discord|Trova a to cumunità nant'à Discord
 Activity User Leave|Un utilisateur quitte l'activité|Un utilizatore lascia l'attività
-dates, pinned and more|dates, messages épinglés et plus|date, messaghji puntati è più
+dates, pinned and more|dates, messages épinglés et plus|date, messaghji spirlati è più
 1. Choose a resource channel|1. Choisis un salon de ressources|1. Sceglie un canale di risorse
 Show Launch Options|Afficher les options de lancement|Affissà l'ozzioni di lanciu
 No payment method saved|Aucun mode de paiement enregistré|Nisunu modu di pagamentu arregistratu
@@ -100947,7 +100947,7 @@ custom role icons|des icônes de rôle personnalisées|icone di rolu persunaliza
 Expression Picker Actions|Actions de sélection d'expressions|Azzioni di selezzione d'espressioni
 Add Clips Gallery Widget|Ajouter le widget Galerie de Clips|Aghjunghje u widget Galleria di Clip
 No friends to invite yet|Aucun ami à inviter pour l'instant|Nisunu amicu da invità per avà
-The Pin Is Stuck!|Ce message est trop bien épinglé !|Stu messaghju hè troppu bè puntatu !
+The Pin Is Stuck!|Ce message est trop bien épinglé !|Stu messaghju hè troppu bè spirlatu !
 How would you like to verify your age?|Comment veux-tu vérifier ton âge ?|Cumu voli verificà a to età ?
 Create New AutoMod Rule|Créer une nouvelle règle d'AutoMod|Creà una nova regula d'AutoMod
 Set as Global Entrance Sound|Définir comme son d'entrée général|Definisce cum'è sonu d'entrata generale
@@ -101815,7 +101815,7 @@ Rampage!!|Massacre !!|Massacru !!
 Unassigned|Non assigné|Micca assignatu
 Forum Channel|Salon forum|Canale foru
 Game Tags|Tags de jeu|Tag di ghjocu
-Go Online|Va en ligne|Passa cunnessu
+Go Online|Va en ligne|Passa in linea
 min required|min. requis|minimu richiestu
 Event in|Événement à|Avvenimentu à
 Nitro Preview|Aperçu Nitro|Anteprima Nitro
@@ -101894,7 +101894,7 @@ Not Connected|Pas connecté(e)|Micca cunnessu(a)
 Next Step|Prochaine étape|Tappa seguente
 Reminder Pausing|Rappel en pause|Ramentu in pausa
 Visual Novel|Roman graphique|Rumanzu graficu
-Pinned Channels|Salons épinglés|Canali puntati
+Pinned Channels|Salons épinglés|Canali spirlati
 Online Status|Statut en ligne|Statutu in linea
 Profile Theme|Thème de profil|Tema di prufilu
 Want to play?|Tu veux jouer ?|Voli ghjucà ?
@@ -101955,7 +101955,7 @@ Collapse Roles|Réduire les rôles|Riduce i roli
 Total score (113)|Score total (113)|Puntegiu tutale (113)
 Stream Stopped|Stream interrompu|Stream interrottu
 Colour Themes|Thèmes de couleur|Temi di culore
-The Pin Broke|Trêve d'épinglage|Tregua di puntatura
+The Pin Broke|Trêve d'épinglage|Tregua di spirlatura
 Using Orbs|Utiliser des Orbs|Impiegà Orbs
 Voice (Locked)|Voix (Verrouillé)|Voce (Bluccata)
 a few seconds|quelques secondes|qualchì seconda
@@ -101983,7 +101983,7 @@ Skip this step|Passer cette étape|Saltà sta tappa
 Bounties completed!|Primes terminées !|Premii compii !
 Quests Available|Quêtes disponibles|Cerche dispunibule
 Mute this thread|Rendre ce fil muet|Ammutulisce stu filu
-Recently active|Récemment en ligne|Cunnessu pocu fà
+Recently active|Récemment en ligne|In linea pocu fà
 Clip Resolution|Résolution du clip|Risuluzione di u clip
 Total score (1337)|Score total (1337)|Puntegiu tutale (1337)
 Remove tab|Supprimer l'onglet|Squassà l'unghjetta
@@ -102173,7 +102173,7 @@ Sent an audio file|A envoyé un fichier audio|Hà mandatu un schedariu audio
 Active >30d ago|Actif il y a plus de 30 j|Attivu ci hè più di 30 g
 Favourite DM|Ajouter le MP aux favoris|Aghjunghje u MP à i favuriti
 No devices available|Aucun appareil disponible|Nisun apparechju dispunibule
-Oh yeah. Pin it|Carrément ! Épinglez ça !|Propiu ! Puntatelu !
+Oh yeah. Pin it|Carrément ! Épinglez ça !|Propiu ! Spirlatelu !
 Age-restricted commands|Commandes de limite d'âge|Cumande cù limita d'età
 Continue without Backup|Continuer sans sauvegarde|Cuntinuà senza salvezza
 From a specific person|D'une personne spécifique|Da una persona specifica
@@ -102717,12 +102717,12 @@ Verification key|Clé de vérification|Chjave di verificazione
 Keep your quest going!|Continue ta quête !|Cuntinueghja a to cerca !
 In a stage|Dans une conférence|In una cunferenza
 Describe your issue|Décris ton problème|Discrivi u to prublema
-Online via Mobile|En ligne sur mobile|Cunnessu nant'à u mobile
+Online via Mobile|En ligne sur mobile|In linea nant'à u mobile
 Kick Member|Expulsion de membre|Espulsione di membru
 Copied Message ID|ID de message copié|ID di messaghju cupiatu
 Insults & Slurs|Insultes et injures|Insulti è ingiurie
 Offer Ends In|L'offre expire dans|L'offerta finisce in
-Message unpinned.|Message désépinglé.|Messaghju spuntatu.
+Message unpinned.|Message désépinglé.|Messaghju dispirlatu.
 Edit Product|Modifier le produit|Mudificà u pruduttu
 Category Name|Nom de la catégorie|Nome di a categuria
 Filter Options|Options de filtrage|Ozzioni di filtru
@@ -103063,7 +103063,7 @@ Disabled join settings|Paramètres d'adhésion désactivés|Parametri d'adesione
 Why am I seeing this?|Pourquoi est-ce que je vois ça ?|Perchè vecu questu ?
 Give your profile a fresh look|Rafraîchis le look de ton profil|Rinfresca l'aspettu di u to prufilu
 Free reward selected|Récompense gratuite sélectionnée|Ricumpensa gratuita selezziunata
-If the message is pinned or not|Si le message est épinglé ou non|Sè u messaghju hè puntatu o micca
+If the message is pinned or not|Si le message est épinglé ou non|Sè u messaghju hè spirlatu o micca
 Your App Subscriptions|Tes abonnements aux applications|I to abbunamenti à l'appiecazioni
 You’re winning more Orbs with Nitro|Tu gagnes plus d'Orbs avec Nitro|Guadagni più Orbs cù Nitro
 Use Voice Activity|Utiliser la Détection de la voix|Impiegà a Rilevazione di a voce
@@ -103469,7 +103469,7 @@ Feedback Submitted|Commentaires envoyés|Cummenti mandati
 Continue watching|Continuer à regarder|Cuntinuà à fighjà
 Create Voice Channel|Créer un salon vocal|Creà un canale vucale
 Destroying|Destruction en cours|Distruzzione in corsu
-Unpin Channel|Désépingler le salon|Spuntà u canale
+Unpin Channel|Désépingler le salon|Dispirlà u canale
 Try my commands|Essaie mes commandes|Prova i mo cumandi
 Filter Mentions|Filtrer les mentions|Filtrà e mintuvate
 Set up Discovery|Installer Découverte|Installà Scuperta
@@ -103522,7 +103522,7 @@ Your online status:|Ton statut en ligne :|U to statutu in linea :
 Download Required|Téléchargement requis|Scaricamentu richiestu
 View in Store|Voir dans la boutique|Vede in a buttega
 friend request dismissed|demande d'ami ignorée|dumanda d'amicu ignurata
-Pin Messages|Épingler les messages|Puntà i messaghji
+Pin Messages|Épingler les messages|Spirlà i messaghji
 Member Joined Via|Adhésion du membre via|Adesione di u membru via
 Add Override|Ajouter une dérogation|Aghjunghje una deroga
 Maple leaf badge|Badge feuille d'érable|Badge foglia d'acero
@@ -104367,7 +104367,7 @@ HD Streaming|Streaming haute définition|Streaming in alta definizione
 Your Student Email|Ton adresse mail étudiante|U to indirizzu mail di studiente
 Already purchased the bundle.|Tu as déjà acheté ce pack.|Ai digià compru stu pacchettu.
 Use External Sounds|Utiliser des sons externes|Impiegà soni esterni
-dates and pinned|dates et messages épinglés|date è messaghji puntati
+dates and pinned|dates et messages épinglés|date è messaghji spirlati
 Keybind Action|Action du raccourci clavier|Azzione di l'accurtatoghju
 Friend Gaming Activity|Activité de jeu des ami(e)s|Attività di ghjocu di l'amichi
 Add a bot to a server|Ajouter un bot à un serveur|Aghjunghje un bot à un servore
@@ -104605,7 +104605,7 @@ Upgrade to Nitro to level up this badge.|Passe à Nitro pour améliorer ce badge
 Search installed apps|Rechercher les applications installées|Circà l'appiecazioni installate
 Input Sensitivity|Sensibilité de la détection de la voix|Sensibilità di a rilevazione di a voce
 Plan comparison table|Tableau de comparaison de l'abonnement|Tavula di paragone di l'abbunamentu
-You’ve hit the character limit.|Tu as atteint la limite de caractères.|Ai ghjuntu u limitu di caratteri.
+You’ve hit the character limit.|Tu as atteint la limite de caractères.|Ai righjuntu u limitu di caratteri.
 Use App Commands|Utilise les commandes de l'application|Impiega e cumande di l'appiecazione
 Contacting Venmo...|Établissement du contact avec Venmo...|Cuntattu cù Venmo in corsu...
 Toggle Voice Channel Chat|Afficher/masquer le chat du salon vocal|Affissà/piattà u chat di u canale vucale
@@ -104923,7 +104923,7 @@ Unable to confirm payment method|Impossible de confirmer ce mode de paiement|Imp
 Follow the steps to continue with Google Pay.|Suis les étapes pour continuer avec Google Pay.|Segui e tappe per cuntinuà cù Google Pay.
 We just sent you an email. Click the verification link in the email to authorise this purchase.|On vient de t'envoyer un e-mail. Clique sur le lien de vérification dans l'e-mail pour autoriser cet achat.|T'avemu appena mandatu un e-mail. Cliccheghja nant'à u liame di verificazione in l'e-mail per autorizà sta compra.
 Camera access denied – Discord requires camera access to scan QR codes.|Accès à la caméra refusé - Discord requiert un accès à la caméra afin de scanner les codes QR.|Accessu à a videocamera ricusatu - Discord richiede l'accessu à a videocamera per scansà i codici QR.
-Are you sure you want to pin this message?|Tu es sûr(e) de vouloir épingler ce message ?|Sì sicuru(a) di vulè puntà stu messaghju ?
+Are you sure you want to pin this message?|Tu es sûr(e) de vouloir épingler ce message ?|Sì sicuru(a) di vulè spirlà stu messaghju ?
 Reach the greatest of heights and brag to your friends!|Bats tous les records et épate tes amis !|Batte tutti i record è stupisce i to amichi !
 Turn off and hide Party Mode. You can always turn it back on the same way you originally did.|Désactiver et masquer le mode festif. Tu peux toujours le réactiver plus tard de la même manière.|Disattivà è piattà u modu festivu. U poi sempre riattivà più tardi di listessa manera.
 You must complete the verification steps required by this server.|Tu dois compléter les étapes de certification exigées par ce serveur.|Ci vole à compie e tappe di certificazione richieste da stu servore.
@@ -104981,7 +104981,7 @@ Allow members to create invite-only threads in these channels.|Autoriser les mem
 Allows members to create, edit or delete channels.|Permet aux membres de créer, modifier ou supprimer des salons.|Permette à i membri di creà, mudificà o squassà canali.
 Allows members to mark or unmark messages as official.|Permet aux membres de marquer ou de démarquer les messages comme « officiels ».|Permette à i membri di marcà o smarcà i messaghji cum'è « ufficiali ».
 Allows members to create, edit or delete webhooks, which can post messages from other apps or sites, in this channel.|Permet aux membres de créer, modifier ou supprimer des webhooks dans ce salon, grâce auxquels ils peuvent poster des messages venant d'autres applications ou sites.|Permette à i membri di creà, mudificà o squassà webhooks in stu canale, grazie à i quali ponu publicà messaghji chì venenu d'altre appiecazioni o siti.
-Allows members to pin or unpin any message in these channels.|Permet aux membres d'épingler ou de désépingler n'importe quel message dans ces salons.|Permette à i membri di puntà o spuntà qualunque messaghju in sti canali.
+Allows members to pin or unpin any message in these channels.|Permet aux membres d'épingler ou de désépingler n'importe quel message dans ces salons.|Permette à i membri di spirlà o dispirlà qualunque messaghju in sti canali.
 Allow members to send messages in threads and in posts on forum channels.|Autoriser les membres à envoyer des messages dans les fils et les posts dans les salons forum.|Permette à i membri di mandà messaghji in i fili è e publicazioni in i canali foru.
 Allows members to send text-to-speech messages in this channel by starting a message with /tts. These messages can be heard by anyone focused on this channel.|Permet aux membres d'envoyer des messages de synthèse vocale dans ce salon en commençant leur message par /tts. Ces messages peuvent être entendus par toutes les personnes pour qui ce salon est en avant-plan.|Permette à i membri di mandà messaghji di sintesi vucale in stu canale principiendu u so messaghju cù /tts. Sti messaghji ponu esse intesi da tutte e persone chì anu stu canale in primu pianu.
 Allows members to use commands from applications, including slash commands and context menu commands.|Permet aux membres d'utiliser des commandes provenant d'applications, comme les commandes slash et les commandes de menu contextuel.|Permette à i membri d'impiegà cumandi chì venenu d'appiecazioni, cum'è i cumandi slash è i cumandi di menu cuntestuale.
@@ -105161,7 +105161,7 @@ Cash App Pay is now available as a payment method on Discord!|Cash App Pay est d
 Hey, admin, make this page less overwhelming for members|Hé administrateur, rends cette page moins encombrée pour tes membres|Ò amministratore, rende sta pagina menu ingombra per i to membri
 Role already has server-level permissions.|Le rôle dispose déjà des permissions de niveau serveur.|U rolu hà digià permessi à u livellu di u servore.
 Permissions do not come from a channel overwrite.|Les permissions ne proviennent pas du salon.|I permessi ùn venenu micca da u canale.
-Search, members, media, pins, threads and more|Recherche, membres, médias, épinglages, fils et plus|Ricerca, membri, media, messaghji puntati, fili è altru
+Search, members, media, pins, threads and more|Recherche, membres, médias, épinglages, fils et plus|Ricerca, membri, media, messaghji spirlati, fili è altru
 Allows your voice to be included when someone in the same voice channel uses Clips.|Permet à ta voix d'être incluse lorsque quelqu'un qui est dans le même salon vocal fait un clip.|Permette à a to voce d'esse inclusa quandu qualchissia in u listessu canale vucale face un clip.
 Captures a screenshot of the current stream.|Fait une capture d'écran du stream actuel.|Face una catturata di screnu di u stream attuale.
 This is the maximum resolution your clips will be recorded in.|La résolution maximale à laquelle tes clips seront enregistrés.|A risoluzione massima à a quale i to clip seranu arregistrati.
@@ -105391,7 +105391,7 @@ You can only use certain payment methods for this purchase.|Tu ne peux utiliser 
 Google Pay is unavailable or has not been set up in your browser. Please enter your payment card here instead|Google Pay n'est pas disponible ou n'a pas été configuré dans ton navigateur. Merci d'entrer tes informations de carte de paiement ici à la place|Google Pay ùn hè micca dispunibule o ùn hè micca statu cunfiguratu in u to navigatore. Scrivi piuttostu quì l'infurmazioni di a to carta di pagamentu, per piacè
 With Nitro, your Quest rewards don’t fade – hold onto earned avatar decorations long after the adventure ends.|Avec Nitro, tes récompenses de quête ne disparaissent pas : conserve les décorations d'avatar obtenues longtemps après la fin de l'aventure.|Cù Nitro, e to ricumpense di cerca ùn spariscenu micca : tene e decurazioni d'avatar ottenute assai dopu à a fine di l'avventura.
 By turning this off you lose access to things like personalised recommendations and suggestions. You won't be able to recover them in the future!|En désactivant cette option, tu perdras l'accès à certaines choses comme les recommandations et les suggestions personnalisées. Tu ne seras pas en mesure de les récupérer à l'avenir !|Disattivendu st'opzione, perderai l'accessu à certe cose cum'è e ricumandazioni è i suggerimenti persunalizati. Ùn li puderai più ricuperà !
-Hey, just double-checking that you want to pin this message to the current channel for posterity and greatness?|Hé, on veut juste s'assurer que tu veux vraiment épingler ce message dans ce salon pour la postérité et la gloire.|Ò, vulemu solu esse sicuri chì tù voli veramente puntà stu messaghju in stu canale per a pusterità è a gloria.
+Hey, just double-checking that you want to pin this message to the current channel for posterity and greatness?|Hé, on veut juste s'assurer que tu veux vraiment épingler ce message dans ce salon pour la postérité et la gloire.|Ò, vulemu solu esse sicuri chì tù voli veramente spirlà stu messaghju in stu canale per a pusterità è a gloria.
 Congrats, 100th visitor!|Félicitations, tu es notre 100e visiteur !|Felicitazioni, sì u nostru 100u visitatore !
 How hard do you want your screen to shake?|Avec quelle intensité veux-tu que l'écran soit secoué ?|Cù chì intensità voli chì u screnu sia scuzzulatu ?
 You can’t vote in this poll yet!|Tu ne peux pas encore voter pour ce sondage !|Ùn poi ancu vutà per stu sundaghju !
@@ -105449,7 +105449,7 @@ Allow members to create invite-only threads in this channel.|Autoriser les membr
 Allows members to change these channels' name, description and text/voice settings. They can also delete these channels.|Permet aux membres de changer le nom, la description et les paramètres vocaux/textuels de ces salons. Les membres pourront également supprimer les salons.|Permette à i membri di cambià u nome, a descrizzione è i parametri vucali/di testu di sti canali. I membri puderanu dinò squassà i canali.
 Allows members to mark or unmark messages as official in these channels.|Permet aux membres de marquer ou de démarquer les messages comme « officiels » dans ces salons.|Permette à i membri di marcà o di smarcà i messaghji cum'è « ufficiali » in sti canali.
 Allow Stage Moderators with this role to notify @everyone when a Stage starts. This is the same permission as Mention @everyone, @here and All Roles.|Autorise les modérateurs de conférence avec ce rôle à notifier @everyone quand une conférence est lancée. C'est la même permission que Mentionner @everyone, @here et tous les rôles.|Permette à i muderatori di cunferenza cù stu rolu di nutificà @everyone quandu una cunferenza principia. Hè u listessu permessu chè Mintuvà @everyone, @here è tutti i roli.
-Allows members to pin or unpin any message in this channel.|Permet aux membres d'épingler ou de désépingler n'importe quel message dans ce salon.|Permette à i membri di puntà o di spuntà qualunque messaghju in stu canale.
+Allows members to pin or unpin any message in this channel.|Permet aux membres d'épingler ou de désépingler n'importe quel message dans ce salon.|Permette à i membri di spirlà o di dispirlà qualunque messaghju in stu canale.
 Allow members to send messages in threads and posts under these channels.|Autoriser les membres à envoyer des messages dans les fils et les posts de ces salons.|Permette à i membri di mandà messaghji in i fili è e publicazioni di sti canali.
 Allows members to send voice messages in these channels. Requires the ‘Attach Files’ permission as well.|Permet aux membres d'envoyer des messages vocaux dans ces salons. Nécessite aussi la permission « Joindre des fichiers ».|Permette à i membri di mandà messaghji vucali in sti canali. Richiede dinò u permessu « Aghjunghje schedarii ».
 Allows members to use Activities.|Permet aux membres d'utiliser les Activités.|Permette à i membri d'impiegà l'Attività.
@@ -105623,7 +105623,7 @@ Boost this server to unlock perks|Booste ce serveur pour déverrouiller des avan
 Can access messages in this server and read their contents.|Peut accéder aux messages de ce serveur et les lire.|Pò accede à i messaghji di stu servore è leghje li.
 Swoosh. Notifications are a go!|VOOM. C'est parti pour les notifications !|VUUM. Eccu chì partenu e nutificazioni !
 People were toxic or inappropriate|Les gens avaient un comportement toxique ou inapproprié|A ghjente avia un cumpurtamentu tossicu o inadattu
-This Stage has reached its audience limit for Video Stages.|Cette conférence a atteint la limite de spectateurs pour les conférences vidéo.|Sta cunferenza hà ghjuntu u limitu di spettatori per e cunferenze videò.
+This Stage has reached its audience limit for Video Stages.|Cette conférence a atteint la limite de spectateurs pour les conférences vidéo.|Sta cunferenza hà righjuntu u limitu di spettatori per e cunferenze videò.
 Cannot change channel permissions|Impossible de changer les permissions du salon|Impussibule di cambià i permessi di u canale
 Cash App Pay is now available as a Nitro payment method!|Cash App Pay est désormais disponible comme mode de paiement pour Nitro !|Cash App Pay hè oramai dispunibule cum'è modu di pagamentu per Nitro !
 You must unfollow this category to add or remove specific channels.|Tu dois arrêter de suivre cette catégorie pour pouvoir ajouter ou retirer des salons spécifiques.|Ci vole à piantà di seguità sta categuria per pudè aghjunghje o caccià canali specifichi.
@@ -105858,7 +105858,7 @@ Your current payment method isn’t supported for this purchase. Please add a ne
 We were unable to successfully charge this payment source. Please ensure the information is correct.|Nous n'avons pas réussi à facturer cette source de paiement. Assure-toi que les informations sont correctes, s'il te plaît.|Ùn simu micca riesciuti à fatturà sta fonte di pagamentu. Assicurati chì l'infurmazioni sianu currette, per piacè.
 Keep Quest avatar decorations rewards for longer|Conserve plus longtemps les récompenses de quête de décorations d'avatar|Cunserva più longu e ricumpense di cerca di decurazioni d'avatar
 Turn off personalisation?|Veux-tu vraiment désactiver la personnalisation ?|Voli daveru disattivà a persunalizazione ?
-You do not have permission to pin messages in this channel.|Tu n'as pas la permission d'épingler des messages dans ce salon.|Ùn hai micca u permessu di puntà messaghji in stu canale.
+You do not have permission to pin messages in this channel.|Tu n'as pas la permission d'épingler des messages dans ce salon.|Ùn hai micca u permessu di spirlà messaghji in stu canale.
 Show a combo indicator as you type.|Affiche les indicateurs de combos pendant que tu écris.|Affissa l'indicatori di combo mentre chì tù scrivi.
 To enable screenshake, turn off Reduced Motion in Accessibility settings.|Pour activer les secousses d'écran, désactive le paramètre de mouvement réduit dans les paramètres d'accessibilité.|Per attivà e scossa di screnu, disattiva u parametru di muvimentu riduttu in i parametri d'accessibilità.
 You can’t see votes on this poll yet!|Tu ne peux pas encore voir les votes sur ce sondage !|Ùn poi ancu vede i voti di stu sundaghju !
@@ -105962,7 +105962,7 @@ Chat in the pop-out is coming soon.|Le chat en fenêtre sera bientôt disponible
 Stay focused on a conversation with a thread – a temporary text channel.|Concentre toute ton attention sur une conversation dans un salon textuel temporaire, autrement appelé « fil ».|Cuncentra tutta a to attenzione nant'à una cunversazione in un canale di testu tempurariu, dettu dinù « filu ».
 Join Nitro & Unlock an Evolving Profile Badge|Rejoins Nitro et déverrouille un badge de profil évolutif|Raghjunghje Nitro è sblocca un badge di prufilu evulutivu
 View all of your friends and direct messages or start a new private conversation.|Vois tous tes amis et tes messages privés, ou commence une nouvelle conversation privée.|Vede tutti i to amichi è i to messaghji privati, o principia una nova cunversazione privata.
-This server has reached the maximum number of active posts. Free up space by archiving a post.|Ce serveur a atteint le nombre maximum de posts actifs. Fais de la place en archivant un post.|Stu servore hà ghjuntu u numeru massimu di posts attivi. Fà piazza archiviendu un post.
+This server has reached the maximum number of active posts. Free up space by archiving a post.|Ce serveur a atteint le nombre maximum de posts actifs. Fais de la place en archivant un post.|Stu servore hà righjuntu u numeru massimu di posts attivi. Fà piazza archiviendu un post.
 We smashed that Nitro button so you can enjoy 2 weeks on us.|On a appuyé sur ce bouton Nitro pour que tu puisses en profiter gratuitement pendant 2 semaines.|Avemu pressu stu buttone Nitro per chì tù ne pozzi prufittà gratisi per 2 settimane.
 Are you sure you don’t want to download your backup codes? Without them, you are at risk of losing your account permanently if you lose access to your security key!|Es-tu sûr(e) de ne pas vouloir télécharger tes codes de sauvegarde ? Sans ça, tu risques de perdre ton compte de manière définitive si tu n'as plus accès à ta clé de sécurité !|Sì sicuru(a) di ùn vulè micca scaricà i to codici di salvezza ? Senza quessi, risichi di perde u to contu per sempre s'è tù ùn hai più accessu à a to chjave di sicurità !
 Open the authentication app and scan the image to the left using your phone's camera.|Ouvre l'application d'authentification et scanne l'image à gauche avec l'appareil photo de ton téléphone.|Apre l'appiecazione d'autentificazione è scanneghja a fiura à manca cù a camera di u to telefuninu.
@@ -106320,9 +106320,9 @@ Passkeys sync with your Apple ID, so you can sign in easily across devices.|Les 
 Your new password cannot be empty.|Ton nouveau mot de passe ne peut pas rester vide.|A to nova parolla d'intesa ùn pò micca esse viota.
 Follow the steps to continue with Apple Pay.|Suis les étapes pour continuer avec Apple Pay.|Seguita e tappe per cuntinuà cù Apple Pay.
 Make this my default payment method.|Sélectionner comme mode de paiement par défaut.|Selezziunà cum'è modu di pagamentu predefinitu.
-This permission no longer grants the ability to pin messages.|Cette permission n'octroie plus la possibilité d'épingler des messages.|Sta permissione ùn dà più a pussibilità di puntà messaghji.
+This permission no longer grants the ability to pin messages.|Cette permission n'octroie plus la possibilité d'épingler des messages.|Sta permissione ùn dà più a pussibilità di spirlà messaghji.
 Failed to add phone number, please try again later|Impossible d'ajouter le numéro de téléphone, réessaie un peu plus tard|Impussibule d'aghjunghje u numeru di telefonu, prova torna un pocu più tardi
-This message is a system message and cannot be pinned.|Ce message est un message système et ne peut pas être épinglé.|Stu messaghju hè un messaghju di sistema è ùn pò micca esse puntatu.
+This message is a system message and cannot be pinned.|Ce message est un message système et ne peut pas être épinglé.|Stu messaghju hè un messaghju di sistema è ùn pò micca esse spirlatu.
 How high your combo score has to reach before the party starts.|Le score que ton score de combo doit atteindre avant le début des festivités.|U puntu chì u to puntu di combo deve tuccà prima di u principiu di a festa.
 Shakes your screen as your combo score increases.|Secoue l'écran dès que le score de ton combo augmente.|Scuzzula u screnu appena u puntu di u to combo cresce.
 You have to re-join the community before you can use polls again.|Tu dois rejoindre à nouveau la communauté avant de pouvoir réutiliser des sondages.|Devi raghjunghje torna a cumunità prima di pudè aduprà torna i sundaghji.
@@ -106395,7 +106395,7 @@ Update your connection and metadata for this application|Tu dois mettre ta conne
 Connect to voice on your behalf and see others who are in any voice channel or call|Connecte-toi vocalement et accède aux salons vocaux et appels des autres utilisateurs|Cunnettiti in vucale è accede à i canali vucali è à e chjame di l'altri utilizatori
 Before searching, we need to index this DM. Give us a mo'.|Avant la recherche, nous avons besoin d'indexer cette conversation. Laisse nous un peu de temps, tu veux bien ?|Prima di a ricerca, ci vole à indicizà sta cunversazione. Lasciaci un pocu di tempu, voli ?
 Filter messages from a particular channel|Filtrer les messages d'un salon spécifique|Filtrà i messaghji d'un canale specificu
-Tap to append filter. Search pinned messages|Touche pour ajouter un filtre. Rechercher les messages épinglés|Tocca per aghjunghje un filtru. Circà i messaghji puntati
+Tap to append filter. Search pinned messages|Touche pour ajouter un filtre. Rechercher les messages épinglés|Tocca per aghjunghje un filtru. Circà i messaghji spirlati
 It was hard to scan and find the right result quickly|C'était compliqué de parcourir rapidement tout ça et de trouver le bon résultat|Era cumplicatu di scorre prestu tuttu què è di truvà u risultatu bonu
 Gift Nitro and get a decoration for free!|Offre Nitro et reçois gratuitement une décoration !|Rigala Nitro è ricevi gratuitamente una decurazione !
 If someone told you to copy/paste something here, there’s an 11/10 chance you’re being scammed.|Si quelqu'un t'a dit de copier/coller quelque chose ici, il y a à peu près 11 chances sur 10 que ce soit une arnaque.|S'è qualchissia t'hà dettu di cupià/incullà qualcosa quì, ci hè guasi 11 probabilità nant'à 10 ch'ella sia una scruccunata.
@@ -106619,7 +106619,7 @@ Uses your GPU for efficient video encoding and decoding, if available.|Utilise t
 Send a message when someone Boosts this server.|Envoyer un message lorsque quelqu'un booste ce serveur.|Mandà un messaghju quandu qualchissia spinghje stu servore.
 If you have an older device, this may fix issues you experience on voice calls.|Si tu disposes d'un appareil plus ancien, cela pourrait t'aider à régler des problèmes rencontrés en appel.|S'è tù ai un apparechju più anzianu, quessa pò aiutatti à riparà prublemi in e chjame.
 You won't receive notifications from muted categories and they will appear greyed out in your channel list. This setting applies across all your devices.|Tu ne recevras pas de notifications des catégories muettes, et elles seront grisées sur ta liste des salons. Ce paramètre s'applique sur tous tes appareils.|Ùn riceverai micca nutificazioni da e categurie ammutulite, è seranu in grisgiu in a to lista di i canali. Stu parametru vale per tutti i to apparechji.
-Switching to at-mentions only will disable voice activity notifications while still letting you know if somebody pinged you directly in the VC chat.|Passer à « Mentions seulement » désactivera les notifications d'activité vocale tout en te permettant de savoir si quelqu'un t'a interpellé(e) directement dans le chat vocal.|Passà à « Mintuvate solu » disattiverà e nutificazioni d'attività vucale, ma ti lascerà sapè s'è qualchissia t'hà chjamatu direttamente in a discussione vucale.
+Switching to at-mentions only will disable voice activity notifications while still letting you know if somebody pinged you directly in the VC chat.|Passer à « Mentions seulement » désactivera les notifications d'activité vocale tout en te permettant de savoir si quelqu'un t'a interpellé(e) directement dans le chat vocal.|Passà à « Solu e mintuvate » disattiverà e nutificazioni d'attività vucale, ma ti lascerà sapè s'è qualchissia t'hà chjamatu direttamente in a discussione vucale.
 More granular settings to control when channels should appear as unread.|D'autres paramètres granulaires pour contrôler l'instant où les salons doivent apparaître comme étant non lus.|Altri parametri più fini per cuntrullà quandu i canali devenu cumparisce cum'è micca letti.
 This will add a thumbnail to your post in the list view.|Cette action ajoutera une vignette à ton post affiché dans la liste.|St'azzione aghjunghjerà una miniatura à a to publicazione affissata in a lista.
 Failed to save default reaction|Échec de la sauvegarde de la réaction par défaut|Fiascu di l'arregistramentu di a reazzione predefinita
@@ -106737,7 +106737,7 @@ Leave without notifying other members|Quitter sans en informer les autres membre
 Keep an eye out for common scams|Ouvre l'œil pour éviter les arnaques courantes|Apre l'ochji per evità e truffe currente
 There's a very small – and we mean small – chance you can get a secret ringtone when calling someone. Good luck!|Tu as une toute petite - et nous insistons sur « petite » - chance d'obtenir une sonnerie secrète quand tu appelles quelqu'un. Bonne chance !|Ai una chance chjuca chjuca - è insistemu nant'à « chjuca » - d'ottene una sunneria secreta quandu chjami qualchissia. Bona furtuna !
 Drag and drop servers on top of each other to create server folders.|Fais glisser des serveurs et dépose-les les uns sur les autres pour créer des dossiers de serveurs.|Trascina servori è depositali l'unu nant'à l'altru per creà cartulari di servori.
-Right click to pin messages in a channel or DM to save them for later.|Fais un clic droit pour épingler un message dans un salon ou en MP pour le sauvegarder pour plus tard.|Fai un cliccu dirittu per puntà un messaghju in un canale o in MP per guardallu per dopu.
+Right click to pin messages in a channel or DM to save them for later.|Fais un clic droit pour épingler un message dans un salon ou en MP pour le sauvegarder pour plus tard.|Fai un cliccu dirittu per spirlà un messaghju in un canale o in MP per guardallu per dopu.
 This application may not support screen sharing.|Cette application ne semble pas pouvoir supporter le partage d'écran.|St'appiecazione ùn pare micca capace di gestisce u spartimentu di screnu.
 You have to join the community first before you can interact.|Tu dois d'abord rejoindre la communauté avant de pouvoir interagir.|Ci vole prima à raghjunghje a cumunità nanzu di pudè interagisce.
 This role is automatically managed by Discord for Server Boosting. It cannot be manually assigned to members or deleted.|Ce rôle est automatiquement géré par Discord pour les boosts de serveur. Il ne peut être ni assigné manuellement à d'autres membres, ni supprimé.|Stu rolu hè gestitu autumaticamente da Discord per e spinte di servore. Ùn pò esse nè assignatu à manu à altri membri, nè squassatu.
@@ -106788,9 +106788,9 @@ Securely sign in to Discord with one step by creating a Passkey. Discord can’t
 Password is too weak or common to use|Ce mot de passe est trop faible ou trop commun|Sta parolla d'intesa hè troppu debule o troppu cumuna
 Apple Pay is unavailable or has not been set up in your browser. Please enter your payment card here instead|Apple Pay n'est pas disponible ou n'a pas été configuré dans ton navigateur. Merci d'entrer tes informations de carte de paiement ici à la place|Apple Pay ùn hè micca dispunibule o ùn hè statu cunfiguratu in u to navigatore. Scrivi piuttostu quì l'infurmazioni di a to carta di pagamentu, per piacè
 Your saved payment methods are not eligible for this purchase. Please add a different payment method.|Tes modes de paiement enregistrés ne sont pas éligibles pour cet achat. Merci d'ajouter un mode de paiement différent.|I to modi di pagamentu arregistrati ùn sò micca eligibili per sta compra. Aghjunghji un altru modu di pagamentu, per piacè.
-This permission will soon stop granting the ability to pin messages.|Cette permission cessera bientôt d'accorder la possibilité d'épingler les messages.|Stu permessu ùn darà più fra pocu a pussibilità di puntà i messaghji.
+This permission will soon stop granting the ability to pin messages.|Cette permission cessera bientôt d'accorder la possibilité d'épingler les messages.|Stu permessu ùn darà più fra pocu a pussibilità di spirlà i messaghji.
 We don't recognise this location. We sent a confirmation code to the phone number connected to this account.|Impossible de reconnaître ce lieu. Nous avons envoyé un SMS au numéro de téléphone lié à ce compte.|Impussibule di ricunnosce stu locu. Avemu mandatu un SMS à u numeru di telefonu ligatu à stu contu.
-This message cannot be pinned in this channel.|Ce message ne peut pas être épinglé dans ce salon.|Stu messaghju ùn pò esse puntatu in stu canale.
+This message cannot be pinned in this channel.|Ce message ne peut pas être épinglé dans ce salon.|Stu messaghju ùn pò esse spirlatu in stu canale.
 Hear the roar of the crowd as you type and your combo score increases.|Entends la foule en délire pendant que tu écris et que tu enchaînes les combos.|Senti a folla in delìriu mentre chì tù scrivi è incateni i combo.
 Your whole message bar will shake while you are typing.|Ta barre de discussion sera secouée pendant que tu écris.|A to barra di discussione serà scossa mentre chì tù scrivi.
 You can’t remove your vote unless you’re a member.|Tu ne peux pas retirer ton vote à moins d'être membre.|Ùn poi micca caccià u to votu fora chì tù sia membru.
@@ -106900,7 +106900,7 @@ Try Nitro for 2 weeks on us!|Essaie Nitro gratuitement pendant 2 semaines !|Pr
 Disabled for owner/admin of servers that have published server subscription tiers|Désactivée pour les propriétaires/administrateurs de serveurs ayant publié des niveaux d'abonnements de serveurs|Disattivata per i pruprietarii/amministratori di servori chì anu publicatu livelli d'abbunamenti di servori
 Are you sure you want to remove your Authenticator App?|Veux-tu vraiment supprimer ton Application d'authentification ?|Voli veramente squassà a to Appiecazione d'autentificazione ?
 Sorry, this channel has the max number of people!|Oups ! Ce salon a atteint sa limite max de membres !|Oops ! Stu canale hà righjuntu u so limitu massimu di membri !
-You sure you want to remove this pinned message?|Tu es sûr(e) de vouloir désépingler ce message ?|Sì sicuru di vulè caccià stu messaghju puntatu ?
+You sure you want to remove this pinned message?|Tu es sûr(e) de vouloir désépingler ce message ?|Sì sicuru di vulè caccià stu messaghju spirlatu ?
 They’re getting a notification for every message! Let’s change the notification settings so they don’t get overwhelmed and stay engaged.|Ils reçoivent une notification à chaque message ! Modifions les paramètres de notification pour qu'ils ne soient pas submergés et restent impliqués.|Ricevenu una nutificazione per ogni messaghju ! Mudifichemu i parametri di nutificazione per ch'elli ùn sianu sopraffatti è ch'elli fermenu implicati.
 Hold on! Your logs have been uploaded and are still being processed.|Attends ! Tes journaux ont été uploadés et sont encore en cours de traitement.|Aspetta ! I to ghjurnali sò stati caricati è sò sempre in corsu di trattamentu.
 Content that is either authentic, AI-generated or digitally manipulated depicting you.|Contenu authentique, généré par IA ou manipulé numériquement te représentant.|Cuntenutu autenticu, generatu da IA o manipulatu numericamente chì ti riprisenta.
@@ -107168,7 +107168,7 @@ What's this server about? What do people do here?|Quel est l'objectif de ce serv
 Remove risky permissions from @everyone|Supprime les permissions risquées de @everyone|Squassa i permessi risicosi di @everyone
 Members must accept rules before they can talk or DM|Les membres doivent accepter les règles avant de pouvoir discuter ou envoyer des messages privés|I membri devenu accettà e regule prima di pudè discorre o mandà messaghji privati
 Badges are styled in retro pixel art like a classic video game.|Les badges ont un style en pixel art rétro, à la manière des anciens jeux vidéo.|I badge anu un stile pixel art retro, cum'è i vechji videoghjochi.
-Unpin this channel before reordering. Pinning is only for you, but channel order applies to everyone.|Désépingle ce salon avant de le réorganiser. L'épinglage est uniquement pour toi, mais l'ordre des salons s'applique à tout le monde.|Spunta stu canale nanzu di riurdinallu. A puntatura hè solu per tè, ma l'ordine di i canali s'applica à tutti.
+Unpin this channel before reordering. Pinning is only for you, but channel order applies to everyone.|Désépingle ce salon avant de le réorganiser. L'épinglage est uniquement pour toi, mais l'ordre des salons s'applique à tout le monde.|Dispirla stu canale nanzu di riurdinallu. Spirlà un canale vale solu per tè, ma l'ordine di i canali s'applica à tutti.
 Sell a Downloadable or Role! 🔥|Vends un contenu téléchargeable ou un rôle ! 🔥|Vendi un cuntenutu scaricabile o un rolu ! 🔥
 * You have unsynced changes. Update the channels, roles and permissions in your template by syncing.|* Modifications non synchronisées. Mets à jour les salons, rôles et permissions dans ton modèle en le synchronisant.|* Mudificazioni micca sincrunizate. Metti à ghjornu i canali, i roli è i permessi in u to mudellu sincrunizendulu.
 Stream lessons, ask questions and study together.|Pour streamer des cours, poser des questions et étudier ensemble.|Per trasmette corsi, fà dumande è studià inseme.
@@ -107253,9 +107253,9 @@ Check out account settings to add more passkeys, obtain backup codes and more.|C
 Pause Preview When Discord Isn’t Focused|Mettre l'aperçu en pause lorsque Discord n'est pas au premier plan|Mette l'anteprima in pausa quandu Discord ùn hè micca in primu pianu
 Hooray! You can now pay via your Cash App account.|Hourra ! Tu peux désormais payer avec ton compte Cash App.|Evviva ! Avà poi pagà cù u to contu Cash App.
 Autofill from Browser|Remplissage automatique par le navigateur|Riempiitura autumatica da u navigatore
-This permission no longer grants the ability to pin messages or bypass slowmode.|Cette permission n'octroie plus la possibilité d'épingler des messages ou d'ignorer le mode lent.|Stu permessu ùn dà più a pussibilità di puntà messaghji o d'ignurà u modu lentu.
+This permission no longer grants the ability to pin messages or bypass slowmode.|Cette permission n'octroie plus la possibilité d'épingler des messages ou d'ignorer le mode lent.|Stu permessu ùn dà più a pussibilità di spirlà messaghji o d'ignurà u modu lentu.
 Enter your confirmation code to verify it's you|Saisis ton code de confirmation pour confirmer qu'il s'agit bien de toi|Inserisci u to codice di cunfirmazione per cunfirmà chì sì propiu tù
-This message cannot be pinned in an archived thread.|Ce message ne peut pas être épinglé dans un fil archivé.|Stu messaghju ùn pò micca esse puntatu in un filu archiviatu.
+This message cannot be pinned in an archived thread.|Ce message ne peut pas être épinglé dans un fil archivé.|Stu messaghju ùn pò micca esse spirlatu in un filu archiviatu.
 How much confetti do you want to see?|Quelle quantité de confettis veux-tu à l'écran ?|Quantu cunfetti voli nant'à u screnu ?
 Shakes your screen when someone mentions you.|Secoue ton écran lorsque quelqu'un te mentionne.|Scuzzula u to screnu quandu qualchissia ti mintuva.
 You have to join the community before you can use polls.|Tu dois d'abord rejoindre la communauté avant de pouvoir utiliser des sondages.|Devi prima raghjunghje a cumunità per pudè aduprà i sundaghji.
@@ -107364,7 +107364,7 @@ All the perks of Nitro, on us for a limited time|Tous les avantages de Nitro, gr
 Download an authenticator app|Télécharger une application d'authentification|Scaricà un'appiecazione d'autentificazione
 Your Discord account is now protected with an extra layer of security|Ton compte Discord est désormais protégé par une couche supplémentaire de sécurité|U to contu Discord hè avà prutettu da un stratu in più di sicurità
 Soo... you blocked this person|Bon, apparemment, tu as bloqué cette personne…|Bè, pare chì tù hai bluccatu sta persona…
-Discord failed to unpin that message for some reason. Sorry about that.|Discord n'a pas été capable de désépingler ce message, pour une raison quelconque. Désolé de ce contretemps.|Discord ùn hè micca riisciutu à spuntà stu messaghju, per una ragione o un'altra. Ci dispiace per stu cuntrattempu.
+Discord failed to unpin that message for some reason. Sorry about that.|Discord n'a pas été capable de désépingler ce message, pour une raison quelconque. Désolé de ce contretemps.|Discord ùn hè micca riisciutu à dispirlà stu messaghju, per una ragione o un'altra. Ci dispiace per stu cuntrattempu.
 Updating Discord while in a voice channel will cause you to leave briefly. You're probably going to update anyway but, you know, just warning you.|Mettre à jour Discord pendant que tu es dans un salon vocal actuel te le fera quitter brièvement. Tu vas probablement quand même faire la mise à jour, mais bon, on te prévient au cas où.|Mette à ghjornu Discord mentre tù sì in un canale vucale ti u ferà lascià per un mumentu. Ferai di sicuru l'aghjurnamentu listessu, ma bè, ti avvisemu in casu.
 Something went wrong while reading log files from your system. Please try again.|Une erreur s'est produite lors de la lecture des fichiers de journalisation de ton système. Merci d'essayer à nouveau.|Un sbagliu hè accadutu durante a lettura di i schedarii di ghjurnale di u to sistema. Prova torna, per piacè.
 Manage Server Privacy|Gérer les paramètres de confidentialité du serveur|Gestisce i parametri di cunfidenzialità di u servore
@@ -107630,7 +107630,7 @@ New members will be greeted by this screen when they join!|Les nouveaux membres 
 Moderators must have two-factor authentication enabled to ban, kick or time-out members and delete messages.|Les modérateurs doivent obligatoirement activer l'authentification à deux facteurs pour pouvoir bannir, expulser ou exclure temporairement des membres, ainsi que pour effacer des messages.|I muderatori devenu attivà l'autenticazione à dui fattori per pudè sbandisce, espulsà o escludere pruvisoriamente membri, è per squassà messaghji.
 Filter DMs from unknown users to the Message Requests Inbox. Members must approve the request before they are able to respond.|Filtre les MP des utilisateurs inconnus vers la boîte de réception des demandes de message. Les membres doivent approuver la demande avant de pouvoir y répondre.|Filtra i MP di l'utilizatori scunnisciuti versu a casella di ricezzione di e dumande di messaghju. I membri devenu appruvà a dumanda nanzu di pudecci risponde.
 These preset colour pairs set your badge’s primary and secondary colours.|Ces combinaisons de 2 couleurs prédéfinies définissent les couleurs primaire et secondaire de ton badge.|Ste cumbinazioni di 2 culori predefinite definiscenu i culori primariu è secundariu di u to badge.
-Trying to reorder a pinned channel?|Tu essaies de réorganiser un salon épinglé ?|Pruvi à riurganizà un canale puntatu ?
+Trying to reorder a pinned channel?|Tu essaies de réorganiser un salon épinglé ?|Pruvi à riurganizà un canale spirlatu ?
 Discover this new way to offer cool stuff!|Découvre cette nouvelle manière d'offrir des trucs sympas !|Scopre sta nova manera d'offre cose simpatiche !
 You can ask the owner to make a new one though|Mais tu peux demander au propriétaire d'en créer un nouveau|Ma poi dumandà à u pruprietariu di creanne unu novu
 Use roles to organise your members and to grant permissions like access to private channels.|Utilise les rôles pour catégoriser tes membres et donner des permissions, comme un accès à des salons privés.|Impiega i roli per categurizà i to membri è dà permessi, cum'è un accessu à canali privati.
@@ -107715,9 +107715,9 @@ Add a passkey and log in with a single tap.|Ajoute une clé d'accès et connecte
 We were unable to authenticate your payment. Please try updating your payment method.|L'authentification de ton paiement a échoué. Essaie de mettre tes modes de paiement à jour.|L'autenticazione di u to pagamentu hè fiascata. Prova d'aghjurnà i to modi di pagamentu.
 Follow the steps to complete your account connection.|Suis ces étapes pour terminer de connecter ton compte.|Seguita ste tappe per compie a cunnessione di u to contu.
 Confirming payment in your browser!|Confirmation du paiement dans ton navigateur !|Cunfirmazione di u pagamentu in u to navigatore !
-This permission will soon stop granting the ability to pin messages or bypass slowmode.|Cette permission cessera bientôt d'accorder la possibilité d'épingler les messages ou de contourner le mode lent.|Stu permessu cesserà prestu di dà a pussibilità di puntà i messaghji o di scansà u modu lentu.
+This permission will soon stop granting the ability to pin messages or bypass slowmode.|Cette permission cessera bientôt d'accorder la possibilité d'épingler les messages ou de contourner le mode lent.|Stu permessu cesserà prestu di dà a pussibilità di spirlà i messaghji o di scansà u modu lentu.
 Unable to register using phone number. Please register with an email address.|Impossible de s'inscrire avec un numéro de téléphone. Merci de t'inscrire avec une adresse e-mail.|Impussibule d'inscrivesi cù un numeru di telefonu. Inscriviti cù un indirizzu e-mail.
-The message you are trying to pin does not exist.|Le message que tu essaies d'épingler n'existe pas.|U messaghju chì tù pruvi di puntà ùn esiste micca.
+The message you are trying to pin does not exist.|Le message que tu essaies d'épingler n'existe pas.|U messaghju chì tù pruvi di spirlà ùn esiste micca.
 You will now see confetti. Like, a lot.|Tu verras à présent des confettis. Genre, beaucoup.|Avà viderai cunfetti. Ma propiu assai.
 When someone speaks, their video tile will shake.|Lorsque quelqu'un parle, l'aperçu de sa vidéo sera secoué.|Quandu qualchissia parla, l'anteprima di a so videò serà scuzzulata.
 View original message to interact|Consulte le message original pour interagir|Fighjula u messaghju originale per interagisce
@@ -108016,7 +108016,7 @@ Muting a server prevents unread indicators and notifications from appearing unle
 This server has a verification role configured. You can remove the requirement, but selecting a new role is no longer available.|Ce serveur a un rôle de certification configuré. Tu peux retirer l'exigence, mais il ne sera plus possible de sélectionner un nouveau rôle.|Stu servore hà un rolu di certificazione cunfiguratu. Poi caccià l'esigenza, ma ùn serà più pussibule di selezziunà un novu rolu.
 Scroll through posts with photos and videos easily using gallery view! To reset your default view, go to channel settings.|Avec l'affichage en galerie, tu peux facilement faire défiler les posts qui contiennent des photos et des vidéos ! Pour redéfinir l'affichage par défaut, rends-toi dans les paramètres du salon.|Cù l'affissera in galleria, poi sfilà facilmente i posts chì cuntenenu foto è videò ! Per cambià l'affissera predefinita, và in i parametri di u canale.
 All posts will be displayed by the specified option by default. Members will still be able to toggle between these options.|Tous les posts seront affichés selon la manière choisie par défaut. Les membres pourront toujours passer d'une option à l'autre.|Tutti i posts saranu affissati secondu a manera scelta per difettu. I membri puderanu sempre passà da un'ozzione à l'altra.
-There’s a post that’s pinned already. Pinning this post will remove the existing pinned post.|Un autre post est déjà épinglé. Si tu épingles ce nouveau post, il remplacera celui qui est déjà épinglé.|Un altru post hè dighjà puntatu. S'è tù punti stu novu post, rimpiazzerà quellu chì hè dighjà puntatu.
+There’s a post that’s pinned already. Pinning this post will remove the existing pinned post.|Un autre post est déjà épinglé. Si tu épingles ce nouveau post, il remplacera celui qui est déjà épinglé.|Un altru post hè dighjà spirlatu. S'è tù spirli stu novu post, rimpiazzerà quellu chì hè dighjà spirlatu.
 Relationships, Advice, Art, Gear, Health, Recipes|Relations, Conseils, Art, Mode, Santé, Recettes|Relazioni, Cunsiglii, Arte, Moda, Salute, Ricette
 Are there any particular genres you don’t like?|Il y a des genres en particulier que tu n'aimes pas ?|Ci sò generi particulari chì ùn ti piacenu micca ?
 Forum Channels: a space for organised discussion|Les salons forum : un espace pour organiser des discussions|I canali foru : un spaziu per urganizà discussioni
@@ -108409,7 +108409,7 @@ Your profile info will be hidden from them|Les informations de ton profil lui se
 I’m not sure what blocking actually does|Je ne sais pas vraiment quelles sont les conséquences lorsque l'on bloque un utilisateur|Ùn sò micca bè quale sò e cunsequenze quandu omu blocca un utilizatore
 What are 'additional perks' and how are they different from Levels?|Que sont les « avantages supplémentaires » et en quoi sont-ils différents des niveaux ?|Chì sò i « vantaghji supplementarii » è in chè sò sfarenti di i livelli ?
 Support your server’s access to high-quality streams, for everyone.|Soutiens l'accès de ton serveur aux streams de haute qualité, pour tous.|Sustene l'accessu di u to servore à streaming d'alta qualità, per tutti.
-Your message could not be sent because this server has reached the maximum number of posts. Free up space by archiving a post.|Ton message n'a pas pu être envoyé car ce serveur a atteint le nombre maximum de posts. Fais de la place en archivant un post.|U to messaghju ùn hà micca pussutu esse mandatu perchè stu servore hà ghjuntu u numeru massimu di publicazioni. Fà piazza archivendu una publicazione.
+Your message could not be sent because this server has reached the maximum number of posts. Free up space by archiving a post.|Ton message n'a pas pu être envoyé car ce serveur a atteint le nombre maximum de posts. Fais de la place en archivant un post.|U to messaghju ùn hà micca pussutu esse mandatu perchè stu servore hà righjuntu u numeru massimu di publicazioni. Fà piazza archivendu una publicazione.
 You have been invited to try a test build of Discord|Tu as été invité(e) à essayer une version bêta de Discord|Sì statu invitatu(a) à pruvà una versione beta di Discord
 Pop Out Stream|Ouvrir le stream dans une fenêtre séparée|Apre u stream in una finestra separata
 Get your own custom video backgrounds and more with Nitro!|Obtiens tes propres arrière-plans vidéo personnalisés et plus encore avec Nitro !|Ottene i to propii sfondi videò persunalizati è ancu di più cù Nitro !
@@ -108429,7 +108429,7 @@ Turn heads in every server, every DM, everywhere people see your profile.|Attire
 Charming. Fierce. Hungry. Whatever your vibe, buy and collect your favourite styles for your profile for any occasion.|Charmant. Féroce. Affamé. Quel que soit ton style, achète et collectionne tes styles préférés pour ton profil pour toutes les occasions.|Incantevule. Feroce. Affamatu. Qualunque sia u to stile, compra è cullezziona i to stili preferiti per u to prufilu per tutte l'occasioni.
 Oops! We encountered an error when trying to kick that user.|Oups ! Une erreur s’est produite lors de l’expulsion de cet utilisateur.|Oups ! Un sbagliu hè accadutu durante l’espulsione di st’utilizatore.
 A visitor who talked (voice or text).|Un visiteur qui a discuté (voix ou texte).|Un visitatore chì hà discurrutu (voce o testu).
-You’ve reached the maximum number of connected accounts. Remove an existing connection and try again.|Tu as atteint le nombre maximum de comptes connectés. Supprime un lien existant et réessaie.|Hai ghjuntu u numeru massimu di conti cunnessi. Squassa un liame esistente è prova torna.
+You’ve reached the maximum number of connected accounts. Remove an existing connection and try again.|Tu as atteint le nombre maximum de comptes connectés. Supprime un lien existant et réessaie.|Hai righjuntu u numeru massimu di conti cunnessi. Squassa un liame esistente è prova torna.
 Join voice calls directly from PlayStation|Rejoins les appels vocaux directement depuis ta PlayStation|Raghjunghje e chjame vucale direttamente da a to PlayStation
 It’s anime time! Sign in to Crunchyroll to connect your accounts.|C'est l'heure de regarder des animes ! Inscris-toi à Crunchyroll pour connecter tes comptes.|Hè l'ora di fighjà animes ! Iscrìviti à Crunchyroll per cunnette i to conti.
 Transfer Voice to PlayStation|Transférer la fonction vocale sur PlayStation|Trasferisce a funzione vucale nant'à PlayStation
@@ -109031,7 +109031,7 @@ Help a server unlock great perks with Server Boosts. Purchase at any time – we
 Meet up, make plans and stay in touch.|Pour vous donner rendez-vous, vous organiser et rester en contact.|Per dassi appuntamentu, urganizassi è stà in cuntattu.
 An admin has picked a custom theme for this server. You can use it while you’re here or use your own theme. You can always change this in Settings.|Un administrateur a choisi un thème personnalisé pour ce serveur. Tu peux l'utiliser pendant que tu es ici, ou utiliser ton propre thème. Tu pourras toujours le modifier dans les Paramètres.|Un amministratore hà sceltu un tema persunalizatu per stu servore. U poi aduprà mentre chì tù sì quì, o aduprà u to propiu tema. U puderai sempre mudificà in i Parametri.
 Ready to talk? Grab a seat in this voice channel so people know you're around to hang out.|Envie de discuter ? Prends place dans ce salon vocal pour que tout le monde sache que tu es dispo.|Voglia di chjachjarà ? Piglia piazza in stu canale vucale per chì tutti sappianu chì tù sì dispunibule.
-|Tes MP sont enterrés vivants ? Essaie de les épingler !|I to messaghji privati sò interrati vivi ? Prova di puntalli !
+|Tes MP sont enterrés vivants ? Essaie de les épingler !|I to messaghji privati sò interrati vivi ? Prova di spirlalli !
 You cannot clear permissions because it would remove one or more permissions from you.|Tu ne peux pas supprimer toutes les permissions, car cela retirerait une ou plusieurs de tes propres permissions.|Ùn poi micca squassà tutti i permessi, perchè quessa cacciaria unu o parechji di i to propii permessi.
 Hides most Discord windows from most screen capture software.|Masque la majorité des fenêtres Discord pour la plupart des logiciels de capture d'écran.|Piatta a magiurità di e finestre Discord per a più parte di i prugrammi di cattura di screnu.
 From clubs, to study groups, to game nights, there's a place for you.|Des clubs, aux groupes de travail, aux soirées jeux, il y a une place pour toi.|Da i club à i gruppi di travagliu, à e serate di ghjocu, ci hè una piazza per tè.
@@ -109112,7 +109112,7 @@ If you followed this link after trying to make a purchase, please go back to the
 We’re using another saved payment method for this purchase. You can change it here.|Nous utilisons un autre mode de paiement enregistré pour cet achat. Tu peux le changer ici.|Adupremu un altru modu di pagamentu arregistratu per sta compra. U poi cambià quì.
 Hooray! You can now pay via your Venmo account.|Hourra ! Tu peux désormais payer avec ton compte Venmo.|Evviva ! Avà poi pagà cù u to contu Venmo.
 Media access denied – Discord requires access to storage to post attachments.|Accès au média refusé - Discord requiert un accès au stockage afin de poster des pièces jointes.|Accessu à u media ricusatu - Discord richiede un accessu à a memoria per publicà allegati.
-Users with the ‘Pin Messages’ permission can pin a message from its context menu.|Les utilisateurs ayant la permission « Épingler les messages » peuvent épingler un message depuis son menu contextuel.|L'utilizatori cù u permessu « Puntà i messaghji » ponu puntà un messaghju da u so menu cuntestuale.
+Users with the ‘Pin Messages’ permission can pin a message from its context menu.|Les utilisateurs ayant la permission « Épingler les messages » peuvent épingler un message depuis son menu contextuel.|L'utilizatori cù u permessu « Spirlà i messaghji » ponu spirlà un messaghju da u so menu cuntestuale.
 Unable to find a PS5 to connect to. Make sure your PS5 is registered to the account you have linked here.|Nous n'avons pas trouvé de PS5 à laquelle nous connecter. Vérifie que ta PS5 est associée au compte que tu as lié ici.|Ùn avemu micca trovu una PS5 à a quale cunnettesi. Verificheghja chì a to PS5 sia assuciata à u contu chì tù hai ligatu quì.
 Appears when the member list is shown and someone else is typing.|Apparaît lorsque la liste des membres est affichée et que quelqu'un d'autre est en train d'écrire.|Apparisce quandu a lista di i membri hè affissata è chì qualchissia altru hè scrivendu.
 Your Reduced Motion setting is on|Tu as activé le paramètre Mouvement réduit|Hai attivatu u parametru Muvimentu ridottu
@@ -109325,7 +109325,7 @@ Wanna level up? Enabling tracking helps us make your experiences as rewarding an
 You can always update your choice for this device in your iOS settings at any time. If you allow tracking, you can:|Tu peux toujours modifier ton choix pour cet appareil dans tes paramètres iOS à tout moment. En autorisant le suivi, tu pourras :|Poi sempre mudificà a to scelta per st'apparechju in i to parametri iOS quandu tù voli. S'è tù permetti u seguimentu, puderai :
 This application has been authorised and added to the server.|Cette application a été autorisée et ajoutée au serveur.|St'appiecazione hè stata auturizata è aghjunta à u servore.
 We could not validate your login link. Please try again.|Nous n'avons pas pu valider ton lien de connexion. Merci de réessayer.|Ùn avemu micca pussutu cunvalidà u to liame di cunnessione. Ti pregu, prova torna.
-Pinned post will not be auto-closed|Les posts épinglés ne seront pas automatiquement fermés|E publicazioni puntate ùn saranu micca chjose automaticamente
+Pinned post will not be auto-closed|Les posts épinglés ne seront pas automatiquement fermés|E publicazioni spirlate ùn saranu micca chjose automaticamente
 Earn this badge by gifting Nitro to friends.|Obtiens ce badge en offrant Nitro à tes ami(e)s.|Ottene stu badge rigalendu Nitro à i to amichi.
 Shows this badge on your profile again|Affiche à nouveau ce badge sur ton profil|Affissa torna stu badge nant'à u to prufilu
 Boosts are a recurring subscription. Cancel at any time in your settings.|Les Boosts sont un abonnement qui se renouvelle automatiquement. Tu peux les annuler à tout moment dans tes paramètres.|I Boosts sò un abbunamentu chì si rinnova automaticamente. I poi abbandunà quandu tù voli in i to parametri.
@@ -109394,7 +109394,7 @@ Requires higher Server Boost Level|Nécessite un niveau de boost de serveur sup�
 This emoji is from this server. You can use it everywhere.|Cet émoji vient du serveur. Tu peux l'utiliser n'importe où.|St'emoji vene da u servore. U poi impiegà induve tù voli.
 You currently don’t have emoji upload permissions in any of your servers.|Tu n'as actuellement pas la permission d'uploader d'émoji sur tes serveurs.|Ùn ai attualmente u permessu di carcà emoji nant'à i to servori.
 Come back to see when others have tagged or replied to you.|N'oublie pas de revenir quand les autres te répondent ou te taguent.|Ùn ti scurdà di vultà quandu l'altri ti rispondenu o ti taggheghjanu.
-Set default settings to Mentions Only|A défini les paramètres par défaut sur Mentions seulement|Hà definitu i parametri per difettu nant'à Mintuvate solu
+Set default settings to Mentions Only|A défini les paramètres par défaut sur Mentions seulement|Hà definitu i parametri per difettu nant'à Solu e mintuvate
 Allow synced subscribers to use your custom Twitch Emoticons in Discord.|Autoriser les abonnés synchronisés à utiliser tes émoticônes Twitch personnalisées dans Discord.|Permette à l'abbunati sincrunizati d'impiegà e to emoticone Twitch persunalizate in Discord.
 Double-tap to view event details|Touche deux fois pour afficher les détails de l'événement|Tocca duie volte per affissà i dettagli di l'avvenimentu
 Scan media content from all members. (Recommended for squeaky-clean servers)|Analyser les contenus médias de tous les membres. (Recommandé pour avoir des serveurs ultra-propres)|Analizà i cuntenuti media di tutti i membri. (Ricumandatu per avè servori puliti puliti)
@@ -109578,7 +109578,7 @@ Please try to make the purchase again.|Merci de tenter le paiement une nouvelle 
 Cannot delete this payment source while you have an active Nitro subscription.|Impossible de supprimer cette source de paiement tant que ton abonnement Nitro est actif.|Impussibule di squassà sta fonte di pagamentu fin chì u to abbunamentu Nitro hè attivu.
 Please return to the app to continue.|Merci de revenir à l'application pour continuer.|Ti pregu, volta à l'appiecazione per cuntinuà.
 Download access denied – Discord requires storage access to download files.|Accès au téléchargement refusé - Discord requiert un accès au stockage pour télécharger des fichiers.|Accessu à u scaricamentu ricusatu - Discord richiede un accessu à l'allucamentu per scaricà schedarii.
-You can pin a message from its context menu.|Tu peux épingler un message depuis son menu contextuel.|Poi puntà un messaghju da u so menu cuntestuale.
+You can pin a message from its context menu.|Tu peux épingler un message depuis son menu contextuel.|Poi spirlà un messaghju da u so menu cuntestuale.
 Double-tap to play or pause.|Touche deux fois pour écouter ou mettre en pause.|Tocca duie volte per ascultà o mette in pausa.
 Appears on a message when it receives a reaction.|Apparaît sur un message lorsqu'une réaction est ajoutée.|Cumpare nant'à un messaghju quandu una reazzione hè aghjunta.
 Plan events, gather opinions or drop a silly question in the chat.|Planifie des événements, rassemble des opinions ou pose une question idiote dans le chat.|Pianifica avvenimenti, raccoglie opinioni o fà una quistione scema in u chat.
@@ -109985,7 +109985,7 @@ Show only DMs from people who also play the game|Afficher uniquement les MP des 
 To join this voice call, your current call will be ended.|Pour rejoindre cet appel vocal, ton appel sera coupé.|Per raghjunghje sta chjama vucale, a to chjama serà interrotta.
 Before you can list your server on Discovery, you must agree to rules to help keep Server Discovery safe for everyone.|Avant de pouvoir répertorier ton serveur dans la Découverte de serveurs, tu dois accepter les règles afin de préserver la sécurité de la Découverte de serveurs pour tout le monde.|Nanzu di pudè listà u to servore in a Scuperta di servori, devi accettà e regule per priservà a sicurità di a Scuperta di servori per tutti.
 Enter an invite below to join an existing server|Entre un lien d'invitation ci-dessous pour rejoindre un serveur existant|Inserisci un liame d'invitu quì sottu per raghjunghje un servore esistente
-Toggle pins pop-out|Afficher/Masquer la fenêtre des messages épinglés|Affissà/Piattà a finestra di i messaghji puntati
+Toggle pins pop-out|Afficher/Masquer la fenêtre des messages épinglés|Affissà/Piattà a finestra di i messaghji spirlati
 Hold to open the soundboard at your mouse’s location while in the game overlay.|Maintiens pour ouvrir le Soundboard à l'emplacement de ta souris lorsque tu es dans l'overlay du jeu.|Tene premutu per apre u Soundboard à a pusizione di u to topu quandu sì in l'overlay di u ghjocu.
 By default, external keyboards will send message on enter.|Par défaut, les claviers externes envoient le message quand la touche Entrée est appuyée.|Per difettu, e tastiere esterne mandanu u messaghju quandu u tastu Entrata hè appughjatu.
 Use a persistent pull tab element on the right of the screen to activate Launch Pad.|Sers-toi de l'onglet interactif à droite de l'écran pour activer LaunchPad.|Adopra l'unghjetta interattiva à a diritta di u screnu per attivà LaunchPad.
@@ -110045,7 +110045,7 @@ If you followed this link after trying to make a purchase, please go back to the
 To edit other card information, please use the 'Add Payment Method' button.|Pour modifier les informations d'une carte, il te suffit d'utiliser le bouton « Ajouter un mode de paiement ».|Per mudificà l'infurmazioni d'una carta, basta à aduprà u buttone « Aghjunghje un modu di pagamentu ».
 We’re opening a secure browser window so you can easily autofill your payment details.|Nous ouvrons une fenêtre de navigateur sécurisée pour que tu puisses remplir facilement et automatiquement tes informations de paiement.|Apremu una finestra di navigatore sicura per ch'è tù possi riempie faciule è autumaticamente e to infurmazioni di pagamentu.
 Microphone access denied – Discord requires audio access to connect to a call.|Accès au microphone refusé - Discord requiert un accès audio pour se connecter à un appel.|Accessu à u micrufonu ricusatu - Discord richiede un accessu audio per cunnettesi à una chjama.
-This channel is age-restricted and due to its content, its pins should not be viewed by anyone.|Ce salon est soumis à une limite d'âge, et en raison de son contenu les messages épinglés ne devraient pas être vus par n'importe qui.|Stu canale hè sottumessu à un limite d'età, è per via di u so cuntenutu i messaghji puntati ùn devenu esse visti da chiunque.
+This channel is age-restricted and due to its content, its pins should not be viewed by anyone.|Ce salon est soumis à une limite d'âge, et en raison de son contenu les messages épinglés ne devraient pas être vus par n'importe qui.|Stu canale hè sottumessu à un limite d'età, è per via di u so cuntenutu i messaghji spirlati ùn devenu esse visti da chiunque.
 Stuck in character creation|Fana de l'écran de création de personnage|Appassiunatu di u screnu di creazione di parsunaghju
 Turn this on when you're ready to party.|Active ce paramètre pour lancer les festivités.|Attiva stu parametru per lancià a festa.
 This will close the poll immediately and reveal the results.|Ceci mettra immédiatement fin au sondage et dévoilera les résultats.|Quessu metterà subitu fine à u sundaghju è palisarà i risultati.
@@ -110103,7 +110103,7 @@ Allow members to create invite-only threads.|Autoriser les membres à créer des
 Allows members to remove other members from this server. Kicked members will be able to re-join if they have another invite.|Permet aux membres de supprimer les autres membres de ce serveur. Les membres expulsés pourront revenir à condition de recevoir une nouvelle invitation.|Permette à i membri di caccià l'altri membri da stu servore. I membri espulsati puderanu vultà à cundizione di riceve un invitu novu.
 Allows members to change the nicknames of other members.|Permet aux membres de changer le pseudo des autres membres.|Permette à i membri di cambià u cugnome di l'altri membri.
 Allows members to create, edit or delete webhooks, which can post messages from other apps or sites, in these channels.|Permet aux membres de créer, modifier ou supprimer des webhooks dans ces salons, grâce auxquels ils peuvent poster des messages venant d'autres applications ou sites.|Permette à i membri di creà, mudificà o squassà webhooks in sti canali, cù quali ponu publicà messaghji chì venenu d'altre appiecazioni o siti.
-Allows members to pin or unpin any message.|Permet aux membres d'épingler ou de désépingler n'importe quel message.|Permette à i membri di puntà o di spuntà qualunque messaghju.
+Allows members to pin or unpin any message.|Permet aux membres d'épingler ou de désépingler n'importe quel message.|Permette à i membri di spirlà o di dispirlà qualunque messaghju.
 Allows members to send messages in this channel.|Permet aux membres d'envoyer des messages dans ce salon.|Permette à i membri di mandà messaghji in stu canale.
 Allows members to send text-to-speech messages in these channels by starting a message with /tts. These messages can be heard by anyone focused on that channel.|Permet aux membres d'envoyer des messages de synthèse vocale dans ces salons en commençant leur message par /tts. Ces messages peuvent être entendus par toutes les personnes pour qui ce salon est en avant-plan.|Permette à i membri di mandà messaghji di sintesi vucale in sti canali cuminciendu u so messaghju cù /tts. Sti messaghji ponu esse intesi da tutte e persone chì anu stu canale in primu pianu.
 Allows members to use commands from applications in this channel, including slash commands and context menu commands.|Permet aux membres d'utiliser des commandes provenant d'applications dans ce salon, comme les commandes slash et les commandes de menu contextuel.|Permette à i membri d'aduprà cumandi d'appiecazioni in stu canale, cum'è i cumandi slash è i cumandi di menu cuntestuale.
@@ -111011,7 +111011,7 @@ Your server has the perks of every level. Additional perks still need to be purc
 |boulonécrououtiltravauxvisvis et écrou|bullonedadustrumentutravaglivitevite è dadu
 |festivalJaponpoupéespoupées japonaises|festivalGhjappunepupattepupatte ghjappunese
 |{deviceType} nécessite un mot de passe|{deviceType} richiede una parolla d'intesa
-|@mentions uniquement pour {channelName}|@mintuvate solu per {channelName}
+|@mentions uniquement pour {channelName}|Solu e @mintuvate per {channelName}
 |Compte connecté et 200 Orbs récupérés !|Contu cunnessu è 200 Orbs ricuperati !
 |Option de couleurs {number} : {hexList}|Ozzione di culori {number} : {hexList}
 |Voir la liste de souhaits de {username}|Vede a lista di brame di {username}
@@ -111247,7 +111247,7 @@ Your server has the perks of every level. Additional perks still need to be purc
 |blaguebouhcréatureeffrayantfantastiquefantômeHalloweenhantermonstrepeurvisagevisage de fantôme|scherzubuhcreaturaspaventosufantasticufantasmaHalloweenfrastornàmostrupaurafacciafaccia di fantasma
 |N'attends pas pour déverrouiller ton article d'Halloween exclusif. Fin de l'offre le {endDate}.|Ùn aspettà per sbluccà u to articulu d'Halloween esclusivu. Fine di l'offerta u {endDate}.
 |{firstApplicationName}, {secondApplicationName} et plus sont maintenant dans les applications !|{firstApplicationName}, {secondApplicationName} è altre sò avà in l'appiecazioni !
-|Tu as atteint la limite de {max} messages programmés. Annules-en un pour en programmer un autre.|Ai ghjuntu a limita di {max} messaghji prugrammati. Abbandunanne unu per prugrammanne un altru.
+|Tu as atteint la limite de {max} messages programmés. Annules-en un pour en programmer un autre.|Ai righjuntu a limita di {max} messaghji prugrammati. Abbandunanne unu per prugrammanne un altru.
 |Passe à {planName} afin d'utiliser des émojis animés et personnalisés sur n'importe quel serveur.|Passa à {planName} per aduprà emoji animati è persunalizati in ogni servore.
 |confusdésoléexcusesgestegronderinclinéj’ai comprisOKpardonpersonne inclinéepersonne qui s’incline|cunfusudispiaciutuscusegestusgridàinchinatuaghju capituOKpardonupersona inchinatapersona chì s'inchina
 |développeurdéveloppeuseinformaticieninformaticien (tous genres)informaticiennelogicielstechnologie|sviluppatoresviluppatriceinfurmaticuinfurmaticu (tutti i generi)infurmaticalugicialitecnulugie
@@ -111260,7 +111260,7 @@ Your server has the perks of every level. Additional perks still need to be purc
 |Saisis une raison. Elle ne sera visible que dans les logs du serveur et ce membre ne pourra pas la voir.|Scrivi una ragione. Serà visibile solu in i ghjurnali di u servore è stu membru ùn a puderà micca vede.
 |déguisementespionfaux nezgrimerincognitolunettesmoustachepostichesmileysourcils ébouriffésvisage déguisé|travestimentuspiunasu falsutruccàincognituucchjalimustacciupostichjusmileyciglie scumpigliatefaccia travestita
 |accessoireathlétismebasketchaussurechaussure de sportcoup de piedcourircoursesshoppingtennisvêtementsvite|accessoriuatleticabasketscarpascarpa di sportcalciucorrecorseshoppingtennisvistimentiprestu
-|Tu as atteint la limite de {maxInstances} serveurs de jeu. Désactives-en un pour créer un nouveau serveur.|Ai ghjuntu a limita di {maxInstances} servori di ghjocu. Disattivanne unu per creà un servore novu.
+|Tu as atteint la limite de {maxInstances} serveurs de jeu. Désactives-en un pour créer un nouveau serveur.|Ai righjuntu a limita di {maxInstances} servori di ghjocu. Disattivanne unu per creà un servore novu.
 |Profite de {discountPercent} % de réduction sur l'équipement Logitech G chaque mois, uniquement avec Nitro.|Prufitta di {discountPercent} % di riduzzione nant'à l'equipamentu Logitech G ogni mese, solu cù Nitro.
 |{discordTag} n'accepte pas les demandes d'amis. Cette personne devra t'ajouter pour que vous deveniez amis.|{discordTag} ùn accetta micca e dumande d'amicizia. Sta persona duverà aghjunghjeti per chì vo diventite amichi.
 |agilitéathlètefaire la rouefemme faisant la rouegymnastegymnastiquepersonnepersonne faisant la rouerouesport|agilitàatletafà a rotadonna chì face a rotaginnastaginnasticapersonapersona chì face a rotarotasport
@@ -111300,7 +111300,7 @@ Your server has the perks of every level. Additional perks still need to be purc
 |Ta réduction de {percent} % se terminera {numMonths} mois après l'achat. Après cela, le montant qui te sera facturé sera de {regularPrice} + taxes applicables.|A to riduzzione di {percent} % finisce {numMonths} mesi dopu à a compra. Dopu, l'ammontu chì ti serà fatturatu serà di {regularPrice} + tasse applicabile.
 |{applicationName} fonctionnera beaucoup mieux si l’accélération matérielle est activée. Garde à l’esprit que modifier ce paramètre quittera et relancera Discord.|{applicationName} funziunerà assai megliu s'è l'accelerazione materiale hè attivata. Tene à mente chì mudificà stu parametru chjuderà è rilancerà Discord.
 |L'overlay fonctionne en mode de compatibilité pour ce jeu et ne peut pas recevoir les commandes au clavier. Passe sur Discord hors du jeu pour envoyer des messages.|L'overlay funziona in modu di cumpatibilità per stu ghjocu è ùn pò micca riceve i cumandi di a tastiera. Passa nant'à Discord fora di u ghjocu per mandà messaghji.
-|Tu as atteint la limite de {maxLength} caractères. Donne ton avis dans des messages 2 fois plus longs, envoie des fichiers plus lourds, et bien plus avec Discord Nitro !|Ai ghjuntu a limita di {maxLength} caratteri. Dà u to parè in messaghji 2 volte più longhi, manda schedarii più pisanti, è assai di più cù Discord Nitro !
+|Tu as atteint la limite de {maxLength} caractères. Donne ton avis dans des messages 2 fois plus longs, envoie des fichiers plus lourds, et bien plus avec Discord Nitro !|Ai righjuntu a limita di {maxLength} caratteri. Dà u to parè in messaghji 2 volte più longhi, manda schedarii più pisanti, è assai di più cù Discord Nitro !
 |Ton groupe d'âge n'a pas encore été confirmé, et certains contenus et paramètres destinés aux adultes ne sont donc pas disponibles. À part ça, Discord fonctionne normalement.|U to gruppu d'età ùn hè ancu statu cunfirmatu, è certi cuntenuti è parametri destinati à l'adulti ùn sò dunque micca dispunibuli. Fora di quessa, Discord funziona nurmalmente.
 |Si tu quittes cet abonnement, tu pourras rejoindre un autre abonnement de groupe après la fin de la période de récupération de {cooldownMonths} mois, et tu perdras ces avantages :|S'è tù lasci st'abbunamentu, puderai raghjunghje un altru abbunamentu di gruppu dopu à a fine di u periodu d'attesa di {cooldownMonths} mesi, è perderai sti vantaghji :
 |Tu vois actuellement tous les niveaux d'abonnement et produits du serveur. Il y a une limite maximale de {maxTiers} niveaux et {maxProducts} produits pouvant être publiés en même temps.|Avà vedi tutti i livelli d'abbunamentu è i prudutti di u servore. Ci hè una limita massima di {maxTiers} livelli è {maxProducts} prudutti chì ponu esse publicati in listessu tempu.
@@ -111823,7 +111823,7 @@ Your server has the perks of every level. Additional perks still need to be purc
 |Les nouveaux abonnés ou les abonnés actuels à YouTube Premium peuvent bénéficier de 20 % de réduction pendant 6 mois.|I novi abbunati o l'abbunati attuali à YouTube Premium ponu prufittà di 20 % di riduzzione per 6 mesi.
 |À l'avenir, tu pourras utiliser cet onglet pour partager ton stream depuis des appareils spécifiques comme ta caméra.|In u futuru, puderai impiegà st'unghjetta per sparte u to stream da apparechji specifichi cum'è a to camera.
 |Nitro augmente ta limite de signets de {max} à {premiumMax}. Tu peux aussi supprimer un signet pour faire de la place.|Nitro aumenta u to limitu d'indette da {max} à {premiumMax}. Poi dinù squassà un'indetta per fà piazza.
-|Tu as atteint la limite de {maxCustomBackgrounds} arrière-plans ! Supprime un arrière-plan avant d'en ajouter un autre.|Ai ghjuntu u limitu di {maxCustomBackgrounds} sfondi ! Squassa un sfondu nanzu d'aghjunghjene un altru.
+|Tu as atteint la limite de {maxCustomBackgrounds} arrière-plans ! Supprime un arrière-plan avant d'en ajouter un autre.|Ai righjuntu u limitu di {maxCustomBackgrounds} sfondi ! Squassa un sfondu nanzu d'aghjunghjene un altru.
 |En utilisant le statut Invisible, je cache les informations concernant les jeux et applications connectés que j'utilise.|Impiegendu u statutu Invisibule, piattu l'infurmazioni nant'à i ghjochi è l'appiecazioni cunnessi ch'e impiegu.
 |flècheforme géométriquegéométrierougetriangle hauttriangle rouge pointant vers le hauttriangle rouge pointé vers le haut|frezzafurma geometricageometriarossutriangulu in sutriangulu rossu chì punta in sutriangulu rossu puntatu in su
 |La taille maximale du fichier est de {maxSize}. Passe à Discord Nitro pour uploader des fichiers jusqu'à {premiumMaxSize}.|A dimensione massima di u schedariu hè di {maxSize}. Passa à Discord Nitro per caricà schedarii sin'à {premiumMaxSize}.
@@ -112358,7 +112358,7 @@ Your server has the perks of every level. Additional perks still need to be purc
 |Consulte la documentation destinée aux développeurs pour terminer la configuration de ta boutique de jeu.|Cunsulta a ducumentazione destinata à i sviluppatori per compie a cunfigurazione di a to buttega di ghjocu.
 |apprendrebibliothèqueécoleenseignementétudierlecturelirelittératurelivre ouvertmanuel scolaireromansavoir|amparàbibliutecascolainsignamentustudiàletturaleghjeletteraturalibru apertumanuale sculasticurumanzusapè
 |colèreémoticôneénervéexaspéréfâchéfurieuxmécontentrageurrougerouge de colèresourcils froncésvisage boudeur|zergaemoticonainnervusitusasperatuinzergatufuriosuscuntentuarrabiatarossurossu di zergaciglie aggrottatevisu imbrunciatu
-|Tu as atteint la limite de {quantity} serveurs. Tu dois quitter un serveur avant d’en rejoindre un nouveau.|Ai ghjuntu u limitu di {quantity} servori. Ci vole à lascià un servore nanzu di raghjunghjene un novu.
+|Tu as atteint la limite de {quantity} serveurs. Tu dois quitter un serveur avant d’en rejoindre un nouveau.|Ai righjuntu u limitu di {quantity} servori. Ci vole à lascià un servore nanzu di raghjunghjene un novu.
 |Limite de programmation atteinte. Obtiens {nitroTierName} pour profiter de {premiumMax} messages programmés.|Limitu di prugrammazione ghjuntu. Ottieni {nitroTierName} per prufittà di {premiumMax} messaghji prugrammati.
 |blouseblouse blanchedocteurexpérienceexpérimentationlabolaboratoiremanteau blancmédecinscientifiquevêtements|camisgiacamisgia biancaduttoreesperienzasperimentazionelabulaburatoriumantellu biancumedicuscentificuvestiti
 |Félicitations ! Ça fait {timeMilestone} que tu es membre ! Tiens, un petit quelque chose avec lequel frimer !|Felicitazione ! Face {timeMilestone} chì sì membru ! Tè, un rigalucciu per fà ti vede !
@@ -112374,7 +112374,7 @@ Your server has the perks of every level. Additional perks still need to be purc
 |Accède aux meilleurs sons de Soundboard sur n'importe lequel de tes serveurs Discord. Disponible avec {nitroTierName}.|Accedi à i più belli soni di Soundboard in qualunque di i to servori Discord. Dispunibule cù {nitroTierName}.
 |Oups ! Le chat vidéo n'est pas disponible quand plus de {videoUserLimit} personnes sont présentes dans le salon vocal.|Oops ! U chat videò ùn hè micca dispunibule quandu più di {videoUserLimit} persone sò in u canale vucale.
 |Uploade jusqu'à 10 fichiers. Max {fileUploadLimit} au total. Aucun fichier compressé n'est autorisé (.zip, .rar, etc.).|Manda sin'à 10 schedarii. Max {fileUploadLimit} in tuttu. Nisun schedariu cumpressu hè permessu (.zip, .rar, ecc.).
-|Hé, on veut juste s'assurer que tu veux vraiment épingler ce message dans #{channelName} pour la postérité et la gloire.|Ehi, vulemu solu assicuracci chì tù voli daveru puntà stu messaghju in #{channelName} per a pusterità è a gloria.
+|Hé, on veut juste s'assurer que tu veux vraiment épingler ce message dans #{channelName} pour la postérité et la gloire.|Ehi, vulemu solu assicuracci chì tù voli daveru spirlà stu messaghju in #{channelName} per a pusterità è a gloria.
 |Discord n'a pas besoin d'être tout noir et tout blanc. Crée ton propre thème personnalisé pour rendre TON Discord unique.|Discord ùn hà micca bisognu d'esse tuttu neru è tuttu biancu. Crea u to propiu tema persunalizatu per rende u TO Discord unicu.
 |Ton message n'a pas pu être envoyé, car il contient un lien bloqué par Discord. Tu peux en apprendre plus ici : {helpUrl}.|U to messaghju ùn hè micca pussutu esse mandatu, perchè cuntene un liame bluccatu da Discord. Ne poi amparà di più quì : {helpUrl}.
 |Exemple montrant une carte de profil avec ton Avatar, ton nom d'utilisateur et une bulle de statut affichant : {placeholder}|Esempiu chì mostra una carta di prufilu cù u to Avatar, u to nome d'utilizatore è una bolla di statutu chì affissa : {placeholder}
@@ -112590,7 +112590,7 @@ Your server has the perks of every level. Additional perks still need to be purc
 |Exclusion temporaire : {duration}|Esclusione timpuraria : {duration}
 |Ouvre la conversation avec {name}|Apre a cunversazione cù {name}
 |Qualité du partage : {resolution}|Qualità di a spartera : {resolution}
-|Tu as atteint le niveau {level} !|Ai ghjuntu u livellu {level} !
+|Tu as atteint le niveau {level} !|Ai righjuntu u livellu {level} !
 |astrologieBélierhoroscopezodiaque|astrulugiaArieteoruscopuzodiacu
 |fruitlégumenourritureplantetomate|fruttuortagliacibupiantapumata
 |{discountOfferAmount} % de remise|{discountOfferAmount} % di scontu
@@ -112770,7 +112770,7 @@ Your server has the perks of every level. Additional perks still need to be purc
 |dynamiteétincelleexplosifexplosivefeu d’artificepétardtnt|dinamitescintillaesplusivuesplusivafocu d'artifiziupetardutnt
 |÷algèbrediviserdivisionmathmathématiquemathématiquessigne|÷algebradividedivisionematematematicamatematichesegnu
 |Messages privés, {requestCount} demandes d'amis en attente|Messaghji privati, {requestCount} dumande d'amicu in attesa
-|Tu as atteint la limite de {maxInstances} serveurs de jeu.|Ai ghjuntu u limitu di {maxInstances} servori di ghjocu.
+|Tu as atteint la limite de {maxInstances} serveurs de jeu.|Ai righjuntu u limitu di {maxInstances} servori di ghjocu.
 |animalbêtecacardercanardjarsoieoiseautroupeauvolaillevolée|animalebestiaschjamazzàanatraocaocellumandrapullamevulata
 |dentsémoticônegênégrimaceriensourirevisagevisage grimaçant|dentiemoticonaimbarazzatusmorfiaridesurrisufacciafaccia smurfiosa
 |éléganthommemariépersonne en smokingpersonne mariéesmoking|elegantiomusposupersona in smokingpersona spusatasmoking
@@ -112900,7 +112900,7 @@ Your server has the perks of every level. Additional perks still need to be purc
 |Tes abonnements à {a}, {b} et {c} ont expiré. Ne renonce pas à tes fonctionnalités préférées sur ton serveur !|I to abbunamenti à {a}, {b} è {c} sò scaduti. Ùn rinuncià micca à e to funzioni preferite nant'à u to servore !
 |Obtiens l'accès aux fonctionnalités premium de {applicationName} dans n'importe quel serveur avec l'application|Ottene l'accessu à e funzioni premium di {applicationName} in qualsiasi servore cù l'appiecazione
 |TOUS LES OCTETS ! Dépasser {bitrate} ko/s peut avoir un impact négatif pour ceux qui ont une mauvaise connexion.|TUTTI L'OTTETTI ! Passà {bitrate} ko/s pò avè un impattu negativu per quelli chì anu una cattiva cunnessione.
-|Discord ne peut pas épingler ce message. Tu as peut-être atteint la limite de {maxPins} épinglages dans ce salon.|Discord ùn pò micca puntà stu messaghju. Forse ai ghjuntu u limitu di {maxPins} messaghji puntati in stu canale.
+|Discord ne peut pas épingler ce message. Tu as peut-être atteint la limite de {maxPins} épinglages dans ce salon.|Discord ùn pò micca spirlà stu messaghju. Forse ai righjuntu u limitu di {maxPins} messaghji spirlati in stu canale.
 |arrêterattendrebloquerdroitehaltehigh fivemainmain qui pousse vers la droitepousserrefuserstoptape m’en cinqtop là|piantàaspettàbluccàdrittaaltumanumanu chì spinge versu drittaspinghjericusàstopbatti cinquebatti cinque
 |Discord doit installer tout un tas de trucs avant de lancer ton jeu. Installation en cours ({progress} de {total}).|Discord deve installà un saccu di robba nanzu di lancià u to ghjocu. Installazione in corsu ({progress} di {total}).
 |bouderdéçueénervéeexpressionfâchéefaire la têtefemmefroncer les sourcilsgesteinquiètemouepersonnepersonne qui boude|ingrugnàdelusainnirvitaespressionearrabbiatafà u mussudonnaaggrottà e cigliegestuinquietamussupersonapersona ingrugnata
@@ -112915,7 +112915,7 @@ Your server has the perks of every level. Additional perks still need to be purc
 |Nous ne pouvons retourner que jusqu'à {maxPages} pages de résultats. Essaie de rechercher quelque chose de plus spécifique !|Pudemu rimandà solu sin'à {maxPages} pagine di risultati. Prova di circà qualcosa di più precisu !
 |Profite d'avantages Nitro, de 2x Boosts et d'une réduction sur les Boosts dans le cadre de l'abonnement de {primaryUserName}.|Prufitta di vantaghji Nitro, di 2x Boost è d'una riduzzione nant'à i Boost in u quadru di l'abbunamentu di {primaryUserName}.
 |Connecte tes comptes {applicationName} et Discord depuis les paramètres Discord sur l'appli de bureau pour accepter cet achat.|Cunnetti i to conti {applicationName} è Discord da i parametri Discord nant'à l'appiecazione di scagnu per accettà sta compra.
-|Discord ne peut pas épingler ce message. Tu as peut-être atteint la limite de {maxPins} épinglages dans le salon #{channelName}.|Discord ùn pò micca puntà stu messaghju. Forse ai ghjuntu u limitu di {maxPins} messaghji puntati in u canale #{channelName}.
+|Discord ne peut pas épingler ce message. Tu as peut-être atteint la limite de {maxPins} épinglages dans le salon #{channelName}.|Discord ùn pò micca spirlà stu messaghju. Forse ai righjuntu u limitu di {maxPins} messaghji spirlati in u canale #{channelName}.
 |couplecouple homosexueldeux personnes se tenant la maingaymainpersonnepersonnes se tenant par la mainpoignée de maintenir la main|cuppiacuppia omosessualeduie persone chì si tenenu a manugaymanupersonapersone chì si tenenu per a manustretta di manutene a manu
 |asieAsieaustralieAustralieespaceglobeglobe présentant l’Asie et l’Australieglobe tourné sur l’Asie et l’AustraliemondeplanèteTerre|asiaAsiaaustraliaAustraliaspaziuglobuglobu chì presenta l'Asia è l'Australiaglobu giratu versu l'Asia è l'AustraliamondupianetaTerra
 |amouramoureuxchatchat souriant aux yeux en cœurschat souriant avec des coeurs dans les yeuxcœurcoeurscoeurs dans les yeuxsourireyeux|amoreinnamuratugattugattu surridente cù l'ochji in coregattu surridente cù i cori in l'ochjicorecoricori in l'ochjisurrisuochji
@@ -113352,7 +113352,7 @@ Your server has the perks of every level. Additional perks still need to be purc
 |accessoirebottebotte de femmechaussurecoursesfemmeshoppingvêtements|accessoriustivalestivale di donnascarpacompredonnashoppingvestiti
 |boulette de pâtedumplingempanadagyozajiaozipierogipotstickerravioli|pulpetta di pastadumplingempanadagyozajiaozipierogipotstickerravioli
 |interdictioninterditportabletéléphonetéléphones portables interdits|pruibizionepruibitutelefuninutelefonutelefunini pruibiti
-|Tu as atteint le nombre maximum d'annonces publiées ({maxProducts}).|Hai ghjuntu u numeru massimu d'annunzii publicati ({maxProducts}).
+|Tu as atteint le nombre maximum d'annonces publiées ({maxProducts}).|Hai righjuntu u numeru massimu d'annunzii publicati ({maxProducts}).
 |alcoolbarbièreboissonchopechope de bièreoktoberfestpicolerpintesanté|alcolbarbirrabivandaghjottaghjotta di birraoktoberfestbeiepintasalute
 |bourguignonnechocolatfonduefromageplatpoêlonsavoyardeskisuisseSuisse|burgugnonacicculatafondutafurmagliupiattutianusavuiardascisvizzeraSvizzera
 |lunelune à visagenuitpleine lunepleine lune avec visagesourirevisage|lunaluna cù faccianotteluna pienaluna piena cù facciasurrisufaccia
@@ -113451,7 +113451,7 @@ Your server has the perks of every level. Additional perks still need to be purc
 |amusantblagueclin d’œilémoticônefoulangueloufoquemarrantœilrigolovisagevisage qui tire la langue et fait un clin d’œil|divertentescherzucennu d’occhjuemoticonapazzulinguastrambuspassosuocchjucomicufacciafaccia chì tira a lingua è face un cennu d’occhju
 |encoreexaspérationhommehomme avec la paume sur le visageincrédulitéincroyablemain sur le visageoh nonoublipaumepersonne|tornaesasperazioneomuomu cù a palma nant'à a facciaincredulitàincredibilemanu nant'à a facciaoh nòscordupalmapersona
 |Obtiens Nitro pour seulement {pricePerPerson} par personne chaque mois. Un abonnement pour toi et {totalMember} ami(e)s.|Ottieni Nitro per solu {pricePerPerson} à persona ogni mese. Un abbunamentu per tè è {totalMember} amichi(e).
-|Tu as atteint le nombre maximal de permissions. Supprimes-en {removeCount} afin d'effectuer des changements additionnels.|Hai ghjuntu u numeru massimu di permessi. Squassane {removeCount} per fà altri cambiamenti.
+|Tu as atteint le nombre maximal de permissions. Supprimes-en {removeCount} afin d'effectuer des changements additionnels.|Hai righjuntu u numeru massimu di permessi. Squassane {removeCount} per fà altri cambiamenti.
 |après-shampoingbouteille de lotioncrème hydratantecrème pour le corpscrème solaireflaconhydratantlotionshampoingshampooing|balsamubuttiglia di lozionecrema idratantecrema per u corpucrema sularefiascuidratantelozioneshampoingshampoo
 |Ton compte a été définitivement suspendu et sera supprimé, car tu ne respectes pas la restriction d'âge minimum de ta région|U to contu hè statu suspesu definitivamente è serà squassatu, perchè ùn rispetti micca a restrizzione d'età minima di a to regione
 |Ton abonnement Xbox Game Pass te donne un avant-goût de Nitro avec {bonusOrbMultiplier}x plus d'Orbs obtenus avec les quêtes.|U to abbunamentu Xbox Game Pass ti dà un antigustu di Nitro cù {bonusOrbMultiplier}x più Orbs ottenuti cù e missioni.
@@ -114298,7 +114298,7 @@ is typing...|est en train d'écrire...|hè à scrive...
 |{userName} t'invite à rejoindre un serveur|{userName} t'invita à raghjunghje un servore
 |Activer l'overlay classique pour {gameName}|Attivà l'overlay classicu per {gameName}
 |Déplacer hors du dossier, sous {folderName}|Spustà fora di u cartulare, sottu à {folderName}
-|Tu as atteint la limite de {number} membres|Ai ghjuntu u limitu di {number} membri
+|Tu as atteint la limite de {number} membres|Ai righjuntu u limitu di {number} membri
 |animalboiscervidéélanmammifèreorignalramure|animalelegnucervidualcemammiferuorignalecurnatura
 |busminibusmoyen de transportnavettevéhicule|busminibusmezu di trasportunavettavehiculu
 |expériencelaboratoiremicroscopeoutilscience|sperimentulaburatoriumicroscopiuattrezzuscienza
@@ -114313,7 +114313,7 @@ is typing...|est en train d'écrire...|hè à scrive...
 |{referrer} a partagé un passe Nitro avec toi|{referrer} hà spartutu un passe Nitro cun tè
 |17 h5 hcinq heuresdix-sept heuresheurehorloge|17 h5 hcinque oredicesette oreoraorologhju
 |Offre à {username} un nouvel abonnement Nitro|Rigala à {username} un novu abbunamentu Nitro
-|Tu as atteint le maximum de {max} connexions.|Ai ghjuntu u massimu di {max} cunnessioni.
+|Tu as atteint le maximum de {max} connexions.|Ai righjuntu u massimu di {max} cunnessioni.
 |animalcrapaudgrenouilletêtetête de grenouille|animalerospuranocchjacapucapu di ranocchja
 |bagelboulangeriepetit-déjeunersandwichschmear|bagelpanatteriacolazionesandwichschmear
 |directionflècheflèche haut droitenord-estsens|direzzionefrecciafreccia in sù à drittanordestsensu
@@ -114349,7 +114349,7 @@ is typing...|est en train d'écrire...|hè à scrive...
 |communicationmode vibreurportabletéléphonevibreur|cumunicazionemodu vibrazionetelefuninutelefonuvibratore
 |{discountPercentage} % de réduction chez Logitech|{discountPercentage} % di riduzzione ind'è Logitech
 |Continue l'aventure Nitro et économise {percent} %|Cuntinueghja l'avventura Nitro è risparmia {percent} %
-|Tu as atteint la limite de {maxLength} caractères.|Ai ghjuntu u limitu di {maxLength} caratteri.
+|Tu as atteint la limite de {maxLength} caractères.|Ai righjuntu u limitu di {maxLength} caratteri.
 |aiguillebobinebobine de filcoudrecoutureficellefil|agububbinabubbina di filucusgìcusgiturafunicellafilu
 |chantierconstructionconstruction d’un bâtimentgrue|cantierucustruzzionecustruzzione d’un edifiziugru
 |Appuie sur {keybind} pour parler dans {channelName}|Appughja nant'à {keybind} per parlà in {channelName}
@@ -114527,7 +114527,7 @@ is typing...|est en train d'écrire...|hè à scrive...
 |Tout n'est pas perdu ! Rejoins-nous à {testers} et dis-nous ce qu'il s'est passé. On s'en occupera au plus vite.|Ùn hè micca tuttu persu ! Raghjunghjeci à {testers} è dicci ciò chì hè accadutu. Ci ne occuperemu u più prestu pussibule.
 |compte sur moicontentfemme qui lève la maingesteicije saislevéemainmoiparticiperpersonne qui lève la mainprésente|contà nant'à mècuntentudonna chì alza a manughjestuquìsòalzatamanumèparticipàpersona chì alza a manupresente
 |émoticôneexcitéfroidgouttesouriresourire nerveuxstressésueursueurs froidesvisage souriant avec une goutte de sueur|emoticonaecitatufreddugocciasurrisusurrisu nervosustressatusudoresudori freddifaccia surridente cù una goccia di sudore
-|Tu as atteint la limite de messages marqués ({max} au total). Pour en ajouter d'autres, supprime quelques messages.|Ai ghjuntu u limitu di messaghji marcati ({max} in tuttu). Per aghjunghjene d'altri, squassa qualchì messaghju.
+|Tu as atteint la limite de messages marqués ({max} au total). Pour en ajouter d'autres, supprime quelques messages.|Ai righjuntu u limitu di messaghji marcati ({max} in tuttu). Per aghjunghjene d'altri, squassa qualchì messaghju.
 |En te connectant à {username}, tu confirmes être son parent ou tuteur légal et approuves son utilisation de Discord.|Cunnettenduti à {username}, cunfermi d'esse u so parente o tutore legale è appruvi u so usu di Discord.
 |Bénéficie de {numGuildSubscriptions} boosts gratuits et d'une réduction de {discountPercent} sur tout achat de boosts|Prufitta di {numGuildSubscriptions} boost gratisi è d'una riduzzione di {discountPercent} nant'à ogni compra di boost
 |Transforme tes victoires de quête en supervictoires avec un multiplicateur x{multiplier} sur les récompenses en Orbs.|Trasforma e to vittorie di missione in supervittorie cù un multiplicatore x{multiplier} nant'à e ricumpense in Orbs.
@@ -114565,8 +114565,8 @@ is typing...|est en train d'écrire...|hè à scrive...
 |Nous sommes désolés, mais cet achat ne peut pas être remboursé. Un remboursement ne peut être demandé que si cet achat a été fait il y a moins de {dateLimit} jours et si le cadeau n'a pas été utilisé.|Ci dispiace, ma sta compra ùn pò micca esse rimbursata. Un rimborsu pò esse dumandatu solu s'è sta compra hè stata fatta menu di {dateLimit} ghjorni fà è s'è u rigalu ùn hè micca statu adupratu.
 |Joue à n'importe quel jeu sur une console connectée pendant {targetMinutes} minutes pour déverrouiller {rewardNameWithArticle} pendant {duration}. Utilise cette récompense encore plus longtemps avec Nitro !|Ghjoca à qualunque ghjocu nant'à una cunsola cunnessa durante {targetMinutes} minuti per sbluccà {rewardNameWithArticle} durante {duration}. Usa sta ricumpensa ancu più longu cù Nitro !
 |Joue à {gameTitle} pendant {streamingDurationRequirement} minutes avec ton client Discord ouvert pour déverrouiller {rewardNameWithArticle} pendant {duration}, et garde cette récompense plus longtemps avec Nitro !|Ghjoca à {gameTitle} durante {streamingDurationRequirement} minuti cù u to cliente Discord apertu per sbluccà {rewardNameWithArticle} durante {duration}, è tene sta ricumpensa più longu cù Nitro !
-Unpin App|Désépingler l'application|Spuntà l'appiecazione
-Pin App|Épingler l'application|Puntà l'appiecazione
+Unpin App|Désépingler l'application|Dispirlà l'appiecazione
+Pin App|Épingler l'application|Spirlà l'appiecazione
 |{count} messages non lus|{count} messaghji micca letti
 |{count} mentions non lues|{count} mintuvate micca lette
 |Dans un appel ({name})|In una chjama ({name})
@@ -115894,7 +115894,7 @@ Several people|Plusieurs personnes|Parechje persone
 |sur l'utilisation des émojis personnalisés.|nant'à l'usu di l'emoji persunalizati.
 |Aucun emplacement disponible|Nisuna piazza dispunibule
 |Fais glisser et dépose ou|Trascina è lascia o
-|Dans la mesure où il arrive souvent que de nombreuses personnes parlent en même temps sur les serveurs de communauté, régler les paramètres de notifications par défaut du serveur sur Mentions seulement permet de limiter le nombre de membres quittant le serveur. Les membres peuvent modifier ces paramètres à tout moment.|Postu chì accade spessu chì parechje persone parlinu à tempu nant'à i servori di cumunità, regulà i parametri di nutificazioni predefiniti di u servore nant'à Mintuvate solu permette di limità u numeru di membri chì lascianu u servore. I membri ponu mudificà sti parametri in ogni mumentu.
+|Dans la mesure où il arrive souvent que de nombreuses personnes parlent en même temps sur les serveurs de communauté, régler les paramètres de notifications par défaut du serveur sur Mentions seulement permet de limiter le nombre de membres quittant le serveur. Les membres peuvent modifier ces paramètres à tout moment.|Postu chì accade spessu chì parechje persone parlinu à tempu nant'à i servori di cumunità, regulà i parametri di nutificazioni predefiniti di u servore nant'à « Solu e mintuvate » permette di limità u numeru di membri chì lascianu u servore. I membri ponu mudificà sti parametri in ogni mumentu.
 |Retirer les permissions de modération de @everyone|Caccià i permessi di muderazione di @everyone
 |Désactiver les permissions risquées pour le rôle|Disattivà i permessi risicosi per u rolu
 |Les serveurs de communauté sont des espaces plus vastes construits autour d'intérêts partagés. Activer la Communauté nécessite de mettre en place des paramètres de sécurité, des salons de règles et de nouvelles, ainsi que des paramètres de modération.|I servori di cumunità sò spazii più vasti custruiti intornu à interessi sparti. Attivà a Cumunità richiede di mette in piazza parametri di sicurità, canali di regule è di nutizie, è dinù parametri di muderazione.
@@ -115926,7 +115926,7 @@ Several people|Plusieurs personnes|Parechje persone
 |Déplace automatiquement les membres dans ce salon après une certaine période d'inactivité et les rend muets. Cela n'affecte pas les navigateurs.|Sposta autumaticamente i membri in stu canale dopu à un certu periodu d'inattività è i rende muti. Ùn tocca micca i navigatori.
 |Diminue de ce pourcentage le volume des autres applications lorsque quelqu'un parle. Fixe cette valeur à 0 % pour désactiver complètement l'atténuation globale.|Diminuisce di sta percentuale u vulume di l'altre appiicazioni quandu qualchissia parla. Fissa stu valore à 0 % per disattivà cumpletamente l'attenuazione glubale.
 |En utilisant un microphone certifié par Discord, certaines fonctionnalités du traitement de la voix ne sont plus gérées par Discord, mais par le micro lui-même.|Utilizendu un micrufonu certificatu da Discord, certe funzioni di trattamentu di a voce ùn sò più gestite da Discord, ma da u micru stessu.
-|Cela déterminera si les membres qui n'ont pas défini explicitement leurs paramètres de notification recevront une notification pour chaque message envoyé sur ce serveur ou non. Pour un serveur de communauté, nous recommandons vivement de régler ce paramètre sur @mentions uniquement.|Questu determinerà s'è i membri chì ùn anu micca definitu esplicitamente i so parametri di nutificazione riceveranu o micca una nutificazione per ogni messaghju mandatu nant'à stu servore. Per un servore di cumunità, ricumandemu forte di regulà stu parametru nant'à @mintuvate solu.
+|Cela déterminera si les membres qui n'ont pas défini explicitement leurs paramètres de notification recevront une notification pour chaque message envoyé sur ce serveur ou non. Pour un serveur de communauté, nous recommandons vivement de régler ce paramètre sur @mentions uniquement.|Questu determinerà s'è i membri chì ùn anu micca definitu esplicitamente i so parametri di nutificazione riceveranu o micca una nutificazione per ogni messaghju mandatu nant'à stu servore. Per un servore di cumunità, ricumandemu forte di regulà stu parametru nant'à « Solu e @mintuvate ».
 |Analyse et supprime automatiquement les médias envoyés sur ce serveur contenant du contenu explicite. Choisis le niveau de filtre à appliquer aux membres de ton serveur.|Analizza è squassa autumaticamente i media mandati nant'à stu servore chì cuntenenu cuntenutu esplicitu. Sceglie u livellu di filtru da applicà à i membri di u to servore.
 |Bloque les messages sur ce serveur qui pourraient contenir des images explicites dans des salons non indiqués comme étant soumis à une limite d'âge. Choisis la façon dont ce filtre sera appliqué aux membres de ton serveur. Nous te recommandons de l'activer.|Blocca i messaghji nant'à stu servore chì puderianu cuntene fiure esplicite in canali micca indicati cum'è sottumessi à un limitu d'età. Sceglie u modu cù u quale stu filtru serà applicatu à i membri di u to servore. Ti ricumandemu d'attivallu.
 |Choisis si les membres du serveur peuvent partager du contenu média à base d'images détecté par les filtres de contenu sensible de Discord. Ce paramètre s'appliquera aux salons qui ne sont pas soumis à une limite d'âge.|Sceglie s'è i membri di u servore ponu sparte cuntenutu media basatu nant'à fiure detectatu da i filtri di cuntenutu sensibile di Discord. Stu parametru s'applicherà à i canali chì ùn sò micca sottumessi à un limitu d'età.
@@ -115992,7 +115992,7 @@ Several people|Plusieurs personnes|Parechje persone
 |avec « {query} »|cù « {query} »
 |Mode lent activé. Les membres peuvent créer un post toutes les|Modu lentu attivatu. I membri ponu creà una publicazione ogni
 |je pense pas que tu puisses acheter des lots d'une seule corde, mais vérifie si les autres cordes ont toujours l'air de tenir. si elles sont en bon état, ne les change pas. la corde du mi aigu est généralement la première à se rompre !|ùn pensu micca chì tù possi cumprà lotti d'una sola corda, ma verifica s'è l'altre corde parenu sempre tene. s'elle sò in bonu statu, ùn le cambià micca. a corda di u mi acutu hè generalmente a prima à rompesi !
-|Tu peux retrouver une liste de livres dans notre post épinglé. Voici tous les livres qui seront abordés lors des prochaines réunions du club de lecture (oui, on a un club de lecture et c'est super intéressant - rejoins-nous !!)|Pòi ritruvà una lista di libri in a nostra publicazione appuntata. Eccu tutti i libri chì saranu trattati durante e prossime riunioni di u club di lettura (iè, avemu un club di lettura è hè assai interessante - veni cun noi !!)
+|Tu peux retrouver une liste de livres dans notre post épinglé. Voici tous les livres qui seront abordés lors des prochaines réunions du club de lecture (oui, on a un club de lecture et c'est super intéressant - rejoins-nous !!)|Pòi ritruvà una lista di libri in a nostra publicazione spirlata. Eccu tutti i libri chì saranu trattati durante e prossime riunioni di u club di lettura (iè, avemu un club di lettura è hè assai interessante - veni cun noi !!)
 |De cette manière, tes membres ont la possibilité d'organiser et de retrouver des conversations sur les sujets qui les intéressent. Le forum est l'endroit idéal pour des échanges, des conseils, des annonces achats/ventes, des groupes LFG, des questions-réponses, des retours et bien plus. Voici quelques exemples :|Cusì, i to membri anu a pussibilità d'urganizà è di ritruvà cunversazioni nant'à i sughjetti chì l'interessanu. U foru hè u locu ideale per scambii, cunsiglii, annunzii di compra/vendita, gruppi LFG, dumande-risposte, ritorni è assai di più. Eccu qualchì esempiu :
 |Appuie longuement sur n'importe quel message, puis appuie brièvement sur|Appughja longu nant'à qualsiasi messaghju, po appughja brevemente nant'à
 |. Retrouve-le ici, personne d'autre ne le verra.|. Ritrovalu quì, nisun altru ùn u viderà.
@@ -116212,7 +116212,7 @@ Several people|Plusieurs personnes|Parechje persone
 |a été retirée.|hè stata ritirata.
 |{guildName} a temporairement perdu l'accès à certaines fonctionnalités de Discord après avoir enfreint les règles de Discord pour les serveurs. Consulte le|{guildName} hà persu tempuraneamente l'accessu à certe funzioni di Discord dopu avè violatu e regule di Discord per i servori. Cunsulta u
 |Ce serveur a temporairement perdu l'accès à certaines fonctionnalités de Discord après avoir enfreint les règles de Discord pour les serveurs. Merci de consulter le|Stu servore hà persu tempuraneamente l'accessu à certe funzioni di Discord dopu avè violatu e regule di Discord per i servori. Grazie di cunsultà u
-|Ton serveur a atteint son maximum de {count} membres et ne peut pas accepter de nouvelles candidatures.|U to servore hà ghjuntu u so massimu di {count} membri è ùn pò micca accettà candidature nove.
+|Ton serveur a atteint son maximum de {count} membres et ne peut pas accepter de nouvelles candidatures.|U to servore hà righjuntu u so massimu di {count} membri è ùn pò micca accettà candidature nove.
 |(Ajouté) {roleNamesAdded} (Retiré) {roleNamesRemoved}|(Aghjuntu) {roleNamesAdded} (Cacciatu) {roleNamesRemoved}
 |Pour activer la monétisation du serveur, tu dois|Per attivà a munetizazione di u servore, devi
 |, puis la sélectionner ci-dessous. Les équipes|, po selezziunalla quì sottu. E squadre
@@ -116515,10 +116515,10 @@ Several people|Plusieurs personnes|Parechje persone
 |a mis à jour les rôles de|hà aghjurnatu i roli di
 |a mis à jour|hà aghjurnatu
 |a mis à jour les paramètres de candidature des membres|hà aghjurnatu i parametri di candidatura di i membri
-|a épinglé un message de|hà puntatu un messaghju di
-|a désépinglé un message de|hà spuntatu un messaghju di
+|a épinglé un message de|hà spirlatu un messaghju di
+|a désépinglé un message de|hà dispirlatu un messaghju di
 |a mis à jour la permission Ignorer le mode lent|hà aghjurnatu u permessu Ignurà u modu lentu
-|a mis à jour la permission « Épingler les messages »|hà aghjurnatu u permessu « Puntà i messaghji »
+|a mis à jour la permission « Épingler les messages »|hà aghjurnatu u permessu « Spirlà i messaghji »
 |a commencé le processus d'accueil pour ce serveur|hà principiatu u prucessu d'accolta per stu servore
 |a ajouté les salons|hà aghjuntu i canali
 |a ajouté les rôles|hà aghjuntu i roli
@@ -116992,8 +116992,8 @@ Several people|Plusieurs personnes|Parechje persone
 |pour en savoir plus sur les notifications de moments notables.|per sapene di più nant'à e nutificazioni di mumenti nutevuli.
 |Nous pouvons personnaliser la section En ligne et d'autres endroits de Discord, en nous basant sur les jeux auxquels tu joues et tes interlocuteurs. Tu peux les modifier à tout moment dans les|Pudemu persunalizà a sezzione In linea è altri lochi di Discord, basendusi nant'à i ghjochi à i quali tù ghjochi è e persone cù quale tù parli. I poi mudificà in ogni mumentu in i
 |Tu te sens seul(e) au monde ? Un peu comme une barque à la dérive au beau milieu de l'océan ? Ramène quelques-uns de tes amis ici en leur envoyant un lien d'invitation !|Ti senti solu(a) à u mondu ? Un pocu cum'è una barca à a deriva in pienu mezu à l'oceanu ? Porta quì qualchì unu di i to amichi mandenduli un liame d'invitu !
-|Ce salon n'a pas encore de message épinglé... pour l'instant.|Stu canale ùn hà ancu micca messaghju puntatu... per avà.
-|Cette conversation privée n'a pas encore de message épinglé... pour l'instant.|Sta cunversazione privata ùn hà ancu micca messaghju puntatu... per avà.
+|Ce salon n'a pas encore de message épinglé... pour l'instant.|Stu canale ùn hà ancu micca messaghju spirlatu... per avà.
+|Cette conversation privée n'a pas encore de message épinglé... pour l'instant.|Sta cunversazione privata ùn hà ancu micca messaghju spirlatu... per avà.
 |Les serveurs soumis à une limite d'âge sont bloqués sur les plateformes iOS conformément aux directives de l'App Store. Si tu es adulte, tu peux rejoindre le serveur sur ordinateur et mettre à jour tes paramètres pour le consulter sur iOS. Consulte notre centre d'assistance pour en savoir plus.|I servori sottumessi à un limitu d'età sò bluccati nant'à e piattaforme iOS secondu e direttive di l'App Store. S'è tù sì adultu, poi raghjunghje u servore nant'à urdinatore è mette à ghjornu i to parametri per cunsultallu nant'à iOS. Cunsulta u nostru centru d'assistenza per sapene di più.
 |Nous sommes désolés, mais les serveurs soumis à une limite d'âge sont bloqués sur les plateformes iOS conformément aux directives de l'App Store. Si tu as plus de 18 ans, tu peux les rejoindre via l'application de bureau ou la version navigateur.|Ci dispiace, ma i servori sottumessi à un limitu d'età sò bluccati nant'à e piattaforme iOS secondu e direttive di l'App Store. S'è tù hai più di 18 anni, i poi raghjunghje via l'appiecazione di scagnu o a versione navigatore.
 |Tu peux en savoir plus au|Poi sapene di più à u
@@ -117848,7 +117848,7 @@ are typing...|sont en train d'écrire...|sò à scrive...
 |Pimente la conversation en vocal avec|Pepa a cunversazione in vucale cù
 |. Cornes de brume en approche.|. Corne di nebbia in avvicinamentu.
 |Utilise tes sons préférés dans tout Discord et bien plus avec Nitro.|Adopra i to soni preferiti in tuttu Discord è assai di più cù Nitro.
-|Ton serveur a atteint la limite maximale de|U to servore hà ghjuntu u limitu massimu di
+|Ton serveur a atteint la limite maximale de|U to servore hà righjuntu u limitu massimu di
 |. Va dans les paramètres du serveur pour supprimer un son avant de pouvoir en ajouter un autre.|. Và in i parametri di u servore per squassà un sonu nanzu di pudè aghjunghjene un altru.
 |pour ouvrir la roue des sons n'importe où, même directement en jeu.|per apre a rota di i soni in ogni locu, ancu direttamente in ghjocu.
 |Pour activer l'overlay, rends-toi dans|Per attivà l'overlay, và in
@@ -117982,19 +117982,19 @@ are typing...|sont en train d'écrire...|sò à scrive...
 |C'est un plaisir de te voir,|Hè un piacè di vedeti,
 |Youhou, tu as réussi,|Iuhù, ce l'hai fatta,
 |vient de booster le serveur !|hà appena boostatu u servore !
-|vient de booster le serveur ! {guildName} a atteint|hà appena boostatu u servore ! {guildName} hà ghjuntu
+|vient de booster le serveur ! {guildName} a atteint|hà appena boostatu u servore ! {guildName} hà righjuntu
 |a boosté ce serveur {numSubscriptions} fois|hà boostatu stu servore {numSubscriptions} volte
 |vient de booster le serveur|hà appena boostatu u servore
-|fois ! {guildName} a atteint le niveau|volte ! {guildName} hà ghjuntu u livellu
+|fois ! {guildName} a atteint le niveau|volte ! {guildName} hà righjuntu u livellu
 |Les Boosts de serveur aident à déverrouiller de nouveaux avantages pour tout le monde ! Rejoins les boosteurs qui font vivre cette communauté.|I Boost di servore aiutanu à sbluccà avantaghji novi per tutti ! Raghjunghje i boostatori chì facenu campà sta cumunità.
 |a offert|hà rigalatu
 |a acheté|hà compru
 |a acheté {productName} !|hà compru {productName} !
 |t'a envoyé un message depuis|t'hà mandatu un messaghju da
 |. La discussion en jeu ne peut pas inclure de fonctionnalités de messagerie enrichie telles que les images, les sondages ou les applications.|. A discussione in ghjocu ùn pò micca include funzioni di messaghjeria arricchita cum'è e fiure, i sundaghji o l'appiecazioni.
-|a épinglé un message dans ce salon. Voir tous les|hà puntatu un messaghju in stu canale. Vede tutti i
-|a épinglé un message dans ce salon.|hà puntatu un messaghju in stu canale.
-|a épinglé|hà puntatu
+|a épinglé un message dans ce salon. Voir tous les|hà spirlatu un messaghju in stu canale. Vede tutti i
+|a épinglé un message dans ce salon.|hà spirlatu un messaghju in stu canale.
+|a épinglé|hà spirlatu
 |dans ce salon.|in stu canale.
 |dans ce salon. Voir tous les|in stu canale. Vede tutti i
 |est terminé ! Il n'y a pas eu de gagnant|hè finitu ! Ùn ci hè statu nisun vincitore
@@ -118426,10 +118426,10 @@ Events|Événements|Avvenimenti
 events|événements|avvenimenti
 Server Boost|Boost de serveur|Boost di u servore
 Boost|Boost|Boost
-Pin Message|Épingler le message|Puntà u messaghju
-Pin|Épingler|Puntà
-Unpin|Désépingler|Spuntà
-Unpin Message|Désépingler le message|Spuntà u messaghju
+Pin Message|Épingler le message|Spirlà u messaghju
+Pin|Épingler|Spirlà
+Unpin|Désépingler|Dispirlà
+Unpin Message|Désépingler le message|Dispirlà u messaghju
 Send|Envoyer|Mandà
 Edit Profile|Modifier le profil|Mudificà u prufilu
 Mute|Rendre muet|Ammutulisce
@@ -118491,6 +118491,10 @@ Check For Updates...|Rechercher les mises à jour…|Circà l'aghjurnamenti…
 Hi! Discord will run in the background to keep you in touch with your friends. You can right-click here to quit.|Salut ! Discord s'exécutera en arrière-plan pour te permettre de rester en contact avec tes ami(e)s. Tu peux faire un clic droit ici pour quitter.|Salute! Discord ferma attivu in sfondulu per ch'è tù fermi in cuntattu cù i to amichi. Poi fà un cliccu dirittu quì per esce.
 # Discord: a setting left in French, found by the bounded search of October 2026 (docs/untranslated-inventory.md).
 Minimum notification duration|Durée minimale des notifications|Durata minima di e nutificazioni
+# Discord: labels of the October 2026 inventory (docs/untranslated-inventory.md) that showed French or another program's
+# Discord: word; provenance in lexicon/review-discord-2026-10.tsv (AI proposals, not read by a speaker).
+Unranked|Non classé|Senza classifica
+Clips|Clips|Clip
 # Vencord: settings pages and plugin descriptions of Vencord, which only exist in English.
 A Vencord update is available!||Un aghjurnamentu di Vencord hè dispunibule!
 A restart is required to apply this change||Ci vole à rilancià per applicà stu cambiamentu
@@ -118710,7 +118714,7 @@ Keep showing guild icons in the primary guild bar folder when it's open in the B
 Language incoming messages are translated from||Lingua uriginale di i messaghji ricevuti da traduce
 Language your messages are translated from||Lingua uriginale di i vostri messaghji da traduce
 Large Image Text||Testu di a fiura grande
-Last message pin:||Ultimu messaghju puntatu:
+Last message pin:||Ultimu messaghju spirlatu:
 Leave Message||Messaghju di partenza
 Lens Size||Dimensione di a lente
 List all your tags||Listà tutte e vostre etichette
@@ -118776,7 +118780,7 @@ Pasting a link while having text selected will not paste as masked URL||Incullà
 Patches Discord's UserSettings to expose their group and name.||Mudifica UserSettings di Discord per palisà u so gruppu è u so nome.
 Pause the client when you press F8 with DevTools (+ breakpoints) open.||Mette in pausa u cliente quandu appughjate nant'à F8 cù DevTools (+ punti d'arrestu) apertu.
 Permission Details||Dettagli di i permessi
-Pin DMs Category Menu||Listinu di categurie di i messaghji privati puntati
+Pin DMs Category Menu||Listinu di categurie di i messaghji privati spirlati
 Plain style with Lock Icon instead||Stile simplice cù un'icona di serratura invece
 Play Example Sounds||Ghjucà soni d'esempiu
 Please consider supporting the development of Vencord by becoming a donor. It would mean a lot!!||Pensate à sustene u sviluppu di Vencord fendu un donu. Saria assai impurtante per noi!!

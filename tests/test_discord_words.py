@@ -89,13 +89,30 @@ class DiscordWordsTests(unittest.TestCase):
         # Found by the bounded search of Discord's settings (docs/untranslated-inventory.md).
         self.assertEqual(self.words['Durée minimale des notifications'], 'Durata minima di e nutificazioni')
 
-    def test_suppress_means_turn_off_and_pin_stays_discords(self):
+    def test_suppress_means_turn_off_and_pin_follows_mozilla(self):
         # "Suppress Highlights" stops a kind of notification, it erases nothing (October 2026 review).
         self.assertEqual(self.words['Supprimer les moments notables'], 'Disattivà i mumenti nutevuli')
-        # Puntà/Spuntà is Discord's own pair; it no longer leaks into other programs (Firefox follows Mozilla).
-        self.assertEqual(self.words['Épingler'], 'Puntà')
-        self.assertEqual(self.words['Désépingler'], 'Spuntà')
+        # Pin and unpin follow Mozilla's Corsican (Spirlà / Dispirlà) in Discord too: "Spuntà" also means to rise or
+        # appear ("Spuntà di u sole"), "Puntà" to aim (round of 2026-10-19, lexicon/review-discord-2026-10.tsv).
+        self.assertEqual(self.words['Épingler'], 'Spirlà')
+        self.assertEqual(self.words['Désépingler'], 'Dispirlà')
+        self.assertEqual(self.words['Messages épinglés'], 'Messaghji spirlati')
         self.assertEqual(engine.WORDS['Épingler'], 'Spirlà')
+        self.assertNotIn('Spuntà', self.words.values())
+
+    def test_labels_of_the_october_inventory(self):
+        # docs/untranslated-inventory.md: a game rank left in French; "Clips" taken from an audio editor ("Pezzi",
+        # pieces) where Discord's own rows say "clip"; "solu" before what it restricts, as Mozilla's Corsican writes
+        # it ("Bluccà solu l'audio"); a presence status that does not agree with a list of people ("Cunnessu").
+        expected = {
+            'Non classé': 'Senza classifica', 'Unranked': 'Senza classifica', 'Clips': 'Clip',
+            '@mentions seulement': 'Solu e @mintuvate', 'Only @mentions': 'Solu e @mintuvate',
+            'En ligne': 'In linea', 'Online': 'In linea', 'Hors ligne': 'Fora di linea',
+        }
+        for key, value in expected.items():
+            self.assertEqual(self.words[key], value, key)
+        # The Delete key: Corsu's own key name ("Squas", as "Suppr (pavé num.)"), not the Spanish key cap "Supr".
+        self.assertEqual(self.words['Suppr'], 'Squas')
 
     def test_templates_keep_their_placeholders(self):
         key = engine.normalize('Effacer après \u00001\u0000 heures')

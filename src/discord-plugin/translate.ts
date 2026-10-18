@@ -19,7 +19,7 @@ export function setCorrections(value: Record<string, string> | undefined) {
 // with this file's way of reading the page; the fingerprint is computed from the dictionary itself (its entry count
 // and two sums of FNV-1a hashes over each key and value's UTF-16 code units, which do not depend on the order of the
 // entries), so it can be compared with the dictionary.json of any build.
-export const translatorRevision = "2026-10-native-1";
+export const translatorRevision = "2026-10-dialog-1";
 let fingerprint: string | undefined;
 
 export function dictionaryFingerprint(): string {
@@ -558,7 +558,44 @@ export function translateLabel(value: string, names: Set<string> = new Set(), pr
 function label(value: string, element: Element, node: Node): string {
     const where = place(element, node);
     if (where.name) return nameLabel(value, where.presence);
+    if (!where.presence) {
+        const verb = dialogVerb(value, element, where.names);
+        if (verb !== undefined) return verb;
+    }
     return translateLabel(value, where.names, where.presence);
+}
+
+// One French label for several actions. Discord's French says "Supprimer" both for Delete (a message, a channel, a
+// server: Corsican "Squassà", erase) and for Remove (an attachment, a role or a person from a list: "Caccià", take
+// out); its English keeps them apart ("Delete", "Remove"). The dictionary gives the general "Caccià". In a dialog, the
+// button repeats the action its title names ("Supprimer le message" over a "Supprimer" button), so the button takes
+// the verb the title's translation starts with when it is one of these. Elsewhere, or with a title that starts with
+// another word, the dictionary applies; a correction made in the Corsu app always wins. A name or activity value
+// equal to the label stays as written, and a title inside what people write or in a name never decides.
+export const dialogVerbs: Record<string, string[]> = { "Supprimer": ["Squassà", "Caccià"] };
+const dialogArea = '[role="dialog"],[role="alertdialog"]';
+const dialogTitle = 'h1,h2,h3,[class*="title"],[class*="Title"]';
+
+function dialogVerb(value: string, element: Element, names: Set<string>): string | undefined {
+    const match = value.match(/^(\s*)(.*?)(\s*)$/s);
+    const key = normalize(match?.[2] ?? "");
+    const verbs = dialogVerbs[key];
+    if (!verbs || Object.hasOwn(corrections, key)) return undefined;
+    if (Array.from(names).some(name => normalize(name).trim().toLowerCase() === key.toLowerCase())) return undefined;
+    const dialog = element.closest(dialogArea);
+    if (!dialog) return undefined;
+    for (const title of Array.from(dialog.querySelectorAll(dialogTitle))) {
+        if (title.contains(element) || element.contains(title) || title.closest(contentArea) || title.closest(nameArea)) continue;
+        const shown = normalize(title.textContent ?? "").trim();
+        if (!shown) continue;
+        // The title may already be translated (it comes first in the page) or not yet.
+        for (const text of [shown, resolve(shown)]) {
+            const verb = text && verbs.find(candidate => text.toLowerCase().startsWith(candidate.toLowerCase() + " "));
+            if (verb) return match![1] + verb + match![3];
+        }
+        return undefined;
+    }
+    return undefined;
 }
 
 type Finding = { kind: string; rule?: string; text?: string; };
