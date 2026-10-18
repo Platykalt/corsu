@@ -2,6 +2,10 @@ import io
 import json
 import os
 from pathlib import Path
+import shlex
+import shutil
+import subprocess
+import sys
 import tempfile
 import unittest
 from contextlib import redirect_stdout
@@ -277,9 +281,11 @@ class InstallerTests(Isolated):
                 self.assertEqual(deployed, installer.runtime_python(data / 'runtime/3.13.16-20261001'))
                 self.assertTrue(deployed.exists())
                 self.assertEqual(installer.deploy_runtime(), deployed)
-            # A system Python stays the one used.
+            # A system Python stays the one used, and the copy is made all the same: launchers fall back to it.
+            shutil.rmtree(data)
             with patch.object(installer, 'ROOT', root), patch.object(corsu, 'DATA', data):
                 self.assertEqual(installer.deploy_runtime(), Path(installer.sys.executable))
+                self.assertTrue(installer.runtime_python(data / 'runtime/3.13.16-20261001').exists())
 
     def test_unused_python_copies_are_deleted(self):
         with tempfile.TemporaryDirectory() as directory:
@@ -294,6 +300,132 @@ class InstallerTests(Isolated):
                     patch.object(corsu, 'CONFIG', Path(directory) / 'config'):
                 installer.prune_runtimes()
             self.assertEqual([path.name for path in (data / 'runtime').iterdir()], ['launcher'])
+
+
+class LauncherPythonTests(Isolated):
+    """Launchers of an archive installed with the system's Python fall back to the bundled copy (corsu.launcher_python)."""
+
+    VERSION = '3.13.16+20261001'
+
+    def setUp(self):
+        super().setUp()
+        self.root = self.release('0.25.0', R('current'))
+        (self.root / 'src/release.json').write_text(json.dumps({'version': '0.25.0', 'python_runtime': {'version': self.VERSION}}))
+        patcher = patch.object(corsu, 'ROOT', self.root)
+        patcher.start()
+        self.addCleanup(patcher.stop)
+
+    def bundled(self, platform='linux'):
+        python = self.data / 'runtime/3.13.16-20261001/python'
+        interpreter = python / ('python.exe' if platform == 'windows' else 'bin/python3')
+        interpreter.parent.mkdir(parents=True, exist_ok=True)
+        interpreter.write_text('')
+        return interpreter
+
+    def test_without_a_bundled_copy_launchers_use_this_python(self):
+        with patch.object(corsu, 'PLATFORM', 'linux'):
+            self.assertEqual(corsu.launcher_python(corsu.Installer()), Path(sys.executable))
+        self.assertFalse((self.data / 'bin/corsu-python').exists())
+
+    def test_the_system_python_falls_back_to_the_bundled_copy(self):
+        fallback = self.bundled()
+        with patch.object(corsu, 'PLATFORM', 'linux'), patch.object(corsu.sys, 'executable', '/usr/bin/python3'):
+            wrapper = corsu.launcher_python(corsu.Installer())
+        self.assertEqual(wrapper, self.data / 'bin/corsu-python')
+        text = wrapper.read_text()
+        self.assertIn(f'for python in /usr/bin/python3 {shlex.quote(str(fallback))}; do', text)
+        self.assertTrue(os.access(wrapper, os.X_OK))
+        self.assertIn(str(wrapper), corsu.load_state()['files'])
+        # The wrapper names the copy: it is never deleted as unused.
+        (self.data / 'runtime/old/python').mkdir(parents=True)
+        installer.prune_runtimes()
+        self.assertEqual(sorted(path.name for path in (self.data / 'runtime').iterdir()), ['3.13.16-20261001'])
+
+    def test_corsu_running_on_the_bundled_copy_and_windows_use_it_directly(self):
+        fallback = self.bundled()
+        with patch.object(corsu, 'PLATFORM', 'linux'), patch.object(corsu.sys, 'executable', str(fallback)):
+            self.assertEqual(corsu.launcher_python(corsu.Installer()), fallback)
+        windows = self.bundled('windows')
+        with patch.object(corsu, 'PLATFORM', 'windows'), patch.object(corsu.sys, 'executable', 'C:/Python313/python.exe'):
+            self.assertEqual(corsu.launcher_python(corsu.Installer()), Path('C:/Python313/python.exe'))
+        self.assertTrue(windows.exists())
+        self.assertFalse((self.data / 'bin/corsu-python').exists())
+
+    def test_launchers_on_linux_and_macos_go_through_the_wrapper(self):
+        self.bundled()
+        commands = []
+
+        def osacompile(command, **_):
+            commands.append(command)
+            Path(command[2]).mkdir(parents=True)
+        for platform in ('linux', 'macos'):
+            with patch.object(corsu, 'PLATFORM', platform), patch.object(corsu.sys, 'executable', '/usr/bin/python3'), \
+                    patch.object(corsu.subprocess, 'run', side_effect=osacompile):
+                corsu.setup_shortcut(corsu.Installer())
+        wrapper = shlex.quote(str(self.data / 'bin/corsu-python'))
+        entry = (self.home / '.local/share/applications/corsu-setup.desktop').read_text()
+        self.assertIn(f'Exec={wrapper} ', entry)
+        self.assertIn(f'exec {wrapper} ', commands[0][-1])
+
+    def test_launchers_written_before_get_the_chosen_python(self):
+        # 0.24.0 wrote the system Python into each launcher; Firefox switched off keeps its launcher unrewritten.
+        old = self.data / 'releases' / R('old')
+        launcher = self.home / '.local/bin/firefox-corsu'
+        entry = self.home / '.local/share/applications/corsu-setup.desktop'
+        shortcuts = corsu.Installer()
+        shortcuts.write(launcher, f'#!/bin/sh\nexec /usr/bin/python3 {shlex.quote(str(old / "src/corsu.py"))} launch-firefox "$@"\n', 0o755)
+        shortcuts.write(entry, f'[Desktop Entry]\nExec=/usr/bin/python3 {shlex.quote(str(old / "src/app.py"))}\nName=Corsu\n')
+        wrapper = self.data / 'bin/corsu-python'
+        with patch.object(corsu, 'PLATFORM', 'linux'):
+            corsu.refresh_launchers(shortcuts, python=wrapper)
+        self.assertEqual(launcher.read_text(), f'#!/bin/sh\nexec {shlex.quote(str(wrapper))} '
+                                               f'{shlex.quote(str(self.root / "src/corsu.py"))} launch-firefox "$@"\n')
+        self.assertIn(f'Exec={shlex.quote(str(wrapper))} {shlex.quote(str(self.root / "src/app.py"))}\n', entry.read_text())
+        # Back on the bundled copy: the wrapper goes once nothing names it any more.
+        shortcuts.write(wrapper, '#!/bin/sh\n', 0o755)
+        fallback = self.bundled()
+        installer.forget_python_wrapper(shortcuts, wrapper)
+        self.assertTrue(wrapper.exists())
+        installer.forget_python_wrapper(shortcuts, fallback)
+        self.assertTrue(wrapper.exists(), 'launchers still name it')
+        with patch.object(corsu, 'PLATFORM', 'linux'):
+            corsu.refresh_launchers(shortcuts, python=fallback)
+        installer.forget_python_wrapper(shortcuts, fallback)
+        self.assertFalse(wrapper.exists())
+        self.assertNotIn(str(wrapper), corsu.load_state()['files'])
+        self.assertIn(f'exec {shlex.quote(str(fallback))} ', launcher.read_text())
+
+    def test_windows_launchers_are_left_to_their_own_steps(self):
+        launcher = self.data / 'bin/firefox-corsu.cmd'
+        shortcuts = corsu.Installer()
+        text = f'@"C:/Python/pythonw.exe" "{self.data / "releases" / R("old") / "src/corsu.py"}" launch-firefox %*\r\n'
+        shortcuts.write(launcher, text)
+        with patch.object(corsu, 'PLATFORM', 'windows'):
+            corsu.refresh_launchers(shortcuts, python=Path('C:/other/pythonw.exe'))
+        self.assertIn('C:/Python/pythonw.exe', launcher.read_text())
+        self.assertIn(R('current'), launcher.read_text())
+
+    @unittest.skipIf(os.name == 'nt', 'a shell script')
+    def test_the_wrapper_starts_the_first_python_that_works(self):
+        fallback = self.bundled()
+        fallback.write_text(f'#!/bin/sh\nexec {shlex.quote(sys.executable)} "$@"\n')
+        fallback.chmod(0o755)
+        broken = self.home / 'python3-minimal'
+        broken.write_text('#!/bin/sh\nexit 1\n')
+        broken.chmod(0o755)
+        script = self.home / 'say.py'
+        script.write_text('import sys; print(sys.argv[1])\n')
+        for system in (self.home / 'removed/python3', broken, Path(sys.executable)):
+            with patch.object(corsu, 'PLATFORM', 'linux'), patch.object(corsu.sys, 'executable', str(system)):
+                wrapper = corsu.launcher_python(corsu.Installer())
+            result = subprocess.run([str(wrapper), str(script), 'corsu'], capture_output=True, text=True)
+            self.assertEqual((result.returncode, result.stdout), (0, 'corsu\n'), system)
+        with patch.object(corsu, 'PLATFORM', 'linux'), patch.object(corsu.sys, 'executable', str(broken)):
+            corsu.launcher_python(corsu.Installer())
+        fallback.unlink()  # the copy deleted by hand as well: nothing can start, and the script says so
+        result = subprocess.run([str(wrapper), str(script), 'corsu'], capture_output=True, text=True)
+        self.assertEqual(result.returncode, 1)
+        self.assertIn('no usable Python', result.stderr)
 
 
 if __name__ == '__main__':

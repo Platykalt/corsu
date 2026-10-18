@@ -32,8 +32,11 @@ le plugin Discord demande Node.js 22 ou plus et pnpm.
 Les archives publiées contiennent leur propre Python (`runtime/<processeur>/python`, de
 [python-build-standalone](https://github.com/astral-sh/python-build-standalone), épinglé avec sa somme SHA-256 dans
 `src/release.json`), allégé de Tk, IDLE, pip et des tests ; ceux de Windows et macOS ont pywebview et ses liaisons.
-`tools/package_release.py --no-runtime` construit des archives sans lui. Lancé depuis ce Python, l'installeur le
-copie une seule fois dans `runtime/<version>` du dossier de données, que les raccourcis utilisent ensuite.
+`tools/package_release.py --no-runtime` construit des archives sans lui. L'installeur d'une archive le copie une
+seule fois dans `runtime/<version>` du dossier de données. Lancé depuis ce Python, les raccourcis l'utilisent ensuite ;
+lancé depuis un autre (sous Linux, celui de la distribution, pour la fenêtre GTK), les raccourcis passent par
+`bin/corsu-python`, qui démarre ce Python tant qu'il est en 3.10 ou plus avec sa bibliothèque standard complète, et
+sinon la copie (`corsu.launcher_python`).
 
 L'application Corsu (`src/app.py`) est un petit serveur web lié à 127.0.0.1, à l'adresse fixe `http://localhost:7744`
 (le port suivant libre si un autre programme occupe celui-ci). `src/window.py` l'affiche dans une fenêtre à elle :

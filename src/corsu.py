@@ -1082,6 +1082,50 @@ def python_launcher():
     return windowed if PLATFORM == 'windows' and windowed.exists() else executable
 
 
+def bundled_python():
+    """Corsu's own copy of the Python bundled in this release's archive (installer.deploy_runtime), or None."""
+    try:
+        version = json.loads((ROOT / 'src/release.json').read_text(encoding='utf-8'))['python_runtime']['version']
+    except (OSError, ValueError, KeyError, TypeError):
+        return None
+    python = DATA / 'runtime' / version.replace('+', '-') / 'python'
+    python = python / 'python.exe' if PLATFORM == 'windows' else python / 'bin/python3'
+    return python if python.is_file() else None
+
+
+# What the wrapper asks of a Python before starting Corsu with it: 3.10 or newer, with its whole standard library.
+# Debian's python3-minimal (often installed on its own) lacks shlex, tempfile, zipfile, urllib.request and more; shlex
+# tells it apart without slowing every launch down.
+PYTHON_CHECK = 'import sys, shlex; sys.exit(sys.version_info < (3, 10))'
+
+
+def launcher_python(installer=None):
+    """The interpreter Linux and macOS launchers start Corsu with. Normally the Python running Corsu now. When that
+    is another Python than Corsu's own copy of the bundled one, while such a copy exists (an archive installed with
+    the system's Python, which on Linux gives the window its GTK bindings), launchers go through a small script
+    instead: it starts that Python while it still works, else the bundled copy, so removing, downgrading or
+    splitting the system's Python never leaves Corsu's shortcuts broken. With `installer`, the script is written."""
+    executable = Path(sys.executable)
+    fallback = bundled_python()
+    wrapper = DATA / 'bin/corsu-python'
+    if PLATFORM == 'windows' or fallback is None or executable.resolve().is_relative_to((DATA / 'runtime').resolve()):
+        return executable
+    if installer is not None:
+        candidates = ' '.join(shlex.quote(str(python)) for python in (executable, fallback))
+        installer.write(wrapper,
+                        '#!/bin/sh\n'
+                        '# Written by Corsu: starts it with the Python it was installed with while that one works, else with\n'
+                        '# the copy of the Python bundled in its archive.\n'
+                        f'for python in {candidates}; do\n'
+                        f'    if "$python" -I -S -c {shlex.quote(PYTHON_CHECK)} >/dev/null 2>&1; then\n'
+                        '        exec "$python" "$@"\n'
+                        '    fi\n'
+                        'done\n'
+                        'echo "Corsu: no usable Python 3.10 or newer; run Corsu\'s installer again." >&2\n'
+                        'exit 1\n', 0o755)
+    return wrapper
+
+
 def windows_link(installer, path, target, arguments, icon=None, toggle=False):
     """Create a Windows `.lnk` shortcut through the Shell, and track it like any managed file."""
     with tempfile.TemporaryDirectory() as directory:
@@ -1108,7 +1152,7 @@ def windows_shortcut(installer, firefox):
 def macos_application(installer, firefox=None):
     """A small AppleScript applet, so Firefox Corsu appears in Launchpad and Spotlight."""
     target = HOME / 'Applications/Firefox Corsu.app'
-    command = f'exec {shlex.quote(sys.executable)} {shlex.quote(str(SRC / "corsu.py"))} launch-firefox >/dev/null 2>&1 &'
+    command = f'exec {shlex.quote(str(launcher_python(installer)))} {shlex.quote(str(SRC / "corsu.py"))} launch-firefox >/dev/null 2>&1 &'
     with tempfile.TemporaryDirectory() as directory:
         applet = Path(directory) / 'Firefox Corsu.app'
         script = 'do shell script ' + json.dumps(command)
@@ -1136,24 +1180,26 @@ def setup_shortcut(installer):
         installer.write(icon, (SRC / 'app/corsu.ico').read_bytes())
         windows_link(installer, START_MENU / 'Corsu.lnk', python_launcher(), f'"{app}"', f'{icon},0')
     elif PLATFORM == 'macos':
-        command = f'exec {shlex.quote(sys.executable)} {shlex.quote(str(app))} >/dev/null 2>&1 &'
+        command = f'exec {shlex.quote(str(launcher_python(installer)))} {shlex.quote(str(app))} >/dev/null 2>&1 &'
         with tempfile.TemporaryDirectory() as directory:
             applet = Path(directory) / 'Corsu.app'
             subprocess.run(['osacompile', '-o', str(applet), '-e', 'do shell script ' + json.dumps(command)], check=True)
             installer.tree(HOME / 'Applications/Corsu.app', applet)
     else:
+        python = launcher_python(installer)
         installer.write(HOME / '.local/share/applications/corsu-setup.desktop',
                         '[Desktop Entry]\nType=Application\nName=Corsu\n'
                         'GenericName=Corsican language\nGenericName[fr]=Langue corse\nGenericName[co]=Lingua corsa\n'
                         'Comment=Choose which programs are in Corsican\nComment[fr]=Choisir les logiciels en corse\n'
-                        f'Exec={shlex.quote(sys.executable)} {shlex.quote(str(app))}\nTerminal=false\nIcon={SRC / "app/corsu.svg"}\n'
+                        f'Exec={shlex.quote(str(python))} {shlex.quote(str(app))}\nTerminal=false\nIcon={SRC / "app/corsu.svg"}\n'
                         'StartupWMClass=corsu\nCategories=Settings;\n')
 
 
-def refresh_launchers(installer, root=None):
+def refresh_launchers(installer, root=None, python=None):
     """Point every launcher and shortcut Corsu wrote at this copy of Corsu (or at the release folder `root`: an
     update that failed points them back at the previous copy). Installing one part used to leave the others on the
-    copy they were written with, which then could never be deleted."""
+    copy they were written with, which then could never be deleted. With `python`, the Linux and macOS text
+    launchers also start Corsu with that interpreter (launcher_python)."""
     root = Path(root) if root else ROOT
     releases = (DATA / 'releases').resolve()
     if not root.resolve().is_relative_to(releases):
@@ -1161,6 +1207,10 @@ def refresh_launchers(installer, root=None):
     # Launchers hold the path as it was written (C:\Users\RUNNER~1, /var/...), which may differ from the real one.
     prefixes = sorted({str(DATA / 'releases'), str(releases)}, key=len, reverse=True)
     pattern = re.compile('(' + '|'.join(map(re.escape, prefixes)) + r')([\\/])([0-9a-f]{16})(?=[\\/])')
+    # `exec <python> <copy>/src/corsu.py` and `Exec=<python> <copy>/src/app.py`, as desktop() and setup_shortcut()
+    # write them, the paths quoted by shlex.
+    interpreter = re.compile(r"(^Exec=|\bexec )('[^']*'|[^\s']+)(?=\s+'?(?:" + '|'.join(map(re.escape, prefixes))
+                             + r")/[0-9a-f]{16}/src/(?:app|corsu)\.py)", re.M)
     for name, record in list(installer.state['files'].items()):
         path = Path(name)
         # Vencord's installer owns app.asar; trees and system files are rebuilt by their own steps.
@@ -1174,6 +1224,8 @@ def refresh_launchers(installer, root=None):
         except UnicodeDecodeError:
             continue
         updated = pattern.sub(lambda match: match.group(1) + match.group(2) + root.name, text)
+        if python and PLATFORM != 'windows':
+            updated = interpreter.sub(lambda match: match.group(1) + shlex.quote(str(python)), updated)
         if updated != text:
             installer.write(path, updated, mode=path.stat().st_mode & 0o777, toggle=record.get('toggle', False))
 
@@ -1189,7 +1241,8 @@ def desktop(installer, firefox=True, vesktop=True):
         return
     launcher = firefox_launcher()
     if firefox:
-        installer.write(launcher, f'#!/bin/sh\nexec {shlex.quote(sys.executable)} {shlex.quote(str(SRC / "corsu.py"))} launch-firefox "$@"\n', 0o755)
+        python = shlex.quote(str(launcher_python(installer)))
+        installer.write(launcher, f'#!/bin/sh\nexec {python} {shlex.quote(str(SRC / "corsu.py"))} launch-firefox "$@"\n', 0o755)
     entries = ([('firefox.desktop', str(launcher))] if firefox else []) + ([('vesktop.desktop', None)] if vesktop else [])
     for desktop_id, executable in entries:
         existing = HOME / '.local/share/applications' / desktop_id

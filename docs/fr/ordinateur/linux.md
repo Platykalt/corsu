@@ -21,7 +21,9 @@ du terminal.
 
 Corsu utilise le Python 3.10 ou plus récent de la distribution, présent dans les distributions actuelles : avec
 WebKitGTK, il donne à Corsu sa fenêtre. Sans lui, l'archive (processeurs x86_64) contient son propre Python ; Corsu
-s'ouvre alors dans Chrome, Chromium ou le navigateur.
+s'ouvre alors dans Chrome, Chromium ou le navigateur. Ce Python est gardé dans le dossier de Corsu dans les deux cas :
+si le Python de la distribution disparaît ou devient inutilisable, les raccourcis de Corsu se servent de lui, même
+après la suppression de l'archive téléchargée.
 
 ## Différences entre distributions
 
