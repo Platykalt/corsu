@@ -13,6 +13,7 @@ The flat files `lexicon-mozilla.tsv` and `lexicon-upstream.tsv` (`English|French
 |---|---|---|
 | `<source>.jsonl` (`audacity`, `vlc-media-player`, `mozilla-android`, …) | `tools/import_translations.py` | translations published by each project's Corsican translators |
 | `corsu-<section>.jsonl` (`corsu-discord`, `corsu-firefox`, …) | `tools/import_translations.py` (also `--corsu-only`, offline) | Corsu's own rows, one file per `# ` section of `lexicon.tsv` | Not committed: rebuild with `--corsu-only`.
+| `minecraft-java.jsonl` | `tools/mcmemory.py` (`--check` in the tests) | the decisions of the Minecraft review of October 2026 (`minecraft/java/review-2026-10/`): one entry per Corsican text a decision touched, with the decision, its sources and three validation levels; app-only (`reuse`), no English text (Mojang's, see `minecraft/java/LICENSING.md`), only its hash |
 
 The text stays plain JSON lines (no gzip), so that changes stay diffable in git.
 
@@ -36,6 +37,10 @@ One JSON object per line and per string. Fields:
 | `license` | license of the strings (SPDX when there is one) |
 | `review` | `upstream-reviewed` (published by the project's translators), `corsu-draft`, `ai-reviewed` (an applied correction of `corrections.tsv`), `human-reviewed`, `to-review` (source changed since) |
 | `fetched` | import date |
+| `reuse` | `same-app`: the entry answers only for its own `app`; `engine.lookup` and `tm.py match` never offer it to another program, not even as a suggestion (`engine.app_only`). Used for decisions whose sense belongs to one program (Minecraft's "Sign" is a wooden sign, not a signature) |
+| `source_hash` | 12-character SHA-1 of the source text, when the source itself is not stored (Minecraft) |
+| `decision` | for review decisions: `id` (row of the review file), `round`, `previous` text, `references` (exact entry or page), `justification`, `verdict`, and `round3` when a later round re-examined it |
+| `validation` | three levels kept apart: `ai_proposal` (who proposed it), `ai_review` (which AI verification, with its verdict), `human` (a speaker's validation; `none` until one exists). An AI review is never written as a human validation |
 
 ### Size: omitted fields
 

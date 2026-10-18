@@ -31,7 +31,12 @@ Les sections datées après « État actuel » sont l'historique : ce qui y est 
     : APPLIED, REJECTED, TRACKING). Restent : 41 cas différés, les 2 262 entrées anciennes renommées/réutilisées
     (seulement balayées), textes juridiques Realms, termes non résolus (cinabru, petrame, lingottu, mola, cocciu…),
     contrôles manuels INFCOR listés dans TRACKING.md. Second tour : anciens textes renommés/réutilisés et noms
-    anciens relus (cohérents), 27 textes corrigés, 28 cas encore différés. Relecture humaine : 0.
+    anciens relus (cohérents), 27 textes corrigés, 28 cas encore différés. Troisième tour
+    (`review-2026-10/ROUND3.md`, `round3.tsv`) : comptes réconciliés (1 131 + 27 = 1 158 modifications, 1 157 textes
+    distincts ; 30 lignes différées), 11 décisions sensibles relues sur leurs sources (rail : *Ragliu* gardé, ADECEC
+    *La chaudronnerie* et lexique des Chemins de fer de la Corse p. 101 ; *Tonu* gardé ; raisonnements « ce mot veut
+    dire autre chose » corrigés), aucun texte changé ; décisions enregistrées dans `lexicon/memory/minecraft-java.jsonl`
+    (jamais réutilisées pour un autre logiciel) ; consultations manuelles à faire listées. Relecture humaine : 0.
   - **Clavier Keyman** : casse gardée, nom « Corsu », vocabulaire refait (`keyboard/data`), préférences
     Cismuntincu et Pumuntincu **expérimentales** (361 mots pondérés autrement). Vérifié dans le moteur de Keyman
     18.0.254 (CI) et dans l'application réelle sur émulateur Android 14 ; **pas sur téléphone, pas sur iOS**.
@@ -43,7 +48,9 @@ Les sections datées après « État actuel » sont l'historique : ce qui y est 
     les marqueurs `corsu:phone-variants` et `corsu:phone-casing`, et `COMING` → `VARIANTS` dans `src/app/phone.js`.
   - **Décisions à prendre** : usage « attestation seulement » de U Cunghjugarellu (Canopé, tous droits réservés ;
     253 formes verbales des préférences régionales) et des pages ADECEC ; un agent a lancé 219 requêtes INFCOR par
-    script (une par mot, 3 s d'intervalle) : arrêté, à ne pas refaire.
+    script (une par mot, 3 s d'intervalle) : arrêté, à ne pas refaire ; documenté et prévenu (test
+    `tests/test_sources_policy.py`) dans `minecraft/java/review-2026-10/ROUND3.md`, règle à ajouter à AGENTS.md par le
+    mainteneur.
 
 - **0.24.0 publiée** (17 octobre 2026) : tag `v0.24.0` sur `78697ea`, release
   https://github.com/Platykalt/corsu/releases/tag/v0.24.0 marquée dernière version (run CI 39040761519 : tests,

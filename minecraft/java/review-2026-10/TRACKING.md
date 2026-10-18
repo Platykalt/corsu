@@ -26,7 +26,9 @@ dump in the Corsu resources was searched locally; the reviewed software lexicons
 | Language (language.tsv) | 181 (all rows but 28 "keep") | 87 (45 verified, 19 harmonised, 23 adaptations) | 61 | 33 |
 | Verifier extensions | — | 3 (clock in `/time` texts, birch biomes, old "On A Rail") | — | — |
 
-Texts changed: 1,131 (779 in the 26.3 base, 352 older pairs in `history.json`).
+Texts changed: 1,131 (779 in the 26.3 base, 352 older pairs in `history.json`). How this number relates to the
+1,197 listings of APPLIED.tsv, to round 2's 27 texts, to the 1,158 edits and to the 1,157 distinct texts changed
+over both rounds: [ROUND3.md](ROUND3.md) section 1.
 
 Verdicts: **verified** = the cited reference exists and says what was claimed, in the game's sense; **harmonised** =
 both forms are attested, one spelling was chosen for the whole product (the other is not wrong); **adapted** = a
@@ -108,3 +110,28 @@ Texts changed in round 2: 27 (14 in the 26.3 base, 13 history pairs).
 Not covered by round 2: the renamed pairs were judged through their 26.3 text, which the round-1 language and
 concrete reviews read; names read but never checked in a dictionary stay as listed above; no text was seen in a
 running game.
+
+## Round 3 (2026-10-18): counts, sensitive decisions, sources
+
+AI work (one agent and a separate AI sub-agent that read the same passages itself). **Human validation: 0.**
+Details: [ROUND3.md](ROUND3.md), per decision [round3.tsv](round3.tsv).
+
+- Counts reconciled (ROUND3.md section 1): 1,131 + 27 = 1,158 edits, 1,157 distinct texts; 41 deferred in round 1,
+  30 deferred rows after round 2 (28 + H01, H02), still 30 after round 3 (plus two new open points: *attrezzi* in
+  Toolsmith, *Diorite*).
+- The INFCOR incident (219 scripted requests on 2026-10-18), what it means for the cited entries and how it is
+  prevented: ROUND3.md section 2; manual consultations still needed: section 5.
+- 11 sensitive decisions re-examined (rail, thunder, dandelion, sign, cake, smithing table, sheep, diorite, moss,
+  squid, donkey): 8 confirmed (rail, thunder, moss and squid with a corrected justification; dandelion and sign with
+  a speaker question; smithing table as a compound built from attested words), 1 kept (sheep), 2 deferred (diorite,
+  donkey/mule); Toolsmith's *attrezzi* deferred. Texts changed: 0.
+- Decisions recorded in the contextual memory (`lexicon/memory/minecraft-java.jsonl`, `tools/mcmemory.py`), never
+  reused for another program.
+
+| State | Result after round 3 |
+| --- | --- |
+| Translation present | unchanged (no text changed) |
+| Technical check | Python, no game code: `tools/minecraft.py check` 0 errors (37 warnings, the same as before); `tools/mchistory.py check` 3,978 entries, 0 errors, 0 warnings; `tools/mcreport.py --check` up to date; `tools/mcmemory.py --check` up to date (1,177 entries); unit tests 519 run, OK (3 skipped). With each release's own client jar: `tools/mcversions.py verify all` exit 0, 87/87 releases supported, 0 problems and 0 unknown keys in every release. No game window opened, nothing seen in a running game. |
+| AI review with sources | 11 decisions re-read against the passages; 7 also checked by a separate AI sub-agent |
+| Human validation | 0 |
+

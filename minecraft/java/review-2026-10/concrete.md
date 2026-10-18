@@ -42,7 +42,9 @@ descriptions, music disc titles, Mojang proper names (Creeper, Nether, Redstoneâ
    very few hits, and words that look Italian or French, were looked up first. Absence from a source was never taken
    as proof of an error; a word was changed only when a source gives another form **with the game's sense**, or when
    the current word has another sense in the sources (calamaru = inkwell, muscu = musk, ferraghju = February,
-   creta = chalk, binariu = binary).
+   creta = chalk, binariu = binary). *Round 3 correction:* another sense shows homonymy or polysemy, not that the
+   word cannot also have the game's sense; each of these changes stands on the positive attestation of the new word
+   ([round3.tsv](round3.tsv), [ROUND3.md](ROUND3.md)).
 4. **Deduplication and propagation.** One decision per English sense; the decision is written as substitution rules
    on the Corsican text, applied (in a scratch copy only) to every text of 26.3 and every history pair, so all keys and
    versions that show the same word get the same proposal. Agreement was handled in the rules where a gender changes
@@ -241,7 +243,9 @@ gives *acciaccadore*, *ammazzadore*), Fletcher, Librarian, Cartographer, Nitwit.
 
 ## Possible clashes created or removed
 
-- Removed: *binariu* (rail) also meant "binary" (`key.keyboard.keypad.binary`, `snbt.parser.expected_binary_numeral`);
+- Removed: *binariu* (rail) also meant "binary" (`key.keyboard.keypad.binary`, `snbt.parser.expected_binary_numeral`)
+  (a clash of two senses in one file, not a proof that *binariu* cannot mean a rail; *ragliu* rests on INFCOR, the
+  Chemins de fer de la Corse lexicon p. 101 and ADECEC *La chaudronnerie*, see round3.tsv T01);
   *calamaru* (squid) is the inkwell; *muscu* (moss) is musk; *ferraghju* is February; *creta* is chalk.
 - Created: *tinta* (dye, noun) next to the participle *tinta* ("Arzilla tinta" = stained clay, old versions) â€” same
   word family, different function, judged acceptable. *Botte* was avoided for Boots because INFCOR *botte* is also
