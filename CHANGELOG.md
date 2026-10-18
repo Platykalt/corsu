@@ -15,6 +15,15 @@
   the copy runs in the en-US slot and `LocaleService::GetRegionalPrefsLocales` only uses the system's regional locale
   when languages match or that pref is set. Profile choices still win. `signature()` checks argument order (plain
   `%S` as `%n$S`). 31 lexicon rows for devtools and downloads; "Onglets ouverts".
+- Discord: "Dans un appel" (and the rest of the activity line) translated in the direct message list, where the
+  `[class*="activity"]` and `/channels/` link rules kept it as a name; now a text there is looked up when React props
+  show an activity, and the activity's own values (game, details, state, custom status, asset texts, buttons) and
+  names stay as written, also inside a longer text. "Bio" (profile bio) was "Organicu", taken from Chrome's image
+  styles: 51 Discord rows where the fallback gave another program's sense (salon > salottu, Envoyer > Incaricà,
+  Événements > fre:ac's logs, Anglais > Corsu…), from an AI second-pass review (lexicon/review-discord-2026-10.tsv,
+  docs/discord-review-2026-10.md). Hidden diagnostic: classifies each untranslated text (missing, unapplied, excluded
+  and by which rule, template, stale), gives the plugin revision and dictionary fingerprint, and gives no name or
+  status (unknown words as {?}). Simulated pages and the built bundle in Chrome; not observed in the real app.
 - Discord: protected names checked in every lookup (templates, counts, dates), labels around a name still translated,
   "…" and "..." equivalent; English typing words in the lexicon. Simulated page in Chrome only.
 - Window (security, Linux): an action is accepted only from the client end of that very connection: both addresses
