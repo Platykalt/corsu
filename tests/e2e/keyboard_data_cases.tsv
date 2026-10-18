@@ -1,3 +1,29 @@
 # Keyboard cases that depend on the word data (keyboard/data), run by tests/e2e/check_keyboard.py in the Keyman
 # engine. Columns and values: see DATA_CASES_HELP in check_keyboard.py. Kept by whoever changes keyboard/data.
 model	setting	context	typed	action	expected	kind	severity	note
+*	3		Bastelicaccia	space	Bastelicaccia\s	text	fail	official name of commune 2A032 (INSEE), typed on purpose: kept, not turned into the Corsican Bastilicaccia
+*	3		Bastilicaccia	space	Bastilicaccia\s	text	fail	Corsican name (Wikidata label, Vikipedia title): kept
+*	3	Stò in\s	Bastelicaccia	space	Stò in Bastelicaccia\s	text	fail	official name after other words, not at the start of a sentence
+*	3		Zicavo	space	Zicavo\s	text	fail	official name (2A359); the Corsican Zicavu is one letter away and weighs more
+*	3		Zicavu	space	Zicavu\s	text	fail	Corsican name: kept (it was once auto-corrected to Cavu)
+*	3		Ajaccio	space	Ajaccio\s	text	fail	official name (2A004) next to Aiacciu (20,000): known, so kept
+*	3		Aiacciu	space	Aiacciu\s	text	fail	Corsican name: kept
+*	3		Bonifacio	space	Bonifacio\s	text	fail	official name (2A041) next to Bunifaziu
+*	3		Solenzara	space	Solenzara\s	text	fail	official name (Sari-Solenzara) next to the Corsican Sulinzara
+*	3		Porto-Vecchio	space	Porto-Vecchio\s	text	warn	compound official name: the word breaker splits at the hyphen, Porto and Vecchio are both known; warn because typing - on EuroLatin is not checked here
+*	3		Sari-Solenzara	space	Sari-Solenzara\s	text	warn	compound official name, both parts known
+*	2		bastelic	none	Bastelicaccia	offers	fail	a lowercase prefix offers the official name with its capital
+*	2		zicav	none	Zicavu	first	fail	the Corsican name stays first; Zicavo (20) is below Zicavu (226)
+*	2		Sartene	none	Sartène	offers	warn	accent folded by the search key: the official Sartène is offered when typed without its accent
+*	3		Platykalt	space	Platykalt\s	text	warn	an unknown name is not a typo: nothing close enough should replace it
+*	3		Vizzani	space	Vizzani\s	text	warn	Vikipedia spelling of Vezzani (label kept in the list): not in the list, one letter from Vezzani; an unknown name is not a typo, but the engine may correct it (REVIEW.md, to check by hand)
+*	3	lingua\s	parlle	space	lingua parolle\s	text	fail	typo for parolle: parolle (tier 2, 5,000) now outranks parleti in every model (REVIEW.md); Keyman 19 beta once gave parleti
+platykalt.co.corsu_pumuntincu	3	lingua\s	parlle	space	lingua parolle\s	text	fail	southern model: parleti weighs 1,000 there, parolle 5,000
+*	2		paro	none	parò	offers	warn	parò (806) leaves the simulated top 3 of paro for parolle; whether the banner still shows it
+platykalt.co.corsu_cismuntincu	2		ind	none	induve	first	fail	northern preference: induve (cowiki-lingua-corsa)
+platykalt.co.corsu_pumuntincu	2		ind	none	induva	first	fail	southern preference: induva (cowiki-lingua-corsa)
+platykalt.co.corsu_pumuntincu	2		so	none	socu	offers	fail	southern 1st person of essa (U Cunghjugarellu table 1, suttanacciu)
+*	3	Sò\s	corti	space	Sò corti\s	text	warn	common word (short, plural) not capitalised into the place name Corti; corti is not in the data yet
+*	3	Sò\s	calvi	space	Sò calvi\s	text	warn	same for calvi (bald, plural) and Calvi
+*	3	A\s	ADECEC	space	A ADECEC\s	text	warn	acronym kept
+*	3	12 rue\s	Fesch	space	12 rue Fesch\s	text	warn	street name kept

@@ -318,9 +318,13 @@ def checks(results, models):
                f'{model}: "ca|sa" + "casa" gave {s("return to a word: caret inside", 2)["text"]!r}')
         expect(s('return to a word: caret inside', 4)['text'] == 'Eccu a casata di Petru.',
                f'{model}: "casa|" + "casata" gave {s("return to a word: caret inside", 4)["text"]!r}')
-        for scenario, index in (('return to a word: selection replaced', 4), ('return to a word: delete the last', 4)):
-            got = s(scenario, index).get('text')
-            expect(got == sentence, f'{model}: {scenario!r} gave {got!r}')
+        got = s('return to a word: selection replaced', 4).get('text')
+        expect(got == sentence, f'{model}: selection replaced gave {got!r}')
+        # An edit then a new suggestion: "cas|" + "e" offers words of "case"; tapping one replaces the whole word.
+        # ("casa" itself left the six suggestions for "case" when the official commune names came in: Casevechje
+        # and Casevecchie, both kept on purpose; "case" is itself a word, the plural of "casa".)
+        got = s('return to a word: delete the last', 4).get('text')
+        expect(got == 'Eccu a casella di Petru.', f'{model}: "cas" + "e" + "casella" gave {got!r}')
         after = s('return to a word: after a full stop', 4).get('text')
         expect(after == 'Eccu a casa. Dopu ghjunghje', f'{model}: "Dop|u" + "Dopu" after a full stop gave {after!r}')
         guide = s("return to a word: the guide's example", 2)['text']
