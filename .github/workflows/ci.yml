@@ -210,6 +210,9 @@ jobs:
         if: runner.os == 'Linux'
         # Ubuntu has no fre:ac package: its part of this check runs where fre:ac is installed (Debian).
         run: python tests/e2e/check_update_apps.py --archives "$GITHUB_WORKSPACE/dist" --from 0.24.0
+      - name: Migration from 0.24.0 (Linux) — choices, appearance, plugin, launchers after the archive is deleted, personal files
+        if: runner.os == 'Linux'
+        run: python tests/e2e/check_migration.py --archives "$GITHUB_WORKSPACE/dist" --from 0.24.0
       - name: VLC complement declared unavailable (Windows, macOS)
         if: runner.os != 'Linux'
         shell: bash
