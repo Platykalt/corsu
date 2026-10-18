@@ -27,7 +27,7 @@ n'y a pas de captures d'écran.
      prochaine version, déplacer ici les lignes du tableau « Dans la prochaine version » qu'elle contient. -->
 | Fichier | Nom dans Keyman | Version | Contenu | Téléchargement |
 | --- | --- | --- | --- | --- |
-| `corsu-keyboard.kmp` | `platykalt.co.corsu` | 1.0 (publié avec Corsu 0.25.1) | dictionnaire général, environ 17 000 mots corses courants ; perd la majuscule des mots et garde quelques mots parasites (mots anglais, noms de produits, fragments), défauts corrigés dans la prochaine version | [dernière version publiée](https://github.com/Platykalt/corsu/releases/latest/download/corsu-keyboard.kmp) ([empreinte SHA-256](https://github.com/Platykalt/corsu/releases/latest/download/corsu-keyboard.kmp.sha256)) |
+| `corsu-keyboard.kmp` | `platykalt.co.corsu` | 1.0 (publié avec Corsu 0.25.1) | dictionnaire général, 19 805 mots tirés du lexique de Corsu ; perd la majuscule des mots et garde quelques mots parasites (mots anglais, noms de produits, fragments), défauts corrigés dans la prochaine version | [dernière version publiée](https://github.com/Platykalt/corsu/releases/latest/download/corsu-keyboard.kmp) ([empreinte SHA-256](https://github.com/Platykalt/corsu/releases/latest/download/corsu-keyboard.kmp.sha256)) |
 
 « Version » est la version du paquet du dictionnaire, que Keyman affiche (voir l'étape 5) ; elle ne suit pas les
 numéros de version de Corsu.
