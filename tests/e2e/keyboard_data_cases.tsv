@@ -1,0 +1,3 @@
+# Keyboard cases that depend on the word data (keyboard/data), run by tests/e2e/check_keyboard.py in the Keyman
+# engine. Columns and values: see DATA_CASES_HELP in check_keyboard.py. Kept by whoever changes keyboard/data.
+model	setting	context	typed	action	expected	kind	severity	note

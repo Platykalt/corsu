@@ -21,6 +21,9 @@ FIXTURES = ROOT / 'tests/fixtures/keyboard/data'
 spec = importlib.util.spec_from_file_location('build_keyboard', ROOT / 'tools/build_keyboard.py')
 build_keyboard = importlib.util.module_from_spec(spec)
 spec.loader.exec_module(build_keyboard)
+spec = importlib.util.spec_from_file_location('check_keyboard', ROOT / 'tests/e2e/check_keyboard.py')
+check_keyboard = importlib.util.module_from_spec(spec)
+spec.loader.exec_module(check_keyboard)
 
 # Keyman Developer's naming rule for lexical models (developer/src/common/web/utils/src/source-filename-patterns.ts,
 # MODEL_ID_PATTERN_PACKAGE): author.bcp47.uniq, lowercase letters, digits and underscores (and hyphens in the tag).
@@ -122,6 +125,61 @@ class ProjectTests(unittest.TestCase):
                 written = json.loads(archive.read('kmp.json'))
         metadata['lexicalModels'][0]['name'] = 'Corsu'
         self.assertEqual(written, metadata)
+
+
+class DataCaseTests(unittest.TestCase):
+    """tests/e2e/keyboard_data_cases.tsv: the data-dependent expectations of the engine check."""
+    HEAD = '\t'.join(check_keyboard.DATA_CASE_COLUMNS) + '\n'
+
+    def load(self, content):
+        with tempfile.TemporaryDirectory() as directory:
+            path = Path(directory) / 'cases.tsv'
+            path.write_text(content, encoding='utf-8')
+            return check_keyboard.load_data_cases(path)
+
+    def test_committed_file_loads(self):
+        cases = check_keyboard.load_data_cases(ROOT / 'tests/e2e/keyboard_data_cases.tsv')
+        models = {entry.id for entry in build_keyboard.MODELS}
+        for case in cases:
+            self.assertTrue(case['model'] == '*' or case['model'] in models, case)
+
+    def test_rows_become_scenarios(self):
+        cases = self.load('# comment\n' + self.HEAD
+                          + '*\t3\tin\\s\tBastelicaccia\tspace\tin Bastelicaccia\\s\ttext\tfail\tname kept\n'
+                          + 'platykalt.co.corsu_pumuntincu\t2\t\tzite\tnone\tziteddu\tfirst\twarn\tsouth\n')
+        self.assertEqual((cases[0]['context'], cases[0]['expected']), ('in ', 'in Bastelicaccia '))
+        models = ['platykalt.co.corsu', 'platykalt.co.corsu_pumuntincu']
+        scenarios = check_keyboard.data_scenarios(cases, models)
+        self.assertEqual([s['model'] for s in scenarios], models + ['platykalt.co.corsu_pumuntincu'])
+        self.assertEqual(scenarios[0]['steps'], [{'setText': 'in '}, {'type': 'Bastelicaccia'}, {'key': 'K_SPACE'}])
+        self.assertEqual(scenarios[2]['steps'], [{'type': 'zite'}])
+        snap = lambda text, banner, tags: {'text': text, 'suggestions': banner, 'tags': tags}  # noqa: E731
+        results = [
+            {'name': scenarios[0]['name'], 'model': models[0], 'errors': [],
+             'steps': [snap('', [], []), snap('in ', [], []), snap('in Bastelicaccia', [], []),
+                       snap('in Bastilicaccia ', [], [])]},
+            {'name': scenarios[1]['name'], 'model': models[1], 'errors': [],
+             'steps': [snap('', [], []), snap('in ', [], []), snap('in Bastelicaccia', [], []),
+                       snap('in Bastelicaccia ', [], [])]},
+            {'name': scenarios[2]['name'], 'model': models[1], 'errors': [],
+             'steps': [snap('', [], []), snap('zite', ['“zite”', 'zitellu', 'ziteddu'], ['keep', '', ''])]},
+        ]
+        failures, warnings = check_keyboard.data_checks(results, scenarios)
+        self.assertEqual(len(failures), 1)
+        self.assertIn("'in Bastilicaccia '", failures[0])
+        self.assertEqual(len(warnings), 1)
+        self.assertIn('zitellu', warnings[0])
+
+    def test_malformed_rows_are_refused(self):
+        for content, message in {
+            'model\tsetting\n': 'header',
+            self.HEAD + '*\t4\t\ta\tnone\ta\tfirst\tfail\tx\n': 'not allowed',
+            self.HEAD + '*\t2\t\ta\tspace\ta\tfirst\tfail\tx\n': 'action must be none',
+            self.HEAD + '*\t2\t\\q\ta\tnone\ta\tfirst\tfail\tx\n': 'escape',
+            self.HEAD + '*\t2\t\ta\tnone\n': 'columns',
+        }.items():
+            with self.assertRaisesRegex(SystemExit, message):
+                self.load(content)
 
 
 @unittest.skipUnless(os.environ.get('CORSU_TEST_KMC') and shutil.which('npx'), 'set CORSU_TEST_KMC=1 (needs npx)')
