@@ -15,8 +15,21 @@ Les sections datées après « État actuel » sont l'historique : ce qui y est 
   publiques : 84 PASS, exit 0 (empreinte du plugin non recalculée faute de Node.js dans le conteneur ; faite en CI) ;
   0.24.0 publiée installée, Firefox désactivé, puis mise à jour réelle par son propre `update.py` depuis GitHub :
   `updated 0.24.0 → 0.25.1`, Firefox reste désactivé, entrée de menu sur `bin/corsu-python`.
-- **Ensuite** : `next-0.26` (Minecraft, revue linguistique ; clavier Keyman : casse, variantes ; page « Sur
-  téléphone »).
+- **`next-0.26`** (non publiée) :
+  - **Minecraft** : revue IA d'octobre 2026, partie vérifiée appliquée (1 131 textes ; `minecraft/java/review-2026-10/`
+    : APPLIED, REJECTED, TRACKING). Restent : 41 cas différés, les 2 262 entrées anciennes renommées/réutilisées
+    (seulement balayées), textes juridiques Realms, termes non résolus (cinabru, petrame, lingottu, mola, cocciu…),
+    contrôles manuels INFCOR listés dans TRACKING.md. Relecture humaine : 0.
+  - **Clavier Keyman** : casse gardée, nom « Corsu », vocabulaire refait (`keyboard/data`), préférences
+    Cismuntincu et Pumuntincu **expérimentales** (361 mots pondérés autrement). Vérifié dans le moteur de Keyman
+    18.0.254 (CI) et dans l'application réelle sur émulateur Android 14 ; **pas sur téléphone, pas sur iOS**.
+    Limites Keyman 18 : pas de correction automatique (Keyman 19), remplacement seulement à gauche du curseur,
+    un seul dictionnaire actif par langue sous Android, ancien modèle actif jusqu'au redémarrage de Keyman.
+  - **Téléphone** : README, guides Android/iPhone, page « Sur téléphone » de la fenêtre. À la publication : basculer
+    les marqueurs `corsu:phone-variants` et `corsu:phone-casing`, et `COMING` → `VARIANTS` dans `src/app/phone.js`.
+  - **Décisions à prendre** : usage « attestation seulement » de U Cunghjugarellu (Canopé, tous droits réservés ;
+    253 formes verbales des préférences régionales) et des pages ADECEC ; un agent a lancé 219 requêtes INFCOR par
+    script (une par mot, 3 s d'intervalle) : arrêté, à ne pas refaire.
 
 - **0.24.0 publiée** (17 octobre 2026) : tag `v0.24.0` sur `78697ea`, release
   https://github.com/Platykalt/corsu/releases/tag/v0.24.0 marquée dernière version (run CI 39040761519 : tests,
