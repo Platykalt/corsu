@@ -155,7 +155,7 @@ version bêta, ajoute **Apply corrections automatically** ; il apparaîtra sur l
 version stable. Il restera facultatif. Dans nos essais du moteur de la bêta 19.0.309 (hors de l'application), un mot
 présent dans le dictionnaire est toujours gardé tel qu'il est tapé, mais un mot absent peut être remplacé : un nom par
 un nom proche (« Bastelicaccia » par « Bastilicaccia » quand seule la seconde graphie est dans le dictionnaire), ou un
-mot en minuscules par le nom qui s'écrit pareil (« corti » par « Corti » quand « corti » y manque).
+mot en minuscules par le nom qui s'écrit pareil (« corti » par « Corti » quand « corti » y manque). La prochaine version du dictionnaire contient ces formes (« Bastelicaccia », « corti » à côté de « Corti », « Vizzani », des sigles comme « ADECEC ») ; un mot qui y manque encore, un nom de rue par exemple, peut toujours être remplacé.
 
 ## Revenir sur un mot
 

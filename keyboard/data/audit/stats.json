@@ -10,15 +10,15 @@
   "gone-from-lexicon": 29,
   "corpus-name": 95
  },
- "shared_entries": 13197,
+ "shared_entries": 13213,
  "shared_by_status": {
-  "attested": 6546,
+  "attested": 6562,
   "corsu-lexicon": 6640,
   "ai-proposal": 11
  },
  "shared_by_source": {
   "tatoeba": 43,
-  "wiktionary": 749,
+  "wiktionary": 760,
   "vikipedia": 4600,
   "corsu-lexicon": 6640,
   "apertium": 183,
@@ -27,23 +27,26 @@
   "frwiki-corse-langue": 12,
   "adecec": 8,
   "ai": 11,
-  "wikidata": 446,
-  "cog": 221
+  "wikidata": 447,
+  "cog": 221,
+  "homographs": 1,
+  "acronyms": 3
  },
- "new_from_outside_old_list": 1616,
+ "new_from_outside_old_list": 1632,
  "cismuntincu_entries": 354,
  "pumuntincu_entries": 357,
  "northern_only_forms": 180,
  "southern_only_forms": 192,
  "words_ranked_differently": 361,
  "wiki_tokens": 1327560,
- "lexicon_tokens": 1010763,
+ "lexicon_tokens": 1010810,
  "place_words": {
   "added": 429,
   "seen_in_vikipedia": 437,
   "already_a_word": 98,
   "added_in_lowercase": 17,
   "official_already_known": 167,
-  "official_added": 221
+  "official_added": 221,
+  "lowercase_homographs": 12
  }
 }

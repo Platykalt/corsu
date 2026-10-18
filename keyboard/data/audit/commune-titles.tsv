@@ -1,0 +1,103 @@
+# Communes whose Wikidata Corsican label (sources/places.tsv) is a redirect in the Corsican Vikipedia dump of 2026-10-16:
+# the article has another title. Candidates only, NOT checked: some titles are another name of the same commune
+# (Vizzani, now in sources/place-titles.tsv), others are an accented spelling, a fuller name, a hamlet or a mistaken
+# redirect (Mela -> "Mela (malus domestica)"). A title moves to sources/place-titles.tsv only after a check by hand.
+qid	label	vikipedia_title
+Q1087782	A Casalta d'Ampugnani	A Casalta
+Q765746	A Croce	A Croce d'Ampugnani
+Q535778	A Riventosa	Riventosa
+Q658693	A Vallica	Avallica
+Q410601	Aiti	Àiti
+Q204907	Alandu	Àlandu
+Q519130	Arbiddara	Arbiddali
+Q523484	Barrettali	Barettali
+Q1060281	Belgudè	Bargudè
+Q637296	Bustanicu	Bustànicu
+Q733068	Calenzana	Calinzana
+Q765745	Canari	Cànari
+Q927282	Carbini	Càrbini
+Q1087810	Casabianca	A Casabianca
+Q1087862	Castiglione	Castiglioni
+Q270342	Centuri	Cinturi
+Q1087818	Corbara	A Curbaghja
+Q534748	Cugnocolu è Muntichji	Cugnòculu
+Q271515	E Muracciole	I Muraccioli
+Q1240654	E Valle d'Alisgiani	E Valli d'Alisgiani
+Q1240307	E Valle d'Orezza	A Valle d'Orezza
+Q670899	E Valle di Rustinu	A Valle di Rustinu
+Q675552	E Ville di Parasu	E Ville di Balagna
+Q1087767	Evisa	Èvisa
+Q1109491	Felce	Felge
+Q431574	Figari	Fìgari
+Q244925	Foce	Foci è Bilzesi
+Q245010	Fughjuchja	Fucichja
+Q431009	Grossa	A Grossa
+Q690253	Guargualè	Vargualè
+Q1087778	I Cateri	I Càtari
+Q1240707	I Prunelli di Fiumorbu	I Pruneddi di Fiumorbu
+Q783908	Laretu di Tallà	Laretu d'Attallà
+Q1109634	Lecci	I Licci
+Q273443	Livia	Livìa
+Q265969	Mansu	Barghjana
+Q1109584	Mela	Mela (malus domestica)
+Q677980	Munacia d'Auddè	A Munacìa d'Avretu
+Q274055	Nessa	Nesce
+Q274503	Ocana	Òcana
+Q281063	Olcani	Olchini
+Q274162	Ota	Otta
+Q677965	Pedicorti di Gaghju	Pedicorti
+Q271510	Pianu	U Pianu
+Q1109715	Pioghjola	Piogiula
+Q271490	Piupetta	Piupeta
+Q1109689	Poghjolu	U Pighjolu
+Q651705	Quasquara	Quàsquara
+Q1240516	Quercitellu	U Quercitellu
+Q254098	Rosazia	Rusazia
+Q288693	Ruspigliani	Respughjani
+Q264864	Rutali	Rùtali
+Q273370	Salice	U Salge
+Q970326	San Gavinu di Carbini	San Gavinu di Càrbini
+Q245697	San Gavinu di Tenda	San Gavinu di Nebbiu
+Q731527	San Niculaiu	Santu Niculaiu di Moriani
+Q266850	Sant' Andria di Boziu	Sant'Andrìa di Boziu
+Q246317	Sant' Antoninu	Sant'Antulinu di Balagna
+Q954328	Santa Lucia di Mercuriu	Santa Lucìa di Mercuriu
+Q273684	Santa Lucia di Tallà	Santa Lucìa d'Attallà
+Q373026	Santa Maria di u Poghju	U Poghju di Moriani
+Q684489	Santa Maria è Figaniedda	Santa Marìa di Vighjanu
+Q273473	Santa Maria è Sichè	Santa Marìa d'Urnanu
+Q693431	Santu Petru di Tenda	Santu Petru di Nebbiu
+Q696020	Sari d'Urcinu	Sari di Cinarca
+Q273710	Sari è Sulinzara	Sari di Portivechju
+Q735099	Sarra di Fiumorbu	Urnasu
+Q648612	Sarra di Scupamè	A Sarra di Scupamena
+Q634070	Scolca	A Scolca
+Q244857	Serriera	A Sarrera
+Q686809	Sotta	San Martinu d'Avretu
+Q781437	Soveria	Suveria
+Q1240550	Speloncatu	U Spuncatu
+Q736751	Tarranu	Tàrranu
+Q244933	Tassu	Tassu (omonimia)
+Q273707	Tavacu	Tàvacu
+Q753070	Tocchisi	Tòcchisu
+Q1240588	Tominu	Tuminu
+Q1109880	U Felicetu	U Fulgetu
+Q265372	U Ped' Orezza	U Ped'Orezza
+Q271544	U Petricaghju	U Petricaghju d'Alisgiani
+Q649633	U Poghju è Marinacciu	U Poghju d'Ampugnani
+Q727378	U Poghju è Mezzana	U Poghju di Tavagna
+Q1240284	U Pulverosu	Pulverosu
+Q653219	U Vescuvatu	U Viscuvatu
+Q1153469	Urbalaconu	Urbalacò
+Q657269	Urtaca	Ùrtaca
+Q273380	Valli di Mezzana	Valli di Mezana
+Q245705	Venacu	U Serraghju
+Q648636	Ventisari	Vintìsari
+Q753074	Vezzani	Vizzani
+Q748203	Villanova	Beddanova
+Q273367	Vutera-I Bagni	Vuttera
+Q145011	Zalana	Zàlana
+Q1109845	Zevacu	Zèvacu
+Q1153494	Zicavu	Zìcavu
+Q742327	Zozza	Zoza
+Q227495	Zuani	Zùani

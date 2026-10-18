@@ -7,16 +7,17 @@ Files:
 
 | File | Content |
 |---|---|
-| `shared.tsv` | The base list: 13,197 words, both varieties' forms included (446 Corsican place names and 221 words of official commune names). |
+| `shared.tsv` | The base list: 13,213 entries, both varieties' forms included (447 Corsican place names, 221 words of official commune names, 12 lowercase common words next to a name, 3 acronyms). |
 | `cismuntincu.tsv` | 354 rows laid over `shared.tsv` for a northern preference. |
 | `pumuntincu.tsv` | 357 rows laid over `shared.tsv` for a southern preference. |
-| `sources/` | Hand-checked inputs: `daily.tsv` (everyday words, editorial choice), `adecec.tsv`, `cunghjugarellu.tsv`, `variant-pairs.tsv`; `places.tsv`, the Corsican place labels of Wikidata; `communes-official.tsv`, the official (INSEE) commune names. |
+| `sources/` | Hand-checked inputs: `daily.tsv` (everyday words, editorial choice), `adecec.tsv`, `cunghjugarellu.tsv`, `variant-pairs.tsv`; `places.tsv`, the Corsican place labels of Wikidata; `communes-official.tsv`, the official (INSEE) commune names; `place-titles.tsv` (Vizzani), `homographs.tsv` (corti) and `acronyms.tsv` (ADECEC), see "Auto-correction". |
 | `tools/make_vocab.py` | Rebuilds the three lists from the sources (needs the resources of `tools/fetch_resources.py`). |
 | `tools/fetch_places.py` | Runs the three Wikidata queries that write `sources/places.tsv`. |
 | `tools/fetch_communes.py` | Two requests to geo.api.gouv.fr that write `sources/communes-official.tsv`. |
 | `tools/simulate.py` | Top-3 suggestion simulation and checks (also run by `tests/test_keyboard_vocab.py`). |
 | `audit/removed.tsv` | Every word of the old list that was dropped, with its reason. |
 | `audit/stats.json` | The numbers quoted below. |
+| `audit/commune-titles.tsv` | Communes whose Vikipedia title differs from the Wikidata label: candidates, not checked. |
 
 ## Reading the files (for the build)
 
@@ -91,7 +92,7 @@ The old list (`keyboard/platykalt.co.corsu/source/wordlist.tsv`, 16,949 words) w
 Total removed: **5,375** of 16,949 (`audit/removed.tsv`). Kept: 11,574; added from outside the old list: 955 (daily
 words, conjugations, ADECEC words, Vikipedia words with ≥ 30 occurrences that Wiktionary, Apertium or the lexicon
 also has). **After: 12,530 words** in `shared.tsv` — 5,879 attested, 6,640 corsu-lexicon, 11 ai-proposal; then
-446 place names and 221 words of official commune names (below): **13,197 words**, 6,546 attested. The audit reads the old list from git (commit 66e7f58,
+446 place names and 221 words of official commune names (below), then the additions of "Auto-correction" below: **13,213 entries**, 6,562 attested. The audit reads the old list from git (commit 66e7f58,
 version 0.9.0), because `tools/build_keyboard.py` now rewrites `wordlist.tsv` from these lists; place names that the
 old list had and the corpus-name rule dropped (*ghjuvanni*, *oriente*, *riparata*, *sichè*, *oga*) are no longer
 counted as removed.
@@ -180,10 +181,55 @@ headless Chrome, packages built from this data, setting 3 = auto-correction as t
 asked; not Keyman 19, not a phone): the 22 cases of `tests/e2e/keyboard_data_cases.tsv` pass in the three models —
 *Bastelicaccia*, *Bastilicaccia*, *Zicavo*, *Zicavu*, *Ajaccio*, *Aiacciu*, *Bonifacio*, *Solenzara*,
 *Porto-Vecchio*, *Sari-Solenzara* and an unknown *Platykalt* stay as typed; *bastelic* offers *Bastelicaccia*;
-*Sartene* offers *Sartène*; *lingua parlle* becomes *lingua parolle*; *paro* still offers *parò*. One warning:
-*Vizzani* (Vikipedia's spelling, not in the list) becomes *Vezzani*. Adding the Vikipedia article titles of the
-communes next to the Wikidata labels would fix that kind of case; it needs the titles (Wikidata sitelinks), not
-fetched yet.
+*Sartene* offers *Sartène*; *lingua parlle* becomes *lingua parolle*; *paro* still offers *parò*. One warning
+then: *Vizzani* (Vikipedia's spelling, not in the list) became *Vezzani*; fixed since (see "Auto-correction").
+
+## Auto-correction: what the data controls and what the engine does
+
+What Keyman does (engines 18.0.254 and 19.0.309 beta, observed by agent C and here in `tests/e2e/check_keyboard.py`,
+headless Chrome, outside the apps): a word typed exactly as the dictionary writes it, case included, is kept. A word
+the dictionary does not have may be replaced on space by a close word, or by the same word with another case, when
+auto-correction is on: setting 3, offered by Keyman 19 (an option, not the default) and applied by the 18.0 engine only
+when asked; **the Keyman 18 apps offer no automatic correction**, so on Keyman 18 phones nothing is replaced unless the
+suggestion is tapped. The dictionary cannot change that engine rule; it can only contain the right words.
+
+Four cases found with setting 3, and what was done (2026-10-18):
+
+| Typed | Became | Cause | Change | Provenance |
+|---|---|---|---|---|
+| *Vizzani* | *Vezzani* | data: only the Wikidata label was listed | *Vizzani* added next to *Vezzani* (both kept), place-name weight 50 | Vikipedia article title (*Vezzani* redirects to it), Wikidata sitelink of Q753074 (one page consulted), a quotation in the article; `sources/place-titles.tsv` |
+| *corti* | *Corti* | data: only the capitalised name was listed | lowercase *corti* added next to *Corti*, weight 468 (its lowercase uses) | Apertium adjective *cortu* (plural *corti*), 62 lowercase uses in Vikipedia; `sources/homographs.tsv` |
+| *calvi* | *Calvi* | data gap, no source | nothing yet: *calvi* (bald) is in no consulted source (no Corsican Wiktionary entry for *calvu*, nothing in Apertium, ADECEC's lexicons or lowercase Vikipedia). Stays a `warn` case | to check by hand in INFCOR |
+| *ADECEC* | *DECE* | data: acronyms were filtered as non-words | *ADECEC*, *INFCOR*, *BDLC* kept in capitals, weight 20 | `sources/acronyms.tsv` (editorial list, each with its reference) |
+
+The same rule found 11 more common words written like a name of the list that Wiktionary has as common (non-name)
+Corsican forms; they are added in lowercase next to the name: *orsu*, *argentu*, *mansu*, *cagna*, *misericordia*,
+*magnu*, *dio*, *alzi*, *forana*, *ritondu*, *rotondu*. Nothing was removed: *Corti*, *Calvi*, *Orsu*, *Vezzani* and the
+other names stay as they were. A lowercase word and its capitalised name are two entries with the same search key;
+`tools/count_kmp.py` on the built packages: 13,213 entries, 13,213 distinct words, 13,201 ignoring case.
+
+Effect on suggestions (`simulate.py` ranking, every 1-4 letter prefix, 4,970 prefixes, same in the three models): 19
+prefixes change; 3 entries leave a top 3: *Cagnano* (20; *cagn*: *cagna*), *Manso* (20; *mans*: *mansu*) and
+*l'affissaghju* (1; *l'af*), the last from a lexicon count that changed with the merge, not from this change. The other
+changes add the lowercase word next to its name (*ors*: *Orsu*, *orsu*) or fill empty prefixes (*ade*: *ADECEC*;
+*viz*: *Vizzani*). Weights elsewhere moved by at most 1 because the project lexicon grew between the two builds.
+
+Remaining limits, by platform and version:
+
+- Keyman 18.0 (stable) apps, Android and iPhone: no automatic correction; nothing is replaced unless tapped.
+- Keyman 19 (beta) with auto-correction on, and the 18.0 engine when setting 3 is forced: a word missing from the
+  dictionary can still be replaced: *calvi* by *Calvi* until a source attests it; a proper name or a word Corsu does
+  not list. *Fesch* (rue Fesch) was kept in the 18.0 engine test but became *Perchè* in the 19.0.309 engine (agent
+  C's sentence scenario): an unknown name is an engine limit, not something a word list can solve for every name.
+
+Engine results of `tests/e2e/keyboard_data_cases.tsv` (37 cases, 2026-10-18, packages built from this data, headless
+Chrome, not a phone): Keyman 18.0.254, every `fail` case passes in the three models, one warning (*calvi* →
+*Calvi*); Keyman 19.0.309 beta, every `fail` case passes, warnings: *calvi* → *Calvi*, *ade* does not offer *ADECEC*
+(the banner fills with corrections of higher weight: *avemu*, *andemu*, *de*…), and *Fesch* → *Perchè* in the
+sentence scenario.
+- Other communes whose Vikipedia title differs from the Wikidata label (98, in `audit/commune-titles.tsv`): not added,
+  because a redirect is not always another name of the commune (*Mela* → *Mela (malus domestica)*); each needs a check.
+- iPhone: the whole-word replacement of `keyboard/whole-word.js` applies only on Android (see that file).
 
 ## Northern and southern preferences
 
@@ -290,8 +336,8 @@ Place names:
 
 - *Bastilicaccia* / *Bastelicaccia*: both are now known (above). Still open: which Corsican spelling a speaker of
   the place uses (INFCOR or the commune, by hand). Several Wikidata labels differ from the Vikipedia title (*Zicavu* /
-  *Zìcavu*, *Vezzani* / *Vizzani*): the labels were kept; *Vizzani* (6 times in Vikipedia) is not in the list, so
-  Keyman 19 may auto-correct it: to check by hand which spelling is usual.
+  *Zìcavu*, *Vezzani* / *Vizzani*): the labels were kept; *Vizzani*, the Vikipedia title, is now listed next to
+  *Vezzani* (see "Auto-correction"); the other differing titles are in `audit/commune-titles.tsv`, to check one by one.
 - *Bonifaziu* (label of the pieve) next to *Bunifaziu* (the commune): both are kept.
 
 Other everyday-word questions:

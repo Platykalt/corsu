@@ -1,0 +1,9 @@
+# Common words written like a capitalised name of the list (Corti / corti), added in lowercase next to the name by
+# tools/make_vocab.py, so that a lowercase word typed on purpose is not turned into the name. Wiktionary's common
+# (non-name) Corsican forms are taken automatically (orsu, argentu, mansu...); this file lists the others, each with
+# its evidence. Checked 2026-10-18 by an AI agent in local resources, not by a speaker.
+# Not listed for lack of a source: calvi (plural of "calvu", bald): no Corsican entry in Wiktionary
+# (https://en.wiktionary.org/wiki/calvu, consulted 2026-10-18), Apertium or the ADECEC lexicons, and no lowercase use in
+# Vikipedia; to check in INFCOR by hand.
+word	evidence
+corti	Apertium apertium-cos.cos.dix: lemma cortu (short), paradigm vechj/u__adj (masculine plural corti); Vikipedia: 62 lowercase uses mid-sentence ("più corti", "a corti di Francia")

@@ -1,15 +1,15 @@
 word	weight	variant	source	license	status
 di	715754	shared	tatoeba	CC-BY-2.0-FR	attested
-u	495281	shared	wiktionary	CC-BY-SA-4.0	attested
+u	495280	shared	wiktionary	CC-BY-SA-4.0	attested
 a	403577	shared	wiktionary	CC-BY-SA-4.0	attested
-in	273518	shared	tatoeba	CC-BY-2.0-FR	attested
+in	273519	shared	tatoeba	CC-BY-2.0-FR	attested
 à	269063	shared	wiktionary	CC-BY-SA-4.0	attested
 è	242486	shared	wiktionary	CC-BY-SA-4.0	attested
 i	188489	shared	wiktionary	CC-BY-SA-4.0	attested
 hè	179689	shared	wiktionary	CC-BY-SA-4.0	attested
 un	112142	shared	wiktionary	CC-BY-SA-4.0	attested
 da	108440	shared	tatoeba	CC-BY-2.0-FR	attested
-chì	106796	shared	wiktionary	CC-BY-SA-4.0	attested
+chì	106795	shared	wiktionary	CC-BY-SA-4.0	attested
 una	87821	shared	wiktionary	CC-BY-SA-4.0	attested
 so	71974	shared	wiktionary	CC-BY-SA-4.0	attested
 si	68444	shared	tatoeba	CC-BY-2.0-FR	attested
@@ -721,7 +721,7 @@ generali	1383	shared	vikipedia	CC-BY-SA-4.0	attested
 Germania	1368	shared	vikipedia	CC-BY-SA-4.0	attested
 ufficiali	1366	shared	vikipedia	CC-BY-SA-4.0	attested
 invece	1364	shared	vikipedia	CC-BY-SA-4.0	attested
-ferma	1361	shared	vikipedia	CC-BY-SA-4.0	attested
+ferma	1362	shared	vikipedia	CC-BY-SA-4.0	attested
 cunnisciuta	1359	shared	vikipedia	CC-BY-SA-4.0	attested
 l'articulu	1359	shared	vikipedia	CC-BY-SA-4.0	attested
 misura	1354	shared	vikipedia	CC-BY-SA-4.0	attested
@@ -1386,8 +1386,8 @@ eu	618	shared	wiktionary	CC-BY-SA-4.0	attested
 museiu	618	shared	vikipedia	CC-BY-SA-4.0	attested
 nanna	618	shared	vikipedia	CC-BY-SA-4.0	attested
 putenza	618	shared	vikipedia	CC-BY-SA-4.0	attested
+circà	616	shared	vikipedia	CC-BY-SA-4.0	attested
 l'altre	616	shared	vikipedia	CC-BY-SA-4.0	attested
-circà	615	shared	vikipedia	CC-BY-SA-4.0	attested
 umani	615	shared	vikipedia	CC-BY-SA-4.0	attested
 ghjunta	613	shared	vikipedia	CC-BY-SA-4.0	attested
 stagnu	613	shared	vikipedia	CC-BY-SA-4.0	attested
@@ -1952,6 +1952,7 @@ chjara	470	shared	vikipedia	CC-BY-SA-4.0	attested
 cortu	469	shared	vikipedia	CC-BY-SA-4.0	attested
 l'anticu	469	shared	vikipedia	CC-BY-SA-4.0	attested
 aria	468	shared	wiktionary	CC-BY-SA-4.0	attested
+corti	468	shared	homographs	GPL-3.0-or-later	attested
 raghju	468	shared	vikipedia	CC-BY-SA-4.0	attested
 rosa	468	shared	wiktionary	CC-BY-SA-4.0	attested
 sorte	468	shared	vikipedia	CC-BY-SA-4.0	attested
@@ -2352,9 +2353,9 @@ vetta	339	shared	wikidata:Q19947778	CC0-1.0	attested
 furmati	338	shared	vikipedia	CC-BY-SA-4.0	attested
 capace	337	shared	vikipedia	CC-BY-SA-4.0	attested
 duvutu	337	shared	vikipedia	CC-BY-SA-4.0	attested
-navigazione	337	shared	vikipedia	CC-BY-SA-4.0	attested
 trattu	337	shared	vikipedia	CC-BY-SA-4.0	attested
 ciclu	336	shared	vikipedia	CC-BY-SA-4.0	attested
+navigazione	336	shared	vikipedia	CC-BY-SA-4.0	attested
 s'ella	336	shared	vikipedia	CC-BY-SA-4.0	attested
 caratteru	335	shared	vikipedia	CC-BY-SA-4.0	attested
 ultimi	335	shared	vikipedia	CC-BY-SA-4.0	attested
@@ -4357,7 +4358,6 @@ ombra	93	shared	vikipedia	CC-BY-SA-4.0	attested
 primura	93	shared	vikipedia	CC-BY-SA-4.0	attested
 richiestu	93	shared	vikipedia	CC-BY-SA-4.0	attested
 scuntratu	93	shared	vikipedia	CC-BY-SA-4.0	attested
-seconde	93	shared	vikipedia	CC-BY-SA-4.0	attested
 trasferitu	93	shared	vikipedia	CC-BY-SA-4.0	attested
 basate	92	shared	vikipedia	CC-BY-SA-4.0	attested
 berberu	92	shared	vikipedia	CC-BY-SA-4.0	attested
@@ -4377,6 +4377,7 @@ propia	92	shared	vikipedia	CC-BY-SA-4.0	attested
 prufittà	92	shared	vikipedia	CC-BY-SA-4.0	attested
 radicali	92	shared	vikipedia	CC-BY-SA-4.0	attested
 ritmu	92	shared	vikipedia	CC-BY-SA-4.0	attested
+seconde	92	shared	vikipedia	CC-BY-SA-4.0	attested
 utile	92	shared	vikipedia	CC-BY-SA-4.0	attested
 vigore	92	shared	vikipedia	CC-BY-SA-4.0	attested
 voci	92	shared	vikipedia	CC-BY-SA-4.0	attested
@@ -5693,6 +5694,7 @@ Verghju	50	shared	wikidata:Q1107407	CC0-1.0	attested
 Vezzu	50	shared	wikidata:Q3641475	CC0-1.0	attested
 Vico	50	shared	cog:2A348	etalab-2.0	attested
 Vighjaneddu	50	shared	wikidata:Q1240206	CC0-1.0	attested
+Vizzani	50	shared	wikidata:Q753074	CC0-1.0	attested
 Zevacu	50	shared	wikidata:Q1109845	CC0-1.0	attested
 Zozza	50	shared	wikidata:Q742327	CC0-1.0	attested
 adopranu	50	shared	vikipedia	CC-BY-SA-4.0	attested
@@ -5987,6 +5989,7 @@ l'espurtazione	45	shared	corsu-lexicon	corsu-lexicon-mixed	corsu-lexicon
 l'etichetta	45	shared	corsu-lexicon	corsu-lexicon-mixed	corsu-lexicon
 l'urganismu	45	shared	vikipedia	CC-BY-SA-4.0	attested
 maiuscula	45	shared	vikipedia	CC-BY-SA-4.0	attested
+mansu	45	shared	wiktionary	CC-BY-SA-4.0	attested
 mensile	45	shared	vikipedia	CC-BY-SA-4.0	attested
 metadati	45	shared	corsu-lexicon	corsu-lexicon-mixed	corsu-lexicon
 mu	45	shared	vikipedia	CC-BY-SA-4.0	attested
@@ -6249,6 +6252,7 @@ astuti	38	shared	vikipedia	CC-BY-SA-4.0	attested
 baseball	38	shared	vikipedia	CC-BY-SA-4.0	attested
 biiettiva	38	shared	vikipedia	CC-BY-SA-4.0	attested
 cagiunata	38	shared	vikipedia	CC-BY-SA-4.0	attested
+cagna	38	shared	wiktionary	CC-BY-SA-4.0	attested
 canadesi	38	shared	vikipedia	CC-BY-SA-4.0	attested
 capital	38	shared	vikipedia	CC-BY-SA-4.0	attested
 ciclicu	38	shared	vikipedia	CC-BY-SA-4.0	attested
@@ -6625,6 +6629,7 @@ alternanza	31	shared	apertium	GPL-3.0	attested
 amministratu	31	shared	corsu-lexicon	corsu-lexicon-mixed	corsu-lexicon
 appiicazioni	31	shared	corsu-lexicon	corsu-lexicon-mixed	corsu-lexicon
 arabe	31	shared	wiktionary	CC-BY-SA-4.0	attested
+argentu	31	shared	wiktionary	CC-BY-SA-4.0	attested
 assignata	31	shared	corsu-lexicon	corsu-lexicon-mixed	corsu-lexicon
 associati	31	shared	corsu-lexicon	corsu-lexicon-mixed	corsu-lexicon
 astuta	31	shared	corsu-lexicon	corsu-lexicon-mixed	corsu-lexicon
@@ -7251,6 +7256,7 @@ macau	23	shared	apertium	GPL-3.0	attested
 maglia	23	shared	corsu-lexicon	corsu-lexicon-mixed	corsu-lexicon
 mazzu	23	shared	corsu-lexicon	corsu-lexicon-mixed	corsu-lexicon
 mischjatu	23	shared	corsu-lexicon	corsu-lexicon-mixed	corsu-lexicon
+misericordia	23	shared	wiktionary	CC-BY-SA-4.0	attested
 n'avete	23	shared	corsu-lexicon	corsu-lexicon-mixed	corsu-lexicon
 narrazione	23	shared	apertium	GPL-3.0	attested
 nulu	23	shared	wiktionary	CC-BY-SA-4.0	attested
@@ -7259,6 +7265,7 @@ ombre	23	shared	corsu-lexicon	corsu-lexicon-mixed	corsu-lexicon
 onu	23	shared	apertium	GPL-3.0	attested
 operà	23	shared	corsu-lexicon	corsu-lexicon-mixed	corsu-lexicon
 ordinata	23	shared	corsu-lexicon	corsu-lexicon-mixed	corsu-lexicon
+orsu	23	shared	wiktionary	CC-BY-SA-4.0	attested
 panicu	23	shared	corsu-lexicon	corsu-lexicon-mixed	corsu-lexicon
 pensamentu	23	shared	apertium	GPL-3.0	attested
 piantata	23	shared	corsu-lexicon	corsu-lexicon-mixed	corsu-lexicon
@@ -7370,6 +7377,7 @@ root	21	shared	corsu-lexicon	corsu-lexicon-mixed	corsu-lexicon
 scumparti	21	shared	corsu-lexicon	corsu-lexicon-mixed	corsu-lexicon
 seguitati	21	shared	corsu-lexicon	corsu-lexicon-mixed	corsu-lexicon
 squassata	21	shared	corsu-lexicon	corsu-lexicon-mixed	corsu-lexicon
+ADECEC	20	shared	acronyms	GPL-3.0-or-later	attested
 Aghione	20	shared	cog:2B002	etalab-2.0	attested
 Alando	20	shared	cog:2B005	etalab-2.0	attested
 Altagène	20	shared	cog:2A011	etalab-2.0	attested
@@ -7380,6 +7388,7 @@ Argiusta	20	shared	cog:2A021	etalab-2.0	attested
 Arro	20	shared	cog:2A022	etalab-2.0	attested
 Asco	20	shared	cog:2B023	etalab-2.0	attested
 Aullène	20	shared	cog:2A024	etalab-2.0	attested
+BDLC	20	shared	acronyms	GPL-3.0-or-later	attested
 Barbaggio	20	shared	cog:2B029	etalab-2.0	attested
 Bastelicaccia	20	shared	cog:2A032	etalab-2.0	attested
 Belgodère	20	shared	cog:2B034	etalab-2.0	attested
@@ -7436,6 +7445,7 @@ Giuncheto	20	shared	cog:2A127	etalab-2.0	attested
 Granace	20	shared	cog:2A128	etalab-2.0	attested
 Guagno	20	shared	cog:2A131	etalab-2.0	attested
 Guitera	20	shared	cog:2A133	etalab-2.0	attested
+INFCOR	20	shared	acronyms	GPL-3.0-or-later	attested
 Isolaccio	20	shared	cog:2B135	etalab-2.0	attested
 Lano	20	shared	cog:2B137	etalab-2.0	attested
 Lavatoggio	20	shared	cog:2B138	etalab-2.0	attested
@@ -8165,6 +8175,7 @@ l'invitu	15	shared	corsu-lexicon	corsu-lexicon-mixed	corsu-lexicon
 l'ottenimentu	15	shared	corsu-lexicon	corsu-lexicon-mixed	corsu-lexicon
 lanciate	15	shared	corsu-lexicon	corsu-lexicon-mixed	corsu-lexicon
 macintosh	15	shared	corsu-lexicon	corsu-lexicon-mixed	corsu-lexicon
+magnu	15	shared	wiktionary	CC-BY-SA-4.0	attested
 metricu	15	shared	apertium	GPL-3.0	attested
 mutualmente	15	shared	corsu-lexicon	corsu-lexicon-mixed	corsu-lexicon
 ospite	15	shared	corsu-lexicon	corsu-lexicon-mixed	corsu-lexicon
@@ -9037,6 +9048,7 @@ determineghja	8	shared	corsu-lexicon	corsu-lexicon-mixed	corsu-lexicon
 dev	8	shared	corsu-lexicon	corsu-lexicon-mixed	corsu-lexicon
 deverà	8	shared	corsu-lexicon	corsu-lexicon-mixed	corsu-lexicon
 dicii	8	shared	cunghjugarellu	attestation-only	attested
+dio	8	shared	wiktionary	CC-BY-SA-4.0	attested
 diodi	8	shared	corsu-lexicon	corsu-lexicon-mixed	corsu-lexicon
 diritte	8	shared	corsu-lexicon	corsu-lexicon-mixed	corsu-lexicon
 disinstallazione	8	shared	corsu-lexicon	corsu-lexicon-mixed	corsu-lexicon
@@ -10298,6 +10310,7 @@ ispezziunà	2	shared	corsu-lexicon	corsu-lexicon-mixed	corsu-lexicon
 istantania	2	shared	corsu-lexicon	corsu-lexicon-mixed	corsu-lexicon
 istruzzione	2	shared	corsu-lexicon	corsu-lexicon-mixed	corsu-lexicon
 l'accessibilità	2	shared	corsu-lexicon	corsu-lexicon-mixed	corsu-lexicon
+l'affissere	2	shared	corsu-lexicon	corsu-lexicon-mixed	corsu-lexicon
 l'alerta	2	shared	corsu-lexicon	corsu-lexicon-mixed	corsu-lexicon
 l'allineamentu	2	shared	corsu-lexicon	corsu-lexicon-mixed	corsu-lexicon
 l'ampiitutine	2	shared	corsu-lexicon	corsu-lexicon-mixed	corsu-lexicon
@@ -10694,6 +10707,7 @@ almagazinà	1	shared	corsu-lexicon	corsu-lexicon-mixed	corsu-lexicon
 alpm	1	shared	corsu-lexicon	corsu-lexicon-mixed	corsu-lexicon
 alternatives	1	shared	corsu-lexicon	corsu-lexicon-mixed	corsu-lexicon
 altoparlanti	1	shared	corsu-lexicon	corsu-lexicon-mixed	corsu-lexicon
+alzi	1	shared	wiktionary	CC-BY-SA-4.0	attested
 amendate	1	shared	corsu-lexicon	corsu-lexicon-mixed	corsu-lexicon
 ammanettà	1	shared	corsu-lexicon	corsu-lexicon-mixed	corsu-lexicon
 ammarchjunata	1	shared	corsu-lexicon	corsu-lexicon-mixed	corsu-lexicon
@@ -11541,6 +11555,7 @@ flottanti	1	shared	corsu-lexicon	corsu-lexicon-mixed	corsu-lexicon
 fluidità	1	shared	corsu-lexicon	corsu-lexicon-mixed	corsu-lexicon
 fluorescente	1	shared	corsu-lexicon	corsu-lexicon-mixed	corsu-lexicon
 focale	1	shared	corsu-lexicon	corsu-lexicon-mixed	corsu-lexicon
+forana	1	shared	wiktionary	CC-BY-SA-4.0	attested
 forced	1	shared	corsu-lexicon	corsu-lexicon-mixed	corsu-lexicon
 formulari	1	shared	corsu-lexicon	corsu-lexicon-mixed	corsu-lexicon
 fortran	1	shared	corsu-lexicon	corsu-lexicon-mixed	corsu-lexicon
@@ -11835,7 +11850,6 @@ l'aerografu	1	shared	corsu-lexicon	corsu-lexicon-mixed	corsu-lexicon
 l'affissadore	1	shared	corsu-lexicon	corsu-lexicon-mixed	corsu-lexicon
 l'affissaghju	1	shared	corsu-lexicon	corsu-lexicon-mixed	corsu-lexicon
 l'affissatura	1	shared	corsu-lexicon	corsu-lexicon-mixed	corsu-lexicon
-l'affissere	1	shared	corsu-lexicon	corsu-lexicon-mixed	corsu-lexicon
 l'affissu	1	shared	corsu-lexicon	corsu-lexicon-mixed	corsu-lexicon
 l'aggregazione	1	shared	corsu-lexicon	corsu-lexicon-mixed	corsu-lexicon
 l'aghjunte	1	shared	corsu-lexicon	corsu-lexicon-mixed	corsu-lexicon
@@ -12631,6 +12645,7 @@ ristrette	1	shared	corsu-lexicon	corsu-lexicon-mixed	corsu-lexicon
 risturallu	1	shared	corsu-lexicon	corsu-lexicon-mixed	corsu-lexicon
 risturate	1	shared	corsu-lexicon	corsu-lexicon-mixed	corsu-lexicon
 risturati	1	shared	corsu-lexicon	corsu-lexicon-mixed	corsu-lexicon
+ritondu	1	shared	wiktionary	CC-BY-SA-4.0	attested
 ritrattamentu	1	shared	corsu-lexicon	corsu-lexicon-mixed	corsu-lexicon
 riurdinà	1	shared	corsu-lexicon	corsu-lexicon-mixed	corsu-lexicon
 riusu	1	shared	corsu-lexicon	corsu-lexicon-mixed	corsu-lexicon
@@ -12644,6 +12659,7 @@ rivucatore	1	shared	corsu-lexicon	corsu-lexicon-mixed	corsu-lexicon
 rivucevule	1	shared	corsu-lexicon	corsu-lexicon-mixed	corsu-lexicon
 rompesi	1	shared	corsu-lexicon	corsu-lexicon-mixed	corsu-lexicon
 rotella	1	shared	corsu-lexicon	corsu-lexicon-mixed	corsu-lexicon
+rotondu	1	shared	wiktionary	CC-BY-SA-4.0	attested
 rotture	1	shared	corsu-lexicon	corsu-lexicon-mixed	corsu-lexicon
 routes	1	shared	corsu-lexicon	corsu-lexicon-mixed	corsu-lexicon
 rregistrà	1	shared	corsu-lexicon	corsu-lexicon-mixed	corsu-lexicon
