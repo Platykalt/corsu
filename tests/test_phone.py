@@ -130,6 +130,25 @@ class ReleasedFilesTests(unittest.TestCase):
             self.assertIn(RELEASED_KMP, text, path)
             self.assertEqual(set(re.findall(r'releases/latest/download/([\w.-]+\.kmp)', text)), {'corsu-keyboard.kmp'}, path)
 
+    def test_window_never_offers_an_unpublished_or_local_file(self):
+        # The candidate packages (CI artifacts) are for testers who follow the guides, not a download in the window;
+        # a path on the maintainer's computer is never a download at all.
+        for name in ('phone.js', 'texts-phone.js'):
+            code = (APP / name).read_text(encoding='utf-8')
+            self.assertNotRegex(code, r'actions/runs|/artifacts/|/tmp/|file:/|releases/download/v', name)
+        code = (APP / 'phone.js').read_text(encoding='utf-8')
+        coming = re.search(r'const COMING = \[(.*?)\];', code, re.S).group(1)
+        self.assertNotRegex(coming, r'https?:|url|href', 'COMING entries carry no address')
+
+    def test_guides_have_no_local_path_or_unfilled_placeholder(self):
+        for path in ('docs/fr/telephone/android.md', 'docs/fr/telephone/iphone.md', 'docs/en/phone/android.md',
+                     'docs/en/phone/iphone.md', 'docs/fr/telephone/essai-5-minutes.md'):
+            text = (ROOT / path).read_text(encoding='utf-8')
+            self.assertNotRegex(text, r'\]\((/tmp/|file:|/home/)|@@\w+@@', path)
+            # A candidate is only ever offered through a CI artifact page, never as a release asset.
+            for link in re.findall(r'https://github\.com/Platykalt/corsu/actions/runs/[^)\s]+', text):
+                self.assertRegex(link, r'^https://github\.com/Platykalt/corsu/actions/runs/\d+/artifacts/\d+$', path)
+
 
 # A small DOM, enough for phone.js's render, so it runs in node as written.
 HARNESS = r'''

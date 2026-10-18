@@ -2,6 +2,12 @@
 
 [Français](../../fr/telephone/android.md) · [iPhone](iphone.md)
 
+**No Corsu installation on a computer is needed**: everything happens on the phone.
+
+**Download the dictionary: [corsu-keyboard.kmp](https://github.com/Platykalt/corsu/releases/latest/download/corsu-keyboard.kmp)**
+(latest published release, to open in Keyman: see [Install](#install)). The file is attached to Corsu's releases but
+works on its own.
+
 Two pieces, both free:
 
 - **Keyman** provides the keyboard. It is an app by SIL, installed from the Play Store. Its EuroLatin (SIL) layout
@@ -9,8 +15,7 @@ Two pieces, both free:
 - **Corsu** provides the dictionary: as you type, it suggests Corsican words in the banner above the keyboard and
   offers the right spelling of a mistyped word.
 
-The Corsu desktop app is not needed. The dictionary is neither a sentence translator nor a full grammar checker: it
-works word by word.
+The dictionary is neither a sentence translator nor a full grammar checker: it works word by word.
 
 This guide follows Keyman for Android 18.0 (stable 18.0.254 as of 16 October 2026). Button names come from Keyman's
 official help and the translation files of that version; another version may change them. There are no screenshots.
@@ -19,22 +24,24 @@ official help and the translation files of that version; another version may cha
 
 <!-- corsu:phone-variants:en The files really attached to the latest published release. When the next version is
      published, move here the rows of the "In the next version" table that it carries. -->
-| File | Content | Download |
-| --- | --- | --- |
-| `corsu-keyboard.kmp` | general dictionary, about 17,000 common Corsican words | [latest published release](https://github.com/Platykalt/corsu/releases/latest/download/corsu-keyboard.kmp) |
+| File | Name in Keyman | Version | Content | Download |
+| --- | --- | --- | --- | --- |
+| `corsu-keyboard.kmp` | `platykalt.co.corsu` | 1.0 (published with Corsu 0.25.1) | general dictionary, about 17,000 common Corsican words; loses the capital letters of words and still holds a few stray words (English words, product names, fragments), defects fixed in the next version | [latest published release](https://github.com/Platykalt/corsu/releases/latest/download/corsu-keyboard.kmp) ([SHA-256 checksum](https://github.com/Platykalt/corsu/releases/latest/download/corsu-keyboard.kmp.sha256)) |
 
-In Keyman, the published release's dictionary shows under its identifier, `platykalt.co.corsu`.
+"Version" is the dictionary package's version, which Keyman shows (see step 5); it does not follow Corsu's version
+numbers.
 
 ### In the next version (not published yet)
 
-| File | Name in Keyman | Content |
-| --- | --- | --- |
-| `corsu-keyboard.kmp` (version 1.1) | Corsu | the shared vocabulary, no regional preference; keeps the capital letters of words |
-| `corsu-keyboard-cismuntincu.kmp` | Corsu – Cismuntincu (experimental) | the same vocabulary, preferring the forms of the Cismonte; experimental, the regional forms cover only part of the words |
-| `corsu-keyboard-pumuntincu.kmp` | Corsu – Pumuntincu (experimental) | the same vocabulary, preferring the forms of the Pumonte; experimental, same limit |
+| File | Name in Keyman | Version | Content |
+| --- | --- | --- | --- |
+| `corsu-keyboard.kmp` | Corsu | 1.1 | the shared vocabulary, about 13,000 words (stray words removed), no regional preference; keeps the capital letters of words |
+| `corsu-keyboard-cismuntincu.kmp` | Corsu – Cismuntincu (experimental) | 1.1 | the same vocabulary, preferring the forms of the Cismonte; experimental, the regional forms cover only part of the words (361 words weighted differently) |
+| `corsu-keyboard-pumuntincu.kmp` | Corsu – Pumuntincu (experimental) | 1.1 | the same vocabulary, preferring the forms of the Pumonte; experimental, same limit |
 
 All three are for the Corsican language (`co`) and the EuroLatin (SIL) keyboard. One is enough: see
-[Choosing a regional dictionary](#choosing-a-regional-dictionary).
+[Choosing a regional dictionary](#choosing-a-regional-dictionary). To try them before they are published:
+[Trying the next version's dictionary (candidate)](#trying-the-next-versions-dictionary-candidate).
 
 ## Install
 
@@ -55,7 +62,10 @@ All three are for the Corsican language (`co`) and the EuroLatin (SIL) keyboard.
    file**, then pick `corsu-keyboard.kmp` in Downloads. If Android asks for access to files, allow it (Keyman asks
    only once). Keyman shows the "Corsu" package and its version: tap **Install**, then **OK** after the welcome page.
 5. **Check the dictionary.** **Settings** › **Installed languages** › **Corsican**: at the bottom of the screen,
-   **Dictionary** should name Corsu (`platykalt.co.corsu` for the published release's package).
+   **Dictionary** names the active dictionary, `platykalt.co.corsu` for the package published today ("Corsu" for the
+   next version's). To see its version, tap **Dictionary**, then the checked dictionary: the "Dictionary: …" screen
+   shows the **Dictionary version** (Keyman shows the package's version there), to compare with the
+   [Available dictionaries](#available-dictionaries) table. Go back without tapping **Uninstall dictionary**.
 6. **Set suggestions** on the same screen. Keyman 18.0 offers three choices: *Disable suggestions*, *Predictions
    only* (words suggested, no corrections) and *Predictions with corrections* (words suggested and typos corrected).
    Choose **Predictions with corrections**. There is no automatic correction in this version: see
@@ -73,7 +83,35 @@ Download the new file and install it as in step 4, **under the same name** `cors
 package's identity from the file name: if the browser added a suffix (`corsu-keyboard(1).kmp`,
 `corsu-keyboard (1).kmp`), rename the file before installing it, or delete the old download first. Your settings are
 kept. **Then restart Keyman**: until then, the old dictionary keeps answering. To restart it, switch to another
-keyboard and back to Keyman, or force-stop the Keyman app in Android's settings.
+keyboard and back to Keyman, or force-stop the Keyman app in Android's settings. Then check the version as in step 5.
+
+## Trying the next version's dictionary (candidate)
+
+The next Corsu version's dictionary (package **version 1.1**, named **"Corsu"** in Keyman) is not published yet. You
+can try it beforehand: the project's build pipeline (GitHub Actions) produces it on every change. It is not a
+published release: it may still change, and it was only tried on an Android 14 emulator, not on a
+real phone.
+
+1. **Sign in to GitHub** in the phone's browser (a free account is enough): GitHub only hands these files to signed-in
+   accounts (signed out, the link shows a "404" page).
+2. **Download the archive** [keyboard-packages](https://github.com/Platykalt/corsu/actions/runs/39140018508/artifacts/12141617671) (opening the link starts the download). It arrives as `keyboard-packages.zip`.
+   GitHub deletes it after 90 days (on 16 January 2027); a newer link will then be given here.
+3. **Extract it** with the phone's files app (Files by Google: tap the `.zip` file, then **Extract**). The folder you get holds `corsu-keyboard.kmp`, `corsu-keyboard-cismuntincu.kmp`,
+   `corsu-keyboard-pumuntincu.kmp` and their `.sha256` checksums. For the general dictionary, take
+   **`corsu-keyboard.kmp`**, without renaming it.
+4. **First remove the installed dictionary**: **Settings** › **Installed languages** › **Corsican** ›
+   **Dictionary** › the checked dictionary › **Uninstall dictionary** › **Delete**. Restart Keyman (see [Updating](#updating)).
+5. **Install** `corsu-keyboard.kmp` from the extracted folder as in step 4 (**Install from local
+   file**). The package screen should show "Corsu" and version 1.1.
+6. **Restart Keyman, then check** as in step 5: **Dictionary** names "Corsu" (not
+   `platykalt.co.corsu`), and the **Dictionary version** is 1.1. In the middle of a
+   sentence, type `Ecc`: the banner should suggest "Eccu" with its capital (the published dictionary suggests "eccu").
+
+**Going back to the published dictionary**: uninstall "Corsu" the same way (step 4 above), restart Keyman, then
+install `corsu-keyboard.kmp` downloaded from the [published link](https://github.com/Platykalt/corsu/releases/latest/download/corsu-keyboard.kmp)
+(steps 3 and 4 of [Install](#install)). After another restart, **Dictionary** names `platykalt.co.corsu` again, version 1.0.
+
+The full test list with expected results is in French: [Essai en 5 minutes](../../fr/telephone/essai-5-minutes.md).
 
 ## Choosing a regional dictionary
 
@@ -85,7 +123,10 @@ adds it to the list, but the old one stays active. To switch:
 1. **Settings** › **Installed languages** › **Corsican** › **Dictionary** › the active dictionary › **Uninstall
    dictionary**;
 2. install the package you want (step 4) if it is not installed yet;
-3. restart Keyman (see [Updating](#updating)).
+3. restart Keyman (see [Updating](#updating)), then check the name shown (step 5).
+
+Before they are published, both variants are in the same archive as the candidate dictionary: see
+[Trying the next version's dictionary](#trying-the-next-versions-dictionary-candidate).
 
 ## Capitals and sentence start
 
@@ -126,8 +167,11 @@ and type it again) before picking a suggestion.
   had a `(1)` suffix, rename it and install it again.
 - **Capitals disappear.** See [Capitals and sentence start](#capitals-and-sentence-start).
 - **Automatic correction doesn't apply.** See [Automatic correction](#automatic-correction).
-- **Back to your usual keyboard.** Tap the keyboard icon at the bottom right of the screen (or the globe key on the
-  Keyman keyboard) and pick your usual keyboard. To remove the dictionary:
+- **Back to your usual keyboard.** Tap the keyboard icon at the bottom right of the screen and pick your usual
+  keyboard. The globe key on the Keyman keyboard does it too: with a single Keyman keyboard installed, a short press
+  goes back to the previous system keyboard; a long press opens the language list, with **Other Input Methods** at the
+  bottom ([Switching Between Keyboards](https://help.keyman.com/products/android/18.0/basic/switching-between-keyboards)).
+  To remove the dictionary:
   [Removing Dictionaries](https://help.keyman.com/products/android/18.0/basic/uninstalling-dictionaries).
 
 ## Where this comes from
@@ -143,6 +187,13 @@ Keyman 18.0.254 app on an Android 14 emulator, not on a real phone.
 - [Adding Dictionaries](https://help.keyman.com/products/android/18.0/basic/installing-dictionaries)
 - [Using the Settings Screen](https://help.keyman.com/products/android/18.0/basic/config/)
 - [Enabling Keyman as a System-Wide Keyboard](https://help.keyman.com/products/android/18.0/start/enabling-system-keyboard)
+- [Install Keyboard or Dictionary](https://help.keyman.com/products/android/18.0/basic/config/install-keyboard-or-dictionary)
+- [Removing Dictionaries](https://help.keyman.com/products/android/18.0/basic/uninstalling-dictionaries)
+- [Switching Between Keyboards](https://help.keyman.com/products/android/18.0/basic/switching-between-keyboards)
+- [Using the Banner on the Keyboard](https://help.keyman.com/products/android/18.0/basic/using-the-banner)
+- The **Dictionary version** shown is the package's: see Keyman 18.0's code
+  ([dictionary screen](https://github.com/keymanapp/keyman/blob/stable-18.0/android/KMEA/app/src/main/java/com/keyman/engine/ModelInfoActivity.java),
+  [package reading](https://github.com/keymanapp/keyman/blob/stable-18.0/android/KMEA/app/src/main/java/com/keyman/engine/packages/LexicalModelPackageProcessor.java)).
 - The three suggestion choices come from Keyman 18.0's own files
   ([texts](https://github.com/keymanapp/keyman/tree/stable-18.0/android/KMEA/app/src/main/res),
   [language screen](https://github.com/keymanapp/keyman/blob/stable-18.0/android/KMEA/app/src/main/res/layout/language_settings_list_layout.xml),

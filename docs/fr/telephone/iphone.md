@@ -2,6 +2,12 @@
 
 [English](../../en/phone/iphone.md) · [Android](android.md)
 
+**Aucune installation de Corsu sur un ordinateur n'est nécessaire** : tout se fait sur l'iPhone.
+
+**Télécharger le dictionnaire : [corsu-keyboard.kmp](https://github.com/Platykalt/corsu/releases/latest/download/corsu-keyboard.kmp)**
+(dernière version publiée, à ouvrir dans Keyman : voir [Installer](#installer)). Le fichier est joint aux versions de
+Corsu, mais s'utilise seul.
+
 Deux pièces, toutes deux gratuites :
 
 - **Keyman** fournit le clavier. C'est une application de SIL, installée depuis l'App Store. Sa disposition
@@ -9,8 +15,7 @@ Deux pièces, toutes deux gratuites :
 - **Corsu** fournit le dictionnaire : pendant que vous écrivez, il propose des mots corses dans le bandeau au-dessus
   du clavier et propose la bonne orthographe d'un mot mal tapé.
 
-L'application Corsu pour ordinateur n'est pas nécessaire. Le dictionnaire n'est ni un traducteur de phrases ni un
-correcteur de grammaire complet : il travaille mot par mot.
+Le dictionnaire n'est ni un traducteur de phrases ni un correcteur de grammaire complet : il travaille mot par mot.
 
 Ce guide suit Keyman pour iPhone et iPad 18.0 (version stable 18.0.254 au 16 octobre 2026). Les noms des boutons
 viennent de l'aide officielle de Keyman et des fichiers de traduction de cette version ; une autre version peut les
@@ -20,22 +25,24 @@ changer. Il n'y a pas de captures d'écran.
 
 <!-- corsu:phone-variants:fr Fichiers réellement joints à la dernière version publiée. À la publication de la
      prochaine version, déplacer ici les lignes du tableau « Dans la prochaine version » qu'elle contient. -->
-| Fichier | Contenu | Téléchargement |
-| --- | --- | --- |
-| `corsu-keyboard.kmp` | dictionnaire général, environ 17 000 mots corses courants | [dernière version publiée](https://github.com/Platykalt/corsu/releases/latest/download/corsu-keyboard.kmp) |
+| Fichier | Nom dans Keyman | Version | Contenu | Téléchargement |
+| --- | --- | --- | --- | --- |
+| `corsu-keyboard.kmp` | `platykalt.co.corsu` | 1.0 (publié avec Corsu 0.25.1) | dictionnaire général, environ 17 000 mots corses courants ; perd la majuscule des mots et garde quelques mots parasites (mots anglais, noms de produits, fragments), défauts corrigés dans la prochaine version | [dernière version publiée](https://github.com/Platykalt/corsu/releases/latest/download/corsu-keyboard.kmp) ([empreinte SHA-256](https://github.com/Platykalt/corsu/releases/latest/download/corsu-keyboard.kmp.sha256)) |
 
-Dans Keyman, le dictionnaire de la version publiée s'affiche sous son identifiant, `platykalt.co.corsu`.
+« Version » est la version du paquet du dictionnaire, que Keyman affiche (voir l'étape 5) ; elle ne suit pas les
+numéros de version de Corsu.
 
 ### Dans la prochaine version (pas encore publiée)
 
-| Fichier | Nom dans Keyman | Contenu |
-| --- | --- | --- |
-| `corsu-keyboard.kmp` (version 1.1) | Corsu | le vocabulaire commun, sans préférence régionale ; garde la majuscule des mots |
-| `corsu-keyboard-cismuntincu.kmp` | Corsu – Cismuntincu (experimental) | le même vocabulaire, avec une préférence pour les formes du Cismonte ; expérimental, les formes régionales ne couvrent qu'une partie des mots |
-| `corsu-keyboard-pumuntincu.kmp` | Corsu – Pumuntincu (experimental) | le même vocabulaire, avec une préférence pour les formes du Pumonte ; expérimental, même limite |
+| Fichier | Nom dans Keyman | Version | Contenu |
+| --- | --- | --- | --- |
+| `corsu-keyboard.kmp` | Corsu | 1.1 | le vocabulaire commun, environ 13 000 mots (mots parasites retirés), sans préférence régionale ; garde la majuscule des mots |
+| `corsu-keyboard-cismuntincu.kmp` | Corsu – Cismuntincu (experimental) | 1.1 | le même vocabulaire, avec une préférence pour les formes du Cismonte ; expérimental, les formes régionales ne couvrent qu'une partie des mots (361 mots pondérés autrement) |
+| `corsu-keyboard-pumuntincu.kmp` | Corsu – Pumuntincu (experimental) | 1.1 | le même vocabulaire, avec une préférence pour les formes du Pumonte ; expérimental, même limite |
 
 Les trois sont pour la langue Corsican (`co`) et le clavier EuroLatin (SIL). Un seul suffit : voir
-[Choisir un dictionnaire régional](#choisir-un-dictionnaire-régional).
+[Choisir un dictionnaire régional](#choisir-un-dictionnaire-régional). Pour les essayer avant leur publication :
+[Essayer le dictionnaire de la prochaine version (candidate)](#essayer-le-dictionnaire-de-la-prochaine-version-candidate).
 
 ## Installer
 
@@ -56,7 +63,11 @@ Les trois sont pour la langue Corsican (`co`) et le clavier EuroLatin (SIL). Un 
    droite. Keyman montre le paquet « Corsu » : gardez la langue Corsican, touchez **Installer** en haut à droite,
    puis **Done** (Terminé) après la page d'accueil.
 5. **Vérifiez le dictionnaire.** **Paramètres** › **Langues installées** › **Corsican** : la partie
-   **Dictionnaires** doit lister Corsu (`platykalt.co.corsu` pour le paquet de la version publiée).
+   **Dictionnaires** liste le dictionnaire, `platykalt.co.corsu` pour le paquet publié aujourd'hui (« Corsu » pour
+   celui de la prochaine version). Pour voir sa version, touchez-le, puis l'icône bleue **i** à côté de son nom :
+   l'écran montre la **Version du dictionnaire**, à comparer avec le tableau
+   [Dictionnaires disponibles](#dictionnaires-disponibles). Revenez en arrière sans toucher **Désinstaller ce
+   dictionnaire**.
 6. **Réglez les suggestions** sur ce même écran, partie **Paramètres de langue** : activez **Activer les
    prédictions**, puis **Activer les corrections** (ce second bouton n'apparaît que lorsque les prédictions sont
    activées). Il n'y a pas de correction automatique dans cette version : voir
@@ -78,7 +89,41 @@ Téléchargez le nouveau fichier et ouvrez-le dans Keyman comme à l'étape 4, *
 `corsu-keyboard.kmp` : Keyman tire l'identité du paquet du nom du fichier. Si un suffixe a été ajouté
 (`corsu-keyboard(1).kmp`, `corsu-keyboard (1).kmp`), renommez le fichier dans Fichiers avant de l'ouvrir. Vos
 réglages sont gardés. **Relancez ensuite Keyman** : jusque-là, l'ancien dictionnaire peut continuer de répondre.
-Passez à un autre clavier avec la touche globe puis revenez à Keyman, ou fermez l'application Keyman.
+Passez à un autre clavier avec la touche globe puis revenez à Keyman, ou fermez l'application Keyman. Vérifiez
+ensuite la version comme à l'étape 5.
+
+## Essayer le dictionnaire de la prochaine version (candidate)
+
+Le dictionnaire de la prochaine version de Corsu (paquet **version 1.1**, nommé **« Corsu »** dans Keyman) n'est pas
+encore publié. On peut l'essayer avant : la chaîne de construction du projet (GitHub Actions) le produit à chaque
+modification. Ce n'est pas une version publiée : il peut encore changer, et rien n'a été essayé sur un iPhone (les
+étapes suivent l'aide de Keyman 18.0).
+
+1. **Connectez-vous à GitHub** dans Safari (un compte gratuit suffit) : GitHub ne donne ces fichiers qu'aux comptes
+   connectés (sans connexion, le lien affiche une page « 404 »).
+2. **Téléchargez l'archive** [keyboard-packages](https://github.com/Platykalt/corsu/actions/runs/39140018508/artifacts/12141617671) (le téléchargement commence en ouvrant le lien). Elle
+   arrive dans **Fichiers** › **Téléchargements** sous le nom `keyboard-packages.zip`. GitHub l'efface au bout de
+   90 jours (le 16 janvier 2027) ; un lien plus récent sera alors donné ici.
+3. **Extrayez-la** : dans l'app **Fichiers**, touchez `keyboard-packages.zip` ; iOS crée un dossier
+   `keyboard-packages` à côté. Il contient `corsu-keyboard.kmp`, `corsu-keyboard-cismuntincu.kmp`,
+   `corsu-keyboard-pumuntincu.kmp` et leurs empreintes `.sha256`. Pour le dictionnaire général, prenez
+   **`corsu-keyboard.kmp`**, sans le renommer.
+4. **Retirez d'abord le dictionnaire installé** : **Paramètres** › **Langues installées** › **Corsican** ›
+   **Dictionnaires** › le dictionnaire › icône **i** › **Désinstaller ce dictionnaire**. Relancez Keyman (voir
+   [Mettre à jour](#mettre-à-jour)).
+5. **Installez** le `corsu-keyboard.kmp` du dossier : dans Keyman, **Paramètres** › **Installer depuis un fichier** ›
+   **Parcourir**, puis choisissez-le dans le dossier `keyboard-packages`. L'écran du paquet doit montrer « Corsu » et
+   la version 1.1 ; touchez **Installer**, puis **Terminé**.
+6. **Relancez Keyman, puis vérifiez** comme à l'étape 5 : **Dictionnaires** liste « Corsu » (et non
+   `platykalt.co.corsu`), et la **Version du dictionnaire** est 1.1. Au milieu d'une phrase, tapez `Ecc` : le bandeau
+   doit proposer « Eccu » avec sa majuscule (le dictionnaire publié propose « eccu »).
+
+**Revenir au dictionnaire publié** : désinstallez « Corsu » de la même façon (étape 4 ci-dessus), relancez Keyman,
+puis installez `corsu-keyboard.kmp` téléchargé depuis le [lien publié](https://github.com/Platykalt/corsu/releases/latest/download/corsu-keyboard.kmp)
+(étapes 3 et 4 de [Installer](#installer)). Après une nouvelle relance, **Dictionnaires** liste de nouveau
+`platykalt.co.corsu`, version 1.0.
+
+Pour une liste d'essai complète, avec les résultats attendus : [Essai en 5 minutes](essai-5-minutes.md).
 
 ## Choisir un dictionnaire régional
 
@@ -86,7 +131,10 @@ Passez à un autre clavier avec la touche globe puis revenez à Keyman, ou ferme
 Avec la prochaine version, deux dictionnaires expérimentaux préféreront les formes du Cismonte ou du Pumonte. Sur
 iPhone, d'après le code de Keyman 18.0 (pas essayé sur un iPhone), on choisit le dictionnaire dans **Paramètres** ›
 **Langues installées** › **Corsican**, partie **Dictionnaires**, et le choix est gardé pour la langue. Relancez
-ensuite Keyman comme pour une mise à jour.
+ensuite Keyman comme pour une mise à jour, puis vérifiez le nom affiché (étape 5).
+
+Avant leur publication, les deux variantes sont dans la même archive que le dictionnaire candidat : voir
+[Essayer le dictionnaire de la prochaine version](#essayer-le-dictionnaire-de-la-prochaine-version-candidate).
 
 ## Majuscules et début de phrase
 
@@ -126,7 +174,9 @@ effacez le mot et retapez-le) avant de choisir une suggestion.
   avait un suffixe `(1)`, renommez-le et ouvrez-le à nouveau dans Keyman.
 - **Les majuscules disparaissent.** Voir [Majuscules et début de phrase](#majuscules-et-début-de-phrase).
 - **La correction automatique ne s'applique pas.** Voir [Correction automatique](#correction-automatique).
-- **Revenir au clavier habituel.** Touchez la touche globe jusqu'à votre clavier habituel. Pour retirer Keyman de la
+- **Revenir au clavier habituel.** Un appui court sur la touche globe passe au clavier suivant ; un appui long ouvre
+  le menu de Keyman, où **Fermer Keyman** passe au clavier suivant qui n'est pas Keyman
+  ([Switching between keyboards](https://help.keyman.com/products/iphone-and-ipad/18.0/basic/switching-between-keyboards)). Pour retirer Keyman de la
   liste : **Réglages** › **Général** › **Clavier** › **Claviers** › **Modifier**.
 
 ## D'où viennent ces informations
@@ -142,6 +192,8 @@ comportements décrits (mise à jour, majuscules, retour sur un mot) ont été o
 - [How To - Keyboard and Dictionary Installation](https://help.keyman.com/products/iphone-and-ipad/18.0/start/installing-packages)
 - [Language Settings](https://help.keyman.com/products/iphone-and-ipad/18.0/basic/language-settings)
 - [How To - Installing Keyman as a System Keyboard](https://help.keyman.com/products/iphone-and-ipad/18.0/start/installing-system-keyboard)
+- [Switching between keyboards](https://help.keyman.com/products/iphone-and-ipad/18.0/basic/switching-between-keyboards)
+- [Using the Settings Screen](https://help.keyman.com/products/iphone-and-ipad/18.0/basic/config/)
 - Les libellés français viennent des fichiers de traduction de Keyman 18.0
   ([moteur](https://github.com/keymanapp/keyman/blob/stable-18.0/ios/engine/KMEI/KeymanEngine/fr.lproj/Localizable.strings),
   [application](https://github.com/keymanapp/keyman/blob/stable-18.0/ios/keyman/Keyman/Keyman/fr.lproj/Localizable.strings)).
