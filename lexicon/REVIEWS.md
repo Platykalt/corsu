@@ -9,6 +9,24 @@ Three kinds of checks exist and are never counted as one another:
 
 Every change is logged in [corrections.tsv](corrections.tsv) with its status.
 
+## 2026-10-19 — labels reported as missing or misread: Discord, Firefox, KDE, the window (AI review)
+
+Scope: the labels still open in [docs/untranslated-inventory.md](../docs/untranslated-inventory.md) and in
+[review-discord-2026-10.tsv](review-discord-2026-10.tsv), each classified by cause (absent, not applied, wrong source
+or context, outside the mechanism, personal content; table in the inventory). Evidence: Mozilla's Corsican (Pontoon
+TMX of all projects and lexicon-mozilla.tsv, human translators), the reviewed upstream programs (lexicon-upstream.tsv),
+the local dump of the Corsican Wikipedia; no dictionary was queried. The changes were re-read by a separate AI agent
+from the same material: an AI second opinion, not a validation.
+
+Applied: Discord's pin family follows Mozilla (*Spirlà* / *Dispirlà*: *Spuntà* also means "rise"); a bare "Supprimer"
+takes the verb of its dialog's title (*Squassà* in a delete dialog, *Caccià* elsewhere; a plugin rule, since the
+plugin only sees rendered text); Online / Offline are *In linea* / *Fora di linea* (*Cunnessu* did not agree with a
+list of people); the New Tab timer is a *minuteria*, not a stopwatch; "Clips" no longer comes from an audio editor;
+*Solu e @mintuvate* puts *solu* where Mozilla puts it; the Delete key is *Squas* (was the Spanish "Supr"); "Non classé"
+got a first proposal; transitive "reach" is *righjunghje* in nine Discord rows; the window's "{job} in corsu…" (read
+"in Corsican") became "{job}…". Left as they are, outside Corsu's reach: KDE module names compiled into plugins,
+Vesktop's own menus.
+
 ## 2026-10-18 — wording and fit of the most common labels: Corsu's window, Discord, Firefox (AI review)
 
 Scope: the window's main texts (src/app/texts.js, about 140 Corsican strings), Discord's most visible paths (message

@@ -84,7 +84,7 @@ const text = {
     remove_heading: "Disinstallà", remove_text: "Ogni schedariu è parametru d'origine hè rimessu. Ciò chì avete mudificatu voi stessi dopu à a stallazione ùn hè micca toccu.",
     remove_ellipsis: "Disinstallà Corsu…", remove_question: "Disinstallà Corsu ?", remove: "Disinstallà",
     job_install: "Stallazione", job_switch: "Cambiamentu di lingua", job_uninstall: "Disinstallazione",
-    running: "{job} in corsu…", done: "{job} : operazione compia.", failed: "{job} : operazione interrotta da un sbagliu.",
+    running: "{job}…", done: "{job} : operazione compia.", failed: "{job} : operazione interrotta da un sbagliu.",
     show_details: "Affissà i dettagli", hide_details: "Piattà i dettagli",
     busy: "Corsu hè occupatu (un'altra finestra o u stalladore travaglia).", closed: "Corsu hè chjosu. Riapritelu da u listinu di l'appiecazioni.",
     locked: "Sta pagina ùn hà micca a chjave di Corsu. Riapritelu da u listinu di l'appiecazioni.",

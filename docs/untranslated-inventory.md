@@ -28,6 +28,31 @@ Corsu's code on an excerpt or a page made for the test.
 | KDE: names of actions and entries without any Corsican (124 desktop entries with a French name, none translated, on the Plasma 6.7.5 system measured) | desktop entries | **Remaining**, English shown: a copy written only for a French fallback would hide the system's later updates of these files. In files Corsu writes anyway, untranslated texts now fall back to French (44 texts on that system) |
 | KDE: messages of programs and Plasma (gettext, Qt catalogs) | catalogs | Fall back to French by design (`LANGUAGE=co:fr`) where Corsu's catalog lacks a text |
 
+## Labels shown wrong or left over: classification (19 October 2026)
+
+Each remaining or questioned label, by cause: **absent** (no translation), **not applied** (a translation exists but
+does not reach the screen), **wrong source or context** (a translation from another program or sense, or one that
+reads wrong where it is shown), **outside the mechanism** (native text Corsu's components cannot reach), **personal
+content** (to keep as written). Records: [review-discord-2026-10.tsv](../lexicon/review-discord-2026-10.tsv) (Discord),
+[corrections.tsv](../lexicon/corrections.tsv) (Firefox, KDE, the window). AI work, not read by a speaker.
+
+| Label | Where | Cause | What was done |
+| --- | --- | --- | --- |
+| "Non classé" (Unranked) | Discord, a game rank | absent | Row added in the Discord section: *Senza classifica* (Mozilla's Corsican *classifica* for a ranking; AI proposal) |
+| *Puntà* / *Spuntà* (Pin / Unpin) | Discord, messages, channels, posts | wrong source: an AI pair where Mozilla's Corsican has *Spirlà* / *Dispirlà*; *Spuntà* is also "rise, appear" | The Discord pin family (66 rows, 2 in `lexicon-fixes.tsv`) follows Mozilla; Firefox already did. Emoji keywords with *punta* (to point) unchanged |
+| "Supprimer" | Discord buttons | wrong context: one French word for Delete (*Squassà*) and Remove (*Caccià*); the plugin only sees the rendered French, so no per-key lookup | Per-context rule in the plugin (`dialogVerb`, `src/discord-plugin/translate.ts`): in a dialog the button takes the verb of the dialog's title (*Squassà u messaghju* over *Squassà*); elsewhere *Caccià*. Checked on a simulated page (`check_discord_content.py`, scenario "dialogs"), including a person named "Supprimer" kept as written |
+| "Clips" | Discord settings category | wrong source (an audio editor's *Pezzi*) | Discord row *Clip*, as every other Discord row about clips |
+| "@mintuvate solu" | Discord notification settings | wrong form: *solu* after a feminine plural reads as a disagreeing adjective | *Solu e @mintuvate*, Mozilla's order (*Bluccà solu l'audio*); 6 rows |
+| "Supr" | key name of Delete (Firefox menus, Discord keybinds) | wrong source: the Spanish key label | *Squas*, as Corsu's "Suppr (pavé num.)" row; keeping the printed French key cap "Suppr" is an open question |
+| "Cunnessu" for Online | Discord status and member-list headings, Firefox, KDE | wrong sense and agreement (masculine singular "connected" over a list of people) | *In linea* / *Fora di linea* (Mozilla's Corsican), general row and 6 Discord status rows |
+| "Minuteur" | Firefox New Tab timer widget, KDE timer | wrong sense: *cronumetru* is a stopwatch, the widget counts down | *Minuteria*, the reviewed upstream Corsican for a timer (VLC and another upstream program); 13 rows, agreements |
+| "{job} in corsu…" | Corsu's window, status line | wrong context: in this window *in corsu* means "in Corsican" | "{job}…" |
+| KDE System Settings: module names from compiled plugin metadata ("Display Configuration") | KDE | outside the mechanism: KPluginMetaData reads the first language only and Corsu cannot write into compiled plugins | Unchanged (see above); needs Corsican upstream or a KDE fallback along `LANGUAGE` |
+| Vesktop's tray menu and window menu | Vesktop | outside the mechanism: Vesktop's main process, English only | Unchanged; patching Vesktop's own files was not attempted (they are replaced by its updates) |
+
+Personal content: none of these labels is a name or a message; the new dialog rule keeps the protections of names,
+activities and messages (the name rules are checked first, and the existing Work/Error/Control/Bio checks pass).
+
 ## How this was checked
 
 - Discord's messages: the public web client (`discord.com/app` and the French and English message chunks it loads),

@@ -24,6 +24,14 @@ class FirefoxWordsTests(unittest.TestCase):
             self.assertEqual(engine.translate(french), corsican, french)
         self.assertEqual(engine.translate('Connecter un appareil'), 'Cunnette un apparechju')
 
+    def test_new_tab_timer_counts_down(self):
+        # The New Tab widget "Timer" ("Minuteur") counts a focus or break time down: "minuteria", the reviewed
+        # Corsican of VLC ("Sleep timer": "Minuteria di veghja") and of the upstream "Couldn't create a timer";
+        # "cronumetru" is a stopwatch, which counts up (round of 2026-10-19, lexicon/corrections.tsv).
+        self.assertEqual(engine.translate('Minuteur'), 'Minuteria')
+        self.assertEqual(engine.translate('Mettre en pause le minuteur'), 'Mette in pausa a minuteria')
+        self.assertEqual(engine.translate('Options du minuteur'), 'Ozzioni di a minuteria')
+
 
 if __name__ == '__main__':
     unittest.main()

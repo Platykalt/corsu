@@ -161,3 +161,29 @@ AI work (agent E, then a separate AI sub-agent that read the contexts and refere
 | Seen in the game | no: no game window was opened; nothing was rendered on screen |
 | Human validation | 0 |
 
+
+## Round 5 (2026-10-19): natural phrasing, second lot
+
+AI work (agent A, then a separate AI sub-agent that read the contexts and references itself). **Human validation:
+0.** Details: [ROUND5.md](ROUND5.md), per decision [round5.tsv](round5.tsv); recorded in the contextual memory
+(`lexicon/memory/minecraft-java.jsonl`, 1,227 entries).
+
+- Scope (about 700 texts read): world creation and management beyond round 4 (`createWorld.*`, `selectWorld.*`,
+  `optimizeWorld.*`), game rules (`gamerule.*`), connection and disconnection (`connect.*`, `disconnect.*`,
+  `multiplayer.status.*`, `multiplayer.disconnect.*`, `multiplayer.player.*`), inventory (`container.*`,
+  `inventory.*`, recipe book, `itemGroup.*`, `book.*`), commands give, gamemode, teleport, time, weather, kill, help,
+  `command.*` and `argument.*` errors, chat and its errors. Not read: other commands, Realms, advancements,
+  subtitles, death messages, names, option tooltips.
+- Changed: 16 texts (14 in 26.3, 2 older pairs): the fire and weather rules said "renew" (*U focu si sparghje*, *U
+  tempu cambia*); transitive "reach" is *righjunghje* (5 keys); *Minecraft in corsu* ("in Corsican") in the locked-world
+  tooltip; the `^` coordinates error; "unacknowledged" chat messages were "unrecognised"; two failure messages aligned.
+- Open for a speaker: *sirenu* / *piuvosu* in `/weather`, *naufragi* for wrecks, *PS* for health points, *telepurtassi*,
+  *Manghjà è bevande*, whether *ghjunghje* can take an object (and *toccu* for limits).
+
+| State | Result after round 5 |
+| --- | --- |
+| Translation present | unchanged: every non-empty text of the 87 releases has Corsican |
+| Technical check | Python, no game code: `tools/minecraft.py check` 0 errors (37 warnings, unchanged); `tools/mchistory.py check` 3,978 entries, 0 errors, 0 warnings; `tools/mcreport.py --check` up to date (pages regenerated); `tools/mcmemory.py --check` up to date (1,227 entries); unit tests 567 run, OK (3 skipped). With each release's own client jar: `tools/mcversions.py verify all` exit 0, 87/87 releases supported, 0 problems |
+| AI review | 9 change decisions (16 texts) and 7 kept or open decisions recorded; the changes also reviewed by a separate AI sub-agent (agrees, with the reservations in ROUND5.md) |
+| Seen in the game | no: no game window was opened; nothing was rendered on screen |
+| Human validation | 0 |

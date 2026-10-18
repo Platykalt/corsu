@@ -350,8 +350,55 @@ NAVIGATION_AFTER_CHANGE = {
     'sepName': 'Work — In linea', 'countName': 'Members 5, In linea',
 }
 
+# Discord's French "Supprimer" is its Delete (Squassà) and its Remove (Caccià). In a dialog the button takes the verb
+# of the dialog's title, translated already or not; elsewhere the dictionary's word. A name stays as written.
+DIALOG_DICTIONARY = {
+    'Supprimer': 'Caccià', 'Supprimer le message': 'Squassà u messaghju', 'Annuler': 'Abbandunà',
+    'Supprimer la pièce jointe': "Caccià l'aghjunta", 'Supprimer le salon': 'Squassà u canale',
+}
+
+DIALOG_PAGE = HELPERS + r"""
+document.body.innerHTML = `
+  <div role="dialog" id="d1"><h1 class="title_x">Supprimer le message</h1>
+    <button id="d1button" data-check="">Supprimer</button><button id="d1cancel" data-check="">Annuler</button>
+    <span id="d1name" class="username_x" data-check="">Supprimer</span></div>
+  <div role="dialog" id="d2"><h1 class="title_x">Squassà u messaghju</h1>
+    <button id="d2button" data-check=""> Supprimer </button></div>
+  <div role="alertdialog" id="d3"><div class="title_y">Supprimer la pièce jointe</div>
+    <button id="d3button" data-check="">Supprimer</button></div>
+  <div role="dialog" id="d4"><h2 class="title_x">Work</h2><button id="d4button" data-check="">Supprimer</button></div>
+  <div role="dialog" id="d5"><h1 class="title_x">Supprimer le salon</h1>
+    <button id="d5icon" data-check="aria-label" aria-label="Supprimer"></button></div>
+  <div role="dialog" id="d6"><div class="embedTitle_x">Supprimer le message</div><h1 class="title_x">Supprimer la pièce jointe</h1>
+    <button id="d6button" data-check="">Supprimer</button><span id="d6nick" data-check="">Supprimer</span></div>
+  <div id="menu"><div id="menuItem" role="menuitem" data-check="">Supprimer</div></div>`;
+mount(document.getElementById("d1name"), { user: { id: "111111111111111111", username: "x", globalName: "Supprimer" } });
+mount(document.getElementById("d6nick"), { member: { userId: "222222222222222222", guildId: "444444444444444444", nick: "Supprimer", roles: [] } });
+window.translator = Corsu.createTranslator(document);
+window.translator.start();
+"""
+
+# The same dialog reused for another action: its title and button get new text.
+DIALOG_CHANGE = r"""
+document.querySelector("#d1 h1").firstChild.data = "Supprimer la pièce jointe";
+document.getElementById("d1button").firstChild.data = "Supprimer";
+"""
+
+DIALOG_EXPECTED = {
+    'd1button': 'Squassà', 'd1cancel': 'Abbandunà', 'd1name': 'Supprimer',
+    'd2button': ' Squassà ',             # the title was already translated; the spaces around the label stay
+    'd3button': 'Caccià',                # Remove: the title's verb is Caccià
+    'd4button': 'Caccià',                # a title that names no action: the dictionary's word
+    'd5icon': 'Squassà',                 # an attribute, in a dialog that deletes a channel
+    'menuItem': 'Caccià',                # outside a dialog: the dictionary's word
+    'd6button': 'Caccià',                # an embed's title (what people post) does not decide; the dialog's title does
+    'd6nick': 'Supprimer',               # a server nickname from the records, in no name class
+}
+DIALOG_AFTER_CHANGE = {**DIALOG_EXPECTED, 'd1button': 'Caccià'}
+
 # (name, dictionary, page, read, expected, change, expected after the change)
 SCENARIOS = [
+    ('dialogs', DIALOG_DICTIONARY, DIALOG_PAGE, READ_CHECKED, DIALOG_EXPECTED, DIALOG_CHANGE, DIALOG_AFTER_CHANGE),
     ('records', DICTIONARY, PAGE, READ, EXPECTED, CHANGE, AFTER_CHANGE),
     ('typing', TYPING_DICTIONARY, TYPING_PAGE, READ_CHECKED, TYPING_EXPECTED, TYPING_CHANGE, TYPING_AFTER_CHANGE),
     ('navigation', NAVIGATION_DICTIONARY, NAVIGATION_PAGE, READ_CHECKED, NAVIGATION_EXPECTED, NAVIGATION_CHANGE,

@@ -6,7 +6,7 @@
 
 One entry per Corsican text that a recorded decision of the October 2026 review touches: every key of
 minecraft/java/review-2026-10/APPLIED.tsv (rounds 1 and 2) and every key of round3.tsv (decisions re-examined in
-round 3, including kept and deferred ones) and of round4.tsv (phrasings and fit to the interface). Each entry keeps the key, the component, the versions that show it (from
+round 3, including kept and deferred ones) and of round4.tsv and round5.tsv (phrasings and fit to the interface). Each entry keeps the key, the component, the versions that show it (from
 keys.tsv), the sense in the game, the current Corsican, the decision with its references, and three separate
 validation levels (AI proposal, AI review, human validation: `none`, or a speaker's answer from
 review/answers.jsonl that the maintainer accepted, for that exact English text; `to-re-examine` once the text changed).
@@ -32,10 +32,11 @@ REVIEW = DATA / 'review-2026-10'
 OUT = ROOT / 'lexicon/memory/minecraft-java.jsonl'
 APP = 'Minecraft: Java Edition'
 # The commit at which each round's changes were applied.
-COMMITS = {1: 'e9e3252', 2: '38d3dce', 3: None, 4: None}
+COMMITS = {1: 'e9e3252', 2: '38d3dce', 3: None, 4: None, 5: None}
 PROPOSERS = {1: 'AI review agents of 2026-10-18 (concrete names: concrete.tsv; language: language.tsv)',
              2: 'AI agent of round 2 (2026-10-18)', 3: 'AI agent E of round 3 (2026-10-18)',
-             4: 'AI agent E of round 4 (2026-10-18), main-menu pair proposed by the maintainer'}
+             4: 'AI agent E of round 4 (2026-10-18), main-menu pair proposed by the maintainer',
+             5: 'AI agent A of round 5 (2026-10-19)'}
 REVIEWERS = {1: 'separate AI verifier, 2026-10-18 (verdict in APPLIED.tsv)',
              2: 'same AI agent as the proposal, against the cited sources (round 2)'}
 
@@ -120,24 +121,26 @@ def entries():
                             'verdict': row['verdict']}
                 add(name, decision, 3, {'ai_proposal': 'none in round 3 (the text was kept as it was)',
                                         'ai_review': row['validation'], 'human': 'none'})
-    # Round 4: full phrasings and fit to the interface (round4.tsv). Applied rows record the change; kept or open
-    # rows record the decision not to change.
-    for row in table(REVIEW / 'round4.tsv'):
-        applied = not row['category'].startswith(('preference (not', 'open'))
-        record = {'id': row['id'], 'category': row['category'], 'previous': row['old'] if applied else None,
-                  'references': row['references'], 'justification': row['justification'],
-                  'uncertainty': row['uncertainty'], 'screen': row['screen'],
-                  'details': 'minecraft/java/review-2026-10/round4.tsv'}
-        record = {name: value for name, value in record.items() if value}
-        for name in key_list(row['keys']):
-            if name in result:
-                result[name]['decision']['round4'] = record
-                result[name]['validation']['ai_review'] += f"; round 4: {row['validation']}"
-            else:
-                add(name, {'id': row['id'], 'round': 4, 'sense': row['intended_sense'], **{
-                    k: v for k, v in record.items() if k != 'id'}}, 4,
-                    {'ai_proposal': PROPOSERS[4] if applied else 'none in round 4 (the text was kept as it was)',
-                     'ai_review': row['validation'], 'human': 'none'})
+    # Rounds 4 and 5: full phrasings and fit to the interface (round4.tsv, round5.tsv). Applied rows record the
+    # change; kept or open rows record the decision not to change.
+    for round_ in (4, 5):
+        for row in table(REVIEW / f'round{round_}.tsv'):
+            applied = not row['category'].startswith(('preference (not', 'open'))
+            record = {'id': row['id'], 'category': row['category'], 'previous': row['old'] if applied else None,
+                      'references': row['references'], 'justification': row['justification'],
+                      'uncertainty': row['uncertainty'], 'screen': row['screen'],
+                      'details': f'minecraft/java/review-2026-10/round{round_}.tsv'}
+            record = {name: value for name, value in record.items() if value}
+            for name in key_list(row['keys']):
+                if name in result:
+                    result[name]['decision'][f'round{round_}'] = record
+                    result[name]['validation']['ai_review'] += f"; round {round_}: {row['validation']}"
+                else:
+                    add(name, {'id': row['id'], 'round': round_, 'sense': row['intended_sense'], **{
+                        k: v for k, v in record.items() if k != 'id'}}, round_,
+                        {'ai_proposal': PROPOSERS[round_] if applied
+                         else f'none in round {round_} (the text was kept as it was)',
+                         'ai_review': row['validation'], 'human': 'none'})
     # Speakers' answers (review/answers.jsonl, tools/review_sets.py) count only once the maintainer accepted them,
     # and only for the exact English text they were given for.
     speakers = review_sets.human_validations()
