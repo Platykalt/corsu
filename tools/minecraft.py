@@ -318,13 +318,13 @@ def verify(version):
             target.write_bytes(download(artifact['url'], artifact['sha1']))
         classpath.append(target)
     english = folder / 'en_us.json'
-    with tempfile.TemporaryDirectory() as build:
+    with tempfile.TemporaryDirectory() as classes:
         separator = os.pathsep
         path = separator.join(str(item) for item in classpath)
-        subprocess.run(['javac', '-nowarn', '-cp', path, '-d', build, str(ROOT / 'tools/minecraft/LangCheck.java')], check=True)
+        subprocess.run(['javac', '-nowarn', '-cp', path, '-d', classes, str(ROOT / 'tools/minecraft/LangCheck.java')], check=True)
         # The game's logging writes logs/latest.log in the working directory: keep it in the temporary folder.
-        command = ['java', '-cp', build + separator + path, 'LangCheck', str(english)]
-        result = subprocess.run(command + [str(TRANSLATION)], cwd=build)
+        command = ['java', '-cp', classes + separator + path, 'LangCheck', str(english)]
+        result = subprocess.run(command + [str(TRANSLATION)], cwd=classes)
         if result.returncode == 0:
             # Then the pack as distributed: metadata through the game's codecs, language file from the zip.
             game = json.loads((folder / 'game-version.json').read_text())['pack_version']
@@ -332,7 +332,7 @@ def verify(version):
             if not pack.exists():
                 build(version)
             result = subprocess.run(command + [str(pack), str(game['resource_major']), str(game['resource_minor'])],
-                                    cwd=build)
+                                    cwd=classes)
     return result.returncode
 
 
