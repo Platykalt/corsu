@@ -15,7 +15,14 @@ Chaque fichier a sa somme de contrôle `.sha256`. Les archives contiennent leur 
 installée, utilisée après suppression du dossier extrait, mise à jour et désinstallée sur son système avant la
 publication (tests automatiques ; personne n'a regardé les écrans).
 
-### Nouveautés de la 0.25.0
+### Nouveautés de la 0.25.1
+
+La 0.25.0 a été étiquetée mais jamais publiée : la vérification Windows a trouvé le défaut ci-dessous. La 0.25.1
+est la 0.25.0 avec cette correction.
+
+- **Windows** : quand la fenêtre de Corsu lisait son fichier d'état au moment où un installeur le remplaçait (ou
+  quand deux installeurs démarraient ensemble), l'opération pouvait s'arrêter sur « Permission denied ». Corsu
+  réessaie maintenant pendant deux secondes au plus.
 
 - **Poedit** : Corsu active sa traduction corse. Linux : essais réels du paquet Debian (3.6.3) et du Flatpak (3.10)
   avec des sessions française, allemande et italienne : Poedit en corse, fenêtres de fichiers et boutons standard
@@ -122,7 +129,12 @@ Each file has a `.sha256` checksum. The archives carry their own Python. Every a
 deleting the extracted folder, updated and uninstalled on its own system before publication (automated checks; no one
 looked at the screens).
 
-### New in 0.25.0
+### New in 0.25.1
+
+0.25.0 was tagged but never published: the Windows check found the fault below. 0.25.1 is 0.25.0 with this fix.
+
+- **Windows**: when Corsu's window read its state file while an installer was replacing it (or when two installers
+  started together), the operation could stop on "Permission denied". Corsu now tries again for up to two seconds.
 
 - **Poedit**: Corsu switches on its Corsican translation. Linux: Debian package (3.6.3) and Flatpak (3.10) run for
   real with French, German and Italian sessions: Poedit in Corsican, file dialogs and standard buttons in the usual

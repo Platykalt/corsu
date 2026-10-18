@@ -1,6 +1,16 @@
 # Changelog
 
-## 0.25.0 (2026-10-18)
+## 0.25.1 (2026-10-18)
+
+0.25.0 was tagged but never published: the release run's Windows check found the fault below, so nothing was
+released under that tag. 0.25.1 is 0.25.0 with this fix.
+
+- Windows: reading or replacing `installation.json` while another Corsu process is using it (the window reads it
+  every second and a half while an installer writes it; two installers started at once) failed for a moment with
+  a sharing violation and stopped the run ("[Errno 13] Permission denied"). It is now tried again for up to two
+  seconds. Present since the window existed; seen once in CI, in the "two installers at once" check.
+
+## 0.25.0 (tagged 2026-10-18, not published)
 
 - Poedit: Corsican through `LANGUAGE=co:<session languages> LC_MESSAGES=/C.UTF-8` on Linux (wxWidgets reads
   "/C.UTF-8" as no language, so LANGUAGE wins; glibc loads it as C.UTF-8 without the C exception, so GTK follows the

@@ -14,6 +14,7 @@ import struct
 import subprocess
 import sys
 import tempfile
+import time
 import urllib.request
 import zipfile
 
@@ -1385,12 +1386,26 @@ def component_names(names):
                      else name for name in sorted(names))
 
 
+def shared_access(action, attempts=40, pause=0.05):
+    """Run a read or replace of a file another Corsu process may be using at that instant. On Windows, opening a file
+    that is being replaced, or replacing one that is open (the window reads the record every second and a half while
+    an installer writes it), fails with a sharing violation for a moment (PermissionError); try again for up to two
+    seconds instead of stopping the whole run."""
+    for attempt in range(attempts):
+        try:
+            return action()
+        except PermissionError:
+            if PLATFORM != 'windows' or attempt == attempts - 1:
+                raise
+            time.sleep(pause)
+
+
 def load_state():
     """Corsu's record of every change it made. A damaged file falls back to the copy kept by the previous save,
     so an interrupted write never loses the way back."""
     for path in (STATE, STATE.with_name(STATE.name + '.previous')):
         try:
-            return json.loads(path.read_text(encoding='utf-8'))
+            return json.loads(shared_access(lambda: path.read_text(encoding='utf-8')))
         except FileNotFoundError:
             continue
         except ValueError:
@@ -1411,11 +1426,11 @@ def save_state(state):
         os.fsync(output.fileno())
     if STATE.exists():
         try:
-            json.loads(STATE.read_text(encoding='utf-8'))
-            shutil.copyfile(STATE, STATE.with_name(STATE.name + '.previous'))
+            json.loads(shared_access(lambda: STATE.read_text(encoding='utf-8')))
+            shared_access(lambda: shutil.copyfile(STATE, STATE.with_name(STATE.name + '.previous')))
         except ValueError:
             pass
-    os.replace(temp, STATE)
+    shared_access(lambda: os.replace(temp, STATE))
 
 
 class Busy(RuntimeError):

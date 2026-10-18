@@ -189,6 +189,40 @@ class TranslationTests(unittest.TestCase):
                     corsu.load_state()
                 self.assertEqual(state.read_text(encoding='utf-8'), '{"files": {"/a": {"back')
 
+    def test_a_record_in_use_for_a_moment_on_windows_is_tried_again(self):
+        # Windows refuses for a moment to replace a file another process is reading (the window polls the record
+        # while an installer writes it), and to open one being replaced: neither may stop the run.
+        with tempfile.TemporaryDirectory() as directory:
+            data = Path(directory)
+            state = data / 'installation.json'
+            real_replace, real_read = os.replace, Path.read_text
+            refusals = {'replace': 3, 'read': 3}
+
+            def replace(source, target):
+                if refusals['replace']:
+                    refusals['replace'] -= 1
+                    raise PermissionError(13, 'Access is denied', str(target))
+                return real_replace(source, target)
+
+            def read_text(path, *args, **kwargs):
+                if path == state and refusals['read']:
+                    refusals['read'] -= 1
+                    raise PermissionError(13, 'Access is denied', str(path))
+                return real_read(path, *args, **kwargs)
+
+            with patch.object(corsu, 'DATA', data), patch.object(corsu, 'STATE', state), \
+                    patch.object(corsu, 'PLATFORM', 'windows'), patch('time.sleep'), \
+                    patch('os.replace', replace), patch.object(Path, 'read_text', read_text):
+                corsu.save_state({'files': {'/a': {'backup': None}}})
+                self.assertEqual(corsu.load_state(), {'files': {'/a': {'backup': None}}})
+            self.assertEqual(refusals, {'replace': 0, 'read': 0})
+            # Elsewhere a refusal is a real one, reported at once.
+            with patch.object(corsu, 'DATA', data), patch.object(corsu, 'STATE', state), \
+                    patch.object(corsu, 'PLATFORM', 'linux'), patch('os.replace', replace):
+                refusals['replace'] = 1
+                with self.assertRaises(PermissionError):
+                    corsu.save_state({'files': {}})
+
     def test_interrupted_downloads_and_copies_are_never_taken_as_complete(self):
         import zipfile
         with tempfile.TemporaryDirectory() as directory:
