@@ -14,8 +14,8 @@
     <Copyright URL="">© Corsu contributors</Copyright>
     <Author URL="">Corsu</Author>
     <WebSite URL="https://github.com/Platykalt/corsu">github.com/Platykalt/corsu</WebSite>
-    <Version URL="">1.0</Version>
-    <Description URL="">Corsican word prediction and correction · Predizzione è currezzione di parolle in corsu</Description>
+    <Version URL="">1.1</Version>
+    <Description URL="">Corsican word prediction and correction, no regional preference · Predizzione è currezzione di parolle in corsu</Description>
   </Info>
   <Files>
     <File>

@@ -1,0 +1,457 @@
+[
+ {
+  "name": "casing: lower, initial, upper, then space (auto-correct on)",
+  "setting": 3,
+  "steps": [
+   {
+    "type": "eccu"
+   },
+   {
+    "key": "K_SPACE"
+   },
+   {
+    "type": "Eccu"
+   },
+   {
+    "key": "K_SPACE"
+   },
+   {
+    "type": "ECCU"
+   },
+   {
+    "key": "K_SPACE"
+   }
+  ]
+ },
+ {
+  "name": "casing: suggestion taps keep the typed case",
+  "setting": 2,
+  "steps": [
+   {
+    "type": "Ecc"
+   },
+   {
+    "accept": 1
+   },
+   {
+    "type": "ECC"
+   },
+   {
+    "accept": 1
+   }
+  ]
+ },
+ {
+  "name": "casing: accented words",
+  "setting": 3,
+  "steps": [
+   {
+    "type": "Ùn"
+   },
+   {
+    "key": "K_SPACE"
+   },
+   {
+    "type": "hè"
+   },
+   {
+    "key": "K_SPACE"
+   },
+   {
+    "type": "HÈ"
+   },
+   {
+    "key": "K_SPACE"
+   },
+   {
+    "type": "Sicuru"
+   },
+   {
+    "key": "K_SPACE"
+   }
+  ]
+ },
+ {
+  "name": "casing: elisions with an apostrophe",
+  "setting": 3,
+  "steps": [
+   {
+    "type": "L'isul"
+   },
+   {
+    "key": "K_SPACE"
+   },
+   {
+    "type": "d'altr"
+   },
+   {
+    "key": "K_SPACE"
+   },
+   {
+    "type": "Ch'ell"
+   },
+   {
+    "key": "K_SPACE"
+   }
+  ]
+ },
+ {
+  "name": "casing: proper nouns",
+  "setting": 2,
+  "steps": [
+   {
+    "type": "in corsic"
+   },
+   {
+    "accept": 1
+   },
+   {
+    "type": "Aiacc"
+   },
+   {
+    "accept": 1
+   },
+   {
+    "type": "corsicaa"
+   },
+   {
+    "key": "K_SPACE"
+   }
+  ]
+ },
+ {
+  "name": "casing: a typo corrected keeps the chosen case",
+  "setting": 3,
+  "steps": [
+   {
+    "type": "Lingau"
+   },
+   {
+    "key": "K_SPACE"
+   },
+   {
+    "type": "lingau"
+   },
+   {
+    "key": "K_SPACE"
+   },
+   {
+    "type": "LINGAU"
+   },
+   {
+    "key": "K_SPACE"
+   }
+  ]
+ },
+ {
+  "name": "sentence start: field start, . ? ! then space",
+  "setting": 2,
+  "steps": [
+   {
+    "type": "Eccu."
+   },
+   {
+    "key": "K_SPACE"
+   },
+   {
+    "type": "Dopu?"
+   },
+   {
+    "key": "K_SPACE"
+   },
+   {
+    "type": "Iè!"
+   },
+   {
+    "key": "K_SPACE"
+   }
+  ]
+ },
+ {
+  "name": "sentence start: suggestion before any letter",
+  "setting": 2,
+  "steps": [
+   {
+    "accept": 0
+   },
+   {
+    "type": "eccu."
+   },
+   {
+    "key": "K_SPACE"
+   },
+   {
+    "accept": 0
+   }
+  ]
+ },
+ {
+  "name": "sentence start: quotes, newline",
+  "setting": 2,
+  "steps": [
+   {
+    "type": "Disse: \""
+   },
+   {
+    "key": "K_BKSP"
+   },
+   {
+    "type": "eccu.\""
+   },
+   {
+    "key": "K_SPACE"
+   },
+   {
+    "key": "K_ENTER"
+   },
+   {
+    "type": "eccu"
+   },
+   {
+    "key": "K_ENTER"
+   }
+  ]
+ },
+ {
+  "name": "sentence start: decimals, abbreviations, web and mail addresses",
+  "setting": 2,
+  "steps": [
+   {
+    "type": "3.5"
+   },
+   {
+    "key": "K_SPACE"
+   },
+   {
+    "type": "M."
+   },
+   {
+    "key": "K_SPACE"
+   },
+   {
+    "type": "www.corsu.org"
+   },
+   {
+    "key": "K_SPACE"
+   },
+   {
+    "type": "a@b.co"
+   },
+   {
+    "key": "K_SPACE"
+   }
+  ]
+ },
+ {
+  "name": "sentence start: caret moved after a full stop",
+  "setting": 2,
+  "steps": [
+   {
+    "setText": "Eccu. Dopu",
+    "at": 6
+   },
+   {
+    "setText": "Eccu. Dopu",
+    "at": 3
+   }
+  ]
+ },
+ {
+  "name": "auto-correct on: typos, known words, unknown words, addresses",
+  "setting": 3,
+  "steps": [
+   {
+    "type": "lingau"
+   },
+   {
+    "key": "K_SPACE"
+   },
+   {
+    "type": "parlle"
+   },
+   {
+    "key": "K_SPACE"
+   },
+   {
+    "type": "lingua"
+   },
+   {
+    "key": "K_SPACE"
+   },
+   {
+    "type": "Platykalt"
+   },
+   {
+    "key": "K_SPACE"
+   },
+   {
+    "type": "Zicavu"
+   },
+   {
+    "key": "K_SPACE"
+   },
+   {
+    "type": "Bastelicaccia"
+   },
+   {
+    "key": "K_SPACE"
+   },
+   {
+    "type": "12 rue Fesch"
+   },
+   {
+    "key": "K_SPACE"
+   },
+   {
+    "type": "20090"
+   },
+   {
+    "key": "K_SPACE"
+   }
+  ]
+ },
+ {
+  "name": "auto-correct off (Keyman default): same typing",
+  "setting": 2,
+  "steps": [
+   {
+    "type": "lingau"
+   },
+   {
+    "key": "K_SPACE"
+   },
+   {
+    "type": "parlle"
+   },
+   {
+    "key": "K_SPACE"
+   },
+   {
+    "type": "Platykalt"
+   },
+   {
+    "key": "K_SPACE"
+   }
+  ]
+ },
+ {
+  "name": "auto-correct: backspace right after a correction undoes it",
+  "setting": 3,
+  "steps": [
+   {
+    "type": "lingau"
+   },
+   {
+    "key": "K_SPACE"
+   },
+   {
+    "key": "K_BKSP"
+   }
+  ]
+ },
+ {
+  "name": "return to a word: caret inside, at end, selection",
+  "setting": 2,
+  "steps": [
+   {
+    "setText": "Eccu a casa di Petru.",
+    "at": 9
+   },
+   {
+    "accept": 1
+   },
+   {
+    "setText": "Eccu a casa di Petru.",
+    "at": 4
+   },
+   {
+    "accept": 1
+   },
+   {
+    "setText": "Eccu a casa di Petru.",
+    "at": 7
+   },
+   {
+    "setText": "Eccu a casa di Petru.",
+    "at": 0
+   }
+  ]
+ },
+ {
+  "name": "return to a word: selection replaced",
+  "setting": 2,
+  "steps": [
+   {
+    "setText": "Eccu a casa di Petru.",
+    "at": 0
+   },
+   {
+    "caret": [
+     7,
+     11
+    ]
+   },
+   {
+    "type": "c"
+   },
+   {
+    "accept": 1
+   }
+  ]
+ },
+ {
+  "name": "return to a word: delete the last letter and retype",
+  "setting": 2,
+  "steps": [
+   {
+    "setText": "Eccu a casa di Petru.",
+    "at": 11
+   },
+   {
+    "key": "K_BKSP"
+   },
+   {
+    "type": "e"
+   },
+   {
+    "accept": 1
+   }
+  ]
+ },
+ {
+  "name": "return to a word: after a full stop and several words",
+  "setting": 2,
+  "steps": [
+   {
+    "setText": "Eccu a casa. Dopu ghjunghje",
+    "at": 11
+   },
+   {
+    "setText": "Eccu a casa. Dopu ghjunghje",
+    "at": 13
+   },
+   {
+    "setText": "Eccu a casa. Dopu ghjunghje",
+    "at": 17
+   },
+   {
+    "accept": 1
+   }
+  ]
+ },
+ {
+  "name": "variants: the same typing in each model",
+  "setting": 2,
+  "steps": [
+   {
+    "type": "u zite"
+   },
+   {
+    "key": "K_SPACE"
+   },
+   {
+    "type": "u cava"
+   }
+  ]
+ }
+]

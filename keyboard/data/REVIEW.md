@@ -1,0 +1,204 @@
+# Keyboard vocabulary: audit and review
+
+Automated work by an AI agent (2026-10-18). **No human has reviewed these lists.** Nothing here is a speaker's
+validation; "attested" only means that an external source writes the word that way.
+
+Files:
+
+| File | Content |
+|---|---|
+| `shared.tsv` | The base list: 12,530 words, both varieties' forms included. |
+| `cismuntincu.tsv` | 354 rows laid over `shared.tsv` for a northern preference. |
+| `pumuntincu.tsv` | 357 rows laid over `shared.tsv` for a southern preference. |
+| `sources/` | Hand-checked inputs: `daily.tsv` (everyday words, editorial choice), `adecec.tsv`, `cunghjugarellu.tsv`, `variant-pairs.tsv`. |
+| `tools/make_vocab.py` | Rebuilds the three lists from the sources (needs the resources of `tools/fetch_resources.py`). |
+| `tools/simulate.py` | Top-3 suggestion simulation and checks (also run by `tests/test_keyboard_vocab.py`). |
+| `audit/removed.tsv` | Every word of the old list that was dropped, with its reason. |
+| `audit/stats.json` | The numbers quoted below. |
+
+## Reading the files (for the build)
+
+Columns: `word	weight	variant	source	license	status`, UTF-8, tab-separated, one header line.
+
+- **Merging a variety**: take `shared.tsv`, then lay the variety's file over it. When a word is in both, the
+  variety's weight replaces the shared one. Words absent from the variety's file keep their shared weight.
+- In a variety's file, `variant` says which variety the *form* belongs to: `pumuntincu.tsv` holds the southern forms
+  (raised) and the northern counterparts it lowers (`variant` = `cismuntincu`, a quarter of the pair's weight).
+  Nothing is deleted: the other variety's words stay suggestible.
+- `shared.tsv` alone (no preference) has both forms of each pair, the variety-specific ones at half the pair's weight.
+- Words keep their case: lowercase common words, capitalised names (Corsica, Aiacciu, Bastia, Spagna). Apostrophes are
+  the ASCII `'` (U+0027); `’` was converted.
+- Elided forms are single entries (`nant'à`, `cum'è`, `l'annu`, `ch'è`; 1,280 in `shared.tsv`), because Keyman's
+  default word breaker (Unicode word boundaries) does not split a word at an apostrophe between two letters. If the
+  build uses a word breaker that splits at the apostrophe, these entries become useless and could be dropped.
+
+### Weight scale
+
+`weight` ≈ occurrences per 10 million words, so weights of different sources can be compared:
+
+1. Vikipedia frequency (botanical stub articles excluded): `count × 10,000,000 / 1,327,560` tokens.
+2. Plus 2 % of the Corsu-lexicon frequency on the same scale (1,010,763 tokens). Interface strings repeat "fichier",
+   "paramètres", "erreur" thousands of times; this share keeps those words known without letting them outrank
+   everyday words.
+3. Minimum weights (editorial, an AI choice): daily words of `sources/daily.tsv` tier 1 → 20,000, tier 2 → 5,000,
+   tier 3 → 1,000; words of the Tatoeba sentences → 2,000; variety pairs with a tier → the same floors.
+4. Variety files: the variety's own form gets the pair's weight (the highest weight of the pair's forms, at least
+   1,000 or its tier floor); the other variety's form gets 25 % of it, unless the pair says `lower_other = no`.
+
+Range: 1 to 715,754 (*di*); median 31; 981 words at 1,000 or more.
+
+### Status
+
+- `attested`: the word is written so in at least one external source (`source` column, strongest first:
+  cunghjugarellu, adecec, wiktionary, tatoeba, vikipedia ≥ 5 occurrences, apertium).
+- `corsu-lexicon`: only Corsu's own software lexicon has it (6,640 words). This includes words from the Mozilla and
+  Patriccollu imports: their file of origin does not make them attested here.
+- `ai-proposal`: 11 everyday words found in no source (listed below).
+
+## Audit of the old list
+
+The old list (`keyboard/platykalt.co.corsu/source/wordlist.tsv`, 16,949 words) was generated at version 0.9.0 by
+`tools/build_keyboard.py` from the lexicon only:
+
+- **Stale**: it was never regenerated after the lexicon corrections of `lexicon/variants.md`, and still had
+  *almacenamentu*, *scurciatoghja*, *accurtatoia*, *ditagli*…
+- **"Reviewed" by file of origin**: rows of `lexicon-mozilla.tsv` and `lexicon-upstream.tsv` counted three times, and
+  a word seen once there was kept. 3,134 words were kept only by that rule or by two occurrences.
+- **Software frequencies**: *schedariu* (file) had 6,153, more than *più*; *impussibule* 5,213, *affissà* 3,257,
+  *cartulare* 2,157. *casa*, *grazie*, *bonghjornu*, *aghju*, *mamma*, *dumane* were absent or far behind.
+- **Everything lowercased**: *corsica*; *Bastia* and *Aiacciu* missing.
+- **Not Corsican**: English words and program names left in the translations (*google*, *firefox*, *audio*, *data*,
+  *the*, *of*), format tokens (*yyyy*, *ycbcr*, *ctrl*, *mm*), French spellings (*entrée*, *vérificà*).
+
+### Filtering rules (applied to the old list and to every new candidate)
+
+| Rule | Removed | Examples |
+|---|---|---|
+| **foreign-or-name**: in the program-name list (Google, Windows, Linux, Firefox, Chrome, Discord, KDE, Plasma, Wi-Fi, Bluetooth, git…), a web/markup token (http, www, html, jpg, url, isbn…), or written at least half as often in the English source strings as in the Corsican ones, and absent from Wiktionary, Apertium, Tatoeba, ADECEC and the daily list | 1,291 | audio (754), data (598), firefox (430), audacity, mozilla, db, alt, media, the, of, and |
+| **non-corsican-letters**: a character outside a–z, à è ì ò ù and the apostrophe (other scripts such as Japanese ディスコード, Greek, Cyrillic; ç, ñ, ö…), or k, w, x, y, or a j not in *chj/ghj* — unless Wiktionary has the word as Corsican | 842 | web (1,221), cookies, krita, proxy, pixel, widget, javascript, json, kernel, ycbcr, yyyy |
+| **non-corsican-spelling**: an acute accent (Corsican spelling writes grave accents) | 14 | entrée, bézier, vérificà, moiré, periféricu, échap |
+| **fragment**: no vowel; five consonants in a row (*ghj* and *chj* count as one, so *aghjunghje*, *inghjò* pass); one letter three times; or one or two letters found in no source | 225 | ctrl (341), mm, ms, qt, ssh, dll, src, dirmngr, ip, ui, tà |
+| **gone-from-lexicon**: no longer in the lexicon (corrected since) and in no source | 29 | ditagli, d'almacenamentu, scurciatoghja, accurtatoia |
+| **unattested-rare**: fewer than 3 occurrences in the lexicon (all files counted alike) and in no external source | 2,874 | maius, almacenamentu, discunnittitevi, alonghezza, nonstampevule |
+| **corpus-name**: a capitalised name known only from Vikipedia or Tatoeba (not a Corsican Wiktionary entry, not a Corsican lexicon word) | 100 | sun, steve, research, foundation, david, Tom (Tatoeba) |
+
+Total removed: **5,375** of 16,949 (`audit/removed.tsv`). Kept: 11,574; added from outside the old list: 955 (daily
+words, conjugations, ADECEC words, Vikipedia words with ≥ 30 occurrences that Wiktionary, Apertium or the lexicon
+also has). **After: 12,530 words** in `shared.tsv` — 5,879 attested, 6,640 corsu-lexicon, 11 ai-proposal.
+
+The `unattested-rare` rule is deliberately strict: it also drops real but rare words (*infelice*, *fidanza*,
+*contestu*). They are only missing from suggestions, not marked wrong, and come back when a source attests them.
+
+## Effect of the weights (simulation)
+
+`python3 keyboard/data/tools/simulate.py` ranks the words that start with a prefix (case and accents folded as in
+Keyman's default search key; no typo correction, no context). It is a rough model of Keyman, not Keyman.
+
+- 37 shared checks (an everyday word expected in the top 3 for its prefix) plus 9 northern and 10 southern ones:
+  **old list 26 of the 37 shared checks fail; new lists 0 failures**. Old examples: *sc* → schedariu, schedarii, screnu (no *scusate*); *ca* → cartulare, carta, cambià (no
+  *casa*); *cun* → cunnessione, cunfigurazione, cuntenutu (no *cuntentu*); *gr* → gruppu, grafia, gruppi; *bo* →
+  bordu, bordi, bona. New: *sc* → scusa, scusate, scrittu; *ca* → caffè, casa, Calvi; *cun* → cuntenta, cuntentu,
+  cuntenti; *gr* → grazie, grande, grandi.
+- `--scan`: two-letter prefixes with a software term in the top 3: **old 24 of 481, new 6 of 241** (af: affissà,
+  im: impussibule, oz: ozzioni, sb: sbagliu, sq: squassà, st: statu — *statu* is also "state/been").
+- Some checks pass on ties (in the variety files *induve*/*induva* and *innò* all weigh 20,000; ties sort
+  alphabetically here, and Keyman may order them differently).
+
+## Northern and southern preferences
+
+### What the names cover
+
+*Cismuntincu* (Italian *cismontano*, "this side of the mountains") and *pumuntincu* (*oltramontano*) are the two
+traditional groups of Corsican varieties, north and south of the island's mountain ridge. They are linguistic
+groupings, not the two départements: the line runs roughly from Piana–Vico–Vizzavona–Ghisoni–Ghisonaccia (frwiki,
+"Nord de la Corse"), and a **transition zone** (Piana, Calcatoggio, Cinarca, Vizzavona, Fiumorbo, the Ajaccio area,
+Gravone, Bastelica, Solenzara) mixes features — Ajaccio says *cane* and *accattà*, the northern words, while having
+southern -i feminine plurals. Inside each group there is variation: in the south, **Taravu** (Taravesu) and **Sartè**
+(Sartinesu) differ (*eddu*/*iddu*, *piglià*/*piddà*, *famiglia*/*famidda*), the Alta Rocca is close to northern
+Sardinia, and the Porto-Vecchio hinterland and Bonifacio area have masculine plurals in -a. In the north, Cap Corse
+uses the articles *lu, li, la, le*. **Bunifaziu and Calvi** speak Ligurian dialects inherited from Genoa, not
+Corsican: they are not covered by either list. Gallurese, Sassarese and Castellanese (Sardinia) are related but
+separate and not covered. U Cunghjugarellu calls the two versions *supranacciu* (north) and *suttanacciu* (south).
+
+### Status: real but partial, experimental as a keyboard setting
+
+The differences are **sourced**, not generated: no letter rule (-ll- → -dd-, -e → -i…) was applied to any word. Every
+variety-specific form comes from a cited table or entry. But coverage is narrow — the verbs of 21 conjugation tables,
+28 + 7 lexical pairs from two encyclopaedia articles and 19 Wiktionary entries — so these are **preference lists, not
+a dialect dictionary**. The weights given to each side (pair weight, 25 % for the other side) are an editorial
+choice. Treat the two settings as experimental until a speaker of each area has tried them.
+
+| | Count |
+|---|---|
+| Words whose weight differs between the merged northern and southern lists | **361** |
+| — from U Cunghjugarellu (21 verbs, present and imperfect indicative, tables 1–100) | 253 |
+| — from Vikipedia "Lingua corsa" (Taravesu / Sartinesu table) | 60 |
+| — from Wiktionary (Cismontane / Ultramontane entries) | 34 |
+| — from Wikipédia "Corse (langue)" | 14 |
+| `cismuntincu.tsv`: northern forms raised / southern forms lowered | 175 / 179 |
+| `pumuntincu.tsv`: southern forms raised / northern forms lowered | 192 / 165 |
+
+Examples (northern list / southern list weights): *simu* 20,000 / 5,000 and *semi* 5,000 / 20,000 (*semu*, given for
+both groups, is untouched); *induve* / *induva*; *eranu* / *erani*; *cantavamu* / *cantavami*; *anu* / *ani*;
+*socu* (southern 1st person of *essa* and *sapè*); *ellu* / *eddu*, *iddu*; *fratellu* / *frateddu*; *pane* /
+*pani*; *tredeci* / *tredici*.
+
+Pairs where both forms are used in the south, or where a form has another common sense, do not lower the other form
+(`lower_other = no`): *piglià/piddà*, *famiglia/famidda*, *paglia/padda*, *figliolu/fiddolu*, *vogliu/voddu* (Taravu
+keeps the first form), *manghjà/magnà* (both northern), *accattà/cumprà*, *sì/s'è*, *nove/novi*; and the forms *eri*
+(yesterday), *sete* (thirst), *mane* (morning), *sani*, *vani*, *pari*, *sò*, *site*, *deti*, *feti* are never lowered.
+
+### Gaps (not covered, not guessed)
+
+- Future, conditional, subjunctive, imperative and past simple of the verbs; the other 79 tables of the book; the
+  Alta Rocca imperfect (*andaghjiu*, *cantaiu*) printed next to the southern one.
+- Forms the book writes with a final apostrophe (*da'*, *va'*, *po'*, *sa'*, *vo'*, *a'*) were left out.
+- The southern -i of nouns and adjectives (*pastori*, *nazioni*) only for the listed examples; masculine plurals in
+  -a (*i letta*); Cap Corse articles; any Ligurian (Bunifaziu, Calvi).
+- *eiu*/*iu* and other pronouns: no source consulted pairs them by area.
+- Sources disagree on "to arrive": Vikipedia's table gives *ghjugne / ghjugna*, U Cunghjugarellu *ghjunghje /
+  ghjunghja*. Both are kept.
+
+## To check by hand (INFCOR, ADECEC or a speaker)
+
+AI proposals (in no source consulted; kept with the daily weight): *ciao*, *saluti*, *auguri*, *evviva*, *cugina*,
+*amiche*, *partimu*, *appetitu*, *pigliu*, *stanca*, *malata*.
+
+Left out of the daily list because unsure: *bonasera* (one word, or *bona sera*?), *nonnu*, *nanna*, *minnanna*
+(grandparents: which forms are usual, and where? *missiavu* is kept, attested), *fratellucciu*.
+
+Corsu-lexicon-only words that the daily list raises (no external attestation found): *scusate*, *benvenuti*,
+*mandu*.
+
+Variety questions:
+
+1. *cane* / *ghjacaru*: Wiktionary marks *cane* "Cismontane, dialectal" and *ghjacaru* "Ultramontane, dialectal",
+   Vikipedia's table gives *cane* north, *ghjàcaru* south, and frwiki says Ajaccio uses *cane*. Is *ghjacaru* also
+   common in the north (then `lower_other` should be `no`)?
+2. *accattà* / *cumprà*: only a preference; both are written in the north.
+3. *simu* / *semi*: the southern list lowers *simu* to a quarter; is *simu* heard in the south (Taravu)?
+4. Wiktionary *dicessetti* and *diciassetti* (seventeen, Ultramontane): which one is usual?
+5. *stai*: the southern 2nd person of *stà* is printed *sta'* in U Cunghjugarellu; it was not paired, so *stai* is
+   not lowered in the south.
+
+Other everyday-word questions:
+
+6. *colazione* (Vikipedia) vs *cullazione* (ADECEC: "déjeuner"), *pesce* (Wiktionary) vs *pesciu* (ADECEC): both
+   kept; which should be preferred?
+7. *nivulu* (Wiktionary) vs *nuvulu*, *nulu* (ADECEC "nuage"); *tempesta* (lexicon) vs *timpesta* (ADECEC).
+8. Product names are removed even when Corsican text writes them (*Google*, *Windows*). If the maintainer wants
+   them suggested, they belong in a separate, explicitly listed set.
+
+## Licences
+
+See [docs/keyboard-sources.md](../../docs/keyboard-sources.md). To decide before a release: whether the
+`attestation-only` use of U Cunghjugarellu (all rights reserved) and of the ADECEC pages is acceptable; the forms
+are single words checked in them, no table is reproduced.
+
+## Rebuilding
+
+```
+python3 keyboard/data/tools/make_vocab.py      # needs ~/.local/share/corsu/resources (tools/fetch_resources.py)
+python3 keyboard/data/tools/simulate.py --show # top-3 checks; --old for the old list; --scan for software terms
+HOME=$(mktemp -d) python3 -m unittest tests.test_keyboard_vocab
+```
