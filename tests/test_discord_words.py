@@ -89,6 +89,14 @@ class DiscordWordsTests(unittest.TestCase):
         # Found by the bounded search of Discord's settings (docs/untranslated-inventory.md).
         self.assertEqual(self.words['Durée minimale des notifications'], 'Durata minima di e nutificazioni')
 
+    def test_suppress_means_turn_off_and_pin_stays_discords(self):
+        # "Suppress Highlights" stops a kind of notification, it erases nothing (October 2026 review).
+        self.assertEqual(self.words['Supprimer les moments notables'], 'Disattivà i mumenti nutevuli')
+        # Puntà/Spuntà is Discord's own pair; it no longer leaks into other programs (Firefox follows Mozilla).
+        self.assertEqual(self.words['Épingler'], 'Puntà')
+        self.assertEqual(self.words['Désépingler'], 'Spuntà')
+        self.assertEqual(engine.WORDS['Épingler'], 'Spirlà')
+
     def test_templates_keep_their_placeholders(self):
         key = engine.normalize('Effacer après \u00001\u0000 heures')
         self.assertEqual(self.words[key], 'Squassà dopu \u00001\u0000 ore')

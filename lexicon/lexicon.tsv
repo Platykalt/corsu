@@ -111,7 +111,7 @@ Save and continue|Enregistrer et continuer|Arregistrà è cuntinuà
 Manage account|Gérer le compte|Gestisce u contu
 This cannot be undone.|Cette action est irréversible.|St'azzione ùn si pò abbandunà.
 Default configuration|Configuration par défaut|Cunfigurazione per difettu
-Pin this tab|Épingler cet onglet|Appuntà st'unghjetta
+Pin this tab|Épingler cet onglet|Spirlà st'unghjetta
 Recent activity|Activité récente|Attività recente
 Weather|Météo|Tempu
 Edit list name|Modifier le nom de la liste|Mudificà u nome di a lista
@@ -642,7 +642,7 @@ Get Help|Obtenir de l’aide|Ottene aiutu
 More Troubleshooting Information|Plus d’informations de dépannage|Altre infurmazioni di riparazione
 Share Ideas and Feedback|Partager des idées et des commentaires|Sparte idee è cummenti
 Turn Troubleshoot Mode Off|Désactiver le mode de dépannage|Disattivà u modu di riparazione
-Switch to a New Device|Passer à un nouvel appareil|Passà à un dispusitivu novu
+Switch to a New Device|Passer à un nouvel appareil|Passà à un apparechju novu
 Report Deceptive Site|Signaler un site trompeur|Signalà un situ ingannatore
 This Isn’t a Deceptive Site|Ce site n’est pas trompeur|Stu situ ùn hè micca ingannatore
 Report Broken Site|Signaler des problèmes avec ce site|Signalà prublemi cù stu situ
@@ -1082,7 +1082,7 @@ Baltic|Baltique|Balticu
 |Tableau de bord des protections|Pannellu di e prutezzioni
 |Lancer la lecture|Lancià a lettura
 |Groupe sans nom|Gruppu senza nome
-|Déplacer vers une nouvelle fenêtre|Spustà ver di una finestra nova
+|Déplacer vers une nouvelle fenêtre|Dispiazzà in una finestra nova
 |Modifier la note|Mudificà a nota
 |Supprimer la note|Squassà a nota
 |Ajouter le moteur de recherche « %1 »|Aghjunghje u mutore di ricerca « %1 »
@@ -1508,7 +1508,7 @@ Baltic|Baltique|Balticu
 |Réglage conçu pour examiner les bugs liés à la consommation d’énergie dans %1, avec une surcharge faible.|Regulazione cuncepita per esaminà i bug ligati à u cunsumu d'energia in %1, cù un caricu addiziunale debule.
 |Réglage conçu pour le débogage dans %1. Sa surcharge est importante, à utiliser non pour étudier les performances, mais pour comprendre le comportement du navigateur.|Regulazione cuncepita per a currezzione di l'errori in %1. U so caricu addiziunale hè impurtante: da aduprà micca per studià e prestazioni, ma per capisce u cumpurtamentu di u navigatore.
 |Réglage recommandé pour déboguer les problèmes de compatibilité web avec les sites web, plutôt que pour le suivi des performances.|Regulazione ricumandata per currege i prublemi di cumpatibilità web cù i siti web, piuttostu chè per seguità e prestazioni.
-|Connecter un appareil|Cunnette un dispusitivu
+|Connecter un appareil|Cunnette un apparechju
 |Emportez vos marque-pages avec vous|Purtate i vostri indette cun voi
 |Reprendre une capture d’écran|Rifà una cattura di screnu
 |Annuler (Échap)|Abbandunà (Esc)
@@ -1649,7 +1649,7 @@ Baltic|Baltique|Balticu
 |Rechercher parmi les raccourcis|Circà trà l'accurtatoghji
 |Contrôlez la manière dont vous naviguez et vos interactions avec %1.|Cuntrullate a manera di navigà è e vostre interazzioni cù %1.
 |Restaurer les raccourcis par défaut|Ristabilisce l'accurtatoghji predefiniti
-|Dupliquer l’onglet|Duplicà l'unghjetta
+|Dupliquer l’onglet|Duppià l'unghjetta
 |Console web|Cunsola web
 |Moniteur réseau|Monitore di rete
 |Éditeur de style|Editore di stile
@@ -1657,9 +1657,9 @@ Baltic|Baltique|Balticu
 |Mot-clé|Parolla chjave
 |Essayer les onglets verticaux|Pruvà l'unghjette verticale
 |Afficher moins de recommandations|Affissà menu ricumandazioni
-|Déplacer l’onglet|Spustà l'unghjetta
-|Déplacer vers le début|Spustà à u principiu
-|Déplacer vers la fin|Spustà à a fine
+|Déplacer l’onglet|Dispiazzà l'unghjetta
+|Déplacer vers le début|Dispiazzà à u principiu
+|Déplacer vers la fin|Dispiazzà à a fine
 |Sélectionnez « Continuer »|Selezziunate « Cuntinuà »
 |Mots de passe enregistrés|Parolle d'accessu arregistrate
 |Historique de navigation|Cronolugia di navigazione
@@ -1670,8 +1670,8 @@ Baltic|Baltique|Balticu
 |Sélectionner un fichier|Selezziunà un schedariu
 |Personnaliser|Persunalizà
 |Paramètres des notifications|Parametri di e nutificazioni
-|Épingler|Appuntà
-|Désépingler|Staccà
+|Épingler|Spirlà
+|Désépingler|Dispirlà
 |Nos sponsors et votre vie privée|I nostri sponsor è a vostra vita privata
 |Ne plus suivre|Ùn seguità più
 |Tendance|Tendenza
@@ -1784,7 +1784,7 @@ Baltic|Baltique|Balticu
 |Vous utilisez Resist Fingerprinting (RFP) qui remplace quelques-uns des paramètres de protection contre les détecteurs d’empreinte numérique de %1. De ce fait, certains sites peuvent dysfonctionner.|Aduprate Resist Fingerprinting (RFP) chì rimpiazza qualchì parametru di prutezzione contr'à i rilevatori d'impronta numerica di %1. Per quessa, certi siti ponu funziunà male.
 |Stricte|Stretta
 |Personnalisée|Persunalizata
-|Actualiser tous les onglets|Rinfrescà tutte l'unghjette
+|Actualiser tous les onglets|Attualizà tutte l'unghjette
 |Détecteurs d’empreinte numérique connus|Rilevatori d'impronta numerica cunnisciuti
 |L’envoi de données est désactivé pour cette configuration de compilation.|A mandata di dati hè disattivata per sta cunfigurazione di cumpilazione.
 |Les rapports de plantage permettent à %1 de diagnostiquer et de corriger des problèmes avec le navigateur. Les rapports peuvent contenir des données personnelles ou sensibles.|I rapporti di crash permettenu à %1 di diagnosticà è di currege prublemi cù u navigatore. I rapporti ponu cuntene dati persunali o sensibili.
@@ -1810,7 +1810,7 @@ Baltic|Baltique|Balticu
 |Pour en savoir plus sur le système de protection contre l’hameçonnage et les logiciels malveillants de %1 vous pouvez consulter <a data-l10n-name='firefox_support'>support.mozilla.org</a>.|Per sapene di più nant'à u sistema di prutezzione contr'à u phishing è i prugrammi maligni di %1 pudete cunsultà <a data-l10n-name='firefox_support'>support.mozilla.org</a>.
 |Paramètres de site|Parametri di u situ
 |Choisir comme fond d’écran|Sceglie cum'è fondu di screnu
-|Dupliquer|Duplicà
+|Dupliquer|Duppià
 |Fermer plusieurs onglets|Chjode parechje unghjette
 |Icône d’erreur|Icona d'errore
 |Icône d’avertissement|Icona d'avertimentu
@@ -6253,10 +6253,10 @@ Baltic|Baltique|Balticu
 |Ouvrir le menu de l’application|Apre u menù di l'appiecazione
 |Fermer le menu de l’application|Chjode u menù di l'appiecazione
 |Afficher davantage d’onglets|Affissà più unghjette
-|Afficher plus d’onglets de cet appareil|Affissà più unghjette di stu dispusitivu
+|Afficher plus d’onglets de cet appareil|Affissà più unghjette di st'apparechju
 |Onglets inactifs|Unghjette inattive
-|Afficher les onglets inactifs sur cet appareil|Affissà l'unghjette inattive nant'à stu dispusitivu
-|Afficher la liste des onglets de vos autres appareils.|Affissà a lista di l'unghjette di i vostri altri dispusitivi.
+|Afficher les onglets inactifs sur cet appareil|Affissà l'unghjette inattive nant'à st'apparechju
+|Afficher la liste des onglets de vos autres appareils.|Affissà a lista di l'unghjette di i vostri altri apparechji.
 |Se connecter à %1|Cunnettesi à %1
 |Gestion du compte|Gestione di u contu
 |Synchronisation activée|Sincrunizazione attivata
@@ -6278,7 +6278,7 @@ Baltic|Baltique|Balticu
 |Ctrl+Maj+1|Ctrl+Maiusc+1
 |Ctrl+Maj+2|Ctrl+Maiusc+2
 |Gérer l’historique|Gestisce a cronolugia
-|Synchronisez vos appareils facilement|Sincrunizate i vostri dispusitivi facilmente
+|Synchronisez vos appareils facilement|Sincrunizate i vostri apparechji facilmente
 |Synchroniser vos onglets et votre historique|Sincrunizà e vostre unghjette è a vostra cronolugia
 |Retrouvez les onglets de votre mobile|Ritruvate l'unghjette di u vostru telefuninu
 |Historique récent|Cronolugia recente
@@ -6290,9 +6290,9 @@ Baltic|Baltique|Balticu
 |Alertes de fuites de données %1|Avertimenti di fughe di dati %1
 |Protégez la confidentialité de vos adresses e-mail|Prutegite a cunfidenzialità di i vostri indirizzi email
 |Permet de limiter le spam dans votre boîte de réception|Permette di limità u spam in a vostra scatula di ricezzione
-|Voir les alias de messagerie|Vede l'alias di messageria
+|Voir les alias de messagerie|Vede l'alias di messaghjeria
 |Masquez votre localisation avec %1|Piattate a vostra lucalizazione cù %1
-|Bénéficiez d’une protection supplémentaire sur tous vos appareils|Prufittate d'una prutezzione in più nant'à tutti i vostri dispusitivi
+|Bénéficiez d’une protection supplémentaire sur tous vos appareils|Prufittate d'una prutezzione in più nant'à tutti i vostri apparechji
 |Télécharger %1|Scaricà %1
 |Outils de confidentialité|Arnesi di cunfidenzialità
 |Tous les profils|Tutti i prufili
@@ -6801,7 +6801,7 @@ Baltic|Baltique|Balticu
 |Réessayer de télécharger|Pruvà torna à scaricà
 |Afficher tous les téléchargements|Affissà tutti i scaricamenti
 |Détails du téléchargement|Dettagli di u scaricamentu
-|Les fichiers restent sur votre appareil|I schedarii fermanu nant'à u vostru dispusitivu
+|Les fichiers restent sur votre appareil|I schedarii fermanu nant'à u vostru apparechju
 |Toute personne utilisant cet appareil peut voir les téléchargements, même quand vous fermez toutes les fenêtres privées.|Qualunque persona chì adopra stu dispusitivu pò vede i scaricamenti, ancu quandu chjudite tutte e finestre private.
 |Supprimer les fichiers automatiquement|Squassà i schedarii autumaticamente
 |Fichier non téléchargé.|Schedariu micca scaricatu.
@@ -8063,6 +8063,7 @@ Baltic|Baltique|Balticu
 |Obtenez les prévisions météo locales|Ottenite e previsioni di u tempu lucale
 |Utiliser la localisation|Aduprà a lucalizazione
 |Maximale|Massima
+|Minimale|Minima
 |Économie|Ecunumia
 |Carrière|Carriera
 |Enseignement|Insignamentu
@@ -9713,8 +9714,8 @@ Baltic|Baltique|Balticu
 |Télécharger dans l’App Store|Scaricà nant'à l'App Store
 |Nouvel onglet à droite|Unghjetta nova à diritta
 |Nouvel onglet en dessous|Unghjetta nova sottu
-|Actualiser l’onglet|Rinfrescà l'unghjetta
-|Dupliquer les onglets|Duplicà l'unghjette
+|Actualiser l’onglet|Attualizà l'unghjetta
+|Dupliquer les onglets|Duppià l'unghjette
 |Fermer les onglets sur la gauche|Chjode l'unghjette à manca
 |Fermer les onglets au-dessus|Chjode l'unghjette sopra
 |Fermer les onglets sur la droite|Chjode l'unghjette à diritta
@@ -9722,19 +9723,19 @@ Baltic|Baltique|Balticu
 |Fermer les autres onglets|Chjode l'altre unghjette
 |Décharger l’onglet|Scaricà l'unghjetta da a memoria
 |Décharger %1 onglets|Scaricà %1 unghjette da a memoria
-|Actualiser les onglets|Rinfrescà l'unghjette
-|Désépingler cet onglet|Staccà st'unghjetta
-|Épingler les onglets|Appuntà l'unghjette
-|Désépingler les onglets|Staccà l'unghjette
+|Actualiser les onglets|Attualizà l'unghjette
+|Désépingler cet onglet|Dispirlà st'unghjetta
+|Épingler les onglets|Spirlà l'unghjette
+|Désépingler les onglets|Dispirlà l'unghjette
 |Marquer ces onglets…|Aghjunghje st'unghjette à l'indette…
 |Ajouter aux marque-pages|Aghjunghje à l'indette
-|Déplacer vers %1|Spustà versu %1
+|Déplacer vers %1|Dispiazzà versu %1
 |Fermer les doublons de cet onglet|Chjode i duppioni di st'unghjetta
-|Déplacer les onglets|Spustà l'unghjette
-|Déplacer l’onglet vers|Spustà l'unghjetta versu
-|Déplacer %1 onglets vers|Spustà %1 unghjette versu
-|Déplacer la vue scindée vers|Spustà a vista sparta versu
-|Envoyer à vos appareils|Mandà à i vostri dispusitivi
+|Déplacer les onglets|Dispiazzà l'unghjette
+|Déplacer l’onglet vers|Dispiazzà l'unghjetta versu
+|Déplacer %1 onglets vers|Dispiazzà %1 unghjette versu
+|Déplacer la vue scindée vers|Dispiazzà a vista sparta versu
+|Envoyer à vos appareils|Mandà à i vostri apparechji
 |Créer un lien partageable|Creà un ligame spartevule
 |<strong>Mise à jour</strong> Nous avons ajouté des <a data-l10n-name="terms-of-use-link">Conditions d’utilisation</a> pour %1 et mis à jour notre <a data-l10n-name="privacy-notice-link">Politique de confidentialité</a>. Veuillez prendre quelques instants pour les consulter et les accepter.|<strong>Attualizazione</strong> Avemu aghjuntu <a data-l10n-name="terms-of-use-link">Cundizioni d'usu</a> per %1 è attualizatu a nostra <a data-l10n-name="privacy-notice-link">Pulitica di cunfidenzialità</a>. Pigliate qualchì stonda per cunsultalle è accettalle.
 |Nous avons mis à jour notre <a data-l10n-name="privacy-notice-link">Politique de confidentialité</a> afin de prendre en compte les nouvelles fonctionnalités de %1.|Avemu attualizatu a nostra <a data-l10n-name="privacy-notice-link">Pulitica di cunfidenzialità</a> per tene contu di e funziunalità nove di %1.
@@ -100877,7 +100878,7 @@ Open Activity Shelf|Ouvrir l’Étagère des activités|Apre a Scaffa di l'attiv
 Extra room, courtesy of Nitro|Plus d'espace, cadeau de Nitro|Più spaziu, rigalu di Nitro
 Searching all members...|Recherche de tous les membres…|Ricerca di tutti i membri…
 Enter a name for your folder|Saisis un nom pour ton dossier|Scrivi un nome per u to cartulare
-Suppress Highlights|Supprimer les moments notables|Squassà i mumenti nutevuli
+Suppress Highlights|Supprimer les moments notables|Disattivà i mumenti nutevuli
 Your purchase is almost complete.|Ton achat est presque terminé.|A to compra hè guasi compia.
 You are about to start this event|Tu vas commencer cet événement|Stai per principià st'avvenimentu
 Here’s a summary of your request.|Voici un résumé de ta demande.|Eccu un riassuntu di a to dumanda.
@@ -118426,6 +118427,7 @@ events|événements|avvenimenti
 Server Boost|Boost de serveur|Boost di u servore
 Boost|Boost|Boost
 Pin Message|Épingler le message|Puntà u messaghju
+Pin|Épingler|Puntà
 Unpin|Désépingler|Spuntà
 Unpin Message|Désépingler le message|Spuntà u messaghju
 Send|Envoyer|Mandà
