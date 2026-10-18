@@ -1,0 +1,135 @@
+/* The Appearance page's own parts. Shared components (.group, .switch, .button, .segmented, .swatches, .range) come
+   from style.css; the rules for them here sit inside :where() (no specificity), so style.css always wins and these
+   only fill in when it says nothing. */
+
+:where(#appearance) .ap-sr {
+  position: absolute; width: 1px; height: 1px; margin: -1px; padding: 0; overflow: hidden;
+  clip: rect(0 0 0 0); white-space: nowrap; border: 0;
+}
+
+/* Segmented choices and swatches: native radio buttons (arrow keys move between them), the dot hidden visually. */
+:where(#appearance .segmented) {
+  display: inline-flex; flex-wrap: wrap; gap: 2px; padding: 2px; border: 1px solid var(--line, #ccc);
+  border-radius: 8px; background: var(--surface-2, transparent);
+}
+:where(#appearance .segmented) .ap-choice {
+  position: relative; display: inline-flex; align-items: center; gap: 6px; padding: 5px 12px; border-radius: 6px;
+  cursor: pointer; font-size: 0.875rem; white-space: nowrap;
+}
+:where(#appearance) .ap-choice > input[type=radio] { position: absolute; opacity: 0; inset: 0; margin: 0; cursor: pointer; }
+:where(#appearance .segmented) .ap-choice:has(input:checked), :where(#appearance .segmented) .ap-choice[data-checked] {
+  background: var(--surface, #fff); box-shadow: 0 0 0 1px var(--line, #ccc), 0 1px 2px rgb(0 0 0 / 0.08); font-weight: 600;
+}
+/* Not colour alone: the chosen item also gets a check mark. */
+:where(#appearance) .ap-choice:has(input:checked) > span:last-child::before,
+:where(#appearance) .ap-choice[data-checked] > span:last-child::before { content: "✓ "; }
+:where(#appearance) .ap-choice:has(input:focus-visible),
+:where(#appearance) .ap-frame:focus-visible,
+:where(#appearance) .ap-custom:has(input:focus-visible) {
+  outline: 2px solid var(--focus, #3d84b8); outline-offset: 2px;
+}
+
+:where(#appearance) .ap-block { padding: var(--space-3, 12px) var(--space-4, 16px); }
+:where(#appearance) .ap-detail { margin: 0 0 var(--space-3, 12px); }
+:where(#appearance .swatches) { display: flex; flex-wrap: wrap; gap: var(--space-2, 8px); }
+:where(#appearance .swatches) .ap-choice {
+  position: relative; display: inline-flex; align-items: center; gap: 8px; padding: 6px 10px 6px 6px;
+  border: 1px solid var(--line, #ccc); border-radius: 999px; cursor: pointer; font-size: 0.875rem;
+}
+:where(#appearance .swatches) .ap-choice:has(input:checked), :where(#appearance .swatches) .ap-choice[data-checked] {
+  border-color: var(--text, #222); box-shadow: inset 0 0 0 1px var(--text, #222); font-weight: 600;
+}
+:where(#appearance) .ap-accents .ap-choice { padding: 6px; }
+:where(#appearance) .ap-accents .ap-choice:has(input:checked) .ap-chip:not(.ap-chip-default)::after,
+:where(#appearance) .ap-accents .ap-choice[data-checked] .ap-chip:not(.ap-chip-default)::after,
+:where(#appearance) .ap-custom.ap-checked::after {
+  content: "✓"; position: absolute; inset: 0; display: grid; place-items: center; color: #fff;
+  font-weight: 700; font-size: 0.8125rem; text-shadow: 0 0 2px #000, 0 0 1px #000;
+}
+:where(#appearance) .ap-accents .ap-choice:has(.ap-chip-default) { padding-right: 10px; }
+:where(#appearance) .ap-chip {
+  position: relative; display: inline-block; width: 22px; height: 22px; border-radius: 50%; flex: none;
+  box-shadow: inset 0 0 0 1px rgb(0 0 0 / 0.18);
+}
+/* Each palette shown as its paper and its accent (a preview only; the palettes themselves live in style.css). */
+:where(#appearance) .ap-chip[data-chip=maquis] { background: linear-gradient(135deg, #f6f3ec 50%, #1f6b5c 50%); }
+:where(#appearance) .ap-chip[data-chip=mare] { background: linear-gradient(135deg, #f2f5f8 50%, #22609a 50%); }
+:where(#appearance) .ap-chip[data-chip=granitu] { background: linear-gradient(135deg, #efedea 50%, #9a6a24 50%); }
+:where(#appearance) .ap-chip[data-chip=tramontu] { background: linear-gradient(135deg, #f7efe9 50%, #a64b2f 50%); }
+:where(#appearance) .ap-chip[data-chip=notte] { background: linear-gradient(135deg, #1a2233 50%, #8fb4ff 50%); }
+:where(#appearance) .ap-chip-default {
+  background: conic-gradient(var(--accent, #2d5f7c) 0 50%, var(--surface, #fff) 0 100%);
+}
+:where(#appearance) .ap-custom { position: relative; display: inline-flex; align-items: center; gap: 8px; cursor: pointer;
+  border: 1px dashed var(--line, #ccc); border-radius: 999px; padding: 4px 10px 4px 4px; font-size: 0.875rem; }
+:where(#appearance) .ap-custom input[type=color] {
+  width: 24px; height: 24px; padding: 0; border: 0; border-radius: 50%; background: none; cursor: pointer;
+}
+:where(#appearance) .ap-custom input[type=color]::-webkit-color-swatch-wrapper { padding: 0; }
+:where(#appearance) .ap-custom input[type=color]::-webkit-color-swatch { border: 0; border-radius: 50%; }
+:where(#appearance) .ap-custom.ap-checked { border-style: solid; border-color: var(--text, #222); font-weight: 600; }
+:where(#appearance) .ap-custom.ap-checked::after { right: auto; width: 32px; }
+:where(#appearance) .ap-note { margin: var(--space-3, 12px) 0 0; font-size: 0.875rem; color: var(--muted, #666); min-height: 1.2em; }
+:where(#appearance) .ap-note:empty { display: none; }
+
+/* Rows wrap on narrow windows and at large text sizes instead of squeezing their label. */
+:where(#appearance) .ap-row { flex-wrap: wrap; row-gap: var(--space-2, 8px); }
+:where(#appearance) .ap-row > .label { flex: 1 1 14rem; }
+
+/* Over a picture, text that is not on a panel gets a plate of its own, whatever the picture. */
+:where([data-background=image] #appearance) > :is(h1, h2, .lead, .muted, .ap-message) {
+  width: fit-content; max-width: 100%; padding: 2px 8px; margin-left: -8px; border-radius: 6px;
+  background: color-mix(in srgb, var(--surface, #fff) 90%, transparent);
+}
+
+/* Background */
+:where(#appearance) .ap-image-row { flex-wrap: wrap; }
+:where(#appearance) .ap-thumb {
+  width: 96px; height: 60px; object-fit: cover; border-radius: 6px; flex: none;
+  box-shadow: 0 0 0 1px var(--line, #ccc);
+}
+:where(#appearance) .ap-buttons { display: flex; flex-wrap: wrap; gap: var(--space-2, 8px); }
+:where(#appearance) .ap-range { display: inline-flex; align-items: center; gap: var(--space-2, 8px); }
+:where(#appearance) .ap-range input[type=range] { width: min(180px, 36vw); }
+:where(#appearance) input[type=range] { accent-color: var(--accent-user, var(--accent, auto)); }
+:where(#appearance) .ap-value { min-width: 3.5em; font-variant-numeric: tabular-nums; color: var(--muted, #666); font-size: 0.875rem; }
+
+:where(#appearance) .ap-framing {
+  margin-top: var(--space-3, 12px); padding: var(--space-4, 16px); border: 1px solid var(--accent, #2d5f7c);
+  border-radius: 10px; background: var(--surface, #fff);
+}
+:where(#appearance) .ap-framing h3 { margin: 0 0 var(--space-1, 4px); font-size: 1rem; }
+:where(#appearance) .ap-frame {
+  position: relative; display: block; width: fit-content; max-width: 100%; margin: var(--space-3, 12px) 0;
+  border-radius: 8px; overflow: hidden; cursor: crosshair; touch-action: none; user-select: none;
+  background: repeating-conic-gradient(#0000001a 0 25%, transparent 0 50%) 0 0 / 16px 16px;
+}
+:where(#appearance) .ap-frame-image { display: block; max-width: 100%; max-height: 300px; pointer-events: none; }
+:where(#appearance) .ap-marker {
+  position: absolute; width: 28px; height: 28px; margin: -14px 0 0 -14px; border-radius: 50%; pointer-events: none;
+  border: 2px solid #fff; box-shadow: 0 0 0 2px #000, inset 0 0 0 2px #000;
+  transition: left 80ms ease-out, top 80ms ease-out;
+}
+:where(#appearance) .ap-marker::after {
+  content: ""; position: absolute; left: 50%; top: 50%; width: 4px; height: 4px; margin: -2px; border-radius: 50%; background: #fff;
+  box-shadow: 0 0 0 1px #000;
+}
+:where(#appearance) .ap-axes { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: var(--space-3, 12px); }
+:where(#appearance) .ap-axes label { display: flex; flex-direction: column; gap: 4px; font-size: 0.875rem; }
+
+:where(#appearance) .ap-message { margin: var(--space-3, 12px) 0 0; font-size: 0.875rem; }
+:where(#appearance) .ap-message:empty { display: none; }
+:where(#appearance) .ap-alert { color: var(--danger, #a1302b); font-weight: 550; }
+:where(#appearance) .ap-alert::before { content: "⚠ "; }
+:where(#appearance) .ap-confirm {
+  margin-top: var(--space-3, 12px); padding: var(--space-3, 12px) var(--space-4, 16px);
+  border: 1px solid var(--danger, #a1302b); border-radius: 8px; background: var(--surface, #fff);
+}
+:where(#appearance) .ap-confirm p { margin: 0 0 var(--space-3, 12px); }
+
+@media (prefers-reduced-motion: reduce) {
+  :where(#appearance) * { transition: none !important; animation: none !important; }
+}
+@media (forced-colors: active) {
+  :where(#appearance) .ap-choice:has(input:checked) { outline: 2px solid Highlight; }
+}

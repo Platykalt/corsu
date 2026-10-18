@@ -18,17 +18,29 @@ NEW_KEYS = [
 
 
 def script():
+    """The page's markup and its scripts (src/app/<name>.js in the page's order), as one program. Scripts another part
+    of the work adds (appearance.js) are skipped while they do not exist yet."""
     html = PAGE.read_text(encoding='utf-8')
-    return html, re.search(r'<script>\n(.*)</script>', html, re.S).group(1)
+    names = re.findall(r'<script src="([\w.-]+\.js)"></script>', html)
+    return html, '\n'.join((PAGE.parent / name).read_text(encoding='utf-8') for name in names if (PAGE.parent / name).exists())
 
 
-def texts():
-    """{language: {key: value}} read from the page's `text` dictionary."""
-    _, code = script()
-    block = code[code.index('const text = {'):code.index('\n};\n')]
+def texts(name='texts.js', variable='text'):
+    """{language: {key: value}} read from the page's `text` dictionary (or another texts file of the same shape)."""
+    code = (PAGE.parent / name).read_text(encoding='utf-8')
+    block = code[code.index(f'const {variable} = {{'):code.index('\n};\n')]
     found = {}
     for language, body in re.findall(r'\n  (co|fr|en): \{\n(.*?)\n  \},', block + '\n  },', re.S):
         found[language] = dict(re.findall(r'(?:^|[\s,])(\w+): "((?:[^"\\]|\\.)*)"', body))
+    return found
+
+
+def all_texts():
+    """The page's texts and, once it exists, the Appearance page's (texts-appearance.js): t() reads both."""
+    found = texts()
+    if (PAGE.parent / 'texts-appearance.js').exists():
+        for language, values in texts('texts-appearance.js', 'textsAppearance').items():
+            found[language] = {**values, **found[language]}
     return found
 
 
@@ -56,7 +68,7 @@ class TextTests(unittest.TestCase):
             used |= set(pair)
         self.assertTrue(set(NEW_KEYS) - {'activation_' + name for name in
                         ('active', 'partial', 'inactive', 'blocked', 'failed', 'restart_required')} <= used)
-        for language, values in texts().items():
+        for language, values in all_texts().items():
             self.assertFalse(used - set(values), language)
 
 
@@ -64,10 +76,14 @@ class TextTests(unittest.TestCase):
 HARNESS = r'''
 const fs = require("fs"), vm = require("vm");
 const [page, fixturePath] = process.argv.slice(2);
-const code = fs.readFileSync(page, "utf8").match(/<script>\r?\n([\s\S]*)<\/script>/)[1];
+const path = require("path");
+const html = fs.readFileSync(page, "utf8");
+const code = [...html.matchAll(/<script src="([\w.-]+\.js)"><\/script>/g)].map(found => path.join(path.dirname(page), found[1]))
+  .filter(file => fs.existsSync(file)).map(file => fs.readFileSync(file, "utf8")).join("\n");
 class Element {
   constructor(tag) { this.tagName = tag.toUpperCase(); this.attributes = {}; this.children = []; this.listeners = {};
-    this.style = {}; this.dataset = {}; this.hidden = false; this.disabled = false; this.classList = { toggle() {} }; }
+    this.style = { setProperty(name, value) { this[name] = value; }, removeProperty(name) { delete this[name]; }, getPropertyValue(name) { return this[name] || ""; } };
+    this.dataset = {}; this.hidden = false; this.disabled = false; this.classList = { toggle() {}, add() {}, remove() {}, contains: () => false }; }
   setAttribute(name, value) { this.attributes[name] = String(value); if (name === "id") this.id = String(value); if (name === "open") this.open = true; }
   getAttribute(name) { return name in this.attributes ? this.attributes[name] : null; }
   removeAttribute(name) { delete this.attributes[name]; }
@@ -81,14 +97,17 @@ class Element {
   get textContent() { return this.children.map(child => child instanceof Element ? child.textContent : child.text).join(""); }
   find(predicate) { const all = []; const walk = node => { for (const child of node.children) if (child instanceof Element) { if (predicate(child)) all.push(child); walk(child); } }; walk(this); return all; }
 }
-const ids = new Map();
+const ids = new Map(), events = [];
+class CustomEvent { constructor(type, options = {}) { this.type = type; this.detail = options.detail; } }
 const document = {
-  createElement: tag => new Element(tag),
+  createElement: tag => new Element(tag), createElementNS: (namespace, tag) => new Element(tag),
   getElementById: id => { if (!ids.has(id)) ids.set(id, new Element("div")); return ids.get(id); },
   querySelectorAll: () => [], querySelector: () => new Element("main"), documentElement: new Element("html"), activeElement: null,
+  dispatchEvent: event => { events.push({ type: event.type, detail: event.detail }); return true; }, addEventListener() {}, readyState: "loading",
 };
 const context = vm.createContext({ document, localStorage: { getItem: () => null, setItem() {} }, fetch: () => new Promise(() => {}),
-  setInterval() {}, alert() {}, window: {}, navigator: {}, console, Intl, Date, Math, Number, JSON, Object, Array, Map, Set, String, Boolean, Promise });
+  setInterval() {}, setTimeout() {}, clearTimeout() {}, alert() {}, window: { addEventListener() {}, matchMedia: () => ({ matches: false, addEventListener() {} }) }, navigator: {}, console, Intl, Date, Math, Number, JSON, Object, Array, Map, Set, String, Boolean, Promise,
+  CustomEvent, events });
 vm.runInContext(code, context);
 context.fixture = JSON.parse(fs.readFileSync(fixturePath, "utf8"));
 context.Element = Element;
@@ -97,7 +116,8 @@ const out = vm.runInContext(`
   const rowsOf = list => $(list).children.map(row => {
     const input = row.find(node => node.tagName === "INPUT")[0];
     const details = row.find(node => node.tagName === "DETAILS")[0];
-    const status = row.find(node => node.attributes.class === "status")[0];
+    // The state chip beside the name (icon + word), when the row has something unusual to say.
+    const status = input ? row.find(node => node.id === "status-" + input.id.replace(/^(switch|pick)-/, ""))[0] : null;
     const tested = row.find(node => node.attributes.class === "tested")[0];
     // The restart hint sits directly in the label; installers' actions sit in the details.
     const label = row.children.find(node => node.attributes && node.attributes.class === "label");
@@ -121,6 +141,7 @@ const out = vm.runInContext(`
       tested: validationText({ simulated: true, real_app: ["windows"], visual: false, linguistic_review: false }),
       untested: validationText({ simulated: false, real_app: [], visual: false, linguistic_review: false }),
       labels: ["active", "partial", "inactive", "blocked", "failed", "restart_required"].map(activationLabel),
+      never: t("update_never"),
     };
   }
   language = "en";
@@ -131,6 +152,36 @@ const out = vm.runInContext(`
   render();
   result.programs = rowsOf("switches");
   result.add = rowsOf("choices");
+  const textOf = id => clean($(id).textContent);
+  result.summary = { on: textOf("summary-on-value"), off: textOf("summary-on-sub"), attention: textOf("summary-attention-value"),
+    jumps: $("summary-attention-list").children.map(node => clean(node.textContent)), attentionClass: $("summary-attention").className,
+    update: textOf("summary-update-text"), hidden: Boolean($("summary").hidden) };
+  // The page redraws itself every 1.5 s: what did not change keeps its nodes (focus stays on a link or button, live
+  // regions are not announced again); what changed is redrawn.
+  const redrawn = ["summary-attention-list", "guides", "practice", "facts", "update-facts", "update-status"];
+  const firsts = () => redrawn.map(id => $(id).children[0]);
+  let before = firsts();
+  render();
+  result.unchangedKept = firsts().map((node, index) => Boolean(node) && node === before[index]);
+  before = firsts();
+  language = "fr"; render();
+  result.changedRedrawn = firsts().map((node, index) => node !== before[index]);
+  language = "en"; render();
+  // The hooks the Appearance page (appearance.js) relies on.
+  result.renderEvents = events.filter(event => event.type === "corsu:render").map(event => event.detail);
+  show("appearance");
+  result.pageEvent = events.filter(event => event.type === "corsu:page").map(event => event.detail).pop();
+  result.hooks = Object.keys(window.corsu).sort();
+  result.hookLanguage = window.corsu.language();
+  // texts-appearance.js once it is there, a stand-in of the same shape before.
+  if (typeof textsAppearance === "undefined") {
+    globalThis.textsAppearance = { co: { ap_probe: "Pruvà {n}" }, fr: { ap_probe: "Essai {n}" }, en: { ap_probe: "Test {n}" } };
+    result.appearanceText = [window.corsu.t("ap_probe", { n: 2 }), "Test 2"];
+  } else {
+    const key = Object.keys(textsAppearance.en).find(name => !(name in text.en));
+    result.appearanceText = [window.corsu.t(key), textsAppearance.en[key]];
+  }
+  result.ownTextFirst = window.corsu.t("nav_appearance");
   // The person closes 7-Zip's details: the next refresh keeps them closed.
   const zip = $("switches").children.find(row => row.find(node => node.id === "switch-7zip").length);
   const details = zip.find(node => node.tagName === "DETAILS")[0];
@@ -224,18 +275,22 @@ class RenderTests(unittest.TestCase):
 
     def test_active_with_partial_coverage_is_not_a_problem(self):
         vlc = self.row('vlc')
-        self.assertEqual(vlc['status'], 'In Corsican · Translated: 4,443 / 6,203 (72%)')
+        # Nothing unusual: no chip, coverage and tests on demand, closed.
+        self.assertIsNone(vlc['status'])
         self.assertNotIn('problem', vlc['class'] or '')
         self.assertNotIn('attention', vlc['class'] or '')
-        self.assertIsNone(vlc['details'])
+        self.assertFalse(vlc['details']['open'])
+        self.assertEqual(vlc['details']['summary'], 'Installation details')
+        self.assertIn('Translated: 4,443 / 6,203 (72%)', vlc['details']['text'])
         self.assertTrue(vlc['checked'])
-        self.assertEqual(vlc['describedby'], 'status-vlc')
+        self.assertEqual(vlc['describedby'], 'desc-vlc')
         self.assertEqual(vlc['hints'], ['restart vlc'])
         self.assertIn('real app (Windows)', vlc['tested'])
 
     def test_partial_activation_lists_each_installation(self):
         zip_ = self.row('7zip')
-        self.assertTrue(zip_['status'].startswith('Partly in Corsican'))
+        self.assertEqual(zip_['status'], 'Partly in Corsican')
+        self.assertEqual(zip_['describedby'], 'status-7zip desc-7zip')
         self.assertIn('attention', zip_['class'])
         self.assertTrue(zip_['details']['open'])
         self.assertEqual(zip_['details']['summary'], 'Details of the 2 installations')
@@ -268,6 +323,34 @@ class RenderTests(unittest.TestCase):
             self.assertIsNone(row['class'], name)
             self.assertTrue(row['checked'], name)
 
+    def test_problems_first_then_attention_then_the_usual_order(self):
+        self.assertEqual([row['name'] for row in self.result['programs']], ['winmerge', '7zip', 'filezilla', 'firefox', 'vlc', 'old'])
+
+    def test_summary_counts_and_names_what_needs_the_person(self):
+        summary = self.result['summary']
+        self.assertFalse(summary['hidden'])
+        self.assertEqual(summary['on'], '5 of 6 in Corsican')
+        self.assertEqual(summary['off'], '1 in the original language')
+        self.assertEqual(summary['attention'], '3 programs need attention')
+        self.assertIn('tone-danger', summary['attentionClass'])
+        self.assertEqual(summary['jumps'][0], 'WinMerge Failed')
+        self.assertEqual(summary['jumps'][1], '7-Zip Partly in Corsican')
+        # Active but deferred: the installer's advice says what to do.
+        self.assertEqual(summary['jumps'][2], 'FileZilla Fermez FileZilla')
+        self.assertEqual(summary['update'], self.result['en']['never'])
+
+    def test_unchanged_parts_keep_their_nodes_across_refreshes(self):
+        self.assertEqual(self.result['unchangedKept'], [True] * 6)
+        self.assertEqual(self.result['changedRedrawn'], [True] * 6)
+
+    def test_hooks_for_the_appearance_page(self):
+        self.assertEqual(self.result['renderEvents'][-1], 'en')
+        self.assertEqual(self.result['pageEvent'], 'appearance')
+        self.assertEqual(self.result['hooks'], ['call', 'icon', 'language', 'make', 't'])
+        self.assertEqual(self.result['hookLanguage'], 'en')
+        self.assertEqual(self.result['appearanceText'][0], self.result['appearanceText'][1])
+        self.assertEqual(self.result['ownTextFirst'], 'Appearance')
+
     def test_add_page_says_why_the_last_attempt_did_nothing(self):
         audacity = self.row('audacity', 'add')
         self.assertTrue(audacity['status'].startswith('Blocked'))
@@ -285,6 +368,93 @@ class RenderTests(unittest.TestCase):
         # Details the person closed stay closed.
         zip_ = next(row for row in self.result['after'] if row['name'] == '7zip')
         self.assertFalse(zip_['details']['open'])
+
+
+STYLE = PAGE.parent / 'style.css'
+PALETTES = ('maquis', 'mare', 'granitu', 'tramontu', 'notte')
+TOKENS = ('bg', 'surface', 'surface-2', 'line', 'text', 'muted', 'accent', 'on-accent', 'accent-soft', 'track', 'knob', 'focus')
+STATUS = ('ok', 'warn', 'danger', 'info')
+
+
+def luminance(colour):
+    """WCAG relative luminance of #rrggbb."""
+    channels = [int(colour[i:i + 2], 16) / 255 for i in (1, 3, 5)]
+    r, g, b = [c / 12.92 if c <= 0.04045 else ((c + 0.055) / 1.055) ** 2.4 for c in channels]
+    return 0.2126 * r + 0.7152 * g + 0.0722 * b
+
+
+def contrast(a, b):
+    light, dark = sorted((luminance(a), luminance(b)), reverse=True)
+    return (light + 0.05) / (dark + 0.05)
+
+
+def palettes():
+    """{palette: {'l'|'d': {token: #hex}}} from style.css, status colours (the same for all) merged into each."""
+    css = STYLE.read_text(encoding='utf-8')
+    status = re.search(r'/\* @status[^*]*\*/\s*:root \{([^}]*)\}', css).group(1)
+    found = {}
+    for name, body in re.findall(r'/\* @palette (\w+) \*/\s*[^{]+\{([^}]*)\}', css):
+        found[name] = {theme: {key: value.lower() for key, value in re.findall(rf'--{theme}-([\w-]+):\s*(#[0-9a-fA-F]{{6}})', body + status)}
+                       for theme in ('l', 'd')}
+    return found
+
+
+class ContrastTests(unittest.TestCase):
+    """WCAG AA in every palette and theme: text 4.5:1, interface parts 3:1, status colours on the surfaces."""
+
+    def test_every_palette_defines_every_token(self):
+        found = palettes()
+        self.assertEqual(set(found), set(PALETTES))
+        for name, themes in found.items():
+            for theme, tokens in themes.items():
+                for token in TOKENS + STATUS + tuple(s + '-soft' for s in STATUS) + ('on-danger',):
+                    self.assertIn(token, tokens, f'{name} {theme} {token}')
+
+    def test_ratios(self):
+        text = [(fg, bg) for bg in ('bg', 'surface', 'surface-2', 'accent-soft') for fg in ('text', 'muted')]
+        text += [('accent', 'surface'), ('accent', 'surface-2'), ('accent', 'bg'), ('accent', 'accent-soft'), ('on-accent', 'accent'),
+                 ('on-danger', 'danger')]
+        for status in STATUS:
+            text += [(status, 'surface'), (status, 'surface-2'), (status, 'bg'), (status, status + '-soft'), ('text', status + '-soft')]
+        parts = [('track', 'surface'), ('track', 'surface-2'), ('knob', 'track'), ('knob', 'accent'), ('accent', 'surface'),
+                 ('focus', 'bg'), ('focus', 'surface'), ('focus', 'surface-2')]
+        failures, lowest = [], {}
+        for name, themes in palettes().items():
+            for theme, tokens in themes.items():
+                for pairs, need in ((text, 4.5), (parts, 3.0)):
+                    for fg, bg in pairs:
+                        ratio = contrast(tokens[fg], tokens[bg])
+                        lowest[name, theme] = min(lowest.get((name, theme), 99), ratio)
+                        if ratio < need:
+                            failures.append(f'{name} {theme}: {fg} on {bg} {ratio:.2f} < {need}')
+        self.assertEqual(failures, [])
+
+    def test_known_ratio(self):
+        self.assertAlmostEqual(contrast('#000000', '#ffffff'), 21.0)
+        self.assertAlmostEqual(contrast('#767676', '#ffffff'), 4.54, places=2)
+
+
+class PageStructureTests(unittest.TestCase):
+    def test_appearance_page_and_its_entry(self):
+        html = PAGE.read_text(encoding='utf-8')
+        self.assertRegex(html, r'<section id="appearance" data-page-panel[^>]*>\s*<header class="page-head">\s*<h1 data-t="nav_appearance">')
+        self.assertIn('data-page="appearance"', html)
+        found = texts()
+        self.assertEqual((found['co']['nav_appearance'], found['fr']['nav_appearance'], found['en']['nav_appearance']),
+                         ('Aspettu', 'Apparence', 'Appearance'))
+
+    def test_every_icon_used_is_in_the_sprite(self):
+        html, code = script()
+        symbols = set(re.findall(r'<symbol id="i-([\w-]+)"', html))
+        used = set(re.findall(r'href="#i-([\w-]+)"', html)) | set(re.findall(r'icon\("([\w-]+)"', code))
+        app = (PAGE.parent / 'app.js').read_text(encoding='utf-8')
+        for table in re.findall(r'(?:programIcons|tones) = \{(.*?)\};', app, re.S):
+            used |= set(re.findall(r'"([\w-]+)"\]?(?:,|\s*\})', table)) - set(re.findall(r'(\w+):', table))
+        used |= set(re.findall(r'(?:up_to_date|available|unknown|ahead|none): "([\w-]+)"', app))
+        # The tones table also names tones (ok, warn…): only names that are not tones must be icons.
+        self.assertFalse(used - symbols - {'neutral', 'danger', 'info'})
+        for glyph in ('ok', 'warn', 'error', 'blocked', 'partial', 'off', 'restart', 'clock', 'update', 'chevron', 'external', 'app'):
+            self.assertIn(glyph, symbols)
 
 
 UPDATE_KEYS = [
