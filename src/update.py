@@ -1,7 +1,8 @@
 #!/usr/bin/env python3
 """Find and install a newer Corsu release (docs/update-architecture.md).
 
-`check()` asks GitHub for the newest stable release (cached 6 hours in corsu.DATA/update.json).
+`check()` asks GitHub for the newest stable release. Its answer is kept in corsu.DATA/update.json for an hour at most,
+with the time GitHub gave it; a failed check is never read as "up to date" (docs/update-diagnosis.md).
 `python3 update.py --install [--version X.Y.Z]` downloads the archive of that exact release for this system, checks it
 against its published SHA-256 and that it is the version asked for, extracts it safely and runs its installer for the
 parts already installed (parts switched off stay off). Nothing is installed when any check fails. It prints
@@ -11,6 +12,7 @@ parts already installed (parts switched off stay off). Nothing is installed when
 import argparse
 import errno
 import hashlib
+import http.client
 import json
 import os
 from pathlib import Path, PurePosixPath
@@ -38,8 +40,10 @@ CACHE = 'update.json'
 PREFERENCES = 'preferences.json'
 # vlc_complement: VLC's experimental Corsican complement (apps/vlc_complement.py), only when asked for.
 DEFAULTS = {'auto_update': False, 'vlc_complement': False}
-CHECK_EVERY = 6 * 3600
-# After a failed check (offline, GitHub's rate limit), wait this long before asking again.
+# How long GitHub's answer is used again without asking. Until 0.25.1 it was 6 hours, so a window opened hours after a
+# release could still say "up to date" (docs/update-diagnosis.md).
+CHECK_EVERY = 3600
+# After a failed check (offline, GitHub's rate limit), wait this long before asking again, unless GitHub said when.
 RETRY_AFTER = 15 * 60
 VERSION = re.compile(r'v?(\d+)\.(\d+)\.(\d+)')
 
@@ -111,6 +115,8 @@ def describe_error(error):
         if error.code == 404:
             return t('Not found on GitHub (HTTP 404).', 'Introuvable sur GitHub (HTTP 404).')
         return t(f'GitHub answered HTTP {error.code}.', f'GitHub a répondu HTTP {error.code}.')
+    if isinstance(error, (json.JSONDecodeError, http.client.HTTPException)):
+        return t('GitHub\'s answer was incomplete or unreadable.', 'La réponse de GitHub était incomplète ou illisible.')
     if isinstance(error, urllib.error.URLError):
         return t(f'GitHub could not be reached ({error.reason}). Check the connection.',
                  f'GitHub est injoignable ({error.reason}). Vérifiez la connexion.')
@@ -126,11 +132,40 @@ def describe_error(error):
     return str(error)
 
 
+def error_kind(error):
+    """Why a check failed: 'rate_limit', 'http' (GitHub answered with an error), 'network' (no answer) or
+    'bad_response' (an answer that is not a list of releases, or one cut short)."""
+    if isinstance(error, urllib.error.HTTPError):
+        return 'rate_limit' if error.code in (403, 429) else 'http'
+    if isinstance(error, (ValueError, KeyError, TypeError, http.client.HTTPException)):
+        return 'bad_response'
+    return 'network'
+
+
+def retry_time(error, now):
+    """When to ask GitHub again after `error` without being asked to: its Retry-After or rate-limit reset when it
+    gave one (6 hours at most), else RETRY_AFTER."""
+    headers = getattr(error, 'headers', None) or {}
+    try:
+        if headers.get('Retry-After'):
+            return now + min(max(int(headers['Retry-After']), 0), 6 * 3600)
+        if headers.get('X-RateLimit-Remaining') == '0' and headers.get('X-RateLimit-Reset'):
+            return min(max(float(headers['X-RateLimit-Reset']), now), now + 6 * 3600)
+    except (TypeError, ValueError):
+        pass
+    return now + RETRY_AFTER
+
+
 def fetch_latest():
-    """The newest stable release on GitHub: (version, tag, url). Drafts and pre-releases are never offered."""
-    request = urllib.request.Request(API, headers={'Accept': 'application/vnd.github+json', 'User-Agent': 'corsu-update'})
+    """The newest stable release on GitHub: (version, tag, url). Drafts and pre-releases are never offered, nor a tag
+    without a release (GitHub's list holds releases only). An answer that is not a list is an error, never "nothing
+    newer"."""
+    request = urllib.request.Request(API, headers={'Accept': 'application/vnd.github+json', 'User-Agent': 'corsu-update',
+                                                   'Cache-Control': 'no-cache'})
     with urllib.request.urlopen(request, timeout=8) as response:
         releases = json.load(response)
+    if not isinstance(releases, list):
+        raise ValueError(t('GitHub gave an unexpected answer.', 'GitHub a donné une réponse inattendue.'))
     best = None
     for release in releases:
         if not isinstance(release, dict) or release.get('draft') or release.get('prerelease'):
@@ -146,46 +181,80 @@ def fetch_latest():
     return best
 
 
-def status_of(running, latest):
+def status_of(running, latest, installed=None):
+    """Compared with the newest of this copy and the installed one: an installed copy newer than this window is
+    reached by restarting, never by installing it again; a development copy newer than every release is 'ahead'."""
     if not latest:
         return 'unknown'
-    if version_tuple(latest) > version_tuple(running):
+    base = max((version for version in (running, installed) if version), key=version_tuple)
+    if version_tuple(latest) > version_tuple(base):
         return 'available'
-    if version_tuple(latest) < version_tuple(running):
+    if version_tuple(latest) < version_tuple(base):
         return 'ahead'
     return 'up_to_date'
 
 
-def check(force=False):
-    """{'current', 'latest', 'tag', 'url', 'status', 'checked', 'error'}; status is up_to_date, available, unknown
-    (could not check: see error) or ahead (this copy is newer than the latest release). GitHub is asked at most every
-    6 hours unless `force`."""
+def installed_version():
+    """The installed copy's version, or None (not installed, or installation.json unreadable)."""
+    try:
+        return (installed_release() or {}).get('version')
+    except (RuntimeError, OSError, ValueError):
+        return None
+
+
+def number(value):
+    return value if isinstance(value, (int, float)) and not isinstance(value, bool) else 0
+
+
+def check(force=False, max_age=CHECK_EVERY):
+    """{'current', 'installed', 'latest', 'tag', 'url', 'status', 'checked', 'fresh', 'error', 'error_kind'}.
+
+    status: 'available', 'up_to_date', 'ahead' (this copy is newer than the latest release: a development version)
+    or 'unknown' (the check failed: see error and error_kind; never read as up to date). 'latest' and 'checked' are
+    GitHub's last good answer and its time, kept after a failure so they can be shown with their date. 'fresh': GitHub
+    answered during this call; otherwise the answer is the one saved at 'checked'. GitHub is asked when the saved
+    answer is older than `max_age` seconds or `force`; after a failure, not again before its retry time unless
+    `force`."""
     path = corsu.DATA / CACHE
     saved = read_json(path)
     now = time.time()
-    fresh = saved.get('format') == 2 and now - saved.get('checked', 0) < CHECK_EVERY and saved.get('latest')
-    retry = force or now - saved.get('failed', 0) > RETRY_AFTER
-    error = None
-    if not fresh and retry:
-        try:
-            version, tag, url = fetch_latest()
-            saved = {'format': 2, 'checked': now, 'latest': version, 'tag': tag, 'url': url}
-        except (OSError, ValueError, KeyError, TypeError) as problem:
-            error = describe_error(problem)
-            saved = {**saved, 'failed': now, 'error': error}
-        try:
-            write_json(path, saved)
-        except OSError:
-            pass
-    elif not fresh:
-        error = saved.get('error') or t('Not checked yet.', 'Pas encore vérifié.')
-    running = current()
-    latest = saved.get('latest') if saved.get('format') == 2 else None
-    result = {'current': running, 'latest': latest, 'tag': saved.get('tag') if latest else None,
-              'url': saved.get('url') if latest else None,
-              'status': 'unknown' if error else status_of(running, latest),
-              'checked': saved.get('checked'), 'error': error}
-    return result
+    checked = number(saved.get('checked'))
+    good = saved.get('format') == 2 and isinstance(saved.get('latest'), str) and VERSION.fullmatch(saved['latest'])
+    running, installed = current(), installed_version()
+    # A time in the future (clock changed) is not taken as fresh, nor a saved "latest" older than this copy or the
+    # installed one: it was saved before they were installed (an update by the one-line install, or a restart into
+    # the new copy), so it says nothing about what is published now.
+    fresh_enough = (good and 0 <= now - checked < max_age
+                    and status_of(running, saved['latest'], installed) != 'ahead')
+    failed_after = number(saved.get('failed')) > checked
+    retry = force or now >= number(saved.get('retry_at')) or now < number(saved.get('failed'))
+    error = kind = None
+    fresh = False
+    if force or not fresh_enough:
+        if retry:
+            try:
+                version, tag, url = fetch_latest()
+                saved = {'format': 2, 'checked': now, 'latest': version, 'tag': tag, 'url': url}
+                fresh = True
+            except (OSError, ValueError, KeyError, TypeError, http.client.HTTPException) as problem:
+                error, kind = describe_error(problem), error_kind(problem)
+                saved = {**saved, 'failed': now, 'retry_at': retry_time(problem, now), 'error': error, 'error_kind': kind}
+            try:
+                write_json(path, saved)
+            except OSError:
+                pass
+        else:
+            # A recent failure, and the saved answer is too old to stand for a check.
+            error = saved.get('error') if failed_after else None
+            error = error or t('Not checked yet.', 'Pas encore vérifié.')
+            kind = saved.get('error_kind') if failed_after else 'network'
+    good = saved.get('format') == 2 and isinstance(saved.get('latest'), str) and VERSION.fullmatch(saved['latest'])
+    latest = saved['latest'] if good else None
+    return {'current': running, 'installed': installed, 'latest': latest,
+            'tag': saved.get('tag') if latest else None, 'url': saved.get('url') if latest else None,
+            'status': 'unknown' if error else status_of(running, latest, installed),
+            'checked': number(saved.get('checked')) or None if latest else None, 'fresh': fresh, 'error': error,
+            'error_kind': kind}
 
 
 def latest(force=False):

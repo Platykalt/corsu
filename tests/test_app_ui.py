@@ -462,7 +462,7 @@ class PageStructureTests(unittest.TestCase):
 
 
 UPDATE_KEYS = [
-    'update_heading', 'update_current', 'update_latest', 'update_checked', 'update_never', 'update_checking',
+    'update_heading', 'update_current', 'update_installed', 'update_latest', 'update_checked', 'update_never', 'update_checking',
     'update_up_to_date', 'update_available', 'update_unknown', 'update_unknown_plain', 'update_ahead', 'update_check',
     'update_install', 'update_restart', 'update_auto', 'update_auto_detail', 'update_auto_started', 'update_updated',
     'update_repaired', 'update_unchanged', 'update_failed', 'update_failed_plain', 'update_waiting_one',
@@ -521,10 +521,11 @@ NO_RESTART = {'available': False, 'version': None, 'error': None}
 
 
 def scenario(status=None, latest='0.23.0', error=None, checking=False, job=None, restart=None, auto=False, auto_started=None,
-             items=None, restarting_now=False):
+             items=None, restarting_now=False, installed=None, keep_latest=False):
     return {**FIXTURE, 'version': '0.22.0', 'pid': 1, 'preferences': {'auto_update': auto}, 'restarting_now': restarting_now,
             'items': items if items is not None else FIXTURE['items'][:1],
-            'update': {'current': '0.22.0', 'latest': latest if status else None, 'status': status, 'checked': 1.7e9 if status else None,
+            'update': {'current': '0.22.0', 'installed': installed, 'latest': latest if status or keep_latest else None, 'status': status,
+                       'checked': 1.7e9 if status or keep_latest else None,
                        'error': error, 'checking': checking, 'auto_started': auto_started, 'restart': restart or NO_RESTART},
             'job': {**IDLE, **(job or {})}}
 
@@ -544,6 +545,10 @@ UPDATE_SCENARIOS = {
     'available': scenario('available'),
     'unknown': scenario('unknown', latest=None, error='GitHub could not be reached.'),
     'unknown_plain': scenario('unknown', latest=None),
+    # GitHub's last good answer is kept with its date, but a failed check never reads as up to date.
+    'unknown_after_answer': scenario('unknown', latest='0.22.0', error='GitHub limits how often it can be asked; try again later.'),
+    # A window opened before an update: this window 0.22.0, the installed copy 0.23.0.
+    'old_window': scenario('up_to_date', installed='0.23.0', restart={'available': True, 'version': '0.23.0', 'error': None}),
     'ahead': scenario('ahead', latest='0.21.0'),
     'running': scenario('available', job={'title': 'update', 'running': True, 'progress': {'percent': 30, 'label': 'x'}}),
     'auto': scenario('available', auto=True, auto_started='0.23.0', job={'title': 'update', 'running': True}),
@@ -584,7 +589,17 @@ class UpdateRenderTests(unittest.TestCase):
     def test_each_status_reads_differently(self):
         statuses = {name: self.en[name]['status'] for name in ('never', 'checking', 'up_to_date', 'available', 'unknown', 'ahead')}
         self.assertEqual(len(set(statuses.values())), len(statuses))
-        self.assertEqual(statuses['up_to_date'], 'Corsu is up to date.')
+        # "Up to date" always says against which release and when GitHub said so (a saved answer keeps its date).
+        self.assertRegex(statuses['up_to_date'], r'^Corsu is up to date \(0\.22\.0 is the latest release\)\. Last check: .*2023.*\.$')
+        self.assertNotIn('up to date', self.en['unknown_after_answer']['status'])
+        self.assertIn('GitHub limits', self.en['unknown_after_answer']['status'])
+        self.assertIn('Latest release0.22.0', self.en['unknown_after_answer']['facts'])
+        self.assertIn('2023', self.en['unknown_after_answer']['facts'])
+        self.assertIn('This window0.22.0', self.en['old_window']['facts'])
+        self.assertIn('Installed copy0.23.0', self.en['old_window']['facts'])
+        self.assertEqual(self.en['old_window']['status'], 'Corsu 0.23.0 is installed. Restart Corsu to use it.')
+        self.assertFalse(self.en['old_window']['restart']['hidden'])
+        self.assertIn('Installed copy—', self.en['never']['facts'])
         self.assertEqual(statuses['available'], 'Corsu 0.23.0 is available (you have 0.22.0).')
         self.assertEqual(statuses['unknown'], 'Could not check for updates: GitHub could not be reached.')
         self.assertEqual(self.en['unknown_plain']['status'], 'Could not check for updates.')

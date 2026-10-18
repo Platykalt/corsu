@@ -597,17 +597,19 @@ class UpdateTests(Isolated):
                     {'tag_name': 'v0.23.0', 'draft': False, 'prerelease': False, 'html_url': 'u23'},
                     {'tag_name': 'v0.9.0', 'draft': False, 'prerelease': False, 'html_url': 'u9'}]
         with patch.object(update, 'fetch_latest', wraps=update.fetch_latest) as fetch, \
-                patch.object(update.urllib.request, 'urlopen', return_value=io.BytesIO(json.dumps(releases).encode())):
+                patch.object(update.urllib.request, 'urlopen', side_effect=lambda *a, **k: io.BytesIO(json.dumps(releases).encode())):
             with patch.object(update, 'current', return_value='0.22.0'):
                 info = update.check()
                 self.assertEqual((info['latest'], info['tag'], info['status'], info['error']),
                                  ('0.23.0', 'v0.23.0', 'available', None))
                 update.check()
-                self.assertEqual(fetch.call_count, 1, 'cached for 6 hours')
+                self.assertEqual(fetch.call_count, 1, 'saved for an hour (CHECK_EVERY)')
             with patch.object(update, 'current', return_value='0.23.0'):
                 self.assertEqual(update.check()['status'], 'up_to_date')
             with patch.object(update, 'current', return_value='0.30.0'):
+                # A development copy: the saved answer is older than this copy, so GitHub is asked again.
                 self.assertEqual(update.check()['status'], 'ahead')
+                self.assertEqual(fetch.call_count, 2)
         self.assertEqual(update.download_url('corsu-linux.tar.gz', '0.23.0'),
                          'https://github.com/Platykalt/corsu/releases/download/v0.23.0/corsu-linux.tar.gz')
         # Without --version, the latest stable tag is downloaded, by its exact address.
