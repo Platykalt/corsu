@@ -4,7 +4,7 @@
     "name": "Corsu (lingua corsa)",
     "description": "Adds the language Corsu (Corsica) · PROTOTYPE · NOT AN OFFICIAL MINECRAFT PRODUCT",
     "uuid": "46daa2f4-5bbe-4e43-984f-2d1c443d7cb6",
-    "version": [0, 1, 0],
+    "version": [0, 2, 0],
     "min_engine_version": [1, 26, 50],
     "pack_scope": "global"
   },
@@ -13,7 +13,7 @@
       "description": "Corsican texts",
       "type": "resources",
       "uuid": "1c053bf3-be3e-437c-8751-e42dcf8dd673",
-      "version": [0, 1, 0]
+      "version": [0, 2, 0]
     }
   ],
   "metadata": {

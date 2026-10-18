@@ -75,6 +75,11 @@ FAMILIES = {
     'commands': {'commands'},
     'menu': {'menu'},
 }
+# Interface families: a short label there takes its gender and sense from the screen it is on, so a one-word text is
+# reused only from the Java key with the same last part (options.ao.max "Massima" is not reused for guiScale.maximum).
+UI_FAMILIES = {'options', 'gui', 'key', 'keyboard', 'menu', 'chat', 'commands', 'selectWorld', 'createWorld',
+               'createWorldScreen'}
+SPLIT_LINE = re.compile(r'^(.*)\.line(\d+)$')
 
 
 def cache(tag):
@@ -171,9 +176,43 @@ def line_problems(key, english, text):
     return problems
 
 
+def segments(key):
+    return [re.sub(r'[^a-z0-9]', '', part.lower()) for part in key.split('.')]
+
+
+def leaf(key):
+    return segments(key)[-1]
+
+
+def same_name(bedrock_key, java_key):
+    """The Java key names the same thing: its parts contain the last part of the Bedrock key
+    (options.language and options.language.title; not options.guiScale.maximum and options.ao.max)."""
+    return leaf(bedrock_key) in segments(java_key)[1:]
+
+
+def short_label_elsewhere(bedrock_key, java_key, english, corsican):
+    """A one-word interface label taken from a Java key that names something else: its gender or sense may differ."""
+    return (family(bedrock_key) in UI_FAMILIES and len(english.split()) == 1 and corsican != english
+            and not same_name(bedrock_key, java_key))
+
+
 def seed(english, java_english, java_corsican):
     """[(Bedrock key, Corsican text, Java key)] for every Bedrock key whose English text is identical to a Java
     English text of a corresponding family, and the reasons the other identical texts were not reused."""
+    reused, skipped = seed_lines(english, java_english, java_corsican)
+    # A sentence split over key.line1, key.line2… is reused whole or not at all: half Corsican, half English is worse.
+    taken = {key for key, _, _ in reused}
+    groups = collections.defaultdict(set)
+    for key, text in english.items():
+        match = SPLIT_LINE.match(key)
+        if match and text.strip():
+            groups[match.group(1)].add(key)
+    incomplete = {key for keys in groups.values() if not keys <= taken for key in keys & taken}
+    skipped['part of a split sentence whose other lines are not reused'] += len(incomplete)
+    return [row for row in reused if row[0] not in incomplete], +skipped
+
+
+def seed_lines(english, java_english, java_corsican):
     by_text = collections.defaultdict(list)
     for java_key, text in java_english.items():
         if text.strip() and java_corsican.get(java_key, '').strip():
@@ -190,8 +229,11 @@ def seed(english, java_english, java_corsican):
         if len(translations) > 1:
             skipped['identical English, Java translations disagree'] += 1
             continue
-        java_key = sorted(candidates)[0]
+        java_key = sorted(candidates, key=lambda j: (leaf(j) != leaf(key), not same_name(key, j), j))[0]
         corsican = java_corsican[java_key]
+        if short_label_elsewhere(key, java_key, text, corsican):
+            skipped['one-word interface label from a differently named Java key'] += 1
+            continue
         if line_problems(key, text, corsican):
             skipped['identical English, Corsican fails Bedrock checks'] += 1
             continue
@@ -203,7 +245,9 @@ def write_seed(reused, tag, java_version):
     lines = [f'## Corsu: Minecraft Bedrock Edition in Corsican (lingua corsa). PROTOTYPE, never loaded in the game.',
              f'## Keys of bedrock-samples {tag} resource_pack/texts/en_US.lang. Written by tools/bedrock.py seed:',
              f'## each line reuses minecraft/java/co_fr.json (Java {java_version}) where the English text is identical',
-             '## and the key families correspond; "## from-java:<key>" names the Java key. Other keys are left out.']
+             '## and the key families correspond; "## from-java:<key>" names the Java key. Other keys are left out,',
+             '## and so are one-word interface labels from a differently named Java key and incomplete split sentences.',
+             '## tools/bedrock.py build drops every comment from the copy that goes into the .mcpack.']
     lines += [f'{key}={text}{MARKER}{java_key}' for key, text, java_key in reused]
     return '\n'.join(lines) + '\n'
 
@@ -295,6 +339,7 @@ def check(tag, quiet=False):
     english = read_lang(fetch(tag) / 'en_US.lang')
     errors = check_text(TRANSLATION.read_bytes(), english)
     errors += check_manifest(json.loads(MANIFEST.read_text(encoding='utf-8')))
+    errors += check_language_code(fetch(tag))
     if not quiet:
         for line in errors:
             print('error:', line)
@@ -303,12 +348,26 @@ def check(tag, quiet=False):
     return errors
 
 
+def check_language_code(folder):
+    """The code must not be one of the vanilla languages (the pack would replace that language, not add one)."""
+    path = Path(folder) / 'languages.json'
+    if not path.exists():
+        return []
+    vanilla = json.loads(path.read_text(encoding='utf-8-sig'))
+    if not re.match(r'^[a-z]{2,3}_[A-Z]{2}$', LANGUAGE):
+        return [f'language code {LANGUAGE} does not follow the vanilla ll_CC pattern']
+    return [f'language code {LANGUAGE} is a vanilla language'] if LANGUAGE in vanilla else []
+
+
 def check_manifest(manifest):
     errors = []
     uuid = re.compile(r'^[0-9a-f]{8}-[0-9a-f]{4}-4[0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$')
     header = manifest.get('header', {})
     if manifest.get('format_version') != 2:
         errors.append('manifest: format_version must be 2')
+    if header.get('pack_scope') != 'global':
+        # wiki.bedrock.dev: a custom language only appears when the pack is applied globally.
+        errors.append('manifest: header.pack_scope must be "global" (languages come only from global packs)')
     for field in ('name', 'description', 'uuid', 'version', 'min_engine_version'):
         if field not in header:
             errors.append(f'manifest: header.{field} missing')
@@ -324,8 +383,20 @@ def check_manifest(manifest):
     return errors
 
 
+def pack_text(translation):
+    """The .lang that goes into the pack: only key=value lines, LF, no BOM. The comments (provenance) stay in the
+    repository copy, so the game never has to strip "<tab>## from-java:…" (documented, but not seen in a game)."""
+    if isinstance(translation, bytes):
+        translation = translation.decode('utf-8')
+    rows, problems = parse(translation, LANGUAGE + '.lang')
+    if problems:
+        raise ValueError('; '.join(problems))
+    return ''.join(f'{key}={value}\n' for _, key, value, _ in rows).encode('utf-8')
+
+
 def make_pack(manifest, translation, license_text, icon):
     """The .mcpack (a zip) as bytes. Fixed dates and order: the same sources always give the same file."""
+    translation = pack_text(translation)
     buffer = io.BytesIO()
     files = [
         ('manifest.json', manifest),

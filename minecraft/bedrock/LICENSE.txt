@@ -2,8 +2,8 @@ Corsu — Minecraft: Bedrock Edition in Corsican (lingua corsa) — PROTOTYPE
 https://github.com/Platykalt/corsu
 
 This pack contains only Corsican texts written for Corsu, a generated icon, the pack's own metadata and this file.
-It contains no file from Minecraft. Lines marked "from-java:<key>" reuse Corsu's own Corsican translation of
-Minecraft: Java Edition (minecraft/java/co_fr.json). The texts translate Minecraft's text; Mojang keeps its rights in
+It contains no file from Minecraft. Every text reuses Corsu's own Corsican translation of Minecraft: Java Edition
+(minecraft/java/co_fr.json); the Java key behind each line is noted in minecraft/bedrock/co_FR.lang in the repository. The texts translate Minecraft's text; Mojang keeps its rights in
 the original, and possibly in translations of it (see the Minecraft EULA, https://www.minecraft.net/en-us/eula).
 Corsu's own contribution is offered under the GNU General Public License, version 3 or any later version:
 https://www.gnu.org/licenses/gpl-3.0.html
