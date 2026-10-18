@@ -9,6 +9,26 @@ Three kinds of checks exist and are never counted as one another:
 
 Every change is logged in [corrections.tsv](corrections.tsv) with its status.
 
+## 2026-10-18 — wording and fit of the most common labels: Corsu's window, Discord, Firefox (AI review)
+
+Scope: the window's main texts (src/app/texts.js, about 140 Corsican strings), Discord's most visible paths (message
+box, server and channel menus, user settings top level, call buttons, notification settings, close and quit: 166
+labels from its public web client, October 2026) and Firefox's main menu, tab context menu, downloads and new tab
+(415 labels from Firefox 157 and its French pack). Each label was read for its sense, its function (action, title,
+state, question) and its neighbours, against Mozilla's Corsican (lexicon-mozilla.tsv), upstream programs
+(lexicon-upstream.tsv) and VLC (contrib/vlc/co.po). No dictionary was queried. The sensitive changes were re-read by a
+separate AI agent from the corpora: an AI second opinion, not a validation. Changes and proposals are logged in
+corrections.tsv (window, Firefox) and review-discord-2026-10.tsv (Discord).
+
+Applied: "Rilege" → "Rileghje" (misspelling); the window's "{job} compia." which did not agree with masculine jobs
+(French had the same bug); Firefox's "Créer un nouveau profil" and "Modifier le profil" taken from another program's
+"Save as new profile" and "Profile edition"; "Vue détaillée", "Minimale", "messageria"; the tab context menu and the
+synced-tabs panel aligned on Mozilla's own verbs and "apparechju" (they mixed two vocabularies); Discord's "Suppress
+Highlights" said "erase". Rejected after the second reading: a global "Supprimer" → "Squassà" (it also means Remove)
+and "Tuttu marcà cum'è lettu" → "Marcà tuttu…" (Mozilla's own pattern "Tuttu selezziunà"). Most labels examined were
+right, or differed only by legitimate variants (Ammutulisce as Mozilla's -isce infinitives, Espertu, Discunnette,
+tastera/tastiera), left as they are.
+
 ## 2026-10-17 — Firefox main menu, Settings, downloads and tabs, read in the running copy (automatic detection, AI proposals)
 
 Method: Corsu's Firefox 157 built in a throwaway home, started headless, and its labels read through Marionette (app
