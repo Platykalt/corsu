@@ -1,0 +1,132 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Relecture mc06-1</title>
+<style>
+:root { --bg: #f7f5f0; --surface: #fff; --line: #d9d4c8; --text: #1f2421; --muted: #5b625d; --accent: #1d6b5a;
+  --on-accent: #fff; --soft: #e3f0ec; --warn: #8a5300; --warn-soft: #fbefd9; color-scheme: light dark; }
+@media (prefers-color-scheme: dark) { :root { --bg: #151917; --surface: #1e2421; --line: #36403b; --text: #e8ece9;
+  --muted: #a7b0ab; --accent: #6cc3ad; --on-accent: #0f1513; --soft: #203a33; --warn: #f0b867; --warn-soft: #3a2e1b; } }
+* { box-sizing: border-box; }
+body { margin: 0; background: var(--bg); color: var(--text); font: 1rem/1.5 system-ui, sans-serif; }
+main { max-width: 52rem; margin: 0 auto; padding: 1.5rem 1rem 4rem; }
+h1 { font-size: 1.5rem; margin: 0 0 .25rem; } h2 { font-size: 1.1rem; margin: 2rem 0 .75rem; }
+.muted { color: var(--muted); } .note { background: var(--soft); border-radius: .5rem; padding: .75rem 1rem; }
+article { background: var(--surface); border: 1px solid var(--line); border-radius: .75rem; padding: 1rem; margin: 1rem 0; }
+article h3 { margin: 0 0 .5rem; font-size: 1rem; }
+table { border-collapse: collapse; width: 100%; font-size: .9rem; margin: .5rem 0; display: block; overflow-x: auto; }
+th, td { text-align: left; border-bottom: 1px solid var(--line); padding: .35rem .5rem; vertical-align: top; }
+td.co { font-weight: 600; } code { font-size: .8rem; overflow-wrap: anywhere; }
+.asked { background: var(--warn-soft); color: var(--warn); border-radius: .4rem; padding: .25rem .5rem; font-size: .875rem; }
+fieldset { border: 0; padding: 0; margin: .75rem 0 0; display: flex; flex-wrap: wrap; gap: .5rem 1rem; }
+label { cursor: pointer; } input[type=text], textarea { width: 100%; font: inherit; padding: .4rem .5rem;
+  border: 1px solid var(--line); border-radius: .4rem; background: var(--bg); color: var(--text); }
+.field { display: block; margin-top: .5rem; font-size: .9rem; }
+button { font: inherit; padding: .5rem .9rem; border-radius: .5rem; border: 1px solid var(--line); background: var(--surface);
+  color: var(--text); cursor: pointer; } button.main { background: var(--accent); border-color: var(--accent); color: var(--on-accent); }
+:focus-visible { outline: 3px solid var(--accent); outline-offset: 2px; }
+.buttons { display: flex; flex-wrap: wrap; gap: .5rem; margin: .75rem 0; }
+#reply { font-family: ui-monospace, monospace; font-size: .8rem; min-height: 12rem; }
+#said { min-height: 1.5rem; }
+</style>
+</head>
+<body>
+<main>
+<h1>Relecture mc06-1 · Review mc06-1</h1>
+<p class="muted" id="intro"></p>
+<p class="note"><b>Fr.</b> Ces traductions ont été produites puis revues par une IA, sans relecture humaine. Votre réponse
+est une <b>proposition</b>, examinée ensuite : rien ne change dans le jeu sans cet examen. Rien n'est envoyé tant que vous
+ne cliquez pas sur « Ouvrir un ticket » ; aucun nom n'est demandé.<br><b>En.</b> These translations were produced and
+revised by an AI, with no human review. Your answer is a <b>proposal</b>, examined afterwards. Nothing is sent unless you
+click "Open an issue"; no name is asked.</p>
+<p class="muted">« ¶ » = retour à la ligne · line break ; <code>%s</code> = rempli par le jeu · filled in by the game.</p>
+<div id="items"></div>
+<h2>Votre réponse · Your reply</h2>
+<p class="muted">Relisez-la avant de l'envoyer · Read it before sending it. Par courriel, en fichier ou par ticket GitHub (compte GitHub
+nécessaire) · By e-mail, as a file or as a GitHub issue (needs a GitHub account).</p>
+<textarea id="reply" readonly aria-label="Réponse à copier · Reply to copy"></textarea>
+<div class="buttons">
+<button type="button" class="main" id="copy">Copier · Copy</button>
+<button type="button" id="save">Enregistrer le fichier · Save as a file</button>
+<button type="button" id="issue">Ouvrir un ticket GitHub · Open a GitHub issue</button>
+</div>
+<p id="said" role="status" class="muted"></p>
+</main>
+<script type="application/json" id="data">{"id":"mc06-1","batch":"06-realms.md","title":"Lot 06 · Batch 06 — Realms : textes juridiques, facturation, écrans / Realms: legal, billing, screens","description":["Textes juridiques et de facturation de Realms (serveurs payants de Mojang), puis les écrans les plus visibles.","Realms (Mojang's paid servers) legal and billing texts, then the most visible screens."],"part":1,"parts":7,"app":"Minecraft: Java Edition","version":"26.3","items":[{"id":"06.01","title":"Mojang implements certain procedures to help protect childre","where":"Legal text. The Corsican is a translation for understanding only; Mojang's English text remains the reference. Shown when an account needs parental consent before using Realms.","question":"Read the whole text: is it correct and clear? In particular *Regulamentu generale nant'à a prutezzione di i dati (RGPD)* for GDPR, *cunsensu di i vostri genitori*, *migrà stu contu*.","texts":[{"key":"mco.account.privacy.information","english":"Mojang implements certain procedures to help protect children and their privacy including complying with the Children's Online Privacy Protection Act (COPPA) and General Data Protection Regulation (GDPR). ¶  ¶ You may need to obtain parental consent before accessing your Realms account.","french":"Mojang a mis en place certaines mesures pour assurer la protection des enfants et de leur vie privée conformément au Children's Online Privacy Protection Act (COPPA) et au règlement général sur la protection des données (RGPD). ¶  ¶ Vous pourriez avoir besoin d'obtenir le consentement parental avant d'accéder à votre compte Realms.","corsican":"Mojang applica certe prucedure per aiutà à prutege i zitelli è a so vita privata, in particulare rispittendu u Children's Online Privacy Protection Act (COPPA) è u Regulamentu generale nant'à a prutezzione di i dati (RGPD). ¶  ¶ Pò esse chì vi tocchi à ottene u cunsensu di i vostri genitori nanzu d'accede à u vostru contu Realms.","source_hash":"97de03449ab3","corsican_hash":"31ffc4ff01a3","asked":null},{"key":"mco.account.privacyinfo","english":"Mojang implements certain procedures to help protect children and their privacy including complying with the Children's Online Privacy Protection Act (COPPA) and General Data Protection Regulation (GDPR). ¶  ¶ You may need to obtain parental consent before accessing your Realms account. ¶  ¶ If you have an older Minecraft account (you log in with your username), you need to migrate the account to a Mojang account in order to access Realms.","french":"Mojang a mis en place certaines mesures pour assurer la protection des enfants et de leur vie privée conformément au Children's Online Privacy Protection Act (COPPA) et au règlement général sur la protection des données (RGPD). ¶  ¶ Vous pourriez avoir besoin d'obtenir le consentement parental avant d'accéder à votre compte Realms. ¶  ¶ Si vous possédez un ancien compte Minecraft (si vous vous connectez avec votre nom d'utilisateur), vous devez migrer votre compte vers un compte Mojang pour accéder à Realms.","corsican":"Mojang applica certe prucedure per aiutà à prutege i zitelli è a so vita privata, in particulare rispittendu u Children's Online Privacy Protection Act (COPPA) è u Regulamentu generale nant'à a prutezzione di i dati (RGPD). ¶  ¶ Pò esse chì vi tocchi à ottene u cunsensu di i vostri genitori nanzu d'accede à u vostru contu Realms. ¶  ¶ S'è vo avete un contu Minecraft anticu (vi cunnittite cù u vostru nome d'utilizatore), ci vole à migrà stu contu versu un contu Mojang per accede à Realms.","source_hash":"f6652c42294e","corsican_hash":"cd71bf8f1f18","asked":null}]},{"id":"06.02","title":"Read more about Mojang and privacy laws","where":"Legal text. The Corsican is a translation for understanding only; Mojang's English text remains the reference. Link under the text above.","question":"*Sapene di più nant'à Mojang è e leghje nant'à a vita privata*: natural? (*vita privata* for privacy.)","texts":[{"key":"mco.account.privacy.info","english":"Read more about Mojang and privacy laws","french":"En savoir plus sur Mojang et les lois sur la confidentialité","corsican":"Sapene di più nant'à Mojang è e leghje nant'à a vita privata","source_hash":"ace2854403f7","corsican_hash":"5f1f3cfee095","asked":null}]},{"id":"06.03","title":"Realms Terms of Service","where":"Legal text. The Corsican is a translation for understanding only; Mojang's English text remains the reference. Terms screen: sentence.1 + sentence.2 form one line, the second part is a link (\"Accettu e\" + \"Cundizioni d'utilizazione di Minecraft Realms\").","question":"Does *Accettu e Cundizioni d'utilizazione di Minecraft Realms* read as one correct sentence? Is *Cundizioni d'utilizazione* the usual term for Terms of Service?","texts":[{"key":"mco.terms.title","english":"Realms Terms of Service","french":"Conditions d'utilisation de Realms","corsican":"Cundizioni d'utilizazione di Realms","source_hash":"6adb7158101f","corsican_hash":"8efb3b02b681","asked":null},{"key":"mco.terms.sentence.1","english":"I agree to the Minecraft Realms","french":"J'accepte les","corsican":"Accettu e","source_hash":"0608cecc1da5","corsican_hash":"32bfadc43e00","asked":null},{"key":"mco.terms.sentence.2","english":"Terms of Service","french":"conditions d'utilisation de Minecraft Realms","corsican":"Cundizioni d'utilizazione di Minecraft Realms","source_hash":"0c8a9a95e21a","corsican_hash":"1f52cf2a6a08","asked":null}]},{"id":"06.04","title":"Agree","where":"Terms screen buttons. Button: half-width button, about 14 characters fit; longest Corsican label here: 16 characters (may not fit; the game scrolls labels that are too long).","question":"*Accettu* / *Ùn accettu micca*: natural on two buttons?","texts":[{"key":"mco.terms.buttons.agree","english":"Agree","french":"Accepter","corsican":"Accettu","source_hash":"ee68d3496bb4","corsican_hash":"2543d911a568","asked":null},{"key":"mco.terms.buttons.disagree","english":"Don't agree","french":"Refuser","corsican":"Ùn accettu micca","source_hash":"ec8ab74dd332","corsican_hash":"e8e948375658","asked":null}]},{"id":"06.05","title":"Terms of Service not accepted","where":"Error when the terms were not accepted.","question":"*Cundizioni d'utilizazione micca accettate*: natural?","texts":[{"key":"mco.errorMessage.6002","english":"Terms of Service not accepted","french":"Les conditions d'utilisation n'ont pas été acceptées","corsican":"Cundizioni d'utilizazione micca accettate","source_hash":"9df290add083","corsican_hash":"7eacfea69115","asked":null}]},{"id":"06.06","title":"Changes made to your Realms subscription such as stacking ti","where":"Billing text on the subscription screen.","question":"Correct and clear? *aghjunta di tempu* (stacking time), *fatturazione periodica* (recurring billing), *prossima data di fatturazione*.","texts":[{"key":"mco.configure.world.subscription.recurring.info","english":"Changes made to your Realms subscription such as stacking time or turning off recurring billing will not be reflected until your next bill date.","french":"Les changements apportés à votre abonnement à Realms, tels que la prolongation du temps ou la désactivation de la facturation périodique, ne seront pas pris en compte avant la prochaine date de facturation.","corsican":"I cambiamenti fatti à u vostru abbunamentu Realms, cum'è l'aghjunta di tempu o a disattivazione di a fatturazione periodica, ùn seranu micca pigliati in contu nanzu à a vostra prossima data di fatturazione.","source_hash":"f7eeab4ac007","corsican_hash":"62d9c0854aa2","asked":null}]},{"id":"06.07","title":"Renewed automatically in","where":"Subscription screen, followed by a duration.","question":"*Rinnuvatu autumaticamente in …* : *Rinnuvatu* or *Rinnovatu* (the file writes *Rinnovà* for the Renew button, after Mozilla)? And *in* or *trà* before a duration?","texts":[{"key":"mco.configure.world.subscription.recurring.daysleft","english":"Renewed automatically in","french":"Renouvelé automatiquement dans","corsican":"Rinnuvatu autumaticamente in","source_hash":"cad44e321af0","corsican_hash":"85cd287cd1b3","asked":null}]},{"id":"06.08","title":"Java Realms subscriptions are moving to the Microsoft Store.","where":"Notification about moving subscriptions to the Microsoft Store.","question":"Correct and clear? (*Ùn lasciate micca scade u vostru abbunamentu !*, *Trasferitelu subitu*.)","texts":[{"key":"mco.notification.transferSubscription.message","english":"Java Realms subscriptions are moving to the Microsoft Store. Do not let your subscription expire! ¶ Transfer now and get 30 days of Realms for free. ¶ Go to Profile on minecraft.net to transfer your subscription.","french":"Les abonnements à Realms pour Java sont en train d'être transférés vers le Microsoft Store. Ne laissez pas votre abonnement expirer ! ¶ Transférez-le maintenant et obtenez 30 jours de Realms gratuitement. ¶ Rendez-vous sur votre profil sur minecraft.net pour transférer votre abonnement.","corsican":"L'abbunamenti Realms per Java passanu à u Microsoft Store. Ùn lasciate micca scade u vostru abbunamentu ! ¶ Trasferitelu subitu è ottenite 30 ghjorni di Realms gratisi. ¶ Andate in Prufilu nant'à minecraft.net per trasferisce u vostru abbunamentu.","source_hash":"02e634c5ede0","corsican_hash":"2d77df9b7ccc","asked":null}]}]}</script>
+<script>
+"use strict";
+const set = JSON.parse(document.getElementById("data").textContent);
+const STORE = "corsu-review-" + set.id;
+let saved = {};
+try { saved = JSON.parse(localStorage.getItem(STORE) || "{}"); } catch (error) {}
+const el = (tag, attributes = {}, ...children) => {
+  const node = document.createElement(tag);
+  for (const [name, value] of Object.entries(attributes)) {
+    if (name === "text") node.textContent = value; else if (name.startsWith("on")) node.addEventListener(name.slice(2), value);
+    else if (value !== false && value != null) node.setAttribute(name, value === true ? "" : value);
+  }
+  node.append(...children.filter(child => child != null));
+  return node;
+};
+// *word* in the questions is emphasis; everything else is plain text.
+const rich = text => text.split(/(\*[^*]+\*)/).map(part => /^\*[^*]+\*$/.test(part) ? el("em", { text: part.slice(1, -1) }) : part);
+const answers = () => set.items.map(item => saved[item.id] || {});
+function remember() { try { localStorage.setItem(STORE, JSON.stringify(saved)); } catch (error) {} reply(); }
+const line = value => (value || "").replace(/\s*\n\s*/g, " / ").trim();
+function reply() {
+  const lines = ["corsu-review v1", "set: " + set.id, "data: " + set.app + " " + set.version];
+  set.items.forEach((item, index) => {
+    const answer = answers()[index];
+    lines.push("item: " + item.id, "texts: " + item.texts.map(text => `${text.key}@${text.source_hash}:${text.corsican_hash}`).join(" "),
+      "answer: " + (answer.kind || "skip"), "proposal: " + (answer.kind === "other" ? line(answer.proposal) : ""), "comment: " + line(answer.comment));
+  });
+  lines.push("end");
+  document.getElementById("reply").value = lines.join("\n");
+}
+const count = set.items.reduce((sum, item) => sum + item.texts.length, 0);
+document.getElementById("intro").textContent = `${set.title} — ${set.part}/${set.parts}. ${set.items.length} questions, ${count} textes · texts. ${set.app} ${set.version}.`;
+const box = document.getElementById("items");
+for (const item of set.items) {
+  const state = saved[item.id] = saved[item.id] || {};
+  const name = "q-" + item.id;
+  const proposal = el("input", { type: "text", id: name + "-proposal", value: state.proposal || "", disabled: state.kind !== "other",
+    oninput: event => { state.proposal = event.target.value; remember(); } });
+  const choice = (kind, label) => el("label", {}, el("input", { type: "radio", name, value: kind, checked: (state.kind || "skip") === kind,
+    onchange: () => { state.kind = kind; proposal.disabled = kind !== "other"; if (kind === "other") proposal.focus(); remember(); } }), " " + label);
+  box.append(el("article", { "aria-labelledby": name + "-title" },
+    el("h3", { id: name + "-title", text: `${item.id} — ${item.title}` }),
+    el("p", {}, el("b", { text: "Où · Where : " }), ...rich(item.where)),
+    el("table", {}, el("thead", {}, el("tr", {}, ...["Clé · Key", "English", "Français (officiel)", "Corse actuel · Corsican now"].map(text => el("th", { scope: "col", text })))),
+      el("tbody", {}, ...item.texts.map(text => el("tr", {}, el("td", {}, el("code", { text: text.key })), el("td", { text: text.english }),
+        el("td", { text: text.french }), el("td", { class: "co", lang: "co", text: text.corsican }))))),
+    ...item.texts.filter(text => text.asked).map(text => el("p", { class: "asked", text: `La question a été écrite pour · The question was written for : ${text.asked} (${text.key})` })),
+    el("p", {}, el("b", { text: "Question : " }), ...rich(item.question)),
+    el("fieldset", {}, el("legend", { class: "muted", text: "Votre avis · Your view" }),
+      choice("ok", "OK, naturel · natural"), choice("other", "J'écrirais autrement · I would write it otherwise"), choice("skip", "Passer · Skip")),
+    el("label", { class: "field", for: name + "-proposal", text: "Votre forme · Your form" }), proposal,
+    el("label", { class: "field", for: name + "-comment", text: "Remarque (facultatif) · Comment (optional)" }),
+    el("textarea", { id: name + "-comment", rows: "2", oninput: event => { state.comment = event.target.value; remember(); } }, state.comment || "")));
+}
+reply();
+const say = text => { document.getElementById("said").textContent = text; };
+document.getElementById("copy").addEventListener("click", async () => {
+  const area = document.getElementById("reply");
+  try { await navigator.clipboard.writeText(area.value); say("Copié · Copied."); }
+  catch (error) { area.select(); say("Sélectionnée : Ctrl+C pour copier · Selected: Ctrl+C to copy."); }
+});
+document.getElementById("save").addEventListener("click", () => {
+  const link = el("a", { href: URL.createObjectURL(new Blob([document.getElementById("reply").value], { type: "text/plain" })), download: `relecture-${set.id}.txt` });
+  document.body.append(link); link.click(); link.remove();
+});
+document.getElementById("issue").addEventListener("click", () => {
+  const body = "Réponse à la relecture " + set.id + " · Reply to review " + set.id + "\n\n```text\n" + document.getElementById("reply").value + "\n```\n";
+  let url = "https://github.com/Platykalt/corsu/issues/new?" + new URLSearchParams({ title: "Relecture " + set.id, body });
+  // Browsers and GitHub refuse very long addresses: then the issue opens empty and the reply is pasted by hand.
+  if (url.length > 7500) { url = "https://github.com/Platykalt/corsu/issues/new?" + new URLSearchParams({ title: "Relecture " + set.id }); say("Réponse trop longue pour l'adresse : copiez-la dans le ticket · Reply too long for the address: paste it into the issue."); }
+  window.open(url, "_blank", "noopener");
+});
+</script>
+</body>
+</html>
