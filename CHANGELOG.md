@@ -45,9 +45,9 @@
   (`X-Corsu-Key`, obtained once from a one-time ticket in the window's address). Until now, on Windows and macOS,
   another account of the computer could read Corsu's state and the background picture, and trigger actions, by
   sending the `X-Corsu` header itself. See docs/window-security.md.
-- Linux and macOS launchers: the archive's Python is kept in Corsu's data folder even when the installer runs on the
-  system's Python, and launchers fall back to it when the system's Python is missing, too old or incomplete
-  (`DATA/bin/corsu-python`). Until 0.24.0 the menu entry and Firefox launcher pointed at `/usr/bin/python3` and broke
+- Launchers: the archive's Python is kept in Corsu's data folder even when the installer runs on the system's
+  Python. On Linux, launchers fall back to it when the system's Python is missing, too old or incomplete
+  (`DATA/bin/corsu-python`); on macOS they always use it, also after a repair run with another Python. Until 0.24.0 the menu entry and Firefox launcher pointed at `/usr/bin/python3` and broke
   if it was removed; installing with only `python3-minimal` failed.
 - Discord: protected names checked in every lookup (templates, counts, dates), labels around a name still translated,
   "…" and "..." equivalent; English typing words in the lexicon. Simulated page in Chrome only.

@@ -3,7 +3,7 @@
 Document de reprise, tenu à jour à chaque étape. Il renvoie aux documents détaillés plutôt que de les répéter.
 Les sections datées après « État actuel » sont l'historique : ce qui y est dit ouvert a pu être corrigé depuis.
 
-## État actuel (17 octobre 2026)
+## État actuel (18 octobre 2026)
 
 - **0.24.0 publiée** (17 octobre 2026) : tag `v0.24.0` sur `78697ea`, release
   https://github.com/Platykalt/corsu/releases/tag/v0.24.0 marquée dernière version (run CI 39040761519 : tests,
@@ -25,15 +25,30 @@ Les sections datées après « État actuel » sont l'historique : ce qui y est 
   `GetRegionalPrefsLocales`), protections Discord (page simulée dans Chrome), raccourcis du complément VLC
   (« A&ttrezzi » ; la 0.24.0 garde le double Alt+A), vérification d'utilisateur de la fenêtre
   limitée à la vraie connexion (test instable du tag 0.24.0). Notes dans [.github/RELEASE_NOTES.md](../.github/RELEASE_NOTES.md) et le CHANGELOG.
-- **Candidate 0.25.0** (`src/release.json`) sur `next-0.25`, non taguée. Migration depuis la 0.24.0 publiée vérifiée
-  dans un conteneur Debian avec vrais VLC (entrée de menu), Poedit, PDFsam, fre:ac et Firefox.
-- **`fix-discord-labels`** (depuis `next-0.25`, non fusionnée) : « Dans un appel » traduit dans la liste des MP,
-  activités et noms laissés tels quels, « Bio » au lieu de « Organicu », 51 libellés Discord pris à d'autres
-  logiciels corrigés (revue IA, propositions restantes dans `lexicon/review-discord-2026-10.tsv`), diagnostic
-  sans données personnelles. Vérifié sur pages simulées et sur le module construit ; pas dans un vrai Discord. Le
-  Discord personnel charge encore le module de la 0.23.0 (empreinte `126646-…`).
-- **`redesign-window`** (depuis `next-0.25`, non fusionnée) : refonte de la fenêtre et rubrique Apparence
-  (docs/window-design.md).
+- **Candidate 0.25.0 intégrée** (18 octobre 2026) sur `next-0.25`, non taguée, non publiée, non fusionnée dans
+  `main`. Réunit `fix-discord-labels` et `redesign-window`, puis trois branches de travail (`c025-discord`,
+  `c025-ui`, `c025-install`). Commit et CI : voir la ligne « Validation » plus bas, mise à jour à chaque passage.
+  - **Discord** : « Dans un appel » (liste des MP), « Bio » devenu « Biugrafia » (INFCOR : *biografia*, variante
+    *biugrafia* ; Wikipedia corsa), « Message » nom « Messaghju », 51 + 15 libellés remis dans le sens de Discord
+    (provenance de chacun dans `lexicon/review-discord-2026-10.tsv`). Textes des zones de présence gardés selon leur
+    origine (jeux affichés sous un autre nom compris), diagnostic sans rien qui vienne de noms, statuts ou activités
+    (révision `2026-10-origin-1`, empreinte du dictionnaire construit `126775-317a576de61ce2a3`). Pages simulées et
+    module construit dans Chrome ; **pas observé dans un vrai Discord**. Le Discord personnel charge encore le module
+    de la 0.23.0 (empreinte `126646-…`).
+  - **Fenêtre** : refonte et rubrique Apparence (docs/window-design.md) ; clé par lancement exigée pour toute lecture
+    et action (`X-Corsu-Key`, ticket à usage unique après `#t=`), qui ferme la lecture de l'état et de l'image de
+    fond par un autre compte sous Windows et macOS (docs/window-security.md) ; socket d'écoute fermé à l'arrêt
+    (relais `--replace` qui attendait 30 s). Observé : Chrome headless et WebKitGTK 2.54 (Xvfb, conteneur) ; **pas
+    WebView2 ni WKWebView**. Captures : données fictives.
+  - **Installation** : le Python de l'archive est gardé dans `DATA/runtime` même quand l'installeur tourne sur celui
+    du système ; sous Linux les lanceurs passent par `DATA/bin/corsu-python` (Python du système s'il est
+    complet, sinon la copie ; macOS utilise toujours la copie). Cause : `deploy_runtime` ne copiait que quand Corsu tournait déjà sur le Python de
+    l'archive, et les lanceurs écrivaient `sys.executable` (`/usr/bin/python3`). Observé en conteneur : sans aucun
+    Python, avec `python3-minimal` seul, Python retiré après installation ; migration réelle depuis la 0.24.0
+    publiée (`tests/e2e/check_migration.py`, aussi en CI) ; Windows inchangé (le `.cmd` préférait déjà le Python
+    de l'archive).
+  - **Règle de traduction** des abréviations et classes de provenance : [AGENTS.md](../AGENTS.md).
+  - **Validation** : voir le CHANGELOG et le bilan de la session ; commit final et run CI ajoutés ci-dessous.
 - **`fix-0.24.1`** (`3e43459`, depuis `v0.24.0`) : seulement le correctif de sécurité de la fenêtre ; attend une
   décision de publication.
 - Tests unitaires : `HOME=$(mktemp -d) python3 -m unittest discover -s tests -t . -q` (sans `-t .`, 13 erreurs
@@ -205,10 +220,12 @@ Sans partager de message ; noter seulement l'endroit d'un défaut, pas le conten
 7. Un pseudo égal à un mot de l'interface (« Online », « Home ») n'est jamais traduit.
 8. Aucun message, bio ou statut traduit.
 9. Liste des MP : un contact en appel montre « In una chjama » ; son pseudo, un jeu ou un statut personnalisé
-   restent tels quels. Profil : titre « Bio », texte de la bio intact.
+   restent tels quels, même un jeu affiché sous un autre nom. Profil : titre « Biugrafia », texte de la bio intact.
 10. Version chargée : Paramètres › Vencord › Plugins › Corsu, option cachée `reportMissing` (dans
-    `settings.json` de Vencord) puis redémarrage : la console affiche `[CorsuMissing] {"revision":"2026-10-activity-2",
-    "dictionary":"…"}`. Rien de tel avec le module de la 0.23.0.
+    `settings.json` de Vencord) puis redémarrage : la console affiche `[CorsuMissing] {"revision":"2026-10-origin-1",
+    "dictionary":"126775-317a576de61ce2a3"}` (candidate 0.25.0). Rien de tel avec le module de la 0.23.0.
+11. Nouvelle fenêtre (après installation de la candidate) : Apparence › choisir une image, Appliquer ; fermer puis
+    rouvrir Corsu : l'image et le thème restent ; Réinitialiser l'apparence ne change aucun interrupteur.
 
 ## Blocages et ce qui demande une personne
 
