@@ -17,9 +17,12 @@ web client as its public bundle shows them (read in October 2026, without an acc
   "{label}, {conversation name}".
 It checks: "Dans un appel" is translated in the direct message list, on the Friends tab and in the profile; names
 ("Work", "Error") stay inside the translated labels; a game, rich presence details and state, and a custom status equal
-to dictionary words ("Work", "Error", "Dans un appel") stay as written; after the activity changes and after nodes are
-reused for another person, each text is still right; repeated passes never translate twice; and the hidden diagnostic
-classifies what it sees without giving names or messages.
+to dictionary words ("Work", "Error", "Dans un appel") stay as written; a game shown under another name than its
+record's ("Control" for "control.exe", "Mars 2", an application shown as "Message") stays as written in the Friends
+tab, the direct message list and a profile card, while Discord's template around it is translated; after the activity
+changes and after nodes are reused for another person, each text is still right; repeated passes never translate
+twice; and the hidden diagnostic classifies what it sees without giving names, nicknames, games or messages, even when
+they are dictionary words ("Work", "Error", "Control", "Message") or when only part of a name shows.
 This is a simulated page, not an observation of the real Discord app.
 """
 import json
@@ -35,7 +38,9 @@ from check_discord_content import HELPERS  # noqa: E402
 DICTIONARY = {
     'Dans un appel': 'In una chjama', 'Dans un appel (\u00001\u0000)': 'In una chjama (\u00001\u0000)',
     'Joue à \u00001\u0000': 'Ghjoca à \u00001\u0000',
-    'Work': 'Travagliu', 'Error': 'Sbagliu', 'En ligne': 'In linea', 'Online': 'In linea',
+    'Work': 'Travagliu', 'Error': 'Sbagliu', 'En ligne': 'In linea', 'Online': 'In linea', 'Joue à': 'Ghjoca à',
+    # Dictionary words a game can be shown as, while its record says something else (renamed game, application name).
+    'Control': 'Cuntrollu', 'Message': 'Messaghju',
     # A translation that is itself a key: a second pass over a translated label would show it.
     'In una chjama': 'DOUBLE',
 }
@@ -71,6 +76,14 @@ document.body.innerHTML = `
           </div></div>
         </div></div>
       </a></div></div>
+    <div class="channel__972a0 dm__972a0"><div class="interactive__972a0">
+      <a class="link__972a0 channelNameFade__972a0" href="/channels/@me/333333333333333333">
+        <div class="layout__20a53"><div class="content__20a53">
+          <div class="subText__20a53"><div class="container_c9d15c textXs_c9d15c">
+            <div id="dmAlias" class="text-xs/medium_a truncated_c9d15c activityStatusText__972a0" data-check="">Message</div>
+          </div></div>
+        </div></div>
+      </a></div></div>
   </nav>
   <div class="peopleColumn__133bf"><div class="peopleList__5ec2f">
     <div class="peopleListItem_cc6179"><div class="rowContent_cc6179"><div class="listItemContents_fc004c">
@@ -95,6 +108,19 @@ document.body.innerHTML = `
           <div id="friendCustom" class="text-sm/medium_a truncated_c9d15c statusText__19b6d" data-check="">Dans un appel</div>
         </div></div>
       </div></div></div></div></div>
+    <div class="peopleListItem_cc6179"><div class="rowContent_cc6179"><div class="listItemContents_fc004c">
+      <div class="userInfo__0a06e"><div class="text__0a06e">
+        <div class="subtext__0a06e"><div class="container_c9d15c textSm_c9d15c">
+          <div id="aliasBox" class="container_c9d15c textWithIconContainer_c9d15c textSm_c9d15c" aria-label="Joue à Control" data-check="aria-label">
+            <div id="aliasGame" class="text-sm/medium_a truncated_c9d15c statusText__19b6d" data-check="">Control</div>
+          </div></div></div>
+      </div></div></div></div></div>
+    <div class="peopleListItem_cc6179"><div class="rowContent_cc6179"><div class="listItemContents_fc004c">
+      <div class="userInfo__0a06e"><div class="text__0a06e">
+        <div class="subtext__0a06e"><div class="container_c9d15c textSm_c9d15c">
+          <div id="aliasDate" class="text-sm/medium_a truncated_c9d15c statusText__19b6d" data-check="">Mars 2</div>
+        </div></div>
+      </div></div></div></div></div>
   </div></div>
   <section class="panels_x"><div class="container__37e49"><div class="panelSubtextContainer__37e49">
     <div class="container_c9d15c textXs_c9d15c"><div id="panelCustom" class="text-xs/medium_a truncated_c9d15c activityStatusText__37e49" data-check="">Error</div></div>
@@ -103,9 +129,11 @@ document.body.innerHTML = `
     <div id="voiceCard" class="card__39ec2"><div class="header__39ec2"><div class="text-xs/medium_a headerText__39ec2">
       <div id="profileCall" data-check="">Dans un appel</div></div></div>
       <h2 id="profileHeading" class="hiddenVisually_x" data-check="">Dans un appel, Work</h2></div>
-    <div id="gameCard" class="card__39ec2"><div class="header__39ec2"><div class="text-xs/medium_a headerText__39ec2"><div id="gameHeader" data-check="">Online</div></div></div>
+    <div id="gameCard" class="card__39ec2"><div class="header__39ec2"><div class="text-xs/medium_a headerText__39ec2"><div id="gameHeader" data-check="">Joue à</div></div></div>
       <div class="details__39ec2"><div id="rpName" data-check="">Error</div><div id="rpDetails" data-check="">Work</div>
         <div id="rpState" data-check="">Dans un appel</div></div></div>
+    <div id="aliasCard" class="card__39ec2"><div class="details__39ec2"><div id="aliasName" data-check="">Control</div>
+      <div id="aliasOnline" data-check="">Online</div></div></div>
   </div>
   <div class="messagesWrapper_x"><div id="message-content-1" class="markup_x messageContent_x" data-check="">Dans un appel</div></div>`;
 const id = name => document.getElementById(name);
@@ -140,7 +168,19 @@ mount(id("profileCall"), { children: "Dans un appel" }, { text: "Dans un appel" 
 mount(id("profileHeading"), { children: "Dans un appel, Work" }, { user: work, currentUser: error, voiceChannel: dm(work) });
 const presence = { type: 0, name: "Error", details: "Work", state: "Dans un appel", assets: { large_text: "Work" } };
 for (const name of ["rpName", "rpDetails", "rpState"]) mount(id(name), { children: id(name).textContent }, { activity: presence, user: work });
-mount(id("gameHeader"), { children: "Online" }, { activity: presence, user: work });
+mount(id("gameHeader"), { children: "Joue à" }, { activity: presence, user: work });
+// Games shown under another name than their record's: Discord can show a detectable application's name, or a renamed
+// game. Nothing tells that "Control" there is not Discord's own text, so it stays as written (and "Mars 2" is no date).
+const renamed = game("control.exe");
+mount(id("aliasBox"), { text: "Control", "aria-label": "Joue à Control" }, { activity: renamed[0] }, status(error, renamed), ...row(error, renamed));
+mount(id("aliasGame"), { variant: "text-sm/medium" }, { text: "Control", "aria-label": "Joue à Control" }, { activity: renamed[0] }, status(error, renamed), ...row(error, renamed));
+const mars = game("MARS2");
+mount(id("aliasDate"), { variant: "text-sm/medium" }, { text: "Mars 2" }, { activity: mars[0] }, status(error, mars), ...row(error, mars));
+const messenger = game("messenger-app");
+mount(id("dmAlias"), { variant: "text-xs/medium" }, { activity: messenger[0] }, status(work, messenger), { channel: dm(work), user: work, activities: messenger });
+const card = { type: 0, name: "control.exe", details: "Work" };
+mount(id("aliasName"), { children: "Control" }, { activity: card, user: error });
+mount(id("aliasOnline"), { children: "Online" }, { activity: card, user: error });
 window.translator = Corsu.createTranslator(document);
 window.translator.start();
 '''
@@ -164,7 +204,11 @@ EXPECTED = {
     'panelCustom': 'Error',                            # one's own custom status in the account panel
     'profileCall': 'In una chjama',                    # the profile's call card
     'profileHeading': 'In una chjama, Work',
-    'gameHeader': 'In linea',                          # an interface label in the same card
+    'gameHeader': 'Ghjoca à',                          # Discord's header in the same card
+    'aliasBox': 'Ghjoca à Control',                    # Discord's template around a renamed game, the game kept
+    'aliasGame': 'Control', 'aliasDate': 'Mars 2',     # renamed games in the Friends tab: no word, no date read
+    'dmAlias': 'Message',                              # an application shown as "Message" in the DM list
+    'aliasName': 'Control', 'aliasOnline': 'Online',   # a renamed game and an unknown text in a profile card
     'rpName': 'Error', 'rpDetails': 'Work', 'rpState': 'Dans un appel',  # rich presence written by the game
     'message-content-1': 'Dans un appel',              # a message
 }
@@ -196,6 +240,14 @@ rerender(id("rpName"), "Work", { activity: presence, user: error });
 rerender(id("rpDetails"), "Online", { activity: presence, user: error });
 rerender(id("profileCall"), "Dans un appel", { text: "Dans un appel" }, { user: error, currentUser: work, voiceChannel: dm(error) });
 rerender(id("profileHeading"), "Dans un appel, Error", { user: error, currentUser: work, voiceChannel: dm(error) });
+// The renamed game's node now shows a call label, the call label's node in the DM list a renamed game; the card shows
+// another game whose record has the name shown.
+rerender(id("aliasGame"), "Dans un appel", { variant: "text-sm/medium" }, { text: "Dans un appel" }, { channel: dm(error) },
+  status(error, call(), dm(error)), row(error, call()));
+const renamedAgain = game("ctrl_x64");
+rerender(id("dmStatus"), "Control", { variant: "text-xs/medium" }, { activity: renamedAgain[0] }, status(work, renamedAgain),
+  { channel: dm(work), user: work, activities: renamedAgain, voiceChannel: null });
+rerender(id("aliasName"), "Error", { activity: { type: 0, name: "Error" }, user: work });
 await settle();
 // Several more passes: the page writes back what it shows, and the attributes too.
 for (let pass = 0; pass < 3; pass++) {
@@ -217,6 +269,7 @@ AFTER_CHANGE = {
     'friendActivity': 'Dans un appel',                 # the node that showed the label shows a custom status
     'rpName': 'Work', 'rpDetails': 'Online',
     'profileCall': 'In una chjama', 'profileHeading': 'In una chjama, Error',
+    'aliasGame': 'In una chjama', 'dmStatus': 'Control', 'aliasName': 'Error',
 }
 
 # The diagnostic: one text of each kind, with names, a message and a game that must not appear in the report.
@@ -225,7 +278,8 @@ DIAGNOSTIC_DICTIONARY = {
     'Joue à \u00001\u0000': 'Ghjoca à \u00001\u0000', 'Work': 'Travagliu',
     # Words the diagnostic may give (it gives a word only when some entry uses it).
     'Paramètres avancés': 'Parametri avanzati', 'Paramètres du serveur': 'Parametri di u servore',
-    'Appel avec': 'Chjama cù', 'en cours': 'in corsu',
+    'Appel avec': 'Chjama cù', 'en cours': 'in corsu', 'Control': 'Cuntrollu', 'Error': 'Sbagliu', 'Message': 'Messaghju',
+    'Travail': 'Travagliu', 'Dans un appel (\u00001\u0000)': 'In una chjama (\u00001\u0000)',
 }
 
 DIAGNOSTIC_PAGE = HELPERS + r'''
@@ -238,9 +292,23 @@ document.body.innerHTML = `
   <div id="template">Joue à Privategame</div>
   <div id="message-content-7" class="markup_x">Mon message très privé à toi</div>
   <div class="subtext_x"><div id="value">Work</div></div>
+  <div class="subtext_x"><div id="renamed">Control</div></div>
+  <span id="nick" class="nickname_x">Error</span>
+  <div class="memberRow_x"><div id="storeNick" class="name_x">Message</div></div>
+  <div id="call" aria-label="Dans un appel (Error Travail)"></div>
+  <h1 id="title" class="title_x">Error Travail</h1>
+  <div id="partial">Appel avec Travail en cours</div>
   <div id="later"></div>`;
 mount(document.getElementById("withName"), { user: bob });
 mount(document.getElementById("value"), { activity: { type: 0, name: "Work" } }, { user: bob, activities: [{ type: 0, name: "Work" }] });
+// A game shown under another name than its record's, a nickname, a name from Discord's store (no record), a call with
+// a name of two dictionary words, a conversation title and a sentence with part of that name.
+mount(document.getElementById("renamed"), { activity: { type: 0, name: "control.exe" } }, { user: bob, activities: [{ type: 0, name: "control.exe" }] });
+const errorTravail = { id: "222222222222222222", username: "et", globalName: "Error Travail" };
+mount(document.getElementById("call"), { user: errorTravail, voiceChannel: { id: "333333333333333333", type: 1, name: "" } });
+mount(document.getElementById("title"), { channel: { id: "333333333333333333", type: 1, name: "", recipients: [errorTravail.id],
+  rawRecipients: [{ id: errorTravail.id, username: "et", global_name: "Error Travail" }] } });
+mount(document.getElementById("partial"), { user: errorTravail });
 window.translator = Corsu.createTranslator(document);
 window.translator.start();
 '''
@@ -262,6 +330,14 @@ document.getElementById("later").append(plain);
 const missed = document.createElement("div");
 missed.textContent = "Paramètres";
 document.body.append(missed);
+// A renamed game and a call label with a name, shown before the translator sees them: unapplied, never given.
+const line = document.createElement("div");
+line.className = "subtext_y";
+line.innerHTML = '<div>Control</div><div aria-label="Dans un appel (Error Travail)">Dans un appel</div>';
+document.body.append(line);
+const renamedGame = [{ type: 0, name: "control.exe" }];
+mount(line.firstChild, { activity: renamedGame[0] }, { user: { id: "555555555555555555", username: "x", globalName: "Error Travail" }, activities: renamedGame });
+mount(line.lastChild, { voiceChannel: { id: "666666666666666666", type: 1, name: "" } }, { user: { id: "555555555555555555", username: "x", globalName: "Error Travail" }, activities: [] });
 const report = window.translator.report();
 const output = JSON.stringify(report);
 const has = (kind, text, rule) => report.findings.some(f => f.kind === kind && (text === undefined || f.text === text) && (rule === undefined || f.rule === rule));
@@ -277,8 +353,8 @@ return JSON.stringify({
   userValue: (report.counts.userValue ?? 0) >= 1,
   userContent: (report.counts.userContent ?? 0) >= 1,
   unknownInName: (report.counts.unknownInName ?? 0) >= 1,
-  private: ["Zoélie", "Privatename", "Bobette", "Secretname", "bob.private", "Privategame", "privé", "Mon message"]
-    .filter(word => output.includes(word)),
+  private: ["Zoélie", "Privatename", "Bobette", "Secretname", "bob.private", "Privategame", "privé", "Mon message",
+    "Control", "control", "Error", "Travail", "Message", "Work"].filter(word => output.includes(word)),
 });
 })()
 """

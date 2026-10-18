@@ -6,13 +6,17 @@ The other Discord checks bundle src/discord-plugin/translate.ts with a small tes
 translator out of the bundle Discord actually loads (VENCORD_DIR/dist/renderer.js, built by installer.prepare_build
 after corsu.generate()), with the dictionary embedded in it, and checks:
 - the bundle: the translator revision, the dictionary fingerprint the diagnostic reports (it must equal the one computed
-  from VENCORD_DIR/src/userplugins/corsu/dictionary.json), "Bio" kept as "Bio" (no "Organicu" anywhere);
+  from VENCORD_DIR/src/userplugins/corsu/dictionary.json), "Bio" written out as "Biugrafia" (no "Organicu" anywhere);
 - simulated pages (the markup and React props of Discord's web client, as in check_discord_activity.py): the activity
   line in the direct message list and the Friends tab, games, rich presence and custom statuses equal to dictionary
-  words, names, server, channel and role names, a label mixing a name, long, emoji, right-to-left and separator names,
-  the profile's "Bio" heading and the bio itself, repeated passes and a second translator over a translated page;
-- the hidden diagnostic: what it prints for synthetic personal data.
-Known limits (left as they are on this branch) are printed as KNOWN and only fail with --strict.
+  words, games shown under another name than their record's (renamed games, application names), voice channel
+  statuses, names and nicknames ("Work", "Error", "Message"), server, channel and role names, names inserted in
+  sentences (text, aria-label, title), long, emoji, right-to-left and separator names, the profile's "Bio" titles
+  (Biugrafia) and the bio itself (kept), repeated passes, a second translator over a translated page, and nodes reused
+  by React for other texts and records (navigation, activity changes);
+- the hidden diagnostic: it prints none of the synthetic personal data, even dictionary words ("Work", "Error",
+  "Message", "Control"), whole or in part.
+Cases marked strict=false are known limits, printed as KNOWN, failing only with --strict (there are none now).
 This is a simulated page, not an observation of the real Discord app.
 """
 import json
@@ -47,7 +51,7 @@ const names = {
   setCorrections: pick(plugin, /try\{(\w+)\(JSON\.parse/),
   dictionaryFingerprint: pick(plugin, /dictionary:(\w+)\(\)/),
   revision: pick(plugin, /revision:(\w+),dictionary/),
-  translateLabel: pick(body, /function (\w+)\(e,i=new Set\)\{let a=e\.match/),
+  translateLabel: pick(body, /function (\w+)\(e,i=new Set(?:,\w+=!1)?\)\{let \w+=e\.match/),
 };
 for (const [key, value] of Object.entries(names)) if (!value) throw new Error("not found in the bundle: " + key);
 const exported = Object.entries(names).map(([key, value]) => `${key}:${value}`).join(",");
@@ -68,6 +72,8 @@ const game = name => ({ type: 0, name, application_id: "999999999999999999" });
 const custom = state => ({ type: 4, name: "Custom Status", state, emoji: null });
 // strict: false marks a known limit of this branch (expected = what should happen).
 function add(name, html, chain, expected, attr, strict = true) { cases.push({ name, html, chain, expected, attr, strict }); }
+// After the first passes, React reuses the case's node for something else (navigation, an activity that changes).
+function then(name, text, chain, expected) { cases.find(c => c.name === name).next = { text, chain, expected }; }
 const subtext = inner => `<div class="userInfo__0a06e"><div class="subtext__0a06e"><div class="container_c9d15c">${inner}</div></div></div>`;
 const dmLine = inner => `<a class="link__972a0 channelNameFade__972a0" href="/channels/@me/1"><div class="subText__20a53">${inner}</div></a>`;
 const card = inner => `<div class="userProfile_x"><div class="activityCard_x">${inner}</div></div>`;
@@ -118,10 +124,40 @@ for (const text of ["Dans un appel", "Work", "Bio", "En ligne", "Ne pas dérange
   add("rich presence state with party size", card(`<div id="t" class="state_x">Dans un appel (1 sur 4)</div>`), props,
     "Dans un appel (1 sur 4)");
 }
-// KNOWN (also in 0.23.0): a game shown under another name than its record's (the application's name).
+// Games shown under another name than their record's (a detectable application's name, a renamed game): in an activity
+// area only Discord's own labels are translated, so these stay as written (in 0.23.0 and 0.24 "Control" became
+// "Cuntrollu"); Discord's template around them is still translated.
+const renamed = game("control.exe");
 add("game shown under another name than its record", subtext(`<div id="t" class="statusText__19b6d">Control</div>`),
-  [{ variant: "x" }, { activity: game("control.exe") }, status(work, [game("control.exe")]), row(work, [game("control.exe")])],
-  "Control", undefined, false);
+  [{ variant: "x" }, { activity: renamed }, status(work, [renamed]), row(work, [renamed])], "Control");
+add("renamed game aria-label", subtext(`<div id="t" class="textWithIconContainer_c9d15c" aria-label="Joue à Control"></div>`),
+  [{ text: "Control", "aria-label": "Joue à Control" }, { activity: renamed }, status(work, [renamed]), row(work, [renamed])],
+  "Ghjoca à Control", "aria-label");
+add("renamed game in the DM list", dmLine(`<div id="t" class="activityStatusText__972a0">Message</div>`),
+  [{ variant: "x" }, { activity: game("msgr") }, status(error, [game("msgr")]), { channel: dm(error), user: error, activities: [game("msgr")] }], "Message");
+add("renamed game read as a date", subtext(`<div id="t" class="statusText__19b6d">Mars 2</div>`),
+  [{ variant: "x" }, { activity: game("MARS2") }, status(work, [game("MARS2")]), row(work, [game("MARS2")])], "Mars 2");
+add("renamed game in a profile card", card(`<div id="t" class="name_x">Control</div>`), [{ activity: renamed, user: work }], "Control");
+add("renamed game in a profile card, no class", `<div class="userProfile_x"><div><div id="t">Error</div></div></div>`,
+  [{ children: "Error" }, { activity: game("err.exe"), user: work }], "Error");
+add("profile card header", card(`<h3 id="t" class="header_x">Joue à</h3>`), [{ activity: renamed, user: work }], "Ghjoca à");
+add("call label in a profile card", `<div class="card_x"><div id="t" class="headerText_x">Dans un appel</div></div>`,
+  [{ text: "Dans un appel" }, { user: work, voiceChannel: dm(work) }], "In una chjama");
+add("custom status Control", subtext(`<div id="t" class="statusText__19b6d">Control</div>`),
+  [{ variant: "x" }, { customStatusActivity: custom("Control") }, status(error, [custom("Control")]), row(error, [custom("Control")])], "Control");
+add("voice channel status Work", `<div class="voiceChannelStatus_x"><span id="t">Work</span></div>`, [], "Work");
+add("voice channel status Dans un appel", `<div class="voiceChannelStatus_x"><span id="t">Dans un appel</span></div>`, [], "Dans un appel");
+add("nickname Work", `<div class="member_x"><span id="t" class="name_x">Work</span></div>`,
+  [{ member: { userId: ID(8), guildId: ID(4), nick: "Work" } }], "Work");
+add("nickname Error from Discord's store", `<div class="member_x"><span id="t" class="name_x">Error</span></div>`, [], "Error");
+add("person named Message", `<div class="discordTag__0a06e"><span id="t" class="username__0a06e">Message</span></div>`,
+  [{ user: user(9, "Message") }], "Message");
+add("name in a sentence (aria-label)", `<div id="t" aria-label="Envoyer un message à @Work"></div>`, [{ user: work }],
+  "Mandà un messaghju à @Work", "aria-label");
+add("name Message in a sentence (aria-label)", `<div id="t" aria-label="Envoyer un message à @Message"></div>`,
+  [{ user: user(9, "Message") }], "Mandà un messaghju à @Message", "aria-label");
+add("name in a sentence (title)", `<div id="t" title="Profil de Error"></div>`, [{ user: error }], "Prufilu di Error", "title");
+add("name in a sentence (text)", `<div id="t">Profil de Work</div>`, [{ user: work }], "Prufilu di Work");
 add("friend named Work", `<div class="discordTag__0a06e"><span id="t" class="username__0a06e">Work</span></div>`, [{ user: work }, row(work, [])], "Work");
 add("friend named Error", `<div class="discordTag__0a06e"><span id="t" class="username__0a06e">Error</span></div>`, [{ user: error }, row(error, [])], "Error");
 add("channel named General", `<a id="t" href="/channels/4/5">General</a>`, [{ channel: { id: ID(5), name: "General", guild_id: ID(4) } }], "General");
@@ -137,11 +173,25 @@ add("emoji name in a label", `<div id="t" aria-label="Dans un appel (🔥🔥)">
 add("right-to-left name in a label", `<div id="t" aria-label="Dans un appel (محمد Work)"></div>`, [{ user: rtl, voiceChannel: dm(rtl) }], "In una chjama (محمد Work)", "aria-label");
 add("game named like a template", subtext(`<div id="t" class="statusText__19b6d">Bobby de Paris</div>`),
   [{ variant: "x" }, { activity: game("Bobby de Paris") }, status(paris, [game("Bobby de Paris")])], "Bobby de Paris");
-add("profile Bio heading", `<div class="userProfile_x"><h2 id="t" class="defaultColor_x">Bio</h2></div>`, [{ user: work }], "Bio");
+add("profile Bio heading", `<div class="userProfile_x"><h2 id="t" class="defaultColor_x">Bio</h2></div>`, [{ user: work }], "Biugrafia");
+add("settings Bio section title", `<div class="sectionTitle_x"><h3 id="t" class="title_x">Bio</h3></div>`, [], "Biugrafia");
+add("server Bio title", `<div class="sectionTitle_x"><h3 id="t" class="title_x">Bio du serveur</h3></div>`, [], "Biugrafia di u servore");
+add("bio editor content Bio", `<div class="bioEditor_x"><div id="t" contenteditable="true">Bio</div></div>`, [{ user: work }], "Bio");
 add("bio text Bio", `<div class="userBio_x"><div id="t" class="markup_x">Bio</div></div>`, [{ user: work }], "Bio");
 add("bio text Dans un appel", `<div class="bio_x"><span id="t">Dans un appel</span></div>`, [{ user: work }], "Dans un appel");
 add("Créer un salon", `<button id="t">Créer un salon</button>`, [], "Creà un canale");
 add("message", `<div id="message-content-1" class="markup_x"><span id="t">Dans un appel</span></div>`, [], "Dans un appel");
+
+then("game Control", "Dans un appel", [{ variant: "x" }, { text: "Dans un appel" }, { channel: dm(work) },
+  status(work, [], dm(work)), row(work, [])], "In una chjama");
+then("DM list call label", "Control", [{ variant: "x" }, { activity: game("ctrl.exe") }, status(work, [game("ctrl.exe")]),
+  { channel: dm(work), user: work, activities: [game("ctrl.exe")], voiceChannel: null }], "Control");
+then("renamed game in a profile card", "Work", [{ activity: game("Work"), user: error }], "Work");
+then("friend named Work", "Error", [{ user: error }, row(error, [])], "Error");
+then("name in a sentence (aria-label)", "Envoyer un message à @Error", [{ user: error }], "Mandà un messaghju à @Error");
+then("custom status (Friends) Dans un appel", "Joue à Control", [{ variant: "x" }, { customStatusActivity: custom("Joue à Control") },
+  status(error, [custom("Joue à Control")]), row(error, [custom("Joue à Control")])], "Joue à Control");
+then("Créer un salon", "Envoyer", [], "Mandà");
 
 for (const c of cases) {
   const host = document.createElement("div");
@@ -173,12 +223,31 @@ const second = CorsuBuilt.createTranslator(document);
 second.start();
 await settle();
 second.stop();
-return JSON.stringify(cases.map((c, index) => ({ name: c.name, expected: c.expected, strict: c.strict, first: first[index], last: read(c) })));
+const last = cases.map(read);
+// Navigation: the nodes are reused for other texts and records, then written back twice.
+for (const c of cases.filter(c => c.next)) {
+  const chain = c.next.chain.length ? c.next.chain : [{}];
+  if (!c.element.__reactFiber$test) c.element.firstChild.data = c.next.text;  // no React records: only the text changes
+  else if (c.attr) { rerender(c.element, null, ...chain); c.element.setAttribute(c.attr, c.next.text); }
+  else rerender(c.element, c.next.text, ...chain);
+}
+await settle();
+const moved = cases.map(read);
+for (let pass = 0; pass < 2; pass++) {
+  for (const c of cases.filter(c => c.next)) {
+    if (c.attr) c.element.setAttribute(c.attr, c.element.getAttribute(c.attr));
+    else for (const node of c.element.childNodes) if (node.nodeType === Node.TEXT_NODE) node.data = node.data;
+  }
+  await settle();
+}
+return JSON.stringify(cases.map((c, index) => ({ name: c.name, expected: c.expected, strict: c.strict, first: first[index],
+  last: last[index], next: c.next?.expected, moved: moved[index], movedLast: read(c) })));
 })()
 '''
 
-# The diagnostic with synthetic personal data in places Discord shows what people chose without a name class or
-# React records nearby. Nothing of it should be printed.
+# The diagnostic with synthetic personal data: in places Discord shows what people chose without a name class or React
+# records nearby, and names, nicknames, games and statuses that are dictionary words ("Work", "Error", "Message",
+# "Control"), whole or in part. Nothing of it should be printed.
 PRIVACY = HELPERS + r'''
 (async () => {
 const bob = { id: "111111111111111111", username: "bob.prive", globalName: "Bobette Secretnom" };
@@ -191,17 +260,39 @@ document.body.innerHTML = `
   <div id="emoji" aria-label=":chat_de_Mélanie:"></div>
   <div class="userBio_x"><div class="markup_x">Ma bio très privée</div></div>
   <div id="message-content-9" class="markup_x">Message ultra secret de Bobette</div>
-  <div id="withRecords">Appel avec Bobette Secretnom en cours</div>`;
+  <div id="withRecords">Appel avec Bobette Secretnom en cours</div>
+  <div class="discordTag_x"><span class="username_x">Work</span></div>
+  <div class="member_x"><span class="name_x">Error</span></div>
+  <div class="nickname_x">Message</div>
+  <div class="customStatus_x">Travail du soir</div>
+  <div class="voiceChannelStatus_x">Soirée Control</div>
+  <h1 id="dmTitle" class="title_x">Error Work</h1>
+  <div id="callLabel" aria-label="Dans un appel (Error Work)"></div>
+  <div id="partial">Appel avec Work en cours</div>
+  <div id="subtext" class="subtext_x"><div id="renamed" class="statusText_x">Control</div></div>`;
 mount(document.getElementById("withRecords"), { user: bob });
+const ew = { id: "222222222222222222", username: "ew", globalName: "Error Work" };
+mount(document.getElementById("dmTitle"), { channel: { id: "333333333333333333", type: 1, name: "", recipients: [ew.id],
+  rawRecipients: [{ id: ew.id, username: "ew", global_name: "Error Work" }] } });
+mount(document.getElementById("callLabel"), { user: ew, voiceChannel: { id: "333333333333333333", type: 1, name: "" } });
+mount(document.getElementById("partial"), { user: ew });
+mount(document.getElementById("renamed"), { activity: { type: 0, name: "control.exe" } }, { user: ew, activities: [{ type: 0, name: "control.exe" }] });
 const translator = CorsuBuilt.createTranslator(document);
 translator.start();
 await new Promise(resolve => setTimeout(resolve, 30));
 const fresh = document.createElement("div");
 fresh.textContent = "Jérôme Martindale, Envoyer";
 document.body.append(fresh);
+// Shown before the translator sees them (the report runs first): a renamed game and a nickname.
+const line = document.createElement("div");
+line.className = "subtext_y";
+line.innerHTML = '<div class="statusText_y">Message</div><span class="username_y">Error</span>';
+document.body.append(line);
+mount(line.firstChild, { activity: { type: 0, name: "msgr" } }, { user: ew, activities: [{ type: 0, name: "msgr" }] });
 const output = JSON.stringify(translator.report());
 return JSON.stringify(["Jérôme", "Martindale", "elle/la sienne", "nuit", "Paris", "Ajaccio", "Léa", "Mélanie", "bio très",
-  "secret", "Bobette", "Secretnom", "bob.prive"].filter(word => output.includes(word)));
+  "secret", "Bobette", "Secretnom", "bob.prive", "Work", "Error", "Message", "Control", "Travail", "Soirée"]
+  .filter(word => output.includes(word)));
 })()
 '''
 
@@ -224,9 +315,9 @@ def main(chrome, vencord, strict):
     expected_fingerprint = fingerprint(dictionary)
     with tempfile.TemporaryDirectory(prefix='corsu-built-', ignore_cleanup_errors=True) as folder:
         bundle, url = extract(vencord, folder)
-        checks = {'"Bio" is "Bio" in the dictionary': dictionary.get('Bio') == 'Bio',
+        checks = {'"Bio" is "Biugrafia" in the dictionary': dictionary.get('Bio') == 'Biugrafia',
                   'no "Organicu" in the bundle': 'Organicu' not in bundle,
-                  'bundle has Bio:"Bio"': 'Bio:"Bio"' in bundle}
+                  'bundle has Bio:"Biugrafia"': 'Bio:"Biugrafia"' in bundle}
         for name, ok in checks.items():
             print(f'{"PASS" if ok else "FAIL"}: {name}')
             if not ok:
@@ -267,6 +358,13 @@ def main(chrome, vencord, strict):
                 failures.append('fingerprint')
             evaluate(devtools, session, CASES)
             for case in json.loads(evaluate(devtools, session, RUN)):
+                if case.get('next') is not None:
+                    ok = case['moved'] == case['next'] and case['movedLast'] == case['moved']
+                    print(f'{"PASS" if ok else "FAIL"}: {case["name"]}, node reused = {case["moved"]!r}'
+                          + ('' if case['movedLast'] == case['moved'] else f' then {case["movedLast"]!r}')
+                          + ('' if ok else f' (expected {case["next"]!r})'))
+                    if not ok:
+                        failures.append(case['name'] + ' (node reused)')
                 ok = case['first'] == case['expected'] and case['last'] == case['first']
                 tag = 'PASS' if ok else ('FAIL' if case['strict'] else 'KNOWN')
                 print(f'{tag}: {case["name"]} = {case["first"]!r}' + ('' if case['last'] == case['first'] else
