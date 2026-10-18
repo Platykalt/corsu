@@ -104,8 +104,12 @@ grammaire complet.
 Dictionnaire publié (le même fichier pour Android et iPhone) :
 [corsu-keyboard.kmp](https://github.com/Platykalt/corsu/releases/latest/download/corsu-keyboard.kmp), le dictionnaire
 général (environ 17 000 mots corses courants).
-<!-- corsu:phone-variants:fr Ne lister que les fichiers joints à la dernière version publiée. -->
-D'autres variantes sont en préparation ; elles seront listées ici une fois publiées.
+<!-- corsu:phone-variants:fr Ne lister ci-dessus que les fichiers joints à la dernière version publiée ; à la
+     publication, y déplacer ceux de la phrase suivante. -->
+Dans la prochaine version (pas encore publiée) : un `corsu-keyboard.kmp` qui garde la majuscule des mots, et deux
+dictionnaires expérimentaux qui préfèrent les formes d'une région, `corsu-keyboard-cismuntincu.kmp` et
+`corsu-keyboard-pumuntincu.kmp`. Keyman 18 n'a pas de correction automatique : les corrections sont proposées dans le
+bandeau, à toucher.
 
 ### Les traductions
 
@@ -209,8 +213,12 @@ needed. It is neither a sentence translator nor a full grammar checker.
 Published dictionary (the same file for Android and iPhone):
 [corsu-keyboard.kmp](https://github.com/Platykalt/corsu/releases/latest/download/corsu-keyboard.kmp), the general
 dictionary (about 17,000 common Corsican words).
-<!-- corsu:phone-variants:en List only the files attached to the latest published release. -->
-Other variants are being prepared; they will be listed here once published.
+<!-- corsu:phone-variants:en List above only the files attached to the latest published release; at release time,
+     move there those of the next sentence. -->
+In the next version (not published yet): a `corsu-keyboard.kmp` that keeps the capital letters of words, and two
+experimental dictionaries preferring one region's forms, `corsu-keyboard-cismuntincu.kmp` and
+`corsu-keyboard-pumuntincu.kmp`. Keyman 18 has no automatic correction: corrections are offered in the banner, to
+tap.
 
 ### Translations
 

@@ -120,6 +120,10 @@ class ReleasedFilesTests(unittest.TestCase):
         code = (APP / 'phone.js').read_text(encoding='utf-8')
         variants = re.search(r'const VARIANTS = \[(.*?)\];', code, re.S).group(1)
         self.assertEqual(re.findall(r'file: "([\w.-]+)"', variants), ['corsu-keyboard.kmp'])
+        # The next version's files are shown apart, never as a download.
+        coming = re.findall(r'file: "([\w.-]+)"', re.search(r'const COMING = \[(.*?)\];', code, re.S).group(1))
+        self.assertEqual(coming, ['corsu-keyboard-cismuntincu.kmp', 'corsu-keyboard-pumuntincu.kmp'])
+        self.assertNotIn('RELEASE + COMING', code)
         for path in ('docs/fr/telephone/android.md', 'docs/fr/telephone/iphone.md', 'docs/en/phone/android.md',
                      'docs/en/phone/iphone.md', 'README.md'):
             text = (ROOT / path).read_text(encoding='utf-8')
@@ -243,6 +247,8 @@ class RenderTests(unittest.TestCase):
         self.assertIn('Keyman', self.result['co-android']['text'])
         self.assertNotIn('ph_', self.result['co-iphone']['text'])
         self.assertIn('corsu-keyboard.kmp', self.result['en-android']['text'])
+        self.assertIn('In the next version', self.result['en-android']['text'])
+        self.assertIn('corsu-keyboard-pumuntincu.kmp', self.result['en-android']['text'])
 
     def test_unchanged_page_keeps_its_nodes_across_refreshes(self):
         self.assertTrue(all(self.result[f'{language}-kept'] for language in ('co', 'fr', 'en')))

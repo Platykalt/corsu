@@ -17,13 +17,24 @@ official help and the translation files of that version; another version may cha
 
 ## Available dictionaries
 
+<!-- corsu:phone-variants:en The files really attached to the latest published release. When the next version is
+     published, move here the rows of the "In the next version" table that it carries. -->
 | File | Content | Download |
 | --- | --- | --- |
 | `corsu-keyboard.kmp` | general dictionary, about 17,000 common Corsican words | [latest published release](https://github.com/Platykalt/corsu/releases/latest/download/corsu-keyboard.kmp) |
 
-<!-- The files really attached to the latest published release. Add a row only when the published release has the
-     file. -->
-Other variants are being prepared; they will appear in this table once published.
+In Keyman, the published release's dictionary shows under its identifier, `platykalt.co.corsu`.
+
+### In the next version (not published yet)
+
+| File | Name in Keyman | Content |
+| --- | --- | --- |
+| `corsu-keyboard.kmp` (version 1.1) | Corsu | the shared vocabulary, no regional preference; keeps the capital letters of words |
+| `corsu-keyboard-cismuntincu.kmp` | Corsu – Cismuntincu (experimental) | the same vocabulary, preferring the forms of the Cismonte; experimental, the regional forms cover only part of the words |
+| `corsu-keyboard-pumuntincu.kmp` | Corsu – Pumuntincu (experimental) | the same vocabulary, preferring the forms of the Pumonte; experimental, same limit |
+
+All three are for the Corsican language (`co`) and the EuroLatin (SIL) keyboard. One is enough: see
+[Choosing a regional dictionary](#choosing-a-regional-dictionary).
 
 ## Install
 
@@ -38,23 +49,69 @@ Other variants are being prepared; they will appear in this table once published
    Corsican.
 3. **Download the dictionary** on the phone:
    [corsu-keyboard.kmp](https://github.com/Platykalt/corsu/releases/latest/download/corsu-keyboard.kmp). The file
-   usually lands in the Downloads folder.
+   usually lands in the Downloads folder. Keep exactly that name: if the browser renamed it `corsu-keyboard(1).kmp` or
+   `corsu-keyboard (1).kmp`, rename it (see [Updating](#updating)).
 4. **Import it into Keyman.** Menu › **Settings** › **Install Keyboard or Dictionary** › **Install from local
    file**, then pick `corsu-keyboard.kmp` in Downloads. If Android asks for access to files, allow it (Keyman asks
    only once). Keyman shows the "Corsu" package and its version: tap **Install**, then **OK** after the welcome page.
-5. **Choose the dictionary.** **Settings** › **Installed languages** › **Corsican**: at the bottom of the screen,
-   **Dictionary** should name Corsu (it may show its identifier, `platykalt.co.corsu`). If not, tap it and choose it
-   (the installed dictionary has a check mark).
+5. **Check the dictionary.** **Settings** › **Installed languages** › **Corsican**: at the bottom of the screen,
+   **Dictionary** should name Corsu (`platykalt.co.corsu` for the published release's package).
 6. **Set suggestions** on the same screen. Keyman 18.0 offers three choices: *Disable suggestions*, *Predictions
    only* (words suggested, no corrections) and *Predictions with corrections* (words suggested and typos corrected).
-   Choose **Predictions with corrections**. Keyman 18.0 for Android has no auto-correction: a correction shows in the
-   banner and applies when you tap it.
+   Choose **Predictions with corrections**. There is no automatic correction in this version: see
+   [Automatic correction](#automatic-correction).
 7. **Make Keyman the phone's keyboard.** Menu › **Settings** › **Enable Keyman as system-wide keyboard** (also under
    **Get Started**). Android's keyboard screen opens: turn **Keyman** on, then answer **OK** to the two confirmation
    messages. Android warns there that a keyboard can read what you type; it shows this for any added keyboard.
    Afterwards, when a keyboard is on screen, the keyboard icon at the bottom right lets you pick Keyman.
 8. **Try it.** In a notes or messages app, choose Keyman and type `bonghj`: the banner should suggest "bonghjornu". Type
    `grazzie`: it should suggest "grazie"; tap it to correct.
+
+## Updating
+
+Download the new file and install it as in step 4, **under the same name** `corsu-keyboard.kmp`. Keyman takes the
+package's identity from the file name: if the browser added a suffix (`corsu-keyboard(1).kmp`,
+`corsu-keyboard (1).kmp`), rename the file before installing it, or delete the old download first. Your settings are
+kept. **Then restart Keyman**: until then, the old dictionary keeps answering. To restart it, switch to another
+keyboard and back to Keyman, or force-stop the Keyman app in Android's settings.
+
+## Choosing a regional dictionary
+
+<!-- corsu:phone-variants:en The regional variants come with the next version. -->
+With the next version, two experimental dictionaries will prefer the forms of the Cismonte or of the Pumonte. On
+Android, **only one dictionary is active per language: the first one installed**. Installing a second Corsu package
+adds it to the list, but the old one stays active. To switch:
+
+1. **Settings** › **Installed languages** › **Corsican** › **Dictionary** › the active dictionary › **Uninstall
+   dictionary**;
+2. install the package you want (step 4) if it is not installed yet;
+3. restart Keyman (see [Updating](#updating)).
+
+## Capitals and sentence start
+
+- **The capital at the start of a sentence comes from the EuroLatin keyboard, not from the dictionary.** It turns on
+  at the start of a field and after `.`, `?` or `!` followed by a space. It does not turn on after a line break
+  without punctuation, nor after `."`; it wrongly turns on after `M. `. There is no setting to turn it off: tap Shift
+  to cancel it.
+- **Suggestions lose the capital** with the published release's dictionary: `Ecc` can become "eccu". This is fixed
+  in the next version's packages, which keep the typed case ("Eccu") and capitalise suggestions at the start of a
+  sentence. Meanwhile, finish the word on the keyboard or put the capital back.
+  <!-- corsu:phone-casing At release time: say it is fixed in the published release. -->
+
+## Automatic correction
+
+Keyman 18.0, the stable version, **has no automatic correction**: corrections are offered in the banner and only
+apply when you tap them. The Corsu dictionary does not control this setting. Keyman 19, still in beta, adds the
+choice *Predictions with auto-corrections*; it will appear on the Corsican screen once Keyman 19 is the stable
+version. It stays optional: in our tests with the beta, it sometimes wrongly replaced names that are not in the
+dictionary.
+
+## Returning to a word
+
+Moving the cursor changes nothing in the text. Suggestions follow the part of the word **left of the cursor**, and a
+chosen suggestion replaces only that part: with the cursor inside `ell|a`, choosing "ellu" gives "ellu a". This is a
+Keyman limit: it deletes nothing right of the cursor. So put the cursor **at the end of the word** (or delete the word
+and type it again) before picking a suggestion.
 
 ## If something goes wrong
 
@@ -64,16 +121,20 @@ Other variants are being prepared; they will appear in this table once published
 - **Corsican doesn't appear.** **Installed languages** should list Corsican with EuroLatin (SIL). If EuroLatin was
   installed for another language only, redo step 2 searching for `Corsican`.
 - **No suggestions.** The active keyboard must be EuroLatin (SIL) for Corsican (not for French or English); on the
-  Corsican screen, the choice must not be *Disable suggestions* and the dictionary must be Corsu.
-- **Capitals disappear.** With the published dictionary, picking a suggestion can replace a word started with a
-  capital by its lower-case form. The problem is known; a fix is prepared but not published yet. Meanwhile, finish
-  the word on the keyboard or put the capital back.
-  <!-- Provisional wording: the release lead adjusts it when the fix is published. -->
-- **Auto-correction doesn't apply.** That is how Keyman 18.0 for Android works: corrections are offered in the
-  banner, to tap.
+  Corsican screen, the choice must not be *Disable suggestions* and a Corsu dictionary must be named.
+- **Nothing changed after an update or a dictionary change.** Restart Keyman (see [Updating](#updating)). If the file
+  had a `(1)` suffix, rename it and install it again.
+- **Capitals disappear.** See [Capitals and sentence start](#capitals-and-sentence-start).
+- **Automatic correction doesn't apply.** See [Automatic correction](#automatic-correction).
 - **Back to your usual keyboard.** Tap the keyboard icon at the bottom right of the screen (or the globe key on the
   Keyman keyboard) and pick your usual keyboard. To remove the dictionary:
   [Removing Dictionaries](https://help.keyman.com/products/android/18.0/basic/uninstalling-dictionaries).
+
+## Where this comes from
+
+The steps follow Keyman 18.0's official help and that version's own files (list below). The behaviour described
+(active dictionary, updates, capitals, returning to a word) was observed with the Keyman 18.0.254 engine and the
+Keyman 18.0.254 app on an Android 14 emulator, not on a real phone.
 
 ## Keyman help pages used
 

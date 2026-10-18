@@ -16,6 +16,12 @@
   // Only the dictionaries attached to the latest published release. A variant joins this list in the release that
   // carries its file, never before (a file announced here and missing would be a broken download).
   const VARIANTS = [{ file: "corsu-keyboard.kmp", name: "ph_variant_general", detail: "ph_variant_general_detail" }];
+  // Built on the development branch for the next version, not published yet: shown apart, without a download. At
+  // release time, move the entries that the release carries into VARIANTS (and empty this list).
+  const COMING = [
+    { file: "corsu-keyboard-cismuntincu.kmp", name: "ph_variant_cismuntincu", detail: "ph_variant_cismuntincu_detail" },
+    { file: "corsu-keyboard-pumuntincu.kmp", name: "ph_variant_pumuntincu", detail: "ph_variant_pumuntincu_detail" },
+  ];
   const SAVED = "corsu-phone-platform";
 
   let platform = "android";
@@ -80,7 +86,8 @@
         make("section", { class: "group panel ph-steps", "aria-labelledby": "ph-steps-title" },
           make("h3", { id: "ph-steps-title", text: t("ph_steps") + " · " + info.name }),
           make("ol", {}, ...info.steps.map(key => make("li", { text: t(key) }))),
-          make("p", { class: "muted", text: t("ph_auto") })),
+          make("p", { class: "muted", text: t("ph_auto") }),
+          make("p", { class: "muted", text: t("ph_update") })),
         make("figure", { class: "group panel ph-qr" },
           make("img", { src: `qr/${platform}-${guideLanguage()}.svg`, width: "180", height: "180",
             alt: t("ph_qr_alt", { url }) }),
@@ -96,12 +103,17 @@
       make("ul", { class: "group" }, ...VARIANTS.map(variant => make("li", {},
         make("span", { class: "app-icon", "aria-hidden": "true" }, icon("translate")),
         make("span", { class: "label" }, make("span", { class: "name", text: t(variant.name) }),
-          make("span", { class: "detail", text: t(variant.detail) }))))),
-      make("p", { class: "muted section-text ph-more", text: t("ph_variants_more") }));
+          make("span", { class: "detail", text: t(variant.detail) + " · " + variant.file }))))),
+      COMING.length ? make("h2", { text: t("ph_coming") }) : null,
+      COMING.length ? make("p", { class: "muted section-text", text: t("ph_coming_text") }) : null,
+      COMING.length ? make("ul", { class: "group ph-coming" }, ...COMING.map(variant => make("li", {},
+        make("span", { class: "app-icon", "aria-hidden": "true" }, icon("clock")),
+        make("span", { class: "label" }, make("span", { class: "name", text: t(variant.name) }),
+          make("span", { class: "detail", text: t(variant.detail) + " · " + variant.file }))))) : null);
   }
 
   // The window redraws itself every 1.5 s (corsu:render): this page is rebuilt only when the language changed.
   document.addEventListener("corsu:render", () => { if (rendered !== language() + platform) render(); });
   document.addEventListener("corsu:page", event => { if (event.detail === "phone" && rendered !== language() + platform) render(); });
-  window.corsuPhone = { render, platforms: PLATFORMS, variants: VARIANTS, guideUrl };
+  window.corsuPhone = { render, platforms: PLATFORMS, variants: VARIANTS, coming: COMING, guideUrl };
 })();

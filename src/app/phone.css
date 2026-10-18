@@ -11,6 +11,7 @@
 #phone .ph-steps li + li { margin-top: var(--space-2); }
 #phone .ph-steps li { overflow-wrap: anywhere; }
 #phone .ph-steps p { font-size: .875rem; margin: 0; }
+#phone .ph-steps p + p { margin-top: var(--space-2); }
 
 /* The code stays dark on white in every theme (phones read it best that way), with a light frame around it. */
 #phone .ph-qr { margin: 0; width: 15rem; display: flex; flex-direction: column; align-items: center; gap: var(--space-3); }
