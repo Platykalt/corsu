@@ -176,7 +176,9 @@ Le lexique de Corsu compte environ 138 000 lignes, chacune un texte source et sa
   corse de Mozilla. Elles gardent leur licence ([lexicon/](lexicon/)) et leur texte publié ; les adaptations de Corsu
   sont à part ([lexicon-fixes.tsv](lexicon/lexicon-fixes.tsv), [corrections.tsv](lexicon/corrections.tsv)).
 - **Les autres ont été écrites pour Corsu**, avec le même vocabulaire, dont plus de 23 000 pour Discord et Vencord.
-  Ce sont des premières versions. Les textes de Minecraft et du complément VLC sont écrits par IA. Les relectures
+  Ce sont des premières versions, écrites avec un assistant IA (Claude) : chaque modification de
+  [lexicon.tsv](lexicon/lexicon.tsv), depuis sa création, est cosignée par lui dans l'historique Git ; c'est aussi le cas
+  des textes de Minecraft et du complément VLC. Les relectures
   faites jusqu'ici sont surtout des relectures par IA : elles trouvent des erreurs mais ne valent pas validation, et
   les relectures par un locuteur sont comptées à part ([REVIEWS.md](lexicon/REVIEWS.md)).
 - **Sources consultées.** Pour vérifier un mot, Corsu consulte des ressources publiques : INFCOR (ADECEC), la BDLC
@@ -383,7 +385,9 @@ Corsu's lexicon has about 138,000 lines, each a source text and its Corsican tra
   Mozilla team. They keep their licence ([lexicon/](lexicon/)) and their published text; Corsu's adaptations are kept
   apart ([lexicon-fixes.tsv](lexicon/lexicon-fixes.tsv), [corrections.tsv](lexicon/corrections.tsv)).
 - **The rest were written for Corsu**, with the same vocabulary, more than 23,000 of them for Discord and Vencord.
-  They are first versions. The Minecraft and VLC complement texts are written by AI. The reviews made so far are
+  They are first versions, written with an AI assistant (Claude): every change to
+  [lexicon.tsv](lexicon/lexicon.tsv), since it was created, is co-signed by it in the Git history, and so are the Minecraft
+  and VLC complement texts. The reviews made so far are
   mostly AI reviews: they find mistakes but are not a validation, and reviews by a speaker are counted apart
   ([REVIEWS.md](lexicon/REVIEWS.md)).
 - **Sources consulted.** To check a word, Corsu consults public resources: INFCOR (ADECEC), the BDLC (Università di
