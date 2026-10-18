@@ -5,45 +5,74 @@ Les sections datées après « État actuel » sont l'historique : ce qui y est 
 
 ## État actuel (18 octobre 2026)
 
-- **0.25.1 publiée** (18 octobre 2026) : tag `v0.25.1` sur `bb64655`, release
-  https://github.com/Platykalt/corsu/releases/tag/v0.25.1, dernière version (run CI 39121451094 : tests, archives,
-  bout en bout sur les trois systèmes, publication, installation en une ligne Linux et Windows). La 0.25.0 a été
-  étiquetée (`v0.25.0` sur `467174c`) mais **jamais publiée** : son run Windows a trouvé une course sur
-  `installation.json` (corrigée en 0.25.1) ; le tag reste tel quel, sans release.
-- **Vérifié depuis les téléchargements publics** (conteneur Debian `corsu-migration-test`, home jetable) : six
-  fichiers conformes à leurs `.sha256`, trois archives en 0.25.1 ; `check_migration.py --from 0.24.0` sur les archives
-  publiques : 84 PASS, exit 0 (empreinte du plugin non recalculée faute de Node.js dans le conteneur ; faite en CI) ;
-  0.24.0 publiée installée, Firefox désactivé, puis mise à jour réelle par son propre `update.py` depuis GitHub :
-  `updated 0.24.0 → 0.25.1`, Firefox reste désactivé, entrée de menu sur `bin/corsu-python`.
-- **Présentation (18 octobre 2026, sur `main`)** : README par usage (ordinateur, téléphone, Minecraft), statuts
-  de la 0.25.1 (Audacity, Tenacity, fre:ac depuis la 0.24.0), sources et droits distingués des mots, crédits de
-  Patriccollu précisés, `r.md` remplacé par un lien vers sa source (README de Patriccollu/Lingua_Corsa-Infurmatica),
-  guides téléphone pour le dictionnaire publié (paquet 1.0) avec un parcours d'essai de la candidate (artefact
-  `keyboard-packages` du run 39140018508, connexion GitHub requise, expire le 16/01/2027), `CLAUDE.md` en fichier
-  qui importe `AGENTS.md`.
-- **Défauts transmis au chantier suivant** (les deux premiers corrigés sur `next-0.26` : une somme par pack
-  Minecraft, version des captures lue dans `src/release.json`) : la release publie `corsu-minecraft-java-texts-26.3.zip` sans `.sha256`
-  propre (une seule somme `corsu-minecraft-java-26.3.zip.sha256`) ; `tests/e2e/window_screens.py` affiche la version
-  0.25.0 dans ses données d'exemple ; le README dira « environ 17 000 mots » jusqu'à la publication du paquet 1.1
-  (12 976 entrées) : voir `docs/release-checklist-phone.md` sur `next-0.26`.
-- **`next-0.26`** (non publiée) :
-  - **Minecraft** : revue IA d'octobre 2026, partie vérifiée appliquée (1 131 textes ; `minecraft/java/review-2026-10/`
-    : APPLIED, REJECTED, TRACKING). Restent : 41 cas différés, les 2 262 entrées anciennes renommées/réutilisées
-    (seulement balayées), textes juridiques Realms, termes non résolus (cinabru, petrame, lingottu, mola, cocciu…),
-    contrôles manuels INFCOR listés dans TRACKING.md. Second tour : anciens textes renommés/réutilisés et noms
-    anciens relus (cohérents), 27 textes corrigés, 28 cas encore différés. Relecture humaine : 0.
-  - **Clavier Keyman** : casse gardée, nom « Corsu », vocabulaire refait (`keyboard/data`), préférences
-    Cismuntincu et Pumuntincu **expérimentales** (361 mots pondérés autrement). Vérifié dans le moteur de Keyman
-    18.0.254 (CI) et dans l'application réelle sur émulateur Android 14 ; **pas sur téléphone, pas sur iOS**.
-    Limites Keyman 18 : pas de correction automatique (Keyman 19), remplacement seulement à gauche du curseur,
-    un seul dictionnaire actif par langue sous Android, ancien modèle actif jusqu'au redémarrage de Keyman.
-    446 noms de lieux corses (Wikidata, CC0). À trancher : « Bastelicaccia » (graphie officielle) devient
-    « Bastilicaccia » (libellé corse Wikidata) avec la correction automatique de Keyman 19.
-  - **Téléphone** : README, guides Android/iPhone, page « Sur téléphone » de la fenêtre. À la publication : basculer
-    les marqueurs `corsu:phone-variants` et `corsu:phone-casing`, et `COMING` → `VARIANTS` dans `src/app/phone.js`.
-  - **Décisions à prendre** : usage « attestation seulement » de U Cunghjugarellu (Canopé, tous droits réservés ;
-    253 formes verbales des préférences régionales) et des pages ADECEC ; un agent a lancé 219 requêtes INFCOR par
-    script (une par mot, 3 s d'intervalle) : arrêté, à ne pas refaire.
+- **Version publique : 0.25.1** (tag `v0.25.1` sur `bb64655`, release
+  https://github.com/Platykalt/corsu/releases/tag/v0.25.1, dernière version ; CI 39121451094). Vérifiée depuis les
+  téléchargements publics dans un conteneur Debian jetable : sommes conformes, `check_migration.py --from 0.24.0`
+  84 PASS, mise à jour réelle 0.24.0 → 0.25.1 par son propre `update.py` (Firefox reste désactivé). Les notes de la
+  release ont un tableau « Téléchargements par usage » (texte seul modifié ; tag et fichiers inchangés).
+  `v0.25.0` est un tag sans release (course sur `installation.json` sous Windows, corrigée en 0.25.1) ; il reste tel
+  quel. La branche `fix-0.24.1` est dépassée : son correctif est dans la 0.25.1.
+- **`main`** : code de la 0.25.1 et documentation de la version publique (README par usage, sources et droits,
+  crédits, guides téléphone pour le paquet 1.0, [provenance du lexique](../lexicon/PROVENANCE.md)).
+- **`next-0.26`** (en préparation, non publiée ; la publication attend l'accord du mainteneur) :
+  - **Minecraft** : revue IA d'octobre 2026 (`minecraft/java/review-2026-10/` : APPLIED, REJECTED, TRACKING), deux
+    tours appliqués, vérifiés sur les 87 versions avec le code de chaque jeu. Relecture humaine : 0.
+  - **Clavier Keyman** (paquets 1.1) : casse gardée, vocabulaire refait (`keyboard/data`), 446 noms de lieux
+    (Wikidata, CC0), préférences Cismuntincu et Pumuntincu **expérimentales** (361 mots pondérés autrement). Vérifié
+    dans le moteur de Keyman 18.0.254 (CI) et sur émulateur Android 14 ; **pas sur téléphone, pas sur iOS**.
+  - **Téléphone** : page « Sur téléphone » de la fenêtre, guides ; bascules de publication dans
+    [release-checklist-phone.md](release-checklist-phone.md).
+  - Corrigés pour les prochaines publications : une somme `.sha256` par pack Minecraft ; version des captures lue
+    dans `src/release.json`.
+- **Chantier en cours (18 octobre 2026)** : mise à jour (faux « à jour » vu sous 0.24), textes encore non traduits
+  (« Fermer Discord », « Display Configuration ») et logo, clavier (majuscules, retour sur un mot, noms propres,
+  variantes, Canopé), revue sémantique Minecraft. Résultats et preuves ajoutés ici à la fin du chantier.
+- **INFCOR** : un agent a lancé 219 requêtes par script (une par mot, 3 s d'intervalle) ; arrêté. Aucune
+  interrogation automatisée d'INFCOR ni d'un autre dictionnaire : consultation page par page seulement.
+- Tests unitaires : `HOME=$(mktemp -d) python3 -m unittest discover -s tests -t . -q` (sans `-t .`, 13 erreurs
+  d'import qui ne signalent rien). CI d'une branche autre que `main` : `gh workflow run ci.yml --ref <branche>`.
+- **Attend une personne** : essai du clavier sur un vrai téléphone (Android, iPhone) ; relecture par un locuteur
+  (Minecraft, Discord : `lexicon/review-discord-2026-10.tsv`, VLC : 3 cas dans
+  [contrib/vlc/TERMS.md](../contrib/vlc/TERMS.md)) ; essais Minecraft en jeu ; libellés Discord observés dans un vrai
+  Discord ; décision de publier la 0.26.
+- **Limites connues** : complément VLC absent sous Windows, macOS, Flatpak, Snap ; Audacity 4 expérimental sous
+  Windows et macOS ; fre:ac et Audacity vérifiés seulement sur dossiers simulés hors Linux ; fenêtre non observée
+  dans WebView2 ni WKWebView ; Keyman 18 sans correction automatique, remplacement seulement à gauche du curseur.
+
+## Objectifs retenus
+
+1. Quand Corsu est installé, les logiciels présents sur l'ordinateur qui ont une traduction corse s'ouvrent en corse,
+   avec une couverture annoncée honnêtement ([état des traductions](fr/etat-des-traductions.md)).
+2. Minecraft: Java Edition en corse, fiable et sans risque pour les réglages des joueurs
+   ([STATUS](../minecraft/java/STATUS.md)).
+3. Une base de traduction contextuelle (application, clé, contexte, provenance, licence, statut de relecture) qui
+   accélère chaque nouvelle intégration sans propager les contresens ([lexicon/memory](../lexicon/memory/README.md)).
+
+## Décisions et leurs preuves
+
+| Décision | Preuve |
+| --- | --- |
+| Activer d'abord la traduction livrée avec le logiciel, par son propre réglage de langue ; ne jamais restaurer un fichier de configuration entier | [apps-research.md](apps-research.md) ; tests `tests/test_apps.py` |
+| VLC sous Linux : entrée de menu avec `LANGUAGE=co:…` (VLC n'a pas de réglage de langue sous Linux) | CI : vrai VLC d'Ubuntu, aide affichée en corse (`tests/e2e/check_vlc.py`) |
+| Minecraft : seuls les dossiers de jeu en 26.3 sont modifiés ; rien n'est réécrit qui ne puisse être relu | `tests/test_lexicon_minecraft.py` |
+| Une traduction propre à un logiciel n'est pas réutilisée ailleurs quand les applications divergent (`engine.lookup` refuse) | `tests/test_memory.py` |
+| HandBrake n'est plus importé dans le lexique (GPL-2.0-only) mais son corse est activé dans HandBrake lui-même | [LICENSING-OPTIONS.md](../minecraft/java/LICENSING-OPTIONS.md) |
+| Traductions écrites par IA : jamais présentées comme validées | [REVIEWS.md](../lexicon/REVIEWS.md), colonnes séparées de `minecraft/java/inventory.tsv` |
+
+## Terminé et vérifié (au niveau indiqué)
+
+- Activation automatique : VLC (Linux, Windows, macOS ; essai réel en CI sous Linux), 7-Zip, Notepad++, WinMerge,
+  SumatraPDF (Windows), FileZilla, HandBrake, VeraCrypt (Windows, Linux) : tests unitaires ; 7-Zip, VLC et Notepad++
+  aussi sur un vrai Windows en CI.
+- Minecraft Java 26.3 : pack complet, vérifié par le code du jeu, installation prudente ; pack facultatif des phrases
+  d'accueil et du poème de fin.
+- Mémoire de traduction contextuelle et `tools/tm.py` (extraction, réutilisation exacte compatible, suggestions,
+  conflits, mises à jour).
+- Prototype d'extension web pour GitHub ([webext.md](webext.md)) et prototype Bedrock ([STATUS](../minecraft/bedrock/STATUS.md)) :
+  jamais essayés dans un navigateur ou un jeu réel.
+## Historique : 0.24.0 et candidate 0.25 (17 et 18 octobre 2026)
+
+États de l'époque, remplacés par « État actuel » ci-dessus.
 
 - **0.24.0 publiée** (17 octobre 2026) : tag `v0.24.0` sur `78697ea`, release
   https://github.com/Platykalt/corsu/releases/tag/v0.24.0 marquée dernière version (run CI 39040761519 : tests,
@@ -98,43 +127,6 @@ Les sections datées après « État actuel » sont l'historique : ce qui y est 
   décision de publication.
 - Tests unitaires : `HOME=$(mktemp -d) python3 -m unittest discover -s tests -t . -q` (sans `-t .`, 13 erreurs
   d'import qui ne signalent rien).
-- **Attend une personne** : relecture par un locuteur (VLC : 3 cas ouverts dans
-  [contrib/vlc/TERMS.md](../contrib/vlc/TERMS.md) ; Minecraft) ; essais Minecraft en jeu ; noms Discord observés
-  dans un vrai Discord.
-- **Limites connues** : complément VLC absent sous Windows, macOS, Flatpak, Snap ; Audacity 4 expérimental sous
-  Windows et macOS ; fre:ac et Audacity vérifiés seulement sur dossiers simulés hors Linux.
-
-## Objectifs retenus
-
-1. Quand Corsu est installé, les logiciels présents sur l'ordinateur qui ont une traduction corse s'ouvrent en corse,
-   avec une couverture annoncée honnêtement ([état des traductions](fr/etat-des-traductions.md)).
-2. Minecraft: Java Edition en corse, fiable et sans risque pour les réglages des joueurs
-   ([STATUS](../minecraft/java/STATUS.md)).
-3. Une base de traduction contextuelle (application, clé, contexte, provenance, licence, statut de relecture) qui
-   accélère chaque nouvelle intégration sans propager les contresens ([lexicon/memory](../lexicon/memory/README.md)).
-
-## Décisions et leurs preuves
-
-| Décision | Preuve |
-| --- | --- |
-| Activer d'abord la traduction livrée avec le logiciel, par son propre réglage de langue ; ne jamais restaurer un fichier de configuration entier | [apps-research.md](apps-research.md) ; tests `tests/test_apps.py` |
-| VLC sous Linux : entrée de menu avec `LANGUAGE=co:…` (VLC n'a pas de réglage de langue sous Linux) | CI : vrai VLC d'Ubuntu, aide affichée en corse (`tests/e2e/check_vlc.py`) |
-| Minecraft : seuls les dossiers de jeu en 26.3 sont modifiés ; rien n'est réécrit qui ne puisse être relu | `tests/test_lexicon_minecraft.py` |
-| Une traduction propre à un logiciel n'est pas réutilisée ailleurs quand les applications divergent (`engine.lookup` refuse) | `tests/test_memory.py` |
-| HandBrake n'est plus importé dans le lexique (GPL-2.0-only) mais son corse est activé dans HandBrake lui-même | [LICENSING-OPTIONS.md](../minecraft/java/LICENSING-OPTIONS.md) |
-| Traductions écrites par IA : jamais présentées comme validées | [REVIEWS.md](../lexicon/REVIEWS.md), colonnes séparées de `minecraft/java/inventory.tsv` |
-
-## Terminé et vérifié (au niveau indiqué)
-
-- Activation automatique : VLC (Linux, Windows, macOS ; essai réel en CI sous Linux), 7-Zip, Notepad++, WinMerge,
-  SumatraPDF (Windows), FileZilla, HandBrake, VeraCrypt (Windows, Linux) : tests unitaires ; 7-Zip, VLC et Notepad++
-  aussi sur un vrai Windows en CI.
-- Minecraft Java 26.3 : pack complet, vérifié par le code du jeu, installation prudente ; pack facultatif des phrases
-  d'accueil et du poème de fin.
-- Mémoire de traduction contextuelle et `tools/tm.py` (extraction, réutilisation exacte compatible, suggestions,
-  conflits, mises à jour).
-- Prototype d'extension web pour GitHub ([webext.md](webext.md)) et prototype Bedrock ([STATUS](../minecraft/bedrock/STATUS.md)) :
-  jamais essayés dans un navigateur ou un jeu réel.
 
 ## Stabilisation du 16 octobre 2026
 
@@ -307,10 +299,17 @@ Sans partager de message ; noter seulement l'endroit d'un défaut, pas le conten
   Vu avec un vrai VLC 3.0.20 et 3.0.24 (conteneurs, CI). Interrupteur ajouté ensuite dans la fenêtre (fiche VLC).
 - fre:ac lancé pour de vrai (paquet Debian, conteneur) : fenêtre en corse.
 
-## Prochaines étapes
+## Prochaines étapes (feuille de route courte)
 
-1. Poedit et PDFsam : branches `apps-poedit`, `apps-pdfsam` (sources dans [apps-research.md](apps-research.md)).
-   VLC : relecture des brouillons par un locuteur, puis éventuel envoi en amont avec l'accord du mainteneur.
-2. Bedrock : un essai en jeu, puis traduire les écrans les plus visibles.
-3. Telegram : un même nom de pack et un même lien pour toutes les applications, mais chaque application (Desktop,
-   Android, iOS, macOS, Web) a ses propres textes à traduire ([roadmap-candidates.md](roadmap-candidates.md)).
+1. **Consolider les intégrations actuelles** : mise à jour fiable et lisible, textes encore non traduits hors de la
+   page Discord (menus natifs, notifications, KDE), logo et association de fenêtre, essais réels manquants
+   (WebView2, WKWebView, vrai Discord).
+2. **Clavier** : essai sur vrai téléphone, retour des utilisateurs sur les préférences régionales, correction
+   automatique de Keyman 19 quand elle sera stable.
+3. **Relecture Minecraft** par des locuteurs, en commençant par les cas différés et incertains de
+   `minecraft/java/review-2026-10/TRACKING.md`.
+4. **Ensuite, selon la faisabilité réelle** : Bedrock (prototype à essayer en jeu), autres logiciels et jeux
+   ([feuille de route](fr/feuille-de-route.md), [roadmap-candidates.md](roadmap-candidates.md)).
+5. **Contribution future au projet officiel Minecraft (Crowdin)** : objectif, pas engagé. Le moment venu, vérifier
+   les conditions exactes de contribution et de licence, et les règles sur les traductions assistées par IA ; une
+   licence CC0 ne règle pas la question à elle seule. Aucun envoi sans accord du mainteneur.

@@ -7,18 +7,18 @@ Corsu's lexicon reuses Corsican translations published by other free software pr
 published; Corsu's own adaptations go in `lexicon/lexicon-fixes.tsv` and are listed in `lexicon/corrections.tsv`.
 
 - **Patriccollu di Santa Maria è Sichè** has translated many programs into Corsican within the programs' own
-  projects (upstream), over many years. His list, [Lingua_Corsa-Infurmatica](https://github.com/Patriccollu/Lingua_Corsa-Infurmatica),
-  counts 47 translated programs, 3 awaiting publication and 3 in progress (README of 15 March 2026). Corsu uses his
+  projects (upstream), over many years. The list [Lingua_Corsa-Infurmatica](https://github.com/Patriccollu/Lingua_Corsa-Infurmatica)
+  counts 47 translated programs, 3 awaiting publication and 3 in progress (README of 15 March 2026). Corsu uses this
   work in two ways:
   - it **switches on** the Corsican translation shipped with VLC, Audacity, Tenacity, fre:ac, Poedit, PDFsam Basic,
     FileZilla, HandBrake, VeraCrypt, 7-Zip, Notepad++, WinMerge and SumatraPDF, by changing only their language
-    setting (the translation stays his and the program's);
+    setting (the translation stays the translator's and the program's);
   - it **imports as reference vocabulary** most of the translations in `lexicon/lexicon-upstream.tsv` (Audacity, VLC
     and VLC for Android, WinMerge, wxWidgets, Notepad++, Thunderbird for Android, fre:ac, Tenacity, Poedit,
     OpenTracks, Inno Setup), to translate other programs consistently. Some of those sections also have other
     translators.
 
-  He has not reviewed Corsu's own texts, and his repository states no licence: Corsu links to it and does not copy
+  Patriccollu has not reviewed Corsu's own texts, and the repository states no licence: Corsu links to it and does not copy
   it.
 - **The Corsican Mozilla team** on Pontoon: Firefox for Android and iOS, Focus, Mozilla VPN (MPL-2.0), imported as
   reference vocabulary.
@@ -38,6 +38,11 @@ databases whose terms do not allow it; when a correction rests on one, the entry
   pack translates it.
 
 ## AI and human review
+
+Where each lexicon row comes from, as far as the files and the Git history show it, is in
+[lexicon/PROVENANCE.md](lexicon/PROVENANCE.md): identified imports, rows created or adapted with an AI assistant
+(commits co-signed by Claude), and 872 rows whose initial origin is not recorded. Those are not counted as human
+translations.
 
 Corsu's Minecraft texts and the VLC complement were written by AI, and most reviews of Corsu's own texts so far are
 AI reviews. They are never counted as human validation: see [lexicon/REVIEWS.md](lexicon/REVIEWS.md) and

@@ -163,8 +163,9 @@ Patriccollu di Santa Maria è Sichè. Corsu change seulement leur réglage de la
 Thunderbird pour Android, VLC pour Android, OpenTracks, Mozilla VPN, wxWidgets et Inno Setup servent à traduire
 d'autres logiciels de façon cohérente ; Corsu ne modifie pas ces applications.
 
-**Envisagés, pas commencés** : Minecraft Bedrock (prototype jamais essayé en jeu), Vesktop, Discord dans un
-navigateur, jeux et autres logiciels : [feuille de route](docs/fr/feuille-de-route.md).
+**Minecraft Bedrock** : prototype, non validé en jeu ([état](minecraft/bedrock/STATUS.md)).
+
+**Envisagés, pas commencés** : Vesktop, Discord dans un navigateur, jeux et autres logiciels : [feuille de route](docs/fr/feuille-de-route.md).
 
 ### Les traductions : d'où elles viennent
 
@@ -176,9 +177,10 @@ Le lexique de Corsu compte environ 138 000 lignes, chacune un texte source et sa
   corse de Mozilla. Elles gardent leur licence ([lexicon/](lexicon/)) et leur texte publié ; les adaptations de Corsu
   sont à part ([lexicon-fixes.tsv](lexicon/lexicon-fixes.tsv), [corrections.tsv](lexicon/corrections.tsv)).
 - **Les autres ont été écrites pour Corsu**, avec le même vocabulaire, dont plus de 23 000 pour Discord et Vencord.
-  Ce sont des premières versions, écrites avec un assistant IA (Claude) : chaque modification de
-  [lexicon.tsv](lexicon/lexicon.tsv), depuis sa création, est cosignée par lui dans l'historique Git ; c'est aussi le cas
-  des textes de Minecraft et du complément VLC. Les relectures
+  Ce sont des premières versions. Environ 118 500 lignes de [lexicon.tsv](lexicon/lexicon.tsv) ont été ajoutées ou
+  modifiées dans des commits cosignés par un assistant IA (Claude), comme les textes de Minecraft et du complément
+  VLC ; 872 lignes, déjà présentes au premier commit, ont une origine non documentée et ne sont pas comptées comme
+  humaines ([provenance du lexique](lexicon/PROVENANCE.md)). Les relectures
   faites jusqu'ici sont surtout des relectures par IA : elles trouvent des erreurs mais ne valent pas validation, et
   les relectures par un locuteur sont comptées à part ([REVIEWS.md](lexicon/REVIEWS.md)).
 - **Sources consultées.** Pour vérifier un mot, Corsu consulte des ressources publiques : INFCOR (ADECEC), la BDLC
@@ -372,7 +374,9 @@ Patriccollu di Santa Maria è Sichè. Corsu only changes their language setting,
 Android, VLC for Android, OpenTracks, Mozilla VPN, wxWidgets and Inno Setup help translate other programs
 consistently; Corsu does not change those apps.
 
-**Considered, not started**: Minecraft Bedrock (a prototype never tried in the game), Vesktop, Discord in a browser,
+**Minecraft Bedrock**: prototype, not validated in the game ([status](minecraft/bedrock/STATUS.md)).
+
+**Considered, not started**: Vesktop, Discord in a browser,
 games and other programs: [roadmap](docs/en/roadmap.md).
 
 ### Translations: where they come from
@@ -380,14 +384,15 @@ games and other programs: [roadmap](docs/en/roadmap.md).
 Corsu's lexicon has about 138,000 lines, each a source text and its Corsican translation.
 
 - **More than 18,000 are taken from free software already translated into Corsican**, most of them by
-  Patriccollu di Santa Maria è Sichè, who has translated many programs for years within their own projects (his
+  Patriccollu di Santa Maria è Sichè, who has translated many programs for years within their own projects (the
   list: [Lingua_Corsa-Infurmatica](https://github.com/Patriccollu/Lingua_Corsa-Infurmatica)), and by the Corsican
   Mozilla team. They keep their licence ([lexicon/](lexicon/)) and their published text; Corsu's adaptations are kept
   apart ([lexicon-fixes.tsv](lexicon/lexicon-fixes.tsv), [corrections.tsv](lexicon/corrections.tsv)).
 - **The rest were written for Corsu**, with the same vocabulary, more than 23,000 of them for Discord and Vencord.
-  They are first versions, written with an AI assistant (Claude): every change to
-  [lexicon.tsv](lexicon/lexicon.tsv), since it was created, is co-signed by it in the Git history, and so are the Minecraft
-  and VLC complement texts. The reviews made so far are
+  They are first versions. About 118,500 rows of [lexicon.tsv](lexicon/lexicon.tsv) were added or changed in commits
+  co-signed by an AI assistant (Claude), as were the Minecraft and VLC complement texts; 872 rows, already there in the
+  first commit, have an undocumented origin and are not counted as human ([lexicon provenance](lexicon/PROVENANCE.md)).
+  The reviews made so far are
   mostly AI reviews: they find mistakes but are not a validation, and reviews by a speaker are counted apart
   ([REVIEWS.md](lexicon/REVIEWS.md)).
 - **Sources consulted.** To check a word, Corsu consults public resources: INFCOR (ADECEC), the BDLC (Università di
