@@ -14,9 +14,112 @@ import corsu
 
 TITLE = 'Corsu'
 SIZE = (1040, 780)
-ICON = Path(__file__).resolve().parent / 'app/corsu.svg'
-# Same name as StartupWMClass in the menu entry, so desktops show Corsu's icon on its window.
-WINDOW_CLASS = 'corsu'
+APP = Path(__file__).resolve().parent / 'app'
+ICON = APP / 'corsu.svg'
+# The window's own icons (tools/make_icon.py draws them from corsu.svg): X11 title bars, taskbars and Alt+Tab read
+# them from the window; Windows from the .ico; the macOS Dock from the .icns.
+ICONS = sorted(APP.glob('icons/corsu-*.png'), key=lambda path: int(path.stem.split('-')[1]))
+ICO = APP / 'corsu.ico'
+ICNS = APP / 'corsu.icns'
+# Which application the window belongs to, so that desktops show Corsu's name and logo on it, not Python's or a
+# browser's. Linux: the Wayland app_id and the X11 WM_CLASS are the program name GLib is given, which must be the name
+# of the menu entry (corsu-setup.desktop, its StartupWMClass too): KWin and GNOME Shell find a Wayland window's icon
+# only through that entry. Windows: an AppUserModelID of Corsu's own, so the taskbar does not group the window with
+# Python's.
+WINDOW_CLASS = corsu.DESKTOP_ID
+APP_USER_MODEL_ID = 'Platykalt.Corsu'
+
+
+def linux_identity():
+    """Give this process Corsu's application name before any window exists (GTK reads it when the window is made)."""
+    try:
+        import gi
+        gi.require_version('Gdk', '3.0')
+        from gi.repository import Gdk, GLib
+    except (ImportError, ValueError):
+        return False
+    GLib.set_prgname(WINDOW_CLASS)
+    GLib.set_application_name(TITLE)
+    # X11 WM_CLASS is (program name, program class); GDK would otherwise write the class "Corsu-setup".
+    Gdk.set_program_class(WINDOW_CLASS)
+    return True
+
+
+def gtk_icons():
+    from gi.repository import GdkPixbuf, GLib
+    pixbufs = []
+    for path in ICONS:
+        try:
+            pixbufs.append(GdkPixbuf.Pixbuf.new_from_file(str(path)))
+        except GLib.Error:
+            continue
+    return pixbufs
+
+
+def windows_identity():
+    """Windows groups taskbar buttons by AppUserModelID; pythonw.exe's would put Corsu under Python's icon and name."""
+    import ctypes
+    try:
+        ctypes.windll.shell32.SetCurrentProcessExplicitAppUserModelID(ctypes.c_wchar_p(APP_USER_MODEL_ID))
+        return True
+    except (AttributeError, OSError):
+        return False
+
+
+def windows_window_icon(icon=None):
+    """Put Corsu's icon on this process's windows (title bar, taskbar, Alt+Tab): pywebview gives its window the icon
+    of the executable, Python's. Returns the number of windows changed."""
+    import ctypes
+    from ctypes import wintypes
+    user32 = ctypes.windll.user32
+    user32.LoadImageW.restype = wintypes.HANDLE
+    user32.LoadImageW.argtypes = [wintypes.HINSTANCE, wintypes.LPCWSTR, wintypes.UINT, ctypes.c_int, ctypes.c_int,
+                                  wintypes.UINT]
+    user32.SendMessageW.argtypes = [wintypes.HWND, wintypes.UINT, wintypes.WPARAM, wintypes.LPARAM]
+    user32.SendMessageW.restype = wintypes.LPARAM
+    path = str(icon or (corsu.DATA / 'corsu.ico' if (corsu.DATA / 'corsu.ico').is_file() else ICO))
+    image_icon, load_from_file, default_size = 1, 0x10, 0x40
+    big = user32.LoadImageW(None, path, image_icon, user32.GetSystemMetrics(11), user32.GetSystemMetrics(12),
+                            load_from_file)
+    small = user32.LoadImageW(None, path, image_icon, user32.GetSystemMetrics(49), user32.GetSystemMetrics(50),
+                              load_from_file)
+    if not big and not small:
+        big = small = user32.LoadImageW(None, path, image_icon, 0, 0, load_from_file | default_size)
+    if not big:
+        return 0
+    windows = []
+    callback_type = ctypes.WINFUNCTYPE(wintypes.BOOL, wintypes.HWND, wintypes.LPARAM)
+
+    def collect(hwnd, _):
+        process = wintypes.DWORD()
+        user32.GetWindowThreadProcessId(hwnd, ctypes.byref(process))
+        if process.value == os.getpid() and user32.IsWindowVisible(hwnd):
+            windows.append(hwnd)
+        return True
+    user32.EnumWindows(callback_type(collect), 0)
+    set_icon, icon_small, icon_big = 0x0080, 0, 1
+    for hwnd in windows:
+        user32.SendMessageW(hwnd, set_icon, icon_big, big)
+        user32.SendMessageW(hwnd, set_icon, icon_small, small or big)
+    return len(windows)
+
+
+def macos_identity():
+    """The Dock shows the running process's name and icon: Python's, unless told otherwise before the app starts."""
+    try:
+        from AppKit import NSApplication, NSImage
+        from Foundation import NSBundle
+    except ImportError:
+        return False
+    bundle = NSBundle.mainBundle()
+    info = bundle.localizedInfoDictionary() or bundle.infoDictionary()
+    if info is not None:
+        # Read by the menu bar for the application menu's title.
+        info['CFBundleName'] = TITLE
+    image = NSImage.alloc().initWithContentsOfFile_(str(ICNS))
+    if image is not None:
+        NSApplication.sharedApplication().setApplicationIconImage_(image)
+    return True
 
 
 def with_pywebview(url):
@@ -24,8 +127,21 @@ def with_pywebview(url):
         import webview
     except ImportError:
         return False
-    webview.create_window(TITLE, url, width=SIZE[0], height=SIZE[1], min_size=(640, 480))
-    webview.start()
+    identity = {'windows': windows_identity, 'macos': macos_identity}.get(corsu.PLATFORM, linux_identity)
+    try:
+        identity()
+    except Exception as error:
+        print(f'{identity.__name__}: {error}', flush=True)
+    window = webview.create_window(TITLE, url, width=SIZE[0], height=SIZE[1], min_size=(640, 480))
+    if corsu.PLATFORM == 'windows':
+        def shown():
+            try:
+                windows_window_icon()
+            except Exception as error:
+                print(f'windows_window_icon: {error}', flush=True)
+        window.events.shown += shown
+    # pywebview sets the icon itself only with GTK and Qt (Linux); elsewhere it is ignored.
+    webview.start(icon=str(ICONS[-1]) if ICONS else None)
     return True
 
 
@@ -35,6 +151,9 @@ def with_webkitgtk(url):
     # WebKitGTK's DMA-BUF renderer leaves the window blank with some graphics drivers (NVIDIA: "Failed to create
     # GBM buffer"); the shared-memory path works everywhere and a settings page needs nothing faster.
     os.environ.setdefault('WEBKIT_DISABLE_DMABUF_RENDERER', '1')
+    # Before GTK starts: importing Gtk opens the display, and the X11 windows made then take the program name of that
+    # moment ("app.py").
+    linux_identity()
     try:
         import gi
         gi.require_version('Gtk', '3.0')
@@ -49,14 +168,15 @@ def with_webkitgtk(url):
         from gi.repository import GLib, Gtk, WebKit2
     except (ImportError, ValueError):
         return False
-    GLib.set_prgname(WINDOW_CLASS)
-    GLib.set_application_name(TITLE)
+    # GTK's start-up gave the X11 class its own capitalised form ("Corsu-setup"): set it again.
+    linux_identity()
     window = Gtk.Window(title=TITLE)
     window.set_default_size(*SIZE)
-    try:
-        window.set_icon_from_file(str(ICON))
-    except GLib.Error:
-        pass
+    # Every size, so that each place (title bar 16px, Alt+Tab 64px or more) takes a drawn one, not a scaled one.
+    icons = gtk_icons()
+    if icons:
+        Gtk.Window.set_default_icon_list(icons)
+        window.set_icon_list(icons)
     view = WebKit2.WebView()
     # Links to other sites (help pages, GitHub) open in the browser, not inside Corsu's window.
     def decide(view, decision, kind):

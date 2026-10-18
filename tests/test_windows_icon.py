@@ -10,7 +10,9 @@ from unittest.mock import patch
 
 import corsu
 
-ICO = Path(__file__).resolve().parent.parent / 'src/app/corsu.ico'
+APP = Path(__file__).resolve().parent.parent / 'src/app'
+ICO = APP / 'corsu.ico'
+ICNS = APP / 'corsu.icns'
 PNG_SIGNATURE = b'\x89PNG\r\n\x1a\n'
 
 
@@ -47,6 +49,54 @@ class IconFileTests(unittest.TestCase):
                     offset += 12 + length
                 rows = zlib.decompress(chunks)
                 self.assertEqual(len(rows), height * (1 + 4 * width))
+
+
+def png_check(test, image, size):
+    """A complete 8-bit RGBA PNG of `size` pixels (the rounded corners stay transparent)."""
+    test.assertTrue(image.startswith(PNG_SIGNATURE))
+    test.assertEqual(struct.unpack('>II', image[16:24]), (size, size))
+    test.assertEqual(image[24:26], bytes([8, 6]))
+    offset, chunks = len(PNG_SIGNATURE), b''
+    while offset < len(image):
+        length, chunk = struct.unpack('>I4s', image[offset:offset + 8])
+        if chunk == b'IDAT':
+            chunks += image[offset + 8:offset + 8 + length]
+        offset += 12 + length
+    test.assertEqual(len(zlib.decompress(chunks)), size * (1 + 4 * size))
+
+
+class OtherIconFormatTests(unittest.TestCase):
+    """The same drawing (src/app/corsu.svg, through tools/make_icon.py) for macOS and the Linux window."""
+
+    def test_icns_holds_every_macos_size(self):
+        data = ICNS.read_bytes()
+        self.assertEqual(data[:4], b'icns')
+        self.assertEqual(struct.unpack('>I', data[4:8])[0], len(data))
+        found, offset = {}, 8
+        while offset < len(data):
+            kind, length = data[offset:offset + 4], struct.unpack('>I', data[offset + 4:offset + 8])[0]
+            found[kind] = data[offset + 8:offset + length]
+            offset += length
+        sizes = {b'icp4': 16, b'icp5': 32, b'icp6': 64, b'ic07': 128, b'ic08': 256, b'ic09': 512, b'ic10': 1024,
+                 b'ic11': 32, b'ic12': 64, b'ic13': 256, b'ic14': 512}
+        self.assertEqual(set(found), set(sizes))
+        for kind, size in sizes.items():
+            with self.subTest(kind=kind):
+                png_check(self, found[kind], size)
+
+    def test_window_pngs_and_ico_are_the_same_images(self):
+        pngs = {int(path.stem.split('-')[1]): path.read_bytes() for path in (APP / 'icons').glob('corsu-*.png')}
+        self.assertEqual(sorted(pngs), [16, 24, 32, 48, 64, 128, 256])
+        for width, _, image in ico_entries(ICO.read_bytes()):
+            with self.subTest(size=width):
+                png_check(self, pngs[width], width)
+                self.assertEqual(image, pngs[width])
+
+    def test_logo_is_drawn_without_fonts(self):
+        # A <text> logo depends on the fonts of each computer (it was "co" in Georgia or DejaVu Serif).
+        svg = (APP / 'corsu.svg').read_text(encoding='utf-8')
+        self.assertNotIn('<text', svg)
+        self.assertIn('viewBox="0 0 64 64"', svg)
 
 
 class WindowsShortcutTests(unittest.TestCase):

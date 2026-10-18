@@ -19,7 +19,7 @@ export function setCorrections(value: Record<string, string> | undefined) {
 // with this file's way of reading the page; the fingerprint is computed from the dictionary itself (its entry count
 // and two sums of FNV-1a hashes over each key and value's UTF-16 code units, which do not depend on the order of the
 // entries), so it can be compared with the dictionary.json of any build.
-export const translatorRevision = "2026-10-origin-1";
+export const translatorRevision = "2026-10-native-1";
 let fingerprint: string | undefined;
 
 export function dictionaryFingerprint(): string {
@@ -881,3 +881,52 @@ export function createTranslator(doc: Document, options: { showOriginal?: () => 
         }
     };
 }
+
+// Texts Discord's page hands to the desktop app, which draws them itself, outside the page: the menu of the icon in
+// the notification area (system tray: "Ouvrir Discord", "Rendre muet", "Quitter Discord"...) and, on Windows, the
+// tooltips of the buttons under the taskbar preview during a call. The page translator never sees them, so the plugin
+// translates them on their way out (patches in index.ts, on Discord's NativeUtils module). Only Discord's own labels
+// are looked up; the product name (appName: "Discord", "Discord PTB", "Discord Canary") stays as it is.
+export function translateNative(text: unknown, appName?: string): unknown {
+    if (typeof text !== "string" || !text.trim()) return text;
+    try {
+        // "Ouvrir Discord PTB" is looked up as "Ouvrir Discord", then given its own name back.
+        const other = appName && appName !== "Discord" && text.includes(appName);
+        const source = other ? text.split(appName!).join("Discord") : text;
+        const translated = translateLabel(source);
+        if (translated === source) return text;
+        if (!other) return translated;
+        return translated.includes("Discord") ? translated.split("Discord").join(appName!) : text;
+    } catch {
+        return text;
+    }
+}
+
+// The object Discord gives setSystemTrayStrings: {appName, openApp, mute, deafen, suppressed, serverMuted,
+// serverDeafened, voiceSettings, checkForUpdates, acknowledgements, quitApp, closeHint}. A copy is returned.
+export function translateTrayStrings<T>(strings: T): T {
+    if (!strings || typeof strings !== "object") return strings;
+    const source = strings as Record<string, unknown>;
+    const appName = typeof source.appName === "string" ? source.appName : undefined;
+    const result: Record<string, unknown> = {};
+    for (const [key, value] of Object.entries(source)) {
+        result[key] = key === "appName" ? value : translateNative(value, appName);
+    }
+    return result as T;
+}
+
+// The list Discord gives setThumbarButtons: [{name, active, tooltip, flags}]. Only the tooltips change.
+export function translateThumbarButtons<T>(buttons: T): T {
+    if (!Array.isArray(buttons)) return buttons;
+    return buttons.map(button => button && typeof button === "object" && typeof button.tooltip === "string"
+        ? { ...button, tooltip: translateNative(button.tooltip) } : button) as T;
+}
+
+// Where these texts leave the page: Discord's NativeUtils module (found by the same text as Vencord's NoSystemBadge
+// plugin). `\i` is Vencord's shorthand for an identifier. Checked against Discord's web client of October 2026
+// (tests/e2e/check_discord_native.py).
+export const nativePatch = {
+    find: ",setSystemTrayApplications",
+    trayStrings: /setSystemTrayStrings\((\i)\)\{/,
+    thumbarButtons: /setThumbarButtons\((\i)\)\{/
+};

@@ -397,43 +397,64 @@ def kde(installer, qt_system=False):
     installer.write(HOME / '.config/plasma-workspace/env/corsu.sh',
                     '#!/bin/sh\nexport LANGUAGE=co:fr\n', 0o755, toggle=True)
     terminal_hooks(installer)
-    for source in sorted(Path('/usr/share/applications').glob('*.desktop')):
-        target = HOME / '.local/share/applications' / source.name
-        text = (target if target.exists() else source).read_text(encoding='utf-8')
-        output = []
-        section = []
-        changes = 0
-
-        def flush_section():
-            nonlocal changes
-            existing = {line.split('=', 1)[0]: line.split('=', 1)[1].rstrip('\n')
-                        for line in section if '=' in line and not line.startswith('#')}
-            replacements = {}
-            for key in ('Name', 'GenericName', 'Comment'):
-                for candidate in (existing.get(key, ''), existing.get(key + '[fr]', '')):
-                    converted = translate(candidate)
-                    if converted != candidate:
-                        replacements[key + '[co]'] = converted
-                        break
-            for line in section:
-                if line.split('=', 1)[0] not in replacements:
-                    output.append(line)
-            for key, value in replacements.items():
-                if output and not output[-1].endswith('\n'):
-                    output[-1] += '\n'
-                output.append(f'{key}={value}\n')
-            changes += len(replacements)
-
-        for line in text.splitlines(keepends=True):
-            if line.startswith('[') and section:
-                flush_section()
-                section = []
-            section.append(line)
-        flush_section()
-        if changes:
-            installer.write(target, ''.join(output))
-            stats['desktop_entries'] += 1
+    desktop_entries(installer, stats)
     return stats
+
+
+# Desktop entries KDE reads names from: the applications menu, and the components of the Shortcuts settings
+# (kglobalaccel: "Display Configuration", "Switch Display"...). A copy in the user's folder with the same name wins.
+DESKTOP_ENTRY_FOLDERS = (('applications', Path('/usr/share/applications')),
+                         ('kglobalaccel', Path('/usr/share/kglobalaccel')))
+
+
+def desktop_entries(installer, stats, folders=None):
+    """Give desktop entries their Corsican names (Name[co], GenericName[co], Comment[co]), section by section
+    (the entry and each of its actions). KDE reads one language from these files, not the LANGUAGE list: a text
+    without [co] showed in English ("Display Configuration") where gettext catalogs fall back to French. So in a file
+    Corsu writes anyway, a text it cannot translate gets the French one as its [co] value, the fallback LANGUAGE=co:fr
+    gives everywhere else. Files without any Corsican text are left to the system (a copy would hide its updates)."""
+    for folder, system in folders or DESKTOP_ENTRY_FOLDERS:
+        for source in sorted(Path(system).glob('*.desktop')):
+            target = HOME / '.local/share' / folder / source.name
+            text = (target if target.exists() else source).read_text(encoding='utf-8')
+            output = []
+            section = []
+            changes = 0
+
+            def flush_section():
+                nonlocal changes
+                existing = {line.split('=', 1)[0]: line.split('=', 1)[1].rstrip('\n')
+                            for line in section if '=' in line and not line.startswith('#')}
+                replacements = {}
+                for key in ('Name', 'GenericName', 'Comment'):
+                    for candidate in (existing.get(key, ''), existing.get(key + '[fr]', '')):
+                        converted = translate(candidate)
+                        if converted != candidate:
+                            replacements[key + '[co]'] = converted
+                            changes += 1
+                            break
+                    else:
+                        french = existing.get(key + '[fr]', '')
+                        # Corsu's own earlier fallback is rewritten; a [co] text from the program itself is kept.
+                        if french and existing.get(key + '[co]', french) == french:
+                            replacements[key + '[co]'] = french
+                for line in section:
+                    if line.split('=', 1)[0] not in replacements:
+                        output.append(line)
+                for key, value in replacements.items():
+                    if output and not output[-1].endswith('\n'):
+                        output[-1] += '\n'
+                    output.append(f'{key}={value}\n')
+
+            for line in text.splitlines(keepends=True):
+                if line.startswith('[') and section:
+                    flush_section()
+                    section = []
+                section.append(line)
+            flush_section()
+            if changes:
+                installer.write(target, ''.join(output))
+                stats['desktop_entries'] += 1
 
 
 class FirefoxInstall:
@@ -1168,6 +1189,11 @@ def macos_application(installer, firefox=None):
         installer.tree(target, applet)
 
 
+# The name of Corsu's menu entry (corsu-setup.desktop) and of its window's application (Wayland app_id, X11 WM_CLASS,
+# set by window.py): desktops find the window's icon and name through the entry of that name.
+DESKTOP_ID = 'corsu-setup'
+
+
 def setup_shortcut(installer):
     """The Corsu entry in the applications menu: switch parts on and off, add programs, uninstall."""
     app = SRC / 'app.py'
@@ -1188,15 +1214,19 @@ def setup_shortcut(installer):
         with tempfile.TemporaryDirectory() as directory:
             applet = Path(directory) / 'Corsu.app'
             subprocess.run(['osacompile', '-o', str(applet), '-e', 'do shell script ' + json.dumps(command)], check=True)
+            # osacompile gives every applet the generic script icon (Finder, Launchpad, Spotlight).
+            icon = applet / 'Contents/Resources/applet.icns'
+            icon.parent.mkdir(parents=True, exist_ok=True)
+            shutil.copyfile(SRC / 'app/corsu.icns', icon)
             installer.tree(HOME / 'Applications/Corsu.app', applet)
     else:
         python = launcher_python(installer)
-        installer.write(HOME / '.local/share/applications/corsu-setup.desktop',
+        installer.write(HOME / '.local/share/applications' / f'{DESKTOP_ID}.desktop',
                         '[Desktop Entry]\nType=Application\nName=Corsu\n'
                         'GenericName=Corsican language\nGenericName[fr]=Langue corse\nGenericName[co]=Lingua corsa\n'
                         'Comment=Choose which programs are in Corsican\nComment[fr]=Choisir les logiciels en corse\n'
                         f'Exec={shlex.quote(str(python))} {shlex.quote(str(app))}\nTerminal=false\nIcon={SRC / "app/corsu.svg"}\n'
-                        'StartupWMClass=corsu\nCategories=Settings;\n')
+                        f'StartupWMClass={DESKTOP_ID}\nCategories=Settings;\n')
 
 
 def refresh_launchers(installer, root=None, python=None):

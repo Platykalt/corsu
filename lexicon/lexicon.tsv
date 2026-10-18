@@ -45062,6 +45062,10 @@ Unknown size|Taille inconnue|Dimensione scunnisciuta
 |Smart Form Fill|Riempitura intelligente di furmulari
 |motsdepasse.csv|parolledintesa.csv
 |Blog Firefox Nightly|Blog di Firefox Nightly
+# KDE display settings (kscreen) where KDE showed English: the module's own entry and its Shortcuts component
+# (kcm_kscreen.desktop, kglobalaccel/org.kde.kscreen.desktop); log in lexicon/corrections.tsv, October 2026.
+Display Configuration|Configuration de l'affichage|Cunfigurazione di l'affissere
+Switch Display|Basculer l'affichage|Cambià l'affissaghju
 
 # Installed applications (Krita, Kleopatra, Lutris, Transmission, Meld...) and GTK, GLib, PipeWire, NetworkManager: drafts
 |Correspond au teamd runner.active.|Currisponde à teamd runner.active.
@@ -118474,6 +118478,17 @@ Shouting|Cri|Brionu
 Banner|Bannière|Bandera
 Close Window|Fermer la fenêtre|Chjode a finestra
 No command found|Aucune commande trouvée|Nisuna cumanda trovata
+# Discord: the menu of the notification-area icon (and the balloon Windows shows by it), which Discord's page sends to the
+# Discord: desktop app (setSystemTrayStrings); texts from Discord's public web client, October 2026. Provenance of each row in
+# Discord: lexicon/review-discord-2026-10.tsv (AI proposals and Corsu usage, not read by a speaker).
+Quit Discord|Quitter Discord|Esce da Discord
+Suppressed|Interdit|Difesu
+Acknowledgements|Remerciements|Ringraziamenti
+Open Voice && Video Settings|Ouvrir les paramètres vocaux et vidéo|Apre i parametri vucali è videò
+Check For Updates...|Rechercher les mises à jour…|Circà l'aghjurnamenti…
+Hi! Discord will run in the background to keep you in touch with your friends. You can right-click here to quit.|Salut ! Discord s'exécutera en arrière-plan pour te permettre de rester en contact avec tes ami(e)s. Tu peux faire un clic droit ici pour quitter.|Salute! Discord ferma attivu in sfondulu per ch'è tù fermi in cuntattu cù i to amichi. Poi fà un cliccu dirittu quì per esce.
+# Discord: a setting left in French, found by the bounded search of October 2026 (docs/untranslated-inventory.md).
+Minimum notification duration|Durée minimale des notifications|Durata minima di e nutificazioni
 # Vencord: settings pages and plugin descriptions of Vencord, which only exist in English.
 A Vencord update is available!||Un aghjurnamentu di Vencord hè dispunibule!
 A restart is required to apply this change||Ci vole à rilancià per applicà stu cambiamentu
