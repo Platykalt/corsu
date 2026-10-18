@@ -8,7 +8,7 @@ modifiés.
 
 ## Application de bureau (Windows, macOS, Linux)
 
-1. Lancez l'installeur de Corsu et laissez Discord coché. Si Discord est ouvert, l'installeur le modifie quand même ;
+1. Installez Corsu (ou rouvrez l'application Corsu) et laissez Discord coché. Si Discord est ouvert, Corsu le modifie quand même ;
    le changement prend effet au prochain démarrage.
 2. Quittez complètement Discord (depuis l'icône de la barre des tâches, pas seulement la fenêtre) et rouvrez-le.
 3. Dans Discord, ouvrez Paramètres utilisateur, puis Langue, et choisissez **Français** ou **English**. Le plugin
@@ -27,8 +27,8 @@ l'installeur.
 - **Pas de section Vencord dans les paramètres.** Discord s'est mis à jour et a retiré la modification. Rouvrez
   l'application Corsu, ou relancez l'installeur avec seulement Discord coché.
 - **Linux, Discord installé par la distribution.** Les paquets récents gardent le programme dans
-  `~/.config/discord/app-<version>`. Corsu modifie le plus récent. Après une mise à jour de Discord, relancez Corsu
-  Setup.
+  `~/.config/discord/app-<version>`. Corsu modifie le plus récent. Après une mise à jour de Discord, rouvrez
+  l'application Corsu.
 - **Discord en Flatpak.** Non pris en charge : utilisez le paquet classique ou Vesktop.
 - **Vous utilisiez déjà Vencord.** Corsu le remplace par une version de Vencord qui contient le plugin Corsu. Vos
   autres plugins et réglages Vencord sont conservés.

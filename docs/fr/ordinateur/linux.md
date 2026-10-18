@@ -36,7 +36,9 @@ après la suppression de l'archive téléchargée.
   commandes du terminal.
 
 Fermez les logiciels avant de confirmer, puis rouvrez-les. Déconnectez-vous et reconnectez-vous pour voir Plasma en
-corse. Pour Discord, voir [Discord](../discord.md).
+corse. Pour Discord, voir [Discord](../discord.md). Corsu règle aussi sur le corse la langue des logiciels qui ont
+leur propre traduction corse (VLC, Audacity, Tenacity, fre:ac, Poedit, PDFsam, FileZilla…) et met en corse
+Minecraft: Java Edition, voir [État des traductions](../etat-des-traductions.md).
 
 ## Changer d'avis
 
