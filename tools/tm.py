@@ -8,10 +8,12 @@
     tm.py po <work.jsonl> --out x.po
 
 A working file uses the format of lexicon/memory/*.jsonl (see lexicon/memory/README.md): one JSON object per
-string, with its key, context, placeholders and origin. `match` only fills a target when the reuse is safe: same
-source text and (same application, or same context, or one unambiguous translation whose placeholders match).
-Close matches are listed as suggestions and never applied; different translations of the same text from different
-programs are listed as conflicts.
+string, with its key, context, placeholders, origin and, when known, its sense. `match` only fills a target when
+the reuse is safe: same source text, matching placeholders, no other sense, and (same application, or same context,
+or same named sense, or one unambiguous translation that is not an abbreviation). Close matches are listed as
+suggestions and never applied; different translations of the same text from different programs are listed as
+conflicts; candidates of another sense as refused. `match` and `update` also mark strings added or changed since
+the memory (or the previous file) was written. Rules and real cases: lexicon/memory/README.md, "Reuse rules".
 """
 import argparse
 from collections import Counter, defaultdict
@@ -29,6 +31,8 @@ import engine  # noqa: E402
 
 FIELDS = ('app', 'component', 'key', 'context', 'source_lang', 'source', 'source_fr', 'target', 'plural', 'params',
           'origin', 'version', 'license', 'review', 'fetched')
+# What a reused translation says about where it comes from (match.provenance).
+PROVENANCE = ('app', 'component', 'key', 'origin', 'version', 'license', 'review')
 REVIEWED = engine.REVIEW_RANK
 FUZZY = 0.85
 
@@ -297,13 +301,22 @@ def first_form(target):
 
 
 class Memory:
-    """Exact and fuzzy indexes over memory entries (lexicon/memory by default)."""
+    """Exact and fuzzy indexes over memory entries (lexicon/memory by default), and each application's keys (to
+    see that a string is new, or that its source text changed since the memory was written)."""
 
     def __init__(self, entries=None, directory=None):
         self.entries = list(entries) if entries is not None else engine.memory_entries(directory)
         self.exact = defaultdict(list)
         self.words = defaultdict(set)
         self.sources = []
+        self.keys = defaultdict(list)
+        self.apps = set()
+        for entry in self.entries:
+            app = (entry.get('app') or '').casefold()
+            if app:
+                self.apps.add(app)
+                if entry.get('key'):
+                    self.keys[(app, entry['key'])].append(entry)
         for entry in self.entries:
             # Plural sources are not indexed: an entry is matched on its singular source text.
             for source, _ in engine.memory_sources(entry)[:2]:
@@ -340,15 +353,87 @@ def same_placeholders(entry, candidate):
     return sorted(params(target)) == source and engine.signature(entry['source']) == engine.signature(target)
 
 
+def source_identity(entry):
+    """What a validation is tied to: the source text, or its hash when the text is not stored (Minecraft)."""
+    return entry.get('source') or None, entry.get('source_hash') or None
+
+
+def provenance(candidate):
+    found = {name: candidate.get(name) for name in PROVENANCE if candidate.get(name)}
+    human = (candidate.get('validation') or {}).get('human')
+    if human and human != 'none':
+        found['human'] = human
+    return found
+
+
+def compare_with_memory(entry, memory):
+    """`change`: `added` when the entry's application is in the memory without this key, `changed` when the key is
+    there with another source text (the previous text and translation are kept under match.previous, never
+    applied, and the entry is marked to-review). Nothing when the application is new to the memory."""
+    app = (entry.get('app') or '').casefold()
+    if not app or app not in memory.apps or not entry.get('key'):
+        return None
+    known = memory.keys.get((app, entry['key']), [])
+    if not known:
+        entry['change'] = 'added'
+        return None
+    mine = source_identity(entry)
+    for previous in known:
+        theirs = source_identity(previous)
+        same = (mine[0] and theirs[0] and mine[0] == theirs[0]) or (mine[1] and theirs[1] and mine[1] == theirs[1])
+        if same:
+            entry['change'] = 'unchanged'
+            return None
+    previous = known[0]
+    entry['change'] = 'changed'
+    return {'source': previous.get('source') or None, 'source_hash': previous.get('source_hash') or None,
+            'target': previous.get('target'), 'review': previous.get('review'), 'version': previous.get('version')}
+
+
 def match_entry(entry, memory):
-    """Fill entry['target'] from compatible exact matches; record suggestions and conflicts in entry['match']."""
+    """Fill entry['target'] from compatible exact matches; record suggestions, conflicts, refusals and changes.
+
+    Automatic reuse needs the same source text, the same placeholders, no other explicit sense, and one of: the same
+    application, the same context, the same explicit sense, or a single translation across the memory (never for
+    an abbreviation, never when the entry names its sense and the candidate does not). Everything else is listed
+    for a person: `suggestion`s (close texts, or same text whose sense is not known), `conflict`s (one option per
+    meaning) and `refused` candidates (another sense). See lexicon/memory/README.md, "Reuse rules"."""
     if entry.get('target'):
         return entry
+    previous = compare_with_memory(entry, memory)
+    if previous is not None:
+        entry['review'] = 'to-review'
+    found = match_text(entry, memory)
+    if previous is not None:
+        found = found or {}
+        found['previous'] = previous
+        if found.get('type') == 'exact' and found.get('reason') == 'same-app':
+            # The application's own translation of the new text exists, but this key's text changed: a person checks.
+            entry['review'] = 'to-review'
+    if found:
+        entry['match'] = found
+    return entry
+
+
+def match_text(entry, memory):
     key = engine.normalize(entry['source']).strip()
     plural = bool(entry.get('plural'))
+    sense = engine.sense_of(entry)
     candidates = [candidate for candidate in memory.exact.get(key, [])
                   if bool(candidate.get('plural')) == plural and candidate is not entry
                   and not engine.app_only(candidate, entry.get('app'))]
+    refused = []
+    if sense:
+        kept = []
+        for candidate in candidates:
+            other = engine.sense_of(candidate)
+            if other and other != sense:
+                refused.append({'target': candidate['target'], 'app': candidate.get('app'), 'sense': other,
+                                'reason': 'other-sense'})
+            else:
+                kept.append(candidate)
+        candidates = kept
+    result = {'refused': refused} if refused else {}
     if candidates:
         app = (entry.get('app') or '').casefold()
         contexts = context_values(entry)
@@ -363,39 +448,56 @@ def match_entry(entry, memory):
                 if contexts & context_values(candidate) and same_placeholders(entry, candidate):
                     chosen, reason = candidate, 'same-context'
                     break
+        if chosen is None and sense:
+            for candidate in ranked:
+                if engine.sense_of(candidate) == sense and same_placeholders(entry, candidate):
+                    chosen, reason = candidate, 'same-sense'
+                    break
         distinct = {engine.meaning(first_form(candidate['target'])) for candidate in candidates}
-        if chosen is None and len(distinct) == 1:
+        # Why a single translation is still not reused by itself.
+        hold = 'abbreviation' if engine.abbreviation(entry['source']) else \
+            'sense-unknown' if sense and not any(engine.sense_of(candidate) for candidate in candidates) else None
+        if chosen is None and len(distinct) == 1 and hold is None:
             if same_placeholders(entry, ranked[0]):
                 chosen, reason = ranked[0], 'unambiguous'
         if chosen is not None:
             entry['target'] = chosen['target']
             same = reason == 'same-app'
+            # A human validation belongs to its own application and source text: elsewhere it is a draft again.
             entry['review'] = chosen.get('review') if same else 'corsu-draft'
-            entry['match'] = {'type': 'exact', 'reason': reason, 'from': chosen.get('app'),
-                              'review': chosen.get('review')}
-            return entry
+            return {**result, 'type': 'exact', 'reason': reason, 'from': chosen.get('app'),
+                    'review': chosen.get('review'), 'provenance': provenance(chosen)}
+        # One option per meaning, with the applications that use it (most trusted wording first).
+        options = {}
+        for candidate in ranked:
+            option = options.setdefault(engine.meaning(first_form(candidate['target'])), {
+                'target': candidate['target'], 'review': candidate.get('review'), 'apps': [], 'senses': []})
+            if candidate.get('app') not in option['apps']:
+                option['apps'].append(candidate.get('app'))
+            if engine.sense_of(candidate) and engine.sense_of(candidate) not in option['senses']:
+                option['senses'].append(engine.sense_of(candidate))
+        for option in options.values():
+            if not option['senses']:
+                del option['senses']
+        listed = sorted(options.values(), key=lambda option: -len(option['apps']))
         if len(distinct) > 1:
-            # One option per meaning, with the applications that use it (most trusted wording first).
-            options = {}
-            for candidate in ranked:
-                option = options.setdefault(engine.meaning(first_form(candidate['target'])), {
-                    'target': candidate['target'], 'review': candidate.get('review'), 'apps': []})
-                if candidate.get('app') not in option['apps']:
-                    option['apps'].append(candidate.get('app'))
-            entry['match'] = {'type': 'conflict',
-                              'candidates': sorted(options.values(), key=lambda option: -len(option['apps']))}
-            return entry
+            return {**result, 'type': 'conflict', **({'reason': hold} if hold else {}), 'candidates': listed}
+        if hold:
+            return {**result, 'type': 'suggestion', 'reason': hold,
+                    'suggestions': [{'source': entry['source'], 'target': option['target'], 'app': app_name,
+                                     'ratio': 1.0} for option in listed for app_name in option['apps']]}
     suggestions = []
     for ratio, source in memory.similar(entry['source']):
-        usable = [item for item in memory.exact[source] if not engine.app_only(item, entry.get('app'))]
+        usable = [item for item in memory.exact[source] if not engine.app_only(item, entry.get('app'))
+                  and not (sense and engine.sense_of(item) and engine.sense_of(item) != sense)]
         if not usable:
             continue
         candidate = max(usable, key=lambda item: REVIEWED.get(item.get('review'), 0))
         suggestions.append({'source': candidate.get('source'), 'target': candidate['target'],
                             'app': candidate.get('app'), 'ratio': round(ratio, 3)})
     if suggestions:
-        entry['match'] = {'type': 'suggestion', 'suggestions': suggestions}
-    return entry
+        return {**result, 'type': 'suggestion', 'suggestions': suggestions}
+    return result or None
 
 
 def match(entries, memory):
@@ -404,12 +506,18 @@ def match(entries, memory):
 
 def stats(entries):
     kinds = Counter((entry.get('match') or {}).get('type') for entry in entries)
+    changes = Counter(entry.get('change') for entry in entries)
     return {
         'entries': len(entries),
         'unique source strings': len({engine.normalize(entry['source']).strip() for entry in entries}),
         'exact compatible reuses': kinds['exact'],
         'suggestions': kinds['suggestion'],
         'conflicts': kinds['conflict'],
+        'held (abbreviation or unknown sense)': sum(1 for entry in entries if (entry.get('match') or {}).get('reason')
+                                                   in ('abbreviation', 'sense-unknown')),
+        'refused (other sense)': sum(1 for entry in entries if (entry.get('match') or {}).get('refused')),
+        'added': changes['added'],
+        'changed': changes['changed'],
         'untranslated': sum(1 for entry in entries if not entry.get('target')),
     }
 
@@ -434,18 +542,27 @@ def update(old, new):
         previous = before.get(key)
         if previous is None:
             entry['change'] = 'added'
-        elif previous.get('source') != entry.get('source') or \
+        elif source_identity(previous) != source_identity(entry) or \
                 (previous.get('plural') or {}).get('source_plural') != (entry.get('plural') or {}).get('source_plural'):
             entry['change'] = 'changed'
             entry['previous_source'] = previous.get('source')
+            if previous.get('source_hash') != entry.get('source_hash'):
+                entry['previous_source_hash'] = previous.get('source_hash')
             if not entry.get('target') and previous.get('target'):
                 entry['target'] = previous['target']
             entry['review'] = 'to-review'
+            # A speaker's validation was given for the old text: it is kept, marked to re-examine, never carried.
+            validation = previous.get('validation') or {}
+            if validation.get('human') not in (None, 'none'):
+                entry['validation'] = {**validation, 'human': 'to-re-examine',
+                                       'human_before': validation['human']}
         else:
             entry['change'] = 'unchanged'
             if not entry.get('target') and previous.get('target'):
                 entry['target'] = previous['target']
                 entry['review'] = previous.get('review')
+                if previous.get('validation'):
+                    entry['validation'] = previous['validation']
         result.append(entry)
     for key, entry in before.items():
         if key not in after:
