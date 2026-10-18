@@ -41,13 +41,15 @@ sinon la copie (`corsu.launcher_python`).
 L'application Corsu (`src/app.py`) est un petit serveur web lié à 127.0.0.1, à l'adresse fixe `http://localhost:7744`
 (le port suivant libre si un autre programme occupe celui-ci). `src/window.py` l'affiche dans une fenêtre à elle :
 pywebview s'il est présent, WebKitGTK sous Linux, sinon la fenêtre d'application d'Edge, Chrome ou Chromium, et en
-dernier recours un onglet du navigateur. La même adresse s'ouvre aussi dans n'importe quel navigateur tant que Corsu
-tourne. Seule la page de Corsu peut le piloter : le serveur refuse tout autre `Host` (contre le rebinding DNS), exige
+dernier recours un onglet du navigateur. Seule la fenêtre ouverte par Corsu peut s'en servir : son adresse porte un ticket à usage unique que la page
+échange contre la clé du lancement, envoyée dans `X-Corsu-Key` à chaque appel, lectures comprises ; un autre compte
+de l'ordinateur ne peut donc lire ni l'état de Corsu ni l'image de fond (voir [window-security.md](../window-security.md)).
+En plus, le serveur refuse tout autre `Host` (contre le rebinding DNS), exige
 l'en-tête `X-Corsu` qu'une page d'un autre site ne peut pas envoyer sans une autorisation que le serveur ne donne
 jamais, refuse un `Origin` étranger, et sous Linux vérifie que la connexion vient du même compte. Chaque action lance
 `installer.py` dans un processus à part et la page affiche ce qu'il écrit. Le serveur s'arrête 30 secondes après la
 fermeture de la fenêtre, ou dix minutes après la dernière visite dans un navigateur. `app.py --browser` ouvre un
-onglet au lieu de la fenêtre, `app.py --no-browser` ne fait que servir l'adresse, `app.py --text` donne le menu dans
+onglet au lieu de la fenêtre, `app.py --no-browser` ne fait que servir l'adresse (affichée avec son ticket), `app.py --text` donne le menu dans
 le terminal.
 
 ## Lexique

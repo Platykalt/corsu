@@ -40,12 +40,14 @@ while it is 3.10 or newer with its whole standard library, else the copy (`corsu
 The Corsu app (`src/app.py`) is a small web server bound to 127.0.0.1 at the fixed address `http://localhost:7744`
 (the next free port when another program holds it). `src/window.py` shows it in a window of its own: pywebview when
 present, WebKitGTK on Linux, otherwise the app window of Edge, Chrome or Chromium, and as a last resort a browser tab.
-The same address also opens in any browser while Corsu runs. Only Corsu's page can drive it: the server refuses any
+Only the window Corsu opens can use it: its address carries a one-time ticket the page exchanges for the per-launch key
+sent in `X-Corsu-Key` with every call, reads included, so another account on the computer cannot read Corsu's state
+or background picture (see [window-security.md](../window-security.md)). On top of that the server refuses any
 other `Host` (against DNS rebinding), requires the `X-Corsu` header, which a page from another site cannot send
 without a permission the server never grants, refuses a foreign `Origin`, and on Linux checks that the connection
 comes from the same account. Every action runs `installer.py` in a child process and the page shows its output. The
 server stops 30 seconds after the window closes, or ten minutes after the last visit in a browser. `app.py --browser`
-opens a tab instead of the window, `app.py --no-browser` only serves the address, `app.py --text` is the terminal menu.
+opens a tab instead of the window, `app.py --no-browser` only serves the address (printed with its ticket), `app.py --text` is the terminal menu.
 
 ## Lexicon
 

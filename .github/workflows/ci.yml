@@ -60,6 +60,8 @@ jobs:
         run: python tests/e2e/check_discord_activity.py "$(command -v google-chrome || command -v chromium)" Vencord
       - name: Discord plugin as built (dist/renderer.js, real dictionary) — same guarantees, fingerprint, no "Organicu"
         run: python tests/e2e/check_discord_built.py "$(command -v google-chrome || command -v chromium)" Vencord
+      - name: Window appearance in a real browser page — themes, picture import and refusal, persistence, per-launch key
+        run: python tests/e2e/check_appearance.py "$(command -v google-chrome || command -v chromium)" "$RUNNER_TEMP/appearance"
       - name: Bundle the French Firefox language pack (offline fallback)
         run: |
           version=$(curl -fsSL https://product-details.mozilla.org/1.0/firefox_versions.json | python -c "import json,sys; print(json.load(sys.stdin)['LATEST_FIREFOX_VERSION'])")
