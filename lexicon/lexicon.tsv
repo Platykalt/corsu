@@ -45062,6 +45062,10 @@ Unknown size|Taille inconnue|Dimensione scunnisciuta
 |Smart Form Fill|Riempitura intelligente di furmulari
 |motsdepasse.csv|parolledintesa.csv
 |Blog Firefox Nightly|Blog di Firefox Nightly
+# KDE display settings (kscreen) where KDE showed English: the module's own entry and its Shortcuts component
+# (kcm_kscreen.desktop, kglobalaccel/org.kde.kscreen.desktop); log in lexicon/corrections.tsv, October 2026.
+Display Configuration|Configuration de l'affichage|Cunfigurazione di l'affissere
+Switch Display|Basculer l'affichage|Cambià l'affissaghju
 
 # Installed applications (Krita, Kleopatra, Lutris, Transmission, Meld...) and GTK, GLib, PipeWire, NetworkManager: drafts
 |Correspond au teamd runner.active.|Currisponde à teamd runner.active.
