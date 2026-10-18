@@ -31,7 +31,8 @@ Les sections datées après « État actuel » sont l'historique : ce qui y est 
     `docs/keyman/ticket-mid-word-suggestion.md`.
   - **Téléphone** : page « Sur téléphone » de la fenêtre, guides ; bascules de publication dans
     [release-checklist-phone.md](release-checklist-phone.md).
-  - Corrigés pour les prochaines publications : une somme `.sha256` par pack Minecraft ; version des captures lue
+  - Corrigés pour les prochaines publications (les fichiers déjà publiés de la 0.25.1 restent tels quels, sans somme
+    propre pour le pack de textes) : une somme `.sha256` par fichier publié, vérifiée en CI ; version des captures lue
     dans `src/release.json`.
 - **Chantier du 18 octobre 2026 (soir), intégré dans `next-0.26`** (agents A à E ; détail dans le CHANGELOG) :
   - **Faux « à jour »** : cause établie par le journal et reproduite avec le code de la 0.24.0
@@ -40,7 +41,8 @@ Les sections datées après « État actuel » sont l'historique : ce qui y est 
     en conteneur. Windows et macOS non lancés.
   - **Textes** : menu de la zone de notification de Discord traduit (vrai Discord 1.0.162 en conteneur KDE, chaînes
     envoyées à la main, sans connexion) ; « Display Configuration » (KDE) corrigé ; « Fermer Discord » introuvable
-    dans les textes de Discord : demander où il a été vu. Inventaire : [untranslated-inventory.md](untranslated-inventory.md).
+    dans les textes de Discord ; le menu « Quitter Discord » est traité ; un autre emplacement ne sera recherché
+    qu'après une capture qui le montre. Inventaire : [untranslated-inventory.md](untranslated-inventory.md).
   - **Logo** : nouveau dessin ; fenêtre associée à `corsu-setup.desktop`, logo vu dans Alt+Tab, barre des tâches et
     titre sous KDE Plasma 6 (Wayland, X11, conteneur). Non observé : Windows, macOS, GNOME.
   - **Clavier** : fin du mot effacée sous Android quand on choisit une suggestion au milieu (iPhone : non, limite de
@@ -63,7 +65,8 @@ Les sections datées après « État actuel » sont l'historique : ce qui y est 
   Discord ; décision de publier la 0.26.
 - **Limites connues** : complément VLC absent sous Windows, macOS, Flatpak, Snap ; Audacity 4 expérimental sous
   Windows et macOS ; fre:ac et Audacity vérifiés seulement sur dossiers simulés hors Linux ; fenêtre non observée
-  dans WebView2 ni WKWebView ; Keyman 18 sans correction automatique, remplacement seulement à gauche du curseur.
+  dans WebView2 ni WKWebView ; Keyman 18 sans correction automatique ; suggestion choisie au milieu d'un mot : mot entier remplacé sous Android
+  avec les paquets 1.1, seulement la partie à gauche du curseur sous iOS (limite de l'application Keyman).
 
 ## Objectifs retenus
 
@@ -80,7 +83,7 @@ Les sections datées après « État actuel » sont l'historique : ce qui y est 
 | --- | --- |
 | Activer d'abord la traduction livrée avec le logiciel, par son propre réglage de langue ; ne jamais restaurer un fichier de configuration entier | [apps-research.md](apps-research.md) ; tests `tests/test_apps.py` |
 | VLC sous Linux : entrée de menu avec `LANGUAGE=co:…` (VLC n'a pas de réglage de langue sous Linux) | CI : vrai VLC d'Ubuntu, aide affichée en corse (`tests/e2e/check_vlc.py`) |
-| Minecraft : seuls les dossiers de jeu en 26.3 sont modifiés ; rien n'est réécrit qui ne puisse être relu | `tests/test_lexicon_minecraft.py` |
+| Minecraft : Corsu lit la version de chaque dossier de jeu (instance) et n'y ajoute que le pack de cette version parmi les 87 prises en charge, puis choisit le corse ; une version non prise en charge n'est pas modifiée ; rien n'est réécrit qui ne puisse être relu | `tests/test_minecraft_instances.py`, `tests/test_lexicon_minecraft.py` |
 | Une traduction propre à un logiciel n'est pas réutilisée ailleurs quand les applications divergent (`engine.lookup` refuse) | `tests/test_memory.py` |
 | HandBrake n'est plus importé dans le lexique (GPL-2.0-only) mais son corse est activé dans HandBrake lui-même | [LICENSING-OPTIONS.md](../minecraft/java/LICENSING-OPTIONS.md) |
 | Traductions écrites par IA : jamais présentées comme validées | [REVIEWS.md](../lexicon/REVIEWS.md), colonnes séparées de `minecraft/java/inventory.tsv` |

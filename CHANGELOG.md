@@ -50,7 +50,8 @@
 - Minecraft: third review round (review-2026-10/ROUND3.md): counts reconciled (1,158 edits, 1,157 distinct texts),
   sensitive decisions re-read on their sources (Ragliu, Tonu, Radichju, Cartella, Pastadolce, Pecura), no text
   changed; decisions recorded in lexicon/memory/minecraft-java.jsonl, never reused for another program.
-- Release files: every published file must have its own matching `.sha256` (CI); `tools/count_kmp.py` counts the
+- Release files: from this release on, every published file has its own matching `.sha256` (checked in CI; the
+  files already published with 0.25.1 are unchanged); `tools/count_kmp.py` counts the
   words of a built Keyman package.
 - Phones: "Write Corsican on Android and iPhone" at the top of the README; guides rewritten from Keyman 18.0's help
   and source; the window's new "Sur téléphone" page with QR codes (generated locally) to the public guides.
