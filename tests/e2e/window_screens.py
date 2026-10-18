@@ -2,11 +2,11 @@
 """Screenshots of Corsu's window page in typical situations, from fixed sample states (no installation needed).
 
 Usage: window_screens.py CHROME OUTPUT_DIR [--only NAME ...]
-Serves src/app/ with a small local server whose /api/state answers a sample state (empty, active, partial, blocked,
-failed, update available, operation running, damaged record), loads the page in headless Chrome and saves one PNG
-per situation, in light and dark, wide and narrow, with larger text and zoom. The appearance endpoints of
-src/appearance.py are used when that module exists, with its data in a temporary folder, so the same script shows
-the page before and after the redesign. Nothing of the person's own Corsu is read or written: HOME points to a
+Serves src/app/ with the window's own server (src/app.py), whose /api/state answers a sample state (empty, active,
+partial, blocked, failed, update available, operation running, damaged record), opens the page as Corsu does (with a
+ticket for the window's key), loads it in headless Chrome and saves one PNG per situation, in light and dark, wide and
+narrow, with larger text and zoom. Appearance settings are saved through src/appearance.py, its data in a temporary
+folder. Nothing of the person's own Corsu is read or written: HOME points to a
 temporary folder while it runs. This is the page with sample data, not an observation of a real installation.
 """
 import base64
@@ -21,7 +21,6 @@ import tempfile
 import threading
 import time
 import urllib.request
-from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
 
 HERE = Path(__file__).resolve().parent
 ROOT = HERE.parent.parent
@@ -181,55 +180,24 @@ def prepare_appearance(settings):
 
 
 def serve(folder, state_holder, data):
-    """The page and its files from src/app, sample states, and src/appearance.py when present."""
-    appearance = None
-    if (ROOT / 'src' / 'appearance.py').exists():
-        sys.path.insert(0, str(ROOT / 'src'))
-        import appearance as module
-        appearance = module
-
-    class Handler(BaseHTTPRequestHandler):
-        def log_message(self, *arguments):
-            pass
-
-        def reply(self, status, body, kind='application/json; charset=utf-8'):
-            data = body if isinstance(body, bytes) else json.dumps(body).encode()
-            self.send_response(status)
-            self.send_header('Content-Type', kind)
-            self.send_header('Content-Length', str(len(data)))
-            self.send_header('Cache-Control', 'no-store')
-            self.end_headers()
-            self.wfile.write(data)
-
-        def answer(self, method):
-            path = self.path.split('?')[0]
-            if appearance and hasattr(appearance, 'handle'):
-                length = int(self.headers.get('Content-Length') or 0)
-                body = self.rfile.read(length) if length else b''
-                found = appearance.handle(method, path, body, self.headers, True)
-                if found is not None:
-                    return self.reply(*found)
-            if method == 'GET' and path == '/api/state':
-                return self.reply(200, state_holder[0])
-            if method == 'POST' and path.startswith('/api/'):
-                return self.reply(200, {'started': False})
-            if method == 'GET' and path.startswith('/api/review'):
-                return self.reply(200, {'item': None, 'progress': {'Discord': {'done': 0, 'total': 0, 'fixed': 0}}})
-            name = 'index.html' if path == '/' else path.lstrip('/')
-            file = (APP / name).resolve()
-            if method == 'GET' and file.is_file() and APP in file.parents:
-                kinds = {'.html': 'text/html; charset=utf-8', '.css': 'text/css; charset=utf-8',
-                         '.js': 'text/javascript; charset=utf-8', '.svg': 'image/svg+xml'}
-                return self.reply(200, file.read_bytes(), kinds.get(file.suffix, 'application/octet-stream'))
-            self.reply(404, {'error': 'not found'})
-
-        def do_GET(self):
-            self.answer('GET')
-
-        def do_POST(self):
-            self.answer('POST')
-
-    server = ThreadingHTTPServer(('127.0.0.1', 0), Handler)
+    """The window's own server (src/app.py: page, files, appearance routes and every check, the window's key
+    included), its /api/state answering the sample state of the scene and the review page an empty review."""
+    sys.path.insert(0, str(ROOT / 'src'))
+    import corsu
+    corsu.DATA = Path(data) / 'corsu-data'
+    import app
+    app.SESSION = corsu.DATA / 'setup-session.json'
+    app.snapshot = lambda job=None: copy.deepcopy(state_holder[0])
+    app.review.next_item = lambda section: None
+    app.review.progress_all = lambda: {'Discord': {'done': 0, 'total': 0, 'fixed': 0}}
+    job = app.Job()
+    # The scene's operation (running, failed…), not this test server's idle one.
+    job.snapshot = lambda: copy.deepcopy(state_holder[0]['job'])
+    server = app.Server(('127.0.0.1', 0), app.make_handler(job, [0.0], 0))
+    port = server.server_address[1]
+    server.RequestHandlerClass = app.make_handler(job, [0.0], port)
+    # Each scene opens the page as Corsu opens its window: the address with a fresh ticket after '#'.
+    server.opening = lambda: f'http://127.0.0.1:{port}/#t=' + app.ACCESS.ticket()
     threading.Thread(target=server.serve_forever, daemon=True).start()
     return server
 
@@ -273,7 +241,7 @@ def shoot(devtools, url, scene, output, language='fr'):
                       f'try {{ localStorage.setItem("corsu-language", "{language}"); }} catch (e) {{}}'}, session=session)
         if (ROOT / 'src' / 'appearance.py').exists():
             prepare_appearance(settings)
-        devtools.call('Page.navigate', {'url': url}, session=session)
+        devtools.call('Page.navigate', {'url': url() if callable(url) else url}, session=session)
         time.sleep(1.5)
         devtools.call('Runtime.evaluate', {'expression':
                       f'(document.querySelector(\'[data-page="{page}"]\') || {{click() {{}}}}).click()'}, session=session)
@@ -297,7 +265,7 @@ def main(arguments):
         samples = states()
         holder = [None]
         server = serve(APP, holder, temporary)
-        url = f'http://127.0.0.1:{server.server_address[1]}/'
+        url = server.opening
         failures = 0
         for font in sorted({scene[7] for scene in SCENES}):
             process, devtools = chrome(executable, Path(temporary) / f'profile-{font}', font)

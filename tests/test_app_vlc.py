@@ -99,7 +99,7 @@ class EndpointTests(Isolated):
         connection = http.client.HTTPConnection('127.0.0.1', self.port, timeout=5)
         headers = {'Host': f'127.0.0.1:{self.port}', 'Content-Type': 'application/json'}
         if corsu:
-            headers['X-Corsu'] = '1'
+            headers.update({'X-Corsu': '1', 'X-Corsu-Key': app.ACCESS.key})
         connection.request('POST', '/api/vlc-complement', body=json.dumps(body), headers=headers)
         response = connection.getresponse()
         return response.status, json.loads(response.read() or b'null')

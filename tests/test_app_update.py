@@ -263,7 +263,7 @@ class ServerTests(Isolated):
         connection = http.client.HTTPConnection('127.0.0.1', self.port, timeout=5)
         headers = {'Host': host or f'127.0.0.1:{self.port}', 'Content-Type': 'application/json'}
         if corsu:
-            headers['X-Corsu'] = '1'
+            headers.update({'X-Corsu': '1', 'X-Corsu-Key': app.ACCESS.key})
         connection.request(method, path, body=json.dumps(body or {}) if method == 'POST' else None, headers=headers)
         response = connection.getresponse()
         return response.status, json.loads(response.read() or b'null')
@@ -408,7 +408,8 @@ class HandoverTests(Isolated):
 
     def state_of(self):
         connection = http.client.HTTPConnection('127.0.0.1', self.port, timeout=5)
-        connection.request('GET', '/api/state', headers={'Host': f'127.0.0.1:{self.port}', 'X-Corsu': '1'})
+        connection.request('GET', '/api/state', headers={'Host': f'127.0.0.1:{self.port}', 'X-Corsu': '1',
+                                                                 'X-Corsu-Key': app.ACCESS.key})
         return json.loads(connection.getresponse().read())
 
     def test_the_new_copy_takes_the_same_address(self):

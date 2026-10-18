@@ -1,15 +1,15 @@
 #!/usr/bin/env python3
-"""The Appearance page in headless Chrome, against a local server using src/appearance.py's handle().
+"""The Appearance page in headless Chrome, against the window's own server (src/app.py) with a sample state.
 
 Usage: check_appearance.py CHROME [OUTPUT_DIR]
-Changes theme, palette, accent and density; imports synthetic pictures (drawn in the browser, saved to a temporary
-folder) through the page's file input; frames one with the keyboard, cancels, applies; reloads and checks that the
-settings came back from the server; feeds an undecodable file and a text file and checks the messages; resets and
-checks that only DATA/appearance changed. Screenshots go to OUTPUT_DIR. HOME is a temporary folder: nothing of the
-person's own Corsu or files is read or written.
-
-When src/app/index.html does not have the Appearance section yet, a small stand-in page is served instead: the
-contract's tokens and background layers (docs/window-design.md), the shared classes, window.corsu and the events.
+Opens the page as Corsu does (a ticket after '#', exchanged for the window's key) and checks that a reload keeps the
+key, that a page without it is told so, and that the state, settings and picture are refused without it. Changes
+theme, palette, accent and density; imports synthetic pictures (drawn in the browser, saved to a temporary folder)
+through the page's file input, animated GIF, PNG and WebP among them (kept as still pictures); frames one with the
+keyboard, cancels, applies; checks that the periodic refresh leaves the focus and a slider alone and that reduced
+motion turns transitions off; reloads and checks that the settings came back from the server; feeds an undecodable
+file and a text file and checks the messages; resets and checks that only DATA/appearance changed. Screenshots go to
+OUTPUT_DIR. HOME is a temporary folder: nothing of the person's own Corsu or files is read or written.
 """
 import base64
 import hashlib
@@ -17,6 +17,7 @@ import json
 import os
 from pathlib import Path
 import socket
+import struct
 import subprocess
 import sys
 import tempfile
@@ -24,7 +25,7 @@ import threading
 import time
 import urllib.error
 import urllib.request
-from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
+import zlib
 
 HERE = Path(__file__).resolve().parent
 ROOT = HERE.parent.parent
@@ -39,81 +40,6 @@ def sample_state():
     if not hasattr(sample_state, 'value'):
         sample_state.value = states()['empty']
     return sample_state.value
-
-# The window's own policy (src/app.py, send()), with the img-src the wiring adds.
-CSP = ("default-src 'self'; style-src 'self' 'unsafe-inline'; script-src 'self' 'unsafe-inline'; "
-       "img-src 'self' blob: data:; frame-ancestors 'none'")
-
-STAND_IN = """<!doctype html>
-<html lang="fr"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Corsu</title>
-<link rel="stylesheet" href="stand-in.css"><link rel="stylesheet" href="appearance.css">
-<script src="texts-appearance.js"></script><script src="stand-in.js"></script><script src="appearance.js"></script>
-</head><body><div class="app"><aside><div class="brand"><b>Corsu</b></div>
-<nav><button type="button">Logiciels</button><button type="button">Ajouter</button>
-<button type="button" aria-current="page">Apparence</button><button type="button">Aide</button></nav></aside>
-<main><section id="appearance" data-page-panel></section></main></div></body></html>"""
-
-STAND_IN_JS = """"use strict";
-window.corsu = { language: "fr", t: (name, values = {}) => (textsAppearance.fr[name] ?? name) };
-document.addEventListener("DOMContentLoaded", () => document.dispatchEvent(new CustomEvent("corsu:page", { detail: "appearance" })));
-"""
-
-# Only what the contract says style.css provides, kept small: tokens per palette and theme, background layers.
-STAND_IN_CSS = """
-:root { --space-1: 4px; --space-2: 8px; --space-3: 12px; --space-4: 16px; --space-6: 24px;
-  --bg: #f6f3ec; --surface: #fffdf8; --surface-2: #efebe2; --line: #ddd6c8; --text: #1e2421; --muted: #5d6662;
-  --accent: #1f6b5c; --on-accent: #ffffff; --focus: #1f6b5c; --danger: #a1302b; }
-[data-palette=mare] { --bg: #f2f5f8; --surface: #ffffff; --surface-2: #e8eef4; --accent: #22609a; --focus: #22609a; }
-[data-palette=granitu] { --bg: #efedea; --surface: #fbfaf8; --surface-2: #e5e2dd; --accent: #8a5a14; --focus: #8a5a14; }
-[data-palette=tramontu] { --bg: #f7efe9; --surface: #fffaf6; --surface-2: #f0e3da; --accent: #a64b2f; --focus: #a64b2f; }
-[data-palette=notte] { --bg: #eef1f7; --surface: #ffffff; --surface-2: #e3e8f2; --accent: #2b4a8c; --focus: #2b4a8c; }
-[data-theme=dark] { --bg: #151a18; --surface: #1d2321; --surface-2: #181d1b; --line: #323b38; --text: #e6ebe8;
-  --muted: #9ba7a2; --accent: #6cc3ad; --on-accent: #0d1a16; --focus: #6cc3ad; --danger: #f08a80; }
-[data-theme=dark][data-palette=mare] { --accent: #7fb6ea; --focus: #7fb6ea; --bg: #12171d; --surface: #1a2129; }
-[data-theme=dark][data-palette=granitu] { --accent: #e0b062; --focus: #e0b062; --bg: #191817; --surface: #22201e; }
-[data-theme=dark][data-palette=tramontu] { --accent: #f0a080; --focus: #f0a080; --bg: #1c1513; --surface: #261d1a; }
-[data-theme=dark][data-palette=notte] { --accent: #9bb8ff; --focus: #9bb8ff; --bg: #0f1422; --surface: #172036; --surface-2: #121a2c; }
-:root { color-scheme: light; } [data-theme=dark] { color-scheme: dark; }
-:root[style*="--accent-user"] { --accent: var(--accent-user); --focus: var(--accent-user); }
-* { box-sizing: border-box; } html, body { margin: 0; min-height: 100%; }
-body { background: var(--bg); color: var(--text); font: 1rem/1.45 system-ui, sans-serif; }
-[data-background=image] body::before { content: ""; position: fixed; inset: 0; z-index: -2; background: var(--bg-image) var(--bg-position, 50% 50%) / cover no-repeat; }
-[data-background=image] body::after { content: ""; position: fixed; inset: 0; z-index: -1; background: var(--bg); opacity: var(--bg-dim, 0.35); }
-[data-background=image] body { background: transparent; }
-.app { display: grid; grid-template-columns: 200px minmax(0, 1fr); min-height: 100vh; }
-aside { background: color-mix(in srgb, var(--surface-2) 88%, transparent); border-right: 1px solid var(--line); padding: 16px 10px; }
-.brand { padding: 4px 10px 14px; font-size: 1.05rem; }
-nav { display: flex; flex-direction: column; gap: 2px; }
-nav button { text-align: left; border: 0; background: none; color: inherit; font: inherit; padding: 7px 10px; border-radius: 6px; }
-nav button[aria-current=page] { background: var(--surface); font-weight: 600; box-shadow: inset 3px 0 var(--accent); }
-main { padding: 28px 36px 80px; max-width: 820px; }
-h1 { font-size: 1.5rem; font-weight: 600; margin: 0 0 4px; }
-h2 { font-size: 0.8125rem; font-weight: 600; color: var(--muted); margin: 24px 0 8px 2px; }
-.lead { color: var(--muted); margin: 0 0 18px; }
-.detail, .muted { color: var(--muted); font-size: 0.875rem; }
-.group { list-style: none; margin: 0; padding: 0; border: 1px solid var(--line); border-radius: 10px; background: color-mix(in srgb, var(--surface) 92%, transparent); }
-[data-background=image]:not([data-reduced-transparency]) .group, [data-background=image]:not([data-reduced-transparency]) aside { backdrop-filter: blur(var(--bg-blur)); }
-.group > li { display: flex; align-items: center; gap: 14px; padding: 10px 16px; min-height: 52px; }
-.group > li[hidden] { display: none; }
-.group > li + li { border-top: 1px solid var(--line); }
-.group .label { flex: 1; min-width: 0; } .group .label > :first-child { display: block; font-weight: 550; }
-.group .detail { display: block; }
-.buttons { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 10px; }
-.button { font: inherit; font-size: 0.875rem; color: var(--text); background: var(--surface); border: 1px solid var(--line); border-radius: 7px; padding: 6px 12px; cursor: pointer; }
-.button.default { background: var(--accent); color: var(--on-accent); border-color: transparent; }
-.button.danger { color: var(--danger); border-color: currentColor; }
-.button[hidden] { display: none; }
-.switch { position: relative; display: inline-block; width: 40px; height: 22px; flex: none; }
-.switch input { position: absolute; inset: 0; opacity: 0; margin: 0; cursor: pointer; }
-.switch i { position: absolute; inset: 0; border-radius: 11px; background: var(--line); pointer-events: none; }
-.switch i::after { content: ""; position: absolute; top: 3px; left: 3px; width: 16px; height: 16px; border-radius: 50%; background: #fff; transition: left .15s; }
-.switch input:checked + i { background: var(--accent); } .switch input:checked + i::after { left: 21px; }
-.switch input:focus-visible + i { outline: 2px solid var(--focus); outline-offset: 2px; }
-:focus-visible { outline: 2px solid var(--focus); outline-offset: 2px; }
-a { color: var(--accent); }
-"""
-
 
 def chrome(executable, profile):
     with socket.socket() as reserve:
@@ -134,71 +60,19 @@ def chrome(executable, profile):
             time.sleep(0.3)
 
 
-def serve(appearance, port_holder):
-    """The page (or the stand-in), its files, and appearance.handle() behind a Host/X-Corsu/Origin check."""
-    real = 'id="appearance"' in (APP / 'index.html').read_text(encoding='utf-8')
-    extra = {} if real else {'/': (STAND_IN.encode(), 'text/html; charset=utf-8'),
-                             '/stand-in.css': (STAND_IN_CSS.encode(), 'text/css; charset=utf-8'),
-                             '/stand-in.js': (STAND_IN_JS.encode(), 'text/javascript; charset=utf-8')}
-    kinds = {'.html': 'text/html; charset=utf-8', '.css': 'text/css; charset=utf-8',
-             '.js': 'text/javascript; charset=utf-8', '.svg': 'image/svg+xml'}
-
-    class Handler(BaseHTTPRequestHandler):
-        def log_message(self, *arguments):
-            pass
-
-        def reply(self, status, body, kind='application/json; charset=utf-8'):
-            data = body if isinstance(body, bytes) else json.dumps(body).encode()
-            self.send_response(status)
-            self.send_header('Content-Type', kind)
-            self.send_header('Content-Length', str(len(data)))
-            self.send_header('Cache-Control', 'no-store')
-            self.send_header('X-Content-Type-Options', 'nosniff')
-            self.send_header('Content-Security-Policy', CSP)
-            self.end_headers()
-            self.wfile.write(data)
-
-        def allowed(self):
-            host = f'127.0.0.1:{port_holder[0]}'
-            return (self.headers.get('Host') == host and self.headers.get('X-Corsu') == '1'
-                    and self.headers.get('Origin') in (None, f'http://{host}'))
-
-        def answer(self, method):
-            path = self.path.split('?')[0]
-            body = b''
-            if method == 'POST':
-                length = int(self.headers.get('Content-Length') or 0)
-                if length > appearance.body_limit(self.path):
-                    self.close_connection = True
-                    return self.reply(413, {'error': 'too_large'})
-                body = self.rfile.read(length)
-            found = appearance.handle(method, self.path, body, self.headers, self.allowed)
-            if found is not None:
-                return self.reply(*found)
-            if method == 'GET' and path in extra:
-                return self.reply(200, *extra[path])
-            if method == 'GET' and path == '/api/state':
-                # A complete sample state (window_screens.py): with fields missing, the window's own render fails and
-                # the page reads as closed, taking the Appearance section with it.
-                return self.reply(200, sample_state())
-            name = 'index.html' if path == '/' else path.lstrip('/')
-            file = (APP / name).resolve()
-            if method == 'GET' and file.is_file() and APP in file.parents:
-                return self.reply(200, file.read_bytes(), kinds.get(file.suffix, 'application/octet-stream'))
-            if method == 'POST':
-                return self.reply(200, {'started': False})
-            self.reply(404, {'error': 'not found'})
-
-        def do_GET(self):
-            self.answer('GET')
-
-        def do_POST(self):
-            self.answer('POST')
-
-    server = ThreadingHTTPServer(('127.0.0.1', 0), Handler)
-    port_holder[0] = server.server_address[1]
+def serve():
+    """The window's own server (src/app.py: the page, its files, the appearance routes, the Host/X-Corsu/Origin
+    checks, the window's key and, on Linux, the owner check), answering /api/state with a complete sample state."""
+    import app
+    # A complete sample state (window_screens.py): with fields missing, the window's own render fails and the page
+    # reads as closed, taking the Appearance section with it.
+    app.snapshot = lambda job=None: dict(sample_state())
+    job = app.Job()
+    server = app.Server(('127.0.0.1', 0), app.make_handler(job, [0.0], 0))
+    port = server.server_address[1]
+    server.RequestHandlerClass = app.make_handler(job, [0.0], port)
     threading.Thread(target=server.serve_forever, daemon=True).start()
-    return server, real
+    return server, app
 
 
 # Synthetic pictures, drawn by the browser itself.
@@ -226,7 +100,87 @@ DRAW = """(() => {
 })()"""
 
 
+def gif_animated(width=48, height=32):
+    """A two-frame animated GIF (red, then blue), LZW-coded with a clear code every two pixels so the codes stay 3 bits."""
+    def frame(index):
+        codes, bits, count = [], 0, 0
+        stream = [4]
+        for pixel in range(width * height):
+            stream.append(index)
+            if pixel % 2:
+                stream.append(4)
+        stream.append(5)
+        value = 0
+        for code in stream:
+            value |= code << bits
+            bits += 3
+        data = value.to_bytes((bits + 7) // 8, 'little')
+        blocks = b''.join(bytes([len(data[i:i + 255])]) + data[i:i + 255] for i in range(0, len(data), 255))
+        control = b'\x21\xf9\x04\x00\x0a\x00\x00\x00'  # 100 ms
+        return control + b'\x2c' + struct.pack('<HHHHB', 0, 0, width, height, 0) + b'\x02' + blocks + b'\x00'
+    palette = bytes([220, 40, 40, 40, 60, 220, 0, 0, 0, 255, 255, 255])
+    loop = b'\x21\xff\x0bNETSCAPE2.0\x03\x01\x00\x00\x00'
+    return (b'GIF89a' + struct.pack('<HHBBB', width, height, 0xf1, 0, 0) + palette + loop + frame(0) + frame(1) + b'\x3b')
+
+
+def png_animated(width=48, height=32):
+    """A two-frame animated PNG (APNG): green, then purple."""
+    def chunk(kind, body):
+        return struct.pack('>I', len(body)) + kind + body + struct.pack('>I', zlib.crc32(kind + body))
+    def pixels(colour):
+        return zlib.compress(b''.join(b'\0' + bytes(colour) * width for _ in range(height)))
+    def control(sequence):
+        return chunk(b'fcTL', struct.pack('>IIIIIHHBB', sequence, width, height, 0, 0, 1, 10, 0, 0))
+    return (b'\x89PNG\r\n\x1a\n' + chunk(b'IHDR', struct.pack('>IIBBBBB', width, height, 8, 2, 0, 0, 0))
+            + chunk(b'acTL', struct.pack('>II', 2, 0)) + control(0) + chunk(b'IDAT', pixels((40, 160, 60)))
+            + control(1) + chunk(b'fdAT', struct.pack('>I', 2) + pixels((120, 40, 160))) + chunk(b'IEND', b''))
+
+
+def webp_animated(frames, width, height):
+    """An animated WebP made of still WebP frames (each a RIFF with a 'VP8 ' chunk, as the browser encodes them)."""
+    def chunk(kind, body):
+        return kind + struct.pack('<I', len(body)) + body + (b'\0' if len(body) % 2 else b'')
+    def bitstream(data):
+        position, found = 12, b''
+        while position < len(data):
+            kind, length = data[position:position + 4], struct.unpack('<I', data[position + 4:position + 8])[0]
+            if kind in (b'VP8 ', b'VP8L', b'ALPH'):
+                found += chunk(kind, data[position + 8:position + 8 + length])
+            position += 8 + length + (length & 1)
+        return found
+    three = lambda value: value.to_bytes(3, 'little')
+    body = b'WEBP' + chunk(b'VP8X', bytes([0x02, 0, 0, 0]) + three(width - 1) + three(height - 1))
+    body += chunk(b'ANIM', bytes(4) + struct.pack('<H', 0))
+    for frame in frames:
+        body += chunk(b'ANMF', three(0) + three(0) + three(width - 1) + three(height - 1) + three(100) + b'\x00' + bitstream(frame))
+    return b'RIFF' + struct.pack('<I', len(body)) + body
+
+
+def still(data):
+    """Whether the stored bytes are a still picture: a JPEG, a WebP without animation, a PNG without acTL."""
+    if data.startswith(b'\xff\xd8'):
+        return True
+    if data.startswith(b'RIFF'):
+        return b'ANIM' not in data and b'ANMF' not in data and not (data[12:16] == b'VP8X' and data[20] & 0x02)
+    if data.startswith(b'\x89PNG'):
+        return b'acTL' not in data
+    return False
+
+
+def raw(url, path, headers):
+    """Status of a GET to the window as another program would send it (urllib adds the Host header)."""
+    request = urllib.request.Request(url + path.lstrip('/'), headers=headers)
+    try:
+        with urllib.request.urlopen(request, timeout=5) as response:
+            return response.status
+    except urllib.error.HTTPError as error:
+        return error.code
+
+
 class Page:
+    """A tab of headless Chrome. `url` is a function giving the address to open each time: Corsu's address with a fresh
+    ticket, as Corsu itself opens its window (a ticket works once)."""
+
     def __init__(self, devtools, url, scheme):
         self.devtools = devtools
         self.target = devtools.call('Target.createTarget', {'url': 'about:blank'})['targetId']
@@ -242,8 +196,9 @@ class Page:
     def call(self, method, params=None):
         return self.devtools.call(method, params, session=self.session)
 
-    def scheme(self, value):
-        self.call('Emulation.setEmulatedMedia', {'features': [{'name': 'prefers-color-scheme', 'value': value}]})
+    def scheme(self, value, motion=''):
+        self.call('Emulation.setEmulatedMedia', {'features': [{'name': 'prefers-color-scheme', 'value': value},
+                                                              {'name': 'prefers-reduced-motion', 'value': motion}]})
 
     def run(self, expression):
         result = self.call('Runtime.evaluate', {'expression': expression, 'returnByValue': True, 'awaitPromise': True})
@@ -263,7 +218,7 @@ class Page:
         raise AssertionError(f'timed out waiting for {expression}')
 
     def open(self):
-        self.call('Page.navigate', {'url': self.url})
+        self.call('Page.navigate', {'url': self.url()})
         self.wait('document.readyState === "complete" && !!document.getElementById("ap-theme-dark")')
         self.wait('window.corsuAppearance && document.documentElement.dataset.palette')
         # The Appearance page shown, as a person opening it (a hidden page cannot take the focus).
@@ -314,15 +269,14 @@ def main(arguments):
         record = corsu.DATA / 'installation.json'
         record.write_text('{"files": {}, "components": ["vlc"]}', encoding='utf-8')
         record_hash = hashlib.sha256(record.read_bytes()).hexdigest()
-        port = [0]
-        server, real = serve(appearance, port)
-        url = f'http://127.0.0.1:{port[0]}/'
-        print('page:', 'src/app/index.html' if real else 'stand-in page (index.html has no Appearance section yet)')
+        server, app = serve()
+        url = f'http://127.0.0.1:{server.server_address[1]}/'
+        opening = lambda: url + '#t=' + app.ACCESS.ticket()
         pictures = temporary / 'pictures'
         pictures.mkdir()
         process, devtools = chrome(executable, temporary / 'profile')
         try:
-            page = Page(devtools, url, 'light')
+            page = Page(devtools, opening, 'light')
             page.call('Page.navigate', {'url': 'about:blank'})
             time.sleep(0.3)
             for name, size in (('sky.png', (1800, 1100, 'sky')), ('busy.png', (3200, 2000, 'busy'))):
@@ -330,9 +284,22 @@ def main(arguments):
             (pictures / 'fake.png').write_bytes(b'<!doctype html><script>alert(1)</script>')
             (pictures / 'notes.txt').write_text('not a picture', encoding='utf-8')
 
-            # Defaults, then plain light and dark.
+            # Opened as Corsu opens it: the ticket is exchanged for the key and leaves the address.
             page.open()
             html = 'document.documentElement'
+            check(page.run('corsuAccess.has()') and page.run('location.hash') == '' and
+                  page.run('sessionStorage.getItem("corsu-key")') == app.ACCESS.key,
+                  'the ticket gave the page its key, and is no longer in the address')
+            # Another program on the computer (another account on Windows or macOS) sends every header but the key.
+            for path in ('/api/state', '/appearance/settings', '/appearance/background'):
+                for key in (None, 'wrong-' + 'x' * 40):
+                    headers = {'X-Corsu': '1', 'Origin': url.rstrip('/'), **({'X-Corsu-Key': key} if key else {})}
+                    status = raw(url, path, headers)
+                    check(status == 403, f'{path} refused without the key ({"wrong key" if key else "no key"}): {status}')
+            check(raw(url, '/appearance/settings', {'X-Corsu': '1', 'X-Corsu-Key': app.ACCESS.key}) == 200,
+                  'and answered with it')
+
+            # Defaults, then plain light and dark.
             check(page.run(f'{html}.dataset.theme') == 'light' and page.run(f'{html}.dataset.palette') == 'maquis'
                   and page.run(f'{html}.dataset.density') == 'comfortable' and page.run(f'{html}.dataset.background') == 'none',
                   'defaults: system theme (light here), maquis, comfortable, plain background')
@@ -421,7 +388,25 @@ def main(arguments):
             check(len(stored) == 1 and appearance.load()['image']['width'] == 1800, 'replaced: only the new picture is kept, not upscaled')
             page.shot(output / 'light-image.png')
 
-            # Reload: everything comes back from the server (the local cache is cleared to prove it).
+            # A real reload (as F5 or the restart after an update): the key stays, nothing needs a new ticket.
+            page.run('location.reload()')
+            page.wait('document.readyState === "complete" && window.corsuAppearance && !!document.getElementById("ap-theme-dark")')
+            page.wait(f'{html}.style.getPropertyValue("--bg-image").startsWith(\'url("blob:\')')
+            check(page.run('corsuAccess.has()') and not page.run('!!document.querySelector("main .closed")'),
+                  'after location.reload(): the key is kept and the picture fetched with it')
+            page.run('(document.querySelector(\'[data-page="appearance"]\') || { click() {} }).click()')
+
+            # A page without key (an old tab, a bookmark): told to reopen Corsu, nothing personal shown.
+            stranger = Page(devtools, lambda: url, 'light')
+            stranger.call('Page.navigate', {'url': url})
+            stranger.wait('!!document.querySelector("main .closed")')
+            check(stranger.run('document.querySelector("main .closed").textContent').startswith('Cette page n\'a pas la clé de Corsu')
+                  and stranger.run(f'{html}.dataset.background') == 'none',
+                  'a page without key says so and shows no picture: '
+                  + repr(stranger.run('document.querySelector("main .closed").textContent')))
+            stranger.close()
+
+            # Reopened: everything comes back from the server (the local cache is cleared to prove it).
             page.run('localStorage.clear()')
             page.open()
             page.wait(f'{html}.style.getPropertyValue("--bg-image").startsWith(\'url("blob:\')')
@@ -439,12 +424,52 @@ def main(arguments):
             page.shot(output / 'narrow-dark-image.png')
             page.call('Emulation.setDeviceMetricsOverride', {'width': 1100, 'height': 1250, 'deviceScaleFactor': 1, 'mobile': False})
 
-            # The picture needs the X-Corsu header like every other route.
-            try:
-                urllib.request.urlopen(url + 'appearance/background', timeout=5)
-                check(False, 'picture refused without X-Corsu')
-            except urllib.error.HTTPError as error:
-                check(error.code == 403, f'picture refused without X-Corsu ({error.code})')
+            # The window redraws every 1.5 s: a focused slider being moved keeps its focus, its node and its value.
+            page.run('(() => { const dim = document.getElementById("ap-dim"); dim.focus(); dim.dataset.probe = "kept";'
+                     ' dim.value = 40; dim.dispatchEvent(new Event("input", {bubbles: true})); })()')
+            time.sleep(3.5)
+            check(page.run('document.activeElement && document.activeElement.id') == 'ap-dim'
+                  and page.run('document.getElementById("ap-dim").dataset.probe') == 'kept'
+                  and page.run('document.getElementById("ap-dim").value') == '40',
+                  'two refreshes later: focus, slider node and its value unchanged')
+            page.run('document.getElementById("ap-dim").blur()')
+
+            # Reduced motion: no transition or animation anywhere, the framing marker included.
+            page.scheme('light', 'reduce')
+            durations = page.run('(() => { const probe = document.createElement("span"); probe.className = "busy";'
+                                 ' document.body.append(probe); const all = [...document.querySelectorAll("body *")];'
+                                 ' const moving = all.filter(node => { const s = getComputedStyle(node);'
+                                 ' return s.transitionDuration.split(",").some(d => parseFloat(d) > 0)'
+                                 ' || (s.animationName !== "none" && parseFloat(s.animationDuration) > 0); })'
+                                 '.map(node => node.className || node.tagName); probe.remove(); return moving; })()')
+            check(durations == [], f'prefers-reduced-motion: nothing moves ({durations[:5]})')
+            page.scheme('light')
+
+            # Animated pictures (GIF, PNG, WebP) are kept as one still frame, re-encoded by the page.
+            frames = [base64.b64decode(page.run('(() => { const c = document.createElement("canvas"); c.width = 48; c.height = 32;'
+                                                f' const x = c.getContext("2d"); x.fillStyle = "{colour}"; x.fillRect(0, 0, 48, 32);'
+                                                ' return c.toDataURL("image/webp", 0.9).split(",")[1]; })()'))
+                      for colour in ('#c03030', '#3040c0')]
+            for name, data in (('animated.gif', gif_animated()), ('animated.png', png_animated()),
+                               ('animated.webp', webp_animated(frames, 48, 32))):
+                (pictures / name).write_bytes(data)
+                kept = sorted(path.name for path in (corsu.DATA / 'appearance').glob('background-*'))
+                page.run('document.getElementById("ap-status").textContent = ""')
+                page.files('#ap-file', [pictures / name])
+                page.wait('!document.getElementById("ap-framing").hidden || document.getElementById("ap-alert").textContent.length > 0', 30)
+                if not page.run('document.getElementById("ap-framing").hidden'):
+                    page.run('document.getElementById("ap-apply").click()')
+                    page.wait('document.getElementById("ap-framing").hidden && document.getElementById("ap-status").textContent.length > 0', 30)
+                    stored = list((corsu.DATA / 'appearance').glob('background-*'))
+                    data = stored[0].read_bytes() if len(stored) == 1 else b''
+                    check(len(stored) == 1 and still(data) and appearance.inspect(data),
+                          f'{name}: stored as one still picture ({stored[0].name if stored else None})')
+                else:
+                    message = page.run('document.getElementById("ap-alert").textContent')
+                    check(sorted(path.name for path in (corsu.DATA / 'appearance').glob('background-*')) == kept,
+                          f'{name}: refused by this browser, the stored picture unchanged ({message!r})')
+            check(page.run('getComputedStyle(document.body, "::before").animationName') in ('none', ''),
+                  'the background layer has no animation')
 
             # Reset: back to defaults, only DATA/appearance changed.
             page.run('document.getElementById("ap-reset").click()')
@@ -455,6 +480,20 @@ def main(arguments):
                   and not page.run(f'{html}.style.getPropertyValue("--accent-user")'), 'reset: defaults in the page')
             check(list((corsu.DATA / 'appearance').iterdir()) == [], 'reset: appearance files removed')
             check(hashlib.sha256(record.read_bytes()).hexdigest() == record_hash, 'reset: installation.json identical')
+
+            # A ticket read by someone else and used again: the key is replaced, so both pages are shut out.
+            ticket = app.ACCESS.ticket()
+            first = Page(devtools, lambda: url + '#t=' + ticket, 'light')
+            first.open()
+            before = app.ACCESS.key
+            second = Page(devtools, lambda: url + '#t=' + ticket, 'light')
+            second.call('Page.navigate', {'url': url + '#t=' + ticket})
+            second.wait('!!document.querySelector("main .closed")')
+            first.wait('!!document.querySelector("main .closed")')
+            check(app.ACCESS.key != before and raw(url, '/api/state', {'X-Corsu': '1', 'X-Corsu-Key': before}) == 403,
+                  'a ticket used twice replaces the key; both pages say to reopen Corsu')
+            first.close()
+            second.close()
             page.close()
         finally:
             process.terminate()

@@ -18,7 +18,7 @@
   const AA = 4.5;
 
   let settings = { ...DEFAULTS };
-  let imageUrl = null, imageVersion = null;   // the stored picture, fetched with the X-Corsu header
+  let imageUrl = null, imageVersion = null;   // the stored picture, fetched with the window's key
   let draft = null;                           // a picture being framed: {blob, url, width, height, x, y}
   let saveTimer = null, unsaved = false, confirmReset = false, busy = false;
   let adjusted = null;                        // {chosen, used} after the contrast check
@@ -51,7 +51,8 @@
   const lessTransparency = media("(prefers-reduced-transparency: reduce)");
 
   async function request(path, options = {}) {
-    const response = await fetch(path, { ...options, headers: { "X-Corsu": "1", ...(options.headers || {}) } });
+    await corsuAccess.ready;
+    const response = await fetch(path, { ...options, headers: corsuAccess.headers(options.headers) });
     let body = null;
     try { body = await response.json(); } catch (error) {}
     if (!response.ok) {
@@ -205,12 +206,13 @@
     }
   }
 
-  // The stored picture is fetched with the X-Corsu header (so allowed() applies to it too) and shown as a blob: URL.
+  // The stored picture is fetched with the window's key (so allowed() applies to it too) and shown as a blob: URL.
   async function loadImage() {
     const version = settings.image && settings.image.version;
     if (!version || version === imageVersion) return;
     try {
-      const response = await fetch("/appearance/background?v=" + version, { headers: { "X-Corsu": "1" } });
+      await corsuAccess.ready;
+      const response = await fetch("/appearance/background?v=" + version, { headers: corsuAccess.headers() });
       if (!response.ok) throw new Error(String(response.status));
       const blob = await response.blob();
       await createImageBitmap(blob).then(bitmap => bitmap.close && bitmap.close());
@@ -667,7 +669,7 @@
     if (section && (!refs || !section.contains(refs.status))) render();
   });
   window.addEventListener("pagehide", () => {
-    if (unsaved) fetch("/api/appearance", { method: "POST", keepalive: true, headers: { "X-Corsu": "1", "Content-Type": "application/json" }, body: changes() });
+    if (unsaved) fetch("/api/appearance", { method: "POST", keepalive: true, headers: corsuAccess.headers({ "Content-Type": "application/json" }), body: changes() });
   });
   const start = () => { render(); load(); };
   if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", start);

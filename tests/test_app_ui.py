@@ -106,6 +106,8 @@ const document = {
   dispatchEvent: event => { events.push({ type: event.type, detail: event.detail }); return true; }, addEventListener() {}, readyState: "loading",
 };
 const context = vm.createContext({ document, localStorage: { getItem: () => null, setItem() {} }, fetch: () => new Promise(() => {}),
+  sessionStorage: { getItem: () => null, setItem() {} }, location: { hash: "", pathname: "/", search: "" }, history: { replaceState() {} },
+  URLSearchParams,
   setInterval() {}, setTimeout() {}, clearTimeout() {}, alert() {}, window: { addEventListener() {}, matchMedia: () => ({ matches: false, addEventListener() {} }) }, navigator: {}, console, Intl, Date, Math, Number, JSON, Object, Array, Map, Set, String, Boolean, Promise,
   CustomEvent, events });
 vm.runInContext(code, context);
