@@ -79,20 +79,22 @@ Corsu pour ordinateur n'est pas nécessaire : le dictionnaire se télécharge se
 
 **Guides pas à pas : [Android](docs/fr/telephone/android.md) · [iPhone](docs/fr/telephone/iphone.md).**
 
-Dictionnaire publié (le même fichier pour Android et iPhone) :
-[corsu-keyboard.kmp](https://github.com/Platykalt/corsu/releases/latest/download/corsu-keyboard.kmp), 19 805
-mots tirés du lexique de Corsu (compte fait dans le paquet publié).
-<!-- corsu:phone-variants:fr Ne lister ci-dessus que les fichiers joints à la dernière version publiée ; à la
-     publication, y déplacer ceux de la phrase suivante, sans écrire « expérimental » à la place des limites. -->
-Dans la prochaine version (pas encore publiée) : des préférences régionales expérimentales, Cismuntincu et
-Pumuntincu, qui favorisent les formes d'une région.
+Dictionnaire publié (le même fichier pour Android et iPhone, paquet 1.1 depuis Corsu 0.26.0) :
+[corsu-keyboard.kmp](https://github.com/Platykalt/corsu/releases/latest/download/corsu-keyboard.kmp), 13 197
+mots (compte fait dans le paquet publié). Deux préférences régionales **expérimentales**, même vocabulaire avec les
+formes d'une région en tête (361 mots pondérés autrement, couverture partielle) :
+[corsu-keyboard-cismuntincu.kmp](https://github.com/Platykalt/corsu/releases/latest/download/corsu-keyboard-cismuntincu.kmp)
+et [corsu-keyboard-pumuntincu.kmp](https://github.com/Platykalt/corsu/releases/latest/download/corsu-keyboard-pumuntincu.kmp).
+<!-- corsu:phone-variants:fr Ne lister ci-dessus que les fichiers joints à la dernière version publiée. -->
 
 **Limites.** Ce que fait le dictionnaire dépend de la version de Keyman : Keyman 18, la version stable, n'a pas de
 correction automatique ; les corrections sont proposées dans le bandeau de suggestions et ne s'appliquent que si on
 les touche.
-<!-- corsu:phone-casing:fr À la publication de la version qui garde la casse, dire que c'est corrigé. -->
-Avec le dictionnaire publié, une suggestion perd la majuscule tapée (« Ecc » peut devenir « eccu ») ; c'est corrigé
-dans la prochaine version. Ce n'est ni un traducteur automatique ni un correcteur de grammaire : Corsu ne traduit pas
+<!-- corsu:phone-casing:fr La casse tapée est gardée depuis le paquet 1.1 (Corsu 0.26.0). -->
+Depuis le paquet 1.1, une suggestion garde la majuscule tapée ; avec l'ancien paquet 1.0, « Ecc » pouvait devenir
+« eccu » : mettez-le à jour. Sous Android, une suggestion choisie au milieu d'un mot remplace le mot entier ; sur
+iPhone, Keyman n'en remplace que le début. Vérifié dans le moteur de Keyman et sur émulateur Android, pas sur un vrai
+téléphone. Ce n'est ni un traducteur automatique ni un correcteur de grammaire : Corsu ne traduit pas
 les applications du téléphone. Certaines existent déjà en corse (Firefox, VLC, Thunderbird…), voir les guides.
 
 ### Minecraft en corse
@@ -293,19 +295,20 @@ dictionary is downloaded on its own, on the phone.
 
 **Step-by-step guides: [Android](docs/en/phone/android.md) · [iPhone](docs/en/phone/iphone.md).**
 
-Published dictionary (the same file for Android and iPhone):
-[corsu-keyboard.kmp](https://github.com/Platykalt/corsu/releases/latest/download/corsu-keyboard.kmp), 19,805
-words taken from Corsu's lexicon (counted in the published package).
-<!-- corsu:phone-variants:en List above only the files attached to the latest published release; at release time,
-     move there those of the next sentence, keeping the word "experimental" with them. -->
-In the next version (not published yet): experimental regional preferences, Cismuntincu and Pumuntincu, which favour
-one region's forms.
+Published dictionary (the same file for Android and iPhone, package 1.1 since Corsu 0.26.0):
+[corsu-keyboard.kmp](https://github.com/Platykalt/corsu/releases/latest/download/corsu-keyboard.kmp), 13,197
+words (counted in the published package). Two **experimental** regional preferences, same vocabulary with one
+region's forms first (361 words weighted differently, partial coverage):
+[corsu-keyboard-cismuntincu.kmp](https://github.com/Platykalt/corsu/releases/latest/download/corsu-keyboard-cismuntincu.kmp)
+and [corsu-keyboard-pumuntincu.kmp](https://github.com/Platykalt/corsu/releases/latest/download/corsu-keyboard-pumuntincu.kmp).
+<!-- corsu:phone-variants:en List above only the files attached to the latest published release. -->
 
 **Limits.** What the dictionary does depends on the Keyman version: Keyman 18, the stable version, has no automatic
 correction; corrections are offered in the suggestion banner and only apply when you tap them.
-<!-- corsu:phone-casing:en When the release that keeps capitals is published, say it is fixed. -->
-With the published dictionary, a suggestion loses the capital you typed ("Ecc" can become "eccu"); this is fixed in
-the next version. It is neither an automatic translator nor a grammar checker: Corsu does not translate phone apps.
+<!-- corsu:phone-casing:en The case typed is kept since package 1.1 (Corsu 0.26.0). -->
+Since package 1.1 a suggestion keeps the capital you typed; with the old 1.0 package "Ecc" could become "eccu":
+update it. On Android a suggestion chosen inside a word replaces the whole word; on iPhone Keyman replaces only its
+beginning. Checked in Keyman's engine and on an Android emulator, not on a real phone. It is neither an automatic translator nor a grammar checker: Corsu does not translate phone apps.
 Some already exist in Corsican (Firefox, VLC, Thunderbird…), see the guides.
 
 ### Minecraft in Corsican
