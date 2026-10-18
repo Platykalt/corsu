@@ -1,6 +1,6 @@
 word	weight	variant	source	license	status
-di	715754	shared	tatoeba	CC-BY-2.0-FR	attested
-u	495280	shared	wiktionary	CC-BY-SA-4.0	attested
+di	715753	shared	tatoeba	CC-BY-2.0-FR	attested
+u	495281	shared	wiktionary	CC-BY-SA-4.0	attested
 a	403577	shared	wiktionary	CC-BY-SA-4.0	attested
 in	273519	shared	tatoeba	CC-BY-2.0-FR	attested
 à	269063	shared	wiktionary	CC-BY-SA-4.0	attested
@@ -2300,7 +2300,6 @@ l'estremità	348	shared	vikipedia	CC-BY-SA-4.0	attested
 l'unicu	348	shared	vikipedia	CC-BY-SA-4.0	attested
 pressu	348	shared	vikipedia	CC-BY-SA-4.0	attested
 puderia	348	shared	vikipedia	CC-BY-SA-4.0	attested
-squassà	348	shared	corsu-lexicon	corsu-lexicon-mixed	corsu-lexicon
 Boziu	347	shared	wikidata:Q266850	CC0-1.0	attested
 Cinarca	347	shared	wikidata:Q18610994	CC0-1.0	attested
 Rustinu	347	shared	wikidata:Q271095	CC0-1.0	attested
@@ -2317,6 +2316,7 @@ germanicu	347	shared	vikipedia	CC-BY-SA-4.0	attested
 magna	347	shared	wiktionary	CC-BY-SA-4.0	attested
 principu	347	shared	vikipedia	CC-BY-SA-4.0	attested
 sariani	347	shared	wiktionary	CC-BY-SA-4.0	attested
+squassà	347	shared	corsu-lexicon	corsu-lexicon-mixed	corsu-lexicon
 strumenti	347	shared	vikipedia	CC-BY-SA-4.0	attested
 ughjettu	347	shared	vikipedia	CC-BY-SA-4.0	attested
 infurmazioni	346	shared	vikipedia	CC-BY-SA-4.0	attested
@@ -2327,7 +2327,6 @@ cresce	343	shared	vikipedia	CC-BY-SA-4.0	attested
 passendu	343	shared	vikipedia	CC-BY-SA-4.0	attested
 pezzi	343	shared	vikipedia	CC-BY-SA-4.0	attested
 dedicatu	341	shared	vikipedia	CC-BY-SA-4.0	attested
-dispusitivu	341	shared	vikipedia	CC-BY-SA-4.0	attested
 età	341	shared	vikipedia	CC-BY-SA-4.0	attested
 l'architettura	341	shared	vikipedia	CC-BY-SA-4.0	attested
 ottenutu	341	shared	wiktionary	CC-BY-SA-4.0	attested
@@ -2338,6 +2337,7 @@ russu	341	shared	wiktionary	CC-BY-SA-4.0	attested
 antiche	340	shared	wiktionary	CC-BY-SA-4.0	attested
 benchì	340	shared	vikipedia	CC-BY-SA-4.0	attested
 caratteri	340	shared	vikipedia	CC-BY-SA-4.0	attested
+dispusitivu	340	shared	vikipedia	CC-BY-SA-4.0	attested
 fundamentale	340	shared	vikipedia	CC-BY-SA-4.0	attested
 ghjacciu	340	shared	wiktionary	CC-BY-SA-4.0	attested
 ghjurnale	340	shared	vikipedia	CC-BY-SA-4.0	attested
@@ -3495,7 +3495,6 @@ mobili	155	shared	vikipedia	CC-BY-SA-4.0	attested
 timpurali	155	shared	vikipedia	CC-BY-SA-4.0	attested
 vechje	155	shared	vikipedia	CC-BY-SA-4.0	attested
 assulutu	154	shared	vikipedia	CC-BY-SA-4.0	attested
-dispusitivi	154	shared	vikipedia	CC-BY-SA-4.0	attested
 navigatori	154	shared	vikipedia	CC-BY-SA-4.0	attested
 permanente	154	shared	vikipedia	CC-BY-SA-4.0	attested
 quessi	154	shared	vikipedia	CC-BY-SA-4.0	attested
@@ -3505,6 +3504,7 @@ attaccatu	153	shared	vikipedia	CC-BY-SA-4.0	attested
 candidati	153	shared	vikipedia	CC-BY-SA-4.0	attested
 cuntinua	153	shared	vikipedia	CC-BY-SA-4.0	attested
 deriva	153	shared	vikipedia	CC-BY-SA-4.0	attested
+dispusitivi	153	shared	vikipedia	CC-BY-SA-4.0	attested
 estremu	153	shared	vikipedia	CC-BY-SA-4.0	attested
 perse	153	shared	vikipedia	CC-BY-SA-4.0	attested
 prupurzione	153	shared	vikipedia	CC-BY-SA-4.0	attested
@@ -3948,6 +3948,7 @@ seguità	116	shared	vikipedia	CC-BY-SA-4.0	attested
 specifichi	116	shared	vikipedia	CC-BY-SA-4.0	attested
 anonima	115	shared	vikipedia	CC-BY-SA-4.0	attested
 anziane	115	shared	vikipedia	CC-BY-SA-4.0	attested
+apparechju	115	shared	corsu-lexicon	corsu-lexicon-mixed	corsu-lexicon
 aspettà	115	shared	vikipedia	CC-BY-SA-4.0	attested
 aumentu	115	shared	vikipedia	CC-BY-SA-4.0	attested
 camere	115	shared	vikipedia	CC-BY-SA-4.0	attested
@@ -3973,7 +3974,6 @@ tassi	115	shared	wiktionary	CC-BY-SA-4.0	attested
 tuccà	115	shared	vikipedia	CC-BY-SA-4.0	attested
 utilizatori	115	shared	vikipedia	CC-BY-SA-4.0	attested
 vendita	115	shared	vikipedia	CC-BY-SA-4.0	attested
-apparechju	114	shared	corsu-lexicon	corsu-lexicon-mixed	corsu-lexicon
 approcciu	114	shared	vikipedia	CC-BY-SA-4.0	attested
 attaccata	114	shared	vikipedia	CC-BY-SA-4.0	attested
 attacchi	114	shared	vikipedia	CC-BY-SA-4.0	attested
@@ -4630,7 +4630,6 @@ quota	80	shared	vikipedia	CC-BY-SA-4.0	attested
 referenza	80	shared	vikipedia	CC-BY-SA-4.0	attested
 riservata	80	shared	vikipedia	CC-BY-SA-4.0	attested
 spettrale	80	shared	vikipedia	CC-BY-SA-4.0	attested
-spustà	80	shared	vikipedia	CC-BY-SA-4.0	attested
 ungherese	80	shared	vikipedia	CC-BY-SA-4.0	attested
 abbunamentu	79	shared	corsu-lexicon	corsu-lexicon-mixed	corsu-lexicon
 alternativu	79	shared	vikipedia	CC-BY-SA-4.0	attested
@@ -4664,6 +4663,7 @@ migliuramentu	78	shared	vikipedia	CC-BY-SA-4.0	attested
 mischju	78	shared	vikipedia	CC-BY-SA-4.0	attested
 piantatu	78	shared	vikipedia	CC-BY-SA-4.0	attested
 sperimentale	78	shared	vikipedia	CC-BY-SA-4.0	attested
+spustà	78	shared	vikipedia	CC-BY-SA-4.0	attested
 versioni	78	shared	vikipedia	CC-BY-SA-4.0	attested
 virtuale	78	shared	vikipedia	CC-BY-SA-4.0	attested
 aa	77	shared	vikipedia	CC-BY-SA-4.0	attested
@@ -4778,6 +4778,7 @@ Purtichju	75	shared	wikidata:Q65433406	CC0-1.0	attested
 Vallecalle	75	shared	wikidata:Q1240397	CC0-1.0	attested
 avanzà	75	shared	vikipedia	CC-BY-SA-4.0	attested
 cantava	75	shared	wiktionary	CC-BY-SA-4.0	attested
+dispiazzà	75	shared	corsu-lexicon	corsu-lexicon-mixed	corsu-lexicon
 frase	75	shared	vikipedia	CC-BY-SA-4.0	attested
 indicati	75	shared	vikipedia	CC-BY-SA-4.0	attested
 l'aghjunta	75	shared	vikipedia	CC-BY-SA-4.0	attested
@@ -4790,7 +4791,6 @@ seguitanu	75	shared	vikipedia	CC-BY-SA-4.0	attested
 allargata	74	shared	vikipedia	CC-BY-SA-4.0	attested
 alternativa	74	shared	vikipedia	CC-BY-SA-4.0	attested
 attributi	74	shared	vikipedia	CC-BY-SA-4.0	attested
-dispiazzà	74	shared	corsu-lexicon	corsu-lexicon-mixed	corsu-lexicon
 insù	74	shared	vikipedia	CC-BY-SA-4.0	attested
 l'oggettu	74	shared	corsu-lexicon	corsu-lexicon-mixed	corsu-lexicon
 signale	74	shared	vikipedia	CC-BY-SA-4.0	attested
@@ -6036,6 +6036,7 @@ schemi	43	shared	vikipedia	CC-BY-SA-4.0	attested
 sfondu	43	shared	corsu-lexicon	corsu-lexicon-mixed	corsu-lexicon
 zeri	43	shared	vikipedia	CC-BY-SA-4.0	attested
 adattamentu	42	shared	vikipedia	CC-BY-SA-4.0	attested
+apparechji	42	shared	corsu-lexicon	corsu-lexicon-mixed	corsu-lexicon
 bluccata	42	shared	corsu-lexicon	corsu-lexicon-mixed	corsu-lexicon
 calculatu	42	shared	vikipedia	CC-BY-SA-4.0	attested
 cascu	42	shared	vikipedia	CC-BY-SA-4.0	attested
@@ -6055,7 +6056,6 @@ scenarii	42	shared	vikipedia	CC-BY-SA-4.0	attested
 scuri	42	shared	vikipedia	CC-BY-SA-4.0	attested
 spegne	42	shared	vikipedia	CC-BY-SA-4.0	attested
 verticalmente	42	shared	apertium	GPL-3.0	attested
-apparechji	41	shared	corsu-lexicon	corsu-lexicon-mixed	corsu-lexicon
 appiecà	41	shared	corsu-lexicon	corsu-lexicon-mixed	corsu-lexicon
 autorizazione	41	shared	vikipedia	CC-BY-SA-4.0	attested
 bluccati	41	shared	corsu-lexicon	corsu-lexicon-mixed	corsu-lexicon
@@ -6866,6 +6866,7 @@ alfabeticu	27	shared	apertium	GPL-3.0	attested
 allucati	27	shared	corsu-lexicon	corsu-lexicon-mixed	corsu-lexicon
 alternativi	27	shared	corsu-lexicon	corsu-lexicon-mixed	corsu-lexicon
 aprite	27	shared	corsu-lexicon	corsu-lexicon-mixed	corsu-lexicon
+attualizà	27	shared	corsu-lexicon	corsu-lexicon-mixed	corsu-lexicon
 cattiva	27	shared	corsu-lexicon	corsu-lexicon-mixed	corsu-lexicon
 cuncentrazione	27	shared	apertium	GPL-3.0	attested
 curretti	27	shared	corsu-lexicon	corsu-lexicon-mixed	corsu-lexicon
@@ -6899,7 +6900,6 @@ virtuali	27	shared	corsu-lexicon	corsu-lexicon-mixed	corsu-lexicon
 visibule	27	shared	corsu-lexicon	corsu-lexicon-mixed	corsu-lexicon
 abbianu	26	shared	wiktionary	CC-BY-SA-4.0	attested
 assicurata	26	shared	corsu-lexicon	corsu-lexicon-mixed	corsu-lexicon
-attualizà	26	shared	corsu-lexicon	corsu-lexicon-mixed	corsu-lexicon
 avvià	26	shared	corsu-lexicon	corsu-lexicon-mixed	corsu-lexicon
 bug	26	shared	corsu-lexicon	corsu-lexicon-mixed	corsu-lexicon
 cambiati	26	shared	corsu-lexicon	corsu-lexicon-mixed	corsu-lexicon
@@ -8163,7 +8163,6 @@ d'affissà	15	shared	corsu-lexicon	corsu-lexicon-mixed	corsu-lexicon
 d'eseguisce	15	shared	corsu-lexicon	corsu-lexicon-mixed	corsu-lexicon
 detagliu	15	shared	apertium	GPL-3.0	attested
 dipendenze	15	shared	corsu-lexicon	corsu-lexicon-mixed	corsu-lexicon
-duplicà	15	shared	corsu-lexicon	corsu-lexicon-mixed	corsu-lexicon
 finimu	15	shared	cunghjugarellu	attestation-only	attested
 finiscu	15	shared	cunghjugarellu	attestation-only	attested
 ghjurnalizazione	15	shared	corsu-lexicon	corsu-lexicon-mixed	corsu-lexicon
@@ -8215,6 +8214,7 @@ cupiata	14	shared	corsu-lexicon	corsu-lexicon-mixed	corsu-lexicon
 d'identificazione	14	shared	corsu-lexicon	corsu-lexicon-mixed	corsu-lexicon
 d'ospite	14	shared	corsu-lexicon	corsu-lexicon-mixed	corsu-lexicon
 diagnostichi	14	shared	corsu-lexicon	corsu-lexicon-mixed	corsu-lexicon
+duplicà	14	shared	corsu-lexicon	corsu-lexicon-mixed	corsu-lexicon
 estrazzione	14	shared	corsu-lexicon	corsu-lexicon-mixed	corsu-lexicon
 furnite	14	shared	corsu-lexicon	corsu-lexicon-mixed	corsu-lexicon
 gestite	14	shared	corsu-lexicon	corsu-lexicon-mixed	corsu-lexicon
@@ -8438,6 +8438,7 @@ sgradatu	11	shared	corsu-lexicon	corsu-lexicon-mixed	corsu-lexicon
 specificati	11	shared	corsu-lexicon	corsu-lexicon-mixed	corsu-lexicon
 spectacle	11	shared	corsu-lexicon	corsu-lexicon-mixed	corsu-lexicon
 spessore	11	shared	corsu-lexicon	corsu-lexicon-mixed	corsu-lexicon
+st'apparechju	11	shared	corsu-lexicon	corsu-lexicon-mixed	corsu-lexicon
 suggeriti	11	shared	corsu-lexicon	corsu-lexicon-mixed	corsu-lexicon
 tagliatura	11	shared	corsu-lexicon	corsu-lexicon-mixed	corsu-lexicon
 tempesta	11	shared	corsu-lexicon	corsu-lexicon-mixed	corsu-lexicon
@@ -8534,6 +8535,7 @@ limitazione	10	shared	corsu-lexicon	corsu-lexicon-mixed	corsu-lexicon
 malfurmatu	10	shared	corsu-lexicon	corsu-lexicon-mixed	corsu-lexicon
 mandallu	10	shared	corsu-lexicon	corsu-lexicon-mixed	corsu-lexicon
 manighjà	10	shared	corsu-lexicon	corsu-lexicon-mixed	corsu-lexicon
+messaghjeria	10	shared	corsu-lexicon	corsu-lexicon-mixed	corsu-lexicon
 migliurati	10	shared	corsu-lexicon	corsu-lexicon-mixed	corsu-lexicon
 minuscula	10	shared	corsu-lexicon	corsu-lexicon-mixed	corsu-lexicon
 muderate	10	shared	corsu-lexicon	corsu-lexicon-mixed	corsu-lexicon
@@ -8577,7 +8579,6 @@ sincrona	10	shared	corsu-lexicon	corsu-lexicon-mixed	corsu-lexicon
 spec	10	shared	corsu-lexicon	corsu-lexicon-mixed	corsu-lexicon
 specchiu	10	shared	corsu-lexicon	corsu-lexicon-mixed	corsu-lexicon
 spuntà	10	shared	corsu-lexicon	corsu-lexicon-mixed	corsu-lexicon
-st'apparechju	10	shared	corsu-lexicon	corsu-lexicon-mixed	corsu-lexicon
 st'elementi	10	shared	corsu-lexicon	corsu-lexicon-mixed	corsu-lexicon
 st'indirizzu	10	shared	corsu-lexicon	corsu-lexicon-mixed	corsu-lexicon
 st'operazione	10	shared	corsu-lexicon	corsu-lexicon-mixed	corsu-lexicon
@@ -8797,7 +8798,6 @@ macchje	9	shared	corsu-lexicon	corsu-lexicon-mixed	corsu-lexicon
 machina	9	shared	corsu-lexicon	corsu-lexicon-mixed	corsu-lexicon
 mantenidore	9	shared	corsu-lexicon	corsu-lexicon-mixed	corsu-lexicon
 maps	9	shared	corsu-lexicon	corsu-lexicon-mixed	corsu-lexicon
-messaghjeria	9	shared	corsu-lexicon	corsu-lexicon-mixed	corsu-lexicon
 micrometru	9	shared	corsu-lexicon	corsu-lexicon-mixed	corsu-lexicon
 micru	9	shared	corsu-lexicon	corsu-lexicon-mixed	corsu-lexicon
 migratu	9	shared	corsu-lexicon	corsu-lexicon-mixed	corsu-lexicon
@@ -9482,6 +9482,7 @@ d'entrate	5	shared	corsu-lexicon	corsu-lexicon-mixed	corsu-lexicon
 d'estrae	5	shared	corsu-lexicon	corsu-lexicon-mixed	corsu-lexicon
 d'ingrandamentu	5	shared	corsu-lexicon	corsu-lexicon-mixed	corsu-lexicon
 d'iniziu	5	shared	corsu-lexicon	corsu-lexicon-mixed	corsu-lexicon
+detagliata	5	shared	corsu-lexicon	corsu-lexicon-mixed	corsu-lexicon
 dicci	5	shared	corsu-lexicon	corsu-lexicon-mixed	corsu-lexicon
 duppiu	5	shared	corsu-lexicon	corsu-lexicon-mixed	corsu-lexicon
 elencati	5	shared	corsu-lexicon	corsu-lexicon-mixed	corsu-lexicon
@@ -9521,7 +9522,6 @@ reflog	5	shared	corsu-lexicon	corsu-lexicon-mixed	corsu-lexicon
 revisioni	5	shared	corsu-lexicon	corsu-lexicon-mixed	corsu-lexicon
 ridirezzione	5	shared	corsu-lexicon	corsu-lexicon-mixed	corsu-lexicon
 righjittata	5	shared	corsu-lexicon	corsu-lexicon-mixed	corsu-lexicon
-rinfrescà	5	shared	corsu-lexicon	corsu-lexicon-mixed	corsu-lexicon
 robot	5	shared	corsu-lexicon	corsu-lexicon-mixed	corsu-lexicon
 s'applicanu	5	shared	corsu-lexicon	corsu-lexicon-mixed	corsu-lexicon
 salvaguardie	5	shared	corsu-lexicon	corsu-lexicon-mixed	corsu-lexicon
@@ -9603,13 +9603,13 @@ d'òspite	4	shared	corsu-lexicon	corsu-lexicon-mixed	corsu-lexicon
 daemon	4	shared	corsu-lexicon	corsu-lexicon-mixed	corsu-lexicon
 debordu	4	shared	corsu-lexicon	corsu-lexicon-mixed	corsu-lexicon
 dereference	4	shared	corsu-lexicon	corsu-lexicon-mixed	corsu-lexicon
-detagliata	4	shared	corsu-lexicon	corsu-lexicon-mixed	corsu-lexicon
 detagliatu	4	shared	corsu-lexicon	corsu-lexicon-mixed	corsu-lexicon
 dirs	4	shared	corsu-lexicon	corsu-lexicon-mixed	corsu-lexicon
 disattiverà	4	shared	corsu-lexicon	corsu-lexicon-mixed	corsu-lexicon
 discrivite	4	shared	corsu-lexicon	corsu-lexicon-mixed	corsu-lexicon
 disfà	4	shared	corsu-lexicon	corsu-lexicon-mixed	corsu-lexicon
 dumanderà	4	shared	corsu-lexicon	corsu-lexicon-mixed	corsu-lexicon
+duppià	4	shared	corsu-lexicon	corsu-lexicon-mixed	corsu-lexicon
 duvereste	4	shared	corsu-lexicon	corsu-lexicon-mixed	corsu-lexicon
 emulata	4	shared	corsu-lexicon	corsu-lexicon-mixed	corsu-lexicon
 entrante	4	shared	corsu-lexicon	corsu-lexicon-mixed	corsu-lexicon
@@ -9684,6 +9684,7 @@ ribasà	4	shared	corsu-lexicon	corsu-lexicon-mixed	corsu-lexicon
 ricaricà	4	shared	corsu-lexicon	corsu-lexicon-mixed	corsu-lexicon
 ricursiva	4	shared	corsu-lexicon	corsu-lexicon-mixed	corsu-lexicon
 ridefinizione	4	shared	corsu-lexicon	corsu-lexicon-mixed	corsu-lexicon
+rinfrescà	4	shared	corsu-lexicon	corsu-lexicon-mixed	corsu-lexicon
 rinnovi	4	shared	corsu-lexicon	corsu-lexicon-mixed	corsu-lexicon
 s'affissanu	4	shared	corsu-lexicon	corsu-lexicon-mixed	corsu-lexicon
 sbloccu	4	shared	corsu-lexicon	corsu-lexicon-mixed	corsu-lexicon
@@ -9816,7 +9817,6 @@ docs	3	shared	corsu-lexicon	corsu-lexicon-mixed	corsu-lexicon
 duplicatu	3	shared	corsu-lexicon	corsu-lexicon-mixed	corsu-lexicon
 duppiate	3	shared	corsu-lexicon	corsu-lexicon-mixed	corsu-lexicon
 duppioni	3	shared	corsu-lexicon	corsu-lexicon-mixed	corsu-lexicon
-duppià	3	shared	corsu-lexicon	corsu-lexicon-mixed	corsu-lexicon
 emulatu	3	shared	corsu-lexicon	corsu-lexicon-mixed	corsu-lexicon
 emulà	3	shared	corsu-lexicon	corsu-lexicon-mixed	corsu-lexicon
 endian	3	shared	corsu-lexicon	corsu-lexicon-mixed	corsu-lexicon
@@ -11401,6 +11401,7 @@ dispatcher	1	shared	corsu-lexicon	corsu-lexicon-mixed	corsu-lexicon
 dispiazzallu	1	shared	corsu-lexicon	corsu-lexicon-mixed	corsu-lexicon
 dispiazzendu	1	shared	corsu-lexicon	corsu-lexicon-mixed	corsu-lexicon
 dispiazzi	1	shared	corsu-lexicon	corsu-lexicon-mixed	corsu-lexicon
+dispirlà	1	shared	corsu-lexicon	corsu-lexicon-mixed	corsu-lexicon
 dispun	1	shared	corsu-lexicon	corsu-lexicon-mixed	corsu-lexicon
 disselezziunate	1	shared	corsu-lexicon	corsu-lexicon-mixed	corsu-lexicon
 distrazzioni	1	shared	corsu-lexicon	corsu-lexicon-mixed	corsu-lexicon
@@ -12899,6 +12900,7 @@ spiegamentu	1	shared	corsu-lexicon	corsu-lexicon-mixed	corsu-lexicon
 spiegazioni	1	shared	corsu-lexicon	corsu-lexicon-mixed	corsu-lexicon
 spinghjendu	1	shared	corsu-lexicon	corsu-lexicon-mixed	corsu-lexicon
 spirlata	1	shared	corsu-lexicon	corsu-lexicon-mixed	corsu-lexicon
+spirlà	1	shared	corsu-lexicon	corsu-lexicon-mixed	corsu-lexicon
 spiunà	1	shared	corsu-lexicon	corsu-lexicon-mixed	corsu-lexicon
 spline	1	shared	corsu-lexicon	corsu-lexicon-mixed	corsu-lexicon
 spunsurizati	1	shared	corsu-lexicon	corsu-lexicon-mixed	corsu-lexicon

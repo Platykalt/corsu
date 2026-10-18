@@ -1,6 +1,6 @@
 # Corsu: Corsican words and their weight, built by tools/build_keyboard.py
-di	715754
-u	495280
+di	715753
+u	495281
 a	403577
 in	273519
 à	269063
@@ -2300,7 +2300,6 @@ l'estremità	348
 l'unicu	348
 pressu	348
 puderia	348
-squassà	348
 Boziu	347
 Cinarca	347
 Rustinu	347
@@ -2317,6 +2316,7 @@ germanicu	347
 magna	347
 principu	347
 sariani	347
+squassà	347
 strumenti	347
 ughjettu	347
 infurmazioni	346
@@ -2327,7 +2327,6 @@ cresce	343
 passendu	343
 pezzi	343
 dedicatu	341
-dispusitivu	341
 età	341
 l'architettura	341
 ottenutu	341
@@ -2338,6 +2337,7 @@ russu	341
 antiche	340
 benchì	340
 caratteri	340
+dispusitivu	340
 fundamentale	340
 ghjacciu	340
 ghjurnale	340
@@ -3495,7 +3495,6 @@ mobili	155
 timpurali	155
 vechje	155
 assulutu	154
-dispusitivi	154
 navigatori	154
 permanente	154
 quessi	154
@@ -3505,6 +3504,7 @@ attaccatu	153
 candidati	153
 cuntinua	153
 deriva	153
+dispusitivi	153
 estremu	153
 perse	153
 prupurzione	153
@@ -3948,6 +3948,7 @@ seguità	116
 specifichi	116
 anonima	115
 anziane	115
+apparechju	115
 aspettà	115
 aumentu	115
 camere	115
@@ -3973,7 +3974,6 @@ tassi	115
 tuccà	115
 utilizatori	115
 vendita	115
-apparechju	114
 approcciu	114
 attaccata	114
 attacchi	114
@@ -4630,7 +4630,6 @@ quota	80
 referenza	80
 riservata	80
 spettrale	80
-spustà	80
 ungherese	80
 abbunamentu	79
 alternativu	79
@@ -4664,6 +4663,7 @@ migliuramentu	78
 mischju	78
 piantatu	78
 sperimentale	78
+spustà	78
 versioni	78
 virtuale	78
 aa	77
@@ -4778,6 +4778,7 @@ Purtichju	75
 Vallecalle	75
 avanzà	75
 cantava	75
+dispiazzà	75
 frase	75
 indicati	75
 l'aghjunta	75
@@ -4790,7 +4791,6 @@ seguitanu	75
 allargata	74
 alternativa	74
 attributi	74
-dispiazzà	74
 insù	74
 l'oggettu	74
 signale	74
@@ -6036,6 +6036,7 @@ schemi	43
 sfondu	43
 zeri	43
 adattamentu	42
+apparechji	42
 bluccata	42
 calculatu	42
 cascu	42
@@ -6055,7 +6056,6 @@ scenarii	42
 scuri	42
 spegne	42
 verticalmente	42
-apparechji	41
 appiecà	41
 autorizazione	41
 bluccati	41
@@ -6866,6 +6866,7 @@ alfabeticu	27
 allucati	27
 alternativi	27
 aprite	27
+attualizà	27
 cattiva	27
 cuncentrazione	27
 curretti	27
@@ -6899,7 +6900,6 @@ virtuali	27
 visibule	27
 abbianu	26
 assicurata	26
-attualizà	26
 avvià	26
 bug	26
 cambiati	26
@@ -8163,7 +8163,6 @@ d'affissà	15
 d'eseguisce	15
 detagliu	15
 dipendenze	15
-duplicà	15
 finimu	15
 finiscu	15
 ghjurnalizazione	15
@@ -8215,6 +8214,7 @@ cupiata	14
 d'identificazione	14
 d'ospite	14
 diagnostichi	14
+duplicà	14
 estrazzione	14
 furnite	14
 gestite	14
@@ -8438,6 +8438,7 @@ sgradatu	11
 specificati	11
 spectacle	11
 spessore	11
+st'apparechju	11
 suggeriti	11
 tagliatura	11
 tempesta	11
@@ -8534,6 +8535,7 @@ limitazione	10
 malfurmatu	10
 mandallu	10
 manighjà	10
+messaghjeria	10
 migliurati	10
 minuscula	10
 muderate	10
@@ -8577,7 +8579,6 @@ sincrona	10
 spec	10
 specchiu	10
 spuntà	10
-st'apparechju	10
 st'elementi	10
 st'indirizzu	10
 st'operazione	10
@@ -8797,7 +8798,6 @@ macchje	9
 machina	9
 mantenidore	9
 maps	9
-messaghjeria	9
 micrometru	9
 micru	9
 migratu	9
@@ -9482,6 +9482,7 @@ d'entrate	5
 d'estrae	5
 d'ingrandamentu	5
 d'iniziu	5
+detagliata	5
 dicci	5
 duppiu	5
 elencati	5
@@ -9521,7 +9522,6 @@ reflog	5
 revisioni	5
 ridirezzione	5
 righjittata	5
-rinfrescà	5
 robot	5
 s'applicanu	5
 salvaguardie	5
@@ -9603,13 +9603,13 @@ d'òspite	4
 daemon	4
 debordu	4
 dereference	4
-detagliata	4
 detagliatu	4
 dirs	4
 disattiverà	4
 discrivite	4
 disfà	4
 dumanderà	4
+duppià	4
 duvereste	4
 emulata	4
 entrante	4
@@ -9684,6 +9684,7 @@ ribasà	4
 ricaricà	4
 ricursiva	4
 ridefinizione	4
+rinfrescà	4
 rinnovi	4
 s'affissanu	4
 sbloccu	4
@@ -9816,7 +9817,6 @@ docs	3
 duplicatu	3
 duppiate	3
 duppioni	3
-duppià	3
 emulatu	3
 emulà	3
 endian	3
@@ -11401,6 +11401,7 @@ dispatcher	1
 dispiazzallu	1
 dispiazzendu	1
 dispiazzi	1
+dispirlà	1
 dispun	1
 disselezziunate	1
 distrazzioni	1
@@ -12899,6 +12900,7 @@ spiegamentu	1
 spiegazioni	1
 spinghjendu	1
 spirlata	1
+spirlà	1
 spiunà	1
 spline	1
 spunsurizati	1
