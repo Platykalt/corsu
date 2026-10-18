@@ -18,7 +18,8 @@ and the system translations used by GTK programs and terminal commands.
 
 Corsu uses the distribution's Python 3.10 or newer, which current distributions include: with WebKitGTK it gives
 Corsu its window. Without it, the archive (x86_64 processors) carries its own Python; Corsu then opens in Chrome,
-Chromium or the browser.
+Chromium or the browser. That Python is kept in Corsu's folder either way: when the distribution's Python is removed
+or becomes unusable, Corsu's shortcuts use it, even after the downloaded archive is deleted.
 
 ## Differences between distributions
 

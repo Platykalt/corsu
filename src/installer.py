@@ -209,13 +209,16 @@ def runtime_python(root):
 
 
 def deploy_runtime():
-    """Release archives carry their own Python for computers without one. When Corsu runs on it, copy it once to
-    Corsu's data folder, shared by every copy of Corsu, so launchers keep working after the archive is deleted.
-    Returns the interpreter later steps and launchers should use."""
+    """Release archives carry their own Python for computers without one. Copy it once to Corsu's data folder, shared
+    by every copy of Corsu, so launchers keep working after the archive is deleted: they start it when Corsu runs on
+    it, and fall back to it when Corsu runs on the system's Python (Linux, for the window's GTK bindings) and that
+    one is later removed or replaced by one Corsu cannot use (corsu.launcher_python).
+    Returns the interpreter later steps and launchers should use: the copy when Corsu runs on the bundled Python,
+    else the Python running now."""
     bundled = ROOT / 'runtime' / machine()
-    current = Path(sys.executable).resolve()
-    if not bundled.is_dir() or not current.is_relative_to(bundled.resolve()):
+    if not runtime_python(bundled).is_file():
         return Path(sys.executable)
+    running_bundled = Path(sys.executable).resolve().is_relative_to(bundled.resolve())
     version = json.loads((ROOT / 'src/release.json').read_text(encoding='utf-8'))['python_runtime']['version']
     target = corsu.DATA / 'runtime' / version.replace('+', '-')
     if not runtime_python(target).exists():
@@ -229,7 +232,30 @@ def deploy_runtime():
         except BaseException:
             shutil.rmtree(stage, ignore_errors=True)
             raise
-    return runtime_python(target)
+    return runtime_python(target) if running_bundled else Path(sys.executable)
+
+
+def forget_python_wrapper(shortcuts, python):
+    """Remove the script launchers went through (corsu.launcher_python) once they all start `python` directly: kept,
+    it would keep an old copy of Python from deletion. Only here, after every launcher was pointed at `python`."""
+    wrapper = corsu.DATA / 'bin/corsu-python'
+    if Path(python) == wrapper:
+        return
+    # A launcher changed by hand is never rewritten, and may still go through it.
+    for place in managed_places(shortcuts.state):
+        files = [place] if place.is_file() else [path for path in place.rglob('*') if path.is_file()] if place.is_dir() else []
+        for path in files:
+            try:
+                data = b'' if path == wrapper or path.stat().st_size > 4_000_000 else path.read_bytes()
+            except OSError:
+                continue
+            # Compiled AppleScript (macOS applets) keeps its strings in UTF-16.
+            if any(str(wrapper).encode(encoding) in data for encoding in ('utf-8', 'utf-16-be', 'utf-16-le')):
+                return
+    record = shortcuts.state['files'].pop(str(wrapper), None)
+    if record:
+        corsu.restore(wrapper, record)
+        corsu.save_state(shortcuts.state)
 
 
 def prune_runtimes():
@@ -360,9 +386,9 @@ def record_release(before):
     state = corsu.load_state()
     if before and folder_name(before['folder']) != ROOT.name:
         state['previous_release'] = before
-    # The window restarts Corsu from here: the copy, and the Python its launchers use (this run's, which is the
-    # copied bundled runtime when there is one).
-    state['release'] = {'version': release_version(ROOT), 'folder': str(ROOT), 'python': str(Path(sys.executable)),
+    # The window restarts Corsu from here: the copy, and the Python its launchers use (this run's, the copied bundled
+    # runtime when Corsu runs on it, or the script that falls back to that copy).
+    state['release'] = {'version': release_version(ROOT), 'folder': str(ROOT), 'python': str(corsu.launcher_python()),
                         'installed_at': time.time()}
     corsu.save_state(state)
 
@@ -867,7 +893,11 @@ def apply(args, requested, components, location):
         # A compiled applet cannot be rewritten like the text launchers; rebuilt here even while Firefox is
         # switched off (it then opens the ordinary Firefox), so it never keeps an old copy of Corsu in use.
         corsu.macos_application(shortcuts, corsu.firefox_install())
-    corsu.refresh_launchers(shortcuts)
+    # Launchers left as they were (Firefox switched off, earlier versions) may name a Python that is not the one
+    # chosen now, such as /usr/bin/python3 directly: they get the same one as the others.
+    python = corsu.launcher_python(shortcuts)
+    corsu.refresh_launchers(shortcuts, python=python)
+    forget_python_wrapper(shortcuts, python)
     if ROOT.is_relative_to((corsu.DATA / 'releases').resolve()):
         record_release(before)
         prune_releases(ROOT, loaded)

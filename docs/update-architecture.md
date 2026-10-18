@@ -9,6 +9,12 @@ Contract between the installer, the updater and the Corsu window (October 2026).
   `%LOCALAPPDATA%\corsu`, `~/Library/Application Support/corsu`) as `releases/<fingerprint>/` and re-runs itself from
   there. Launchers and shortcuts only ever point into `corsu.DATA`. An extracted archive or a git clone is never
   registered as an installation.
+- An archive's Python (`runtime/<processor>/python`) is always copied to `corsu.DATA/runtime/<version>`. Launchers
+  start it when the installer ran on it; when it ran on another Python (on Linux the distribution's, for the GTK
+  window), they go through `corsu.DATA/bin/corsu-python`, which starts that Python while it is 3.10 or newer with its
+  whole standard library, else the copy. Deleting the archive, removing or breaking the system's Python then leaves
+  every launcher working (an archive built with `--no-runtime` has no copy to fall back to). Copies no launcher names
+  are deleted (`installer.prune_runtimes`).
 - `corsu.DATA/installation.json` (`corsu.STATE`) is the only record of what Corsu changed. It is shared by every
   release copy and is never merged with another file.
 - Version policy, decided before anything is written: newer than the installed release → update; same → repair
