@@ -1,0 +1,205 @@
+#!/usr/bin/env python3
+"""Run Corsu's Keyman packages in the real Keyman for Android web engine, headless, and check what a user sees.
+
+Usage: check_keyboard.py [--keyman 18.0.254] [--chrome CHROME] [--log LOG.txt] PACKAGE.kmp [PACKAGE.kmp ...]
+       check_keyboard.py --observe PACKAGE.kmp   # only print the log (for an old package: no checks)
+
+The official Keyman for Android APK of that version is downloaded from downloads.keyman.com (its MD5 checked
+against the Keyman API), and its engine (assets/keyboard.html, keymanweb-webview.js, android-host.js) runs in
+headless Chrome with the EuroLatin (SIL) keyboard the APK ships. tests/e2e/keyman/harness.mjs plays
+tests/e2e/keyman/scenarios.json: real touch taps on the on-screen keys, suggestion taps through the banner, caret
+moves sent the way the Android app sends them. Needs Node.js, npm (puppeteer-core is installed in the cache folder)
+and a Chrome or chrome-headless-shell binary (--chrome or $CHROME).
+
+What this shows and what it does not: the engine, the keyboard and the model are the ones a phone runs; the Android
+app around them (its Java side, the text field, the system keyboard service) is a stand-in, so this is not a test
+on a phone. The engine's suggestion settings are set the way the app's settings menu sets them (setting 2,
+"Predictions with corrections", is Keyman 18's default and highest choice; setting 3 is auto-correction, offered
+from Keyman 19).
+"""
+import argparse
+import hashlib
+import json
+import os
+from pathlib import Path
+import shutil
+import subprocess
+import sys
+import urllib.request
+import zipfile
+
+HERE = Path(__file__).resolve().parent
+CACHE = Path(os.environ.get('CORSU_KEYMAN_CACHE', Path.home() / '.cache/corsu-keyman-e2e'))
+API = 'https://downloads.keyman.com/api/version/2.0'
+
+
+def open_url(url, timeout):
+    # downloads.keyman.com refuses Python's default user agent.
+    return urllib.request.urlopen(urllib.request.Request(url, headers={'User-Agent': 'corsu-tests'}), timeout=timeout)
+
+
+def fetch_engine(version):
+    """The assets of the official Keyman for Android APK, and EuroLatin's compiled keyboard."""
+    folder = CACHE / f'keyman-{version}'
+    assets = folder / 'assets'
+    if (assets / 'keyboard.html').exists():
+        return assets, folder / 'sil_euro_latin.js'
+    folder.mkdir(parents=True, exist_ok=True)
+    with open_url(API, 60) as response:
+        releases = json.load(response)['android']
+    entry = next((files[f'keyman-{version}.apk'] for tier in releases.values()
+                  if isinstance(tier, dict) and (files := tier.get('files', {})).get(f'keyman-{version}.apk')), None)
+    tier = next((name for name, tier in releases.items() if isinstance(tier, dict) and tier.get('version') == version), None)
+    if not entry or not tier:
+        raise SystemExit(f'Keyman for Android {version} is not offered by {API}')
+    apk = folder / f'keyman-{version}.apk'
+    url = f'https://downloads.keyman.com/android/{tier}/{version}/keyman-{version}.apk'
+    print(f'Downloading {url}', flush=True)
+    with open_url(url, 300) as response, apk.open('wb') as target:
+        shutil.copyfileobj(response, target)
+    if hashlib.md5(apk.read_bytes()).hexdigest() != entry['md5'].lower():
+        apk.unlink()
+        raise SystemExit(f'{url}: MD5 does not match the Keyman API')
+    with zipfile.ZipFile(apk) as archive:
+        for name in archive.namelist():
+            if name.startswith('assets/') and not name.startswith(('assets/info/', 'assets/dexopt/')):
+                archive.extract(name, folder)
+    with zipfile.ZipFile(assets / 'sil_euro_latin.kmp') as package:
+        (folder / 'sil_euro_latin.js').write_bytes(package.read('sil_euro_latin.js'))
+    return assets, folder / 'sil_euro_latin.js'
+
+
+def puppeteer():
+    modules = CACHE / 'node/node_modules'
+    if not (modules / 'puppeteer-core').exists():
+        (CACHE / 'node').mkdir(parents=True, exist_ok=True)
+        subprocess.run(['npm', 'install', '--prefix', str(CACHE / 'node'), '--no-save', '--silent',
+                        'puppeteer-core@24.43.1'], check=True)
+    return modules
+
+
+def find_chrome(given):
+    candidates = [given, os.environ.get('CHROME'), shutil.which('chrome-headless-shell'),
+                  shutil.which('google-chrome'), shutil.which('chromium')]
+    candidates += sorted(map(str, Path.home().glob('.cache/*/chrome*/**/chrome-headless-shell')), reverse=True)
+    for candidate in candidates:
+        if candidate and Path(candidate).is_file():
+            return candidate
+    raise SystemExit('No Chrome found: give --chrome or $CHROME.')
+
+
+def models_of(packages, folder):
+    """{model id: path of its .model.js} for every lexical model of the packages."""
+    models = {}
+    for package in packages:
+        with zipfile.ZipFile(package) as archive:
+            metadata = json.loads(archive.read('kmp.json'))
+            for model in metadata['lexicalModels']:
+                target = folder / f'{model["id"]}.model.js'
+                target.write_bytes(archive.read(f'{model["id"]}.model.js'))
+                models[model['id']] = target
+    return models
+
+
+def log_lines(results):
+    for result in results:
+        yield (f'== {result["name"]} | model {result["model"]} | setting {result["setting"]} | '
+               f'keyboard {result["setup"].get("keyboard")} | page errors {len(result["errors"])}')
+        for error in result['errors']:
+            yield f'   page error: {error}'
+        for step in result['steps']:
+            label = json.dumps(step['step'], ensure_ascii=False)
+            if 'error' in step:
+                yield f'   {label:34} ERROR {step["error"]}'
+            else:
+                yield (f'   {label:34} -> {step["text"]!r} caret={step["caret"]} layer={step["layer"]} '
+                       f'auto={step["selected"]!r} banner={step["suggestions"][:6]}')
+
+
+def step(results, scenario, model, index):
+    result = next(r for r in results if r['name'].startswith(scenario) and r['model'] == model)
+    return result['steps'][index]
+
+
+def checks(results, models):
+    """What the fixed packages must do; each check names the defect it guards."""
+    failures, warnings = [], []
+
+    def expect(condition, message, record=failures):
+        if not condition:
+            record.append(message)
+
+    for model in models:
+        s = lambda scenario, index: step(results, scenario, model, index)  # noqa: E731
+        expect(all(not r['errors'] for r in results if r['model'] == model), f'{model}: page errors')
+        expect(s('casing: suggestion taps', 2)['text'] == 'Eccu ', f'{model}: "Ecc" + tap on "Eccu" must keep the capital')
+        expect(s('casing: suggestion taps', 4)['text'] == 'Eccu ECCU ', f'{model}: "ECC" + tap must give ECCU')
+        expect(s('casing: lower, initial', 4)['text'] == 'eccu Eccu ', f'{model}: auto-correction lowered "Eccu"')
+        expect(s('casing: lower, initial', 6)['text'] == 'eccu Eccu ECCU ', f'{model}: auto-correction lowered "ECCU"')
+        expect(s('casing: a typo corrected', 2)['text'] == 'Lingua ', f'{model}: "Lingau" must become "Lingua"')
+        expect(s('casing: a typo corrected', 6)['text'] == 'Lingua lingua LINGUA ', f'{model}: corrected case')
+        expect(s('casing: proper nouns', 1)['suggestions'][:1] == ['Corsica'], f'{model}: "corsic" must offer "Corsica"')
+        expect(s('sentence start: suggestion before', 0)['suggestions'][:1] == ['Di'],
+               f'{model}: the first suggestion of a sentence must be capitalised')
+        expect(s('sentence start: suggestion before', 1)['text'] == 'Di ', f'{model}: sentence-start suggestion tap')
+        expect(s('sentence start: field start', 2)['layer'] == 'shift', f'{model}: shift after ". "')
+        expect(s('auto-correct off', 2)['text'] == 'lingau ', f'{model}: without auto-correction a typo must stay')
+        # Auto-correction (setting 3) is the engine's: it may replace a word it does not know when the model offers
+        # a single close candidate. Reported, not failed: the dictionary does not control it.
+        for index in (8, 10, 12, 14):
+            typed = s('auto-correct on', index - 1)['text'].split(' ')[-1]
+            expect(s('auto-correct on', index)['text'].endswith(typed + ' '),
+                   f'{model}: auto-correction replaced the unknown word {typed!r}: '
+                   f'{s("auto-correct on", index)["text"]!r}', warnings)
+        expect(s('return to a word: caret inside', 3)['text'] == 'Eccu a casa di Petru.',
+               f'{model}: moving the caret alone must not change the text')
+    if {'platykalt.co.corsu_cismuntincu', 'platykalt.co.corsu_pumuntincu'} <= set(models):
+        north = step(results, 'variants', 'platykalt.co.corsu_cismuntincu', 1)['suggestions']
+        south = step(results, 'variants', 'platykalt.co.corsu_pumuntincu', 1)['suggestions']
+        # Each preference ranks its own form first and still offers the other one.
+        rank = lambda banner, word: banner.index(word) if word in banner else 99  # noqa: E731
+        expect(rank(north, 'zitellu') < rank(north, 'ziteddu') < 99, f'Cismuntincu "zite": {north}')
+        expect(rank(south, 'ziteddu') < rank(south, 'zitellu') < 99, f'Pumuntincu "zite": {south}')
+    return failures, warnings
+
+
+def main():
+    parser = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
+    parser.add_argument('packages', nargs='+', type=Path)
+    parser.add_argument('--keyman', default='18.0.254', help='Keyman for Android version (default: 18.0.254, stable)')
+    parser.add_argument('--chrome')
+    parser.add_argument('--scenarios', type=Path, default=HERE / 'keyman/scenarios.json')
+    parser.add_argument('--log', type=Path, help='also write the readable log here')
+    parser.add_argument('--observe', action='store_true', help='print what happens without checking it')
+    args = parser.parse_args()
+    assets, keyboard = fetch_engine(args.keyman)
+    work = CACHE / 'run'
+    shutil.rmtree(work, ignore_errors=True)
+    work.mkdir(parents=True)
+    models = models_of(args.packages, work)
+    command = ['node', str(HERE / 'keyman/harness.mjs'), '--assets', str(assets), '--keyboard', str(keyboard),
+               '--chrome', find_chrome(args.chrome), '--scenarios', str(args.scenarios), '--out', str(work / 'log.json')]
+    for model, path in models.items():
+        command += ['--model', f'{model}={path}']
+    subprocess.run(command, check=True, env={**os.environ, 'NODE_PATH': str(puppeteer())})
+    results = json.loads((work / 'log.json').read_text(encoding='utf-8'))
+    lines = [f'Keyman for Android {args.keyman} engine, EuroLatin (SIL) from its APK; packages: '
+             + ', '.join(f'{p.name} (sha256 {hashlib.sha256(p.read_bytes()).hexdigest()[:16]})' for p in args.packages),
+             *log_lines(results)]
+    print('\n'.join(lines))
+    if args.log:
+        args.log.write_text('\n'.join(lines) + '\n', encoding='utf-8')
+    if args.observe:
+        return
+    failures, warnings = checks(results, list(models))
+    for warning in warnings:
+        print('WARNING:', warning)
+    for failure in failures:
+        print('FAIL:', failure)
+    if failures:
+        raise SystemExit(f'{len(failures)} keyboard check(s) failed')
+    print(f'All keyboard checks passed for {", ".join(models)}.')
+
+
+if __name__ == '__main__':
+    main()

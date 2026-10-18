@@ -1,0 +1,44 @@
+Android emulator (system image android-34 google_apis x86_64, KVM, headless), Keyman for Android 18.0.254 (official APK),
+EuroLatin (SIL) 3.0.5 installed for Corsican (co); Keyman's in-app text field; keys and suggestions tapped by adb
+on their screen nodes (uiautomator). Suggestion setting: Keyman's default, Predictions with corrections.
+Each line: field text, banner, OSK layer (from the key labels) after the step.
+
+## Published corsu-keyboard.kmp (v0.24.0), installed as corsu-keyboard-0240.kmp (package id corsu-keyboard)
+{"text": "Ecc", "banner": ["ecc", "eccu", "eccettu", "eccezzione", "eccede", "ecciditu", "eccezzioni", "eccellente"], "layer": "default", "step": ["type", "Ecc"]}
+{"text": "eccu ", "banner": ["di", "u", "a", "à", "i", "per", "in", "hè"], "layer": "default", "step": ["accept", "eccu"]}
+{"text": "eccu ECC", "banner": ["ecc", "eccu", "eccettu", "eccezzione", "eccede", "ecciditu", "eccezzioni", "eccellente"], "layer": "default", "step": ["type", "ECC"]}
+{"text": "Eccu. ", "banner": ["di", "u", "a", "à", "i", "per", "in", "hè"], "layer": "shift", "step": ["type", "Eccu. "]}
+{"text": "Start typing here…", "banner": ["di", "u", "a", "à", "i", "per", "in", "hè"], "layer": "shift", "step": ["clear", ""]}
+{"text": "Dopu ella vene", "banner": ["vene", "venenu", "venezuela", "generale", "generà", "generazione", "genericu", "generu"], "layer": "default", "step": ["type", "Dopu ella vene"]}
+{"text": "Dopu ella vene", "banner": ["vene", "venenu", "vencord", "venite", "vende", "vendita", "ventu", "venneri"], "layer": "default", "step": ["key", "21"]}
+{"text": "Dopu ella vene", "banner": ["versu", "versione", "vede", "verificà", "verificazione", "veramente", "verificate", "ver"], "layer": "default", "step": ["key", "21"]}
+{"text": "Dopu ella vene", "banner": ["vostru", "vostra", "vo", "vole", "vulete", "valore", "vostri", "versu"], "layer": "default", "step": ["key", "21"]}
+{"text": "Dopu ella vene", "banner": ["di", "u", "a", "à", "i", "per", "in", "hè"], "layer": "default", "step": ["key", "21"]}
+{"text": "Dopu ella vene", "banner": ["", "", "", "", "", "", "", ""], "layer": "default", "step": ["key", "21"]}
+{"text": "Dopu ella vene", "banner": ["ellu", "ella", "elli", "elle", "ellittica", "ellisse", "ellitticu", ""], "layer": "default", "step": ["key", "21"]}
+{"text": "Dopu ellu a vene", "banner": ["di", "u", "a", "à", "i", "per", "in", "hè"], "layer": "default", "step": ["accept", "ellu"]}
+
+## New corsu-keyboard.kmp 1.1 installed over it (same package id): one dictionary listed, named Corsu, version 1.1.
+Before restarting Keyman the old model was still answering (banner for Ecc: ecc, eccu, eccettu...); after a force-stop and relaunch:
+{"text": "Start typing here…", "banner": [], "layer": "default", "step": ["clear", ""]}
+{"text": "Ecc", "banner": ["Ecc", "Eccu", "Eccezziunale", "Eccellente", "Eccezzioni", "Eccezzione", "Eccettu", "Eccessu"], "layer": "default", "step": ["type", "Ecc"]}
+{"text": "Eccu ", "banner": ["di", "u", "a", "in", "à", "è", "i", "hè"], "layer": "default", "step": ["accept", "Eccu"]}
+{"text": "Eccu ECC", "banner": ["ECC", "ECCU", "ECCEZZIUNALE", "ECCELLENTE", "ECCEZZIONI", "ECCEZZIONE", "ECCETTU", "ECCESSU"], "layer": "default", "step": ["type", "ECC"]}
+{"text": "Eccu ECCU ", "banner": ["di", "u", "a", "in", "à", "è", "i", "hè"], "layer": "default", "step": ["accept", "ECCU"]}
+{"text": "Eccu ECCU lingau ", "banner": ["di", "u", "a", "in", "à", "è", "i", "hè"], "layer": "default", "step": ["type", "lingau "]}
+{"text": "Eccu ECCU lingau in corsic", "banner": ["Corsica", "corsi", "cornice", "corsivu", "", "", "", ""], "layer": "default", "step": ["type", "in corsic"]}
+{"text": "Eccu ECCU lingau in Corsica ", "banner": ["di", "u", "a", "in", "à", "è", "i", "hè"], "layer": "default", "step": ["accept", "Corsica"]}
+{"text": "Eccu ECCU lingau in Corsica Dopu ella vene", "banner": ["vene", "venetu", "venenu", "generale", "generali", "generalmente", "generazione", "generu"], "layer": "default", "step": ["type", "Dopu ella vene"]}
+{"text": "Eccu ECCU lingau in Corsica Dopu ella vene", "banner": ["vene", "vengu", "ventu", "venite", "venneri", "veni", "venutu", "venti"], "layer": "default", "step": ["key", "21"]}
+{"text": "Eccu ECCU lingau in Corsica Dopu ella vene", "banner": ["vecu", "vedi", "vene", "vengu", "vede", "versu", "venite", "veni"], "layer": "default", "step": ["key", "21"]}
+{"text": "Eccu ECCU lingau in Corsica Dopu ella vene", "banner": ["voi", "voli", "vogliu", "và", "vedi", "vene", "vò", "vengu"], "layer": "default", "step": ["key", "21"]}
+{"text": "Eccu ECCU lingau in Corsica Dopu ella vene", "banner": ["di", "u", "a", "in", "à", "è", "i", "hè"], "layer": "default", "step": ["key", "21"]}
+{"text": "Eccu ECCU lingau in Corsica Dopu ella vene", "banner": ["", "", "", "", "", "", "", ""], "layer": "default", "step": ["key", "21"]}
+{"text": "Eccu ECCU lingau in Corsica Dopu ella vene", "banner": ["ella", "ellu", "elle", "elli", "ellittica", "ellitticu", "ellisse", ""], "layer": "default", "step": ["key", "21"]}
+{"text": "Eccu ECCU lingau in Corsica Dopu ellu a vene", "banner": ["di", "u", "a", "in", "à", "è", "i", "hè"], "layer": "default", "step": ["accept", "ellu"]}
+
+## corsu-keyboard-pumuntincu.kmp installed as well: two dictionaries listed (Corsu; Corsu – Pumuntincu (experimental)); Corsu stays active:
+{"text": "u zite", "banner": ["zitella", "zitellu", "zitelli", "ziteddu", "site", "zittu"], "step": ["type", "u zite"]}
+After uninstalling Corsu (Dictionary, Corsu, Uninstall dictionary): no suggestions until Keyman was restarted; then:
+{"text": "u zite", "banner": ["ziteddu", "zitella", "zitelli", "zitellu", "site", "zittu"], "step": ["type", "u zite"]}
+{"text": "u zite u cava", "banner": ["cavalli", "cavaddu", "cavallu"], "step": ["type", " u cava"]}
