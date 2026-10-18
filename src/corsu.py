@@ -1189,6 +1189,11 @@ def macos_application(installer, firefox=None):
         installer.tree(target, applet)
 
 
+# The name of Corsu's menu entry (corsu-setup.desktop) and of its window's application (Wayland app_id, X11 WM_CLASS,
+# set by window.py): desktops find the window's icon and name through the entry of that name.
+DESKTOP_ID = 'corsu-setup'
+
+
 def setup_shortcut(installer):
     """The Corsu entry in the applications menu: switch parts on and off, add programs, uninstall."""
     app = SRC / 'app.py'
@@ -1209,15 +1214,19 @@ def setup_shortcut(installer):
         with tempfile.TemporaryDirectory() as directory:
             applet = Path(directory) / 'Corsu.app'
             subprocess.run(['osacompile', '-o', str(applet), '-e', 'do shell script ' + json.dumps(command)], check=True)
+            # osacompile gives every applet the generic script icon (Finder, Launchpad, Spotlight).
+            icon = applet / 'Contents/Resources/applet.icns'
+            icon.parent.mkdir(parents=True, exist_ok=True)
+            shutil.copyfile(SRC / 'app/corsu.icns', icon)
             installer.tree(HOME / 'Applications/Corsu.app', applet)
     else:
         python = launcher_python(installer)
-        installer.write(HOME / '.local/share/applications/corsu-setup.desktop',
+        installer.write(HOME / '.local/share/applications' / f'{DESKTOP_ID}.desktop',
                         '[Desktop Entry]\nType=Application\nName=Corsu\n'
                         'GenericName=Corsican language\nGenericName[fr]=Langue corse\nGenericName[co]=Lingua corsa\n'
                         'Comment=Choose which programs are in Corsican\nComment[fr]=Choisir les logiciels en corse\n'
                         f'Exec={shlex.quote(str(python))} {shlex.quote(str(app))}\nTerminal=false\nIcon={SRC / "app/corsu.svg"}\n'
-                        'StartupWMClass=corsu\nCategories=Settings;\n')
+                        f'StartupWMClass={DESKTOP_ID}\nCategories=Settings;\n')
 
 
 def refresh_launchers(installer, root=None, python=None):
