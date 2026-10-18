@@ -13,11 +13,14 @@ variety's file laid over it (same word: the variety's weight wins). Exit status 
 """
 import argparse
 from pathlib import Path
+import subprocess
 import sys
 import unicodedata
 
 DATA = Path(__file__).resolve().parents[1]
-OLD_WORDLIST = DATA.parent / 'platykalt.co.corsu/source/wordlist.tsv'
+# The old generated list as version 0.9.0 left it (tools/build_keyboard.py now rewrites the file from keyboard/data).
+OLD_WORDLIST = 'keyboard/platykalt.co.corsu/source/wordlist.tsv'
+OLD_WORDLIST_COMMIT = '66e7f58'
 # Words whose weight comes from software interfaces; they should not hide an everyday word.
 COMPUTING = {'schedariu', 'schedarii', 'affissà', 'affissa', 'parametri', 'cartulare', 'cartulari', 'cunnessione',
              'squassà', 'mudificà', 'dati', 'situ', 'siti', 'pagina', 'sistema', 'testu', 'linea', 'chjave',
@@ -47,9 +50,10 @@ def key(text):
     return ''.join(c for c in decomposed if not unicodedata.combining(c)).replace('’', "'")
 
 
-def read(path, status=None):
+def read(path, status=None, text=None):
     words = {}
-    for line in path.read_text(encoding='utf-8').splitlines()[1:]:
+    text = path.read_text(encoding='utf-8') if text is None else text
+    for line in text.splitlines()[1:]:
         if not line or line.startswith('#'):
             continue
         fields = line.split('\t')
@@ -59,7 +63,9 @@ def read(path, status=None):
 
 def load(variety):
     if variety == 'old':
-        return read(OLD_WORDLIST, 'old')
+        old = subprocess.run(['git', 'show', f'{OLD_WORDLIST_COMMIT}:{OLD_WORDLIST}'], cwd=DATA, check=True,
+                             capture_output=True, text=True, encoding='utf-8').stdout
+        return read(None, 'old', old)
     words = read(DATA / 'shared.tsv')
     if variety != 'shared':
         words.update(read(DATA / f'{variety}.tsv'))

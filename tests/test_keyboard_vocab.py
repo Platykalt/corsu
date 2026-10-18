@@ -74,6 +74,23 @@ class KeyboardVocabularyTests(unittest.TestCase):
             for prefix, expected in checks.items():
                 self.assertIn(expected, simulate.top3(words, prefix), f'{variety} {prefix!r}')
 
+    def test_place_names(self):
+        # Corsican place names from Wikidata (sources/places.tsv): known with their capital, so that auto-correction
+        # keeps them (Zicavu was once replaced by "Cavu"), and never above the everyday words' lowest floor.
+        shared = {entry['word']: entry for entry in rows('shared')[1]}
+        for name in ('Zicavu', 'Aiacciu', 'Bastia', 'Portivechju', 'Corti', 'Calvi', 'Bunifaziu', 'Sartè',
+                     'Bastilicaccia', 'Balagna', 'Niolu', 'Golu', 'Cintu'):
+            self.assertIn(name, shared)
+        for entry in shared.values():
+            if entry['source'].startswith('wikidata:'):
+                self.assertRegex(entry['source'], r'^wikidata:Q\d+$', entry)
+                self.assertLessEqual(int(entry['weight']), make_vocab.PLACE_CAP, entry)
+        words = simulate.load('shared')
+        for prefix, name in (('zicav', 'Zicavu'), ('portiv', 'Portivechju'), ('bunif', 'Bunifaziu')):
+            self.assertIn(name, simulate.top3(words, prefix))
+        # A name never takes the place of an everyday word: ghjucà (1,000) stays ahead of Ghjuvanni.
+        self.assertGreater(int(shared['ghjucà']['weight']), int(shared['Ghjuvanni']['weight']))
+
     def test_variety_forms(self):
         cismuntincu = {entry['word']: entry for entry in rows('cismuntincu')[1]}
         pumuntincu = {entry['word']: entry for entry in rows('pumuntincu')[1]}

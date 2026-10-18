@@ -24,8 +24,8 @@ famiglia	famidda	family	cowiki-lingua-corsa	row "famiglia"	no	Taravesu keeps fam
 paglia	padda	straw	cowiki-lingua-corsa	row "paglia"	no	Taravesu keeps paglia; padda is Sartinesu	
 fornu	forru/furru	oven	cowiki-lingua-corsa	row "fornu"	yes	forru Taravesu, furru Sartinesu	
 carne	carri	meat	cowiki-lingua-corsa	row "carne"	yes		2
-parlate	parleti	you (pl.) speak	cowiki-lingua-corsa	row "parlate"	yes		2
-parlanu	parlani	they speak	cowiki-lingua-corsa	row "pàrlanu"	yes	the table writes the stress (pàrlanu, pàrlani); usual spelling has no accent	2
+parlate	parleti	you (pl.) speak	cowiki-lingua-corsa	row "parlate"	yes	no tier: like the other verbs' plural forms (andate/andeti, avete/aveti), Vikipedia has parlate 56, parleti 0, parlanu 26, parlani 11 times (2026-10-18 dump)	
+parlanu	parlani	they speak	cowiki-lingua-corsa	row "pàrlanu"	yes	the table writes the stress (pàrlanu, pàrlani); usual spelling has no accent; no tier: like the other verbs' plural forms (andate/andeti, avete/aveti), Vikipedia has parlate 56, parleti 0, parlanu 26, parlani 11 times (2026-10-18 dump)	
 simu	semi	we are	cowiki-lingua-corsa	row "simu/semu"	yes	semu is given for both groups and stays shared	1
 cane	ghjacaru	dog	cowiki-lingua-corsa	row "cane"	yes	table writes ghjàcaru (stress); frwiki notes Ajaccio (transition zone) says cane	2
 sì	s'è	if	cowiki-lingua-corsa	row "sì"	no	sì has other senses (you are); s'è is also common in northern writing	

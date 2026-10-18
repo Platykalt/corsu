@@ -1,18 +1,18 @@
 {
  "old_entries": 16949,
- "removed": 5375,
+ "removed": 5370,
  "removed_by_reason": {
   "non-corsican-letters": 842,
   "foreign-or-name": 1291,
   "fragment": 225,
   "non-corsican-spelling": 14,
-  "unattested-rare": 2874,
+  "unattested-rare": 2873,
   "gone-from-lexicon": 29,
-  "corpus-name": 100
+  "corpus-name": 96
  },
- "shared_entries": 12530,
+ "shared_entries": 12976,
  "shared_by_status": {
-  "attested": 5879,
+  "attested": 6325,
   "corsu-lexicon": 6640,
   "ai-proposal": 11
  },
@@ -26,14 +26,21 @@
   "cowiki-lingua-corsa": 34,
   "adecec": 52,
   "frwiki-corse-langue": 12,
-  "ai": 11
+  "ai": 11,
+  "wikidata": 446
  },
- "new_from_outside_old_list": 955,
+ "new_from_outside_old_list": 1396,
  "cismuntincu_entries": 354,
  "pumuntincu_entries": 357,
  "northern_only_forms": 180,
  "southern_only_forms": 192,
  "words_ranked_differently": 361,
  "wiki_tokens": 1327560,
- "lexicon_tokens": 1010763
+ "lexicon_tokens": 1010763,
+ "place_words": {
+  "added": 429,
+  "seen_in_vikipedia": 437,
+  "already_a_word": 98,
+  "added_in_lowercase": 17
+ }
 }

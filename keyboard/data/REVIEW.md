@@ -7,11 +7,12 @@ Files:
 
 | File | Content |
 |---|---|
-| `shared.tsv` | The base list: 12,530 words, both varieties' forms included. |
+| `shared.tsv` | The base list: 12,976 words, both varieties' forms included (446 of them Corsican place names). |
 | `cismuntincu.tsv` | 354 rows laid over `shared.tsv` for a northern preference. |
 | `pumuntincu.tsv` | 357 rows laid over `shared.tsv` for a southern preference. |
-| `sources/` | Hand-checked inputs: `daily.tsv` (everyday words, editorial choice), `adecec.tsv`, `cunghjugarellu.tsv`, `variant-pairs.tsv`. |
+| `sources/` | Hand-checked inputs: `daily.tsv` (everyday words, editorial choice), `adecec.tsv`, `cunghjugarellu.tsv`, `variant-pairs.tsv`; and `places.tsv`, the Corsican place labels of Wikidata. |
 | `tools/make_vocab.py` | Rebuilds the three lists from the sources (needs the resources of `tools/fetch_resources.py`). |
+| `tools/fetch_places.py` | Runs the three Wikidata queries that write `sources/places.tsv`. |
 | `tools/simulate.py` | Top-3 suggestion simulation and checks (also run by `tests/test_keyboard_vocab.py`). |
 | `audit/removed.tsv` | Every word of the old list that was dropped, with its reason. |
 | `audit/stats.json` | The numbers quoted below. |
@@ -42,15 +43,16 @@ Columns: `word	weight	variant	source	license	status`, UTF-8, tab-separated, one 
    everyday words.
 3. Minimum weights (editorial, an AI choice): daily words of `sources/daily.tsv` tier 1 → 20,000, tier 2 → 5,000,
    tier 3 → 1,000; words of the Tatoeba sentences → 2,000; variety pairs with a tier → the same floors.
-4. Variety files: the variety's own form gets the pair's weight (the highest weight of the pair's forms, at least
+4. Place names (Wikidata): their Vikipedia frequency, at least 50 and at most 900 (below the lowest everyday floor).
+5. Variety files: the variety's own form gets the pair's weight (the highest weight of the pair's forms, at least
    1,000 or its tier floor); the other variety's form gets 25 % of it, unless the pair says `lower_other = no`.
 
-Range: 1 to 715,754 (*di*); median 31; 981 words at 1,000 or more.
+Range: 1 to 715,754 (*di*); median 33; 977 words at 1,000 or more.
 
 ### Status
 
 - `attested`: the word is written so in at least one external source (`source` column, strongest first:
-  cunghjugarellu, adecec, wiktionary, tatoeba, vikipedia ≥ 5 occurrences, apertium).
+  cunghjugarellu, adecec, wiktionary, tatoeba, vikipedia ≥ 5 occurrences, apertium; place names: wikidata).
 - `corsu-lexicon`: only Corsu's own software lexicon has it (6,640 words). This includes words from the Mozilla and
   Patriccollu imports: their file of origin does not make them attested here.
 - `ai-proposal`: 11 everyday words found in no source (listed below).
@@ -84,7 +86,11 @@ The old list (`keyboard/platykalt.co.corsu/source/wordlist.tsv`, 16,949 words) w
 
 Total removed: **5,375** of 16,949 (`audit/removed.tsv`). Kept: 11,574; added from outside the old list: 955 (daily
 words, conjugations, ADECEC words, Vikipedia words with ≥ 30 occurrences that Wiktionary, Apertium or the lexicon
-also has). **After: 12,530 words** in `shared.tsv` — 5,879 attested, 6,640 corsu-lexicon, 11 ai-proposal.
+also has). **After: 12,530 words** in `shared.tsv` — 5,879 attested, 6,640 corsu-lexicon, 11 ai-proposal; then
+446 place names (below): **12,976 words**, 6,325 attested. The audit reads the old list from git (commit 66e7f58,
+version 0.9.0), because `tools/build_keyboard.py` now rewrites `wordlist.tsv` from these lists; place names that the
+old list had and the corpus-name rule dropped (*ghjuvanni*, *oriente*, *riparata*, *sichè*, *oga*) are no longer
+counted as removed.
 
 The `unattested-rare` rule is deliberately strict: it also drops real but rare words (*infelice*, *fidanza*,
 *contestu*). They are only missing from suggestions, not marked wrong, and come back when a source attests them.
@@ -99,10 +105,46 @@ Keyman's default search key; no typo correction, no context). It is a rough mode
   *casa*); *cun* → cunnessione, cunfigurazione, cuntenutu (no *cuntentu*); *gr* → gruppu, grafia, gruppi; *bo* →
   bordu, bordi, bona. New: *sc* → scusa, scusate, scrittu; *ca* → caffè, casa, Calvi; *cun* → cuntenta, cuntentu,
   cuntenti; *gr* → grazie, grande, grandi.
-- `--scan`: two-letter prefixes with a software term in the top 3: **old 24 of 481, new 6 of 241** (af: affissà,
+- `--scan`: two-letter prefixes with a software term in the top 3: **old 24 of 481, new 6 of 249** (af: affissà,
   im: impussibule, oz: ozzioni, sb: sbagliu, sq: squassà, st: statu — *statu* is also "state/been").
 - Some checks pass on ties (in the variety files *induve*/*induva* and *innò* all weigh 20,000; ties sort
   alphabetically here, and Keyman may order them differently).
+
+## Place names
+
+Auto-correction (Keyman 19, and setting 3 of Keyman 18) replaces a word the model does not know when one close
+candidate is much likelier: *Zicavu* once became *Cavu*. A word the model knows is kept as typed. The names of
+Corsica's places are therefore in the list, from **Wikidata** (CC0): `tools/fetch_places.py` asks the official query
+service three targeted questions (the 360 communes with a Corsican label, of 361; places located in Corsica of the
+kinds pieve, natural region, department, mountain, pass, river, lake, island, cape; rivers whose French description
+says Corsica) and writes `sources/places.tsv` (548 items). Only the label in Corsican (`co`) is used: the aliases mix
+French and Italian spellings.
+
+`make_vocab.py` takes from each label its capitalised words of three letters or more (*Sari è Sulinzara*: Sari,
+Sulinzara; *A Munacia d'Orezza*: Munacia, Orezza; a bracketed disambiguation such as "(pieve)" is dropped):
+
+| | Words |
+|---|---|
+| Added with their capital (*Zicavu*, *Bastilicaccia*, *Ghisunaccia*, *Golu*, *Cintu*, *Nebbiu*, *Cismonte*) | 429 |
+| Added in lowercase: Vikipedia writes them mostly in lowercase mid-sentence, so they are also common words (*vescuvatu*, *stazzona*, *valle*, *foce*, *fangu*) | 17 |
+| Left to a word already in the list, same search key (*Aiacciu*, *Bastia*, *Corti*, *Sartè*, *Calvi*, *piana*, *lama*, *monte*) | 98 |
+| Of the 446 added, seen at least once in the Vikipedia dump (cross-check) | 437 |
+
+Not seen in Vikipedia: *Fughjuchja*, *Pioghjola*, *Figaniedda*, *Speloncatu*, *Ventisari*, *Oga*, *Vegnu*, *Vezzu*,
+*Infora* (kept: Wikidata is the source; a speaker should confirm them).
+
+Weight: the Vikipedia frequency, at least 50 (Keyman must know the name) and at most 900, just below the lowest
+everyday floor (1,000): an encyclopedia names places far more often than messages do. Names already in the list keep
+their weight (*Aiacciu* and *Bastia* 20,000, *Bunifaziu*, *Corti*, *Portivechju* 5,000). Effect on the top 3 of the
+simulation: two-letter prefixes with a place name in the top 3: 9 of 249 (az, bu, go, os, up, za, ze, zo, zu, where
+few common words start); words of weight ≥ 200 pushed out of a three-letter top 3: *luce* (*luc*: Lucciana),
+*originale* (*ori*: Oriente), *russu* (*rus*: Rustinu), *vale* (*val*: valle); four letters: *bastiacciu* (Bastelica).
+
+Seen in the Keyman engine (18.0.254 and 19.0.309 beta, `tests/e2e/check_keyboard.py`, scenarios "places"): *Zicavu,
+Aiacciu, Bastia, Portivechju, Corti, Calvi, Bunifaziu, Sartè, Bastilicaccia* typed then space with auto-correction on
+stay as typed in the three models, and a lowercase prefix (*zicav*, *portiv*, *bunif*…) offers the name with its
+capital first. *Bastelicaccia* (the French official spelling) is corrected to *Bastilicaccia*, the Wikidata Corsican
+label: see the question below.
 
 ## Northern and southern preferences
 
@@ -143,6 +185,14 @@ both groups, is untouched); *induve* / *induva*; *eranu* / *erani*; *cantavamu* 
 *socu* (southern 1st person of *essa* and *sapè*); *ellu* / *eddu*, *iddu*; *fratellu* / *frateddu*; *pane* /
 *pani*; *tredeci* / *tredici*.
 
+The pairs *parlate/parleti* and *parlanu/parlani* no longer have a tier (they had tier 2, an editorial choice): every
+other verb's plural forms (*andate/andeti*, *avete/aveti*, *cantate/canteti*) have none, and Vikipedia has *parlate* 56
+times, *parleti* 0, *parlanu* 26 and *parlani* 11 (*parolle* 47, plus 971 times in the lexicon). With the tier, *parleti*
+weighed 2,500 in `shared.tsv`, more than four times *parolle* (546); Keyman's correction gives the typo *parlle* the same
+cost for both (one deleted letter to reach *parle-ti*, one inserted letter for *parolle*; a completion costs nothing),
+so the weight decided, and auto-correction turned *parlle* into *parleti*. Now *parleti* weighs 500 in `shared.tsv`, 250
+in the northern list and 1,000 in the southern one.
+
 Pairs where both forms are used in the south, or where a form has another common sense, do not lower the other form
 (`lower_other = no`): *piglià/piddà*, *famiglia/famidda*, *paglia/padda*, *figliolu/fiddolu*, *vogliu/voddu* (Taravu
 keeps the first form), *manghjà/magnà* (both northern), *accattà/cumprà*, *sì/s'è*, *nove/novi*; and the forms *eri*
@@ -181,6 +231,13 @@ Variety questions:
 5. *stai*: the southern 2nd person of *stà* is printed *sta'* in U Cunghjugarellu; it was not paired, so *stai* is
    not lowered in the south.
 
+Place names:
+
+- *Bastilicaccia* (Wikidata's Corsican label, 5 times in Vikipedia) or *Bastelicaccia* (the French official name,
+  twice in Vikipedia)? Only the first is in the list, so auto-correction turns the second into the first. Several
+  Wikidata labels differ from the Vikipedia title (*Zicavu* / *Zìcavu*, *Vezzani* / *Vizzani*): the labels were kept.
+- *Bonifaziu* (label of the pieve) next to *Bunifaziu* (the commune): both are kept.
+
 Other everyday-word questions:
 
 6. *colazione* (Vikipedia) vs *cullazione* (ADECEC: "déjeuner"), *pesce* (Wiktionary) vs *pesciu* (ADECEC): both
@@ -198,6 +255,7 @@ are single words checked in them, no table is reproduced.
 ## Rebuilding
 
 ```
+python3 keyboard/data/tools/fetch_places.py    # optional: asks Wikidata again, rewrites sources/places.tsv
 python3 keyboard/data/tools/make_vocab.py      # needs ~/.local/share/corsu/resources (tools/fetch_resources.py)
 python3 keyboard/data/tools/simulate.py --show # top-3 checks; --old for the old list; --scan for software terms
 HOME=$(mktemp -d) python3 -m unittest tests.test_keyboard_vocab

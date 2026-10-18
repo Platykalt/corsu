@@ -453,5 +453,174 @@
     "type": "u cava"
    }
   ]
+ },
+ {
+  "name": "places: Corsican place names survive auto-correction",
+  "setting": 3,
+  "steps": [
+   {
+    "type": "in"
+   },
+   {
+    "key": "K_SPACE"
+   },
+   {
+    "type": "Zicavu"
+   },
+   {
+    "key": "K_SPACE"
+   },
+   {
+    "type": "Aiacciu"
+   },
+   {
+    "key": "K_SPACE"
+   },
+   {
+    "type": "Bastia"
+   },
+   {
+    "key": "K_SPACE"
+   },
+   {
+    "type": "Portivechju"
+   },
+   {
+    "key": "K_SPACE"
+   },
+   {
+    "type": "Corti"
+   },
+   {
+    "key": "K_SPACE"
+   },
+   {
+    "type": "Calvi"
+   },
+   {
+    "key": "K_SPACE"
+   },
+   {
+    "type": "Bunifaziu"
+   },
+   {
+    "key": "K_SPACE"
+   },
+   {
+    "type": "Sartè"
+   },
+   {
+    "key": "K_SPACE"
+   },
+   {
+    "type": "Bastilicaccia"
+   },
+   {
+    "key": "K_SPACE"
+   },
+   {
+    "type": "Bastelicaccia"
+   },
+   {
+    "key": "K_SPACE"
+   }
+  ]
+ },
+ {
+  "name": "places: a lowercase prefix offers the name with its capital",
+  "setting": 2,
+  "steps": [
+   {
+    "setText": "in ",
+    "at": 3
+   },
+   {
+    "type": "zicav"
+   },
+   {
+    "setText": "in ",
+    "at": 3
+   },
+   {
+    "type": "aiacc"
+   },
+   {
+    "setText": "in ",
+    "at": 3
+   },
+   {
+    "type": "basti"
+   },
+   {
+    "setText": "in ",
+    "at": 3
+   },
+   {
+    "type": "portiv"
+   },
+   {
+    "setText": "in ",
+    "at": 3
+   },
+   {
+    "type": "cort"
+   },
+   {
+    "setText": "in ",
+    "at": 3
+   },
+   {
+    "type": "calv"
+   },
+   {
+    "setText": "in ",
+    "at": 3
+   },
+   {
+    "type": "bunif"
+   },
+   {
+    "setText": "in ",
+    "at": 3
+   },
+   {
+    "type": "sart"
+   },
+   {
+    "setText": "in ",
+    "at": 3
+   },
+   {
+    "type": "bastilic"
+   },
+   {
+    "setText": "in ",
+    "at": 3
+   },
+   {
+    "type": "bastelic"
+   }
+  ]
+ },
+ {
+  "name": "ranking: parlle",
+  "setting": 2,
+  "steps": [
+   {
+    "type": "e parlle"
+   }
+  ]
+ },
+ {
+  "name": "ranking: parlle (auto-correct on)",
+  "setting": 3,
+  "steps": [
+   {
+    "type": "e parlle"
+   },
+   {
+    "key": "K_SPACE"
+   }
+  ]
  }
 ]
