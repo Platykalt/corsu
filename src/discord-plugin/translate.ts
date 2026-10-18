@@ -19,7 +19,7 @@ export function setCorrections(value: Record<string, string> | undefined) {
 // with this file's way of reading the page; the fingerprint is computed from the dictionary itself (its entry count
 // and two sums of FNV-1a hashes over each key and value's UTF-16 code units, which do not depend on the order of the
 // entries), so it can be compared with the dictionary.json of any build.
-export const translatorRevision = "2026-10-activity-2";
+export const translatorRevision = "2026-10-origin-1";
 let fingerprint: string | undefined;
 
 export function dictionaryFingerprint(): string {
@@ -150,15 +150,20 @@ function collectActivity(value: unknown, into: Set<string>, depth: number) {
 const activityDepth = 20;
 const hasActivity = (props: any) => activityKeys.some(key => Object.hasOwn(props, key))
     || Object.hasOwn(props, "voiceChannel") || Object.hasOwn(props, "voiceStatusChannel");
+// A component given one activity (`activity`, `customStatusActivity`, `game`) draws that activity: a card in a
+// profile, the status line itself. What it draws a few levels below is that activity, whatever class it has.
+const presenceDepth = 8;
+const hasOneActivity = (props: any) => ["activity", "customStatusActivity", "game"].some(key => Object.hasOwn(props, key));
 
 // What the components that render this node know: the names in their records and the texts of the activities they
-// show (`names`), and whether one of them is close enough to be the activity status itself (`activity`).
-export function origin(node: Node | null): { names: Set<string>; activity: boolean; } {
+// show (`names`), whether one of them is close enough to be the activity status itself (`activity`), and whether the
+// node is drawn by a component given one activity (`presence`).
+export function origin(node: Node | null): { names: Set<string>; activity: boolean; presence: boolean; } {
     const names = new Set<string>();
-    let activity = false;
+    let activity = false, presence = false;
     let host: Node | null = node;
     while (host && !fiberOf(host)) host = host.parentNode;
-    if (!host) return { names, activity };
+    if (!host) return { names, activity, presence };
     for (let fiber of currentFibers(host, fiberOf(host))) {
         for (let depth = 0; fiber && depth < 40; depth++, fiber = fiber.return) {
             const props = fiber.memoizedProps;
@@ -171,10 +176,43 @@ export function origin(node: Node | null): { names: Set<string>; activity: boole
                 if (Object.hasOwn(props, key)) collectActivity(props[key], names, 0);
             }
             if (depth < activityDepth && hasActivity(props)) activity = true;
+            if (depth < presenceDepth && hasOneActivity(props)) presence = true;
         }
     }
-    return { names, activity };
+    return { names, activity, presence };
 }
+
+// In an activity or presence area, a text is translated only when it is one of the labels Discord itself writes
+// there. Anything else may come from the activity even when it differs from the records: Discord can show a game
+// under another name than its record's (a detectable application's name, a renamed game), so "Control" there is kept
+// even when the record says "control.exe". The labels are those of Discord's activity components (its public web
+// client, October 2026: the status line, the call and stage labels, the activity cards and their buttons), in French
+// and English; the templates take any value, since the value itself is copied as it is.
+const activityLabels = new Set([
+    "Dans un appel", "In a call", "Dans un salon vocal", "In voice", "In a Voice Channel", "Dans une conférence",
+    "In a stage", "Dans un salon de conférence", "In a Stage Channel", "Écoute une conférence", "Listening to a Stage",
+    "En pleine activité", "In Activity", "En partage d'écran", "Sharing their screen", "En direct", "Streaming", "Live",
+    "Live Now", "En stream depuis la console", "Streaming from console", "Joue à", "Playing", "Écoute", "Listening to",
+    "Regarde", "Watching", "Joue en partie classée à", "Competing in", "A récemment joué à", "Recently Played",
+    "En cours", "Active Now", "Rejoindre", "Join", "Demander à rejoindre", "Ask to Join", "Regarder", "Watch", "Écouter",
+    "Listen In", "Jouer", "Play", "Quitter l'activité", "Leave Activity", "Invitation à rejoindre", "Invite to Join",
+    "Rejoindre le salon vocal", "Join Voice", "Rejoint", "Joined", "Voir le profil du jeu", "View Game Profile",
+    "Lancer le jeu", "Launch Game", "Essayer le jeu", "Try Game", "Le plus joué", "Most played", "Nouveau joueur",
+    "New Player", "Nouvelle sortie", "New Release"
+].map(label => normalize(label).toLowerCase()));
+const activityTemplates = new Set([
+    "Joue à {}", "Playing {}", "Écoute {}", "Listening to {}", "Regarde {}", "Watching {}", "Participant à : {}",
+    "Competing in {}", "Streame {}", "Streaming {}", "En direct sur {}", "Live on {}", "Joue sur {}", "Playing on {}",
+    "Écoute quelque chose sur {}", "Listening on {}", "Regarde sur {}", "Watching on {}", "Joue en compétition sur {}",
+    "Competing on {}", "Stream de {}", "Stream {}", "Dans un salon vocal, {}", "In Voice, {}", "Dans un appel ({})",
+    "In a call ({})", "({} sur {})", "({} of {})", "Joue depuis {} minutes", "Playing for {} minutes",
+    "Joue depuis {} heures", "Playing for {} hours"
+].map(template => normalize(template).toLowerCase()));
+const templateShape = (key: string) => normalize(key).replace(/\u0000\d+\u0000/g, "{}").toLowerCase();
+
+// Set by translateLabel for one label of an activity or presence area: only the labels above apply.
+let strict = false;
+const activityLabel = (text: string) => activityLabels.has(normalize(text).trim().toLowerCase());
 
 // The names the components that render this node know about, with the activities they show; empty outside React
 // (and in tests without it).
@@ -185,22 +223,27 @@ export function userNames(node: Node | null): Set<string> {
 // Discord's activity status in a list (direct messages, friends, members, the account panel): the line under a
 // person's name. The activity texts are inside a name rule ([class*="activity"], or the link of a direct message), but
 // besides the values from the records it holds Discord's own labels: "In a call", "In a voice channel", "Playing
-// {game}" in its tooltip. Those are translated when the React records show where the line comes from, every value from
-// the records and every name staying as written; without them (or in the person's name above) only templates and dates
-// apply, as before.
+// {game}" in its tooltip. When the React records show where the line comes from, those labels (and only those, see
+// activityLabels) are translated, every value from the records and every name staying as written; without them (or in
+// the person's name above) only templates and dates apply, as before.
 const statusArea = '[class*="activity"],[class*="subText"],[class*="subtext"],[class*="statusText"]';
 const nameHolder = '[class*="username"],[class*="displayName"],[class*="nickname"],[class*="globalName"],' +
     '[class*="channelName"],[class*="guildName"],[class*="roleName"],[class*="threadName"],[class*="nameTag"],[class*="name_"]';
 
-function activityLabel(element: Element, node: Node): Set<string> | undefined {
+// Where a text sits, from the React records above it and the page around it: in an activity or presence area
+// (`presence`: the activity status line with its records, or what a component given one activity draws), in a name
+// (`name`: a name rule, or a name holder inside the activity line), with the names and activity values to keep.
+type Place = { presence: boolean; name: boolean; names: Set<string>; };
+
+function place(element: Element, node: Node): Place {
+    const found = origin(node);
     const scope = element.closest(statusArea);
-    if (!scope) return undefined;
     // A name inside the line (the link of a direct message around it is named "channelNameFade", so only what is
     // between the text and the line counts).
     const holder = element.closest(nameHolder);
-    if (holder && scope.contains(holder)) return undefined;
-    const found = origin(node);
-    return found.activity ? found.names : undefined;
+    const presence = found.presence || Boolean(scope && found.activity);
+    const name = presence ? Boolean(holder && (!scope || scope.contains(holder))) : Boolean(element.closest(nameArea));
+    return { presence, name, names: found.names };
 }
 
 // Discord's typing indicator writes the names of the people typing in <strong>, from its own store: its props only
@@ -255,6 +298,8 @@ function translateDate(text: string): string | undefined {
     if (kept(text)) return undefined;
     const ago = relativeTime(text);
     if (ago) return ago;
+    // A game can be called "Mars 2": in an activity area only Discord's relative times are read as dates.
+    if (strict) return undefined;
     if (!/\d/.test(text) || !/^[\p{L}\d\s:,./’'-]+$/u.test(text)) return undefined;
     let changed = false;
     const result = text.replace(/ dernier à /g, () => { changed = true; return " scorsu à "; }).replace(datePattern, word => {
@@ -302,12 +347,18 @@ function fromTemplate(text: string): string | undefined {
     const words = key.trim().split(/\s+/);
     const candidates = [...(templateIndex().get("^" + words[0]?.toLowerCase()) ?? []),
         ...(templateIndex().get("$" + words[words.length - 1]?.toLowerCase()) ?? [])].sort((a, b) => b.fixed - a.fixed);
-    for (const { pattern, value, fixed } of candidates) {
+    for (const { pattern, value, fixed, key: source } of candidates) {
         const match = key.match(pattern);
         // Too little fixed text ("Send {x}") would match labels that only start the same way; such short templates
         // apply only when what they capture is a number ("{count} mentions").
         // A value Discord's records give for this node (a name, a game) also counts: "Playing {game}" with the game.
-        if (match && fixed < 12 && !match.slice(1).every(group => /^[\d\s.,\u00a0\u202f+]+$/.test(group) || kept(group) || nameToken.test(group.trim()))) continue;
+        // In an activity area a template applies only when it is one of Discord's activity labels or when what it
+        // captures is known: "{a} de {b}" must not take a game called "Bobby de Paris".
+        const known = () => match!.slice(1).every(group => /^[\d\s.,\u00a0\u202f+]+$/.test(group) || kept(group) || nameToken.test(group.trim()));
+        // Discord's own activity templates there take any value: "Joue à {game}" with a game shown under another name.
+        const discord = match && strict && activityTemplates.has(templateShape(source));
+        if (match && strict && !discord && !known()) continue;
+        if (match && fixed < 12 && !discord && !known()) continue;
         if (match) return value.replace(/\u0000(\d+)\u0000/g, (_, n) => match[Number(n)] ?? "");
     }
     return undefined;
@@ -350,6 +401,7 @@ function ellipsis(key: string): string | undefined {
 
 function direct(text: string): string | undefined {
     if (kept(text)) return undefined;
+    if (strict && !activityLabel(text)) return undefined;
     const key = normalize(text);
     if (Object.hasOwn(corrections, key)) return corrections[key];
     if (Object.hasOwn(words, key)) return words[key];
@@ -442,10 +494,16 @@ function rebreak(translated: string, lines: string[]): string {
 }
 
 // Inside names only templates and dates apply, so a name that happens to be a dictionary word stays as it is.
-function nameLabel(value: string): string {
+function nameLabel(value: string, presence = false): string {
     const match = value.match(/^(\s*)(.*?)(\s*)$/s);
     if (!match || !match[2]) return value;
-    const result = fromTemplate(match[2]) ?? translateDate(match[2]);
+    let result: string | undefined;
+    strict = presence;
+    try {
+        result = fromTemplate(match[2]) ?? translateDate(match[2]);
+    } finally {
+        strict = false;
+    }
     return result === undefined ? value : match[1] + result + match[3];
 }
 
@@ -470,7 +528,8 @@ function maskNames(core: string, names: Set<string>): [string, string[]] {
     return [text, masked];
 }
 
-export function translateLabel(value: string, names: Set<string> = new Set()): string {
+// `presence`: the label is in an activity or presence area, where only Discord's activity labels apply.
+export function translateLabel(value: string, names: Set<string> = new Set(), presence = false): string {
     const match = value.match(/^(\s*)(.*?)(\s*)$/s);
     if (!match || !match[2]) return value;
     const [, before, core, after] = match;
@@ -478,11 +537,13 @@ export function translateLabel(value: string, names: Set<string> = new Set()): s
     if (folded.has(normalize(core).toLowerCase())) return value;
     const [masked, cut] = maskNames(core, names);
     keep = folded;
+    strict = presence;
     let result: string | undefined;
     try {
         result = resolve(masked);
     } finally {
         keep = new Set();
+        strict = false;
     }
     if (result !== undefined) result = result.replace(/\{\$corsuName(\d+)\}/g, (token, n) => cut[Number(n) - 1] ?? token);
     if (result === undefined || result === core) return value;
@@ -492,12 +553,12 @@ export function translateLabel(value: string, names: Set<string> = new Set()): s
     return before + result + after;
 }
 
-// A text or attribute of `element`: inside a name rule only templates and dates apply, except on an activity status line
-// whose records are known; elsewhere the label is translated around the names and activities it holds.
+// A text or attribute of `element`: inside a name rule only templates and dates apply; in an activity or presence
+// area only Discord's activity labels; elsewhere the label is translated around the names and activities it holds.
 function label(value: string, element: Element, node: Node): string {
-    if (!element.closest(nameArea)) return translateLabel(value, userNames(node));
-    const values = activityLabel(element, node);
-    return values ? translateLabel(value, values) : nameLabel(value);
+    const where = place(element, node);
+    if (where.name) return nameLabel(value, where.presence);
+    return translateLabel(value, where.names, where.presence);
 }
 
 type Finding = { kind: string; rule?: string; text?: string; };
@@ -610,14 +671,19 @@ export function createTranslator(doc: Document, options: { showOriginal?: () => 
     }
 
     // Diagnostic (off unless the hidden reportMissing option is on): the visible texts and interface attributes that
-    // were left as they are, each with the reason. It is written not to give what people wrote or chose:
+    // were left as they are, each with the reason. What people write or choose never shows in it, and this is decided
+    // by where a text comes from, not by its words: a name can be a dictionary word ("Work", "Error", "Message").
     // - text inside what people write (messages, bios, statuses, embeds, the text being typed) is only counted;
-    // - a text equal to a name or an activity value from the React records around it is only counted, and inside a
-    //   longer text those values are replaced by {name};
-    // - a text kept by a name rule is only counted, with the rule: a nickname can also be a dictionary word;
-    // - any other text is given word by word: a word that no dictionary entry uses becomes {?} and digits become #,
-    //   and a text where such words are the majority is only counted. A name made only of dictionary words ("Paris",
-    //   "Rose") can still show: it cannot be told from an interface label.
+    // - a text equal to a name or an activity value from the React records around it is only counted;
+    // - a text from a personal area is never given, even when the dictionary knows it: names (the name rules, the
+    //   names in the typing indicator), the activity and presence areas (a game can be shown under another name than
+    //   its record's), any element whose class speaks of a name, a tag, a status, an activity, an account or pronouns,
+    //   and a heading above records of people, servers or channels (a conversation's title). Only the kind of finding
+    //   and the rule are given, except for Discord's own activity labels (activityLabels), which are given as they are;
+    // - any other text is given with every name and activity value from the records around it replaced by {name},
+    //   whole or word by word (so that part of a name does not show either), then word by word: a word that no
+    //   dictionary entry uses becomes {?} and digits become #, and a text where such words are the majority is only
+    //   counted. The report is only written to the local console, and only when asked for.
     // Each finding has a kind:
     //   missing      not in the dictionary;
     //   unapplied    in the dictionary, nothing protects it, yet it is shown untranslated (never seen by the translator);
@@ -627,12 +693,23 @@ export function createTranslator(doc: Document, options: { showOriginal?: () => 
     // The report also says which translator and dictionary are loaded, and counts what was rightly left alone.
     const reported = new Set<string>();
     const looksLikeText = /[éèêàçùûôîâ]|\b(le|la|les|des|un|une|de|du|et|à|en|pour|the|and|to|of|your|in|on)\b|^[A-Z][a-zé]+$/i;
+    const personalArea = [...nameRules, statusArea, nameHolder, '[class*="Name"]', '[class*="nick"]', '[class*="Nick"]',
+        '[class*="tag"]', '[class*="Tag"]', '[class*="status"]', '[class*="Status"]', '[class*="Activity"]',
+        '[class*="presence"]', '[class*="Presence"]', '[class*="account"]', '[class*="Account"]', '[class*="pronoun"]',
+        '[class*="Pronoun"]'].join(",");
+    const heading = 'h1,h2,h3,h4,[class*="title"],[class*="Title"],[class*="header"],[class*="Header"]';
 
     function redact(text: string, names: Set<string>): string | undefined {
         let result = text;
-        for (const name of Array.from(names).sort((a, b) => b.length - a.length)) {
+        const values = Array.from(names).sort((a, b) => b.length - a.length);
+        for (const name of values) {
             if (name.length < 2) continue;
             result = result.replace(new RegExp(`(?<![\\p{L}\\p{N}])${escape(name)}(?![\\p{L}\\p{N}])`, "giu"), "{name}");
+        }
+        // Then each word of a name or value on its own: a label can show part of a name ("Work" of "Work Error").
+        const parts = new Set(values.flatMap(name => normalize(name).toLowerCase().match(/[\p{L}\p{N}]{2,}/gu) ?? []));
+        if (parts.size) {
+            result = result.replace(/\{name\}|[\p{L}\p{N}]+/gu, word => parts.has(normalize(word).toLowerCase()) ? "{name}" : word);
         }
         return scrub(result);
     }
@@ -689,8 +766,16 @@ export function createTranslator(doc: Document, options: { showOriginal?: () => 
         return resolve(text, false) !== undefined ? text : undefined;
     }
 
-    function rule(element: Element): string | undefined {
-        return nameRules.find(selector => element.closest(selector));
+    // In a personal area, only Discord's own activity labels and templates (without their values) may be given.
+    function discordLabel(text: string): string | undefined {
+        if (activityLabel(text)) return text;
+        const template = nearTemplate(text);
+        return template && activityTemplates.has(normalize(template).replace(/\{\d+\}/g, "{}").toLowerCase()) ? template : undefined;
+    }
+
+    function rule(element: Element, where: Place, typing: boolean): string {
+        return (where.presence ? "activity origin" : undefined) ?? nameRules.find(selector => element.closest(selector))
+            ?? (typing ? "typing indicator" : "personal area");
     }
 
     // `saved`: what the translator last wrote there, if it ever did.
@@ -701,11 +786,15 @@ export function createTranslator(doc: Document, options: { showOriginal?: () => 
         const count = (kind: string) => { counts[kind] = (counts[kind] ?? 0) + 1; };
         if (element.closest(contentArea)) return count("userContent");
         if (saved === shown) return count("translated");
-        const { names } = origin(node);
+        const where = place(element, node);
+        const { names } = where;
         const folded = new Set(Array.from(names, name => normalize(name).toLowerCase()));
         if (folded.has(normalize(text).toLowerCase())) return count("userValue");
+        const typing = typingName(element);
+        const personal = where.name || where.presence || typing || Boolean(element.closest(personalArea))
+            || (names.size > 0 && Boolean(element.closest(heading)));
         const lookedUp = translateLabel(text, names);
-        const applied = typingName(element) ? nameLabel(text) : label(text, element, node);
+        const applied = typing ? nameLabel(text) : label(text, element, node);
         const add = (finding: Finding) => {
             const id = finding.kind + "\u0001" + (finding.rule ?? "") + "\u0001" + (finding.text ?? "");
             count(finding.kind);
@@ -713,18 +802,20 @@ export function createTranslator(doc: Document, options: { showOriginal?: () => 
             reported.add(id);
             findings.push(finding);
         };
-        const inName = Boolean(element.closest(nameArea)) || typingName(element);
         if (lookedUp !== text) {
-            const shape = inCatalogue(text);
-            const given = shape !== undefined ? scrub(shape) : inName ? undefined : redact(text, names);
-            if (applied !== text) return add({ kind: saved === undefined ? "unapplied" : "stale", text: given });
-            // A name rule kept it: a nickname or a server name can be a dictionary word, so only the rule is given.
-            return add({ kind: "excluded", rule: rule(element) ?? "typing indicator" });
+            if (applied !== text) {
+                const kind = saved === undefined ? "unapplied" : "stale";
+                if (personal) return add({ kind, rule: rule(element, where, typing), text: discordLabel(text) });
+                const shape = inCatalogue(text);
+                return add({ kind, text: shape !== undefined && shape !== text ? redact(shape, names) : redact(text, names) });
+            }
+            // A protection kept it: a nickname, a server name or a game can be a dictionary word, so only the rule is given.
+            return add({ kind: "excluded", rule: rule(element, where, typing) });
         }
+        if (personal) return count("unknownInName");
         const template = nearTemplate(text);
         if (template) return add({ kind: "template", text: template });
         if (!looksLikeText.test(text)) return;
-        if (inName) return count("unknownInName");
         const given = redact(text, names);
         if (given === undefined) return count("missingUnreadable");
         add({ kind: "missing", text: given });

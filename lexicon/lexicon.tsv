@@ -99690,7 +99690,7 @@ Backroom|Arrière-salle|Sala di daretu
 Trophy badge|Badge trophée|Badge trofeu
 Code sent!|Code envoyé !|Codice mandatu !
 In a call|Dans un appel|In una chjama
-Message|Envoyer un MP|Mandà un MP
+|Envoyer un MP|Mandà un MP
 Mature Humour|Humour adulte|Umore adultu
 Games being played|Jeux en cours|Ghjochi in corsu
 Play Media|Lire le média|Leghje u media
@@ -100908,7 +100908,7 @@ Disable Activity Sharing|Désactiver le partage d'Activité|Disattivà a sparter
 Sent < 1 minute ago|Envoyé il y a moins d'une minute|Mandatu ci hè menu d'un minutu
 No one's here yet|Il n'y a personne pour le moment|Ùn ci hè nimu per avà
 Invite people to join you!|Invite des gens à te rejoindre !|Invita ghjente à raghjunghjeti !
-Message is at max length|Longueur max du message atteinte|Lunghezza max di u messaghju righjunta
+Message is at max length|Longueur max du message atteinte|Lunghezza massima di u messaghju righjunta
 Plan Name Unavailable|Nom de l'abonnement indisponible|Nome di l'abbunamentu indispunibule
 Open voice call actions|Ouvrir les actions d'appel vocal|Apre l'azzioni di chjama vucale
 General Server Permissions|Permissions générales de serveur|Permessi generali di servore
@@ -100968,7 +100968,7 @@ Disable persistent keys?|Désactiver les touches rémanentes ?|Disattivà i tas
 Custom app icons|Icônes d'application personnalisées|Icone d'appiecazione persunalizate
 Gallery View is here!|L'affichage en galerie est arrivé !|L'affissera in galleria hè ghjunta !
 Get upgraded emoji power!|Maîtrise tous les pouvoirs émojis !|Ammaestra tutte e putenze emoji !
-Max Users Displayed|Nombre max. d'utilisateurs affichés|Numeru max. d'utilizatori affissati
+Max Users Displayed|Nombre max. d'utilisateurs affichés|Numeru massimu d'utilizatori affissati
 Windows Default|Paramètres audio Windows par défaut|Parametri audio Windows predefiniti
 Voice Activity Priority|Priorité de la détection de la voix|Priurità di a rilevazione di a voce
 Meets Age Requirement|Respecte les exigences d'ancienneté|Rispetta l'esigenze d'anzianità
@@ -101811,7 +101811,7 @@ Unassigned|Non assigné|Micca assignatu
 Forum Channel|Salon forum|Canale foru
 Game Tags|Tags de jeu|Tag di ghjocu
 Go Online|Va en ligne|Passa cunnessu
-min required|min. requis|min. richiestu
+min required|min. requis|minimu richiestu
 Event in|Événement à|Avvenimentu à
 Nitro Preview|Aperçu Nitro|Anteprima Nitro
 Clover badge|Badge trèfle|Badge trifogliu
@@ -103999,7 +103999,7 @@ video, button|vidéo, bouton|videò, buttone
 Accept DM|Accepter le MP|Accettà u MP
 Add Sound|Ajouter un son|Aghjunghje un sonu
 Other Members|Autres membres|Altri membri
-Server Bio|Bio du serveur|Bio di u servore
+Server Bio|Bio du serveur|Biugrafia di u servore
 Switch Camera|Changer de vue|Cambià di vista
 Sexual Content|Contenu sexuel|Cuntenutu sessuale
 Email Verified|E-mail vérifié|E-mail verificatu
@@ -104243,7 +104243,7 @@ Change Background|Changer l'arrière-plan|Cambià u sfondu
 Configure limits|Configurer les limites|Cunfigurà i limiti
 Create your own widget|Crée ton propre widget|Crea u to propiu widget
 Incoming Friend Requests|Demandes d'amis reçues|Dumande d'amicu ricevute
-Inactive Time-out|Durée max d'inactivité|Durata max d'inattività
+Inactive Time-out|Durée max d'inactivité|Durata massima d'inattività
 Enter your password|Entre ton mot de passe|Stampitta a to parolla d'intesa
 Keep the fun going|Faire durer le plaisir|Fà durà u piacè
 Dismiss Events|Ignorer les événements|Ignurà l'avvenimenti
@@ -113077,7 +113077,7 @@ Your server has the perks of every level. Additional perks still need to be purc
 |{names} est dans les favoris|{names} hè in i favuriti
 |Écrire un message, {channel}|Scrive un messaghju, {channel}
 |Ajoute-moi sur Discord {link}|Aghjunghjimi nant'à Discord {link}
-|Bio du serveur de {guildName}|Bio di u servore di {guildName}
+|Bio du serveur de {guildName}|Biugrafia di u servore di {guildName}
 |Essaie 1 semaine pour {price}|Prova 1 settimana per {price}
 |Message privé avec {username}|Messaghju privatu cù {username}
 |Non récupéré depuis le {date}|Micca ricuperatu dapoi u {date}
@@ -116810,7 +116810,7 @@ Several people|Plusieurs personnes|Parechje persone
 |il y a plus de|ci hè più di
 |Utilise un geste global de droite à gauche pour activer le LaunchPad (note bien que cela désactivera la fonction Glisser-pour-répondre dans la discussion et nécessitera un geste sur le bord droit pour ramener les discussions en arrière en raison de conflits de gestes).|Usa un gestu glubale da diritta à manca per attivà u LaunchPad (nota bè chì quessu disattiverà a funzione Sguillà-per-risponde in a discussione è richiederà un gestu nant'à l'orlu drittu per rimette e discussioni in daretu per via di cunflitti di gesti).
 |Utilise un geste global de droite à gauche pour activer le LaunchPad que tu actives depuis le bord droit (sur Android, cela peut entrer en conflit avec les gestes du système si tu les as activés ; par ailleurs, bien que cela maintienne la fonction Glisser-pour-répondre activée, il peut y avoir des conflits que nous devons encore résoudre).|Usa un gestu glubale da diritta à manca per attivà u LaunchPad chì tù attivi da l'orlu drittu (nant'à Android, quessu pò entre in cunflittu cù i gesti di u sistema s'è tù l'hai attivati ; d'altronde, ancu s'ellu mantene a funzione Sguillà-per-risponde attivata, ci ponu esse cunflitti chì duvemu sempre risolve).
-|Max : {statisticName}|Mass. : {statisticName}
+|Max : {statisticName}|Massimu : {statisticName}
 |d'affilée|di fila
 |Tu es sûr(e) de vouloir quitter|Sì sicuru(a) di vulè lascià
 |? Tu ne pourras plus revenir dans ce groupe à moins d'y être invité(e) à nouveau.|? Ùn puderai più vultà in stu gruppu fora chè tù ci sia invitatu(a) torna.
@@ -118408,7 +118408,7 @@ are typing...|sont en train d'écrire...|sò à scrive...
 # Discord: labels that came from another program with another sense (Bio > Organicu, Salon > Salottu, Envoyer > Incaricà…).
 # Discord: rows of the October 2026 review, an AI second pass not yet read by a Corsican speaker; the source, evidence and
 # Discord: rows not applied are in lexicon/review-discord-2026-10.tsv.
-Bio|Bio|Bio
+Bio|Bio|Biugrafia
 Create Channel|Créer un salon|Creà un canale
 Channel Settings|Paramètres du salon|Parametri di u canale
 Edit Channel|Modifier le salon|Mudificà u canale
@@ -118459,6 +118459,21 @@ Clear after {minutes} minutes|Effacer après {minutes} minutes|Squassà dopu {mi
 Playing for {time} minutes|Joue depuis {time} minutes|Ghjoca dapoi {time} minuti
 Playing for {time} hours|Joue depuis {time} heures|Ghjoca dapoi {time} ore
 {names} from {guildName}|{names} de {guildName}|{names} di {guildName}
+# Discord: corrections of the 0.25 candidate (October 2026), each checked against where Discord shows the label (its public
+# Discord: web client) and recorded with its source in lexicon/review-discord-2026-10.tsv (applied rows): a noun read as a
+# Discord: verb, English labels taken from another program's sense, abbreviations written out, Bio as Biugrafia.
+Message|Message|Messaghju
+sec|s|s
+Sync|Synchroniser|Sincrunizà
+Playing|Joue à|Ghjoca à
+Watch|Regarder|Fighjà
+Go|Aller|Andà
+Arcade|Arcade|Arcade
+fashion|mode|moda
+Shouting|Cri|Brionu
+Banner|Bannière|Bandera
+Close Window|Fermer la fenêtre|Chjode a finestra
+No command found|Aucune commande trouvée|Nisuna cumanda trovata
 # Vencord: settings pages and plugin descriptions of Vencord, which only exist in English.
 A Vencord update is available!||Un aghjurnamentu di Vencord hè dispunibule!
 A restart is required to apply this change||Ci vole à rilancià per applicà stu cambiamentu
