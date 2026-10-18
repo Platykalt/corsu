@@ -33,27 +33,27 @@ guides and `ph_auto` in `src/app/texts-phone.js` need rewriting first.
 
 In `android.md` and `iphone.md`, French and English (four files):
 
-- [ ] **First `corsu:phone-variants` marker** (section « Dictionnaires disponibles » / "Available dictionaries"):
+- [x] **First `corsu:phone-variants` marker** (section « Dictionnaires disponibles » / "Available dictionaries"):
       replace the published row (1.0, `platykalt.co.corsu`, the 0.25.1 defects) by the three rows of the « Dans la
       prochaine version » / "In the next version" table, each with version 1.1 "(publié avec Corsu 0.26.0)" /
       "(published with Corsu 0.26.0)", its `releases/latest/download/<file>` link and its `.sha256` link. Then remove
       the « Dans la prochaine version » sub-section and the sentence that points to the candidate section.
-- [ ] Step 5 « Vérifiez le dictionnaire » / "Check the dictionary": the published name becomes « Corsu » (not
+- [x] Step 5 « Vérifiez le dictionnaire » / "Check the dictionary": the published name becomes « Corsu » (not
       `platykalt.co.corsu`); drop the parenthesis about the next version.
-- [ ] **Second `corsu:phone-variants` marker** (« Choisir un dictionnaire régional » / "Choosing a regional
+- [x] **Second `corsu:phone-variants` marker** (« Choisir un dictionnaire régional » / "Choosing a regional
       dictionary"): "With the next version, two experimental dictionaries will prefer…" becomes present tense, with
       links to the two published files; drop the paragraph that points to the candidate archive.
-- [ ] **`corsu:phone-casing` marker** (« Majuscules et début de phrase » / "Capitals and sentence start"): the bullet
+- [x] **`corsu:phone-casing` marker** (« Majuscules et début de phrase » / "Capitals and sentence start"): the bullet
       « Les suggestions perdent la majuscule… » / "Suggestions lose the capital…" becomes: suggestions keep the case
       typed, and are capitalised at a sentence start, since Corsu 0.26.0 (package 1.1); someone who still has the 1.0
       package should update (link to « Mettre à jour » / "Updating").
-- [ ] Section « Essayer le dictionnaire de la prochaine version (candidate) » / "Trying the next version's
+- [x] Section « Essayer le dictionnaire de la prochaine version (candidate) » / "Trying the next version's
       dictionary (candidate)": remove it, or keep it only if a newer candidate exists, with that run's artifact link
       and expiry date. Never leave an expired artifact link.
-- [ ] « Revenir au dictionnaire publié »: the published name and version become « Corsu », 1.1.
-- [ ] `essai-5-minutes.md`: the « Publié » column becomes the 1.1 expectations (identical to « Candidat »), or
+- [x] « Revenir au dictionnaire publié »: the published name and version become « Corsu », 1.1.
+- [x] `essai-5-minutes.md`: the « Publié » column becomes the 1.1 expectations (identical to « Candidat »), or
       the two columns merge; update the expiry date or remove the candidate artifact link.
-- [ ] Keep the markers (with their comment updated to describe the new state) for the next release.
+- [x] Keep the markers (with their comment updated to describe the new state) for the next release.
 
 ## 3. README.md (owned by the lead / the README agent)
 

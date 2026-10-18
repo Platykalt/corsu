@@ -22,26 +22,19 @@ official help and the translation files of that version; another version may cha
 
 ## Available dictionaries
 
-<!-- corsu:phone-variants:en The files really attached to the latest published release. When the next version is
-     published, move here the rows of the "In the next version" table that it carries. -->
+<!-- corsu:phone-variants:en The files really attached to the latest published release (Corsu 0.26.0: the three
+     1.1 packages). When a later version is published, list here only the files it carries. -->
 | File | Name in Keyman | Version | Content | Download |
 | --- | --- | --- | --- | --- |
-| `corsu-keyboard.kmp` | `platykalt.co.corsu` | 1.0 (published with Corsu 0.25.1) | general dictionary, 19,805 words taken from Corsu's lexicon; loses the capital letters of words and still holds a few stray words (English words, product names, fragments), defects fixed in the next version | [latest published release](https://github.com/Platykalt/corsu/releases/latest/download/corsu-keyboard.kmp) ([SHA-256 checksum](https://github.com/Platykalt/corsu/releases/latest/download/corsu-keyboard.kmp.sha256)) |
+| `corsu-keyboard.kmp` | Corsu | 1.1 (published with Corsu 0.26.0) | general dictionary: the shared vocabulary, 13,213 words (stray words removed), no regional preference; keeps the capital letters of words | [latest published release](https://github.com/Platykalt/corsu/releases/latest/download/corsu-keyboard.kmp) ([SHA-256 checksum](https://github.com/Platykalt/corsu/releases/latest/download/corsu-keyboard.kmp.sha256)) |
+| `corsu-keyboard-cismuntincu.kmp` | Corsu – Cismuntincu (experimental) | 1.1 (published with Corsu 0.26.0) | the same vocabulary, preferring the forms of the Cismonte; experimental, the regional forms cover only part of the words (361 words weighted differently) | [latest published release](https://github.com/Platykalt/corsu/releases/latest/download/corsu-keyboard-cismuntincu.kmp) ([SHA-256 checksum](https://github.com/Platykalt/corsu/releases/latest/download/corsu-keyboard-cismuntincu.kmp.sha256)) |
+| `corsu-keyboard-pumuntincu.kmp` | Corsu – Pumuntincu (experimental) | 1.1 (published with Corsu 0.26.0) | the same vocabulary, preferring the forms of the Pumonte; experimental, same limit | [latest published release](https://github.com/Platykalt/corsu/releases/latest/download/corsu-keyboard-pumuntincu.kmp) ([SHA-256 checksum](https://github.com/Platykalt/corsu/releases/latest/download/corsu-keyboard-pumuntincu.kmp.sha256)) |
 
 "Version" is the dictionary package's version, which Keyman shows (see step 5); it does not follow Corsu's version
 numbers.
 
-### In the next version (not published yet)
-
-| File | Name in Keyman | Version | Content |
-| --- | --- | --- | --- |
-| `corsu-keyboard.kmp` | Corsu | 1.1 | the shared vocabulary, about 13,000 words (stray words removed), no regional preference; keeps the capital letters of words |
-| `corsu-keyboard-cismuntincu.kmp` | Corsu – Cismuntincu (experimental) | 1.1 | the same vocabulary, preferring the forms of the Cismonte; experimental, the regional forms cover only part of the words (361 words weighted differently) |
-| `corsu-keyboard-pumuntincu.kmp` | Corsu – Pumuntincu (experimental) | 1.1 | the same vocabulary, preferring the forms of the Pumonte; experimental, same limit |
-
 All three are for the Corsican language (`co`) and the EuroLatin (SIL) keyboard. One is enough: see
-[Choosing a regional dictionary](#choosing-a-regional-dictionary). To try them before they are published:
-[Trying the next version's dictionary (candidate)](#trying-the-next-versions-dictionary-candidate).
+[Choosing a regional dictionary](#choosing-a-regional-dictionary).
 
 ## Install
 
@@ -62,10 +55,10 @@ All three are for the Corsican language (`co`) and the EuroLatin (SIL) keyboard.
    file**, then pick `corsu-keyboard.kmp` in Downloads. If Android asks for access to files, allow it (Keyman asks
    only once). Keyman shows the "Corsu" package and its version: tap **Install**, then **OK** after the welcome page.
 5. **Check the dictionary.** **Settings** › **Installed languages** › **Corsican**: at the bottom of the screen,
-   **Dictionary** names the active dictionary, `platykalt.co.corsu` for the package published today ("Corsu" for the
-   next version's). To see its version, tap **Dictionary**, then the checked dictionary: the "Dictionary: …" screen
-   shows the **Dictionary version** (Keyman shows the package's version there), to compare with the
-   [Available dictionaries](#available-dictionaries) table. Go back without tapping **Uninstall dictionary**.
+   **Dictionary** names the active dictionary: "Corsu" for the general dictionary. To see its version, tap
+   **Dictionary**, then the checked dictionary: the "Dictionary: …" screen shows the **Dictionary version** (Keyman
+   shows the package's version there), to compare with the [Available dictionaries](#available-dictionaries) table. Go
+   back without tapping **Uninstall dictionary**.
 6. **Set suggestions** on the same screen. Keyman 18.0 offers three choices: *Disable suggestions*, *Predictions
    only* (words suggested, no corrections) and *Predictions with corrections* (words suggested and typos corrected).
    Choose **Predictions with corrections**. There is no automatic correction in this version: see
@@ -83,50 +76,30 @@ Download the new file and install it as in step 4, **under the same name** `cors
 package's identity from the file name: if the browser added a suffix (`corsu-keyboard(1).kmp`,
 `corsu-keyboard (1).kmp`), rename the file before installing it, or delete the old download first. Your settings are
 kept. **Then restart Keyman**: until then, the old dictionary keeps answering. To restart it, switch to another
-keyboard and back to Keyman, or force-stop the Keyman app in Android's settings. Then check the version as in step 5.
-
-## Trying the next version's dictionary (candidate)
-
-The next Corsu version's dictionary (package **version 1.1**, named **"Corsu"** in Keyman) is not published yet. You
-can try it beforehand: the project's build pipeline (GitHub Actions) produces it on every change. It is not a
-published release: it may still change, and it was only tried on an Android 14 emulator, not on a
-real phone.
-
-1. **Sign in to GitHub** in the phone's browser (a free account is enough): GitHub only hands these files to signed-in
-   accounts (signed out, the link shows a "404" page).
-2. **Download the archive** [keyboard-packages](https://github.com/Platykalt/corsu/actions/runs/39161059937/artifacts/12149352996) (commit `146d2cf` on `next-0.26`) (opening the link starts the download). It arrives as `keyboard-packages.zip`.
-   GitHub deletes it after 90 days (on 16 January 2027); a newer link will then be given here.
-3. **Extract it** with the phone's files app (Files by Google: tap the `.zip` file, then **Extract**). The folder you get holds `corsu-keyboard.kmp`, `corsu-keyboard-cismuntincu.kmp`,
-   `corsu-keyboard-pumuntincu.kmp` and their `.sha256` checksums. For the general dictionary, take
-   **`corsu-keyboard.kmp`**, without renaming it.
-4. **First remove the installed dictionary**: **Settings** › **Installed languages** › **Corsican** ›
-   **Dictionary** › the checked dictionary › **Uninstall dictionary** › **Delete**. Restart Keyman (see [Updating](#updating)).
-5. **Install** `corsu-keyboard.kmp` from the extracted folder as in step 4 (**Install from local
-   file**). The package screen should show "Corsu" and version 1.1.
-6. **Restart Keyman, then check** as in step 5: **Dictionary** names "Corsu" (not
-   `platykalt.co.corsu`), and the **Dictionary version** is 1.1. In the middle of a
-   sentence, type `Ecc`: the banner should suggest "Eccu" with its capital (the published dictionary suggests "eccu").
-
-**Going back to the published dictionary**: uninstall "Corsu" the same way (step 4 above), restart Keyman, then
-install `corsu-keyboard.kmp` downloaded from the [published link](https://github.com/Platykalt/corsu/releases/latest/download/corsu-keyboard.kmp)
-(steps 3 and 4 of [Install](#install)). After another restart, **Dictionary** names `platykalt.co.corsu` again, version 1.0.
+keyboard and back to Keyman, or force-stop the Keyman app in Android's settings. Then check the version as in step 5:
+1.1 for the packages published with Corsu 0.26.0. A dictionary installed before Corsu 0.26.0 is named
+`platykalt.co.corsu` in Keyman, version 1.0: update it.
 
 The full test list with expected results is in French: [Essai en 5 minutes](../../fr/telephone/essai-5-minutes.md).
 
 ## Choosing a regional dictionary
 
-<!-- corsu:phone-variants:en The regional variants come with the next version. -->
-With the next version, two experimental dictionaries will prefer the forms of the Cismonte or of the Pumonte. On
-Android, **only one dictionary is active per language: the first one installed**. Installing a second Corsu package
-adds it to the list, but the old one stays active. To switch:
+<!-- corsu:phone-variants:en Both regional variants are published since Corsu 0.26.0 (1.1 packages). -->
+Two experimental dictionaries prefer the forms of the Cismonte or of the Pumonte:
+[corsu-keyboard-cismuntincu.kmp](https://github.com/Platykalt/corsu/releases/latest/download/corsu-keyboard-cismuntincu.kmp)
+and
+[corsu-keyboard-pumuntincu.kmp](https://github.com/Platykalt/corsu/releases/latest/download/corsu-keyboard-pumuntincu.kmp)
+(same vocabulary, partial coverage: see [Available dictionaries](#available-dictionaries)). Keep their exact file
+names. On Android, **only one dictionary is active per language: the first one installed**. Installing a second Corsu
+package adds it to the list, but the old one stays active. To switch:
 
 1. **Settings** › **Installed languages** › **Corsican** › **Dictionary** › the active dictionary › **Uninstall
    dictionary**;
 2. install the package you want (step 4) if it is not installed yet;
 3. restart Keyman (see [Updating](#updating)), then check the name shown (step 5).
 
-Before they are published, both variants are in the same archive as the candidate dictionary: see
-[Trying the next version's dictionary](#trying-the-next-versions-dictionary-candidate).
+To go back to the general dictionary, do the same with `corsu-keyboard.kmp`: **Dictionary** then names "Corsu",
+version 1.1.
 
 ## Capitals and sentence start
 
@@ -134,10 +107,11 @@ Before they are published, both variants are in the same archive as the candidat
   at the start of a field and after `.`, `?` or `!` followed by a space. It does not turn on after a line break
   without punctuation, nor after `."`; it wrongly turns on after `M. `. There is no setting to turn it off: tap Shift
   to cancel it.
-- **Suggestions lose the capital** with the published release's dictionary: `Ecc` can become "eccu". This is fixed
-  in the next version's packages, which keep the typed case ("Eccu") and capitalise suggestions at the start of a
-  sentence. Meanwhile, finish the word on the keyboard or put the capital back.
-  <!-- corsu:phone-casing At release time: say it is fixed in the published release. -->
+- **Suggestions keep the case you typed** since Corsu 0.26.0 (1.1 packages): in the middle of a sentence, `Ecc`
+  suggests "Eccu", and at the start of a sentence suggestions are capitalised. With the old 1.0 package (named
+  `platykalt.co.corsu` in Keyman), `Ecc` could become "eccu": if you still have it, [update it](#updating), then
+  restart Keyman.
+  <!-- corsu:phone-casing Fixed since Corsu 0.26.0 (package 1.1); the 1.0 package lost the capital. -->
 
 ## Automatic correction
 
@@ -147,7 +121,8 @@ when you tap them. The Corsu dictionary does not control this setting. Keyman 19
 stays optional. In our tests of the 19.0.309 beta's engine (outside the app), a word that is in the dictionary is
 always kept as typed, but a missing word may be replaced: a name by a close name ("Bastelicaccia" by "Bastilicaccia"
 when only the latter is in the dictionary), or a lowercase word by the name spelled the same ("corti" by "Corti" when
-"corti" is missing). The next version of the dictionary has these forms ("Bastelicaccia", "corti" next to "Corti", "Vizzani", acronyms such as "ADECEC"); a word still missing, a street name for instance, may still be replaced.
+"corti" is missing). The 1.1 dictionary (Corsu 0.26.0) has these forms ("Bastelicaccia", "corti" next to "Corti",
+"Vizzani", acronyms such as "ADECEC"); a word still missing, a street name for instance, may still be replaced.
 
 ## Returning to a word
 
@@ -155,17 +130,17 @@ Moving the cursor changes nothing in the text. Suggestions follow the part of th
 
 - **Cursor at the end of the word**: the chosen suggestion replaces the whole word. This is the safe gesture, whatever
   the dictionary.
-- **Cursor inside the word**, with the published dictionary (1.0): the suggestion replaces only the part left of the
-  cursor, and the end of the old word stays on its right. In "Dopu ell|a vene", choosing "ellu" gives
-  "Dopu ellu a vene": that "a" is not an added word but the end of "ella", to be deleted by hand. Likewise, `ca|sa`
-  then "casa" gives "casa sa". Keyman does not delete anything right of the cursor by itself.
-- **Cursor inside the word**, with the next version's dictionary (1.1): the suggestion replaces the whole word,
-  "Dopu ellu vene". The dictionary asks Keyman to delete the end of the word, which Keyman for Android does. Observed
-  in the engine of Keyman 18.0.254 and 19.0.309 (beta) and in the Keyman 18.0.254 app on an Android 14 emulator, not
-  on a phone.
+- **Cursor inside the word**, with the 1.1 dictionary (published with Corsu 0.26.0): the suggestion replaces the
+  whole word. In "Dopu ell|a vene", choosing "ellu" gives "Dopu ellu vene". The dictionary asks Keyman to delete the
+  end of the word, which Keyman for Android does. Observed in the engine of Keyman 18.0.254 and 19.0.309 (beta) and
+  in the Keyman 18.0.254 app on an Android 14 emulator, not on a phone.
   Two Keyman limits remain: if the word is followed by punctuation, a space is added before it (`Aiacc|iu.` then
   "Aiacciu" gives "Aiacciu ."); and the undo Keyman offers right after (backspace, then the word in quotes) does not
   bring back the end of the old word.
+- **Cursor inside the word**, with the old 1.0 dictionary (`platykalt.co.corsu`, before Corsu 0.26.0): the suggestion
+  replaces only the part left of the cursor, and the end of the old word stays on its right: "Dopu ellu a vene",
+  where that "a" is the end of "ella", to be deleted by hand; likewise, `ca|sa` then "casa" gives "casa sa".
+  [Update it](#updating).
 - **After adding or deleting a letter inside the word**, it is the same case: suggestions follow the part left of the
   cursor, and the rule above applies.
 - **Selected word**: type the first letters of the word you want (they replace the selection), then pick the

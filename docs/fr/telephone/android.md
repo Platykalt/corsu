@@ -23,26 +23,19 @@ n'y a pas de captures d'écran.
 
 ## Dictionnaires disponibles
 
-<!-- corsu:phone-variants:fr Fichiers réellement joints à la dernière version publiée. À la publication de la
-     prochaine version, déplacer ici les lignes du tableau « Dans la prochaine version » qu'elle contient. -->
+<!-- corsu:phone-variants:fr Fichiers réellement joints à la dernière version publiée (Corsu 0.26.0 : les trois
+     paquets 1.1). À la publication d'une version suivante, ne lister ici que les fichiers qu'elle contient. -->
 | Fichier | Nom dans Keyman | Version | Contenu | Téléchargement |
 | --- | --- | --- | --- | --- |
-| `corsu-keyboard.kmp` | `platykalt.co.corsu` | 1.0 (publié avec Corsu 0.25.1) | dictionnaire général, 19 805 mots tirés du lexique de Corsu ; perd la majuscule des mots et garde quelques mots parasites (mots anglais, noms de produits, fragments), défauts corrigés dans la prochaine version | [dernière version publiée](https://github.com/Platykalt/corsu/releases/latest/download/corsu-keyboard.kmp) ([empreinte SHA-256](https://github.com/Platykalt/corsu/releases/latest/download/corsu-keyboard.kmp.sha256)) |
+| `corsu-keyboard.kmp` | Corsu | 1.1 (publié avec Corsu 0.26.0) | dictionnaire général : le vocabulaire commun, 13 213 mots (mots parasites retirés), sans préférence régionale ; garde la majuscule des mots | [dernière version publiée](https://github.com/Platykalt/corsu/releases/latest/download/corsu-keyboard.kmp) ([empreinte SHA-256](https://github.com/Platykalt/corsu/releases/latest/download/corsu-keyboard.kmp.sha256)) |
+| `corsu-keyboard-cismuntincu.kmp` | Corsu – Cismuntincu (experimental) | 1.1 (publié avec Corsu 0.26.0) | le même vocabulaire, avec une préférence pour les formes du Cismonte ; expérimental, les formes régionales ne couvrent qu'une partie des mots (361 mots pondérés autrement) | [dernière version publiée](https://github.com/Platykalt/corsu/releases/latest/download/corsu-keyboard-cismuntincu.kmp) ([empreinte SHA-256](https://github.com/Platykalt/corsu/releases/latest/download/corsu-keyboard-cismuntincu.kmp.sha256)) |
+| `corsu-keyboard-pumuntincu.kmp` | Corsu – Pumuntincu (experimental) | 1.1 (publié avec Corsu 0.26.0) | le même vocabulaire, avec une préférence pour les formes du Pumonte ; expérimental, même limite | [dernière version publiée](https://github.com/Platykalt/corsu/releases/latest/download/corsu-keyboard-pumuntincu.kmp) ([empreinte SHA-256](https://github.com/Platykalt/corsu/releases/latest/download/corsu-keyboard-pumuntincu.kmp.sha256)) |
 
 « Version » est la version du paquet du dictionnaire, que Keyman affiche (voir l'étape 5) ; elle ne suit pas les
 numéros de version de Corsu.
 
-### Dans la prochaine version (pas encore publiée)
-
-| Fichier | Nom dans Keyman | Version | Contenu |
-| --- | --- | --- | --- |
-| `corsu-keyboard.kmp` | Corsu | 1.1 | le vocabulaire commun, environ 13 000 mots (mots parasites retirés), sans préférence régionale ; garde la majuscule des mots |
-| `corsu-keyboard-cismuntincu.kmp` | Corsu – Cismuntincu (experimental) | 1.1 | le même vocabulaire, avec une préférence pour les formes du Cismonte ; expérimental, les formes régionales ne couvrent qu'une partie des mots (361 mots pondérés autrement) |
-| `corsu-keyboard-pumuntincu.kmp` | Corsu – Pumuntincu (experimental) | 1.1 | le même vocabulaire, avec une préférence pour les formes du Pumonte ; expérimental, même limite |
-
 Les trois sont pour la langue Corsican (`co`) et le clavier EuroLatin (SIL). Un seul suffit : voir
-[Choisir un dictionnaire régional](#choisir-un-dictionnaire-régional). Pour les essayer avant leur publication :
-[Essayer le dictionnaire de la prochaine version (candidate)](#essayer-le-dictionnaire-de-la-prochaine-version-candidate).
+[Choisir un dictionnaire régional](#choisir-un-dictionnaire-régional).
 
 ## Installer
 
@@ -65,11 +58,10 @@ Les trois sont pour la langue Corsican (`co`) et le clavier EuroLatin (SIL). Un 
    l'accès aux fichiers, autorisez-le (Keyman le demande une seule fois). Keyman montre le paquet « Corsu » et sa
    version : touchez **Installer**, puis **OK** après la page d'accueil.
 5. **Vérifiez le dictionnaire.** **Paramètres** › **Langues installées** › **Corsican** : en bas de l'écran,
-   **Dictionnaire** indique le dictionnaire actif, `platykalt.co.corsu` pour le paquet publié aujourd'hui (« Corsu »
-   pour celui de la prochaine version). Pour voir sa version, touchez **Dictionnaire**, puis le dictionnaire coché :
-   l'écran « Dictionnaire : … » montre la **Version du dictionnaire** (Keyman y affiche la version du paquet), à
-   comparer avec le tableau [Dictionnaires disponibles](#dictionnaires-disponibles). Revenez en arrière sans toucher
-   **Désinstaller le dictionnaire**.
+   **Dictionnaire** indique le dictionnaire actif : « Corsu » pour le dictionnaire général. Pour voir sa version,
+   touchez **Dictionnaire**, puis le dictionnaire coché : l'écran « Dictionnaire : … » montre la **Version du
+   dictionnaire** (Keyman y affiche la version du paquet), à comparer avec le tableau [Dictionnaires
+   disponibles](#dictionnaires-disponibles). Revenez en arrière sans toucher **Désinstaller le dictionnaire**.
 6. **Réglez les suggestions** sur ce même écran. Keyman 18.0 propose trois choix, affichés en anglais même quand
    Keyman est en français : *Disable suggestions* (aucune), *Predictions only* (mots proposés, sans correction) et
    *Predictions with corrections* (mots proposés et fautes corrigées). Choisissez **Predictions with corrections**.
@@ -85,59 +77,34 @@ Les trois sont pour la langue Corsican (`co`) et le clavier EuroLatin (SIL). Un 
 
 ## Mettre à jour
 
-Téléchargez le nouveau fichier et installez-le comme à l'étape 4, **sous le même nom** `corsu-keyboard.kmp`.
-Keyman tire l'identité du paquet du nom du fichier : si le navigateur a ajouté un suffixe (`corsu-keyboard(1).kmp`,
-`corsu-keyboard (1).kmp`), renommez le fichier avant de l'installer, ou supprimez d'abord l'ancien téléchargement.
-Vos réglages sont gardés. **Relancez ensuite Keyman** : jusque-là, l'ancien dictionnaire continue de répondre. Pour
-relancer, passez à un autre clavier puis revenez à Keyman, ou forcez l'arrêt de l'application Keyman dans les
-réglages d'Android. Vérifiez ensuite la version comme à l'étape 5.
-
-## Essayer le dictionnaire de la prochaine version (candidate)
-
-Le dictionnaire de la prochaine version de Corsu (paquet **version 1.1**, nommé **« Corsu »** dans Keyman) n'est pas
-encore publié. On peut l'essayer avant : la chaîne de construction du projet (GitHub Actions) le produit à chaque
-modification. Ce n'est pas une version publiée : il peut encore changer, et il n'a été essayé que sur un émulateur
-Android 14, pas sur un vrai téléphone.
-
-1. **Connectez-vous à GitHub** dans le navigateur du téléphone (un compte gratuit suffit) : GitHub ne donne ces
-   fichiers qu'aux comptes connectés (sans connexion, le lien affiche une page « 404 »).
-2. **Téléchargez l'archive** [keyboard-packages](https://github.com/Platykalt/corsu/actions/runs/39161059937/artifacts/12149352996) (commit `146d2cf` de `next-0.26`) (le téléchargement commence en ouvrant le lien). Elle
-   arrive sous le nom `keyboard-packages.zip`. GitHub l'efface au bout de 90 jours (le 16 janvier 2027) ; un
-   lien plus récent sera alors donné ici.
-3. **Extrayez-la** avec l'application de fichiers du téléphone (Files de Google : touchez le fichier `.zip`, puis
-   **Extraire**). Le dossier obtenu contient `corsu-keyboard.kmp`, `corsu-keyboard-cismuntincu.kmp`,
-   `corsu-keyboard-pumuntincu.kmp` et leurs empreintes `.sha256`. Pour le dictionnaire général, prenez
-   **`corsu-keyboard.kmp`**, sans le renommer.
-4. **Retirez d'abord le dictionnaire installé** : **Paramètres** › **Langues installées** › **Corsican** ›
-   **Dictionnaire** › le dictionnaire coché › **Désinstaller le dictionnaire** › **Supprimer**. Relancez Keyman (voir
-   [Mettre à jour](#mettre-à-jour)).
-5. **Installez** le `corsu-keyboard.kmp` du dossier extrait comme à l'étape 4 (**Installer depuis un fichier
-   local**). L'écran du paquet doit montrer « Corsu » et la version 1.1.
-6. **Relancez Keyman, puis vérifiez** comme à l'étape 5 : **Dictionnaire** indique « Corsu » (et non
-   `platykalt.co.corsu`), et la **Version du dictionnaire** est 1.1. Au milieu d'une phrase, tapez `Ecc` : le bandeau
-   doit proposer « Eccu » avec sa majuscule (le dictionnaire publié propose « eccu »).
-
-**Revenir au dictionnaire publié** : désinstallez « Corsu » de la même façon (étape 4 ci-dessus), relancez Keyman,
-puis installez `corsu-keyboard.kmp` téléchargé depuis le [lien publié](https://github.com/Platykalt/corsu/releases/latest/download/corsu-keyboard.kmp)
-(étapes 3 et 4 de [Installer](#installer)). Après une nouvelle relance, **Dictionnaire** indique de nouveau
-`platykalt.co.corsu`, version 1.0.
+Téléchargez le nouveau fichier et installez-le comme à l'étape 4, **sous le même nom** `corsu-keyboard.kmp`. Keyman
+tire l'identité du paquet du nom du fichier : si le navigateur a ajouté un suffixe (`corsu-keyboard(1).kmp`,
+`corsu-keyboard (1).kmp`), renommez le fichier avant de l'installer, ou supprimez d'abord l'ancien téléchargement. Vos
+réglages sont gardés. **Relancez ensuite Keyman** : jusque-là, l'ancien dictionnaire continue de répondre. Pour
+relancer, passez à un autre clavier puis revenez à Keyman, ou forcez l'arrêt de l'application Keyman dans les réglages
+d'Android. Vérifiez ensuite la version comme à l'étape 5 : 1.1 pour les paquets publiés avec Corsu 0.26.0. Un
+dictionnaire installé avant Corsu 0.26.0 s'appelle `platykalt.co.corsu` dans Keyman, version 1.0 : mettez-le à jour.
 
 Pour une liste d'essai complète, avec les résultats attendus : [Essai en 5 minutes](essai-5-minutes.md).
 
 ## Choisir un dictionnaire régional
 
-<!-- corsu:phone-variants:fr Les variantes régionales arrivent avec la prochaine version. -->
-Avec la prochaine version, deux dictionnaires expérimentaux préféreront les formes du Cismonte ou du Pumonte. Sur
-Android, **un seul dictionnaire est actif par langue : le premier installé**. Installer un deuxième paquet Corsu
-l'ajoute à la liste, mais l'ancien reste actif. Pour changer :
+<!-- corsu:phone-variants:fr Les deux variantes régionales sont publiées depuis Corsu 0.26.0 (paquets 1.1). -->
+Deux dictionnaires expérimentaux préfèrent les formes du Cismonte ou du Pumonte :
+[corsu-keyboard-cismuntincu.kmp](https://github.com/Platykalt/corsu/releases/latest/download/corsu-keyboard-cismuntincu.kmp)
+et
+[corsu-keyboard-pumuntincu.kmp](https://github.com/Platykalt/corsu/releases/latest/download/corsu-keyboard-pumuntincu.kmp)
+(même vocabulaire, couverture partielle : voir [Dictionnaires disponibles](#dictionnaires-disponibles)). Gardez leur
+nom de fichier exact. Sur Android, **un seul dictionnaire est actif par langue : le premier installé**. Installer un
+deuxième paquet Corsu l'ajoute à la liste, mais l'ancien reste actif. Pour changer :
 
 1. **Paramètres** › **Langues installées** › **Corsican** › **Dictionnaire** › le dictionnaire actif ›
    **Désinstaller le dictionnaire** ;
 2. installez le paquet voulu (étape 4) s'il ne l'est pas déjà ;
 3. relancez Keyman (voir [Mettre à jour](#mettre-à-jour)), puis vérifiez le nom affiché (étape 5).
 
-Avant leur publication, les deux variantes sont dans la même archive que le dictionnaire candidat : voir
-[Essayer le dictionnaire de la prochaine version](#essayer-le-dictionnaire-de-la-prochaine-version-candidate).
+Pour revenir au dictionnaire général, faites de même avec `corsu-keyboard.kmp` : **Dictionnaire** indique alors
+« Corsu », version 1.1.
 
 ## Majuscules et début de phrase
 
@@ -145,10 +112,11 @@ Avant leur publication, les deux variantes sont dans la même archive que le dic
   champ et après `.`, `?` ou `!` suivis d'une espace. Elle ne s'active pas après un retour à la ligne sans
   ponctuation, ni après `."` ; elle s'active à tort après `M. `. Il n'y a pas de réglage pour la couper : touchez la
   touche Maj pour l'annuler.
-- **Les suggestions perdent la majuscule** avec le dictionnaire de la version publiée : `Ecc` peut devenir « eccu ».
-  C'est corrigé dans les paquets de la prochaine version, qui gardent la casse tapée (« Eccu ») et mettent la
-  majuscule aux suggestions en début de phrase. En attendant, finissez le mot au clavier ou remettez la majuscule.
-  <!-- corsu:phone-casing À la publication : dire que c'est corrigé dans la version publiée. -->
+- **Les suggestions gardent la casse tapée** depuis Corsu 0.26.0 (paquets 1.1) : au milieu d'une phrase, `Ecc`
+  propose « Eccu », et en début de phrase les suggestions ont la majuscule. Avec l'ancien paquet 1.0 (nommé
+  `platykalt.co.corsu` dans Keyman), `Ecc` pouvait devenir « eccu » : si vous l'avez encore,
+  [mettez-le à jour](#mettre-à-jour), puis relancez Keyman.
+  <!-- corsu:phone-casing Corrigé depuis Corsu 0.26.0 (paquet 1.1) ; le paquet 1.0 perdait la majuscule. -->
 
 ## Correction automatique
 
@@ -159,7 +127,9 @@ sera la version stable. Il restera facultatif. Dans nos essais du moteur de la b
 un mot présent dans le dictionnaire est toujours gardé tel qu'il est tapé, mais un mot absent peut être remplacé : un
 nom par un nom proche (« Bastelicaccia » par « Bastilicaccia » quand seule la seconde graphie est dans le
 dictionnaire), ou un mot en minuscules par le nom qui s'écrit pareil (« corti » par « Corti » quand « corti » y
-manque). La prochaine version du dictionnaire contient ces formes (« Bastelicaccia », « corti » à côté de « Corti », « Vizzani », des sigles comme « ADECEC ») ; un mot qui y manque encore, un nom de rue par exemple, peut toujours être remplacé.
+manque). Le dictionnaire 1.1 (Corsu 0.26.0) contient ces formes (« Bastelicaccia », « corti » à côté de « Corti », «
+Vizzani », des sigles comme « ADECEC ») ; un mot qui y manque encore, un nom de rue par exemple, peut toujours être
+remplacé.
 
 ## Revenir sur un mot
 
@@ -167,17 +137,17 @@ Déplacer le curseur ne change rien au texte. Les suggestions suivent la partie 
 
 - **Curseur à la fin du mot** : la suggestion choisie remplace le mot entier. C'est le geste sûr, quel que soit le
   dictionnaire.
-- **Curseur au milieu du mot**, avec le dictionnaire publié (1.0) : la suggestion ne remplace que la partie à gauche
-  du curseur, et la fin de l'ancien mot reste à sa droite. Dans « Dopu ell|a vene », choisir « ellu » donne
-  « Dopu ellu a vene » : ce « a » n'est pas un mot ajouté, c'est la fin de « ella », qu'il faut effacer à la main.
-  De même, `ca|sa` puis « casa » donne « casa sa ». Keyman n'efface rien à droite du curseur de lui-même.
-- **Curseur au milieu du mot**, avec le dictionnaire de la prochaine version (1.1) : la suggestion remplace le mot
-  entier, « Dopu ellu vene ». Le dictionnaire demande à Keyman d'effacer la fin du mot, ce que Keyman pour Android
-  fait. Observé dans le moteur de Keyman 18.0.254 et 19.0.309 (bêta) et dans l'application Keyman 18.0.254 sur un
-  émulateur Android 14, pas sur un téléphone.
+- **Curseur au milieu du mot**, avec le dictionnaire 1.1 (publié avec Corsu 0.26.0) : la suggestion remplace le mot
+  entier. Dans « Dopu ell|a vene », choisir « ellu » donne « Dopu ellu vene ». Le dictionnaire demande à Keyman
+  d'effacer la fin du mot, ce que Keyman pour Android fait. Observé dans le moteur de Keyman 18.0.254 et 19.0.309
+  (bêta) et dans l'application Keyman 18.0.254 sur un émulateur Android 14, pas sur un téléphone.
   Deux limites de Keyman restent : si le mot est suivi d'une ponctuation, une espace s'ajoute devant elle
   (`Aiacc|iu.` puis « Aiacciu » donne « Aiacciu . ») ; et l'annulation que Keyman propose juste après (effacer, puis
   toucher le mot entre guillemets) ne rend pas la fin de l'ancien mot.
+- **Curseur au milieu du mot**, avec l'ancien dictionnaire 1.0 (`platykalt.co.corsu`, avant Corsu 0.26.0) : la
+  suggestion ne remplace que la partie à gauche du curseur, et la fin de l'ancien mot reste à sa droite :
+  « Dopu ellu a vene », où ce « a » est la fin de « ella », à effacer à la main ; de même, `ca|sa` puis « casa »
+  donne « casa sa ». [Mettez-le à jour](#mettre-à-jour).
 - **Après avoir ajouté ou effacé une lettre au milieu du mot**, c'est le même cas : les suggestions suivent la partie
   à gauche du curseur, et la règle ci-dessus s'applique.
 - **Mot sélectionné** : tapez les premières lettres du mot voulu (elles remplacent la sélection), puis choisissez la
