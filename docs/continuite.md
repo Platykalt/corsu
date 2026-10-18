@@ -21,7 +21,8 @@ Les sections datées après « État actuel » sont l'historique : ce qui y est 
   guides téléphone pour le dictionnaire publié (paquet 1.0) avec un parcours d'essai de la candidate (artefact
   `keyboard-packages` du run 39140018508, connexion GitHub requise, expire le 16/01/2027), `CLAUDE.md` en fichier
   qui importe `AGENTS.md`.
-- **Défauts transmis au chantier suivant** : la release publie `corsu-minecraft-java-texts-26.3.zip` sans `.sha256`
+- **Défauts transmis au chantier suivant** (les deux premiers corrigés sur `next-0.26` : une somme par pack
+  Minecraft, version des captures lue dans `src/release.json`) : la release publie `corsu-minecraft-java-texts-26.3.zip` sans `.sha256`
   propre (une seule somme `corsu-minecraft-java-26.3.zip.sha256`) ; `tests/e2e/window_screens.py` affiche la version
   0.25.0 dans ses données d'exemple ; le README dira « environ 17 000 mots » jusqu'à la publication du paquet 1.1
   (12 976 entrées) : voir `docs/release-checklist-phone.md` sur `next-0.26`.

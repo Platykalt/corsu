@@ -87,7 +87,9 @@ jobs:
           python tools/minecraft.py texts
           git diff --exit-code minecraft/java/pack.mcmeta
           version=$(cat minecraft/java/VERSION)
-          (cd dist && sha256sum "corsu-minecraft-java-$version.zip" "corsu-minecraft-java-texts-$version.zip" > "corsu-minecraft-java-$version.zip.sha256")
+          # One checksum file per pack, like every other download (the texts pack had none of its own).
+          (cd dist && sha256sum "corsu-minecraft-java-$version.zip" > "corsu-minecraft-java-$version.zip.sha256" \
+            && sha256sum "corsu-minecraft-java-texts-$version.zip" > "corsu-minecraft-java-texts-$version.zip.sha256")
       - uses: actions/setup-java@v4
         with:
           distribution: temurin

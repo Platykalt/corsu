@@ -47,10 +47,11 @@ def item(texts, name, on=True, activation=None, **extra):
 def states():
     names = texts()
     validation = {'simulated': True, 'real_app': ['linux'], 'visual': True, 'linguistic_review': False}
-    base = {'version': '0.25.0', 'pid': 4242, 'platform': 'linux', 'language': 'fr', 'installed': True,
+    version = json.loads((HERE.parents[1] / 'src/release.json').read_text(encoding='utf-8'))['version']
+    base = {'version': version, 'pid': 4242, 'platform': 'linux', 'language': 'fr', 'installed': True,
             'everything_off': False, 'terminal_paused_until': None, 'firefox_profile': '/home/ana/.local/share/corsu/firefox/profile',
             'lexicon_entries': 119398, 'review': {}, 'options': {'showOriginal': False},
-            'update': {'current': '0.25.0', 'latest': '0.25.0', 'status': 'up_to_date', 'checked': 1792230000,
+            'update': {'current': version, 'latest': version, 'status': 'up_to_date', 'checked': 1792230000,
                        'error': None, 'checking': False, 'auto_started': None, 'restart': {}},
             'preferences': {'auto_update': False}, 'problem': None,
             'job': {'title': None, 'lines': [], 'running': False, 'ok': None, 'progress': None, 'result': None, 'busy': False}}
