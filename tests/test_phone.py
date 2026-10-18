@@ -115,20 +115,23 @@ class QrTests(unittest.TestCase):
                 self.assertEqual(done.stdout.strip(), url)
 
 
+RELEASED = ('corsu-keyboard.kmp', 'corsu-keyboard-cismuntincu.kmp', 'corsu-keyboard-pumuntincu.kmp')
+
+
 class ReleasedFilesTests(unittest.TestCase):
     def test_only_the_released_dictionary_is_offered(self):
         code = (APP / 'phone.js').read_text(encoding='utf-8')
         variants = re.search(r'const VARIANTS = \[(.*?)\];', code, re.S).group(1)
-        self.assertEqual(re.findall(r'file: "([\w.-]+)"', variants), ['corsu-keyboard.kmp'])
-        # The next version's files are shown apart, never as a download.
+        self.assertEqual(re.findall(r'file: "([\w.-]+)"', variants), list(RELEASED))
+        # Nothing announced for a next version: the three files are attached to the release (0.26.0).
         coming = re.findall(r'file: "([\w.-]+)"', re.search(r'const COMING = \[(.*?)\];', code, re.S).group(1))
-        self.assertEqual(coming, ['corsu-keyboard-cismuntincu.kmp', 'corsu-keyboard-pumuntincu.kmp'])
+        self.assertEqual(coming, [])
         self.assertNotIn('RELEASE + COMING', code)
         for path in ('docs/fr/telephone/android.md', 'docs/fr/telephone/iphone.md', 'docs/en/phone/android.md',
                      'docs/en/phone/iphone.md', 'README.md'):
             text = (ROOT / path).read_text(encoding='utf-8')
             self.assertIn(RELEASED_KMP, text, path)
-            self.assertEqual(set(re.findall(r'releases/latest/download/([\w.-]+\.kmp)', text)), {'corsu-keyboard.kmp'}, path)
+            self.assertLessEqual(set(re.findall(r'releases/latest/download/([\w.-]+\.kmp)', text)), set(RELEASED), path)
 
     def test_window_never_offers_an_unpublished_or_local_file(self):
         # The candidate packages (CI artifacts) are for testers who follow the guides, not a download in the window;
@@ -266,7 +269,7 @@ class RenderTests(unittest.TestCase):
         self.assertIn('Keyman', self.result['co-android']['text'])
         self.assertNotIn('ph_', self.result['co-iphone']['text'])
         self.assertIn('corsu-keyboard.kmp', self.result['en-android']['text'])
-        self.assertIn('In the next version', self.result['en-android']['text'])
+        self.assertNotIn('In the next version',        self.result['en-android']['text'])
         self.assertIn('corsu-keyboard-pumuntincu.kmp', self.result['en-android']['text'])
 
     def test_unchanged_page_keeps_its_nodes_across_refreshes(self):

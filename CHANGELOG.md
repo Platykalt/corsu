@@ -1,6 +1,15 @@
 # Changelog
 
-## 0.26.0 (in development on next-0.26, not published)
+## 0.26.0 (2026-10-18)
+
+- Wording review (AI, not reviewed by a speaker): Minecraft main and pause menus, worlds, servers, options
+  (review-2026-10/ROUND4.md): "Ghjucà solu" / "Ghjucà cù l'altri" on the title screen buttons, "Arregistrà è esce da u
+  mondu" (was "…vultà à u titulu", a heading, not the title screen), 18 texts; Corsu window ("Rileghje", "{job} :
+  operazione compia."), Firefox (create/edit profile, tab menu and "apparechju" as Mozilla's Corsican), Discord
+  ("Disattivà i mumenti nutevuli"); each change with its category (mistranslation, clumsiness, preference) in
+  lexicon/corrections.tsv, lexicon/review-discord-2026-10.tsv and lexicon/REVIEWS.md.
+- Phone page of the window: the three dictionaries are listed as published; sections left out no longer risk showing
+  "null".
 
 - Minecraft Java: verified part of an October 2026 AI review (minecraft/java/review-2026-10: APPLIED.tsv,
   REJECTED.tsv, TRACKING.md): 1,131 texts in 26.3 and older versions. Wrong senses corrected (Squid "Calamaru" =

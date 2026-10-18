@@ -15,13 +15,14 @@
   };
   // Only the dictionaries attached to the latest published release. A variant joins this list in the release that
   // carries its file, never before (a file announced here and missing would be a broken download).
-  const VARIANTS = [{ file: "corsu-keyboard.kmp", name: "ph_variant_general", detail: "ph_variant_general_detail" }];
-  // Built on the development branch for the next version, not published yet: shown apart, without a download. At
-  // release time, move the entries that the release carries into VARIANTS (and empty this list).
-  const COMING = [
+  const VARIANTS = [
+    { file: "corsu-keyboard.kmp", name: "ph_variant_general", detail: "ph_variant_general_detail" },
     { file: "corsu-keyboard-cismuntincu.kmp", name: "ph_variant_cismuntincu", detail: "ph_variant_cismuntincu_detail" },
     { file: "corsu-keyboard-pumuntincu.kmp", name: "ph_variant_pumuntincu", detail: "ph_variant_pumuntincu_detail" },
   ];
+  // Built on the development branch for the next version, not published yet: shown apart, without a download. At
+  // release time, move the entries that the release carries into VARIANTS (and empty this list).
+  const COMING = [];
   const SAVED = "corsu-phone-platform";
 
   let platform = "android";
@@ -71,7 +72,8 @@
     const info = PLATFORMS[platform];
     const url = guideUrl(platform);
     rendered = language() + platform;
-    body.replaceChildren(
+    // Sections left out are null: filtered, or the browser would show the word "null".
+    body.replaceChildren(...[
       make("ul", { class: "group" },
         make("li", { class: "tall" }, make("span", { class: "app-icon", "aria-hidden": "true" }, icon("phone")),
           make("span", { class: "label" }, make("span", { class: "name", text: t("ph_keyman") }),
@@ -109,7 +111,8 @@
       COMING.length ? make("ul", { class: "group ph-coming" }, ...COMING.map(variant => make("li", {},
         make("span", { class: "app-icon", "aria-hidden": "true" }, icon("clock")),
         make("span", { class: "label" }, make("span", { class: "name", text: t(variant.name) }),
-          make("span", { class: "detail", text: t(variant.detail) + " · " + variant.file }))))) : null);
+          make("span", { class: "detail", text: t(variant.detail) + " · " + variant.file }))))) : null,
+    ].filter(Boolean));
   }
 
   // The window redraws itself every 1.5 s (corsu:render): this page is rebuilt only when the language changed.

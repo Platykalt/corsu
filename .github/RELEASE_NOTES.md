@@ -1,10 +1,15 @@
 **Français** · [English](#english)
 
-| Système | Fichier | Ensuite |
+### Téléchargements par usage
+
+| Pour | Fichier | Ensuite |
 | --- | --- | --- |
 | Windows 10 ou 11 | `corsu-windows.zip` | décompresser, double-cliquer sur `Install for Windows.cmd` |
 | macOS | `corsu-macos.tar.gz` | double-cliquer sur `Install for macOS.command` |
 | Linux | `corsu-linux.tar.gz` | lancer `./"Install for Linux.sh"` |
+| Téléphone Android ou iPhone (clavier Keyman) | `corsu-keyboard.kmp` | dictionnaire corse pour Keyman, **utilisable seul** : aucune installation sur ordinateur. Paquet 1.1, nom dans Keyman : « Corsu ». Guides : [Android](https://github.com/Platykalt/corsu/blob/main/docs/fr/telephone/android.md), [iPhone](https://github.com/Platykalt/corsu/blob/main/docs/fr/telephone/iphone.md) |
+| Téléphone, variante régionale (expérimentale) | `corsu-keyboard-cismuntincu.kmp` ou `corsu-keyboard-pumuntincu.kmp` | même vocabulaire, préférence pour les formes du Cismonte ou du Pumonte (361 mots pondérés autrement, couverture partielle) ; paquet 1.1. Sous Android, un seul dictionnaire actif par langue : désinstaller l'autre puis relancer Keyman |
+| Minecraft Java 26.3, sans l'application | `corsu-minecraft-java-26.3.zip` | pack de ressources : Options › Packs de ressources, l'activer, puis Options › Langue › Corsu ; pack facultatif des textes d'accueil et de fin : `corsu-minecraft-java-texts-26.3.zip`. Les autres versions (1.6.1 → 26.2) : par l'application Corsu ([versions et vérifications](https://github.com/Platykalt/corsu/blob/main/minecraft/java/COMPATIBILITY.md)) |
 
 En une ligne : `irm https://raw.githubusercontent.com/Platykalt/corsu/main/install/get.ps1 | iex` dans PowerShell sous
 Windows, ou `curl -fsSL https://raw.githubusercontent.com/Platykalt/corsu/main/install/get.sh | sh` dans le Terminal sous
@@ -15,7 +20,33 @@ Chaque fichier a sa somme de contrôle `.sha256`. Les archives contiennent leur 
 installée, utilisée après suppression du dossier extrait, mise à jour et désinstallée sur son système avant la
 publication (tests automatiques ; personne n'a regardé les écrans).
 
-### Nouveautés de la 0.25.1
+### Nouveautés de la 0.26.0
+
+- **Mise à jour** : la 0.24.0 a pu dire « à jour » alors que la 0.25.1 était publiée : une fenêtre restée ouverte ne
+  vérifiait qu'à son ouverture, une relance réaffichait cette fenêtre, et une réponse de GitHub servait 6 heures comme
+  si elle était récente ([diagnostic](https://github.com/Platykalt/corsu/blob/main/docs/update-diagnosis.md)). Désormais
+  la réponse sert une heure au plus, une fenêtre ouverte vérifie toutes les heures et à chaque relance, une erreur
+  (réseau, limite de GitHub, réponse incomplète) affiche « Vérification impossible », jamais « à jour », et la fenêtre
+  montre sa version, la copie installée, la dernière version publiée et l'heure de la réponse. Si votre Corsu reste
+  sur une ancienne version, le bouton « Rechercher » ou l'installation en une ligne ci-dessus la rattrape, en gardant
+  vos réglages.
+- **Clavier sur téléphone** (paquets 1.1) : la majuscule tapée est gardée et les suggestions de début de phrase en
+  prennent une ; vocabulaire refait à partir de sources citées (13 197 mots) ; noms de lieux corses et noms
+  officiels des communes ; deux préférences régionales expérimentales. Sous Android, une suggestion choisie au milieu
+  d'un mot remplace le mot entier ; sur iPhone, Keyman ne remplace que le début (gestes conseillés dans le guide).
+  Vérifié dans le moteur de Keyman 18.0.254 et dans l'application sur émulateur Android 14 ; **pas sur un vrai
+  téléphone, pas sur iPhone**. Keyman 18 n'a pas de correction automatique.
+- **Minecraft** : revue IA des textes (sens corrigés, sources citées), boutons du menu principal « Ghjucà solu » et
+  « Ghjucà cù l'altri », « Arregistrà è esce da u mondu » dans le menu de pause ; les 87 versions vérifiées avec le
+  code de chaque jeu. **Aucun texte relu par un locuteur** ; rien n'a été regardé à l'écran dans le jeu.
+- **Discord** : le menu de la zone de notification (« Quitter Discord »…) est traduit ; plusieurs libellés revus.
+- **KDE** : les raccourcis sans nom corse (« Display Configuration ») ne s'affichent plus en anglais.
+- **Fenêtre de Corsu** : nouveau logo, reconnu dans Alt+Tab et la barre des tâches sous KDE (Windows et macOS : non
+  observés).
+- **Firefox** : libellés du menu des onglets et des profils revus.
+- Chaque fichier publié a maintenant sa propre somme `.sha256`.
+
+### Rappel : nouveautés de la 0.25.1
 
 La 0.25.0 a été étiquetée mais jamais publiée : la vérification Windows a trouvé le défaut ci-dessous. La 0.25.1
 est la 0.25.0 avec cette correction.
@@ -114,11 +145,16 @@ est la 0.25.0 avec cette correction.
 
 ## English
 
-| System | File | Then |
+### Downloads by use
+
+| For | File | Then |
 | --- | --- | --- |
 | Windows 10 or 11 | `corsu-windows.zip` | extract it and double-click `Install for Windows.cmd` |
 | macOS | `corsu-macos.tar.gz` | double-click `Install for macOS.command` |
 | Linux | `corsu-linux.tar.gz` | run `./"Install for Linux.sh"` |
+| Android phone or iPhone (Keyman keyboard) | `corsu-keyboard.kmp` | Corsican dictionary for Keyman, **usable on its own**: nothing to install on a computer. Package 1.1, shown in Keyman as "Corsu". Guides: [Android](https://github.com/Platykalt/corsu/blob/main/docs/en/phone/android.md), [iPhone](https://github.com/Platykalt/corsu/blob/main/docs/en/phone/iphone.md) |
+| Phone, regional variant (experimental) | `corsu-keyboard-cismuntincu.kmp` or `corsu-keyboard-pumuntincu.kmp` | same vocabulary, preferring the forms of Cismonte or Pumonte (361 words weighted differently, partial coverage); package 1.1. On Android only one dictionary is active per language: uninstall the other, then restart Keyman |
+| Minecraft Java 26.3, without the app | `corsu-minecraft-java-26.3.zip` | resource pack: Options › Resource Packs, turn it on, then Options › Language › Corsu; optional pack of the splash and end texts: `corsu-minecraft-java-texts-26.3.zip`. Other versions (1.6.1 → 26.2): through the Corsu app ([versions and checks](https://github.com/Platykalt/corsu/blob/main/minecraft/java/COMPATIBILITY.md)) |
 
 In one line: `irm https://raw.githubusercontent.com/Platykalt/corsu/main/install/get.ps1 | iex` in PowerShell on
 Windows, or `curl -fsSL https://raw.githubusercontent.com/Platykalt/corsu/main/install/get.sh | sh` in Terminal on
@@ -129,7 +165,30 @@ Each file has a `.sha256` checksum. The archives carry their own Python. Every a
 deleting the extracted folder, updated and uninstalled on its own system before publication (automated checks; no one
 looked at the screens).
 
-### New in 0.25.1
+### New in 0.26.0
+
+- **Updates**: 0.24.0 could say "up to date" while 0.25.1 was out: a window left open checked only when it opened, a
+  new launch showed that window again, and a GitHub answer was reused for 6 hours as if fresh
+  ([diagnosis](https://github.com/Platykalt/corsu/blob/main/docs/update-diagnosis.md)). Now an answer serves one hour
+  at most, an open window checks every hour and at each launch, a failure (network, GitHub limit, incomplete answer)
+  shows "check impossible", never "up to date", and the window shows its version, the installed copy, the latest
+  release and when GitHub answered. If your Corsu is stuck on an old version, the "Rechercher" button or the
+  one-line install above catches up and keeps your settings.
+- **Phone keyboard** (packages 1.1): the case typed is kept and suggestions at a sentence start get a capital;
+  vocabulary rebuilt from cited sources (13,197 words); Corsican place names and the communes' official names; two
+  experimental regional preferences. On Android a suggestion chosen inside a word replaces the whole word; on iPhone
+  Keyman replaces only its beginning (safe gestures in the guide). Checked in Keyman 18.0.254's engine and in the app
+  on an Android 14 emulator; **not on a real phone, not on iPhone**. Keyman 18 has no automatic correction.
+- **Minecraft**: AI review of the texts (senses corrected, sources cited), main menu buttons "Ghjucà solu" and
+  "Ghjucà cù l'altri", "Arregistrà è esce da u mondu" in the pause menu; all 87 versions checked with each game's own
+  code. **No text reviewed by a speaker**; nothing was looked at on screen in the game.
+- **Discord**: the notification-area menu ("Quitter Discord"…) is translated; several labels reviewed.
+- **KDE**: shortcuts without a Corsican name ("Display Configuration") no longer show in English.
+- **Corsu's window**: new logo, recognised in Alt+Tab and the taskbar on KDE (Windows and macOS: not observed).
+- **Firefox**: tab menu and profile labels reviewed.
+- Every published file now has its own `.sha256`.
+
+### Earlier: new in 0.25.1
 
 0.25.0 was tagged but never published: the Windows check found the fault below. 0.25.1 is 0.25.0 with this fix.
 
