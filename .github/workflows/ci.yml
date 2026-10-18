@@ -70,11 +70,16 @@ jobs:
           sha512sum -c fr.sha512
       - name: Package Linux, Windows and macOS archives
         run: python tools/package_release.py --output dist
-      - name: Build the Corsican keyboard prediction package (Keyman)
+      - name: Build the Corsican keyboard prediction packages (Keyman)
         run: |
           python tools/build_keyboard.py --package
-          cp keyboard/build/corsu-keyboard.kmp dist/corsu-keyboard.kmp
-          (cd dist && sha256sum corsu-keyboard.kmp > corsu-keyboard.kmp.sha256)
+          git diff --exit-code keyboard/*/source/wordlist.tsv
+          for package in corsu-keyboard corsu-keyboard-cismuntincu corsu-keyboard-pumuntincu; do
+            cp "keyboard/build/$package.kmp" "dist/$package.kmp"
+            (cd dist && sha256sum "$package.kmp" > "$package.kmp.sha256")
+          done
+      - name: Keyman packages in Keyman for Android 18.0.254's own engine — case, sentence start, variants
+        run: python tests/e2e/check_keyboard.py --chrome "$(command -v google-chrome || command -v chromium)" keyboard/build/corsu-keyboard.kmp keyboard/build/corsu-keyboard-cismuntincu.kmp keyboard/build/corsu-keyboard-pumuntincu.kmp
       - name: Minecraft Java — check every key and placeholder against Mojang's English, build the resource pack
         run: |
           python tools/minecraft.py check
