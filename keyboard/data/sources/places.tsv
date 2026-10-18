@@ -1,0 +1,553 @@
+# Corsican names (Wikidata label in language "co") of the communes and main places of Corsica, fetched by
+# keyboard/data/tools/fetch_places.py from https://query.wikidata.org/sparql on 2026-10-18. Wikidata data is CC0 1.0.
+# label = the Corsican label as Wikidata has it; label_fr = the French label, for reviewers only (not used).
+# tools/make_vocab.py splits each label into words; see keyboard/data/REVIEW.md, "Place names".
+qid	label	kind	label_fr
+Q1026237	Calanche di Piana	calanque	calanques de Piana
+Q858102	Capicorsu	cape	cap Corse
+Q1087782	A Casalta d'Ampugnani	commune	Casalta
+Q262680	A Costa	commune	Costa
+Q765746	A Croce	commune	Croce
+Q585245	A Crucichja	commune	Crocicchia
+Q75018	A Mazzola	commune	Mazzola
+Q1108505	A Munacia d'Orezza	commune	Monacia-d'Orezza
+Q644452	A Nuvale	commune	Novale
+Q1109625	A Parata	commune	Parata
+Q265287	A Penta di Casinca	commune	Penta-di-Casinca
+Q680278	A Penta è Acquatella	commune	Penta-Acquatella
+Q271530	A Petra Curbara	commune	Pietracorbara
+Q668943	A Petra Serena	commune	Pietraserena
+Q246250	A Petra di Verde	commune	Pietra-di-Verde
+Q252460	A Pieve	commune	Piève
+Q667520	A Porta	commune	La Porta
+Q535778	A Riventosa	commune	Riventosa
+Q1109860	A Soccia	commune	Soccia
+Q1240194	A Stazzona	commune	Stazzona
+Q658693	A Vallica	commune	Vallica
+Q1240718	A Venzulà	commune	Venzolasca
+Q753065	A Vulpaiola	commune	Volpajola
+Q382023	Afà	commune	Afa
+Q317748	Aghjone	commune	Aghione
+Q40104	Aiacciu	commune	Ajaccio
+Q410601	Aiti	commune	Aiti
+Q204907	Alandu	commune	Alando
+Q1087700	Alata	commune	Alata
+Q1059498	Albertacce	commune	Albertacce
+Q273688	Albitreccia	commune	Albitreccia
+Q212399	Aleria	commune	Aléria
+Q330912	Algaghjola	commune	Algajola
+Q1087934	Altaghjè	commune	Altagène
+Q775503	Altiani	commune	Altiani
+Q245007	Alzi	commune	Alzi
+Q273428	Ambiegna	commune	Ambiegna
+Q391879	Ampriani	commune	Ampriani
+Q391898	Antisanti	commune	Antisanti
+Q1087744	Appiettu	commune	Appietto
+Q519130	Arbiddara	commune	Arbellara
+Q1060212	Arburi	commune	Arbori
+Q958191	Aregnu	commune	Aregno
+Q681297	Arghjusta è Muricciu	commune	Argiusta-Moriccio
+Q665619	Arru	commune	Arro
+Q1058312	Ascu	commune	Asco
+Q253949	Auccià	commune	Ucciani
+Q636914	Auddè	commune	Aullène
+Q1058358	Avapessa	commune	Avapessa
+Q643071	Azilonu è Ampaza	commune	Azilone-Ampaza
+Q1087834	Azzana	commune	Azzana
+Q776340	Balogna	commune	Balogna
+Q1087921	Barbaghju	commune	Barbaggio
+Q523484	Barrettali	commune	Barrettali
+Q782506	Bastelica	commune	Bastelica
+Q1087803	Bastilicaccia	commune	Bastelicaccia
+Q134698	Bastìa	commune	Bastia
+Q1060281	Belgudè	commune	Belgodère
+Q1087684	Belvideri è Campumoru	commune	Belvédère-Campomoro
+Q476358	Bigornu	commune	Bigorno
+Q476364	Biguglia	commune	Biguglia
+Q528863	Bilia	commune	Bilia
+Q653799	Bisinchi	commune	Bisinchi
+Q748403	Brandu	commune	Brando
+Q273377	Bucugnà	commune	Bocognano
+Q204051	Bunifaziu	commune	Bonifacio
+Q637296	Bustanicu	commune	Bustanico
+Q1060195	Cagnanu	commune	Cagnano
+Q1060254	Calacuccia	commune	Calacuccia
+Q273697	Calcatoghju	commune	Calcatoggio
+Q733068	Calenzana	commune	Calenzana
+Q202439	Calvi	commune	Calvi
+Q476362	Cambia	commune	Cambia
+Q245649	Campana	commune	Campana
+Q498414	Campi	commune	Campi
+Q686017	Campile	commune	Campile
+Q271086	Campitellu	commune	Campitello
+Q1087694	Campu	commune	Campo
+Q252579	Canale di Verde	commune	Canale-di-Verde
+Q765745	Canari	commune	Canari
+Q1087689	Canavaghja	commune	Canavaggia
+Q1087879	Cannelle	commune	Cannelle
+Q927282	Carbini	commune	Carbini
+Q667448	Carbuccia	commune	Carbuccia
+Q640428	Carchetu è Brusticu	commune	Carcheto-Brustico
+Q254151	Cardu è Turghjà	commune	Cardo-Torgia
+Q641750	Carghjaca	commune	Cargiaca
+Q391964	Carghjese	commune	Cargèse
+Q1087711	Carpinetu	commune	Carpineto
+Q271126	Carticasi	commune	Carticasi
+Q1087810	Casabianca	commune	Casabianca
+Q637262	Casaglionu	commune	Casaglione
+Q253631	Casalabriva	commune	Casalabriva
+Q251823	Casamàcciuli	commune	Casamaccioli
+Q1087827	Casanova	commune	Casanova
+Q245725	Casevechje	commune	Casevecchie
+Q271095	Castellu di Rustinu	commune	Castello-di-Rostino
+Q1087903	Castifau	commune	Castifao
+Q1087862	Castiglione	commune	Castiglione
+Q265360	Castineta	commune	Castineta
+Q1087796	Castirla	commune	Castirla
+Q273678	Cavru	commune	Cauro
+Q270342	Centuri	commune	Centuri
+Q252572	Cervioni	commune	Cervione
+Q1087855	Chisà	commune	Chisa
+Q1087705	Chjatra	commune	Chiatra
+Q244886	Ciamannaccia	commune	Ciamannacce
+Q246444	Coghja	commune	Coggia
+Q780807	Conca	commune	Conca
+Q1087818	Corbara	commune	Corbara
+Q542534	Corscia	commune	Corscia
+Q213555	Corti	commune	Corte
+Q1109614	Coti è Chjavari	commune	Coti-Chiavari
+Q734443	Cristinacce	commune	Cristinacce
+Q534748	Cugnocolu è Muntichji	commune	Cognocoli-Monticchi
+Q273660	Currà	commune	Corrano
+Q542132	Cuttuli è Curtichjatu	commune	Cuttoli-Corticchiato
+Q1060204	Cuzzà	commune	Cozzano
+Q271515	E Muracciole	commune	Muracciole
+Q660302	E Piazzole	commune	Piazzole
+Q1240654	E Valle d'Alisgiani	commune	Valle-d'Alesani
+Q1240307	E Valle d'Orezza	commune	Valle-d'Orezza
+Q246480	E Valle di Campoloru	commune	Valle-di-Campoloro
+Q670899	E Valle di Rustinu	commune	Valle-di-Rostino
+Q675552	E Ville di Parasu	commune	Ville-di-Paraso
+Q266900	E Ville di Petrabugnu	commune	Ville-di-Pietrabugno
+Q538346	Eccica è Suaredda	commune	Eccica-Suarella
+Q1109830	Erbaghjolu	commune	Erbajolo
+Q1087726	Erone	commune	Érone
+Q271501	Ersa	commune	Ersa
+Q1087767	Evisa	commune	Évisa
+Q1109491	Felce	commune	Felce
+Q766323	Ferringule	commune	Farinole
+Q661542	Ficaghja	commune	Ficaja
+Q431574	Figari	commune	Figari
+Q244925	Foce	commune	Foce
+Q572551	Frassetu	commune	Frasseto
+Q245010	Fughjuchja	commune	Focicchia
+Q1087791	Furciolu	commune	Forciolo
+Q637279	Furiani	commune	Furiani
+Q273301	Fuzzà	commune	Fozzano
+Q1111296	Galeria	commune	Galéria
+Q1108158	Gavignanu	commune	Gavignano
+Q1060509	Ghisoni	commune	Ghisoni
+Q637313	Ghisunaccia	commune	Ghisonaccia
+Q648771	Ghjucatoghju	commune	Giocatojo
+Q269993	Ghjuncaghju	commune	Giuncaggio
+Q253788	Ghjunchetu	commune	Giuncheto
+Q273682	Granaccia	commune	Granace
+Q431009	Grossa	commune	Grossa
+Q1060249	Grussetu è a Prugna	commune	Grosseto-Prugna
+Q737603	Guagnu	commune	Guagno
+Q690253	Guargualè	commune	Guargualé
+Q1087778	I Cateri	commune	Cateri
+Q1109529	I Perelli	commune	Perelli
+Q245732	I Piazzali	commune	Piazzali
+Q607101	I Prunelli di Casàccuni	commune	Prunelli-di-Casacconi
+Q1240707	I Prunelli di Fiumorbu	commune	Prunelli-di-Fiumorbo
+Q1087753	L'Isulacciu di Fiumorbu	commune	Isolaccio-di-Fiumorbo
+Q782611	L'Olmu	commune	Olmo
+Q579925	L'Ortale	commune	Ortale
+Q1108188	Lama	commune	Lama
+Q1240537	Lanu	commune	Lano
+Q783908	Laretu di Tallà	commune	Loreto-di-Tallano
+Q264614	Lavatoghju	commune	Lavatoggio
+Q1109634	Lecci	commune	Lecci
+Q677880	Lentu	commune	Lento
+Q639592	Letia	commune	Letia
+Q271498	Linguizzetta	commune	Linguizzetta
+Q1153478	Livesi	commune	Olivese
+Q273443	Livia	commune	Levie
+Q732435	Lopigna	commune	Lopigna
+Q783296	Loretu di Casinca	commune	Loreto-di-Casinca
+Q737580	Lozzi	commune	Lozzi
+Q677911	Lucciana	commune	Lucciana
+Q246410	Lumiu	commune	Lumio
+Q944665	Luri	commune	Luri
+Q467030	Lìsula	commune	L'Île-Rousse
+Q684878	Macà	commune	Moca-Croce
+Q265969	Mansu	commune	Manso
+Q1087897	Marignana	commune	Marignana
+Q1108165	Matra	commune	Matra
+Q1109584	Mela	commune	Mela
+Q664338	Meria	commune	Meria
+Q270675	Merusaglia	commune	Morosaglia
+Q429148	Moltifau	commune	Moltifao
+Q181150	Montegrossu	commune	Montegrosso
+Q677980	Munacia d'Auddè	commune	Monacia-d'Aullène
+Q637428	Muratu	commune	Murato
+Q246440	Mursiglia	commune	Morsiglia
+Q1108222	Muru	commune	Muro
+Q259908	Murzu	commune	Murzo
+Q271729	Mòita	commune	Moïta
+Q274055	Nessa	commune	Nessa
+Q741214	Nonza	commune	Nonza
+Q1108442	Nucariu	commune	Nocario
+Q647297	Nuceta	commune	Noceta
+Q274084	Nuvella	commune	Novella
+Q274503	Ocana	commune	Ocana
+Q273127	Ochjatana	commune	Occhiatana
+Q1111250	Ogliastru	commune	Ogliastro
+Q281063	Olcani	commune	Olcani
+Q650588	Oletta	commune	Oletta
+Q270726	Olmeta di Capicorsu	commune	Olmeta-di-Capocorso
+Q686605	Olmeta di Tuda	commune	Olmeta-di-Tuda
+Q593770	Olmi è Cappella	commune	Olmi-Cappella
+Q1109557	Omessa	commune	Omessa
+Q1109570	Ortiporiu	commune	Ortiporio
+Q265057	Ortu	commune	Orto
+Q696033	Osani	commune	Osani
+Q274162	Ota	commune	Ota
+Q246205	Palasca	commune	Palasca
+Q549430	Palleca	commune	Palneca
+Q549106	Pancheraccia	commune	Pancheraccia
+Q274159	Partinellu	commune	Partinello
+Q264147	Pastricciola	commune	Pastricciola
+Q776060	Patrimoniu	commune	Patrimonio
+Q677965	Pedicorti di Gaghju	commune	Piedicorte-di-Gaggio
+Q1109821	Pedicroce	commune	Piedicroce
+Q245689	Pedigrisgiu	commune	Piedigriggio
+Q1111366	Pedipartinu	commune	Piedipartino
+Q646726	Peri	commune	Peri
+Q271116	Peru è Casevechje	commune	Pero-Casevecchie
+Q631214	Petralba	commune	Pietralba
+Q686108	Piana	commune	Piana
+Q739516	Pianottuli è Caldareddu	commune	Pianottoli-Caldarello
+Q271510	Pianu	commune	Piano
+Q1157213	Pigna	commune	Pigna
+Q637553	Pila è Canali	commune	Pila-Canale
+Q251909	Pinu	commune	Pino
+Q1109715	Pioghjola	commune	Pioggiola
+Q1108492	Pitretu è Bicchisgià	commune	Petreto-Bicchisano
+Q253874	Pitrusedda	commune	Pietrosella
+Q271490	Piupetta	commune	Piobetta
+Q1109689	Poghjolu	commune	Poggiolo
+Q1240332	Porri	commune	Porri
+Q241567	Portivechju	commune	Porto-Vecchio
+Q736749	Prupià	commune	Propriano
+Q651705	Quasquara	commune	Quasquara
+Q253856	Quenza	commune	Quenza
+Q1240516	Quercitellu	commune	Quercitello
+Q1240504	Rapaghju	commune	Rapaggio
+Q1240369	Rapale	commune	Rapale
+Q658410	Rennu	commune	Renno
+Q254098	Rosazia	commune	Rosazia
+Q842027	Ruglianu	commune	Rogliano
+Q1240681	Rusiu	commune	Rusio
+Q288693	Ruspigliani	commune	Rospigliani
+Q264864	Rutali	commune	Rutali
+Q273370	Salice	commune	Salice
+Q545786	Sampolu	commune	Sampolo
+Q1240790	San Damianu	commune	San-Damiano
+Q677952	San Fiurenzu	commune	Saint-Florent
+Q1240770	San Gavinu d'Ampugnani	commune	San-Gavino-d'Ampugnani
+Q970326	San Gavinu di Carbini	commune	San-Gavino-di-Carbini
+Q266869	San Gavinu di Fiumorbu	commune	San-Gavino-di-Fiumorbo
+Q245697	San Gavinu di Tenda	commune	San-Gavino-di-Tenda
+Q245610	San Ghjulianu	commune	San-Giuliano
+Q1240423	San Ghjuvanni di Moriani	commune	San-Giovanni-di-Moriani
+Q549987	San Lurenzu	commune	San-Lorenzo
+Q972882	San Martinu di Lota	commune	San-Martino-di-Lota
+Q731527	San Niculaiu	commune	San-Nicolao
+Q1109503	Sant' Andrea d'Urcinu	commune	Sant'Andréa-d'Orcino
+Q266850	Sant' Andria di Boziu	commune	Sant'Andréa-di-Bozio
+Q1240321	Sant' Andria di u Cutone	commune	Sant'Andréa-di-Cotone
+Q246317	Sant' Antoninu	commune	Sant'Antonino
+Q954328	Santa Lucia di Mercuriu	commune	Santa-Lucia-di-Mercurio
+Q920045	Santa Lucia di Moriani	commune	Santa-Lucia-di-Moriani
+Q273684	Santa Lucia di Tallà	commune	Sainte-Lucie-de-Tallano
+Q1240561	Santa Maria di Lota	commune	Santa-Maria-di-Lota
+Q373026	Santa Maria di u Poghju	commune	Santa-Maria-Poggio
+Q684489	Santa Maria è Figaniedda	commune	Santa-Maria-Figaniella
+Q273473	Santa Maria è Sichè	commune	Santa-Maria-Siché
+Q1240753	Santa Riparata di Balagna	commune	Santa-Reparata-di-Balagna
+Q614641	Santa Riparata di Moriani	commune	Santa-Reparata-di-Moriani
+Q693431	Santu Petru di Tenda	commune	Santo-Pietro-di-Tenda
+Q676588	Santu Petru di Venacu	commune	Santo-Pietro-di-Venaco
+Q696020	Sari d'Urcinu	commune	Sari-d'Orcino
+Q273710	Sari è Sulinzara	commune	Sari-Solenzara
+Q1110144	Sarra di Farru	commune	Serra-di-Ferro
+Q735099	Sarra di Fiumorbu	commune	Serra-di-Fiumorbo
+Q648612	Sarra di Scupamè	commune	Serra-di-Scopamène
+Q933515	Sarrula è Carcupinu	commune	Sarrola-Carcopino
+Q217459	Sartè	commune	Sartène
+Q1108458	Scanafaghjaccia	commune	Rezza
+Q519998	Scata	commune	Scata
+Q634070	Scolca	commune	Scolca
+Q1240529	Sermanu	commune	Sermano
+Q244857	Serriera	commune	Serriera
+Q266886	Siscu	commune	Sisco
+Q1240733	Sorbu è Occagnanu	commune	Sorbo-Ocagnano
+Q266831	Soriu	commune	Sorio
+Q686809	Sotta	commune	Sotta
+Q781437	Soveria	commune	Soveria
+Q1240550	Speloncatu	commune	Speloncato
+Q1109550	Suddacarò	commune	Sollacaro
+Q782449	Surbuddà	commune	Sorbollano
+Q732069	Tagliu è Isolacciu	commune	Taglio-Isolaccio
+Q1240341	Talasani	commune	Talasani
+Q1240258	Tallone	commune	Tallone
+Q736751	Tarranu	commune	Tarrano
+Q244933	Tassu	commune	Tasso
+Q273707	Tavacu	commune	Tavaco
+Q244817	Tavera	commune	Tavera
+Q753070	Tocchisi	commune	Tox
+Q644484	Todda	commune	Tolla
+Q1240588	Tominu	commune	Tomino
+Q1240182	Tralonca	commune	Tralonca
+Q637242	U Borgu	commune	Borgo
+Q1087731	U Castellà di Casinca	commune	Castellare-di-Casinca
+Q252319	U Castellà di Mercuriu	commune	Castellare-di-Mercurio
+Q549262	U Favalellu	commune	Favalello
+Q1109880	U Felicetu	commune	Feliceto
+Q674189	U Lugu di Nazza	commune	Lugo-di-Nazza
+Q677898	U Monte	commune	Monte
+Q246367	U Mucale	commune	Moncale
+Q654000	U Munticellu	commune	Monticello
+Q1108450	U Musuleu	commune	Mausoléo
+Q265372	U Ped' Orezza	commune	Pie-d'Orezza
+Q271544	U Petricaghju	commune	Pietricaggio
+Q285750	U Petrosu	commune	Pietroso
+Q954397	U Pianellu	commune	Pianello
+Q1240172	U Poghju d'Oletta	commune	Poggio-d'Oletta
+Q1109744	U Poghju di Nazza	commune	Poggio-di-Nazza
+Q1109536	U Poghju di Vènacu	commune	Poggio-di-Venaco
+Q649633	U Poghju è Marinacciu	commune	Poggio-Marinaccio
+Q727378	U Poghju è Mezzana	commune	Poggio-Mezzana
+Q681707	U Pratu di Ghjuvellina	commune	Prato-di-Giovellina
+Q265137	U Prunu	commune	Pruno
+Q1240284	U Pulverosu	commune	Polveroso
+Q245717	U Salgetu	commune	Saliceto
+Q264089	U Silvarecciu	commune	Silvareccio
+Q1240237	U Sulaghju	commune	Solaro
+Q653219	U Vescuvatu	commune	Vescovato
+Q633502	Ulmetu	commune	Olmeto
+Q1110508	Ulmiccia	commune	Olmiccia
+Q730324	Upulasca	commune	Popolasca
+Q1153469	Urbalaconu	commune	Urbalacone
+Q657269	Urtaca	commune	Urtaca
+Q1240397	Vallecalle	commune	Vallecalle
+Q273380	Valli di Mezzana	commune	Valle-di-Mezzana
+Q513690	Velone è Ornetu	commune	Velone-Orneto
+Q245705	Venacu	commune	Venaco
+Q648636	Ventisari	commune	Ventiseri
+Q266916	Verdese	commune	Verdèse
+Q767307	Veru	commune	Vero
+Q753074	Vezzani	commune	Vezzani
+Q685988	Vicu	commune	Vico
+Q1240206	Vighjaneddu	commune	Viggianello
+Q753094	Vignale	commune	Vignale
+Q748203	Villanova	commune	Villanova
+Q750825	Vivariu	commune	Vivario
+Q273367	Vutera-I Bagni	commune	Guitera-les-Bains
+Q145011	Zalana	commune	Zalana
+Q1109845	Zevacu	commune	Zévaco
+Q1153494	Zicavu	commune	Zicavo
+Q203051	Ziglia	commune	Zilia
+Q273361	Zigliara	commune	Zigliara
+Q1109658	Zirubia	commune	Zérubia
+Q964272	Zonza	commune	Zonza
+Q742327	Zozza	commune	Zoza
+Q227495	Zuani	commune	Zuani
+Q3334	Cismonte	department	Haute-Corse
+Q3336	Pumonte	department	Corse-du-Sud
+Q507251	Moriani	former settlement	Mariana
+Q16942815	Isula Bruzzi	island	île Bruzzi
+Q292271	Isula Cavaddu	island	île de Cavallo
+Q16942837	Isula Forana	island	île Forana
+Q16942839	Isula Mare	island	Île de Mare
+Q16942840	Isula Mezu	island	île de Mezzu Mare
+Q3593173	Isula Piana	island	île Piana
+Q16942842	Isula Purraghja	island	Île de Porraja
+Q16942843	Isula Ratinu	island	Île Ratino
+Q16942844	Isula San Bainzu	island	Île San Baïnso
+Q16942845	Isula Spirdutu	island	Grand îlot de Sperduto
+Q16942846	Isula Terra	island	îlot di Terra
+Q3593317	Isula d'Eccica	island	île d'Eccica
+Q16942821	Isula di Capu Morsetta	island	Île de Capu Morsetta
+Q16942822	Isula di Capu Rossu	island	Île de Capu Rossu
+Q16942820	Isula di Capu di Fenu	island	Île de Capu de Fenu
+Q16942823	Isula di Centuri	island	Île de Centuri
+Q21427332	Isula di Garganellu	island	île de Garganellu
+Q16942825	Isula di Gavetti	island	Îles Gavetti
+Q16942826	Isula di Maestru Maria	island	île de Maestro Maria
+Q16942829	Isula di Porri	island	
+Q16942830	Isula di Punta d'Arasu	island	Île de Punta d'Arasu
+Q16942831	Isula di San Ciprianu	island	île San Ciprianu
+Q16942832	Isula di San Damianu	island	Île San-Damiano
+Q2255429	Isula di Spanu	island	îlot de Spano
+Q3107573	Isula di a Giraglia	island	Giraglia
+Q16942835	Isula di u Toru	island	île du Toro
+Q2252727	Isuli di i Monachi	island	îlots des Moines
+Q3593371	Isulottu di Gargalu	island	île de Gargalo
+Q16942848	Isulottu di i Porri	island	Île de Porri
+Q16942849	Isulottu di l'Oga	island	Île de l'Oga
+Q3593527	Isula Cerbicale	islands	îles Cerbicale
+Q292072	Isula San Bainzu	islands	îles Lavezzi
+Q2094207	Isule Finuchjarole	islands	îles Finocchiarola
+Q2860242	Isuli Sanguinari	islands	archipel des Sanguinaires
+Q3591671	Stagnu di Chjurlinu	lagoon	étang de Biguglia
+Q3215310	Lavu d'Argentu	lake	lac d'Argento
+Q3215623	Lavu di A Muvrella	lake	lac de la Muvrella
+Q1578858	Lavu di Capitellu	lake	lac de Capitello
+Q3215451	Lavu di Goria	lake	lac de Goria
+Q1799627	Lavu di Melu	lake	lac de Melo
+Q3215498	Lavu di Niellucciu	lake	lac de Nielluccio
+Q685410	Lavu di Ninu	lake	lac de Nino
+Q3215703	Lavu di U Ceppu	lake	lac du Ceppu
+Q2509175	Lavu di U Rotondu	lake	lac de Bettaniella
+Q3215600	Lavu di l'Oriente	lake	lac de l'Oriente
+Q3215708	Lavu di u Cintu	lake	lac du Cinto
+Q19947376	A Cimatella	mountain	Cimatella
+Q87836474	A Curona	mountain	Monte Corona
+Q15992393	A Maniccia	mountain	Maniccia
+Q25675385	A Mufrella	mountain	Muvrella
+Q16861938	Capu Biancu	mountain	Capu Biancu
+Q25675299	Capu Falu	mountain	
+Q2937694	Capu Larghja	mountain	Capu Larghia
+Q25675457	Capu Rossu	mountain	
+Q25675458	Capu Rossu	mountain	
+Q749865	Capu Tafunatu	mountain	Capu Tafunatu
+Q31627431	Capu di Vegnu	mountain	Capo di Vegno
+Q25675368	Capu à a Cùccula	mountain	
+Q31643346	Capu à e Ghjarghjole	mountain	Capo alle Giargiole
+Q25675372	Capu à u Ceppu	mountain	Capu a u Ceppu
+Q31647686	Capu à u Chjostru	mountain	Capo al Chiostro
+Q2937697	Capu à u Dente	mountain	Capu a u Dente
+Q16861935	Capu à u Pardatu	mountain	Capu a u Verdatu
+Q25675390	Capu à u Tozzu	mountain	Capu à u Tozzu
+Q2972397	Cima à e Follicce	mountain	Cima di e Follicie
+Q25675364	Cima à i Mori	mountain	Cima à i Mori
+Q25675389	E Cricche	mountain	Pointe de Cricche
+Q1412839	L'Alcùdina	mountain	Monte Incudine
+Q3322511	Monte Astu	mountain	Monte Astu
+Q3322517	Monte Cardo	mountain	Monte Cardo
+Q115533922	Monte Cintu	mountain	Monte Cintu
+Q1415428	Monte Cintu	mountain	Monte Cinto
+Q3322530	Monte Furmicula	mountain	Monte Furmicula
+Q3322546	Monte Grossu	mountain	Monte Grosso
+Q20970513	Monte Nieddu	mountain	
+Q3322562	Monte Pianu Maiò	mountain	Monte Piano Maggiore
+Q25675382	Monte Prunu	mountain	Monte Prunu
+Q947558	Monte Stellu	mountain	Monte Stello
+Q2572089	Monte d'Oru	mountain	Monte d'Oro
+Q3552060	Omu di Cagna	mountain	Uomo di Cagna
+Q1935119	Paglia Orba	mountain	Paglia Orba
+Q20970526	Punta Capitellu	mountain	
+Q20970519	Punta Filicina	mountain	
+Q31639023	Punta Licciola	mountain	pointe Liciola
+Q955366	Punta Minuta	mountain	Punta Minuta
+Q21055615	Punta Mufrena	mountain	Punta Mufrena
+Q20970521	Punta Paffone	mountain	
+Q21694680	Punta Rossa	mountain	Punta Rossa
+Q25675386	Punta Stranciacone	mountain	Punta Stranciacone
+Q31639049	Punta a a Licciola	mountain	pointe Licciola
+Q22248767	Punta di Caldane	mountain	Punta di Caldane
+Q3410872	Punta di a Vacca Morta	mountain	Punta di a Vacca Morta
+Q21427723	Punta di l’Uriente	mountain	Punta dell'Oriente
+Q31644153	Punta llu Furneddu	mountain	Punta di u Furnellu
+Q3410862	Punta Àrtica	mountain	Punta Artica
+Q25675395	Punta à a Capella	mountain	Punta della Cappella
+Q19947778	Punta à a Vetta	mountain	Punta alla Vetta
+Q20970517	Punta à e Gruttelle	mountain	
+Q3471588	San Parteu	mountain	San Parteo
+Q3322576	San Petrone	mountain	Monte San Petrone
+Q25675397	Sarra di Malpassu	mountain	Malpassu
+Q21427563	U Lumbarducciu	mountain	Lombarduccio
+Q3322570	U Renosu	mountain	Monte Renoso
+Q641239	U Ritondu	mountain	Monte Rotondo
+Q31635146	monte Patru	mountain	Monte Padro
+Q404745	Furchi di Bavedda	mountain range	Aiguilles de Bavella
+Q21294334	Bocca di A Scaledda	pass	col de Scalella
+Q16942676	Bocca di San Ghjorghju	pass	Col Saint-Georges
+Q1107407	Bocca di Verghju	pass	col de Vergio
+Q3641475	Bocca di Vezzu	pass	Bocca di Vezzu
+Q2860789	Aregnu (pieve)	pieve	Aregno (piève)
+Q3472931	Bevincu	pieve	San Quilico (piève)
+Q25393854	Bevincu (pieve)	pieve	Bevinco
+Q2902431	Bigornu	pieve	Costera (piève)
+Q16942677	Bonifaziu	pieve	Bonifacio (piève)
+Q2923727	Brandu (pieve)	pieve	Brando
+Q2932483	Caccia (pieve)	pieve	Caccia
+Q16942691	Calvi	pieve	Calvi (piève)
+Q2935590	Campulori	pieve	Campoloro
+Q2936158	Canari	pieve	Canari
+Q16942701	Capu Biancu	pieve	
+Q16942704	Carbini	pieve	Carbini
+Q2940790	Casacconi	pieve	Casacconi
+Q2941072	Casinca	pieve	Casinca
+Q2941389	Castellu	pieve	Castello
+Q18610920	Cavru	pieve	Cauro
+Q2943883	Celavu	pieve	Celavo
+Q2963800	Chjumi	pieve	Chiomi
+Q18610994	Cinarca	pieve	Cinarca
+Q16942741	Cruzinu	pieve	Cruzini
+Q25393867	Cursa	pieve	Cursa
+Q3007893	Custera	pieve	Costera
+Q3190259	Ghjunsani	pieve	Giussani
+Q3107548	Ghjuvellina	pieve	Giovellina
+Q16644113	Istria	pieve	Istria
+Q3377599	Lama	pieve	Canale
+Q3259963	Lota	pieve	Lota
+Q3267748	Luri (pieve)	pieve	Luri
+Q3324071	Moriani	pieve	Moriani
+Q2601598	Niolu	pieve	Niolo
+Q3343384	Nonza	pieve	Nonza
+Q3351523	Olmia	pieve	Olmia
+Q3354185	Opinu	pieve	Opino
+Q3355901	Orezza	pieve	Orezza
+Q15648355	Ortu (pieve)	pieve	Orto
+Q15648363	Patrimoniu (pieve)	pieve	Patrimonio (piève)
+Q3388777	Pinu (pieve)	pieve	Pino
+Q3439683	Rogna	pieve	Rogna
+Q3453563	Rustinu	pieve	Rostino
+Q3470028	Salogna	pieve	Salogna
+Q56302797	Santa Riparata	pieve	Santa Riparata
+Q3472914	Santu Andria	pieve	Sant'Andréa (piève)
+Q3472933	Santu Petru (pieve)	pieve	Santo Pietro
+Q3479899	Serra	pieve	Serra
+Q3362686	Seve Infora	pieve	Paomia
+Q3480798	Seve Ingrentu	pieve	Sevidentro
+Q25395900	Siscu (pieve)	pieve	Siscu
+Q3514449	Talcini	pieve	Talcini
+Q3516279	Tavagna	pieve	Tavagna
+Q3541753	Tuani	pieve	Tuani
+Q56302885	Tuminu (pieve)	pieve	Tomino
+Q3357427	Ustriconi	pieve	Ostriconi (piève)
+Q2375889	Venacu	pieve	Venaco
+Q3555783	Verde	pieve	Verde
+Q2862276	Àrmitu	pieve	Armito
+Q2880433	Balagna	region	Balagne
+Q1048475	Castagniccia	region	Castagniccia
+Q3337602	Nebbiu	region	Nebbio
+Q3311975	Vaddincu	region	Vallinco
+Q1403899	Bravone	river	Bravona
+Q1403910	Fangu	river	Fango
+Q3071610	Figarella (fiume)	river	Figarella
+Q19631185	Fiumaltu	river	Fium Alto
+Q649519	Golu	river	Golo
+Q1544024	Gravona	river	Gravona
+Q1482537	Liamone	river	Liamone
+Q2509190	Restonica	river	Restonica
+Q1343438	Sulinzara	river	Solenzara
+Q182969	Tavignanu	river	Tavignano
+Q3107717	Girolata	settlement	Girolata
+Q3399341	Portu	settlement	Porto
+Q65433406	Purtichju	settlement	Porticcio
+Q2211882	Saone	settlement	Sagone

@@ -10,7 +10,9 @@ Inputs:
     northern/southern pairs);
   - the project lexicons (Corsu's own software translations), counted all alike: a word does not become more
     trustworthy because of the file it comes from;
-  - the old generated word list keyboard/platykalt.co.corsu/source/wordlist.tsv, only to report what changed.
+  - the Corsican place names of sources/places.tsv (Wikidata, fetched by tools/fetch_places.py);
+  - the old generated word list keyboard/platykalt.co.corsu/source/wordlist.tsv as of version 0.9.0 (read from git:
+    tools/build_keyboard.py now rewrites that file from these lists), only to report what changed.
 
 Outputs the three lists, keyboard/data/audit/removed.tsv (what the old list had and the new one drops, with the
 reason) and keyboard/data/audit/stats.json (the numbers quoted in keyboard/data/REVIEW.md). Weights and statuses
@@ -23,6 +25,7 @@ import json
 import os
 from pathlib import Path
 import re
+import subprocess
 import unicodedata
 import xml.etree.ElementTree as ET
 
@@ -30,7 +33,9 @@ ROOT = Path(__file__).resolve().parents[3]
 DATA = ROOT / 'keyboard/data'
 SOURCES = DATA / 'sources'
 RESOURCES = Path(os.environ.get('CORSU_RESOURCES', Path.home() / '.local/share/corsu/resources'))
-OLD_WORDLIST = ROOT / 'keyboard/platykalt.co.corsu/source/wordlist.tsv'
+OLD_WORDLIST = 'keyboard/platykalt.co.corsu/source/wordlist.tsv'
+# The commit that holds the old list as version 0.9.0 generated it; later commits hold build_keyboard.py's output.
+OLD_WORDLIST_COMMIT = '66e7f58'
 LEXICONS = [ROOT / 'lexicon' / name for name in
             ('lexicon-fixes.tsv', 'lexicon-mozilla.tsv', 'lexicon-upstream.tsv', 'lexicon.tsv')]
 HEADER = 'word\tweight\tvariant\tsource\tlicense\tstatus\n'
@@ -43,6 +48,7 @@ LICENSES = {
     'tatoeba': 'CC-BY-2.0-FR',
     'vikipedia': 'CC-BY-SA-4.0',
     'apertium': 'GPL-3.0',
+    'wikidata': 'CC0-1.0',
     'corsu-lexicon': 'corsu-lexicon-mixed',
     'ai': 'GPL-3.0-or-later',
 }
@@ -54,6 +60,13 @@ TATOEBA_FLOOR = 2000
 # The weight of a word in the software lexicon counts for this share of a Vikipedia occurrence: interface text
 # repeats "file", "settings" or "error" thousands of times and says little about everyday messages.
 LEXICON_SHARE = 0.02
+# Weight of a Corsican place name (sources/places.tsv): its Vikipedia frequency, at least PLACE_FLOOR so that Keyman
+# knows the name and auto-correction keeps it (Zicavu was once replaced by "Cavu"), and at most PLACE_CAP, just
+# below the lowest floor of the everyday words (1,000): an encyclopedia names places far more often than messages
+# do, and the names must not push everyday words out of the suggestions. Names already in the list (Aiacciu,
+# Bastia, Corti) keep their own weight.
+PLACE_FLOOR = 50
+PLACE_CAP = 900
 # In a variety's preference list, the other variety's form keeps this share of the pair's weight.
 OTHER_SHARE = 0.25
 # About 1,380 Vikipedia articles are botanical stubs generated from one table ("spezia", "pianta", "sinonimi",
@@ -194,12 +207,37 @@ def lexicon_counts():
 
 
 def old_wordlist():
+    text = subprocess.run(['git', 'show', f'{OLD_WORDLIST_COMMIT}:{OLD_WORDLIST}'], cwd=ROOT, check=True,
+                          capture_output=True, text=True, encoding='utf-8').stdout
     words = {}
-    for line in OLD_WORDLIST.read_text(encoding='utf-8').splitlines():
+    for line in text.splitlines():
         if line.startswith('#') or '\t' not in line:
             continue
         word, count = line.split('\t')
         words[word] = int(count)
+    return words
+
+
+def fold(word):
+    """Keyman's default search key: lowercase, accents removed (Bastìa and Bastia are one key)."""
+    decomposed = unicodedata.normalize('NFD', word.lower())
+    return ''.join(c for c in decomposed if not unicodedata.combining(c))
+
+
+def place_names():
+    """{word: Wikidata item} for the words of the Corsican place labels of sources/places.tsv.
+
+    A label of several words gives its capitalised words of three letters or more (Sari è Sulinzara: Sari,
+    Sulinzara); an elided word gives its name (d'Orezza: Orezza); a disambiguation in brackets is dropped
+    (Luri (pieve)). The first item, in file order, names the word's source.
+    """
+    words = {}
+    for row in read_tsv(SOURCES / 'places.tsv'):
+        label = re.sub(r'\s*\([^)]*\)', '', nfc(row['label']))
+        for token in re.split(r'[\s-]+', label):
+            token = token.rsplit("'", 1)[-1]
+            if len(token) >= 3 and token[0].isupper() and token == token[0] + token[1:].lower():
+                words.setdefault(token, row['qid'])
     return words
 
 
@@ -392,6 +430,29 @@ def main():
         if entry['status'] != 'attested' or entry['source'] in ('vikipedia', 'apertium'):
             entry.update(source=source, status='attested')
 
+    # 4. Corsican place names (Wikidata). A name whose search key is already a word of the list is left to that word:
+    #    Bastia (written so by Tatoeba and 25 times more often than Bastìa in Vikipedia), Corti, Sartè, or common
+    #    words such as piana, lama, felce. A word that Vikipedia mostly writes in lowercase mid-sentence is also a
+    #    common word (vescuvatu, stazzona, valle): it is added in lowercase, and Keyman keeps the capital when
+    #    one is typed. The Vikipedia dump is used only for these checks and for the weight.
+    known = {fold(low) for low in entries}
+    place_stats = Counter()
+    for word, qid in place_names().items():
+        low = word.lower()
+        if shape_problem(low):
+            place_stats['not_corsican_spelling'] += 1
+        elif fold(low) in known:
+            place_stats['already_a_word'] += 1
+        else:
+            common = wiki_mid[low] >= 5 and wiki_caps[low] < 0.5 * wiki_mid[low]
+            place_stats['added_in_lowercase' if common else 'added'] += 1
+            place_stats['seen_in_vikipedia'] += wiki[low] > 0
+            known.add(fold(low))
+            weight = min(max(frequency_weight(low), PLACE_FLOOR), PLACE_CAP)
+            entries[low] = dict(word=low if common else word, weight=round(weight), source=f'wikidata:{qid}',
+                                status='attested')
+            removed.pop(low, None)
+
     def license_of(source):
         return LICENSES[source.split(':')[0]]
 
@@ -417,7 +478,7 @@ def main():
         for word, (count, reason, detail) in sorted(removed.items(), key=lambda item: (item[1][1], -item[1][0])):
             out.write(f'{word}\t{count}\t{reason}\t{detail}\n')
     statuses = Counter(e['status'] for e in entries.values())
-    sources = Counter(e['source'] for e in entries.values())
+    sources = Counter(e['source'].split(':')[0] for e in entries.values())
     merged = {v: {low: variant_weight[v].get(low, e['weight']) for low, e in entries.items()} for v in variant_weight}
     differing = sorted(low for low in entries if merged['cismuntincu'][low] != merged['pumuntincu'][low])
     stats = dict(
@@ -427,6 +488,7 @@ def main():
         cismuntincu_entries=len(variant_weight['cismuntincu']), pumuntincu_entries=len(variant_weight['pumuntincu']),
         northern_only_forms=len(north_only), southern_only_forms=len(south_only),
         words_ranked_differently=len(differing), wiki_tokens=wiki_total, lexicon_tokens=lexicon_total,
+        place_words=place_stats,
     )
     (DATA / 'audit/stats.json').write_text(json.dumps(stats, ensure_ascii=False, indent=1) + '\n', encoding='utf-8')
     print(json.dumps(stats, ensure_ascii=False, indent=1))
