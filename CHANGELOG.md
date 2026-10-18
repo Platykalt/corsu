@@ -22,8 +22,11 @@
   446 Corsican place names from Wikidata (CC0), kept with their capital and protected from correction;
   "parlle" now offers "parolle" first (an editorial weight on parleti had no corpus support).
   Checked in Keyman for Android 18.0.254's own engine (CI) and in the real app on an Android 14 emulator; not on a
-  phone, not on iOS. Keyman 18 has no automatic correction; going back into a word replaces only the part left of
-  the caret (engine limits, documented).
+  phone, not on iOS. Keyman 18 has no automatic correction (documented). A suggestion chosen with the caret inside
+  a word now replaces the whole word on Android ("Dopu ell|a vene" + ellu: "Dopu ellu vene", no longer
+  "Dopu ellu a vene"): the models ask Keyman to delete the rest of the word (keyboard/whole-word.js); Keyman for
+  iPhone ignores that request, so the guide there gives the safe gestures. Draft Keyman issue, not sent:
+  docs/keyman/ticket-mid-word-suggestion.md.
 - Phones: "Write Corsican on Android and iPhone" at the top of the README; guides rewritten from Keyman 18.0's help
   and source; the window's new "Sur téléphone" page with QR codes (generated locally) to the public guides.
 - Project rules for agents (AGENTS.md): full meaning before abbreviations; provenance of every translation.

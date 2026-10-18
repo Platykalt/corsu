@@ -35,8 +35,11 @@ Les sections datées après « État actuel » sont l'historique : ce qui y est 
   - **Clavier Keyman** : casse gardée, nom « Corsu », vocabulaire refait (`keyboard/data`), préférences
     Cismuntincu et Pumuntincu **expérimentales** (361 mots pondérés autrement). Vérifié dans le moteur de Keyman
     18.0.254 (CI) et dans l'application réelle sur émulateur Android 14 ; **pas sur téléphone, pas sur iOS**.
-    Limites Keyman 18 : pas de correction automatique (Keyman 19), remplacement seulement à gauche du curseur,
-    un seul dictionnaire actif par langue sous Android, ancien modèle actif jusqu'au redémarrage de Keyman.
+    Limites Keyman 18 : pas de correction automatique (Keyman 19), un seul dictionnaire actif par langue sous
+    Android, ancien modèle actif jusqu'au redémarrage de Keyman. Suggestion choisie au milieu d'un mot : Keyman ne
+    remplace que la partie à gauche du curseur ; les modèles 1.1 (`keyboard/whole-word.js`) effacent la fin du mot
+    sous Android (vérifié moteurs 18.0.254/19.0.309 et application 18.0.254 sur émulateur), pas sous iOS, où Keyman
+    ignore l'effacement à droite. Ticket préparé, non envoyé : `docs/keyman/ticket-mid-word-suggestion.md`.
     446 noms de lieux corses (Wikidata, CC0). À trancher : « Bastelicaccia » (graphie officielle) devient
     « Bastilicaccia » (libellé corse Wikidata) avec la correction automatique de Keyman 19.
   - **Téléphone** : README, guides Android/iPhone, page « Sur téléphone » de la fenêtre. À la publication : basculer

@@ -40,6 +40,11 @@ function parseArguments(argv) {
   return options;
 }
 
+const USER_AGENTS = {
+  android: 'Mozilla/5.0 (Linux; Android 14) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/130.0 Mobile Safari/537.36',
+  iphone: 'Mozilla/5.0 (iPhone; CPU iPhone OS 17_6 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Mobile/15E148',
+};
+
 const TYPES = { '.html': 'text/html', '.js': 'text/javascript', '.css': 'text/css', '.ttf': 'font/ttf',
                 '.gif': 'image/gif', '.svg': 'image/svg+xml', '.map': 'application/json' };
 
@@ -115,9 +120,10 @@ async function main() {
       const errors = [];
       page.on('pageerror', error => errors.push(String(error)));
       if (process.env.HARNESS_DEBUG) page.on('console', message => console.error('page:', message.text()));
+      // A scenario may give another user agent (the prediction worker sees it too): "iphone" is the one of
+      // Keyman for iPhone's web view, to check what the models do when the app is not Android.
       await page.emulate({ viewport: { width: 400, height: 700, deviceScaleFactor: 2, isMobile: true, hasTouch: true },
-                           userAgent: 'Mozilla/5.0 (Linux; Android 14) AppleWebKit/537.36 (KHTML, like Gecko) '
-                                      + 'Chrome/130.0 Mobile Safari/537.36' });
+                           userAgent: USER_AGENTS[scenario.userAgent ?? 'android'] });
       await page.evaluateOnNewDocument(bridge);
       await page.goto(`${base}/keyboard.html`, { waitUntil: 'load' });
       await page.waitForFunction(() => window.keyman && keyman.osk && keyman.core, { timeout: 20000 });
@@ -147,7 +153,8 @@ async function main() {
       }, model, scenario.setting ?? 3, base);
       if (process.env.HARNESS_SCREENSHOT) await page.screenshot({ path: process.env.HARNESS_SCREENSHOT });
       const steps = await runSteps(page, scenario.steps);
-      results.push({ name: scenario.name, model, setting: scenario.setting ?? 3, setup, steps, errors });
+      results.push({ name: scenario.name, model, setting: scenario.setting ?? 3, userAgent: scenario.userAgent ?? 'android',
+                     setup, steps, errors });
       await page.close();
     }
   } finally {

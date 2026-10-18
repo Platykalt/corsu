@@ -127,6 +127,50 @@ class ProjectTests(unittest.TestCase):
         self.assertEqual(written, metadata)
 
 
+class WholeWordTests(unittest.TestCase):
+    """keyboard/whole-word.js wraps the compiled model; its behaviour is checked in the engine (check_keyboard.py)."""
+    CODE = ("(function() {\n'use strict';\nvar definitions = {};\n"
+            "LMLayerWorker.loadModel(new models.TrieModel({\"root\":{}}, {\n  languageUsesCasing: true,\n}));\n})();")
+
+    def test_the_trie_model_is_wrapped(self):
+        code = build_keyboard.wrap_model(self.CODE, 'function corsuWholeWord(model) { return model; }')
+        self.assertIn('function corsuWholeWord(model) { return model; }\n'
+                      'LMLayerWorker.loadModel(corsuWholeWord(new models.TrieModel({"root":{}}, {', code)
+        self.assertTrue(code.endswith('  languageUsesCasing: true,\n})));\n})();\n'))
+
+    def test_an_unknown_compiler_output_is_refused(self):
+        for code in (self.CODE.replace('new models.TrieModel', 'new models.DummyModel'), self.CODE + '\n// more',
+                     build_keyboard.wrap_model(self.CODE, 'function corsuWholeWord(m) { return m; }')):
+            with self.assertRaisesRegex(SystemExit, 'shape'):
+                build_keyboard.wrap_model(code, 'function corsuWholeWord(m) { return m; }')
+
+    @unittest.skipUnless(shutil.which('node'), 'needs Node.js')
+    def test_suggestions_mid_word_delete_the_rest_of_the_word_on_android_only(self):
+        script = (build_keyboard.WHOLE_WORD.read_text(encoding='utf-8') + r"""
+const words = text => [...text.matchAll(/[\p{L}']+/gu)].map(m => ({start: m.index, end: m.index + m[0].length, text: m[0]}));
+const model = () => ({ wordbreaker: words, predict: (transform, context) =>
+  [{ sample: { transform: { insert: 'casa', deleteLeft: 2 }, displayAs: 'casa' }, p: 1 }] });
+const run = (agent, left, right, transform) => {
+  Object.defineProperty(globalThis, 'navigator', { value: { userAgent: agent }, configurable: true });
+  return corsuWholeWord(model()).predict(transform || { insert: '', deleteLeft: 0 }, { left, right })[0].sample.transform;
+};
+console.log(JSON.stringify([
+  run('Linux; Android 14', 'Eccu a ca', 'sa di Petru.'),
+  run('Linux; Android 14', 'Eccu a ca', 'sa'),
+  run('Linux; Android 14', 'Eccu a ca', 'sa.'),
+  run('Linux; Android 14', 'Eccu a ca', ' di Petru.'),
+  run('Linux; Android 14', 'Eccu a c', 'sa di', { insert: 'a', deleteLeft: 0 }),
+  run('Linux; Android 14', 'Eccu a ', 'casa'),
+  run('iPhone; CPU iPhone OS 17_6', 'Eccu a ca', 'sa di Petru.'),
+]));
+""")
+        output = subprocess.run(['node', '-e', script], capture_output=True, text=True, check=True).stdout
+        deletions = [change.get('deleteRight') for change in json.loads(output)]
+        # rest of the word and its space; at the end of the text; before punctuation; caret at the end of a word;
+        # a letter just typed mid-word; caret before a word (not inside it); Keyman for iPhone (ignores it).
+        self.assertEqual(deletions, [3, 2, 2, None, 3, None, None])
+
+
 class DataCaseTests(unittest.TestCase):
     """tests/e2e/keyboard_data_cases.tsv: the data-dependent expectations of the engine check."""
     HEAD = '\t'.join(check_keyboard.DATA_CASE_COLUMNS) + '\n'
@@ -200,6 +244,8 @@ class CompiledPackageTests(unittest.TestCase):
                 self.assertEqual(metadata['info']['name']['description'], entry.name)
                 self.assertIn('languageUsesCasing: true', code)
                 self.assertIn('applyCasing: function', code)
+                self.assertIn('LMLayerWorker.loadModel(corsuWholeWord(new models.TrieModel(', code)
+                self.assertTrue(code.endswith('})));\n})();\n'))
 
 
 if __name__ == '__main__':

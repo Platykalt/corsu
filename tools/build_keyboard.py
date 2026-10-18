@@ -22,6 +22,9 @@ words of the Corsu lexicon (the interface translations, lowercased).
 
 Words are kept in their written case: the models declare `languageUsesCasing`, so Keyman matches the case being
 typed (Eccu, ECCU) and its search ignores case and accents.
+
+Each compiled model is wrapped with keyboard/whole-word.js: on Keyman for Android, a suggestion chosen with the
+caret inside a word replaces the whole word instead of only its part left of the caret.
 """
 import argparse
 from collections import Counter
@@ -44,6 +47,10 @@ SHORT_WORDS = {'a', 'à', 'è', 'e', 'i', 'o', 'u'}
 VARIANTS = ('cismuntincu', 'pumuntincu')
 COLUMNS = ['word', 'weight', 'variant', 'source', 'license', 'status']
 LEFT_OUT = {'rejected'}
+WHOLE_WORD = KEYBOARD / 'whole-word.js'
+# How kmc (18.0) writes a trie model: the wrapper goes around the model it builds.
+TRIE_LOAD = 'LMLayerWorker.loadModel(new models.TrieModel('
+TRIE_END = '}));\n})();'
 
 
 class Model:
@@ -162,6 +169,29 @@ def name_models(package, names):
     temporary.replace(package)
 
 
+def wrap_model(code, wrapper):
+    """The compiled model's code with its TrieModel passed through corsuWholeWord (keyboard/whole-word.js)."""
+    if code.count(TRIE_LOAD) != 1 or not code.rstrip().endswith(TRIE_END.rstrip()) or 'corsuWholeWord' in code:
+        raise SystemExit('The compiled model does not have the shape kmc 18.0 writes; check keyboard/whole-word.js '
+                         'against the new compiler before building.')
+    head, tail = code.split(TRIE_LOAD)
+    tail = tail.rstrip()[:-len(TRIE_END.rstrip())] + '})));\n})();\n'
+    return head + wrapper.rstrip() + '\n' + TRIE_LOAD.replace('(new ', '(corsuWholeWord(new ') + tail
+
+
+def wrap_models(package, wrapper):
+    """Wrap every lexical model of a compiled package (see wrap_model); every other member is copied as it is."""
+    with zipfile.ZipFile(package) as source:
+        members = [(info, source.read(info)) for info in source.infolist()]
+    temporary = package.with_suffix('.tmp')
+    with zipfile.ZipFile(temporary, 'w') as target:
+        for info, data in members:
+            if info.filename.endswith('.model.js'):
+                data = wrap_model(data.decode('utf-8'), wrapper).encode('utf-8')
+            target.writestr(info, data, compress_type=info.compress_type)
+    temporary.replace(package)
+
+
 def compile_packages(keyboard=KEYBOARD):
     npx = shutil.which('npx')
     if not npx:
@@ -174,6 +204,7 @@ def compile_packages(keyboard=KEYBOARD):
         target = build / model.package
         shutil.copy2(project / f'build/{model.id}.model.kmp', target)
         name_models(target, {model.id: model.name})
+        wrap_models(target, WHOLE_WORD.read_text(encoding='utf-8'))
         print(f'{target} ({target.stat().st_size // 1024} KiB)')
 
 

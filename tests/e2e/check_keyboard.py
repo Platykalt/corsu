@@ -93,6 +93,12 @@ def find_chrome(given):
     raise SystemExit('No Chrome found: give --chrome or $CHROME.')
 
 
+# The model each package must hold (tools/build_keyboard.py).
+PACKAGE_MODELS = {'corsu-keyboard.kmp': 'platykalt.co.corsu',
+                  'corsu-keyboard-cismuntincu.kmp': 'platykalt.co.corsu_cismuntincu',
+                  'corsu-keyboard-pumuntincu.kmp': 'platykalt.co.corsu_pumuntincu'}
+
+
 def models_of(packages, folder):
     """{model id: path of its .model.js} for every lexical model of the packages."""
     models = {}
@@ -104,6 +110,24 @@ def models_of(packages, folder):
                 target.write_bytes(archive.read(f'{model["id"]}.model.js'))
                 models[model['id']] = target
     return models
+
+
+def package_checks(packages, models, results):
+    """Each package holds the one model its name says, wrapped by whole-word.js, and the engine loaded it."""
+    failures = []
+    for package in packages:
+        with zipfile.ZipFile(package) as archive:
+            ids = [model['id'] for model in json.loads(archive.read('kmp.json'))['lexicalModels']]
+        expected = PACKAGE_MODELS.get(package.name)
+        if expected and ids != [expected]:
+            failures.append(f'{package.name} holds {ids}, expected [{expected!r}]')
+    for model, path in models.items():
+        if 'corsuWholeWord(new models.TrieModel(' not in path.read_text(encoding='utf-8'):
+            failures.append(f'{model}: the model is not wrapped by keyboard/whole-word.js')
+    for result in results:
+        if result['model'] and result['setup'].get('state') != 'configured':
+            failures.append(f'{result["model"]}: not loaded by the engine in {result["name"]!r} ({result["setup"]})')
+    return failures
 
 
 def log_lines(results):
@@ -255,6 +279,17 @@ def checks(results, models):
         expect(s('casing: a typo corrected', 2)['text'] == 'Lingua ', f'{model}: "Lingau" must become "Lingua"')
         expect(s('casing: a typo corrected', 6)['text'] == 'Lingua lingua LINGUA ', f'{model}: corrected case')
         expect(s('casing: proper nouns', 1)['suggestions'][:1] == ['Corsica'], f'{model}: "corsic" must offer "Corsica"')
+        expect(s('casing: proper nouns', 4)['text'] == 'in Corsica Aiacciu ', f'{model}: a name tapped keeps its capital')
+        expect(s('casing: proper nouns', 6)['text'] == 'in Corsica Aiacciu corsicaa ',
+               f'{model}: without auto-correction, an unknown word stays as typed')
+        # The text after each tap: the typed case is kept (initial, upper), a name keeps its capital mid-sentence,
+        # a common word is not capitalised mid-sentence, and a tap before any letter follows the OSK's layer.
+        taps = {3: 'Eccu. Perchè ', 6: 'Eccu. Lingua ', 9: "Eccu. L'isula ", 12: "Eccu. D'altri ", 15: 'Eccu. Ùn ',
+                18: 'Disse: Aiacciu ', 21: 'Eccu a casa ', 23: 'Eccu, di ', 26: 'ECCU LINGUA ', 28: 'Eccu. Di ',
+                30: 'Eccu?\nDi '}
+        for index, text in taps.items():
+            got = s('casing: taps at a sentence start', index)
+            expect(got.get('text') == text, f'{model}: tap gave {got.get("text", got.get("error"))!r}, expected {text!r}')
         expect(s('sentence start: suggestion before', 0)['suggestions'][:1] == ['Di'],
                f'{model}: the first suggestion of a sentence must be capitalised')
         expect(s('sentence start: suggestion before', 1)['text'] == 'Di ', f'{model}: sentence-start suggestion tap')
@@ -269,13 +304,39 @@ def checks(results, models):
         expect(s('auto-correct off', 2)['text'] == 'lingau ', f'{model}: without auto-correction a typo must stay')
         # Auto-correction (setting 3) is the engine's: it may replace a word it does not know when the model offers
         # a single close candidate. Reported, not failed: the dictionary does not control it.
-        for index in (8, 10, 12, 14):
+        for index in (8, 10, 12, 14, 18, 20, 22):
             typed = s('auto-correct on', index - 1)['text'].split(' ')[-1]
             expect(s('auto-correct on', index)['text'].endswith(typed + ' '),
                    f'{model}: auto-correction replaced the unknown word {typed!r}: '
                    f'{s("auto-correct on", index)["text"]!r}', warnings)
-        expect(s('return to a word: caret inside', 3)['text'] == 'Eccu a casa di Petru.',
+        sentence = 'Eccu a casa di Petru.'
+        expect(s('return to a word: caret inside', 3)['text'] == sentence,
                f'{model}: moving the caret alone must not change the text')
+        # A suggestion chosen with the caret inside a word replaces the whole word (keyboard/whole-word.js), and at
+        # the end of a word replaces that word; no piece of the old word stays right of the caret.
+        expect(s('return to a word: caret inside', 2)['text'] == sentence,
+               f'{model}: "ca|sa" + "casa" gave {s("return to a word: caret inside", 2)["text"]!r}')
+        expect(s('return to a word: caret inside', 4)['text'] == 'Eccu a casata di Petru.',
+               f'{model}: "casa|" + "casata" gave {s("return to a word: caret inside", 4)["text"]!r}')
+        for scenario, index in (('return to a word: selection replaced', 4), ('return to a word: delete the last', 4)):
+            got = s(scenario, index).get('text')
+            expect(got == sentence, f'{model}: {scenario!r} gave {got!r}')
+        after = s('return to a word: after a full stop', 4).get('text')
+        expect(after == 'Eccu a casa. Dopu ghjunghje', f'{model}: "Dop|u" + "Dopu" after a full stop gave {after!r}')
+        guide = s("return to a word: the guide's example", 2)['text']
+        expect(guide == 'Dopu ellu vene', f'{model}: "Dopu ell|a vene" + "ellu" gave {guide!r}')
+        # Keyman for iPhone ignores deleteRight, so the model leaves suggestions as they are there: the engine's
+        # own result, the end of the old word right of the caret.
+        iphone = s('return to a word: iPhone user agent', 2)['text']
+        expect(iphone == 'Dopu ellu a vene', f'{model}: with an iPhone user agent, {iphone!r}')
+        # Known limits of the engine, reported when they change: a space is added before punctuation that follows
+        # the word; undoing a mid-word choice does not bring back the end of the old word; a selected word gets the
+        # suggestions of a sentence start, with a capital.
+        limits = {2: 'Eccu Aiacciu .', 6: 'Eccu a cadi Petru.', 9: 'Eccu a Di di Petru.'}
+        for index, text in limits.items():
+            got = s('return to a word: known limits', index)
+            expect(got.get('text') == text, f'{model}: known limit changed: {got.get("text", got.get("error"))!r} '
+                   f'instead of {text!r} (step {index})', warnings)
     if {'platykalt.co.corsu_cismuntincu', 'platykalt.co.corsu_pumuntincu'} <= set(models):
         north = step(results, 'variants', 'platykalt.co.corsu_cismuntincu', 1)['suggestions']
         south = step(results, 'variants', 'platykalt.co.corsu_pumuntincu', 1)['suggestions']
@@ -321,6 +382,7 @@ def main():
     if args.observe:
         return
     failures, warnings = checks(results, list(models))
+    failures += package_checks(args.packages, models, results)
     for found, record in zip(data_checks(results, scenarios), (failures, warnings)):
         record.extend(found)
     for warning in warnings:

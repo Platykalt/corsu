@@ -152,18 +152,37 @@ Avant leur publication, les deux variantes sont dans la même archive que le dic
 
 ## Correction automatique
 
-Keyman 18.0, la version stable, **n'a pas de correction automatique** : les corrections sont proposées dans le
-bandeau et ne s'appliquent que si vous les touchez. Le dictionnaire Corsu ne commande pas ce réglage. Keyman 19,
-encore en version bêta, ajoute le choix *Predictions with auto-corrections* ; il apparaîtra sur l'écran Corsican
-quand Keyman 19 sera la version stable. Il restera facultatif : dans nos essais avec la bêta, il a parfois remplacé à
-tort des noms absents du dictionnaire.
+Keyman 18.0, la version stable, **n'a pas de correction automatique** : les corrections sont proposées dans le bandeau
+et ne s'appliquent que si vous les touchez. Le dictionnaire Corsu ne commande pas ce réglage. Keyman 19, encore en
+version bêta, ajoute le choix *Predictions with auto-corrections* ; il apparaîtra sur l'écran Corsican quand Keyman 19
+sera la version stable. Il restera facultatif. Dans nos essais du moteur de la bêta 19.0.309 (hors de l'application),
+un mot présent dans le dictionnaire est toujours gardé tel qu'il est tapé, mais un mot absent peut être remplacé : un
+nom par un nom proche (« Bastelicaccia » par « Bastilicaccia » quand seule la seconde graphie est dans le
+dictionnaire), ou un mot en minuscules par le nom qui s'écrit pareil (« corti » par « Corti » quand « corti » y
+manque).
 
 ## Revenir sur un mot
 
-Déplacer le curseur ne change rien au texte. Les suggestions suivent la partie du mot **à gauche du curseur**, et une
-suggestion choisie ne remplace que cette partie : avec le curseur dans `ell|a`, choisir « ellu » donne « ellu a ».
-C'est une limite de Keyman, qui n'efface rien à droite du curseur. Placez donc le curseur **à la fin du mot** (ou
-effacez le mot et retapez-le) avant de choisir une suggestion.
+Déplacer le curseur ne change rien au texte. Les suggestions suivent la partie du mot **à gauche du curseur**.
+
+- **Curseur à la fin du mot** : la suggestion choisie remplace le mot entier. C'est le geste sûr, quel que soit le
+  dictionnaire.
+- **Curseur au milieu du mot**, avec le dictionnaire publié (1.0) : la suggestion ne remplace que la partie à gauche
+  du curseur, et la fin de l'ancien mot reste à sa droite. Dans « Dopu ell|a vene », choisir « ellu » donne
+  « Dopu ellu a vene » : ce « a » n'est pas un mot ajouté, c'est la fin de « ella », qu'il faut effacer à la main.
+  De même, `ca|sa` puis « casa » donne « casa sa ». Keyman n'efface rien à droite du curseur de lui-même.
+- **Curseur au milieu du mot**, avec le dictionnaire de la prochaine version (1.1) : la suggestion remplace le mot
+  entier, « Dopu ellu vene ». Le dictionnaire demande à Keyman d'effacer la fin du mot, ce que Keyman pour Android
+  fait. Observé dans le moteur de Keyman 18.0.254 et 19.0.309 (bêta) et dans l'application Keyman 18.0.254 sur un
+  émulateur Android 14, pas sur un téléphone.
+  Deux limites de Keyman restent : si le mot est suivi d'une ponctuation, une espace s'ajoute devant elle
+  (`Aiacc|iu.` puis « Aiacciu » donne « Aiacciu . ») ; et l'annulation que Keyman propose juste après (effacer, puis
+  toucher le mot entre guillemets) ne rend pas la fin de l'ancien mot.
+- **Après avoir ajouté ou effacé une lettre au milieu du mot**, c'est le même cas : les suggestions suivent la partie
+  à gauche du curseur, et la règle ci-dessus s'applique.
+- **Mot sélectionné** : tapez les premières lettres du mot voulu (elles remplacent la sélection), puis choisissez la
+  suggestion. Toucher une suggestion sans rien taper remplace la sélection par une suggestion de début de phrase, avec
+  majuscule (« Eccu a Di di Petru. ») : comportement du moteur de Keyman, observé dans son moteur seulement.
 
 ## Si ça ne marche pas
 

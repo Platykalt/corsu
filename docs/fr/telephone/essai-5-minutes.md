@@ -44,13 +44,13 @@ du nom du fichier).
 | 9 | Toucher la suggestion | « Eccu » garde sa majuscule | la majuscule est perdue (défaut connu) | |
 | 10 | **Début de phrase** : après « bonghjornu. » et une espace, taper `ecc` sans toucher Maj | Le clavier EuroLatin met de lui-même la majuscule (« Ecc ») et les suggestions sont en majuscule : « Eccu » | majuscule du clavier, mais suggestions en minuscules (même défaut) | |
 | 11 | Toujours en début de phrase : retour à la ligne sans ponctuation, puis `ecc` | Pas de majuscule automatique : comportement du clavier EuroLatin, limite connue (de même après `."`) | idem | |
-| 12 | **Retour sur un mot** : écrire « ella », placer le curseur entre `ell` et `a`, choisir « ellu » dans le bandeau | Résultat « ellu a » : la suggestion ne remplace que la partie à gauche du curseur (limite connue de Keyman). Puis placer le curseur à la fin d'un mot : la suggestion remplace le mot entier | idem | |
+| 12 | **Retour sur un mot** : écrire « Dopu ella vene », placer le curseur entre `ell` et `a`, choisir « ellu » dans le bandeau. Puis placer le curseur à la fin d'un mot et choisir une suggestion | Android : « Dopu ellu vene », le mot entier est remplacé (candidat produit à partir de cette modification ; l'archive du 18 octobre 2026 ne l'a pas). iPhone : « Dopu ellu a vene », le « a » est la fin de « ella » restée à droite du curseur (limite de Keyman pour iPhone). À la fin d'un mot : la suggestion remplace le mot entier | « Dopu ellu a vene » sur les deux : le « a » est la fin de « ella », restée à droite du curseur (limite connue de Keyman). À la fin d'un mot : le mot entier est remplacé | |
 | 13 | Revenir au clavier habituel (Android : icône de clavier, ou appui court sur la touche globe ; iPhone : touche globe), puis de nouveau à Keyman | Les deux claviers alternent ; Keyman retrouve les suggestions corses | idem | |
 
 Compter un peu moins d'une minute pour 1 à 3 si Keyman est déjà prêt, et le reste en trois ou quatre minutes.
 
-**Échec ou limite ?** Les lignes 7, 11 et la première partie de 12 décrivent des limites connues de Keyman ou du
-clavier EuroLatin, et les lignes 8 à 10 de la colonne « publié » un défaut connu du paquet 1.0 : un résultat conforme
+**Échec ou limite ?** Les lignes 7, 11 et la première partie de 12 (sauf le candidat sur Android) décrivent des
+limites connues de Keyman ou du clavier EuroLatin, et les lignes 8 à 10 de la colonne « publié » un défaut connu du paquet 1.0 : un résultat conforme
 est « OK ». Un échec, c'est un résultat différent de la colonne « Attendu » du fichier essayé. Si rien ne change
 après une mise à jour, relancer Keyman (changer de clavier puis revenir, ou forcer l'arrêt de l'application) avant de
 conclure.

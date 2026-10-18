@@ -103,13 +103,13 @@
     "type": "in corsic"
    },
    {
-    "accept": 1
+    "accept": "Corsica"
    },
    {
     "type": "Aiacc"
    },
    {
-    "accept": 1
+    "accept": "Aiacciu"
    },
    {
     "type": "corsicaa"
@@ -140,6 +140,102 @@
    },
    {
     "key": "K_SPACE"
+   }
+  ]
+ },
+ {
+  "name": "casing: taps at a sentence start and mid-sentence",
+  "setting": 2,
+  "steps": [
+   {
+    "setText": "Eccu. "
+   },
+   {
+    "type": "Perche"
+   },
+   {
+    "accept": "Perchè"
+   },
+   {
+    "setText": "Eccu. "
+   },
+   {
+    "type": "Lingau"
+   },
+   {
+    "accept": "Lingua"
+   },
+   {
+    "setText": "Eccu. "
+   },
+   {
+    "type": "L'isul"
+   },
+   {
+    "accept": "L'isula"
+   },
+   {
+    "setText": "Eccu. "
+   },
+   {
+    "type": "D'altr"
+   },
+   {
+    "accept": "D'altri"
+   },
+   {
+    "setText": "Eccu. "
+   },
+   {
+    "type": "Ùn"
+   },
+   {
+    "accept": "Ùn"
+   },
+   {
+    "setText": "Disse: "
+   },
+   {
+    "type": "aiacc"
+   },
+   {
+    "accept": "Aiacciu"
+   },
+   {
+    "setText": "Eccu a "
+   },
+   {
+    "type": "cas"
+   },
+   {
+    "accept": "casa"
+   },
+   {
+    "setText": "Eccu, "
+   },
+   {
+    "accept": 0
+   },
+   {
+    "setText": "ECCU "
+   },
+   {
+    "type": "LINGAU"
+   },
+   {
+    "accept": "LINGUA"
+   },
+   {
+    "setText": "Eccu. "
+   },
+   {
+    "accept": 0
+   },
+   {
+    "setText": "Eccu?\n"
+   },
+   {
+    "accept": 0
    }
   ]
  },
@@ -307,6 +403,24 @@
    },
    {
     "key": "K_SPACE"
+   },
+   {
+    "type": "ADECEC"
+   },
+   {
+    "key": "K_SPACE"
+   },
+   {
+    "type": "UE"
+   },
+   {
+    "key": "K_SPACE"
+   },
+   {
+    "type": "SNCF"
+   },
+   {
+    "key": "K_SPACE"
    }
   ]
  },
@@ -350,7 +464,7 @@
   ]
  },
  {
-  "name": "return to a word: caret inside, at end, selection",
+  "name": "return to a word: caret inside, at end",
   "setting": 2,
   "steps": [
    {
@@ -358,14 +472,14 @@
     "at": 9
    },
    {
-    "accept": 1
+    "accept": "casa"
    },
    {
     "setText": "Eccu a casa di Petru.",
-    "at": 4
+    "at": 11
    },
    {
-    "accept": 1
+    "accept": "casata"
    },
    {
     "setText": "Eccu a casa di Petru.",
@@ -374,6 +488,72 @@
    {
     "setText": "Eccu a casa di Petru.",
     "at": 0
+   }
+  ]
+ },
+ {
+  "name": "return to a word: the guide's example, caret in ell|a",
+  "setting": 2,
+  "steps": [
+   {
+    "setText": "Dopu ella vene",
+    "at": 8
+   },
+   {
+    "accept": "ellu"
+   }
+  ]
+ },
+ {
+  "name": "return to a word: iPhone user agent, caret in ell|a",
+  "setting": 2,
+  "userAgent": "iphone",
+  "steps": [
+   {
+    "setText": "Dopu ella vene",
+    "at": 8
+   },
+   {
+    "accept": "ellu"
+   }
+  ]
+ },
+ {
+  "name": "return to a word: known limits (punctuation after the word, undo, selected word)",
+  "setting": 2,
+  "steps": [
+   {
+    "setText": "Eccu Aiacciu.",
+    "at": 7
+   },
+   {
+    "accept": "Aiacciu"
+   },
+   {
+    "setText": "Eccu a casa di Petru.",
+    "at": 9
+   },
+   {
+    "accept": "casa"
+   },
+   {
+    "key": "K_BKSP"
+   },
+   {
+    "accept": 0
+   },
+   {
+    "setText": "Eccu a casa di Petru.",
+    "at": 9
+   },
+   {
+    "caret": [
+     7,
+     11
+    ]
+   },
+   {
+    "accept": 0
    }
   ]
  },
@@ -395,7 +575,7 @@
     "type": "c"
    },
    {
-    "accept": 1
+    "accept": "casa"
    }
   ]
  },
@@ -414,7 +594,7 @@
     "type": "e"
    },
    {
-    "accept": 1
+    "accept": "casa"
    }
   ]
  },
@@ -432,10 +612,10 @@
    },
    {
     "setText": "Eccu a casa. Dopu ghjunghje",
-    "at": 17
+    "at": 16
    },
    {
-    "accept": 1
+    "accept": "Dopu"
    }
   ]
  },
