@@ -28,6 +28,8 @@ Quelques règles :
 3. Écrivez `%1`, `%2` pour une variable : `Restart %1` couvre aussi `Redémarrer { -brand-short-name }` dans Firefox.
 4. Ne gardez un `&` ou un `_` devant une lettre que si la source en a un.
 5. Mettez une espace avant `:`, `?`, `!` et `;`, et laissez le `…` ou le `:` final hors de la ligne.
+6. Devant une abréviation, traduisez d'abord le sens complet dans son contexte : « Bio » d'un profil Discord est
+   « Biographie », pas « biologique ». Gardez les sigles techniques usuels et les noms propres. Voir [AGENTS.md](AGENTS.md).
 
 Suivez le vocabulaire existant : *unghjetta* pour un onglet, *schedariu* pour un fichier, *cartulare* pour un
 dossier, *parolla d'intesa* pour un mot de passe.
@@ -61,6 +63,8 @@ A few rules:
 3. Write `%1`, `%2` for a placeholder: `Restart %1` also covers `Redémarrer { -brand-short-name }` in Firefox.
 4. Keep a `&` or `_` before a letter only if the source has one.
 5. Put a space before `:`, `?`, `!` and `;`, and leave a final `…` or `:` out of the line.
+6. For an abbreviation, translate its full meaning in context first: "Bio" in a Discord profile is "biography",
+   not "organic". Keep usual technical acronyms and proper names. See [AGENTS.md](AGENTS.md).
 
 Use the existing vocabulary: *unghjetta* for a browser tab, *schedariu* for a file, *cartulare* for a folder,
 *parolla d'intesa* for a password.
