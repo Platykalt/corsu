@@ -15,6 +15,16 @@ Les sections datées après « État actuel » sont l'historique : ce qui y est 
   publiques : 84 PASS, exit 0 (empreinte du plugin non recalculée faute de Node.js dans le conteneur ; faite en CI) ;
   0.24.0 publiée installée, Firefox désactivé, puis mise à jour réelle par son propre `update.py` depuis GitHub :
   `updated 0.24.0 → 0.25.1`, Firefox reste désactivé, entrée de menu sur `bin/corsu-python`.
+- **Présentation (18 octobre 2026, sur `main`)** : README par usage (ordinateur, téléphone, Minecraft), statuts
+  de la 0.25.1 (Audacity, Tenacity, fre:ac depuis la 0.24.0), sources et droits distingués des mots, crédits de
+  Patriccollu précisés, `r.md` remplacé par un lien vers sa source (README de Patriccollu/Lingua_Corsa-Infurmatica),
+  guides téléphone pour le dictionnaire publié (paquet 1.0) avec un parcours d'essai de la candidate (artefact
+  `keyboard-packages` du run 39140018508, connexion GitHub requise, expire le 16/01/2027), `CLAUDE.md` en fichier
+  qui importe `AGENTS.md`.
+- **Défauts transmis au chantier suivant** : la release publie `corsu-minecraft-java-texts-26.3.zip` sans `.sha256`
+  propre (une seule somme `corsu-minecraft-java-26.3.zip.sha256`) ; `tests/e2e/window_screens.py` affiche la version
+  0.25.0 dans ses données d'exemple ; le README dira « environ 17 000 mots » jusqu'à la publication du paquet 1.1
+  (12 976 entrées) : voir `docs/release-checklist-phone.md` sur `next-0.26`.
 - **Ensuite** : `next-0.26` (Minecraft, revue linguistique ; clavier Keyman : casse, variantes ; page « Sur
   téléphone »).
 
