@@ -1,0 +1,8 @@
+# Acronyms kept as written (capital letters), so that auto-correction does not replace them (ADECEC once became
+# "DECE"). Only acronyms with a reason to be typed in Corsican text about the language: the institutions and
+# databases this keyboard's sources and Corsican writers cite. Low weight (tools/make_vocab.py ACRONYM_WEIGHT): known,
+# never pushed among the suggestions. Editorial list by an AI agent, 2026-10-18; Vikipedia counts from the 2026-10-16 dump.
+word	expansion	reference
+ADECEC	Corsican cultural association of Cervioni that publishes INFCOR (expansion not checked)	https://adecec.net; Vikipedia: 162 occurrences
+INFCOR	the ADECEC's online database of the Corsican language (expansion not checked)	https://adecec.net/infcor; Vikipedia: 4 occurrences
+BDLC	Banca di Dati di a Lingua Corsa (Università di Corsica)	Vikipedia: 2 occurrences

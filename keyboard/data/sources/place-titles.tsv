@@ -1,0 +1,5 @@
+# Corsican names of communes written otherwise than their Wikidata label (sources/places.tsv), added next to it
+# without replacing it. Only names checked one by one. tools/make_vocab.py gives them the place-name weight.
+# Candidates not checked yet (labels that the Vikipedia dump redirects to another title): audit/commune-titles.tsv.
+qid	name	evidence
+Q753074	Vizzani	Corsican Vikipedia article title of commune 2B347 (Wikidata sitelink cowiki "Vizzani", label "Vezzani"; https://www.wikidata.org/wiki/Special:EntityData/Q753074.json consulted 2026-10-18); the page "Vezzani" redirects to it; the article quotes "Un dì la lefra sè tù capiti in Vizzani" (Monsignori Di La Fuata, Preti Santu); 6 occurrences in Vikipedia

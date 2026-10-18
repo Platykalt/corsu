@@ -51,6 +51,8 @@ LICENSES = {
     'apertium': 'GPL-3.0',
     'wikidata': 'CC0-1.0',
     'cog': 'etalab-2.0',
+    'homographs': 'GPL-3.0-or-later',
+    'acronyms': 'GPL-3.0-or-later',
     'corsu-lexicon': 'corsu-lexicon-mixed',
     'ai': 'GPL-3.0-or-later',
 }
@@ -76,6 +78,9 @@ PLACE_CAP = 900
 # Official names are spelled as INSEE writes them, so the Corsican spelling checks do not apply.
 OFFICIAL_FLOOR = 20
 OFFICIAL_CAP = PLACE_FLOOR
+# Weight of a curated acronym (sources/acronyms.tsv): known, so auto-correction keeps it, never among the suggestions
+# of an everyday prefix.
+ACRONYM_WEIGHT = 20
 # In a variety's preference list, the other variety's form keeps this share of the pair's weight.
 OTHER_SHARE = 0.25
 # About 1,380 Vikipedia articles are botanical stubs generated from one table ("spezia", "pianta", "sinonimi",
@@ -177,6 +182,20 @@ def wiktionary_words():
         for form in entry.get('forms', []):
             if 'table-tags' not in form.get('tags', []) and ' ' not in form.get('form', ''):
                 words.add(nfc(form['form']).lower())
+    return words
+
+
+def wiktionary_common_words():
+    """Wiktionary's Corsican words and forms of entries that are not names (orsu, argentu, mansu): common words."""
+    words = set()
+    for line in (RESOURCES / 'kaikki/kaikki.org-dictionary-Corsican.jsonl').read_text(encoding='utf-8').splitlines():
+        entry = json.loads(line)
+        if entry.get('pos') == 'name':
+            continue
+        words.add(nfc(entry['word']))
+        for form in entry.get('forms', []):
+            if 'table-tags' not in form.get('tags', []) and ' ' not in form.get('form', ''):
+                words.add(nfc(form['form']))
     return words
 
 
@@ -489,6 +508,41 @@ def main():
         weight = min(max(frequency_weight(word.lower()), OFFICIAL_FLOOR), OFFICIAL_CAP)
         entries[word.lower()] = dict(word=word, weight=round(weight), source=f'cog:{code}', status='attested')
         removed.pop(word.lower(), None)
+
+    # 6. Common words written like a capitalised entry (orsu / Orsu, corti / Corti): Keyman keeps a word typed exactly
+    #    as the list has it, so with only the name a lowercase word typed on purpose became the name. The lowercase
+    #    word is added next to it, weighed by its lowercase uses in Vikipedia: from Wiktionary's common (non-name)
+    #    forms, and from sources/homographs.tsv for the others (each with its evidence).
+    extra = {}
+    common = wiktionary_common_words()
+    listed = {nfc(row['word']) for row in read_tsv(SOURCES / 'homographs.tsv')}
+    for entry in list(entries.values()):
+        word = entry['word']
+        low = word.lower()
+        if word == low or not (low in common or low in listed):
+            continue
+        lowercase_uses = max(wiki_mid[low] - wiki_caps[low], 0)
+        weight = lowercase_uses * 1e7 / wiki_total + LEXICON_SHARE * lexicon[low] * 1e7 / lexicon_total
+        extra[low] = dict(word=low, weight=max(1, round(min(weight, int(entry['weight'])))),
+                          source='wiktionary' if low in common else 'homographs', status='attested')
+    place_stats['lowercase_homographs'] = len(extra)
+
+    # 7. Corsican names of communes written otherwise than their Wikidata label (sources/place-titles.tsv: Vizzani
+    #    next to Vezzani), and curated acronyms kept in capitals (sources/acronyms.tsv: ADECEC).
+    for row in read_tsv(SOURCES / 'place-titles.tsv'):
+        name = nfc(row['name'])
+        if fold(name) not in known:
+            known.add(fold(name))
+            weight = min(max(frequency_weight(name.lower()), PLACE_FLOOR), PLACE_CAP)
+            extra[name.lower()] = dict(word=name, weight=round(weight), source=f"wikidata:{row['qid']}",
+                                       status='attested')
+    for row in read_tsv(SOURCES / 'acronyms.tsv'):
+        word = nfc(row['word'])
+        extra[word] = dict(word=word, weight=ACRONYM_WEIGHT, source='acronyms', status='attested')
+        removed.pop(word.lower(), None)
+    for key, entry in extra.items():
+        # Kept under their own key: entries are keyed by the lowercase word, which the name already uses.
+        entries[f"\0{entry['word']}"] = entry
 
     def license_of(source):
         return LICENSES[source.split(':')[0]]

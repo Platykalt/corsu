@@ -147,7 +147,7 @@ when you tap them. The Corsu dictionary does not control this setting. Keyman 19
 stays optional. In our tests of the 19.0.309 beta's engine (outside the app), a word that is in the dictionary is
 always kept as typed, but a missing word may be replaced: a name by a close name ("Bastelicaccia" by "Bastilicaccia"
 when only the latter is in the dictionary), or a lowercase word by the name spelled the same ("corti" by "Corti" when
-"corti" is missing).
+"corti" is missing). The next version of the dictionary has these forms ("Bastelicaccia", "corti" next to "Corti", "Vizzani", acronyms such as "ADECEC"); a word still missing, a street name for instance, may still be replaced.
 
 ## Returning to a word
 

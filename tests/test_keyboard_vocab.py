@@ -62,7 +62,11 @@ class KeyboardVocabularyTests(unittest.TestCase):
                 word = entry['word']
                 low = word.lower()
                 self.assertNotIn(low, make_vocab.NOT_WORDS | make_vocab.PRODUCT_NAMES, word)
-                # Official commune names are spelled as INSEE writes them (Ajaccio, Zévaco, Tox).
+                # Official commune names are spelled as INSEE writes them (Ajaccio, Zévaco, Tox); curated acronyms
+                # are written in capitals (BDLC).
+                if entry['source'] == 'acronyms':
+                    self.assertEqual(word, word.upper(), word)
+                    continue
                 if entry['source'] != 'wiktionary' and not entry['source'].startswith('cog:'):
                     self.assertIsNone(make_vocab.shape_problem(low), word)
                 self.assertTrue(word == low or word == low[0].upper() + low[1:], word)
@@ -108,6 +112,9 @@ class KeyboardVocabularyTests(unittest.TestCase):
                 self.assertRegex(entry['source'], r'^cog:2[AB]\d{3}$', entry)
                 self.assertLessEqual(int(entry['weight']), make_vocab.PLACE_FLOOR, entry)
                 self.assertEqual(entry['word'][0], entry['word'][0].upper(), entry)
+        # Vizzani (Vikipedia title, sources/place-titles.tsv) next to the Wikidata label Vezzani, never instead.
+        self.assertIn('Vizzani', shared)
+        self.assertIn('Vezzani', shared)
         # Same search key as a word already known: left to that word (Calvi, Corti's Corte is a common word).
         self.assertNotIn('Calvi', [e['word'] for e in shared.values() if e['source'].startswith('cog:')])
 
@@ -121,6 +128,23 @@ class KeyboardVocabularyTests(unittest.TestCase):
         # semu is given for both groups (Vikipedia's table and U Cunghjugarellu): neither list overrides it.
         self.assertNotIn('semu', cismuntincu)
         self.assertNotIn('semu', pumuntincu)
+
+
+    def test_common_words_next_to_names(self):
+        # Keyman keeps a word typed exactly as the list has it. A common word written like a name is listed in
+        # lowercase next to the name, so neither is turned into the other: corti (short, plural) / Corti, orsu / Orsu.
+        shared = {entry['word']: entry for entry in rows('shared')[1]}
+        for word in ('corti', 'orsu', 'argentu', 'mansu', 'cagna', 'magnu'):
+            self.assertIn(word, shared)
+            self.assertIn(word.capitalize(), shared)
+            self.assertLessEqual(int(shared[word]['weight']), int(shared[word.capitalize()]['weight']), word)
+        # No source yet for calvi (bald): only the name. It comes back when a source attests it (REVIEW.md).
+        self.assertNotIn('calvi', shared)
+        self.assertIn('Calvi', shared)
+        # Curated acronyms, kept in capitals at a low weight.
+        for word in ('ADECEC', 'INFCOR', 'BDLC'):
+            self.assertEqual(int(shared[word]['weight']), make_vocab.ACRONYM_WEIGHT, word)
+            self.assertEqual(shared[word]['source'], 'acronyms')
 
 
 if __name__ == '__main__':
