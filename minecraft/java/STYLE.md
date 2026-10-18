@@ -16,7 +16,7 @@ revised by a Corsican speaker. Terms live in [glossary.tsv](glossary.tsv).
 
 ## Capitalisation and register
 
-- Sentence case for names and labels: *Scala di quercia*, not *Scala Di Quercia*. Proper names keep their capital
+- Sentence case for names and labels: *Scala di querciu*, not *Scala Di Querciu*. Proper names keep their capital
   (*Nether*, *End*, *Creeper*).
 - Buttons and menu items: infinitive (*Arregistrà*, *Rinasce*, *Lascià u mondu*), as Corsican software does.
 - Instructions and help texts address the player as *voi* (plural of politeness), like Firefox and Thunderbird in
