@@ -95,7 +95,7 @@ published release: it may still change, and nothing was tried on an iPhone (the 
 
 1. **Sign in to GitHub** in Safari (a free account is enough): GitHub only hands these files to signed-in
    accounts (signed out, the link shows a "404" page).
-2. **Download the archive** [keyboard-packages](https://github.com/Platykalt/corsu/actions/runs/39140018508/artifacts/12141617671) (opening the link starts the download). It arrives in **Files** › **Downloads** as `keyboard-packages.zip`.
+2. **Download the archive** [keyboard-packages](https://github.com/Platykalt/corsu/actions/runs/39161059937/artifacts/12149352996) (commit `146d2cf` on `next-0.26`) (opening the link starts the download). It arrives in **Files** › **Downloads** as `keyboard-packages.zip`.
    GitHub deletes it after 90 days (on 16 January 2027); a newer link will then be given here.
 3. **Extract it** in the **Files** app, tap `keyboard-packages.zip`; iOS creates a `keyboard-packages` folder next
    to it. It holds `corsu-keyboard.kmp`, `corsu-keyboard-cismuntincu.kmp`,

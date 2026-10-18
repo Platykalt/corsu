@@ -12,7 +12,7 @@ Les résultats attendus ont été observés avec le moteur de Keyman 18.0.254 et
 
 | | Candidat (prochaine version) | Publié (dernière version) |
 | --- | --- | --- |
-| Où le prendre | archive [keyboard-packages](https://github.com/Platykalt/corsu/actions/runs/39140018508/artifacts/12141617671) produite par GitHub Actions (compte GitHub connecté ; `.zip` à extraire ; effacée le 16 janvier 2027) | [corsu-keyboard.kmp](https://github.com/Platykalt/corsu/releases/latest/download/corsu-keyboard.kmp) |
+| Où le prendre | archive [keyboard-packages](https://github.com/Platykalt/corsu/actions/runs/39161059937/artifacts/12149352996) (commit `146d2cf` de `next-0.26`) produite par GitHub Actions (compte GitHub connecté ; `.zip` à extraire ; effacée le 16 janvier 2027) | [corsu-keyboard.kmp](https://github.com/Platykalt/corsu/releases/latest/download/corsu-keyboard.kmp) |
 | Fichier | `corsu-keyboard.kmp` du dossier extrait | `corsu-keyboard.kmp` |
 | Nom dans Keyman | Corsu | `platykalt.co.corsu` |
 | Version du dictionnaire | 1.1 | 1.0 (Corsu 0.25.1) |

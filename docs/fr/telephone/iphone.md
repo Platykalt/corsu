@@ -101,7 +101,7 @@ modification. Ce n'est pas une version publiée : il peut encore changer, et rie
 
 1. **Connectez-vous à GitHub** dans Safari (un compte gratuit suffit) : GitHub ne donne ces fichiers qu'aux comptes
    connectés (sans connexion, le lien affiche une page « 404 »).
-2. **Téléchargez l'archive** [keyboard-packages](https://github.com/Platykalt/corsu/actions/runs/39140018508/artifacts/12141617671) (le téléchargement commence en ouvrant le lien). Elle
+2. **Téléchargez l'archive** [keyboard-packages](https://github.com/Platykalt/corsu/actions/runs/39161059937/artifacts/12149352996) (commit `146d2cf` de `next-0.26`) (le téléchargement commence en ouvrant le lien). Elle
    arrive dans **Fichiers** › **Téléchargements** sous le nom `keyboard-packages.zip`. GitHub l'efface au bout de
    90 jours (le 16 janvier 2027) ; un lien plus récent sera alors donné ici.
 3. **Extrayez-la** : dans l'app **Fichiers**, touchez `keyboard-packages.zip` ; iOS crée un dossier
