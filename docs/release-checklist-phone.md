@@ -64,8 +64,8 @@ Lines to change, found by their markers:
       and the general dictionary's word count, **counted in the `.kmp` of the release candidate's CI run** (entries of
       the built `.model.js`, and distinct words among them), not in a source file: the 0.25.1 package was built in CI
       from the lexicon and held 19,805 entries (19,805 distinct words) while the committed word list had 16,949 lines.
-      Count with `python3 -I tools/count_kmp.py corsu-keyboard.kmp` if it exists, else the regex on `"content":` used
-      for 0.25.1 (see docs/continuite.md). The sentence « Dans la prochaine version (pas encore publiée) :
+      Count with `python3 -I tools/count_kmp.py corsu-keyboard.kmp` (also for the two regional packages). The
+      sentence « Dans la prochaine version (pas encore publiée) :
       … » is removed or rewritten as what the published files do (keeps capitals; two experimental regional
       preferences).
 - [ ] English part, `<!-- corsu:phone-variants:en … -->`: same change ("Published dictionary …", "In the next
