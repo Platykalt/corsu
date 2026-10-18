@@ -112,9 +112,11 @@ anglais ou sont ignorés. Prenez toujours le pack de votre version.
 ## Bedrock Edition
 
 Bedrock accepte aussi une langue ajoutée par un pack global (`texts/languages.json`, `texts/language_names.json`,
-`texts/co_FR.lang`), sous Windows, Android et iOS. Ce n'est pas encore fait : Bedrock a ses propres clés (environ
-13 000 lignes) et ne réutilise pas les fichiers Java. Sur consoles, importer un pack est en général impossible, et
-désactiver le pack alors que la langue est choisie fait planter le jeu.
+`texts/co_FR.lang`), sous Windows, Android et iOS. Corsu en a un **prototype expérimental**, jamais chargé dans le
+jeu : 4 272 textes sur 13 340 (Bedrock 26.50) reprennent la traduction Java quand l'anglais et le sens sont les
+mêmes ; les autres restent à traduire. Sur consoles, importer un pack est en général impossible. Selon une
+documentation communautaire (wiki.bedrock.dev, non vérifié), désactiver le pack alors que la langue est choisie fait
+planter le jeu : revenir d'abord à une autre langue. Essai et retrait pas à pas : [Bedrock](minecraft-bedrock.md).
 
 ## Tester en jeu
 

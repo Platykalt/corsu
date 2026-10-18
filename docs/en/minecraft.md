@@ -107,9 +107,11 @@ version's pack.
 ## Bedrock Edition
 
 Bedrock also accepts a language added by a global pack (`texts/languages.json`, `texts/language_names.json`,
-`texts/co_FR.lang`) on Windows, Android and iOS. It is not done yet: Bedrock has its own keys (about 13,000 lines)
-and does not reuse the Java files. Consoles generally cannot import packs, and disabling the pack while its language is
-selected crashes the game.
+`texts/co_FR.lang`) on Windows, Android and iOS. Corsu has an **experimental prototype**, never loaded in the game:
+4,272 of 13,340 texts (Bedrock 26.50) reuse the Java translation where the English and the sense are the same; the
+rest are still to translate. Consoles generally cannot import packs. According to community documentation
+(wiki.bedrock.dev, not verified), disabling the pack while its language is selected crashes the game: switch to
+another language first. Test and removal steps (French): [Bedrock](../fr/minecraft-bedrock.md).
 
 ## Test in the game
 

@@ -25,7 +25,7 @@ Statuts : **disponible** (dans la version publiée 0.25.1), **expérimental** (d
 | Commandes du terminal, programmes GTK (Linux) | Expérimental | catalogues gettext construits depuis le français | non | non |
 | **Minecraft: Java Edition, 87 versions (1.6.1 → 26.3)** | **Disponible** depuis 0.23.0 ; relecture par un locuteur à faire | fichiers de langue complets pour chaque version listée ([tableau](../../minecraft/java/COMPATIBILITY.md)) | le code de chaque version lit le pack et affiche chaque texte, avec les exceptions listées | **non** : écrite par IA, relue par un locuteur : 0 ; chargée en jeu : 26.3 seulement ([état](../../minecraft/java/STATUS.md)) |
 | Minecraft : phrases d'accueil, poème de fin | Disponible, pack facultatif à installer soi-même (change ces textes pour toutes les langues) | voir [Minecraft en corse](minecraft.md) | — | non |
-| Minecraft Bedrock Edition | Prototype, jamais essayé en jeu | 4 288 / 13 340 clés (reprises de Java, anglais identique) | formats vérifiés hors jeu ([état](../../minecraft/bedrock/STATUS.md)) | non |
+| Minecraft Bedrock Edition | Prototype, jamais essayé en jeu | 4 272 / 13 340 clés (reprises de Java, anglais identique) | formats vérifiés hors jeu ([état](../../minecraft/bedrock/STATUS.md)) | non |
 
 ## Logiciels qui ont déjà leur traduction corse : Corsu l'active
 
