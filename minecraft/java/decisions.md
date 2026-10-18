@@ -63,7 +63,7 @@ answered with an attested form and applied (Q30); Q20 and Q22 were only harmonis
 6. `block.minecraft.sculk_shrieker`: *Urladore* (coined from *urlà*); agent nouns mix *-adore* and *-atore* across the file (Urladore, Catalizatore, Fabbricadore, Osservatore) — pick a rule? — *Review 2026-10:* no single suffix rule (both attested); *urladore* unresolved.
 7. `entity.minecraft.zombified_piglin`: *zumbificatu* vs *zombificatu*. — *Review 2026-10:* keep; unresolved.
 8. `block.minecraft.orange_poplar_leaves`: plural *arance* of the colour *arancia* reads like "oranges" (the fruit); keep, or use an invariable form? — *Review 2026-10:* keep; unresolved.
-9. `block.minecraft.nether_wart`: *Verruca di u Nether* without attestation in the resources consulted. — *Review 2026-10:* ask about *porru*; current doubtful.
+9. `block.minecraft.nether_wart`: *Verruca di u Nether* without attestation in the resources consulted. — *Review 2026-10:* ask about *porru*; current doubtful. *Round 2 (2026-10-18):* *verruche* is used in the wart sense in the local Vikipedia (article *Lophius piscatorius*); kept, still for a speaker.
 10. `block.minecraft.sea_pickle`: *Cucumaru di mare* is a guess (the real creature is a pyrosome). — *Review 2026-10:* keep; plausible.
 11. `block.minecraft.allium`, `cornflower` (*Fiurdalisu* vs *Fiordalisu*), `azure_bluet` (*Houstonia*), `lily_pad` (*ninfea*): common Corsican plant names? — *Review 2026-10:* keep; *Agliu salvaticu* plausible, others unresolved. — *Verification 2026-10-18:* *Fiurdalisu* kept (INFCOR lists it as a synonym of *turchinellu*); Lily Pad changed to *Nenufaru* (INFCOR, EN "lily pad").
 12. `block.minecraft.potent_sulfur`: meaning of "Potent" (new 26.3 block) unclear; *Zolfu putente*. — *Review 2026-10:* *Zolfu cuncentratu* if FR/IT reading confirmed; current doubtful.
@@ -81,8 +81,8 @@ answered with an attested form and applied (Q30); Q20 and Q22 were only harmonis
 24. `subtitles.entity.axolotl.splash`, `slime.squish`: coined *sciaccuttuleghja*, *sciaccheghja*. — *Review 2026-10:* keep; unresolved.
 25. `subtitles.entity.parrot.imitate.creaking`: distinction *cricca* (creaks) / *scricchjula* (rattles) is coined. — *Review 2026-10:* keep; unresolved.
 26. `subtitles.entity.drowned.ambient` (*gorgula*), `panda.worried_ambient` (*mugula*), `rabbit.ambient` (*squitta*), `strider.idle` (*piula*), `parrot.imitate.endermite` (*zampetta*): without attestation in the resources consulted sound verbs. — *Review 2026-10:* keep; unresolved.
-27. `subtitles.item.trident.thunder`: *tonu* for thunder. — *Review 2026-10:* keep; plausible.
-28. `advancements.adventure.blowback.title`: proverb *Chì sumena ventu ricoglie timpesta* — wording and spelling. — *Review 2026-10:* keep; plausible.
+27. `subtitles.item.trident.thunder`: *tonu* for thunder. — *Review 2026-10:* keep; plausible. *Round 2:* attested (ADECEC la-géographie "tonnerre : tonu", le-temps-qu'il-fait "Tonnerre : tonu"); *tronu* (throne in Vikipedia) replaced by *tonu* in the lightning subtitle and `/weather`.
+28. `advancements.adventure.blowback.title`: proverb *Chì sumena ventu ricoglie timpesta* — wording and spelling. — *Review 2026-10:* keep; plausible. *Round 2:* ADECEC la-géographie "récolter : ricoglie, ra-"; `plant_seed.title` harmonised on *ricoglie*.
 29. `advancements.adventure.two_birds_one_arrow.title`: *Dui pichjoni cù una freccia*, adapted from Italian; is there a Corsican idiom? — *Review 2026-10:* keep; plausible.
 30. `advancements.adventure.minecraft_trials_edition.description`: imperative *Mettite pede* (mittite?). — *Review 2026-10:* **changed to *Mittite*** (mozilla:1892); attested.
 31. `advancements.husbandry.root.title`: Husbandry as *Agricultura*; *Allevu* possible. — *Review 2026-10:* keep; plausible.

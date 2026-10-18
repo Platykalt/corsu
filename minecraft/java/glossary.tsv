@@ -105,7 +105,7 @@ Frog	mob (f)	Granochja	granochj	Ranochja		to check in INFCOR	proposal	yes
 Tadpole	mob (m)	Cudutu	cudut		Ranochjella; Capirossulu (not found)	INFCOR (cached lookups, review-2026-10) cudutu/codutu EN tadpole (verified 2026-10-18, review-2026-10/APPLIED.tsv)	attested	yes
 Turtle	mob (f)	Tartaruga	tartarug	Cuppulata (land tortoise)		to check in INFCOR	proposal	yes
 Squid	mob (m)	Totanu	totan	Tutanu	Calamaru (= inkwell)	INFCOR (cached lookups, review-2026-10) totanu EN squid; calamaru EN inkwell (verified 2026-10-18, review-2026-10/APPLIED.tsv)	attested	yes
-Glow Squid	mob	Calamaru luminosu				Corsu	proposal	no
+Glow Squid	mob (m)	Totanu luminosu				Corsu	proposal	no
 Dolphin	mob (m)	Delfinu	delfin			to check in INFCOR	proposal	yes
 Cod	fish (m)	Merluzzu	merluzz			to check in INFCOR	proposal	yes
 Salmon	fish (m)	Salmone	salmon			to check in INFCOR	proposal	yes
@@ -192,7 +192,7 @@ Trapdoor	block (f)	Caterazza	caterazz	Trappa	Bodula (Italian botola)	ADECEC la-m
 Button	block (m)	Buttone	button/cliccu			to check in INFCOR	proposal	yes
 Pressure Plate	block (f)	Pedana di pressione	pedan			Corsu	proposal	yes
 Sign	block (f)	Cartella	cartell		Cartellu (INFCOR: challenge letter, sachet)	INFCOR (cached lookups, review-2026-10) cartella FR écriteau, pancarte EN placard, sign (verified 2026-10-18, review-2026-10/APPLIED.tsv)	attested	yes
-Hanging Sign	block	Cartellu appesu				Corsu	proposal	no
+Hanging Sign	block (f)	Cartella appesa				Corsu	proposal	no
 Brick	material (m)	Mattone	matton		Matone	ADECEC la-maison "Brique: mattone"; INFCOR (cached lookups, review-2026-10) mattone (verified 2026-10-18, review-2026-10/APPLIED.tsv)	attested	yes
 Bricks	block (m pl)	Mattoni	matton		Matoni	ADECEC la-maison "Brique: mattone"; INFCOR (cached lookups, review-2026-10) mattone (verified 2026-10-18, review-2026-10/APPLIED.tsv)	attested	yes
 Polished	stone finish	Lisciatu	lisciat			Corsu	proposal	yes
@@ -208,7 +208,7 @@ Glass Pane	thin glass (m)	Vetru di finestra	vetru di finestra		Pannellu di vetru
 Wool	block (f)	Lana	lan			to check in INFCOR	proposal	yes
 Carpet	block (m)	Tappettu	tappett		Tappetu	INFCOR (cached lookups, review-2026-10) tappettu EN carpet; ADECEC filage-et-tissage (verified 2026-10-18, review-2026-10/APPLIED.tsv)	attested	yes
 Concrete	block (m)	Cimentu	ciment	Cimentu	Betonu (not found)	ADECEC la-maison "Béton: cimentu" (verified 2026-10-18, review-2026-10/APPLIED.tsv)	attested	yes
-Concrete Powder	block (f)	Polvera di betonu				Corsu	proposal	no
+Concrete Powder	block (f)	Polvera di cimentu				Corsu	proposal	no
 Terracotta	block (f)	Terracotta	terracott			Corsu	proposal	yes
 Glazed Terracotta	block	Terracotta smaltata				Corsu	proposal	no
 Copper	metal (m)	Ramu	ram			to check in INFCOR	proposal	yes
@@ -256,7 +256,7 @@ Lava	fluid (f)	Lava				to check in INFCOR	proposal	yes
 Water	fluid (f)	Acqua	acqu			to check in INFCOR	proposal	yes
 Magma	block (m)	Magma				to check in INFCOR	proposal	no
 Cobweb	block (f)	Tela di ragnu	ragnaghj	Ragnaghju		to check in INFCOR	proposal	yes
-Ladder	block (f)	Scala di manu	scala			Corsu	proposal	yes
+Ladder	block (f)	Scaletta	scalett		Scala di manu (not found)	ADECEC la-maison "Echelle: scala, scaletta - ladder" (verified 2026-10-18, review-2026-10/APPLIED.tsv R2-02)	attested	yes
 Torch	block (f)	Torchja	torchj	Fiaccula	Torcia (Italian)	INFCOR (cached lookups, review-2026-10) torchja/torchia FR torche (verified 2026-10-18, review-2026-10/APPLIED.tsv)	attested	yes
 Lantern	block (f)	Lanterna	lantern			to check in INFCOR	proposal	yes
 Candle	block (f)	Candela	candel			to check in INFCOR	proposal	yes
@@ -324,8 +324,8 @@ Potted	plant in a pot	in vasu	vasu			Corsu	proposal	yes
 Shelf	block (m)	Scaffale	scaffal			to check in INFCOR	proposal	yes
 # Plants and biomes
 Oak	tree (m)	Querciu	querci		Quercia (Italian; f.)	INFCOR (cached lookups, review-2026-10) querciu/quarciu n.m. EN oak (verified 2026-10-18, review-2026-10/APPLIED.tsv)	attested	yes
-Dark Oak	tree (f)	Quercia scura				Corsu	proposal	no
-Pale Oak	tree (f)	Quercia pallida				Corsu	proposal	no
+Dark Oak	tree (m)	Querciu scuru				Corsu	proposal	no
+Pale Oak	tree (m)	Querciu pallidu				Corsu	proposal	no
 Spruce	tree (m)	Abetu	abet		Abete (Italian)	INFCOR (cached lookups, review-2026-10) abetu/abbetu FR sapin (verified 2026-10-18, review-2026-10/APPLIED.tsv)	attested	yes
 Birch	tree (m)	Biolu	biol		Betula (Latin genus)	INFCOR (cached lookups, review-2026-10) biolu/violu EN birch (verified 2026-10-18, review-2026-10/APPLIED.tsv)	attested	yes
 Jungle	biome / tree (f)	Giungla	giungl			to check in INFCOR	proposal	yes
@@ -549,7 +549,7 @@ Sulfur	stone and biome (m)	Zolfu	zolf			Corsu (Vikipedia: zolfu)	proposal	no
 Tiles	Deepslate Tiles (f pl)	Piastrelle	piastrell			Corsu (coined)	proposal	no
 Cobbled Deepslate	stone (m)	Petrame d'ardesia prufonda				Corsu (coined)	proposal	no
 Crop	growing plant block (f)	Cultura	cultur			Corsu (coined)	proposal	no
-Torchflower	flower (m)	Fiore torcia				Corsu (coined)	proposal	no
+Torchflower	flower (m)	Fiore torchja				Corsu (coined)	proposal	no
 Pitcher Plant	flower (f)	Pianta à brocca				Corsu (coined)	proposal	no
 Eyeblossom	flower (m); apertu/chjosu	Ochjufiore	ochjufior			Corsu (coined)	proposal	no
 Cornflower	flower (m)	Fiurdalisu			Fiordalisu	Corsu (coined)	proposal	no
@@ -558,9 +558,9 @@ Lily of the Valley	flower (m)	Mughettu				Corsu (Vikipedia: mughettu)	proposal	n
 Shelf Mushroom	block (m)	Fungu à scaffale			Fungu à mensula	Corsu (coined)	proposal	no
 Dead (coral)	adjective	mortu				Corsu (coined)	proposal	no
 Infested	block adjective	infestatu	infestat			Corsu (coined)	proposal	no
-Activator Rail	block (m)	Binariu attivatore				Corsu (coined)	proposal	no
-Detector Rail	block (m)	Binariu rilevatore				Corsu (coined)	proposal	no
-Powered Rail	block (m)	Binariu alimentatu				Corsu (coined)	proposal	no
+Activator Rail	block (m)	Ragliu attivatore				Corsu (coined)	proposal	no
+Detector Rail	block (m)	Ragliu rilevatore				Corsu (coined)	proposal	no
+Powered Rail	block (m)	Ragliu alimentatu				Corsu (coined)	proposal	no
 Daylight Detector	block (m)	Rilevatore di luce di ghjornu				Corsu (coined)	proposal	no
 Portal	Nether/End Portal (m)	Portale	portal			Corsu (coined)	proposal	no
 End Gateway	block (m)	Passaghju di l'End	passaghj			Corsu (coined)	proposal	no
@@ -698,7 +698,7 @@ Swift Sneak	enchantment	Accuvacciata rapida				Corsu (coined)	proposal	no
 Curse of Vanishing	enchantment	Malidizzione di a sparizione				Corsu (coined)	proposal	no
 Wind Burst	enchantment	Raffica di ventu				Corsu (coined)	proposal	no
 Parched	skeleton variant (m)	Scheletru arsu				Corsu (coined)	proposal	no
-Camel Husk	mob (m)	Cammellu seccu				Corsu (coined)	proposal	no
+Camel Husk	mob (m)	Camellu seccu				Corsu (coined)	proposal	no
 Dried Ghast	block (m)	Ghast seccu				Corsu (coined)	proposal	no
 Ghastling	mob (m)	Ghastinu				Corsu (coined)	proposal	no
 Snifflet	baby Sniffer (m)	Annusadurellu				Corsu (coined)	proposal	no
@@ -755,7 +755,7 @@ Time marker	commands (m)	marcatore di tempu				Corsu (coined)	proposal	no
 Summon	verb	invucà				Corsu (coined)	proposal	no
 World Border	commands (m)	cunfine di u mondu				Corsu (coined)	proposal	no
 Clipboard	interface (m)	preme'papei				lexicon-upstream:10371 (clipboard -> preme'papei)	attested	no
-Hitbox	debug (f)	scatula di collisione				Corsu (coined)	proposal	no
+Hitbox	debug (f)	scatula di cullisione				Corsu (coined); cullisione: local Vikipedia (Gondula) (review-2026-10/APPLIED.tsv R2-04)	proposal	no
 Advanced tooltips	debug (f pl)	infurmazioni avanzate				Corsu (coined)	proposal	no
 Game Test	commands (f)	prova				Corsu (coined)	proposal	no
 Whisper	verb	bisbiglià				Corsu (coined)	proposal	no

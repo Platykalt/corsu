@@ -5079,13 +5079,13 @@
  },
  "commands.replaceitem.noContainer": {
   "5fd1bcb850bc": {
-   "co": "U bloccu in %s, %s, %s ùn hè micca un cuntenitore",
+   "co": "U bloccu in %s, %s, %s ùn hè micca un cuntenidore",
    "kind": "new",
    "from": null,
    "review": "ai"
   },
   "f5435ab41971": {
-   "co": "U bloccu in %d, %d, %d ùn hè micca un cuntenitore",
+   "co": "U bloccu in %d, %d, %d ùn hè micca un cuntenidore",
    "kind": "new",
    "from": null,
    "review": "ai"
@@ -6410,19 +6410,19 @@
  },
  "commands.setidletimeout.success": {
   "469109c29441": {
-   "co": "U tempu d'inattività di i ghjucadori hè avà di %s min",
+   "co": "U tempu d'inattività di i ghjucadori hè avà di %s minuti",
    "kind": "reused",
    "from": "commands.setidletimeout.success",
    "review": "ai"
   },
   "c9327e176c6c": {
-   "co": "U tempu d'inattività hè avà di %s min.",
+   "co": "U tempu d'inattività hè avà di %s minuti.",
    "kind": "adapted",
    "from": "commands.setidletimeout.success",
    "review": "ai"
   },
   "f7e33cdbf9cb": {
-   "co": "U tempu d'inattività hè avà di %d min.",
+   "co": "U tempu d'inattività hè avà di %d minuti.",
    "kind": "adapted",
    "from": "commands.setidletimeout.success",
    "review": "ai"
@@ -7582,7 +7582,7 @@
  },
  "commands.weather.set.thunder": {
   "8c5fe3d25902": {
-   "co": "U tempu hè avà à piova è à tronu",
+   "co": "U tempu hè avà à piova è à tonu",
    "kind": "reused",
    "from": "commands.weather.set.thunder",
    "review": "ai"
@@ -8337,7 +8337,7 @@
  },
  "createWorld.customize.custom.maxHeight": {
   "05c496f176d1": {
-   "co": " Altezza mass.",
+   "co": " Altezza massima",
    "kind": "new",
    "from": null,
    "review": "ai"
@@ -8357,7 +8357,7 @@
    "review": "ai"
   },
   "ad7222462c09": {
-   "co": " Altezza min.",
+   "co": " Altezza minima",
    "kind": "new",
    "from": null,
    "review": "ai"
@@ -23419,7 +23419,7 @@
  },
  "options.stream.mic_toggle.mute": {
   "0f0973483d91": {
-   "co": "Mutu",
+   "co": "Ammutulì",
    "kind": "renamed",
    "from": "key.keyboard.mute",
    "review": "ai",
@@ -27134,7 +27134,7 @@
  },
  "subtitles.entity.lightning.thunder": {
   "4bd65d13d91b": {
-   "co": "Tronu rimbomba",
+   "co": "Tonu rimbomba",
    "kind": "renamed",
    "from": "subtitles.entity.lightning_bolt.thunder",
    "review": "ai"
@@ -27166,7 +27166,7 @@
  },
  "subtitles.entity.magmacube.squish": {
   "834b66a59cf8": {
-   "co": "Cubu di magma si schiaccia",
+   "co": "Cubu di magma si sciaccia",
    "kind": "renamed",
    "from": "subtitles.entity.magma_cube.squish",
    "review": "ai"
@@ -27270,7 +27270,7 @@
  },
  "subtitles.entity.parrot.imitate.wolf": {
   "f40bcf937aa3": {
-   "co": "Pappagallu ansima",
+   "co": "Pappagallu ansa",
    "kind": "new",
    "from": null,
    "review": "ai"
@@ -29495,7 +29495,7 @@
  },
  "tile.ladder.name": {
   "0bf3d1de57b0": {
-   "co": "Scala di manu",
+   "co": "Scaletta",
    "kind": "renamed",
    "from": "block.minecraft.ladder",
    "review": "ai"

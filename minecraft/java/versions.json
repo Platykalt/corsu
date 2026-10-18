@@ -20,7 +20,7 @@
   },
   "note": "verify 2026-10-18: 0 errors; rendered 1354 Corsican texts with the game's own loader and formatter (3 skipped: the English itself does not format), 0 unknown keys, 0 problems",
   "verified": {
-   "fingerprint": "sha256:38cbbdeac767540ef4c713ea150a2a599f5de72ddb4258964ca6780d71e2e233",
+   "fingerprint": "sha256:bf2adabb74185d0369b62494b830a2119fdef750b42bade630dcb5ddbc5f2836",
    "date": "2026-10-18",
    "engine": true
   }
@@ -46,7 +46,7 @@
   },
   "note": "verify 2026-10-18: 0 errors; rendered 1360 Corsican texts with the game's own loader and formatter (3 skipped: the English itself does not format), 0 unknown keys, 0 problems",
   "verified": {
-   "fingerprint": "sha256:cbf4689f0f8f1cf1b1ff43b8f8c402fae004d9a0d164f79980b8dd00fa5c02db",
+   "fingerprint": "sha256:1b5821cf6354ef960ece593b917b15aa0edac0bac1c7e9abbbb7f435782ada09",
    "date": "2026-10-18",
    "engine": true
   }
@@ -72,7 +72,7 @@
   },
   "note": "verify 2026-10-18: 0 errors; rendered 1362 Corsican texts with the game's own loader and formatter (3 skipped: the English itself does not format), 0 unknown keys, 0 problems",
   "verified": {
-   "fingerprint": "sha256:67ff4f114a5565082aa93e8edc125f4b44c661608541af70b0a41d5a492e3f12",
+   "fingerprint": "sha256:afae0ae722fb7b30bdfb312ee1f111cc7d0dc9dca4fcada7b240cf929ec3dd59",
    "date": "2026-10-18",
    "engine": true
   }
@@ -98,7 +98,7 @@
   },
   "note": "verify 2026-10-18: 0 errors; rendered 1595 Corsican texts with the game's own loader and formatter (2 skipped: the English itself does not format), 0 unknown keys, 0 problems",
   "verified": {
-   "fingerprint": "sha256:be3e703c1660a9633a84b1f554546b7dbc3f3d5b9cca27d4ebf1d8f4c745eb01",
+   "fingerprint": "sha256:d83dd8de7a8ff51d595eeba4bf38ca2a63521efac54bfed50251d36dc22a086b",
    "date": "2026-10-18",
    "engine": true
   }
@@ -124,7 +124,7 @@
   },
   "note": "verify 2026-10-18: 0 errors; rendered 1685 Corsican texts with the game's own loader and formatter (2 skipped: the English itself does not format), 0 unknown keys, 0 problems",
   "verified": {
-   "fingerprint": "sha256:e2cc7cbe166a8ed26d5891269155a2fa8beafc51d42681193a3773c80c31de08",
+   "fingerprint": "sha256:31d07010a0e7cca005e1c0b7ac3bb0436fac798840255cfc356972a53bd560ec",
    "date": "2026-10-18",
    "engine": true
   }
@@ -150,7 +150,7 @@
   },
   "note": "verify 2026-10-18: 0 errors; rendered 1685 Corsican texts with the game's own loader and formatter (2 skipped: the English itself does not format), 0 unknown keys, 0 problems",
   "verified": {
-   "fingerprint": "sha256:bf2ac2ff07fa11437dc92ca4d92be3529e272da6218a1f13c260207a0d8e6b83",
+   "fingerprint": "sha256:504c9bf9b988fba3ba97d60db3e380a9b86c5ca431c4c8bc5995fcb1b7594d87",
    "date": "2026-10-18",
    "engine": true
   }
@@ -176,7 +176,7 @@
   },
   "note": "verify 2026-10-18: 0 errors; rendered 1708 Corsican texts with the game's own loader and formatter (2 skipped: the English itself does not format), 0 unknown keys, 0 problems",
   "verified": {
-   "fingerprint": "sha256:36a6bb428a134b31a7cb0a3e41ebe91019084ff5a9b52d1f62a2c5f8df882f8f",
+   "fingerprint": "sha256:09a91433c965694f35d5e87fc80721f1b68770da357d54a094f95ceffbfea238",
    "date": "2026-10-18",
    "engine": true
   }
@@ -202,7 +202,7 @@
   },
   "note": "verify 2026-10-18: 0 errors; rendered 1725 Corsican texts with the game's own loader and formatter (2 skipped: the English itself does not format), 0 unknown keys, 0 problems",
   "verified": {
-   "fingerprint": "sha256:ad98da75f584db12fa937d81d965aeaaaf7341adb3f3136c8ebe670b831f5250",
+   "fingerprint": "sha256:c6b633edc84e058ba754b78e4cf92644596a9fdc2168ca0a1edf845499b6cdda",
    "date": "2026-10-18",
    "engine": true
   }
@@ -228,7 +228,7 @@
   },
   "note": "verify 2026-10-18: 0 errors; rendered 1725 Corsican texts with the game's own loader and formatter (2 skipped: the English itself does not format), 0 unknown keys, 0 problems",
   "verified": {
-   "fingerprint": "sha256:11ca12605f20fe55b5bda87be617b10174936d369aa9dfeee378cabc9b68e50a",
+   "fingerprint": "sha256:bc10f29cd282e61470ae85d2d29cd33d2ccd4cd29afc693f6ae988480d759601",
    "date": "2026-10-18",
    "engine": true
   }
@@ -254,7 +254,7 @@
   },
   "note": "verify 2026-10-18: 0 errors; rendered 1726 Corsican texts with the game's own loader and formatter (2 skipped: the English itself does not format), 0 unknown keys, 0 problems",
   "verified": {
-   "fingerprint": "sha256:d96655abcff5d691107cbf6526d40a017199219eb99ef0e1c48e0f7113c01189",
+   "fingerprint": "sha256:b412419ce079b5accf377df1b91ca066efeb694adf031bce71d425f1b5a2828b",
    "date": "2026-10-18",
    "engine": true
   }
@@ -280,7 +280,7 @@
   },
   "note": "verify 2026-10-18: 0 errors; rendered 1726 Corsican texts with the game's own loader and formatter (2 skipped: the English itself does not format), 0 unknown keys, 0 problems",
   "verified": {
-   "fingerprint": "sha256:b521b0d69567270907ef976b515a380fa70bf999089757e13e9f1efca71ab3de",
+   "fingerprint": "sha256:81cf69002d8eb9180ee6ef798ce57b91a152147944d9ca09303edeff954dddcb",
    "date": "2026-10-18",
    "engine": true
   }
@@ -306,7 +306,7 @@
   },
   "note": "verify 2026-10-18: 0 errors; rendered 1765 Corsican texts with the game's own loader and formatter (2 skipped: the English itself does not format), 0 unknown keys, 0 problems",
   "verified": {
-   "fingerprint": "sha256:370838e6bcb6b3e6e74a1bce6188f695f45bd08294a8e34e43483288818af817",
+   "fingerprint": "sha256:d1398be53688563d4bdef3d64777f5c5ac86ae417a8736f1f93037f56f4bea4d",
    "date": "2026-10-18",
    "engine": true
   }
@@ -332,7 +332,7 @@
   },
   "note": "verify 2026-10-18: 0 errors; rendered 2677 Corsican texts with the game's own loader and formatter (2 skipped: the English itself does not format), 0 unknown keys, 0 problems",
   "verified": {
-   "fingerprint": "sha256:bd8998791b3d35b55fd45febb06a64af1d9e74eb487a1e4d5d6d9d09aa97148d",
+   "fingerprint": "sha256:12a713ec1bd09d39231daea49e091b8d881f0eb02922a55eae730ab2eddb948d",
    "date": "2026-10-18",
    "engine": true
   }
@@ -358,7 +358,7 @@
   },
   "note": "verify 2026-10-18: 0 errors; rendered 2698 Corsican texts with the game's own loader and formatter (2 skipped: the English itself does not format), 0 unknown keys, 0 problems",
   "verified": {
-   "fingerprint": "sha256:b51330887a79a012466f64f12e7af5a890d5c2dd27ccf1eef94b461588796425",
+   "fingerprint": "sha256:37c7b66d58bf2987bfdf1adc0a5fd55865d76fc58fb7b684ec8787dfeae20f18",
    "date": "2026-10-18",
    "engine": true
   }
@@ -384,7 +384,7 @@
   },
   "note": "verify 2026-10-18: 0 errors; rendered 2719 Corsican texts with the game's own loader and formatter (2 skipped: the English itself does not format), 0 unknown keys, 0 problems",
   "verified": {
-   "fingerprint": "sha256:2727ff765d8897b33931037a18e0025c81d98d699ba5f02492cdb50985c40ddf",
+   "fingerprint": "sha256:1370590de11d22633a86367c2f54ed6ae6eb1018ea828f75d42a76127fcc2d82",
    "date": "2026-10-18",
    "engine": true
   }
@@ -410,7 +410,7 @@
   },
   "note": "verify 2026-10-18: 0 errors; rendered 2719 Corsican texts with the game's own loader and formatter (2 skipped: the English itself does not format), 0 unknown keys, 0 problems",
   "verified": {
-   "fingerprint": "sha256:301e6926fcbda1eced4857daf75aeea56821d56be76e4a615e1fa7035fdb6e71",
+   "fingerprint": "sha256:de5dd498aebb2a9b0620b126faa7247a2cb7dfc1033b51678cf44ba842d5a170",
    "date": "2026-10-18",
    "engine": true
   }
@@ -436,7 +436,7 @@
   },
   "note": "verify 2026-10-18: 0 errors; rendered 2725 Corsican texts with the game's own loader and formatter (2 skipped: the English itself does not format), 0 unknown keys, 0 problems",
   "verified": {
-   "fingerprint": "sha256:18c5caf95d192f1dbb017d1f58e6863fa9b3799a5cae676a012b97b3894a0dfa",
+   "fingerprint": "sha256:3b1b829e1cf1bf073d25816d5a97ad94640cafb57fe3007f1b1293ed2b132b3a",
    "date": "2026-10-18",
    "engine": true
   }
@@ -462,7 +462,7 @@
   },
   "note": "verify 2026-10-18: 0 errors; rendered 2725 Corsican texts with the game's own loader and formatter (2 skipped: the English itself does not format), 0 unknown keys, 0 problems",
   "verified": {
-   "fingerprint": "sha256:4980e0a9319c45aa3df45141060ee979351980a460b673c4caf046e0e011794b",
+   "fingerprint": "sha256:a03a5f5772da8f9519d0aafb2eb32dfa9a27c47dc2654879f45248b3fb13807b",
    "date": "2026-10-18",
    "engine": true
   }
@@ -488,7 +488,7 @@
   },
   "note": "verify 2026-10-18: 0 errors; rendered 2725 Corsican texts with the game's own loader and formatter (2 skipped: the English itself does not format), 0 unknown keys, 0 problems",
   "verified": {
-   "fingerprint": "sha256:73f70b1946d45023a30b3acea489887c6e7f3d414cf921fb575821e61c20e129",
+   "fingerprint": "sha256:30153270a8254568b9284f982007ba1cbec6ef80fb85fcbb92769ebb9d981bd8",
    "date": "2026-10-18",
    "engine": true
   }
@@ -514,7 +514,7 @@
   },
   "note": "verify 2026-10-18: 0 errors; rendered 2725 Corsican texts with the game's own loader and formatter (2 skipped: the English itself does not format), 0 unknown keys, 0 problems",
   "verified": {
-   "fingerprint": "sha256:e3e87bfd96a39b24a5075b2c2648cd567a231ad66ee776a7be6d4a6ccabed7f1",
+   "fingerprint": "sha256:c5ce88873ed245bb3bc250997b2d38fcfbb869c736a7b699ff2c02b5bb1f9894",
    "date": "2026-10-18",
    "engine": true
   }
@@ -540,7 +540,7 @@
   },
   "note": "verify 2026-10-18: 0 errors; rendered 2749 Corsican texts with the game's own loader and formatter (2 skipped: the English itself does not format), 0 unknown keys, 0 problems",
   "verified": {
-   "fingerprint": "sha256:ece3f260b5b42b519b4744656cdb74dca903d58da4fabf484dbc0903edc20e77",
+   "fingerprint": "sha256:38ea1a230bb7241502d520dbf60f4391fb22786e83ed3038338e227fd9ea2475",
    "date": "2026-10-18",
    "engine": true
   }
@@ -566,7 +566,7 @@
   },
   "note": "verify 2026-10-18: 0 errors; rendered 2761 Corsican texts with the game's own loader and formatter (2 skipped: the English itself does not format), 0 unknown keys, 0 problems",
   "verified": {
-   "fingerprint": "sha256:190d6fe97a67634e79e003df3cdfb141e7741078c42ed0fb6d1b77eeea438a40",
+   "fingerprint": "sha256:7982c1c16b41fb039ddaf9959723112f6fda99f26a444244681081682acd45fe",
    "date": "2026-10-18",
    "engine": true
   }
@@ -592,7 +592,7 @@
   },
   "note": "verify 2026-10-18: 0 errors; rendered 3079 Corsican texts with the game's own loader and formatter (2 skipped: the English itself does not format), 0 unknown keys, 0 problems",
   "verified": {
-   "fingerprint": "sha256:25487da2a4816702f765fa0313f23bbf9cfa35cc7d182b8101b7d60319551a38",
+   "fingerprint": "sha256:053b6bfb03d7799cc207415048f6c44345dda8f4856044a42fd0752ba7eecc21",
    "date": "2026-10-18",
    "engine": true
   }
@@ -618,7 +618,7 @@
   },
   "note": "verify 2026-10-18: 0 errors; rendered 3079 Corsican texts with the game's own loader and formatter (2 skipped: the English itself does not format), 0 unknown keys, 0 problems",
   "verified": {
-   "fingerprint": "sha256:17f7b9a32a3ade252b3b39a027b1ec66fd8653f2ece9c28166aaac600270f79b",
+   "fingerprint": "sha256:29bf3a0f767c5eca0eb871692eb60ad5e287406b3022440513b2af82dad00a2b",
    "date": "2026-10-18",
    "engine": true
   }
@@ -644,7 +644,7 @@
   },
   "note": "verify 2026-10-18: 0 errors; rendered 3079 Corsican texts with the game's own loader and formatter (2 skipped: the English itself does not format), 0 unknown keys, 0 problems",
   "verified": {
-   "fingerprint": "sha256:51551a4673bb2c7c9989804bacf1aafcf7caefb9e8e53bc8566d70a7ceb0cc95",
+   "fingerprint": "sha256:960297a1220424779e4603c25e11af029065487aa5d708299392489ae2b2d000",
    "date": "2026-10-18",
    "engine": true
   }
@@ -670,7 +670,7 @@
   },
   "note": "verify 2026-10-18: 0 errors; rendered 3084 Corsican texts with the game's own loader and formatter (2 skipped: the English itself does not format), 0 unknown keys, 0 problems",
   "verified": {
-   "fingerprint": "sha256:64260daf91eb3c2530c5da17db8cffff5e8b5108df16da519991af3d13bf8248",
+   "fingerprint": "sha256:1d20e06d2cff6773649d2a12d89261334b5c4321dbfd0fc7243095c5cbbcc2de",
    "date": "2026-10-18",
    "engine": true
   }
@@ -696,7 +696,7 @@
   },
   "note": "verify 2026-10-18: 0 errors; rendered 3084 Corsican texts with the game's own loader and formatter (2 skipped: the English itself does not format), 0 unknown keys, 0 problems",
   "verified": {
-   "fingerprint": "sha256:4453c673cbcbaa88ad6d044ea60f6b22efe38d45950c94002b2c8014897629ec",
+   "fingerprint": "sha256:cdb55a15b9747b07563eaa0dfeb97ae54dd898f0b592d96abd9726a46d7e747e",
    "date": "2026-10-18",
    "engine": true
   }
@@ -722,7 +722,7 @@
   },
   "note": "verify 2026-10-18: 0 errors; rendered 3123 Corsican texts with the game's own loader and formatter (2 skipped: the English itself does not format), 0 unknown keys, 0 problems",
   "verified": {
-   "fingerprint": "sha256:515b8e02130f8c9483de2999c7560fe58e9456903f608851db912e9127b3fa10",
+   "fingerprint": "sha256:a45980f530d2d0c7fa7b09882df547c88795fb512eb7d52f77e8b6634a5f8f4a",
    "date": "2026-10-18",
    "engine": true
   }
@@ -748,7 +748,7 @@
   },
   "note": "verify 2026-10-18: 0 errors; rendered 3123 Corsican texts with the game's own loader and formatter (2 skipped: the English itself does not format), 0 unknown keys, 0 problems",
   "verified": {
-   "fingerprint": "sha256:32b59640a827e326c97f408d46553d79e3043577764d72ea1016ed3cb2c30909",
+   "fingerprint": "sha256:218b6ee84b7f27d8893c3759b8db921f2b943072ecca6cf6b97dfc45c1b861c7",
    "date": "2026-10-18",
    "engine": true
   }
@@ -774,7 +774,7 @@
   },
   "note": "verify 2026-10-18: 0 errors; rendered 3122 Corsican texts with the game's own loader and formatter (2 skipped: the English itself does not format), 0 unknown keys, 0 problems",
   "verified": {
-   "fingerprint": "sha256:22efc07ce7388a0d1e473b997938d1ad58d5bac4a2683256c7251873ad49a795",
+   "fingerprint": "sha256:00f3c4c6e4e911f91be4a40cf391df0503b7801a8696cb3f5c1813ddddd21deb",
    "date": "2026-10-18",
    "engine": true
   }
@@ -800,7 +800,7 @@
   },
   "note": "verify 2026-10-18: 0 errors; rendered 3258 Corsican texts with the game's own loader and formatter (2 skipped: the English itself does not format), 0 unknown keys, 0 problems",
   "verified": {
-   "fingerprint": "sha256:8aebbc820d37b4e20c9859d802e10bd3a020cc70c8687beeaa99c4c40cb91086",
+   "fingerprint": "sha256:7c90c3a02d5c601bef61c02c29e8af92747341669d162c1129d8f149a6db9b2c",
    "date": "2026-10-18",
    "engine": true
   }
@@ -826,7 +826,7 @@
   },
   "note": "verify 2026-10-18: 0 errors; rendered 3261 Corsican texts with the game's own loader and formatter (2 skipped: the English itself does not format), 0 unknown keys, 0 problems",
   "verified": {
-   "fingerprint": "sha256:38fa8eb35a83d2f376f74f47a115da221f3e256b4fbc3224ec2257ed9b77ce5a",
+   "fingerprint": "sha256:5898b58f98626187a1d4c98d8f488901470ef892371ba9dbe88690d47ab40417",
    "date": "2026-10-18",
    "engine": true
   }
@@ -852,7 +852,7 @@
   },
   "note": "verify 2026-10-18: 0 errors; rendered 3265 Corsican texts with the game's own loader and formatter (2 skipped: the English itself does not format), 0 unknown keys, 0 problems",
   "verified": {
-   "fingerprint": "sha256:79a66e834e4e01551cee926534de94c79b59305ca56b3399278f00c7b3634dac",
+   "fingerprint": "sha256:0c75287212089f2f4710095ae168fcc06e33c863f4c571f9db68f620bcc3a1e9",
    "date": "2026-10-18",
    "engine": true
   }
@@ -878,7 +878,7 @@
   },
   "note": "verify 2026-10-18: 0 errors; rendered 3527 Corsican texts with the game's own loader and formatter (2 skipped: the English itself does not format), 0 unknown keys, 0 problems",
   "verified": {
-   "fingerprint": "sha256:4bbd2e555a6fc05a2e6c8a4c65c7b3dd296de00da3461d85e418675ce767ce62",
+   "fingerprint": "sha256:598c1ec0fcc202855d3d777d89570778508824203b4b56fb3bc45106242b5e66",
    "date": "2026-10-18",
    "engine": true
   }
@@ -904,7 +904,7 @@
   },
   "note": "verify 2026-10-18: 0 errors; rendered 3527 Corsican texts with the game's own loader and formatter (2 skipped: the English itself does not format), 0 unknown keys, 0 problems",
   "verified": {
-   "fingerprint": "sha256:8cea2206e5661b507cb08b54ed28d170209fdb32b35398d7da40ba17e76707aa",
+   "fingerprint": "sha256:c7d12f2b139160a459cd9182d18129017ff51e193417b0d939e81722e3118b46",
    "date": "2026-10-18",
    "engine": true
   }
@@ -930,7 +930,7 @@
   },
   "note": "verify 2026-10-18: 0 errors; rendered 3531 Corsican texts with the game's own loader and formatter (2 skipped: the English itself does not format), 0 unknown keys, 0 problems",
   "verified": {
-   "fingerprint": "sha256:d2ed14338effbe6518f481520a4aea5d358c8992bf634987f8b89adc5141f228",
+   "fingerprint": "sha256:58ed171bca9ce24452beaf507b0ad4cb43b42f860bfcef426929170f84fb8e2d",
    "date": "2026-10-18",
    "engine": true
   }
@@ -956,7 +956,7 @@
   },
   "note": "verify 2026-10-18: 0 errors; rendered 4138 Corsican texts with the game's own loader and formatter (2 skipped: the English itself does not format), 0 unknown keys, 0 problems",
   "verified": {
-   "fingerprint": "sha256:431c518818f9bf3db9fc3e156abe8c015d24884a4524c65a1de426b221a61038",
+   "fingerprint": "sha256:cc72fe3826f3cbcd9848ae001c5de3f71c3a34aa6521ce0688b43e922c5902a9",
    "date": "2026-10-18",
    "engine": true
   }
@@ -982,7 +982,7 @@
   },
   "note": "verify 2026-10-18: 0 errors; rendered 4219 Corsican texts with the game's own loader and formatter (2 skipped: the English itself does not format), 0 unknown keys, 0 problems",
   "verified": {
-   "fingerprint": "sha256:9cb5aa86fbd38dc440d84486df717da450abbc4edc86ea5c43d57dedb9ca8fa3",
+   "fingerprint": "sha256:23a70900db62a9d191e200424fb8fe7eee943748bfae2e8ac6a4ca6290bca794",
    "date": "2026-10-18",
    "engine": true
   }
@@ -1008,7 +1008,7 @@
   },
   "note": "verify 2026-10-18: 0 errors; rendered 4219 Corsican texts with the game's own loader and formatter (2 skipped: the English itself does not format), 0 unknown keys, 0 problems",
   "verified": {
-   "fingerprint": "sha256:03ac80e312e90e171963f95b335fb37ae2f99cbf1ceacec9de3dd7fe02c5c3d0",
+   "fingerprint": "sha256:e96a8edd3dd02ef5cc15a6a72d76b08b770e8300e7b7191e88fb64ff3a4eabcf",
    "date": "2026-10-18",
    "engine": true
   }
@@ -1034,7 +1034,7 @@
   },
   "note": "verify 2026-10-18: 0 errors; rendered 4557 Corsican texts with the game's own loader and formatter (2 skipped: the English itself does not format), 0 unknown keys, 0 problems",
   "verified": {
-   "fingerprint": "sha256:0564d9b452193120e41ab4d1769e9cdc486745764a9b9d9a6a73d144a03862c0",
+   "fingerprint": "sha256:21afbccf487613f255a0bea65670f9563c99ea30a3b05e856fa74804d94619a3",
    "date": "2026-10-18",
    "engine": true
   }
@@ -1060,7 +1060,7 @@
   },
   "note": "verify 2026-10-18: 0 errors; rendered 4559 Corsican texts with the game's own loader and formatter (2 skipped: the English itself does not format), 0 unknown keys, 0 problems",
   "verified": {
-   "fingerprint": "sha256:c71cde86802a08f82dadbcaa85f3a64f838c3a85c1574838f6bf31ead4507b06",
+   "fingerprint": "sha256:ffa51eb6a71adee6288071d1c5d45372f2c94309099710de0eac1b5774b1296a",
    "date": "2026-10-18",
    "engine": true
   }
@@ -1086,7 +1086,7 @@
   },
   "note": "verify 2026-10-18: 0 errors; rendered 4559 Corsican texts with the game's own loader and formatter (2 skipped: the English itself does not format), 0 unknown keys, 0 problems",
   "verified": {
-   "fingerprint": "sha256:4c84c13a45f7b590644075c0bd38de5c9aa94e5ad29cdb09d5b4e4c12553b30b",
+   "fingerprint": "sha256:8fc2ec6f104067049acf6107d6dae251a684775458da4147cda9372082d3cc45",
    "date": "2026-10-18",
    "engine": true
   }
@@ -1112,7 +1112,7 @@
   },
   "note": "verify 2026-10-18: 0 errors; rendered 4561 Corsican texts with the game's own loader and formatter (2 skipped: the English itself does not format), 0 unknown keys, 0 problems",
   "verified": {
-   "fingerprint": "sha256:d3b5287bd0ef378c80780cdca46c5a87ea0b79f7853fba7acd9199aaf74f7968",
+   "fingerprint": "sha256:589c373cab47867b0cd48cee8b0c6967dbd84d5b5cea57787f2dc90b72f4600b",
    "date": "2026-10-18",
    "engine": true
   }
@@ -1138,7 +1138,7 @@
   },
   "note": "verify 2026-10-18: 0 errors; rendered 4565 Corsican texts with the game's own loader and formatter (2 skipped: the English itself does not format), 0 unknown keys, 0 problems",
   "verified": {
-   "fingerprint": "sha256:6d62c2442067f489f4e7c8dd57a3663dc6a12bd0fb10d6d3f9a5eb1267adbdeb",
+   "fingerprint": "sha256:42ddd1ee784f3559cfad046dfa3f2dc1794ed03bf820ef951745643c0db1411e",
    "date": "2026-10-18",
    "engine": true
   }
@@ -1164,7 +1164,7 @@
   },
   "note": "verify 2026-10-18: 0 errors; rendered 4618 Corsican texts with the game's own loader and formatter (2 skipped: the English itself does not format), 0 unknown keys, 0 problems",
   "verified": {
-   "fingerprint": "sha256:8fe52c0c76558a53d1df938423fd208c10a54c33db1a9324e5bd53f85ee0eb74",
+   "fingerprint": "sha256:1f9c2b215568090b819164ca12966d714b12f5f56672b7f055cee61a3fea8198",
    "date": "2026-10-18",
    "engine": true
   }
@@ -1190,7 +1190,7 @@
   },
   "note": "verify 2026-10-18: 0 errors; rendered 4618 Corsican texts with the game's own loader and formatter (2 skipped: the English itself does not format), 0 unknown keys, 0 problems",
   "verified": {
-   "fingerprint": "sha256:4b84d7098d8803536167ad83db36c020949778ad947a966fe6460dd98f707522",
+   "fingerprint": "sha256:62615cde1b85aa6fa899bc53ddcc3b4440c1e45866ce1d209ff3ba09fc41ad14",
    "date": "2026-10-18",
    "engine": true
   }
@@ -1216,7 +1216,7 @@
   },
   "note": "verify 2026-10-18: 0 errors; rendered 4626 Corsican texts with the game's own loader and formatter (2 skipped: the English itself does not format), 0 unknown keys, 0 problems",
   "verified": {
-   "fingerprint": "sha256:2000db912d0027cee6f9a48ceeb556dcacd3866e26c585f0ced4aff3f49d92e9",
+   "fingerprint": "sha256:c59b2820a40a2e52bd0769d377522843aa1c867863f903654bca6c7d49482f02",
    "date": "2026-10-18",
    "engine": true
   }
@@ -1242,7 +1242,7 @@
   },
   "note": "verify 2026-10-18: 0 errors; rendered 4988 Corsican texts with the game's own loader and formatter (2 skipped: the English itself does not format), 0 unknown keys, 0 problems",
   "verified": {
-   "fingerprint": "sha256:611ba634ca95ec4426593eba84e2b41a4060f16dc062e0ed5a7c6667413980da",
+   "fingerprint": "sha256:90325e6ce42b27704ca3cf571059e8cfcb9e9e51b99e3b8cbddcc38dab94c4d7",
    "date": "2026-10-18",
    "engine": true
   }
@@ -1268,7 +1268,7 @@
   },
   "note": "verify 2026-10-18: 0 errors; rendered 4988 Corsican texts with the game's own loader and formatter (2 skipped: the English itself does not format), 0 unknown keys, 0 problems",
   "verified": {
-   "fingerprint": "sha256:98914aa54de8753e14c85ca2c33d612cf7ea93565f0386fd0b12fc323ffa9a69",
+   "fingerprint": "sha256:8f77ef041f76dd73da6898094087b4d7edfee508b2f8da7517fd24e9019d6918",
    "date": "2026-10-18",
    "engine": true
   }
@@ -1294,7 +1294,7 @@
   },
   "note": "verify 2026-10-18: 0 errors; rendered 5016 Corsican texts with the game's own loader and formatter (2 skipped: the English itself does not format), 0 unknown keys, 0 problems",
   "verified": {
-   "fingerprint": "sha256:6a9f42cb97239fb736dca6b1c3bef2ec0a319e3953dcde88387031ea3e392dde",
+   "fingerprint": "sha256:9fbc65923d37207d5548ebe84f79507d7169407b64945f9bb48b91ef105c53a4",
    "date": "2026-10-18",
    "engine": true
   }
@@ -1320,7 +1320,7 @@
   },
   "note": "verify 2026-10-18: 0 errors; rendered 5016 Corsican texts with the game's own loader and formatter (2 skipped: the English itself does not format), 0 unknown keys, 0 problems",
   "verified": {
-   "fingerprint": "sha256:85422efd4e2af2c9bd7510e022ae55b2b739fa9d69d89f002c70935269b1c380",
+   "fingerprint": "sha256:1b6014a55a536f705605fe25b9fced8d7ff79816208a3cecfc1a74a275b459fe",
    "date": "2026-10-18",
    "engine": true
   }
@@ -1346,7 +1346,7 @@
   },
   "note": "verify 2026-10-18: 0 errors; rendered 5046 Corsican texts with the game's own loader and formatter (2 skipped: the English itself does not format), 0 unknown keys, 0 problems",
   "verified": {
-   "fingerprint": "sha256:ddc016d0cd610b74a083082b9d5fc95fee0431f28fe6d5e0f041412e68ef0913",
+   "fingerprint": "sha256:9cece7ec219b2c3b1ca6c75a5d3a2fd8aa96e0279b21678774b04e8c170812d7",
    "date": "2026-10-18",
    "engine": true
   }
@@ -1372,7 +1372,7 @@
   },
   "note": "verify 2026-10-18: 0 errors; rendered 5046 Corsican texts with the game's own loader and formatter (2 skipped: the English itself does not format), 0 unknown keys, 0 problems",
   "verified": {
-   "fingerprint": "sha256:30f90342f5b949ad5eac00cadebc229eb0a02d358f7cf4cf7ada60d82d562215",
+   "fingerprint": "sha256:d9ae506a5d59d5bedf024e6fde4578baf9e61651c085f7b12a53ecb213050308",
    "date": "2026-10-18",
    "engine": true
   }
@@ -1398,7 +1398,7 @@
   },
   "note": "verify 2026-10-18: 0 errors; rendered 5369 Corsican texts with the game's own loader and formatter (2 skipped: the English itself does not format), 0 unknown keys, 0 problems",
   "verified": {
-   "fingerprint": "sha256:b9ed245d9c860b682f5038f407fe7e5f4a7da89632e23c4c892d16b68ef0604f",
+   "fingerprint": "sha256:5f83838f917a580e3911294a9497f749d2157459a4a81442c35e9b282c760e61",
    "date": "2026-10-18",
    "engine": true
   }
@@ -1424,7 +1424,7 @@
   },
   "note": "verify 2026-10-18: 0 errors; rendered 5372 Corsican texts with the game's own loader and formatter (2 skipped: the English itself does not format), 0 unknown keys, 0 problems",
   "verified": {
-   "fingerprint": "sha256:d36f0a24857e2689272c794e829e577c013b080afdda39e7728d0ee5d02f7092",
+   "fingerprint": "sha256:e20999dc660a39118f5c226de8123055ffc77cd97b1d01b80c1fbdfe3e0d98f9",
    "date": "2026-10-18",
    "engine": true
   }
@@ -1450,7 +1450,7 @@
   },
   "note": "verify 2026-10-18: 0 errors; rendered 5387 Corsican texts with the game's own loader and formatter (2 skipped: the English itself does not format), 0 unknown keys, 0 problems",
   "verified": {
-   "fingerprint": "sha256:5e5adf498d0d5688292e5c152e2d3a6ffdfb18f70c600295e9387dab37d53ee3",
+   "fingerprint": "sha256:fb6a3f32cd65bdf80490d71fae8fd85f169321fcee6b91dbc24832159b031e19",
    "date": "2026-10-18",
    "engine": true
   }
@@ -1476,7 +1476,7 @@
   },
   "note": "verify 2026-10-18: 0 errors; rendered 5388 Corsican texts with the game's own loader and formatter (2 skipped: the English itself does not format), 0 unknown keys, 0 problems",
   "verified": {
-   "fingerprint": "sha256:2dc21383fbb07b7cfa213c91fd1654a1a3c5698467b3908eb63d4d62f9bfe36d",
+   "fingerprint": "sha256:133078ff5cf6b8d31d2d38842e88a454c5bf4f865365db1323e24d017582b77d",
    "date": "2026-10-18",
    "engine": true
   }
@@ -1502,7 +1502,7 @@
   },
   "note": "verify 2026-10-18: 0 errors; rendered 5396 Corsican texts with the game's own loader and formatter (2 skipped: the English itself does not format), 0 unknown keys, 0 problems",
   "verified": {
-   "fingerprint": "sha256:463017ee716f095b8419177efc4708281d3d591307ef005862ae73a9cf28a303",
+   "fingerprint": "sha256:3ca884d698e76019e28dabd84dd979a00dabb6b23c91ffdbe38ae15151897f84",
    "date": "2026-10-18",
    "engine": true
   }
@@ -1528,7 +1528,7 @@
   },
   "note": "verify 2026-10-18: 0 errors; rendered 5569 Corsican texts with the game's own loader and formatter (2 skipped: the English itself does not format), 0 unknown keys, 0 problems",
   "verified": {
-   "fingerprint": "sha256:f73f21cbe44cd29939b949e9449ba490925b71be8b1ea410141894a879b81c55",
+   "fingerprint": "sha256:3e6360a8cc9ffc528e3bf8e7a51863d0475ee691cbe43e5fe7a19fabf9688c0d",
    "date": "2026-10-18",
    "engine": true
   }
@@ -1554,7 +1554,7 @@
   },
   "note": "verify 2026-10-18: 0 errors; rendered 5665 Corsican texts with the game's own loader and formatter (2 skipped: the English itself does not format), 0 unknown keys, 0 problems",
   "verified": {
-   "fingerprint": "sha256:d85b8ae780bcdc36d48aba77d8d647f36f8020831d536a9ee76223bb45b469f7",
+   "fingerprint": "sha256:8a3efa3dd375d6e3e046775ddcc2e830e81b3383015119787e6c2336634682ab",
    "date": "2026-10-18",
    "engine": true
   }
@@ -1580,7 +1580,7 @@
   },
   "note": "verify 2026-10-18: 0 errors; rendered 5666 Corsican texts with the game's own loader and formatter (2 skipped: the English itself does not format), 0 unknown keys, 0 problems",
   "verified": {
-   "fingerprint": "sha256:29544f51b078d9abd2b7793f26724a1e259da3fcec3b44ebc3759e8a93afa7da",
+   "fingerprint": "sha256:ca541018a02ddb8bbc4594be6f0386720918d62ccc717545437530288320c28b",
    "date": "2026-10-18",
    "engine": true
   }
@@ -1606,7 +1606,7 @@
   },
   "note": "verify 2026-10-18: 0 errors; rendered 5820 Corsican texts with the game's own loader and formatter (2 skipped: the English itself does not format), 0 unknown keys, 0 problems",
   "verified": {
-   "fingerprint": "sha256:cc91b5f102a9b5879f690192ad2b21ef277ae74f1ccd3f8111ecada24dbb8545",
+   "fingerprint": "sha256:d334caa642012623f1ffd927a0dea057c78cf1a7c41a37e1ddc698e7fb2dd18d",
    "date": "2026-10-18",
    "engine": true
   }
@@ -1632,7 +1632,7 @@
   },
   "note": "verify 2026-10-18: 0 errors; rendered 6063 Corsican texts with the game's own loader and formatter (2 skipped: the English itself does not format), 0 unknown keys, 0 problems",
   "verified": {
-   "fingerprint": "sha256:641d570c61be710332b86c9e44b3749ed9803bd0982ceda2ac39fbde8f7cf76f",
+   "fingerprint": "sha256:d5d014f47cf20543af24c7a33c022fda7b4c0a969e98836807ee0d401651e25c",
    "date": "2026-10-18",
    "engine": true
   }
@@ -1658,7 +1658,7 @@
   },
   "note": "verify 2026-10-18: 0 errors; rendered 6217 Corsican texts with the game's own loader and formatter (2 skipped: the English itself does not format), 0 unknown keys, 0 problems",
   "verified": {
-   "fingerprint": "sha256:7886e0601e72bff3095d4a18805e1b18b4aa31d66d9999d408066e69289c6de8",
+   "fingerprint": "sha256:7de13e9c48da362c8d3ef65b98e0eabf0e2b6b2c4ab4b064c06cc28b72dff4de",
    "date": "2026-10-18",
    "engine": true
   }
@@ -1684,7 +1684,7 @@
   },
   "note": "verify 2026-10-18: 0 errors; rendered 6217 Corsican texts with the game's own loader and formatter (2 skipped: the English itself does not format), 0 unknown keys, 0 problems",
   "verified": {
-   "fingerprint": "sha256:7732c489eff7f6fefe00a27f7d9acf01118620c5ebf5134244f528459a2f2a16",
+   "fingerprint": "sha256:fb98b3fd9a6f395912bf97399d6c497f5b49cb83116435964289a34730b186f0",
    "date": "2026-10-18",
    "engine": true
   }
@@ -1710,7 +1710,7 @@
   },
   "note": "verify 2026-10-18: 0 errors; rendered 6345 Corsican texts with the game's own loader and formatter (2 skipped: the English itself does not format), 0 unknown keys, 0 problems",
   "verified": {
-   "fingerprint": "sha256:9e1e5943db71678bf8c2a1480f458b7373ac9cc32cbbf78886ae304bd3fd512b",
+   "fingerprint": "sha256:7c57ddd1673717ec774da94f6e4d2170b4a75a3038da8404b33f45693c83d42d",
    "date": "2026-10-18",
    "engine": true
   }
@@ -1736,7 +1736,7 @@
   },
   "note": "verify 2026-10-18: 0 errors; rendered 6540 Corsican texts with the game's own loader and formatter (2 skipped: the English itself does not format), 0 unknown keys, 0 problems",
   "verified": {
-   "fingerprint": "sha256:fd5fbfe3643b0d7807d896f9a697138d92da6350a2ef1151aa06655548773c65",
+   "fingerprint": "sha256:15fb0e9bca32a3878c4d530a28661d6b40407ce140661888ad680b289b148ed8",
    "date": "2026-10-18",
    "engine": true
   }
@@ -1762,7 +1762,7 @@
   },
   "note": "verify 2026-10-18: 0 errors; rendered 6540 Corsican texts with the game's own loader and formatter (2 skipped: the English itself does not format), 0 unknown keys, 0 problems",
   "verified": {
-   "fingerprint": "sha256:bc7b8d27ebbaaff3ff4a960556d36762e385670065692a0f4913fa0810c486e3",
+   "fingerprint": "sha256:6f1f73f0c2d17bb215ab5b945bc47e91f0c60dfa869bffff8fe7fc0475f2f3d9",
    "date": "2026-10-18",
    "engine": true
   }
@@ -1788,7 +1788,7 @@
   },
   "note": "verify 2026-10-18: 0 errors; rendered 6770 Corsican texts with the game's own loader and formatter (2 skipped: the English itself does not format), 0 unknown keys, 0 problems",
   "verified": {
-   "fingerprint": "sha256:2776b731465ad246a5cdd46970979541cee659159b87ee4ec4b033fe977c69e7",
+   "fingerprint": "sha256:09736727836a7dd56de006b121c92287bdc14feb820a6b7ccb9d87c60f37e7f3",
    "date": "2026-10-18",
    "engine": true
   }
@@ -1814,7 +1814,7 @@
   },
   "note": "verify 2026-10-18: 0 errors; rendered 6770 Corsican texts with the game's own loader and formatter (2 skipped: the English itself does not format), 0 unknown keys, 0 problems",
   "verified": {
-   "fingerprint": "sha256:6a2930ec73d0891b846b62624e3e28de3c34b6204a189b125422aabf831fd7d6",
+   "fingerprint": "sha256:779587b8e4c82b86b3b168c4f6dc5bba1fb9183dd4323d430447a6ca33dff867",
    "date": "2026-10-18",
    "engine": true
   }
@@ -1840,7 +1840,7 @@
   },
   "note": "verify 2026-10-18: 0 errors; rendered 6881 Corsican texts with the game's own loader and formatter (2 skipped: the English itself does not format), 0 unknown keys, 0 problems",
   "verified": {
-   "fingerprint": "sha256:5547ce374daaf7fec527ed8ac0e8a28efc95ca98f99a514cdda201b068ed9a10",
+   "fingerprint": "sha256:f3eb1d8f2dc7e39bfca931f319c9feb5e56713927af47fe401d91dfffee2dbe8",
    "date": "2026-10-18",
    "engine": true
   }
@@ -1866,7 +1866,7 @@
   },
   "note": "verify 2026-10-18: 0 errors; rendered 6881 Corsican texts with the game's own loader and formatter (2 skipped: the English itself does not format), 0 unknown keys, 0 problems",
   "verified": {
-   "fingerprint": "sha256:f76f576c793099f9bdc3e019aaa5dc01ea0179564970c81cc99e326bb61e3229",
+   "fingerprint": "sha256:c58e61e4d04f40d11c38cbde1083994cba7928de7d170dfdc05b52f83beaed53",
    "date": "2026-10-18",
    "engine": true
   }
@@ -1892,7 +1892,7 @@
   },
   "note": "verify 2026-10-18: 0 errors; rendered 6972 Corsican texts with the game's own loader and formatter (2 skipped: the English itself does not format), 0 unknown keys, 0 problems",
   "verified": {
-   "fingerprint": "sha256:28b3a65677c88696a0854ac28a698f137a33856dc863bd92306ed526f9c00a12",
+   "fingerprint": "sha256:9b047d6151a62d48c3813c6d28833fc3efe04945668e0bb3a60b4aca86c2479f",
    "date": "2026-10-18",
    "engine": true
   }
@@ -1918,7 +1918,7 @@
   },
   "note": "verify 2026-10-18: 0 errors; rendered 6972 Corsican texts with the game's own loader and formatter (2 skipped: the English itself does not format), 0 unknown keys, 0 problems",
   "verified": {
-   "fingerprint": "sha256:b1a9cfbad3c48f1e6a8d53bf5707f7a5b392176c40f8b7def59a3e785054874f",
+   "fingerprint": "sha256:b77a4ef5ab8cc14919c101e8d46130ec2983f0608e565dacfcd72dd8ba4b023a",
    "date": "2026-10-18",
    "engine": true
   }
@@ -1944,7 +1944,7 @@
   },
   "note": "verify 2026-10-18: 0 errors; rendered 7000 Corsican texts with the game's own loader and formatter (2 skipped: the English itself does not format), 0 unknown keys, 0 problems",
   "verified": {
-   "fingerprint": "sha256:402d4953fa960560880ea4a80186be9154f8a6f0d9603250fc5d13c767037aad",
+   "fingerprint": "sha256:cda5873d5f492b6b3571de7e0d92a263dd6d9cde86ee246952aca5983ebe8bdb",
    "date": "2026-10-18",
    "engine": true
   }
@@ -1970,7 +1970,7 @@
   },
   "note": "verify 2026-10-18: 0 errors; rendered 7161 Corsican texts with the game's own loader and formatter (2 skipped: the English itself does not format), 0 unknown keys, 0 problems",
   "verified": {
-   "fingerprint": "sha256:54ed6654f20aa473ad2d22c869038dff49288f562bd293425ccd62c36fa5b825",
+   "fingerprint": "sha256:ce1503fb1b6ab61f9cc4ca16705cece080cd6492440d840b59ef2ee6f45eaa7c",
    "date": "2026-10-18",
    "engine": true
   }
@@ -1996,7 +1996,7 @@
   },
   "note": "verify 2026-10-18: 0 errors; rendered 7387 Corsican texts with the game's own loader and formatter (2 skipped: the English itself does not format), 0 unknown keys, 0 problems",
   "verified": {
-   "fingerprint": "sha256:ef84d961d413e487e982576aa6b5340ffccabead1d65c662a69a017f2abcb0b5",
+   "fingerprint": "sha256:9c0e7b85131e87c9f020f6759e6ee2b39607aa60813db752ba48fd225c319924",
    "date": "2026-10-18",
    "engine": true
   }
@@ -2022,7 +2022,7 @@
   },
   "note": "verify 2026-10-18: 0 errors; rendered 7392 Corsican texts with the game's own loader and formatter (2 skipped: the English itself does not format), 0 unknown keys, 0 problems",
   "verified": {
-   "fingerprint": "sha256:dc21e713308a78ff8b4d59a3720f91ddf7bfed06c34b28ff266e45891a667470",
+   "fingerprint": "sha256:bea94131509bf0ca71408a6392b55a2a4a152454f6c3d058eb4a1d0235870a13",
    "date": "2026-10-18",
    "engine": true
   }
@@ -2048,7 +2048,7 @@
   },
   "note": "verify 2026-10-18: 0 errors; rendered 7392 Corsican texts with the game's own loader and formatter (2 skipped: the English itself does not format), 0 unknown keys, 0 problems",
   "verified": {
-   "fingerprint": "sha256:de80248719420f0f01366ecd05cdc119f8a3ab88d11aee328e763adbab34d026",
+   "fingerprint": "sha256:544636760d62748439f0bfb5d78ecd1992c3736194739015284486cd907ebdb1",
    "date": "2026-10-18",
    "engine": true
   }
@@ -2075,7 +2075,7 @@
   },
   "note": "verify 2026-10-18: 0 errors; rendered 7583 Corsican texts with the game's own loader and formatter (2 skipped: the English itself does not format), 0 unknown keys, 0 problems",
   "verified": {
-   "fingerprint": "sha256:639ba76907246588f234b9aa2aa16fb8ed9367b920d174a6715d40bf6a48fa63",
+   "fingerprint": "sha256:f2e387737d725bda23ccc90a9ed088b66fec1050ba99d44988de50837ecf3fe2",
    "date": "2026-10-18",
    "engine": true
   }
@@ -2102,7 +2102,7 @@
   },
   "note": "verify 2026-10-18: 0 errors; rendered 7583 Corsican texts with the game's own loader and formatter (2 skipped: the English itself does not format), 0 unknown keys, 0 problems",
   "verified": {
-   "fingerprint": "sha256:544e446a1c02b43dab6dc15308d5c92a9529e8838a3165406ea0cfd0f2d926d6",
+   "fingerprint": "sha256:ef6983c3c26136ae1c59f31af551d98fa17c4396b983a2877816b30dd66c634b",
    "date": "2026-10-18",
    "engine": true
   }
@@ -2129,7 +2129,7 @@
   },
   "note": "verify 2026-10-18: 0 errors; rendered 7767 Corsican texts with the game's own loader and formatter (2 skipped: the English itself does not format), 0 unknown keys, 0 problems",
   "verified": {
-   "fingerprint": "sha256:b3e44165025ab25a9b54fd55f855c691bd948de6043b534ea5fc1e3dffaf0190",
+   "fingerprint": "sha256:aab642ed3643729450516ad40f31f423b3b97f3fd2da1e5d65397286c997d04a",
    "date": "2026-10-18",
    "engine": true
   }
@@ -2156,7 +2156,7 @@
   },
   "note": "verify 2026-10-18: 0 errors; rendered 7886 Corsican texts with the game's own loader and formatter (2 skipped: the English itself does not format), 0 unknown keys, 0 problems",
   "verified": {
-   "fingerprint": "sha256:f084a1fc89c6181e13dc9aa698a9c8c06234cd2e9da666a49d1276e32a2ed42b",
+   "fingerprint": "sha256:1da9ceff63f18f046ced8067f888f19e6f9df0a9885ed1c9fae00cd9b377a077",
    "date": "2026-10-18",
    "engine": true
   }
@@ -2183,7 +2183,7 @@
   },
   "note": "verify 2026-10-18: 0 errors; rendered 7886 Corsican texts with the game's own loader and formatter (2 skipped: the English itself does not format), 0 unknown keys, 0 problems",
   "verified": {
-   "fingerprint": "sha256:f66373452dd9c15d7ca04fce360f54b931ceeaaee487c8773d87b02debfae66e",
+   "fingerprint": "sha256:02b7008db8a7b677b3b619f5e8edb049cd9c4d128d48eb695aae5ac66169623d",
    "date": "2026-10-18",
    "engine": true
   }
@@ -2210,7 +2210,7 @@
   },
   "note": "verify 2026-10-18: 0 errors; rendered 7886 Corsican texts with the game's own loader and formatter (2 skipped: the English itself does not format), 0 unknown keys, 0 problems",
   "verified": {
-   "fingerprint": "sha256:75e2040bde981160694a5d0ec2c3df7287885dbf8b80eb24e03c4b517f36f2c7",
+   "fingerprint": "sha256:062611cecdaecd2ac6f9ae96cb396c8856b3002de1adce5f853ceeba05131a81",
    "date": "2026-10-18",
    "engine": true
   }
@@ -2237,7 +2237,7 @@
   },
   "note": "verify 2026-10-18: 0 errors; rendered 8123 Corsican texts with the game's own loader and formatter (2 skipped: the English itself does not format), 0 unknown keys, 0 problems",
   "verified": {
-   "fingerprint": "sha256:a4dc8be8dec66571d7dde7c10db2879c9536acac4349e49e21300a2a9d4808c9",
+   "fingerprint": "sha256:c50b178075282a8efa9eedb50a9f8642b63a93abca8bbca36b674478748c2cc4",
    "date": "2026-10-18",
    "engine": true
   }
@@ -2264,7 +2264,7 @@
   },
   "note": "verify 2026-10-18: 0 errors; rendered 8559 Corsican texts with the game's own loader and formatter (3 skipped: the English itself does not format), 0 unknown keys, 0 problems",
   "verified": {
-   "fingerprint": "sha256:89fef44e3760aef5582b2d62a4eb10794b3e0d47bf5569cb53164db28b82ac6b",
+   "fingerprint": "sha256:6bc439cd99c9c188a06a881a710ab49a4248cd7d4a4dbd4a33c50b9432b09b10",
    "date": "2026-10-18",
    "engine": true
   }

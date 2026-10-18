@@ -65,11 +65,9 @@ enchantments 53, telemetry 70, debug screen 63, game tests 86, commands 804, Rea
 | --- | --- | --- |
 | Concrete names read but not checked in a dictionary (invented Mojang names, coined devices such as *Fabbricadore*, *Lampatore*, *Ghjiradischi*, tropical fish, compounds) | 452 | no source expected for invented names; coined device names need a speaker |
 | Banner patterns, potion and tipped-arrow names, item descriptions, music disc titles | 246 | out of the concrete scope (decisions-2 D8 for heraldry) |
-| `history.json` renamed and reused pairs | 2,262 | pattern scan only (they copy 26.3 decisions) |
-| `history.json` new/adapted noun pairs | about 250 | covered only through the concrete decisions that matched them |
 | Realms legal and billing texts | — | not re-read for legal meaning (decisions-2 D15) |
+| Deferred rows after round 2 (REJECTED.tsv, rows `-r2` with verdict "deferred") | 30 (28 of the 41, + H01, H02) | speaker, manual dictionary entry or in-game check; exact entry per row |
 | Lengths on buttons (*Arregistrà è esce da a partita*, debug pause labels) | — | no text seen in a running game |
-| Deferred rows (REJECTED.tsv, verdict "deferred") | 41 | speaker or in-game check |
 
 ## Entries for a speaker or a manual dictionary check
 
@@ -80,3 +78,33 @@ Taraxacum, but Vikipedia's article *Radichju* shows a radish and INFCOR's defini
 *pastadolce* for Cake; *aghjurnà* or *mette à livellu* for update; *collisione* or *cullisione*; *focu*/*fucus* for
 window focus; *ardesia* or *baina* for Deepslate; *diorite/andesite/calcite* or *-ita*; *cinabru*, *petrame*,
 *lingottu*, *mola*, *cocciu*, *verruca*, *stillicciu*, *scala di manu* (concrete.md "Unresolved").
+
+## Round 2 (2026-10-18): older texts and deferred rows
+
+AI work again, by one agent; nothing here was read by a speaker. **Human validation: 0.** Rows are marked
+`round=2` in [APPLIED.tsv](APPLIED.tsv) (`R2-01` to `R2-12`) and [REJECTED.tsv](REJECTED.tsv) (ids ending `-r2`).
+Sources: the ADECEC lexicon pages and INFCOR results already cached in round 1 (read from the cache; no INFCOR
+query, no web page fetched), the local Corsican Vikipedia dump, `lexicon/lexicon-mozilla.tsv` and
+`lexicon/lexicon-upstream.tsv` by line.
+
+| State | Result |
+| --- | --- |
+| Translation present | unchanged: every text of the 87 releases has Corsican (texts replaced only) |
+| Technical check | `tools/minecraft.py check` 0 errors (37 warnings, the same 37 as before the round); `tools/mchistory.py check` 3,978 entries, 0 errors, 0 warnings; `tools/mcversions.py verify all` with each release's own client jar: 87/87 supported, every release 0 problems; `tools/mcreport.py --check` up to date; unit tests 509 run, OK (3 skipped) |
+| AI review with sources | per lot below |
+| Human validation | 0 |
+
+| Lot | Size | Examined | Result |
+| --- | --- | --- | --- |
+| (a) `renamed` pairs | 1,755 (1,660 distinct English/Corsican) | all: every entry checked to equal the 26.3 text of its `from` key (1,755/1,755); the 204 whose old key belongs to another family than its source (potions vs effects, achievements vs advancements, Twitch options, old world presets…) and the 182 whose key name differs most from the source read one by one for sense in the old screen | 1 noun/verb fix (R2-03); 3 propagated from 26.3 fixes (R2-01, R2-02, R2-08) |
+| (a) `reused` pairs | 507 (131 with an English that differs by more than case or punctuation) | all equal the 26.3 text of the same key (507/507); the 131 read for a change of sense ("whilst", "Pending Invitations", "Hostile Creatures", "Left Click", "There is/are"…): none changes the meaning | 3 propagated (R2-01, R2-12) |
+| (b) old-only names (`new`/`adapted` in name families: tile, item, block, entity, biome, potion, effect, enchantment, itemGroup, attribute, filled_map) | 308 | all read and compared with the 26.3 names of the same thing (gender, agreement, applied round-1 names) | consistent; 4 kept or deferred with reasons (H01-H04) |
+| all texts (26.3 + 3,978 history entries) | — | scan for every form replaced in round 1, for gender agreement around the renamed nouns, for Italian function words and -o endings | 5 history texts that round 1 had decided but not changed (R2-09 to R2-11); the abbreviation "min" for minutes (R2-12); no agreement error found |
+| (c) deferred rows of round 1 | 41 | all re-checked against the local caches | 10 resolved by a change (R2-01, R2-02, R2-04 to R2-07), 3 kept with evidence (U01, B11, L62), 28 still deferred with the exact entry to check (L114 only for its verb) |
+| glossary.tsv | 12 rows | stale proposal rows behind applied 26.3 names (Glow Squid, Hanging Sign, Concrete Powder, Dark/Pale Oak, Torchflower, three rails, Camel Husk) and Ladder, Hitbox | aligned with co_fr.json |
+
+Texts changed in round 2: 27 (14 in the 26.3 base, 13 history pairs).
+
+Not covered by round 2: the renamed pairs were judged through their 26.3 text, which the round-1 language and
+concrete reviews read; names read but never checked in a dictionary stay as listed above; no text was seen in a
+running game.
