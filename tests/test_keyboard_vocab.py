@@ -62,7 +62,8 @@ class KeyboardVocabularyTests(unittest.TestCase):
                 word = entry['word']
                 low = word.lower()
                 self.assertNotIn(low, make_vocab.NOT_WORDS | make_vocab.PRODUCT_NAMES, word)
-                if entry['source'] != 'wiktionary':
+                # Official commune names are spelled as INSEE writes them (Ajaccio, Zévaco, Tox).
+                if entry['source'] != 'wiktionary' and not entry['source'].startswith('cog:'):
                     self.assertIsNone(make_vocab.shape_problem(low), word)
                 self.assertTrue(word == low or word == low[0].upper() + low[1:], word)
 
@@ -90,6 +91,25 @@ class KeyboardVocabularyTests(unittest.TestCase):
             self.assertIn(name, simulate.top3(words, prefix))
         # A name never takes the place of an everyday word: ghjucà (1,000) stays ahead of Ghjuvanni.
         self.assertGreater(int(shared['ghjucà']['weight']), int(shared['Ghjuvanni']['weight']))
+
+    def test_official_names(self):
+        # A legitimate spelling typed on purpose is known, so auto-correction keeps it: the official (INSEE) name
+        # Bastelicaccia next to the Corsican Bastilicaccia. The Corsican name keeps the higher weight, and no
+        # official-name word outranks a Corsican place name's floor.
+        shared = {entry['word']: entry for entry in rows('shared')[1]}
+        for name in ('Bastelicaccia', 'Zicavo', 'Ajaccio', 'Bonifacio', 'Sartène', 'Propriano', 'Vescovato',
+                     'Ghisonaccia', 'Solenzara'):
+            self.assertIn(name, shared)
+        for corsican, official in (('Bastilicaccia', 'Bastelicaccia'), ('Zicavu', 'Zicavo'),
+                                   ('Bunifaziu', 'Bonifacio'), ('Aiacciu', 'Ajaccio')):
+            self.assertGreater(int(shared[corsican]['weight']), int(shared[official]['weight']), official)
+        for entry in shared.values():
+            if entry['source'].startswith('cog:'):
+                self.assertRegex(entry['source'], r'^cog:2[AB]\d{3}$', entry)
+                self.assertLessEqual(int(entry['weight']), make_vocab.PLACE_FLOOR, entry)
+                self.assertEqual(entry['word'][0], entry['word'][0].upper(), entry)
+        # Same search key as a word already known: left to that word (Calvi, Corti's Corte is a common word).
+        self.assertNotIn('Calvi', [e['word'] for e in shared.values() if e['source'].startswith('cog:')])
 
     def test_variety_forms(self):
         cismuntincu = {entry['word']: entry for entry in rows('cismuntincu')[1]}

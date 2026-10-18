@@ -7,12 +7,13 @@ Files:
 
 | File | Content |
 |---|---|
-| `shared.tsv` | The base list: 12,976 words, both varieties' forms included (446 of them Corsican place names). |
+| `shared.tsv` | The base list: 13,197 words, both varieties' forms included (446 Corsican place names and 221 words of official commune names). |
 | `cismuntincu.tsv` | 354 rows laid over `shared.tsv` for a northern preference. |
 | `pumuntincu.tsv` | 357 rows laid over `shared.tsv` for a southern preference. |
-| `sources/` | Hand-checked inputs: `daily.tsv` (everyday words, editorial choice), `adecec.tsv`, `cunghjugarellu.tsv`, `variant-pairs.tsv`; and `places.tsv`, the Corsican place labels of Wikidata. |
+| `sources/` | Hand-checked inputs: `daily.tsv` (everyday words, editorial choice), `adecec.tsv`, `cunghjugarellu.tsv`, `variant-pairs.tsv`; `places.tsv`, the Corsican place labels of Wikidata; `communes-official.tsv`, the official (INSEE) commune names. |
 | `tools/make_vocab.py` | Rebuilds the three lists from the sources (needs the resources of `tools/fetch_resources.py`). |
 | `tools/fetch_places.py` | Runs the three Wikidata queries that write `sources/places.tsv`. |
+| `tools/fetch_communes.py` | Two requests to geo.api.gouv.fr that write `sources/communes-official.tsv`. |
 | `tools/simulate.py` | Top-3 suggestion simulation and checks (also run by `tests/test_keyboard_vocab.py`). |
 | `audit/removed.tsv` | Every word of the old list that was dropped, with its reason. |
 | `audit/stats.json` | The numbers quoted below. |
@@ -51,8 +52,11 @@ Range: 1 to 715,754 (*di*); median 33; 977 words at 1,000 or more.
 
 ### Status
 
-- `attested`: the word is written so in at least one external source (`source` column, strongest first:
-  cunghjugarellu, adecec, wiktionary, tatoeba, vikipedia ≥ 5 occurrences, apertium; place names: wikidata).
+- `attested`: the word is written so in at least one external source. The `source` column cites, in this order:
+  wiktionary, tatoeba, vikipedia ≥ 5 occurrences, apertium, then the reference works consulted without a reuse
+  licence, cunghjugarellu and adecec, when they are the only ones (place names: wikidata). A variety-specific form
+  cites the reference of its pair when no dictionary has it. The order changes no weight; every form checked in
+  a reference work stays listed in `sources/`.
 - `corsu-lexicon`: only Corsu's own software lexicon has it (6,640 words). This includes words from the Mozilla and
   Patriccollu imports: their file of origin does not make them attested here.
 - `ai-proposal`: 11 everyday words found in no source (listed below).
@@ -87,7 +91,7 @@ The old list (`keyboard/platykalt.co.corsu/source/wordlist.tsv`, 16,949 words) w
 Total removed: **5,375** of 16,949 (`audit/removed.tsv`). Kept: 11,574; added from outside the old list: 955 (daily
 words, conjugations, ADECEC words, Vikipedia words with ≥ 30 occurrences that Wiktionary, Apertium or the lexicon
 also has). **After: 12,530 words** in `shared.tsv` — 5,879 attested, 6,640 corsu-lexicon, 11 ai-proposal; then
-446 place names (below): **12,976 words**, 6,325 attested. The audit reads the old list from git (commit 66e7f58,
+446 place names and 221 words of official commune names (below): **13,197 words**, 6,546 attested. The audit reads the old list from git (commit 66e7f58,
 version 0.9.0), because `tools/build_keyboard.py` now rewrites `wordlist.tsv` from these lists; place names that the
 old list had and the corpus-name rule dropped (*ghjuvanni*, *oriente*, *riparata*, *sichè*, *oga*) are no longer
 counted as removed.
@@ -143,8 +147,43 @@ few common words start); words of weight ≥ 200 pushed out of a three-letter to
 Seen in the Keyman engine (18.0.254 and 19.0.309 beta, `tests/e2e/check_keyboard.py`, scenarios "places"): *Zicavu,
 Aiacciu, Bastia, Portivechju, Corti, Calvi, Bunifaziu, Sartè, Bastilicaccia* typed then space with auto-correction on
 stay as typed in the three models, and a lowercase prefix (*zicav*, *portiv*, *bunif*…) offers the name with its
-capital first. *Bastelicaccia* (the French official spelling) is corrected to *Bastilicaccia*, the Wikidata Corsican
-label: see the question below.
+capital first. At that time *Bastelicaccia* (the official spelling) was corrected to *Bastilicaccia*, the Wikidata
+Corsican label, because only the latter was in the list; the official names below fix that (to be seen again in the
+engine).
+
+### Official names next to the Corsican ones
+
+Rule: a legitimate spelling typed on purpose is kept; the Corsican form may be proposed, never forced. An unknown
+name is not a typo. *Bastelicaccia* is the official name of commune 2A032 (INSEE Code officiel géographique);
+*Bastilicaccia* is its Corsican name (Wikidata label, title of the Vikipedia article, 5 occurrences in Vikipedia
+against 2 for *Bastelicaccia*). Neither makes the other wrong: a Wikidata label is one source among others.
+
+`sources/communes-official.tsv` holds the 360 official names (INSEE, through geo.api.gouv.fr, Licence Ouverte 2.0).
+`make_vocab.py` splits them like the Corsican labels and adds the 221 words whose search key the list does not
+already have (*Bastelicaccia*, *Zicavo*, *Ajaccio*, *Bonifacio*, *Sartène*, *Propriano*, *Porto*, *Vecchio*,
+*Saint*, *Rousse*…), with their capital, at their Vikipedia frequency between 20 and 50 (`OFFICIAL_FLOOR`,
+`OFFICIAL_CAP` = the Corsican names' floor): known, so kept as typed, but never above a Corsican place name or an
+everyday word. 167 words were already known (*Calvi*, *Bastia*, *Corte*, *Vezzani*…). The Corsican spelling checks
+do not apply to them (*Ajaccio* has a *j*, *Zévaco* an acute accent: that is how INSEE writes them). Keyman's word
+breaker splits at hyphens, so *Porto-Vecchio* is two words, *Porto* and *Vecchio*.
+
+Measured with `simulate.py`'s ranking on every 1-4 letter prefix (4,962 prefixes; same result in the three models):
+196 prefixes get a different top 3, and 19 lose a word, none above weight 20: *dammi* (8; *dam*: Damiano),
+*tasse* (20, tie; *tass*: Tasso), *lore* (*lor*: Lorenzo, Loreto), *alarma* (*ala*: Alando), *cogito*, *gio*,
+*lucidezza*, *repo*, *flottanti*, *felicitazioni*, *isolata*, *lavatura*, *pioggie*, *cianu*, *ciambuttà*,
+*corruption*, *arrotundata*, *sarrimanenti*. A first version weighed them by their Vikipedia frequency up to 200:
+*Florent* (158) and *Martino* (136), counted mostly as first names, then pushed *flussi* and *martellu* out, hence
+the cap at 50.
+
+Seen in the Keyman engine 18.0.254 (2026-10-18, agent C's `tests/e2e/check_keyboard.py` from its work in progress,
+headless Chrome, packages built from this data, setting 3 = auto-correction as the 18.0 engine applies it when
+asked; not Keyman 19, not a phone): the 22 cases of `tests/e2e/keyboard_data_cases.tsv` pass in the three models —
+*Bastelicaccia*, *Bastilicaccia*, *Zicavo*, *Zicavu*, *Ajaccio*, *Aiacciu*, *Bonifacio*, *Solenzara*,
+*Porto-Vecchio*, *Sari-Solenzara* and an unknown *Platykalt* stay as typed; *bastelic* offers *Bastelicaccia*;
+*Sartene* offers *Sartène*; *lingua parlle* becomes *lingua parolle*; *paro* still offers *parò*. One warning:
+*Vizzani* (Vikipedia's spelling, not in the list) becomes *Vezzani*. Adding the Vikipedia article titles of the
+communes next to the Wikidata labels would fix that kind of case; it needs the titles (Wikidata sitelinks), not
+fetched yet.
 
 ## Northern and southern preferences
 
@@ -170,10 +209,16 @@ variety-specific form comes from a cited table or entry. But coverage is narrow 
 a dialect dictionary**. The weights given to each side (pair weight, 25 % for the other side) are an editorial
 choice. Treat the two settings as experimental until a speaker of each area has tried them.
 
+Checked again on 2026-10-18 (by the AI agent, not by a speaker): the 28 rows of Vikipedia's table against the local
+Vikipedia dump (same forms, Taravesu and Sartinesu columns as recorded), the Wiktionary pairs against their
+Cismontane / Ultramontane tags in the kaikki.org extract (all present; one wrong gloss corrected, question 6 below),
+and the 368 U Cunghjugarellu forms against the PDF's text (all present). No weight of the 361 was changed. The
+lists only favour a form: neither removes the other variety's forms, and neither stands for a département.
+
 | | Count |
 |---|---|
 | Words whose weight differs between the merged northern and southern lists | **361** |
-| — from U Cunghjugarellu (21 verbs, present and imperfect indicative, tables 1–100) | 253 |
+| — from U Cunghjugarellu (21 verbs, present and imperfect indicative, 21 of its 100 tables) | 253 |
 | — from Vikipedia "Lingua corsa" (Taravesu / Sartinesu table) | 60 |
 | — from Wiktionary (Cismontane / Ultramontane entries) | 34 |
 | — from Wikipédia "Corse (langue)" | 14 |
@@ -191,7 +236,14 @@ times, *parleti* 0, *parlanu* 26 and *parlani* 11 (*parolle* 47, plus 971 times 
 weighed 2,500 in `shared.tsv`, more than four times *parolle* (546); Keyman's correction gives the typo *parlle* the same
 cost for both (one deleted letter to reach *parle-ti*, one inserted letter for *parolle*; a completion costs nothing),
 so the weight decided, and auto-correction turned *parlle* into *parleti*. Now *parleti* weighs 500 in `shared.tsv`, 250
-in the northern list and 1,000 in the southern one.
+in the northern list and 1,000 in the southern one. That still left *parleti* (1,000) above *parolle* (546) in the
+southern list, and nearly level with it (500 / 546) in `shared.tsv`. *parolla* and *parolle* ("word", "words") are
+therefore daily words of tier 2 (`sources/daily.tsv`, an editorial AI choice like the rest of that list, at the level
+of *parla*, *parlà* and *cosa*): 5,000 in the three lists, so the same one-letter typo now leads to *parolle* in every
+model. Measured on every 1-4 letter prefix: only *paro* changes, where *parò* (806) leaves the top 3 for *parolle*;
+Keyman folds accents, so typing *parò* reaches the same prefix; whether the banner still shows *parò* then is an
+engine question, listed as a case to watch.
+The engine case is in `tests/e2e/keyboard_data_cases.tsv`.
 
 Pairs where both forms are used in the south, or where a form has another common sense, do not lower the other form
 (`lower_other = no`): *piglià/piddà*, *famiglia/famidda*, *paglia/padda*, *figliolu/fiddolu*, *vogliu/voddu* (Taravu
@@ -230,12 +282,16 @@ Variety questions:
 4. Wiktionary *dicessetti* and *diciassetti* (seventeen, Ultramontane): which one is usual?
 5. *stai*: the southern 2nd person of *stà* is printed *sta'* in U Cunghjugarellu; it was not paired, so *stai* is
    not lowered in the south.
+6. *vindette* / *vindetti* (plural of *vindetta*): Wiktionary's *vindette* entry calls *vindetti* Ultramontane, but its
+   *vindetta* entry gives both plurals without a label. The northern list lowers *vindetti*; if it is also usual in
+   the north, the pair should get `lower_other = no`. (Its gloss said "sold" until 2026-10-18; corrected.)
 
 Place names:
 
-- *Bastilicaccia* (Wikidata's Corsican label, 5 times in Vikipedia) or *Bastelicaccia* (the French official name,
-  twice in Vikipedia)? Only the first is in the list, so auto-correction turns the second into the first. Several
-  Wikidata labels differ from the Vikipedia title (*Zicavu* / *Zìcavu*, *Vezzani* / *Vizzani*): the labels were kept.
+- *Bastilicaccia* / *Bastelicaccia*: both are now known (above). Still open: which Corsican spelling a speaker of
+  the place uses (INFCOR or the commune, by hand). Several Wikidata labels differ from the Vikipedia title (*Zicavu* /
+  *Zìcavu*, *Vezzani* / *Vizzani*): the labels were kept; *Vizzani* (6 times in Vikipedia) is not in the list, so
+  Keyman 19 may auto-correct it: to check by hand which spelling is usual.
 - *Bonifaziu* (label of the pieve) next to *Bunifaziu* (the commune): both are kept.
 
 Other everyday-word questions:
@@ -248,9 +304,12 @@ Other everyday-word questions:
 
 ## Licences
 
-See [docs/keyboard-sources.md](../../docs/keyboard-sources.md). To decide before a release: whether the
-`attestation-only` use of U Cunghjugarellu (all rights reserved) and of the ADECEC pages is acceptable; the forms
-are single words checked in them, no table is reproduced.
+See [docs/keyboard-sources.md](../../docs/keyboard-sources.md), section "U Cunghjugarellu (Canopé de Corse)", for
+what the publisher states (book page: CC BY-NC-ND 2.0 FR; PDF: general reproduction reservation; neither is a
+licence on the words), what `sources/cunghjugarellu.tsv` holds (511 rows, 368 forms: two tenses of 21 tables, one
+form per row with its table number), what the packages receive (words and weights only) and the three uses told
+apart: checking a fact, reusing the book's texts or editorial choices, extracting a data collection. The ADECEC
+pages were used only to check 53 single words.
 
 ## Rebuilding
 
