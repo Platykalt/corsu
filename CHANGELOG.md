@@ -19,11 +19,36 @@
   `[class*="activity"]` and `/channels/` link rules kept it as a name; now a text there is looked up when React props
   show an activity, and the activity's own values (game, details, state, custom status, asset texts, buttons) and
   names stay as written, also inside a longer text. "Bio" (profile bio) was "Organicu", taken from Chrome's image
-  styles: 51 Discord rows where the fallback gave another program's sense (salon > salottu, Envoyer > Incaricà,
+  styles; it is now "Biugrafia" (INFCOR lists biografia with the variant biugrafia; Wikipedia in Corsican uses
+  biugrafia), the bio itself untouched. 51 Discord rows where the fallback gave another program's sense (salon > salottu, Envoyer > Incaricà,
   Événements > fre:ac's logs, Anglais > Corsu…), from an AI second-pass review (lexicon/review-discord-2026-10.tsv,
   docs/discord-review-2026-10.md). Hidden diagnostic: classifies each untranslated text (missing, unapplied, excluded
   and by which rule, template, stale), gives the plugin revision and dictionary fingerprint, and gives no name or
   status (unknown words as {?}). Simulated pages and the built bundle in Chrome; not observed in the real app.
+- Discord: texts of presence areas (activity line, and components given one activity: profile cards) are kept by
+  their origin: only Discord's own activity labels and templates are translated there, so a game shown under
+  another name than its record ("Control", "Mars 2") stays as written. The diagnostic decides by origin too: nothing
+  from names, statuses, activities or headings above people is given, even a dictionary word ("Work", "Error").
+  Plugin revision `2026-10-origin-1`. In Discord's sense: "Message" is the noun "Messaghju" (was "Mandà un MP"),
+  Sync > Sincrunizà, Go > Andà, Playing > Ghjoca à, Watch > Fighjà, sec > s, "max"/"min." written out, Arcade,
+  Shouting > Brionu, Banner > Bandera (profile banner label only). Each correction's provenance (external source,
+  Corsu's own usage, AI proposal) is in lexicon/review-discord-2026-10.tsv. Translation rule for abbreviations in
+  AGENTS.md and CONTRIBUTING.md.
+- Window redesign: sidebar (top bar when narrow), Programs summary (what is in Corsican, what needs you, update),
+  dense rows with problems first, states as icon and word, details on demand, sizes in rem. Appearance section: light,
+  dark or system theme, five palettes, accent colour (adjusted when unreadable), plain background or personal picture
+  (preview, framing, Apply/Cancel, dimming, optional blur), comfortable or compact density, reset of appearance
+  only. Pictures are checked (PNG, JPEG, WebP; GIF and AVIF converted by the page; animated pictures kept still),
+  reduced, copied to `DATA/appearance`; a missing or damaged one falls back to the plain background. Settings in
+  `DATA/appearance/settings.json` (format 1), kept through repair, update and uninstall.
+- Window (security, all systems): a key made at each launch is required on every call, reads included
+  (`X-Corsu-Key`, obtained once from a one-time ticket in the window's address). Until now, on Windows and macOS,
+  another account of the computer could read Corsu's state and the background picture, and trigger actions, by
+  sending the `X-Corsu` header itself. See docs/window-security.md.
+- Linux and macOS launchers: the archive's Python is kept in Corsu's data folder even when the installer runs on the
+  system's Python, and launchers fall back to it when the system's Python is missing, too old or incomplete
+  (`DATA/bin/corsu-python`). Until 0.24.0 the menu entry and Firefox launcher pointed at `/usr/bin/python3` and broke
+  if it was removed; installing with only `python3-minimal` failed.
 - Discord: protected names checked in every lookup (templates, counts, dates), labels around a name still translated,
   "…" and "..." equivalent; English typing words in the lexicon. Simulated page in Chrome only.
 - Window (security, Linux): an action is accepted only from the client end of that very connection: both addresses

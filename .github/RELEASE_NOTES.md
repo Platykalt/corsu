@@ -36,14 +36,29 @@ publication (tests automatiques ; personne n'a regardé les écrans).
   reviennent à l'identique quand Firefox est désactivé ou Corsu désinstallé (une section de Corsu y restait). Outils du
   navigateur et messages de téléchargement traduits (31 textes IA, à relire) ; « Onglets ouverts » n'est plus traduit
   comme un verbe ; le contrôle des textes vérifie l'ordre des valeurs insérées.
-- **Discord** : noms de personnes, surnoms, conversations privées et noms contenant une virgule protégés partout ;
-  indicateur « est en train d'écrire » traduit en français et en anglais, noms intacts. Vérifié sur une page simulée
-  dans Chrome, pas encore dans un vrai Discord.
+- **Nouvelle fenêtre** : navigation latérale, résumé en tête (ce qui est en corse, ce qui demande votre
+  intervention, mise à jour), liste compacte avec les problèmes en premier, détails techniques sur demande. Rubrique
+  **Apparence** : thème clair, sombre ou du système, cinq palettes, couleur d'accent (ajustée si elle est peu
+  lisible), fond uni ou image personnelle (aperçu, cadrage, Appliquer/Annuler, assombrissement, flou facultatif),
+  affichage confortable ou compact, réinitialisation de l'apparence seule. L'image est vérifiée, réduite et copiée
+  dans les données de Corsu ; rien n'est envoyé ailleurs. Vue dans Chrome et WebKitGTK (Linux) ; pas encore
+  observée dans WebView2 (Windows) ni sur macOS.
+- **Discord** : « Dans un appel » traduit dans la liste des MP ; « Bio » du profil devient « Biugrafia » (c'était
+  « Organicu », pris aux styles d'images de Chrome) ; « Message » redevient le nom « Messaghju » ; 51 libellés pris
+  à d'autres logiciels remis dans le sens de Discord, et d'autres abréviations écrites en entier (relecture IA, pas
+  par un locuteur). Les activités, jeux (même affichés sous un autre nom), statuts et noms restent tels quels ; noms
+  de personnes, surnoms, conversations privées et noms contenant une virgule protégés partout ; indicateur « est en
+  train d'écrire » traduit. Vérifié sur des pages simulées et sur le module construit dans Chrome, pas encore dans
+  un vrai Discord.
 - **Sécurité de la fenêtre (Linux)** : sur un ordinateur partagé, un autre compte pouvait déclencher les actions de
   la fenêtre de Corsu (installer, mettre à jour, désinstaller) pendant qu'elle était ouverte. La fenêtre vérifie
   maintenant la connexion exacte et refuse un appelant non identifié. Corrige aussi des refus aléatoires des
-  actions de l'utilisateur lui-même. Windows et macOS n'ont pas ce contrôle de propriétaire (voir
-  `docs/window-security.md`).
+  actions de l'utilisateur lui-même. Sur tous les systèmes, une clé créée à chaque lancement est maintenant exigée
+  pour toute lecture et toute action : sous Windows et macOS, un autre compte pouvait lire l'état de Corsu et l'image
+  de fond (voir `docs/window-security.md`).
+- **Lanceurs Linux** : le Python de l'archive est gardé, et les raccourcis s'en servent si le Python du système
+  disparaît ou est incomplet (en 0.24.0, ils cessaient de fonctionner) ; l'installation avec seulement
+  `python3-minimal` ne plante plus.
 - **Complément VLC** : Outils devient « A&ttrezzi » (Alt+T), il prenait Alt+A comme Audio ; « Sempre s&opra » ne
   double plus Alt+S. Corrections de brouillons IA, la traduction amont de VLC est inchangée. Les 3 traductions
   incertaines restent exclues. Le complément était refusé sans le dire dans les sessions où VLC traduit sa ligne de
@@ -126,13 +141,25 @@ looked at the screens).
   uninstalled (a Corsu section stayed there). Browser tools and download messages translated (31 AI
   texts, to be reviewed); "Onglets ouverts" no longer translated as a verb; the text check verifies the order of
   inserted values.
-- **Discord**: people's names, nicknames, private conversations and names containing a comma are protected
-  everywhere; the "is typing" indicator is translated in French and English, names untouched. Checked on a simulated
-  page in Chrome, not yet in a real Discord.
+- **New window**: side navigation, a summary at the top (what is in Corsican, what needs you, update), a compact list
+  with problems first, technical details on demand. **Appearance** section: light, dark or system theme, five
+  palettes, accent colour (adjusted when hard to read), plain background or personal picture (preview, framing,
+  Apply/Cancel, dimming, optional blur), comfortable or compact density, reset of the appearance only. The picture is
+  checked, reduced and copied to Corsu's data; nothing is sent anywhere. Seen in Chrome and WebKitGTK (Linux); not
+  yet observed in WebView2 (Windows) or on macOS.
+- **Discord**: "Dans un appel" translated in the direct message list; the profile's "Bio" becomes "Biugrafia" (it
+  was "Organicu", taken from Chrome's image styles); "Message" is the noun "Messaghju" again; 51 labels taken from
+  other programs put back in Discord's sense, and other abbreviations written out (AI review, not a speaker's).
+  Activities, games (even shown under another name), statuses and names stay as written; people's names, nicknames,
+  private conversations and names containing a comma are protected everywhere; the "is typing" indicator is
+  translated. Checked on simulated pages and on the built plugin in Chrome, not yet in a real Discord.
 - **Window security (Linux)**: on a shared computer, another account could trigger the Corsu window's actions
   (install, update, uninstall) while it was open. The window now checks the exact connection and refuses a caller
-  it cannot identify. This also fixes random refusals of the user's own actions. Windows and macOS have no owner
-  check (see `docs/window-security.md`).
+  it cannot identify. This also fixes random refusals of the user's own actions. On every system, a key made at each
+  launch is now required for every read and action: on Windows and macOS another account could read Corsu's state
+  and the background picture (see `docs/window-security.md`).
+- **Linux launchers**: the archive's Python is kept, and shortcuts use it when the system's Python goes away or is
+  incomplete (in 0.24.0 they stopped working); installing with only `python3-minimal` no longer fails.
 - **VLC complement**: Tools becomes "A&ttrezzi" (Alt+T), it took Alt+A like Audio; "Sempre s&opra" no longer doubles
   Alt+S. Fixes to AI drafts, VLC's upstream translation is unchanged. The 3 uncertain translations stay left out.
   The complement was silently refused in sessions where VLC translates its version line (German, Italian,
