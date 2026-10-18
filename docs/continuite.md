@@ -33,9 +33,25 @@ Les sections datées après « État actuel » sont l'historique : ce qui y est 
     [release-checklist-phone.md](release-checklist-phone.md).
   - Corrigés pour les prochaines publications : une somme `.sha256` par pack Minecraft ; version des captures lue
     dans `src/release.json`.
-- **Chantier en cours (18 octobre 2026)** : mise à jour (faux « à jour » vu sous 0.24), textes encore non traduits
-  (« Fermer Discord », « Display Configuration ») et logo, clavier (majuscules, retour sur un mot, noms propres,
-  variantes, Canopé), revue sémantique Minecraft. Résultats et preuves ajoutés ici à la fin du chantier.
+- **Chantier du 18 octobre 2026 (soir), intégré dans `next-0.26`** (agents A à E ; détail dans le CHANGELOG) :
+  - **Faux « à jour »** : cause établie par le journal et reproduite avec le code de la 0.24.0
+    ([update-diagnosis.md](update-diagnosis.md)) : fenêtre ouverte à 10 h 50 qui ne vérifiait qu'à l'ouverture,
+    relance qui réaffichait cette fenêtre, réponse gardée 6 h. Corrigé ; rattrapage par l'installeur public vérifié
+    en conteneur. Windows et macOS non lancés.
+  - **Textes** : menu de la zone de notification de Discord traduit (vrai Discord 1.0.162 en conteneur KDE, chaînes
+    envoyées à la main, sans connexion) ; « Display Configuration » (KDE) corrigé ; « Fermer Discord » introuvable
+    dans les textes de Discord : demander où il a été vu. Inventaire : [untranslated-inventory.md](untranslated-inventory.md).
+  - **Logo** : nouveau dessin ; fenêtre associée à `corsu-setup.desktop`, logo vu dans Alt+Tab, barre des tâches et
+    titre sous KDE Plasma 6 (Wayland, X11, conteneur). Non observé : Windows, macOS, GNOME.
+  - **Clavier** : fin du mot effacée sous Android quand on choisit une suggestion au milieu (iPhone : non, limite de
+    Keyman) ; noms officiels de communes ; cas dépendant des données dans `tests/e2e/keyboard_data_cases.tsv`.
+    Avertissements restants (correction automatique) : Vizzani → Vezzani, corti → Corti, calvi → Calvi,
+    ADECEC → DECE. Paquets 1.1 : 13 197 mots chacun (`tools/count_kmp.py`).
+  - **Canopé** : `sources/cunghjugarellu.tsv` contient 511 lignes (368 formes de 21 verbes, avec numéro de tableau) ;
+    les paquets n'ont que mots et poids. Correction ciblée proposée, non appliquée : règles propres pour les verbes
+    réguliers, formes irrégulières seules listées (aucun effet sur les paquets).
+  - **Minecraft** : troisième tour, comptes réconciliés, décisions sensibles relues sur leurs sources, aucun texte
+    changé ; mémoire contextuelle `lexicon/memory/minecraft-java.jsonl`.
 - **INFCOR** : un agent a lancé 219 requêtes par script (une par mot, 3 s d'intervalle) ; arrêté. Aucune
   interrogation automatisée d'INFCOR ni d'un autre dictionnaire : consultation page par page seulement ([AGENTS.md](../AGENTS.md), test `tests/test_sources_policy.py`, incident
   décrit dans `minecraft/java/review-2026-10/ROUND3.md`).

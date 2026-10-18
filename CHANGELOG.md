@@ -27,6 +27,31 @@
   "Dopu ellu a vene"): the models ask Keyman to delete the rest of the word (keyboard/whole-word.js); Keyman for
   iPhone ignores that request, so the guide there gives the safe gestures. Draft Keyman issue, not sent:
   docs/keyman/ticket-mid-word-suggestion.md.
+- Update check: Corsu 0.24.0 said "up to date" on 18 October while 0.25.1 was out. Causes (docs/update-diagnosis.md):
+  a window checked only when it opened, a second launch only showed that window again, and a saved answer was
+  reused for 6 hours as if fresh. Now a saved answer serves 1 hour at most and never when older than the running or
+  installed copy; an open window asks again every hour and on each new launch; a newer copy opens its own window;
+  a failed check (network, rate limit, bad or cut answer) says "Vérification impossible", never "up to date"; the
+  window shows its own version, the installed copy, the latest release and when GitHub answered. Catch-up from
+  0.24.0 with the public one-line installer checked in a container (26 PASS).
+- Discord: the notification-area menu ("Quitter Discord", "Ouvrir Discord"…) and Windows taskbar buttons, drawn
+  by the system from strings the page sends (`setSystemTrayStrings`, `setThumbarButtons`), are translated on the
+  way out; seen in a real Discord 1.0.162 in a KDE container, strings sent by hand, not logged in.
+  "Fermer Discord" not found in any Discord text (docs/untranslated-inventory.md).
+- KDE: desktop entries without `Name[co]` showed English ("Display Configuration") because KDE does not fall back
+  to the second language; Corsu now writes `[co]` in the entries it already handles, kglobalaccel components
+  included, with French when no Corsican exists.
+- Corsu's window: new logo; the window is tied to its menu entry (`corsu-setup` app id and X11 class), so KDE's
+  Alt+Tab shows Corsu's logo instead of a generic icon (seen on KDE Plasma 6, Wayland and X11; Windows AppUserModelID
+  and macOS Dock icon set, not observed).
+- Keyboard data: 221 official commune names (INSEE, Licence Ouverte) next to the Corsican names, so a legitimate
+  spelling typed on purpose (Bastelicaccia) is kept; parlle offers parolle in all three models; U Cunghjugarellu
+  described as it is (511 rows, 368 forms of 21 verbs, notices on the publication; docs/keyboard-sources.md).
+- Minecraft: third review round (review-2026-10/ROUND3.md): counts reconciled (1,158 edits, 1,157 distinct texts),
+  sensitive decisions re-read on their sources (Ragliu, Tonu, Radichju, Cartella, Pastadolce, Pecura), no text
+  changed; decisions recorded in lexicon/memory/minecraft-java.jsonl, never reused for another program.
+- Release files: every published file must have its own matching `.sha256` (CI); `tools/count_kmp.py` counts the
+  words of a built Keyman package.
 - Phones: "Write Corsican on Android and iPhone" at the top of the README; guides rewritten from Keyman 18.0's help
   and source; the window's new "Sur téléphone" page with QR codes (generated locally) to the public guides.
 - Project rules for agents (AGENTS.md): full meaning before abbreviations; provenance of every translation.
