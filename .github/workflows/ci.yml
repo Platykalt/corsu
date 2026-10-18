@@ -111,6 +111,14 @@ jobs:
           name: releases
           path: dist/
           if-no-files-found: error
+      # The keyboard packages alone, small enough to fetch on a phone to try a candidate (docs/fr/telephone).
+      - uses: actions/upload-artifact@v4
+        with:
+          name: keyboard-packages
+          path: |
+            dist/corsu-keyboard*.kmp
+            dist/corsu-keyboard*.kmp.sha256
+          if-no-files-found: error
 
   e2e:
     name: End-to-end (${{ matrix.os }})
