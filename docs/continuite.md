@@ -5,6 +5,14 @@ Les sections datées après « État actuel » sont l'historique : ce qui y est 
 
 ## État actuel (18 octobre 2026)
 
+- **0.26.0 publiée** (18 octobre 2026, 22 h 29 UTC) : tag `v0.26.0` sur `9868066`, release
+  https://github.com/Platykalt/corsu/releases/tag/v0.26.0, dernière version (CI du tag 39169945473 : tests,
+  archives, bout en bout sur les trois systèmes, publication, installation en une ligne Linux et Windows ; CI de la
+  candidate 39167633006). Vérifié depuis `releases/latest/download` : 8 fichiers conformes à leurs 8 `.sha256`,
+  archives en 0.26.0, trois dictionnaires 1.1 (13 213 mots chacun, identifiants attendus). `main` = `9868066`.
+- **`next-0.27`** (en développement depuis `8d3cba8`, sur la 0.26.0) : voir le CHANGELOG. Ce qui suit dans cette
+  section décrit encore la préparation de la 0.26 et sera remis à jour à la fin du chantier 0.27.
+
 - **Version publique : 0.25.1** (tag `v0.25.1` sur `bb64655`, release
   https://github.com/Platykalt/corsu/releases/tag/v0.25.1, dernière version ; CI 39121451094). Vérifiée depuis les
   téléchargements publics dans un conteneur Debian jetable : sommes conformes, `check_migration.py --from 0.24.0`
