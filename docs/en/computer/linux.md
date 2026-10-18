@@ -31,7 +31,9 @@ or becomes unusable, Corsu's shortcuts use it, even after the downloaded archive
   translates the browsers and Discord, and the system translations still cover GTK programs and terminal commands.
 
 Close the programs before confirming and open them again afterwards. Log out and back in to see Plasma in Corsican.
-For Discord, see [Discord](../discord.md).
+For Discord, see [Discord](../discord.md). Corsu also sets to Corsican the language of programs that have their own
+Corsican translation (VLC, Audacity, Tenacity, fre:ac, Poedit, PDFsam, FileZilla…) and puts Minecraft: Java Edition
+in Corsican, see [Translation status](../translation-status.md).
 
 ## Changing your mind
 

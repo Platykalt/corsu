@@ -17,6 +17,9 @@
 | Minecraft: Java Edition 1.6.1 → 26.3, 87 versions (resource pack) | Checked without running the game | Checked without running the game | Checked without running the game |
 | GTK programs and terminal commands | | | Expected |
 
+Programs that already have their own Corsican translation (VLC, Audacity, Poedit, 7-Zip…), and the systems for
+each, are in [Translation status](translation-status.md).
+
 **Tested** means the CI installs Corsu on that system before every release, starts the program and reads its text
 in Corsican. **Partly tested** means the CI checks that Corsu patches Discord and restores it, but does not open
 Discord itself. **Used daily** means a Corsican speaker uses it every day. **Expected** means the code is there but
@@ -38,9 +41,10 @@ maintainer's Prism instance), with no visual check of every screen.
 | Firefox, Firefox Focus | In Corsican (Mozilla) | In Corsican (Mozilla) |
 | Thunderbird, VLC | In Corsican | VLC in Corsican |
 | Discord | Not possible | Not possible |
-| Corsican keyboard | Gboard, or Keyman with Corsu prediction | Keyman with Corsu prediction |
+| Corsican keyboard | Gboard, or Keyman with the Corsu dictionary | Keyman with the Corsu dictionary |
 
-The phone apps listed come in Corsican from their makers; Corsu does not change them. See [Android](phone/android.md)
+The phone apps listed come in Corsican from their makers; Corsu does not change them. The Corsu dictionary for
+Keyman suggests words and corrections; with Keyman 18 there is no automatic correction. See [Android](phone/android.md)
 and [iPhone](phone/iphone.md).
 
 ## Google and other websites

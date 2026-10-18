@@ -25,7 +25,9 @@ irm https://raw.githubusercontent.com/Platykalt/corsu/main/install/get.ps1 | iex
 
 Close Firefox, Chrome, Opera GX and Discord before confirming, and open them again afterwards. Firefox in Corsican
 opens from the Firefox Corsu shortcut in the Start menu. Chrome, Opera GX and Edge keep their usual shortcut. For
-Discord, see [Discord](../discord.md).
+Discord, see [Discord](../discord.md). Corsu also sets to Corsican the language of programs that have their own
+Corsican translation (VLC, 7-Zip, Notepad++, Audacity, PDFsam…) and puts Minecraft: Java Edition in Corsican, see
+[Translation status](../translation-status.md).
 
 ## Changing your mind
 

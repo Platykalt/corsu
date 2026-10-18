@@ -7,7 +7,7 @@ that replaces the interface text. Messages, server names and user names are neve
 
 ## Desktop app (Windows, macOS, Linux)
 
-1. Run the Corsu installer and keep Discord ticked in the list. If Discord is open, the installer patches it anyway;
+1. Install Corsu (or open the Corsu app again) and keep Discord ticked in the list. If Discord is open, Corsu patches it anyway;
    it takes effect the next time Discord starts.
 2. Quit Discord completely (from the tray icon, not only the window) and open it again.
 3. In Discord, open User Settings, then Language, and choose **Français** or **English**. The plugin translates from

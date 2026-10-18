@@ -25,7 +25,9 @@ irm https://raw.githubusercontent.com/Platykalt/corsu/main/install/get.ps1 | iex
 
 Fermez Firefox, Chrome, Opera GX et Discord avant de confirmer, puis rouvrez-les. Firefox en corse s'ouvre avec le
 raccourci Firefox Corsu du menu Démarrer. Chrome, Opera GX et Edge gardent leur raccourci habituel. Pour Discord,
-voir [Discord](../discord.md).
+voir [Discord](../discord.md). Corsu règle aussi sur le corse la langue des logiciels qui ont leur propre traduction
+corse (VLC, 7-Zip, Notepad++, Audacity, PDFsam…) et met en corse Minecraft: Java Edition, voir
+[État des traductions](../etat-des-traductions.md).
 
 ## Changer d'avis
 
