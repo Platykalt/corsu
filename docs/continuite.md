@@ -48,7 +48,12 @@ Les sections datées après « État actuel » sont l'historique : ce qui y est 
     publiée (`tests/e2e/check_migration.py`, aussi en CI) ; Windows inchangé (le `.cmd` préférait déjà le Python
     de l'archive).
   - **Règle de traduction** des abréviations et classes de provenance : [AGENTS.md](../AGENTS.md).
-  - **Validation** : voir le CHANGELOG et le bilan de la session ; commit final et run CI ajoutés ci-dessous.
+  - **Validation** : code de la candidate `326a1c2`, CI run 39117128881 verte (tests unitaires 3 systèmes × Python
+    3.10 et 3.13, construction de Vencord et des archives, bout en bout Linux, Windows, macOS dont la migration depuis la
+    0.24.0 publiée sous Linux). Le commit suivant ne change que ce document.
+  - **Reste à faire par une personne** : vérifications 9 à 11 de « Vérifier Discord à la main » après installation
+    de la candidate ; relecture par un locuteur des cas incertains de `lexicon/review-discord-2026-10.tsv` ; décision
+    de publication (rien n'est tagué).
 - **`fix-0.24.1`** (`3e43459`, depuis `v0.24.0`) : seulement le correctif de sécurité de la fenêtre ; attend une
   décision de publication.
 - Tests unitaires : `HOME=$(mktemp -d) python3 -m unittest discover -s tests -t . -q` (sans `-t .`, 13 erreurs
