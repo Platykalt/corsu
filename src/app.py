@@ -1044,6 +1044,10 @@ def serve(mode='window', replace=None):
         # The new copy serves the address and owns the session file now.
         return
     holder['server'].shutdown()
+    # The port is let go of now, not whenever the server object is collected: it sits in a reference cycle (server,
+    # its handler class, the hand-over, `holder`) that only the cyclic garbage collector frees, and until then the
+    # address stays taken for anything that starts on it next.
+    holder['server'].server_close()
     SESSION.unlink(missing_ok=True)
 
 
