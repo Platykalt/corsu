@@ -69,6 +69,24 @@ class DiscordWordsTests(unittest.TestCase):
         for key, value in expected.items():
             self.assertEqual(self.words[key], value, key)
 
+    def test_tray_menu(self):
+        # The menu of Discord's notification-area icon: texts the page sends to the desktop app (setSystemTrayStrings),
+        # as Discord writes them in French and English. "Quitter Discord" ends the app ("Esce da", as Mozilla's
+        # "Esce da Mozilla VPN"); "Quitter" alone stays the leave of a server or group.
+        expected = {
+            'Ouvrir Discord': 'Apre Discord', 'Open Discord': 'Apre Discord',
+            'Quitter Discord': 'Esce da Discord', 'Quit Discord': 'Esce da Discord',
+            'Rendre muet': 'Ammutulisce', 'Mettre en sourdine': "Disattivà l'ascoltu",
+            'Interdit': 'Difesu', 'Suppressed': 'Difesu',
+            'Ouvrir les paramètres vocaux et vidéo': 'Apre i parametri vucali è videò',
+            'Open Voice && Video Settings': 'Apre i parametri vucali è videò',
+            'Rechercher les mises à jour…': "Circà l'aghjurnamenti…", 'Check For Updates...': "Circà l'aghjurnamenti…",
+            'Remerciements': 'Ringraziamenti', 'Acknowledgements': 'Ringraziamenti',
+        }
+        for key, value in expected.items():
+            self.assertEqual(self.words[key], value, key)
+        self.assertEqual(self.words['Quitter'], 'Abbandunà')
+
     def test_templates_keep_their_placeholders(self):
         key = engine.normalize('Effacer après \u00001\u0000 heures')
         self.assertEqual(self.words[key], 'Squassà dopu \u00001\u0000 ore')

@@ -8,7 +8,10 @@ import { showNotification } from "@api/Notifications";
 import { definePluginSettings } from "@api/Settings";
 import definePlugin, { OptionType } from "@utils/types";
 
-import { createTranslator, dictionaryFingerprint, setCorrections, translatorRevision } from "./translate";
+import {
+    createTranslator, dictionaryFingerprint, nativePatch, setCorrections, translateThumbarButtons, translateTrayStrings,
+    translatorRevision
+} from "./translate";
 
 // Written by the Corsu app: corrections from its Review page, and whether hovering shows the original text.
 const settings = definePluginSettings({
@@ -39,6 +42,19 @@ export default definePlugin({
     description: "Traduzzione lucale parziale di l'interfaccia in corsu. I messaghji fermanu invariati.",
     authors: [{ name: "Corsu local", id: 0n }],
     settings,
+    // The menu of the notification-area icon and the taskbar preview buttons are drawn by the desktop app from texts
+    // the page sends it; they are translated on their way (see translateTrayStrings in translate.ts).
+    patches: [
+        {
+            find: nativePatch.find,
+            replacement: [
+                { match: nativePatch.trayStrings, replace: "$&$1=$self.trayStrings($1);" },
+                { match: nativePatch.thumbarButtons, replace: "$&$1=$self.thumbarButtons($1);" }
+            ]
+        }
+    ],
+    trayStrings: translateTrayStrings,
+    thumbarButtons: translateThumbarButtons,
     start() {
         try {
             setCorrections(JSON.parse(settings.store.corrections || "{}"));
