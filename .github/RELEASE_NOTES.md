@@ -25,23 +25,22 @@ publication (tests automatiques ; personne n'a regardé les écrans).
 <!-- corsu:keyboard-figures Paquets 1.2, 19 341 mots par paquet (tools/count_kmp.py sur les .kmp construits) ; 1.1 :
      13 213. À recompter si le clavier change avant la publication (docs/release-checklist-phone.md). -->
 - **Clavier sur téléphone** (paquets 1.2, 19 341 mots par paquet, contre 13 213 dans les paquets 1.1) : plus d'espace
-  ajoutée devant une ponctuation déjà écrite (`Aiacc|.` puis « Aiacciu » donne « Aiacciu. », et non « Aiacciu . ») ;
-  à la fin d'un mot sous Android et sur iPhone, au milieu d'un mot sous Android seulement. L'apostrophe typographique
+  ajoutée devant une ponctuation déjà écrite (`Aiacc|.` puis « Aiacciu » donne « Aiacciu. », et non « Aiacciu . ») ; à
+  la fin d'un mot sous Android et sur iPhone, au milieu d'un mot sous Android seulement. L'apostrophe typographique
   est gardée (« l’is » donne « l’isula »). 6 012 formes écrites par les sources (pluriels, féminins, formes du
   Wiktionnaire, formes élidées) sont maintenant connues, pour que la correction automatique de Keyman 19 ne remplace
   plus des mots justes (« tradizioni », « abitanti », « l'ADECEC ») ; sélection faite par IA, **non vérifiée par un
   locuteur** ; les formes de Vikipedia ne sont comptées que dans la prose corse (titres, citations et passages en
   italien, français ou latin écartés). Noms de lieux historiques ajoutés d'après un inventaire sourcé : pievi,
   micro-régions, anciens diocèses, provinces et divisions historiques ; couverture limitée aux listes de référence
-  retenues, pas exhaustive (113 mots, dont « Vallerustie », « Mariana »,
-  « Accia ») ; les noms composés sont reconnus mot par mot. Paquets finaux vérifiés dans les moteurs de Keyman (navigateur sans affichage, pas dans l'application) : tous les
-  contrôles passent avec Keyman 18.0.254, la version stable ; avec la bêta 19.0.309, tous les cas de mots passent, mais
-  le scénario « correction automatique activée » échoue par intermittence sur une erreur interne du moteur
-  (`isFullReplacement`), reproduite aussi avec les paquets 1.1 et 1.2 précédents, d'origine non complètement isolée.
-  Espace avant la ponctuation vu aussi dans les deux applications sur émulateur Android 14, avec des données 1.2
-  antérieures ;
-  **pas sur un vrai téléphone, pas sur iPhone**. Mettre à jour : télécharger de nouveau le fichier sous le même nom, puis relancer Keyman (guides
-  ci-dessus) ; Keyman affiche alors la version 1.2.
+  retenues, pas exhaustive (113 mots, dont « Vallerustie », « Mariana », « Accia ») ; les noms composés sont reconnus
+  mot par mot. Paquets finaux vérifiés dans les moteurs de Keyman (navigateur sans affichage, pas dans l'application)
+  : tous les contrôles passent avec Keyman 18.0.254, la version stable ; avec la bêta 19.0.309, tous les cas de mots
+  passent, mais le scénario « correction automatique activée » échoue par intermittence sur une erreur interne du
+  moteur (`isFullReplacement`), reproduite aussi avec les paquets 1.1 et 1.2 précédents, d'origine non complètement
+  isolée. Espace avant la ponctuation vu aussi dans les deux applications sur émulateur Android 14, avec des données
+  1.2 antérieures ; **pas sur un vrai téléphone, pas sur iPhone**. Mettre à jour : télécharger de nouveau le fichier
+  sous le même nom, puis relancer Keyman (guides ci-dessus) ; Keyman affiche alors la version 1.2.
 - **Signaler une traduction depuis la fenêtre** (page « Signaler ») : logiciel, version, texte vu, endroit,
   proposition et remarques. La page montre le signalement, le copie ou ouvre un ticket GitHub prérempli, seulement
   sur un clic. Rien n'est envoyé ni gardé par la page ; les chemins de dossiers personnels et les adresses e-mail
@@ -72,11 +71,11 @@ publication (tests automatiques ; personne n'a regardé les écrans).
   sur une ancienne version, le bouton « Rechercher » ou l'installation en une ligne ci-dessus la rattrape, en gardant
   vos réglages.
 - **Clavier sur téléphone** (paquets 1.1) : la majuscule tapée est gardée et les suggestions de début de phrase en
-  prennent une ; vocabulaire refait à partir de sources citées (13 213 mots) ; noms de lieux corses et noms
-  officiels des communes ; deux préférences régionales expérimentales. Sous Android, une suggestion choisie au milieu
-  d'un mot remplace le mot entier ; sur iPhone, Keyman ne remplace que le début (gestes conseillés dans le guide).
-  Vérifié dans le moteur de Keyman 18.0.254 et dans l'application sur émulateur Android 14 ; **pas sur un vrai
-  téléphone, pas sur iPhone**. Keyman 18 n'a pas de correction automatique.
+  prennent une ; vocabulaire refait à partir de sources citées (13 213 mots) ; noms de lieux corses et noms officiels
+  des communes ; deux préférences régionales expérimentales. Sous Android, une suggestion choisie au milieu d'un mot
+  remplace le mot entier ; sur iPhone, Keyman ne remplace que le début (gestes conseillés dans le guide). Vérifié dans
+  le moteur de Keyman 18.0.254 et dans l'application sur émulateur Android 14 ; **pas sur un vrai téléphone, pas sur
+  iPhone**. Keyman 18 n'a pas de correction automatique.
 - **Minecraft** : revue IA des textes (sens corrigés, sources citées), boutons du menu principal « Ghjucà solu » et
   « Ghjucà cù l'altri », « Arregistrà è esce da u mondu » dans le menu de pause ; les 87 versions vérifiées avec le
   code de chaque jeu. **Aucun texte relu par un locuteur** ; rien n'a été regardé à l'écran dans le jeu.
@@ -211,20 +210,21 @@ looked at the screens).
 <!-- corsu:keyboard-figures Packages 1.2, 19,341 words per package (tools/count_kmp.py on the built .kmp files); 1.1:
      13,213. Count again if the keyboard changes before publication (docs/release-checklist-phone.md). -->
 - **Phone keyboard** (packages 1.2, 19,341 words per package, against 13,213 in the 1.1 packages): no space is added
-  before punctuation already in the text (`Aiacc|.` then "Aiacciu" gives "Aiacciu.", not "Aiacciu ."); at the end of
-  a word on Android and iPhone, inside a word on Android only. The typographic apostrophe is kept ("l’is" gives
+  before punctuation already in the text (`Aiacc|.` then "Aiacciu" gives "Aiacciu.", not "Aiacciu ."); at the end of a
+  word on Android and iPhone, inside a word on Android only. The typographic apostrophe is kept ("l’is" gives
   "l’isula"). 6,012 forms that the sources write (plurals, feminines, Wiktionary forms, elided forms) are now known
-  words, so Keyman 19's automatic correction no longer replaces correct words ("tradizioni", "abitanti",
-  "l'ADECEC"); the selection was made by AI and **not checked by a speaker**, and forms from Vikipedia are
-  counted in Corsican prose only (titles, quotations and Italian, French or Latin passages left out). Historical place
-  names added from a sourced inventory: pievi, micro-regions, former dioceses, provinces and historical divisions; coverage limited to the reference lists used,
-  not exhaustive (113
-  words, including "Vallerustie", "Mariana", "Accia"); compound names are known word by word. The final packages were checked in Keyman's engines (headless browser, not the app): every check passes with
-  Keyman 18.0.254, the stable version; with the 19.0.309 beta every word case passes, but the "auto-correct on"
-  scenario fails intermittently on an internal engine error (`isFullReplacement`), also reproduced with the earlier 1.1
-  and 1.2 packages, whose origin is not fully isolated. The space before punctuation was also seen in both apps on an
-  Android 14 emulator, with earlier 1.2 data; **not on a real phone, not on iPhone**. To update: download the file again under the same name, then restart Keyman
-  (guides above); Keyman then shows version 1.2.
+  words, so Keyman 19's automatic correction no longer replaces correct words ("tradizioni", "abitanti", "l'ADECEC");
+  the selection was made by AI and **not checked by a speaker**, and forms from Vikipedia are counted in Corsican
+  prose only (titles, quotations and Italian, French or Latin passages left out). Historical place names added from a
+  sourced inventory: pievi, micro-regions, former dioceses, provinces and historical divisions; coverage limited to
+  the reference lists used, not exhaustive (113 words, including "Vallerustie", "Mariana", "Accia"); compound names
+  are known word by word. The final packages were checked in Keyman's engines (headless browser, not the app): every
+  check passes with Keyman 18.0.254, the stable version; with the 19.0.309 beta every word case passes, but the
+  "auto-correct on" scenario fails intermittently on an internal engine error (`isFullReplacement`), also reproduced
+  with the earlier 1.1 and 1.2 packages, whose origin is not fully isolated. The space before punctuation was also
+  seen in both apps on an Android 14 emulator, with earlier 1.2 data; **not on a real phone, not on iPhone**. To
+  update: download the file again under the same name, then restart Keyman (guides above); Keyman then shows version
+  1.2.
 - **Report a translation from the window** ("Signaler" page): program, version, text seen, place, proposal and notes.
   The page shows the report, copies it, or opens a prefilled GitHub issue, only on a click. Nothing is sent or stored
   by the page; personal folder paths and e-mail addresses are replaced.

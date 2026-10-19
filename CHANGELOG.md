@@ -1,11 +1,8 @@
 # Changelog
 
-## 0.27.0 (in development on next-0.27, not published)
+## 0.27.0 (2026-10-19)
 
-Started from 0.26.0 (`9868066`, tag `v0.26.0`). Changes inherited from 0.26 are listed under 0.26.0 below.
-
-The version in `src/release.json` says 0.27.0 so that CI checks the update from the published 0.26.0; nothing below is
-in a published release.
+Developed on next-0.27 from 0.26.0 (`9868066`, tag `v0.26.0`). CI checks the update from the published 0.26.0.
 
 - **Phone keyboard, packages 1.2** (`keyboard/`, docs/fr/telephone, docs/en/phone):
   - No space is added before punctuation already in the text: choosing "Aiacciu" in `Aiacc|.` gives "Aiacciu.", not
