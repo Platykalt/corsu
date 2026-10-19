@@ -13,7 +13,7 @@ Corsu met en corse les logiciels de tous les jours. Corsu puts everyday software
 ## Français
 
 Corsu est un projet libre qui donne au corse une place dans les logiciels de tous les jours. Il y a trois façons de
-s'en servir, indépendantes l'une de l'autre. Version publiée : **0.26.0**
+s'en servir, indépendantes l'une de l'autre. Version publiée : **0.27.0**
 ([toutes les versions](https://github.com/Platykalt/corsu/releases)).
 
 | Je veux… | Ce qu'il faut | Guide |
@@ -61,9 +61,9 @@ English ([Discord en corse](docs/fr/discord.md)). Le détail système par systè
 [Ce qui marche, et où](docs/fr/compatibilite.md) ; fichier par fichier :
 [Ce que Corsu modifie](docs/fr/ce-que-corsu-modifie.md).
 
-<img src="docs/images/corsu-setup-fr.png" alt="La fenêtre de Corsu 0.26.0, rubrique Logiciels : Firefox, Discord, le bureau KDE Plasma, Minecraft et VLC en corse, chacun avec son interrupteur (capture faite avec des données d'exemple)" width="570">
+<img src="docs/images/corsu-setup-fr.png" alt="La fenêtre de Corsu 0.27.0, rubrique Logiciels : Firefox, Discord, le bureau KDE Plasma, Minecraft et VLC en corse, chacun avec son interrupteur (capture faite avec des données d'exemple)" width="570">
 
-*La fenêtre de Corsu 0.26.0, avec des données d'exemple.*
+*La fenêtre de Corsu 0.27.0, avec des données d'exemple.*
 
 **Mettre à jour, réparer, retirer.** Rouvrez l'application Corsu depuis le menu des applications : elle permet
 d'ajouter un logiciel, de remettre une partie dans sa langue d'origine (le terminal pendant une heure, par exemple),
@@ -79,9 +79,8 @@ Corsu pour ordinateur n'est pas nécessaire : le dictionnaire se télécharge se
 
 **Guides pas à pas : [Android](docs/fr/telephone/android.md) · [iPhone](docs/fr/telephone/iphone.md).**
 
-Dictionnaire publié (le même fichier pour Android et iPhone, paquet 1.1 depuis Corsu 0.26.0) :
-[corsu-keyboard.kmp](https://github.com/Platykalt/corsu/releases/latest/download/corsu-keyboard.kmp), 13 213
-mots (compte fait dans le paquet publié). Deux préférences régionales **expérimentales**, même vocabulaire avec les
+Dictionnaire publié (le même fichier pour Android et iPhone, paquet 1.2 depuis Corsu 0.27.0) :
+[corsu-keyboard.kmp](https://github.com/Platykalt/corsu/releases/latest/download/corsu-keyboard.kmp), 19 341 mots (compte fait dans le paquet publié), dont des noms de lieux historiques (pievi, micro-régions, anciens diocèses ; liste non exhaustive). Deux préférences régionales **expérimentales**, même vocabulaire avec les
 formes d'une région en tête (361 mots pondérés autrement, couverture partielle) :
 [corsu-keyboard-cismuntincu.kmp](https://github.com/Platykalt/corsu/releases/latest/download/corsu-keyboard-cismuntincu.kmp)
 et [corsu-keyboard-pumuntincu.kmp](https://github.com/Platykalt/corsu/releases/latest/download/corsu-keyboard-pumuntincu.kmp).
@@ -94,7 +93,7 @@ les touche.
 Depuis le paquet 1.1, une suggestion garde la majuscule tapée ; avec l'ancien paquet 1.0, « Ecc » pouvait devenir
 « eccu » : mettez-le à jour. Sous Android, une suggestion choisie au milieu d'un mot remplace le mot entier ; sur
 iPhone, Keyman n'en remplace que le début. Vérifié dans le moteur de Keyman et sur émulateur Android, pas sur un vrai
-téléphone. Ce n'est ni un traducteur automatique ni un correcteur de grammaire : Corsu ne traduit pas
+téléphone. Depuis le paquet 1.2, aucune espace n'est ajoutée devant une ponctuation déjà écrite. Ce n'est ni un traducteur automatique ni un correcteur de grammaire : Corsu ne traduit pas
 les applications du téléphone. Certaines existent déjà en corse (Firefox, VLC, Thunderbird…), voir les guides.
 
 ### Minecraft en corse
@@ -126,7 +125,7 @@ approuvé par Mojang ou Microsoft, ni associé à eux.
 
 ### Logiciels pris en charge
 
-Statuts : **disponible** (dans la version publiée 0.26.0), **expérimental** (disponible, peu vérifié sur ce système),
+Statuts : **disponible** (dans la version publiée 0.27.0), **expérimental** (disponible, peu vérifié sur ce système),
 **candidat** (dans la prochaine version, pas encore publiée), **prévu** (pas encore fait). Le détail, avec les
 vérifications faites pour chacun : [État des traductions](docs/fr/etat-des-traductions.md).
 
@@ -230,7 +229,7 @@ La version longue : [Pourquoi Corsu](docs/fr/pourquoi-corsu.md).
 ## English
 
 Corsu is a free software project that gives Corsican a place in everyday software. There are three ways to use it,
-independent of each other. Published release: **0.26.0**
+independent of each other. Published release: **0.27.0**
 ([all releases](https://github.com/Platykalt/corsu/releases)).
 
 | I want… | What it takes | Guide |
@@ -277,9 +276,9 @@ a modification of the app, and only when its language is Français or English
 ([Discord in Corsican](docs/en/discord.md)). Details for each system: [What works where](docs/en/compatibility.md);
 file by file: [What Corsu changes](docs/en/what-corsu-changes.md).
 
-<img src="docs/images/corsu-setup-en.png" alt="The Corsu 0.26.0 window, Programs section: Firefox, Discord, the KDE Plasma desktop, Minecraft and VLC in Corsican, each with its own switch (captured with sample data)" width="570">
+<img src="docs/images/corsu-setup-en.png" alt="The Corsu 0.27.0 window, Programs section: Firefox, Discord, the KDE Plasma desktop, Minecraft and VLC in Corsican, each with its own switch (captured with sample data)" width="570">
 
-*The Corsu 0.26.0 window, with sample data.*
+*The Corsu 0.27.0 window, with sample data.*
 
 **Updating, repairing, removing.** Open the Corsu app again from the applications menu to add a program, put a part
 back in its original language (the terminal for an hour, for example), update (in About) or remove everything.
@@ -295,9 +294,8 @@ dictionary is downloaded on its own, on the phone.
 
 **Step-by-step guides: [Android](docs/en/phone/android.md) · [iPhone](docs/en/phone/iphone.md).**
 
-Published dictionary (the same file for Android and iPhone, package 1.1 since Corsu 0.26.0):
-[corsu-keyboard.kmp](https://github.com/Platykalt/corsu/releases/latest/download/corsu-keyboard.kmp), 13,213
-words (counted in the published package). Two **experimental** regional preferences, same vocabulary with one
+Published dictionary (the same file for Android and iPhone, package 1.2 since Corsu 0.27.0):
+[corsu-keyboard.kmp](https://github.com/Platykalt/corsu/releases/latest/download/corsu-keyboard.kmp), 19,341 words (counted in the published package), including historical place names (pievi, micro-regions, former dioceses; not an exhaustive list). Two **experimental** regional preferences, same vocabulary with one
 region's forms first (361 words weighted differently, partial coverage):
 [corsu-keyboard-cismuntincu.kmp](https://github.com/Platykalt/corsu/releases/latest/download/corsu-keyboard-cismuntincu.kmp)
 and [corsu-keyboard-pumuntincu.kmp](https://github.com/Platykalt/corsu/releases/latest/download/corsu-keyboard-pumuntincu.kmp).
@@ -308,7 +306,7 @@ correction; corrections are offered in the suggestion banner and only apply when
 <!-- corsu:phone-casing:en The case typed is kept since package 1.1 (Corsu 0.26.0). -->
 Since package 1.1 a suggestion keeps the capital you typed; with the old 1.0 package "Ecc" could become "eccu":
 update it. On Android a suggestion chosen inside a word replaces the whole word; on iPhone Keyman replaces only its
-beginning. Checked in Keyman's engine and on an Android emulator, not on a real phone. It is neither an automatic translator nor a grammar checker: Corsu does not translate phone apps.
+beginning. Checked in Keyman's engine and on an Android emulator, not on a real phone. Since package 1.2 no space is added before punctuation already in the text. It is neither an automatic translator nor a grammar checker: Corsu does not translate phone apps.
 Some already exist in Corsican (Firefox, VLC, Thunderbird…), see the guides.
 
 ### Minecraft in Corsican
@@ -340,7 +338,7 @@ MICROSOFT.
 
 ### Supported programs
 
-Statuses: **available** (in the published release 0.26.0), **experimental** (available, little checked on that
+Statuses: **available** (in the published release 0.27.0), **experimental** (available, little checked on that
 system), **candidate** (in the next version, not published yet), **planned** (not done yet). Details, with the checks
 made for each: [Translation status](docs/en/translation-status.md).
 

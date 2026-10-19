@@ -3,7 +3,7 @@
 [Français](../fr/feuille-de-route.md)
 
 Everything below is **planned or under consideration**, not available. What works today is in
-[What works where](compatibility.md). Status as of 19 October 2026 (published release: 0.26.0). The French page has the full tables, including
+[What works where](compatibility.md). Status as of 19 October 2026 (published release: 0.27.0). The French page has the full tables, including
 the inventory of software already in Corsican elsewhere; this is a summary.
 
 ## Already in Corsican elsewhere
