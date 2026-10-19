@@ -22,13 +22,13 @@ official help and the translation files of that version; another version may cha
 
 ## Available dictionaries
 
-<!-- corsu:phone-variants:en The files attached to Corsu 0.27.0 (the three 1.2 packages, 19,228 words each, counted
+<!-- corsu:phone-variants:en The files attached to Corsu 0.27.0 (the three 1.2 packages, 19,341 words each, counted
      with tools/count_kmp.py in the built packages). This guide describes 0.27.0; until it is published, "latest
      published release" still gives Corsu 0.26.0's 1.1 packages (13,213 words). When a later version is published,
      list here only the files it carries. -->
 | File | Name in Keyman | Version | Content | Download |
 | --- | --- | --- | --- | --- |
-| `corsu-keyboard.kmp` | Corsu | 1.2 (from Corsu 0.27.0) | general dictionary: the shared vocabulary, 19,228 words (stray words removed), no regional preference; keeps the capital letters of words | [latest published release](https://github.com/Platykalt/corsu/releases/latest/download/corsu-keyboard.kmp) ([SHA-256 checksum](https://github.com/Platykalt/corsu/releases/latest/download/corsu-keyboard.kmp.sha256)) |
+| `corsu-keyboard.kmp` | Corsu | 1.2 (from Corsu 0.27.0) | general dictionary: the shared vocabulary, 19,341 words (stray words removed), no regional preference; keeps the capital letters of words | [latest published release](https://github.com/Platykalt/corsu/releases/latest/download/corsu-keyboard.kmp) ([SHA-256 checksum](https://github.com/Platykalt/corsu/releases/latest/download/corsu-keyboard.kmp.sha256)) |
 | `corsu-keyboard-cismuntincu.kmp` | Corsu – Cismuntincu (experimental) | 1.2 (from Corsu 0.27.0) | the same vocabulary, preferring the forms of the Cismonte; experimental, the regional forms cover only part of the words (361 words weighted differently) | [latest published release](https://github.com/Platykalt/corsu/releases/latest/download/corsu-keyboard-cismuntincu.kmp) ([SHA-256 checksum](https://github.com/Platykalt/corsu/releases/latest/download/corsu-keyboard-cismuntincu.kmp.sha256)) |
 | `corsu-keyboard-pumuntincu.kmp` | Corsu – Pumuntincu (experimental) | 1.2 (from Corsu 0.27.0) | the same vocabulary, preferring the forms of the Pumonte; experimental, same limit | [latest published release](https://github.com/Platykalt/corsu/releases/latest/download/corsu-keyboard-pumuntincu.kmp) ([SHA-256 checksum](https://github.com/Platykalt/corsu/releases/latest/download/corsu-keyboard-pumuntincu.kmp.sha256)) |
 

@@ -17,9 +17,14 @@ Les sections datées après « État actuel » sont l'historique : ce qui y est 
     fin de mot, Android seul au milieu d'un mot), apostrophe ’ gardée ; +6 012 formes écrites par les sources
     (Vikipédia, comptées seulement dans la prose corse, Wiktionnaire, élisions ; 324 formes mises en attente dans
     `keyboard/data/held-back.tsv` ; sélection IA non relue) pour que la correction automatique de Keyman 19 ne
-    remplace plus des mots justes ; 19 228 mots par paquet. Vérifié dans les moteurs 18.0.254 et 19.0.309 et dans les
+    remplace plus des mots justes ; 19 341 mots par paquet. Vérifié dans les moteurs 18.0.254 et 19.0.309 et dans les
     applications 18.0.254 et 19.0.309 sur émulateur Android 14 ; ni téléphone réel ni iPhone. Ponctuation tapée
     juste après une suggestion : Keyman 18 laisse « casa . » (un retour arrière enlève l'espace), Keyman 19 l'enlève.
+  - **Noms de lieux historiques** (branches `c027c-inv`, `c027c-kb`) : inventaire sourcé
+    (`keyboard/data/sources/historical-places.tsv`, 330 lignes : pievi, micro-régions, diocèses et sièges, provinces,
+    divisions historiques) ; 113 mots ajoutés aux trois paquets, dont « Vallerustie » ; graphies françaises reconnues
+    sous la forme corse ; noms composés reconnus mot par mot seulement. Manques et cas incertains :
+    `keyboard/data/historical-places.md`.
   - **Signaler une traduction** : page « Signaler » de la fenêtre ; rien n'est envoyé sans clic, chemins et adresses
     masqués. **Séries de relecture** (`review/`, 71 séries Minecraft) : réponses gardées comme propositions, liées
     aux empreintes des textes. **Mémoire de traduction** : sens, abréviations, provenance, sources changées.

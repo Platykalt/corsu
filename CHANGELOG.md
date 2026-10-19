@@ -23,7 +23,16 @@ in a published release.
     shipped, for example "secoli", "prodottu", "dalla". Each added form weighs less than the words already offered
     for its prefixes, so it is recognised when typed but pushes no listed word out of the suggestions. This selection
     was made by AI and not checked by a speaker (`keyboard/data/REVIEW.md`). 13,213 words in the published 1.1
-    packages, 19,228 in each 1.2 package.
+    packages, 19,341 in each 1.2 package.
+  - Historical and traditional place names of Corsica from a sourced inventory (`keyboard/data/sources/historical-places.tsv`,
+    `keyboard/data/historical-places.md`): micro-regions, pievi, dioceses and episcopal sees, Genoese provinces and
+    historical divisions, with each spelling's usage, category and reference. 113 new words, including
+    "Vallerustie" (the maintainer's report), "Mariana", "Accia" and "Sagone", and documented French or other
+    spellings such as "Nebbio" and "Aléria", which weigh less than the Corsican form. Only accepted rows ship (289
+    of 330; 23 uncertain and 18 deferred rows are listed, not shipped). Each name is kept as typed with automatic
+    correction on, and comes below the common words offered for its first letters; a common word that is also a
+    place name ("serra", "verde") keeps its entry. Compound names are known word by word: Keyman looks up only the
+    last word before the caret, so "San Lurenzu di Vallerustie" is never offered as one suggestion.
   - Punctuation typed right after tapping a suggestion: Keyman 18 leaves "casa ."; one Backspace removes only the
     space. Keyman 19 removes the space itself. Written in the phone guides.
   - Checked in Keyman 18.0.254's and 19.0.309's engines and in the Keyman 18.0.254 and 19.0.309 apps on an Android 14

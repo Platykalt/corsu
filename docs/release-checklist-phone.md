@@ -11,7 +11,7 @@ On `next-0.27`, the guides, `essai-5-minutes.md` and `.github/RELEASE_NOTES.md` 
 | --- | --- | --- | --- |
 | Corsu version | `src/release.json`, tag `vX.Y.Z` | 0.26.0 | 0.27.0 |
 | Dictionary package version (what Keyman shows as "Dictionary version") | `keyboard/*/source/*.model.kps` (`<Version>`), `kmp.json` → `info.version` | 1.1 | 1.2 (all three packages) |
-| Words per package (`tools/count_kmp.py`, entries of the built `.model.js`) | built from `keyboard/data` | 13,213 (13,201 ignoring case) | 19,228 (19,216 ignoring case), to recount after any keyboard change |
+| Words per package (`tools/count_kmp.py`, entries of the built `.model.js`) | built from `keyboard/data` | 13,213 (13,201 ignoring case) | 19,341 (19,308 ignoring case), to recount after any keyboard change |
 | Keyman app version the guides follow | the guides' introduction | 18.0.254 (stable) | 18.0.254 (stable); 19.0 is beta |
 
 The guides give the package version next to the Corsu version that carries it; they must not say "Corsu 1.2". If
@@ -29,17 +29,17 @@ python3 -I tools/count_kmp.py keyboard/build/corsu-keyboard.kmp keyboard/build/c
 ```
 
 Then, if the count or the package version changes, update every place below (search for the old figure in both
-spellings, `19 228` and `19,228`):
+spellings, `19 341` and `19,341`):
 
 | File | What it holds |
 | --- | --- |
-| `docs/fr/telephone/android.md`, `docs/fr/telephone/iphone.md` | first `corsu:phone-variants:fr` comment (version, count, published state); table « Dictionnaires disponibles » (version column ×3, « 19 228 mots » in the general row); sentence under it (0.26.0: 1.1, 13 213 mots); « Mettre à jour » (version to check); second `corsu:phone-variants:fr` comment; « Revenir au dictionnaire général » (version); « Correction automatique » (« environ 6 000 formes ») |
-| `docs/en/phone/android.md`, `docs/en/phone/iphone.md` | the same places in English (`corsu:phone-variants:en`, "19,228 words", "about 6,000 more forms") |
+| `docs/fr/telephone/android.md`, `docs/fr/telephone/iphone.md` | first `corsu:phone-variants:fr` comment (version, count, published state); table « Dictionnaires disponibles » (version column ×3, « 19 341 mots » in the general row); sentence under it (0.26.0: 1.1, 13 213 mots); « Mettre à jour » (version to check); second `corsu:phone-variants:fr` comment; « Revenir au dictionnaire général » (version); « Correction automatique » (« environ 6 000 formes ») |
+| `docs/en/phone/android.md`, `docs/en/phone/iphone.md` | the same places in English (`corsu:phone-variants:en`, "19,341 words", "about 6,000 more forms") |
 | `docs/fr/telephone/essai-5-minutes.md` | the comment above « Quel fichier essayer », « Version du dictionnaire », the « Attendu (paquet 1.2) » heading, rows 2, 3 and 13, « Variantes régionales » |
-| `.github/RELEASE_NOTES.md` | both "Downloads" tables (« Paquet 1.2 », « paquet 1.2 » / "Package 1.2", "package 1.2"); the `corsu:keyboard-figures` comment and the « Clavier sur téléphone » / "Phone keyboard" bullet of « Nouveautés de la 0.27.0 » / "New in 0.27.0" (19 228 / 19,228, 6 012 / 6,012, version 1.2) |
+| `.github/RELEASE_NOTES.md` | both "Downloads" tables (« Paquet 1.2 », « paquet 1.2 » / "Package 1.2", "package 1.2"); the `corsu:keyboard-figures` comment and the « Clavier sur téléphone » / "Phone keyboard" bullet of « Nouveautés de la 0.27.0 » / "New in 0.27.0" (19 341 / 19,341, 6 012 / 6,012, version 1.2) |
 | `keyboard/*/source/*.model.kps` | `<Version>` (1.2) |
 | `keyboard/data/REVIEW.md`, `keyboard/data/audit/stats.json` | counts recorded with the keyboard data (owned by the keyboard work) |
-| `README.md`, `CHANGELOG.md`, `docs/continuite.md` | owned by the lead: README `corsu:phone-variants` sentences (still 1.1 / 13,213: the published state), CHANGELOG 0.27.0 entry (13,213 in the published 1.1 packages, 19,228 in 1.2), continuity notes |
+| `README.md`, `CHANGELOG.md`, `docs/continuite.md` | owned by the lead: README `corsu:phone-variants` sentences (still 1.1 / 13,213: the published state), CHANGELOG 0.27.0 entry (13,213 in the published 1.1 packages, 19,341 in 1.2), continuity notes |
 
 The regional variants' "361 words weighted differently" is the count of regional source rows; it did not change
 between 1.1 and 1.2.
@@ -56,14 +56,14 @@ between 1.1 and 1.2.
       `lexicalModels[0].id` is `platykalt.co.corsu`, `platykalt.co.corsu_cismuntincu`,
       `platykalt.co.corsu_pumuntincu`, all for language `co`.
 - [ ] `python3 -I tools/count_kmp.py` on the three downloaded files gives the count written in the guides and the
-      release notes (19,228 at the time of writing).
+      release notes (19,341 at the time of writing).
 
 ## 2. Guides (`docs/fr/telephone/`, `docs/en/phone/`)
 
 Same files and names as 0.26.0, so no row moves and no link changes; only versions and counts.
 
 - [x] Table « Dictionnaires disponibles » / "Available dictionaries": version 1.2 « (à partir de Corsu 0.27.0) » /
-      "(from Corsu 0.27.0)", 19,228 words; a sentence says that 0.26.0 carried 1.1 (13,213 words).
+      "(from Corsu 0.27.0)", 19,341 words; a sentence says that 0.26.0 carried 1.1 (13,213 words).
 - [x] « Mettre à jour » / "Updating" and « Revenir au dictionnaire général »: version 1.2, with 1.1 for 0.26.0.
 - [x] Sections that said « prochaine version de Corsu, pas encore publiée » / "next version of Corsu, not published
       yet" for the 1.2 behaviour (punctuation, apostrophe, added forms) now say "from Corsu 0.27.0".

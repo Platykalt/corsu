@@ -22,17 +22,20 @@ publication (tests automatiques ; personne n'a regardé les écrans).
 
 ### Nouveautés de la 0.27.0
 
-<!-- corsu:keyboard-figures Paquets 1.2, 19 228 mots par paquet (tools/count_kmp.py sur les .kmp construits) ; 1.1 :
+<!-- corsu:keyboard-figures Paquets 1.2, 19 341 mots par paquet (tools/count_kmp.py sur les .kmp construits) ; 1.1 :
      13 213. À recompter si le clavier change avant la publication (docs/release-checklist-phone.md). -->
-- **Clavier sur téléphone** (paquets 1.2, 19 228 mots par paquet, contre 13 213 dans les paquets 1.1) : plus d'espace
+- **Clavier sur téléphone** (paquets 1.2, 19 341 mots par paquet, contre 13 213 dans les paquets 1.1) : plus d'espace
   ajoutée devant une ponctuation déjà écrite (`Aiacc|.` puis « Aiacciu » donne « Aiacciu. », et non « Aiacciu . ») ;
   à la fin d'un mot sous Android et sur iPhone, au milieu d'un mot sous Android seulement. L'apostrophe typographique
   est gardée (« l’is » donne « l’isula »). 6 012 formes écrites par les sources (pluriels, féminins, formes du
   Wiktionnaire, formes élidées) sont maintenant connues, pour que la correction automatique de Keyman 19 ne remplace
   plus des mots justes (« tradizioni », « abitanti », « l'ADECEC ») ; sélection faite par IA, **non vérifiée par un
-  locuteur**, où sont entrées quelques formes italiennes citées dans Vikipedia. Vérifié dans les moteurs de Keyman
-  18.0.254 et 19.0.309 et dans ces deux applications sur émulateur Android 14 ; **pas sur un vrai téléphone, pas sur
-  iPhone**. Mettre à jour : télécharger de nouveau le fichier sous le même nom, puis relancer Keyman (guides
+  locuteur** ; les formes de Vikipedia ne sont comptées que dans la prose corse (titres, citations et passages en
+  italien, français ou latin écartés). Noms de lieux historiques ajoutés d'après un inventaire sourcé : pievi,
+  micro-régions, anciens diocèses, provinces et divisions historiques (113 mots, dont « Vallerustie », « Mariana »,
+  « Accia ») ; les noms composés sont reconnus mot par mot. Données finales vérifiées dans les moteurs de Keyman
+  18.0.254 et 19.0.309 ; espace avant la ponctuation vu aussi dans ces deux applications sur émulateur Android 14 ;
+  **pas sur un vrai téléphone, pas sur iPhone**. Mettre à jour : télécharger de nouveau le fichier sous le même nom, puis relancer Keyman (guides
   ci-dessus) ; Keyman affiche alors la version 1.2.
 - **Signaler une traduction depuis la fenêtre** (page « Signaler ») : logiciel, version, texte vu, endroit,
   proposition et remarques. La page montre le signalement, le copie ou ouvre un ticket GitHub prérempli, seulement
@@ -200,16 +203,19 @@ looked at the screens).
 
 ### New in 0.27.0
 
-<!-- corsu:keyboard-figures Packages 1.2, 19,228 words per package (tools/count_kmp.py on the built .kmp files); 1.1:
+<!-- corsu:keyboard-figures Packages 1.2, 19,341 words per package (tools/count_kmp.py on the built .kmp files); 1.1:
      13,213. Count again if the keyboard changes before publication (docs/release-checklist-phone.md). -->
-- **Phone keyboard** (packages 1.2, 19,228 words per package, against 13,213 in the 1.1 packages): no space is added
+- **Phone keyboard** (packages 1.2, 19,341 words per package, against 13,213 in the 1.1 packages): no space is added
   before punctuation already in the text (`Aiacc|.` then "Aiacciu" gives "Aiacciu.", not "Aiacciu ."); at the end of
   a word on Android and iPhone, inside a word on Android only. The typographic apostrophe is kept ("l’is" gives
   "l’isula"). 6,012 forms that the sources write (plurals, feminines, Wiktionary forms, elided forms) are now known
   words, so Keyman 19's automatic correction no longer replaces correct words ("tradizioni", "abitanti",
-  "l'ADECEC"); the selection was made by AI and **not checked by a speaker**, and a few Italian forms quoted in
-  Vikipedia got in. Checked in Keyman 18.0.254's and 19.0.309's engines and in both apps on an Android 14 emulator;
-  **not on a real phone, not on iPhone**. To update: download the file again under the same name, then restart Keyman
+  "l'ADECEC"); the selection was made by AI and **not checked by a speaker**, and forms from Vikipedia are
+  counted in Corsican prose only (titles, quotations and Italian, French or Latin passages left out). Historical place
+  names added from a sourced inventory: pievi, micro-regions, former dioceses, provinces and historical divisions (113
+  words, including "Vallerustie", "Mariana", "Accia"); compound names are known word by word. Final data checked in
+  Keyman 18.0.254's and 19.0.309's engines; the space before punctuation was also seen in both apps on an Android 14
+  emulator; **not on a real phone, not on iPhone**. To update: download the file again under the same name, then restart Keyman
   (guides above); Keyman then shows version 1.2.
 - **Report a translation from the window** ("Signaler" page): program, version, text seen, place, proposal and notes.
   The page shows the report, copies it, or opens a prefilled GitHub issue, only on a click. Nothing is sent or stored
