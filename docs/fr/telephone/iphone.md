@@ -23,16 +23,18 @@ changer. Il n'y a pas de captures d'écran.
 
 ## Dictionnaires disponibles
 
-<!-- corsu:phone-variants:fr Fichiers réellement joints à la dernière version publiée (Corsu 0.26.0 : les trois
-     paquets 1.1). À la publication d'une version suivante, ne lister ici que les fichiers qu'elle contient. -->
+<!-- corsu:phone-variants:fr Fichiers joints à Corsu 0.27.0 (les trois paquets 1.2, 19 550 mots chacun, comptés
+     avec tools/count_kmp.py dans les paquets construits). Ce guide décrit la 0.27.0 ; tant qu'elle n'est pas
+     publiée, « dernière version publiée » donne encore les paquets 1.1 de Corsu 0.26.0 (13 213 mots). À la
+     publication d'une version suivante, ne lister ici que les fichiers qu'elle contient. -->
 | Fichier | Nom dans Keyman | Version | Contenu | Téléchargement |
 | --- | --- | --- | --- | --- |
-| `corsu-keyboard.kmp` | Corsu | 1.1 (publié avec Corsu 0.26.0) | dictionnaire général : le vocabulaire commun, 13 213 mots (mots parasites retirés), sans préférence régionale ; garde la majuscule des mots | [dernière version publiée](https://github.com/Platykalt/corsu/releases/latest/download/corsu-keyboard.kmp) ([empreinte SHA-256](https://github.com/Platykalt/corsu/releases/latest/download/corsu-keyboard.kmp.sha256)) |
-| `corsu-keyboard-cismuntincu.kmp` | Corsu – Cismuntincu (experimental) | 1.1 (publié avec Corsu 0.26.0) | le même vocabulaire, avec une préférence pour les formes du Cismonte ; expérimental, les formes régionales ne couvrent qu'une partie des mots (361 mots pondérés autrement) | [dernière version publiée](https://github.com/Platykalt/corsu/releases/latest/download/corsu-keyboard-cismuntincu.kmp) ([empreinte SHA-256](https://github.com/Platykalt/corsu/releases/latest/download/corsu-keyboard-cismuntincu.kmp.sha256)) |
-| `corsu-keyboard-pumuntincu.kmp` | Corsu – Pumuntincu (experimental) | 1.1 (publié avec Corsu 0.26.0) | le même vocabulaire, avec une préférence pour les formes du Pumonte ; expérimental, même limite | [dernière version publiée](https://github.com/Platykalt/corsu/releases/latest/download/corsu-keyboard-pumuntincu.kmp) ([empreinte SHA-256](https://github.com/Platykalt/corsu/releases/latest/download/corsu-keyboard-pumuntincu.kmp.sha256)) |
+| `corsu-keyboard.kmp` | Corsu | 1.2 (à partir de Corsu 0.27.0) | dictionnaire général : le vocabulaire commun, 19 550 mots (mots parasites retirés), sans préférence régionale ; garde la majuscule des mots | [dernière version publiée](https://github.com/Platykalt/corsu/releases/latest/download/corsu-keyboard.kmp) ([empreinte SHA-256](https://github.com/Platykalt/corsu/releases/latest/download/corsu-keyboard.kmp.sha256)) |
+| `corsu-keyboard-cismuntincu.kmp` | Corsu – Cismuntincu (experimental) | 1.2 (à partir de Corsu 0.27.0) | le même vocabulaire, avec une préférence pour les formes du Cismonte ; expérimental, les formes régionales ne couvrent qu'une partie des mots (361 mots pondérés autrement) | [dernière version publiée](https://github.com/Platykalt/corsu/releases/latest/download/corsu-keyboard-cismuntincu.kmp) ([empreinte SHA-256](https://github.com/Platykalt/corsu/releases/latest/download/corsu-keyboard-cismuntincu.kmp.sha256)) |
+| `corsu-keyboard-pumuntincu.kmp` | Corsu – Pumuntincu (experimental) | 1.2 (à partir de Corsu 0.27.0) | le même vocabulaire, avec une préférence pour les formes du Pumonte ; expérimental, même limite | [dernière version publiée](https://github.com/Platykalt/corsu/releases/latest/download/corsu-keyboard-pumuntincu.kmp) ([empreinte SHA-256](https://github.com/Platykalt/corsu/releases/latest/download/corsu-keyboard-pumuntincu.kmp.sha256)) |
 
 « Version » est la version du paquet du dictionnaire, que Keyman affiche (voir l'étape 5) ; elle ne suit pas les
-numéros de version de Corsu.
+numéros de version de Corsu. Corsu 0.26.0 contenait les paquets 1.1 (13 213 mots).
 
 Les trois sont pour la langue Corsican (`co`) et le clavier EuroLatin (SIL). Un seul suffit : voir
 [Choisir un dictionnaire régional](#choisir-un-dictionnaire-régional).
@@ -80,16 +82,17 @@ Les trois sont pour la langue Corsican (`co`) et le clavier EuroLatin (SIL). Un 
 Téléchargez le nouveau fichier et ouvrez-le dans Keyman comme à l'étape 4, **sous le même nom** `corsu-keyboard.kmp` :
 Keyman tire l'identité du paquet du nom du fichier. Si un suffixe a été ajouté (`corsu-keyboard(1).kmp`,
 `corsu-keyboard (1).kmp`), renommez le fichier dans Fichiers avant de l'ouvrir. Vos réglages sont gardés. **Relancez
-ensuite Keyman** : jusque-là, l'ancien dictionnaire peut continuer de répondre. Passez à un autre clavier avec la
-touche globe puis revenez à Keyman, ou fermez l'application Keyman. Vérifiez ensuite la version comme à l'étape 5 :
-1.1 pour les paquets publiés avec Corsu 0.26.0. Un dictionnaire installé avant Corsu 0.26.0 s'appelle
+ensuite Keyman** : jusque-là, l'ancien dictionnaire peut continuer de répondre. Passez à un autre clavier avec la touche
+globe puis revenez à Keyman, ou fermez l'application Keyman. Vérifiez ensuite la version comme à l'étape 5 : 1.2 pour
+les paquets de Corsu 0.27.0 (1.1 pour ceux de Corsu 0.26.0). Un dictionnaire installé avant Corsu 0.26.0 s'appelle
 `platykalt.co.corsu` dans Keyman, version 1.0 : mettez-le à jour.
 
 Pour une liste d'essai complète, avec les résultats attendus : [Essai en 5 minutes](essai-5-minutes.md).
 
 ## Choisir un dictionnaire régional
 
-<!-- corsu:phone-variants:fr Les deux variantes régionales sont publiées depuis Corsu 0.26.0 (paquets 1.1). -->
+<!-- corsu:phone-variants:fr Les deux variantes régionales sont publiées depuis Corsu 0.26.0 (paquets 1.1 ; 1.2 à
+     partir de Corsu 0.27.0). -->
 Deux dictionnaires expérimentaux préfèrent les formes du Cismonte ou du Pumonte :
 [corsu-keyboard-cismuntincu.kmp](https://github.com/Platykalt/corsu/releases/latest/download/corsu-keyboard-cismuntincu.kmp)
 et
@@ -100,7 +103,7 @@ iPhone), on choisit le dictionnaire dans **Paramètres** › **Langues installé
 **Dictionnaires**, et le choix est gardé pour la langue. Relancez ensuite Keyman comme pour une mise à jour, puis
 vérifiez le nom affiché (étape 5).
 
-Pour revenir au dictionnaire général, choisissez « Corsu » (version 1.1) de la même façon.
+Pour revenir au dictionnaire général, choisissez « Corsu » (version 1.2 ; 1.1 avec Corsu 0.26.0) de la même façon.
 
 ## Majuscules et début de phrase
 
@@ -126,11 +129,11 @@ mot en minuscules par le nom qui s'écrit pareil (« corti » par « Corti » qu
 1.1 (Corsu 0.26.0) contient ces formes (« Bastelicaccia », « corti » à côté de « Corti », « Vizzani », des sigles
 comme « ADECEC ») ; un mot qui y manque encore, un nom de rue par exemple, peut toujours être remplacé.
 
-Le dictionnaire 1.2 (prochaine version de Corsu, pas encore publiée) connaît en plus environ 6 300 formes trouvées
-dans ses sources : pluriels et féminins (« tradizioni », « fundata », « partuti », que le moteur 19.0.309 remplaçait
-par « tradizione », « fundatu », « partiti »), formes verbales du Wiktionnaire (« manghjatu ») et formes élidées
-(« l'abitanti », « L'ADECEC », devenues « abitanti » et « ADECEC »). Les formes qui lui manquent (verbes comme
-« ghjocanu », « vedemu », élisions plus rares) peuvent encore être remplacées.
+Le dictionnaire 1.2 (à partir de Corsu 0.27.0) connaît en plus environ 6 300 formes trouvées dans ses sources : pluriels
+et féminins (« tradizioni », « fundata », « partuti », que le moteur 19.0.309 remplaçait par « tradizione »,
+« fundatu », « partiti »), formes verbales du Wiktionnaire (« manghjatu ») et formes élidées (« l'abitanti »,
+« L'ADECEC », devenues « abitanti » et « ADECEC »). Les formes qui lui manquent (verbes comme « ghjocanu », « vedemu »,
+élisions plus rares) peuvent encore être remplacées.
 
 ## Revenir sur un mot
 
@@ -139,9 +142,9 @@ suggestion choisie ne remplace que cette partie : la fin de l'ancien mot reste �
 « Dopu ell|a vene », choisir « ellu » donne « Dopu ellu a vene » : ce « a » n'est pas un mot ajouté, c'est la fin de
 « ella », qu'il faut effacer à la main. De même, `ca|sa` puis « casa » donne « casa sa ».
 
-Sur iPhone, c'est vrai aussi avec le dictionnaire 1.1 (Corsu 0.26.0) : il demande à Keyman d'effacer la fin du
-mot (ce que fait Keyman pour Android), mais Keyman pour iPhone ignore cette demande, en 18.0 comme dans la bêta 19.0
-(d'après son code ; pas essayé sur un iPhone). Les gestes sûrs :
+Sur iPhone, c'est vrai aussi avec les dictionnaires 1.1 et 1.2 (Corsu 0.26.0 et 0.27.0) : ils demandent à Keyman
+d'effacer la fin du mot (ce que fait Keyman pour Android), mais Keyman pour iPhone ignore cette demande, en 18.0 comme
+dans la bêta 19.0 (d'après son code ; pas essayé sur un iPhone). Les gestes sûrs :
 
 - placez le curseur **à la fin du mot** avant de choisir une suggestion : elle remplace alors le mot entier ;
 - ou sélectionnez le mot, tapez ses premières lettres (elles remplacent la sélection), puis choisissez la suggestion ;
@@ -150,9 +153,9 @@ mot (ce que fait Keyman pour Android), mais Keyman pour iPhone ignore cette dema
 Autres cas, observés dans le moteur de Keyman 18.0.254 et 19.0.309 avec l'identification (user agent) de l'iPhone, pas
 sur un iPhone :
 
-- **Ponctuation déjà écrite après le mot**, curseur à sa fin : avec le dictionnaire 1.2 (prochaine version de Corsu,
-  pas encore publiée), `Aiacc|.` puis « Aiacciu » donne « Aiacciu. » (avec 1.1, Keyman ajoutait une espace :
-  « Aiacciu . »). Curseur au milieu du mot, la fin de l'ancien mot reste, comme plus haut, et une espace la sépare.
+- **Ponctuation déjà écrite après le mot**, curseur à sa fin : avec le dictionnaire 1.2 (à partir de Corsu 0.27.0),
+  `Aiacc|.` puis « Aiacciu » donne « Aiacciu. » (avec 1.1, Keyman ajoutait une espace : « Aiacciu . »). Curseur au
+  milieu du mot, la fin de l'ancien mot reste, comme plus haut, et une espace la sépare.
 - **Ponctuation tapée après une suggestion touchée** : Keyman ajoute une espace après le mot touché, et Keyman 18 la
   garde si l'on tape ensuite `.` ou `,` (« casa . »). Touchez une fois la touche d'effacement (elle n'enlève que
   l'espace), puis tapez le signe. Keyman 19 (bêta) enlève lui-même cette espace.

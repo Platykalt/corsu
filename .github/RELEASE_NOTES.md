@@ -7,8 +7,8 @@
 | Windows 10 ou 11 | `corsu-windows.zip` | décompresser, double-cliquer sur `Install for Windows.cmd` |
 | macOS | `corsu-macos.tar.gz` | double-cliquer sur `Install for macOS.command` |
 | Linux | `corsu-linux.tar.gz` | lancer `./"Install for Linux.sh"` |
-| Téléphone Android ou iPhone (clavier Keyman) | `corsu-keyboard.kmp` | dictionnaire corse pour Keyman, **utilisable seul** : aucune installation sur ordinateur. Paquet 1.1, nom dans Keyman : « Corsu ». Guides : [Android](https://github.com/Platykalt/corsu/blob/main/docs/fr/telephone/android.md), [iPhone](https://github.com/Platykalt/corsu/blob/main/docs/fr/telephone/iphone.md) |
-| Téléphone, variante régionale (expérimentale) | `corsu-keyboard-cismuntincu.kmp` ou `corsu-keyboard-pumuntincu.kmp` | même vocabulaire, préférence pour les formes du Cismonte ou du Pumonte (361 mots pondérés autrement, couverture partielle) ; paquet 1.1. Sous Android, un seul dictionnaire actif par langue : désinstaller l'autre puis relancer Keyman |
+| Téléphone Android ou iPhone (clavier Keyman) | `corsu-keyboard.kmp` | dictionnaire corse pour Keyman, **utilisable seul** : aucune installation sur ordinateur. Paquet 1.2, nom dans Keyman : « Corsu ». Guides : [Android](https://github.com/Platykalt/corsu/blob/main/docs/fr/telephone/android.md), [iPhone](https://github.com/Platykalt/corsu/blob/main/docs/fr/telephone/iphone.md) |
+| Téléphone, variante régionale (expérimentale) | `corsu-keyboard-cismuntincu.kmp` ou `corsu-keyboard-pumuntincu.kmp` | même vocabulaire, préférence pour les formes du Cismonte ou du Pumonte (361 mots pondérés autrement, couverture partielle) ; paquet 1.2. Sous Android, un seul dictionnaire actif par langue : désinstaller l'autre puis relancer Keyman |
 | Minecraft Java 26.3, sans l'application | `corsu-minecraft-java-26.3.zip` | pack de ressources : Options › Packs de ressources, l'activer, puis Options › Langue › Corsu ; pack facultatif des textes d'accueil et de fin : `corsu-minecraft-java-texts-26.3.zip`. Les autres versions (1.6.1 → 26.2) : par l'application Corsu ([versions et vérifications](https://github.com/Platykalt/corsu/blob/main/minecraft/java/COMPATIBILITY.md)) |
 
 En une ligne : `irm https://raw.githubusercontent.com/Platykalt/corsu/main/install/get.ps1 | iex` dans PowerShell sous
@@ -20,7 +20,40 @@ Chaque fichier a sa somme de contrôle `.sha256`. Les archives contiennent leur 
 installée, utilisée après suppression du dossier extrait, mise à jour et désinstallée sur son système avant la
 publication (tests automatiques ; personne n'a regardé les écrans).
 
-### Nouveautés de la 0.26.0
+### Nouveautés de la 0.27.0
+
+<!-- corsu:keyboard-figures Paquets 1.2, 19 550 mots par paquet (tools/count_kmp.py sur les .kmp construits) ; 1.1 :
+     13 213. À recompter si le clavier change avant la publication (docs/release-checklist-phone.md). -->
+- **Clavier sur téléphone** (paquets 1.2, 19 550 mots par paquet, contre 13 213 dans les paquets 1.1) : plus d'espace
+  ajoutée devant une ponctuation déjà écrite (`Aiacc|.` puis « Aiacciu » donne « Aiacciu. », et non « Aiacciu . ») ;
+  à la fin d'un mot sous Android et sur iPhone, au milieu d'un mot sous Android seulement. L'apostrophe typographique
+  est gardée (« l’is » donne « l’isula »). 6 335 formes écrites par les sources (pluriels, féminins, formes du
+  Wiktionnaire, formes élidées) sont maintenant connues, pour que la correction automatique de Keyman 19 ne remplace
+  plus des mots justes (« tradizioni », « abitanti », « l'ADECEC ») ; sélection faite par IA, **non vérifiée par un
+  locuteur**, où sont entrées quelques formes italiennes citées dans Vikipedia. Vérifié dans les moteurs de Keyman
+  18.0.254 et 19.0.309 et dans ces deux applications sur émulateur Android 14 ; **pas sur un vrai téléphone, pas sur
+  iPhone**. Mettre à jour : télécharger de nouveau le fichier sous le même nom, puis relancer Keyman (guides
+  ci-dessus) ; Keyman affiche alors la version 1.2.
+- **Signaler une traduction depuis la fenêtre** (page « Signaler ») : logiciel, version, texte vu, endroit,
+  proposition et remarques. La page montre le signalement, le copie ou ouvre un ticket GitHub prérempli, seulement
+  sur un clic. Rien n'est envoyé ni gardé par la page ; les chemins de dossiers personnels et les adresses e-mail
+  sont remplacés.
+- **Relecture par des locuteurs** : 71 courtes séries de questions sur les textes de Minecraft
+  ([review/](https://github.com/Platykalt/corsu/tree/main/review)), chacune en page Markdown et en page HTML autonome
+  qui prépare une réponse à copier ou à envoyer en ticket prérempli. Une réponse redevient « à réexaminer » quand le
+  texte anglais ou corse change.
+- **Relecture de la langue, 5e passe** (travail IA, revérifié par une autre passe IA ; **aucune relecture par un
+  locuteur**) : Minecraft Java, environ 700 textes lus et 16 changés (par exemple `doFireTick` « U focu si
+  sparghje »), vérifiés sur les 87 versions avec le code de chaque jeu ; Discord : un « Supprimer » seul prend le
+  verbe de sa fenêtre, Spirlà/Dispirlà (épingler), In linea / Fora di linea ; Firefox : Minuteria pour le minuteur
+  du Nouvel onglet ; KDE : Squas pour la touche Suppr.
+- **Mémoire de traduction** : une traduction écrite pour un autre sens n'est plus reprise, une abréviation n'est
+  jamais reprise de la seule traduction trouvée ailleurs, et chaque reprise dit d'où elle vient.
+- La mise à jour depuis la 0.26.0 publiée est vérifiée automatiquement.
+- **Minecraft Bedrock** : un prototype existe dans le dépôt, mais il n'est **pas joint** à cette version (jamais
+  chargé dans le jeu).
+
+### Rappel : nouveautés de la 0.26.0
 
 - **Mise à jour** : la 0.24.0 a pu dire « à jour » alors que la 0.25.1 était publiée : une fenêtre restée ouverte ne
   vérifiait qu'à son ouverture, une relance réaffichait cette fenêtre, et une réponse de GitHub servait 6 heures comme
@@ -152,8 +185,8 @@ est la 0.25.0 avec cette correction.
 | Windows 10 or 11 | `corsu-windows.zip` | extract it and double-click `Install for Windows.cmd` |
 | macOS | `corsu-macos.tar.gz` | double-click `Install for macOS.command` |
 | Linux | `corsu-linux.tar.gz` | run `./"Install for Linux.sh"` |
-| Android phone or iPhone (Keyman keyboard) | `corsu-keyboard.kmp` | Corsican dictionary for Keyman, **usable on its own**: nothing to install on a computer. Package 1.1, shown in Keyman as "Corsu". Guides: [Android](https://github.com/Platykalt/corsu/blob/main/docs/en/phone/android.md), [iPhone](https://github.com/Platykalt/corsu/blob/main/docs/en/phone/iphone.md) |
-| Phone, regional variant (experimental) | `corsu-keyboard-cismuntincu.kmp` or `corsu-keyboard-pumuntincu.kmp` | same vocabulary, preferring the forms of Cismonte or Pumonte (361 words weighted differently, partial coverage); package 1.1. On Android only one dictionary is active per language: uninstall the other, then restart Keyman |
+| Android phone or iPhone (Keyman keyboard) | `corsu-keyboard.kmp` | Corsican dictionary for Keyman, **usable on its own**: nothing to install on a computer. Package 1.2, shown in Keyman as "Corsu". Guides: [Android](https://github.com/Platykalt/corsu/blob/main/docs/en/phone/android.md), [iPhone](https://github.com/Platykalt/corsu/blob/main/docs/en/phone/iphone.md) |
+| Phone, regional variant (experimental) | `corsu-keyboard-cismuntincu.kmp` or `corsu-keyboard-pumuntincu.kmp` | same vocabulary, preferring the forms of Cismonte or Pumonte (361 words weighted differently, partial coverage); package 1.2. On Android only one dictionary is active per language: uninstall the other, then restart Keyman |
 | Minecraft Java 26.3, without the app | `corsu-minecraft-java-26.3.zip` | resource pack: Options › Resource Packs, turn it on, then Options › Language › Corsu; optional pack of the splash and end texts: `corsu-minecraft-java-texts-26.3.zip`. Other versions (1.6.1 → 26.2): through the Corsu app ([versions and checks](https://github.com/Platykalt/corsu/blob/main/minecraft/java/COMPATIBILITY.md)) |
 
 In one line: `irm https://raw.githubusercontent.com/Platykalt/corsu/main/install/get.ps1 | iex` in PowerShell on
@@ -165,7 +198,37 @@ Each file has a `.sha256` checksum. The archives carry their own Python. Every a
 deleting the extracted folder, updated and uninstalled on its own system before publication (automated checks; no one
 looked at the screens).
 
-### New in 0.26.0
+### New in 0.27.0
+
+<!-- corsu:keyboard-figures Packages 1.2, 19,550 words per package (tools/count_kmp.py on the built .kmp files); 1.1:
+     13,213. Count again if the keyboard changes before publication (docs/release-checklist-phone.md). -->
+- **Phone keyboard** (packages 1.2, 19,550 words per package, against 13,213 in the 1.1 packages): no space is added
+  before punctuation already in the text (`Aiacc|.` then "Aiacciu" gives "Aiacciu.", not "Aiacciu ."); at the end of
+  a word on Android and iPhone, inside a word on Android only. The typographic apostrophe is kept ("l’is" gives
+  "l’isula"). 6,335 forms that the sources write (plurals, feminines, Wiktionary forms, elided forms) are now known
+  words, so Keyman 19's automatic correction no longer replaces correct words ("tradizioni", "abitanti",
+  "l'ADECEC"); the selection was made by AI and **not checked by a speaker**, and a few Italian forms quoted in
+  Vikipedia got in. Checked in Keyman 18.0.254's and 19.0.309's engines and in both apps on an Android 14 emulator;
+  **not on a real phone, not on iPhone**. To update: download the file again under the same name, then restart Keyman
+  (guides above); Keyman then shows version 1.2.
+- **Report a translation from the window** ("Signaler" page): program, version, text seen, place, proposal and notes.
+  The page shows the report, copies it, or opens a prefilled GitHub issue, only on a click. Nothing is sent or stored
+  by the page; personal folder paths and e-mail addresses are replaced.
+- **Review by speakers**: 71 short sets of questions on the Minecraft texts
+  ([review/](https://github.com/Platykalt/corsu/tree/main/review)), each one a Markdown page and a self-contained HTML
+  page that builds a reply to copy or send as a prefilled issue. An answer goes back to "to re-examine" when the
+  English or the Corsican text changes.
+- **Language review, round 5** (AI work, re-checked by a separate AI pass; **no speaker review**): Minecraft Java,
+  about 700 texts read and 16 changed (for example `doFireTick` "U focu si sparghje"), checked on the 87 releases
+  with each game's code; Discord: a bare "Supprimer" takes the verb of its dialog, Spirlà/Dispirlà (pin), In linea /
+  Fora di linea; Firefox: Minuteria for the New Tab timer; KDE: Squas for the Delete key.
+- **Translation memory**: a translation written for another sense is no longer reused, an abbreviation is never reused
+  from the only translation found elsewhere, and each reuse records where it comes from.
+- The update from the published 0.26.0 is checked automatically.
+- **Minecraft Bedrock**: a prototype exists in the repository but is **not attached** to this release (never loaded
+  in the game).
+
+### Earlier: new in 0.26.0
 
 - **Updates**: 0.24.0 could say "up to date" while 0.25.1 was out: a window left open checked only when it opened, a
   new launch showed that window again, and a GitHub answer was reused for 6 hours as if fresh
