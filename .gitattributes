@@ -1,0 +1,2 @@
+# Bedrock reads its .lang files with LF line ends: keep them so on a Windows checkout (tests/test_bedrock.py).
+minecraft/bedrock/*.lang text eol=lf
