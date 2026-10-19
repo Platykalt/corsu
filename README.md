@@ -13,7 +13,7 @@ Corsu met en corse les logiciels de tous les jours. Corsu puts everyday software
 ## Français
 
 Corsu est un projet libre qui donne au corse une place dans les logiciels de tous les jours. Il y a trois façons de
-s'en servir, indépendantes l'une de l'autre. Version publiée : **0.25.1**
+s'en servir, indépendantes l'une de l'autre. Version publiée : **0.26.0**
 ([toutes les versions](https://github.com/Platykalt/corsu/releases)).
 
 | Je veux… | Ce qu'il faut | Guide |
@@ -61,9 +61,9 @@ English ([Discord en corse](docs/fr/discord.md)). Le détail système par systè
 [Ce qui marche, et où](docs/fr/compatibilite.md) ; fichier par fichier :
 [Ce que Corsu modifie](docs/fr/ce-que-corsu-modifie.md).
 
-<img src="docs/images/corsu-setup-fr.png" alt="La fenêtre de Corsu 0.25.1, rubrique Logiciels : Firefox, Discord, le bureau KDE Plasma, Minecraft et VLC en corse, chacun avec son interrupteur (capture faite avec des données d'exemple)" width="570">
+<img src="docs/images/corsu-setup-fr.png" alt="La fenêtre de Corsu 0.26.0, rubrique Logiciels : Firefox, Discord, le bureau KDE Plasma, Minecraft et VLC en corse, chacun avec son interrupteur (capture faite avec des données d'exemple)" width="570">
 
-*La fenêtre de Corsu 0.25.1, avec des données d'exemple.*
+*La fenêtre de Corsu 0.26.0, avec des données d'exemple.*
 
 **Mettre à jour, réparer, retirer.** Rouvrez l'application Corsu depuis le menu des applications : elle permet
 d'ajouter un logiciel, de remettre une partie dans sa langue d'origine (le terminal pendant une heure, par exemple),
@@ -126,7 +126,7 @@ approuvé par Mojang ou Microsoft, ni associé à eux.
 
 ### Logiciels pris en charge
 
-Statuts : **disponible** (dans la version publiée 0.25.1), **expérimental** (disponible, peu vérifié sur ce système),
+Statuts : **disponible** (dans la version publiée 0.26.0), **expérimental** (disponible, peu vérifié sur ce système),
 **candidat** (dans la prochaine version, pas encore publiée), **prévu** (pas encore fait). Le détail, avec les
 vérifications faites pour chacun : [État des traductions](docs/fr/etat-des-traductions.md).
 
@@ -230,7 +230,7 @@ La version longue : [Pourquoi Corsu](docs/fr/pourquoi-corsu.md).
 ## English
 
 Corsu is a free software project that gives Corsican a place in everyday software. There are three ways to use it,
-independent of each other. Published release: **0.25.1**
+independent of each other. Published release: **0.26.0**
 ([all releases](https://github.com/Platykalt/corsu/releases)).
 
 | I want… | What it takes | Guide |
@@ -277,9 +277,9 @@ a modification of the app, and only when its language is Français or English
 ([Discord in Corsican](docs/en/discord.md)). Details for each system: [What works where](docs/en/compatibility.md);
 file by file: [What Corsu changes](docs/en/what-corsu-changes.md).
 
-<img src="docs/images/corsu-setup-en.png" alt="The Corsu 0.25.1 window, Programs section: Firefox, Discord, the KDE Plasma desktop, Minecraft and VLC in Corsican, each with its own switch (captured with sample data)" width="570">
+<img src="docs/images/corsu-setup-en.png" alt="The Corsu 0.26.0 window, Programs section: Firefox, Discord, the KDE Plasma desktop, Minecraft and VLC in Corsican, each with its own switch (captured with sample data)" width="570">
 
-*The Corsu 0.25.1 window, with sample data.*
+*The Corsu 0.26.0 window, with sample data.*
 
 **Updating, repairing, removing.** Open the Corsu app again from the applications menu to add a program, put a part
 back in its original language (the terminal for an hour, for example), update (in About) or remove everything.
@@ -340,7 +340,7 @@ MICROSOFT.
 
 ### Supported programs
 
-Statuses: **available** (in the published release 0.25.1), **experimental** (available, little checked on that
+Statuses: **available** (in the published release 0.26.0), **experimental** (available, little checked on that
 system), **candidate** (in the next version, not published yet), **planned** (not done yet). Details, with the checks
 made for each: [Translation status](docs/en/translation-status.md).
 
