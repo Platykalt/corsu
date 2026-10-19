@@ -4,6 +4,47 @@
 
 Started from 0.26.0 (`9868066`, tag `v0.26.0`). Changes inherited from 0.26 are listed under 0.26.0 below.
 
+The version in `src/release.json` says 0.27.0 so that CI checks the update from the published 0.26.0; nothing below is
+in a published release.
+
+- **Phone keyboard, packages 1.2** (`keyboard/`, docs/fr/telephone, docs/en/phone):
+  - No space is added before punctuation already in the text: choosing "Aiacciu" in `Aiacc|.` gives "Aiacciu.", not
+    "Aiacciu .". The model wrapper (`keyboard/whole-word.js`) leaves out the space for that suggestion when the word is
+    followed by punctuation, a hyphen, a line break or a no-break space. At the end of a word this works on Android
+    and iPhone; inside a word, on Android only.
+  - The typographic apostrophe is kept: "l’is" + "l'isula" gives "l’isula".
+  - 6,335 forms that sources write are now known words, so Keyman 19's automatic correction no longer replaces correct
+    words ("tradizioni", "culturali", "andati", "fundata", "abitanti", "l'ADECEC", "l'abitanti"…). Rules 5b (plurals
+    and feminines written at least 5 times in Vikipedia, 3,113), 5c (forms of Wiktionary's Corsican entries, 2,749) and
+    5d (elided forms written at least 5 times in Vikipedia, 473). Weight at most 100 and never above the listed form.
+    This selection was made by AI and not checked by a speaker; some Italian forms quoted in Vikipedia got in
+    (`keyboard/data/REVIEW.md`). 13,215 → 19,550 words in each package.
+  - Punctuation typed right after tapping a suggestion: Keyman 18 leaves "casa ."; one Backspace removes only the
+    space. Keyman 19 removes the space itself. Written in the phone guides.
+  - Checked in Keyman 18.0.254's and 19.0.309's engines and in the Keyman 18.0.254 and 19.0.309 apps on an Android 14
+    emulator. Not tried on a real phone or an iPhone.
+- **Report a translation from the window** (« Signaler » page, `src/app/report.js`): program, version, text seen,
+  place, proposal and notes. The page shows the report first, copies it, or opens a prefilled GitHub issue, only on a
+  click. Nothing is sent or stored by the page; account folder paths and e-mail addresses are replaced.
+- **Review sets for speakers** (`review/`, `tools/review_sets.py`): 71 short sets of Minecraft questions, each one a
+  Markdown page and a self-contained HTML page that builds a reply to copy or send as a prefilled issue. Answers are
+  stored as proposals tied to the English and Corsican hashes; an answer goes back to "to re-examine" when either text
+  changes. Accepted answers become `validation.human` in the Minecraft memory.
+- **Translation memory** (`tools/tm.py`): a candidate written for another sense is refused; an abbreviation is never
+  reused from the only translation found elsewhere (`lexicon/memory/abbreviations.tsv`); each reuse records where it
+  comes from; changed sources are detected. Real cases as tests: Bio, Profil, Minecraft `key.drop`.
+- **Language review, round 5** (AI work, re-checked by a separate AI pass; no speaker review):
+  - Minecraft Java: about 700 texts read (world management, game rules, connection, inventory, chat), 16 changed, for
+    example `doFireTick` « U focu si sparghje », `doWeatherCycle` « U tempu cambia ». Verified on the 87 releases with
+    each game's code.
+  - Discord: a bare "Supprimer" takes the verb of its dialog; Spirlà/Dispirlà (pin), In linea / Fora di linea.
+    Firefox: Minuteria for the New Tab timer. KDE: Squas for the Delete key.
+- **Minecraft Bedrock, prototype** (`minecraft/bedrock/`): target Bedrock 26.50 (bedrock-samples v1.26.50.4), 4,272 of
+  13,340 texts reused from Java where the English and the sense are the same; stricter reuse refusals; comment-free
+  pack; install, test and removal protocol in docs/fr/minecraft-bedrock.md. Never loaded in the game. CI checks it and
+  builds the test pack as a separate artifact (`minecraft-bedrock-prototype`), never attached to a release.
+- CI: updates checked from the published 0.26.0 as well (`check_update.py`, `check_update_apps.py`).
+
 ## 0.26.0 (2026-10-18)
 
 - Wording review (AI, not reviewed by a speaker): Minecraft main and pause menus, worlds, servers, options

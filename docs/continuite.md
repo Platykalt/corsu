@@ -3,15 +3,79 @@
 Document de reprise, tenu à jour à chaque étape. Il renvoie aux documents détaillés plutôt que de les répéter.
 Les sections datées après « État actuel » sont l'historique : ce qui y est dit ouvert a pu être corrigé depuis.
 
-## État actuel (18 octobre 2026)
+## État actuel (19 octobre 2026)
 
 - **0.26.0 publiée** (18 octobre 2026, 22 h 29 UTC) : tag `v0.26.0` sur `9868066`, release
   https://github.com/Platykalt/corsu/releases/tag/v0.26.0, dernière version (CI du tag 39169945473 : tests,
   archives, bout en bout sur les trois systèmes, publication, installation en une ligne Linux et Windows ; CI de la
   candidate 39167633006). Vérifié depuis `releases/latest/download` : 8 fichiers conformes à leurs 8 `.sha256`,
   archives en 0.26.0, trois dictionnaires 1.1 (13 213 mots chacun, identifiants attendus). `main` = `9868066`.
-- **`next-0.27`** (en développement depuis `8d3cba8`, sur la 0.26.0) : voir le CHANGELOG. Ce qui suit dans cette
-  section décrit encore la préparation de la 0.26 et sera remis à jour à la fin du chantier 0.27.
+- **`next-0.27`** (en développement depuis `8d3cba8`, sur la 0.26.0 ; non publiée, la publication attend l'accord du
+  mainteneur). `src/release.json` dit 0.27.0 pour que la CI vérifie la mise à jour depuis la 0.26.0 publiée. Détail
+  dans le CHANGELOG ; quatre chantiers intégrés (agents A à D) :
+  - **Clavier 1.2** (branche `c027-kb`) : plus d'espace avant une ponctuation déjà écrite (modèle ; Android et iOS en
+    fin de mot, Android seul au milieu d'un mot), apostrophe ’ gardée ; +6 335 formes écrites par les sources
+    (Vikipédia, Wiktionnaire, élisions ; sélection IA non relue) pour que la correction automatique de Keyman 19 ne
+    remplace plus des mots justes ; 19 550 mots par paquet. Vérifié dans les moteurs 18.0.254 et 19.0.309 et dans les
+    applications 18.0.254 et 19.0.309 sur émulateur Android 14 ; ni téléphone réel ni iPhone. Ponctuation tapée
+    juste après une suggestion : Keyman 18 laisse « casa . » (un retour arrière enlève l'espace), Keyman 19 l'enlève.
+  - **Signaler une traduction** : page « Signaler » de la fenêtre ; rien n'est envoyé sans clic, chemins et adresses
+    masqués. **Séries de relecture** (`review/`, 71 séries Minecraft) : réponses gardées comme propositions, liées
+    aux empreintes des textes. **Mémoire de traduction** : sens, abréviations, provenance, sources changées.
+  - **Langue, cinquième tour** (IA, revérifié par une autre passe IA ; relecture humaine : 0) : 16 textes Minecraft
+    (`minecraft/java/review-2026-10/ROUND5.md`), verbe de dialogue pour « Supprimer » dans Discord, Spirlà/Dispirlà,
+    In linea / Fora di linea, Minuteria, Squas.
+  - **Bedrock** : prototype pour Bedrock 26.50, 4 272 textes sur 13 340 repris de Java, jamais chargé en jeu ; la CI
+    le vérifie et construit le pack d'essai comme artefact séparé (`minecraft-bedrock-prototype`), jamais joint à une
+    release. Protocole : [minecraft-bedrock.md](fr/minecraft-bedrock.md).
+- Tests unitaires : `HOME=$(mktemp -d) python3 -m unittest discover -s tests -t . -q` (sans `-t .`, 13 erreurs
+  d'import qui ne signalent rien). CI d'une branche autre que `main` : `gh workflow run ci.yml --ref <branche>`.
+- **INFCOR** et autres dictionnaires en ligne : consultation page par page seulement, jamais par script
+  ([AGENTS.md](../AGENTS.md), test `tests/test_sources_policy.py`).
+- **Attend une personne** : essai des paquets clavier 1.2 sur un vrai téléphone Android et sur iPhone ; relecture par
+  un locuteur (séries `review/`, Minecraft, Discord : `lexicon/review-discord-2026-10.tsv`, formes ajoutées au clavier :
+  `keyboard/data/REVIEW.md`) ; essais Minecraft en jeu, Java et Bedrock (neuf questions dans minecraft-bedrock.md) ;
+  libellés Discord observés dans un vrai Discord ; envoi éventuel du ticket Keyman
+  (`docs/keyman/ticket-mid-word-suggestion.md`, brouillon) ; décision de publier la 0.27.
+- **Limites connues** : complément VLC absent sous Windows, macOS, Flatpak, Snap ; Audacity 4 expérimental sous
+  Windows et macOS ; fenêtre non observée dans WebView2 ni WKWebView ; Keyman 18 sans correction automatique ;
+  suggestion choisie au milieu d'un mot : seulement la partie à gauche du curseur remplacée sous iOS (limite de
+  l'application Keyman) ; « calvi » devient « Calvi » (aucune source pour l'adjectif) ; formes verbales absentes des
+  sources (« ghjocanu », « vedemu ») encore remplaçables par la correction de Keyman 19.
+
+## Objectifs retenus
+
+1. Quand Corsu est installé, les logiciels présents sur l'ordinateur qui ont une traduction corse s'ouvrent en corse,
+   avec une couverture annoncée honnêtement ([état des traductions](fr/etat-des-traductions.md)).
+2. Minecraft: Java Edition en corse, fiable et sans risque pour les réglages des joueurs
+   ([STATUS](../minecraft/java/STATUS.md)).
+3. Une base de traduction contextuelle (application, clé, contexte, provenance, licence, statut de relecture) qui
+   accélère chaque nouvelle intégration sans propager les contresens ([lexicon/memory](../lexicon/memory/README.md)).
+
+## Décisions et leurs preuves
+
+| Décision | Preuve |
+| --- | --- |
+| Activer d'abord la traduction livrée avec le logiciel, par son propre réglage de langue ; ne jamais restaurer un fichier de configuration entier | [apps-research.md](apps-research.md) ; tests `tests/test_apps.py` |
+| VLC sous Linux : entrée de menu avec `LANGUAGE=co:…` (VLC n'a pas de réglage de langue sous Linux) | CI : vrai VLC d'Ubuntu, aide affichée en corse (`tests/e2e/check_vlc.py`) |
+| Minecraft : Corsu lit la version de chaque dossier de jeu (instance) et n'y ajoute que le pack de cette version parmi les 87 prises en charge, puis choisit le corse ; une version non prise en charge n'est pas modifiée ; rien n'est réécrit qui ne puisse être relu | `tests/test_minecraft_instances.py`, `tests/test_lexicon_minecraft.py` |
+| Une traduction propre à un logiciel n'est pas réutilisée ailleurs quand les applications divergent (`engine.lookup` refuse) | `tests/test_memory.py` |
+| HandBrake n'est plus importé dans le lexique (GPL-2.0-only) mais son corse est activé dans HandBrake lui-même | [LICENSING-OPTIONS.md](../minecraft/java/LICENSING-OPTIONS.md) |
+| Traductions écrites par IA : jamais présentées comme validées | [REVIEWS.md](../lexicon/REVIEWS.md), colonnes séparées de `minecraft/java/inventory.tsv` |
+
+## Terminé et vérifié (au niveau indiqué)
+
+- Activation automatique : VLC (Linux, Windows, macOS ; essai réel en CI sous Linux), 7-Zip, Notepad++, WinMerge,
+  SumatraPDF (Windows), FileZilla, HandBrake, VeraCrypt (Windows, Linux) : tests unitaires ; 7-Zip, VLC et Notepad++
+  aussi sur un vrai Windows en CI.
+- Minecraft Java 26.3 : pack complet, vérifié par le code du jeu, installation prudente ; pack facultatif des phrases
+  d'accueil et du poème de fin.
+- Mémoire de traduction contextuelle et `tools/tm.py` (extraction, réutilisation exacte compatible, suggestions,
+  conflits, mises à jour).
+- Prototype d'extension web pour GitHub ([webext.md](webext.md)) et prototype Bedrock ([STATUS](../minecraft/bedrock/STATUS.md)) :
+  jamais essayés dans un navigateur ou un jeu réel.
+
+## Historique : préparation de la 0.26 (18 octobre 2026)
 
 - **Version publique : 0.25.1** (tag `v0.25.1` sur `bb64655`, release
   https://github.com/Platykalt/corsu/releases/tag/v0.25.1, dernière version ; CI 39121451094). Vérifiée depuis les
@@ -79,37 +143,6 @@ Les sections datées après « État actuel » sont l'historique : ce qui y est 
   dans WebView2 ni WKWebView ; Keyman 18 sans correction automatique ; suggestion choisie au milieu d'un mot : mot entier remplacé sous Android
   avec les paquets 1.1, seulement la partie à gauche du curseur sous iOS (limite de l'application Keyman).
 
-## Objectifs retenus
-
-1. Quand Corsu est installé, les logiciels présents sur l'ordinateur qui ont une traduction corse s'ouvrent en corse,
-   avec une couverture annoncée honnêtement ([état des traductions](fr/etat-des-traductions.md)).
-2. Minecraft: Java Edition en corse, fiable et sans risque pour les réglages des joueurs
-   ([STATUS](../minecraft/java/STATUS.md)).
-3. Une base de traduction contextuelle (application, clé, contexte, provenance, licence, statut de relecture) qui
-   accélère chaque nouvelle intégration sans propager les contresens ([lexicon/memory](../lexicon/memory/README.md)).
-
-## Décisions et leurs preuves
-
-| Décision | Preuve |
-| --- | --- |
-| Activer d'abord la traduction livrée avec le logiciel, par son propre réglage de langue ; ne jamais restaurer un fichier de configuration entier | [apps-research.md](apps-research.md) ; tests `tests/test_apps.py` |
-| VLC sous Linux : entrée de menu avec `LANGUAGE=co:…` (VLC n'a pas de réglage de langue sous Linux) | CI : vrai VLC d'Ubuntu, aide affichée en corse (`tests/e2e/check_vlc.py`) |
-| Minecraft : Corsu lit la version de chaque dossier de jeu (instance) et n'y ajoute que le pack de cette version parmi les 87 prises en charge, puis choisit le corse ; une version non prise en charge n'est pas modifiée ; rien n'est réécrit qui ne puisse être relu | `tests/test_minecraft_instances.py`, `tests/test_lexicon_minecraft.py` |
-| Une traduction propre à un logiciel n'est pas réutilisée ailleurs quand les applications divergent (`engine.lookup` refuse) | `tests/test_memory.py` |
-| HandBrake n'est plus importé dans le lexique (GPL-2.0-only) mais son corse est activé dans HandBrake lui-même | [LICENSING-OPTIONS.md](../minecraft/java/LICENSING-OPTIONS.md) |
-| Traductions écrites par IA : jamais présentées comme validées | [REVIEWS.md](../lexicon/REVIEWS.md), colonnes séparées de `minecraft/java/inventory.tsv` |
-
-## Terminé et vérifié (au niveau indiqué)
-
-- Activation automatique : VLC (Linux, Windows, macOS ; essai réel en CI sous Linux), 7-Zip, Notepad++, WinMerge,
-  SumatraPDF (Windows), FileZilla, HandBrake, VeraCrypt (Windows, Linux) : tests unitaires ; 7-Zip, VLC et Notepad++
-  aussi sur un vrai Windows en CI.
-- Minecraft Java 26.3 : pack complet, vérifié par le code du jeu, installation prudente ; pack facultatif des phrases
-  d'accueil et du poème de fin.
-- Mémoire de traduction contextuelle et `tools/tm.py` (extraction, réutilisation exacte compatible, suggestions,
-  conflits, mises à jour).
-- Prototype d'extension web pour GitHub ([webext.md](webext.md)) et prototype Bedrock ([STATUS](../minecraft/bedrock/STATUS.md)) :
-  jamais essayés dans un navigateur ou un jeu réel.
 ## Historique : 0.24.0 et candidate 0.25 (17 et 18 octobre 2026)
 
 États de l'époque, remplacés par « État actuel » ci-dessus.
