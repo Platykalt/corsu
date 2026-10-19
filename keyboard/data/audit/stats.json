@@ -62,7 +62,7 @@
   "rows": 330,
   "accepted": 289,
   "words_added": 113,
-  "spellings_lowered_below_canonical": 5,
+  "spellings_lowered_below_canonical": 3,
   "not_shipped": {
    "deferred": 18,
    "uncertain": 23

@@ -69,10 +69,12 @@ platykalt.co.corsu_pumuntincu	2		so	none	socu	offers	fail	southern 1st person of
 *	3	U\s	Pumonte	space	U Pumonte\s	text	fail	the canonical form, kept
 *	2		pumo	none	Pumonte	first	fail	the canonical Pumonte is offered before Pumonti
 *	3	A pieve di\s	Tàlcini	space	A pieve di Tàlcini\s	text	fail	accented spelling (co, one Vikipedia paragraph) next to Talcini: kept as typed
-*	2		talc	none	Talcini	first	fail	the canonical Talcini stays before the accented Tàlcini
-*	3	U dipartimentu di u\s	Golo	space	U dipartimentu di u Golo\s	text	fail	French name of the 1793 department (fr, accepted) next to the river Golu: kept
+*	2		talc	none	Talcini	offers	fail	the canonical Talcini is offered (it weighs more than the accented Tàlcini; Keyman 19 puts the correction talianu first, so first is not checked)
+*	3	U dipartimentu di u\s	Golo	space	U dipartimentu di u Golo\s	text	fail	French name of the 1793 department (fr, accepted) next to the river Golu: kept (at weight 1 Keyman 19 made it Golfu: HISTORICAL_FLOOR)
 *	3	Una\s	serra	space	Una serra\s	text	fail	common word serra kept in lowercase next to the pieve name Serra (historical-places.tsv)
 *	3	A pieve di\s	Serra	space	A pieve di Serra\s	text	fail	the name Serra typed with its capital mid-sentence, kept
 *	2		serr	none	serra	first	fail	the common word serra keeps its place before the name Serra
 *	3	Hè\s	verde	space	Hè verde\s	text	fail	common word verde kept next to the pieve name Verde
 *	3		Diquà da i Monti	space	Diquà da i Monti\s	text	fail	compound historical division, typed word by word: each word known and kept
+*	3	A pieve di\s	Talavu	space	A pieve di Talavu\s	text	fail	canonical name at the recognition floor: at weight 1 Keyman 19 made it Taravu
+*	3		Deçà des Monts	space	Deçà des Monts\s	text	fail	French name of the historical division (fr, accepted), word by word: at weight 1 Keyman 19 made Deçà into Dece

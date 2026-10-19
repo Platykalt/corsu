@@ -11,11 +11,11 @@ Sagone	Sagone	co	diocese	accepted	yes	Sagone	Sagone: added (weights: Sagone 67)
 Aiacciu	Aiacciu	co	diocese	accepted	known	Aiacciu	Aiacciu: already listed
 Cervioni	Cervioni	co	episcopal-see	accepted	known	Cervioni	Cervioni: already listed
 San Fiurenzu	San Fiurenzu	co	episcopal-see	accepted	known	San Fiurenzu	San: already listed; Fiurenzu: already listed
-Vicu	Vicu	co	episcopal-see	accepted	yes	Vicu	Vicu: added (weights: Vicu 1)
+Vicu	Vicu	co	episcopal-see	accepted	yes	Vicu	Vicu: added (weights: Vicu 5)
 Cismonte	Cismonte	co	historical-division	accepted	known	Cismonte	Cismonte: already listed
 Pumonte	Pumonte	co	historical-division	accepted	known	Pumonte	Pumonte: already listed
 Diquà da i Monti	Diquà da i Monti	co	historical-division	accepted	yes	Diquà Monti	Diquà: added; Monti: left to the listed word of the same search key (weights: Diquà 50)
-Dilà da i Monti	Dilà da i Monti	co	historical-division	accepted	yes	Dilà Monti	Dilà: added; Monti: left to the listed word of the same search key (weights: Dilà 1)
+Dilà da i Monti	Dilà da i Monti	co	historical-division	accepted	yes	Dilà Monti	Dilà: added; Monti: left to the listed word of the same search key (weights: Dilà 5)
 Terra di i Signori	Terra di i Signori	co	historical-division	accepted	known	Terra Signori	Terra: left to the listed word of the same search key; Signori: left to the listed word of the same search key
 Nebbiu	Nebbiu	co	province	accepted	known	Nebbiu	Nebbiu: already listed
 Vicu	Vicu	co	province	accepted	known	Vicu	Vicu: already listed
@@ -140,7 +140,7 @@ Cuvasina	Cuvasina	co	pieve	accepted	yes	Cuvasina	Cuvasina: added (weights: Cuvas
 Matra	Matra	co	pieve	accepted	known	Matra	Matra: already listed
 Carbini	Carbini	co	pieve	accepted	known	Carbini	Carbini: already listed
 Aleria	Aleria	co	pieve	accepted	known	Aleria	Aleria: already listed
-Tòcchisu	Tòcchisu	co	pieve	accepted	yes	Tòcchisu	Tòcchisu: added (weights: Tòcchisu 1)
+Tòcchisu	Tòcchisu	co	pieve	accepted	yes	Tòcchisu	Tòcchisu: added (weights: Tòcchisu 5)
 Mercoriu	Mercoriu	co	pieve	accepted	yes	Mercoriu	Mercoriu: added (weights: Mercoriu 68)
 A Costa	A Costa	co	pieve	accepted	yes	Costa	Costa: added (weights: Costa 138)
 Aiacciu	Aiacciu	co	pieve	accepted	known	Aiacciu	Aiacciu: already listed
@@ -149,7 +149,7 @@ Mizana	Mizana	co	pieve	accepted	yes	Mizana	Mizana: added (weights: Mizana 60)
 Celavu	Celavu	co	pieve	accepted	known	Celavu	Celavu: already listed
 Cavru	Cavru	co	pieve	accepted	known	Cavru	Cavru: already listed
 Urnanu	Urnanu	co	pieve	accepted	yes	Urnanu	Urnanu: added (weights: Urnanu 7)
-Talavu	Talavu	co	pieve	accepted	yes	Talavu	Talavu: added (weights: Talavu 1)
+Talavu	Talavu	co	pieve	accepted	yes	Talavu	Talavu: added (weights: Talavu 5)
 Cruscaglia	Cruscaglia	co	pieve	accepted	yes	Cruscaglia	Cruscaglia: added (weights: Cruscaglia 50)
 Vighjanu	Vighjanu	co	pieve	accepted	yes	Vighjanu	Vighjanu: added (weights: Vighjanu 49)
 Vaddi	Vaddi	co	pieve	accepted	yes	Vaddi	Vaddi: added (weights: Vaddi 44)
@@ -184,7 +184,7 @@ Calvi	Calvi	fr	episcopal-see	accepted	known	Calvi	Calvi: already listed
 Saint-Florent	San Fiurenzu	fr	episcopal-see	accepted	known	Saint Florent	Saint: already listed; Florent: already listed
 Pumonti	Pumonte	co	historical-division	accepted	yes	Pumonti	Pumonti: added (weights: Pumonti 50)
 Dilà di i Monti	Dilà da i Monti	co	historical-division	uncertain	no	Dilà Monti	status uncertain: not shipped
-Deçà des Monts	Cismonte	fr	historical-division	accepted	yes	Deçà Monts	Deçà: added; Monts: added (weights: Deçà 1, Monts 23)
+Deçà des Monts	Cismonte	fr	historical-division	accepted	yes	Deçà Monts	Deçà: added; Monts: added (weights: Deçà 3, Monts 23)
 Delà des Monts	Pumonte	fr	historical-division	accepted	yes	Delà Monts	Delà: added; Monts: already listed (weights: Delà 20, Monts 23)
 En-Deçà-des-Monts	Cismonte	fr	historical-division	accepted	known	Deçà Monts	Deçà: already listed; Monts: already listed
 Au-Delà-des-Monts	Pumonte	fr	historical-division	accepted	known	Delà Monts	Delà: already listed; Monts: already listed
@@ -195,11 +195,11 @@ Banda di fuori	Pumonte	it	historical-division	uncertain	no	Banda	status uncertai
 Terra di Comune	Terra di Comune	it	historical-division	accepted	yes	Terra Comune	Terra: left to the listed word of the same search key; Comune: added (weights: Comune 7)
 Terra del Comune	Terra di Comune	it	historical-division	accepted	known	Terra Comune	Terra: left to the listed word of the same search key; Comune: already listed
 Terra di u Cumunu	Terra di Comune	co	historical-division	uncertain	no	Terra Cumunu	status uncertain: not shipped
-Terre de la Commune	Terra di Comune	fr	historical-division	accepted	yes	Terre Commune	Terre: left to the listed word of the same search key; Commune: added (weights: Commune 1)
+Terre de la Commune	Terra di Comune	fr	historical-division	accepted	yes	Terre Commune	Terre: left to the listed word of the same search key; Commune: added (weights: Commune 3)
 A Terra di i Signori	Terra di i Signori	co	historical-division	accepted	known	Terra Signori	Terra: left to the listed word of the same search key; Signori: left to the listed word of the same search key
 Terra dei Signori	Terra di i Signori	it	historical-division	accepted	known	Terra Signori	Terra: left to the listed word of the same search key; Signori: left to the listed word of the same search key
 Terre des Seigneurs	Terra di i Signori	fr	historical-division	accepted	yes	Terre Seigneurs	Terre: left to the listed word of the same search key; Seigneurs: added (weights: Seigneurs 20)
-Golo	Golo	fr	historical-division	accepted	yes	Golo	Golo: added (weights: Golo 1)
+Golo	Golo	fr	historical-division	accepted	yes	Golo	Golo: added (weights: Golo 3)
 Liamone	Liamone	fr	historical-division	accepted	known	Liamone	Liamone: already listed
 Cap Corse	Capicorsu	fr	province	accepted	yes	Cap Corse	Cap: added; Corse: left to the listed word of the same search key (weights: Cap 50)
 Bastia	Bastia	fr	province	accepted	known	Bastia	Bastia: already listed
@@ -248,7 +248,7 @@ Casacconi	Casaccuni	co	pieve	accepted	known	Casacconi	Casacconi: already listed
 Casàccuni	Casaccuni	co	pieve	accepted	known	Casàccuni	Casàccuni: already listed
 Cànari	Canari	co	pieve	accepted	yes	Cànari	Cànari: added (weights: Cànari 50)
 Ròsulu	Rosulu	co	pieve	accepted	yes	Ròsulu	Ròsulu: added (weights: Ròsulu 14)
-Bivincu	Bevincu	co	pieve	accepted	yes	Bivincu	Bivincu: added (weights: Bivincu 1)
+Bivincu	Bevincu	co	pieve	accepted	yes	Bivincu	Bivincu: added (weights: Bivincu 3)
 San Ghjuvanni di Brùmica	Santu Petru	co	pieve	accepted	yes	San Ghjuvanni Brùmica	San: already listed; Ghjuvanni: already listed; Brùmica: added (weights: Brùmica 16)
 Calinzana	Olmia	co	pieve	accepted	yes	Calinzana	Calinzana: added (weights: Calinzana 4)
 Armitu	Àrmitu	co	pieve	accepted	yes	Armitu	Armitu: added (weights: Armitu 20)
@@ -261,7 +261,7 @@ Campuloru	Campulori	co	pieve	accepted	known	Campuloru	Campuloru: already listed
 Tàlcini	Talcini	co	pieve	accepted	yes	Tàlcini	Tàlcini: added (weights: Tàlcini 45)
 Càrbini	Carbini	co	pieve	accepted	yes	Càrbini	Càrbini: added (weights: Càrbini 50)
 Cèlavu	Celavu	co	pieve	accepted	yes	Cèlavu	Cèlavu: added (weights: Cèlavu 20)
-Tàlavu	Talavu	co	pieve	accepted	yes	Tàlavu	Tàlavu: added (weights: Tàlavu 1)
+Tàlavu	Talavu	co	pieve	accepted	yes	Tàlavu	Tàlavu: added (weights: Tàlavu 3)
 Vighjeni	Vighjanu	co	pieve	accepted	yes	Vighjeni	Vighjeni: added (weights: Vighjeni 20)
 Valle	Vaddi	co	pieve	accepted	yes	Valle	Valle: added (weights: Valle 43)
 Attalà	Tallà	co	pieve	accepted	yes	Attalà	Attalà: added (weights: Attalà 20)
@@ -290,7 +290,7 @@ Giovellina	Ghjuvellina	fr	pieve	accepted	known	Giovellina	Giovellina: already li
 Giussani	Ghjunsani	fr	pieve	accepted	yes	Giussani	Giussani: added (weights: Giussani 19)
 Mezzana	Mizana	fr	pieve	accepted	known	Mezzana	Mezzana: already listed
 Niolo	Niolu	fr	pieve	accepted	yes	Niolo	Niolo: added (weights: Niolo 20)
-Ornano	Urnanu	fr	pieve	accepted	yes	Ornano	Ornano: added (weights: Ornano 1)
+Ornano	Urnanu	fr	pieve	accepted	yes	Ornano	Ornano: added (weights: Ornano 3)
 Orto	Ortu	fr	pieve	accepted	known	Orto	Orto: already listed
 Patrimonio	Patrimoniu	fr	pieve	accepted	known	Patrimonio	Patrimonio: already listed
 Pino	Pinu	fr	pieve	accepted	known	Pino	Pino: already listed
@@ -307,7 +307,7 @@ Sevidentro	Seve Ingrentu	fr	pieve	accepted	yes	Sevidentro	Sevidentro: added (wei
 Sevinfuori	Seve Infora	fr	pieve	accepted	yes	Sevinfuori	Sevinfuori: added (weights: Sevinfuori 20)
 Sorroingiù	Sorru Inghjò	fr	pieve	accepted	yes	Sorroingiù	Sorroingiù: added (weights: Sorroingiù 20)
 Sorroinsù	Sorru Insù	fr	pieve	accepted	yes	Sorroinsù	Sorroinsù: added (weights: Sorroinsù 20)
-Talavo	Talavu	fr	pieve	accepted	yes	Talavo	Talavo: added (weights: Talavo 1)
+Talavo	Talavu	fr	pieve	accepted	yes	Talavo	Talavo: added (weights: Talavo 3)
 Tallano	Tallà	fr	pieve	accepted	known	Tallano	Tallano: already listed
 Vallinco	Valincu	fr	pieve	accepted	yes	Vallinco	Vallinco: added (weights: Vallinco 20)
 Venaco	Venacu	fr	pieve	accepted	known	Venaco	Venaco: already listed

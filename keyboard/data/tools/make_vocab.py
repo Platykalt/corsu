@@ -435,6 +435,13 @@ def official_names():
     return words
 
 
+# Lowest weight of a word of a historical place name (step 8): the Corsican canonical form, and any other spelling
+# (kept below the canonical's). Keyman 19's correction search stops once it has enough likelier candidates, so a word
+# of weight 1 next to a frequent close word is not recognised and auto-correction replaces it (Golo became Golfu,
+# Talavu Taravu, Deçà Dece in the 19.0.309 engine); at weight 3 or more all three were kept (REVIEW.md, "Historical
+# place names"). The floor wins over the top-3 rule where the two disagree, on prefixes whose third word weighs 1-4.
+HISTORICAL_FLOOR = 5
+HISTORICAL_VARIANT_FLOOR = 3
 HISTORICAL_COLUMNS = ['name', 'canonical', 'usage', 'category', 'period', 'status', 'reference', 'note']
 HISTORICAL_USAGES = {'co', 'co-historical', 'fr', 'it', 'la'}
 HISTORICAL_CATEGORIES = {'micro-region', 'historical-region', 'pieve', 'diocese', 'episcopal-see', 'province',
@@ -556,7 +563,7 @@ def cap_historical_variants(new, weight_of):
         weights = [w for w in (weight_of(word) for word in words
                                if not (word in new and not new[word]['preferred'])) if w]
         if weights and entry['weight'] >= min(weights):
-            entry['weight'] = max(1, min(weights) - 1)
+            entry['weight'] = max(HISTORICAL_VARIANT_FLOOR, min(weights) - 1)
             lowered += 1
     return lowered
 
@@ -1047,6 +1054,9 @@ def main():
         limits = [third[key[:end]] - 1 for end in range(1, len(key) + 1) if key[:end] in third]
         if limits and entries[low]['weight'] > min(limits):
             entries[low]['weight'] = max(1, min(limits))
+        # ... but never below the floor at which Keyman 19 still recognises the name (HISTORICAL_FLOOR).
+        floor = HISTORICAL_FLOOR if entries[low]['preferred'] else HISTORICAL_VARIANT_FLOOR
+        entries[low]['weight'] = max(entries[low]['weight'], floor)
     final = {entry['word']: entry['weight'] for entry in entries.values()}
     historical_lowered = cap_historical_variants(historical, final.get)
     for entry in historical.values():

@@ -54,7 +54,8 @@ Columns: `word	weight	variant	source	license	status`, UTF-8, tab-separated, one 
    other word in the top 3 of each prefix of their search key.
 7. Historical place names (step 8, "Historical place names"): the Corsican canonical form like a place name (4.), another
    spelling like an official commune name (20 to 50) and below its canonical; then below every other word (the forms
-   of 6. included) in the top 3 of each prefix of their search key.
+   of 6. included) in the top 3 of each prefix of their search key, but at least 5 (canonical) or 3 (other spelling),
+   the weight Keyman 19 needs to recognise them.
 
 Range: 1 to 715,753 (*di*); median 23; 979 words at 1,000 or more.
 
@@ -256,7 +257,16 @@ is added as its own capitalised entry, below the common word, whose entry and we
 stricter: each added word weighs less than every other word in the top 3 of each prefix of its search key, the forms
 of steps 5b-5e included (they are themselves only kept below the words listed before them, and a name of weight 249,
 *Quilicu*, passed one of them at *quil* with the plain rule). A name therefore only fills places the list leaves
-empty, and it is reached after a distinctive prefix. *Vallerustie*: 121 from its Vikipedia frequency (16
+empty, and it is reached after a distinctive prefix. One exception, measured: **a floor of 5 for the canonical form
+and 3 for another spelling** (`HISTORICAL_FLOOR`, `HISTORICAL_VARIANT_FLOOR`). With the rule alone, 11 words fell to
+weight 1, and the Keyman 19.0.309 engine (auto-correction on, after *di*, all 113 added words typed then space)
+replaced three of them: *Golo* → *Golfu*, *Talavu* → *Taravu*, *Deçà* → *Dece*; the 18.0.254 engine kept *Golo*. In 19
+the correction search stops once it holds enough likelier candidates (`shouldStopSearchingEarly`, worker of the
+19.0.309 APK), so the exact entry of weight 1 is never reached and the typed word counts as unknown: in Keyman 19,
+recognition does depend on weight when a frequent word is one edit away (this corrects "whatever its weight" in
+"Recognising, suggesting and replacing", which rests on `Trie.lookup` alone). Packages built with these three words
+at 3, 5, 10 and 20: all kept at every value, in the 19.0.309 engine; 5 leaves some margin. Where the floor and the
+rule disagree (prefixes whose third word weighs 1 to 4) the floor wins. *Vallerustie*: 121 from its Vikipedia frequency (16
 occurrences, 13 of 13 mid-sentence ones capitalised), 74 after the rule (below *Vallecalle*, 75, at *valle*); `simulate.py`: top 3 of *valle* = *valle*, *Vallecalle*, *Vallerustie*,
 and *Vallerustie* is first and alone from *valler*. Same entries in the three packages: the names are in `shared.tsv`,
 which every package holds (no variety file lists them).
@@ -270,29 +280,46 @@ accepted name is in the three built models (script over `model.js`, 339 checks, 
 *Serriera*, *serrature* (the name *Serra*, 7, below *serra*, 354, unchanged).
 
 Top-3 comparison with the 1.2 packages (bff7ba1), from the entries of the compiled `model.js` of each package, every
-1-4 letter prefix (5,587): 81 prefixes change, all by a name taking a place the list left empty or a tie of weight
-1; **6 entries leave a top 3, all of weight 1, on ties with a name of weight 1** (the comparison breaks ties by
-spelling; the data does not set Keyman's order for equal weights): *decade* (*deca*: *Deçà*), *dilimitatu* (*dil*:
-*Dilà*), *golf* (*gol*: *Golo*), *ornitorinchi* (*orn*: *Ornano*), *talami*, *talamu* (*tala*: *Talavo*, *Talavu*). No
+1-4 letter prefix (5,587): 81 prefixes change, all by a name taking a place the list left empty or, through the
+floor, a place held by a word of weight 1; **6 entries leave a top 3, all of weight 1**: *decade* (*deca*: *Deçà*),
+*dilimitatu* (*dil*: *Dilà*), *golf* (*gol*: *Golo*), *ornitorinchi* (*orn*: *Ornano*), *talami*, *talamu* (*tala*:
+*Talavo*, *Talavu*). No
 existing entry's weight changes and none is removed, in the three packages, which hold the same 19,341 entries
 (`tools/count_kmp.py`; 113 more than 1.2).
 
 Limits of the data as shipped, for review:
 
-- Ties at weight 1: where the shorter prefixes are full of weight-1 words, a name cannot weigh less, so the canonical
-  and its other spellings can tie (*Talavu*, *Tàlavu*, *Talavo* all 1; *Vicu*, *Dilà*, *Golo*, *Tòcchisu* 1): each is
-  still recognised; which is offered first is then the engine's choice.
+- The floor (5 / 3) is measured on three words in one engine run each; a name at the floor next to a much more
+  frequent close word could still be replaced by Keyman 19, and nothing in a word list can rule that out. A canonical
+  at the floor and its other spelling are 5 and 3 (*Talavu* 5, *Tàlavu* and *Talavo* 3).
 - Accented spellings from a single Vikipedia paragraph (inventory note), shipped because the rule keeps them below
-  every listed word: *Tàlcini* 45, *Càrbini* 50, *Cànari* 50, *Òpinu* 20, *Cèlavu* 20, *Urtòlu* 20, *Ròsulu* 14,
-  *Tàlavu* 1 (other spellings of a canonical without accent), *Brùmica* 16 (in *San Ghjuvanni di
-  Brùmica*), and the canonical forms *Liòli* 50 and *Tòcchisu* 1. To drop one, mark
+  every listed word of their prefixes' top 3 (*Tàlavu* at the floor): *Tàlcini* 45, *Càrbini* 50, *Cànari* 50, *Òpinu* 20, *Cèlavu* 20, *Urtòlu* 20, *Ròsulu* 14,
+  *Tàlavu* 3 (other spellings of a canonical without accent), *Brùmica* 16 (in *San Ghjuvanni di
+  Brùmica*), and the canonical forms *Liòli* 50 and *Tòcchisu* 5. To drop one, mark
   its row `deferred` and rebuild.
-- French words of multi-word French names come in as capitalised entries of weight 1 to 50: *Deux* (*Deux-Sevi*),
+- French words of multi-word French names come in as capitalised entries of weight 3 to 50: *Deux* (*Deux-Sevi*),
   *Plaine*, *Monts*, *Delà*, *Deçà*, *Seigneurs*, *Commune*, *Cap*, and the Italian *Comune*. They are names' words,
-  recognised when typed, never above a listed word; a reviewer who prefers to leave out the generic part of a French
+  recognised when typed, never above a listed word of weight 5 or more in a top 3; a reviewer who prefers to leave out the generic part of a French
   name can defer that row.
 
-ENGINE_RESULTS
+**Engine results (2026-10-19)**, `tests/e2e/check_keyboard.py` on the three final packages (19,341 entries each),
+headless chrome-headless-shell 152 with the engines of the official Keyman for Android APKs: engine only, **not an
+emulator and not a phone** (no Android emulator was used in this pass). All scenarios of `scenarios.json` plus the 77
+cases of `keyboard_data_cases.tsv` (27 new: *Vallerustie* alone, after *E*, *In*, *San Lurenzu di*, with "." and ",",
+*vallerus* / *Vallerus* offering it first, *vall* still offering *valle* first; *Nebbio* / *Nebbiu*, *Aléria* / *Aleria*,
+*Pumonti* / *Pumonte*, *Tàlcini*, *Golo*, *Talavu*, *Deçà des Monts*, *Diquà da i Monti*, *serra* / *Serra*, *verde*):
+
+- Keyman 18.0.254: exit status 0, every `fail` check passes in the three models; warnings as before (*calvi* →
+  *Calvi*, *vedemu* → *vedenu* in the northern model).
+- Keyman 19.0.309: every data case passes in the three models, the new ones included (each name and each other
+  spelling typed then space with auto-correction is kept; *vallerus* offers *Vallerustie* first; *nebb* and *pumo*
+  offer the canonical first). Exit status 1 for one check: a page error, `TypeError: Cannot read properties of
+  undefined (reading 'isFullReplacement')`, inside the engine during the "auto-correct on" scenario of one model. It
+  does not come from the data: that scenario run 24 times on the 1.2 packages (bff7ba1) and 24 times on these gave the
+  error in 7 and 8 runs; the second pass happened to have none. Warnings as before (*calvi*, *Fesch* → *Perchè*,
+  *ade* without *ADECEC*, *vedemu*).
+- Before the floor, the same run failed on *Golo* (→ *Golfu*) in Keyman 19 only; *talc* offered *talianu* (a
+  correction) before *Talcini*, so that case checks that *Talcini* is offered, not that it is first.
 
 ## Auto-correction: what the data controls and what the engine does
 
@@ -521,7 +548,8 @@ named in the code `processSimilarity`, `predictionAutoSelect`, `Trie.lookup`):
   `languageUsesCasing` / `applyCasing` and `punctuation` (`insertAfterWord`, `quotesForKeepSuggestion`). There is no
   per-word flag, no list of known-but-not-offered words, and no setting for auto-correction or its threshold.
 - **Recognised** = the engine finds, among the model's predictions for the word as typed, one equal to it
-  (`matchesModel`). With a trie model this holds for every listed word, whatever its weight.
+  (`matchesModel`). With a trie model this holds for every listed word, whatever its weight, in Keyman 18; in
+  Keyman 19 a word of weight 1 one edit away from a frequent word was not recognised (see "Historical place names").
 - **Offered** = the model's predictions for the typed word and for the engine's corrections of it, ranked by weight
   times correction probability; 3 shown on a phone.
 - **Replaced** (auto-correction, setting 3, Keyman 19; the 18.0 engine when asked, the 18.0 apps do not offer it):

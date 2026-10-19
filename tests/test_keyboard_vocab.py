@@ -236,7 +236,11 @@ class KeyboardVocabularyTests(unittest.TestCase):
             key, weight = simulate.key(entry['word']), int(entry['weight'])
             for end in range(1, len(key) + 1):
                 ahead = sorted((w for k, w in others if k.startswith(key[:end])), reverse=True)[:3]
-                self.assertTrue(all(w >= weight for w in ahead), f'{entry["word"]} at {key[:end]!r}: {ahead}')
+                # Except at the recognition floor (HISTORICAL_FLOOR): Keyman 19 does not recognise a weight-1 name
+                # next to a frequent close word (Golo became Golfu).
+                self.assertTrue(all(w >= weight for w in ahead) or weight <= make_vocab.HISTORICAL_FLOOR,
+                                f'{entry["word"]} at {key[:end]!r}: {ahead}')
+            self.assertGreaterEqual(weight, make_vocab.HISTORICAL_VARIANT_FLOOR, entry)
 
     def test_historical_entries_rules(self):
         # The rules of step 8 on a small example (names chosen for the test; only the mechanism is checked here).
