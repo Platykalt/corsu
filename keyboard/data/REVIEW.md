@@ -358,7 +358,9 @@ listed through Wiktionary, not through Vikipedia (its Vikipedia uses are Gallure
 
 What the prose count does not catch: Gallurese and Sassarese passages (*Tempiu*, *Gadduresu*), Italianising
 Corsican (*Lingue rumaniche*), machine-translated articles (*Manucure*), Italian sentences without any of the
-markers. Italics also mark Corsican example phrases in linguistics articles (*Frassetu*, *Variità taravesa*); those
+markers. Example kept by the rule: *secolu* (14 times in prose, 4 articles, three of them written in that Italianising
+style, "in lu X secolu"; the usual Corsican *seculu* has 1,231), which the 18.0.254 engine offers first for *secol*;
+to review. Italics also mark Corsican example phrases in linguistics articles (*Frassetu*, *Variità taravesa*); those
 are left out too, which errs on the side of holding back.
 
 ### ghjocanu and vedemu
@@ -428,7 +430,21 @@ replacing a near miss. That would rest on undocumented engine behaviour, so noth
 data, the separation that exists is: being listed (recognised, never replaced), weight (how early it is offered, and
 how likely it wins as a correction), and not being listed (held back: neither offered nor recognised).
 
-Engine results: see the next commit (runs of `tests/e2e/check_keyboard.py` on these packages).
+### Engine results (2026-10-19)
+
+`tests/e2e/check_keyboard.py` on the three packages built from this data (19,228 entries each by
+`tools/count_kmp.py`), headless chrome-headless-shell 152, the engines of the official Keyman for Android APKs, not a
+phone; all scenarios of `scenarios.json` (sentences, case, apostrophes, punctuation, caret moves) and the 50 cases of
+`tests/e2e/keyboard_data_cases.tsv`:
+
+- Keyman 18.0.254: exit status 0, every `fail` check passes in the three models. Warnings: *calvi* → *Calvi* (no
+  source yet), and in the northern model *vedemu* → *vedenu* (not listed, expected).
+- Keyman 19.0.309 beta: exit status 0, every `fail` check passes in the three models. Warnings: *calvi* → *Calvi*;
+  *Fesch* → *Perchè* (unknown name; two models of three in this run); *ade* does not offer *ADECEC*; *vedemu* →
+  *vedenu* in the three models.
+- *ghjocanu* is kept in both engines (*I zitelli ghjocanu*); *videmu* is kept; *tradizioni*, *abitanti* and the other
+  forms of the first pass are kept although their weight is now lower; *secol* does not offer *secoli* (it offers
+  *secolu*, *seculu*, *seculi*).
 
 ## Northern and southern preferences
 
