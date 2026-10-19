@@ -10,9 +10,9 @@
   "gone-from-lexicon": 31,
   "corpus-name": 95
  },
- "shared_entries": 19228,
+ "shared_entries": 19341,
  "shared_by_status": {
-  "attested": 12574,
+  "attested": 12687,
   "corsu-lexicon": 6643,
   "ai-proposal": 11
  },
@@ -30,9 +30,10 @@
   "wikidata": 447,
   "cog": 221,
   "homographs": 1,
-  "acronyms": 3
+  "acronyms": 3,
+  "historical-places": 113
  },
- "new_from_outside_old_list": 7644,
+ "new_from_outside_old_list": 7757,
  "cismuntincu_entries": 354,
  "pumuntincu_entries": 357,
  "northern_only_forms": 180,
@@ -56,5 +57,15 @@
   "5b": 280,
   "5d": 44
  },
- "added_forms_lowered": 2297
+ "added_forms_lowered": 2333,
+ "historical_places": {
+  "rows": 330,
+  "accepted": 289,
+  "words_added": 113,
+  "spellings_lowered_below_canonical": 5,
+  "not_shipped": {
+   "deferred": 18,
+   "uncertain": 23
+  }
+ }
 }

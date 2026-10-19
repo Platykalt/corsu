@@ -2,8 +2,9 @@
 
 `sources/historical-places.tsv` lists, with a reference for each spelling, names of Corsican micro-regions,
 historical regions and divisions, pievi (pièves), dioceses, episcopal sees and Genoese provinces. It is a reference
-inventory for the Keyman keyboard dictionaries. **The build does not read it**: `tools/make_vocab.py` and the word
-lists are unchanged. Whatever goes into `shared.tsv` from it is a separate, reviewed step.
+inventory for the Keyman keyboard dictionaries. Since the integration on branch c027c-kb, `tools/make_vocab.py` (step
+8) reads it: only `accepted` rows, only the `name` column, split into words; what it does with each row is in
+`audit/historical-places.tsv` and the rules are in `REVIEW.md`, "Historical place names".
 
 This is **not** "all historical names of Corsica". It covers the categories above, as far as the reference lists
 named below allow checking. Every other kind of historical name (hamlets, castles, seigneuries, cantons before

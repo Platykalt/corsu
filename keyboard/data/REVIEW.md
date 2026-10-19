@@ -7,17 +7,18 @@ Files:
 
 | File | Content |
 |---|---|
-| `shared.tsv` | The base list: 19,228 entries, both varieties' forms included (447 Corsican place names, 221 words of official commune names, 12 lowercase common words next to a name, 3 acronyms, and 6,012 known forms added on 2026-10-19: see "Forms auto-correction replaced" and "Second pass"). |
+| `shared.tsv` | The base list: 19,341 entries, both varieties' forms included (447 Corsican place names, 221 words of official commune names, 12 lowercase common words next to a name, 3 acronyms, 6,012 known forms added on 2026-10-19: see "Forms auto-correction replaced" and "Second pass", and 113 words of historical place names: see "Historical place names"). |
 | `held-back.tsv` | 324 forms the first count of 2026-10-19 took from Vikipedia and Corsican prose does not attest enough: not shipped, each with its counts, class and passages (see "Second pass"). |
 | `cismuntincu.tsv` | 354 rows laid over `shared.tsv` for a northern preference. |
 | `pumuntincu.tsv` | 357 rows laid over `shared.tsv` for a southern preference. |
-| `sources/` | Hand-checked inputs: `daily.tsv` (everyday words, editorial choice), `adecec.tsv`, `cunghjugarellu.tsv`, `variant-pairs.tsv`; `places.tsv`, the Corsican place labels of Wikidata; `communes-official.tsv`, the official (INSEE) commune names; `place-titles.tsv` (Vizzani), `homographs.tsv` (corti) and `acronyms.tsv` (ADECEC), see "Auto-correction"; `forms.tsv`, forms a reference work writes in full (ghjocanu), see "Second pass". |
+| `sources/` | Hand-checked inputs: `daily.tsv` (everyday words, editorial choice), `adecec.tsv`, `cunghjugarellu.tsv`, `variant-pairs.tsv`; `places.tsv`, the Corsican place labels of Wikidata; `communes-official.tsv`, the official (INSEE) commune names; `place-titles.tsv` (Vizzani), `homographs.tsv` (corti) and `acronyms.tsv` (ADECEC), see "Auto-correction"; `forms.tsv`, forms a reference work writes in full (ghjocanu), see "Second pass"; `historical-places.tsv`, historical and traditional place names (Vallerustie), see "Historical place names". |
 | `tools/make_vocab.py` | Rebuilds the three lists from the sources (needs the resources of `tools/fetch_resources.py`). |
 | `tools/fetch_places.py` | Runs the three Wikidata queries that write `sources/places.tsv`. |
 | `tools/fetch_communes.py` | Two requests to geo.api.gouv.fr that write `sources/communes-official.tsv`. |
 | `tools/simulate.py` | Top-3 suggestion simulation and checks (also run by `tests/test_keyboard_vocab.py`). |
 | `audit/removed.tsv` | Every word of the old list that was dropped, with its reason. |
 | `audit/stats.json` | The numbers quoted below. |
+| `audit/historical-places.tsv` | Each row of `sources/historical-places.tsv`: shipped or not, the words taken, their weights. |
 | `audit/commune-titles.tsv` | Communes whose Vikipedia title differs from the Wikidata label: candidates, not checked. |
 
 ## Reading the files (for the build)
@@ -51,6 +52,9 @@ Columns: `word	weight	variant	source	license	status`, UTF-8, tab-separated, one 
    1,000 or its tier floor); the other variety's form gets 25 % of it, unless the pair says `lower_other = no`.
 6. Forms added to be known (steps 5b-5e, "Second pass"): their Vikipedia prose frequency, at most 100, and below every
    other word in the top 3 of each prefix of their search key.
+7. Historical place names (step 8, "Historical place names"): the Corsican canonical form like a place name (4.), another
+   spelling like an official commune name (20 to 50) and below its canonical; then below every other word (the forms
+   of 6. included) in the top 3 of each prefix of their search key.
 
 Range: 1 to 715,753 (*di*); median 23; 979 words at 1,000 or more.
 
@@ -186,6 +190,109 @@ asked; not Keyman 19, not a phone): the 22 cases of `tests/e2e/keyboard_data_cas
 *Porto-Vecchio*, *Sari-Solenzara* and an unknown *Platykalt* stay as typed; *bastelic* offers *Bastelicaccia*;
 *Sartene* offers *Sartène*; *lingua parlle* becomes *lingua parolle*; *paro* still offers *parò*. One warning
 then: *Vizzani* (Vikipedia's spelling, not in the list) became *Vezzani*; fixed since (see "Auto-correction").
+
+## Historical place names
+
+Reported by the maintainer (2026-10-19): *Vallerustie*, a micro-region of Castagniccia (attested as *E Vallerustie*,
+*San Lurenzu di Vallerustie*), was not known by the keyboard.
+
+**Diagnosis.** Of the four possible causes (absent from the source data; present but dropped by the build; present in
+the package but badly proposed; a user with an old package), the first: the name was in no source file.
+`sources/places.tsv` (Wikidata `co` labels, 548 items) has no item for it, so it was never a candidate; it is not in
+`audit/removed.tsv` or `held-back.tsv` (nothing dropped it), not in `shared.tsv` or the three word lists, and not in the
+built 1.2 packages (`tools/count_kmp.py`: 19,228 entries, no *Vallerustie*). No commit ever listed it, so no older
+package had it either. The Vikipedia dump writes it (a pieve article "Vallerustie (pieve)", links in the articles on
+Castagniccia), but a capitalised word known only from Vikipedia is left out on purpose (`corpus-name`: *León*, *Tom*).
+Without auto-correction the engine left the typed word alone; it was neither offered nor known.
+
+**Source step.** `sources/historical-places.tsv` lists historical and traditional place names (micro-regions,
+historical regions, pievi, dioceses, episcopal sees, provinces, historical divisions), one row per spelling:
+`name canonical usage category period status reference note`; usage `co`, `co-historical`, `fr`, `it`, `la`; status
+`accepted`, `uncertain`, `deferred`. `make_vocab.py` step 8 (`historical_entries`) ships only `accepted` rows and
+reads only `name` (never the note or the reference); uncertain and deferred rows are listed, not shipped, in
+`audit/historical-places.tsv`, with what was done with every row. A word already listed as written (*Rustinu*,
+*Orezza*, *San*, *Lurenzu*) keeps its entry and weight. Capitals, accents and apostrophes are kept as written; the
+name in the source file keeps its hyphens and spaces, and the packages get its words (below).
+
+**Compound names.** Measured, not assumed. The compiler (`@keymanapp/kmc-model` 18.0.254, `build-trie.js`) accepts
+a word-list entry with spaces and keys it with the spaces (`"key":"san lurenzu di vallerustie"`). The engine's trie
+model (`TrieModel.predict`, worker of the 18.0.254 and 19.0.309 Android engines) looks up only the last token before
+the caret given by the model's word breaker (`getLastPreCaretToken`); the default word breaker (Unicode word
+boundaries, https://help.keyman.com/developer/18.0/reference/file-types/model-ts, `wordBreaker: 'default'`) breaks at
+spaces and at hyphens, and that token is empty right after a space. In the engine (`tests/e2e/check_keyboard.py
+--observe`, a scratch package with *San Lurenzu di Vallerustie*, *Terra di u Cumunu* and *Porto-Vecchio* added as
+entries of weight 500, Keyman 18.0.254 and 19.0.309, headless Chrome):
+
+- a compound entry is offered only as a completion of its **first** word: *Terra* offers *Terra di u Cumunu*, *Porto*
+  offers *Porto-Vecchio*; tapped, the whole name is written. *San* did not offer *San Lurenzu di Vallerustie* (the
+  banner fills with *San*, *Santa*, *Santu*… of higher weight);
+- after the first space nothing of it is reachable: *San Lurenzu di Valler* offers *Valle*, *Vallecalle*, *Galleria*;
+  *Terra di u Cum* offers *Cumu*, *Cum'è*… ; after *Porto-* the banner is empty, then *Vecc* gets the words of *Vecc*;
+- typing the compound in full does not make its last word known: *Vallerustie* got no suggestion at all;
+- in Keyman 19.0.309, after the compound was tapped, the banner kept showing compounds and completions of *Terra*
+  for the next word (Keyman 18 showed *di*, *u*, *a*… as usual).
+
+Decision: **separate words only.** A compound entry would take a place among the completions of a very common first
+word (*San*, *Terra*, *Santa*) and help no one after it. Guaranteed: each capitalised word of three letters or more of
+an accepted name is an entry (*Vallerustie*; *San* and *Lurenzu* were already), so the compound typed word by word
+is kept with auto-correction on. Not guaranteed: the compound is never offered as one suggestion; a following word is
+not predicted from the previous one (the trie model has no word sequences); function words (*di*, *u*, *e*, *d'*)
+are not added by this step (they are listed already); a word of a longer name that is already a common word (*Terra*
+in *Terra di u Cumunu*) is left to that word, which Keyman keeps in any case typed.
+
+**Spellings.** The preferred form is the row with usage `co` whose name is its canonical; it weighs like a Corsican
+place name (Vikipedia frequency, 50 to 900). Any other spelling (`co-historical`, `fr`, `it`, `la`) is known at the
+weight of an official commune name (20 to 50) and, once all weights are final, below every word of its canonical's
+preferred form (`cap_historical_variants`). Nothing replaces one spelling with another: Keyman keeps a typed word
+that the model lists, whatever its weight (see "Recognising, suggesting and replacing"), and a model has no way to
+declare a replacement; both spellings are entries, so each typed in full is kept. The Corsican spelling checks apply
+to `co` and `co-historical` rows only (a French or Italian spelling is written as its source writes it).
+
+**Common word and name.** A one-word name written like a listed common word (*serra*, *verde*, *lama*, *castellu*)
+is added as its own capitalised entry, below the common word, whose entry and weight are not touched (unit test
+`test_historical_entries_rules`).
+
+**Weight.** The rule of the forms added to be known ("Added forms no longer push listed words out"), one step
+stricter: each added word weighs less than every other word in the top 3 of each prefix of its search key, the forms
+of steps 5b-5e included (they are themselves only kept below the words listed before them, and a name of weight 249,
+*Quilicu*, passed one of them at *quil* with the plain rule). A name therefore only fills places the list leaves
+empty, and it is reached after a distinctive prefix. *Vallerustie*: 121 from its Vikipedia frequency (16
+occurrences, 13 of 13 mid-sentence ones capitalised), 74 after the rule (below *Vallecalle*, 75, at *valle*); `simulate.py`: top 3 of *valle* = *valle*, *Vallecalle*, *Vallerustie*,
+and *Vallerustie* is first and alone from *valler*. Same entries in the three packages: the names are in `shared.tsv`,
+which every package holds (no variety file lists them).
+
+**With the inventory** (`sources/historical-places.tsv`, 330 rows, see `historical-places.md`): 289 accepted rows
+(41 not shipped: 23 uncertain, 18 deferred), 235 distinct words in their names; 113 words added (111 rows bring at
+least one), 108 already listed as written (*Rustinu*, *Orezza*, *Aiacciu*…), 14 left to a listed word of the same
+search key (*Terra*, *Monti*, *Signori*, *Santu*…); 5 other spellings lowered below their canonical. Every word of an
+accepted name is in the three built models (script over `model.js`, 339 checks, 0 missing). Examples: *nebb* →
+*Nebbiu*, *nebbia*, *Nebbio*; *talc* → *Talcini*, *Tàlcini*; *pumo* → *Pumonte*, *Pumonti*; *serr* → *serra*,
+*Serriera*, *serrature* (the name *Serra*, 7, below *serra*, 354, unchanged).
+
+Top-3 comparison with the 1.2 packages (bff7ba1), from the entries of the compiled `model.js` of each package, every
+1-4 letter prefix (5,587): 81 prefixes change, all by a name taking a place the list left empty or a tie of weight
+1; **6 entries leave a top 3, all of weight 1, on ties with a name of weight 1** (the comparison breaks ties by
+spelling; the data does not set Keyman's order for equal weights): *decade* (*deca*: *Deçà*), *dilimitatu* (*dil*:
+*Dilà*), *golf* (*gol*: *Golo*), *ornitorinchi* (*orn*: *Ornano*), *talami*, *talamu* (*tala*: *Talavo*, *Talavu*). No
+existing entry's weight changes and none is removed, in the three packages, which hold the same 19,341 entries
+(`tools/count_kmp.py`; 113 more than 1.2).
+
+Limits of the data as shipped, for review:
+
+- Ties at weight 1: where the shorter prefixes are full of weight-1 words, a name cannot weigh less, so the canonical
+  and its other spellings can tie (*Talavu*, *Tàlavu*, *Talavo* all 1; *Vicu*, *Dilà*, *Golo*, *Tòcchisu* 1): each is
+  still recognised; which is offered first is then the engine's choice.
+- Accented spellings from a single Vikipedia paragraph (inventory note), shipped because the rule keeps them below
+  every listed word: *Tàlcini* 45, *Càrbini* 50, *Cànari* 50, *Òpinu* 20, *Cèlavu* 20, *Urtòlu* 20, *Ròsulu* 14,
+  *Tàlavu* 1 (other spellings of a canonical without accent), *Brùmica* 16 (in *San Ghjuvanni di
+  Brùmica*), and the canonical forms *Liòli* 50 and *Tòcchisu* 1. To drop one, mark
+  its row `deferred` and rebuild.
+- French words of multi-word French names come in as capitalised entries of weight 1 to 50: *Deux* (*Deux-Sevi*),
+  *Plaine*, *Monts*, *Delà*, *Deçà*, *Seigneurs*, *Commune*, *Cap*, and the Italian *Comune*. They are names' words,
+  recognised when typed, never above a listed word; a reviewer who prefers to leave out the generic part of a French
+  name can defer that row.
+
+ENGINE_RESULTS
 
 ## Auto-correction: what the data controls and what the engine does
 

@@ -67,7 +67,10 @@ class KeyboardVocabularyTests(unittest.TestCase):
                 if entry['source'] == 'acronyms':
                     self.assertEqual(word, word.upper(), word)
                     continue
-                if entry['source'] != 'wiktionary' and not entry['source'].startswith('cog:'):
+                # Official commune names, and the French, Italian and Latin spellings of historical place names
+                # (sources/historical-places.tsv), are spelled as their source writes them.
+                if entry['source'] != 'wiktionary' and not entry['source'].startswith(
+                        ('cog:', 'historical-places:fr:', 'historical-places:it:', 'historical-places:la:')):
                     self.assertIsNone(make_vocab.shape_problem(low), word)
                 if "'" in word and word.partition("'")[0] == low.partition("'")[0]:
                     # An elided form keeps the case of its listed second part: d'Aiacciu, l'Italia, l'ADECEC.
@@ -196,6 +199,86 @@ class KeyboardVocabularyTests(unittest.TestCase):
         self.assertIn('polvere', shared)
         self.assertIn('ghjocanu', shared)
         self.assertNotIn('vedemu', shared)
+
+    def test_historical_place_names(self):
+        # sources/historical-places.tsv (step 8): only accepted rows are shipped, as the words of their name, in the
+        # three packages alike; Vallerustie (micro-region of Castagniccia) was missing from every source before.
+        places = make_vocab.historical_places()
+        self.assertTrue(places)
+        shared = {entry['word']: entry for entry in rows('shared')[1]}
+        accepted = {row['canonical'] for row in places if row['status'] == 'accepted'}
+        lists = {model: {line.split('\t')[0] for line in (ROOT / f'keyboard/{model}/source/wordlist.tsv')
+                         .read_text(encoding='utf-8').splitlines() if not line.startswith('#')}
+                 for model in ('platykalt.co.corsu', 'platykalt.co.corsu_cismuntincu', 'platykalt.co.corsu_pumuntincu')}
+        keys = {make_vocab.fold(word) for word in shared}
+        for row in places:
+            if row['status'] != 'accepted':
+                continue
+            for word in make_vocab.name_words(row['name']):
+                # Listed as written, or (a word of a longer name, Monti in Diquà da i Monti) left to the listed word
+                # of the same search key, which Keyman keeps in any case typed (audit/historical-places.tsv).
+                self.assertTrue(word in shared or make_vocab.fold(word) in keys, f'{row["name"]}: {word}')
+                for model, words in lists.items():
+                    self.assertEqual(word in words, word in shared, f'{model}: {word}')
+        historical = [entry for entry in shared.values() if entry['source'].startswith('historical-places:')]
+        for entry in historical:
+            usage, canonical = entry['source'].split(':')[1:3]
+            self.assertIn(canonical.replace('_', ' '), accepted, entry)
+            self.assertEqual(entry['license'], 'GPL-3.0-or-later')
+        self.assertEqual(shared['Vallerustie']['source'], 'historical-places:co:Vallerustie')
+        words = simulate.load('shared')
+        self.assertEqual(simulate.top3(words, 'vallerus')[:1], ['Vallerustie'])
+        # Weighed as the forms added to be known: below every other word of the top 3 of each prefix of its key,
+        # so a name never pushes a listed word out of the first suggestions.
+        others = [(simulate.key(e['word']), int(e['weight'])) for e in shared.values()
+                  if not e['source'].startswith('historical-places:')]
+        for entry in historical:
+            key, weight = simulate.key(entry['word']), int(entry['weight'])
+            for end in range(1, len(key) + 1):
+                ahead = sorted((w for k, w in others if k.startswith(key[:end])), reverse=True)[:3]
+                self.assertTrue(all(w >= weight for w in ahead), f'{entry["word"]} at {key[:end]!r}: {ahead}')
+
+    def test_historical_entries_rules(self):
+        # The rules of step 8 on a small example (names chosen for the test; only the mechanism is checked here).
+        entries = {'serra': dict(word='serra', weight=354), 'San': dict(word='San', weight=13802),
+                   'Lurenzu': dict(word='Lurenzu', weight=429), 'terra': dict(word='terra', weight=5591),
+                   'di': dict(word='di', weight=715753), 'u': dict(word='u', weight=495279),
+                   'cumunu': dict(word='cumunu', weight=908)}
+        before = {key: dict(entry) for key, entry in entries.items()}
+
+        def row(name, canonical, usage='co', status='accepted', note=''):
+            return dict(name=name, canonical=canonical, usage=usage, category='micro-region', period='', status=status,
+                        reference='https://example.org', note=note)
+
+        rows = [row('Vallerustie', 'Vallerustie', note='micro-region of Castagniccia'),
+                row('San Lurenzu di Vallerustie', 'San Lurenzu di Vallerustie'),
+                row('Terra di u Cumunu', 'Terra di u Cumunu', usage='co', status='accepted'),
+                row('Serra', 'Serra'),
+                row('Vallerustia', 'Vallerustie', usage='it'),
+                row("Pieve d'Orezzu", "Pieve d'Orezzu", status='uncertain'),
+                row('Nebbiolu', 'Nebbiolu', status='deferred')]
+        new, audit = make_vocab.historical_entries(rows, entries, lambda low: 1000 if low == 'vallerustie' else 0)
+        self.assertEqual(entries, before)  # listed words keep their entry and weight (serra, terra, San)
+        # Words of the name only: not the note (Castagniccia), not the function words, not a word already listed.
+        self.assertEqual(sorted(new), ['Serra', 'Vallerustia', 'Vallerustie'])
+        self.assertEqual(new['Vallerustie']['weight'], make_vocab.PLACE_CAP)
+        # A one-word name written like a common word: its own capitalised entry, below the common one.
+        self.assertLess(new['Serra']['weight'], entries['serra']['weight'])
+        # Another spelling weighs less than the canonical, before and after the final weights.
+        self.assertLessEqual(new['Vallerustia']['weight'], make_vocab.OFFICIAL_CAP)
+        new['Vallerustie']['weight'] = 30
+        new['Vallerustia']['weight'] = 30
+        self.assertEqual(make_vocab.cap_historical_variants(new, lambda w: new[w]['weight'] if w in new else None), 1)
+        self.assertLess(new['Vallerustia']['weight'], new['Vallerustie']['weight'])
+        shipped = {r['name']: r['shipped'] for r in audit}
+        self.assertEqual(shipped["Pieve d'Orezzu"], 'no')
+        self.assertEqual(shipped['Nebbiolu'], 'no')
+        self.assertEqual(shipped['Terra di u Cumunu'], 'known')
+        self.assertNotIn('Nebbiolu', new)
+        self.assertNotIn('Orezzu', new)
+        # Spaces and hyphens split a name; an elided word gives its name; capitals and accents are kept.
+        self.assertEqual(make_vocab.name_words("San Ghjuvanni-di-Moriani (pieve) d'Orezza Pètra"),
+                         ['San', 'Ghjuvanni', 'Moriani', 'Orezza', 'Pètra'])
 
     def test_added_forms_push_out_no_listed_word(self):
         # The forms added to be known (steps 5b-5e) weigh less than the listed words of every prefix's top 3: with
