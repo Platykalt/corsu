@@ -1,0 +1,67 @@
+Android emulator (system image android-34 google_apis x86_64, AVD corsu34 started read-only, -no-snapshot-save; nothing
+kept), 2026-10-19. Keyman for Android 18.0.254 (official APK, already on the AVD), EuroLatin (SIL) for Corsican (co).
+Keys and suggestions tapped by adb on their screen nodes (uiautomator), caret moved with DPAD_LEFT (key 21).
+Suggestions: Predictions with corrections. Not a phone; not an iPhone.
+
+## Keyman 18.0.254, in-app field, Corsu – Pumuntincu 1.1 (the package of Corsu 0.26.0) active
+{"text": "Start typing here…", "banner": ["Di", "U", "A", "In", "À", "È", "I", "Hè"], "layer": "shift", "step": ["clear", ""]}
+{"text": "Eccu Aiacc.", "banner": ["", "", "", "", "", "", "", ""], "layer": "default", "step": ["type", "Eccu Aiacc."]}
+{"text": "Eccu Aiacc.", "banner": ["Aiacciu", "", "", "", "", "", "", ""], "layer": "default", "step": ["key", "21"]}
+{"text": "Eccu Aiacciu .", "banner": ["di", "u", "a", "in", "à", "è", "i", "hè"], "layer": "default", "step": ["accept", "Aiacciu"]}
+
+## Keyman 18.0.254, in-app field, Corsu – Pumuntincu 1.2 (this branch, keyboard/build) installed over it from a local
+## HTTP server (Keyman's Install Dictionary screen), Keyman force-stopped and relaunched; its installed model.js
+## contains the new whole-word.js code. (That build, 19,077 words, also had an elision rule since removed from
+## whole-word.js; the punctuation and mid-word code observed here is unchanged in the final 1.2 packages.)
+{"text": "Start typing here…", "banner": ["Di", "U", "A", "In", "À", "È", "I", "Hè"], "layer": "shift", "step": ["clear", ""]}
+{"text": "u zite", "banner": ["zitella", "zitelli", "ziteddu", "zitellu", "zitelle", "zitedda", "ziteddi", "site"], "layer": "default", "step": ["type", "u zite"]}
+{"text": "Start typing here…", "banner": ["Di", "U", "A", "In", "À", "È", "I", "Hè"], "layer": "shift", "step": ["clear", ""]}
+{"text": "Eccu Aiacc.", "banner": ["", "", "", "", "", "", "", ""], "layer": "default", "step": ["type", "Eccu Aiacc."]}
+{"text": "Eccu Aiacc.", "banner": ["Aiacciu", "", "", "", "", "", "", ""], "layer": "default", "step": ["key", "21"]}
+{"text": "Eccu Aiacciu.", "banner": ["", "", "", "", "", "", "", ""], "layer": "default", "step": ["accept", "Aiacciu"]}
+{"text": "Start typing here…", "banner": ["Di", "U", "A", "In", "À", "È", "I", "Hè"], "layer": "shift", "step": ["clear", ""]}
+{"text": "Eccu Aiacciu.", "banner": ["", "", "", "", "", "", "", ""], "layer": "default", "step": ["type", "Eccu Aiacciu."]}
+{"text": "Eccu Aiacciu.", "banner": ["", "", "", "", "", "", "", ""], "layer": "default", "step": ["key", "21"]}
+{"text": "Eccu Aiacciu.", "banner": ["Aiacciu", "", "", "", "", "", "", ""], "layer": "default", "step": ["key", "21"]}
+{"text": "Eccu Aiacciu.", "banner": ["Aiacciu", "", "", "", "", "", "", ""], "layer": "default", "step": ["key", "21"]}
+{"text": "Eccu Aiacciu.", "banner": ["Aiacciu", "", "", "", "", "", "", ""], "layer": "default", "step": ["key", "21"]}
+{"text": "Eccu Aiacciu.", "banner": ["Aiacciu", "", "", "", "", "", "", ""], "layer": "default", "step": ["key", "21"]}
+{"text": "Eccu Aiacciu.", "banner": ["Aiacciu", "Aiutu", "Aiutatu", "Aiutà", "Aiuta", "Aiutò", "Aiti", "Aiutati"], "layer": "default", "step": ["key", "21"]}
+{"text": "Eccu Aiacciu.", "banner": ["", "", "", "", "", "", "", ""], "layer": "default", "step": ["accept", "Aiacciu"]}
+{"text": "Start typing here…", "banner": ["Di", "U", "A", "In", "À", "È", "I", "Hè"], "layer": "shift", "step": ["clear", ""]}
+{"text": "Eccu a cas", "banner": ["casa", "casgiu", "casata", "casu", "casi", "castellu", "castagna", "castagne"], "layer": "default", "step": ["type", "Eccu a cas"]}
+{"text": "Eccu a casa ", "banner": ["di", "u", "a", "in", "à", "è", "i", "hè"], "layer": "default", "step": ["accept", "casa"]}
+{"text": "Eccu a casa .", "banner": ["ma", "mè", "mo", "micca", "mamma", "magnà", "manghjà", "mari"], "layer": "default", "step": ["type", "."]}
+{"text": "Eccu a casa . ", "banner": ["Di", "U", "A", "In", "À", "È", "I", "Hè"], "layer": "shift", "step": ["type", " "]}
+{"text": "Start typing here…", "banner": ["Di", "U", "A", "In", "À", "È", "I", "Hè"], "layer": "shift", "step": ["clear", ""]}
+{"text": "Dopu ella vene", "banner": ["vene", "venetu", "venenu", "veneta", "generale", "generali", "generalmente", "generazione"], "layer": "default", "step": ["type", "Dopu ella vene"]}
+{"text": "Dopu ella vene", "banner": ["vene", "vengu", "ventu", "venneri", "veni", "venutu", "venite", "venti"], "layer": "default", "step": ["key", "21"]}
+{"text": "Dopu ella vene", "banner": ["vecu", "vene", "vedi", "vengu", "versu", "ventu", "venutu", "venneri"], "layer": "default", "step": ["key", "21"]}
+{"text": "Dopu ella vene", "banner": ["vò", "voi", "voddu", "vogliu", "voli", "và", "vedi", "vene"], "layer": "default", "step": ["key", "21"]}
+{"text": "Dopu ella vene", "banner": ["di", "u", "a", "in", "à", "è", "i", "hè"], "layer": "default", "step": ["key", "21"]}
+{"text": "Dopu ella vene", "banner": ["", "", "", "", "", "", "", ""], "layer": "default", "step": ["key", "21"]}
+{"text": "Dopu ella vene", "banner": ["ella", "ellu", "elli", "elle", "ellinistica", "ellinisticu", "ellittica", "ellitticu"], "layer": "default", "step": ["key", "21"]}
+{"text": "Dopu ellu vene", "banner": ["venetu", "venenu", "veneta", "", "", "", "", ""], "layer": "default", "step": ["accept", "ellu"]}
+
+## Keyman 19.0.309-beta (official APK installed over 18.0.254 in the same throwaway session), in-app field
+## (the ',' rows are a script error: the comma is a long-press key, the tap hit "m")
+{"text": "Start typing here…", "banner": ["Di", "U", "A", "In", "À", "È", "I", "Hè"], "layer": "shift", "step": ["clear", ""]}
+{"text": "Eccu a cas", "banner": ["“cas”", "casa", "casgiu", "casata", "casu", "casi", "castellu", "castagna"], "layer": "default", "step": ["type", "Eccu a cas"]}
+{"text": "Eccu a casa ", "banner": ["di", "u", "a", "in", "à", "è", "i", "hè"], "layer": "default", "step": ["accept", "casa"]}
+{"text": "Eccu a casa.", "banner": ["", "", "", "", "", "", "", ""], "layer": "default", "step": ["type", "."]}
+{"text": "Eccu a casa. ", "banner": ["Di", "U", "A", "In", "À", "È", "I", "Hè"], "layer": "shift", "step": ["type", " "]}
+{"text": "Eccu a casa. Dop", "banner": ["“Dop”", "Dopu", "Doppia", "Doppiu", "Di", "Sopra", "Donna", "Dipartimentu"], "layer": "default", "step": ["type", "Dop"]}
+{"text": "Start typing here…", "banner": ["Di", "U", "A", "In", "À", "È", "I", "Hè"], "layer": "shift", "step": ["clear", ""]}
+{"text": "Eccu a cas", "banner": ["“cas”", "casa", "casgiu", "casata", "casu", "casi", "castellu", "castagna"], "layer": "default", "step": ["type", "Eccu a cas"]}
+{"text": "Eccu a casa ", "banner": ["di", "u", "a", "in", "à", "è", "i", "hè"], "layer": "default", "step": ["accept", "casa"]}
+{"text": "Eccu a casa m", "banner": ["ma", "mè", "mo", "micca", "mamma", "magnà", "manghjà", "mari"], "layer": "default", "step": ["type", ","]}
+{"text": "Eccu a casa m ", "banner": ["di", "u", "a", "in", "à", "è", "i", "hè"], "layer": "default", "step": ["type", " "]}
+{"text": "Eccu a casa m di", "banner": ["di", "dì", "dicu", "dinù", "dici", "digià", "dispiace", "diu"], "layer": "default", "step": ["type", "di"]}
+
+## Keyman 19.0.309-beta as the system keyboard (ime set), Contacts › Create contact › Company field; keys tapped at
+## their screen position (the keyboard's web view gives no uiautomator nodes), field read with uiautomator
+{"step": "type a cas", "text": "A cas", "banner (screenshot)": ["“cas”", "casa", "casgiu", "casata", "casu"]}
+{"step": "tap casa", "text": "A casa "}
+{"step": "type .", "text": "A casa."}
+{"step": "type space", "text": "A casa. "}
+{"step": "type do", "text": "A casa. Do"}

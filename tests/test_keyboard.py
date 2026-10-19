@@ -171,6 +171,37 @@ console.log(JSON.stringify([
         self.assertEqual(deletions, [3, 2, 2, None, 3, None, None])
 
 
+    @unittest.skipUnless(shutil.which('node'), 'needs Node.js')
+    def test_punctuation_and_apostrophes(self):
+        script = (build_keyboard.WHOLE_WORD.read_text(encoding='utf-8') + r"""
+const words = text => [...text.matchAll(/[\p{L}'\u2019]+/gu)].map(m => ({start: m.index, end: m.index + m[0].length, text: m[0]}));
+const model = () => ({ wordbreaker: words,
+  predict: (transform, context) => [{ sample: { transform: { insert: "l'isula", deleteLeft: 4 }, displayAs: "l'isula" }, p: 1 }] });
+const run = (agent, left, right, transform) => {
+  Object.defineProperty(globalThis, 'navigator', { value: { userAgent: agent }, configurable: true });
+  const m = corsuWholeWord(model());
+  const out = m.predict(transform || { insert: '', deleteLeft: 0 }, { left, right });
+  return { space: m.punctuation === undefined ? null : m.punctuation.insertAfterWord,
+           words: out.map(o => o.sample.displayAs), dr: out[0].sample.transform.deleteRight || 0 };
+};
+const android = 'Linux; Android 14', iphone = 'iPhone; CPU iPhone OS 17_6';
+console.log(JSON.stringify([
+  run(android, 'Eccu Aiacc', '.'), run(android, 'Eccu Aiacc', 'iu.'), run(android, 'Eccu Aiacc', ' ma'),
+  run(android, 'Eccu Aiacc', ''), run(android, 'Sar', 'i-Solenzara'), run(android, 'Eccu Aiacc', '\nDopu'),
+  run(iphone, 'Eccu Aiacc', '.'), run(iphone, 'Eccu Aiacc', 'iu.'),
+  run(android, 'Eccu l\u2019is', ''),
+]));
+""")
+        output = subprocess.run(['node', '-e', script], capture_output=True, text=True, check=True).stdout
+        results = json.loads(output)
+        # No space added before punctuation, a hyphen or a line break right after the word; a plain space or the
+        # end of the text keep the engine's default (undefined: the model declares no punctuation).
+        self.assertEqual([r['space'] for r in results[:8]], ['', '', None, None, '', '', '', None])
+        self.assertEqual([r['dr'] for r in results[:8]], [0, 2, 0, 0, 1, 0, 0, 0])
+        # A typographic apostrophe in the word being replaced is kept in the suggestions.
+        self.assertEqual(results[8]['words'], ['l\u2019isula'])
+
+
 class DataCaseTests(unittest.TestCase):
     """tests/e2e/keyboard_data_cases.tsv: the data-dependent expectations of the engine check."""
     HEAD = '\t'.join(check_keyboard.DATA_CASE_COLUMNS) + '\n'

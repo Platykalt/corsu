@@ -83,6 +83,13 @@ OFFICIAL_CAP = PLACE_FLOOR
 ACRONYM_WEIGHT = 20
 # In a variety's preference list, the other variety's form keeps this share of the pair's weight.
 OTHER_SHARE = 0.25
+# Vikipedia occurrences needed to add another form of a listed word (step 5b): the attestation threshold.
+INFLECTED_MIN = 5
+# ... and their weight: their Vikipedia frequency, at most the weight of the listed form and at most INFLECTED_CAP.
+# They are added so that a correct word typed on purpose is known (auto-correction keeps it), not to be suggested
+# early: with this cap no word of weight 100 or more leaves the top 3 of a 1-4 letter prefix (REVIEW.md). Without
+# it, abitanti (854 times in an encyclopedia) and rumani took the first places of short prefixes.
+INFLECTED_CAP = 100
 # About 1,380 Vikipedia articles are botanical stubs generated from one table ("spezia", "pianta", "sinonimi",
 # "flora"...): a quarter of all the article text. They are left out of the counts.
 BOT_STUB = '{| align="right" rules="all"'
@@ -197,6 +204,29 @@ def wiktionary_common_words():
             if 'table-tags' not in form.get('tags', []) and ' ' not in form.get('form', ''):
                 words.add(nfc(form['form']))
     return words
+
+
+def wiktionary_forms():
+    """{form: headword} for Wiktionary's Corsican words and forms that are not names, as written (step 5c).
+
+    Conjugation and declension forms of an entry count (manghjatu, cantendu); a form tagged as a misspelling or
+    archaic, a template placeholder and a phrase of several words do not."""
+    forms = {}
+    for line in (RESOURCES / 'kaikki/kaikki.org-dictionary-Corsican.jsonl').read_text(encoding='utf-8').splitlines():
+        entry = json.loads(line)
+        if entry.get('pos') == 'name':
+            continue
+        head = nfc(entry['word'])
+        senses = {tag for sense in entry.get('senses', []) for tag in sense.get('tags', [])}
+        if not senses & {'misspelling', 'archaic'}:
+            forms.setdefault(head, head)
+        for form in entry.get('forms', []):
+            tags = set(form.get('tags', []))
+            text = nfc(form.get('form', ''))
+            if tags & {'table-tags', 'inflection-template', 'misspelling', 'archaic', 'canonical'} or ' ' in text:
+                continue
+            forms.setdefault(text, head)
+    return forms
 
 
 def apertium_words():
@@ -509,6 +539,75 @@ def main():
         entries[word.lower()] = dict(word=word, weight=round(weight), source=f'cog:{code}', status='attested')
         removed.pop(word.lower(), None)
 
+    # 5b. Other forms of a word: the feminine and plural of a noun, adjective or participle (tradizioni next to
+    #     tradizione, fundata next to fundatu, partuti next to partutu), written at least INFLECTED_MIN times in
+    #     Vikipedia, mostly in lowercase, when the list has another form of the word or when Vikipedia also has its
+    #     masculine singular in -u (partutu, partuti, partuta), the Corsican ending that sets these paradigms apart
+    #     from Italian ones. Auto-correction (Keyman 19) replaced such words, correct but unknown, with a listed
+    #     form: tradizioni became tradizione, partuti partiti. Only the final vowel may differ (-u/-a/-i/-e); no
+    #     other rule is applied, and a form found in no source is not invented. Weight: see INFLECTED_CAP.
+    def vikipedia_form(low):
+        return (wiki[low] >= INFLECTED_MIN and len(low) >= 4 and "'" not in low and not foreign(low)
+                and not shape_problem(low) and has_vowel(low) and wiki_caps[low] < 0.5 * max(wiki_mid[low], 1))
+
+    inflected = {}
+    for low in sorted(wiki):
+        if low[-1:] not in ('a', 'e', 'i', 'u') or low in entries or fold(low) in known or not vikipedia_form(low):
+            continue
+        stem = low[:-1]
+        siblings = [stem + end for end in 'aeiu' if end != low[-1] and stem + end in entries
+                    and entries[stem + end]['word'] == stem + end]
+        if siblings:
+            # The listed form with the highest weight (ties: alphabetical) caps the weight.
+            inflected[low] = max(siblings, key=lambda form: (entries[form]['weight'], [-ord(c) for c in form]))
+        elif any(end != low[-1] and vikipedia_form(stem + end) for end in 'aeiu') \
+                and (low[-1] == 'u' or vikipedia_form(stem + 'u')):
+            inflected[low] = None
+    for low, sibling in inflected.items():
+        known.add(fold(low))
+        weight = min(frequency_weight(low), entries[sibling]['weight'] if sibling else INFLECTED_CAP, INFLECTED_CAP)
+        entries[low] = dict(word=low, weight=max(1, round(weight)), source='vikipedia', status='attested')
+        removed.pop(low, None)
+
+    # 5c. Wiktionary's Corsican words and forms (manghjatu, cantendu, parlavamu) not yet listed. Wiktionary is the
+    #     first source cited for attestation, but only its words that another rule selected were listed, so a
+    #     correct form it records could still be replaced by auto-correction. Added as known words, weighed like
+    #     the forms of step 5b (at most INFLECTED_CAP), next to any name or word with the same search key. A
+    #     regional form (Cismontane, Ultramontane) is only known: no preference list changes.
+    wiktionary_added = 0
+    for word, head in sorted(wiktionary_forms().items()):
+        low = word.lower()
+        if (low in entries or len(low) < 2 or not has_vowel(low) or shape_problem(low)
+                or not re.fullmatch(r"[^\W\d_]+(?:'[^\W\d_]+)*", word)):
+            continue
+        weight = min(frequency_weight(low), INFLECTED_CAP)
+        entries[low] = dict(word=word, weight=max(1, round(weight)), source='wiktionary', status='attested')
+        known.add(fold(low))
+        removed.pop(low, None)
+        wiktionary_added += 1
+
+    # 5d. Elided forms written at least INFLECTED_MIN times in Vikipedia (l'abitanti, d'Aiacciu, l'ADECEC) whose second
+    #     part is a listed word and whose first part is an elision the list already uses at least 5 times (l', d',
+    #     un', st', s', ch'...). Keyman's word breaker keeps an elided form as one word, and its correction search
+    #     only follows words of the lexicon: auto-correction turned l'abitanti into abitanti. The second part keeps
+    #     the case the list gives it. Weight: as in step 5b.
+    elisions = Counter(low.split("'")[0] for low in entries if "'" in low)
+    # The acronyms of step 7 count as listed words here (l'ADECEC).
+    written = {low: entry['word'] for low, entry in entries.items()}
+    written.update({nfc(row['word']).lower(): nfc(row['word']) for row in read_tsv(SOURCES / 'acronyms.tsv')})
+    elided_added = 0
+    for low, count in sorted(wiki.items()):
+        head, _, tail = low.partition("'")
+        if (count < INFLECTED_MIN or not tail or low in entries or tail not in written or elisions[head] < 5
+                or "'" in tail):
+            continue
+        word = head + "'" + written[tail]
+        weight = min(frequency_weight(low), INFLECTED_CAP)
+        entries[low] = dict(word=word, weight=max(1, round(weight)), source='vikipedia', status='attested')
+        known.add(fold(low))
+        removed.pop(low, None)
+        elided_added += 1
+
     # 6. Common words written like a capitalised entry (orsu / Orsu, corti / Corti): Keyman keeps a word typed exactly
     #    as the list has it, so with only the name a lowercase word typed on purpose became the name. The lowercase
     #    word is added next to it, weighed by its lowercase uses in Vikipedia: from Wiktionary's common (non-name)
@@ -579,7 +678,7 @@ def main():
         cismuntincu_entries=len(variant_weight['cismuntincu']), pumuntincu_entries=len(variant_weight['pumuntincu']),
         northern_only_forms=len(north_only), southern_only_forms=len(south_only),
         words_ranked_differently=len(differing), wiki_tokens=wiki_total, lexicon_tokens=lexicon_total,
-        place_words=place_stats,
+        place_words=place_stats, inflected_forms=len(inflected), wiktionary_forms=wiktionary_added, elided_forms=elided_added,
     )
     (DATA / 'audit/stats.json').write_text(json.dumps(stats, ensure_ascii=False, indent=1) + '\n', encoding='utf-8')
     print(json.dumps(stats, ensure_ascii=False, indent=1))
