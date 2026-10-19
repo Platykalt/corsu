@@ -3,7 +3,7 @@
 [Français](../fr/feuille-de-route.md)
 
 Everything below is **planned or under consideration**, not available. What works today is in
-[What works where](compatibility.md). Status as of 18 October 2026 (published release: 0.25.1). The French page has the full tables, including
+[What works where](compatibility.md). Status as of 19 October 2026 (published release: 0.26.0). The French page has the full tables, including
 the inventory of software already in Corsican elsewhere; this is a summary.
 
 ## Already in Corsican elsewhere
@@ -17,7 +17,7 @@ Thunderbird for Android (92.8 %), Tenacity (98.4 %) and OpenTracks (76.1 %) are 
 Corsican in their own releases. No Corsican was found for LibreOffice, GIMP, Inkscape, KeePassXC, F-Droid, OsmAnd or
 Luanti.
 
-## Candidate: in the next version, not published yet
+## Done in 0.26.0
 
 - Phone keyboard: a Corsu dictionary for Keyman that keeps the capitals you type, and experimental regional
   preferences (Cismuntincu, Pumuntincu).

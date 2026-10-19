@@ -1,6 +1,6 @@
 # Documentation
 
-Version publiée · Published release: **0.25.1**.
+Version publiée · Published release: **0.26.0**.
 
 | Français | English |
 | --- | --- |

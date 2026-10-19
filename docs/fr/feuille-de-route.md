@@ -3,11 +3,11 @@
 [English](../en/roadmap.md)
 
 Ce qui suit est **prévu ou envisagé**, pas disponible, sauf les lignes marquées « fait ». Ce qui marche aujourd'hui est dans
-[Ce qui marche, et où](compatibilite.md). État établi le 18 octobre 2026 (version publiée : 0.25.1).
+[Ce qui marche, et où](compatibilite.md). État établi le 19 octobre 2026 (version publiée : 0.26.0).
 
-**Candidat, dans la prochaine version (pas encore publiée)** : pour le clavier Keyman, un dictionnaire qui garde les
-majuscules tapées et des préférences régionales expérimentales (Cismuntincu, Pumuntincu) ; pour Minecraft Java, une
-nouvelle relecture par IA des textes (octobre 2026), toujours sans relecture par un locuteur.
+**Fait dans la 0.26.0** : pour le clavier Keyman, un dictionnaire qui garde les majuscules tapées et des préférences
+régionales expérimentales (Cismuntincu, Pumuntincu) ; pour Minecraft Java, une nouvelle relecture par IA des textes
+(octobre 2026), toujours sans relecture par un locuteur.
 
 ## Ce qui existe déjà en corse ailleurs
 
