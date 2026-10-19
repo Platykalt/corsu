@@ -164,7 +164,7 @@ console.log(JSON.stringify([
   run('iPhone; CPU iPhone OS 17_6', 'Eccu a ca', 'sa di Petru.'),
 ]));
 """)
-        output = subprocess.run(['node', '-e', script], capture_output=True, text=True, check=True).stdout
+        output = subprocess.run(['node', '-'], input=script, capture_output=True, text=True, encoding='utf-8', check=True).stdout
         deletions = [change.get('deleteRight') for change in json.loads(output)]
         # rest of the word and its space; at the end of the text; before punctuation; caret at the end of a word;
         # a letter just typed mid-word; caret before a word (not inside it); Keyman for iPhone (ignores it).
@@ -173,6 +173,8 @@ console.log(JSON.stringify([
 
     @unittest.skipUnless(shutil.which('node'), 'needs Node.js')
     def test_punctuation_and_apostrophes(self):
+        # The script goes through stdin and both ways are UTF-8: on Windows, `node -e` and the default code page
+        # turned the ’ of the answer into U+FFFD.
         script = (build_keyboard.WHOLE_WORD.read_text(encoding='utf-8') + r"""
 const words = text => [...text.matchAll(/[\p{L}'\u2019]+/gu)].map(m => ({start: m.index, end: m.index + m[0].length, text: m[0]}));
 const model = () => ({ wordbreaker: words,
@@ -192,7 +194,7 @@ console.log(JSON.stringify([
   run(android, 'Eccu l\u2019is', ''),
 ]));
 """)
-        output = subprocess.run(['node', '-e', script], capture_output=True, text=True, check=True).stdout
+        output = subprocess.run(['node', '-'], input=script, capture_output=True, text=True, encoding='utf-8', check=True).stdout
         results = json.loads(output)
         # No space added before punctuation, a hyphen or a line break right after the word; a plain space or the
         # end of the text keep the engine's default (undefined: the model declares no punctuation).
