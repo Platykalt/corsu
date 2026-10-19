@@ -61,11 +61,18 @@ The reused texts are Corsu's Java texts: none of them has been reviewed by a Cor
   `manifest.json`, `pack_icon.png` (128×128 PNG, generated), `texts/languages.json` (`["co_FR"]`),
   `texts/language_names.json` (`[["co_FR", "Corsu (Corsica)"]]`), `texts/co_FR.lang`, `LICENSE.txt`. The `.lang`
   inside the pack has **no comments** (only `key=value` lines): the provenance stays in the repository copy.
-  Fixed dates and order: two builds on the same machine give the same bytes (SHA-256 on 2026-10-19 with zlib-ng 1.3.1:
-  `7a6c383891a9168a5bd5d6542714a1d05c3c24e52e48dee492fa98bb75f4e23a`; another zlib may compress differently).
-  No Mojang file inside.
+  Reproducible on any machine: fixed member order, dates (2026-01-01), permissions (0644), creating system (Unix),
+  and no compression (members STORED, icon image data in stored deflate blocks), so the bytes do not depend on the
+  zlib, umask, operating system or Python version. Before this (until 85c6241) the members were deflated: CI run
+  39192791783 (GitHub's Ubuntu runner) gave `a8de8a5c…9a7e` and a zlib-ng 1.3.1 machine `7a6c3838…e23a` from the
+  same commit, with the same member bytes, order and metadata and only the compressed streams differing. SHA-256
+  now: `91907de47ba4e26387b7e4dbda8cc8f0152d11cc6b262a2e661676f0194e7579` (260,395 bytes, 2026-10-19), identical with
+  zlib-ng 1.3.1/Python 3.14 (CachyOS), zlib 1.3/Python 3.12 (Ubuntu 24.04) and zlib 1.3.1/Python 3.13 (Debian 13);
+  the old deflated build gave the CI value under both stock zlib containers. Stored members are plain ZIP, but that
+  the game imports them is, like everything else here, not yet seen in a game (step 1 below). No Mojang file inside.
 - Unit tests `tests/test_bedrock.py` (offline, no Mojang file): reuse rules and refusals, provenance, format of the
-  committed file, check errors, pack contents, comment stripping.
+  committed file, check errors, pack contents, comment stripping, fixed archive metadata, the same bytes with another
+  umask, platform or deflate output.
 
 No Bedrock client was run: there is none for Linux, and the official Bedrock Dedicated Server has no user interface,
 so it cannot show a language. Nothing here was tested on Windows, Android or iOS.
