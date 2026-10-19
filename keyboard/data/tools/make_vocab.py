@@ -10,14 +10,16 @@ Inputs:
     northern/southern pairs, forms a reference writes in full);
   - the project lexicons (Corsu's own software translations), counted all alike: a word does not become more
     trustworthy because of the file it comes from;
-  - the Corsican place names of sources/places.tsv (Wikidata, fetched by tools/fetch_places.py) and the official
-    commune names of sources/communes-official.tsv (INSEE, fetched by tools/fetch_communes.py);
+  - the Corsican place names of sources/places.tsv (Wikidata, fetched by tools/fetch_places.py), the official
+    commune names of sources/communes-official.tsv (INSEE, fetched by tools/fetch_communes.py) and the historical and
+    traditional place names of sources/historical-places.tsv (accepted rows only);
   - the old generated word list keyboard/platykalt.co.corsu/source/wordlist.tsv as of version 0.9.0 (read from git:
     tools/build_keyboard.py now rewrites that file from these lists), only to report what changed.
 
 Outputs the three lists, keyboard/data/held-back.tsv (forms that only the whole-dump Vikipedia count supports: not
 shipped, with their passages), keyboard/data/audit/removed.tsv (what the old list had and the new one drops, with the
-reason) and keyboard/data/audit/stats.json (the numbers quoted in keyboard/data/REVIEW.md). Weights and statuses
+reason), keyboard/data/audit/historical-places.tsv (what step 8 did with each historical place name) and
+keyboard/data/audit/stats.json (the numbers quoted in keyboard/data/REVIEW.md). Weights and statuses
 are explained in REVIEW.md; sources and licences in docs/keyboard-sources.md.
 """
 import bz2
@@ -54,6 +56,7 @@ LICENSES = {
     'cog': 'etalab-2.0',
     'homographs': 'GPL-3.0-or-later',
     'acronyms': 'GPL-3.0-or-later',
+    'historical-places': 'GPL-3.0-or-later',
     'corsu-lexicon': 'corsu-lexicon-mixed',
     'ai': 'GPL-3.0-or-later',
 }
@@ -430,6 +433,139 @@ def official_names():
             if len(token) >= 3 and token[0].isupper() and token == token[0] + token[1:].lower():
                 words.setdefault(token, row['code'])
     return words
+
+
+# Lowest weight of a word of a historical place name (step 8): the Corsican canonical form, and any other spelling
+# (kept below the canonical's). Keyman 19's correction search stops once it has enough likelier candidates, so a word
+# of weight 1 next to a frequent close word is not recognised and auto-correction replaces it (Golo became Golfu,
+# Talavu Taravu, Deçà Dece in the 19.0.309 engine); at weight 3 or more all three were kept (REVIEW.md, "Historical
+# place names"). The floor wins over the top-3 rule where the two disagree, on prefixes whose third word weighs 1-4.
+HISTORICAL_FLOOR = 5
+HISTORICAL_VARIANT_FLOOR = 3
+HISTORICAL_COLUMNS = ['name', 'canonical', 'usage', 'category', 'period', 'status', 'reference', 'note']
+HISTORICAL_USAGES = {'co', 'co-historical', 'fr', 'it', 'la'}
+HISTORICAL_CATEGORIES = {'micro-region', 'historical-region', 'pieve', 'diocese', 'episcopal-see', 'province',
+                         'historical-division'}
+HISTORICAL_STATUSES = {'accepted', 'uncertain', 'deferred'}
+
+
+def historical_places(path=None):
+    """The rows of sources/historical-places.tsv, checked (one row per spelling; see historical_entries)."""
+    path = path or SOURCES / 'historical-places.tsv'
+    if not path.exists():
+        return []
+    lines = [line for line in path.read_text(encoding='utf-8').splitlines() if line and not line.startswith('#')]
+    if not lines or lines[0].split('\t') != HISTORICAL_COLUMNS:
+        raise SystemExit(f'{path}: the header must be {chr(9).join(HISTORICAL_COLUMNS)!r}')
+    rows = []
+    for number, line in enumerate(lines[1:], start=2):
+        fields = line.split('\t')
+        fields += [''] * (len(HISTORICAL_COLUMNS) - len(fields))
+        row = dict(zip(HISTORICAL_COLUMNS, (field.strip() for field in fields)))
+        # A row may leave its canonical empty: it is then its own canonical (said in the audit).
+        row['canonical_missing'] = not row['canonical']
+        row['name'], row['canonical'] = nfc(row['name']), nfc(row['canonical'] or row['name'])
+        if (len(fields) != len(HISTORICAL_COLUMNS) or not row['name']
+                or row['usage'] not in HISTORICAL_USAGES or row['category'] not in HISTORICAL_CATEGORIES
+                or row['status'] not in HISTORICAL_STATUSES):
+            raise SystemExit(f'{path}: row {number} ({row["name"]!r}): {len(HISTORICAL_COLUMNS)} columns, a name, and a '
+                             f'usage, category and status among the allowed values are needed')
+        rows.append(row)
+    return rows
+
+
+def name_words(name):
+    """The words of a place name that can be dictionary entries, as written (capital, accents kept).
+
+    Keyman's default word breaker splits at spaces and hyphens, so an entry holding either could never be typed
+    (keyboard/data/REVIEW.md, "Historical place names"): the name gives its capitalised words of three letters or
+    more (San Lurenzu di Vallerustie: San, Lurenzu, Vallerustie); an elided word gives its name (d'Orezza: Orezza);
+    a disambiguation in brackets is dropped. The same split as place_names()."""
+    words = []
+    for token in re.split(r'[\s-]+', re.sub(r'\s*\([^)]*\)', '', nfc(name))):
+        token = token.rsplit("'", 1)[-1]
+        if len(token) >= 3 and token[0].isupper() and token == token[0] + token[1:].lower() and token not in words:
+            words.append(token)
+    return words
+
+
+def historical_entries(rows, entries, frequency):
+    """Step 8: the entries that the accepted rows of sources/historical-places.tsv add, and one audit row per row.
+
+    entries: the list so far ({key: entry}); frequency(low): the Vikipedia weight of a word. Returns
+    (new {word: entry}, audit rows). Only status "accepted" is shipped, and only the words of `name`.
+
+    - A word already listed as written (Rustinu, Orezza, San, Lurenzu) is left as it is: weight unchanged.
+    - The preferred form (usage co, name = canonical) weighs like a Corsican place name (PLACE_FLOOR..PLACE_CAP);
+      any other spelling (co-historical, fr, it, la) like an official commune name (OFFICIAL_FLOOR..OFFICIAL_CAP),
+      and below its canonical once the weights are final (cap_historical_variants).
+    - A word whose search key is already listed in another form: a word of a longer name (Terra in "Terra di u
+      Cumunu", di, u) is left to the listed word, which Keyman already recognises in any case typed; a name of one
+      word (Serra next to serra) is added as its own capitalised entry, below the listed one, which keeps its weight.
+    The forms then go through the rule of the forms added to be known (below every listed word of each prefix's
+    top 3), in main()."""
+    written = {entry['word'] for entry in entries.values()}
+    by_key = defaultdict(list)
+    for entry in entries.values():
+        by_key[fold(entry['word'])].append(entry['weight'])
+    new, audit = {}, []
+    preferred = lambda row: row['usage'] == 'co' and row['name'] == row['canonical']  # noqa: E731
+    for first in (True, False):
+        for row in rows:
+            if preferred(row) != first:
+                continue
+            words, notes = name_words(row['name']), []
+            if row['status'] != 'accepted':
+                audit.append(dict(row, shipped='no', words=' '.join(words), detail=f'status {row["status"]}: not shipped'))
+                continue
+            single = len(words) == 1
+            for word in words:
+                low = word.lower()
+                if word in written or word in new:
+                    notes.append(f'{word}: already listed')
+                    continue
+                if row['usage'] in ('co', 'co-historical') and shape_problem(low):
+                    notes.append(f'{word}: not shipped ({shape_problem(low)})')
+                    continue
+                same_key = by_key.get(fold(word), [])
+                if same_key and not single:
+                    notes.append(f'{word}: left to the listed word of the same search key')
+                    continue
+                floor, cap = (PLACE_FLOOR, PLACE_CAP) if first else (OFFICIAL_FLOOR, OFFICIAL_CAP)
+                weight = min(max(frequency(low), floor), cap)
+                if same_key:
+                    weight = min(weight, min(same_key) - 1)
+                new[word] = dict(word=word, weight=max(1, round(weight)),
+                                 source=f"historical-places:{row['usage']}:{row['canonical'].replace(' ', '_')}",
+                                 status='attested', canonical=row['canonical'], preferred=first)
+                notes.append(f'{word}: added')
+            if row.get('canonical_missing'):
+                notes.append('no canonical given: the name is its own canonical')
+            audit.append(dict(row, shipped='yes' if any(n.endswith(': added') for n in notes) else 'known',
+                              words=' '.join(words), detail='; '.join(notes) or 'no word of three letters or more'))
+    return new, audit
+
+
+def cap_historical_variants(new, weight_of):
+    """Another spelling of a name weighs less than every added or listed word of its canonical's preferred form, so
+    that it is recognised (kept as typed) without being offered before it. weight_of(word): the final weight of a
+    listed word, or None. Returns the number of spellings lowered."""
+    preferred = defaultdict(list)
+    for entry in new.values():
+        if entry['preferred']:
+            preferred[entry['canonical']].append(entry['word'])
+    lowered = 0
+    for entry in new.values():
+        if entry['preferred']:
+            continue
+        words = preferred.get(entry['canonical']) or name_words(entry['canonical'])
+        # The canonical's own words only: not another spelling of it (a row without canonical is its own).
+        weights = [w for w in (weight_of(word) for word in words
+                               if not (word in new and not new[word]['preferred'])) if w]
+        if weights and entry['weight'] >= min(weights):
+            entry['weight'] = max(HISTORICAL_VARIANT_FLOOR, min(weights) - 1)
+            lowered += 1
+    return lowered
 
 
 def has_vowel(word):
@@ -871,6 +1007,14 @@ def main():
         entries[f"\0{entry['word']}"] = entry
         extra_keys.add(f"\0{entry['word']}")
 
+    # 8. Historical and traditional place names (sources/historical-places.tsv: Vallerustie, a micro-region of
+    #    Castagniccia that no Wikidata label of sources/places.tsv gives). Only accepted rows, only the words of their
+    #    name (historical_entries); weighed as added forms below, other spellings below their canonical.
+    historical_rows = historical_places()
+    historical, historical_audit = historical_entries(historical_rows, entries, frequency_weight)
+    for word, entry in historical.items():
+        entries[f'\0h{word}'] = entry
+
     # Keeping the added forms below. The forms of steps 5b-5e are there so that a correct word typed on purpose is
     #     known (Keyman keeps a typed word that the model lists, whatever its weight: the trie returns the exact
     #     match first, keyboard/data/REVIEW.md). With INFLECTED_CAP alone, a form of weight 100 still pushed listed
@@ -893,6 +1037,42 @@ def main():
         if limits and entries[low]['weight'] > min(limits):
             entries[low]['weight'] = max(1, min(limits))
             lowered += 1
+    # The historical place names (step 8) go one step further: below every other word of the top 3 of each prefix,
+    #     the forms of steps 5b-5e included, so that a name never takes a place a word of the list had in a top 3
+    #     (the forms of 5b-5e are only kept below the words listed before them).
+    historical_keys = {f'\0h{word}' for word in historical}
+    third = {}
+    by_prefix = defaultdict(list)
+    for low in set(entries) - historical_keys:
+        key = fold(entries[low]['word'])
+        for end in range(1, len(key) + 1):
+            by_prefix[key[:end]].append(entries[low]['weight'])
+    for prefix, weights in by_prefix.items():
+        third[prefix] = min(sorted(weights, reverse=True)[:3])
+    for low in historical_keys:
+        key = fold(entries[low]['word'])
+        limits = [third[key[:end]] - 1 for end in range(1, len(key) + 1) if key[:end] in third]
+        if limits and entries[low]['weight'] > min(limits):
+            entries[low]['weight'] = max(1, min(limits))
+        # ... but never below the floor at which Keyman 19 still recognises the name (HISTORICAL_FLOOR).
+        floor = HISTORICAL_FLOOR if entries[low]['preferred'] else HISTORICAL_VARIANT_FLOOR
+        entries[low]['weight'] = max(entries[low]['weight'], floor)
+    final = {entry['word']: entry['weight'] for entry in entries.values()}
+    historical_lowered = cap_historical_variants(historical, final.get)
+    for entry in historical.values():
+        entry.pop('canonical')
+        entry.pop('preferred')
+    with (DATA / 'audit').joinpath('historical-places.tsv').open('w', encoding='utf-8', newline='\n') as out:
+        out.write('# Rows of keyboard/data/sources/historical-places.tsv and what keyboard/data/tools/make_vocab.py did with\n'
+                  '# them (step 8): only accepted rows are shipped, as the words of their name; final weights in shared.tsv.\n')
+        out.write('name\tcanonical\tusage\tcategory\tstatus\tshipped\twords\tdetail\n')
+        for row in historical_audit:
+            detail = row['detail']
+            if row['shipped'] == 'yes':
+                detail += ' (weights: ' + ', '.join(f'{w} {historical[w]["weight"]}' for w in row['words'].split()
+                                                   if w in historical) + ')'
+            out.write('\t'.join(row[c] for c in ('name', 'canonical', 'usage', 'category', 'status', 'shipped',
+                                                 'words')) + f'\t{detail}\n')
 
     def license_of(source):
         return LICENSES[source.split(':')[0]]
@@ -931,6 +1111,9 @@ def main():
         words_ranked_differently=len(differing), wiki_tokens=wiki_total, lexicon_tokens=lexicon_total,
         place_words=place_stats, inflected_forms=len(inflected), wiktionary_forms=wiktionary_added, elided_forms=elided_added,
         held_back=Counter(step for step, _ in held.values()), added_forms_lowered=lowered,
+        historical_places=dict(rows=len(historical_rows), accepted=sum(r['status'] == 'accepted' for r in historical_rows),
+                               words_added=len(historical), spellings_lowered_below_canonical=historical_lowered,
+                               not_shipped=Counter(r['status'] for r in historical_rows if r['status'] != 'accepted')),
     )
     # LF line ends on every system, so that a rebuild on Windows leaves the committed files unchanged.
     (DATA / 'audit/stats.json').write_text(json.dumps(stats, ensure_ascii=False, indent=1) + '\n', encoding='utf-8',

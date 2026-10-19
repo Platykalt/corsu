@@ -51,3 +51,30 @@ platykalt.co.corsu_pumuntincu	2		so	none	socu	offers	fail	southern 1st person of
 *	3	Dumane\s	videmu	space	Dumane videmu\s	text	fail	present 1st plural of vede in U Cunghjugarellu (table 94, supranacciu): known, kept
 *	2		secol	none	secoli	absent	fail	held back (keyboard/data/held-back.tsv): in Vikipedia mostly in an Italian caption and the Italian anthem, 4 times in prose; Corsican seculi is listed
 *	2		secul	none	seculi	offers	warn	the Corsican plural seculi (Wiktionary) is offered
+*	3		Vallerustie	space	Vallerustie\s	text	fail	micro-region of Castagniccia (sources/historical-places.tsv, accepted): known, kept as typed with auto-correction
+*	3	E\s	Vallerustie.	space	E Vallerustie.\s	text	fail	name followed by a full stop ("E Vallerustie."): punctuation stays attached, the name unchanged
+*	3	San Lurenzu di\s	Vallerustie,	space	San Lurenzu di Vallerustie,\s	text	fail	name after "di", followed by a comma
+*	3		San Lurenzu di Vallerustie	space	San Lurenzu di Vallerustie\s	text	fail	compound name typed word by word with auto-correction: each word (San, Lurenzu, di, Vallerustie) is a known entry and is kept; the compound itself is not an entry (Keyman's word breaker splits at spaces)
+*	3	In\s	Vallerustie	space	In Vallerustie\s	text	fail	mid-sentence, after a common word
+*	2		vallerus	none	Vallerustie	first	fail	reachable after a distinctive prefix, with its capital, although it weighs less than every word of the top 3 of its shorter prefixes
+*	2		Vallerus	none	Vallerustie	first	fail	the same prefix typed with a capital
+*	2		vall	none	valle	first	fail	the common word valle stays first at "vall": the name does not displace it
+*	3		E Vallerustie	space	E Vallerustie\s	text	fail	the attested form "E Vallerustie" (historical-places.tsv, accepted), typed word by word
+*	3	A diocesi di\s	Nebbio	space	A diocesi di Nebbio\s	text	fail	French spelling of Nebbiu (historical-places.tsv, fr, accepted): recognised, kept as typed, not replaced by Nebbiu
+*	3	A diocesi di\s	Nebbiu	space	A diocesi di Nebbiu\s	text	fail	the Corsican canonical form, kept
+*	2		nebb	none	Nebbiu	first	fail	the Corsican form is offered before the French spelling Nebbio (lower weight)
+*	3		Aléria	space	Aléria\s	text	fail	French spelling with an acute accent (fr, accepted), next to Aleria: kept as typed
+*	3		Aleria	space	Aleria\s	text	fail	the Corsican form, kept
+*	3	U\s	Pumonti	space	U Pumonti\s	text	fail	another Corsican spelling of Pumonte (co, not canonical): known at a lower weight, kept
+*	3	U\s	Pumonte	space	U Pumonte\s	text	fail	the canonical form, kept
+*	2		pumo	none	Pumonte	first	fail	the canonical Pumonte is offered before Pumonti
+*	3	A pieve di\s	Tàlcini	space	A pieve di Tàlcini\s	text	fail	accented spelling (co, one Vikipedia paragraph) next to Talcini: kept as typed
+*	2		talc	none	Talcini	offers	fail	the canonical Talcini is offered (it weighs more than the accented Tàlcini; Keyman 19 puts the correction talianu first, so first is not checked)
+*	3	U dipartimentu di u\s	Golo	space	U dipartimentu di u Golo\s	text	fail	French name of the 1793 department (fr, accepted) next to the river Golu: kept (at weight 1 Keyman 19 made it Golfu: HISTORICAL_FLOOR)
+*	3	Una\s	serra	space	Una serra\s	text	fail	common word serra kept in lowercase next to the pieve name Serra (historical-places.tsv)
+*	3	A pieve di\s	Serra	space	A pieve di Serra\s	text	fail	the name Serra typed with its capital mid-sentence, kept
+*	2		serr	none	serra	first	fail	the common word serra keeps its place before the name Serra
+*	3	Hè\s	verde	space	Hè verde\s	text	fail	common word verde kept next to the pieve name Verde
+*	3		Diquà da i Monti	space	Diquà da i Monti\s	text	fail	compound historical division, typed word by word: each word known and kept
+*	3	A pieve di\s	Talavu	space	A pieve di Talavu\s	text	fail	canonical name at the recognition floor: at weight 1 Keyman 19 made it Taravu
+*	3		Deçà des Monts	space	Deçà des Monts\s	text	fail	French name of the historical division (fr, accepted), word by word: at weight 1 Keyman 19 made Deçà into Dece
