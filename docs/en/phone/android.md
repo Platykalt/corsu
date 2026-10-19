@@ -22,13 +22,13 @@ official help and the translation files of that version; another version may cha
 
 ## Available dictionaries
 
-<!-- corsu:phone-variants:en The files attached to Corsu 0.27.0 (the three 1.2 packages, 19,550 words each, counted
+<!-- corsu:phone-variants:en The files attached to Corsu 0.27.0 (the three 1.2 packages, 19,228 words each, counted
      with tools/count_kmp.py in the built packages). This guide describes 0.27.0; until it is published, "latest
      published release" still gives Corsu 0.26.0's 1.1 packages (13,213 words). When a later version is published,
      list here only the files it carries. -->
 | File | Name in Keyman | Version | Content | Download |
 | --- | --- | --- | --- | --- |
-| `corsu-keyboard.kmp` | Corsu | 1.2 (from Corsu 0.27.0) | general dictionary: the shared vocabulary, 19,550 words (stray words removed), no regional preference; keeps the capital letters of words | [latest published release](https://github.com/Platykalt/corsu/releases/latest/download/corsu-keyboard.kmp) ([SHA-256 checksum](https://github.com/Platykalt/corsu/releases/latest/download/corsu-keyboard.kmp.sha256)) |
+| `corsu-keyboard.kmp` | Corsu | 1.2 (from Corsu 0.27.0) | general dictionary: the shared vocabulary, 19,228 words (stray words removed), no regional preference; keeps the capital letters of words | [latest published release](https://github.com/Platykalt/corsu/releases/latest/download/corsu-keyboard.kmp) ([SHA-256 checksum](https://github.com/Platykalt/corsu/releases/latest/download/corsu-keyboard.kmp.sha256)) |
 | `corsu-keyboard-cismuntincu.kmp` | Corsu – Cismuntincu (experimental) | 1.2 (from Corsu 0.27.0) | the same vocabulary, preferring the forms of the Cismonte; experimental, the regional forms cover only part of the words (361 words weighted differently) | [latest published release](https://github.com/Platykalt/corsu/releases/latest/download/corsu-keyboard-cismuntincu.kmp) ([SHA-256 checksum](https://github.com/Platykalt/corsu/releases/latest/download/corsu-keyboard-cismuntincu.kmp.sha256)) |
 | `corsu-keyboard-pumuntincu.kmp` | Corsu – Pumuntincu (experimental) | 1.2 (from Corsu 0.27.0) | the same vocabulary, preferring the forms of the Pumonte; experimental, same limit | [latest published release](https://github.com/Platykalt/corsu/releases/latest/download/corsu-keyboard-pumuntincu.kmp) ([SHA-256 checksum](https://github.com/Platykalt/corsu/releases/latest/download/corsu-keyboard-pumuntincu.kmp.sha256)) |
 
@@ -127,10 +127,10 @@ when only the latter is in the dictionary), or a lowercase word by the name spel
 "corti" is missing). The 1.1 dictionary (Corsu 0.26.0) has these forms ("Bastelicaccia", "corti" next to "Corti",
 "Vizzani", acronyms such as "ADECEC"); a word still missing, a street name for instance, may still be replaced.
 
-The 1.2 dictionary (from Corsu 0.27.0) also knows about 6,300 more forms found in its sources: plurals and feminines
+The 1.2 dictionary (from Corsu 0.27.0) also knows about 6,000 more forms found in its sources: plurals and feminines
 ("tradizioni", "fundata", "partuti", which the 19.0.309 engine replaced by "tradizione", "fundatu", "partiti"), the verb
 forms of Wiktionary ("manghjatu") and elided forms ("l'abitanti", "L'ADECEC", which became "abitanti" and "ADECEC").
-Forms it lacks (verbs such as "ghjocanu", "vedemu", rarer elisions) may still be replaced.
+Forms it lacks (verb forms such as "vedemu", rarer elisions) may still be replaced.
 
 ## Returning to a word
 

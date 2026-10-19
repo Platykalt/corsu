@@ -14,9 +14,10 @@ Les sections datées après « État actuel » sont l'historique : ce qui y est 
   mainteneur). `src/release.json` dit 0.27.0 pour que la CI vérifie la mise à jour depuis la 0.26.0 publiée. Détail
   dans le CHANGELOG ; quatre chantiers intégrés (agents A à D) :
   - **Clavier 1.2** (branche `c027-kb`) : plus d'espace avant une ponctuation déjà écrite (modèle ; Android et iOS en
-    fin de mot, Android seul au milieu d'un mot), apostrophe ’ gardée ; +6 335 formes écrites par les sources
-    (Vikipédia, Wiktionnaire, élisions ; sélection IA non relue) pour que la correction automatique de Keyman 19 ne
-    remplace plus des mots justes ; 19 550 mots par paquet. Vérifié dans les moteurs 18.0.254 et 19.0.309 et dans les
+    fin de mot, Android seul au milieu d'un mot), apostrophe ’ gardée ; +6 012 formes écrites par les sources
+    (Vikipédia, comptées seulement dans la prose corse, Wiktionnaire, élisions ; 324 formes mises en attente dans
+    `keyboard/data/held-back.tsv` ; sélection IA non relue) pour que la correction automatique de Keyman 19 ne
+    remplace plus des mots justes ; 19 228 mots par paquet. Vérifié dans les moteurs 18.0.254 et 19.0.309 et dans les
     applications 18.0.254 et 19.0.309 sur émulateur Android 14 ; ni téléphone réel ni iPhone. Ponctuation tapée
     juste après une suggestion : Keyman 18 laisse « casa . » (un retour arrière enlève l'espace), Keyman 19 l'enlève.
   - **Signaler une traduction** : page « Signaler » de la fenêtre ; rien n'est envoyé sans clic, chemins et adresses
@@ -41,7 +42,7 @@ Les sections datées après « État actuel » sont l'historique : ce qui y est 
   Windows et macOS ; fenêtre non observée dans WebView2 ni WKWebView ; Keyman 18 sans correction automatique ;
   suggestion choisie au milieu d'un mot : seulement la partie à gauche du curseur remplacée sous iOS (limite de
   l'application Keyman) ; « calvi » devient « Calvi » (aucune source pour l'adjectif) ; formes verbales absentes des
-  sources (« ghjocanu », « vedemu ») encore remplaçables par la correction de Keyman 19.
+  sources (« vedemu ») encore remplaçables par la correction de Keyman 19.
 
 ## Objectifs retenus
 

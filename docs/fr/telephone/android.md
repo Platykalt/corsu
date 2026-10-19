@@ -23,13 +23,13 @@ n'y a pas de captures d'écran.
 
 ## Dictionnaires disponibles
 
-<!-- corsu:phone-variants:fr Fichiers joints à Corsu 0.27.0 (les trois paquets 1.2, 19 550 mots chacun, comptés
+<!-- corsu:phone-variants:fr Fichiers joints à Corsu 0.27.0 (les trois paquets 1.2, 19 228 mots chacun, comptés
      avec tools/count_kmp.py dans les paquets construits). Ce guide décrit la 0.27.0 ; tant qu'elle n'est pas
      publiée, « dernière version publiée » donne encore les paquets 1.1 de Corsu 0.26.0 (13 213 mots). À la
      publication d'une version suivante, ne lister ici que les fichiers qu'elle contient. -->
 | Fichier | Nom dans Keyman | Version | Contenu | Téléchargement |
 | --- | --- | --- | --- | --- |
-| `corsu-keyboard.kmp` | Corsu | 1.2 (à partir de Corsu 0.27.0) | dictionnaire général : le vocabulaire commun, 19 550 mots (mots parasites retirés), sans préférence régionale ; garde la majuscule des mots | [dernière version publiée](https://github.com/Platykalt/corsu/releases/latest/download/corsu-keyboard.kmp) ([empreinte SHA-256](https://github.com/Platykalt/corsu/releases/latest/download/corsu-keyboard.kmp.sha256)) |
+| `corsu-keyboard.kmp` | Corsu | 1.2 (à partir de Corsu 0.27.0) | dictionnaire général : le vocabulaire commun, 19 228 mots (mots parasites retirés), sans préférence régionale ; garde la majuscule des mots | [dernière version publiée](https://github.com/Platykalt/corsu/releases/latest/download/corsu-keyboard.kmp) ([empreinte SHA-256](https://github.com/Platykalt/corsu/releases/latest/download/corsu-keyboard.kmp.sha256)) |
 | `corsu-keyboard-cismuntincu.kmp` | Corsu – Cismuntincu (experimental) | 1.2 (à partir de Corsu 0.27.0) | le même vocabulaire, avec une préférence pour les formes du Cismonte ; expérimental, les formes régionales ne couvrent qu'une partie des mots (361 mots pondérés autrement) | [dernière version publiée](https://github.com/Platykalt/corsu/releases/latest/download/corsu-keyboard-cismuntincu.kmp) ([empreinte SHA-256](https://github.com/Platykalt/corsu/releases/latest/download/corsu-keyboard-cismuntincu.kmp.sha256)) |
 | `corsu-keyboard-pumuntincu.kmp` | Corsu – Pumuntincu (experimental) | 1.2 (à partir de Corsu 0.27.0) | le même vocabulaire, avec une préférence pour les formes du Pumonte ; expérimental, même limite | [dernière version publiée](https://github.com/Platykalt/corsu/releases/latest/download/corsu-keyboard-pumuntincu.kmp) ([empreinte SHA-256](https://github.com/Platykalt/corsu/releases/latest/download/corsu-keyboard-pumuntincu.kmp.sha256)) |
 
@@ -135,10 +135,10 @@ manque). Le dictionnaire 1.1 (Corsu 0.26.0) contient ces formes (« Bastelicacci
 Vizzani », des sigles comme « ADECEC ») ; un mot qui y manque encore, un nom de rue par exemple, peut toujours être
 remplacé.
 
-Le dictionnaire 1.2 (à partir de Corsu 0.27.0) connaît en plus environ 6 300 formes trouvées dans ses sources : pluriels
+Le dictionnaire 1.2 (à partir de Corsu 0.27.0) connaît en plus environ 6 000 formes trouvées dans ses sources : pluriels
 et féminins (« tradizioni », « fundata », « partuti », que le moteur 19.0.309 remplaçait par « tradizione »,
 « fundatu », « partiti »), formes verbales du Wiktionnaire (« manghjatu ») et formes élidées (« l'abitanti »,
-« L'ADECEC », devenues « abitanti » et « ADECEC »). Les formes qui lui manquent (verbes comme « ghjocanu », « vedemu »,
+« L'ADECEC », devenues « abitanti » et « ADECEC »). Les formes qui lui manquent (formes verbales comme « vedemu »,
 élisions plus rares) peuvent encore être remplacées.
 
 ## Revenir sur un mot

@@ -13,12 +13,17 @@ in a published release.
     followed by punctuation, a hyphen, a line break or a no-break space. At the end of a word this works on Android
     and iPhone; inside a word, on Android only.
   - The typographic apostrophe is kept: "l’is" + "l'isula" gives "l’isula".
-  - 6,335 forms that sources write are now known words, so Keyman 19's automatic correction no longer replaces correct
-    words ("tradizioni", "culturali", "andati", "fundata", "abitanti", "l'ADECEC", "l'abitanti"…). Rules 5b (plurals
-    and feminines written at least 5 times in Vikipedia, 3,113), 5c (forms of Wiktionary's Corsican entries, 2,749) and
-    5d (elided forms written at least 5 times in Vikipedia, 473). Weight at most 100 and never above the listed form.
-    This selection was made by AI and not checked by a speaker; some Italian forms quoted in Vikipedia got in
-    (`keyboard/data/REVIEW.md`). 13,215 → 19,550 words in each package.
+  - 6,012 forms that sources write are now known words, so Keyman 19's automatic correction no longer replaces correct
+    words ("tradizioni", "culturali", "andati", "fundata", "abitanti", "ghjocanu", "l'ADECEC", "l'abitanti"…). Rules
+    5b (plurals and feminines differing by their last vowel, 2,819), 5c (forms of Wiktionary's Corsican entries,
+    2,763), 5d (elided forms, 429) and 5e (forms checked in a cited source, 1: "ghjocanu", U Cunghjugarellu). Forms
+    taken from Vikipedia must be written at least 5 times in Corsican prose, in at least 3 articles: titles,
+    quotations, italics, bibliographies, tables and sentences in Italian, French or Latin no longer count. 324 forms
+    that only the earlier count supported are held back with their passages (`keyboard/data/held-back.tsv`) and not
+    shipped, for example "secoli", "prodottu", "dalla". Each added form weighs less than the words already offered
+    for its prefixes, so it is recognised when typed but pushes no listed word out of the suggestions. This selection
+    was made by AI and not checked by a speaker (`keyboard/data/REVIEW.md`). 13,213 words in the published 1.1
+    packages, 19,228 in each 1.2 package.
   - Punctuation typed right after tapping a suggestion: Keyman 18 leaves "casa ."; one Backspace removes only the
     space. Keyman 19 removes the space itself. Written in the phone guides.
   - Checked in Keyman 18.0.254's and 19.0.309's engines and in the Keyman 18.0.254 and 19.0.309 apps on an Android 14
