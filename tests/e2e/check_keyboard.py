@@ -261,7 +261,7 @@ def step(results, scenario, model, index):
     return result['steps'][index]
 
 
-def checks(results, models):
+def checks(results, models, keyman='18.0.254'):
     """What the fixed packages must do; each check names the defect it guards."""
     failures, warnings = [], []
 
@@ -333,14 +333,72 @@ def checks(results, models):
         # own result, the end of the old word right of the caret.
         iphone = s('return to a word: iPhone user agent', 2)['text']
         expect(iphone == 'Dopu ellu a vene', f'{model}: with an iPhone user agent, {iphone!r}')
-        # Known limits of the engine, reported when they change: a space is added before punctuation that follows
-        # the word; undoing a mid-word choice does not bring back the end of the old word; a selected word gets the
-        # suggestions of a sentence start, with a capital.
-        limits = {2: 'Eccu Aiacciu .', 6: 'Eccu a cadi Petru.', 9: 'Eccu a Di di Petru.'}
+        # Punctuation already written after the word stays attached to it (keyboard/whole-word.js): the engine
+        # used to add its space before it ("Aiacciu .").
+        got = s('return to a word: known limits', 2).get('text')
+        expect(got == 'Eccu Aiacciu.', f'{model}: "Aiacc|iu." + "Aiacciu" gave {got!r}')
+        # Known limits of the engine, reported when they change: undoing a mid-word choice does not bring back the
+        # end of the old word; a selected word gets the suggestions of a sentence start, with a capital.
+        limits = {6: 'Eccu a cadi Petru.', 9: 'Eccu a Di di Petru.'}
         for index, text in limits.items():
             got = s('return to a word: known limits', index)
             expect(got.get('text') == text, f'{model}: known limit changed: {got.get("text", got.get("error"))!r} '
                    f'instead of {text!r} (step {index})', warnings)
+        # A whole message typed key by key, with suggestions tapped: the final text, case and spacing included.
+        message = 'Eccu a casa di Petru. Dopu ghjunghje! Iè? Perchè'
+        got = s('sentence: a message typed', 12).get('text')
+        expect(got == message, f'{model}: the typed message gave {got!r}, expected {message!r}')
+        # Where EuroLatin (SIL) turns Shift on by itself: after . ! ? and a space or a line break, and at the start
+        # of the field; not after … : ; « » or a line break alone. The keyboard's behaviour, not the dictionary's:
+        # reported when it changes.
+        starts = {2: 'Eccu… ecc', 4: 'Eccu: ecc', 6: 'Eccu; ecc', 8: 'Disse « ecc', 10: '« Eccu. » ecc',
+                  12: 'Eccu.\nEcc', 14: 'Eccu\necc', 16: 'Ecc'}
+        for index, text in starts.items():
+            got = s('sentence start: after other punctuation', index).get('text')
+            expect(got == text, f'{model}: EuroLatin sentence start changed: {got!r} instead of {text!r}', warnings)
+        # A suggestion chosen before punctuation already in the text adds no space before it (whole-word.js), at
+        # the end of the word on every platform and with the caret inside the word on Android.
+        attached = {2: 'Eccu Aiacciu.', 4: 'Eccu Aiacciu!', 6: 'Eccu Aiacciu?', 8: 'Eccu Aiacciu:', 10: 'Eccu Aiacciu…',
+                    12: 'Eccu «Aiacciu»', 14: 'Eccu Aiacciu\nDopu', 16: 'Eccu Aiacciu ma', 18: 'Eccu Aiacciu.',
+                    20: 'Dopu ellu, vene', 22: 'Sari-Solenzara'}
+        for index, text in attached.items():
+            got = s('punctuation after the word: a suggestion', index).get('text')
+            expect(got == text, f'{model}: punctuation after the word: {got!r} instead of {text!r} (step {index})')
+        # iPhone: the same at the end of a word; with the caret inside the word the end of the old word stays
+        # (Keyman for iPhone ignores deleteRight), reported when it changes.
+        for index, text in attached.items():
+            got = s('punctuation after the word: iPhone', index).get('text')
+            text = {18: 'Eccu Aiacciu acciu.', 20: 'Dopu ellu a, vene', 22: 'Sari i-Solenzara'}.get(index, text)
+            expect(got == text, f'{model}: iPhone, punctuation after the word: {got!r} instead of {text!r}',
+                   warnings if index >= 18 else failures)
+        # A punctuation mark typed right after a chosen suggestion: the keyboard's keystroke, not the model's.
+        # Keyman 18 leaves the space before it ("casa ."). Keyman 19.0.309 removes it; in this harness the next
+        # space then also removes the mark ("casa dop"), but not in the 19.0.309 app on an Android 14 emulator
+        # (in-app field and system keyboard: "casa. Do"), whose Java side reports every text change back to the
+        # engine and resets its context: a limit of the stand-in bridge, not of Keyman. Reported, not failed.
+        got = s('punctuation typed after a chosen suggestion', 5).get('text')
+        expected = {'18': 'Eccu a casa . Dop', '19': 'Eccu a casa dop'}.get(keyman.split('.')[0], 'Eccu a casa. Dop')
+        expect(got == expected, f'{model}: Keyman {keyman}, "casa" tapped then ". dop": {got!r} '
+               f'(known engine result {expected!r})', warnings)
+        # Apostrophes: a typographic apostrophe stays; elided suggestions are written in full.
+        quotes = {2: 'Eccu l’isula ', 4: 'Eccu l’isula.', 7: "Eccu un'altra ", 10: "Eccu ch'ella "}
+        for index, text in quotes.items():
+            got = s('apostrophes: typographic', index).get('text')
+            expect(got == text, f'{model}: apostrophes: {got!r} instead of {text!r}')
+        for index, fragment in ((6, "un'a"), (9, "ch'el")):
+            banner = s('apostrophes: typographic', index).get('suggestions', [])
+            expect(fragment not in banner, f'{model}: the fragment {fragment!r} is offered as a word: {banner}')
+        # An elided word whose second part is known is kept by auto-correction. Keyman 18's correction search never
+        # asks the model about a word missing from it, so there the engine still drops "L'" (setting 3 is not
+        # offered by the Keyman 18 apps): a warning on 18, a failure from 19.
+        got = s('apostrophes: an elided word', 4).get('text')
+        expect(got == "L'ADECEC hè tutti l'abitanti ", f'{model}: Keyman {keyman}, elided words gave {got!r}',
+               warnings if keyman.startswith('18.') else failures)
+        # Each regional form can replace the other, also with the caret inside the word (Android).
+        switches = {2: 'u ziteddu ', 4: 'u zitellu ', 6: 'u ziteddu vene', 8: 'u zitellu vene'}
+        for index, text in switches.items():
+            got = s('variants: switching', index).get('text')
+            expect(got == text, f'{model}: variant switch gave {got!r} instead of {text!r}')
     if {'platykalt.co.corsu_cismuntincu', 'platykalt.co.corsu_pumuntincu'} <= set(models):
         north = step(results, 'variants', 'platykalt.co.corsu_cismuntincu', 1)['suggestions']
         south = step(results, 'variants', 'platykalt.co.corsu_pumuntincu', 1)['suggestions']
@@ -385,7 +443,7 @@ def main():
         args.log.write_text('\n'.join(lines) + '\n', encoding='utf-8')
     if args.observe:
         return
-    failures, warnings = checks(results, list(models))
+    failures, warnings = checks(results, list(models), args.keyman)
     failures += package_checks(args.packages, models, results)
     for found, record in zip(data_checks(results, scenarios), (failures, warnings)):
         record.extend(found)

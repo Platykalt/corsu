@@ -110,8 +110,8 @@ Pour revenir au dictionnaire général, faites de même avec `corsu-keyboard.kmp
 
 - **La majuscule en début de phrase vient du clavier EuroLatin, pas du dictionnaire.** Elle s'active au début d'un
   champ et après `.`, `?` ou `!` suivis d'une espace. Elle ne s'active pas après un retour à la ligne sans
-  ponctuation, ni après `."` ; elle s'active à tort après `M. `. Il n'y a pas de réglage pour la couper : touchez la
-  touche Maj pour l'annuler.
+  ponctuation, ni après `."`, `…`, `:`, `;` ou `«` ; elle s'active à tort après `M. `. Il n'y a pas de réglage pour la
+  couper : touchez la touche Maj pour l'annuler.
 - **Les suggestions gardent la casse tapée** depuis Corsu 0.26.0 (paquets 1.1) : au milieu d'une phrase, `Ecc`
   propose « Eccu », et en début de phrase les suggestions ont la majuscule. Avec l'ancien paquet 1.0 (nommé
   `platykalt.co.corsu` dans Keyman), `Ecc` pouvait devenir « eccu » : si vous l'avez encore,
@@ -131,6 +131,12 @@ manque). Le dictionnaire 1.1 (Corsu 0.26.0) contient ces formes (« Bastelicacci
 Vizzani », des sigles comme « ADECEC ») ; un mot qui y manque encore, un nom de rue par exemple, peut toujours être
 remplacé.
 
+Le dictionnaire 1.2 (prochaine version de Corsu, pas encore publiée) connaît en plus environ 5 900 formes trouvées
+dans ses sources : pluriels et féminins (« tradizioni », « fundata », « partuti », que le moteur 19.0.309 remplaçait
+par « tradizione », « fundatu », « partiti ») et formes verbales du Wiktionnaire (« manghjatu ») ; et un mot élidé
+dont la seconde partie est connue (« L'ADECEC », « d'abitanti ») est gardé. Des formes verbales qui lui manquent
+(« ghjocanu », « vedemu ») peuvent encore être remplacées.
+
 ## Revenir sur un mot
 
 Déplacer le curseur ne change rien au texte. Les suggestions suivent la partie du mot **à gauche du curseur**.
@@ -141,15 +147,29 @@ Déplacer le curseur ne change rien au texte. Les suggestions suivent la partie 
   entier. Dans « Dopu ell|a vene », choisir « ellu » donne « Dopu ellu vene ». Le dictionnaire demande à Keyman
   d'effacer la fin du mot, ce que Keyman pour Android fait. Observé dans le moteur de Keyman 18.0.254 et 19.0.309
   (bêta) et dans l'application Keyman 18.0.254 sur un émulateur Android 14, pas sur un téléphone.
-  Deux limites de Keyman restent : si le mot est suivi d'une ponctuation, une espace s'ajoute devant elle
-  (`Aiacc|iu.` puis « Aiacciu » donne « Aiacciu . ») ; et l'annulation que Keyman propose juste après (effacer, puis
-  toucher le mot entre guillemets) ne rend pas la fin de l'ancien mot.
+  Une limite de Keyman reste : l'annulation que Keyman propose juste après (effacer, puis toucher le mot entre
+  guillemets) ne rend pas la fin de l'ancien mot.
+- **Ponctuation déjà écrite après le mot** : avec le dictionnaire 1.2 (prochaine version de Corsu, pas encore
+  publiée), le mot choisi reste collé à elle, curseur à la fin du mot ou au milieu : `Aiacc|.` ou `Aiacc|iu.` puis
+  « Aiacciu » donne « Aiacciu. », et `Sar|i-Solenzara` puis « Sari » garde le trait d'union. Avec le dictionnaire
+  1.1, Keyman ajoutait une espace devant le signe (« Aiacciu . »). Observé dans le moteur de Keyman 18.0.254 et
+  19.0.309, pas sur un téléphone.
 - **Curseur au milieu du mot**, avec l'ancien dictionnaire 1.0 (`platykalt.co.corsu`, avant Corsu 0.26.0) : la
   suggestion ne remplace que la partie à gauche du curseur, et la fin de l'ancien mot reste à sa droite :
   « Dopu ellu a vene », où ce « a » est la fin de « ella », à effacer à la main ; de même, `ca|sa` puis « casa »
   donne « casa sa ». [Mettez-le à jour](#mettre-à-jour).
 - **Après avoir ajouté ou effacé une lettre au milieu du mot**, c'est le même cas : les suggestions suivent la partie
   à gauche du curseur, et la règle ci-dessus s'applique.
+- **Ponctuation tapée après une suggestion touchée** : Keyman ajoute une espace après le mot touché, et Keyman 18 la
+  garde si l'on tape ensuite `.` ou `,` (« casa . »). Touchez une fois la touche d'effacement (elle n'enlève que
+  l'espace), puis tapez le signe : « casa. ». Keyman 19 (bêta) enlève lui-même cette espace. C'est la façon dont
+  Keyman traite les touches ; le dictionnaire n'y peut rien.
+- **Formes régionales** : quand le bandeau propose les deux formes (zitellu, ziteddu), touchez celle que vous voulez ;
+  pour changer un mot déjà écrit, placez le curseur à sa fin (ou au milieu) et touchez l'autre forme : le mot entier
+  est remplacé.
+- **Apostrophes** : les mots élidés sont proposés en entier (`l'is` donne « l'isula », `ch'el` donne « ch'ella »). Si
+  le texte emploie l'apostrophe typographique `’`, le dictionnaire 1.2 la garde dans le mot qu'il écrit
+  (« l’isula »).
 - **Mot sélectionné** : tapez les premières lettres du mot voulu (elles remplacent la sélection), puis choisissez la
   suggestion. Toucher une suggestion sans rien taper remplace la sélection par une suggestion de début de phrase, avec
   majuscule (« Eccu a Di di Petru. ») : comportement du moteur de Keyman, observé dans son moteur seulement.

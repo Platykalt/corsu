@@ -252,6 +252,8 @@ function installHelpers() {
         suggestions: prediction.currentSuggestions.map(s => s.displayAs),
         tags: prediction.currentSuggestions.map(s => s.tag || ''),
         selected: prediction.selected ? prediction.selected.displayAs : null,
+        // The edits the engine asked the app for since the last step (insertText: dn, s, dr).
+        edits: field.log.splice(0),
       };
     },
   };
@@ -287,6 +289,13 @@ async function runSteps(page, steps) {
       if (step.type !== undefined) {
         for (const ch of Array.from(step.type)) {
           await press(ch === ' ' ? 'K_SPACE' : ch === '\n' ? 'K_ENTER' : ch);
+        }
+      } else if (step.tap !== undefined) {
+        // Like a person who taps the letter keys and lets the keyboard choose the case (its automatic Shift at a
+        // sentence start): a-z are pressed by key (K_A...), whatever layer is shown; other characters as in "type".
+        for (const ch of Array.from(step.tap)) {
+          await press(ch === ' ' ? 'K_SPACE' : ch === '\n' ? 'K_ENTER'
+            : /^[a-z]$/.test(ch) ? `K_${ch.toUpperCase()}` : ch);
         }
       } else if (step.key) {
         await press(step.key);

@@ -35,3 +35,14 @@ platykalt.co.corsu_pumuntincu	2		so	none	socu	offers	fail	southern 1st person of
 *	3	A\s	INFCOR	space	A INFCOR\s	text	fail	curated acronym (sources/acronyms.tsv) kept in capitals
 *	3		Vezzani	space	Vezzani\s	text	fail	the Wikidata label Vezzani stays known next to Vizzani
 *	2		ade	none	ADECEC	offers	warn	the acronym is offered from its prefix (it is the only word starting so)
+*	3	E\s	tradizioni	space	E tradizioni\s	text	fail	plural of tradizione, 138 times in Vikipedia (make_vocab step 5b): auto-correction once made it tradizione
+*	3	E tradizioni\s	culturali	space	E tradizioni culturali\s	text	fail	plural of culturale (Vikipedia 181, step 5b): once became culturale
+*	3	parechji\s	milioni	space	parechji milioni\s	text	fail	plural of milione (Vikipedia 298, step 5b): once became milione
+*	3	Simu\s	andati	space	Simu andati\s	text	fail	participle plural (Vikipedia 26, step 5b): once became andatu
+*	3	A chjesa hè stata\s	fundata	space	A chjesa hè stata fundata\s	text	fail	participle feminine (Vikipedia 140, step 5b): once became fundatu
+*	3	Ella hè\s	venuta	space	Ella hè venuta\s	text	fail	participle feminine (Vikipedia 7, step 5b): once became venutu
+*	3	Simu\s	partuti	space	Simu partuti\s	text	fail	participle plural (Vikipedia 11, with partutu 21: step 5b): once became spartuti (18.0 engine) or partiti (19.0)
+*	3	A\s	zitedda	space	A zitedda\s	text	fail	southern form of zitella (Vikipedia 23, step 5b; known, no regional weighting): once became ziteddu
+*	3	Aghju\s	manghjatu	space	Aghju manghjatu\s	text	fail	participle in Wiktionary's conjugation of manghjà (step 5c): once became manghjà (19.0 engine)
+*	3	mille\s	abitanti	space	mille abitanti\s	text	fail	plural of abitante (Vikipedia 854, step 5b): once became abitante (19.0 engine)
+*	2		tradizi	none	tradizione	first	fail	an added form (tradizioni, weight at most 100 and at most its listed form) does not pass the word the list already had

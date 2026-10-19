@@ -802,5 +802,376 @@
     "key": "K_SPACE"
    }
   ]
+ },
+ {
+  "name": "sentence: a message typed with taps, suggestions and punctuation",
+  "setting": 2,
+  "steps": [
+   {
+    "tap": "eccu a cas"
+   },
+   {
+    "accept": "casa"
+   },
+   {
+    "tap": "di "
+   },
+   {
+    "type": "Petru"
+   },
+   {
+    "type": ". "
+   },
+   {
+    "tap": "dop"
+   },
+   {
+    "accept": "Dopu"
+   },
+   {
+    "tap": "ghjunghje"
+   },
+   {
+    "type": "! "
+   },
+   {
+    "tap": "iè"
+   },
+   {
+    "type": "? "
+   },
+   {
+    "tap": "perchè"
+   }
+  ]
+ },
+ {
+  "name": "sentence start: after other punctuation and line breaks",
+  "setting": 2,
+  "steps": [
+   {
+    "setText": "Eccu… "
+   },
+   {
+    "tap": "ecc"
+   },
+   {
+    "setText": "Eccu: "
+   },
+   {
+    "tap": "ecc"
+   },
+   {
+    "setText": "Eccu; "
+   },
+   {
+    "tap": "ecc"
+   },
+   {
+    "setText": "Disse « "
+   },
+   {
+    "tap": "ecc"
+   },
+   {
+    "setText": "« Eccu. » "
+   },
+   {
+    "tap": "ecc"
+   },
+   {
+    "setText": "Eccu.\n"
+   },
+   {
+    "tap": "ecc"
+   },
+   {
+    "setText": "Eccu\n"
+   },
+   {
+    "tap": "ecc"
+   },
+   {
+    "setText": ""
+   },
+   {
+    "tap": "ecc"
+   }
+  ]
+ },
+ {
+  "name": "punctuation after the word: a suggestion keeps the spacing as written",
+  "setting": 2,
+  "steps": [
+   {
+    "setText": "Eccu Aiacc.",
+    "at": 10
+   },
+   {
+    "accept": "Aiacciu"
+   },
+   {
+    "setText": "Eccu Aiacc!",
+    "at": 10
+   },
+   {
+    "accept": "Aiacciu"
+   },
+   {
+    "setText": "Eccu Aiacc?",
+    "at": 10
+   },
+   {
+    "accept": "Aiacciu"
+   },
+   {
+    "setText": "Eccu Aiacc:",
+    "at": 10
+   },
+   {
+    "accept": "Aiacciu"
+   },
+   {
+    "setText": "Eccu Aiacc…",
+    "at": 10
+   },
+   {
+    "accept": "Aiacciu"
+   },
+   {
+    "setText": "Eccu «Aiacc»",
+    "at": 11
+   },
+   {
+    "accept": "Aiacciu"
+   },
+   {
+    "setText": "Eccu Aiacc\nDopu",
+    "at": 10
+   },
+   {
+    "accept": "Aiacciu"
+   },
+   {
+    "setText": "Eccu Aiacc ma",
+    "at": 10
+   },
+   {
+    "accept": "Aiacciu"
+   },
+   {
+    "setText": "Eccu Aiacciu.",
+    "at": 7
+   },
+   {
+    "accept": "Aiacciu"
+   },
+   {
+    "setText": "Dopu ella, vene",
+    "at": 8
+   },
+   {
+    "accept": "ellu"
+   },
+   {
+    "setText": "Sari-Solenzara",
+    "at": 3
+   },
+   {
+    "accept": "Sari"
+   }
+  ]
+ },
+ {
+  "name": "punctuation after the word: iPhone user agent",
+  "setting": 2,
+  "steps": [
+   {
+    "setText": "Eccu Aiacc.",
+    "at": 10
+   },
+   {
+    "accept": "Aiacciu"
+   },
+   {
+    "setText": "Eccu Aiacc!",
+    "at": 10
+   },
+   {
+    "accept": "Aiacciu"
+   },
+   {
+    "setText": "Eccu Aiacc?",
+    "at": 10
+   },
+   {
+    "accept": "Aiacciu"
+   },
+   {
+    "setText": "Eccu Aiacc:",
+    "at": 10
+   },
+   {
+    "accept": "Aiacciu"
+   },
+   {
+    "setText": "Eccu Aiacc…",
+    "at": 10
+   },
+   {
+    "accept": "Aiacciu"
+   },
+   {
+    "setText": "Eccu «Aiacc»",
+    "at": 11
+   },
+   {
+    "accept": "Aiacciu"
+   },
+   {
+    "setText": "Eccu Aiacc\nDopu",
+    "at": 10
+   },
+   {
+    "accept": "Aiacciu"
+   },
+   {
+    "setText": "Eccu Aiacc ma",
+    "at": 10
+   },
+   {
+    "accept": "Aiacciu"
+   },
+   {
+    "setText": "Eccu Aiacciu.",
+    "at": 7
+   },
+   {
+    "accept": "Aiacciu"
+   },
+   {
+    "setText": "Dopu ella, vene",
+    "at": 8
+   },
+   {
+    "accept": "ellu"
+   },
+   {
+    "setText": "Sari-Solenzara",
+    "at": 3
+   },
+   {
+    "accept": "Sari"
+   }
+  ],
+  "userAgent": "iphone"
+ },
+ {
+  "name": "punctuation typed after a chosen suggestion",
+  "setting": 2,
+  "steps": [
+   {
+    "tap": "eccu a cas"
+   },
+   {
+    "accept": "casa"
+   },
+   {
+    "type": "."
+   },
+   {
+    "key": "K_SPACE"
+   },
+   {
+    "tap": "dop"
+   }
+  ]
+ },
+ {
+  "name": "apostrophes: typographic apostrophe and elisions kept",
+  "setting": 2,
+  "steps": [
+   {
+    "setText": "Eccu l’is"
+   },
+   {
+    "accept": "l’isula"
+   },
+   {
+    "setText": "Eccu l’isula.",
+    "at": 9
+   },
+   {
+    "accept": "l’isula"
+   },
+   {
+    "setText": "Eccu "
+   },
+   {
+    "type": "un'a"
+   },
+   {
+    "accept": "un'altra"
+   },
+   {
+    "setText": "Eccu "
+   },
+   {
+    "type": "ch'el"
+   },
+   {
+    "accept": "ch'ella"
+   }
+  ]
+ },
+ {
+  "name": "apostrophes: an elided word is known (auto-correct on)",
+  "setting": 3,
+  "steps": [
+   {
+    "type": "L'ADECEC hè"
+   },
+   {
+    "key": "K_SPACE"
+   },
+   {
+    "type": "tutti l'abitanti"
+   },
+   {
+    "key": "K_SPACE"
+   }
+  ]
+ },
+ {
+  "name": "variants: switching to the other form",
+  "setting": 2,
+  "steps": [
+   {
+    "type": "u zite"
+   },
+   {
+    "accept": "ziteddu"
+   },
+   {
+    "setText": "u zite"
+   },
+   {
+    "accept": "zitellu"
+   },
+   {
+    "setText": "u zitellu vene",
+    "at": 6
+   },
+   {
+    "accept": "ziteddu"
+   },
+   {
+    "setText": "u ziteddu vene",
+    "at": 6
+   },
+   {
+    "accept": "zitellu"
+   }
+  ]
  }
 ]

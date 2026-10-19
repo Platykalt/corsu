@@ -24,7 +24,9 @@ Words are kept in their written case: the models declare `languageUsesCasing`, s
 typed (Eccu, ECCU) and its search ignores case and accents.
 
 Each compiled model is wrapped with keyboard/whole-word.js: on Keyman for Android, a suggestion chosen with the
-caret inside a word replaces the whole word instead of only its part left of the caret.
+caret inside a word replaces the whole word instead of only its part left of the caret; everywhere, no space is
+added before punctuation already written after the word, an elided word whose second part is known is kept, and a
+typographic apostrophe stays.
 """
 import argparse
 from collections import Counter

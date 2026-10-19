@@ -60,14 +60,35 @@ capital (The, To, And...), and tapping one replaces the selection with it.
 
 ## Related, smaller
 
-- When the word is followed by punctuation, the space added after the chosen word comes before it: with the end of
-  the word deleted, `Aiacc|iu.` + "Aiacciu" gives `Aiacciu .`.
+- **A space is added before punctuation already written after the word.** `finalizeSuggestions` appends
+  `punctuation.insertAfterWord` unless `context.right` starts with it; when the word (or the end of the word, in the
+  mid-word case) is directly followed by `.`, `,`, `)`, `»`, a hyphen or a line break, the space lands before it:
+  `Aiacc|.` + "Aiacciu" gives `Aiacciu .`, `Aiacc|iu.` gives `Aiacciu .` once the end of the word is deleted,
+  `Port|o-Vecchio` + "Portu" gives `Portu -Vecchio`. Seen in the 18.0.254 and 19.0.309 engines and in the 18.0.254
+  app (Android 14 emulator). Suggested change: do not append it when the text after the token starts with
+  punctuation or any whitespace (not only `insertAfterWord`). Corsu works around it (below).
 - The reversion offered after accepting (`acceptSuggestion` in `model-compositor.ts`) restores only the left part:
   after a mid-word choice that deleted text right of the caret, backspace then the quoted word gives
   `Eccu a ca|di Petru.` from `Eccu a ca|sa di Petru.`.
+- **Keyman 18.0: punctuation typed after a tapped suggestion** keeps the appended space (`casa .`). Keyman 19.0.309
+  removes it (`doPredictiveAutoBreaking`), seen in the 19.0.309 app on an Android 14 emulator, in Keyman's own field
+  and as the system keyboard: `casa` tapped, then `.`, space, `Do` gives `A casa. Do`. (In a headless page with a
+  stand-in bridge that does not echo text changes back, the space typed after the `.` also removed the `.`: a limit
+  of that stand-in, not reproduced in the app; mentioned only in case another host behaves like it.)
+- **Keyman 18.0 correction search and words outside the lexicon.** With auto-correction forced on in the 18.0 engine
+  (the 18.0 apps do not offer it), `L'ADECEC` + space became `ADECEC`: the search only follows lexicon paths, so the
+  model is never asked about the typed elided word, even when its second part is a known word. The 19.0.309 engine
+  asks the model about the typed root, and a model can then recognise it. Low priority, since 18.0 apps have no
+  auto-correction.
 
 ## What Corsu does meanwhile
 
-Corsu's models (Keyman packages `platykalt.co.corsu*`) set `deleteRight` themselves on Android only, where the app
-applies it (`keyboard/whole-word.js` in the Corsu repository); on iOS they leave suggestions as they are. If Keyman
-fixes this in the engine, that wrapper must go, or the end of the word would be deleted twice.
+Corsu's models (Keyman packages `platykalt.co.corsu*`, `keyboard/whole-word.js` in the Corsu repository):
+
+- set `deleteRight` themselves on Android only, where the app applies it; on iOS they leave suggestions as they are.
+  If Keyman fixes this in the engine, that part must go, or the end of the word would be deleted twice;
+- expose `punctuation` through a getter that returns an empty `insertAfterWord` while the current prediction's
+  context has punctuation or a line break right after the word (at the end of the word on every platform, inside it
+  on Android). This relies on `finalizeSuggestions` reading the model's punctuation for each set of suggestions,
+  after calling the model's `predict` for the same context (18.0.254 and 19.0.309). If the engine stops adding the
+  space itself, the getter becomes a no-op.

@@ -99,8 +99,8 @@ To go back to the general dictionary, choose "Corsu" (version 1.1) the same way.
 
 - **The capital at the start of a sentence comes from the EuroLatin keyboard, not from the dictionary.** It turns on
   at the start of a field and after `.`, `?` or `!` followed by a space. It does not turn on after a line break
-  without punctuation, nor after `."`; it wrongly turns on after `M. `. There is no setting to turn it off: tap Shift
-  to cancel it.
+  without punctuation, nor after `."`, `…`, `:`, `;` or `«`; it wrongly turns on after `M. `. There is no setting to
+  turn it off: tap Shift to cancel it.
 - **Suggestions keep the case you typed** since Corsu 0.26.0 (1.1 packages): in the middle of a sentence, `Ecc`
   suggests "Eccu", and at the start of a sentence suggestions are capitalised. With the old 1.0 package (named
   `platykalt.co.corsu` in Keyman), `Ecc` could become "eccu": if you still have it, [update it](#updating), then
@@ -118,6 +118,11 @@ only the latter is in the dictionary), or a lowercase word by the name spelled t
 "corti" is missing). The 1.1 dictionary (Corsu 0.26.0) has these forms ("Bastelicaccia", "corti" next to "Corti",
 "Vizzani", acronyms such as "ADECEC"); a word still missing, a street name for instance, may still be replaced.
 
+The 1.2 dictionary (next version of Corsu, not published yet) also knows about 5,900 more forms found in its sources:
+plurals and feminines ("tradizioni", "fundata", "partuti", which the 19.0.309 engine replaced by "tradizione",
+"fundatu", "partiti") and the verb forms of Wiktionary ("manghjatu"); and an elided word whose second part it knows
+("L'ADECEC", "d'abitanti") is kept. Verb forms it lacks ("ghjocanu", "vedemu") may still be replaced.
+
 ## Returning to a word
 
 Moving the cursor changes nothing in the text. Suggestions follow the part of the word **left of the cursor**, and a
@@ -132,6 +137,20 @@ tried on an iPhone). The safe gestures:
 - put the cursor **at the end of the word** before picking a suggestion: it then replaces the whole word;
 - or select the word, type its first letters (they replace the selection), then pick the suggestion;
 - or delete the word and type it again.
+
+Other cases, observed in the engine of Keyman 18.0.254 and 19.0.309 with the iPhone user agent, not on an
+iPhone:
+
+- **Punctuation already after the word**, cursor at its end: with the 1.2 dictionary (next version of Corsu, not
+  published yet), `Aiacc|.` then "Aiacciu" gives "Aiacciu." (with 1.1, Keyman added a space: "Aiacciu ."). With the
+  cursor inside the word, the end of the old word stays, as above, and a space keeps it apart.
+- **Punctuation typed after a tapped suggestion**: Keyman adds a space after the word you tap, and Keyman 18 keeps it
+  when you then type `.` or `,` ("casa ."). Tap Backspace once (it removes the space only), then type the mark.
+  Keyman 19 (beta) removes that space itself.
+- **Regional forms**: when the banner offers both forms (zitellu, ziteddu), tap the one you want; to change a word
+  already written, put the cursor at its end and tap the other form.
+- **Apostrophes**: elided words are suggested whole (`l'is` gives "l'isula"). If the text uses the typographic
+  apostrophe `’`, the 1.2 dictionary keeps it ("l’isula").
 
 ## If something goes wrong
 
