@@ -122,8 +122,8 @@ Pour revenir au dictionnaire général, choisissez « Corsu » (version 1.2 ; 1.
 Keyman 18.0, la version stable, **n'a pas de correction automatique** : les corrections sont proposées dans le bandeau
 et ne s'appliquent que si vous les touchez. Le dictionnaire Corsu ne commande pas ce réglage. Keyman 19, encore en
 version bêta, ajoute **Apply corrections automatically** ; il apparaîtra sur l'écran Corsican quand Keyman 19 sera la
-version stable. Il restera facultatif. Dans nos essais du moteur de la bêta 19.0.309 (hors de l'application), un mot
-présent dans le dictionnaire est toujours gardé tel qu'il est tapé, mais un mot absent peut être remplacé : un nom par
+version stable. Il restera facultatif. Dans nos essais du moteur de la bêta 19.0.309 (hors de l'application), les mots présents dans le dictionnaire qui ont été essayés sont restés tels qu'ils étaient tapés (un mot très rare
+proche d'un mot fréquent n'est pas garanti), mais un mot absent peut être remplacé : un nom par
 un nom proche (« Bastelicaccia » par « Bastilicaccia » quand seule la seconde graphie est dans le dictionnaire), ou un
 mot en minuscules par le nom qui s'écrit pareil (« corti » par « Corti » quand « corti » y manque). Le dictionnaire
 1.1 (Corsu 0.26.0) contient ces formes (« Bastelicaccia », « corti » à côté de « Corti », « Vizzani », des sigles

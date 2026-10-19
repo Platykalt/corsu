@@ -17,8 +17,11 @@ Les sections datées après « État actuel » sont l'historique : ce qui y est 
     fin de mot, Android seul au milieu d'un mot), apostrophe ’ gardée ; +6 012 formes écrites par les sources
     (Vikipédia, comptées seulement dans la prose corse, Wiktionnaire, élisions ; 324 formes mises en attente dans
     `keyboard/data/held-back.tsv` ; sélection IA non relue) pour que la correction automatique de Keyman 19 ne
-    remplace plus des mots justes ; 19 341 mots par paquet. Vérifié dans les moteurs 18.0.254 et 19.0.309 et dans les
-    applications 18.0.254 et 19.0.309 sur émulateur Android 14 ; ni téléphone réel ni iPhone. Ponctuation tapée
+    remplace plus des mots justes ; 19 341 mots par paquet. Paquets finaux vérifiés dans les moteurs seulement : tout passe avec 18.0.254 (aussi en CI) ; avec la bêta
+    19.0.309, tous les cas de mots passent, mais le scénario « correction automatique activée » échoue par intermittence
+    (erreur interne `isFullReplacement`, aussi avec les paquets 1.1 et 1.2 précédents, origine non isolée). Espace avant
+    la ponctuation vu dans les applications 18.0.254 et 19.0.309 sur émulateur Android 14 avec des données 1.2
+    antérieures ; ni téléphone réel ni iPhone. Commit fonctionnel validé : `b9ff20f` (CI 39233111017). Ponctuation tapée
     juste après une suggestion : Keyman 18 laisse « casa . » (un retour arrière enlève l'espace), Keyman 19 l'enlève.
   - **Noms de lieux historiques** (branches `c027c-inv`, `c027c-kb`) : inventaire sourcé
     (`keyboard/data/sources/historical-places.tsv`, 330 lignes : pievi, micro-régions, diocèses et sièges, provinces,

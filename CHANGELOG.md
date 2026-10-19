@@ -35,8 +35,11 @@ in a published release.
     last word before the caret, so "San Lurenzu di Vallerustie" is never offered as one suggestion.
   - Punctuation typed right after tapping a suggestion: Keyman 18 leaves "casa ."; one Backspace removes only the
     space. Keyman 19 removes the space itself. Written in the phone guides.
-  - Checked in Keyman 18.0.254's and 19.0.309's engines and in the Keyman 18.0.254 and 19.0.309 apps on an Android 14
-    emulator. Not tried on a real phone or an iPhone.
+  - Final packages checked in Keyman's engines only: every check passes in 18.0.254 (also in CI); in the 19.0.309 beta
+    every word case passes, but the "auto-correct on" scenario fails intermittently on an internal engine error
+    (`isFullReplacement`), also reproduced with the earlier 1.1 and 1.2 packages, origin not fully isolated. The space
+    before punctuation was also seen in the 18.0.254 and 19.0.309 apps on an Android 14 emulator, with earlier 1.2
+    data. Not tried on a real phone or an iPhone.
 - **Report a translation from the window** (« Signaler » page, `src/app/report.js`): program, version, text seen,
   place, proposal and notes. The page shows the report first, copies it, or opens a prefilled GitHub issue, only on a
   click. Nothing is sent or stored by the page; account folder paths and e-mail addresses are replaced.

@@ -32,9 +32,14 @@ publication (tests automatiques ; personne n'a regardé les écrans).
   plus des mots justes (« tradizioni », « abitanti », « l'ADECEC ») ; sélection faite par IA, **non vérifiée par un
   locuteur** ; les formes de Vikipedia ne sont comptées que dans la prose corse (titres, citations et passages en
   italien, français ou latin écartés). Noms de lieux historiques ajoutés d'après un inventaire sourcé : pievi,
-  micro-régions, anciens diocèses, provinces et divisions historiques (113 mots, dont « Vallerustie », « Mariana »,
-  « Accia ») ; les noms composés sont reconnus mot par mot. Données finales vérifiées dans les moteurs de Keyman
-  18.0.254 et 19.0.309 ; espace avant la ponctuation vu aussi dans ces deux applications sur émulateur Android 14 ;
+  micro-régions, anciens diocèses, provinces et divisions historiques ; couverture limitée aux listes de référence
+  retenues, pas exhaustive (113 mots, dont « Vallerustie », « Mariana »,
+  « Accia ») ; les noms composés sont reconnus mot par mot. Paquets finaux vérifiés dans les moteurs de Keyman (navigateur sans affichage, pas dans l'application) : tous les
+  contrôles passent avec Keyman 18.0.254, la version stable ; avec la bêta 19.0.309, tous les cas de mots passent, mais
+  le scénario « correction automatique activée » échoue par intermittence sur une erreur interne du moteur
+  (`isFullReplacement`), reproduite aussi avec les paquets 1.1 et 1.2 précédents, d'origine non complètement isolée.
+  Espace avant la ponctuation vu aussi dans les deux applications sur émulateur Android 14, avec des données 1.2
+  antérieures ;
   **pas sur un vrai téléphone, pas sur iPhone**. Mettre à jour : télécharger de nouveau le fichier sous le même nom, puis relancer Keyman (guides
   ci-dessus) ; Keyman affiche alors la version 1.2.
 - **Signaler une traduction depuis la fenêtre** (page « Signaler ») : logiciel, version, texte vu, endroit,
@@ -212,10 +217,13 @@ looked at the screens).
   words, so Keyman 19's automatic correction no longer replaces correct words ("tradizioni", "abitanti",
   "l'ADECEC"); the selection was made by AI and **not checked by a speaker**, and forms from Vikipedia are
   counted in Corsican prose only (titles, quotations and Italian, French or Latin passages left out). Historical place
-  names added from a sourced inventory: pievi, micro-regions, former dioceses, provinces and historical divisions (113
-  words, including "Vallerustie", "Mariana", "Accia"); compound names are known word by word. Final data checked in
-  Keyman 18.0.254's and 19.0.309's engines; the space before punctuation was also seen in both apps on an Android 14
-  emulator; **not on a real phone, not on iPhone**. To update: download the file again under the same name, then restart Keyman
+  names added from a sourced inventory: pievi, micro-regions, former dioceses, provinces and historical divisions; coverage limited to the reference lists used,
+  not exhaustive (113
+  words, including "Vallerustie", "Mariana", "Accia"); compound names are known word by word. The final packages were checked in Keyman's engines (headless browser, not the app): every check passes with
+  Keyman 18.0.254, the stable version; with the 19.0.309 beta every word case passes, but the "auto-correct on"
+  scenario fails intermittently on an internal engine error (`isFullReplacement`), also reproduced with the earlier 1.1
+  and 1.2 packages, whose origin is not fully isolated. The space before punctuation was also seen in both apps on an
+  Android 14 emulator, with earlier 1.2 data; **not on a real phone, not on iPhone**. To update: download the file again under the same name, then restart Keyman
   (guides above); Keyman then shows version 1.2.
 - **Report a translation from the window** ("Signaler" page): program, version, text seen, place, proposal and notes.
   The page shows the report, copies it, or opens a prefilled GitHub issue, only on a click. Nothing is sent or stored
