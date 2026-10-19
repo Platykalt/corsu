@@ -7,7 +7,7 @@ Inputs:
   - the downloaded resources of tools/fetch_resources.py (Vikipedia dump, Wiktionary extract, Apertium dictionary,
     Tatoeba sentences), read from $CORSU_RESOURCES or ~/.local/share/corsu/resources and never modified;
   - the hand-checked source files in keyboard/data/sources/ (daily words, ADECEC pages, U Cunghjugarellu forms,
-    northern/southern pairs);
+    northern/southern pairs, forms a reference writes in full);
   - the project lexicons (Corsu's own software translations), counted all alike: a word does not become more
     trustworthy because of the file it comes from;
   - the Corsican place names of sources/places.tsv (Wikidata, fetched by tools/fetch_places.py) and the official
@@ -15,7 +15,8 @@ Inputs:
   - the old generated word list keyboard/platykalt.co.corsu/source/wordlist.tsv as of version 0.9.0 (read from git:
     tools/build_keyboard.py now rewrites that file from these lists), only to report what changed.
 
-Outputs the three lists, keyboard/data/audit/removed.tsv (what the old list had and the new one drops, with the
+Outputs the three lists, keyboard/data/held-back.tsv (forms that only the whole-dump Vikipedia count supports: not
+shipped, with their passages), keyboard/data/audit/removed.tsv (what the old list had and the new one drops, with the
 reason) and keyboard/data/audit/stats.json (the numbers quoted in keyboard/data/REVIEW.md). Weights and statuses
 are explained in REVIEW.md; sources and licences in docs/keyboard-sources.md.
 """
@@ -85,6 +86,9 @@ ACRONYM_WEIGHT = 20
 OTHER_SHARE = 0.25
 # Vikipedia occurrences needed to add another form of a listed word (step 5b): the attestation threshold.
 INFLECTED_MIN = 5
+# ... counted in Corsican prose only (class Prose: not in titles, quotations, verse, bibliographies or Italian and
+# French sentences), and in at least this many articles, so that one article quoting a text cannot add a form.
+INFLECTED_ARTICLES = 3
 # ... and their weight: their Vikipedia frequency, at most the weight of the listed form and at most INFLECTED_CAP.
 # They are added so that a correct word typed on purpose is known (auto-correction keeps it), not to be suggested
 # early: with this cap no word of weight 100 or more leaves the top 3 of a 1-4 letter prefix (REVIEW.md). Without
@@ -159,11 +163,14 @@ def wiki_counts():
         t = html.unescape(re.sub(r"'{2,}", '', t))
         return '\n'.join(line for line in t.splitlines() if line and not line.startswith(('|', '!', '{', '}', '=')))
 
+    prose = Prose()
     with bz2.open(RESOURCES / 'wikimedia/cowiki-latest-pages-articles.xml.bz2', 'rb') as stream:
-        ns = None
+        ns = title = None
         for _, element in ET.iterparse(stream):
             tag = element.tag.rsplit('}', 1)[-1]
-            if tag == 'ns':
+            if tag == 'title':
+                title = element.text
+            elif tag == 'ns':
                 ns = element.text
             elif (tag == 'text' and ns == '0' and element.text and not element.text.lstrip().startswith('#')
                   and not element.text.lstrip().startswith(BOT_STUB)):
@@ -176,9 +183,123 @@ def wiki_counts():
                             mid[low] += 1
                             if word[0].isupper():
                                 caps[low] += 1
+                prose.add(title, element.text, clean)
             elif tag == 'page':
                 element.clear()
-    return counts, caps, mid
+    return counts, caps, mid, prose
+
+
+# Sections of a Vikipedia article that list works, references and links, or gather quotations: their titles and
+# quotations are in the language of the work quoted (Italian, French, Latin...), not Corsican prose.
+LIST_SECTIONS = {'riferimenti', 'rifarimenti', 'rifarenzi', 'referenze', 'riferenze', 'note', 'noti', 'ligami',
+                 'liami', 'ligami esterni', 'altri prugetti', 'da vede dinò', 'da vede dinù', 'da veda dinò',
+                 'da veda', 'bibliugrafia', 'bibliografia', 'fonti', 'citazioni', 'citazione', 'albumi', 'opari',
+                 'opere', 'discugrafia', 'discografia', 'filmugrafia', 'filmografia', 'articuli cunnessi',
+                 'publicazioni', 'pubblicazioni', 'scritti', 'libri'}
+# Function words of Italian, French and Latin that Corsican does not write (Corsican: u, di u, cù, chì, cum'è, hè,
+# sò; più, la, le, tra and è are left out because Corsican texts also write them). A sentence holding one is
+# treated as a foreign passage: "La calligrafia corsiva insegnata nelle scuole italiane (secoli XX-XXI)".
+FOREIGN_MARKERS = {
+    'il', 'della', 'dello', 'delle', 'degli', 'nella', 'nelle', 'nello', 'negli', 'sono', 'gli', 'perché',
+    'anche', 'questo', 'essere', 'siamo', 'hanno', 'dei', 'del', 'alla', 'alle', 'agli', 'dalla', 'dalle', 'sul',
+    'sulla', 'nel', 'che', 'con', 'come',                                               # Italian
+    'les', 'des', 'est', 'une', 'avec', 'pour', 'dans', 'sur', 'du', 'au', 'aux', 'et',  # French
+    'sunt', 'quae', 'quod', 'cum',                                                       # Latin
+}
+QUOTED = re.compile(r'«[^»\n]{0,400}»|“[^”\n]{0,400}”|„[^“”\n]{0,400}[“”]|"[^"\n]{0,400}"')
+
+
+class Prose:
+    """Where each word of Vikipedia occurs: in Corsican prose, or in a passage that is not (step 5b, 5d).
+
+    Counting every token of the dump let in forms that Vikipedia only quotes: titles of works in italics, quotations,
+    verse, bibliographies, sentences in Italian or French inside a Corsican article (secoli, from "La calligrafia
+    corsiva insegnata nelle scuole italiane (secoli XX-XXI)" and the Italian anthem). Corsican prose is what is left
+    of an article once these are taken out: text outside a list section (LIST_SECTIONS), outside italics ('' '') and
+    quotation marks, in a sentence with no FOREIGN_MARKERS word (a block of verse or indented lines: in a block with
+    none).
+    For each word: its prose count, the articles it occurs in as prose, how often it occurs in each kind of left-out
+    passage, and the first passages seen (for keyboard/data/held-back.tsv)."""
+
+    KINDS = ('list-section', 'italics', 'quotation', 'foreign-verse', 'foreign-sentence')
+
+    def __init__(self):
+        self.counts, self.articles = Counter(), defaultdict(set)
+        self.left_out = defaultdict(Counter)
+        self.passages = defaultdict(list)
+
+    def note(self, low, title, kind, text):
+        if len(self.passages[low]) < 3 and not any(p[0] == title for p in self.passages[low]):
+            self.passages[low].append((title, kind, text))
+
+    def words(self, title, kind, text, clean):
+        snippet = ' '.join(clean(text).split())
+        for match in WORD.finditer(snippet):
+            low = nfc(match.group()).lower()
+            if kind == 'prose':
+                self.counts[low] += 1
+                self.articles[low].add(title)
+            else:
+                self.left_out[low][kind] += 1
+            start = max(0, match.start() - 60)
+            self.note(low, title, kind, snippet[start:match.end() + 60])
+
+    def add(self, title, text, clean):
+        # References, comments, templates and tables first, over the whole text (they span lines); links, markup
+        # and the quote marks of the wiki syntax are cleaned span by span, once italics are told apart.
+        text = re.sub(r'<!--.*?-->', ' ', text, flags=re.S)
+        text = re.sub(r'<ref[^>]*/>', ' ', text)
+        text = re.sub(r'<ref.*?</ref>', ' ', text, flags=re.S)
+        for _ in range(4):
+            text = re.sub(r'\{\{[^{}]*\}\}', ' ', text)
+        for _ in range(2):
+            text = re.sub(r'\{\|(?:(?!\{\|).)*?\|\}', ' ', text, flags=re.S)
+        text = re.sub(r'<math[^>]*>.*?</math>', ' ', text, flags=re.S | re.I)
+        text = re.sub(r'<(poem|blockquote)[^>]*>.*?</\1>', lambda m: '\n' + m.group().replace('\n', '<br>\n') + '\n',
+                      text, flags=re.S | re.I)
+        listed_level, verse = 0, []
+        for line in text.splitlines() + ['']:
+            # Verse (<br> line breaks, <poem>, <blockquote>) and indented blocks (":" lines: poems, proverbs,
+            # quotations) are read as one block: a poem in Italian has its markers on some lines only ("Noi siamo
+            # da secoli<br /> Calpesti, derisi"). Corsican verse and proverbs count as prose.
+            if not listed_level and (re.search(r'<br\s*/?>', line, re.I) or line.startswith(':')):
+                verse.append(line)
+                continue
+            if verse:
+                block = ' '.join(verse)
+                if {nfc(w).lower() for w in WORD.findall(clean(block))} & FOREIGN_MARKERS:
+                    self.words(title, 'foreign-verse', block, clean)
+                else:
+                    for verse_line in verse:
+                        self.line(title, verse_line, clean)
+                verse = []
+            heading = re.fullmatch(r'\s*(=+)\s*(.*?)\s*=+\s*', line)
+            if heading:
+                level = len(heading.group(1))
+                if listed_level and level <= listed_level:
+                    listed_level = 0
+                if not listed_level and nfc(heading.group(2)).lower() in LIST_SECTIONS:
+                    listed_level = level
+                continue
+            if line.lstrip().startswith(('|', '!', '{', '}')):
+                continue
+            if listed_level:
+                self.words(title, 'list-section', line, clean)
+            else:
+                self.line(title, line, clean)
+
+    def line(self, title, line, clean):
+        """One line of an article outside list sections: italics, quotations, then each sentence."""
+        line = re.sub(r"'''''(.*?)'''''", r"''\1''", line).replace("'''", '\x01')
+        for span in re.findall(r"''(?:(?!'').)+''", line):
+            self.words(title, 'italics', span, clean)
+        line = re.sub(r"''(?:(?!'').)+''", ' ', line).replace('\x01', "'''")
+        for span in QUOTED.findall(line):
+            self.words(title, 'quotation', span, clean)
+        line = QUOTED.sub(' ', line)
+        for sentence in re.split(r'(?<=[.!?])\s+', line):
+            lows = {nfc(w).lower() for w in WORD.findall(clean(sentence))}
+            self.words(title, 'foreign-sentence' if lows & FOREIGN_MARKERS else 'prose', sentence, clean)
 
 
 def wiktionary_words():
@@ -316,7 +437,7 @@ def has_vowel(word):
 
 
 def main():
-    wiki, wiki_caps, wiki_mid = wiki_counts()
+    wiki, wiki_caps, wiki_mid, prose = wiki_counts()
     wiki_total = sum(wiki.values())
     wiktionary, apertium, tatoeba = wiktionary_words(), apertium_words(), tatoeba_words()
     lexicon, english, lexicon_caps, lexicon_mid = lexicon_counts()
@@ -539,6 +660,10 @@ def main():
         entries[word.lower()] = dict(word=word, weight=round(weight), source=f'cog:{code}', status='attested')
         removed.pop(word.lower(), None)
 
+    # The list as the rules above leave it: the forms of steps 5b-5e are added to be known, and must not push any of
+    # these words out of the suggestions (see "Keeping the added forms below" after step 5e).
+    base_entries = set(entries)
+
     # 5b. Other forms of a word: the feminine and plural of a noun, adjective or participle (tradizioni next to
     #     tradizione, fundata next to fundatu, partuti next to partutu), written at least INFLECTED_MIN times in
     #     Vikipedia, mostly in lowercase, when the list has another form of the word or when Vikipedia also has its
@@ -546,27 +671,73 @@ def main():
     #     from Italian ones. Auto-correction (Keyman 19) replaced such words, correct but unknown, with a listed
     #     form: tradizioni became tradizione, partuti partiti. Only the final vowel may differ (-u/-a/-i/-e); no
     #     other rule is applied, and a form found in no source is not invented. Weight: see INFLECTED_CAP.
-    def vikipedia_form(low):
-        return (wiki[low] >= INFLECTED_MIN and len(low) >= 4 and "'" not in low and not foreign(low)
-                and not shape_problem(low) and has_vowel(low) and wiki_caps[low] < 0.5 * max(wiki_mid[low], 1))
+    #     Since 2026-10-19 (second pass) the occurrences are counted in Corsican prose only (class Prose), in at
+    #     least INFLECTED_ARTICLES articles: counting every token let in Italian quoted by Vikipedia (secoli, from
+    #     the title of an image and the Italian anthem). A form the old count would have taken and the prose count
+    #     does not is held back (keyboard/data/held-back.tsv, with its passages), unless another source writes it
+    #     (Wiktionary: step 5c; Apertium, Tatoeba, U Cunghjugarellu, ADECEC: here).
+    def word_shape(low):
+        return (len(low) >= 4 and "'" not in low and not foreign(low) and not shape_problem(low) and has_vowel(low)
+                and wiki_caps[low] < 0.5 * max(wiki_mid[low], 1))
 
-    inflected = {}
-    for low in sorted(wiki):
-        if low[-1:] not in ('a', 'e', 'i', 'u') or low in entries or fold(low) in known or not vikipedia_form(low):
-            continue
+    def vikipedia_form(low, counted='prose'):
+        """Whether Vikipedia writes low as a word of its own: 'raw', 5 times anywhere (the rule before the prose
+        count); 'prose', 5 times in Corsican prose across 3 articles; 'partner', 5 times anywhere and at least once
+        in prose (the other form of a paradigm, which only shows that the word has a paradigm in -u)."""
+        if counted == 'raw':
+            return wiki[low] >= INFLECTED_MIN and word_shape(low)
+        if counted == 'partner':
+            return wiki[low] >= INFLECTED_MIN and prose.counts[low] >= 1 and word_shape(low)
+        return prose_attested(low) and word_shape(low)
+
+    def prose_attested(low):
+        return prose.counts[low] >= INFLECTED_MIN and len(prose.articles[low]) >= INFLECTED_ARTICLES
+
+    def prose_weight(low):
+        return prose.counts[low] * 1e7 / wiki_total + LEXICON_SHARE * lexicon[low] * 1e7 / lexicon_total
+
+    def other_source(low):
+        """An external source other than Vikipedia and Wiktionary that writes the word (Wiktionary: step 5c)."""
+        for name, words in (('tatoeba', tatoeba), ('apertium', apertium), ('cunghjugarellu', conjugation_forms),
+                            ('adecec', adecec)):
+            if low in words:
+                return name
+        return None
+
+    def form_of(low, counted):
+        """The listed form that caps the weight of another form of a word, '' for a form of a Vikipedia paradigm
+        in -u, or None when low is not another form of a word."""
         stem = low[:-1]
         siblings = [stem + end for end in 'aeiu' if end != low[-1] and stem + end in entries
                     and entries[stem + end]['word'] == stem + end]
         if siblings:
             # The listed form with the highest weight (ties: alphabetical) caps the weight.
-            inflected[low] = max(siblings, key=lambda form: (entries[form]['weight'], [-ord(c) for c in form]))
-        elif any(end != low[-1] and vikipedia_form(stem + end) for end in 'aeiu') \
-                and (low[-1] == 'u' or vikipedia_form(stem + 'u')):
-            inflected[low] = None
-    for low, sibling in inflected.items():
+            return max(siblings, key=lambda form: (entries[form]['weight'], [-ord(c) for c in form]))
+        partner = 'partner' if counted == 'prose' else counted
+        if any(end != low[-1] and vikipedia_form(stem + end, partner) for end in 'aeiu') \
+                and (low[-1] == 'u' or vikipedia_form(stem + 'u', partner)):
+            return ''
+        return None
+
+    inflected, held = {}, {}
+    for low in sorted(wiki):
+        if low[-1:] not in ('a', 'e', 'i', 'u') or low in entries or fold(low) in known \
+                or not vikipedia_form(low, 'raw'):
+            continue
+        sibling = form_of(low, 'prose') if vikipedia_form(low) else None
+        if sibling is not None:
+            inflected[low] = (sibling, 'vikipedia')
+        elif form_of(low, 'raw') is not None:
+            source = other_source(low)
+            if source:
+                inflected[low] = (form_of(low, 'raw'), source)
+            else:
+                held[low] = ('5b', form_of(low, 'raw'))
+    for low, (sibling, source) in inflected.items():
         known.add(fold(low))
-        weight = min(frequency_weight(low), entries[sibling]['weight'] if sibling else INFLECTED_CAP, INFLECTED_CAP)
-        entries[low] = dict(word=low, weight=max(1, round(weight)), source='vikipedia', status='attested')
+        weight = min(prose_weight(low) if source == 'vikipedia' else frequency_weight(low),
+                     entries[sibling]['weight'] if sibling else INFLECTED_CAP, INFLECTED_CAP)
+        entries[low] = dict(word=low, weight=max(1, round(weight)), source=source, status='attested')
         removed.pop(low, None)
 
     # 5c. Wiktionary's Corsican words and forms (manghjatu, cantendu, parlavamu) not yet listed. Wiktionary is the
@@ -595,18 +766,73 @@ def main():
     # The acronyms of step 7 count as listed words here (l'ADECEC).
     written = {low: entry['word'] for low, entry in entries.items()}
     written.update({nfc(row['word']).lower(): nfc(row['word']) for row in read_tsv(SOURCES / 'acronyms.tsv')})
+    acronyms = {nfc(row['word']).lower() for row in read_tsv(SOURCES / 'acronyms.tsv')}
     elided_added = 0
     for low, count in sorted(wiki.items()):
         head, _, tail = low.partition("'")
+        if count >= INFLECTED_MIN and tail in held and elisions[head] >= 5 and low not in entries:
+            held[low] = ('5d', tail)  # l'equazioni: equazioni itself is held back
+            continue
         if (count < INFLECTED_MIN or not tail or low in entries or tail not in written or elisions[head] < 5
                 or "'" in tail):
             continue
+        if not prose_attested(low) and tail not in acronyms:
+            # Same prose rule as step 5b: an elided form in an Italian title or quotation is not Corsican usage. An
+            # elided curated acronym keeps the old count: Vikipedia writes l'ADECEC mostly in its bibliographies
+            # (the publisher's name), in Corsican.
+            held[low] = ('5d', tail)
+            continue
         word = head + "'" + written[tail]
-        weight = min(frequency_weight(low), INFLECTED_CAP)
+        weight = min(prose_weight(low), INFLECTED_CAP)
         entries[low] = dict(word=word, weight=max(1, round(weight)), source='vikipedia', status='attested')
         known.add(fold(low))
         removed.pop(low, None)
         elided_added += 1
+
+    # 5e. Forms a reference work writes in full that no rule above selects (sources/forms.tsv: ghjocanu, written
+    #     by U Cunghjugarellu's examples; auto-correction made it ghjovanu). The openly licensed source is cited
+    #     first when it has the word (attestation()); weighed like the forms of step 5b.
+    for row in read_tsv(SOURCES / 'forms.tsv'):
+        low = nfc(row['word']).lower()
+        if low in entries:
+            continue
+        entries[low] = dict(word=low, weight=max(1, round(min(prose_weight(low), INFLECTED_CAP))),
+                            source=attestation(low) or 'cunghjugarellu', status='attested')
+        known.add(fold(low))
+        held.pop(low, None)
+
+    # Held back: forms the raw Vikipedia count would have added and Corsican prose does not attest. They are not in
+    #     the lists (so not in the packages); keyboard/data/held-back.tsv gives each one's counts and passages, so a
+    #     reviewer can bring one back through a source (sources/, Wiktionary) or reject it.
+    held = {low: value for low, value in held.items() if low not in entries}
+    with (DATA / 'held-back.tsv').open('w', encoding='utf-8', newline='\n') as out:
+        out.write('# Forms that keyboard/data/tools/make_vocab.py does not list: written 5 times or more in the\n'
+                  '# Vikipedia dump, but not 5 times in Corsican prose across 3 articles (titles, quotations, foreign\n'
+                  '# verse, bibliographies, Italian or French sentences left out), and in no other source. Not shipped.\n'
+                  '# Classes and passages: keyboard/data/REVIEW.md, "Second pass".\n')
+        columns = ('word', 'step', 'form_of', 'vikipedia_all', 'vikipedia_prose', 'prose_articles', 'left_out',
+                   'class', 'reason', 'passages')
+        out.write('\t'.join(columns) + '\n')
+        for low, (step, of) in sorted(held.items(), key=lambda item: (item[1][0], -wiki[item[0]], item[0])):
+            left = prose.left_out[low]
+            kinds = ', '.join(f'{kind} {left[kind]}' for kind in Prose.KINDS if left[kind])
+            if step == '5d' and of in held:
+                reason = f'second part held back ({of})'
+            elif prose.counts[low] < INFLECTED_MIN:
+                reason = f'{prose.counts[low]} prose occurrence(s) of {wiki[low]}'
+            else:
+                reason = f'prose in {len(prose.articles[low])} article(s) only'
+            where = dict(left, prose=prose.counts[low])
+            where['table or template'] = max(0, wiki[low] - sum(where.values()))
+            dominant = max(where, key=lambda kind: (where[kind], kind == 'prose'))
+            if prose.counts[low] >= INFLECTED_MIN:
+                kind = 'corsican-prose-narrow'
+            else:
+                kind = {'prose': 'corsican-prose-rare', 'list-section': 'title-or-reference',
+                        'table or template': 'table-or-template'}.get(dominant, dominant)
+            passages = ' | '.join(f'[{title}, {kind}] {text}' for title, kind, text in prose.passages[low])
+            out.write(f'{low}\t{step}\t{of or ""}\t{wiki[low]}\t{prose.counts[low]}\t{len(prose.articles[low])}\t'
+                      f'{kinds}\t{kind}\t{reason}\t{passages.replace(chr(9), " ")}\n')
 
     # 6. Common words written like a capitalised entry (orsu / Orsu, corti / Corti): Keyman keeps a word typed exactly
     #    as the list has it, so with only the name a lowercase word typed on purpose became the name. The lowercase
@@ -639,9 +865,34 @@ def main():
         word = nfc(row['word'])
         extra[word] = dict(word=word, weight=ACRONYM_WEIGHT, source='acronyms', status='attested')
         removed.pop(word.lower(), None)
+    extra_keys = set()
     for key, entry in extra.items():
         # Kept under their own key: entries are keyed by the lowercase word, which the name already uses.
         entries[f"\0{entry['word']}"] = entry
+        extra_keys.add(f"\0{entry['word']}")
+
+    # Keeping the added forms below. The forms of steps 5b-5e are there so that a correct word typed on purpose is
+    #     known (Keyman keeps a typed word that the model lists, whatever its weight: the trie returns the exact
+    #     match first, keyboard/data/REVIEW.md). With INFLECTED_CAP alone, a form of weight 100 still pushed listed
+    #     words out of a top 3: utile (92) for utilizatu, eccezziunale (91), urigine (99). Each added form now
+    #     weighs less than every other word of the list (the rules before them and steps 6-7) in the top 3 of every
+    #     prefix of its search key, so it only fills the places that the list leaves empty.
+    added = set(entries) - base_entries - extra_keys
+    third = {}
+    by_prefix = defaultdict(list)
+    for low in set(entries) - added:
+        key = fold(entries[low]['word'])
+        for end in range(1, len(key) + 1):
+            by_prefix[key[:end]].append(entries[low]['weight'])
+    for prefix, weights in by_prefix.items():
+        third[prefix] = min(sorted(weights, reverse=True)[:3])
+    lowered = 0
+    for low in added:
+        key = fold(entries[low]['word'])
+        limits = [third[key[:end]] - 1 for end in range(1, len(key) + 1) if key[:end] in third]
+        if limits and entries[low]['weight'] > min(limits):
+            entries[low]['weight'] = max(1, min(limits))
+            lowered += 1
 
     def license_of(source):
         return LICENSES[source.split(':')[0]]
@@ -649,7 +900,7 @@ def main():
     def write(path, rows):
         lines = [HEADER] + [f"{r['word']}\t{r['weight']}\t{r['variant']}\t{r['source']}\t{license_of(r['source'])}"
                             f"\t{r['status']}\n" for r in sorted(rows, key=lambda r: (-r['weight'], r['word']))]
-        path.write_text(''.join(lines), encoding='utf-8')
+        path.write_text(''.join(lines), encoding='utf-8', newline='\n')
 
     write(DATA / 'shared.tsv', [dict(e, variant='shared') for e in entries.values()])
     for variety, weights in variant_weight.items():
@@ -661,7 +912,7 @@ def main():
         write(DATA / f'{variety}.tsv', rows)
 
     (DATA / 'audit').mkdir(exist_ok=True)
-    with (DATA / 'audit/removed.tsv').open('w', encoding='utf-8') as out:
+    with (DATA / 'audit/removed.tsv').open('w', encoding='utf-8', newline='\n') as out:
         out.write('# Words of the old generated list (keyboard/platykalt.co.corsu/source/wordlist.tsv) that the new\n'
                   '# lists drop, with the reason found by keyboard/data/tools/make_vocab.py.\n')
         out.write('word\told_weight\treason\tdetail\n')
@@ -679,8 +930,11 @@ def main():
         northern_only_forms=len(north_only), southern_only_forms=len(south_only),
         words_ranked_differently=len(differing), wiki_tokens=wiki_total, lexicon_tokens=lexicon_total,
         place_words=place_stats, inflected_forms=len(inflected), wiktionary_forms=wiktionary_added, elided_forms=elided_added,
+        held_back=Counter(step for step, _ in held.values()), added_forms_lowered=lowered,
     )
-    (DATA / 'audit/stats.json').write_text(json.dumps(stats, ensure_ascii=False, indent=1) + '\n', encoding='utf-8')
+    # LF line ends on every system, so that a rebuild on Windows leaves the committed files unchanged.
+    (DATA / 'audit/stats.json').write_text(json.dumps(stats, ensure_ascii=False, indent=1) + '\n', encoding='utf-8',
+                                           newline='\n')
     print(json.dumps(stats, ensure_ascii=False, indent=1))
 
 

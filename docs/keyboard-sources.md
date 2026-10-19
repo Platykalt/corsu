@@ -37,7 +37,7 @@ under GPL-3.0-or-later.
 
 | id | What it is | Licence | What was taken |
 |---|---|---|---|
-| `vikipedia` | Corsican Wikipedia, dump `cowiki-latest-pages-articles.xml.bz2` fetched 2026-10-16 (https://dumps.wikimedia.org/cowiki/), "Vikipedia contributors" | CC BY-SA 4.0 | Word counts in the prose of main-namespace articles (templates, tables, links and references removed). The ~1,380 botanical stub articles generated from one table (`{\| align="right" rules="all"`) are left out: they were a quarter of the text and put "spezia", "pianta", "sinonimi" among the top words. A word counts as attested when it occurs 5 times or more. Since 2026-10-19 the other forms of a word (-u/-a/-i/-e) and the elided forms of a listed word (l'abitanti) written 5 times or more are also listed, at a low weight, so that auto-correction keeps them (REVIEW.md, "Forms auto-correction replaced"). |
+| `vikipedia` | Corsican Wikipedia, dump `cowiki-latest-pages-articles.xml.bz2` fetched 2026-10-16 (https://dumps.wikimedia.org/cowiki/), "Vikipedia contributors" | CC BY-SA 4.0 | Word counts in the prose of main-namespace articles (templates, tables, links and references removed). The ~1,380 botanical stub articles generated from one table (`{\| align="right" rules="all"`) are left out: they were a quarter of the text and put "spezia", "pianta", "sinonimi" among the top words. A word counts as attested when it occurs 5 times or more. Since 2026-10-19 the other forms of a word (-u/-a/-i/-e) and the elided forms of a listed word (l'abitanti) are also listed, at a low weight, so that auto-correction keeps them, when they occur 5 times or more **in Corsican prose, in at least 3 articles**: italics, quotations, bibliographies and reference sections, Italian, French or Latin sentences and poems, tables and formulas are not counted (REVIEW.md, "Second pass"). The 324 forms that only the whole-dump count supported are held back, with their passages, in `keyboard/data/held-back.tsv` and are not shipped. |
 | `wiktionary` | Wiktionary, Corsican entries, through the kaikki.org extract `kaikki.org-dictionary-Corsican.jsonl` fetched 2026-10-16 (https://kaikki.org/dictionary/Corsican/) | CC BY-SA 4.0 and GFDL | Headwords and inflected forms, as attestations, and since 2026-10-19 as known words of the list at a low weight (conjugation tables included; names, misspellings and archaic forms left out). Entries tagged Cismontane / Ultramontane / Northern / Southern for the variety pairs (numbers, bellu/beddu, collu/coddu, ride/rida…). |
 | `apertium` | apertium-cos dictionary, `apertium-cos.cos.dix` (https://github.com/apertium/apertium-cos) | GPL-3.0 | Lemmas, as attestations. |
 | `tatoeba` | Tatoeba, Corsican sentences, `cos_sentences.tsv.bz2` (56 sentences) (https://tatoeba.org) | CC BY 2.0 FR | Words of the sentences, as attestations of everyday usage, and a minimum weight for them. |
@@ -70,6 +70,12 @@ imperfect indicative of 21 everyday verbs (tables 1, 2, 3, 23-27, 29, 30, 32, 35
 the book, both versions): `keyboard/data/sources/cunghjugarellu.tsv`, 511 rows, 368 distinct forms, each with the
 book's table number, tense, person and version as its reference. No explanation, example sentence, other tense or
 page layout was copied. All 368 forms occur in the PDF's text (automated check, 2026-10-18; not a human review).
+
+**Forms read in the book's text outside the 21 tables.** `keyboard/data/sources/forms.tsv` lists forms a reference
+writes in full and no rule selects, each with its page: *ghjocanu* (3rd plural of *ghjucà*), written in two example
+sentences of the book (PDF pages 32 and 37) and 9 times in Vikipedia prose, which is the source the list cites. The
+same check found that the book does not write *vedemu* (table 94 gives *vidimu/videmu*), so it is not listed. PDF read
+again on 2026-10-19 for these two facts only.
 
 **What reaches the keyboard packages.** Only words and weights (`keyboard/*/source/wordlist.tsv`): the 368 forms
 among the list's words, with no table number, tense, person or label. Of the 368, 187 are also written by an openly

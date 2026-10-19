@@ -46,3 +46,8 @@ platykalt.co.corsu_pumuntincu	2		so	none	socu	offers	fail	southern 1st person of
 *	3	Aghju\s	manghjatu	space	Aghju manghjatu\s	text	fail	participle in Wiktionary's conjugation of manghjà (step 5c): once became manghjà (19.0 engine)
 *	3	mille\s	abitanti	space	mille abitanti\s	text	fail	plural of abitante (Vikipedia 854, step 5b): once became abitante (19.0 engine)
 *	2		tradizi	none	tradizione	first	fail	an added form (tradizioni, weight at most 100 and at most its listed form) does not pass the word the list already had
+*	3	I zitelli\s	ghjocanu	space	I zitelli ghjocanu\s	text	fail	3rd plural of ghjucà, written by U Cunghjugarellu (examples, PDF pages 32 and 37) and 9 times in Vikipedia prose (sources/forms.tsv): Keyman 19 once made it ghjovanu
+*	3	Dumane\s	vedemu	space	Dumane vedemu\s	text	warn	not in the list: U Cunghjugarellu gives vidimu/videmu (table 94), vedemu is in no source consulted (sources/forms.tsv); the engine may still replace it (Keyman 19 gave vedenu)
+*	3	Dumane\s	videmu	space	Dumane videmu\s	text	fail	present 1st plural of vede in U Cunghjugarellu (table 94, supranacciu): known, kept
+*	2		secol	none	secoli	absent	fail	held back (keyboard/data/held-back.tsv): in Vikipedia mostly in an Italian caption and the Italian anthem, 4 times in prose; Corsican seculi is listed
+*	2		secul	none	seculi	offers	warn	the Corsican plural seculi (Wiktionary) is offered

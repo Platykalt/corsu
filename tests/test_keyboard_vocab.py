@@ -151,6 +151,59 @@ class KeyboardVocabularyTests(unittest.TestCase):
             self.assertEqual(int(shared[word]['weight']), make_vocab.ACRONYM_WEIGHT, word)
             self.assertEqual(shared[word]['source'], 'acronyms')
 
+    def test_prose_leaves_out_foreign_passages(self):
+        # Steps 5b and 5d count Vikipedia's Corsican prose only: not a title in italics, a quotation, a list of
+        # references, an Italian or French sentence, a poem in Italian (keyboard/data/REVIEW.md).
+        prose = make_vocab.Prose()
+
+        def clean(text):
+            return re.sub(r"\[\[(?:[^\]|]*\|)?([^\]]*)\]\]", r'\1', text).replace("''", '')
+
+        prose.add('A', '\n'.join([
+            "U '''libru''' ''Storia di i secoli'' parla di i seculi.",
+            'Ellu disse: «I secoli sò longhi».',
+            'La calligrafia insegnata nelle scuole (secoli XX-XXI).',
+            ':Noi siamo da secoli',
+            ':Calpesti, derisi, secoli',
+            '',
+            ':Ghjè u ventu di i seculi',  # a Corsican verse (its own block) counts as prose
+            '== Bibliugrafia ==',
+            '* Secoli di storia, Roma',
+            '== Storia ==',
+            'I seculi passanu.']), clean)
+        self.assertEqual(prose.counts['secoli'], 0)
+        self.assertEqual(prose.counts['seculi'], 3)
+        self.assertEqual(dict(prose.left_out['secoli']), {'italics': 1, 'quotation': 1, 'foreign-sentence': 1,
+                                                          'foreign-verse': 2, 'list-section': 1})
+
+    def test_held_back_forms(self):
+        shared = {entry['word']: entry for entry in rows('shared')[1]}
+        lines = [line for line in (DATA / 'held-back.tsv').read_text(encoding='utf-8').splitlines()
+                 if not line.startswith('#')]
+        header = lines[0].split('\t')
+        held = [dict(zip(header, line.split('\t'))) for line in lines[1:]]
+        self.assertEqual(header[:3], ['word', 'step', 'form_of'])
+        self.assertTrue(held)
+        for row in held:
+            # Held back means not shipped, with a reason and the passages a reviewer can check.
+            self.assertNotIn(row['word'], shared, row['word'])
+            self.assertTrue(row['reason'] and row['passages'], row['word'])
+        words = {row['word'] for row in held}
+        # Italian quoted by Vikipedia (an image caption, the Italian anthem), and a table legend.
+        self.assertIn('secoli', words)
+        self.assertIn('prodottu', words)
+        # Kept: Corsican prose in several articles (polvere, plural of polvera), and a form a reference writes.
+        self.assertIn('polvere', shared)
+        self.assertIn('ghjocanu', shared)
+        self.assertNotIn('vedemu', shared)
+
+    def test_added_forms_push_out_no_listed_word(self):
+        # The forms added to be known (steps 5b-5e) weigh less than the listed words of every prefix's top 3: with
+        # a cap of 100 alone, utilizatu pushed utile (92) out of "uti".
+        shared = {entry['word']: (int(entry['weight']), None) for entry in rows('shared')[1]}
+        for prefix, word in (('uti', 'utile'), ('ecc', 'eccezziunale'), ('urig', 'urigine')):
+            self.assertIn(word, simulate.top3(shared, prefix), prefix)
+
 
 if __name__ == '__main__':
     unittest.main()

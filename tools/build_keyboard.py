@@ -148,7 +148,8 @@ def model_words(model, data):
 def write_wordlist(model, words, keyboard=KEYBOARD):
     lines = [f'{word}\t{count}' for word, count in sorted(words.items(), key=lambda item: (-item[1], item[0]))]
     header = f'# {model.name}: Corsican words and their weight, built by tools/build_keyboard.py\n'
-    model.wordlist(keyboard).write_text(header + '\n'.join(lines) + '\n', encoding='utf-8')
+    # LF line ends on every system: the committed lists must come out the same on a Windows checkout.
+    model.wordlist(keyboard).write_text(header + '\n'.join(lines) + '\n', encoding='utf-8', newline='\n')
 
 
 def name_models(package, names):

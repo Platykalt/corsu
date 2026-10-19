@@ -1,0 +1,8 @@
+# Word forms that no rule of tools/make_vocab.py selects but that a reference work writes as such, checked one by one
+# (Keyman's auto-correction replaced them because the list did not have them). A form is listed only when a
+# reference writes it in full: never derived from another form by changing letters. Checked 2026-10-19 by an AI
+# agent, not by a speaker. Considered and not listed: vedemu (Keyman 19 turned it into vedenu): U Cunghjugarellu,
+# table 94 (vede, supranacciu), gives the present 1st plural as vidimu/videmu, both already in the list; vedemu
+# occurs once in the Vikipedia dump and in no other source consulted.
+word	verb	reference	evidence
+ghjocanu	ghjucà	U Cunghjugarellu (Canopé de Corse, 2024), PDF pages 32 and 37, example sentences "I zitelli chì ghjocanu in a corte brionanu assai" and "ci sò i zitelli chì ghjocanu in corte" (ghjucà follows table 8, Tuccà)	Vikipedia dump 2026-10-16: 9 occurrences in Corsican prose, in 9 articles
