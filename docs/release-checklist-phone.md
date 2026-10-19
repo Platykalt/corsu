@@ -1,21 +1,48 @@
 # Phone dictionary: release checklist
 
-What to change when a Corsu release carries new Keyman dictionary packages (here: 0.26, packages version 1.1).
-Nothing below is done before the release: until then, the guides and the window describe the published package
-(`corsu-keyboard.kmp` version 1.0, shown as `platykalt.co.corsu`, from Corsu 0.25.1) and show the next version's
-packages apart, without a release download.
+What to change when a Corsu release carries new Keyman dictionary packages (here: 0.27.0, packages version 1.2).
+The published release is still 0.26.0 (packages 1.1, 13,213 words each); nothing in this list publishes anything.
+On `next-0.27`, the guides, `essai-5-minutes.md` and `.github/RELEASE_NOTES.md` already describe 0.27.0 ("from Corsu
+0.27.0") and say what 0.26.0 carried; they reach `main` only with the release.
 
 ## Three version numbers, kept apart
 
-| Number | Where it is set | 0.25.1 (published) | 0.26 (candidate) |
+| Number | Where it is set | 0.26.0 (published) | 0.27.0 (candidate) |
 | --- | --- | --- | --- |
-| Corsu version | `src/release.json`, tag `vX.Y.Z` | 0.25.1 | 0.26.0 |
-| Dictionary package version (what Keyman shows as "Dictionary version") | `keyboard/*/source/*.kps`, `kmp.json` → `info.version` | 1.0 | 1.1 (all three packages) |
+| Corsu version | `src/release.json`, tag `vX.Y.Z` | 0.26.0 | 0.27.0 |
+| Dictionary package version (what Keyman shows as "Dictionary version") | `keyboard/*/source/*.model.kps` (`<Version>`), `kmp.json` → `info.version` | 1.1 | 1.2 (all three packages) |
+| Words per package (`tools/count_kmp.py`, entries of the built `.model.js`) | built from `keyboard/data` | 13,213 (13,201 ignoring case) | 19,550 (19,538 ignoring case), to recount after any keyboard change |
 | Keyman app version the guides follow | the guides' introduction | 18.0.254 (stable) | 18.0.254 (stable); 19.0 is beta |
 
-The guides give the package version (1.1) next to the Corsu version that published it; they must not say "Corsu
-1.1". If the stable Keyman changes before the release (19.0 out of beta), the automatic-correction sections of the
-guides and `ph_auto` in `src/app/texts-phone.js` need rewriting first.
+The guides give the package version next to the Corsu version that carries it; they must not say "Corsu 1.2". If
+the stable Keyman changes before the release (19.0 out of beta), the automatic-correction sections of the guides and
+`ph_auto` in `src/app/texts-phone.js` need rewriting first.
+
+## Where the keyboard figures live
+
+Count from the packages, never from a source list:
+
+```sh
+python3 tools/build_keyboard.py --package
+python3 -I tools/count_kmp.py keyboard/build/corsu-keyboard.kmp keyboard/build/corsu-keyboard-cismuntincu.kmp \
+    keyboard/build/corsu-keyboard-pumuntincu.kmp
+```
+
+Then, if the count or the package version changes, update every place below (search for the old figure in both
+spellings, `19 550` and `19,550`):
+
+| File | What it holds |
+| --- | --- |
+| `docs/fr/telephone/android.md`, `docs/fr/telephone/iphone.md` | first `corsu:phone-variants:fr` comment (version, count, published state); table « Dictionnaires disponibles » (version column ×3, « 19 550 mots » in the general row); sentence under it (0.26.0: 1.1, 13 213 mots); « Mettre à jour » (version to check); second `corsu:phone-variants:fr` comment; « Revenir au dictionnaire général » (version); « Correction automatique » (« environ 6 300 formes ») |
+| `docs/en/phone/android.md`, `docs/en/phone/iphone.md` | the same places in English (`corsu:phone-variants:en`, "19,550 words", "about 6,300 more forms") |
+| `docs/fr/telephone/essai-5-minutes.md` | the comment above « Quel fichier essayer », « Version du dictionnaire », the « Attendu (paquet 1.2) » heading, rows 2, 3 and 13, « Variantes régionales » |
+| `.github/RELEASE_NOTES.md` | both "Downloads" tables (« Paquet 1.2 », « paquet 1.2 » / "Package 1.2", "package 1.2"); the `corsu:keyboard-figures` comment and the « Clavier sur téléphone » / "Phone keyboard" bullet of « Nouveautés de la 0.27.0 » / "New in 0.27.0" (19 550 / 19,550, 6 335 / 6,335, version 1.2) |
+| `keyboard/*/source/*.model.kps` | `<Version>` (1.2) |
+| `keyboard/data/REVIEW.md`, `keyboard/data/audit/stats.json` | counts recorded with the keyboard data (owned by the keyboard work) |
+| `README.md`, `CHANGELOG.md`, `docs/continuite.md` | owned by the lead: README `corsu:phone-variants` sentences (still 1.1 / 13,213: the published state), CHANGELOG 0.27.0 entry ("13,215 → 19,550": 13,215 is the source list before the additions, the published 1.1 packages hold 13,213), continuity notes |
+
+The regional variants' "361 words weighted differently" is the count of regional source rows; it did not change
+between 1.1 and 1.2.
 
 ## 1. Release assets
 
@@ -24,95 +51,51 @@ guides and `ph_auto` in `src/app/texts-phone.js` need rewriting first.
 - [ ] After publishing, for each of the three, a HEAD request on
       `https://github.com/Platykalt/corsu/releases/latest/download/<file>` (following redirects) gives 200, and the
       downloaded file's SHA-256 equals the `.sha256` asset and the CI artifact's.
-- [ ] Unzip each downloaded `.kmp`: `kmp.json` → `info.version` is `1.1`, `info.name` and `lexicalModels[0].name`
+- [ ] Unzip each downloaded `.kmp`: `kmp.json` → `info.version` is `1.2`, `info.name` and `lexicalModels[0].name`
       are "Corsu", "Corsu – Cismuntincu (experimental)", "Corsu – Pumuntincu (experimental)", and
       `lexicalModels[0].id` is `platykalt.co.corsu`, `platykalt.co.corsu_cismuntincu`,
       `platykalt.co.corsu_pumuntincu`, all for language `co`.
+- [ ] `python3 -I tools/count_kmp.py` on the three downloaded files gives the count written in the guides and the
+      release notes (19,550 at the time of writing).
 
 ## 2. Guides (`docs/fr/telephone/`, `docs/en/phone/`)
 
-In `android.md` and `iphone.md`, French and English (four files):
+Same files and names as 0.26.0, so no row moves and no link changes; only versions and counts.
 
-- [x] **First `corsu:phone-variants` marker** (section « Dictionnaires disponibles » / "Available dictionaries"):
-      replace the published row (1.0, `platykalt.co.corsu`, the 0.25.1 defects) by the three rows of the « Dans la
-      prochaine version » / "In the next version" table, each with version 1.1 "(publié avec Corsu 0.26.0)" /
-      "(published with Corsu 0.26.0)", its `releases/latest/download/<file>` link and its `.sha256` link. Then remove
-      the « Dans la prochaine version » sub-section and the sentence that points to the candidate section.
-- [x] Step 5 « Vérifiez le dictionnaire » / "Check the dictionary": the published name becomes « Corsu » (not
-      `platykalt.co.corsu`); drop the parenthesis about the next version.
-- [x] **Second `corsu:phone-variants` marker** (« Choisir un dictionnaire régional » / "Choosing a regional
-      dictionary"): "With the next version, two experimental dictionaries will prefer…" becomes present tense, with
-      links to the two published files; drop the paragraph that points to the candidate archive.
-- [x] **`corsu:phone-casing` marker** (« Majuscules et début de phrase » / "Capitals and sentence start"): the bullet
-      « Les suggestions perdent la majuscule… » / "Suggestions lose the capital…" becomes: suggestions keep the case
-      typed, and are capitalised at a sentence start, since Corsu 0.26.0 (package 1.1); someone who still has the 1.0
-      package should update (link to « Mettre à jour » / "Updating").
-- [x] Section « Essayer le dictionnaire de la prochaine version (candidate) » / "Trying the next version's
-      dictionary (candidate)": remove it, or keep it only if a newer candidate exists, with that run's artifact link
-      and expiry date. Never leave an expired artifact link.
-- [x] « Revenir au dictionnaire publié »: the published name and version become « Corsu », 1.1.
-- [x] `essai-5-minutes.md`: the « Publié » column becomes the 1.1 expectations (identical to « Candidat »), or
-      the two columns merge; update the expiry date or remove the candidate artifact link.
-- [x] Keep the markers (with their comment updated to describe the new state) for the next release.
+- [x] Table « Dictionnaires disponibles » / "Available dictionaries": version 1.2 « (à partir de Corsu 0.27.0) » /
+      "(from Corsu 0.27.0)", 19,550 words; a sentence says that 0.26.0 carried 1.1 (13,213 words).
+- [x] « Mettre à jour » / "Updating" and « Revenir au dictionnaire général »: version 1.2, with 1.1 for 0.26.0.
+- [x] Sections that said « prochaine version de Corsu, pas encore publiée » / "next version of Corsu, not published
+      yet" for the 1.2 behaviour (punctuation, apostrophe, added forms) now say "from Corsu 0.27.0".
+- [x] `essai-5-minutes.md`: expectations for 1.2, and a row for punctuation already written after the word.
+- [ ] Before tagging: recount (section above) if the keyboard changed after these edits.
+- [ ] Keep the `corsu:phone-variants` and `corsu:phone-casing` markers, with their comments describing the state.
 
-## 3. README.md (owned by the lead / the README agent)
+## 3. README.md (owned by the lead)
 
-Lines to change, found by their markers:
-
-- [ ] French part, `<!-- corsu:phone-variants:fr … -->`: the sentence « Dictionnaire publié … 19 805 mots tirés du
-      lexique de Corsu » lists the three published files (general, Cismuntincu, Pumuntincu) with their download links
-      and the general dictionary's word count, **counted in the `.kmp` of the release candidate's CI run** (entries of
-      the built `.model.js`, and distinct words among them), not in a source file: the 0.25.1 package was built in CI
-      from the lexicon and held 19,805 entries (19,805 distinct words) while the committed word list had 16,949 lines.
-      Count with `python3 -I tools/count_kmp.py corsu-keyboard.kmp` (also for the two regional packages). The
-      sentence « Dans la prochaine version (pas encore publiée) :
-      … » is removed or rewritten as what the published files do (keeps capitals; two experimental regional
-      preferences).
-- [ ] English part, `<!-- corsu:phone-variants:en … -->`: same change ("Published dictionary …", "In the next
-      version (not published yet): …").
+- [ ] French and English `corsu:phone-variants` sentences: package 1.2 from Corsu 0.27.0 and the word count counted
+      in the release candidate's packages (`tools/count_kmp.py`), instead of 1.1 / 13,213.
 
 ## 4. The window's « Sur téléphone » page
 
-- [ ] `src/app/phone.js`: move the two entries of `COMING` into `VARIANTS` (after the general one) and leave
-      `COMING = []`. The heading « Dans la prochaine version » disappears by itself when `COMING` is empty.
-- [ ] Decide whether the variants get their own download links in the window: today only `VARIANTS[0]` is a
-      download (`RELEASE + VARIANTS[0].file`); the variants are only listed. If they get links, they must use
-      `RELEASE + file`, never an artifact.
-- [ ] `src/app/texts-phone.js` (co, fr, en): `ph_coming_text` is no longer shown (keep or delete the key in all three
-      languages together); `ph_variant_general_detail` gives no word count on purpose, keep it that way or give the
-      published one; check `ph_a5` (the dictionary shows as « Corsu »).
-- [ ] `tests/test_phone.py`, `ReleasedFilesTests.test_only_the_released_dictionary_is_offered`: expect the three
-      files in `VARIANTS` and an empty `COMING`; allow the variants' `releases/latest/download/` links in the guides
-      and README. `RenderTests.test_steps_and_texts` checks "In the next version": update it.
-- [ ] The QR codes point to the guides on `main` and do not change.
+- [ ] `src/app/phone.js`: nothing to move (`VARIANTS` already lists the three files, `COMING` is empty); downloads
+      stay `RELEASE + file`, never an artifact.
+- [ ] `src/app/texts-phone.js` (co, fr, en): carries no package version or word count; keep it that way.
+- [ ] `tests/test_phone.py` needs no change for 0.27.0 (same three released files, empty `COMING`).
 
-## 5. Release notes and continuity (owned by the lead)
+## 5. Release notes and continuity
 
-- [ ] `.github/RELEASE_NOTES.md`: the "Downloads" table names the three dictionary files, version 1.1, and that
-      they are used on their own (no Corsu installation on a computer).
-- [ ] `CHANGELOG.md`, `docs/continuite.md`: the published package version (1.1) and what was really tested
-      (engine in CI, Android 14 emulator; a physical phone or an iPhone only if someone did run
+- [x] `.github/RELEASE_NOTES.md`: « Nouveautés de la 0.27.0 » / "New in 0.27.0" written from the CHANGELOG entry,
+      the 0.26.0 sections become « Rappel » / "Earlier", the "Downloads" tables say package 1.2.
+- [ ] `CHANGELOG.md`, `docs/continuite.md` (lead): the published package version (1.2) and what was really tested
+      (engines in CI, Android 14 emulator; a physical phone or an iPhone only if someone did run
       `docs/fr/telephone/essai-5-minutes.md` on one).
 
 ## 6. After publishing
 
 - [ ] Download `corsu-keyboard.kmp` from `releases/latest/download/` on a phone or an emulator, install it over the
-      1.0 package, restart Keyman, and check that Keyman shows « Corsu », version 1.1.
+      1.1 package, restart Keyman, and check that Keyman shows « Corsu », version 1.2.
 - [ ] Run `HOME=$(mktemp -d) python3 -m unittest discover -s tests -t .` on `main`.
 
-## Downloads table for the 0.26 release notes (`.github/RELEASE_NOTES.md`)
-
-Replace the table at the top of the French part with this one (the English part gets the same rows, headings
-"Downloads" | "For" | "File" | "Then", guides under `docs/en/phone/`):
-
-| Pour | Fichier | Ensuite |
-| --- | --- | --- |
-| Windows 10 ou 11 | `corsu-windows.zip` | décompresser, double-cliquer sur `Install for Windows.cmd` |
-| macOS | `corsu-macos.tar.gz` | double-cliquer sur `Install for macOS.command` |
-| Linux | `corsu-linux.tar.gz` | lancer `./"Install for Linux.sh"` |
-| Téléphone Android ou iPhone (clavier Keyman) | `corsu-keyboard.kmp` | dictionnaire corse pour Keyman, **utilisable seul** : aucune installation sur ordinateur. Paquet 1.1, nom dans Keyman : « Corsu ». Guides : [Android](https://github.com/Platykalt/corsu/blob/main/docs/fr/telephone/android.md), [iPhone](https://github.com/Platykalt/corsu/blob/main/docs/fr/telephone/iphone.md) |
-| Téléphone, variante régionale (expérimentale) | `corsu-keyboard-cismuntincu.kmp` ou `corsu-keyboard-pumuntincu.kmp` | même vocabulaire, préférence pour les formes du Cismonte ou du Pumonte (361 mots pondérés autrement, couverture partielle) ; paquet 1.1. Sous Android, un seul dictionnaire actif par langue : désinstaller l'autre puis relancer Keyman |
-| Minecraft Java 26.3, sans l'application | `corsu-minecraft-java-26.3.zip` | pack de ressources : Options › Packs de ressources, l'activer, puis Options › Langue › Corsu ; pack facultatif des textes d'accueil et de fin : `corsu-minecraft-java-texts-26.3.zip`. Les autres versions (1.6.1 → 26.2) : par l'application Corsu ([versions et vérifications](https://github.com/Platykalt/corsu/blob/main/minecraft/java/COMPATIBILITY.md)) |
-
-Chaque fichier a sa somme de contrôle `.sha256`. Keep the existing tag scheme: no separate keyboard release (it would
-change `releases/latest` and the app's update check).
+Keep the existing tag scheme: no separate keyboard release (it would change `releases/latest` and the app's update
+check).

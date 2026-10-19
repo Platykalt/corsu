@@ -193,6 +193,71 @@ class BuildTests(unittest.TestCase):
             self.assertEqual(json.loads(archive.read('texts/language_names.json')), [['co_FR', 'Corsu (Corsica)']])
             self.assertTrue(all(info.date_time == (2026, 1, 1, 0, 0, 0) for info in archive.infolist()))
 
+    def committed_pack(self):
+        return bedrock.make_pack(bedrock.MANIFEST.read_bytes(), bedrock.TRANSLATION.read_bytes(),
+                                 (bedrock.HERE / 'LICENSE.txt').read_bytes(), bedrock.icon())
+
+    def test_pack_metadata_fixed(self):
+        """Every field that zipfile could take from the machine is set: order, date, permissions, creating system,
+        no compression (zlib-ng and stock zlib deflate the same data into different bytes), no extra field."""
+        with zipfile.ZipFile(io.BytesIO(self.committed_pack())) as archive:
+            self.assertEqual(archive.namelist(), ['manifest.json', 'pack_icon.png', 'texts/languages.json',
+                                                  'texts/language_names.json', 'texts/co_FR.lang', 'LICENSE.txt'])
+            self.assertEqual(archive.comment, b'')
+            for info in archive.infolist():
+                self.assertEqual(info.date_time, (2026, 1, 1, 0, 0, 0), info.filename)
+                self.assertEqual(info.compress_type, zipfile.ZIP_STORED, info.filename)
+                self.assertEqual(info.compress_size, info.file_size, info.filename)
+                self.assertEqual(info.create_system, 3, info.filename)
+                self.assertEqual(info.external_attr, 0o644 << 16, info.filename)
+                self.assertEqual((info.flag_bits, info.extra, info.comment), (0, b'', b''), info.filename)
+
+    def test_pack_same_bytes_whatever_the_machine(self):
+        """Built twice, then with another umask, with Windows as the platform, and with another deflate output:
+        the same bytes each time (CI run 39192791783 and a zlib-ng machine gave two SHA-256 before the fix)."""
+        import os
+        import sys
+        from unittest import mock
+        first = self.committed_pack()
+        self.assertEqual(first, self.committed_pack())
+        old = os.umask(0o077)
+        try:
+            self.assertEqual(first, self.committed_pack())
+        finally:
+            os.umask(old)
+        with mock.patch.object(sys, 'platform', 'win32'):
+            self.assertEqual(first, self.committed_pack())
+        # Another deflate: zlib.compress gives other (valid) bytes, and zipfile may not compress at all.
+        import zlib
+        real = zlib.compress
+        other = mock.Mock(side_effect=lambda data, level=-1, **_: real(data, 1))
+        broken = mock.Mock(side_effect=AssertionError('the pack must not depend on the local deflate'))
+        with mock.patch('zlib.compress', other), mock.patch('zlib.compressobj', broken):
+            self.assertEqual(first, self.committed_pack())
+        self.assertTrue(other.called)
+
+    def test_pack_icon_same_image_without_compression(self):
+        import struct
+        import zlib
+        import sys
+        sys.path.insert(0, str(ROOT / 'src'))
+        import minecraft as game_pack
+
+        def image(png):
+            position, data = 8, b''
+            while position < len(png):
+                length, kind = struct.unpack('>I4s', png[position:position + 8])
+                if kind == b'IDAT':
+                    data += png[position + 8:position + 8 + length]
+                position += 12 + length
+            return zlib.decompress(data)
+        original, stored = game_pack.png(128), bedrock.icon()
+        self.assertEqual(stored[:33], original[:33])  # signature and IHDR (128x128, RGB)
+        self.assertEqual(image(stored), image(original))
+        self.assertEqual(bedrock.stored_zlib(b''), b'x\x01\x01\x00\x00\xff\xff\x00\x00\x00\x01')
+        big = bytes(range(256)) * 600  # more than one stored block (65,535 bytes each)
+        self.assertEqual(zlib.decompress(bedrock.stored_zlib(big)), big)
+
     def test_pack_lang_has_no_comments(self):
         source = '## header\ntile.stone.name=Petra\t## from-java:block.minecraft.stone\nitem.apple.name=Mela\n'
         self.assertEqual(bedrock.pack_text(source), b'tile.stone.name=Petra\nitem.apple.name=Mela\n')

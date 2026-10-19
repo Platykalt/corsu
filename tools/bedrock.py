@@ -24,9 +24,11 @@ import json
 import os
 from pathlib import Path
 import re
+import struct
 import sys
 import urllib.request
 import zipfile
+import zlib
 
 ROOT = Path(__file__).resolve().parent.parent
 HERE = ROOT / 'minecraft/bedrock'
@@ -394,8 +396,18 @@ def pack_text(translation):
     return ''.join(f'{key}={value}\n' for _, key, value, _ in rows).encode('utf-8')
 
 
+# Archive settings that do not depend on the machine. Every member is STORED (not deflated): the deflate stream that
+# zlib writes is not specified by the format and differs between implementations (zlib-ng 1.3.1 here, stock zlib 1.3
+# on GitHub's Ubuntu runners: same members, different compressed bytes, so a different SHA-256). zipfile also takes
+# create_system from the running system (0 on Windows, 3 elsewhere): it is fixed too.
+ZIP_DATE = (2026, 1, 1, 0, 0, 0)
+ZIP_MODE = 0o644 << 16
+ZIP_SYSTEM = 3  # Unix
+
+
 def make_pack(manifest, translation, license_text, icon):
-    """The .mcpack (a zip) as bytes. Fixed dates and order: the same sources always give the same file."""
+    """The .mcpack (a zip) as bytes. Fixed member order, dates, permissions, creating system and no compression: the
+    same sources give the same file on any machine, whatever its zlib, umask or operating system."""
     translation = pack_text(translation)
     buffer = io.BytesIO()
     files = [
@@ -406,19 +418,50 @@ def make_pack(manifest, translation, license_text, icon):
         (f'texts/{LANGUAGE}.lang', translation),
         ('LICENSE.txt', license_text),
     ]
-    with zipfile.ZipFile(buffer, 'w', zipfile.ZIP_DEFLATED) as archive:
+    with zipfile.ZipFile(buffer, 'w', zipfile.ZIP_STORED) as archive:
         for name, data in files:
-            info = zipfile.ZipInfo(name, (2026, 1, 1, 0, 0, 0))
-            info.compress_type = zipfile.ZIP_DEFLATED
-            info.external_attr = 0o644 << 16
+            info = zipfile.ZipInfo(name, ZIP_DATE)
+            info.compress_type = zipfile.ZIP_STORED
+            info.create_system = ZIP_SYSTEM
+            info.external_attr = ZIP_MODE
             archive.writestr(info, data)
     return buffer.getvalue()
+
+
+def stored_zlib(data):
+    """A zlib stream (RFC 1950) made of stored deflate blocks: the same bytes with any zlib library."""
+    blocks = [data[start:start + 0xFFFF] for start in range(0, len(data), 0xFFFF)] or [b'']
+    out = bytearray(b'\x78\x01')
+    for number, block in enumerate(blocks):
+        out += bytes([number == len(blocks) - 1]) + struct.pack('<HH', len(block), len(block) ^ 0xFFFF) + block
+    return bytes(out + struct.pack('>I', zlib.adler32(data)))
+
+
+def png_without_compression(png):
+    """The same PNG with its image data rewritten as stored blocks (src/minecraft.py compresses it with the local
+    zlib at level 9, whose output may differ elsewhere)."""
+    chunks, position, image = [], 8, b''
+    while position < len(png):
+        length, kind = struct.unpack('>I4s', png[position:position + 8])
+        data = png[position + 8:position + 8 + length]
+        position += 12 + length
+        if kind == b'IDAT':
+            image += data
+            if chunks and chunks[-1][0] == b'IDAT':
+                continue
+        chunks.append((kind, data))
+    out = bytearray(png[:8])
+    for kind, data in chunks:
+        if kind == b'IDAT':
+            data = stored_zlib(zlib.decompress(image))
+        out += struct.pack('>I', len(data)) + kind + data + struct.pack('>I', zlib.crc32(kind + data))
+    return bytes(out)
 
 
 def icon():
     sys.path.insert(0, str(ROOT / 'src'))
     import minecraft as game_pack  # src/minecraft.py: the same generated flag-coloured icon as the Java pack
-    return game_pack.png(128)
+    return png_without_compression(game_pack.png(128))
 
 
 def build_path(tag):

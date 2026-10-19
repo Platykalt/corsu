@@ -1,2 +1,5 @@
 # Bedrock reads its .lang files with LF line ends: keep them so on a Windows checkout (tests/test_bedrock.py).
 minecraft/bedrock/*.lang text eol=lf
+# Copied byte for byte into the .mcpack: LF everywhere, so a Windows checkout builds the same file (tests/test_bedrock.py).
+minecraft/bedrock/manifest.json text eol=lf
+minecraft/bedrock/LICENSE.txt text eol=lf

@@ -9,14 +9,16 @@ Les résultats attendus ont été observés avec le moteur de Keyman 18.0.254 et
 
 ## Quel fichier essayer
 
-<!-- Fichier publié avec Corsu 0.26.0 (paquet 1.1) ; pas de candidat plus récent. Si un
-     candidat revient, lui donner sa propre colonne avec le lien de son exécution et sa date d'expiration. -->
+<!-- Fichier de Corsu 0.27.0 (paquet 1.2) : cette fiche sert à l'essai de la 0.27.0 une fois publiée. Tant
+     qu'elle ne l'est pas, le lien ci-dessous donne le paquet 1.1 de Corsu 0.26.0 (pour lequel les lignes 1 à 12
+     et 14 restent valables, avec la version 1.1). Si un candidat revient, lui donner sa propre colonne avec le lien
+     de son exécution et sa date d'expiration. -->
 | | Dictionnaire publié |
 | --- | --- |
 | Où le prendre | [corsu-keyboard.kmp](https://github.com/Platykalt/corsu/releases/latest/download/corsu-keyboard.kmp) ([empreinte SHA-256](https://github.com/Platykalt/corsu/releases/latest/download/corsu-keyboard.kmp.sha256)) |
 | Fichier | `corsu-keyboard.kmp` |
 | Nom dans Keyman | Corsu |
-| Version du dictionnaire | 1.1 (publié avec Corsu 0.26.0) |
+| Version du dictionnaire | 1.2 (à partir de Corsu 0.27.0 ; 1.1 avec Corsu 0.26.0) |
 | Pas à pas | « Installer » dans le guide [Android](android.md#installer) ou [iPhone](iphone.md#installer) |
 
 Le fichier doit garder exactement le nom `corsu-keyboard.kmp` (sinon le renommer : Keyman tire l'identité du paquet
@@ -32,11 +34,11 @@ du nom du fichier).
 
 ## Déroulé
 
-| # | Action | Attendu (paquet 1.1) | OK ? |
+| # | Action | Attendu (paquet 1.2) | OK ? |
 | --- | --- | --- | --- |
 | 1 | Télécharger le fichier (tableau ci-dessus) | `corsu-keyboard.kmp`, sous ce nom exact | |
-| 2 | L'importer dans Keyman (Android : Paramètres › Installer un clavier ou un dictionnaire › Installer depuis un fichier local ; iPhone : Ouvrir dans « Keyman », ou Paramètres › Installer depuis un fichier › Parcourir) | L'écran du paquet montre « Corsu », la version 1.1 et la langue Corsican ; Installer aboutit sans erreur | |
-| 3 | Relancer Keyman, puis Langues installées › Corsican ; ouvrir le dictionnaire (Android : Dictionnaire › le dictionnaire coché ; iPhone : le dictionnaire › icône i) | Nom « Corsu » (et non `platykalt.co.corsu`, le paquet 1.0), **Version du dictionnaire** 1.1 ; suggestions sur *Predictions with corrections* (Android) ou prédictions et corrections activées (iPhone) | |
+| 2 | L'importer dans Keyman (Android : Paramètres › Installer un clavier ou un dictionnaire › Installer depuis un fichier local ; iPhone : Ouvrir dans « Keyman », ou Paramètres › Installer depuis un fichier › Parcourir) | L'écran du paquet montre « Corsu », la version 1.2 et la langue Corsican ; Installer aboutit sans erreur | |
+| 3 | Relancer Keyman, puis Langues installées › Corsican ; ouvrir le dictionnaire (Android : Dictionnaire › le dictionnaire coché ; iPhone : le dictionnaire › icône i) | Nom « Corsu » (et non `platykalt.co.corsu`, le paquet 1.0), **Version du dictionnaire** 1.2 ; suggestions sur *Predictions with corrections* (Android) ou prédictions et corrections activées (iPhone) | |
 | 4 | Dans l'application d'essai, choisir Keyman, EuroLatin (SIL) en corse ; taper `bonghj` | Le bandeau propose « bonghjornu » | |
 | 5 | Toucher « bonghjornu » | Le mot est écrit en entier, suivi d'une espace | |
 | 6 | Taper `grazzie` (faute voulue) | Le bandeau propose « grazie » | |
@@ -46,7 +48,8 @@ du nom du fichier).
 | 10 | **Début de phrase** : après « bonghjornu. » et une espace, taper `ecc` sans toucher Maj | Le clavier EuroLatin met de lui-même la majuscule (« Ecc ») et les suggestions sont en majuscule : « Eccu » | |
 | 11 | Toujours en début de phrase : retour à la ligne sans ponctuation, puis `ecc` | Pas de majuscule automatique : comportement du clavier EuroLatin, limite connue (de même après `."`) | |
 | 12 | **Retour sur un mot** : écrire « Dopu ella vene », placer le curseur entre `ell` et `a`, choisir « ellu » dans le bandeau. Puis placer le curseur à la fin d'un mot et choisir une suggestion | Android : « Dopu ellu vene », le mot entier est remplacé. iPhone : « Dopu ellu a vene », le « a » est la fin de « ella » restée à droite du curseur (limite de Keyman pour iPhone). À la fin d'un mot : la suggestion remplace le mot entier, sur les deux | |
-| 13 | Revenir au clavier habituel (Android : icône de clavier, ou appui court sur la touche globe ; iPhone : touche globe), puis de nouveau à Keyman | Les deux claviers alternent ; Keyman retrouve les suggestions corses | |
+| 13 | **Ponctuation déjà écrite** : écrire « Aiacc. », placer le curseur juste avant le point, choisir « Aiacciu » | « Aiacciu. », sans espace devant le point (paquet 1.2 ; avec 1.1 : « Aiacciu . ») | |
+| 14 | Revenir au clavier habituel (Android : icône de clavier, ou appui court sur la touche globe ; iPhone : touche globe), puis de nouveau à Keyman | Les deux claviers alternent ; Keyman retrouve les suggestions corses | |
 
 Compter un peu moins d'une minute pour 1 à 3 si Keyman est déjà prêt, et le reste en trois ou quatre minutes.
 
@@ -58,7 +61,7 @@ paquet qui répond.
 
 ## Variantes régionales
 
-Publiées avec Corsu 0.26.0, version 1.1 :
+Publiées depuis Corsu 0.26.0 (version 1.1), version 1.2 à partir de Corsu 0.27.0 :
 [corsu-keyboard-cismuntincu.kmp](https://github.com/Platykalt/corsu/releases/latest/download/corsu-keyboard-cismuntincu.kmp)
 et
 [corsu-keyboard-pumuntincu.kmp](https://github.com/Platykalt/corsu/releases/latest/download/corsu-keyboard-pumuntincu.kmp).

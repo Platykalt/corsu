@@ -22,16 +22,18 @@ official help and the translation files of that version; another version may cha
 
 ## Available dictionaries
 
-<!-- corsu:phone-variants:en The files really attached to the latest published release (Corsu 0.26.0: the three
-     1.1 packages). When a later version is published, list here only the files it carries. -->
+<!-- corsu:phone-variants:en The files attached to Corsu 0.27.0 (the three 1.2 packages, 19,550 words each, counted
+     with tools/count_kmp.py in the built packages). This guide describes 0.27.0; until it is published, "latest
+     published release" still gives Corsu 0.26.0's 1.1 packages (13,213 words). When a later version is published,
+     list here only the files it carries. -->
 | File | Name in Keyman | Version | Content | Download |
 | --- | --- | --- | --- | --- |
-| `corsu-keyboard.kmp` | Corsu | 1.1 (published with Corsu 0.26.0) | general dictionary: the shared vocabulary, 13,213 words (stray words removed), no regional preference; keeps the capital letters of words | [latest published release](https://github.com/Platykalt/corsu/releases/latest/download/corsu-keyboard.kmp) ([SHA-256 checksum](https://github.com/Platykalt/corsu/releases/latest/download/corsu-keyboard.kmp.sha256)) |
-| `corsu-keyboard-cismuntincu.kmp` | Corsu – Cismuntincu (experimental) | 1.1 (published with Corsu 0.26.0) | the same vocabulary, preferring the forms of the Cismonte; experimental, the regional forms cover only part of the words (361 words weighted differently) | [latest published release](https://github.com/Platykalt/corsu/releases/latest/download/corsu-keyboard-cismuntincu.kmp) ([SHA-256 checksum](https://github.com/Platykalt/corsu/releases/latest/download/corsu-keyboard-cismuntincu.kmp.sha256)) |
-| `corsu-keyboard-pumuntincu.kmp` | Corsu – Pumuntincu (experimental) | 1.1 (published with Corsu 0.26.0) | the same vocabulary, preferring the forms of the Pumonte; experimental, same limit | [latest published release](https://github.com/Platykalt/corsu/releases/latest/download/corsu-keyboard-pumuntincu.kmp) ([SHA-256 checksum](https://github.com/Platykalt/corsu/releases/latest/download/corsu-keyboard-pumuntincu.kmp.sha256)) |
+| `corsu-keyboard.kmp` | Corsu | 1.2 (from Corsu 0.27.0) | general dictionary: the shared vocabulary, 19,550 words (stray words removed), no regional preference; keeps the capital letters of words | [latest published release](https://github.com/Platykalt/corsu/releases/latest/download/corsu-keyboard.kmp) ([SHA-256 checksum](https://github.com/Platykalt/corsu/releases/latest/download/corsu-keyboard.kmp.sha256)) |
+| `corsu-keyboard-cismuntincu.kmp` | Corsu – Cismuntincu (experimental) | 1.2 (from Corsu 0.27.0) | the same vocabulary, preferring the forms of the Cismonte; experimental, the regional forms cover only part of the words (361 words weighted differently) | [latest published release](https://github.com/Platykalt/corsu/releases/latest/download/corsu-keyboard-cismuntincu.kmp) ([SHA-256 checksum](https://github.com/Platykalt/corsu/releases/latest/download/corsu-keyboard-cismuntincu.kmp.sha256)) |
+| `corsu-keyboard-pumuntincu.kmp` | Corsu – Pumuntincu (experimental) | 1.2 (from Corsu 0.27.0) | the same vocabulary, preferring the forms of the Pumonte; experimental, same limit | [latest published release](https://github.com/Platykalt/corsu/releases/latest/download/corsu-keyboard-pumuntincu.kmp) ([SHA-256 checksum](https://github.com/Platykalt/corsu/releases/latest/download/corsu-keyboard-pumuntincu.kmp.sha256)) |
 
 "Version" is the dictionary package's version, which Keyman shows (see step 5); it does not follow Corsu's version
-numbers.
+numbers. Corsu 0.26.0 carried the 1.1 packages (13,213 words).
 
 All three are for the Corsican language (`co`) and the EuroLatin (SIL) keyboard. One is enough: see
 [Choosing a regional dictionary](#choosing-a-regional-dictionary).
@@ -75,16 +77,17 @@ All three are for the Corsican language (`co`) and the EuroLatin (SIL) keyboard.
 Download the new file and install it as in step 4, **under the same name** `corsu-keyboard.kmp`. Keyman takes the
 package's identity from the file name: if the browser added a suffix (`corsu-keyboard(1).kmp`,
 `corsu-keyboard (1).kmp`), rename the file before installing it, or delete the old download first. Your settings are
-kept. **Then restart Keyman**: until then, the old dictionary keeps answering. To restart it, switch to another
-keyboard and back to Keyman, or force-stop the Keyman app in Android's settings. Then check the version as in step 5:
-1.1 for the packages published with Corsu 0.26.0. A dictionary installed before Corsu 0.26.0 is named
+kept. **Then restart Keyman**: until then, the old dictionary keeps answering. To restart it, switch to another keyboard
+and back to Keyman, or force-stop the Keyman app in Android's settings. Then check the version as in step 5: 1.2 for the
+packages of Corsu 0.27.0 (1.1 for those of Corsu 0.26.0). A dictionary installed before Corsu 0.26.0 is named
 `platykalt.co.corsu` in Keyman, version 1.0: update it.
 
 The full test list with expected results is in French: [Essai en 5 minutes](../../fr/telephone/essai-5-minutes.md).
 
 ## Choosing a regional dictionary
 
-<!-- corsu:phone-variants:en Both regional variants are published since Corsu 0.26.0 (1.1 packages). -->
+<!-- corsu:phone-variants:en Both regional variants are published since Corsu 0.26.0 (1.1 packages; 1.2 from
+     Corsu 0.27.0). -->
 Two experimental dictionaries prefer the forms of the Cismonte or of the Pumonte:
 [corsu-keyboard-cismuntincu.kmp](https://github.com/Platykalt/corsu/releases/latest/download/corsu-keyboard-cismuntincu.kmp)
 and
@@ -99,7 +102,7 @@ package adds it to the list, but the old one stays active. To switch:
 3. restart Keyman (see [Updating](#updating)), then check the name shown (step 5).
 
 To go back to the general dictionary, do the same with `corsu-keyboard.kmp`: **Dictionary** then names "Corsu",
-version 1.1.
+version 1.2 (1.1 with Corsu 0.26.0).
 
 ## Capitals and sentence start
 
@@ -124,11 +127,10 @@ when only the latter is in the dictionary), or a lowercase word by the name spel
 "corti" is missing). The 1.1 dictionary (Corsu 0.26.0) has these forms ("Bastelicaccia", "corti" next to "Corti",
 "Vizzani", acronyms such as "ADECEC"); a word still missing, a street name for instance, may still be replaced.
 
-The 1.2 dictionary (next version of Corsu, not published yet) also knows about 6,300 more forms found in its sources:
-plurals and feminines ("tradizioni", "fundata", "partuti", which the 19.0.309 engine replaced by "tradizione",
-"fundatu", "partiti"), the verb forms of Wiktionary ("manghjatu") and elided forms ("l'abitanti", "L'ADECEC", which
-became "abitanti" and "ADECEC"). Forms it lacks (verbs such as "ghjocanu", "vedemu", rarer elisions) may still be
-replaced.
+The 1.2 dictionary (from Corsu 0.27.0) also knows about 6,300 more forms found in its sources: plurals and feminines
+("tradizioni", "fundata", "partuti", which the 19.0.309 engine replaced by "tradizione", "fundatu", "partiti"), the verb
+forms of Wiktionary ("manghjatu") and elided forms ("l'abitanti", "L'ADECEC", which became "abitanti" and "ADECEC").
+Forms it lacks (verbs such as "ghjocanu", "vedemu", rarer elisions) may still be replaced.
 
 ## Returning to a word
 
@@ -136,17 +138,15 @@ Moving the cursor changes nothing in the text. Suggestions follow the part of th
 
 - **Cursor at the end of the word**: the chosen suggestion replaces the whole word. This is the safe gesture, whatever
   the dictionary.
-- **Cursor inside the word**, with the 1.1 dictionary (published with Corsu 0.26.0): the suggestion replaces the
-  whole word. In "Dopu ell|a vene", choosing "ellu" gives "Dopu ellu vene". The dictionary asks Keyman to delete the
-  end of the word, which Keyman for Android does. Observed in the engine of Keyman 18.0.254 and 19.0.309 (beta) and
-  in the Keyman 18.0.254 app on an Android 14 emulator, not on a phone.
-  One Keyman limit remains: the undo Keyman offers right after (backspace, then the word in quotes) does not bring
-  back the end of the old word.
-- **Punctuation already after the word**: with the 1.2 dictionary (next version of Corsu, not published yet), the
-  chosen word stays attached to it, cursor at the end of the word or inside it: `Aiacc|.` or `Aiacc|iu.` then
-  "Aiacciu" gives "Aiacciu.", and `Sar|i-Solenzara` then "Sari" keeps the hyphen. With the 1.1 dictionary, Keyman
-  added a space before the mark ("Aiacciu ."). Observed in the engine of Keyman 18.0.254 and 19.0.309, not on a
-  phone.
+- **Cursor inside the word**, with the 1.1 and 1.2 dictionaries (Corsu 0.26.0 and 0.27.0): the suggestion replaces the
+  whole word. In "Dopu ell|a vene", choosing "ellu" gives "Dopu ellu vene". The dictionary asks Keyman to delete the end
+  of the word, which Keyman for Android does. Observed in the engine of Keyman 18.0.254 and 19.0.309 (beta) and in the
+  Keyman 18.0.254 app on an Android 14 emulator, not on a phone. One Keyman limit remains: the undo Keyman offers right
+  after (backspace, then the word in quotes) does not bring back the end of the old word.
+- **Punctuation already after the word**: with the 1.2 dictionary (from Corsu 0.27.0), the chosen word stays attached to
+  it, cursor at the end of the word or inside it: `Aiacc|.` or `Aiacc|iu.` then "Aiacciu" gives "Aiacciu.", and
+  `Sar|i-Solenzara` then "Sari" keeps the hyphen. With the 1.1 dictionary, Keyman added a space before the mark
+  ("Aiacciu ."). Observed in the engine of Keyman 18.0.254 and 19.0.309, not on a phone.
 - **Punctuation typed after a tapped suggestion**: Keyman adds a space after the word you tap, and Keyman 18 keeps it
   when you then type `.` or `,` ("casa ."). Tap Backspace once (it removes the space only), then type the mark:
   "casa.". Keyman 19 (beta) removes that space itself. This is Keyman's keystroke handling; the dictionary cannot
