@@ -10,16 +10,16 @@
   "gone-from-lexicon": 29,
   "corpus-name": 95
  },
- "shared_entries": 19077,
+ "shared_entries": 19550,
  "shared_by_status": {
-  "attested": 12424,
+  "attested": 12897,
   "corsu-lexicon": 6642,
   "ai-proposal": 11
  },
  "shared_by_source": {
   "tatoeba": 43,
   "wiktionary": 3509,
-  "vikipedia": 7713,
+  "vikipedia": 8186,
   "corsu-lexicon": 6642,
   "apertium": 183,
   "cowiki-lingua-corsa": 34,
@@ -32,7 +32,7 @@
   "homographs": 1,
   "acronyms": 3
  },
- "new_from_outside_old_list": 7494,
+ "new_from_outside_old_list": 7967,
  "cismuntincu_entries": 354,
  "pumuntincu_entries": 357,
  "northern_only_forms": 180,
@@ -50,5 +50,6 @@
   "lowercase_homographs": 12
  },
  "inflected_forms": 3113,
- "wiktionary_forms": 2749
+ "wiktionary_forms": 2749,
+ "elided_forms": 473
 }

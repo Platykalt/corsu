@@ -586,6 +586,28 @@ def main():
         removed.pop(low, None)
         wiktionary_added += 1
 
+    # 5d. Elided forms written at least INFLECTED_MIN times in Vikipedia (l'abitanti, d'Aiacciu, l'ADECEC) whose second
+    #     part is a listed word and whose first part is an elision the list already uses at least 5 times (l', d',
+    #     un', st', s', ch'...). Keyman's word breaker keeps an elided form as one word, and its correction search
+    #     only follows words of the lexicon: auto-correction turned l'abitanti into abitanti. The second part keeps
+    #     the case the list gives it. Weight: as in step 5b.
+    elisions = Counter(low.split("'")[0] for low in entries if "'" in low)
+    # The acronyms of step 7 count as listed words here (l'ADECEC).
+    written = {low: entry['word'] for low, entry in entries.items()}
+    written.update({nfc(row['word']).lower(): nfc(row['word']) for row in read_tsv(SOURCES / 'acronyms.tsv')})
+    elided_added = 0
+    for low, count in sorted(wiki.items()):
+        head, _, tail = low.partition("'")
+        if (count < INFLECTED_MIN or not tail or low in entries or tail not in written or elisions[head] < 5
+                or "'" in tail):
+            continue
+        word = head + "'" + written[tail]
+        weight = min(frequency_weight(low), INFLECTED_CAP)
+        entries[low] = dict(word=word, weight=max(1, round(weight)), source='vikipedia', status='attested')
+        known.add(fold(low))
+        removed.pop(low, None)
+        elided_added += 1
+
     # 6. Common words written like a capitalised entry (orsu / Orsu, corti / Corti): Keyman keeps a word typed exactly
     #    as the list has it, so with only the name a lowercase word typed on purpose became the name. The lowercase
     #    word is added next to it, weighed by its lowercase uses in Vikipedia: from Wiktionary's common (non-name)
@@ -656,7 +678,7 @@ def main():
         cismuntincu_entries=len(variant_weight['cismuntincu']), pumuntincu_entries=len(variant_weight['pumuntincu']),
         northern_only_forms=len(north_only), southern_only_forms=len(south_only),
         words_ranked_differently=len(differing), wiki_tokens=wiki_total, lexicon_tokens=lexicon_total,
-        place_words=place_stats, inflected_forms=len(inflected), wiktionary_forms=wiktionary_added,
+        place_words=place_stats, inflected_forms=len(inflected), wiktionary_forms=wiktionary_added, elided_forms=elided_added,
     )
     (DATA / 'audit/stats.json').write_text(json.dumps(stats, ensure_ascii=False, indent=1) + '\n', encoding='utf-8')
     print(json.dumps(stats, ensure_ascii=False, indent=1))

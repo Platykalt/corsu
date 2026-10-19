@@ -69,6 +69,11 @@ class KeyboardVocabularyTests(unittest.TestCase):
                     continue
                 if entry['source'] != 'wiktionary' and not entry['source'].startswith('cog:'):
                     self.assertIsNone(make_vocab.shape_problem(low), word)
+                if "'" in word and word.partition("'")[0] == low.partition("'")[0]:
+                    # An elided form keeps the case of its listed second part: d'Aiacciu, l'Italia, l'ADECEC.
+                    tail = word.partition("'")[2]
+                    self.assertTrue(tail in (tail.lower(), tail[0].upper() + tail[1:].lower(), tail.upper()), word)
+                    continue
                 self.assertTrue(word == low or word == low[0].upper() + low[1:], word)
 
     def test_everyday_words_come_first(self):

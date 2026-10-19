@@ -1,6 +1,6 @@
 // Corsu: what a chosen suggestion does to the text around the caret (Keyman lexical model wrapper).
 //
-// tools/build_keyboard.py wraps the compiled trie model with this function. Four adjustments, each for a case
+// tools/build_keyboard.py wraps the compiled trie model with this function. Three adjustments, each for a case
 // where Keyman's engine (18.0 and 19.0) changes text the user did not ask to change:
 //
 // 1. Whole word, caret inside it (Keyman for Android only). The engine replaces only the part of a word left of
@@ -19,10 +19,7 @@
 //    the end of the word: there the end of a word cut by the caret stays, and the space keeps it apart.
 //    A punctuation mark typed after a chosen suggestion is the keyboard's input, not the model's: Keyman 19
 //    removes the space then; Keyman 18 does not, and no model can.
-// 3. An elided word is known when its second part is: "L'ADECEC", "d'abitanti". The word list holds the
-//    frequent elided forms as words (l'annu, ch'ella); for the others the model offers the word as typed, which
-//    is how the engine recognises a known word, so auto-correction keeps it ("L'ADECEC" became "ADECEC").
-// 4. A typographic apostrophe stays. The word list writes elisions with ' (U+0027); when the word being
+// 3. A typographic apostrophe stays. The word list writes elisions with ' (U+0027); when the word being
 //    replaced is written with ’ (U+2019), the suggestions use ’ too: "l’is" + "l'isula" gives "l’isula".
 //
 // Plain ES5: it runs in the engine's prediction worker.
@@ -55,18 +52,6 @@ function corsuWholeWord(model) {
   function codePoints(text) {
     return Array.from(text).length;
   }
-  // The model's entry for a word, from its lexicon: { text, p } or null. Several entries can share the word's search
-  // key (Corti, corti); the one written as the word is preferred.
-  function known(lexicon, word) {
-    var node = lexicon.traverseFromRoot().child(lexicon.toKey(word));
-    var entries = (node && node.entries) || [];
-    for (var i = 0; i < entries.length; i++) {
-      if (entries[i].text === word) {
-        return entries[i];
-      }
-    }
-    return entries.length ? entries[0] : null;
-  }
   model.predict = function(transform, context) {
     var distribution = predict.call(this, transform, context);
     var right = (context && context.right) || '';
@@ -89,24 +74,6 @@ function corsuWholeWord(model) {
     var next = right.slice(rest.length);
     noSpace = atWord && attached.test(next) && (!rest || android);
     var i, change;
-    // An elided word whose second part the model knows ("L'ADECEC", "d'abitanti") is a word, not a typo: it is
-    // offered, with the second part as the word list writes it, so that the engine finds the typed word in the
-    // model (casing applied) and auto-correction keeps it. Keyman 18 hands the model the root in lowercase.
-    var elision = atWord ? /^([^'\u2019\s\d.,;:!?]{1,5})(['\u2019])(.+)$/.exec(last.text) : null;
-    var insert = transform.insert || '';
-    // A second part of one or two letters (un'a, ch'el) is too often a word being typed: it is left to the engine.
-    var tail = elision && codePoints(elision[3]) >= 3 && this.traverseFromRoot
-      && last.text.slice(-insert.length || last.text.length) === insert ? known(this, elision[3]) : null;
-    if (tail && !known(this, last.text)) {
-      var word = elision[1] + elision[2] + tail.text;
-      distribution.push({
-        sample: {
-          transform: { insert: word, deleteLeft: (transform.deleteLeft || 0) + codePoints(last.text) - codePoints(insert) },
-          displayAs: word
-        },
-        p: tail.p
-      });
-    }
     // The word as written in the text: Keyman 19 hands the model a corrected root, written with '.
     var written = (context && context.left) || '';
     var typed = breakWords(written);

@@ -124,10 +124,11 @@ when only the latter is in the dictionary), or a lowercase word by the name spel
 "corti" is missing). The 1.1 dictionary (Corsu 0.26.0) has these forms ("Bastelicaccia", "corti" next to "Corti",
 "Vizzani", acronyms such as "ADECEC"); a word still missing, a street name for instance, may still be replaced.
 
-The 1.2 dictionary (next version of Corsu, not published yet) also knows about 5,900 more forms found in its sources:
+The 1.2 dictionary (next version of Corsu, not published yet) also knows about 6,300 more forms found in its sources:
 plurals and feminines ("tradizioni", "fundata", "partuti", which the 19.0.309 engine replaced by "tradizione",
-"fundatu", "partiti") and the verb forms of Wiktionary ("manghjatu"); and an elided word whose second part it knows
-("L'ADECEC", "d'abitanti") is kept. Verb forms it lacks ("ghjocanu", "vedemu") may still be replaced.
+"fundatu", "partiti"), the verb forms of Wiktionary ("manghjatu") and elided forms ("l'abitanti", "L'ADECEC", which
+became "abitanti" and "ADECEC"). Forms it lacks (verbs such as "ghjocanu", "vedemu", rarer elisions) may still be
+replaced.
 
 ## Returning to a word
 

@@ -75,11 +75,12 @@ capital (The, To, And...), and tapping one replaces the selection with it.
   and as the system keyboard: `casa` tapped, then `.`, space, `Do` gives `A casa. Do`. (In a headless page with a
   stand-in bridge that does not echo text changes back, the space typed after the `.` also removed the `.`: a limit
   of that stand-in, not reproduced in the app; mentioned only in case another host behaves like it.)
-- **Keyman 18.0 correction search and words outside the lexicon.** With auto-correction forced on in the 18.0 engine
-  (the 18.0 apps do not offer it), `L'ADECEC` + space became `ADECEC`: the search only follows lexicon paths, so the
-  model is never asked about the typed elided word, even when its second part is a known word. The 19.0.309 engine
-  asks the model about the typed root, and a model can then recognise it. Low priority, since 18.0 apps have no
-  auto-correction.
+- **Words outside the lexicon cannot be recognised by the model.** The correction search (18.0.254 and 19.0.309)
+  only follows paths of the lexicon, and `predict` is only called with those roots, so a model cannot tell the
+  engine that a typed word it does not list is valid (an elided form of a known word, `l'abitanti`, is replaced by
+  `abitanti` with auto-correction on). In 19.0.309 the outcome also depends on time: in a headless page the same
+  typing was kept in five runs of six (the search ran out of time and offered nothing) and replaced in one. A hook
+  for the model to accept a word as known would help languages with elision or clitics.
 
 ## What Corsu does meanwhile
 

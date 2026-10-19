@@ -11,7 +11,8 @@ Suggestions: Predictions with corrections. Not a phone; not an iPhone.
 
 ## Keyman 18.0.254, in-app field, Corsu – Pumuntincu 1.2 (this branch, keyboard/build) installed over it from a local
 ## HTTP server (Keyman's Install Dictionary screen), Keyman force-stopped and relaunched; its installed model.js
-## contains the new whole-word.js code
+## contains the new whole-word.js code. (That build, 19,077 words, also had an elision rule since removed from
+## whole-word.js; the punctuation and mid-word code observed here is unchanged in the final 1.2 packages.)
 {"text": "Start typing here…", "banner": ["Di", "U", "A", "In", "À", "È", "I", "Hè"], "layer": "shift", "step": ["clear", ""]}
 {"text": "u zite", "banner": ["zitella", "zitelli", "ziteddu", "zitellu", "zitelle", "zitedda", "ziteddi", "site"], "layer": "default", "step": ["type", "u zite"]}
 {"text": "Start typing here…", "banner": ["Di", "U", "A", "In", "À", "È", "I", "Hè"], "layer": "shift", "step": ["clear", ""]}

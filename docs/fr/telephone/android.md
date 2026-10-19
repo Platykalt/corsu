@@ -131,11 +131,11 @@ manque). Le dictionnaire 1.1 (Corsu 0.26.0) contient ces formes (« Bastelicacci
 Vizzani », des sigles comme « ADECEC ») ; un mot qui y manque encore, un nom de rue par exemple, peut toujours être
 remplacé.
 
-Le dictionnaire 1.2 (prochaine version de Corsu, pas encore publiée) connaît en plus environ 5 900 formes trouvées
+Le dictionnaire 1.2 (prochaine version de Corsu, pas encore publiée) connaît en plus environ 6 300 formes trouvées
 dans ses sources : pluriels et féminins (« tradizioni », « fundata », « partuti », que le moteur 19.0.309 remplaçait
-par « tradizione », « fundatu », « partiti ») et formes verbales du Wiktionnaire (« manghjatu ») ; et un mot élidé
-dont la seconde partie est connue (« L'ADECEC », « d'abitanti ») est gardé. Des formes verbales qui lui manquent
-(« ghjocanu », « vedemu ») peuvent encore être remplacées.
+par « tradizione », « fundatu », « partiti »), formes verbales du Wiktionnaire (« manghjatu ») et formes élidées
+(« l'abitanti », « L'ADECEC », devenues « abitanti » et « ADECEC »). Les formes qui lui manquent (verbes comme
+« ghjocanu », « vedemu », élisions plus rares) peuvent encore être remplacées.
 
 ## Revenir sur un mot
 

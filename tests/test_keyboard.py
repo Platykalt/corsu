@@ -172,13 +172,10 @@ console.log(JSON.stringify([
 
 
     @unittest.skipUnless(shutil.which('node'), 'needs Node.js')
-    def test_punctuation_elisions_and_apostrophes(self):
+    def test_punctuation_and_apostrophes(self):
         script = (build_keyboard.WHOLE_WORD.read_text(encoding='utf-8') + r"""
 const words = text => [...text.matchAll(/[\p{L}'\u2019]+/gu)].map(m => ({start: m.index, end: m.index + m[0].length, text: m[0]}));
-const lexicon = { adecec: [{ text: 'ADECEC', p: 0.1 }], abitanti: [{ text: 'abitanti', p: 0.2 }], el: [{ text: 'el', p: 0.3 }] };
-const node = key => ({ entries: lexicon[key] || [] });
-const model = () => ({ wordbreaker: words, toKey: text => text.toLowerCase().replace(/\u2019/g, "'"),
-  traverseFromRoot: () => ({ child: key => node(key) }),
+const model = () => ({ wordbreaker: words,
   predict: (transform, context) => [{ sample: { transform: { insert: "l'isula", deleteLeft: 4 }, displayAs: "l'isula" }, p: 1 }] });
 const run = (agent, left, right, transform) => {
   Object.defineProperty(globalThis, 'navigator', { value: { userAgent: agent }, configurable: true });
@@ -192,7 +189,6 @@ console.log(JSON.stringify([
   run(android, 'Eccu Aiacc', '.'), run(android, 'Eccu Aiacc', 'iu.'), run(android, 'Eccu Aiacc', ' ma'),
   run(android, 'Eccu Aiacc', ''), run(android, 'Sar', 'i-Solenzara'), run(android, 'Eccu Aiacc', '\nDopu'),
   run(iphone, 'Eccu Aiacc', '.'), run(iphone, 'Eccu Aiacc', 'iu.'),
-  run(android, "A L'ADECEC", ''), run(android, "tutti l'abitanti", ''), run(android, "ch'el", ''),
   run(android, 'Eccu l\u2019is', ''),
 ]));
 """)
@@ -202,12 +198,8 @@ console.log(JSON.stringify([
         # end of the text keep the engine's default (undefined: the model declares no punctuation).
         self.assertEqual([r['space'] for r in results[:8]], ['', '', None, None, '', '', '', None])
         self.assertEqual([r['dr'] for r in results[:8]], [0, 2, 0, 0, 1, 0, 0, 0])
-        # An elided word whose second part (3 letters or more) is known is offered as the word list writes it.
-        self.assertEqual(results[8]['words'], ["l'isula", "L'ADECEC"])
-        self.assertEqual(results[9]['words'], ["l'isula", "l'abitanti"])
-        self.assertEqual(results[10]['words'], ["l'isula"])
         # A typographic apostrophe in the word being replaced is kept in the suggestions.
-        self.assertEqual(results[11]['words'], ['l\u2019isula'])
+        self.assertEqual(results[8]['words'], ['l\u2019isula'])
 
 
 class DataCaseTests(unittest.TestCase):
