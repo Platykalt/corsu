@@ -21,6 +21,8 @@ class TranslationTests(unittest.TestCase):
         self.assertEqual(engine.translate('Le fichier a été bloqué car %1$S n’est pas accessible.'),
                          'U schedariu hè statu bluccatu perchè %1$S ùn hè micca accessibile.')
         self.assertEqual(engine.signature('Fichier %1$S'), ['%1$S'])
+        # Context menu on selected text (contextMenuSearch): it stayed French until October 2026.
+        self.assertEqual(engine.translate('Recherche %1$S pour « %2$S »'), 'Circà « %2$S » cù %1$S')
 
     def test_mozilla_arguments_keep_their_values(self):
         """Firefox gives the n-th %S, or %n$S, the n-th value: a translation must give each value the same place."""

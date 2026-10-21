@@ -6061,6 +6061,9 @@ Baltic|Baltique|Balticu
 |Actions pour la page|Azzioni per a pagina
 |Afficher l’adresse dans la barre d’adresse|Affissà l'indirizzu in a barra d'indirizzu
 |Rechercher avec %1 dans une fenêtre de navigation privée|Circà cù %1 in una finestra di navigazione privata
+# Firefox context menu on selected text (browser.properties contextMenuSearch). AI proposal built on the
+# wording Corsu already uses beside it ("Circà cù %1", "Circà cù %S in una finestra di navigazione privata").
+Search %1 for “%2”|Recherche %1 pour « %2 »|Circà « %2 » cù %1
 |Rechercher dans une fenêtre de navigation privée|Circà in una finestra di navigazione privata
 |Aller à l’onglet|Andà à l'unghjetta
 |Déplacer l’onglet dans la vue scindée|Spustà l'unghjetta in a vista sparta
