@@ -5,6 +5,7 @@ Usage: check_firefox.py FIREFOX_EXECUTABLE
 Fails when a checked string is still English or French (or not the Corsican given): that catches a missing French
 pack, a broken omni.ja, labels the lexicon no longer covers and .properties arguments (%S) the engine misses.
 """
+import contextlib
 import json
 import pathlib
 import socket
@@ -78,7 +79,10 @@ def receive(connection):
     return json.loads(data)
 
 
-def main(executable):
+@contextlib.contextmanager
+def marionette(executable, arguments=('--headless',), environment=None):
+    """Start `executable` in a throwaway profile and yield `command(name, params)`, a Marionette session in the chrome
+    context. `arguments` replaces --headless when a check runs Firefox on a nested display instead."""
     with tempfile.TemporaryDirectory(prefix='corsu-check-', ignore_cleanup_errors=True) as directory:
         profile = pathlib.Path(directory)
         with socket.socket() as reserve:
@@ -88,8 +92,9 @@ def main(executable):
             f'user_pref("marionette.port", {port});\nuser_pref("browser.shell.checkDefaultBrowser", false);\n'
             'user_pref("datareporting.policy.dataSubmissionEnabled", false);\n', encoding='utf-8')
         log = (profile / 'log').open('w', encoding='utf-8')
-        process = subprocess.Popen([executable, '--headless', '--no-remote', '--profile', directory, '--marionette',
-                                    '--remote-allow-system-access', 'about:blank'], stdout=log, stderr=log)
+        process = subprocess.Popen([executable, *arguments, '--no-remote', '--profile', directory, '--marionette',
+                                    '--remote-allow-system-access', 'about:blank'], stdout=log, stderr=log,
+                                   env=environment)
         connection = None
         try:
             deadline = time.monotonic() + 90
@@ -117,30 +122,7 @@ def main(executable):
 
             command('WebDriver:NewSession', {'capabilities': {'alwaysMatch': {}}})
             command('Marionette:SetContext', {'value': 'chrome'})
-            result = command('WebDriver:ExecuteAsyncScript', {
-                'script': SCRIPT, 'args': [[check[:3] for check in CHECKS], [check[:2] for check in PROPERTIES]],
-                'newSandbox': True,
-                'sandbox': 'default', 'scriptTimeout': 30000})['value']
-            if 'error' in result:
-                raise RuntimeError(result['error'])
-            failures = []
-            expected = [(f'{resource} {identifier}{"." + attribute if attribute else ""}', english, french, corsican)
-                        for resource, identifier, attribute, english, french, *corsican in CHECKS]
-            expected += [(f'{url.rsplit("/", 1)[1]} {key}', english, french, [])
-                         for url, key, english, french in PROPERTIES]
-            for (label, english, french, corsican), value in zip(expected, result['values']):
-                status = 'FAIL' if not value or value in (english, french) or (corsican and value != corsican[0]) \
-                    else 'PASS'
-                print(f'{status}: {label} = {value!r}')
-                if status == 'FAIL':
-                    failures.append(label)
-            print(f'Interface locale: {result["locale"]}')
-            print(f'Regional formats: {result["regional"]} (system {result["os"]}), 15:32 shown as {result["time"]!r} '
-                  f'({result["timeLocale"]})')
-            if not result['useOs'] or result['regional'] != result['os']:
-                failures.append('regional formats do not follow the system')
-            if failures:
-                raise SystemExit('Untranslated in the running Firefox: ' + ', '.join(failures))
+            yield command
         finally:
             if connection:
                 connection.close()
@@ -151,6 +133,34 @@ def main(executable):
                 process.kill()
                 process.wait()
             log.close()
+
+
+def main(executable):
+    with marionette(executable) as command:
+        result = command('WebDriver:ExecuteAsyncScript', {
+            'script': SCRIPT, 'args': [[check[:3] for check in CHECKS], [check[:2] for check in PROPERTIES]],
+            'newSandbox': True,
+            'sandbox': 'default', 'scriptTimeout': 30000})['value']
+    if 'error' in result:
+        raise RuntimeError(result['error'])
+    failures = []
+    expected = [(f'{resource} {identifier}{"." + attribute if attribute else ""}', english, french, corsican)
+                for resource, identifier, attribute, english, french, *corsican in CHECKS]
+    expected += [(f'{url.rsplit("/", 1)[1]} {key}', english, french, [])
+                 for url, key, english, french in PROPERTIES]
+    for (label, english, french, corsican), value in zip(expected, result['values']):
+        status = 'FAIL' if not value or value in (english, french) or (corsican and value != corsican[0]) \
+            else 'PASS'
+        print(f'{status}: {label} = {value!r}')
+        if status == 'FAIL':
+            failures.append(label)
+    print(f'Interface locale: {result["locale"]}')
+    print(f'Regional formats: {result["regional"]} (system {result["os"]}), 15:32 shown as {result["time"]!r} '
+          f'({result["timeLocale"]})')
+    if not result['useOs'] or result['regional'] != result['os']:
+        failures.append('regional formats do not follow the system')
+    if failures:
+        raise SystemExit('Untranslated in the running Firefox: ' + ', '.join(failures))
 
 
 if __name__ == '__main__':

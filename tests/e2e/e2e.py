@@ -104,6 +104,7 @@ def check_firefox(root, home, environment):
     assert stats['french_messages'] > 5000, stats
     executable = run(root, environment, 'src/corsu.py', 'prepare-firefox', capture=True).splitlines()[0].strip()
     run(root, environment, str(HERE / 'check_firefox.py'), executable)
+    run(root, environment, str(HERE / 'check_firefox_context_menu.py'), executable)
     if PLATFORM == 'linux':
         run(root, {**environment, 'XDG_DATA_HOME': str(home / '.local/share')}, str(HERE / 'check_firefox_default.py'),
             str(launchers(home)[0]))
