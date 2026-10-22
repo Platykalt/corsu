@@ -40,6 +40,15 @@ Les sections datées après « État actuel » sont l'historique : ce qui y est 
     priorité : 1. « Temps de connexion dépassé » (page d'erreur, très visible) ; 2. `unsignedAddonsDisabled`
     (installation de modules) ; 3. `geolocationLastAccessIndicatorText` (barre d'adresse, autorisations) ;
     4. `crashedplugins` (rare).
+- **Branche `hyprland`** (depuis `next-0.28` `2931910`, 22 octobre 2026 ; ni fusion, ni tag, ni release) :
+  composant facultatif Hyprland 0.56 + Noctalia 5.3, deux choix (`hyprland` langue, `hyprland-profile` profil,
+  jamais coché d'avance). Contrat : [src/hyprland/README.md](../src/hyprland/README.md) ; système, GPU, portails :
+  [hyprland-system.md](hyprland-system.md) ; usage et état réel : [fr/hyprland.md](fr/hyprland.md). Préréglage
+  `cachyos-hypr-noctalia` écarté (conflit avec `cachyos-kde-settings`, qui porte la configuration Wayland de SDDM ;
+  `/etc/profile.d` global ; GPL-1.0-only). Vérifié : vrai Hyprland en session imbriquée (KWin virtuel, bus privés),
+  Noctalia en corse ; non vérifié avant une vraie connexion : portails, partage d'écran, polkit, verrouillage,
+  KWallet, veille. Catalogue Noctalia : 2 375 textes sur 3 126 proposés par IA, aucune relecture humaine.
+  Installation personnelle du mainteneur : 0.28.0 de cette branche avec les deux choix (retour testé vers 0.27.0).
 - **PHP** (avis du 21 octobre 2026, CVE-2026-109618 et CVE-2026-109619) : Corsu ne dépend pas de PHP (aucun fichier,
   appel, paquet, étape de CI ni image de conteneur qui l'utilise ; les adresses `.php` citées sont des sites
   distants). Aucune mise à jour PHP du projet n'est nécessaire.
