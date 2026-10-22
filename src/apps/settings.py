@@ -476,7 +476,9 @@ def _toml_put(text, spec, value):
             following = next((index for index in range(start + 1, len(lines)) if _toml_header(lines[index]) is not None),
                              len(lines))
             if not any(line.strip() for line in lines[start + 1:following]):
-                begin = start - 1 if start > 0 and not lines[start - 1].strip() else start
+                # The blank line before goes with the table only at the end of the file; elsewhere the table's own
+                # trailing blank lines go and the one before stays as the separator.
+                begin = start - 1 if following == len(lines) and start > 0 and not lines[start - 1].strip() else start
                 del lines[begin:following]
         return ''.join(lines)
     if found is not None:

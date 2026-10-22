@@ -41,6 +41,9 @@ TEMPLATES = corsu.SRC / 'hyprland'
 NOCTALIA_ASSETS = Path('/usr/share/noctalia/assets')
 PORTAL_FILES = (Path('/usr/share/xdg-desktop-portal/portals/hyprland.portal'),)
 LUA_STARTER = 'hyprland.lua'
+# Noctalia's menu entry: a copy shown only in Hyprland (started from Plasma's menu it would put a second shell over
+# Plasma), rebuilt from the system entry by src/hyprland_system.py.
+NOCTALIA_ENTRY = 'dev.noctalia.Noctalia.desktop'
 # Noctalia merges every *.toml of ~/.config/noctalia in alphabetical order, then what its Settings window saved
 # (~/.local/state/noctalia/settings.toml), which wins. Corsu's layers sort first (src/hyprland/noctalia/).
 NOCTALIA_LANGUAGE_FILE, NOCTALIA_PROFILE_FILE = '00-corsu-language.toml', '00-corsu-profile.toml'
@@ -62,7 +65,7 @@ def paths():
             'noctalia_gui': state / 'noctalia/settings.toml',
             'qt6ct': config / 'qt6ct/qt6ct.conf',
             # Corsu's own folder: Noctalia's assets with Corsu's catalogue added (NOCTALIA_ASSETS_DIR).
-            'assets': corsu.DATA / 'noctalia-assets'}
+            'assets': corsu.DATA / 'noctalia/assets'}
 
 
 # Files Plasma reads, or shared with it: never written by this module (tests check them byte for byte).
@@ -231,7 +234,15 @@ def status(state=None):
                             'activation': result.get('activation'),
                             'files': sorted(name for name, record in state.get('files', {}).items()
                                             if record.get('component') == component)}
-    return {'found': found, 'verdict': verdict(found), 'summary': summary(found), 'parts': parts}
+    helper = system()
+    findings = []
+    if helper is not None and hasattr(helper, 'checks') and found.get('hyprland'):
+        # Readable findings (login entry, portals, graphics cards, qt6ct, KWallet) from src/hyprland_system.py.
+        try:
+            findings = [{'level': level, 'text': text} for level, text in helper.checks(home=corsu.HOME)]
+        except (OSError, ValueError, KeyError) as error:
+            findings = [{'level': 'warning', 'text': str(error)}]
+    return {'found': found, 'verdict': verdict(found), 'summary': summary(found), 'parts': parts, 'checks': findings}
 
 
 # ---------------------------------------------------------------------------------------------------------------
@@ -331,9 +342,21 @@ def portals_conf():
     return path.read_text(encoding='utf-8') if path else PORTALS
 
 
+def person_languages():
+    """The person's languages, without Corsican: Plasma's choice when there is one (read only; Corsu run from a
+    terminal or a TTY may not see the desktop's LANG), else this session's."""
+    plasma = corsu.CONFIG / 'plasma-localerc'
+    try:
+        value = settings.ini_get(settings.read_body(plasma)[0], 'Translations', 'LANGUAGE') if plasma.exists() else None
+    except ValueError:
+        value = None
+    languages = [item for item in (value or '').split(':') if item and not item.startswith('co')]
+    return languages or apps.session_languages()
+
+
 def language_value():
     """Corsican first, then the person's languages, then English: what programs fall back to, said explicitly."""
-    languages = apps.corsican_first().split(':')
+    languages = ['co', *person_languages()]
     if 'en' not in languages:
         languages.append('en')
     return ':'.join(dict.fromkeys(languages))
@@ -389,12 +412,80 @@ def translation():
     return path.read_bytes() if path else None
 
 
+# What Noctalia checks before using a NOCTALIA_ASSETS_DIR (isAssetRoot, src/hyprland/translations/LOADING.md).
+ASSET_ROOT = ('emoji.json', 'fonts/noctalia-tabler.ttf', 'templates/builtin.toml', 'translations/en.json')
+
+
+def flatten(document, prefix=''):
+    found = {}
+    for key, value in (document.items() if isinstance(document, dict) else ()):
+        if isinstance(value, dict):
+            found.update(flatten(value, f'{prefix}{key}.'))
+        elif isinstance(value, str):
+            found[f'{prefix}{key}'] = value
+    return found
+
+
+def nest(flat):
+    document = {}
+    for key, value in flat.items():
+        node, parts = document, key.split('.')
+        for part in parts[:-1]:
+            node = node.setdefault(part, {})
+        node[parts[-1]] = value
+    return document
+
+
+def source_hashes():
+    """{key: first hex digits of the SHA-1 of the English text co.json translates}, or None when this copy has no list."""
+    path = template('translations', 'co.source-hashes.tsv')
+    if path is None:
+        return None
+    hashes = {}
+    for line in path.read_text(encoding='utf-8').splitlines():
+        if line and not line.startswith('#'):
+            fields = line.split('\t')
+            if len(fields) >= 2:
+                hashes[fields[0]] = fields[1]
+    return hashes
+
+
+def read_catalogue(name):
+    try:
+        return flatten(json.loads((NOCTALIA_ASSETS / 'translations' / name).read_text(encoding='utf-8')))
+    except (OSError, ValueError):
+        return {}
+
+
+def catalogue():
+    """(co.json for the bundle, Corsican texts used): the installed French catalogue for Noctalia's keys, with Corsu's
+    Corsican over it where the English it translates is unchanged; Noctalia adds English for the rest. Never an empty
+    text (Noctalia shows an empty one as a missing key). None without Corsu's catalogue."""
+    import hashlib
+    data = translation()
+    if data is None:
+        return None, 0
+    english, hashes = read_catalogue('en.json'), source_hashes()
+    result = {key: value for key, value in read_catalogue('fr.json').items() if key in english and value}
+    used = 0
+    for key, value in flatten(json.loads(data)).items():
+        if key not in english or not value:
+            continue
+        if hashes is not None and not hashlib.sha1(english[key].encode('utf-8')).hexdigest().startswith(hashes.get(key) or '-'):
+            continue  # the English changed since it was translated: French or English shows until it is again
+        result[key] = value
+        used += 1
+    return (json.dumps(nest(result), ensure_ascii=False, indent=2) + '\n').encode('utf-8'), used
+
+
 def build_assets():
     """Corsu's folder for NOCTALIA_ASSETS_DIR: every entry of Noctalia's packaged assets linked, translations linked
-    one by one, plus Corsu's co.json. Rebuilt whole at each run (a Noctalia update adds files); None when Noctalia's
-    assets or Corsu's catalogue are missing, so the variable is never set to a folder Noctalia cannot use."""
-    data, target = translation(), paths()['assets']
-    if data is None or not (NOCTALIA_ASSETS / 'translations').is_dir():
+    one by one, plus the co.json built by catalogue(). Rebuilt whole at each run (a Noctalia update adds files); None
+    when Noctalia's assets are incomplete or Corsu's catalogue is missing, so the variable never names a folder Noctalia
+    would refuse. Never removed when the language is switched off: a running Noctalia's lock screen still needs it."""
+    data, _ = catalogue()
+    target = paths()['assets']
+    if data is None or not all((NOCTALIA_ASSETS / name).exists() for name in ASSET_ROOT):
         return None
     staged, old = target.with_name(target.name + '.corsu-new'), target.with_name(target.name + '.corsu-old')
     for leftover in (staged, old):
@@ -417,23 +508,11 @@ def build_assets():
     return target
 
 
-def leaves(document):
-    if isinstance(document, dict):
-        return sum(leaves(value) for value in document.values())
-    return 1 if isinstance(document, str) and document else 0
-
-
-def coverage(data):
-    """'N/M' texts of Corsu's Noctalia catalogue against Noctalia's English one, when both can be read."""
-    try:
-        have = leaves(json.loads(data))
-    except (ValueError, TypeError):
-        return None
-    try:
-        total = leaves(json.loads((NOCTALIA_ASSETS / 'translations/en.json').read_text(encoding='utf-8')))
-    except (OSError, ValueError):
-        total = 0
-    return f'{have}/{total}' if total else (f'{have}' if have else None)
+def coverage():
+    """'N/M': Corsican texts Noctalia will show against its English catalogue, when both can be read."""
+    _, used = catalogue()
+    total = len(read_catalogue('en.json'))
+    return f'{used}/{total}' if total else (f'{used}' if used else None)
 
 
 # ---------------------------------------------------------------------------------------------------------------
@@ -590,7 +669,7 @@ class Language(Hyprland):
             elif data is None or template('noctalia', NOCTALIA_LANGUAGE_FILE) is None:
                 why = reason('templates_missing', what='Noctalia (co.json, 00-corsu-language.toml)')
             result.append(apps.Installation(self, self.kind('noctalia'), where['noctalia'] / NOCTALIA_LANGUAGE_FILE,
-                                            found['noctalia'], coverage=coverage(data) if data else None, reason=why))
+                                            found['noctalia'], coverage=coverage() if data else None, reason=why))
         return result
 
     def noctalia_usable(self):
@@ -674,6 +753,11 @@ class Profile(Hyprland):
                     f'your {where["starter"]} is kept: add require("corsu.init") to it to use the profile',
                     f'votre {where["starter"]} est gardé : ajoutez-y require("corsu.init") pour utiliser le profil'))
             own_file(installer, self.id, where['portals'], portals_conf(), notes)
+            helper = system()
+            entry = next((folder / NOCTALIA_ENTRY for folder in apps.APPLICATION_DIRS if (folder / NOCTALIA_ENTRY).exists()), None)
+            if entry and helper is not None and hasattr(helper, 'hyprland_only_entry'):
+                own_file(installer, self.id, corsu.HOME / '.local/share/applications' / NOCTALIA_ENTRY,
+                         helper.hyprland_only_entry(entry.read_text(encoding='utf-8')), notes)
             lines = env_profile_lines()
             if lines:
                 own_block(installer, self.id, where['env'], 'profile', lines, notes)

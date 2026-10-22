@@ -33,14 +33,20 @@ with the reason; with a Hyprland too old they are "blocked" with the version nee
 
 | File | Part | How |
 | --- | --- | --- |
-| `~/.config/uwsm/env-hyprland` | language (`language` block), profile (`profile` block) | a block between `# corsu:begin …` and `# corsu:end …`; your lines around it stay |
-| `~/.local/share/noctalia/translations/co.json` | language | Corsu's file |
-| `~/.config/noctalia/settings.toml` | language (`language`), profile (look settings) | one value at a time, the previous one kept |
-| `~/.config/hypr/corsu/*.lua`, `machine.lua` | profile | Corsu's files; `machine.lua` comes from detection (keyboard, scale, graphics card) |
-| `~/.config/hypr/hyprland.lua` | profile | written **only when you have none**; yours is kept |
+| `~/.config/uwsm/env-hyprland` | language (`language` block: `LANGUAGE`, `NOCTALIA_ASSETS_DIR`), profile (`profile` block: `qt6ct` Qt theme, cursor, menu prefix, graphics card order when needed) | two blocks between `# corsu:begin …` and `# corsu:end …`; your lines around them stay |
+| `~/.local/share/corsu/noctalia/assets/` | language | Corsu's folder: Noctalia's assets (links) plus a `co.json` built at each run (Corsu's Corsican where the English text is unchanged, else Noctalia's French, then English); kept when the language is switched off, as the lock screen of a Noctalia already running reads it again |
+| `~/.config/noctalia/00-corsu-language.toml` | language | Corsu's layer (`lang = "co"`); a language picked in Noctalia's Settings window wins |
+| `~/.config/noctalia/00-corsu-profile.toml`, `~/.config/noctalia/palettes/` | profile | Corsu's look layer and palettes; your choices in Settings win |
+| `~/.local/state/noctalia/settings.toml` | — | your choices in Noctalia's Settings: never changed, except by "Put Corsu's look back" (below) |
+| `~/.config/hypr/corsu/*.lua`, `machine.lua` | profile | Corsu's files; `machine.lua` comes from detection (keyboard, outputs and scale) |
+| `~/.config/hypr/hyprland.lua` | profile | written **only when you have none**, never rewritten afterwards; yours is kept (add `require("corsu.init")` to it) |
 | `~/.config/hypr/user.lua` | — | **never read nor written** by Corsu: your settings go there |
 | `~/.config/xdg-desktop-portal/hyprland-portals.conf` | profile | read only when the desktop is Hyprland; kept if it is yours |
-| `~/.config/noctalia/colorschemes/` | profile | Corsu's palette |
+| `~/.config/qt6ct/qt6ct.conf` | profile | written only when missing; read only in the Hyprland session |
+| `~/.local/share/applications/dev.noctalia.Noctalia.desktop` | profile | a copy of Noctalia's entry with `OnlyShowIn=Hyprland`: Noctalia no longer shows in Plasma's menu (started there it would add a second panel over Plasma); this is the only visible effect in Plasma |
+
+At login choose **"Hyprland (uwsm-managed)"**: `env-hyprland` is read only with it. Without uwsm the session
+language is "blocked" with that explanation.
 
 Plasma is not touched: no global variable, no system file, and neither `kdeglobals`, `gtk-3.0/settings.ini`, `gtk-4.0`,
 `mimeapps.list` nor `plasma-workspace/env/corsu.sh` (the tests check them byte for byte).
@@ -56,9 +62,9 @@ Plasma is not touched: no global variable, no system file, and neither `kdegloba
 - **Updates and repairs** keep your settings: what you changed in Noctalia, `user.lua`, and any Corsu file you edited
   (left as it is, with a message in the window and the log); unchanged files get the new version.
 - **Put Corsu's look back** (the profile's button in the window, `r` in the text menu, or
-  `installer.py --hyprland-reset-look`): the profile's palette and look settings come back; your other Noctalia
-  settings, the language, Hyprland and `user.lua` do not move. A palette you had edited is first copied to
-  `~/.local/share/corsu/backups/hyprland-reset/`.
+  `installer.py --hyprland-reset-look`): Corsu's palettes and look layer come back, and the look choices saved by
+  Noctalia's Settings window (theme, bar…) are taken out; your other settings (language, widgets, idle, Hyprland,
+  `user.lua`) do not move. Changed files are first copied to `~/.local/share/corsu/backups/hyprland-reset/`.
 
 ## Command line
 

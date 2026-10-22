@@ -1,0 +1,10 @@
+# Corsu's look for Noctalia (stand-in for src/hyprland/noctalia/00-corsu-profile.toml).
+[shell]
+polkit_agent = true
+
+[theme]
+mode = "dark"
+custom_palette = "Corsu"
+
+[bar.default]
+position = "top"

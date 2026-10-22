@@ -22,7 +22,9 @@ Started from 0.27.0 (`f51b1ac`, tag `v0.27.0`). Changes inherited from 0.27 are 
   xdg-desktop-portal-hyprland) is shown in the window, `corsu.py status` and the text menus. Every change goes through
   Corsu's record: `apps/settings.py` gained marked blocks and single TOML values; switching off gives back only what
   is still Corsu's, `user.lua` is never touched, and Plasma's files are checked byte for byte in
-  `tests/test_hyprland.py`. Tried on simulated folders only; the window texts in Corsican are AI proposals.
+  `tests/test_hyprland.py` (the profile's only visible effect in Plasma: Noctalia's menu entry, limited to Hyprland).
+  Noctalia loads Corsu's catalogue through `NOCTALIA_ASSETS_DIR` (a folder in Corsu's data) and two `00-corsu-*.toml`
+  layers that its Settings window overrides; session values come from `src/hyprland_system.py` (branch `hypr-a`). Tried on simulated folders only; the window texts in Corsican are AI proposals.
 
 ## 0.27.0 (2026-10-19)
 

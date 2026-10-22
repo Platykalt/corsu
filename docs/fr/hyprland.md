@@ -17,7 +17,7 @@ sous Linux et n'a encore été essayée que sur des dossiers simulés (aucun vra
 | xdg-desktop-portal-hyprland | toute version | les portails (captures, partage d'écran) de la session Hyprland |
 
 Corsu dit ce qu'il trouve : dans la fenêtre (page « Ajouter »), dans `corsu.py status` (rubrique `hyprland` : versions,
-verdict, état des deux parties) et dans le menu texte (`app.py --text`). Sans Hyprland, les deux choix restent
+verdict, état des deux parties, constats : entrée de connexion, portails, cartes graphiques, qt6ct) et dans le menu texte (`app.py --text`). Sans Hyprland, les deux choix restent
 affichés, grisés, avec la raison ; avec un Hyprland trop ancien, ils sont « bloqués » avec la version demandée.
 
 ## Deux choix séparés
@@ -33,14 +33,20 @@ affichés, grisés, avec la raison ; avec un Hyprland trop ancien, ils sont « b
 
 | Fichier | Partie | Comment |
 | --- | --- | --- |
-| `~/.config/uwsm/env-hyprland` | langue (bloc `language`), profil (bloc `profile`) | un bloc entre `# corsu:begin …` et `# corsu:end …` ; vos lignes autour restent |
-| `~/.local/share/noctalia/translations/co.json` | langue | fichier de Corsu |
-| `~/.config/noctalia/settings.toml` | langue (`language`), profil (réglages d'apparence) | une valeur à la fois, l'ancienne gardée |
-| `~/.config/hypr/corsu/*.lua`, `machine.lua` | profil | fichiers de Corsu ; `machine.lua` vient de la détection (clavier, échelle, carte graphique) |
-| `~/.config/hypr/hyprland.lua` | profil | écrit **seulement si vous n'en avez pas** ; le vôtre est gardé |
+| `~/.config/uwsm/env-hyprland` | langue (bloc `language` : `LANGUAGE`, `NOCTALIA_ASSETS_DIR`), profil (bloc `profile` : thème Qt `qt6ct`, curseur, préfixe de menu, ordre des cartes graphiques si besoin) | deux blocs entre `# corsu:begin …` et `# corsu:end …` ; vos lignes autour restent |
+| `~/.local/share/corsu/noctalia/assets/` | langue | dossier de Corsu : les ressources de Noctalia (liens) plus un `co.json` construit à chaque passage (le corse de Corsu là où le texte anglais n'a pas changé, sinon le français de Noctalia, puis l'anglais) ; gardé quand la langue est désactivée, car l'écran de verrouillage d'un Noctalia déjà lancé le relit |
+| `~/.config/noctalia/00-corsu-language.toml` | langue | couche de Corsu (`lang = "co"`) ; une langue choisie dans la fenêtre Réglages de Noctalia l'emporte |
+| `~/.config/noctalia/00-corsu-profile.toml`, `~/.config/noctalia/palettes/` | profil | couche d'apparence et palettes Corsu ; vos choix dans Réglages l'emportent |
+| `~/.local/state/noctalia/settings.toml` | — | vos choix dans Réglages de Noctalia : jamais modifiés, sauf par « Remettre l'apparence Corsu » (voir plus bas) |
+| `~/.config/hypr/corsu/*.lua`, `machine.lua` | profil | fichiers de Corsu ; `machine.lua` vient de la détection (clavier, écrans et échelle) |
+| `~/.config/hypr/hyprland.lua` | profil | écrit **seulement si vous n'en avez pas**, jamais réécrit ensuite ; le vôtre est gardé (ajoutez-y `require("corsu.init")`) |
 | `~/.config/hypr/user.lua` | — | **jamais lu ni écrit** par Corsu : vos réglages vont là |
 | `~/.config/xdg-desktop-portal/hyprland-portals.conf` | profil | lu seulement quand le bureau est Hyprland ; gardé s'il est à vous |
-| `~/.config/noctalia/colorschemes/` | profil | la palette Corsu |
+| `~/.config/qt6ct/qt6ct.conf` | profil | écrit seulement s'il n'existe pas ; lu seulement dans la session Hyprland |
+| `~/.local/share/applications/dev.noctalia.Noctalia.desktop` | profil | copie de l'entrée de Noctalia avec `OnlyShowIn=Hyprland` : Noctalia n'apparaît plus dans le menu de Plasma (lancé là, il ajouterait un second panneau par-dessus Plasma) ; c'est le seul effet visible dans Plasma |
+
+Choisissez à la connexion l'entrée **« Hyprland (uwsm-managed) »** : `env-hyprland` n'est lu qu'avec elle. Sans uwsm,
+la langue de la session est « bloquée » avec cette explication.
 
 Plasma n'est pas touché : aucune variable globale, aucun fichier système, et ni `kdeglobals`, ni
 `gtk-3.0/settings.ini`, ni `gtk-4.0`, ni `mimeapps.list`, ni `plasma-workspace/env/corsu.sh` (les essais le
@@ -58,9 +64,10 @@ vérifient octet par octet).
   fichier de Corsu que vous avez modifié (il est laissé tel quel, avec un message dans la fenêtre et le journal) ;
   les fichiers inchangés reçoivent la nouvelle version.
 - **Remettre l'apparence Corsu** (bouton du profil dans la fenêtre, `r` dans le menu texte, ou
-  `installer.py --hyprland-reset-look`) : la palette et les réglages d'apparence du profil reviennent ; vos autres
-  réglages Noctalia, la langue, Hyprland et `user.lua` ne bougent pas. Une palette que vous aviez modifiée est
-  d'abord copiée dans `~/.local/share/corsu/backups/hyprland-reset/`.
+  `installer.py --hyprland-reset-look`) : les palettes et la couche d'apparence de Corsu reviennent, et les choix
+  d'apparence enregistrés par la fenêtre Réglages de Noctalia (thème, barre…) sont retirés ; vos autres réglages
+  (langue, widgets, mise en veille, Hyprland, `user.lua`) ne bougent pas. Les fichiers modifiés sont d'abord copiés
+  dans `~/.local/share/corsu/backups/hyprland-reset/`.
 
 ## En ligne de commande
 

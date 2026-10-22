@@ -46,10 +46,17 @@ class Home(unittest.TestCase):
         shutil.copytree(FIXTURES, self.templates)
         self.assets = Path(self.directory.name) / 'noctalia-assets'
         (self.assets / 'translations').mkdir(parents=True)
+        for name in ('emoji.json', 'fonts/noctalia-tabler.ttf', 'templates/builtin.toml'):
+            (self.assets / name).parent.mkdir(parents=True, exist_ok=True)
+            (self.assets / name).write_text('')
         (self.assets / 'translations/en.json').write_text(json.dumps(
             {'bar': {'clock': 'Clock', 'battery': 'Battery', 'volume': 'Volume'}, 'settings': {'title': 'Settings'}}))
+        (self.assets / 'translations/fr.json').write_text(json.dumps(
+            {'bar': {'battery': 'Batterie', 'volume': ''}, 'old': {'gone': 'Disparu'}}))
         self.portal = Path(self.directory.name) / 'hyprland.portal'
         self.portal.write_text('[portal]\n')
+        self.applications = Path(self.directory.name) / 'applications'
+        self.applications.mkdir()
         self.run_answers = dict(self.answers)
         self.stack = ExitStack()
         for target, name, value in ((corsu, 'HOME', self.home), (corsu, 'CONFIG', self.config),
@@ -58,6 +65,7 @@ class Home(unittest.TestCase):
                                     (corsu, 'PLATFORM', 'linux'), (hyprland, 'TEMPLATES', self.templates),
                                     (hyprland, 'NOCTALIA_ASSETS', self.assets), (hyprland, 'PORTAL_FILES', (self.portal,)),
                                     (hyprland, 'RUN', runner(self.run_answers)), (hyprland, 'system', lambda: None),
+                                    (apps, 'APPLICATION_DIRS', (self.applications,)),
                                     (corsu, 'running_executables', lambda: set())):
             self.stack.enter_context(patch.object(target, name, value))
         self.stack.enter_context(patch.dict(hyprland.CACHE, {'key': None, 'time': 0.0, 'value': None}))
@@ -66,6 +74,7 @@ class Home(unittest.TestCase):
         self.output = io.StringIO()
         self.stack.enter_context(redirect_stdout(self.output))
         self.plasma = self.plasma_files()
+        self.noctalia = self.config / 'noctalia'
 
     def tearDown(self):
         self.stack.close()
@@ -90,8 +99,10 @@ class Home(unittest.TestCase):
         self.run_answers.update(answers)
         hyprland.CACHE.update(key=None, time=0.0, value=None)
 
-    def noctalia_settings(self, text='[general]\nlanguage = "fr"\nanimations = true\n\n[colors]\nscheme = "Noctalia"\n'):
-        path = self.config / 'noctalia/settings.toml'
+    def gui_settings(self, text='[shell]\nlang = "it"\n\n[theme]\ncustom_palette = "Gruvbox"\n\n[bar.default]\n'
+                                'position = "bottom"\n\n[widget.clock]\nformat = "HH:mm"\n'):
+        """What Noctalia's Settings window saved (it wins over every layer)."""
+        path = self.home / '.local/state/noctalia/settings.toml'
         path.parent.mkdir(parents=True, exist_ok=True)
         path.write_text(text)
         return path
@@ -136,7 +147,7 @@ class Detection(Home):
         self.assertEqual(hyprland.verdict(found), {'hyprland': 'ok', 'noctalia': 'ok', 'uwsm': 'ok', 'portal': 'ok'})
         self.assertIsNone(hyprland.unavailable())
         self.assertTrue(all(item.usable for item in hyprland.Language().find() + hyprland.Profile().find()))
-        self.assertEqual(hyprland.Language().find()[1].coverage, '3/4')
+        self.assertEqual(hyprland.Language().find()[1].coverage, '2/4')
         self.assertEqual(sorted(name for name in apps.found() if name.startswith('hyprland')), ['hyprland', 'hyprland-profile'])
         self.assertEqual(hyprland.summary(), 'Hyprland — Hyprland 0.56.2, Noctalia 5.3.0, uwsm 0.27.1, '
                                              'xdg-desktop-portal-hyprland. Compatible with Corsu.')
@@ -157,6 +168,13 @@ class Detection(Home):
         with patch.dict(os.environ, {'PATH': str(folder)}):
             found = hyprland.detect(hyprland.default_run)
         self.assertEqual((found['hyprland'], found['noctalia'], found['uwsm']), ('0.55.0', '5.3.0', None))
+
+    def test_versions_from_hyprland_system(self):
+        """src/hyprland_system.py's versions() (merged from branch hypr-a) with the same injected runner."""
+        import hyprland_system
+        with patch.object(hyprland, 'system', lambda: hyprland_system):
+            found = hyprland.detect()
+        self.assertEqual((found['hyprland'], found['noctalia']), ('0.56.2', '5.3.0'))
 
     def test_windows_and_macos_never_see_it(self):
         with patch.object(corsu, 'PLATFORM', 'windows'):
@@ -198,30 +216,41 @@ class Choices(Home):
         self.assertIn('env-hyprland', plan)
         self.assertIn('user.lua stays yours', plan)
         self.assertIn('hyprland-portals.conf', plan)
+        self.assertIn('00-corsu-language.toml', plan)
 
 
 class Language(Home):
     def test_language_only_writes_no_profile_file(self):
-        settings_file = self.noctalia_settings()
         corsu.install(['hyprland'])
         env = (self.config / 'uwsm/env-hyprland').read_text()
+        assets = corsu.DATA / 'noctalia/assets'
         self.assertIn('# corsu:begin language\n', env)
-        self.assertIn('export LANGUAGE=co:fr_FR:en\n', env)
-        self.assertIn('then fr_FR, en for texts not translated yet', env)
+        # The person's languages from Plasma's settings (co:fr), then English.
+        self.assertIn('export LANGUAGE=co:fr:en\n', env)
+        self.assertIn('then fr, en for texts not translated yet', env)
+        self.assertIn(f'export NOCTALIA_ASSETS_DIR={assets}\n', env)
         self.assertNotIn('# corsu:begin profile', env)
-        self.assertEqual((self.home / '.local/share/noctalia/translations/co.json').read_bytes(),
-                         (FIXTURES / 'translations/co.json').read_bytes())
-        self.assertIn('language = "co"\n', settings_file.read_text())
+        # Corsican where the English is unchanged, French for a text whose English changed, nothing empty or obsolete.
+        self.assertEqual(json.loads((assets / 'translations/co.json').read_text()),
+                         {'bar': {'clock': 'Ora', 'battery': 'Batterie'}, 'settings': {'title': 'Parametri'}})
+        self.assertEqual((assets / 'translations/fr.json').resolve(), self.assets / 'translations/fr.json')
+        self.assertEqual((assets / 'fonts').resolve(), self.assets / 'fonts')
+        self.assertTrue(all((assets / name).exists() for name in hyprland.ASSET_ROOT))
+        self.assertEqual((self.noctalia / '00-corsu-language.toml').read_bytes(),
+                         (FIXTURES / 'noctalia/00-corsu-language.toml').read_bytes())
+        self.assertFalse((self.noctalia / '00-corsu-profile.toml').exists())
         self.assertFalse((self.config / 'hypr').exists())
         self.assertFalse((self.config / 'xdg-desktop-portal').exists())
-        self.assertNotIn('Corsu', settings_file.read_text())  # no look
         result = self.state()['results']['hyprland']
         self.assertEqual(result['activation'], 'active')
         self.assertEqual(self.state()['components'], ['hyprland'])
         self.assertPlasmaUntouched()
 
+    def test_session_languages_without_plasma(self):
+        (self.config / 'plasma-localerc').unlink()
+        self.assertEqual(hyprland.language_value(), 'co:fr_FR:en')
+
     def test_switching_on_twice_changes_nothing(self):
-        self.noctalia_settings()
         corsu.install(['hyprland'])
         before, records = self.files(), self.state()['files']
         corsu.install(['hyprland'])
@@ -235,42 +264,61 @@ class Language(Home):
         env.parent.mkdir(parents=True)
         env.write_text('# mine\nexport XCURSOR_SIZE=24\n')
         original_env = env.read_bytes()
-        settings_file = self.noctalia_settings()
-        original_settings = settings_file.read_bytes()
+        gui = self.gui_settings()
+        original_gui = gui.read_bytes()
         corsu.install(['hyprland'])
         corsu.disable(['hyprland'])
         self.assertEqual(env.read_bytes(), original_env)
-        self.assertEqual(settings_file.read_bytes(), original_settings)
-        self.assertFalse((self.home / '.local/share/noctalia/translations/co.json').exists())
+        self.assertEqual(gui.read_bytes(), original_gui)
+        self.assertFalse((self.noctalia / '00-corsu-language.toml').exists())
         self.assertEqual(self.state()['results']['hyprland']['activation'], 'inactive')
         corsu.enable(['hyprland'])
         self.assertIn('export LANGUAGE=co', env.read_text())
         corsu.uninstall()
         self.assertEqual(env.read_bytes(), original_env)
-        self.assertEqual(settings_file.read_bytes(), original_settings)
+        self.assertEqual(gui.read_bytes(), original_gui)
         self.assertPlasmaUntouched()
 
     def test_a_file_corsu_created_goes_when_switched_off(self):
         corsu.install(['hyprland'])
         self.assertTrue((self.config / 'uwsm/env-hyprland').exists())
-        self.assertIn('Start Noctalia once', self.state()['results']['hyprland']['instances'][1]['action'])
         corsu.disable(['hyprland'])
         self.assertFalse((self.config / 'uwsm/env-hyprland').exists())
 
+    def test_no_assets_variable_without_noctalia(self):
+        self.detect_again(Hyprland='Hyprland 0.56.2', uwsm='uwsm 0.27.1')
+        corsu.install(['hyprland'])
+        env = (self.config / 'uwsm/env-hyprland').read_text()
+        self.assertIn('export LANGUAGE=', env)
+        self.assertNotIn('NOCTALIA_ASSETS_DIR', env)
+        self.assertFalse((corsu.DATA / 'noctalia').exists())
+
+    def test_incomplete_noctalia_assets_never_named(self):
+        (self.assets / 'emoji.json').unlink()
+        corsu.install(['hyprland'])
+        self.assertNotIn('NOCTALIA_ASSETS_DIR', (self.config / 'uwsm/env-hyprland').read_text())
+        self.assertIn('stays in English', self.output.getvalue())
+
+    def test_the_bundle_stays_when_switched_off(self):
+        """A running Noctalia's lock screen reloads the language from it (LOADING.md)."""
+        corsu.install(['hyprland'])
+        corsu.disable(['hyprland'])
+        self.assertTrue((corsu.DATA / 'noctalia/assets/translations/co.json').exists())
+
     def test_switching_off_keeps_the_persons_later_changes(self):
-        settings_file = self.noctalia_settings()
         corsu.install(['hyprland'])
         env = self.config / 'uwsm/env-hyprland'
         env.write_text(env.read_text() + 'export MOZ_ENABLE_WAYLAND=1\n')  # outside Corsu's block
-        settings_file.write_text(settings_file.read_text().replace('language = "co"', 'language = "it"'))  # in Noctalia
+        layer = self.noctalia / '00-corsu-language.toml'
+        layer.write_text('[shell]\nlang = "it"\n')
         corsu.disable(['hyprland'])
         self.assertEqual(env.read_text(), 'export MOZ_ENABLE_WAYLAND=1\n')
-        self.assertIn('language = "it"', settings_file.read_text())
+        self.assertEqual(layer.read_text(), '[shell]\nlang = "it"\n')
 
     def test_a_block_edited_inside_is_left_and_said(self):
         corsu.install(['hyprland'])
         env = self.config / 'uwsm/env-hyprland'
-        env.write_text(env.read_text().replace('export LANGUAGE=co:fr_FR:en', 'export LANGUAGE=co:it'))
+        env.write_text(env.read_text().replace('export LANGUAGE=co:fr:en', 'export LANGUAGE=co:it'))
         corsu.install(['hyprland'])
         self.assertIn('export LANGUAGE=co:it', env.read_text())
         self.assertIn('block changed since, left as it is', self.output.getvalue())
@@ -280,7 +328,6 @@ class Language(Home):
 
 class Profile(Home):
     def test_profile_only_writes_no_translation(self):
-        settings_file = self.noctalia_settings()
         corsu.install(['hyprland-profile'])
         modules = self.config / 'hypr/corsu'
         self.assertEqual(sorted(path.name for path in modules.iterdir()), ['init.lua', 'keys.lua', 'machine.lua'])
@@ -288,16 +335,17 @@ class Profile(Home):
         self.assertFalse((self.config / 'hypr/user.lua').exists())
         self.assertEqual((self.config / 'xdg-desktop-portal/hyprland-portals.conf').read_bytes(),
                          (FIXTURES / 'session/hyprland-portals.conf').read_bytes())
-        self.assertTrue((self.config / 'noctalia/colorschemes/Corsu.json').exists())
-        text = settings_file.read_text()
-        self.assertIn('scheme = "Corsu"', text)
-        self.assertIn('[bar]\nposition = "top"\n', text)
-        self.assertIn('language = "fr"', text)  # the language is the other part's
-        self.assertFalse((self.home / '.local/share/noctalia').exists())
+        self.assertTrue((self.noctalia / 'palettes/Corsu.json').exists())
+        self.assertEqual((self.noctalia / '00-corsu-profile.toml').read_bytes(),
+                         (FIXTURES / 'noctalia/00-corsu-profile.toml').read_bytes())
+        self.assertIn(f'color_scheme_path={self.config}/qt6ct/colors/noctalia.conf',
+                      (self.config / 'qt6ct/qt6ct.conf').read_text())
+        self.assertFalse((self.noctalia / '00-corsu-language.toml').exists())
+        self.assertFalse((corsu.DATA / 'noctalia').exists())
         self.assertFalse((self.config / 'uwsm/env-hyprland').exists())  # no profile lines without hyprland_system
         self.assertPlasmaUntouched()
 
-    def test_existing_hyprland_lua_and_user_lua_stay(self):
+    def test_existing_files_of_the_person_stay(self):
         hypr = self.config / 'hypr'
         hypr.mkdir(parents=True)
         (hypr / 'hyprland.lua').write_text('-- mine\n')
@@ -305,21 +353,26 @@ class Profile(Home):
         portals = self.config / 'xdg-desktop-portal/hyprland-portals.conf'
         portals.parent.mkdir(parents=True)
         portals.write_text('[preferred]\ndefault=gtk\n')
+        qt6ct = self.config / 'qt6ct/qt6ct.conf'
+        qt6ct.parent.mkdir(parents=True)
+        qt6ct.write_text('[Appearance]\nstyle=Fusion\n')
         corsu.install(['hyprland-profile'])
         self.assertEqual((hypr / 'hyprland.lua').read_text(), '-- mine\n')
         self.assertEqual(portals.read_text(), '[preferred]\ndefault=gtk\n')
+        self.assertEqual(qt6ct.read_text(), '[Appearance]\nstyle=Fusion\n')
         action = self.state()['results']['hyprland-profile']['instances'][0]['action']
-        self.assertIn('load ~/.config/hypr/corsu/init.lua', action)
+        self.assertIn('add require("corsu.init")', action)
         self.assertIn('yours, left as it is', action)
         corsu.disable(['hyprland-profile'])
         self.assertEqual((hypr / 'hyprland.lua').read_text(), '-- mine\n')
         self.assertEqual((hypr / 'user.lua').read_text(), '-- my settings\n')
         self.assertEqual(portals.read_text(), '[preferred]\ndefault=gtk\n')
+        self.assertEqual(qt6ct.read_text(), '[Appearance]\nstyle=Fusion\n')
         self.assertFalse((hypr / 'corsu/init.lua').exists())
 
     def test_switching_on_twice_and_off(self):
-        settings_file = self.noctalia_settings()
-        original = settings_file.read_bytes()
+        gui = self.gui_settings()
+        original = gui.read_bytes()
         corsu.install(['hyprland-profile'])
         before, records = self.files(), self.state()['files']
         corsu.install(['hyprland-profile'])
@@ -327,27 +380,14 @@ class Profile(Home):
         self.assertEqual(self.state()['files'], records)
         (self.config / 'hypr/user.lua').write_text('-- mine\n')
         corsu.disable(['hyprland-profile'])
-        self.assertEqual(settings_file.read_bytes(), original)
-        self.assertFalse((self.config / 'hypr/hyprland.lua').exists())
-        self.assertFalse((self.config / 'hypr/corsu/keys.lua').exists())
-        self.assertFalse((self.config / 'xdg-desktop-portal/hyprland-portals.conf').exists())
+        self.assertEqual(gui.read_bytes(), original)  # Noctalia's Settings window choices stay
+        for name in ('hypr/hyprland.lua', 'hypr/corsu/keys.lua', 'xdg-desktop-portal/hyprland-portals.conf',
+                     'noctalia/00-corsu-profile.toml', 'noctalia/palettes/Corsu.json', 'qt6ct/qt6ct.conf'):
+            self.assertFalse((self.config / name).exists(), name)
         self.assertEqual((self.config / 'hypr/user.lua').read_text(), '-- mine\n')
         self.assertPlasmaUntouched()
 
-    def test_noctalia_changes_survive_updates_and_switching_off(self):
-        settings_file = self.noctalia_settings()
-        corsu.install(['hyprland-profile'])
-        settings_file.write_text(settings_file.read_text().replace('position = "top"', 'position = "bottom"'))
-        corsu.install(['hyprland-profile'])  # a repair or an update
-        self.assertIn('position = "bottom"', settings_file.read_text())
-        self.assertIn('position changed in Noctalia, kept', self.output.getvalue())
-        corsu.disable(['hyprland-profile'])
-        text = settings_file.read_text()
-        self.assertIn('position = "bottom"', text)
-        self.assertIn('scheme = "Noctalia"', text)
-
     def test_update_refreshes_unchanged_files_and_leaves_edited_ones(self):
-        self.noctalia_settings()
         corsu.install(['hyprland-profile'])
         modules = self.config / 'hypr/corsu'
         (modules / 'init.lua').write_text('-- my own init\n')
@@ -355,10 +395,15 @@ class Profile(Home):
         (self.templates / 'config/corsu/keys.lua').write_text('-- Corsu keys, next version.\nreturn {}\n')
         (self.templates / 'config/corsu/init.lua').write_text('-- Corsu init, next version.\n')
         (self.templates / 'config/corsu/rules.lua').write_text('-- new module\n')
+        (self.templates / 'config/hyprland.lua').write_text('-- starter, next version\n')
+        (self.templates / 'noctalia/00-corsu-profile.toml').write_text('[theme]\nmode = "light"\n')
         corsu.install(['hyprland-profile'])
         self.assertEqual((modules / 'keys.lua').read_text(), '-- Corsu keys, next version.\nreturn {}\n')
         self.assertEqual((modules / 'rules.lua').read_text(), '-- new module\n')
         self.assertEqual((modules / 'init.lua').read_text(), '-- my own init\n')
+        self.assertEqual((self.noctalia / '00-corsu-profile.toml').read_text(), '[theme]\nmode = "light"\n')
+        # The starter is written once and never rewritten.
+        self.assertEqual((self.config / 'hypr/hyprland.lua').read_bytes(), (FIXTURES / 'config/hyprland.lua').read_bytes())
         self.assertIn(f'changed since, left as it is: {modules / "init.lua"}', self.output.getvalue())
         result = self.state()['results']['hyprland-profile']
         self.assertEqual(result['activation'], 'active')
@@ -368,30 +413,27 @@ class Profile(Home):
         self.assertFalse((modules / 'rules.lua').exists())
 
     def test_reset_look_keeps_other_settings(self):
-        settings_file = self.noctalia_settings()
+        gui = self.gui_settings()
         corsu.install(['hyprland', 'hyprland-profile'])
-        text = settings_file.read_text().replace('scheme = "Corsu"', 'scheme = "Gruvbox"').replace(
-            'animations = true', 'animations = false')
-        settings_file.write_text(text)
-        palette = self.config / 'noctalia/colorschemes/Corsu.json'
+        palette = self.noctalia / 'palettes/Corsu.json'
         palette.write_text('{"name": "Corsu", "primary": "#000000"}')
         (self.config / 'hypr/user.lua').write_text('-- mine\n')
         env = (self.config / 'uwsm/env-hyprland').read_bytes()
+        language = (self.noctalia / '00-corsu-language.toml').read_bytes()
         with patch.object(corsu, 'lock', lambda action: ExitStack()):
             self.assertEqual(installer.main(['--hyprland-reset-look']), 0)
-        text = settings_file.read_text()
-        self.assertIn('scheme = "Corsu"', text)
-        self.assertIn('animations = false', text)  # not part of the look
-        self.assertIn('language = "co"', text)
+        # The look's choices go (theme, bar); the language and the other widgets stay.
+        self.assertEqual(gui.read_text(), '[shell]\nlang = "it"\n\n[widget.clock]\nformat = "HH:mm"\n')
         self.assertEqual(palette.read_bytes(), (FIXTURES / 'noctalia/palettes/Corsu.json').read_bytes())
-        kept = list((corsu.DATA / 'backups/hyprland-reset').rglob('Corsu.json'))
-        self.assertEqual(kept[0].read_text(), '{"name": "Corsu", "primary": "#000000"}')
+        kept = {path.name: path.read_text() for path in (corsu.DATA / 'backups/hyprland-reset').rglob('*') if path.is_file()}
+        self.assertEqual(kept['Corsu.json'], '{"name": "Corsu", "primary": "#000000"}')
+        self.assertIn('custom_palette = "Gruvbox"', kept['settings.toml'])
         self.assertEqual((self.config / 'hypr/user.lua').read_text(), '-- mine\n')
         self.assertEqual((self.config / 'uwsm/env-hyprland').read_bytes(), env)
-        # Switched off afterwards: the look goes, Noctalia's own value before Corsu comes back.
+        self.assertEqual((self.noctalia / '00-corsu-language.toml').read_bytes(), language)
         corsu.disable(['hyprland-profile'])
-        self.assertIn('scheme = "Noctalia"', settings_file.read_text())
         self.assertFalse(palette.exists())
+        self.assertTrue((self.noctalia / '00-corsu-language.toml').exists())
         self.assertPlasmaUntouched()
 
     def test_reset_needs_the_profile(self):
@@ -399,25 +441,50 @@ class Profile(Home):
         self.assertIn('not switched on', self.output.getvalue())
 
     def test_session_values_from_hyprland_system(self):
+        (self.applications / hyprland.NOCTALIA_ENTRY).write_text('[Desktop Entry]\nName=Noctalia\nExec=noctalia\n')
+
         class System:
             @staticmethod
-            def env_block():
-                return '# corsu:begin\nexport AQ_DRM_DEVICES=/dev/dri/card1\n# corsu:end\n'
+            def env_block(env, root='/', home=None, cards=None):
+                return ('# corsu:begin\n# Written by Corsu for the Hyprland session only; Plasma does not read this file.\n'
+                        f'export LANGUAGE=co:{env["LANG"][:2]}\nexport QT_QPA_PLATFORMTHEME=qt6ct\n# corsu:end\n')
 
             @staticmethod
-            def machine_lua():
-                return 'return { kb_layout = "fr" }\n'
+            def gpus(root='/'):
+                return []
+
+            @staticmethod
+            def keyboard(root='/', home=None):
+                return {'layout': 'fr', 'variant': 'oss', 'model': '', 'options': '', 'source': 'localectl'}
+
+            @staticmethod
+            def outputs(cards, home=None):
+                return [{'name': 'OUT-1', 'plasma': 1.5, 'suggested': 1.25}]
+
+            @staticmethod
+            def portals_conf(root='/'):
+                return '[preferred]\ndefault=hyprland;gtk\n'
+
+            @staticmethod
+            def hyprland_only_entry(text):
+                return text + 'OnlyShowIn=Hyprland;\n'
 
         with patch.object(hyprland, 'system', lambda: System):
             corsu.install(['hyprland', 'hyprland-profile'])
         env = (self.config / 'uwsm/env-hyprland').read_text()
         self.assertEqual(env.count('# corsu:begin'), 2)
-        self.assertIn('# corsu:begin profile\nexport AQ_DRM_DEVICES=/dev/dri/card1\n# corsu:end profile\n', env)
-        self.assertEqual((self.config / 'hypr/corsu/machine.lua').read_text(), 'return { kb_layout = "fr" }\n')
+        self.assertEqual(env.count('LANGUAGE='), 1)  # only the language part's
+        self.assertIn('# corsu:begin profile\nexport QT_QPA_PLATFORMTHEME=qt6ct\n# corsu:end profile\n', env)
+        machine = (self.config / 'hypr/corsu/machine.lua').read_text()
+        self.assertIn('keyboard = { layout = "fr", variant = "oss", model = "", options = "" },', machine)
+        self.assertIn('monitors = { { output = "OUT-1", mode = "preferred", position = "auto", scale = 1.5 } },', machine)
+        entry = self.home / '.local/share/applications' / hyprland.NOCTALIA_ENTRY
+        self.assertTrue(entry.read_text().endswith('OnlyShowIn=Hyprland;\n'))
         corsu.disable(['hyprland-profile'])
         env = (self.config / 'uwsm/env-hyprland').read_text()
-        self.assertNotIn('AQ_DRM_DEVICES', env)
+        self.assertNotIn('QT_QPA_PLATFORMTHEME', env)
         self.assertIn('export LANGUAGE=', env)
+        self.assertFalse(entry.exists())
         corsu.disable(['hyprland'])
         self.assertFalse((self.config / 'uwsm/env-hyprland').exists())
 
@@ -442,7 +509,6 @@ class Window(Home):
             self.assertNotIn('hyprland', self.items())
 
     def test_found_installed_and_reset(self):
-        self.noctalia_settings()
         items = self.items()
         self.assertNotIn('unavailable', items['hyprland'])
         self.assertIn('Hyprland 0.56.2, Noctalia 5.3.0', items['hyprland']['text']['fr'][1])
@@ -462,6 +528,16 @@ class Window(Home):
         self.assertEqual(report['hyprland']['found']['hyprland'], '0.56.2')
         self.assertTrue(report['hyprland']['parts']['hyprland']['on'])
         self.assertFalse(report['hyprland']['parts']['hyprland-profile']['installed'])
+
+    def test_status_carries_the_checks(self):
+        class System:
+            @staticmethod
+            def checks(home=None):
+                return [('warning', 'only the "Hyprland" login entry')]
+
+        with patch.object(hyprland, 'system', lambda: System):
+            report = hyprland.status()
+        self.assertEqual(report['checks'], [{'level': 'warning', 'text': 'only the "Hyprland" login entry'}])
 
     def test_page_texts(self):
         texts = (corsu.SRC / 'app/texts.js').read_text(encoding='utf-8')
