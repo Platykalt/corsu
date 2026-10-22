@@ -1,0 +1,8 @@
+# Written by Corsu (language component). Noctalia merges every *.toml of this folder in alphabetical order, then the
+# choices made in its Settings window (~/.local/state/noctalia/settings.toml): a language picked there, or set again
+# in a later file such as config.toml, wins over this one.
+# "co" is found only in the asset bundle Corsu prepares (NOCTALIA_ASSETS_DIR, see translations/LOADING.md);
+# without it Noctalia logs "no catalog for 'co'" and shows English.
+
+[shell]
+lang = "co"
