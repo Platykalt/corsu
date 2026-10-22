@@ -285,7 +285,8 @@ def machine_values():
         monitors = []
         for output in helper.outputs(helper.gpus(), corsu.HOME):
             scale = output.get('plasma') or output.get('suggested')
-            monitors.append({'output': output['name'], 'mode': 'preferred', 'position': 'auto',
+            monitors.append({'output': output['name'], 'mode': output.get('plasma_mode') or 'preferred',
+                             'position': 'auto',
                              'scale': scale if scale else None})
         if monitors:
             values['monitors'] = monitors

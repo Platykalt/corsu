@@ -257,10 +257,40 @@ def plasma_scales(home):
     return scales
 
 
+def plasma_modes(home):
+    """{connector: 'WIDTHxHEIGHT@RATE'} chosen in Plasma's display settings, so Hyprland starts at the same refresh rate
+    (a panel's preferred mode is often its lowest rate: 60 Hz on a 240 Hz laptop); {} when Plasma has none."""
+    try:
+        data = json.loads((Path(home) / '.config/kwinoutputconfig.json').read_text(encoding='utf-8'))
+    except (OSError, ValueError):
+        return {}
+    modes = {}
+    for section in data if isinstance(data, list) else []:
+        if not (isinstance(section, dict) and section.get('name') == 'outputs'):
+            continue
+        for output in section.get('data') or []:
+            mode = output.get('mode') if isinstance(output, dict) else None
+            if not (isinstance(mode, dict) and output.get('connectorName')):
+                continue
+            cvt = mode.get('cvt')
+            try:
+                if isinstance(cvt, dict):
+                    width, height = int(cvt['hdisplay']), int(cvt['vdisplay'])
+                    rate = int(cvt['clock']) * 1000 / (int(cvt['htotal']) * int(cvt['vtotal']))
+                else:
+                    width, height, rate = int(mode['width']), int(mode['height']), int(mode['refreshRate']) / 1000
+            except (KeyError, TypeError, ValueError, ZeroDivisionError):
+                continue
+            if width > 0 and height > 0 and rate > 0:
+                modes.setdefault(output['connectorName'], f'{width}x{height}@{rate:.2f}')
+    return modes
+
+
 def outputs(cards, home=None):
     """Connected outputs: [{name, card, driver, internal, mode, size_mm, suggested, plasma}]; `plasma` is the scale
-    the person uses in Plasma (None if unknown), `suggested` the one computed from the physical size."""
+    the person uses in Plasma (None if unknown), `plasma_mode` its mode there, `suggested` the one computed from the physical size."""
     plasma = plasma_scales(home) if home else {}
+    plasma_mode = plasma_modes(home) if home else {}
     found = []
     for gpu in cards:
         for item in gpu['connectors']:
@@ -270,7 +300,7 @@ def outputs(cards, home=None):
             found.append({'name': item['name'], 'card': gpu['card'], 'driver': gpu['driver'],
                           'internal': item['internal'], 'mode': item['mode'], 'size_mm': item['size_mm'],
                           'suggested': suggested_scale(*mode, *size, internal=item['internal']),
-                          'plasma': plasma.get(item['name'])})
+                          'plasma': plasma.get(item['name']), 'plasma_mode': plasma_mode.get(item['name'])})
     return found
 
 

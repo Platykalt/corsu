@@ -4,6 +4,7 @@ SIMULATED: every machine here is a fake /sys, /dev and /etc tree in a throwaway 
 a fake runner; nothing reads or changes the computer running the tests. The laptop case copies what was read on the
 maintainer's Acer Predator PHN18-72 on 22 October 2026 (internal panel on the NVIDIA card).
 """
+import json
 import os
 from pathlib import Path
 import shutil
@@ -231,6 +232,18 @@ class ScaleTests(unittest.TestCase):
                       '[{"name": "outputs", "data": [{"connectorName": "eDP-1", "scale": 1.25}]}, {"name": "setups"}]')
         self.assertEqual(hs.plasma_scales(machine.home), {'eDP-1': 1.25})
         self.assertEqual(hs.plasma_scales(machine.root), {})
+
+    def test_plasma_mode_is_read(self):
+        # A 240 Hz panel whose EDID prefers 60 Hz: Plasma stores the chosen mode as CVT timings, or as plain values.
+        machine = Machine()
+        self.addCleanup(machine.cleanup)
+        machine.write('home/.config/kwinoutputconfig.json', json.dumps([{'name': 'outputs', 'data': [
+            {'connectorName': 'eDP-1', 'mode': {'cvt': {'clock': 1175050, 'hdisplay': 2560, 'vdisplay': 1600,
+                                                        'htotal': 2720, 'vtotal': 1800}, 'flags': 0}},
+            {'connectorName': 'HDMI-A-1', 'mode': {'width': 1280, 'height': 800, 'refreshRate': 59810}},
+            {'connectorName': 'DP-1', 'mode': {'cvt': {'clock': 1, 'htotal': 0}}}]}]))
+        self.assertEqual(hs.plasma_modes(machine.home), {'eDP-1': '2560x1600@240.00', 'HDMI-A-1': '1280x800@59.81'})
+        self.assertEqual(hs.plasma_modes(machine.root), {})
 
 
 class KeyboardTests(Case):

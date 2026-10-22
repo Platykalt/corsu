@@ -33,6 +33,9 @@ def runner(answers):
     return run
 
 
+REAL_WHICH = shutil.which
+
+
 class Home(unittest.TestCase):
     """A home folder with Plasma's files in it, Corsu's record in it, and the templates from the stand-ins."""
 
@@ -69,6 +72,8 @@ class Home(unittest.TestCase):
                                     (corsu, 'running_executables', lambda: set())):
             self.stack.enter_context(patch.object(target, name, value))
         self.stack.enter_context(patch.dict(hyprland.CACHE, {'key': None, 'time': 0.0, 'value': None}))
+        # The computer running the tests may have Hyprland's programs: only the fake runner answers.
+        self.stack.enter_context(patch.object(hyprland.shutil, 'which', lambda *args, **kwargs: None))
         self.stack.enter_context(patch.dict(os.environ, {'LANGUAGE': '', 'LC_ALL': '', 'LC_MESSAGES': '',
                                                          'LANG': 'fr_FR.UTF-8', 'CORSU_LANG': 'en'}))
         self.output = io.StringIO()
@@ -165,7 +170,7 @@ class Detection(Home):
         for name, text in (('Hyprland', 'Hyprland 0.55.0 built from branch main'), ('noctalia', 'noctalia v5.3.0')):
             (folder / name).write_text(f'#!/bin/sh\necho "{text}"\n')
             (folder / name).chmod(0o755)
-        with patch.dict(os.environ, {'PATH': str(folder)}):
+        with patch.dict(os.environ, {'PATH': str(folder)}), patch.object(hyprland.shutil, 'which', REAL_WHICH):
             found = hyprland.detect(hyprland.default_run)
         self.assertEqual((found['hyprland'], found['noctalia'], found['uwsm']), ('0.55.0', '5.3.0', None))
 
