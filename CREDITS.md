@@ -50,6 +50,13 @@ Corse and to the author for this reference.
 - **Julian Gough**, the End Poem of Minecraft, dedicated by him to the public domain (CC0 1.0); Corsu's optional
   pack translates it.
 
+## Hyprland and Noctalia (optional component)
+
+- Hyprland configuration modules adapt option names and structure from Hyprland's example hyprland.lua and wiki
+  (BSD-3-Clause, hyprwm).
+- The Noctalia profile and co.json follow Noctalia 5.3's documented configuration and translation keys (MIT,
+  noctalia-dev); Corsican texts are Corsu's (GPL-3.0-or-later).
+
 ## AI and human review
 
 Where each lexicon row comes from, as far as the files and the Git history show it, is in

@@ -495,6 +495,38 @@ class Profile(Home):
         self.assertFalse((self.config / 'uwsm/env-hyprland').exists())
 
 
+class RealTemplates(Home):
+    """The same round trip with the real src/hyprland/ (branch hyprland) instead of the stand-ins."""
+
+    def setUp(self):
+        super().setUp()
+        self.stack.enter_context(patch.object(hyprland, 'TEMPLATES', corsu.SRC / 'hyprland'))
+
+    def test_enable_twice_and_disable(self):
+        if not (corsu.SRC / 'hyprland/config/corsu').is_dir():
+            self.skipTest('src/hyprland has no templates in this copy')
+        gui = self.gui_settings()
+        original = gui.read_bytes()
+        corsu.install(['hyprland', 'hyprland-profile'])
+        before, records = self.files(), self.state()['files']
+        corsu.install(['hyprland', 'hyprland-profile'])
+        self.assertEqual(self.files(), before)
+        self.assertEqual(self.state()['files'], records)
+        self.assertTrue((self.config / 'hypr/corsu/init.lua').exists())
+        self.assertTrue((self.config / 'hypr/corsu/machine.lua').exists())
+        self.assertTrue((self.noctalia / 'palettes/Corsu-Maquis.json').exists())
+        self.assertNotIn('@CONFIG_HOME@', (self.config / 'qt6ct/qt6ct.conf').read_text())
+        self.assertIn('lang = "co"', (self.noctalia / '00-corsu-language.toml').read_text())
+        self.assertTrue((corsu.DATA / 'noctalia/assets/translations/co.json').exists())
+        self.assertEqual({result['activation'] for result in self.state()['results'].values()}, {'active'})
+        corsu.disable(['hyprland', 'hyprland-profile'])
+        self.assertEqual(gui.read_bytes(), original)
+        self.assertEqual([path for path in self.config.rglob('*') if path.is_file() and 'hypr' in path.parts
+                          or path.name.startswith('00-corsu')], [])
+        self.assertFalse((self.config / 'uwsm/env-hyprland').exists())
+        self.assertPlasmaUntouched()
+
+
 class Window(Home):
     def setUp(self):
         super().setUp()
@@ -631,7 +663,7 @@ class Templates(unittest.TestCase):
     """Corsu's Hyprland templates and the stand-ins carry no personal path, name or identifier: machine values come
     from detection when the profile is switched on."""
 
-    PERSONAL = re.compile(r'/home/[a-z]|/Users/|kalt\b|coldaslava|@gmail|\b(?:DP|HDMI|eDP)-\d|/dev/dri/card\d|'
+    PERSONAL = re.compile(r'/home/[a-z]|/Users/|(?<![a-z])kalt\b|coldaslava|@gmail|\b(?:DP|HDMI|eDP)-\d|/dev/dri/card\d|'
                           r'pci-0000|by-path|[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}', re.I)
 
     def test_no_personal_values(self):
