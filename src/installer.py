@@ -590,6 +590,17 @@ def describe(name):
     return t(app.description['en'][1], app.description['fr'][1])
 
 
+def unavailable_lines(available):
+    """Parts that cannot be offered on this computer, each with why (Hyprland missing or too old): shown, not ticked."""
+    if corsu.PLATFORM != 'linux':
+        return []
+    from apps import hyprland
+    why = hyprland.unavailable()
+    if not why or hyprland.LANGUAGE in available:
+        return []
+    return [t(f'Hyprland: {why["en"]}', f'Hyprland : {why["fr"]}')]
+
+
 def choose(available):
     """Ask which detected applications to translate. Rerun the setup later to add more."""
     installed, state = set(), {}
@@ -597,7 +608,9 @@ def choose(available):
         state = corsu.load_state()
         installed = set(state.get('components', []))
     # Running the installer again keeps what was chosen: only installed parts are ticked, new ones are offered.
-    selected = {name: (name in installed) if installed else True for name in available}
+    # A part only for those who ask (the Hyprland desktop profile) is never ticked in advance.
+    import apps
+    selected = {name: (name in installed) if installed else not apps.opt_in(name) for name in available}
     while True:
         print(t('Select what you want to translate:', 'Choisissez ce que vous voulez traduire :'))
         for number, name in enumerate(available, 1):
@@ -607,6 +620,8 @@ def choose(available):
                 note = (t('  (installed, switched off)', '  (installé, désactivé)') if corsu.is_disabled(name, state)
                         else t('  (installed)', '  (déjà installé)'))
             print(f'  [{mark}] {number}. {describe(name)}{note}')
+        for line in unavailable_lines(available):
+            print(f'  [-] {line}')
         answer = input(t('Enter installs everything ticked. Type a number to tick or untick it, a for all, n for none, q to quit: ',
                          'Entrée installe tout ce qui est coché. Tapez un numéro pour le cocher ou le décocher, '
                          'a pour tout, n pour rien, q pour quitter : ')).strip().lower()
@@ -682,7 +697,12 @@ def show_plan(components, location):
             print(f'    - {folder.describe()} : {state}')
     import apps
     for app_id in [name for name in components if name in apps.registry()]:
-        for installation in apps.registry()[app_id].find():
+        app = apps.registry()[app_id]
+        for installation in app.find():
+            if hasattr(app, 'plan_line'):
+                # Parts that write files of their own say which (Hyprland).
+                print(f'  {installation.describe()} : {app.plan_line(installation)}')
+                continue
             state = (t('switch to Corsican', 'passer en corse') if installation.usable
                      else t('left alone: ', 'laissé tel quel : ') + installation.reason)
             print(f'  {installation.describe()} : {state}')
@@ -756,7 +776,15 @@ def main(argv=None):
                         help='VLC on Linux: also use Corsu\'s experimental Corsican complement (AI translations of the '
                              'messages VLC\'s catalogue leaves in English, not reviewed by a speaker), or stop using it')
     parser.add_argument('--hours', type=float, help='With --disable terminal: switch the terminal back on after this many hours')
+    parser.add_argument('--hyprland-reset-look', action='store_true',
+                        help='Put Corsu\'s look back in Noctalia (desktop profile), keeping your other settings')
     args = parser.parse_args(argv)
+    if args.hyprland_reset_look:
+        if args.dry_run:
+            return 0
+        from apps import hyprland
+        with corsu.lock('enable'):
+            return 0 if hyprland.reset_look() else 1
     if args.disable is not None and args.enable is not None:
         parser.error('Choose either --disable or --enable.')
     if args.disable is not None or args.enable is not None:
@@ -806,8 +834,11 @@ def main(argv=None):
     recorded = [name for name in state.get('components', []) if name != 'terminal']
     if state.get('qt_system'):
         recorded.append('qt')
-    # Without a list, running the installer again repairs what is installed; it never adds parts nobody chose.
-    components = args.components if args.components is not None else (recorded or available)
+    # Without a list, running the installer again repairs what is installed; it never adds parts nobody chose, and a
+    # first installation leaves out the parts only for those who ask (the Hyprland desktop profile).
+    import apps
+    components = args.components if args.components is not None else (
+        recorded or [name for name in available if not apps.opt_in(name)])
     if args.components is None and available and not (args.yes or args.dry_run) and sys.stdin.isatty():
         components = choose(available)
         if not components:
@@ -825,6 +856,11 @@ def main(argv=None):
         if component not in available and not (component == 'discord' and location and discord_archive(location).exists()):
             if component in ('desktop', 'qt') and corsu.PLATFORM != 'linux':
                 parser.error(f'{component} is for KDE Plasma on Linux.')
+            if component in ('hyprland', 'hyprland-profile'):
+                from apps import hyprland
+                why = hyprland.unavailable()
+                if why:
+                    parser.error(t(why['en'], why['fr']))
             parser.error(f'{component} was not found on this computer.')
     # The Corsu app shows the plan before starting; its log only needs what happens next.
     if not os.environ.get('CORSU_SETUP_WINDOW') and not child:

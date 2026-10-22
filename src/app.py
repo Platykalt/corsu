@@ -200,12 +200,22 @@ def snapshot(job=None):
     paused = corsu.terminal_paused_until() if 'terminal' in switchable else None
     items = []
     texts = components()
+    import apps
+    known = apps.registry()
+    # The Hyprland parts are shown even when Hyprland cannot be used here, unticked, with why (Corsu never installs a
+    # desktop): only on Linux, and only until one of them is found or installed.
+    hyprland_missing = None
+    if corsu.PLATFORM == 'linux' and not {'hyprland', 'hyprland-profile'} & (available | installed | switchable):
+        from apps import hyprland
+        hyprland_missing = hyprland.unavailable()
     for name in order():
         if name == 'terminal' and name not in switchable:
             continue
-        if name not in available | installed | switchable:
+        if name not in available | installed | switchable and not (hyprland_missing and name in ('hyprland', 'hyprland-profile')):
             continue
         text = texts[name]
+        if hasattr(known.get(name), 'window_text'):
+            text = known[name].window_text()
         if name == 'chromium':
             import chromium
             found = ', '.join(browser.label for browser in chromium.browsers())
@@ -222,6 +232,13 @@ def snapshot(job=None):
         item = {'name': name, 'text': text, 'installed': name in installed or name in switchable,
                 'switchable': name in switchable, 'on': name in switchable and not corsu.is_disabled(name, state)}
         item.update(status(name, item, state))
+        if apps.opt_in(name):
+            item['opt_in'] = True
+        if hyprland_missing and name in ('hyprland', 'hyprland-profile'):
+            item['unavailable'] = hyprland_missing
+        if name == 'hyprland-profile' and item['on']:
+            # Corsu's look for Noctalia can be put back; the person's other settings stay.
+            item['reset'] = True
         if name == 'minecraft' and item['installed']:
             waiting = minecraft_waiting(state, state.get('results', {}).get(name))
             item['instances'] = [*item['instances'], *waiting]
@@ -587,6 +604,9 @@ def make_handler(job, activity, port, handover=None):
                     lines = lines[1:]
                 plan = '\n'.join(line.strip() for line in lines).strip()
                 return self.send(200, {'plan': plan, 'ok': result.returncode == 0})
+            if self.path == '/api/hyprland-reset':
+                started = job.start('switch', ['--hyprland-reset-look'], language)
+                return self.send(200 if started else 409, {'started': started})
             if self.path in ('/api/install', '/api/uninstall', '/api/rescan'):
                 DETECTED['time'] = COMPLEMENT['time'] = 0.0
             if self.path == '/api/rescan':
@@ -1112,13 +1132,24 @@ def run_text():
         print('\nCorsu')
         for number, (name, label, on) in enumerate(items, 1):
             print(f'  [{"x" if on else " "}] {number}. {label}')
+        reset = any(name == 'hyprland-profile' and on for name, _, on in items)
+        if corsu.PLATFORM == 'linux':
+            from apps import hyprland
+            print('  ' + hyprland.summary())
+        if reset:
+            print(t('  r. Put Corsu\'s look back in Noctalia (your other settings stay)',
+                    '  r. Remettre l\'apparence Corsu dans Noctalia (vos autres réglages restent)'))
         print(t('  p. Terminal in French for 1 hour   s. Add programs   q. Quit',
                 '  p. Terminal en français 1 heure   s. Ajouter des logiciels   q. Quitter'))
         answer = input(t('Type a number to switch it, or a letter: ',
                          'Tapez un numéro pour l\'inverser, ou une lettre : ')).strip().lower()
         if answer in ('q', ''):
             return
-        if answer == 'p':
+        if answer == 'r' and reset:
+            from apps import hyprland
+            with corsu.lock('enable'):
+                hyprland.reset_look()
+        elif answer == 'p':
             corsu.disable(['terminal'], hours=1)
         elif answer == 's':
             os.execv(sys.executable, [sys.executable, str(corsu.SRC / 'installer.py')])

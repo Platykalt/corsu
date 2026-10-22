@@ -1,0 +1,7 @@
+# Corsu's look for Noctalia (stand-in): visual settings only.
+[colors]
+scheme = "Corsu"
+dark = true
+
+[bar]
+position = "top"

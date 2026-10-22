@@ -176,7 +176,12 @@ def revert(record):
         try:
             text, newline, bom = read_body(path)
             if get(text, setting['key']) == setting['installed']:
-                atomic_write(path, encode(put(text, setting['key'], setting['original']), newline, bom))
+                changed = put(text, setting['key'], setting['original'])
+                if setting.get('created') and not changed.strip():
+                    # A file Corsu created for its own block, empty again: it goes, as it was before.
+                    path.unlink()
+                else:
+                    atomic_write(path, encode(changed, newline, bom))
         except Exception:
             return False
         return True
@@ -392,6 +397,112 @@ def _java_prefs_put(text, key, value):
     return text[:line_start] + indent + element + '\n' + text[line_start:]
 
 
+def _block_span(text, name):
+    import re as _re
+    quoted = _re.escape(name)
+    return _re.search(rf'^# corsu:begin {quoted}[ \t]*\r?\n(.*?)^# corsu:end {quoted}[ \t]*(?:\r?\n|\Z)', text,
+                      _re.M | _re.S)
+
+
+def _block_get(text, name):
+    """The lines between `# corsu:begin <name>` and `# corsu:end <name>`, or None when there is no such block."""
+    match = _block_span(text, name)
+    return match.group(1).replace('\r\n', '\n') if match else None
+
+
+def _block_put(text, name, value):
+    """Replace, add (at the end) or remove (value None) one marked block; every line outside it stays as it is."""
+    match = _block_span(text, name)
+    if value is None:
+        return text[:match.start()] + text[match.end():] if match else text
+    body = value if not value or value.endswith('\n') else value + '\n'
+    block = f'# corsu:begin {name}\n{body}# corsu:end {name}\n'
+    if match:
+        return text[:match.start()] + block + text[match.end():]
+    return text + ('' if not text or text.endswith('\n') else '\n') + block
+
+
+def _toml_header(line):
+    import re as _re
+    match = _re.match(r'\s*(\[\[?)\s*([^\[\]]+?)\s*\]\]?\s*(?:#.*)?$', line)
+    if not match:
+        return None
+    # An array of tables is never one of Corsu's sections.
+    return ('[[' + match.group(2)) if match.group(1) == '[[' else match.group(2)
+
+
+def _toml_lines(text, spec):
+    """(lines, index of the key's line or None, index where the section ends or None when it is missing). The
+    section '' is the top of the file, before the first table."""
+    import re as _re
+    section, name = spec
+    lines = text.splitlines(keepends=True)
+    key = _re.compile(rf'\s*{_re.escape(name)}\s*=')
+    current, found, end = '', None, None
+    for index, line in enumerate(lines):
+        header = _toml_header(line)
+        if header is not None:
+            if current == section and end is None:
+                end = index
+            current = header
+            continue
+        if current == section and found is None and key.match(line):
+            found = index
+    if current == section and end is None:
+        end = len(lines)
+    return lines, found, end
+
+
+def _toml_get(text, spec):
+    """The raw value of one key of a TOML table (`["general", "language"]` → '"co"'), as written; None when absent."""
+    lines, found, _ = _toml_lines(text, spec)
+    if found is None:
+        return None
+    return lines[found].split('=', 1)[1].strip()
+
+
+def _toml_put(text, spec, value):
+    """Set one key of a TOML table, keeping the line's own spacing; None removes the line (and the table header when
+    nothing is left in it). Other lines stay byte for byte."""
+    section, name = spec
+    lines, found, end = _toml_lines(text, spec)
+    newline = '\r\n' if '\r\n' in text else '\n'
+    if value is None:
+        if found is None:
+            return text
+        del lines[found]
+        if section:
+            start = next(index for index, line in enumerate(lines) if _toml_header(line) == section)
+            following = next((index for index in range(start + 1, len(lines)) if _toml_header(lines[index]) is not None),
+                             len(lines))
+            if not any(line.strip() for line in lines[start + 1:following]):
+                begin = start - 1 if start > 0 and not lines[start - 1].strip() else start
+                del lines[begin:following]
+        return ''.join(lines)
+    if found is not None:
+        line = lines[found]
+        prefix = line.split('=', 1)[0] + '='
+        spacing = ' ' if line.split('=', 1)[1].startswith(' ') else ''
+        ending = line[len(line.rstrip('\r\n')):]
+        lines[found] = f'{prefix}{spacing}{value}{ending}'
+        return ''.join(lines)
+    entry = f'{name} = {value}{newline}'
+    if end is None:
+        if lines and not lines[-1].endswith(('\n', '\r')):
+            lines[-1] += newline
+        if lines and lines[-1].strip():
+            lines.append(newline)
+        lines += [f'[{section}]{newline}', entry]
+        return ''.join(lines)
+    position = end
+    while position > 0 and not lines[position - 1].strip():
+        position -= 1
+    if position > 0 and not lines[position - 1].endswith(('\n', '\r')):
+        lines[position - 1] += newline
+    lines.insert(position, entry)
+    return ''.join(lines)
+
+
 FILE_KINDS = {
     'json': (_json_get, _json_put),
     'xml': (_xml_get, _xml_put),
@@ -401,7 +512,37 @@ FILE_KINDS = {
     'xml-path': (_xml_path_get, _xml_path_put),
     # One key of a Java Preferences node on Linux (~/.java/.userPrefs/<node>/prefs.xml), e.g. PDFsam's locale.
     'java-prefs': (_java_prefs_get, _java_prefs_put),
+    # A block of lines between `# corsu:begin <name>` and `# corsu:end <name>` in a file the person shares with Corsu,
+    # e.g. uwsm's ~/.config/uwsm/env-hyprland.
+    'block': (_block_get, _block_put),
+    # One key of a TOML table, [section, key], the value as TOML writes it ('"co"', 'true', '0.9').
+    'toml': (_toml_get, _toml_put),
 }
+
+
+def set_block(installer, component, path, name, value):
+    """One marked block in a file the person may also edit, recorded like set_file_value(). Unlike a program's
+    settings file, the file may be missing (uwsm reads it when present): Corsu then creates it, and removes it again
+    when taking its last block out. ValueError if the file cannot be read safely."""
+    path = Path(path)
+    text, newline, bom = read_body(path)
+    name_key = f'{path}#{json.dumps(name)}'
+    record = installer.state['files'].get(name_key)
+    if record:
+        original, created = record['setting']['original'], record['setting'].get('created', False)
+    else:
+        original = _block_get(text, name)
+        # Created by Corsu: missing, or holding nothing but Corsu's own blocks.
+        import re as _re
+        rest = _re.sub(r'^# corsu:begin (\S+)[ \t]*\r?\n.*?^# corsu:end \1[ \t]*(?:\r?\n|\Z)', '', text, flags=_re.M | _re.S)
+        created = not path.exists() or not rest.strip()
+    body = value if not value or value.endswith('\n') else value + '\n'
+    installer.state['files'][name_key] = {'backup': None, 'mode': None, 'toggle': True, 'component': component,
+                                          'setting': {'type': 'file', 'kind': 'block', 'file': str(path), 'key': name,
+                                                      'original': original, 'installed': body, 'created': created},
+                                          'installed_sha256': ''}
+    corsu.save_state(installer.state)
+    atomic_write(path, encode(_block_put(text, name, body), newline, bom))
 
 
 def set_file_value(installer, component, path, kind, key, value):

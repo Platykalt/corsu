@@ -1088,11 +1088,17 @@ def status():
             counts['changed'].append(name)
     report_path = DATA / 'report.json'
     profile = firefox_profile()
+    hyprland = None
+    if PLATFORM == 'linux':
+        # What was found for the optional Hyprland parts (versions, whether Corsu can offer them) and their state.
+        from apps import hyprland as hyprland_parts
+        hyprland = hyprland_parts.status(state)
     print(json.dumps({'enabled': not disabled_marker().exists(),
                       'components': state.get('components', []),
                       'installation': counts,
                       'lexicon_entries': len(WORDS),
                       'firefox_profile': str(profile) if profile else None,
+                      'hyprland': hyprland,
                       'last_build': json.loads(report_path.read_text(encoding='utf-8')) if report_path.exists() else None},
                      ensure_ascii=False, indent=2))
 
@@ -1777,6 +1783,9 @@ def disable(components=None, hours=None):
             + ('; log out and back in for the desktop.' if 'desktop' in targets else '.'),
             f'Retour à la langue d\'origine : {names}. Redémarrez ces logiciels'
             + (' ; déconnectez-vous et reconnectez-vous pour le bureau.' if 'desktop' in targets else '.')))
+    if targets & {'hyprland', 'hyprland-profile'}:
+        print(t('Hyprland: log out of the Hyprland session and back in.',
+                'Hyprland : déconnectez-vous de la session Hyprland et reconnectez-vous.'))
 
 
 def enable(components=None):
@@ -1812,6 +1821,9 @@ def enable(components=None):
             + ('; log out and back in for the desktop.' if 'desktop' in targets else '.'),
             f'De nouveau en corse : {names}. Redémarrez ces logiciels'
             + (' ; déconnectez-vous et reconnectez-vous pour le bureau.' if 'desktop' in targets else '.')))
+    if targets & {'hyprland', 'hyprland-profile'}:
+        print(t('Hyprland: log out of the Hyprland session and back in.',
+                'Hyprland : déconnectez-vous de la session Hyprland et reconnectez-vous.'))
 
 
 def uninstall():

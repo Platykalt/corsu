@@ -53,7 +53,7 @@ function icon(name, extra) {
 // A recognisable shape for each kind of program; any other gets the plain application icon.
 const programIcons = { firefox: "globe", chromium: "globe", discord: "chat", vesktop: "chat", desktop: "monitor", kde: "monitor",
   qt: "monitor", terminal: "terminal", minecraft: "cube", vlc: "play", audacity: "wave", tenacity: "wave", freac: "wave",
-  poedit: "translate", pdfsam: "file" };
+  poedit: "translate", pdfsam: "file", hyprland: "monitor", "hyprland-profile": "monitor" };
 const appIcon = name => make("span", { class: "app-icon", "aria-hidden": "true" }, icon(programIcons[name] || "app"));
 
 // Each state's tone and icon: a chip always carries a word, the colour only repeats it.
@@ -238,6 +238,9 @@ function switchRow(item, busy) {
       // New Minecraft game folders found since the installation: switched only when the person asks.
       item.waiting ? make("span", { class: "buttons" }, make("button", { type: "button", class: "button small", id: "activate-" + item.name,
         text: t("minecraft_switch_new"), disabled: busy, onclick: () => { showLog = false; call("/api/install", { components: [item.name] }).then(refresh); } })) : null,
+      // The Hyprland desktop profile: Corsu's look back in Noctalia, the person's other settings kept.
+      item.reset ? make("span", { class: "buttons" }, make("button", { type: "button", class: "button small", id: "reset-" + item.name,
+        text: t("hyprland_reset_look"), disabled: busy, onclick: () => { showLog = false; call("/api/hyprland-reset", {}).then(refresh); } })) : null,
       option),
     make("span", { class: "switch" },
       // Always the server's word: after a failed or deferred change, the next refresh puts it back.
@@ -372,23 +375,29 @@ function renderSummary() {
 
 function renderAdd() {
   const candidates = state.items.filter(item => !item.installed && item.name !== "terminal");
-  if (picks === null) picks = new Set(candidates.map(item => item.name));
+  // A part only for those who ask (the Hyprland profile) starts unticked; one that cannot be used here cannot be ticked.
+  if (picks === null) picks = new Set(candidates.filter(item => !item.opt_in && !item.unavailable).map(item => item.name));
   setText($("add-lead"), t("add_lead"));
   const rows = candidates.map(item => {
     const [name, detail] = item.text[language];
     const id = "pick-" + item.name;
     // A first attempt that switched nothing leaves the program here: say why.
     const block = statusBlock(item);
-    return make("li", { class: rowClass(block) },
-      make("input", { type: "checkbox", class: "pick", id, checked: picks.has(item.name), "aria-describedby": "add-desc-" + item.name, onchange: event => {
+    const why = item.unavailable ? item.unavailable[language] || item.unavailable.en : null;
+    const note = why ? t("complement_unavailable", { reason: String(why).trim().replace(/[.;:]$/, "") }) : item.opt_in ? t("opt_in_hint") : null;
+    if (why) picks.delete(item.name);
+    return make("li", { class: [rowClass(block), why ? "off" : null].filter(Boolean).join(" ") || null },
+      make("input", { type: "checkbox", class: "pick", id, checked: !why && picks.has(item.name), disabled: Boolean(why),
+        "aria-describedby": ["add-desc-" + item.name, note ? "add-note-" + item.name : null].filter(Boolean).join(" "), onchange: event => {
         if (event.target.checked) picks.add(item.name); else picks.delete(item.name);
       } }),
       appIcon(item.name),
-      make("span", { class: "label" }, headline(id, name, block), make("span", { class: "detail", id: "add-desc-" + item.name, text: detail }), ...block.nodes));
+      make("span", { class: "label" }, headline(id, name, block), make("span", { class: "detail", id: "add-desc-" + item.name, text: detail }),
+        note ? make("span", { class: why ? "detail" : "hint", id: "add-note-" + item.name, text: note }) : null, ...block.nodes));
   });
   replaceKeepingFocus($("choices"), rows.length ? rows : [make("li", { class: "empty-row" },
     make("span", { class: "app-icon", "aria-hidden": "true" }, icon("ok")), make("span", { class: "label muted", text: t("add_none") }))]);
-  $("plan-open").hidden = !candidates.length;
+  $("plan-open").hidden = !candidates.some(item => !item.unavailable);
   $("plan-open").disabled = state.job.running;
 }
 

@@ -165,10 +165,15 @@ def coverage_against(corsican, reference):
 
 
 def registry():
-    from apps import audacity, freac, pdfsam, poedit, programs, vlc
+    from apps import audacity, freac, hyprland, pdfsam, poedit, programs, vlc
     return {app.id: app for app in (vlc.VLC(), *(program() for program in
                                                  (*programs.PROGRAMS, *audacity.PROGRAMS, *freac.PROGRAMS,
-                                                  *poedit.PROGRAMS, *pdfsam.PROGRAMS)))}
+                                                  *poedit.PROGRAMS, *pdfsam.PROGRAMS, *hyprland.PROGRAMS)))}
+
+
+def opt_in(app_id):
+    """A part offered but never ticked unless the person asks for it (the Hyprland desktop profile)."""
+    return bool(getattr(registry().get(app_id), 'opt_in', False))
 
 
 def detected():
@@ -246,6 +251,8 @@ def install(installer, app_id):
             except (OSError, ValueError, ImportError) as error:
                 reason, activation = corsu.t(f'could not write ({error})', f'écriture impossible ({error})'), 'failed'
             if reason is None:
+                # What enable() noted for the person (a file of theirs left as it is) stays next to the status.
+                action = installation.action
                 running = app.restart_processes and _running(app.restart_processes)
                 activation = 'restart_required' if running else 'active'
                 if running:
