@@ -16,6 +16,7 @@
 | KDE Plasma desktop and KDE programs | Not supported | Not supported | Used daily |
 | Minecraft: Java Edition 1.6.1 → 26.3, 87 versions (resource pack) | Checked without running the game | Checked without running the game | Checked without running the game |
 | GTK programs and terminal commands | | | Expected |
+| Hyprland session and Noctalia, optional ([details](hyprland.md)) | | | Expected (tried on simulated folders) |
 
 Programs that already have their own Corsican translation (VLC, Audacity, Poedit, 7-Zip…), and the systems for
 each, are in [Translation status](translation-status.md).

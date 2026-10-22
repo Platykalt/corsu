@@ -12,6 +12,17 @@ Started from 0.27.0 (`f51b1ac`, tag `v0.27.0`). Changes inherited from 0.27 are 
   End-to-end check `tests/e2e/check_firefox_context_menu.py` (run by `e2e.py firefox`): the real context menu on
   selected text, with the default engine and another one, special characters, Firefox's truncation and the access
   key.
+- **Hyprland and Noctalia, optional** (branch `hyprland`, not merged; [docs/en/hyprland.md](docs/en/hyprland.md)):
+  two separate parts in `src/apps/hyprland.py`, offered only when Hyprland is installed (Corsu never installs a
+  desktop; without Hyprland the window shows them greyed out with the reason). `hyprland`: Noctalia in Corsican and
+  Corsican first for programs of the Hyprland session (`LANGUAGE` in a marked block of `~/.config/uwsm/env-hyprland`,
+  with the person's languages and English after it). `hyprland-profile`, never ticked in advance: Corsu's Hyprland Lua
+  modules, the Hyprland session's portals and Corsu's look for Noctalia, with "Put Corsu's look back"
+  (`installer.py --hyprland-reset-look`). Detection (Hyprland 0.55 or newer, Noctalia 5, uwsm,
+  xdg-desktop-portal-hyprland) is shown in the window, `corsu.py status` and the text menus. Every change goes through
+  Corsu's record: `apps/settings.py` gained marked blocks and single TOML values; switching off gives back only what
+  is still Corsu's, `user.lua` is never touched, and Plasma's files are checked byte for byte in
+  `tests/test_hyprland.py`. Tried on simulated folders only; the window texts in Corsican are AI proposals.
 
 ## 0.27.0 (2026-10-19)
 
