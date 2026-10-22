@@ -7,6 +7,9 @@
 # Noctalia answers the password prompts of programs (polkit); no other agent runs in the Hyprland session.
 polkit_agent = true
 telemetry_enabled = false
+# The profile already chooses what the first-run wizard asks (palette, mode, wallpaper); the wizard would save its own
+# answers in settings.toml, which wins over this file. Everything stays in Noctalia's Settings window.
+setup_wizard_enabled = false
 
 [accessibility]
 ui_scale = 1.0
