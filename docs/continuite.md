@@ -3,7 +3,28 @@
 Document de reprise, tenu à jour à chaque étape. Il renvoie aux documents détaillés plutôt que de les répéter.
 Les sections datées après « État actuel » sont l'historique : ce qui y est dit ouvert a pu être corrigé depuis.
 
-## État actuel (19 octobre 2026)
+## État actuel (22 octobre 2026)
+
+- **0.27.0 publiée** (19 octobre 2026, 12 h 06 UTC) : tag annoté `v0.27.0` sur `f51b1ac`, release
+  https://github.com/Platykalt/corsu/releases/tag/v0.27.0, dernière version (16 fichiers ; CI du tag 39243504586
+  verte, installation en une ligne comprise). `main` = `ef6c9b6` (documentation seulement : README, pages d'état et
+  captures de la 0.27.0 ; CI 39250281799 verte). Installation personnelle du mainteneur : 0.27.0.
+- **`next-0.28`** (depuis `ef6c9b6` ; non publiée, la publication attend l'accord du mainteneur). CI seulement par
+  `gh workflow run ci.yml --ref next-0.28`. `src/release.json` dit encore 0.27.0 : à passer en 0.28.0 avant la CI
+  de la candidate, pour qu'elle vérifie la mise à jour depuis la 0.27.0 publiée.
+  - `fc5e88d` : menu contextuel du texte sélectionné dans Firefox (`contextMenuSearch`, « Recherche %1$S pour
+    « %2$S » » → « Circà « %2 » cù %1 », proposition IA bâtie sur « Circà cù %1 » déjà présent) ; CI 39633324591
+    verte.
+  - `ee3faa4` : essai de bout en bout `tests/e2e/check_firefox_context_menu.py` (vrai menu dans Firefox, moteur par
+    défaut et autre moteur, troncature, touche d'accès) ; pas encore passé en CI.
+  - Prochaines pistes : autres restes français vus dans `browser.properties` (« Temps de connexion dépassé »,
+    `unsignedAddonsDisabled`, `geolocationLastAccessIndicatorText`, `crashedplugins`) ; audit complet des
+    `.properties` proposé, non commencé.
+- **PHP** (avis du 21 octobre 2026, CVE-2026-109618 et CVE-2026-109619) : Corsu ne dépend pas de PHP (aucun fichier,
+  appel, paquet, étape de CI ni image de conteneur qui l'utilise ; les adresses `.php` citées sont des sites
+  distants). Aucune mise à jour PHP du projet n'est nécessaire.
+
+## Historique : candidate 0.27 (19 octobre 2026)
 
 - **0.26.0 publiée** (18 octobre 2026, 22 h 29 UTC) : tag `v0.26.0` sur `9868066`, release
   https://github.com/Platykalt/corsu/releases/tag/v0.26.0, dernière version (CI du tag 39169945473 : tests,
