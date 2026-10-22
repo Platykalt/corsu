@@ -37,7 +37,7 @@ with the reason; with a Hyprland too old they are "blocked" with the version nee
 | `~/.local/share/corsu/noctalia/assets/` | language | Corsu's folder: Noctalia's assets (links) plus a `co.json` built at each run (Corsu's Corsican where the English text is unchanged, else Noctalia's French, then English); kept when the language is switched off, as the lock screen of a Noctalia already running reads it again |
 | `~/.config/noctalia/00-corsu-language.toml` | language | Corsu's layer (`lang = "co"`); a language picked in Noctalia's Settings window wins |
 | `~/.config/noctalia/00-corsu-profile.toml`, `~/.config/noctalia/palettes/` | profile | Corsu's look layer and palettes; your choices in Settings win |
-| `~/.local/state/noctalia/settings.toml` | — | your choices in Noctalia's Settings: never changed, except by "Put Corsu's look back" (below) |
+| `~/.local/state/noctalia/settings.toml` | — | your choices in Noctalia's Settings: never changed by Corsu |
 | `~/.config/hypr/corsu/*.lua`, `machine.lua` | profile | Corsu's files; `machine.lua` comes from detection (keyboard, outputs and scale) |
 | `~/.config/hypr/hyprland.lua` | profile | written **only when you have none**, never rewritten afterwards; yours is kept (add `require("corsu.init")` to it) |
 | `~/.config/hypr/user.lua` | — | **never read nor written** by Corsu: your settings go there |
@@ -62,9 +62,10 @@ Plasma is not touched: no global variable, no system file, and neither `kdegloba
 - **Updates and repairs** keep your settings: what you changed in Noctalia, `user.lua`, and any Corsu file you edited
   (left as it is, with a message in the window and the log); unchanged files get the new version.
 - **Put Corsu's look back** (the profile's button in the window, `r` in the text menu, or
-  `installer.py --hyprland-reset-look`): Corsu's palettes and look layer come back, and the look choices saved by
-  Noctalia's Settings window (theme, bar…) are taken out; your other settings (language, widgets, idle, Hyprland,
-  `user.lua`) do not move. Changed files are first copied to `~/.local/share/corsu/backups/hyprland-reset/`.
+  `installer.py --hyprland-reset-look`): Corsu's palettes and look layer (`00-corsu-profile.toml`) come back, even
+  edited (your version is first copied to `~/.local/share/corsu/backups/hyprland-reset/`). What you chose in
+  Noctalia's Settings window is never changed and always wins: the "Reset Page" button of each Noctalia page goes back
+  to Corsu's look there. The language, Hyprland and `user.lua` do not move.
 
 ## Command line
 

@@ -414,21 +414,27 @@ class Profile(Home):
 
     def test_reset_look_keeps_other_settings(self):
         gui = self.gui_settings()
+        original_gui = gui.read_bytes()
         corsu.install(['hyprland', 'hyprland-profile'])
         palette = self.noctalia / 'palettes/Corsu.json'
         palette.write_text('{"name": "Corsu", "primary": "#000000"}')
+        layer = self.noctalia / '00-corsu-profile.toml'
+        layer.write_text('[theme]\nmode = "light"\n')
         (self.config / 'hypr/user.lua').write_text('-- mine\n')
+        (self.config / 'hypr/corsu/keys.lua').write_text('-- my keys\n')
         env = (self.config / 'uwsm/env-hyprland').read_bytes()
         language = (self.noctalia / '00-corsu-language.toml').read_bytes()
         with patch.object(corsu, 'lock', lambda action: ExitStack()):
             self.assertEqual(installer.main(['--hyprland-reset-look']), 0)
-        # The look's choices go (theme, bar); the language and the other widgets stay.
-        self.assertEqual(gui.read_text(), '[shell]\nlang = "it"\n\n[widget.clock]\nformat = "HH:mm"\n')
         self.assertEqual(palette.read_bytes(), (FIXTURES / 'noctalia/palettes/Corsu.json').read_bytes())
+        self.assertEqual(layer.read_bytes(), (FIXTURES / 'noctalia/00-corsu-profile.toml').read_bytes())
         kept = {path.name: path.read_text() for path in (corsu.DATA / 'backups/hyprland-reset').rglob('*') if path.is_file()}
-        self.assertEqual(kept['Corsu.json'], '{"name": "Corsu", "primary": "#000000"}')
-        self.assertIn('custom_palette = "Gruvbox"', kept['settings.toml'])
+        self.assertEqual(kept, {'Corsu.json': '{"name": "Corsu", "primary": "#000000"}',
+                                '00-corsu-profile.toml': '[theme]\nmode = "light"\n'})
+        # Never edited: Noctalia's Settings window choices, Hyprland's files, the language.
+        self.assertEqual(gui.read_bytes(), original_gui)
         self.assertEqual((self.config / 'hypr/user.lua').read_text(), '-- mine\n')
+        self.assertEqual((self.config / 'hypr/corsu/keys.lua').read_text(), '-- my keys\n')
         self.assertEqual((self.config / 'uwsm/env-hyprland').read_bytes(), env)
         self.assertEqual((self.noctalia / '00-corsu-language.toml').read_bytes(), language)
         corsu.disable(['hyprland-profile'])
@@ -617,6 +623,8 @@ class Settings(unittest.TestCase):
         self.assertEqual(settings._toml_put(inserted, ['general', 'dark'], None), text)
         self.assertIsNone(settings._toml_get(text, ['bar', 'language']))
         self.assertEqual(settings._toml_put('', ['', 'x'], '1'), 'x = 1\n')
+        listed = '[bar]\nend = ["a",\n       "b]"]\nheight = 3\n'
+        self.assertEqual(settings._toml_put(listed, ['bar', 'end'], None), '[bar]\nheight = 3\n')
 
 
 class Templates(unittest.TestCase):

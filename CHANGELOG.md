@@ -18,7 +18,7 @@ Started from 0.27.0 (`f51b1ac`, tag `v0.27.0`). Changes inherited from 0.27 are 
   Corsican first for programs of the Hyprland session (`LANGUAGE` in a marked block of `~/.config/uwsm/env-hyprland`,
   with the person's languages and English after it). `hyprland-profile`, never ticked in advance: Corsu's Hyprland Lua
   modules, the Hyprland session's portals and Corsu's look for Noctalia, with "Put Corsu's look back"
-  (`installer.py --hyprland-reset-look`). Detection (Hyprland 0.55 or newer, Noctalia 5, uwsm,
+  (`installer.py --hyprland-reset-look`: Corsu's own look files only; Noctalia's Settings choices are never edited). Detection (Hyprland 0.55 or newer, Noctalia 5, uwsm,
   xdg-desktop-portal-hyprland) is shown in the window, `corsu.py status` and the text menus. Every change goes through
   Corsu's record: `apps/settings.py` gained marked blocks and single TOML values; switching off gives back only what
   is still Corsu's, `user.lua` is never touched, and Plasma's files are checked byte for byte in

@@ -453,6 +453,23 @@ def _toml_lines(text, spec):
     return lines, found, end
 
 
+def _brackets(fragment):
+    """Opening minus closing brackets of a TOML fragment, ignoring those in strings and comments."""
+    depth, quote = 0, None
+    for character in fragment:
+        if quote:
+            quote = None if character == quote else quote
+        elif character in '"\'':
+            quote = character
+        elif character == '#':
+            break
+        elif character in '[{':
+            depth += 1
+        elif character in ']}':
+            depth -= 1
+    return depth
+
+
 def _toml_get(text, spec):
     """The raw value of one key of a TOML table (`["general", "language"]` → '"co"'), as written; None when absent."""
     lines, found, _ = _toml_lines(text, spec)
@@ -470,7 +487,14 @@ def _toml_put(text, spec, value):
     if value is None:
         if found is None:
             return text
-        del lines[found]
+        # A list written over several lines goes whole (brackets counted outside strings).
+        last, depth = found, 0
+        while True:
+            depth += _brackets(lines[last].split('=', 1)[1] if last == found else lines[last])
+            if depth <= 0 or last + 1 >= len(lines):
+                break
+            last += 1
+        del lines[found:last + 1]
         if section:
             start = next(index for index, line in enumerate(lines) if _toml_header(line) == section)
             following = next((index for index in range(start + 1, len(lines)) if _toml_header(lines[index]) is not None),

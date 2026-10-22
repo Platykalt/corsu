@@ -47,13 +47,11 @@ NOCTALIA_ENTRY = 'dev.noctalia.Noctalia.desktop'
 # Noctalia merges every *.toml of ~/.config/noctalia in alphabetical order, then what its Settings window saved
 # (~/.local/state/noctalia/settings.toml), which wins. Corsu's layers sort first (src/hyprland/noctalia/).
 NOCTALIA_LANGUAGE_FILE, NOCTALIA_PROFILE_FILE = '00-corsu-language.toml', '00-corsu-profile.toml'
-# Tables of the profile that are not its look: "Put Corsu's look back" leaves the person's choices there.
-NOT_LOOK = ('shell', 'idle', 'notification')
 
 
 def paths():
     """Where each file goes, from the person's folders (read again each time: tests change them)."""
-    config, state = corsu.CONFIG, corsu.HOME / '.local/state'
+    config = corsu.CONFIG
     return {'env': config / 'uwsm/env-hyprland',
             'portals': config / 'xdg-desktop-portal/hyprland-portals.conf',
             'hypr': config / 'hypr',
@@ -62,7 +60,6 @@ def paths():
             'user': config / 'hypr/user.lua',
             'noctalia': config / 'noctalia',
             'noctalia_palettes': config / 'noctalia/palettes',
-            'noctalia_gui': state / 'noctalia/settings.toml',
             'qt6ct': config / 'qt6ct/qt6ct.conf',
             # Corsu's own folder: Noctalia's assets with Corsu's catalogue added (NOCTALIA_ASSETS_DIR).
             'assets': corsu.DATA / 'noctalia/assets'}
@@ -401,12 +398,6 @@ def look():
     return files, profile.read_bytes() if profile else None, qt6ct.read_text(encoding='utf-8') if qt6ct else None
 
 
-def look_keys(profile):
-    """[section, key] of the profile layer's look: everything but the tables in NOT_LOOK (and their sub-tables)."""
-    return [spec for spec, _ in toml_entries(profile.decode('utf-8'))
-            if spec[0].split('.')[0] not in NOT_LOOK]
-
-
 def translation():
     path = template('translations', 'co.json')
     return path.read_bytes() if path else None
@@ -575,24 +566,6 @@ def own_new_file(installer, component, path, data, notes, hint=None):
         notes.append(hint or corsu.t(f'yours, left as it is: {path}', f'à vous, laissé tel quel : {path}'))
         return False
     return own_file(installer, component, path, data, notes)
-
-
-def clear_look(gui, keys, notes):
-    """Remove the look's keys from what Noctalia's Settings window saved, keeping the rest (a copy is kept first)."""
-    if not gui.exists():
-        return
-    text, newline, bom = settings.read_body(gui)
-    changed = text
-    for spec in keys:
-        changed = settings._toml_put(changed, spec, None)
-    if changed == text:
-        return
-    kept = corsu.DATA / 'backups/hyprland-reset' / time.strftime('%Y%m%d-%H%M%S') / gui.name
-    kept.parent.mkdir(parents=True, exist_ok=True)
-    shutil.copy2(gui, kept)
-    settings.atomic_write(gui, settings.encode(changed, newline, bom))
-    notes.append(corsu.t(f'look choices of Noctalia\'s Settings window cleared (copy in {kept})',
-                         f'choix d\'apparence de la fenêtre Réglages de Noctalia retirés (copie dans {kept})'))
 
 
 # ---------------------------------------------------------------------------------------------------------------
@@ -769,8 +742,6 @@ class Profile(Hyprland):
             if qt6ct:
                 # qt6ct does not expand variables: the person's config folder, written out.
                 own_new_file(installer, self.id, where['qt6ct'], qt6ct.replace('@CONFIG_HOME@', str(corsu.CONFIG)), notes)
-            if force:
-                clear_look(where['noctalia_gui'], look_keys(profile), notes)
         installation.action = '; '.join(notes) or None
         for note in notes:
             print(f'  {note}')
@@ -778,9 +749,10 @@ class Profile(Hyprland):
 
 
 def reset_look():
-    """Put Corsu's look back in Noctalia: its palettes and profile layer as Corsu ships them, and the look's choices
-    saved by Noctalia's Settings window taken out; every other setting, Hyprland's files and the language stay.
-    Only when the profile is installed and switched on."""
+    """Put Corsu's look back in Noctalia: its palettes and profile layer as Corsu ships them, even edited (the edited
+    copy is kept in Corsu's backups). What Noctalia's Settings window saved (~/.local/state/noctalia/settings.toml) is
+    never edited: it wins over Corsu's layer, and Noctalia's own "Reset Page" takes it back page by page. Hyprland's
+    files and the language stay. Only when the profile is installed and switched on."""
     state = corsu.load_state()
     if PROFILE not in state.get('components', []) or corsu.is_disabled(PROFILE, state):
         print(corsu.t('The Corsu desktop profile is not switched on: nothing to reset.',
@@ -798,8 +770,10 @@ def reset_look():
     if result:
         result.update(operation='reset_look', time=time.time())
     corsu.save_state(installer.state)
-    print(corsu.t('Corsu\'s look is back in Noctalia; your other settings stay. Noctalia applies it when it reloads.',
-                  'L\'apparence Corsu est remise dans Noctalia ; vos autres réglages restent. Noctalia l\'applique en se rechargeant.'))
+    print(corsu.t('Corsu\'s look files are back; your other settings stay. What you chose in Noctalia\'s Settings '
+                  'window still wins: use "Reset Page" there to go back to Corsu\'s look page by page.',
+                  'Les fichiers d\'apparence de Corsu sont remis ; vos autres réglages restent. Ce que vous avez choisi dans '
+                  'la fenêtre Réglages de Noctalia l\'emporte toujours : « Reset Page » y revient à l\'apparence Corsu page par page.'))
     return True
 
 
