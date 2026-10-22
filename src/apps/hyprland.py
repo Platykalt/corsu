@@ -22,6 +22,7 @@ import json
 import os
 from pathlib import Path
 import re
+import shlex
 import shutil
 import subprocess
 import time
@@ -36,26 +37,32 @@ MINIMUM_HYPRLAND = (0, 55)
 NOCTALIA_MAJOR = 5
 # Corsu's templates (owners B and A in src/hyprland/README.md). Tests point this at stand-ins.
 TEMPLATES = corsu.SRC / 'hyprland'
-# Noctalia's own catalogues, the reference for the coverage of Corsu's.
+# Noctalia's packaged assets: its catalogues (the reference for the coverage of Corsu's) and everything else it loads.
 NOCTALIA_ASSETS = Path('/usr/share/noctalia/assets')
 PORTAL_FILES = (Path('/usr/share/xdg-desktop-portal/portals/hyprland.portal'),)
-# The Noctalia setting holding the interface language: [table, key] in its TOML settings.
-NOCTALIA_LANGUAGE_KEY = ['general', 'language']
 LUA_STARTER = 'hyprland.lua'
+# Noctalia merges every *.toml of ~/.config/noctalia in alphabetical order, then what its Settings window saved
+# (~/.local/state/noctalia/settings.toml), which wins. Corsu's layers sort first (src/hyprland/noctalia/).
+NOCTALIA_LANGUAGE_FILE, NOCTALIA_PROFILE_FILE = '00-corsu-language.toml', '00-corsu-profile.toml'
+# Tables of the profile that are not its look: "Put Corsu's look back" leaves the person's choices there.
+NOT_LOOK = ('shell', 'idle', 'notification')
 
 
 def paths():
     """Where each file goes, from the person's folders (read again each time: tests change them)."""
-    config, data = corsu.CONFIG, corsu.HOME / '.local/share'
+    config, state = corsu.CONFIG, corsu.HOME / '.local/state'
     return {'env': config / 'uwsm/env-hyprland',
             'portals': config / 'xdg-desktop-portal/hyprland-portals.conf',
             'hypr': config / 'hypr',
             'modules': config / 'hypr/corsu',
             'starter': config / 'hypr' / LUA_STARTER,
             'user': config / 'hypr/user.lua',
-            'noctalia_settings': config / 'noctalia/settings.toml',
-            'noctalia_palettes': config / 'noctalia/colorschemes',
-            'noctalia_translations': data / 'noctalia/translations'}
+            'noctalia': config / 'noctalia',
+            'noctalia_palettes': config / 'noctalia/palettes',
+            'noctalia_gui': state / 'noctalia/settings.toml',
+            'qt6ct': config / 'qt6ct/qt6ct.conf',
+            # Corsu's own folder: Noctalia's assets with Corsu's catalogue added (NOCTALIA_ASSETS_DIR).
+            'assets': corsu.DATA / 'noctalia-assets'}
 
 
 # Files Plasma reads, or shared with it: never written by this module (tests check them byte for byte).
@@ -109,10 +116,8 @@ def detect(run=None):
     found = None
     helper = system()
     if helper is not None and hasattr(helper, 'versions'):
-        try:
-            found = dict(helper.versions(run=run))
-        except TypeError:
-            found = dict(helper.versions())
+        # Its own runner (English output) unless a test gave one.
+        found = dict(helper.versions() if run is default_run else helper.versions(run))
     if found is None:
         hyprland = run(['Hyprland', '--version']) or run(['hyprland', '--version'])
         noctalia = run(['noctalia', '--version'])
@@ -122,8 +127,10 @@ def detect(run=None):
         found = {'hyprland': version_text(hyprland), 'noctalia': version_text(noctalia),
                  'uwsm': version_text(uwsm) or ('yes' if uwsm else None),
                  'portal': any(path.exists() for path in PORTAL_FILES)}
-    found = {'hyprland': found.get('hyprland'), 'noctalia': found.get('noctalia'), 'uwsm': found.get('uwsm'),
-             'portal': bool(found.get('portal') or found.get('xdph') or found.get('xdg-desktop-portal-hyprland'))}
+    # uwsm read from a package database only: still there when its command is.
+    uwsm = found.get('uwsm') or ('yes' if run is default_run and shutil.which('uwsm') else None)
+    found = {'hyprland': found.get('hyprland'), 'noctalia': found.get('noctalia'), 'uwsm': uwsm,
+             'portal': bool(found.get('portal') or found.get('xdph') or any(path.exists() for path in PORTAL_FILES))}
     CACHE.update(key=run, time=time.monotonic(), value=dict(found))
     return found
 
@@ -243,25 +250,69 @@ def modules():
     return {path.name: path.read_bytes() for path in sorted(folder.glob('*.lua')) if path.name != 'machine.lua'}
 
 
+def lua(value):
+    """A Lua literal for machine.lua: strings, numbers, booleans, lists and tables of them."""
+    if isinstance(value, bool):
+        return 'true' if value else 'false'
+    if isinstance(value, (int, float)):
+        return repr(value)
+    if isinstance(value, dict):
+        return '{ ' + ', '.join(f'{key} = {lua(item)}' for key, item in value.items() if item is not None) + ' }'
+    if isinstance(value, (list, tuple)):
+        return '{ ' + ', '.join(lua(item) for item in value) + ' }'
+    return json.dumps(str(value), ensure_ascii=False)
+
+
+def machine_values():
+    """What src/hyprland_system.py finds here, in the shape corsu/machine_values.lua reads: keyboard and outputs."""
+    helper = system()
+    if helper is None:
+        return {}
+    values = {}
+    if hasattr(helper, 'keyboard'):
+        keyboard = helper.keyboard(home=corsu.HOME)
+        if keyboard:
+            values['keyboard'] = {key: keyboard.get(key, '') for key in ('layout', 'variant', 'model', 'options')}
+    if hasattr(helper, 'outputs') and hasattr(helper, 'gpus'):
+        monitors = []
+        for output in helper.outputs(helper.gpus(), corsu.HOME):
+            scale = output.get('plasma') or output.get('suggested')
+            monitors.append({'output': output['name'], 'mode': 'preferred', 'position': 'auto',
+                             'scale': scale if scale else None})
+        if monitors:
+            values['monitors'] = monitors
+    return values
+
+
 def machine_lua():
-    """~/.config/hypr/corsu/machine.lua: the values found on this computer (keyboard, scale, graphics card). Never a
-    template: connector names and card paths differ from one computer to the next."""
+    """~/.config/hypr/corsu/machine.lua: the values found on this computer (keyboard, outputs and their scale). Never a
+    template: connector names differ from one computer to the next."""
     helper = system()
     if helper is not None and hasattr(helper, 'machine_lua'):
         return helper.machine_lua()
-    return ('-- Corsu: values found on this computer when the profile was switched on. Corsu rewrites this file;\n'
-            '-- put your own settings in ~/.config/hypr/user.lua instead.\n'
-            'return {}\n')
+    values = machine_values()
+    lines = ['-- Written by Corsu from what it found on this computer when the profile was switched on; rewritten at',
+             '-- each update unless you change it. Put your own settings in ~/.config/hypr/user.lua instead.',
+             'return {']
+    lines += [f'    {key} = {lua(value)},' for key, value in values.items()]
+    return '\n'.join(lines + ['}']) + '\n'
 
 
 def env_profile_lines():
-    """The profile's lines for uwsm's env-hyprland (graphics card, toolkit hints), from src/hyprland_system.py:
-    its block without its own markers. Empty when this copy has none."""
+    """The profile's lines for uwsm's env-hyprland (graphics cards, Qt theme, cursor, menu prefix), from
+    src/hyprland_system.py: its block without markers, comments about the block, nor LANGUAGE (the other part's).
+    Empty when this copy has none."""
     helper = system()
     if helper is None or not hasattr(helper, 'env_block'):
         return ''
-    lines = [line for line in helper.env_block().splitlines() if not line.strip().startswith('# corsu:')]
-    return '\n'.join(lines).strip('\n') + '\n' if any(line.strip() for line in lines) else ''
+    try:
+        block = helper.env_block(dict(os.environ), home=corsu.HOME, cards=helper.gpus() if hasattr(helper, 'gpus') else None)
+    except TypeError:
+        block = helper.env_block()
+    lines = [line for line in block.splitlines()
+             if not line.strip().startswith('# corsu:') and not line.startswith('export LANGUAGE=')
+             and not re.match(r'# (Written by Corsu|Corsu rewrites)', line)]
+    return '\n'.join(lines).strip('\n') + '\n' if any(line.strip() and not line.startswith('#') for line in lines) else ''
 
 
 PORTALS = ('[preferred]\n'
@@ -288,11 +339,16 @@ def language_value():
     return ':'.join(dict.fromkeys(languages))
 
 
-def language_lines():
+def language_lines(assets=None):
+    """The language block of env-hyprland; with `assets`, Noctalia also loads Corsu's catalogue from there."""
     value = language_value()
     fallback = value.split(':', 1)[1].replace(':', ', ')
-    return ('# Corsu: Corsican first in the Hyprland session, then ' + fallback + ' for texts not translated yet.\n'
-            f'export LANGUAGE={value}\n')
+    lines = ('# Corsican first in the Hyprland session, then ' + fallback + ' for texts not translated yet.\n'
+             f'export LANGUAGE={value}\n')
+    if assets:
+        lines += ('# Noctalia\'s assets with Corsu\'s Corsican catalogue added (rebuilt by Corsu at each update).\n'
+                  f'export NOCTALIA_ASSETS_DIR={shlex.quote(str(assets))}\n')
+    return lines
 
 
 def toml_entries(text):
@@ -313,18 +369,52 @@ def toml_entries(text):
 
 
 def look():
-    """Corsu's look for Noctalia: ({file name: bytes} of the palettes, [([section, key], value)] of the visual
-    settings), from src/hyprland/noctalia/."""
+    """Corsu's look for Noctalia from src/hyprland/noctalia/: ({file name: bytes} of the palettes, the profile layer's
+    bytes or None, qt6ct.conf's text or None)."""
     palettes = template('noctalia', 'palettes')
     files = {path.name: path.read_bytes() for path in sorted(palettes.iterdir()) if path.is_file()} if palettes else {}
-    profile = template('noctalia', 'profile.toml')
-    values = toml_entries(profile.read_text(encoding='utf-8')) if profile else []
-    return files, values
+    profile = template('noctalia', NOCTALIA_PROFILE_FILE)
+    qt6ct = template('noctalia', 'qt6ct.conf')
+    return files, profile.read_bytes() if profile else None, qt6ct.read_text(encoding='utf-8') if qt6ct else None
+
+
+def look_keys(profile):
+    """[section, key] of the profile layer's look: everything but the tables in NOT_LOOK (and their sub-tables)."""
+    return [spec for spec, _ in toml_entries(profile.decode('utf-8'))
+            if spec[0].split('.')[0] not in NOT_LOOK]
 
 
 def translation():
     path = template('translations', 'co.json')
     return path.read_bytes() if path else None
+
+
+def build_assets():
+    """Corsu's folder for NOCTALIA_ASSETS_DIR: every entry of Noctalia's packaged assets linked, translations linked
+    one by one, plus Corsu's co.json. Rebuilt whole at each run (a Noctalia update adds files); None when Noctalia's
+    assets or Corsu's catalogue are missing, so the variable is never set to a folder Noctalia cannot use."""
+    data, target = translation(), paths()['assets']
+    if data is None or not (NOCTALIA_ASSETS / 'translations').is_dir():
+        return None
+    staged, old = target.with_name(target.name + '.corsu-new'), target.with_name(target.name + '.corsu-old')
+    for leftover in (staged, old):
+        if leftover.is_symlink() or leftover.is_file():
+            leftover.unlink()
+        elif leftover.exists():
+            shutil.rmtree(leftover)
+    (staged / 'translations').mkdir(parents=True)
+    for entry in NOCTALIA_ASSETS.iterdir():
+        if entry.name != 'translations':
+            (staged / entry.name).symlink_to(entry)
+    for entry in (NOCTALIA_ASSETS / 'translations').iterdir():
+        if entry.name != 'co.json':
+            (staged / 'translations' / entry.name).symlink_to(entry)
+    (staged / 'translations/co.json').write_bytes(data)
+    if target.exists():
+        target.rename(old)
+    staged.rename(target)
+    shutil.rmtree(old, ignore_errors=True)
+    return target
 
 
 def leaves(document):
@@ -392,18 +482,38 @@ def own_block(installer, component, path, name, value, notes):
     return True
 
 
-def own_value(installer, component, path, spec, value, notes, force=False):
-    """One TOML value in Noctalia's settings. A value the person changed since in Noctalia stays, unless `force`.
-    Noctalia writes its settings at its first start: before that there is nothing to change."""
-    key = f'{path}#{json.dumps(list(spec))}'
-    record = installer.state['files'].get(key)
-    if record and Path(path).exists() and not force:
-        current = settings._toml_get(settings.read_body(path)[0], list(spec))
-        if current != record['setting']['installed']:
-            notes.append(corsu.t(f'{spec[1]} changed in Noctalia, kept', f'{spec[1]} modifié dans Noctalia, gardé'))
-            return False
-    settings.set_file_value(installer, component, path, 'toml', list(spec), value)
-    return True
+def own_new_file(installer, component, path, data, notes, hint=None):
+    """A file Corsu writes only when the person has none (hyprland.lua, qt6ct.conf) and never rewrites afterwards:
+    switching off still removes it while it is unchanged."""
+    path = Path(path)
+    if str(path) in installer.state['files']:
+        record = installer.state['files'][str(path)]
+        if record.get('component') != component or not record.get('toggle'):
+            record.update(component=component, toggle=True)
+            corsu.save_state(installer.state)
+        return True
+    if path.exists():
+        notes.append(hint or corsu.t(f'yours, left as it is: {path}', f'à vous, laissé tel quel : {path}'))
+        return False
+    return own_file(installer, component, path, data, notes)
+
+
+def clear_look(gui, keys, notes):
+    """Remove the look's keys from what Noctalia's Settings window saved, keeping the rest (a copy is kept first)."""
+    if not gui.exists():
+        return
+    text, newline, bom = settings.read_body(gui)
+    changed = text
+    for spec in keys:
+        changed = settings._toml_put(changed, spec, None)
+    if changed == text:
+        return
+    kept = corsu.DATA / 'backups/hyprland-reset' / time.strftime('%Y%m%d-%H%M%S') / gui.name
+    kept.parent.mkdir(parents=True, exist_ok=True)
+    shutil.copy2(gui, kept)
+    settings.atomic_write(gui, settings.encode(changed, newline, bom))
+    notes.append(corsu.t(f'look choices of Noctalia\'s Settings window cleared (copy in {kept})',
+                         f'choix d\'apparence de la fenêtre Réglages de Noctalia retirés (copie dans {kept})'))
 
 
 # ---------------------------------------------------------------------------------------------------------------
@@ -452,8 +562,10 @@ class Language(Hyprland):
             f'Corsican first, then your languages, in a marked block of {paths()["env"]} (read by uwsm for Hyprland only)',
             f'le corse d\'abord, puis vos langues, dans un bloc marqué de {paths()["env"]} (lu par uwsm pour Hyprland seulement)'),
         'noctalia': lambda: corsu.t(
-            f'Corsu\'s Corsican catalogue in {paths()["noctalia_translations"]} and Noctalia\'s language set to Corsican',
-            f'le catalogue corse de Corsu dans {paths()["noctalia_translations"]} et la langue de Noctalia en corse')}
+            f'Corsican in {paths()["noctalia"] / NOCTALIA_LANGUAGE_FILE}, Corsu\'s catalogue in {paths()["assets"]}; '
+            'a language you pick in Noctalia\'s Settings window wins',
+            f'le corse dans {paths()["noctalia"] / NOCTALIA_LANGUAGE_FILE}, le catalogue de Corsu dans {paths()["assets"]} ; '
+            'une langue choisie dans la fenêtre Réglages de Noctalia l\'emporte')}
 
     def find(self):
         found = detect()
@@ -475,23 +587,27 @@ class Language(Hyprland):
             why = None
             if state['noctalia'] != 'ok':
                 why = reason('noctalia_version', version=found['noctalia'])
-            elif data is None:
-                why = reason('templates_missing', what='Noctalia (co.json)')
-            result.append(apps.Installation(self, self.kind('noctalia'), where['noctalia_translations'] / 'co.json',
+            elif data is None or template('noctalia', NOCTALIA_LANGUAGE_FILE) is None:
+                why = reason('templates_missing', what='Noctalia (co.json, 00-corsu-language.toml)')
+            result.append(apps.Installation(self, self.kind('noctalia'), where['noctalia'] / NOCTALIA_LANGUAGE_FILE,
                                             found['noctalia'], coverage=coverage(data) if data else None, reason=why))
         return result
+
+    def noctalia_usable(self):
+        return any(self.key_of(item) == 'noctalia' and item.usable for item in self.find())
 
     def enable(self, installer, installation):
         where, notes = paths(), []
         if self.key_of(installation) == 'session':
-            own_block(installer, self.id, where['env'], 'language', language_lines(), notes)
+            # Noctalia finds "co" only through the assets folder: built before the variable names it.
+            assets = build_assets() if self.noctalia_usable() else None
+            own_block(installer, self.id, where['env'], 'language', language_lines(assets), notes)
         else:
-            own_file(installer, self.id, where['noctalia_translations'] / 'co.json', translation(), notes)
-            if where['noctalia_settings'].exists():
-                own_value(installer, self.id, where['noctalia_settings'], NOCTALIA_LANGUAGE_KEY, '"co"', notes)
-            else:
-                notes.append(corsu.t('Start Noctalia once, then switch Hyprland on again here to choose Corsican in it',
-                                     'Démarrez Noctalia une fois, puis réactivez Hyprland ici pour y choisir le corse'))
+            if build_assets() is None:
+                notes.append(corsu.t(f'Noctalia\'s assets not found in {NOCTALIA_ASSETS}: it stays in English',
+                                     f'ressources de Noctalia introuvables dans {NOCTALIA_ASSETS} : il reste en anglais'))
+            own_file(installer, self.id, where['noctalia'] / NOCTALIA_LANGUAGE_FILE,
+                     template('noctalia', NOCTALIA_LANGUAGE_FILE).read_bytes(), notes)
         installation.action = '; '.join(notes) or None
         for note in notes:
             print(f'  {note}')
@@ -518,10 +634,10 @@ class Profile(Hyprland):
             f'les modules Lua de Corsu dans {paths()["modules"]}, {paths()["starter"]} seulement si vous n\'en avez pas, '
             f'les portails de la session Hyprland dans {paths()["portals"]} ; {paths()["user"]} reste à vous'),
         'look': lambda: corsu.t(
-            f'Corsu\'s palette in {paths()["noctalia_palettes"]} and its look in {paths()["noctalia_settings"]}; '
-            'what you change later in Noctalia stays',
-            f'la palette Corsu dans {paths()["noctalia_palettes"]} et son apparence dans {paths()["noctalia_settings"]} ; '
-            'ce que vous changez ensuite dans Noctalia reste')}
+            f'Corsu\'s palettes in {paths()["noctalia_palettes"]} and its look in {paths()["noctalia"] / NOCTALIA_PROFILE_FILE}; '
+            'what you change in Noctalia\'s Settings window wins and stays',
+            f'les palettes Corsu dans {paths()["noctalia_palettes"]} et son apparence dans {paths()["noctalia"] / NOCTALIA_PROFILE_FILE} ; '
+            'ce que vous changez dans la fenêtre Réglages de Noctalia l\'emporte et reste')}
 
     def find(self):
         found = detect()
@@ -536,13 +652,14 @@ class Profile(Hyprland):
             why = reason('templates_missing', what='Lua (src/hyprland/config/corsu)')
         result = [apps.Installation(self, self.kind('config'), where['modules'], found['hyprland'], reason=why)]
         if found.get('noctalia'):
-            palettes, values = look()
+            palettes, profile, _ = look()
             why = None
             if state['noctalia'] != 'ok':
                 why = reason('noctalia_version', version=found['noctalia'])
-            elif not (palettes or values):
+            elif profile is None:
                 why = reason('templates_missing', what='Noctalia (src/hyprland/noctalia)')
-            result.append(apps.Installation(self, self.kind('look'), where['noctalia_settings'], found['noctalia'], reason=why))
+            result.append(apps.Installation(self, self.kind('look'), where['noctalia'] / NOCTALIA_PROFILE_FILE,
+                                            found['noctalia'], reason=why))
         return result
 
     def enable(self, installer, installation, force=False):
@@ -552,25 +669,24 @@ class Profile(Hyprland):
                 own_file(installer, self.id, where['modules'] / name, data, notes)
             own_file(installer, self.id, where['modules'] / 'machine.lua', machine_lua(), notes)
             starter = template('config', LUA_STARTER)
-            if starter and (not where['starter'].exists() or str(where['starter']) in installer.state['files']):
-                own_file(installer, self.id, where['starter'], starter.read_bytes(), notes)
-            elif starter:
-                notes.append(corsu.t(f'your {where["starter"]} is kept: load ~/.config/hypr/corsu/init.lua from it to use the profile',
-                                     f'votre {where["starter"]} est gardé : chargez-y ~/.config/hypr/corsu/init.lua pour utiliser le profil'))
+            if starter:
+                own_new_file(installer, self.id, where['starter'], starter.read_bytes(), notes, corsu.t(
+                    f'your {where["starter"]} is kept: add require("corsu.init") to it to use the profile',
+                    f'votre {where["starter"]} est gardé : ajoutez-y require("corsu.init") pour utiliser le profil'))
             own_file(installer, self.id, where['portals'], portals_conf(), notes)
             lines = env_profile_lines()
             if lines:
                 own_block(installer, self.id, where['env'], 'profile', lines, notes)
         else:
-            palettes, values = look()
+            palettes, profile, qt6ct = look()
             for name, data in palettes.items():
                 own_file(installer, self.id, where['noctalia_palettes'] / name, data, notes, force=force)
-            if values and where['noctalia_settings'].exists():
-                for spec, value in values:
-                    own_value(installer, self.id, where['noctalia_settings'], spec, value, notes, force=force)
-            elif values:
-                notes.append(corsu.t('Start Noctalia once, then switch the profile on again here for Corsu\'s look',
-                                     'Démarrez Noctalia une fois, puis réactivez le profil ici pour l\'apparence Corsu'))
+            own_file(installer, self.id, where['noctalia'] / NOCTALIA_PROFILE_FILE, profile, notes, force=force)
+            if qt6ct:
+                # qt6ct does not expand variables: the person's config folder, written out.
+                own_new_file(installer, self.id, where['qt6ct'], qt6ct.replace('@CONFIG_HOME@', str(corsu.CONFIG)), notes)
+            if force:
+                clear_look(where['noctalia_gui'], look_keys(profile), notes)
         installation.action = '; '.join(notes) or None
         for note in notes:
             print(f'  {note}')
@@ -578,8 +694,9 @@ class Profile(Hyprland):
 
 
 def reset_look():
-    """Put Corsu's look back in Noctalia (palettes and the visual settings of the profile), keeping every other
-    setting, Hyprland's files and the language. Only when the profile is installed and switched on."""
+    """Put Corsu's look back in Noctalia: its palettes and profile layer as Corsu ships them, and the look's choices
+    saved by Noctalia's Settings window taken out; every other setting, Hyprland's files and the language stay.
+    Only when the profile is installed and switched on."""
     state = corsu.load_state()
     if PROFILE not in state.get('components', []) or corsu.is_disabled(PROFILE, state):
         print(corsu.t('The Corsu desktop profile is not switched on: nothing to reset.',
