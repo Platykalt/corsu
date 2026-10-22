@@ -1,0 +1,89 @@
+# Corsu's desktop profile for Noctalia 5.3 (written by Corsu, replaced when Corsu updates it).
+# This is a base layer: your own files sorted after it (config.toml…) and everything you change in Noctalia's
+# Settings window (~/.local/state/noctalia/settings.toml) win over it and survive Corsu's updates.
+# "Reset Page" in a Settings page removes your changes there and brings back these values.
+
+[shell]
+# Noctalia answers the password prompts of programs (polkit); no other agent runs in the Hyprland session.
+polkit_agent = true
+telemetry_enabled = false
+
+[accessibility]
+ui_scale = 1.0
+
+[theme]
+mode = "dark"
+source = "custom"
+custom_palette = "Corsu-Maquis"   # or "Corsu-Mare"; files in ~/.config/noctalia/palettes/
+# Off: this preference lives in GSettings, which Plasma also reads and writes.
+sync_color_scheme = false
+
+[theme.templates]
+# Only the Qt template: it writes ~/.config/qt6ct/colors/noctalia.conf, read by Qt programs only in the Hyprland
+# session (QT_QPA_PLATFORMTHEME=qt6ct). The KDE (kdeglobals) and GTK (gtk.css, GSettings) templates would change
+# files Plasma uses, so they stay off.
+enable_builtin_templates = true
+builtin_ids = ["qt"]
+
+[bar.default]
+position = "top"
+start = ["launcher", "workspaces", "taskbar"]
+center = ["clock"]
+end = ["media", "tray", "notifications", "clipboard", "network", "bluetooth", "microphone", "volume", "brightness",
+       "battery", "control-center", "session"]
+
+[widget.microphone]
+type = "volume"
+device = "input"
+
+[widget.taskbar]
+group_by_workspace = false
+show_running = true
+
+[widget.notifications]
+hide_when_no_unread = false
+
+# The session is run by uwsm ("Hyprland (uwsm-managed)"): logging out must stop it through uwsm so that its units and
+# the graphical session target end cleanly; the Hyprland exit is only the fallback outside uwsm. The five rows repeat
+# Noctalia's default list (rows merge by position), with only the logout command changed.
+[[shell.session.actions]]
+action = "lock"
+
+[[shell.session.actions]]
+action = "logout"
+command = "uwsm stop || hyprctl dispatch 'hl.dsp.exit()'"
+
+[[shell.session.actions]]
+action = "lock_and_suspend"
+
+[[shell.session.actions]]
+action = "reboot"
+
+[[shell.session.actions]]
+action = "shutdown"
+
+[shell.launcher]
+show_settings_button = true
+show_session_button = true
+
+# Key help: SUPER + F1 opens the launcher on /tasti; the list is written by Corsu's Hyprland binds at each load.
+[shell.launcher.dmenu.entry.corsu-keys]
+command = "cat \"$XDG_RUNTIME_DIR/corsu/hypr-keys.tsv\""
+label = "Tasti di Hyprland"
+prefix = "tasti"
+glyph = "keyboard"
+global = false
+exec = "true"
+
+[notification]
+show_app_name = true
+
+[idle.behavior.lock]
+timeout = 600
+action = "lock"
+enabled = true
+
+[idle.behavior.screen-off]
+timeout = 660
+action = "screen_off"
+enabled = true
