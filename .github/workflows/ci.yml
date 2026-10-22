@@ -72,6 +72,18 @@ jobs:
           sha512sum -c fr.sha512
       - name: Package Linux, Windows and macOS archives
         run: python tools/package_release.py --output dist
+      - name: Windows archive — the window's icon is there and is an ICO file (pywebview's Windows backend cannot take a PNG)
+        run: |
+          python - <<'PY'
+          import zipfile
+          with zipfile.ZipFile('dist/corsu-windows.zip') as bundle:
+              names = set(bundle.namelist())
+              for name in ('corsu/src/app/corsu.ico', 'corsu/runtime/x86_64/python/pythonw.exe'):
+                  assert name in names, f'missing {name}'
+              header = bundle.read('corsu/src/app/corsu.ico')[:4]
+              assert header == bytes([0, 0, 1, 0]), f'corsu.ico is not an ICO file: {header.hex()}'
+              print('corsu/src/app/corsu.ico: ICO header', header.hex(), '; pythonw.exe present')
+          PY
       - name: Build the Corsican keyboard prediction packages (Keyman)
         run: |
           python tools/build_keyboard.py --package
@@ -273,6 +285,17 @@ jobs:
         run: |
           choco install vlc notepadplusplus -y --no-progress
           python tests/e2e/check_windows_apps.py
+      - name: Corsu's own window on Windows — icon loading, 0.27.0's crash reproduced, real window from the archive's Python
+        if: runner.os == 'Windows'
+        timeout-minutes: 12
+        run: python tests/e2e/check_windows_window.py --root "${{ env.CORSU_RELEASE }}" --python "${{ env.CORSU_PYTHON }}"
+      - name: Keep the screenshot of the Windows window
+        if: always() && runner.os == 'Windows'
+        uses: actions/upload-artifact@v4
+        with:
+          name: windows-native-window
+          path: e2e-artifacts/windows-corsu-window.png
+          if-no-files-found: warn
       - name: Chromium — translate Chrome for Testing, read it in Corsican, switch off/on, restore
         if: runner.os != 'macOS'
         shell: bash
