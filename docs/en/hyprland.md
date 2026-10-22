@@ -4,8 +4,32 @@
 
 Corsu can put a [Hyprland](https://hyprland.org) session with the Noctalia panel in Corsican and, if you ask for it,
 add its own desktop profile. **Corsu never installs a desktop**: you install Hyprland, Noctalia, uwsm and
-xdg-desktop-portal-hyprland with your distribution; Corsu detects them. This part exists on Linux only and has so far
-been tried on simulated folders only (no real Hyprland has run it).
+xdg-desktop-portal-hyprland with your distribution; Corsu detects them. This part exists on Linux only. Status:
+experimental (see [Actual status](#actual-status)).
+
+## Actual status
+
+Checked on 22 October 2026 on CachyOS (Hyprland 0.56.2, Noctalia 5.3.0, uwsm 0.27.1, Hyprland portal 1.4.1), on an
+Intel + NVIDIA RTX 5070 laptop whose internal panel is wired to the NVIDIA:
+
+- **Real Hyprland, nested session** (Hyprland inside a screenless virtual KWin, private D-Bus session bus, system
+  bus hidden): configuration loaded without errors, 66 binds registered, `fr` keyboard, Noctalia started by the
+  autostart, in Corsican (welcome, bar, session menu, key help `/tasti`). Screenshots below.
+- **Configuration validated** by `Hyprland --verify-config` and `noctalia config validate`.
+- **Not yet checked in a real login** (real screen, real GPU): portals (KDE file chooser, screenshots, screen
+  sharing), polkit agent, locking and unlocking, KWallet at login, network, Bluetooth, battery, brightness, suspend
+  and lid, AZERTY keys typed on the keyboard. Screen sharing needs a real share in Firefox, Discord or OBS: starting
+  the program proves nothing.
+- Noctalia translation: 3,126 texts; 382 match a published Corsican translation, 267 existing Corsu usage, 2,375 are
+  AI proposals; none reviewed by a speaker yet ([PROVENANCE](../../src/hyprland/translations/PROVENANCE.md)).
+
+| Noctalia welcome (language choice only) | Bar | Session menu |
+| --- | --- | --- |
+| ![Noctalia welcome in Corsican](../images/hyprland/noctalia-welcome-co.png) | ![Noctalia bar](../images/hyprland/noctalia-bar-co.png) | ![Session menu in Corsican](../images/hyprland/noctalia-session-co.png) |
+
+Screenshots of a 1280 × 720 nested session without network or Bluetooth (system bus hidden): on a real screen the
+bar also shows network, Bluetooth, tray and brightness. With the profile the welcome does not open
+(`setup_wizard_enabled = false`): it would save its own colours over Corsu's.
 
 ## What you need
 

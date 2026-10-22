@@ -5,7 +5,32 @@
 Corsu peut mettre en corse une session [Hyprland](https://hyprland.org) avec le panneau Noctalia, et, si vous le
 demandez, y installer son propre profil de bureau. **Corsu n'installe jamais de bureau** : vous installez Hyprland,
 Noctalia, uwsm et xdg-desktop-portal-hyprland avec votre distribution ; Corsu les détecte. Cette partie n'existe que
-sous Linux et n'a encore été essayée que sur des dossiers simulés (aucun vrai Hyprland ne l'a lancée).
+sous Linux. Statut : expérimental (voir [État réel](#état-réel)).
+
+## État réel
+
+Vérifié le 22 octobre 2026 sur CachyOS (Hyprland 0.56.2, Noctalia 5.3.0, uwsm 0.27.1, portail Hyprland 1.4.1),
+portable Intel + NVIDIA RTX 5070 dont l'écran interne est relié à la NVIDIA :
+
+- **Vrai Hyprland, session imbriquée** (Hyprland lancé dans un KWin virtuel sans écran, bus D-Bus privé, bus système
+  masqué) : configuration chargée sans erreur, 66 raccourcis enregistrés, clavier `fr`, Noctalia démarré par
+  l'autolancement, en corse (accueil, barre, menu de session, aide des touches `/tasti`). Captures ci-dessous.
+- **Configuration validée** par `Hyprland --verify-config` et `noctalia config validate`.
+- **Pas encore vérifié dans une vraie connexion** (écran réel, GPU réel) : portails (sélecteur de fichiers KDE,
+  capture, partage d'écran), agent polkit, verrouillage et déverrouillage, KWallet à l'ouverture, réseau, Bluetooth,
+  batterie, luminosité, veille et capot, touches AZERTY au clavier. Le partage d'écran demande un vrai essai dans
+  Firefox, Discord ou OBS : lancer le programme ne suffit pas.
+- Traduction de Noctalia : 3 126 textes ; 382 reprennent une traduction corse publiée, 267 l'usage existant de
+  Corsu, 2 375 sont des propositions IA ; aucun texte relu par un locuteur
+  ([PROVENANCE](../../src/hyprland/translations/PROVENANCE.md)).
+
+| Accueil de Noctalia (choix « langue » seul) | Barre | Menu de session |
+| --- | --- | --- |
+| ![Accueil de Noctalia en corse](../images/hyprland/noctalia-welcome-co.png) | ![Barre de Noctalia](../images/hyprland/noctalia-bar-co.png) | ![Menu de session en corse](../images/hyprland/noctalia-session-co.png) |
+
+Captures d'une session imbriquée 1280 × 720 sans réseau ni Bluetooth (bus système masqué) : sur un vrai écran, la
+barre montre aussi réseau, Bluetooth, zone de notification et luminosité. Avec le profil, l'accueil ne s'ouvre pas
+(`setup_wizard_enabled = false`) : il enregistrerait ses propres couleurs par-dessus celles de Corsu.
 
 ## Ce qu'il faut
 
