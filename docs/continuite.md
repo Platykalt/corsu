@@ -29,6 +29,10 @@ Les sections datées après « État actuel » sont l'historique : ce qui y est 
     traduction juste (« Circà « Corsica » cù Google »), mais l'essai exigeait une touche d'accès soulignée, que les
     menus de macOS n'affichent pas ; l'essai attend désormais un libellé sans soulignement sous macOS. Les étapes
     suivantes de macOS (dont la mise à jour depuis la 0.27.0) n'ont pas tourné dans cette CI.
+  - **CI 39825997542 (`33e1c5c`, 22 octobre 2026) : verte** sur les trois systèmes (tests unitaires, archives, bout en
+    bout). Menu contextuel en corse dans un vrai Firefox sous Linux, Windows et macOS ; mise à jour 0.27.0 → 0.28.0
+    réussie sous les trois systèmes ; migration 0.27.0 → 0.28.0 (réglages gardés) sous Linux. Candidate prête, non
+    publiée ; la publication attend l'accord du mainteneur.
   - Limites : migration complète vérifiée sous Linux seulement ; même Python embarqué en 0.27.0 et 0.28.0 (le
     remplacement du Python n'est pas exercé) ; aucun essai ne lit le nouveau libellé dans une installation mise à jour
     (la copie de Firefox est reconstruite au lancement, son nom dépend de l'empreinte du lexique).
