@@ -8,11 +8,13 @@ Needs Firefox (CORSU_FIREFOX names its folder) and VLC from the system's package
  0. the archive of DIR: its .sha256, the Discord plugin built into it (Vencord/dist), and with Node.js the dictionary
     fingerprint its renderer reports equal to the one computed from its dictionary.json;
  1. the published version (checked against its .sha256) installed with Firefox and VLC, the VLC complement on, then
-    Firefox switched off; its extracted archive deleted. Personal files are put next to Corsu's: in its data folder,
-    the home folder, the applications menu and the Firefox profile;
- 2. the installed copy's own update.py installs DIR's archive: Firefox stays off, VLC and its complement stay on, one
-    copy in use, the new window's files (src/app, appearance.py) and the Discord plugin are the archive's, the bundled
-    Python is kept and the launchers fall back to it, no download left in the data folder;
+    Firefox switched off and, when it has them (0.25 and later), appearance settings saved; its extracted archive
+    deleted. Personal files are put next to Corsu's: in its data folder, the home folder, the applications menu and the
+    Firefox profile;
+ 2. the installed copy's own update.py installs DIR's archive: Firefox stays off, VLC and its complement stay on, the
+    appearance settings are unchanged, one copy in use, the new window's files (src/app, appearance.py) and the
+    Discord plugin are the archive's, the bundled Python is kept and the launchers fall back to it, no download left in
+    the data folder;
  3. the extracted archive deleted: the Corsu menu entry opens the window, Firefox Corsu starts Firefox;
  4. appearance settings saved, then a repair and a later update (the same files saying 99.0.0): they stay, and the
     published version's copy is removed by that later update;
@@ -209,6 +211,13 @@ class Window:
             self.process.wait(timeout=30)
 
 
+def save_appearance(copy, environment, settings):
+    """Save appearance settings with the copy's own appearance.py, as its window does."""
+    subprocess.run([sys.executable, '-c', 'import sys, json; sys.path.insert(0, sys.argv[1]); import appearance; '
+                    'appearance.save(json.loads(sys.argv[2]))', str(copy / 'src'), json.dumps(settings)],
+                   env=environment, check=True)
+
+
 def check_launchers_work(home, environment):
     """Firefox Corsu starts Firefox; the Corsu menu entry opens the window, keyed, and a second launch reuses it."""
     firefox = subprocess.run([str(home / '.local/bin/firefox-corsu'), '--version'], env=environment, capture_output=True,
@@ -284,6 +293,14 @@ def main():
     check('firefox' in state(home).get('disabled', []) and 'VLC_DATA_PATH=' in entry(home),
           'Firefox switched off, VLC in Corsican with the complement')
     check_personal_files(files, f'{arguments.version} installed')
+    # Appearance settings chosen in the published version (0.25 and later have them) must survive the update.
+    saved = data_directory(home) / 'appearance/settings.json'
+    chosen = None
+    if (old_copy / 'src/appearance.py').is_file():
+        save_appearance(old_copy, environment, {'format': 1, 'theme': 'light', 'palette': 'mare', 'accent': '#aa3311',
+                                                'density': 'compact', 'background': 'none', 'image': None})
+        chosen = saved.read_bytes()
+        check(json.loads(chosen)['accent'] == '#aa3311', f'appearance settings saved by {arguments.version}')
 
     step(f'2. Update {arguments.version} → {new_version} by the installed copy\'s update.py')
     run(old_copy, {**environment, 'CORSU_DOWNLOAD_BASE': archives.as_uri()}, 'src/update.py', '--install')
@@ -302,6 +319,8 @@ def main():
     check(not list((data_directory(home) / 'tmp').glob('update-*')), 'no download left in the data folder')
     check_runtime(home)
     check_personal_files(files, 'after the update')
+    if chosen is not None:
+        check(saved.read_bytes() == chosen, f'the appearance settings chosen in {arguments.version} are kept')
 
     step('3. The extracted archive deleted: the launchers still work')
     shutil.rmtree(work / 'new')
@@ -310,10 +329,7 @@ def main():
     step('4. Appearance settings kept by a repair and a later update')
     settings = {'format': 1, 'theme': 'dark', 'palette': 'mare', 'accent': '#336699', 'density': 'compact',
                 'background': 'none', 'image': None, 'dim': 0.4, 'blur': 6}
-    saved = data_directory(home) / 'appearance/settings.json'
-    subprocess.run([sys.executable, '-c', 'import sys, json; sys.path.insert(0, sys.argv[1]); import appearance; '
-                    'appearance.save(json.loads(sys.argv[2]))', str(copy / 'src'), json.dumps(settings)],
-                   env=environment, check=True)
+    save_appearance(copy, environment, settings)
     kept = saved.read_bytes()
     check(json.loads(kept)['palette'] == 'mare', 'appearance settings saved')
     count = len(state(home)['files'])

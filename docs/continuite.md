@@ -10,8 +10,8 @@ Les sections datées après « État actuel » sont l'historique : ce qui y est 
   verte, installation en une ligne comprise). `main` = `ef6c9b6` (documentation seulement : README, pages d'état et
   captures de la 0.27.0 ; CI 39250281799 verte). Installation personnelle du mainteneur : 0.27.0.
 - **`next-0.28`** (depuis `ef6c9b6` ; non publiée, la publication attend l'accord du mainteneur). CI seulement par
-  `gh workflow run ci.yml --ref next-0.28`. `src/release.json` dit encore 0.27.0 : à passer en 0.28.0 avant la CI
-  de la candidate, pour qu'elle vérifie la mise à jour depuis la 0.27.0 publiée.
+  `gh workflow run ci.yml --ref next-0.28`. `src/release.json` dit 0.28.0 : la CI vérifie la mise à jour et la
+  migration depuis la 0.27.0 publiée.
   - `fc5e88d` : menu contextuel du texte sélectionné dans Firefox (`contextMenuSearch`, « Recherche %1$S pour
     « %2$S » » → « Circà « %2 » cù %1 », proposition IA bâtie sur « Circà cù %1 » déjà présent) ; CI 39633324591
     verte.
