@@ -29,6 +29,16 @@ affichés, grisés, avec la raison ; avec un Hyprland trop ancien, ils sont « b
   (touches, fenêtres, entrée), les portails de la session Hyprland et l'apparence Corsu pour Noctalia (palette
   maquis et mer). On peut prendre la langue sans le profil, ou le profil sans la langue.
 
+## Ce qui est coché d'avance, et pourquoi
+
+- **La langue** n'est cochée d'avance que si Corsu trouve un Hyprland compatible **et** Noctalia 5 : comme pour les
+  autres logiciels, Corsu traduit ce qui est déjà installé, et n'installe aucun bureau. Sinon elle reste proposée,
+  décochée, ou grisée avec la raison.
+- **Le profil** n'est jamais coché d'avance : c'est un choix de bureau, pas une traduction.
+- **Le profil cache Noctalia du menu de Plasma** (une copie de son entrée avec `OnlyShowIn=Hyprland`) : lancé depuis
+  Plasma, Noctalia ajouterait un second panneau par-dessus celui de Plasma. C'est le seul changement visible dans
+  Plasma, dit aussi dans la description du profil ; il disparaît quand le profil est désactivé.
+
 ## Fichiers touchés
 
 | Fichier | Partie | Comment |

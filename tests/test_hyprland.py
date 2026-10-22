@@ -187,6 +187,9 @@ class Choices(Home):
     def test_profile_is_never_ticked_by_default(self):
         self.assertTrue(apps.opt_in('hyprland-profile'))
         self.assertFalse(apps.opt_in('hyprland'))
+        self.detect_again(Hyprland='Hyprland 0.56.2', uwsm='uwsm 0.27.1')  # no Noctalia
+        self.assertTrue(apps.opt_in('hyprland'))
+        self.detect_again(**COMPATIBLE)
         answers = iter([''])
         with patch.object(corsu, 'STATE', self.home / 'none.json'), patch('builtins.input', lambda prompt: next(answers)):
             chosen = installer.choose(['firefox', 'hyprland', 'hyprland-profile'])
@@ -322,8 +325,36 @@ class Language(Home):
         corsu.install(['hyprland'])
         self.assertIn('export LANGUAGE=co:it', env.read_text())
         self.assertIn('block changed since, left as it is', self.output.getvalue())
+        # Not reported as switched: the session part is blocked with why, Noctalia's is on.
+        result = self.state()['results']['hyprland']
+        self.assertEqual(result['activation'], 'partial')
+        self.assertEqual(result['instances'][0]['activation'], 'blocked')
+        self.assertIn('block changed since', result['instances'][0]['reason'])
+        self.assertIn('Put the block back', result['instances'][0]['action'])
+        key = f'{env}#"language"'
         corsu.disable(['hyprland'])
         self.assertIn('export LANGUAGE=co:it', env.read_text())
+        self.assertIn(f'Left alone because you changed it: {key}', self.output.getvalue())
+        # The record stays: Corsu's old block is never taken for what was there before Corsu.
+        record = self.state()['files'][key]
+        self.assertIsNone(record['setting']['original'])
+        corsu.enable(['hyprland'])
+        self.assertIsNone(self.state()['files'][key]['setting']['original'])
+        self.assertIn('export LANGUAGE=co:it', env.read_text())
+        corsu.uninstall()
+        self.assertIn('export LANGUAGE=co:it', env.read_text())
+        self.assertIn(key, self.state()['files'])
+
+    def test_language_tags_only_and_quoted(self):
+        (self.config / 'plasma-localerc').write_text('[Translations]\nLANGUAGE=co:fr:$(touch x);rm:de DE:it\n')
+        self.assertEqual(hyprland.language_value(), 'co:fr:it:en')
+        with patch.object(hyprland, 'person_languages', lambda: ['fr', 'pt_BR.UTF-8@euro']):
+            self.assertIn("export LANGUAGE=co:fr:pt_BR.UTF-8@euro:en\n", hyprland.language_lines())
+        with patch.object(apps, 'session_languages', lambda: ['x;y', 'fr\nexport A=1']):
+            (self.config / 'plasma-localerc').unlink()
+            lines = hyprland.language_lines()
+        self.assertEqual(lines.count('\n'), 2)
+        self.assertIn('export LANGUAGE=co:fr:en\n', lines)
 
 
 class Profile(Home):
@@ -655,8 +686,46 @@ class Settings(unittest.TestCase):
         self.assertEqual(settings._toml_put(inserted, ['general', 'dark'], None), text)
         self.assertIsNone(settings._toml_get(text, ['bar', 'language']))
         self.assertEqual(settings._toml_put('', ['', 'x'], '1'), 'x = 1\n')
+        self.assertEqual(settings._toml_get('[a]\nk = "x # y" # a note\n', ['a', 'k']), '"x # y"')
+        self.assertEqual(settings._toml_get("[a]\nk = 'it' #\n", ['a', 'k']), "'it'")
+        self.assertEqual(settings._toml_get('[a]\nk = "say \\"#\\"" # c\n', ['a', 'k']), '"say \\"#\\""')
         listed = '[bar]\nend = ["a",\n       "b]"]\nheight = 3\n'
         self.assertEqual(settings._toml_put(listed, ['bar', 'end'], None), '[bar]\nheight = 3\n')
+
+
+class InterruptedWrite(Home):
+    """corsu.Installer.write: the part is recorded before the file changes, the new digest only once it has."""
+
+    def test_interrupted_replace_stays_reversible(self):
+        path = self.config / 'hypr/corsu/x.lua'
+        path.parent.mkdir(parents=True)
+        path.write_text('-- before Corsu\n')
+        installer_ = corsu.Installer()
+        installer_.write(path, '-- one\n', toggle=True, component='hyprland-profile')
+        first = corsu.load_state()['files'][str(path)]
+        self.assertEqual((first['component'], first['installed_sha256']), ('hyprland-profile', corsu.digest(b'-- one\n')))
+        self.assertNotIn('pending_sha256', first)
+        with patch.object(Path, 'replace', side_effect=OSError('disk full')), self.assertRaises(OSError):
+            installer_.write(path, '-- two\n', toggle=True, component='hyprland-profile')
+        record = corsu.load_state()['files'][str(path)]
+        self.assertEqual(record['installed_sha256'], corsu.digest(b'-- one\n'))
+        self.assertEqual(record['pending_sha256'], corsu.digest(b'-- two\n'))
+        self.assertTrue(corsu.restore(path, record))
+        self.assertEqual(path.read_text(), '-- before Corsu\n')
+
+    def test_component_recorded_before_the_file_is_written(self):
+        seen = {}
+        real = corsu.save_state
+
+        def save(state):
+            record = state['files'].get(str(self.config / 'new.lua'))
+            if record and not (self.config / 'new.lua').exists():
+                seen['component'] = record.get('component')
+            real(state)
+
+        with patch.object(corsu, 'save_state', save):
+            corsu.Installer().write(self.config / 'new.lua', 'x', component='hyprland')
+        self.assertEqual(seen['component'], 'hyprland')
 
 
 class Templates(unittest.TestCase):

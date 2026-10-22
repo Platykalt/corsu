@@ -339,6 +339,9 @@ def portals_conf():
     return path.read_text(encoding='utf-8') if path else PORTALS
 
 
+LANGUAGE_TAG = re.compile(r'[A-Za-z0-9_@.-]+')
+
+
 def person_languages():
     """The person's languages, without Corsican: Plasma's choice when there is one (read only; Corsu run from a
     terminal or a TTY may not see the desktop's LANG), else this session's."""
@@ -348,7 +351,9 @@ def person_languages():
     except ValueError:
         value = None
     languages = [item for item in (value or '').split(':') if item and not item.startswith('co')]
-    return languages or apps.session_languages()
+    # Only language tags: the value goes into a file the session's shell reads.
+    languages = [item for item in languages or apps.session_languages() if LANGUAGE_TAG.fullmatch(item)]
+    return languages or ['fr']
 
 
 def language_value():
@@ -364,7 +369,7 @@ def language_lines(assets=None):
     value = language_value()
     fallback = value.split(':', 1)[1].replace(':', ', ')
     lines = ('# Corsican first in the Hyprland session, then ' + fallback + ' for texts not translated yet.\n'
-             f'export LANGUAGE={value}\n')
+             f'export LANGUAGE={shlex.quote(value)}\n')
     if assets:
         lines += ('# Noctalia\'s assets with Corsu\'s Corsican catalogue added (rebuilt by Corsu at each update).\n'
                   f'export NOCTALIA_ASSETS_DIR={shlex.quote(str(assets))}\n')
@@ -521,25 +526,24 @@ def own_file(installer, component, path, data, notes, force=False):
         if record is None:
             notes.append(corsu.t(f'yours, left as it is: {path}', f'à vous, laissé tel quel : {path}'))
             return False
-        if corsu.digest(current) != record['installed_sha256']:
+        if not corsu.owned(current, record):
             if not force:
                 notes.append(corsu.t(f'changed since, left as it is: {path}', f'modifié depuis, laissé tel quel : {path}'))
                 return False
             kept = corsu.DATA / 'backups/hyprland-reset' / time.strftime('%Y%m%d-%H%M%S') / path.name
             kept.parent.mkdir(parents=True, exist_ok=True)
             shutil.copy2(path, kept)
-            record['installed_sha256'] = corsu.digest(current)
+            record['installed_sha256'], record['pending_sha256'] = corsu.digest(current), None
             notes.append(corsu.t(f'your version kept in {kept}', f'votre version gardée dans {kept}'))
         elif current == data and record.get('component') == component and record.get('toggle'):
             return True
-    installer.write(path, data, toggle=True)
-    installer.state['files'][key]['component'] = component
-    corsu.save_state(installer.state)
+    installer.write(path, data, toggle=True, component=component)
     return True
 
 
 def own_block(installer, component, path, name, value, notes):
-    """One marked block in a file the person shares with Corsu (uwsm's env-hyprland)."""
+    """One marked block in a file the person shares with Corsu (uwsm's env-hyprland). False, with a note, when the
+    person changed Corsu's block since: the caller reports the part as not refreshed."""
     key = f'{path}#{json.dumps(name)}'
     record = installer.state['files'].get(key)
     if record and Path(path).exists():
@@ -597,12 +601,27 @@ class Hyprland(apps.App):
             return corsu.t('left alone: ', 'laissé tel quel : ') + installation.reason
         return self.plans[self.key_of(installation)]()
 
+    def blocked(self, installation, notes):
+        """Why this installation is not (re)applied: the last note, with the others as the action; printed."""
+        installation.action = '; '.join(notes[:-1]) or corsu.t(
+            'Put the block back as Corsu wrote it, or delete it, then switch on again',
+            'Remettez le bloc comme Corsu l\'avait écrit, ou supprimez-le, puis réactivez')
+        return notes[-1]
+
     def leave(self, installer, installation):
         """Left alone now (Hyprland gone or too old): what an earlier run wrote stays until switched off."""
 
 
 class Language(Hyprland):
     id, name = LANGUAGE, 'Hyprland'
+
+    @property
+    def opt_in(self):
+        """Ticked in advance only when a compatible Hyprland and Noctalia are both here: Corsu translates what is
+        installed and installs no desktop."""
+        state = verdict(detect())
+        return not (state['hyprland'] == 'ok' and state['noctalia'] == 'ok')
+
     # The Corsican texts are AI proposals (AGENTS.md, rule 3).
     description = {
         'co': ('Hyprland è Noctalia', "Noctalia in corsu è u corsu prima per i prugrammi di a sessione Hyprland. Nunda ùn cambia per Plasma."),
@@ -653,7 +672,8 @@ class Language(Hyprland):
         if self.key_of(installation) == 'session':
             # Noctalia finds "co" only through the assets folder: built before the variable names it.
             assets = build_assets() if self.noctalia_usable() else None
-            own_block(installer, self.id, where['env'], 'language', language_lines(assets), notes)
+            if not own_block(installer, self.id, where['env'], 'language', language_lines(assets), notes):
+                return self.blocked(installation, notes)
         else:
             if build_assets() is None:
                 notes.append(corsu.t(f'Noctalia\'s assets not found in {NOCTALIA_ASSETS}: it stays in English',
@@ -675,9 +695,9 @@ class Profile(Hyprland):
         return corsu.t('Corsu desktop profile for Hyprland', 'Profil de bureau Corsu pour Hyprland')
 
     description = {
-        'co': ('Prufilu di scagnu Corsu per Hyprland', "Facultativu. Una cunfigurazione Hyprland pronta (tasti, finestre, portali) è l'aspettu di Corsu per Noctalia. U vostru user.lua ùn hè mai toccu."),
-        'fr': ('Profil de bureau Corsu pour Hyprland', 'Facultatif. Une configuration Hyprland prête (touches, fenêtres, portails) et l\'apparence Corsu pour Noctalia. Votre user.lua n\'est jamais touché.'),
-        'en': ('Corsu desktop profile for Hyprland', 'Optional. A ready Hyprland configuration (keys, windows, portals) and Corsu\'s look for Noctalia. Your user.lua is never touched.')}
+        'co': ('Prufilu di scagnu Corsu per Hyprland', "Facultativu. Una cunfigurazione Hyprland pronta (tasti, finestre, portali) è l'aspettu di Corsu per Noctalia. U vostru user.lua ùn hè mai toccu. Noctalia ùn s'affaccia più in u listinu di Plasma, per ùn lancià un secondu pannellu sopra à Plasma."),
+        'fr': ('Profil de bureau Corsu pour Hyprland', 'Facultatif. Une configuration Hyprland prête (touches, fenêtres, portails) et l\'apparence Corsu pour Noctalia. Votre user.lua n\'est jamais touché. Noctalia n\'apparaît plus dans le menu de Plasma, pour ne pas y lancer un second panneau.'),
+        'en': ('Corsu desktop profile for Hyprland', 'Optional. A ready Hyprland configuration (keys, windows, portals) and Corsu\'s look for Noctalia. Your user.lua is never touched. Noctalia no longer shows in Plasma\'s menu, so a second panel is not started over Plasma.')}
     kinds = {'config': ('Hyprland configuration', 'configuration Hyprland'), 'look': ('Noctalia look', 'apparence de Noctalia')}
     plans = {
         'config': lambda: corsu.t(
@@ -732,8 +752,8 @@ class Profile(Hyprland):
                 own_file(installer, self.id, corsu.HOME / '.local/share/applications' / NOCTALIA_ENTRY,
                          helper.hyprland_only_entry(entry.read_text(encoding='utf-8')), notes)
             lines = env_profile_lines()
-            if lines:
-                own_block(installer, self.id, where['env'], 'profile', lines, notes)
+            if lines and not own_block(installer, self.id, where['env'], 'profile', lines, notes):
+                return self.blocked(installation, notes)
         else:
             palettes, profile, qt6ct = look()
             for name, data in palettes.items():

@@ -29,6 +29,16 @@ with the reason; with a Hyprland too old they are "blocked" with the version nee
   windows, input), the portals of the Hyprland session and Corsu's look for Noctalia (maquis and sea palette). You can
   take the language without the profile, or the profile without the language.
 
+## What is ticked in advance, and why
+
+- **The language** is ticked in advance only when Corsu finds a compatible Hyprland **and** Noctalia 5: as for other
+  programs, Corsu translates what is already installed and installs no desktop. Otherwise it stays offered, unticked,
+  or greyed out with the reason.
+- **The profile** is never ticked in advance: it is a choice of desktop, not a translation.
+- **The profile hides Noctalia from Plasma's menu** (a copy of its entry with `OnlyShowIn=Hyprland`): started from
+  Plasma, Noctalia would add a second panel over Plasma's. This is the only visible change in Plasma, also said in the
+  profile's description; it goes when the profile is switched off.
+
 ## Files changed
 
 | File | Part | How |

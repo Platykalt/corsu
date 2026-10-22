@@ -175,7 +175,12 @@ def revert(record):
         get, put = FILE_KINDS[setting['kind']]
         try:
             text, newline, bom = read_body(path)
-            if get(text, setting['key']) == setting['installed']:
+            current = get(text, setting['key'])
+            if setting['kind'] == 'block' and current is not None and current != setting['installed']:
+                # Corsu's block, changed by the person since: left as it is, and the record kept, so a later run
+                # never takes it for what was there before Corsu.
+                return False
+            if current == setting['installed']:
                 changed = put(text, setting['key'], setting['original'])
                 if setting.get('created') and not changed.strip():
                     # A file Corsu created for its own block, empty again: it goes, as it was before.
@@ -475,7 +480,25 @@ def _toml_get(text, spec):
     lines, found, _ = _toml_lines(text, spec)
     if found is None:
         return None
-    return lines[found].split('=', 1)[1].strip()
+    return _toml_value(lines[found].split('=', 1)[1])
+
+
+def _toml_value(fragment):
+    """A value as written, without a trailing `# comment` (a # inside quotes stays)."""
+    quote, escaped = None, False
+    for index, character in enumerate(fragment):
+        if quote:
+            if escaped:
+                escaped = False
+            elif character == '\\' and quote == '"':
+                escaped = True
+            elif character == quote:
+                quote = None
+        elif character in '"\'':
+            quote = character
+        elif character == '#':
+            return fragment[:index].strip()
+    return fragment.strip()
 
 
 def _toml_put(text, spec, value):

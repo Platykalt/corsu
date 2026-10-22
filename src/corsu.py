@@ -165,12 +165,15 @@ class Installer:
         DATA.mkdir(parents=True, exist_ok=True)
         self.state = load_state()
 
-    def write(self, path, data, mode=None, toggle=False):
+    def write(self, path, data, mode=None, toggle=False, component=None):
+        """Write a file Corsu manages. `component`: the switchable part it belongs to, recorded before the file
+        changes. The digest of the new content is recorded as pending until the file is replaced, then as installed:
+        an interruption in between leaves a record that still recognises either content as Corsu's."""
         path = Path(path)
         data = data.encode() if isinstance(data, str) else data
         key = str(path)
         record = self.state['files'].get(key)
-        if record and path.exists() and digest(path.read_bytes()) != record['installed_sha256']:
+        if record and path.exists() and not owned(path.read_bytes(), record):
             raise RuntimeError(f'File changed since installation; preserving it: {path}')
         if record is None:
             record = {'backup': None, 'mode': None}
@@ -183,13 +186,18 @@ class Installer:
         path.parent.mkdir(parents=True, exist_ok=True)
         # Toggles are the switches that activate Corsican; `disable` reverts only those.
         record['toggle'] = record.get('toggle', False) or toggle
-        record['installed_sha256'] = digest(data)
+        if component:
+            record['component'] = component
+        record.setdefault('installed_sha256', None)
+        record['pending_sha256'] = digest(data)
         # Record backup before mutation, so an interrupted install remains reversible.
         save_state(self.state)
         temp = path.with_name(path.name + '.corsu-tmp')
         temp.write_bytes(data)
         temp.chmod(mode if mode is not None else (record['mode'] or 0o644))
         temp.replace(path)
+        record['installed_sha256'] = record.pop('pending_sha256')
+        save_state(self.state)
 
     def json_settings(self, path, changes, toggle=False):
         path = Path(path)
@@ -1671,12 +1679,18 @@ def component_of(name, record):
     return 'desktop'
 
 
+def owned(data, record):
+    """Whether a file's content is still what Corsu wrote: the installed digest, or the one being written when a run
+    stopped between recording and replacing the file."""
+    return digest(data) in (record.get('installed_sha256'), record.get('pending_sha256'))
+
+
 def restore(path, record):
     """Return one managed file to its pre-installation content. False when the user changed it."""
     if not path.exists() and not path.parent.exists():
         # The program removed that folder itself (Discord deletes old versions when it updates): nothing to put back.
         return True
-    if path.exists() and digest(path.read_bytes()) != record['installed_sha256']:
+    if path.exists() and not owned(path.read_bytes(), record):
         return False
     if record.get('backup'):
         shutil.copy2(record['backup'], path)
@@ -1880,7 +1894,7 @@ def uninstall():
                         node.pop(parts[-1], None)
             path.write_text(json.dumps(document, indent=4) + '\n', encoding='utf-8')
             continue
-        if path.exists() and digest(path.read_bytes()) != record['installed_sha256']:
+        if path.exists() and not owned(path.read_bytes(), record):
             remaining[name] = record
             copy = record.get('backup')
             print(t(f'Left alone because you changed it: {name}' + (f' (original copy: {copy})' if copy else ''),

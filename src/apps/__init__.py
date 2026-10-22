@@ -250,9 +250,9 @@ def install(installer, app_id):
                 reason, activation = str(error), 'failed'
             except (OSError, ValueError, ImportError) as error:
                 reason, activation = corsu.t(f'could not write ({error})', f'écriture impossible ({error})'), 'failed'
+            # What enable() noted for the person (a file of theirs left as it is) stays next to the status.
+            action = installation.action
             if reason is None:
-                # What enable() noted for the person (a file of theirs left as it is) stays next to the status.
-                action = installation.action
                 running = app.restart_processes and _running(app.restart_processes)
                 activation = 'restart_required' if running else 'active'
                 if running:
