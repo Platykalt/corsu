@@ -11,6 +11,7 @@ from contextlib import ExitStack, redirect_stdout
 from pathlib import Path
 import re
 import shutil
+import sys
 import tempfile
 import unittest
 from unittest.mock import patch
@@ -34,6 +35,8 @@ def runner(answers):
 
 
 REAL_WHICH = shutil.which
+# Hyprland runs on Linux only: the writing paths are checked there (other systems only check it stays hidden).
+LINUX = sys.platform.startswith('linux')
 
 
 class Home(unittest.TestCase):
@@ -163,6 +166,7 @@ class Detection(Home):
         self.assertIn('uwsm is not installed', session.reason)
         self.assertIn('only knows Noctalia 5', noctalia.reason)
 
+    @unittest.skipUnless(LINUX, 'shell scripts stand for the programs')
     def test_real_commands_on_path(self):
         """The default runner, with tiny scripts standing for the programs."""
         folder = Path(self.directory.name) / 'bin'
@@ -227,6 +231,7 @@ class Choices(Home):
         self.assertIn('00-corsu-language.toml', plan)
 
 
+@unittest.skipUnless(LINUX, 'Hyprland is Linux only')
 class Language(Home):
     def test_language_only_writes_no_profile_file(self):
         corsu.install(['hyprland'])
@@ -362,6 +367,7 @@ class Language(Home):
         self.assertIn('export LANGUAGE=co:fr:en\n', lines)
 
 
+@unittest.skipUnless(LINUX, 'Hyprland is Linux only')
 class Profile(Home):
     def test_profile_only_writes_no_translation(self):
         corsu.install(['hyprland-profile'])
@@ -531,6 +537,7 @@ class Profile(Home):
         self.assertFalse((self.config / 'uwsm/env-hyprland').exists())
 
 
+@unittest.skipUnless(LINUX, 'Hyprland is Linux only')
 class RealTemplates(Home):
     """The same round trip with the real src/hyprland/ (branch hyprland) instead of the stand-ins."""
 

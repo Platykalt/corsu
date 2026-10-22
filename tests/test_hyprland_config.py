@@ -7,7 +7,10 @@ import re
 import shutil
 import subprocess
 import tempfile
-import tomllib
+try:
+    import tomllib
+except ModuleNotFoundError:  # Python 3.10
+    tomllib = None
 import unittest
 
 ROOT = Path(__file__).resolve().parent.parent
@@ -196,6 +199,7 @@ class BindsAndHelp(unittest.TestCase):
             if path.name != 'binds.lua':
                 self.assertNotIn('hl.bind(', path.read_text(encoding='utf-8'), path)
 
+    @unittest.skipUnless(tomllib, 'tomllib needs Python 3.11')
     def test_key_help_command_opens_the_noctalia_provider(self):
         profile = tomllib.loads((NOCTALIA / '00-corsu-profile.toml').read_text(encoding='utf-8'))
         entry = profile['shell']['launcher']['dmenu']['entry']['corsu-keys']
@@ -251,6 +255,7 @@ class NoMachineValues(unittest.TestCase):
                 self.assertIsNone(re.search(pattern, text), f'{path.name}: {pattern}')
 
 
+@unittest.skipUnless(tomllib, 'tomllib needs Python 3.11')
 class NoctaliaProfile(unittest.TestCase):
     @classmethod
     def setUpClass(cls):
