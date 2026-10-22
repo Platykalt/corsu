@@ -16,10 +16,26 @@ Les sections datées après « État actuel » sont l'historique : ce qui y est 
     « %2$S » » → « Circà « %2 » cù %1 », proposition IA bâtie sur « Circà cù %1 » déjà présent) ; CI 39633324591
     verte.
   - `ee3faa4` : essai de bout en bout `tests/e2e/check_firefox_context_menu.py` (vrai menu dans Firefox, moteur par
-    défaut et autre moteur, troncature, touche d'accès) ; pas encore passé en CI.
-  - Prochaines pistes : autres restes français vus dans `browser.properties` (« Temps de connexion dépassé »,
-    `unsignedAddonsDisabled`, `geolocationLastAccessIndicatorText`, `crashedplugins`) ; audit complet des
-    `.properties` proposé, non commencé.
+    défaut et autre moteur, troncature, touche d'accès).
+  - `35ced37`, `ae5bcdb` : version 0.28.0 ; la CI met à jour depuis la 0.27.0 publiée (`check_update.py` sur les trois
+    systèmes, `check_update_apps.py` et `check_migration.py --from 0.27.0` sous Linux) ; `check_migration.py`
+    enregistre désormais des réglages d'apparence avec la copie publiée avant la mise à jour et vérifie qu'ils restent ;
+    provenance de `contextMenuSearch` dans `lexicon/corrections.tsv`.
+  - **CI 39818931689 (`ae5bcdb`, 22 octobre 2026)** : tests unitaires et archives verts ; bout en bout vert sous
+    Ubuntu et Windows. Sous Ubuntu : menu contextuel en corse dans un vrai Firefox ; mise à jour 0.27.0 → 0.28.0
+    (`@result … "from": "0.27.0", "to": "0.28.0"`) ; migration 0.27.0 → 0.28.0 : Firefox reste désactivé, VLC et son
+    complément restent actifs, réglages d'apparence choisis en 0.27.0 inchangés, fichiers personnels intacts, lanceurs
+    sur la nouvelle copie. Sous Windows : menu contextuel et mise à jour depuis la 0.27.0 verts. **Échec macOS** :
+    traduction juste (« Circà « Corsica » cù Google »), mais l'essai exigeait une touche d'accès soulignée, que les
+    menus de macOS n'affichent pas ; l'essai attend désormais un libellé sans soulignement sous macOS. Les étapes
+    suivantes de macOS (dont la mise à jour depuis la 0.27.0) n'ont pas tourné dans cette CI.
+  - Limites : migration complète vérifiée sous Linux seulement ; même Python embarqué en 0.27.0 et 0.28.0 (le
+    remplacement du Python n'est pas exercé) ; aucun essai ne lit le nouveau libellé dans une installation mise à jour
+    (la copie de Firefox est reconstruite au lancement, son nom dépend de l'empreinte du lexique).
+  - **Chantier suivant, textes Firefox restés français** (audit complet des `.properties` non commencé), par
+    priorité : 1. « Temps de connexion dépassé » (page d'erreur, très visible) ; 2. `unsignedAddonsDisabled`
+    (installation de modules) ; 3. `geolocationLastAccessIndicatorText` (barre d'adresse, autorisations) ;
+    4. `crashedplugins` (rare).
 - **PHP** (avis du 21 octobre 2026, CVE-2026-109618 et CVE-2026-109619) : Corsu ne dépend pas de PHP (aucun fichier,
   appel, paquet, étape de CI ni image de conteneur qui l'utilise ; les adresses `.php` citées sont des sites
   distants). Aucune mise à jour PHP du projet n'est nécessaire.

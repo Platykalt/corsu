@@ -200,8 +200,10 @@ def main(executable, screenshot=None):
                     failures.append(label)
                 else:
                     expect(label, item['label'], f'Circà « {shown(selected, state["ellipsis"])} » cù {engine}')
-                    # Drawn as the label, with the access key underlined inside it (no " (R)" added).
-                    if item['shown'] != item['label'] or (item['underlined'] or '').lower() != accesskey.lower():
+                    # Drawn as the label, with the access key underlined inside it (no " (R)" added). macOS menus
+                    # have no access keys: the label is drawn plain there.
+                    underlined = '' if sys.platform == 'darwin' else accesskey.lower()
+                    if item['shown'] != item['label'] or (item['underlined'] or '').lower() != underlined:
                         print(f'FAIL: {label}: drawn as {item["html"]!r}')
                         failures.append(label + ' (drawn label)')
                 if screenshot and engine == state['engine'] and index == 8:
