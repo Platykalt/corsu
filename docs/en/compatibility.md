@@ -16,6 +16,7 @@
 | KDE Plasma desktop and KDE programs | Not supported | Not supported | Used daily |
 | Minecraft: Java Edition 1.6.1 → 26.3, 87 versions (resource pack) | Checked without running the game | Checked without running the game | Checked without running the game |
 | GTK programs and terminal commands | | | Expected |
+| Hyprland session and Noctalia, optional ([details](hyprland.md)) | | | Development branch, not in 0.27.0 |
 
 Programs that already have their own Corsican translation (VLC, Audacity, Poedit, 7-Zip…), and the systems for
 each, are in [Translation status](translation-status.md).
@@ -23,8 +24,9 @@ each, are in [Translation status](translation-status.md).
 **Tested** means the CI installs Corsu on that system before every release, starts the program and reads its text
 in Corsican. **Partly tested** means the CI checks that Corsu patches Discord and restores it, but does not open
 Discord itself. **Used daily** means a Corsican speaker uses it every day. **Expected** means the code is there but
-nobody has checked it on that system yet: please report how it goes. **Not supported** means Corsu does not do it,
-usually because the system prevents it. Safari is part of macOS: Apple protects it and only offers the
+nobody has checked it on that system yet: please report how it goes. **Development branch** means the code is on a
+separate branch, in no published release, and was tried only on the maintainer's computer. **Not supported** means
+Corsu does not do it, usually because the system prevents it. Safari is part of macOS: Apple protects it and only offers the
 languages of macOS, which does not include Corsican.
 
 KDE Plasma is a Linux desktop. Some KDE programs (Kate, Krita, Okular…) also run on Windows and macOS, but Corsu
