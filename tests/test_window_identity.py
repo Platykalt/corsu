@@ -118,6 +118,8 @@ class PywebviewTests(unittest.TestCase):
                 handler()
         self.assertEqual(calls[-1], ('icon',))
         self.assertEqual(window.APP_USER_MODEL_ID, 'Platykalt.Corsu')
+        # No PNG for pywebview's Windows backend: System.Drawing.Icon throws on it and ends Corsu.
+        self.assertEqual(calls[2], ('start', {}))
 
     def test_macos_sets_dock_identity_first(self):
         calls = []
@@ -127,6 +129,15 @@ class PywebviewTests(unittest.TestCase):
             window.with_pywebview('http://127.0.0.1:1/')
         self.assertEqual([call[0] for call in calls], ['identity', 'create', 'start'])
         self.assertEqual(created.events.shown.handlers, [])
+        self.assertEqual(calls[2], ('start', {}))
+
+    def test_linux_gives_pywebview_the_png_icon(self):
+        calls = []
+        module, _ = self.fake_webview(calls)
+        with patch.dict(sys.modules, {'webview': module}), patch.object(corsu, 'PLATFORM', 'linux'), \
+                patch.object(window, 'linux_identity', lambda: None):
+            window.with_pywebview('http://127.0.0.1:1/')
+        self.assertEqual(calls[-1], ('start', {'icon': str(window.ICONS[-1])}))
 
     def test_a_failing_identity_does_not_keep_the_window_closed(self):
         calls = []
