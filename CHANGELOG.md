@@ -3,10 +3,15 @@
 ## 0.28.0 (in development on next-0.28, not published)
 
 Started from 0.27.0 (`f51b1ac`, tag `v0.27.0`). Changes inherited from 0.27 are listed under 0.27.0 below.
+`src/release.json` says 0.28.0 so that CI checks the update and the migration from the published 0.27.0
+(`check_update.py`, `check_update_apps.py`, and `check_migration.py --from 0.27.0` beside `--from 0.24.0`).
 
 - **Firefox**: the context menu on selected text now reads "Circà « … » cù Google" instead of the French
   "Recherche Google pour « … »" (`browser.properties`, key `contextMenuSearch`, which had no lexicon row). AI
   proposal built on wording Corsu already uses beside it ("Circà cù %1"); regression test in `tests/test_engine.py`.
+  End-to-end check `tests/e2e/check_firefox_context_menu.py` (run by `e2e.py firefox`): the real context menu on
+  selected text, with the default engine and another one, special characters, Firefox's truncation and the access
+  key.
 
 ## 0.27.0 (2026-10-19)
 
