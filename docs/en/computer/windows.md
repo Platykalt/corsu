@@ -31,8 +31,8 @@ Corsican translation (VLC, 7-Zip, Notepad++, Audacity, PDFsam…) and puts Minec
 
 ## Corsu 0.27.0: the window closes at start
 
-With Corsu 0.27.0, on some Windows computers, Corsu's window closes as soon as it opens (when installing as well as
-from the Start menu): Corsu gave the window an icon in a format Windows refuses there, and the program stopped. The
+With Corsu 0.27.0 (and already 0.26.0) on Windows, Corsu's window closes as soon as it opens (when installing as
+well as from the Start menu): Corsu gave the window an icon in a format Windows refuses, and the program stopped. The
 fix comes with the next version. Meanwhile, Corsu works in the browser with the `--browser` option: the same page
 opens in a tab instead of its window.
 

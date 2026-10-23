@@ -31,9 +31,9 @@ corse (VLC, 7-Zip, Notepad++, Audacity, PDFsam…) et met en corse Minecraft: Ja
 
 ## Corsu 0.27.0 : la fenêtre se ferme au démarrage
 
-Avec Corsu 0.27.0, sur certains Windows, la fenêtre de Corsu se ferme aussitôt ouverte (à l'installation comme depuis
-le menu Démarrer) : Corsu donnait à la fenêtre une icône dans un format que Windows refuse ici, et le programme
-s'arrêtait. La correction arrivera avec la prochaine version. En attendant, Corsu marche dans le navigateur avec
+Avec Corsu 0.27.0 (et déjà 0.26.0) sous Windows, la fenêtre de Corsu se ferme aussitôt ouverte (à l'installation
+comme depuis le menu Démarrer) : Corsu donnait à la fenêtre une icône dans un format que Windows refuse, et le
+programme s'arrêtait. La correction arrivera avec la prochaine version. En attendant, Corsu marche dans le navigateur avec
 l'option `--browser` : la même page s'ouvre dans un onglet au lieu de sa fenêtre.
 
 Corsu n'est pas encore installé (la fenêtre s'est fermée pendant l'installation) : installez-le dans le terminal,
