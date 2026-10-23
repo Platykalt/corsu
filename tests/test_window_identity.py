@@ -129,7 +129,8 @@ class PywebviewTests(unittest.TestCase):
             window.with_pywebview('http://127.0.0.1:1/')
         self.assertEqual([call[0] for call in calls], ['identity', 'create', 'start'])
         self.assertEqual(created.events.shown.handlers, [])
-        self.assertEqual(calls[2], ('start', {}))
+        # Unchanged since 0.27.0: Cocoa puts the PNG on the Dock.
+        self.assertEqual(calls[2], ('start', {'icon': str(window.ICONS[-1])}))
 
     def test_linux_gives_pywebview_the_png_icon(self):
         calls = []
