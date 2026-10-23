@@ -140,10 +140,10 @@ def with_pywebview(url):
             except Exception as error:
                 print(f'windows_window_icon: {error}', flush=True)
         window.events.shown += shown
-    # The icon goes to pywebview on Linux only (GTK, Qt take a PNG). Its Windows backend loads it with
-    # System.Drawing.Icon, which throws on a PNG in a .NET thread and ends the whole program (Corsu 0.27.0 on a real
-    # Windows); Windows gets its icon from windows_window_icon() above, macOS from the applet.
-    webview.start(**({'icon': str(ICONS[-1])} if corsu.PLATFORM == 'linux' and ICONS else {}))
+    # No PNG icon for pywebview on Windows: its WinForms backend loads it with System.Drawing.Icon, which throws on a
+    # PNG in a .NET thread and ends the whole program (Corsu 0.27.0 on a real Windows); the window gets corsu.ico from
+    # windows_window_icon() above. GTK and Qt (Linux) put the PNG on the window, Cocoa (macOS) on the Dock, as before.
+    webview.start(**({'icon': str(ICONS[-1])} if corsu.PLATFORM != 'windows' and ICONS else {}))
     return True
 
 
