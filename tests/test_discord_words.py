@@ -114,6 +114,22 @@ class DiscordWordsTests(unittest.TestCase):
         # The Delete key: Corsu's own key name ("Squas", as "Suppr (pavé num.)"), not the Spanish key cap "Supr".
         self.assertEqual(self.words['Suppr'], 'Squas')
 
+    def test_search_fields_say_circa(self):
+        # Discord's search boxes (October 2026, seen on the maintainer's Discord): the bare "Rechercher" took Firefox's
+        # "Ricercà" where Discord's own rows say "Circà"; the placeholder over a conversation or a server keeps the
+        # name Discord inserts ("Rechercher EnzoParisi, Moz_One"). Provenance in lexicon/review-discord-2026-10.tsv.
+        expected = {
+            'Rechercher': 'Circà', 'Search': 'Circà',
+            'Rechercher \u00001\u0000': 'Circà \u00001\u0000', 'Search \u00001\u0000': 'Circà \u00001\u0000',
+            'Rechercher dans \u00001\u0000': 'Circà in \u00001\u0000', 'Search in \u00001\u0000': 'Circà in \u00001\u0000',
+            'Rechercher des messages dans tes serveurs': 'Circà messaghji in i to servori',
+            'Rechercher dans tes messages privés': 'Circà in i to messaghji privati',
+            'Recherche dans tous les MP': 'Circà in tutti i messaghji privati',
+            'Rechercher des amis': 'Circà amichi',
+        }
+        for key, value in expected.items():
+            self.assertEqual(self.words[key], value, key)
+
     def test_templates_keep_their_placeholders(self):
         key = engine.normalize('Effacer après \u00001\u0000 heures')
         self.assertEqual(self.words[key], 'Squassà dopu \u00001\u0000 ore')

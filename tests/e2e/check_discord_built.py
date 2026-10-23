@@ -14,6 +14,8 @@ after corsu.generate()), with the dictionary embedded in it, and checks:
   sentences (text, aria-label, title), long, emoji, right-to-left and separator names, the profile's "Bio" titles
   (Biugrafia) and the bio itself (kept), repeated passes, a second translator over a translated page, and nodes reused
   by React for other texts and records (navigation, activity changes);
+- search fields: an <input> placeholder and label, the placeholder Slate draws in an empty editor, with the names
+  Discord inserts kept and what is typed left alone;
 - the hidden diagnostic: it prints none of the synthetic personal data, even dictionary words ("Work", "Error",
   "Message", "Control"), whole or in part.
 Cases marked strict=false are known limits, printed as KNOWN, failing only with --strict (there are none now).
@@ -187,6 +189,19 @@ add("Supprimer in a menu", `<div role="menu"><div id="t" role="menuitem">Supprim
 add("person named Supprimer in a delete dialog", `<div role="dialog"><h1 class="title_x">Supprimer le message</h1><span id="t" class="username_x">Supprimer</span></div>`,
   [{ user: user(9, "Supprimer") }], "Supprimer");
 add("message", `<div id="message-content-1" class="markup_x"><span id="t">Dans un appel</span></div>`, [], "Dans un appel");
+// Search fields (seen in French on the maintainer's Discord, 2026-10-23): the Friends page's <input>, the placeholder
+// over a group DM (drawn by Slate inside the empty editor; Discord composes the name from the members) and over a
+// server; the names stay as written, what is typed and a field inside a message stay as they are.
+const group = { id: ID(5), type: 3, name: "", recipients: [ID(1), ID(2)] };
+const slate = text => `<div class="search_x"><div class="editor_x" role="combobox" contenteditable="true"><div data-slate-node="element"><span data-slate-node="text"><span data-slate-leaf="true"><span id="t" data-slate-placeholder="true" contenteditable="false">${text}</span></span></span></div></div></div>`;
+add("Friends search placeholder", `<div class="peopleColumn_x"><input id="t" class="input_x" placeholder="Rechercher" aria-label="Rechercher"></div>`, [], "Circà", "placeholder");
+add("Friends search label", `<div class="peopleColumn_x"><input id="t" class="input_x" placeholder="Rechercher" aria-label="Rechercher"></div>`, [], "Circà", "aria-label");
+add("group DM search placeholder (Slate)", slate("Rechercher EnzoParisi, Moz_One"), [{ channel: group }], "Circà EnzoParisi, Moz_One");
+add("DM search placeholder with a dictionary word as name", slate("Rechercher Work"), [{ channel: dm(work) }], "Circà Work");
+add("server search placeholder", `<input id="t" placeholder="Rechercher Work, Error">`, [{ guild: { id: ID(4), name: "Work, Error" } }],
+  "Circà Work, Error", "placeholder");
+add("search text being typed", `<div contenteditable="true"><span id="t" data-slate-string="true">Rechercher Work</span></div>`, [], "Rechercher Work");
+add("field inside a message", `<div id="message-content-2" class="markup_x"><input id="t" placeholder="Rechercher"></div>`, [], "Rechercher", "placeholder");
 
 then("game Control", "Dans un appel", [{ variant: "x" }, { text: "Dans un appel" }, { channel: dm(work) },
   status(work, [], dm(work)), row(work, [])], "In una chjama");

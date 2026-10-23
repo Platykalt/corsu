@@ -12,6 +12,16 @@ Started from 0.27.0 (`f51b1ac`, tag `v0.27.0`). Changes inherited from 0.27 are 
   End-to-end check `tests/e2e/check_firefox_context_menu.py` (run by `e2e.py firefox`): the real context menu on
   selected text, with the default engine and another one, special characters, Firefox's truncation and the access
   key.
+- **Discord, search fields**: "Rechercher" stayed in French on the Friends page and over a conversation ("Rechercher
+  EnzoParisi, Moz_One"), seen on the maintainer's Discord. The plugin never read text fields (`<input>`, editors),
+  so their own placeholder and label were skipped; it now translates those attributes, and the placeholder Slate
+  draws inside an empty editor, never what is typed nor a field inside a message. In a placeholder, the template
+  "Rechercher {name}" applies whatever name Discord inserts (a group's name is composed from its members, so no
+  record holds it); the name stays as written. Bare "Rechercher" now says "Circà" as Discord's own rows do, not
+  Firefox's "Ricercà"; three more search labels left half French were added (provenance in
+  `lexicon/review-discord-2026-10.tsv`: Corsu usage, not read by a speaker). Translator revision
+  `2026-10-search-1`. Checked in simulated pages in headless Chromium (`check_discord_names.py`,
+  `check_discord_built.py`), not yet in the real Discord.
 
 ## 0.27.0 (2026-10-19)
 
