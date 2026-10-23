@@ -21,6 +21,7 @@ s'en servir, indépendantes l'une de l'autre. Version publiée : **0.27.0**
 | des logiciels en corse sur mon ordinateur | l'application Corsu | [Ordinateur](#des-logiciels-en-corse-sur-ordinateur) |
 | écrire en corse sur Android ou iPhone | Keyman et le dictionnaire Corsu | [Téléphone](#écrire-en-corse-sur-android-ou-iphone) |
 | Minecraft: Java Edition en corse | un pack de ressources | [Minecraft](#minecraft-en-corse) |
+| essayer le bureau Hyprland + Noctalia en corse (Linux, en développement) | la branche `hyprland` | [Hyprland](#hyprland--noctalia-développement) |
 
 ### Des logiciels en corse sur ordinateur
 
@@ -70,6 +71,17 @@ d'ajouter un logiciel, de remettre une partie dans sa langue d'origine (le termi
 de mettre à jour (rubrique À propos) ou de tout retirer. Relancer la commande d'installation fait la même chose que
 le bouton de mise à jour : une version plus récente met à jour, la même répare, une plus ancienne est refusée (sauf
 avec `--allow-downgrade`). Vos choix sont gardés, et rien de nouveau n'est ajouté sans votre accord.
+
+### Hyprland + Noctalia (développement)
+
+**En développement, pas dans la version publiée.** Le code est sur la branche de développement
+[`hyprland`](https://github.com/Platykalt/corsu/tree/hyprland), à part de la version stable : Corsu 0.27.0 ne le
+contient pas. Pour le bureau [Hyprland](https://hyprland.org) avec le panneau Noctalia, Corsu apporte la traduction
+corse de Noctalia et, au choix, un profil de bureau Corsu : raccourcis clavier, apparence (palettes maquis et mer) et
+configuration guidée depuis la fenêtre de Corsu. Linux seulement ; vérifié seulement sur CachyOS avec Hyprland 0.56.2
+et Noctalia 5.3.0, une partie des essais restant à faire. Facultatif : installer Corsu ne remplace jamais votre
+bureau ; ces parties se choisissent une à une et la session Plasma reste.
+Guide pour débuter, raccourcis et retour en arrière : [Hyprland et Noctalia](docs/fr/hyprland.md).
 
 ### Écrire en corse sur Android ou iPhone
 
@@ -237,6 +249,7 @@ independent of each other. Published release: **0.27.0**
 | programs in Corsican on my computer | the Corsu app | [Computer](#programs-in-corsican-on-a-computer) |
 | to write Corsican on Android or iPhone | Keyman and the Corsu dictionary | [Phone](#write-corsican-on-android-or-iphone) |
 | Minecraft: Java Edition in Corsican | a resource pack | [Minecraft](#minecraft-in-corsican) |
+| to try the Hyprland + Noctalia desktop in Corsican (Linux, in development) | the `hyprland` branch | [Hyprland](#hyprland--noctalia-development) |
 
 ### Programs in Corsican on a computer
 
@@ -285,6 +298,17 @@ back in its original language (the terminal for an hour, for example), update (i
 Running the install command again does the same as the Update button: a newer release updates, the same one
 repairs, an older one is refused (unless you add `--allow-downgrade`). Your choices are kept, and nothing new is
 added unless you select it.
+
+### Hyprland + Noctalia (development)
+
+**In development, not in the published release.** The code is on the development branch
+[`hyprland`](https://github.com/Platykalt/corsu/tree/hyprland), separate from the stable release: Corsu 0.27.0 does
+not contain it. For the [Hyprland](https://hyprland.org) desktop with the Noctalia panel, Corsu brings the Corsican
+translation of Noctalia and, optionally, a Corsu desktop profile: key bindings, look (maquis and sea palettes) and a
+guided configuration from the Corsu window. Linux only; checked only on CachyOS with Hyprland 0.56.2 and Noctalia
+5.3.0, with part of the checks still to do. Optional: installing Corsu never replaces your desktop; these parts are
+chosen one by one and the Plasma session stays.
+Beginner's guide, shortcuts and going back: [Hyprland and Noctalia](docs/en/hyprland.md).
 
 ### Write Corsican on Android or iPhone
 
