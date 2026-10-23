@@ -1,5 +1,24 @@
 # Changelog
 
+## 0.27.1 (proposed on fix-0.27.1, not tagged, not published)
+
+0.27.0 (`f51b1ac`, tag `v0.27.0`) with this fix only. `src/release.json` says 0.27.1 so that CI checks the update and
+the migration from the published 0.27.0.
+
+- **Windows: Corsu's window closed at start.** Reported on a real Windows after the one-line install of 0.27.0:
+  Corsu handed pywebview a PNG icon, which pywebview's Windows backend (WinForms) loads with System.Drawing.Icon;
+  that throws on a PNG ("L'argument 'picture' doit être une image qui peut être utilisée en tant que Icon") inside a
+  .NET thread, and the unhandled exception ended the program and its local server, during installation too. The icon
+  is no longer given to pywebview on Windows, which keeps putting `corsu.ico` on the window itself
+  (`window.windows_window_icon`); Linux and macOS are unchanged. Present since 0.26.0 (`e148912`), which passed the
+  icon to pywebview on every system. Workaround for 0.26.0 and 0.27.0: start Corsu with `--browser`
+  (docs/fr/ordinateur/windows.md, docs/en/computer/windows.md).
+- CI: the package job checks that `corsu-windows.zip` holds `src/app/corsu.ico` as an ICO file and the bundled
+  `pythonw.exe`; on the Windows runner, `tests/e2e/check_windows_window.py` loads the icon with System.Drawing.Icon
+  and LoadImageW from the archive's Python, reproduces 0.27.0's crash with `webview.start(icon=PNG)`, then starts
+  Corsu as its shortcut does (no `--browser`) and observes its window, its server and its clean exit. The update
+  checks also start from the published 0.27.0 (`check_update.py`, `check_update_apps.py`, `check_migration.py`).
+
 ## 0.27.0 (2026-10-19)
 
 Developed on next-0.27 from 0.26.0 (`9868066`, tag `v0.26.0`). CI checks the update from the published 0.26.0.
