@@ -199,7 +199,9 @@ How to test, inside the Hyprland session, distinguishing a launch from a real sh
 - Noctalia locks before sleep (`lock_before_suspend`, default true, Noctalia docs) via logind's sleep delay
   inhibitor, offers an idle inhibitor ("caffeine"), and serves `org.freedesktop.ScreenSaver` so browsers and video
   players can hold the screen on (read in the binary). No separate idle daemon is needed.
-- Turning the panel off when the lid closes while docked is a Hyprland switch binding (profile side).
+- Turning the panel off when the lid closes while docked would need a Hyprland switch binding; the profile has none
+  yet (none in `src/hyprland/config`), so with the lid closed and an external screen the internal panel stays on as
+  far as Hyprland is concerned. Not checked on a real docked laptop.
 
 ## Wallet at login
 

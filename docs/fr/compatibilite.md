@@ -16,7 +16,7 @@
 | Bureau KDE Plasma et programmes KDE | Non pris en charge | Non pris en charge | Utilisé tous les jours |
 | Minecraft: Java Edition 1.6.1 → 26.3, 87 versions (pack de ressources) | Vérifié sans lancer le jeu | Vérifié sans lancer le jeu | Vérifié sans lancer le jeu |
 | Programmes GTK et commandes du terminal | | | Prévu |
-| Session Hyprland et Noctalia, facultatif ([détails](hyprland.md)) | | | Prévu (essayé sur des dossiers simulés) |
+| Session Hyprland et Noctalia, facultatif ([détails](hyprland.md)) | | | Branche de développement, pas dans 0.27.0 |
 
 Les logiciels qui ont déjà leur propre traduction corse (VLC, Audacity, Poedit, 7-Zip…) et les systèmes de chacun
 sont dans [État des traductions](etat-des-traductions.md).
@@ -24,8 +24,9 @@ sont dans [État des traductions](etat-des-traductions.md).
 **Testé** : avant chaque version, la CI installe Corsu sur ce système, lance le logiciel et lit son texte en corse.
 **Testé en partie** : la CI vérifie que Corsu modifie Discord puis le restaure, sans ouvrir Discord lui-même.
 **Utilisé tous les jours** : un locuteur corse s'en sert chaque jour. **Prévu** : le code existe mais personne ne l'a
-encore vérifié sur ce système ; dites-nous comment ça se passe. **Non pris en charge** : Corsu ne le fait pas,
-en général parce que le système l'empêche. Safari fait partie de macOS : Apple le protège et ne propose que les
+encore vérifié sur ce système ; dites-nous comment ça se passe. **Branche de développement** : le code est sur une
+branche à part, dans aucune version publiée ; essayé seulement sur l'ordinateur du mainteneur. **Non pris en
+charge** : Corsu ne le fait pas, en général parce que le système l'empêche. Safari fait partie de macOS : Apple le protège et ne propose que les
 langues de macOS, où le corse n'existe pas.
 
 KDE Plasma est un bureau pour Linux. Certains programmes KDE (Kate, Krita, Okular…) existent aussi sous Windows et
