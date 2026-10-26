@@ -35,6 +35,8 @@ For Discord, see [Discord](../discord.md). Corsu also sets to Corsican the langu
 Corsican translation (VLC, Audacity, Tenacity, fre:ac, Poedit, PDFsam, FileZilla…) and puts Minecraft: Java Edition
 in Corsican, see [Translation status](../translation-status.md).
 
+Hyprland desktop with Noctalia: in development, not in the published release, see [Hyprland and Noctalia](../hyprland.md).
+
 ## Changing your mind
 
 Open the Corsu app from the application menu to add a program, pause the terminal for an hour, switch a part off, or

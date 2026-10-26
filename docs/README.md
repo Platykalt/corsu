@@ -6,6 +6,7 @@ Version publiée · Published release: **0.27.0**.
 | --- | --- |
 | **Utiliser Corsu** | **Using Corsu** |
 | Ordinateur : [Windows](fr/ordinateur/windows.md) · [macOS](fr/ordinateur/macos.md) · [Linux](fr/ordinateur/linux.md) | Computer: [Windows](en/computer/windows.md) · [macOS](en/computer/macos.md) · [Linux](en/computer/linux.md) |
+| [Hyprland et Noctalia](fr/hyprland.md) (en développement) | [Hyprland and Noctalia](en/hyprland.md) (in development) |
 | Téléphone : [Android](fr/telephone/android.md) · [iPhone](fr/telephone/iphone.md) | Phone: [Android](en/phone/android.md) · [iPhone](en/phone/iphone.md) |
 | [Minecraft en corse](fr/minecraft.md) · [Tester en jeu](fr/minecraft-tester.md) | [Minecraft in Corsican](en/minecraft.md) · [Testing in the game](../minecraft/java/TESTING.md) |
 | [Discord en corse](fr/discord.md) | [Discord in Corsican](en/discord.md) |

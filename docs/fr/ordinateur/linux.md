@@ -40,6 +40,8 @@ corse. Pour Discord, voir [Discord](../discord.md). Corsu règle aussi sur le co
 leur propre traduction corse (VLC, Audacity, Tenacity, fre:ac, Poedit, PDFsam, FileZilla…) et met en corse
 Minecraft: Java Edition, voir [État des traductions](../etat-des-traductions.md).
 
+Bureau Hyprland avec Noctalia : en développement, pas dans la version publiée, voir [Hyprland et Noctalia](../hyprland.md).
+
 ## Changer d'avis
 
 Ouvrez l'application Corsu dans le menu des applications pour ajouter un logiciel, mettre le terminal en pause une heure,
