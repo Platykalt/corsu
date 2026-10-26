@@ -530,6 +530,20 @@ class UpdateTests(Isolated):
         self.assertFalse(list((self.data / 'tmp').iterdir()), 'download folder removed')
         self.assertFalse((self.data / 'lock').exists())
 
+    def test_a_non_default_download_base_is_announced(self):
+        # A development override (CORSU_DOWNLOAD_BASE) is visible: SHA-256 only certifies the transfer, so an
+        # alternative source cannot pass silently for the official one.
+        self.publish('0.23.0')
+        code, result = self.install('--version', '0.23.0')
+        self.assertEqual(code, 0, result)
+        self.assertTrue(any('not the official releases' in line for line in self.progress), self.progress)
+        # A normal update (no CORSU_DOWNLOAD_BASE) reaches the download step without that notice.
+        with patch.object(update, 'check', return_value={'latest': '0.24.0', 'status': 'available', 'error': None}), \
+                patch.object(update, 'download', side_effect=OSError('offline')):
+            self.install(base=False)
+        self.assertFalse(any('not the official releases' in line for line in self.progress), self.progress)
+        self.assertTrue(any('Downloading' in line for line in self.progress), 'reached the download step')
+
     def test_pinned_version_must_match_the_archive(self):
         self.publish('0.23.0')
         code, result = self.install('--version', '0.24.0')

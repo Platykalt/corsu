@@ -8,9 +8,14 @@ case "$(uname -s)" in
     Darwin) name=corsu-macos.tar.gz; installer="Install for macOS.command" ;;
     *) echo "Corsu supports Linux, macOS and Windows. On Windows, use install/get.ps1." >&2; exit 1 ;;
 esac
-# CORSU_DOWNLOAD_BASE: another folder of the same archives and .sha256 files (a test build, file:// works);
-# the checksum is verified the same way.
+# CORSU_DOWNLOAD_BASE: a development override pointing at another folder of the same archives and .sha256 files
+# (a test build, file:// works). SHA-256 only proves the download matches the .sha256 fetched from the SAME base,
+# i.e. the transfer was not corrupted; it does not prove where the files come from. The authenticity of the
+# official release rests on HTTPS to github.com, not on the checksum. A non-default base is announced below.
 base=${CORSU_DOWNLOAD_BASE:-https://github.com/Platykalt/corsu/releases/latest/download}
+if [ -n "${CORSU_DOWNLOAD_BASE:-}" ]; then
+    echo "Corsu: downloading from CORSU_DOWNLOAD_BASE=$base, not the official releases (SHA-256 checks the transfer, not the source)." >&2
+fi
 dir=$(mktemp -d "${TMPDIR:-/tmp}/corsu.XXXXXX")
 echo "Downloading $name..."
 curl -fsSL "$base/$name" -o "$dir/$name"
