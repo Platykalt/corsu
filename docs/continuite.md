@@ -19,7 +19,14 @@ Les sections datées après « État actuel » sont l'historique : ce qui y est 
     affichage, pas dans le vrai Discord ; l'emplacement du pseudo dans le message d'épinglage reste une hypothèse.
   - Désactiver : `b416445`, `df89ab8` (consigne de redémarrage seulement tant que le logiciel tourne).
   - Source de téléchargement : `ebed6f3` (avertissement quand `CORSU_DOWNLOAD_BASE` n'est pas la source officielle).
-  - CI de la candidate : à compléter. <!-- corsu:ci-028 -->
+  - CI de la candidate : **40360790474 verte** sur `8b235f0` (26 octobre 2026) : tests unitaires (3 systèmes,
+    Python 3.10 et 3.13), archives, bout en bout sur les trois systèmes. Plugin Discord construit : révision
+    `2026-10-pins-1`, recherche et épinglage traduits, pseudos gardés ; fenêtre native de Corsu ouverte sous Windows
+    avec le Python de l'archive, icônes posées (capture `windows-native-window`) ; mise à jour depuis la 0.27.0
+    publiée sous les trois systèmes, migration 0.27.0 → 0.28.0 sous Linux (Firefox éteint reste éteint, apparence
+    gardée). Archives inspectées : version 0.28.0, `corsu.ico`, aucune trace de `strix_runs/` ni de secret, sommes
+    SHA-256 conformes. Ensuite seulement de la documentation (`c471a0d`, fusion de `main` ; release) : 640 tests
+    unitaires verts en local ; la CI du tag reconstruit et revérifie tout avant de publier.
 - **`fix-0.27.1`** (`f59fb6d`, 0.27.0 avec la correction de la fenêtre Windows) : jamais publiée, remplacée par la
   0.28.0, qui contient la même correction.
 - **`hyprland`** (`b5ec13f`) : branche de développement, non fusionnée dans `next-0.28` ni dans `main` ; la 0.28.0 ne
