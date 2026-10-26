@@ -118516,6 +118516,12 @@ Search your direct messages|Rechercher dans tes messages privés|Circà in i to 
 # Discord: a speaker).
 |a épinglé un message dans ce salon. Voir tous les messages épinglés.|hà spirlatu un messaghju in stu canale. Vede tutti i messaghji spirlati.
 |Voir tous les messages épinglés.|Vede tutti i messaghji spirlati.
+# Discord: same notice when Discord draws the author's name inside the sentence's own text node (not a separate
+# Discord: element): a template keeps the name as a protected value and translates the fixed parts, so a name that is a
+# Discord: dictionary word ("Error", "Work") stays as written. One form for the whole notice in one node, one for the
+# Discord: sentence alone when the link is drawn apart. Same wording as the two rows above.
+|{name} a épinglé un message dans ce salon. Voir tous les messages épinglés.|{name} hà spirlatu un messaghju in stu canale. Vede tutti i messaghji spirlati.
+|{name} a épinglé un message dans ce salon.|{name} hà spirlatu un messaghju in stu canale.
 # Vencord: settings pages and plugin descriptions of Vencord, which only exist in English.
 A Vencord update is available!||Un aghjurnamentu di Vencord hè dispunibule!
 A restart is required to apply this change||Ci vole à rilancià per applicà stu cambiamentu
