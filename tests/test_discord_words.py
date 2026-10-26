@@ -125,10 +125,31 @@ class DiscordWordsTests(unittest.TestCase):
             'Rechercher des messages dans tes serveurs': 'Circà messaghji in i to servori',
             'Rechercher dans tes messages privés': 'Circà in i to messaghji privati',
             'Recherche dans tous les MP': 'Circà in tutti i messaghji privati',
+            # Bars that search friends or users (the friends list, the "new DM"/"add member" pickers): all already in
+            # the Discord section, so the field-attribute fix of fix-discord-search reaches them without a new word.
             'Rechercher des amis': 'Circà amichi',
+            'Rechercher des amis ou des membres de serveur': 'Circà amichi o membri di servore',
+            'Rechercher des amis et des utilisateurs dans : \u00001\u0000': 'Circà amichi è utilizatori in : \u00001\u0000',
         }
         for key, value in expected.items():
-            self.assertEqual(self.words[key], value, key)
+            self.assertEqual(self.words[engine.normalize(key)], value, key)
+
+    def test_pin_system_message_and_its_link(self):
+        # Discord's pin notice in a channel, "{author} a épinglé un message dans ce salon. Voir tous les messages
+        # épinglés.", with "Voir tous les messages épinglés." the action link. It sits in the message list, a name area
+        # where only templates and dates were applied, so both the sentence and the link stayed in French (the
+        # translator now looks these phrases up there too; src/discord-plugin/translate.ts systemLabels). The author's
+        # name is a separate element and stays. "Voir tous les" follows "Voir tous les onglets" (Vede tutte
+        # l'unghjette); "messages épinglés" the rows Messages épinglés|Messaghji spirlati. Provenance in
+        # lexicon/review-discord-2026-10.tsv (Corsu usage, not read by a speaker). NE traduit jamais un vrai message.
+        expected = {
+            'a épinglé un message dans ce salon.': 'hà spirlatu un messaghju in stu canale.',
+            'Voir tous les messages épinglés.': 'Vede tutti i messaghji spirlati.',
+            'a épinglé un message dans ce salon. Voir tous les messages épinglés.':
+                'hà spirlatu un messaghju in stu canale. Vede tutti i messaghji spirlati.',
+        }
+        for key, value in expected.items():
+            self.assertEqual(self.words[engine.normalize(key)], value, key)
 
     def test_templates_keep_their_placeholders(self):
         key = engine.normalize('Effacer après \u00001\u0000 heures')

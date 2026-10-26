@@ -19,7 +19,7 @@ export function setCorrections(value: Record<string, string> | undefined) {
 // with this file's way of reading the page; the fingerprint is computed from the dictionary itself (its entry count
 // and two sums of FNV-1a hashes over each key and value's UTF-16 code units, which do not depend on the order of the
 // entries), so it can be compared with the dictionary.json of any build.
-export const translatorRevision = "2026-10-search-1";
+export const translatorRevision = "2026-10-pins-1";
 let fingerprint: string | undefined;
 
 export function dictionaryFingerprint(): string {
@@ -516,16 +516,33 @@ function rebreak(translated: string, lines: string[]): string {
     return result;
 }
 
-// Inside names only templates and dates apply, so a name that happens to be a dictionary word stays as it is.
+// Discord's system messages sit in the message list, inside [id^="chat-messages"] (a name rule), so only templates
+// and dates applied to them and a pin notice with its "see all pinned" link stayed in French. These exact interface
+// phrases are the whole text of their node (the author's name is a separate element, a username rule, and stays), so
+// they are translated as written. The link and the sentence may be one node or two, so all three forms are listed.
+// A real message with the same words is in a content area and never reaches here.
+const systemLabels = new Set([
+    "a épinglé un message dans ce salon.",
+    "a épinglé un message dans ce salon. Voir tous les messages épinglés.",
+    "Voir tous les messages épinglés."
+].map(label => normalize(label).toLowerCase()));
+
+// Inside names only templates and dates apply, so a name that happens to be a dictionary word stays as it is. A
+// system message (a pin notice and its link, see systemLabels) is interface text, not a name, so it is looked up.
 function nameLabel(value: string, presence = false): string {
     const match = value.match(/^(\s*)(.*?)(\s*)$/s);
     if (!match || !match[2]) return value;
     let result: string | undefined;
-    strict = presence;
-    try {
-        result = fromTemplate(match[2]) ?? translateDate(match[2]);
-    } finally {
-        strict = false;
+    if (!presence && systemLabels.has(normalize(match[2]).toLowerCase())) {
+        result = resolve(match[2], false);
+    }
+    if (result === undefined) {
+        strict = presence;
+        try {
+            result = fromTemplate(match[2]) ?? translateDate(match[2]);
+        } finally {
+            strict = false;
+        }
     }
     return result === undefined ? value : match[1] + result + match[3];
 }
