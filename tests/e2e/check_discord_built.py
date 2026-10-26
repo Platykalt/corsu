@@ -14,6 +14,11 @@ after corsu.generate()), with the dictionary embedded in it, and checks:
   sentences (text, aria-label, title), long, emoji, right-to-left and separator names, the profile's "Bio" titles
   (Biugrafia) and the bio itself (kept), repeated passes, a second translator over a translated page, and nodes reused
   by React for other texts and records (navigation, activity changes);
+- search fields: an <input> placeholder and label, the placeholder Slate draws in an empty editor, a bar that searches
+  friends or users, with the names Discord inserts kept and what is typed left alone;
+- the pin system message in the message list ([id^="chat-messages"], a name area): its sentence and its "see all
+  pinned messages" link are translated as written, the author's name stays even when it is "Work", a real message with
+  the same words is left alone, and a reused node is translated again after navigation;
 - the hidden diagnostic: it prints none of the synthetic personal data, even dictionary words ("Work", "Error",
   "Message", "Control"), whole or in part.
 Cases marked strict=false are known limits, printed as KNOWN, failing only with --strict (there are none now).
@@ -187,6 +192,38 @@ add("Supprimer in a menu", `<div role="menu"><div id="t" role="menuitem">Supprim
 add("person named Supprimer in a delete dialog", `<div role="dialog"><h1 class="title_x">Supprimer le message</h1><span id="t" class="username_x">Supprimer</span></div>`,
   [{ user: user(9, "Supprimer") }], "Supprimer");
 add("message", `<div id="message-content-1" class="markup_x"><span id="t">Dans un appel</span></div>`, [], "Dans un appel");
+// Search fields (seen in French on the maintainer's Discord, 2026-10-23): the Friends page's <input>, the placeholder
+// over a group DM (drawn by Slate inside the empty editor; Discord composes the name from the members) and over a
+// server; the names stay as written, what is typed and a field inside a message stay as they are.
+const group = { id: ID(5), type: 3, name: "", recipients: [ID(1), ID(2)] };
+const slate = text => `<div class="search_x"><div class="editor_x" role="combobox" contenteditable="true"><div data-slate-node="element"><span data-slate-node="text"><span data-slate-leaf="true"><span id="t" data-slate-placeholder="true" contenteditable="false">${text}</span></span></span></div></div></div>`;
+add("Friends search placeholder", `<div class="peopleColumn_x"><input id="t" class="input_x" placeholder="Rechercher" aria-label="Rechercher"></div>`, [], "Circà", "placeholder");
+add("Friends search label", `<div class="peopleColumn_x"><input id="t" class="input_x" placeholder="Rechercher" aria-label="Rechercher"></div>`, [], "Circà", "aria-label");
+add("group DM search placeholder (Slate)", slate("Rechercher EnzoParisi, Moz_One"), [{ channel: group }], "Circà EnzoParisi, Moz_One");
+add("DM search placeholder with a dictionary word as name", slate("Rechercher Work"), [{ channel: dm(work) }], "Circà Work");
+add("server search placeholder", `<input id="t" placeholder="Rechercher Work, Error">`, [{ guild: { id: ID(4), name: "Work, Error" } }],
+  "Circà Work, Error", "placeholder");
+add("search text being typed", `<div contenteditable="true"><span id="t" data-slate-string="true">Rechercher Work</span></div>`, [], "Rechercher Work");
+add("field inside a message", `<div id="message-content-2" class="markup_x"><input id="t" placeholder="Rechercher"></div>`, [], "Rechercher", "placeholder");
+// A bar that searches friends or users (the friends list, the "new DM"/"add member" pickers): a whole phrase of the
+// Discord section, reached as a field's placeholder (the Ctrl+F box over a group DM is the Slate case above).
+add("friend/user search bar", `<input id="t" placeholder="Rechercher des amis ou des membres de serveur">`, [],
+  "Circà amichi o membri di servore", "placeholder");
+// Pin system message (seen in French on the maintainer's Discord): "{author} a épinglé un message dans ce salon. Voir
+// tous les messages épinglés." sits in the message list ([id^="chat-messages"], a name area), with the author in a
+// separate username element and the last clause a link. The sentence and the link are translated as written, the
+// author's name stays even as "Work", and a real message with the same words (in a content area) is left alone.
+const pinRow = inner => `<li id="chat-messages-${ID(4)}-${ID(5)}" class="messageListItem_x"><div class="systemMessage_x">${inner}</div></li>`;
+add("pin notice sentence", pinRow(`<span class="username_x" role="button">Work</span><span id="t"> a épinglé un message dans ce salon. </span>`),
+  [{ user: work }], " hà spirlatu un messaghju in stu canale. ");
+add("pin notice link", pinRow(`<span id="t" role="button" class="anchor_x">Voir tous les messages épinglés.</span>`), [],
+  "Vede tutti i messaghji spirlati.");
+add("pin notice in one node", pinRow(`<span id="t">a épinglé un message dans ce salon. Voir tous les messages épinglés.</span>`), [],
+  "hà spirlatu un messaghju in stu canale. Vede tutti i messaghji spirlati.");
+add("pin author named Work stays", pinRow(`<span id="t" class="username_x" role="button">Work</span><span> a épinglé un message dans ce salon.</span>`),
+  [{ user: work }], "Work");
+add("real message equal to the pin phrase", `<div id="message-content-3" class="markup_x"><span id="t">a épinglé un message dans ce salon. Voir tous les messages épinglés.</span></div>`,
+  [], "a épinglé un message dans ce salon. Voir tous les messages épinglés.");
 
 then("game Control", "Dans un appel", [{ variant: "x" }, { text: "Dans un appel" }, { channel: dm(work) },
   status(work, [], dm(work)), row(work, [])], "In una chjama");
@@ -198,6 +235,11 @@ then("name in a sentence (aria-label)", "Envoyer un message à @Error", [{ user:
 then("custom status (Friends) Dans un appel", "Joue à Control", [{ variant: "x" }, { customStatusActivity: custom("Joue à Control") },
   status(error, [custom("Joue à Control")]), row(error, [custom("Joue à Control")])], "Joue à Control");
 then("Créer un salon", "Envoyer", [], "Mandà");
+// Navigating to another channel reuses the node for its own pin notice: translated again from French.
+then("pin notice in one node", "a épinglé un message dans ce salon. Voir tous les messages épinglés.", [],
+  "hà spirlatu un messaghju in stu canale. Vede tutti i messaghji spirlati.");
+// The same node, reused for another author, keeps the name (never read as a system label).
+then("pin author named Work stays", "Error", [{ user: error }], "Error");
 
 for (const c of cases) {
   const host = document.createElement("div");

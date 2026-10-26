@@ -118498,6 +118498,24 @@ Minimum notification duration|Durée minimale des notifications|Durata minima di
 # Discord: word; provenance in lexicon/review-discord-2026-10.tsv (AI proposals, not read by a speaker).
 Unranked|Non classé|Senza classifica
 Clips|Clips|Clip
+# Discord: search fields (October 2026): the bare "Rechercher" took Mozilla's "Ricercà" where Discord's own rows say
+# Discord: "Circà"; the name Discord inserts (a conversation, a server) stays as written. Provenance in
+# Discord: lexicon/review-discord-2026-10.tsv (Corsu usage and an AI proposal, not read by a speaker).
+Search|Rechercher|Circà
+Search {name}|Rechercher {name}|Circà {name}
+Search in {guildName}|Rechercher dans {guildName}|Circà in {guildName}
+Search messages in your servers|Rechercher des messages dans tes serveurs|Circà messaghji in i to servori
+Search your direct messages|Rechercher dans tes messages privés|Circà in i to messaghji privati
+|Recherche dans tous les MP|Circà in tutti i messaghji privati
+# Discord: the pin system message and its action link (October 2026): "{author} a épinglé un message dans ce salon.
+# Discord: Voir tous les messages épinglés." sits in the message list, [id^="chat-messages"], a name area where only
+# Discord: templates and dates applied, so the sentence and its link stayed in French (the dictionary already held the
+# Discord: sentence "a épinglé un message dans ce salon." but it was never looked up there); the author's name is a
+# Discord: separate element and stays. The translator needed a change too (systemLabels in
+# Discord: src/discord-plugin/translate.ts). Provenance in lexicon/review-discord-2026-10.tsv (Corsu usage, not read by
+# Discord: a speaker).
+|a épinglé un message dans ce salon. Voir tous les messages épinglés.|hà spirlatu un messaghju in stu canale. Vede tutti i messaghji spirlati.
+|Voir tous les messages épinglés.|Vede tutti i messaghji spirlati.
 # Vencord: settings pages and plugin descriptions of Vencord, which only exist in English.
 A Vencord update is available!||Un aghjurnamentu di Vencord hè dispunibule!
 A restart is required to apply this change||Ci vole à rilancià per applicà stu cambiamentu

@@ -19,7 +19,7 @@ export function setCorrections(value: Record<string, string> | undefined) {
 // with this file's way of reading the page; the fingerprint is computed from the dictionary itself (its entry count
 // and two sums of FNV-1a hashes over each key and value's UTF-16 code units, which do not depend on the order of the
 // entries), so it can be compared with the dictionary.json of any build.
-export const translatorRevision = "2026-10-dialog-1";
+export const translatorRevision = "2026-10-pins-1";
 let fingerprint: string | undefined;
 
 export function dictionaryFingerprint(): string {
@@ -46,6 +46,26 @@ const contentArea = [
     // The status people write on a voice channel ("On joue ce soir").
     '[class*="voiceChannelStatus"]'
 ].join(",");
+// A text field is where people type, but its own placeholder and label are Discord's ("Rechercher" on the Friends
+// page, "Rechercher {name}" over a conversation): those attributes of the field itself are translated, never what is
+// typed in it. A field inside what people write (a message, a bio) is left alone.
+const fieldSelector = 'input,textarea,[contenteditable]:not([contenteditable="false"])';
+const isField = (element: Element) => element.matches(fieldSelector) && !element.parentElement?.closest(contentArea);
+// Slate, the editor of Discord's text fields, draws the placeholder of an empty field inside the field, in a span it
+// marks data-slate-placeholder (not editable): Discord's text, not what is typed.
+const slatePlaceholder = "[data-slate-placeholder]";
+
+function inContent(element: Element): boolean {
+    const placeholder = element.closest(slatePlaceholder);
+    if (!placeholder) return Boolean(element.closest(contentArea));
+    const editor = placeholder.parentElement?.closest(contentArea);
+    return !editor || !isField(editor);
+}
+
+// A placeholder (an attribute, a Slate placeholder, an element named so) or a text field's label is written whole by
+// Discord, around the name it inserts: there a template applies whatever it captures ("Rechercher {name}" with
+// "EnzoParisi, Moz_One", a name Discord composes from a group's members and that no record holds as such).
+const placeholderArea = `${slatePlaceholder},[class*="placeholder"],[class*="Placeholder"]`;
 // Names of people, servers, channels and roles: only labels around them change (templates like "Send a message in
 // {channel}" and dates); a name itself is never looked up in the dictionary. Kept as a list so that the diagnostic
 // can tell which of these rules kept a text as it was.
@@ -212,6 +232,8 @@ const templateShape = (key: string) => normalize(key).replace(/\u0000\d+\u0000/g
 
 // Set by translateLabel for one label of an activity or presence area: only the labels above apply.
 let strict = false;
+// Set by label() for one placeholder or text field label (see placeholderArea): templates take any value.
+let loose = false;
 const activityLabel = (text: string) => activityLabels.has(normalize(text).trim().toLowerCase());
 
 // The names the components that render this node know about, with the activities they show; empty outside React
@@ -358,7 +380,8 @@ function fromTemplate(text: string): string | undefined {
         // Discord's own activity templates there take any value: "Joue à {game}" with a game shown under another name.
         const discord = match && strict && activityTemplates.has(templateShape(source));
         if (match && strict && !discord && !known()) continue;
-        if (match && fixed < 12 && !discord && !known()) continue;
+        // A placeholder is Discord's text around the value it inserts, so there the value can be anything.
+        if (match && fixed < 12 && !discord && !loose && !known()) continue;
         if (match) return value.replace(/\u0000(\d+)\u0000/g, (_, n) => match[Number(n)] ?? "");
     }
     return undefined;
@@ -493,16 +516,33 @@ function rebreak(translated: string, lines: string[]): string {
     return result;
 }
 
-// Inside names only templates and dates apply, so a name that happens to be a dictionary word stays as it is.
+// Discord's system messages sit in the message list, inside [id^="chat-messages"] (a name rule), so only templates
+// and dates applied to them and a pin notice with its "see all pinned" link stayed in French. These exact interface
+// phrases are the whole text of their node (the author's name is a separate element, a username rule, and stays), so
+// they are translated as written. The link and the sentence may be one node or two, so all three forms are listed.
+// A real message with the same words is in a content area and never reaches here.
+const systemLabels = new Set([
+    "a épinglé un message dans ce salon.",
+    "a épinglé un message dans ce salon. Voir tous les messages épinglés.",
+    "Voir tous les messages épinglés."
+].map(label => normalize(label).toLowerCase()));
+
+// Inside names only templates and dates apply, so a name that happens to be a dictionary word stays as it is. A
+// system message (a pin notice and its link, see systemLabels) is interface text, not a name, so it is looked up.
 function nameLabel(value: string, presence = false): string {
     const match = value.match(/^(\s*)(.*?)(\s*)$/s);
     if (!match || !match[2]) return value;
     let result: string | undefined;
-    strict = presence;
-    try {
-        result = fromTemplate(match[2]) ?? translateDate(match[2]);
-    } finally {
-        strict = false;
+    if (!presence && systemLabels.has(normalize(match[2]).toLowerCase())) {
+        result = resolve(match[2], false);
+    }
+    if (result === undefined) {
+        strict = presence;
+        try {
+            result = fromTemplate(match[2]) ?? translateDate(match[2]);
+        } finally {
+            strict = false;
+        }
     }
     return result === undefined ? value : match[1] + result + match[3];
 }
@@ -555,14 +595,21 @@ export function translateLabel(value: string, names: Set<string> = new Set(), pr
 
 // A text or attribute of `element`: inside a name rule only templates and dates apply; in an activity or presence
 // area only Discord's activity labels; elsewhere the label is translated around the names and activities it holds.
-function label(value: string, element: Element, node: Node): string {
+// `placeholder`: the text is a placeholder or a text field's label, where templates take any value (not in a name
+// rule nor in an activity or presence area, whose own rules stay).
+function label(value: string, element: Element, node: Node, placeholder = false): string {
     const where = place(element, node);
     if (where.name) return nameLabel(value, where.presence);
     if (!where.presence) {
         const verb = dialogVerb(value, element, where.names);
         if (verb !== undefined) return verb;
     }
-    return translateLabel(value, where.names, where.presence);
+    loose = placeholder && !where.presence;
+    try {
+        return translateLabel(value, where.names, where.presence);
+    } finally {
+        loose = false;
+    }
 }
 
 // One French label for several actions. Discord's French says "Supprimer" both for Delete (a message, a channel, a
@@ -610,24 +657,26 @@ export function createTranslator(doc: Document, options: { showOriginal?: () => 
 
     function text(node: Text) {
         const parent = node.parentElement;
-        if (!parent || parent.closest(contentArea)) return;
+        if (!parent || inContent(parent)) return;
         const value = node.data;
         const previous = originalText.get(node);
         if (previous && previous.translated === value) return;
-        const translated = typingName(parent) ? nameLabel(value) : label(value, parent, node);
+        const translated = typingName(parent) ? nameLabel(value)
+            : label(value, parent, node, Boolean(parent.closest(placeholderArea)));
         if (translated === value) return;
         originalText.set(node, { original: value, translated });
         node.data = translated;
     }
 
     function attributes(element: Element) {
-        if (element.closest(contentArea) && !element.matches("input,textarea")) return;
+        const field = isField(element);
+        if (!field && element.closest(contentArea)) return;
         for (const name of ["aria-label", "title", "placeholder"]) {
             const value = element.getAttribute(name);
             if (!value) continue;
             let saved = originalAttrs.get(element);
             if (saved?.get(name)?.translated === value) continue;
-            const translated = label(value, element, element);
+            const translated = label(value, element, element, field || name === "placeholder");
             if (translated === value) continue;
             if (!saved) originalAttrs.set(element, saved = new Map());
             saved.set(name, { original: value, translated });
@@ -635,17 +684,32 @@ export function createTranslator(doc: Document, options: { showOriginal?: () => 
         }
     }
 
+    // A part of the page left out as what people write: only a text field's own attributes and the placeholder Slate
+    // draws in an empty field are read there.
+    function shielded(element: Element) {
+        if (isField(element)) attributes(element);
+        const spans = element.matches(slatePlaceholder) ? [element] : Array.from(element.querySelectorAll(slatePlaceholder));
+        for (const span of spans) {
+            if (inContent(span)) continue;
+            const walker = doc.createTreeWalker(span, NodeFilter.SHOW_TEXT);
+            let node: Node | null;
+            while ((node = walker.nextNode())) text(node as Text);
+        }
+    }
+
     function walk(root: Node) {
         if (!root.isConnected) return;
         if (root.nodeType === Node.TEXT_NODE) { text(root as Text); return; }
         if (root instanceof Element) {
-            if (root.closest(contentArea)) return;
+            if (root.closest(contentArea)) { shielded(root); return; }
             attributes(root);
         }
+        const left: Element[] = [];
         const walker = doc.createTreeWalker(root, NodeFilter.SHOW_ELEMENT | NodeFilter.SHOW_TEXT, {
             acceptNode(node) {
-                return node instanceof Element && node.matches(contentArea)
-                    ? NodeFilter.FILTER_REJECT : NodeFilter.FILTER_ACCEPT;
+                if (!(node instanceof Element && node.matches(contentArea))) return NodeFilter.FILTER_ACCEPT;
+                left.push(node);
+                return NodeFilter.FILTER_REJECT;
             }
         });
         let node: Node | null;
@@ -653,6 +717,7 @@ export function createTranslator(doc: Document, options: { showOriginal?: () => 
             if (node.nodeType === Node.TEXT_NODE) text(node as Text);
             else attributes(node as Element);
         }
+        for (const element of left) shielded(element);
     }
 
     function flush() {
