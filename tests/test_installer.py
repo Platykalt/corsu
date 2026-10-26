@@ -1,3 +1,4 @@
+import contextlib
 import io
 import json
 import os
@@ -92,6 +93,26 @@ class InstallerTests(Isolated):
             install.assert_called_once_with({'firefox'}, qt_system=False)
             discord.assert_not_called()
             build.assert_not_called()
+
+    def test_recorded_part_unknown_to_this_version_is_left_as_it_is(self):
+        # A hyprland-branch install going back to a published release: its update passes the recorded parts along.
+        with patch.object(installer, 'available_components', return_value=['firefox']), \
+             patch.object(installer, 'discord_location', return_value=Path('/fake/discord')), \
+             patch.object(installer, 'deploy_release', return_value=installer.ROOT), \
+             patch.object(corsu, 'load_state', return_value={'components': ['firefox', 'hyprland'], 'disabled': ['hyprland'], 'files': {}}), \
+             patch.object(corsu, 'install') as install, patch.object(corsu, 'firefox_install', return_value=True), \
+             patch.object(installer.shutil, 'which', return_value=None), redirect_stdout(io.StringIO()) as out:
+            installer.main(['--yes', '--components', 'firefox', 'hyprland'])
+            install.assert_called_once_with({'firefox'}, qt_system=False)
+            self.assertIn('hyprland', out.getvalue())
+        # A name nobody recorded is still a mistake.
+        with patch.object(corsu, 'load_state', return_value={'components': ['firefox'], 'files': {}}), \
+             patch.object(installer, 'available_components', return_value=['firefox']), \
+             patch.object(installer, 'discord_location', return_value=Path('/fake/discord')), \
+             redirect_stdout(io.StringIO()), contextlib.redirect_stderr(io.StringIO()):
+            with self.assertRaises(SystemExit) as raised:
+                installer.main(['--yes', '--components', 'firefox', 'typo'])
+            self.assertEqual(raised.exception.code, 2)
 
     def test_external_archive_is_restored_and_later_edits_preserved(self):
         for user_edit in (False, True):

@@ -224,9 +224,9 @@ jobs:
           echo "Source commit: $GITHUB_SHA"
           (cd dist && (sha256sum corsu-*.tar.gz corsu-*.zip 2>/dev/null || shasum -a 256 corsu-*.tar.gz corsu-*.zip))
           CORSU_ARCHIVES="$GITHUB_WORKSPACE/dist" python tests/e2e/e2e.py archive --root "${{ env.CORSU_RELEASE }}"
-      - name: Update — from published 0.21.0 to 0.27.0 to these archives, repair, refusal, recovery, lock, uninstall
+      - name: Update — from published 0.21.0 to 0.28.0 to these archives, repair, refusal, recovery, lock, uninstall
         shell: bash
-        run: python tests/e2e/check_update.py --archives "$GITHUB_WORKSPACE/dist" --from 0.21.0 0.22.0 0.23.0 0.24.0 0.25.1 0.26.0 0.27.0
+        run: python tests/e2e/check_update.py --archives "$GITHUB_WORKSPACE/dist" --from 0.21.0 0.22.0 0.23.0 0.24.0 0.25.1 0.26.0 0.27.0 0.28.0
       - name: One-line install script with these archives (CORSU_DOWNLOAD_BASE), checksum checked
         shell: bash
         run: |
@@ -261,18 +261,20 @@ jobs:
           python tools/vlcpo.py build "$RUNNER_TEMP/vlc-upstream.mo" --include=none
           python tests/e2e/check_vlc_experimental.py --mo "$RUNNER_TEMP/vlc-experimental.mo" --upstream "$RUNNER_TEMP/vlc-upstream.mo"
           HOME="$(mktemp -d)" XDG_DATA_HOME= XDG_CONFIG_HOME= python tests/e2e/check_vlc_complement.py
-      - name: Update from 0.25.1, 0.26.0 and 0.27.0 with VLC and its complement (Linux, real VLC package)
+      - name: Update from 0.25.1, 0.26.0, 0.27.0 and 0.28.0 with VLC and its complement (Linux, real VLC package)
         if: runner.os == 'Linux'
         # Ubuntu has no fre:ac package: its part of this check runs where fre:ac is installed (Debian).
         run: |
           python tests/e2e/check_update_apps.py --archives "$GITHUB_WORKSPACE/dist" --from 0.25.1
           python tests/e2e/check_update_apps.py --archives "$GITHUB_WORKSPACE/dist" --from 0.26.0
           python tests/e2e/check_update_apps.py --archives "$GITHUB_WORKSPACE/dist" --from 0.27.0
-      - name: Migration from 0.24.0 and from 0.27.0 (Linux) — choices, appearance, plugin, launchers after the archive is deleted, personal files
+          python tests/e2e/check_update_apps.py --archives "$GITHUB_WORKSPACE/dist" --from 0.28.0
+      - name: Migration from 0.24.0, 0.27.0 and 0.28.0 (Linux) — choices, appearance, plugin, launchers after the archive is deleted, personal files
         if: runner.os == 'Linux'
         run: |
           python tests/e2e/check_migration.py --archives "$GITHUB_WORKSPACE/dist" --from 0.24.0
           python tests/e2e/check_migration.py --archives "$GITHUB_WORKSPACE/dist" --from 0.27.0
+          python tests/e2e/check_migration.py --archives "$GITHUB_WORKSPACE/dist" --from 0.28.0
       - name: VLC complement declared unavailable (Windows, macOS)
         if: runner.os != 'Linux'
         shell: bash

@@ -737,7 +737,8 @@ def announce(action, running, installed):
 
 def main(argv=None):
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument('--components', nargs='+', choices=['firefox', 'chromium', 'desktop', 'discord', 'vesktop', 'qt', 'minecraft', *apps_ids()],
+    known = ['firefox', 'chromium', 'desktop', 'discord', 'vesktop', 'qt', 'minecraft', *apps_ids()]
+    parser.add_argument('--components', nargs='+', metavar='{' + ','.join(known) + '}',
                         help='Default: the parts already installed, or on a first installation every supported integration found on this computer.')
     parser.add_argument('--discord-path', type=Path,
                         help='Native Discord location: folder with resources/ (Linux), %%LOCALAPPDATA%%\\Discord (Windows) or Discord.app (macOS)')
@@ -806,6 +807,16 @@ def main(argv=None):
     recorded = [name for name in state.get('components', []) if name != 'terminal']
     if state.get('qt_system'):
         recorded.append('qt')
+    # A part recorded by another build (the `hyprland` development branch) that this version does not have: an update
+    # or a return to a published release passes it along; it is left as it is, never an error.
+    unknown = [name for name in args.components or [] if name not in known]
+    if [name for name in unknown if name not in recorded]:
+        parser.error(f"argument --components: invalid choice: {', '.join(repr(n) for n in unknown if n not in recorded)}")
+    for name in unknown:
+        print(t(f'{name}: not part of Corsu {release_version(ROOT)}; left as it is.',
+                f'{name} : ne fait pas partie de Corsu {release_version(ROOT)} ; laissé tel quel.'))
+    if args.components is not None:
+        args.components = [name for name in args.components if name in known]
     # Without a list, running the installer again repairs what is installed; it never adds parts nobody chose.
     components = args.components if args.components is not None else (recorded or available)
     if args.components is None and available and not (args.yes or args.dry_run) and sys.stdin.isatty():
