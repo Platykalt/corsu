@@ -95,16 +95,17 @@ class InstallerTests(Isolated):
             build.assert_not_called()
 
     def test_recorded_part_unknown_to_this_version_is_left_as_it_is(self):
-        # A hyprland-branch install going back to a published release: its update passes the recorded parts along.
+        # An install by another build (such as the hyprland branch) going back to a published release: its update
+        # passes the recorded parts along, including ones this version does not have.
         with patch.object(installer, 'available_components', return_value=['firefox']), \
              patch.object(installer, 'discord_location', return_value=Path('/fake/discord')), \
              patch.object(installer, 'deploy_release', return_value=installer.ROOT), \
-             patch.object(corsu, 'load_state', return_value={'components': ['firefox', 'hyprland'], 'disabled': ['hyprland'], 'files': {}}), \
+             patch.object(corsu, 'load_state', return_value={'components': ['firefox', 'part-from-another-build'], 'disabled': ['part-from-another-build'], 'files': {}}), \
              patch.object(corsu, 'install') as install, patch.object(corsu, 'firefox_install', return_value=True), \
              patch.object(installer.shutil, 'which', return_value=None), redirect_stdout(io.StringIO()) as out:
-            installer.main(['--yes', '--components', 'firefox', 'hyprland'])
+            installer.main(['--yes', '--components', 'firefox', 'part-from-another-build'])
             install.assert_called_once_with({'firefox'}, qt_system=False)
-            self.assertIn('hyprland', out.getvalue())
+            self.assertIn('part-from-another-build', out.getvalue())
         # A name nobody recorded is still a mistake.
         with patch.object(corsu, 'load_state', return_value={'components': ['firefox'], 'files': {}}), \
              patch.object(installer, 'available_components', return_value=['firefox']), \
