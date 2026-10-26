@@ -222,6 +222,16 @@ def snapshot(job=None):
         item = {'name': name, 'text': text, 'installed': name in installed or name in switchable,
                 'switchable': name in switchable, 'on': name in switchable and not corsu.is_disabled(name, state)}
         item.update(status(name, item, state))
+        # A part switched off: the programs already open keep showing Corsican until they restart. Say so durably,
+        # whatever turned it off (a single switch, "switch everything off", or just reopening this window), so the
+        # window never shows the change as done while an open program still shows the old language. Parts with a
+        # detailed status (state['results']) already carry this in their own rows; the terminal is per-shell.
+        if name != 'terminal' and item['switchable'] and not item['on'] and state.get('results', {}).get(name) is None:
+            item['restart'] = True
+        # A part switched off: the programs already open keep showing Corsican until they restart. Say so durably,
+        # whatever turned it off (a single switch, "switch everything off", or just reopening this window), so the
+        # window never shows the change as done while an open program still shows the old language. Parts with a
+        # detailed status (state['results']) already carry this in their own rows; the terminal is per-shell.
         if name == 'minecraft' and item['installed']:
             waiting = minecraft_waiting(state, state.get('results', {}).get(name))
             item['instances'] = [*item['instances'], *waiting]
