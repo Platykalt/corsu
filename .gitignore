@@ -11,3 +11,4 @@ keyboard/*/build/
 /build/
 vendor/runtime/
 lexicon/memory/corsu-*.jsonl
+strix_runs/
