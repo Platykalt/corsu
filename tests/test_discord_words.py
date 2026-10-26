@@ -162,6 +162,29 @@ class DiscordWordsTests(unittest.TestCase):
         for key, value in templates.items():
             self.assertEqual(self.words[key], value, key)
 
+    def test_group_dm_system_messages(self):
+        # Group DM notices in the message list (a name area): "{username} a ajouté {otherUsername} au groupe." (Discord
+        # keys 7/Xl0S, MMN2Jq), "… a retiré … du groupe." (QtZ0RD, L2FyVq), "… a quitté le groupe." (Qn5+Lf). Each name
+        # is its own element, so the text nodes are these fragments (systemLabels in src/discord-plugin/translate.ts).
+        # "du groupe." there means "from the group": da u gruppu (|Retirer du groupe|Caccià da u gruppu), not "di".
+        expected = {
+            'a ajouté': 'hà aghjuntu',
+            'au groupe.': 'à u gruppu.',
+            'a retiré': 'hà cacciatu',
+            'du groupe.': 'da u gruppu.',
+            'a quitté le groupe.': 'hà lasciatu u gruppu.',
+        }
+        for key, value in expected.items():
+            self.assertEqual(self.words[engine.normalize(key)], value, key)
+        # Names drawn inside the sentence's own text node: templates keep both names as protected values.
+        templates = {
+            '\u00001\u0000 a ajouté \u00002\u0000 au groupe.': '\u00001\u0000 hà aghjuntu \u00002\u0000 à u gruppu.',
+            '\u00001\u0000 a retiré \u00002\u0000 du groupe.': '\u00001\u0000 hà cacciatu \u00002\u0000 da u gruppu.',
+            '\u00001\u0000 a quitté le groupe.': '\u00001\u0000 hà lasciatu u gruppu.',
+        }
+        for key, value in templates.items():
+            self.assertEqual(self.words[key], value, key)
+
     def test_templates_keep_their_placeholders(self):
         key = engine.normalize('Effacer après \u00001\u0000 heures')
         self.assertEqual(self.words[key], 'Squassà dopu \u00001\u0000 ore')

@@ -19,7 +19,7 @@ export function setCorrections(value: Record<string, string> | undefined) {
 // with this file's way of reading the page; the fingerprint is computed from the dictionary itself (its entry count
 // and two sums of FNV-1a hashes over each key and value's UTF-16 code units, which do not depend on the order of the
 // entries), so it can be compared with the dictionary.json of any build.
-export const translatorRevision = "2026-10-pins-1";
+export const translatorRevision = "2026-10-group-1";
 let fingerprint: string | undefined;
 
 export function dictionaryFingerprint(): string {
@@ -525,7 +525,10 @@ function rebreak(translated: string, lines: string[]): string {
 const systemLabels = new Set([
     "a épinglé un message dans ce salon.",
     "a épinglé un message dans ce salon. Voir tous les messages épinglés.",
-    "Voir tous les messages épinglés."
+    "Voir tous les messages épinglés.",
+    // Group DM notices: "{username} a ajouté {otherUsername} au groupe.", "… a retiré … du groupe.", "… a quitté le
+    // groupe.", each name its own element, so these fragments are whole text nodes between them.
+    "a ajouté", "au groupe.", "a retiré", "du groupe.", "a quitté le groupe."
 ].map(label => normalize(label).toLowerCase()));
 
 // Inside names only templates and dates apply, so a name that happens to be a dictionary word stays as it is. A
@@ -533,11 +536,13 @@ const systemLabels = new Set([
 // If Discord instead draws the author's name inside the sentence's own text node, the exact phrase above no longer
 // matches; the fallback below then applies a template ("{name} a épinglé un message dans ce salon…" in the
 // dictionary), which keeps the name as a protected value and translates only the fixed parts.
-function nameLabel(value: string, presence = false): string {
+function nameLabel(value: string, presence = false, names: Set<string> = new Set()): string {
     const match = value.match(/^(\s*)(.*?)(\s*)$/s);
     if (!match || !match[2]) return value;
     let result: string | undefined;
-    if (!presence && systemLabels.has(normalize(match[2]).toLowerCase())) {
+    // A name its records hold is never a system label, even one written "a ajouté".
+    const label = normalize(match[2]).toLowerCase();
+    if (!presence && systemLabels.has(label) && ![...names].some(name => normalize(name.trim()).toLowerCase() === label)) {
         result = resolve(match[2], false);
     }
     if (result === undefined) {
@@ -603,7 +608,7 @@ export function translateLabel(value: string, names: Set<string> = new Set(), pr
 // rule nor in an activity or presence area, whose own rules stay).
 function label(value: string, element: Element, node: Node, placeholder = false): string {
     const where = place(element, node);
-    if (where.name) return nameLabel(value, where.presence);
+    if (where.name) return nameLabel(value, where.presence, where.names);
     if (!where.presence) {
         const verb = dialogVerb(value, element, where.names);
         if (verb !== undefined) return verb;

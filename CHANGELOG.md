@@ -1,5 +1,20 @@
 # Changelog
 
+## 0.28.1 (in preparation on fix-0.28.1, not published)
+
+From 0.28.0 (`1bb7622`, tag `v0.28.0`).
+
+- **Discord, group conversation notices**: "X a ajouté Y au groupe." stayed in French (seen on the maintainer's
+  Discord), as did "X a retiré Y du groupe." and "X a quitté le groupe.". Each name is its own element, so the text
+  between them is a fragment ("a ajouté", "au groupe.") in the message list, a name area where only templates and
+  dates applied: the rows existed but were never looked up there (same cause as the pin notice in 0.28.0). These
+  fragments are now system labels: "X hà aghjuntu Y à u gruppu.", "X hà cacciatu Y da u gruppu.", "X hà lasciatu u
+  gruppu."; "du groupe." said "di u gruppu" (of the group) and now says "da u gruppu" (from the group), as Corsu's
+  "Caccià da u gruppu". Templates cover names drawn inside the sentence's own node. A name its records hold is never
+  read as a system label, even one written like a fragment. Translator revision `2026-10-group-1`; provenance in
+  `lexicon/review-discord-2026-10.tsv` (Corsu usage, not read by a speaker). Checked in simulated pages with the
+  built plugin (`check_discord_built.py`), not in the real Discord.
+
 ## 0.28.0 (2026-10-26)
 
 Developed on next-0.28 from 0.27.0 (`f51b1ac`, tag `v0.27.0`).
