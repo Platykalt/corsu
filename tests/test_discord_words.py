@@ -150,6 +150,17 @@ class DiscordWordsTests(unittest.TestCase):
         }
         for key, value in expected.items():
             self.assertEqual(self.words[engine.normalize(key)], value, key)
+        # If Discord draws the author's name inside the sentence's own text node, the translator (nameLabel) falls back
+        # to a template that keeps the name as a protected value (\u00001\u0000) and translates the fixed parts, so a
+        # name that is a dictionary word ("Error") stays as written. Both forms, for one node or a separate link.
+        templates = {
+            '\u00001\u0000 a épinglé un message dans ce salon. Voir tous les messages épinglés.':
+                '\u00001\u0000 hà spirlatu un messaghju in stu canale. Vede tutti i messaghji spirlati.',
+            '\u00001\u0000 a épinglé un message dans ce salon.':
+                '\u00001\u0000 hà spirlatu un messaghju in stu canale.',
+        }
+        for key, value in templates.items():
+            self.assertEqual(self.words[key], value, key)
 
     def test_templates_keep_their_placeholders(self):
         key = engine.normalize('Effacer après \u00001\u0000 heures')

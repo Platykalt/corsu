@@ -224,6 +224,13 @@ add("pin author named Work stays", pinRow(`<span id="t" class="username_x" role=
   [{ user: work }], "Work");
 add("real message equal to the pin phrase", `<div id="message-content-3" class="markup_x"><span id="t">a épinglé un message dans ce salon. Voir tous les messages épinglés.</span></div>`,
   [], "a épinglé un message dans ce salon. Voir tous les messages épinglés.");
+// If Discord instead draws the author's name inside the sentence's own text node, the exact-phrase path no longer
+// matches and a template keeps the name (a protected value, even when it is the dictionary word "Error") and
+// translates the fixed parts: one node for the whole notice, and the sentence alone when the link is drawn apart.
+add("pin notice inline author Error (one node)", pinRow(`<span id="t">Error a épinglé un message dans ce salon. Voir tous les messages épinglés.</span>`),
+  [{ user: error }], "Error hà spirlatu un messaghju in stu canale. Vede tutti i messaghji spirlati.");
+add("pin notice inline author Work, link apart", pinRow(`<span id="t">Work a épinglé un message dans ce salon. </span><span role="button" class="anchor_x">Voir tous les messages épinglés.</span>`),
+  [{ user: work }], "Work hà spirlatu un messaghju in stu canale. ");
 
 then("game Control", "Dans un appel", [{ variant: "x" }, { text: "Dans un appel" }, { channel: dm(work) },
   status(work, [], dm(work)), row(work, [])], "In una chjama");

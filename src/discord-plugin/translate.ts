@@ -518,9 +518,10 @@ function rebreak(translated: string, lines: string[]): string {
 
 // Discord's system messages sit in the message list, inside [id^="chat-messages"] (a name rule), so only templates
 // and dates applied to them and a pin notice with its "see all pinned" link stayed in French. These exact interface
-// phrases are the whole text of their node (the author's name is a separate element, a username rule, and stays), so
-// they are translated as written. The link and the sentence may be one node or two, so all three forms are listed.
-// A real message with the same words is in a content area and never reaches here.
+// phrases are the whole text of their node, so they are translated as written: this is the primary path, used when
+// the author is a separate element (a username rule, kept as written) and the text node holds no name. The link and
+// the sentence may be one node or two, so all three forms are listed. A real message with the same words is in a
+// content area and never reaches here.
 const systemLabels = new Set([
     "a épinglé un message dans ce salon.",
     "a épinglé un message dans ce salon. Voir tous les messages épinglés.",
@@ -529,6 +530,9 @@ const systemLabels = new Set([
 
 // Inside names only templates and dates apply, so a name that happens to be a dictionary word stays as it is. A
 // system message (a pin notice and its link, see systemLabels) is interface text, not a name, so it is looked up.
+// If Discord instead draws the author's name inside the sentence's own text node, the exact phrase above no longer
+// matches; the fallback below then applies a template ("{name} a épinglé un message dans ce salon…" in the
+// dictionary), which keeps the name as a protected value and translates only the fixed parts.
 function nameLabel(value: string, presence = false): string {
     const match = value.match(/^(\s*)(.*?)(\s*)$/s);
     if (!match || !match[2]) return value;
