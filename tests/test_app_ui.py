@@ -193,8 +193,11 @@ const out = vm.runInContext(`
   details.open = false;
   details.listeners.toggle.forEach(listener => listener({ target: details }));
   // A switch that failed: the server says off, the row says off.
+  // Firefox switched off: the server asks for a restart durably (item.restart), with no click on this switch, so the
+  // row carries the hint even after "switch everything off" or reopening the window.
   state = JSON.parse(JSON.stringify(fixture));
   Object.assign(state.items.find(item => item.name === "vlc"), { on: false, activation: "failed" });
+  Object.assign(state.items.find(item => item.name === "firefox"), { on: false, restart: true });
   render();
   result.after = rowsOf("switches");
   JSON.stringify(result);
@@ -373,6 +376,13 @@ class RenderTests(unittest.TestCase):
         # Details the person closed stay closed.
         zip_ = next(row for row in self.result['after'] if row['name'] == '7zip')
         self.assertFalse(zip_['details']['open'])
+
+    def test_a_part_switched_off_by_the_server_shows_the_restart_hint(self):
+        # No click on this switch: the hint comes from item.restart, so "switch everything off" and reopening the
+        # window keep it. (The server never shows the change as done while the open program is still in Corsican.)
+        firefox = next(row for row in self.result['after'] if row['name'] == 'firefox')
+        self.assertFalse(firefox['checked'])
+        self.assertEqual(firefox['hints'], ['Restart Firefox to see the change.'])
 
 
 STYLE = PAGE.parent / 'style.css'
