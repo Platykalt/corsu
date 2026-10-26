@@ -158,6 +158,37 @@ def detected():
     return DETECTED['names']
 
 
+RUNNING = {'time': 0.0, 'paths': None}
+
+# Executable names (matched on the file name, any case) of the clients a switched-off part keeps translating until
+# they restart. Firefox is matched on its path instead (its translated copy lives under DATA/firefox); the ordinary
+# Firefox a switched-off launcher opens is not the copy and must not raise the hint. Chromium browsers and the rest
+# are left out on purpose: a missing signature means no durable hint, never a permanent one.
+RESTART_PROCESSES = {'discord': {'discord', 'discordcanary', 'discordptb', 'discorddevelopment'},
+                     'vesktop': {'vesktop'}, 'desktop': {'plasmashell'}}
+
+
+def running_now():
+    """The executables running now (corsu.running_executables(), None when it cannot be told), cached a few seconds
+    so one snapshot and the next do not each scan the process list."""
+    if time.monotonic() - RUNNING['time'] > 3:
+        RUNNING['paths'], RUNNING['time'] = corsu.running_executables(), time.monotonic()
+    return RUNNING['paths']
+
+
+def still_open(name):
+    """Whether the program that part `name` translates is open now, so it keeps the old language until it restarts.
+    When the process list cannot be read, returns False: the restart hint stays off rather than on for good."""
+    running = running_now()
+    if not running:
+        return False
+    if name == 'firefox':
+        prefix = (str(corsu.DATA / 'firefox') + os.sep).replace('\\', '/')
+        return any(path.replace('\\', '/').startswith(prefix) for path in running)
+    names = RESTART_PROCESSES.get(name)
+    return bool(names) and any(Path(path.replace('\\', '/')).name.lower() in names for path in running)
+
+
 def components():
     """The fixed parts, then each program with its own Corsican translation (src/apps)."""
     import apps
@@ -222,16 +253,14 @@ def snapshot(job=None):
         item = {'name': name, 'text': text, 'installed': name in installed or name in switchable,
                 'switchable': name in switchable, 'on': name in switchable and not corsu.is_disabled(name, state)}
         item.update(status(name, item, state))
-        # A part switched off: the programs already open keep showing Corsican until they restart. Say so durably,
-        # whatever turned it off (a single switch, "switch everything off", or just reopening this window), so the
-        # window never shows the change as done while an open program still shows the old language. Parts with a
-        # detailed status (state['results']) already carry this in their own rows; the terminal is per-shell.
-        if name != 'terminal' and item['switchable'] and not item['on'] and state.get('results', {}).get(name) is None:
+        # A part switched off while its program is still open keeps the old language until that program restarts: say
+        # so durably, whatever turned it off (a single switch, "switch everything off", or just reopening this window),
+        # so the window never shows the change as done while an open program still shows the old language. The hint is
+        # conditional on the program actually running, so it is not shown for an already-closed one and goes away once
+        # the program has restarted. Parts with a detailed status (state['results']) carry this in their own rows.
+        if (name != 'terminal' and item['switchable'] and not item['on']
+                and state.get('results', {}).get(name) is None and still_open(name)):
             item['restart'] = True
-        # A part switched off: the programs already open keep showing Corsican until they restart. Say so durably,
-        # whatever turned it off (a single switch, "switch everything off", or just reopening this window), so the
-        # window never shows the change as done while an open program still shows the old language. Parts with a
-        # detailed status (state['results']) already carry this in their own rows; the terminal is per-shell.
         if name == 'minecraft' and item['installed']:
             waiting = minecraft_waiting(state, state.get('results', {}).get(name))
             item['instances'] = [*item['instances'], *waiting]
