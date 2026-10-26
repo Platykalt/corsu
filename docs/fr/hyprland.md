@@ -263,10 +263,10 @@ Chaque étape est indépendante ; faites seulement celles qu'il vous faut.
    et la copie de l'entrée de Noctalia. **Restent** : vos réglages faits dans Noctalia
    (`~/.local/state/noctalia/settings.toml`), `~/.config/hypr/user.lua`, tout fichier que vous avez modifié (avec un
    message) et le dossier `~/.local/share/corsu/noctalia/assets/`.
-3. **Revenir à Corsu 0.28.0**, la version publiée, après l'étape 2 :
+3. **Revenir à Corsu 0.28.1**, la version publiée, après l'étape 2 (la 0.28.0 refuse les parties Hyprland encore notées et ne s'installe pas ; rien n'est abîmé) :
 
    ```sh
-   ~/.local/share/corsu/bin/corsu-python ~/.local/share/corsu/releases/<dossier actuel>/src/update.py --install --version 0.28.0 --allow-downgrade
+   ~/.local/share/corsu/bin/corsu-python ~/.local/share/corsu/releases/<dossier actuel>/src/update.py --install --version 0.28.1 --allow-downgrade
    ```
 
    Le dossier actuel est `release.folder` dans `~/.local/share/corsu/installation.json`. Vos autres choix Corsu

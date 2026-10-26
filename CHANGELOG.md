@@ -30,6 +30,12 @@ From 0.28.0 (`1bb7622`, tag `v0.28.0`).
   read as a system label, even one written like a fragment. Translator revision `2026-10-group-1`; provenance in
   `lexicon/review-discord-2026-10.tsv` (Corsu usage, not read by a speaker). Checked in simulated pages with the
   built plugin (`check_discord_built.py`), not in the real Discord.
+- **Going back from the `hyprland` development build**: 0.28.0's installer refused the parts `hyprland` and
+  `hyprland-profile` that such an installation records (`invalid choice: 'hyprland'`), so the documented return to
+  the published release failed (cleanly: the installation stayed as it was; seen in an isolated test). The installer
+  now leaves a recorded part it does not know as it is, with a note; an unknown name nobody recorded is still an
+  error. The guides now name 0.28.1 for that step.
+- **CI**: update, update with VLC and migration from the published 0.28.0.
 
 ## 0.28.0 (2026-10-26)
 
