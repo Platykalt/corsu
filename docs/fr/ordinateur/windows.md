@@ -29,12 +29,17 @@ voir [Discord](../discord.md). Corsu règle aussi sur le corse la langue des log
 corse (VLC, 7-Zip, Notepad++, Audacity, PDFsam…) et met en corse Minecraft: Java Edition, voir
 [État des traductions](../etat-des-traductions.md).
 
-## Corsu 0.27.0 : la fenêtre se ferme au démarrage
+## Corsu 0.26.0 et 0.27.0 : la fenêtre se ferme au démarrage
+
+**Corrigé dans Corsu 0.28.0.** Téléchargez `corsu-windows.zip` depuis la
+[dernière version](https://github.com/Platykalt/corsu/releases/latest) (aucun compte GitHub nécessaire) ou relancez
+l'installation en une ligne : la 0.28.0 remplace la copie installée et garde vos choix. Ce qui suit ne sert qu'avec
+la 0.26.0 ou la 0.27.0.
 
 Avec Corsu 0.27.0 (et déjà 0.26.0) sous Windows, la fenêtre de Corsu se ferme aussitôt ouverte (à l'installation
 comme depuis le menu Démarrer) : Corsu donnait à la fenêtre une icône dans un format que Windows refuse, et le
-programme s'arrêtait. La correction arrivera avec la prochaine version. En attendant, Corsu marche dans le navigateur avec
-l'option `--browser` : la même page s'ouvre dans un onglet au lieu de sa fenêtre.
+programme s'arrêtait. Avec ces versions, Corsu marche dans le navigateur avec l'option `--browser` : la même page
+s'ouvre dans un onglet au lieu de sa fenêtre.
 
 Corsu n'est pas encore installé (la fenêtre s'est fermée pendant l'installation) : installez-le dans le terminal,
 avec l'option `--text` passée à l'installation en une ligne :
@@ -73,7 +78,7 @@ $copie.Save()
 
 Ne modifiez pas le raccourci Corsu du menu Démarrer lui-même : Corsu le réécrit à chaque mise à jour et refuse de
 toucher à un raccourci changé à la main, ce qui ferait échouer la mise à jour. Une fois Corsu mis à jour vers la
-version corrigée, supprimez le raccourci « Corsu (navigateur) » du Bureau : il désigne la version précédente.
+0.28.0, supprimez le raccourci « Corsu (navigateur) » du Bureau : il désigne la version précédente.
 
 ## Changer d'avis
 

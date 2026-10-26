@@ -57,8 +57,10 @@ def current():
 
 
 def download_base():
-    """CORSU_DOWNLOAD_BASE, as in install/get.sh: the same archives from another folder (a test build, file://
-    works), checked the same way."""
+    """CORSU_DOWNLOAD_BASE, as in install/get.sh: a development override pointing at the same archives in another
+    folder (a test build, file:// works). SHA-256 then only proves the download matches the .sha256 fetched from
+    that same base (the transfer was not corrupted), not where the files come from; the authenticity of the
+    official release rests on HTTPS to github.com. install() announces a non-default base."""
     return os.environ.get('CORSU_DOWNLOAD_BASE', '').rstrip('/')
 
 
@@ -498,6 +500,9 @@ def install(version=None, allow_downgrade=False):
     downloads.mkdir(parents=True, exist_ok=True)
     folder = Path(tempfile.mkdtemp(prefix='update-', dir=downloads))
     try:
+        if download_base():
+            progress(9, f'Downloading from {download_base()}, not the official releases (SHA-256 checks the transfer, not the source)',
+                     f'Téléchargement depuis {download_base()}, pas les versions officielles (SHA-256 vérifie le transfert, pas la source)')
         progress(10, f'Downloading {name}', f'Téléchargement de {name}')
         download(download_url(name, version), folder / name)
         download(download_url(name + '.sha256', version), folder / 'expected.sha256', 40, 41)

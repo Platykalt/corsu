@@ -3,10 +3,10 @@
 [Français](../fr/hyprland.md)
 
 > **Status: in development, not in the published release.** The code is on the development branch
-> [`hyprland`](https://github.com/Platykalt/corsu/tree/hyprland), separate from the stable release: Corsu 0.27.0 does
-> not contain it. Linux only; checked only on CachyOS with Hyprland 0.56.2 and Noctalia 5.3.0, and part of the
-> checks are still to be done ([Checks](#checks)). Optional: installing Corsu never replaces your desktop; these
-> parts are chosen one by one and the Plasma session stays.
+> [`hyprland`](https://github.com/Platykalt/corsu/tree/hyprland), separate from the stable release: the published
+> release, 0.28.0, does not contain it. Linux only; checked only on CachyOS with Hyprland 0.56.2 and Noctalia
+> 5.3.0, and part of the checks are still to be done ([Checks](#checks)). Optional: installing Corsu never replaces
+> your desktop; these parts are chosen one by one and the Plasma session stays.
 
 [Hyprland](https://hyprland.org) is a Linux desktop where windows arrange themselves side by side; Noctalia adds the
 top bar, the application launcher, notifications, the lock screen and settings. Corsu brings:
@@ -29,8 +29,8 @@ panel wired to the NVIDIA), Hyprland 0.56.2, Noctalia 5.3.0, uwsm 0.27.1, Hyprla
 - Real Hyprland in a **nested test session** (Hyprland inside a screenless virtual KWin, private D-Bus session bus,
   system bus hidden): configuration loaded without errors, 66 binds registered, `fr` keyboard, Noctalia started and
   in Corsican (welcome, bar, session menu, key help). Screenshots [below](#screenshots).
-- Development build 0.28.0 from the branch installed on that computer with both parts; going back to the published
-  0.27.0 tried in a throwaway folder.
+- Development build 0.28.0 from the branch installed on that computer with both parts; going back to 0.27.0 (then
+  the published release) tried in a throwaway folder.
 - A real Hyprland login reached the desktop; the KWallet wallet asked for its password and opened once that password
   was typed. This confirms that step only, not the rest of the session.
 - CI: the branch's latest successful run ([39846551021](https://github.com/Platykalt/corsu/actions/runs/39846551021))
@@ -86,7 +86,7 @@ tried yet.
 
 ## Getting the development build
 
-These parts are in no published release: the usual install command installs 0.27.0, without them. To try them you
+These parts are in no published release: the usual install command installs 0.28.0, without them. To try them you
 need the `hyprland` branch; this is for testers, not for daily use.
 
 ```sh
@@ -97,7 +97,7 @@ cd corsu-hyprland
 
 The Corsu window opens. In **Add**, tick **Hyprland and Noctalia** and, if you want it, **Corsu desktop profile for
 Hyprland**, then follow the steps. Note: this replaces the installed Corsu with the development build, which calls
-itself 0.28.0 although 0.28.0 is not published. To go back to 0.27.0, see [Going back](#going-back).
+itself 0.28.0 too but is not the published 0.28.0. To go back to the published release, see [Going back](#going-back).
 
 ## Two separate choices
 
@@ -253,10 +253,10 @@ Each step stands on its own; do only the ones you need.
    the copy of Noctalia's entry. **Kept**: your settings made in Noctalia (`~/.local/state/noctalia/settings.toml`),
    `~/.config/hypr/user.lua`, any file you edited (with a message) and the `~/.local/share/corsu/noctalia/assets/`
    folder.
-3. **Back to Corsu 0.27.0**, the published release, after step 2:
+3. **Back to Corsu 0.28.0**, the published release, after step 2:
 
    ```sh
-   ~/.local/share/corsu/bin/corsu-python ~/.local/share/corsu/releases/<current folder>/src/update.py --install --version 0.27.0 --allow-downgrade
+   ~/.local/share/corsu/bin/corsu-python ~/.local/share/corsu/releases/<current folder>/src/update.py --install --version 0.28.0 --allow-downgrade
    ```
 
    The current folder is `release.folder` in `~/.local/share/corsu/installation.json`. Your other Corsu choices

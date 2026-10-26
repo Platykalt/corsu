@@ -223,7 +223,11 @@ function switchRow(item, busy) {
   const id = "switch-" + item.name;
   const block = statusBlock(item);
   // A restart cannot show a change that did not happen.
-  const hint = troubled(activationOf(item)) ? null : restartHints.get(item.name);
+  // The server marks a part switched off whose open programs still show the old language until they restart
+  // (item.restart). That hint is durable: it survives "switch everything off" and reopening the window, unlike the
+  // one set below when the person flips this switch themselves.
+  const serverRestart = item.restart ? (item.name === "desktop" ? t("restart_desktop") : t("restart", { name })) : null;
+  const hint = troubled(activationOf(item)) ? null : serverRestart || restartHints.get(item.name);
   const option = complementOption(item, name, busy);
   // The complement's own switch makes the row tall: VLC's switch stays at the top, next to its name.
   const classes = new Set((rowClass(block) || "").split(" ").filter(Boolean));

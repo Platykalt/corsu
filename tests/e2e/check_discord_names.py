@@ -6,7 +6,10 @@ Bundles src/discord-plugin/translate.ts with Vencord's esbuild (a small test dic
 loads it in Chrome headless, builds pages the way Discord renders them (React keeps each component's props on its DOM
 nodes, under __reactFiber$…), and checks: friends named "Work" and "Error" keep their names while the same words are
 translated as interface labels; a name inside a translated sentence or label is kept; mentions in messages are left
-alone and still clickable; and all of it still holds after the page changes conversation.
+alone and still clickable; search fields (an <input> placeholder and label, the placeholder Slate draws inside an empty
+editor, a placeholder beside the editor) are translated with the conversation or server name Discord inserts kept as
+written ("Rechercher EnzoParisi, Moz_One"), while what is typed and fields inside messages stay; and all of it still
+holds after the page changes conversation.
 """
 import json
 import os
@@ -27,6 +30,7 @@ DICTIONARY = {
     'Work': 'Travagliu', 'Error': 'Sbagliu', 'Online': 'In linea', 'Friends': 'Amichi',
     '\u00001\u0000 is typing a message…': '\u00001\u0000 scrive un messaghju…',
     'Send a message to @\u00001\u0000': 'Mandà un messaghju à @\u00001\u0000',
+    'Rechercher': 'Circà', 'Rechercher \u00001\u0000': 'Circà \u00001\u0000',
 }
 
 PAGE = r'''
@@ -46,7 +50,14 @@ document.body.innerHTML = `
   <div id="typing">Work is typing a message…</div><div id="typingSystem">Error is typing a message…</div>
   <div class="composer"><div id="draft" class="placeholder_x">Send a message to @Work</div><div contenteditable="true"></div></div>
   <div id="message-content-1">Hello <span id="mention" class="mention" role="button" data-user-id="111111111111111111">@Work</span></div>
-  <div id="profile"><span id="nick">Error</span><div id="bio" class="bio_x">Work</div></div>`;
+  <div id="profile"><span id="nick">Error</span><div id="bio" class="bio_x">Work</div></div>
+  <div class="peopleColumn"><input id="friendSearch" class="input_x" placeholder="Rechercher" aria-label="Rechercher"></div>
+  <div class="toolbar_x"><div class="search_x">
+    <div id="dmSearch" class="editor_x" role="combobox" contenteditable="true" aria-label="Rechercher EnzoParisi, Moz_One"><div data-slate-node="element"><span data-slate-node="text"><span data-slate-leaf="true"><span id="slatePlaceholder" data-slate-placeholder="true" contenteditable="false">Rechercher EnzoParisi, Moz_One</span><span data-slate-zero-width="n">\ufeff<br></span></span></span></div></div>
+    <div class="public-DraftEditorPlaceholder-root"><div id="draftPlaceholder" class="public-DraftEditorPlaceholder-inner">Rechercher Work</div></div>
+    <input id="guildSearch" placeholder="Rechercher Mon Serveur" aria-label="Rechercher Mon Serveur"></div></div>
+  <div id="typedEditor" contenteditable="true"><span data-slate-string="true" id="typed">Rechercher Work</span></div>
+  <div id="message-content-2"><input id="messageField" placeholder="Rechercher"></div>`;
 fiber(document.getElementById("friend1"), { user: work }, { friend: work });
 fiber(document.getElementById("friend2"), { user: error });
 fiber(document.getElementById("label2"), { onClick: () => 0, look: "filled" });
@@ -54,6 +65,9 @@ fiber(document.getElementById("dm"), { channel: { id: "333333333333333333", name
 fiber(document.getElementById("typing"), { users: [work] });
 fiber(document.getElementById("draft"), { channel: { id: "333333333333333333", recipients: [work] } });
 fiber(document.getElementById("nick"), { member: { id: "222222222222222222", nick: "Error" } });
+// A group DM: Discord composes "EnzoParisi, Moz_One" from its members; no record holds that text as such.
+fiber(document.getElementById("slatePlaceholder"), { channel: { id: "555555555555555555", type: 3, name: "",
+  recipients: ["666666666666666666", "777777777777777777"] } });
 window.clicks = 0;
 document.getElementById("mention").addEventListener("click", () => window.clicks++);
 window.mentionNode = document.getElementById("mention");
@@ -68,6 +82,16 @@ friend.__reactFiber$test.return.memoizedProps = { user: { id: "44444444444444444
 friend.firstChild.data = "Online";
 const label = document.getElementById("label1");
 label.firstChild.data = "Work";
+// Another conversation: the field gets a new placeholder, Slate draws a new placeholder span.
+document.getElementById("guildSearch").setAttribute("placeholder", "Rechercher Error");
+const leaf = document.getElementById("slatePlaceholder").parentNode;
+document.getElementById("slatePlaceholder").remove();
+const span = document.createElement("span");
+span.id = "slatePlaceholder";
+span.setAttribute("data-slate-placeholder", "true");
+span.setAttribute("contenteditable", "false");
+span.textContent = "Rechercher Work, Error";
+leaf.prepend(span);
 '''
 
 READ = r'''
@@ -79,6 +103,14 @@ JSON.stringify({
   draft: document.getElementById("draft").textContent,
   message: document.getElementById("message-content-1").textContent, nick: document.getElementById("nick").textContent,
   bio: document.getElementById("bio").textContent,
+  friendSearch: document.getElementById("friendSearch").placeholder,
+  friendSearchLabel: document.getElementById("friendSearch").getAttribute("aria-label"),
+  dmSearchLabel: document.getElementById("dmSearch").getAttribute("aria-label"),
+  slatePlaceholder: document.getElementById("slatePlaceholder").textContent,
+  draftPlaceholder: document.getElementById("draftPlaceholder").textContent,
+  guildSearch: document.getElementById("guildSearch").placeholder,
+  typed: document.getElementById("typed").textContent,
+  messageField: document.getElementById("messageField").placeholder,
   mentionSame: document.getElementById("mention") === window.mentionNode,
   mentionId: document.getElementById("mention").dataset.userId,
   clicks: (document.getElementById("mention").click(), window.clicks)
@@ -94,8 +126,15 @@ EXPECTED = {
     'message': 'Hello @Work', 'bio': 'Work',                 # what people write is never translated
     'nick': 'Error',                                         # a server nickname
     'mentionSame': True, 'mentionId': '111111111111111111', 'clicks': 1,
+    # Search fields: "Rechercher" on the Friends page (an <input>, never reached before), the placeholder over a group
+    # DM (in a Slate editor, beside a Draft one, or the field's label) and over a server, names inserted as written.
+    'friendSearch': 'Circà', 'friendSearchLabel': 'Circà',
+    'dmSearchLabel': 'Circà EnzoParisi, Moz_One', 'slatePlaceholder': 'Circà EnzoParisi, Moz_One',
+    'draftPlaceholder': 'Circà Work', 'guildSearch': 'Circà Mon Serveur',
+    'typed': 'Rechercher Work', 'messageField': 'Rechercher',  # what is typed, and a field inside a message
 }
-AFTER_CHANGE = {**EXPECTED, 'friend1': 'Online', 'label1': 'Travagliu', 'clicks': 2}
+AFTER_CHANGE = {**EXPECTED, 'friend1': 'Online', 'label1': 'Travagliu', 'clicks': 2,
+                'guildSearch': 'Circà Error', 'slatePlaceholder': 'Circà Work, Error'}
 
 
 def bundle(vencord, dictionary_words=None):

@@ -3,7 +3,36 @@
 Document de reprise, tenu à jour à chaque étape. Il renvoie aux documents détaillés plutôt que de les répéter.
 Les sections datées après « État actuel » sont l'historique : ce qui y est dit ouvert a pu être corrigé depuis.
 
-## État actuel (22 octobre 2026)
+## État actuel (26 octobre 2026)
+
+- **0.27.0 reste la dernière version publiée** (tag `v0.27.0` sur `f51b1ac`). `main` = `751c461` (documentation :
+  Hyprland en développement, contournement `--browser` pour la fenêtre Windows de la 0.27.0).
+- **Candidate 0.28.0** : `next-0.28` = `c471a0d` (`next-0.28` fusionnée avec `main`), plus la documentation de
+  publication sur la branche `docs-028` (CHANGELOG « 0.28.0 (2026-10-26) », notes de version, README et pages d'état
+  qui nomment la 0.28.0). Non publiée : la publication attend l'accord du mainteneur.
+  - Fenêtre Windows : `b4d99ef`, `fa4473f` (icône `corsu.ico` par `windows_window_icon()` sous Windows seulement ;
+    macOS et Linux inchangés), `d00b266` (CI : vraie fenêtre ouverte avec le Python de l'archive sur un runner Windows
+    Server, `tests/e2e/check_windows_window.py`).
+  - Firefox : `fc5e88d`, `ee3faa4` (`contextMenuSearch`, voir l'historique ci-dessous).
+  - Discord : `8c25eb2` (champs de recherche), `319b281`, `e290746`, `a23d8c0` (message d'épinglage ; provenance
+    usage Corsu, non relu par un locuteur). Vérifié sur pages simulées avec le plugin construit dans Chromium sans
+    affichage, pas dans le vrai Discord ; l'emplacement du pseudo dans le message d'épinglage reste une hypothèse.
+  - Désactiver : `b416445`, `df89ab8` (consigne de redémarrage seulement tant que le logiciel tourne).
+  - Source de téléchargement : `ebed6f3` (avertissement quand `CORSU_DOWNLOAD_BASE` n'est pas la source officielle).
+  - CI de la candidate : **40360790474 verte** sur `8b235f0` (26 octobre 2026) : tests unitaires (3 systèmes,
+    Python 3.10 et 3.13), archives, bout en bout sur les trois systèmes. Plugin Discord construit : révision
+    `2026-10-pins-1`, recherche et épinglage traduits, pseudos gardés ; fenêtre native de Corsu ouverte sous Windows
+    avec le Python de l'archive, icônes posées (capture `windows-native-window`) ; mise à jour depuis la 0.27.0
+    publiée sous les trois systèmes, migration 0.27.0 → 0.28.0 sous Linux (Firefox éteint reste éteint, apparence
+    gardée). Archives inspectées : version 0.28.0, `corsu.ico`, aucune trace de `strix_runs/` ni de secret, sommes
+    SHA-256 conformes. Ensuite seulement de la documentation (`c471a0d`, fusion de `main` ; release) : 640 tests
+    unitaires verts en local ; la CI du tag reconstruit et revérifie tout avant de publier.
+- **`fix-0.27.1`** (`f59fb6d`, 0.27.0 avec la correction de la fenêtre Windows) : jamais publiée, remplacée par la
+  0.28.0, qui contient la même correction.
+- **`hyprland`** (`b5ec13f`) : branche de développement, non fusionnée dans `next-0.28` ni dans `main` ; la 0.28.0 ne
+  contient pas l'intégration Hyprland + Noctalia.
+
+## Historique : candidate 0.28 (22 octobre 2026)
 
 - **0.27.0 publiée** (19 octobre 2026, 12 h 06 UTC) : tag annoté `v0.27.0` sur `f51b1ac`, release
   https://github.com/Platykalt/corsu/releases/tag/v0.27.0, dernière version (16 fichiers ; CI du tag 39243504586

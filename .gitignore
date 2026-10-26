@@ -11,3 +11,6 @@ keyboard/*/build/
 /build/
 vendor/runtime/
 lexicon/memory/corsu-*.jsonl
+
+# Strix pentest output (local, not distributed)
+strix_runs/
