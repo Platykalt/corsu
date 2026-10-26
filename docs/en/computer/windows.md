@@ -29,12 +29,17 @@ Discord, see [Discord](../discord.md). Corsu also sets to Corsican the language 
 Corsican translation (VLC, 7-Zip, Notepad++, Audacity, PDFsam…) and puts Minecraft: Java Edition in Corsican, see
 [Translation status](../translation-status.md).
 
-## Corsu 0.27.0: the window closes at start
+## Corsu 0.26.0 and 0.27.0: the window closes at start
+
+**Fixed in Corsu 0.28.0.** Download `corsu-windows.zip` from the
+[latest release](https://github.com/Platykalt/corsu/releases/latest) (no GitHub account needed) or run the one-line
+installation again: 0.28.0 replaces the installed copy and keeps your choices. What follows is only for 0.26.0 or
+0.27.0.
 
 With Corsu 0.27.0 (and already 0.26.0) on Windows, Corsu's window closes as soon as it opens (when installing as
-well as from the Start menu): Corsu gave the window an icon in a format Windows refuses, and the program stopped. The
-fix comes with the next version. Meanwhile, Corsu works in the browser with the `--browser` option: the same page
-opens in a tab instead of its window.
+well as from the Start menu): Corsu gave the window an icon in a format Windows refuses, and the program stopped.
+With those versions, Corsu works in the browser with the `--browser` option: the same page opens in a tab instead of
+its window.
 
 Corsu is not installed yet (the window closed during installation): install it in the terminal, with the `--text`
 option passed to the one-line installation:
@@ -72,7 +77,7 @@ $copy.Save()
 ```
 
 Do not change the Start menu's Corsu shortcut itself: Corsu rewrites it at every update and refuses to touch a
-shortcut changed by hand, which would make the update fail. Once Corsu is updated to the fixed version, delete the
+shortcut changed by hand, which would make the update fail. Once Corsu is updated to 0.28.0, delete the
 "Corsu (browser)" Desktop shortcut: it points to the previous version.
 
 ## Changing your mind

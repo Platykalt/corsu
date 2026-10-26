@@ -3,10 +3,10 @@
 [English](../en/hyprland.md)
 
 > **Statut : en développement, pas dans la version publiée.** Le code est sur la branche de développement
-> [`hyprland`](https://github.com/Platykalt/corsu/tree/hyprland), à part de la version stable : Corsu 0.27.0 ne le
-> contient pas. Linux seulement ; vérifié seulement sur CachyOS avec Hyprland 0.56.2 et Noctalia 5.3.0, et une
-> partie des essais reste à faire ([Vérifications](#vérifications)). Facultatif : installer Corsu ne remplace jamais
-> votre bureau ; ces parties se choisissent une à une et la session Plasma reste.
+> [`hyprland`](https://github.com/Platykalt/corsu/tree/hyprland), à part de la version stable : la version publiée,
+> 0.28.0, ne le contient pas. Linux seulement ; vérifié seulement sur CachyOS avec Hyprland 0.56.2 et Noctalia
+> 5.3.0, et une partie des essais reste à faire ([Vérifications](#vérifications)). Facultatif : installer Corsu ne
+> remplace jamais votre bureau ; ces parties se choisissent une à une et la session Plasma reste.
 
 [Hyprland](https://hyprland.org) est un bureau pour Linux où les fenêtres se rangent seules côte à côte ; Noctalia y
 ajoute la barre du haut, le lanceur d'applications, les notifications, l'écran de verrouillage et les réglages. Corsu
@@ -32,7 +32,7 @@ détecte. Plasma reste installé et choisissable à chaque connexion.
   privé, bus système masqué) : configuration chargée sans erreur, 66 raccourcis enregistrés, clavier `fr`, Noctalia
   démarré et en corse (accueil, barre, menu de session, aide des touches). Captures [plus bas](#captures).
 - Version de développement 0.28.0 de la branche installée sur cet ordinateur avec les deux parties ; retour à la
-  version publiée 0.27.0 essayé dans un dossier jetable.
+  0.27.0, alors la version publiée, essayé dans un dossier jetable.
 - Une vraie connexion à Hyprland a atteint le bureau ; le portefeuille KWallet a demandé son mot de passe et s'est
   ouvert une fois ce mot de passe tapé. Cela confirme seulement cette étape, pas le reste de la session.
 - CI : la dernière exécution réussie de la branche ([39846551021](https://github.com/Platykalt/corsu/actions/runs/39846551021))
@@ -89,7 +89,7 @@ peuvent différer ; ce n'est pas encore essayé.
 
 ## Obtenir la version de développement
 
-Ces parties ne sont dans aucune version publiée : la commande d'installation habituelle installe 0.27.0, sans elles.
+Ces parties ne sont dans aucune version publiée : la commande d'installation habituelle installe 0.28.0, sans elles.
 Pour les essayer, il faut prendre la branche `hyprland` ; c'est pour les testeurs, pas pour un usage quotidien.
 
 ```sh
@@ -100,8 +100,8 @@ cd corsu-hyprland
 
 La fenêtre de Corsu s'ouvre. Dans **Ajouter**, cochez **Hyprland et Noctalia** et, si vous le voulez,
 **Profil de bureau Corsu pour Hyprland**, puis suivez les étapes. Attention : cela remplace le Corsu installé par la
-version de développement, qui se présente comme 0.28.0 alors que 0.28.0 n'est pas publiée. Pour revenir à 0.27.0,
-voir [Revenir en arrière](#revenir-en-arrière).
+version de développement, qui se présente aussi comme 0.28.0 mais n'est pas la 0.28.0 publiée. Pour revenir à la version
+publiée, voir [Revenir en arrière](#revenir-en-arrière).
 
 ## Deux choix séparés
 
@@ -263,10 +263,10 @@ Chaque étape est indépendante ; faites seulement celles qu'il vous faut.
    et la copie de l'entrée de Noctalia. **Restent** : vos réglages faits dans Noctalia
    (`~/.local/state/noctalia/settings.toml`), `~/.config/hypr/user.lua`, tout fichier que vous avez modifié (avec un
    message) et le dossier `~/.local/share/corsu/noctalia/assets/`.
-3. **Revenir à Corsu 0.27.0**, la version publiée, après l'étape 2 :
+3. **Revenir à Corsu 0.28.0**, la version publiée, après l'étape 2 :
 
    ```sh
-   ~/.local/share/corsu/bin/corsu-python ~/.local/share/corsu/releases/<dossier actuel>/src/update.py --install --version 0.27.0 --allow-downgrade
+   ~/.local/share/corsu/bin/corsu-python ~/.local/share/corsu/releases/<dossier actuel>/src/update.py --install --version 0.28.0 --allow-downgrade
    ```
 
    Le dossier actuel est `release.folder` dans `~/.local/share/corsu/installation.json`. Vos autres choix Corsu

@@ -2,14 +2,14 @@
 
 [Français](../fr/etat-des-traductions.md)
 
-What is translated, what is in progress and what is only planned. Updated 19 October 2026 (Corsu 0.27.0, the published release). Which
+What is translated, what is in progress and what is only planned. Updated 19 October 2026; published release: Corsu 0.28.0. Which
 systems each program works on is in [What works where](compatibility.md).
 
 Three different things are tracked, and none implies the next: **translated** (a Corsican text exists for every
 string), **technically checked** (the files are valid and the program loads them) and **reviewed by a speaker** (a
 person who speaks Corsican checked the sense and the language).
 
-Statuses: **available** (in the published release 0.27.0), **experimental** (available, little checked on that
+Statuses: **available** (in the published release 0.28.0), **experimental** (available, little checked on that
 system), **candidate** (in the next version, not published yet), **prototype** or **planned** (not available).
 
 ## Programs Corsu translates

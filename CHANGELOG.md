@@ -1,11 +1,31 @@
 # Changelog
 
-## 0.28.0 (in development on next-0.28, not published)
+## 0.28.0 (2026-10-26)
 
-Started from 0.27.0 (`f51b1ac`, tag `v0.27.0`). Changes inherited from 0.27 are listed under 0.27.0 below.
-`src/release.json` says 0.28.0 so that CI checks the update and the migration from the published 0.27.0
-(`check_update.py`, `check_update_apps.py`, and `check_migration.py --from 0.27.0` beside `--from 0.24.0`).
+Developed on next-0.28 from 0.27.0 (`f51b1ac`, tag `v0.27.0`).
 
+- **Windows, Corsu's window closed at start** (0.26.0 and 0.27.0, every Windows): pywebview's WinForms backend loads
+  the window icon with `System.Drawing.Icon`, which throws on a PNG; the unhandled .NET exception ended the program
+  and its local server. Reported on a real Windows after the one-line install of 0.27.0. Windows now gets
+  `src/app/corsu.ico` through `windows_window_icon()`; macOS (Dock icon) and Linux keep the PNG as before. The
+  workaround with `--browser` in the Windows guides is kept for 0.26.0 and 0.27.0 only.
+- **Discord, pinned message**: the system message "X a épinglé un message dans ce salon. Voir tous les messages
+  épinglés." stayed in French, seen on the maintainer's Discord. The sentence was in the dictionary but never looked
+  up in the message list; the plugin now translates these exact system sentences there (`systemLabels`), plus two
+  templates where the name is drawn inside the sentence, inserting the name verbatim ("Work", "Error" stay as
+  written). The link "Voir tous les messages épinglés." was added. Provenance in `lexicon/review-discord-2026-10.tsv`
+  (Corsu usage, not read by a speaker); where Discord draws the name is an assumption, not inspected in the real
+  client. Checked in simulated pages with the built plugin in headless Chromium (`check_discord_built.py`), not in
+  the real Discord.
+- **Switching a part off**: the program already open (Firefox, Discord with the Vencord plugin loaded) keeps its
+  Corsican interface until it restarts, and the window used to show the switch as off without saying so. The window
+  now says which program to restart, however the part was switched off (including the big "Désactiver" button),
+  only while that program is really running (Discord, Vesktop and KDE by executable name, Firefox by the path of its
+  translated copy), and the line goes away once it has restarted. Chromium browsers have no such signature: only the
+  short hint on click. Repair and update keep the parts switched off (`installer.keep_choices`, now tested).
+- **Download source**: `get.sh`, `get.ps1` and `update.py` show a visible warning when `CORSU_DOWNLOAD_BASE` points
+  to a non-official source. The archive and its `.sha256` then come from the same place, so SHA-256 proves only that
+  the transfer is intact, not where the file comes from; the official source stays the default (HTTPS to GitHub).
 - **Firefox**: the context menu on selected text now reads "Circà « … » cù Google" instead of the French
   "Recherche Google pour « … »" (`browser.properties`, key `contextMenuSearch`, which had no lexicon row). AI
   proposal built on wording Corsu already uses beside it ("Circà cù %1"); regression test in `tests/test_engine.py`.
@@ -21,7 +41,12 @@ Started from 0.27.0 (`f51b1ac`, tag `v0.27.0`). Changes inherited from 0.27 are 
   Firefox's "Ricercà"; three more search labels left half French were added (provenance in
   `lexicon/review-discord-2026-10.tsv`: Corsu usage, not read by a speaker). Translator revision
   `2026-10-search-1`. Checked in simulated pages in headless Chromium (`check_discord_names.py`,
-  `check_discord_built.py`), not yet in the real Discord.
+  `check_discord_built.py`), not in the real Discord.
+- **CI**: update and migration from the published 0.27.0 (`check_update.py`, `check_update_apps.py`, and
+  `check_migration.py --from 0.27.0` beside `--from 0.24.0`, appearance settings included). The package job fails when
+  `corsu-windows.zip` lacks a valid `src/app/corsu.ico` or `pythonw.exe`; on a Windows Server runner,
+  `tests/e2e/check_windows_window.py` starts Corsu's real window from the archive's own Python and checks that it
+  stays up with its icon, its local server answering, and closes by itself.
 
 ## 0.27.0 (2026-10-19)
 
