@@ -2,6 +2,12 @@
 
 ## Branch `hyprland` (development, not in a published release)
 
+- **Dates in Corsican in the Hyprland session**: Noctalia and the session's programs took day and month names from
+  glibc's `LC_TIME` (French here), and glibc has no Corsican locale. The `hyprland` part now builds, with `localedef`,
+  a Corsican `LC_TIME` (fr_FR's formats; full names as in Corsu's Discord dates, abbreviations AI proposals) and the
+  session's own locales in `~/.local/share/corsu/locale/`, rebuilt at each run; the `language` block of
+  `env-hyprland` sets `LOCPATH` and `LC_TIME=co_FR.UTF-8` only when that folder loads at login (otherwise dates stay
+  as before). Checked with glibc's `date` and Python in a throwaway folder; not observed in Noctalia itself.
 - **Hyprland and Noctalia, optional** (branch `hyprland`, not merged; [docs/en/hyprland.md](docs/en/hyprland.md)):
   two separate parts in `src/apps/hyprland.py`, offered only when Hyprland is installed (Corsu never installs a
   desktop; without Hyprland the window shows them greyed out with the reason). `hyprland`: Noctalia in Corsican and

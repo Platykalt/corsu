@@ -202,8 +202,9 @@ right change workspace, as in Plasma.
 
 | File | Part | How |
 | --- | --- | --- |
-| `~/.config/uwsm/env-hyprland` | language (`language` block: `LANGUAGE`, `NOCTALIA_ASSETS_DIR`), profile (`profile` block: `qt6ct` Qt theme, cursor, menu prefix, graphics card order when needed) | two blocks between `# corsu:begin …` and `# corsu:end …`; your lines around them stay |
+| `~/.config/uwsm/env-hyprland` | language (`language` block: `LANGUAGE`, `NOCTALIA_ASSETS_DIR`, `LOCPATH` and `LC_TIME` for dates in Corsican), profile (`profile` block: `qt6ct` Qt theme, cursor, menu prefix, graphics card order when needed) | two blocks between `# corsu:begin …` and `# corsu:end …`; your lines around them stay |
 | `~/.local/share/corsu/noctalia/assets/` | language | Corsu's folder: Noctalia's assets (links) plus a `co.json` built at each run; kept when the language is switched off, as the lock screen of a Noctalia already running reads it again |
+| `~/.local/share/corsu/locale/` | language | Corsu's folder: a `co_FR.UTF-8` locale (Corsican day and month names, fr_FR's formats) and your session's locales, built with `localedef` at each run. glibc has no Corsican locale. If one no longer loads at login (glibc updated since), dates stay as before until Corsu runs again |
 | `~/.config/noctalia/00-corsu-language.toml` | language | Corsu's layer (`lang = "co"`); a language picked in Noctalia's settings wins |
 | `~/.config/noctalia/00-corsu-profile.toml`, `~/.config/noctalia/palettes/` | profile | Corsu's look layer and palettes; your choices in the settings win |
 | `~/.local/state/noctalia/settings.toml` | — | your choices in Noctalia's settings: never changed by Corsu |
@@ -252,7 +253,7 @@ Each step stands on its own; do only the ones you need.
    `~/.config/xdg-desktop-portal/hyprland-portals.conf` and `~/.config/qt6ct/qt6ct.conf` when Corsu created them, and
    the copy of Noctalia's entry. **Kept**: your settings made in Noctalia (`~/.local/state/noctalia/settings.toml`),
    `~/.config/hypr/user.lua`, any file you edited (with a message) and the `~/.local/share/corsu/noctalia/assets/`
-   folder.
+   and `~/.local/share/corsu/locale/` folders.
 3. **Back to Corsu 0.28.1**, the published release, after step 2 (0.28.0 refuses the Hyprland parts still recorded and does not install; nothing is damaged):
 
    ```sh

@@ -62,7 +62,9 @@ def paths():
             'noctalia_palettes': config / 'noctalia/palettes',
             'qt6ct': config / 'qt6ct/qt6ct.conf',
             # Corsu's own folder: Noctalia's assets with Corsu's catalogue added (NOCTALIA_ASSETS_DIR).
-            'assets': corsu.DATA / 'noctalia/assets'}
+            'assets': corsu.DATA / 'noctalia/assets',
+            # Corsu's own folder: the session's locales with a Corsican LC_TIME (LOCPATH).
+            'locales': corsu.DATA / 'locale'}
 
 
 # Files Plasma reads, or shared with it: never written by this module (tests check them byte for byte).
@@ -365,8 +367,9 @@ def language_value():
     return ':'.join(dict.fromkeys(languages))
 
 
-def language_lines(assets=None):
-    """The language block of env-hyprland; with `assets`, Noctalia also loads Corsu's catalogue from there."""
+def language_lines(assets=None, locales=None):
+    """The language block of env-hyprland; with `assets`, Noctalia also loads Corsu's catalogue from there; with
+    `locales`, dates use the Corsican LC_TIME built there, when the session can load it."""
     value = language_value()
     fallback = value.split(':', 1)[1].replace(':', ', ')
     lines = ('# Corsican first in the Hyprland session, then ' + fallback + ' for texts not translated yet.\n'
@@ -374,7 +377,86 @@ def language_lines(assets=None):
     if assets:
         lines += ('# Noctalia\'s assets with Corsu\'s Corsican catalogue added (rebuilt by Corsu at each update).\n'
                   f'export NOCTALIA_ASSETS_DIR={shlex.quote(str(assets))}\n')
+    if locales:
+        where = shlex.quote(str(locales))
+        lines += ('# Day and month names in Corsican: the session\'s locales and a Corsican LC_TIME built by Corsu (at each\n'
+                  '# update); skipped when one of them cannot be loaded (glibc updated since, another locale chosen).\n'
+                  f'if [ -z "$(LOCPATH={where} LC_TIME={TIME_LOCALE} locale 2>&1 >/dev/null)" ]; then\n'
+                  # The shell itself cannot load it (it does not read LOCPATH again): its warning is not for the session.
+                  f'    export LOCPATH={where} LC_TIME={TIME_LOCALE} 2>/dev/null\n'
+                  'fi\n')
     return lines
+
+
+# glibc has no Corsican locale. Corsu builds fr_FR's LC_TIME with these names (glibc order: Sunday, January first).
+# The full names are those Corsu already uses for Discord's dates; the abbreviations are AI proposals (AGENTS.md, rule 3).
+TIME_LOCALE = 'co_FR.UTF-8'
+TIME_NAMES = {'abday': ('dum.', 'lun.', 'mar.', 'mer.', 'ghj.', 'ven.', 'sab.'),
+              'day': ('dumenica', 'luni', 'marti', 'mercuri', 'ghjovi', 'venneri', 'sabbatu'),
+              'abmon': ('ghje.', 'ferr.', 'marzu', 'apr.', 'maghju', 'ghju.', 'lug.', 'aostu', 'sitt.', 'ott.', 'nuv.',
+                        'dic.'),
+              'mon': ('ghjennaghju', 'ferraghju', 'marzu', 'aprile', 'maghju', 'ghjugnu', 'lugliu', 'aostu', 'sittembre',
+                      'ottobre', 'nuvembre', 'dicembre')}
+LOCALE_SOURCES = Path('/usr/share/i18n/locales')
+LOCALE_CONF = Path('/etc/locale.conf')
+# A UTF-8 locale name: what localedef builds it from (language_TERRITORY, @modifier) and its charmap.
+LOCALE_NAME = re.compile(r'([a-z]{2,3}(?:_[A-Z]{2})?)\.(?:UTF-8|utf8)(@[a-z]+)?')
+
+
+def session_locales():
+    """The UTF-8 locales the Hyprland session names (LANG, LC_*): /etc/locale.conf, Plasma's formats, this process."""
+    texts = [f'{key}={value}' for key, value in os.environ.items() if key == 'LANG' or key.startswith('LC_')]
+    for path in (LOCALE_CONF, corsu.CONFIG / 'plasma-localerc'):
+        try:
+            texts += path.read_text(encoding='utf-8').splitlines()
+        except (OSError, UnicodeDecodeError):
+            pass
+    names = [match.group(2).strip('"\'') for match in map(re.compile(r'(LANG|LC_[A-Z]+)=(.*)').fullmatch, texts) if match]
+    return sorted({name for name in names if LOCALE_NAME.fullmatch(name) and name != TIME_LOCALE})
+
+
+def corsican_time(source):
+    """fr_FR's locale source with TIME_NAMES in its LC_TIME (fr_FR's formats and first weekday kept)."""
+    def section(match):
+        body = re.sub(r'(?ms)^(abday|day|abmon|mon)\s.*?(?<!/)\n', '', match.group(1))
+        names = ''.join(f'{key} ' + ';'.join(f'"{name}"' for name in values) + '\n' for key, values in TIME_NAMES.items())
+        return 'LC_TIME\n' + names + body + 'END LC_TIME'
+    return re.sub(r'(?ms)^LC_TIME\n(.*?)^END LC_TIME', section, source, count=1)
+
+
+def build_locales():
+    """LOCPATH's folder: the Corsican LC_TIME and every locale the session names, built with localedef (LOCPATH
+    replaces glibc's own locales, so the session's must be there too). Rebuilt whole at each run, for a glibc update;
+    None when localedef, fr_FR's source or the Corsican build is missing. Kept when switched off, like the assets."""
+    localedef, source = shutil.which('localedef'), LOCALE_SOURCES / 'fr_FR'
+    if localedef is None or not source.is_file():
+        return None
+    target = paths()['locales']
+    staged, old = target.with_name(target.name + '.corsu-new'), target.with_name(target.name + '.corsu-old')
+    for leftover in (staged, old):
+        shutil.rmtree(leftover, ignore_errors=True)
+    staged.mkdir(parents=True)
+    corsican = staged / 'co_FR.source'
+    corsican.write_text(corsican_time(source.read_text(encoding='utf-8')), encoding='utf-8')
+    builds = [(str(corsican), TIME_LOCALE)]
+    for name in session_locales():
+        match = LOCALE_NAME.fullmatch(name)
+        if (LOCALE_SOURCES / (match.group(1) + (match.group(2) or ''))).is_file():
+            builds.append((match.group(1) + (match.group(2) or ''), name))
+    for input_name, name in builds:
+        try:
+            subprocess.run([localedef, '-i', input_name, '-f', 'UTF-8', str(staged / name)], capture_output=True,
+                           timeout=60, check=True)
+        except (OSError, subprocess.SubprocessError):
+            if name == TIME_LOCALE:
+                shutil.rmtree(staged, ignore_errors=True)
+                return None
+    corsican.unlink()
+    if target.exists():
+        target.rename(old)
+    staged.rename(target)
+    shutil.rmtree(old, ignore_errors=True)
+    return target
 
 
 def toml_entries(text):
@@ -673,7 +755,7 @@ class Language(Hyprland):
         if self.key_of(installation) == 'session':
             # Noctalia finds "co" only through the assets folder: built before the variable names it.
             assets = build_assets() if self.noctalia_usable() else None
-            if not own_block(installer, self.id, where['env'], 'language', language_lines(assets), notes):
+            if not own_block(installer, self.id, where['env'], 'language', language_lines(assets, build_locales()), notes):
                 return self.blocked(installation, notes)
         else:
             if build_assets() is None:

@@ -210,8 +210,9 @@ glissés à gauche ou à droite changent d'espace de travail, comme dans Plasma.
 
 | Fichier | Partie | Comment |
 | --- | --- | --- |
-| `~/.config/uwsm/env-hyprland` | langue (bloc `language` : `LANGUAGE`, `NOCTALIA_ASSETS_DIR`), profil (bloc `profile` : thème Qt `qt6ct`, curseur, préfixe de menu, ordre des cartes graphiques si besoin) | deux blocs entre `# corsu:begin …` et `# corsu:end …` ; vos lignes autour restent |
+| `~/.config/uwsm/env-hyprland` | langue (bloc `language` : `LANGUAGE`, `NOCTALIA_ASSETS_DIR`, `LOCPATH` et `LC_TIME` pour les dates en corse), profil (bloc `profile` : thème Qt `qt6ct`, curseur, préfixe de menu, ordre des cartes graphiques si besoin) | deux blocs entre `# corsu:begin …` et `# corsu:end …` ; vos lignes autour restent |
 | `~/.local/share/corsu/noctalia/assets/` | langue | dossier de Corsu : les ressources de Noctalia (liens) plus un `co.json` construit à chaque passage ; gardé quand la langue est désactivée, car l'écran de verrouillage d'un Noctalia déjà lancé le relit |
+| `~/.local/share/corsu/locale/` | langue | dossier de Corsu : une locale `co_FR.UTF-8` (noms des jours et des mois en corse, formats de fr_FR) et les locales de votre session, construites par `localedef` à chaque passage. glibc n'a pas de locale corse. Si l'une ne se charge plus à l'ouverture de session (glibc mise à jour depuis), les dates restent comme avant jusqu'au prochain passage de Corsu |
 | `~/.config/noctalia/00-corsu-language.toml` | langue | couche de Corsu (`lang = "co"`) ; une langue choisie dans les réglages de Noctalia l'emporte |
 | `~/.config/noctalia/00-corsu-profile.toml`, `~/.config/noctalia/palettes/` | profil | couche d'apparence et palettes Corsu ; vos choix dans les réglages l'emportent |
 | `~/.local/state/noctalia/settings.toml` | — | vos choix dans les réglages de Noctalia : jamais modifiés par Corsu |
@@ -262,7 +263,7 @@ Chaque étape est indépendante ; faites seulement celles qu'il vous faut.
    `~/.config/xdg-desktop-portal/hyprland-portals.conf` et `~/.config/qt6ct/qt6ct.conf` s'ils ont été créés par Corsu,
    et la copie de l'entrée de Noctalia. **Restent** : vos réglages faits dans Noctalia
    (`~/.local/state/noctalia/settings.toml`), `~/.config/hypr/user.lua`, tout fichier que vous avez modifié (avec un
-   message) et le dossier `~/.local/share/corsu/noctalia/assets/`.
+   message) et les dossiers `~/.local/share/corsu/noctalia/assets/` et `~/.local/share/corsu/locale/`.
 3. **Revenir à Corsu 0.28.1**, la version publiée, après l'étape 2 (la 0.28.0 refuse les parties Hyprland encore notées et ne s'installe pas ; rien n'est abîmé) :
 
    ```sh

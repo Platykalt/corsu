@@ -11,6 +11,7 @@ from contextlib import ExitStack, redirect_stdout
 from pathlib import Path
 import re
 import shutil
+import subprocess
 import sys
 import tempfile
 import unittest
@@ -365,6 +366,50 @@ class Language(Home):
             lines = hyprland.language_lines()
         self.assertEqual(lines.count('\n'), 2)
         self.assertIn('export LANGUAGE=co:fr:en\n', lines)
+
+    def test_corsican_names_replace_only_the_names_of_fr_fr_time(self):
+        source = ('comment_char %\nLC_TIME\nabday   "dim.";"lun."\nday     "dimanche";/\n        "lundi"\n'
+                  'mon     "janvier";/\n        "février"\nd_fmt   "%d//%m//%Y"\nfirst_weekday 2\nEND LC_TIME\n'
+                  'LC_NUMERIC\ndecimal_point ","\nEND LC_NUMERIC\n')
+        text = hyprland.corsican_time(source)
+        self.assertNotIn('dimanche', text)
+        self.assertNotIn('février', text)
+        self.assertIn('day "dumenica";"luni";"marti";"mercuri";"ghjovi";"venneri";"sabbatu"\n', text)
+        self.assertIn('mon "ghjennaghju";"ferraghju";', text)
+        self.assertIn('d_fmt   "%d//%m//%Y"\nfirst_weekday 2\nEND LC_TIME\nLC_NUMERIC\ndecimal_point ","', text)
+
+    def test_session_locales_are_utf8_names_only(self):
+        (self.config / 'plasma-localerc').write_text('[Formats]\nLANG=en_US.UTF-8\nLC_TIME="de_DE.utf8"\n'
+                                                     'LC_PAPER=../x;rm\n[Translations]\nLANGUAGE=co:fr\n')
+        with patch.object(hyprland, 'LOCALE_CONF', Path(self.directory.name) / 'none'), \
+                patch.dict(os.environ, {'LC_TIME': 'co_FR.UTF-8', 'LC_NUMERIC': 'sr_RS.UTF-8@latin', 'LC_CTYPE': 'C'}):
+            self.assertEqual(hyprland.session_locales(), ['de_DE.utf8', 'en_US.UTF-8', 'fr_FR.UTF-8', 'sr_RS.UTF-8@latin'])
+
+    def test_time_lines_only_with_the_folder_and_guarded(self):
+        lines = hyprland.language_lines(locales=Path('/a b/locale'))
+        self.assertIn("if [ -z \"$(LOCPATH='/a b/locale' LC_TIME=co_FR.UTF-8 locale 2>&1 >/dev/null)\" ]; then\n", lines)
+        self.assertIn("    export LOCPATH='/a b/locale' LC_TIME=co_FR.UTF-8 2>/dev/null\nfi\n", lines)
+        self.assertNotIn('LOCPATH', hyprland.language_lines())
+
+    @unittest.skipUnless(REAL_WHICH('localedef') and REAL_WHICH('date') and (hyprland.LOCALE_SOURCES / 'fr_FR').is_file()
+                         and (hyprland.LOCALE_SOURCES / 'en_US').is_file(), 'glibc locale sources are not installed')
+    def test_built_locales_give_corsican_dates_in_the_session(self):
+        with patch.object(hyprland.shutil, 'which', REAL_WHICH), \
+                patch.object(hyprland, 'session_locales', lambda: ['en_US.UTF-8', 'xx_XX.UTF-8']):
+            folder = hyprland.build_locales()
+        self.assertEqual(sorted(path.name for path in folder.iterdir()), ['co_FR.UTF-8', 'en_US.UTF-8'])
+        script = hyprland.language_lines(locales=folder) + 'date -d 2026-10-27 "+%A %e %B, %a %b"; echo "$LOCPATH"\n'
+        environment = {'PATH': os.environ['PATH'], 'LANG': 'en_US.UTF-8', 'LC_ALL': ''}
+        result = subprocess.run(['sh', '-c', script], env=environment, capture_output=True, text=True, check=True)
+        self.assertEqual(result.stdout, f'marti 27 ottobre, mar. ott.\n{folder}\n')
+        self.assertEqual(result.stderr, '')
+        # A locale the folder lacks: nothing exported, dates as before.
+        environment['LC_NUMERIC'] = 'xx_XX.UTF-8'
+        result = subprocess.run(['sh', '-c', script], env=environment, capture_output=True, text=True, check=True)
+        self.assertEqual(result.stdout, 'Tuesday 27 October, Tue Oct\n\n')
+        # Rebuilt whole at the next run.
+        with patch.object(hyprland.shutil, 'which', REAL_WHICH), patch.object(hyprland, 'session_locales', lambda: []):
+            self.assertEqual([path.name for path in hyprland.build_locales().iterdir()], ['co_FR.UTF-8'])
 
 
 @unittest.skipUnless(LINUX, 'Hyprland is Linux only')
