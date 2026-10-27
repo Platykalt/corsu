@@ -1,6 +1,6 @@
 # Changelog
 
-## 0.28.1 (in preparation on fix-0.28.1, not published)
+## 0.28.1 (2026-10-27)
 
 From 0.28.0 (`1bb7622`, tag `v0.28.0`).
 

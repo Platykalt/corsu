@@ -1,8 +1,8 @@
 **Français** · [English](#english)
 
-**Windows : avec Corsu 0.26.0 ou 0.27.0, la fenêtre de Corsu se fermait au démarrage. La 0.28.0 corrige ce
-défaut.** Téléchargez `corsu-windows.zip` ci-dessous (aucun compte GitHub nécessaire) ou relancez l'installation en
-une ligne ; vos choix sont gardés.
+**Discord : les messages de groupe « a ajouté … au groupe », « a retiré … du groupe » et « a quitté le groupe »
+sont traduits.** Mise à jour depuis la fenêtre de Corsu (bouton « Rechercher ») ou par l'installation en une ligne ;
+vos choix sont gardés.
 
 ### Téléchargements par usage
 
@@ -24,7 +24,20 @@ Chaque fichier a sa somme de contrôle `.sha256`. Les archives contiennent leur 
 installée, utilisée après suppression du dossier extrait, mise à jour et désinstallée sur son système avant la
 publication (tests automatiques ; personne n'a regardé les écrans).
 
-### Nouveautés de la 0.28.0
+### Nouveautés de la 0.28.1
+
+- **Discord, conversations de groupe** : « X a ajouté Y au groupe. », « X a retiré Y du groupe. » et « X a quitté le
+  groupe. » restaient en français. Ils deviennent « X hà aghjuntu Y à u gruppu. », « X hà cacciatu Y da u gruppu. »
+  et « X hà lasciatu u gruppu. » ; les noms restent tels quels. « du groupe. » disait « di u gruppu » et dit
+  maintenant « da u gruppu », comme « Caccià da u gruppu » déjà employé par Corsu. Traductions reprises de l'usage de
+  Corsu, non relues par un locuteur. Vérifié sur des pages simulées avec le plugin construit, pas dans le vrai
+  Discord.
+- **Retour depuis la version de développement Hyprland** : l'installateur de la 0.28.0 refusait les parties
+  `hyprland` et `hyprland-profile` notées par cette version (`invalid choice: 'hyprland'`), sans rien abîmer.
+  L'installateur laisse maintenant telle quelle une partie notée qu'il ne connaît pas.
+- La mise à jour et la migration depuis la 0.28.0 publiée sont vérifiées automatiquement.
+
+### Rappel : nouveautés de la 0.28.0
 
 - **Windows** : la fenêtre de Corsu ne se ferme plus au démarrage (défaut des 0.26.0 et 0.27.0). Windows reçoit
   maintenant une icône au format `.ico`. Vérifié automatiquement sur un Windows Server : la vraie fenêtre, ouverte
@@ -83,32 +96,6 @@ publication (tests automatiques ; personne n'a regardé les écrans).
 - **Minecraft Bedrock** : un prototype existe dans le dépôt, mais il n'est **pas joint** à cette version (jamais
   chargé dans le jeu).
 
-### Rappel : nouveautés de la 0.26.0
-
-- **Mise à jour** : la 0.24.0 a pu dire « à jour » alors que la 0.25.1 était publiée : une fenêtre restée ouverte ne
-  vérifiait qu'à son ouverture, une relance réaffichait cette fenêtre, et une réponse de GitHub servait 6 heures comme
-  si elle était récente ([diagnostic](https://github.com/Platykalt/corsu/blob/main/docs/update-diagnosis.md)). Désormais
-  la réponse sert une heure au plus, une fenêtre ouverte vérifie toutes les heures et à chaque relance, une erreur
-  (réseau, limite de GitHub, réponse incomplète) affiche « Vérification impossible », jamais « à jour », et la fenêtre
-  montre sa version, la copie installée, la dernière version publiée et l'heure de la réponse. Si votre Corsu reste
-  sur une ancienne version, le bouton « Rechercher » ou l'installation en une ligne ci-dessus la rattrape, en gardant
-  vos réglages.
-- **Clavier sur téléphone** (paquets 1.1) : la majuscule tapée est gardée et les suggestions de début de phrase en
-  prennent une ; vocabulaire refait à partir de sources citées (13 213 mots) ; noms de lieux corses et noms officiels
-  des communes ; deux préférences régionales expérimentales. Sous Android, une suggestion choisie au milieu d'un mot
-  remplace le mot entier ; sur iPhone, Keyman ne remplace que le début (gestes conseillés dans le guide). Vérifié dans
-  le moteur de Keyman 18.0.254 et dans l'application sur émulateur Android 14 ; **pas sur un vrai téléphone, pas sur
-  iPhone**. Keyman 18 n'a pas de correction automatique.
-- **Minecraft** : revue IA des textes (sens corrigés, sources citées), boutons du menu principal « Ghjucà solu » et
-  « Ghjucà cù l'altri », « Arregistrà è esce da u mondu » dans le menu de pause ; les 87 versions vérifiées avec le
-  code de chaque jeu. **Aucun texte relu par un locuteur** ; rien n'a été regardé à l'écran dans le jeu.
-- **Discord** : le menu de la zone de notification (« Quitter Discord »…) est traduit ; plusieurs libellés revus.
-- **KDE** : les raccourcis sans nom corse (« Display Configuration ») ne s'affichent plus en anglais.
-- **Fenêtre de Corsu** : nouveau logo, reconnu dans Alt+Tab et la barre des tâches sous KDE (Windows et macOS : non
-  observés).
-- **Firefox** : libellés du menu des onglets et des profils revus.
-- Chaque fichier publié a maintenant sa propre somme `.sha256`.
-
 ### Minecraft Java
 
 <!-- corsu:minecraft-summary:start -->
@@ -117,8 +104,8 @@ publication (tests automatiques ; personne n'a regardé les écrans).
 
 ## English
 
-**Windows: with Corsu 0.26.0 or 0.27.0, Corsu's window closed at start. 0.28.0 fixes this.** Download
-`corsu-windows.zip` below (no GitHub account needed) or run the one-line install again; your choices are kept.
+**Discord: the group notices "a ajouté … au groupe", "a retiré … du groupe" and "a quitté le groupe" are
+translated.** Update from Corsu's window ("Rechercher" button) or with the one-line install; your choices are kept.
 
 ### Downloads by use
 
@@ -140,7 +127,19 @@ Each file has a `.sha256` checksum. The archives carry their own Python. Every a
 deleting the extracted folder, updated and uninstalled on its own system before publication (automated checks; no one
 looked at the screens).
 
-### New in 0.28.0
+### New in 0.28.1
+
+- **Discord, group conversations**: "X a ajouté Y au groupe.", "X a retiré Y du groupe." and "X a quitté le groupe."
+  stayed in French. They now read "X hà aghjuntu Y à u gruppu.", "X hà cacciatu Y da u gruppu." and "X hà lasciatu u
+  gruppu."; names stay as written. "du groupe." said "di u gruppu" (of the group) and now says "da u gruppu" (from
+  the group), as Corsu's "Caccià da u gruppu". Translations taken from Corsu's own usage, not read by a speaker.
+  Checked in simulated pages with the built plugin, not in the real Discord.
+- **Going back from the Hyprland development build**: 0.28.0's installer refused the parts `hyprland` and
+  `hyprland-profile` that build records (`invalid choice: 'hyprland'`), without damaging anything. The installer now
+  leaves a recorded part it does not know as it is.
+- The update and the migration from the published 0.28.0 are checked automatically.
+
+### Earlier: new in 0.28.0
 
 - **Windows**: Corsu's window no longer closes at start (a fault of 0.26.0 and 0.27.0). Windows now gets an icon in
   `.ico` format. Checked automatically on a Windows Server: the real window, started with the archive's Python, stays
@@ -194,29 +193,6 @@ looked at the screens).
 - The update from the published 0.26.0 is checked automatically.
 - **Minecraft Bedrock**: a prototype exists in the repository but is **not attached** to this release (never loaded
   in the game).
-
-### Earlier: new in 0.26.0
-
-- **Updates**: 0.24.0 could say "up to date" while 0.25.1 was out: a window left open checked only when it opened, a
-  new launch showed that window again, and a GitHub answer was reused for 6 hours as if fresh
-  ([diagnosis](https://github.com/Platykalt/corsu/blob/main/docs/update-diagnosis.md)). Now an answer serves one hour
-  at most, an open window checks every hour and at each launch, a failure (network, GitHub limit, incomplete answer)
-  shows "check impossible", never "up to date", and the window shows its version, the installed copy, the latest
-  release and when GitHub answered. If your Corsu is stuck on an old version, the "Rechercher" button or the
-  one-line install above catches up and keeps your settings.
-- **Phone keyboard** (packages 1.1): the case typed is kept and suggestions at a sentence start get a capital;
-  vocabulary rebuilt from cited sources (13,213 words); Corsican place names and the communes' official names; two
-  experimental regional preferences. On Android a suggestion chosen inside a word replaces the whole word; on iPhone
-  Keyman replaces only its beginning (safe gestures in the guide). Checked in Keyman 18.0.254's engine and in the app
-  on an Android 14 emulator; **not on a real phone, not on iPhone**. Keyman 18 has no automatic correction.
-- **Minecraft**: AI review of the texts (senses corrected, sources cited), main menu buttons "Ghjucà solu" and
-  "Ghjucà cù l'altri", "Arregistrà è esce da u mondu" in the pause menu; all 87 versions checked with each game's own
-  code. **No text reviewed by a speaker**; nothing was looked at on screen in the game.
-- **Discord**: the notification-area menu ("Quitter Discord"…) is translated; several labels reviewed.
-- **KDE**: shortcuts without a Corsican name ("Display Configuration") no longer show in English.
-- **Corsu's window**: new logo, recognised in Alt+Tab and the taskbar on KDE (Windows and macOS: not observed).
-- **Firefox**: tab menu and profile labels reviewed.
-- Every published file now has its own `.sha256`.
 
 ### Minecraft Java
 
