@@ -353,6 +353,8 @@ def main():
         check(current['job']['ok'] and (current['job']['result'] or {}).get('corsu') == 'updated',
               f'the window\'s update finished: {current["job"]["result"]}')
         check(state(home)['release']['version'] == '99.0.0', 'updated again, to 99.0.0')
+        # A fresh state: the one that saw the job end may have read installation.json before the job wrote it.
+        status, current = window.call(window.address, '/api/state', window.key)
         check(current['update']['restart']['available'], 'the window offers to restart from the new copy')
         status, answer = window.call(window.address, '/api/restart', window.key, 'POST', {})
         check(status == 200, f'restart asked: {status} {answer}')
