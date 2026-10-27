@@ -60,6 +60,8 @@ jobs:
         run: python tests/e2e/check_discord_activity.py "$(command -v google-chrome || command -v chromium)" Vencord
       - name: Discord plugin as built (dist/renderer.js, real dictionary) — same guarantees, fingerprint, no "Organicu"
         run: python tests/e2e/check_discord_built.py "$(command -v google-chrome || command -v chromium)" Vencord
+      - name: Discord, the cases the maintainer reported (composer, message search, notices after load), built plugin
+        run: python tests/e2e/check_discord_regressions.py "$(command -v google-chrome || command -v chromium)" Vencord
       - name: Discord plugin — tray menu and taskbar preview texts sent to the desktop app are translated (patched NativeUtils)
         run: python tests/e2e/check_discord_native.py Vencord
       - name: Window appearance in a real browser page — themes, picture import and refusal, persistence, per-launch key
@@ -224,9 +226,9 @@ jobs:
           echo "Source commit: $GITHUB_SHA"
           (cd dist && (sha256sum corsu-*.tar.gz corsu-*.zip 2>/dev/null || shasum -a 256 corsu-*.tar.gz corsu-*.zip))
           CORSU_ARCHIVES="$GITHUB_WORKSPACE/dist" python tests/e2e/e2e.py archive --root "${{ env.CORSU_RELEASE }}"
-      - name: Update — from published 0.21.0 to 0.28.0 to these archives, repair, refusal, recovery, lock, uninstall
+      - name: Update — from published 0.21.0 to 0.28.1 to these archives, repair, refusal, recovery, lock, uninstall
         shell: bash
-        run: python tests/e2e/check_update.py --archives "$GITHUB_WORKSPACE/dist" --from 0.21.0 0.22.0 0.23.0 0.24.0 0.25.1 0.26.0 0.27.0 0.28.0
+        run: python tests/e2e/check_update.py --archives "$GITHUB_WORKSPACE/dist" --from 0.21.0 0.22.0 0.23.0 0.24.0 0.25.1 0.26.0 0.27.0 0.28.0 0.28.1
       - name: One-line install script with these archives (CORSU_DOWNLOAD_BASE), checksum checked
         shell: bash
         run: |
@@ -261,20 +263,20 @@ jobs:
           python tools/vlcpo.py build "$RUNNER_TEMP/vlc-upstream.mo" --include=none
           python tests/e2e/check_vlc_experimental.py --mo "$RUNNER_TEMP/vlc-experimental.mo" --upstream "$RUNNER_TEMP/vlc-upstream.mo"
           HOME="$(mktemp -d)" XDG_DATA_HOME= XDG_CONFIG_HOME= python tests/e2e/check_vlc_complement.py
-      - name: Update from 0.25.1, 0.26.0, 0.27.0 and 0.28.0 with VLC and its complement (Linux, real VLC package)
+      - name: Update from 0.25.1, 0.26.0, 0.27.0, 0.28.0 and 0.28.1 with VLC and its complement (Linux, real VLC package)
         if: runner.os == 'Linux'
         # Ubuntu has no fre:ac package: its part of this check runs where fre:ac is installed (Debian).
         run: |
           python tests/e2e/check_update_apps.py --archives "$GITHUB_WORKSPACE/dist" --from 0.25.1
           python tests/e2e/check_update_apps.py --archives "$GITHUB_WORKSPACE/dist" --from 0.26.0
           python tests/e2e/check_update_apps.py --archives "$GITHUB_WORKSPACE/dist" --from 0.27.0
-          python tests/e2e/check_update_apps.py --archives "$GITHUB_WORKSPACE/dist" --from 0.28.0
-      - name: Migration from 0.24.0, 0.27.0 and 0.28.0 (Linux) — choices, appearance, plugin, launchers after the archive is deleted, personal files
+          python tests/e2e/check_update_apps.py --archives "$GITHUB_WORKSPACE/dist" --from 0.28.1
+      - name: Migration from 0.24.0, 0.27.0, 0.28.0 and 0.28.1 (Linux) — choices, appearance, plugin, launchers after the archive is deleted, personal files
         if: runner.os == 'Linux'
         run: |
           python tests/e2e/check_migration.py --archives "$GITHUB_WORKSPACE/dist" --from 0.24.0
           python tests/e2e/check_migration.py --archives "$GITHUB_WORKSPACE/dist" --from 0.27.0
-          python tests/e2e/check_migration.py --archives "$GITHUB_WORKSPACE/dist" --from 0.28.0
+          python tests/e2e/check_migration.py --archives "$GITHUB_WORKSPACE/dist" --from 0.28.1
       - name: VLC complement declared unavailable (Windows, macOS)
         if: runner.os != 'Linux'
         shell: bash

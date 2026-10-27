@@ -2,7 +2,7 @@
 
 ## 0.28.2 (in preparation, not published)
 
-From 0.28.1 (`ae8890b`, tag `v0.28.1`). Translator revision `2026-10-composer-1`. Structures read in Discord's public
+From 0.28.1 (`ae8890b`, tag `v0.28.1`). Translator revision `2026-10-composer-2`. Structures read in Discord's public
 web client (build `web.ad0b95d8568e0f6b`, 2026-10-27) and checked in simulated pages with the built plugin
 (`check_discord_built.py`), not in the real Discord app.
 
@@ -21,6 +21,18 @@ web client (build `web.ad0b95d8568e0f6b`, 2026-10-27) and checked in simulated p
   are now looked up there (rows already in the lexicon). System phrases are now only looked up in message-list rows.
   Group notices ("a ajouté … au groupe.") arriving after load were already translated by 0.28.1 in the simulated
   page built from the client's structure; a Discord started before 0.28.1 was installed keeps the older plugin.
+- **Discord, a nickname that reads like a notice**: with someone named "a ajouté", the notice's own fragment "a
+  ajouté" beside the name elements stayed in French (the record holds that name). Only a name element, or a lone
+  text equal to a recorded name, is kept now; a fragment beside the name elements is the notice's text.
+- **Discord, a system message in a preview line**: Discord draws it as one plain string in the same `messageContent`
+  span as people's messages. It is read only when the React record's message type is a system type (not default,
+  reply or command): "Work hà aghjuntu Error à u gruppu.", while a person's message with the same words stays.
+- **Tests**: `tests/e2e/check_discord_regressions.py`, written independently from the client's structures (composer
+  at load, after a draft and after navigation, message search opened/closed/reopened, notices inserted after load,
+  look-alike nicknames, real messages with the same words, no double translation), runs in CI: 14 of its checks
+  fail on 0.28.1, all pass now. Inventory of Discord's French strings and the removal/leaving labels:
+  `docs/discord-inventory-0.28.2.md` (`tools/discord_inventory.py` regenerates the table).
+- **CI**: update, update with VLC and migration from the published 0.28.1.
 - **Discord, review of frequent actions (first batches, AI review, not read by a speaker)**: "Exclure {user}" is
   Discord's timeout and said "Scaccià {user}", the same as the kick "Expulser {user}": now "Esclude {user} per un
   tempu" (kick: "Espulsà {user}", Corsu's convention). Verb forms fixed: "Piantà d'esclude {user}" (was "escludà"),
