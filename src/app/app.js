@@ -100,6 +100,14 @@ function activationOf(item) {
   return item.installed && item.switchable ? "inactive" : null;
 }
 
+// The language a part shows, as its chip says it (the summary counts by it). Blocked and failed parts did not switch:
+// they keep the original language (their chip says why). No state (fixed parts, old records) reads as on.
+function shownAs(item) {
+  const activation = activationOf(item);
+  if (activation === null || activation === "active") return "on";
+  return { partial: "partial", restart_required: "restart" }[activation] || "off";
+}
+
 function activationLabel(activation) {
   const key = "activation_" + activation;
   return lookup(key) != null ? t(key) : activation;
@@ -301,6 +309,8 @@ function renderPrograms() {
   }
   replaceKeepingFocus(list, rows);
   setText($("programs-lead"), t("programs_lead"));
+  // The lead describes the summary, hidden while nothing is installed: the empty row says it then.
+  $("programs-lead").hidden = !shown().length;
 
   const terminal = state.items.find(item => item.name === "terminal");
   $("terminal-block").hidden = !terminal;
@@ -335,10 +345,15 @@ function renderSummary() {
   const installed = shown();
   $("summary").hidden = !installed.length;
   if (!installed.length) return;
-  const on = installed.filter(item => ["active", "partial", null].includes(activationOf(item))).length;
-  setText($("summary-on-value"), t("summary_on", { n: on.toLocaleString(numbers()), total: installed.length.toLocaleString(numbers()) }));
-  setText($("summary-on-sub"), on < installed.length ? t("summary_off", { n: (installed.length - on).toLocaleString(numbers()) }) : t("summary_all"));
-  $("summary-on").className = "stat tone-" + (on ? "ok" : "neutral");
+  // Each part counted where its row's chip puts it (shownAs): fully on, partly on, to restart, original language.
+  const counts = { on: 0, partial: 0, restart: 0, off: 0 };
+  for (const item of installed) counts[shownAs(item)]++;
+  const count = name => counts[name].toLocaleString(numbers());
+  setText($("summary-on-value"), t("summary_on", { n: count("on"), total: installed.length.toLocaleString(numbers()) }));
+  const rest = [["partial", "summary_partial"], ["restart", "summary_restart"], ["off", "summary_off"]]
+    .filter(([name]) => counts[name]).map(([name, key]) => t(key, { n: count(name) }));
+  setText($("summary-on-sub"), rest.length ? rest.join(" · ") : t("summary_all"));
+  $("summary-on").className = "stat tone-" + (counts.on || counts.partial ? "ok" : "neutral");
 
   const flagged = installed.map(item => ({ item, kind: statusBlock(item).kind })).filter(entry => entry.kind)
     .sort((a, b) => (a.kind === "problem" ? 0 : 1) - (b.kind === "problem" ? 0 : 1));

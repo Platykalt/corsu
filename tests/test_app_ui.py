@@ -204,6 +204,16 @@ const out = vm.runInContext(`
   render();
   result.after = rowsOf("switches");
   result.afterJumps = $("summary-attention-list").children.map(node => clean(node.textContent));
+  result.afterSummary = { on: clean($("summary-on-value").textContent), sub: clean($("summary-on-sub").textContent) };
+  // Nothing installed: no summary, and no lead promising one.
+  state = JSON.parse(JSON.stringify(fixture));
+  for (const item of state.items) item.installed = false;
+  render();
+  result.empty = { summaryHidden: Boolean($("summary").hidden), leadHidden: Boolean($("programs-lead").hidden),
+    rows: $("switches").children.map(node => clean(node.textContent)) };
+  state = JSON.parse(JSON.stringify(fixture));
+  render();
+  result.leadShown = !$("programs-lead").hidden;
   JSON.stringify(result);
 `, context);
 // The periodic refresh as the page runs it (refresh() with the server's answer): the focused switch keeps the focus on
@@ -365,8 +375,9 @@ class RenderTests(unittest.TestCase):
     def test_summary_counts_and_names_what_needs_the_person(self):
         summary = self.result['summary']
         self.assertFalse(summary['hidden'])
-        self.assertEqual(summary['on'], '5 of 6 in Corsican')
-        self.assertEqual(summary['off'], '1 in the original language')
+        # 7-Zip is partly on: counted apart, as its chip says, not within "in Corsican".
+        self.assertEqual(summary['on'], '4 of 6 in Corsican')
+        self.assertEqual(summary['off'], '1 partly in Corsican · 1 in the original language')
         self.assertEqual(summary['attention'], '3 programs need attention')
         self.assertIn('tone-danger', summary['attentionClass'])
         self.assertEqual(summary['jumps'][0], 'WinMerge Failed')
@@ -419,6 +430,26 @@ class RenderTests(unittest.TestCase):
         self.assertIn('attention', after['firefox']['class'])
         self.assertIsNone(after['firefox']['details'])
         self.assertIn('Firefox Restart needed', self.result['afterJumps'])
+
+    def test_summary_counts_match_the_row_chips(self):
+        # Mixed state: one fully on, one partly on, one to restart (switched off while open), one off, two failed.
+        chips = [row['status'] for row in self.result['after']]
+        self.assertEqual(sorted(chips), sorted(['In Corsican', 'Partly in Corsican', 'Restart needed', 'Original language',
+                                                'Failed', 'Failed']))
+        # Failed parts did not switch: they show the original language, their chip says why.
+        self.assertEqual(self.result['afterSummary']['on'], f"{chips.count('In Corsican')} of {len(chips)} in Corsican")
+        self.assertEqual(self.result['afterSummary']['sub'],
+                         f"{chips.count('Partly in Corsican')} partly in Corsican · {chips.count('Restart needed')} to restart"
+                         f" · {chips.count('Original language') + chips.count('Failed')} in the original language")
+
+    def test_nothing_installed_reads_plainly(self):
+        empty = self.result['empty']
+        self.assertTrue(empty['summaryHidden'])
+        self.assertTrue(empty['leadHidden'])
+        self.assertEqual(len(empty['rows']), 1)
+        self.assertIn('Nothing is installed yet.', empty['rows'][0])
+        self.assertIn('Add programs', empty['rows'][0])
+        self.assertTrue(self.result['leadShown'])
 
     def test_refresh_keeps_the_focus_and_the_page(self):
         refresh = self.result['refresh']
