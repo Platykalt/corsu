@@ -13,7 +13,7 @@ Corsu met en corse les logiciels de tous les jours. Corsu puts everyday software
 ## Français
 
 Corsu est un projet libre qui donne au corse une place dans les logiciels de tous les jours. Il y a trois façons de
-s'en servir, indépendantes l'une de l'autre. Version publiée : **0.28.0**
+s'en servir, indépendantes l'une de l'autre. Version publiée : **0.28.1**
 ([toutes les versions](https://github.com/Platykalt/corsu/releases)).
 
 | Je veux… | Ce qu'il faut | Guide |
@@ -77,7 +77,7 @@ avec `--allow-downgrade`). Vos choix sont gardés, et rien de nouveau n'est ajou
 
 **En développement, pas dans la version publiée.** Le code est sur la branche de développement
 [`hyprland`](https://github.com/Platykalt/corsu/tree/hyprland), à part de la version stable : la version publiée,
-0.28.0, ne le contient pas. Pour le bureau [Hyprland](https://hyprland.org) avec le panneau Noctalia, Corsu apporte
+0.28.1, ne le contient pas. Pour le bureau [Hyprland](https://hyprland.org) avec le panneau Noctalia, Corsu apporte
 la traduction corse de Noctalia et, au choix, un profil de bureau Corsu : raccourcis clavier, apparence (palettes maquis et mer) et
 configuration guidée depuis la fenêtre de Corsu. Linux seulement ; vérifié seulement sur CachyOS avec Hyprland 0.56.2
 et Noctalia 5.3.0, une partie des essais restant à faire. Facultatif : installer Corsu ne remplace jamais votre
@@ -138,7 +138,7 @@ approuvé par Mojang ou Microsoft, ni associé à eux.
 
 ### Logiciels pris en charge
 
-Statuts : **disponible** (dans la version publiée 0.28.0), **expérimental** (disponible, peu vérifié sur ce système),
+Statuts : **disponible** (dans la version publiée 0.28.1), **expérimental** (disponible, peu vérifié sur ce système),
 **candidat** (dans la prochaine version, pas encore publiée), **prévu** (pas encore fait). Le détail, avec les
 vérifications faites pour chacun : [État des traductions](docs/fr/etat-des-traductions.md).
 
@@ -242,7 +242,7 @@ La version longue : [Pourquoi Corsu](docs/fr/pourquoi-corsu.md).
 ## English
 
 Corsu is a free software project that gives Corsican a place in everyday software. There are three ways to use it,
-independent of each other. Published release: **0.28.0**
+independent of each other. Published release: **0.28.1**
 ([all releases](https://github.com/Platykalt/corsu/releases)).
 
 | I want… | What it takes | Guide |
@@ -305,7 +305,7 @@ added unless you select it.
 
 **In development, not in the published release.** The code is on the development branch
 [`hyprland`](https://github.com/Platykalt/corsu/tree/hyprland), separate from the stable release: the published
-release, 0.28.0, does not contain it. For the [Hyprland](https://hyprland.org) desktop with the Noctalia panel, Corsu
+release, 0.28.1, does not contain it. For the [Hyprland](https://hyprland.org) desktop with the Noctalia panel, Corsu
 brings the Corsican translation of Noctalia and, optionally, a Corsu desktop profile: key bindings, look (maquis and sea palettes) and a
 guided configuration from the Corsu window. Linux only; checked only on CachyOS with Hyprland 0.56.2 and Noctalia
 5.3.0, with part of the checks still to do. Optional: installing Corsu never replaces your desktop; these parts are
@@ -364,7 +364,7 @@ MICROSOFT.
 
 ### Supported programs
 
-Statuses: **available** (in the published release 0.28.0), **experimental** (available, little checked on that
+Statuses: **available** (in the published release 0.28.1), **experimental** (available, little checked on that
 system), **candidate** (in the next version, not published yet), **planned** (not done yet). Details, with the checks
 made for each: [Translation status](docs/en/translation-status.md).
 

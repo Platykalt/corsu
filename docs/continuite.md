@@ -3,7 +3,22 @@
 Document de reprise, tenu à jour à chaque étape. Il renvoie aux documents détaillés plutôt que de les répéter.
 Les sections datées après « État actuel » sont l'historique : ce qui y est dit ouvert a pu être corrigé depuis.
 
-## État actuel (26 octobre 2026)
+## État actuel (27 octobre 2026)
+
+- **0.28.0 publiée** (26 octobre 2026) : tag `v0.28.0` sur `1bb7622`, release
+  https://github.com/Platykalt/corsu/releases/tag/v0.28.0 (16 fichiers, sommes vérifiées, mise à jour 0.27.0 → 0.28.0
+  essayée dans un environnement isolé).
+- **0.28.1** : branche `fix-0.28.1`, partie de `v0.28.0`. Discord : messages de groupe « a ajouté … au groupe »,
+  « a retiré … du groupe », « a quitté le groupe » (`4d52662`, révision du traducteur `2026-10-group-1` ; provenance
+  usage Corsu, non relue par un locuteur ; pages simulées avec le plugin construit, pas le vrai Discord). Installateur :
+  une partie notée inconnue de cette version (les parties Hyprland de la branche de développement) est laissée telle
+  quelle au lieu de faire échouer l'installation (`c082c55`, `e0b0fb5`). CI : mise à jour et migration depuis la 0.28.0
+  publiée. Notes de version `ba24b04`. CI de la candidate 40434114016 sur `ba24b04`.
+- **`hyprland`** : branche de développement, jamais fusionnée dans `main` ; elle reprend la 0.28.0, la 0.28.1 et,
+  en plus, les dates en corse dans la session Hyprland (`a9ed3a0` : locale `co_FR.UTF-8` construite par `localedef`,
+  `LOCPATH` et `LC_TIME` dans le bloc `language` d'`env-hyprland`).
+
+## Historique : publication 0.28.0 (26 octobre 2026)
 
 - **0.27.0 reste la dernière version publiée** (tag `v0.27.0` sur `f51b1ac`). `main` = `751c461` (documentation :
   Hyprland en développement, contournement `--browser` pour la fenêtre Windows de la 0.27.0).
