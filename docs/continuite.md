@@ -5,18 +5,36 @@ Les sections datées après « État actuel » sont l'historique : ce qui y est 
 
 ## État actuel (27 octobre 2026)
 
-- **0.28.0 publiée** (26 octobre 2026) : tag `v0.28.0` sur `1bb7622`, release
-  https://github.com/Platykalt/corsu/releases/tag/v0.28.0 (16 fichiers, sommes vérifiées, mise à jour 0.27.0 → 0.28.0
-  essayée dans un environnement isolé).
-- **0.28.1** : branche `fix-0.28.1`, partie de `v0.28.0`. Discord : messages de groupe « a ajouté … au groupe »,
-  « a retiré … du groupe », « a quitté le groupe » (`4d52662`, révision du traducteur `2026-10-group-1` ; provenance
-  usage Corsu, non relue par un locuteur ; pages simulées avec le plugin construit, pas le vrai Discord). Installateur :
-  une partie notée inconnue de cette version (les parties Hyprland de la branche de développement) est laissée telle
-  quelle au lieu de faire échouer l'installation (`c082c55`, `e0b0fb5`). CI : mise à jour et migration depuis la 0.28.0
-  publiée. Notes de version `ba24b04`. CI de la candidate 40434114016 sur `ba24b04`.
-- **`hyprland`** : branche de développement, jamais fusionnée dans `main` ; elle reprend la 0.28.0, la 0.28.1 et,
-  en plus, les dates en corse dans la session Hyprland (`a9ed3a0` : locale `co_FR.UTF-8` construite par `localedef`,
-  `LOCPATH` et `LC_TIME` dans le bloc `language` d'`env-hyprland`).
+- **0.28.2** : branche `fix-0.28.2`, partie de `v0.28.1` (`ae8890b`), publiée par le tag `v0.28.2` (accord explicite du
+  mainteneur le 27 octobre 2026 ; identifiants de la CI et de la release dans l'historique ci-dessous une fois
+  connus).
+  - Discord (`2f7c755`, `fa1f3ac`, révision du traducteur `2026-10-composer-2`) : champ « Envoyer un message à @… »
+    (texte de remplacement Slate hors champ de saisie), « Rechercher {name} » = « Circà in {name} », message
+    d'épinglage actuel et lien « Modifier le groupe » cherchés dans la liste des messages, message système dans
+    l'aperçu seulement si le type React du message est un type système, pseudo qui ressemble à un fragment. Essais
+    `tests/e2e/check_discord_regressions.py` écrits indépendamment (14 échouent sur la 0.28.1). Pages simulées avec le
+    plugin construit, pas le vrai Discord ; provenance usage Corsu ou proposition IA, aucune relecture par un locuteur.
+    Plugin embarqué vérifié dans les trois archives de la CI (révision et textes présents dans
+    `Vencord/dist/renderer.js`).
+  - Relecture linguistique Discord (IA) : environ 785 lignes sur 22 430 examinées, suite dans
+    `lexicon/review-discord-progress.md` ; elle continue séparément et n'a pas retardé la 0.28.2.
+  - Fenêtre (`8848557`) : la page « Logiciels » devient « Accueil » (« Accolta », usage Corsu repris de Firefox) :
+    résumé en haut, liste « Logiciels gérés par Corsu », état en mots sur chaque ligne (en corse, partiellement,
+    langue d'origine, redémarrage nécessaire), focus gardé au rafraîchissement. Identifiant interne `programs` gardé.
+- **0.28.1 publiée** (27 octobre 2026) : tag `v0.28.1` sur `ae8890b`, release
+  https://github.com/Platykalt/corsu/releases/tag/v0.28.1 (messages de groupe Discord, parties inconnues laissées
+  telles quelles par l'installateur).
+- **`hyprland`** : branche de développement, jamais fusionnée dans `main` ; elle reprend chaque version publiée et,
+  en plus, l'intégration Hyprland + Noctalia et les dates en corse dans la session Hyprland (`a9ed3a0`).
+  L'installation personnelle du mainteneur vient de cette branche (composants `hyprland` et `hyprland-profile`) : la
+  mise à jour automatique ne lui propose pas les versions publiées ; elle se met à jour depuis une construction de
+  cette branche.
+
+## Historique : publication 0.28.1 (27 octobre 2026)
+
+- Branche `fix-0.28.1`, partie de `v0.28.0`. Discord : messages de groupe « a ajouté … au groupe »,
+  « a retiré … du groupe », « a quitté le groupe » (`4d52662`, révision du traducteur `2026-10-group-1`). Installateur :
+  partie notée inconnue laissée telle quelle (`c082c55`, `e0b0fb5`). Notes `ba24b04`, CI de la candidate 40434114016.
 
 ## Historique : publication 0.28.0 (26 octobre 2026)
 

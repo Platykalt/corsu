@@ -1,8 +1,8 @@
 **Français** · [English](#english)
 
-**Discord : les messages de groupe « a ajouté … au groupe », « a retiré … du groupe » et « a quitté le groupe »
-sont traduits.** Mise à jour depuis la fenêtre de Corsu (bouton « Rechercher ») ou par l'installation en une ligne ;
-vos choix sont gardés.
+**Discord : le champ « Envoyer un message », la recherche dans une conversation et les messages système
+redeviennent corses. La fenêtre de Corsu s'ouvre sur une page « Accueil ».** Mise à jour depuis la fenêtre de Corsu
+(bouton « Rechercher ») ou par l'installation en une ligne ; vos choix sont gardés.
 
 ### Téléchargements par usage
 
@@ -24,7 +24,34 @@ Chaque fichier a sa somme de contrôle `.sha256`. Les archives contiennent leur 
 installée, utilisée après suppression du dossier extrait, mise à jour et désinstallée sur son système avant la
 publication (tests automatiques ; personne n'a regardé les écrans).
 
-### Nouveautés de la 0.28.1
+### Nouveautés de la 0.28.2
+
+- **Fenêtre : page « Accueil »** (« Accolta » en corse), à la place de « Logiciels ». En haut, l'état général : ce qui
+  est en corse, ce qui attend votre intervention, la mise à jour éventuelle. Ensuite « Logiciels gérés par Corsu »,
+  où chaque ligne dit son état : en corse, partiellement en corse, en langue d'origine ou redémarrage nécessaire (une
+  partie éteinte pendant que son logiciel est ouvert compte aussi dans « à vérifier »). Les interrupteurs, les
+  dossiers Minecraft et les autres commandes ne changent pas. « Accolta » vient de la traduction corse de Firefox déjà
+  reprise par Corsu ; le titre de la liste et la phrase d'introduction sont des propositions IA, non relues par un
+  locuteur.
+- **Discord, champ de saisie** : « Envoyer un message à @… » était revenu en français depuis la 0.28.0. Il redevient
+  « Mandà un messaghju à @… », aussi après un brouillon effacé ; le brouillon et le curseur ne sont jamais touchés.
+- **Discord, recherche dans une conversation** : « Rechercher Ron » disait « Circà Ron », lu comme chercher la
+  personne ; il dit maintenant « Circà in Ron ». La recherche de personnes garde « Circà ».
+- **Discord, messages système** : le message d'épinglage tel que Discord l'affiche aujourd'hui (« … a épinglé un
+  message dans ce salon. Voir tous les messages épinglés. ») et le lien « Modifier le groupe » d'un groupe renommé
+  restaient en français ; ils sont traduits. Un message système affiché dans l'aperçu d'une conversation est traduit,
+  le message d'une personne avec les mêmes mots reste tel quel.
+- **Discord, pseudonymes qui ressemblent à un libellé** : avec une personne nommée « a ajouté », le texte du message
+  système à côté du nom restait en français ; seul le nom reste tel quel désormais.
+- **Ce qui a été vérifié** : essais automatiques écrits à partir de la structure du client web public de Discord
+  (27 octobre 2026), sur des pages simulées avec le plugin construit, dans Chromium sans affichage ; pas dans
+  l'application Discord elle-même. Les traductions reprennent l'usage de Corsu ou sont des propositions IA ; **aucune
+  n'a été relue par un locuteur**. La relecture linguistique de Discord continue séparément : environ 785 textes sur
+  22 430 examinés (3,5 %), par IA ; le reste n'est pas relu.
+- Un Discord ouvert avant la mise à jour garde l'ancien plugin jusqu'à son redémarrage.
+- La mise à jour et la migration depuis la 0.28.1 publiée sont vérifiées automatiquement.
+
+### Rappel : nouveautés de la 0.28.1
 
 - **Discord, conversations de groupe** : « X a ajouté Y au groupe. », « X a retiré Y du groupe. » et « X a quitté le
   groupe. » restaient en français. Ils deviennent « X hà aghjuntu Y à u gruppu. », « X hà cacciatu Y da u gruppu. »
@@ -104,8 +131,9 @@ publication (tests automatiques ; personne n'a regardé les écrans).
 
 ## English
 
-**Discord: the group notices "a ajouté … au groupe", "a retiré … du groupe" and "a quitté le groupe" are
-translated.** Update from Corsu's window ("Rechercher" button) or with the one-line install; your choices are kept.
+**Discord: the "Envoyer un message" field, search in a conversation and system messages are Corsican again.
+Corsu's window opens on a "Home" page.** Update from Corsu's window ("Rechercher" button) or with the one-line
+install; your choices are kept.
 
 ### Downloads by use
 
@@ -127,7 +155,32 @@ Each file has a `.sha256` checksum. The archives carry their own Python. Every a
 deleting the extracted folder, updated and uninstalled on its own system before publication (automated checks; no one
 looked at the screens).
 
-### New in 0.28.1
+### New in 0.28.2
+
+- **Window: "Home" page** ("Accolta" in Corsican) in place of "Programs". At the top, the overall state: what is in
+  Corsican, what needs you, a possible update. Then "Programs managed by Corsu", where each row says its state: in
+  Corsican, partly in Corsican, original language or restart needed (a part switched off while its program is open
+  also counts as needing attention). Switches, Minecraft folders and the other commands are unchanged. "Accolta"
+  comes from Firefox's Corsican translation already used by Corsu; the list heading and the introduction are AI
+  proposals, not read by a speaker.
+- **Discord, message field**: "Envoyer un message à @…" was back in French since 0.28.0. It is "Mandà un messaghju à
+  @…" again, also after an erased draft; the draft and the caret are never touched.
+- **Discord, search in a conversation**: "Rechercher Ron" said "Circà Ron", read as searching for the person; it now
+  says "Circà in Ron". Searching for people keeps "Circà".
+- **Discord, system messages**: the pin notice as Discord draws it today ("… a épinglé un message dans ce salon. Voir
+  tous les messages épinglés.") and the "Modifier le groupe" link of a renamed group stayed in French; they are
+  translated. A system message shown in a conversation's preview line is translated, while a person's message with
+  the same words stays as written.
+- **Discord, nicknames that read like a label**: with someone named "a ajouté", the system message's text beside the
+  name stayed in French; only the name stays as written now.
+- **What was checked**: automated checks written from the structure of Discord's public web client (27 October 2026),
+  in simulated pages with the built plugin, in headless Chromium; not in the Discord app itself. The translations
+  come from Corsu's own usage or are AI proposals; **none was read by a speaker**. The Discord language review goes on
+  separately: about 785 of 22,430 texts examined (3.5 %), by AI; the rest is not reviewed.
+- A Discord opened before the update keeps the older plugin until it is restarted.
+- The update and the migration from the published 0.28.1 are checked automatically.
+
+### Earlier: new in 0.28.1
 
 - **Discord, group conversations**: "X a ajouté Y au groupe.", "X a retiré Y du groupe." and "X a quitté le groupe."
   stayed in French. They now read "X hà aghjuntu Y à u gruppu.", "X hà cacciatu Y da u gruppu." and "X hà lasciatu u

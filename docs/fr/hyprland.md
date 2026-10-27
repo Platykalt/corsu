@@ -4,7 +4,7 @@
 
 > **Statut : en développement, pas dans la version publiée.** Le code est sur la branche de développement
 > [`hyprland`](https://github.com/Platykalt/corsu/tree/hyprland), à part de la version stable : la version publiée,
-> 0.28.1, ne le contient pas. Linux seulement ; vérifié seulement sur CachyOS avec Hyprland 0.56.2 et Noctalia
+> 0.28.2, ne le contient pas. Linux seulement ; vérifié seulement sur CachyOS avec Hyprland 0.56.2 et Noctalia
 > 5.3.0, et une partie des essais reste à faire ([Vérifications](#vérifications)). Facultatif : installer Corsu ne
 > remplace jamais votre bureau ; ces parties se choisissent une à une et la session Plasma reste.
 
@@ -89,7 +89,7 @@ peuvent différer ; ce n'est pas encore essayé.
 
 ## Obtenir la version de développement
 
-Ces parties ne sont dans aucune version publiée : la commande d'installation habituelle installe 0.28.1, sans elles.
+Ces parties ne sont dans aucune version publiée : la commande d'installation habituelle installe 0.28.2, sans elles.
 Pour les essayer, il faut prendre la branche `hyprland` ; c'est pour les testeurs, pas pour un usage quotidien.
 
 ```sh
@@ -100,7 +100,7 @@ cd corsu-hyprland
 
 La fenêtre de Corsu s'ouvre. Dans **Ajouter**, cochez **Hyprland et Noctalia** et, si vous le voulez,
 **Profil de bureau Corsu pour Hyprland**, puis suivez les étapes. Attention : cela remplace le Corsu installé par la
-version de développement, qui se présente aussi comme 0.28.1 mais n'est pas la 0.28.1 publiée. Pour revenir à la version
+version de développement, qui se présente aussi comme 0.28.2 mais n'est pas la 0.28.2 publiée. Pour revenir à la version
 publiée, voir [Revenir en arrière](#revenir-en-arrière).
 
 ## Deux choix séparés
@@ -263,10 +263,10 @@ Chaque étape est indépendante ; faites seulement celles qu'il vous faut.
    et la copie de l'entrée de Noctalia. **Restent** : vos réglages faits dans Noctalia
    (`~/.local/state/noctalia/settings.toml`), `~/.config/hypr/user.lua`, tout fichier que vous avez modifié (avec un
    message) et le dossier `~/.local/share/corsu/noctalia/assets/`.
-3. **Revenir à Corsu 0.28.1**, la version publiée, après l'étape 2 (la 0.28.0 refuse les parties Hyprland encore notées et ne s'installe pas ; rien n'est abîmé) :
+3. **Revenir à Corsu 0.28.2**, la version publiée, après l'étape 2 (la 0.28.0 refuse les parties Hyprland encore notées et ne s'installe pas ; rien n'est abîmé) :
 
    ```sh
-   ~/.local/share/corsu/bin/corsu-python ~/.local/share/corsu/releases/<dossier actuel>/src/update.py --install --version 0.28.1 --allow-downgrade
+   ~/.local/share/corsu/bin/corsu-python ~/.local/share/corsu/releases/<dossier actuel>/src/update.py --install --version 0.28.2 --allow-downgrade
    ```
 
    Le dossier actuel est `release.folder` dans `~/.local/share/corsu/installation.json`. Vos autres choix Corsu
