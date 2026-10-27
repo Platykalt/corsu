@@ -118502,7 +118502,9 @@ Clips|Clips|Clip
 # Discord: "Circà"; the name Discord inserts (a conversation, a server) stays as written. Provenance in
 # Discord: lexicon/review-discord-2026-10.tsv (Corsu usage and an AI proposal, not read by a speaker).
 Search|Rechercher|Circà
-Search {name}|Rechercher {name}|Circà {name}
+# Discord: "Rechercher {name}" (LDZtFO) is only the placeholder of the message search bar, with the name of the
+# Discord: conversation or server searched IN (0.28.2): "Circà in {name}", as "Circà in a pagina".
+Search {name}|Rechercher {name}|Circà in {name}
 Search in {guildName}|Rechercher dans {guildName}|Circà in {guildName}
 Search messages in your servers|Rechercher des messages dans tes serveurs|Circà messaghji in i to servori
 Search your direct messages|Rechercher dans tes messages privés|Circà in i to messaghji privati

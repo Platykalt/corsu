@@ -1,5 +1,27 @@
 # Changelog
 
+## 0.28.2 (in preparation, not published)
+
+From 0.28.1 (`ae8890b`, tag `v0.28.1`). Translator revision `2026-10-composer-1`. Structures read in Discord's public
+web client (build `web.ad0b95d8568e0f6b`, 2026-10-27) and checked in simulated pages with the built plugin
+(`check_discord_built.py`), not in the real Discord app.
+
+- **Discord, message composer**: "Envoyer un message à @Ron" (key 4c+CAx) was back in French since 0.28.0. Discord's
+  composer draws this placeholder in a `<div data-slate-placeholder>` beside the editor, outside any content area;
+  the search-field change of 0.28.0 (`8c25eb2`) took every Slate placeholder not inside a text field for typed
+  content. It is Discord's text again: "Mandà un messaghju à @Ron", also when a draft is typed and erased (a new
+  node); the draft itself and the caret are never touched.
+- **Discord, message search over a conversation**: "Rechercher Ron" (LDZtFO, only used by the message search bar,
+  with the conversation's or server's name) said "Circà Ron", read as searching for the person; it now says "Circà in
+  Ron", as Corsu's "Circà in a pagina". Searching for people keeps "Circà", "Circà amichi". Provenance in
+  `lexicon/review-discord-2026-10.tsv` (Corsu usage and an AI proposal, not read by a speaker).
+- **Discord, system messages as the current client draws them**: the pin notice is "{name} a épinglé [un message]
+  dans ce salon. Voir tous les [messages épinglés]." (yIDvPL, two links), not the shape 0.28.0 assumed, and a
+  renamed group adds a "Modifier le groupe" link (geP3rU): these fragments stayed in French in the message list and
+  are now looked up there (rows already in the lexicon). System phrases are now only looked up in message-list rows.
+  Group notices ("a ajouté … au groupe.") arriving after load were already translated by 0.28.1 in the simulated
+  page built from the client's structure; a Discord started before 0.28.1 was installed keeps the older plugin.
+
 ## 0.28.1 (2026-10-27)
 
 From 0.28.0 (`1bb7622`, tag `v0.28.0`).
