@@ -5,9 +5,15 @@ Les sections datées après « État actuel » sont l'historique : ce qui y est 
 
 ## État actuel (27 octobre 2026)
 
-- **0.28.2** : branche `fix-0.28.2`, partie de `v0.28.1` (`ae8890b`), publiée par le tag `v0.28.2` (accord explicite du
-  mainteneur le 27 octobre 2026 ; identifiants de la CI et de la release dans l'historique ci-dessous une fois
-  connus).
+- **0.28.2 publiée** (27 octobre 2026, 23 h 34 UTC) : tag annoté `v0.28.2` sur `a3a00c8` (= `main` à la publication),
+  release https://github.com/Platykalt/corsu/releases/tag/v0.28.2, dernière version, 16 fichiers, sommes SHA-256
+  vérifiées après téléchargement. CI de la candidate 40590847509 verte (`a3a00c8`) ; CI du tag 40597336799 verte,
+  publication et installation en une ligne (Ubuntu, Windows) comprises. Archives publiées inspectées : version 0.28.2,
+  plugin Discord `2026-10-composer-2` avec les corrections, « Accolta » dans la fenêtre, aucune trace de `strix_runs/`.
+  Essai isolé après publication : la 0.28.1 publiée voit la 0.28.2 sur GitHub (`status: available`), se met à jour
+  par son propre `update.py` ; partie désactivée, apparence et préférence `auto_update` gardées.
+  `a3a00c8` corrige aussi l'essai Firefox de la CI : Firefox 159 exige `MOZ_REMOTE_ALLOW_SYSTEM_ACCESS=1` pour le
+  contexte chrome de Marionette (CI 40584496466 rouge sur Ubuntu pour cette seule raison).
   - Discord (`2f7c755`, `fa1f3ac`, révision du traducteur `2026-10-composer-2`) : champ « Envoyer un message à @… »
     (texte de remplacement Slate hors champ de saisie), « Rechercher {name} » = « Circà in {name} », message
     d'épinglage actuel et lien « Modifier le groupe » cherchés dans la liste des messages, message système dans
@@ -28,7 +34,10 @@ Les sections datées après « État actuel » sont l'historique : ce qui y est 
   en plus, l'intégration Hyprland + Noctalia et les dates en corse dans la session Hyprland (`a9ed3a0`).
   L'installation personnelle du mainteneur vient de cette branche (composants `hyprland` et `hyprland-profile`) : la
   mise à jour automatique ne lui propose pas les versions publiées ; elle se met à jour depuis une construction de
-  cette branche.
+  cette branche. Depuis le 28 octobre 2026 : 0.28.2 de `hyprland` `5e08012` (archives de la CI 40597179092), qui se
+  présente comme 0.28.2 mais n'est pas l'archive publiée.
+  `check_migration.py` relit l'état de la fenêtre avant de demander le redémarrage (course vue dans la CI 40591065196 :
+  `/api/state` calcule `restart` avant de lire le travail terminé).
 
 ## Historique : publication 0.28.1 (27 octobre 2026)
 
