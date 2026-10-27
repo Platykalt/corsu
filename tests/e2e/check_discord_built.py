@@ -202,10 +202,10 @@ const group = { id: ID(5), type: 3, name: "", recipients: [ID(1), ID(2)] };
 const slate = text => `<div class="search_x"><div class="editor_x" role="combobox" contenteditable="true"><div data-slate-node="element"><span data-slate-node="text"><span data-slate-leaf="true"><span id="t" data-slate-placeholder="true" contenteditable="false">${text}</span></span></span></div></div></div>`;
 add("Friends search placeholder", `<div class="peopleColumn_x"><input id="t" class="input_x" placeholder="Rechercher" aria-label="Rechercher"></div>`, [], "Circà", "placeholder");
 add("Friends search label", `<div class="peopleColumn_x"><input id="t" class="input_x" placeholder="Rechercher" aria-label="Rechercher"></div>`, [], "Circà", "aria-label");
-add("group DM search placeholder (Slate)", slate("Rechercher EnzoParisi, Moz_One"), [{ channel: group }], "Circà EnzoParisi, Moz_One");
-add("DM search placeholder with a dictionary word as name", slate("Rechercher Work"), [{ channel: dm(work) }], "Circà Work");
+add("group DM search placeholder (Slate)", slate("Rechercher EnzoParisi, Moz_One"), [{ channel: group }], "Circà in EnzoParisi, Moz_One");
+add("DM search placeholder with a dictionary word as name", slate("Rechercher Work"), [{ channel: dm(work) }], "Circà in Work");
 add("server search placeholder", `<input id="t" placeholder="Rechercher Work, Error">`, [{ guild: { id: ID(4), name: "Work, Error" } }],
-  "Circà Work, Error", "placeholder");
+  "Circà in Work, Error", "placeholder");
 add("search text being typed", `<div contenteditable="true"><span id="t" data-slate-string="true">Rechercher Work</span></div>`, [], "Rechercher Work");
 add("field inside a message", `<div id="message-content-2" class="markup_x"><input id="t" placeholder="Rechercher"></div>`, [], "Rechercher", "placeholder");
 // A bar that searches friends or users (the friends list, the "new DM"/"add member" pickers): a whole phrase of the
@@ -259,6 +259,12 @@ add("group add: names inside one text node", groupRow(`<span id="t">Work a ajout
   [{ channel: groupDm }, { users: [work, error] }], "Work hà aghjuntu Error à u gruppu.");
 add("group leave: name inside the text node", groupRow(`<span id="t">Error a quitté le groupe.</span>`),
   [{ user: error }], "Error hà lasciatu u gruppu.");
+// The last message of a conversation shown under its name in a conversation list (chunk 4bb013d8238b3d6b: MMN2Jq
+// written with formatToPlainString and identity hooks, so both names are inside one text node, in a <span>).
+add("group add in a conversation list preview", `<div class="secondaryText_x"><div class="text_x"><span id="t" class="preview_x">Work a ajouté Error au groupe.</span></div></div>`,
+  [{ channel: groupDm, message: { id: ID(7), author: work, mentions: [error.id] } }], "Work hà aghjuntu Error à u gruppu.");
+add("group add preview inside a conversation link", `<a href="/channels/@me/${ID(6)}"><span id="t" class="preview_x">Error a ajouté Work au groupe.</span></a>`,
+  [{ channel: groupDm, message: { id: ID(7), author: error, mentions: [work.id] } }], "Error hà aghjuntu Work à u gruppu.");
 add("real message equal to the group phrase", `<div id="message-content-4" class="markup_x"><span id="t">a ajouté au groupe.</span></div>`,
   [], "a ajouté au groupe.");
 add("person named like a fragment stays", groupRow(`<span id="t" class="username_x" role="button">a ajouté</span><span> a quitté le groupe.</span>`),
@@ -387,6 +393,179 @@ return JSON.stringify(["Jérôme", "Martindale", "elle/la sienne", "nuit", "Pari
 })()
 '''
 
+# Pages that change after the translator started, built from the structures of Discord's public web client (build
+# web.ad0b95d8568e0f6b, read 2026-10-27; French keys from its fr chunk). Each step is checked in order; this is a
+# simulated page, not the real app.
+# - DM composer: SlateTextArea (module 655098) draws `placeholder` in a <div class="placeholder__1b31f …"
+#   aria-hidden data-slate-placeholder="true"> BESIDE the editor (<div class="markup__75297 editor__1b31f …"
+#   role="textbox" contenteditable aria-label={placeholder}>), only while the draft is empty (state.showPlaceholder);
+#   the text is 4c+CAx "Envoyer un message à {channel}" with channel "@{name}" (module 480870).
+# - Message search: the Slate search bar (chunk c5b5c25ec8ff16aa) is an Editable role="combobox" with
+#   aria-label={placeholder} and Slate's own placeholder span inside the empty leaf; the text is LDZtFO "Rechercher
+#   {name}" with the server's or the conversation's name, m7OrlR "Chercher dans les MP" or 5h0QOP "Rechercher".
+# - Group notices: RECIPIENT_ADD renders MMN2Jq "{usernameHook} a ajouté {otherUsernameHook} au groupe." through the
+#   system message container (module 888675: div.container__235ca > div.iconContainer__235ca + div.content__235ca >
+#   div > [name, " a ajouté ", name, " au groupe.", timestamp]); each name is a clickable username (module 447215:
+#   an Anchor around nested spans). RECIPIENT_REMOVE: L2FyVq "… a retiré … du groupe.", or 5v2xa8 "{usernameHook} a
+#   quitté le groupe." when people leave.
+DYNAMIC = HELPERS + r'''
+(async () => {
+const settle = () => new Promise(resolve => setTimeout(resolve, 30));
+const results = [];
+const check = (name, got, expected) => results.push({ name, got, expected });
+const ID = n => String(n).repeat(18).slice(0, 18);
+const person = (n, g) => ({ id: ID(n), username: "u" + n, globalName: g });
+const ron = person(1, "Ron"), work = person(2, "Work"), error = person(3, "Error"), fake = person(4, "a ajouté");
+const dm = p => ({ id: "9" + p.id.slice(1), type: 1, name: "", recipients: [p.id],
+  rawRecipients: [{ id: p.id, username: p.username, global_name: p.globalName }], nicks: {} });
+const group = { id: ID(6), type: 3, name: "", recipients: [work.id, error.id],
+  rawRecipients: [work, error].map(p => ({ id: p.id, username: p.username, global_name: p.globalName })), nicks: {} };
+const html = text => { const t = document.createElement("template"); t.innerHTML = text; return t.content.firstElementChild; };
+
+// --- A: the DM composer.
+const composer = html(`<div class="channelTextArea__74017"><div class="textArea__74017"><div class="container_x"></div></div></div>`);
+const box = composer.querySelector(".container_x");
+const placeholder = text => {
+  const div = html(`<div class="placeholder__1b31f slateTextArea__74017" aria-hidden="true" data-slate-placeholder="true">${text}</div>`);
+  mount(div, { channel: dm(ron) }, { channel: dm(ron), placeholder: text });
+  return div;
+};
+const editor = html(`<div class="markup__75297 editor__1b31f slateTextArea__74017" role="textbox" contenteditable="true" aria-label="Envoyer un message à @Ron"><div data-slate-node="element"><span data-slate-node="text"><span data-slate-leaf="true"><span data-slate-zero-width="n">﻿<br></span></span></span></div></div>`);
+mount(editor, { channel: dm(ron), placeholder: "Envoyer un message à @Ron" });
+box.append(placeholder("Envoyer un message à @Ron"), editor);
+document.body.append(composer);
+// --- B: the message search bar over the conversation, and the Friends page's field.
+const searchBar = context => {
+  const bar = html(`<div class="search__x"><div class="editor__372492" role="combobox" contenteditable="true" aria-label="Rechercher ${context.globalName}"><div data-slate-node="element"><span data-slate-node="text"><span data-slate-leaf="true"><span data-slate-placeholder="true" contenteditable="false" style="opacity:1">Rechercher ${context.globalName}</span><span data-slate-zero-width="n">﻿<br></span></span></span></div></div></div>`);
+  mount(bar.querySelector('[role="combobox"]'), { placeholder: "Rechercher " + context.globalName }, { searchContext: { type: "CHANNEL", channelId: dm(context).id } });
+  mount(bar.querySelector("[data-slate-placeholder]"), { children: "Rechercher " + context.globalName }, { searchContext: { type: "CHANNEL", channelId: dm(context).id } });
+  return bar;
+};
+const header = html(`<section class="toolbar_x"></section>`);
+header.append(searchBar(ron));
+document.body.append(header);
+const friends = html(`<div class="peopleColumn_x"><input class="input_x" placeholder="Rechercher" aria-label="Rechercher"><input class="input_y" placeholder="Rechercher des amis"></div>`);
+document.body.append(friends);
+// --- C: the message list of a group conversation, with a notice present at load.
+const list = html(`<ol class="scrollerInner_x" data-list-id="chat-messages"></ol>`);
+document.body.append(list);
+let messageId = 10;
+function notice(actor, other, kind) {
+  const id = String(messageId++).repeat(18).slice(0, 18);
+  const row = html(`<li id="chat-messages-${group.id}-${id}" class="messageListItem__x"><div class="message__x" role="article"><div class="container__235ca cozy__235ca"><div class="iconContainer__235ca"><div class="icon__235ca iconSize__235ca"></div></div><div class="content__235ca"><div></div></div></div></div></li>`);
+  const line = row.querySelector(".content__235ca > div");
+  const name = p => {
+    const a = html(`<a class="anchor_x" role="button" tabindex="0"><span class="username_x"><span class="name_x"><span>${p.globalName}</span></span></span></a>`);
+    mount(a.querySelector("span span span"), { children: p.globalName }, { user: p, channelId: group.id });
+    return a;
+  };
+  const words = { add: [" a ajouté ", " au groupe."], remove: [" a retiré ", " du groupe."], leave: [" a quitté le groupe."] }[kind];
+  line.append(name(actor), document.createTextNode(words[0]));
+  if (other) line.append(name(other), document.createTextNode(words[1]));
+  line.append(html(`<span class="timestamp_x"><time datetime="2026-10-27T10:00:00.000Z">10:00</time></span>`));
+  const message = { id, type: kind === "add" ? 1 : 2, author: actor, mentions: other ? [other.id] : [], content: "" };
+  mount(line, { children: [] }, { message, compact: false, otherUsername: other?.globalName }, { message, channel: group });
+  return row;
+}
+const fragments = row => Array.from(row.querySelector(".content__235ca > div").childNodes).filter(n => n.nodeType === 3).map(n => n.data);
+const names = row => Array.from(row.querySelectorAll(".name_x")).map(n => n.textContent);
+const atLoad = notice(work, error, "add");
+list.append(atLoad);
+
+const translator = CorsuBuilt.createTranslator(document);
+translator.start();
+await settle();
+check("A: composer placeholder at load", box.querySelector("[data-slate-placeholder]")?.textContent, "Mandà un messaghju à @Ron");
+check("A: composer editor label at load", editor.getAttribute("aria-label"), "Mandà un messaghju à @Ron");
+check("B: DM search placeholder at load", header.querySelector("[data-slate-placeholder]").textContent, "Circà in Ron");
+check("B: DM search label at load", header.querySelector('[role="combobox"]').getAttribute("aria-label"), "Circà in Ron");
+check("B: Friends search field (no preposition)", friends.firstElementChild.getAttribute("placeholder"), "Circà");
+check("B: friend search phrase", friends.lastElementChild.getAttribute("placeholder"), "Circà amichi");
+check("C: group notice present at load", fragments(atLoad).join("|"), " hà aghjuntu | à u gruppu.");
+
+// A: typing a draft removes the placeholder; the draft is what is typed (even Discord's own words), with the caret
+// inside it; erasing it brings a new placeholder node.
+box.querySelector("[data-slate-placeholder]").remove();
+const leaf = editor.querySelector("[data-slate-leaf]");
+leaf.innerHTML = '<span data-slate-string="true">Envoyer un message à @Ron</span>';
+const typed = leaf.firstChild.firstChild;
+const selection = getSelection();
+selection.collapse(typed, 7);
+await settle();
+check("A: draft equal to the placeholder stays as typed", typed.data, "Envoyer un message à @Ron");
+check("A: caret not moved by the translator", `${selection.anchorNode === typed}:${selection.anchorOffset}`, "true:7");
+leaf.innerHTML = '<span data-slate-zero-width="n">﻿<br></span>';
+box.insertBefore(placeholder("Envoyer un message à @Ron"), editor);
+await settle();
+check("A: placeholder translated again after the draft is erased", box.querySelector("[data-slate-placeholder]")?.textContent, "Mandà un messaghju à @Ron");
+
+// B: closing and reopening the search bar (new nodes), then another conversation in the same nodes.
+header.firstElementChild.remove();
+await settle();
+header.append(searchBar(ron));
+await settle();
+check("B: search reopened", header.querySelector("[data-slate-placeholder]").textContent, "Circà in Ron");
+const span = header.querySelector("[data-slate-placeholder]");
+rerender(span, "Rechercher Work", { children: "Rechercher Work" }, { searchContext: { type: "CHANNEL", channelId: dm(work).id } });
+const combo = header.querySelector('[role="combobox"]');
+rerender(combo, null, { placeholder: "Rechercher Work" }, { searchContext: { type: "CHANNEL", channelId: dm(work).id } });
+combo.setAttribute("aria-label", "Rechercher Work");
+await settle();
+check("B: search over another conversation (node reused)", span.textContent, "Circà in Work");
+check("B: search label over another conversation", combo.getAttribute("aria-label"), "Circà in Work");
+const query = html('<span data-slate-string="true">Rechercher Ron</span>');
+span.parentNode.replaceChild(query, span);
+await settle();
+check("B: typed query stays", query.textContent, "Rechercher Ron");
+
+// C: notices that arrive after load (a new message row inserted by React), with their names.
+const added = notice(work, error, "add"), removed = notice(error, work, "remove"), left = notice(work, null, "leave");
+const fakeName = notice(fake, null, "leave");
+list.append(added, removed, left, fakeName);
+await settle();
+check("C: new add notice", fragments(added).join("|"), " hà aghjuntu | à u gruppu.");
+check("C: new add notice keeps Work and Error", names(added).join("|"), "Work|Error");
+check("C: new remove notice", fragments(removed).join("|"), " hà cacciatu | da u gruppu.");
+check("C: new leave notice", fragments(left).join("|"), " hà lasciatu u gruppu.");
+check("C: a name written like a fragment stays", names(fakeName).join("|"), "a ajouté");
+// The pin notice as the client draws it (yIDvPL: the two links are Anchors) and a group renamed (geP3rU: the new name
+// in a <span>, then the "Modifier le groupe" link), both arriving after load; the new name "Error" stays.
+const systemRow = parts => {
+  const row = notice(work, null, "leave");
+  const line = row.querySelector(".content__235ca > div");
+  while (line.childNodes.length > 1) line.lastChild.remove();
+  for (const part of parts) line.append(typeof part === "string" ? document.createTextNode(part) : html(part[0]));
+  return row;
+};
+const pin = systemRow([" a épinglé ", ['<a class="anchor_x" role="button">un message</a>'], " dans ce salon. Voir tous les ",
+  ['<a class="anchor_x" role="button">messages épinglés</a>'], "."]);
+const renamed = systemRow([" a changé le nom du groupe : ", ['<span class="text-md-medium_x">Error</span>'], ". ",
+  ['<a class="anchor_x" role="button"><span class="text-md-medium_x">Modifier le groupe</span></a>']]);
+list.append(pin, renamed);
+await settle();
+check("C: new pin notice (current client)", pin.querySelector(".content__235ca > div").textContent,
+  "Work hà spirlatu un messaghju in stu canale. Vede tutti i messaghji spirlati.");
+check("C: group renamed, new name kept", renamed.querySelector(".content__235ca > div").textContent,
+  "Work hà cambiatu u nome di u gruppu : Error. Mudificà u gruppu");  // the row's own space before ":"
+const own = html(`<li id="chat-messages-${group.id}-${ID(9)}" class="messageListItem__x"><div class="markup__75297 messageContent__x" id="message-content-${ID(9)}">a ajouté</div></li>`);
+list.append(own);
+await settle();
+check("C: a message written like a fragment stays", own.textContent, "a ajouté");
+
+// No double translation: the page writes back what it shows, and a second translator reads it.
+for (const node of document.querySelectorAll("*")) for (const child of node.childNodes) if (child.nodeType === 3) child.data = child.data;
+await settle();
+const second = CorsuBuilt.createTranslator(document);
+second.start();
+await settle();
+second.stop();
+check("no double translation (composer)", box.querySelector("[data-slate-placeholder]")?.textContent, "Mandà un messaghju à @Ron");
+check("no double translation (notice)", fragments(added).join("|"), " hà aghjuntu | à u gruppu.");
+check("no double translation (search label)", combo.getAttribute("aria-label"), "Circà in Work");
+return JSON.stringify(results);
+})()
+'''
+
 
 def extract(vencord, folder):
     bundle = Path(vencord, 'dist/renderer.js')
@@ -463,6 +642,12 @@ def main(chrome, vencord, strict):
                       + ('' if ok else f' (expected {case["expected"]!r})'))
                 if not ok:
                     (failures if case['strict'] else known).append(case['name'])
+            for step in json.loads(evaluate(devtools, page(), DYNAMIC)):
+                ok = step['got'] == step['expected']
+                print(f'{"PASS" if ok else "FAIL"}: {step["name"]} = {step["got"]!r}'
+                      + ('' if ok else f' (expected {step["expected"]!r})'))
+                if not ok:
+                    failures.append(step['name'])
             leaked = json.loads(evaluate(devtools, page(), PRIVACY))
             print(f'{"PASS" if not leaked else "FAIL"}: diagnostic prints none of the synthetic personal data'
                   + (f' (printed: {leaked})' if leaked else ''))

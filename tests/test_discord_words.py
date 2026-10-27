@@ -120,7 +120,9 @@ class DiscordWordsTests(unittest.TestCase):
         # name Discord inserts ("Rechercher EnzoParisi, Moz_One"). Provenance in lexicon/review-discord-2026-10.tsv.
         expected = {
             'Rechercher': 'Circà', 'Search': 'Circà',
-            'Rechercher \u00001\u0000': 'Circà \u00001\u0000', 'Search \u00001\u0000': 'Circà \u00001\u0000',
+            # "Rechercher {name}" (LDZtFO) is only the message search bar over a conversation or a server (Discord's
+            # web client, October 2026): the name is the place searched in, "Circà in Ron" (0.28.2; was "Circà Ron").
+            'Rechercher \u00001\u0000': 'Circà in \u00001\u0000', 'Search \u00001\u0000': 'Circà in \u00001\u0000',
             'Rechercher dans \u00001\u0000': 'Circà in \u00001\u0000', 'Search in \u00001\u0000': 'Circà in \u00001\u0000',
             'Rechercher des messages dans tes serveurs': 'Circà messaghji in i to servori',
             'Rechercher dans tes messages privés': 'Circà in i to messaghji privati',
@@ -184,6 +186,38 @@ class DiscordWordsTests(unittest.TestCase):
         }
         for key, value in templates.items():
             self.assertEqual(self.words[key], value, key)
+
+    def test_system_message_fragments_of_the_current_client(self):
+        # Discord's web client of October 2026 draws the pin notice as yIDvPL "{username} a épinglé [un message] dans ce
+        # salon. Voir tous les [messages épinglés]." (links in brackets) and a renamed group as geP3rU "{username} a
+        # changé le nom du groupe : {name}. [Modifier le groupe]": these fragments are looked up as system labels in
+        # the message list (src/discord-plugin/translate.ts systemLabels, 0.28.2). Rows already in the lexicon.
+        expected = {
+            'a épinglé': 'hà spirlatu', 'un message': 'un messaghju',
+            'dans ce salon. Voir tous les': 'in stu canale. Vede tutti i', 'Messages épinglés': 'Messaghji spirlati',
+            'a épinglé un message dans ce salon. Voir tous les': 'hà spirlatu un messaghju in stu canale. Vede tutti i',
+            'a changé le nom du groupe :': 'hà cambiatu u nome di u gruppu :', 'Modifier le groupe': 'Mudificà u gruppu',
+            "a changé l'icône du groupe.": "hà cambiatu l'icona di u gruppu.",
+        }
+        for key, value in expected.items():
+            self.assertEqual(self.words[engine.normalize(key)], value, key)
+
+    def test_moderation_actions_stay_distinct(self):
+        # Discord's French "Exclure {user}" (OhsOy0) is the TIMEOUT item (EN "Timeout {user}"); it said "Scaccià
+        # {user}", the same words as the kick "Expulser {user}" (9l/iTS). Remove from a group DM, kick, timeout and
+        # leaving must stay four different actions (review of 2026-10-27, lexicon/review-discord-2026-10.tsv).
+        expected = {
+            'Exclure \u00001\u0000': 'Esclude \u00001\u0000 per un tempu',
+            'Expulser \u00001\u0000': 'Espulsà \u00001\u0000',
+            'Retirer du groupe': 'Caccià da u gruppu',
+            'Quitter le groupe': 'Lascià u gruppu',
+            'Exclure temporairement des membres': 'Esclude membri per un tempu',
+            'Arrêter d’exclure \u00001\u0000': 'Piantà d’esclude \u00001\u0000',
+        }
+        for key, value in expected.items():
+            self.assertEqual(self.words[engine.normalize(key)], value, key)
+        actions = [self.words[engine.normalize(key)] for key in ('Exclure \u00001\u0000', 'Expulser \u00001\u0000', 'Retirer du groupe')]
+        self.assertEqual(len(set(actions)), 3)
 
     def test_templates_keep_their_placeholders(self):
         key = engine.normalize('Effacer après \u00001\u0000 heures')

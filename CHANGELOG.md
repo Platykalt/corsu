@@ -22,6 +22,48 @@
   Noctalia loads Corsu's catalogue through `NOCTALIA_ASSETS_DIR` (a folder in Corsu's data) and two `00-corsu-*.toml`
   layers that its Settings window overrides; session values come from `src/hyprland_system.py` (branch `hypr-a`). Tried on simulated folders only; the window texts in Corsican are AI proposals.
 
+## 0.28.2 (in preparation, not published)
+
+From 0.28.1 (`ae8890b`, tag `v0.28.1`). Translator revision `2026-10-composer-2`. Structures read in Discord's public
+web client (build `web.ad0b95d8568e0f6b`, 2026-10-27) and checked in simulated pages with the built plugin
+(`check_discord_built.py`), not in the real Discord app.
+
+- **Discord, message composer**: "Envoyer un message à @Ron" (key 4c+CAx) was back in French since 0.28.0. Discord's
+  composer draws this placeholder in a `<div data-slate-placeholder>` beside the editor, outside any content area;
+  the search-field change of 0.28.0 (`8c25eb2`) took every Slate placeholder not inside a text field for typed
+  content. It is Discord's text again: "Mandà un messaghju à @Ron", also when a draft is typed and erased (a new
+  node); the draft itself and the caret are never touched.
+- **Discord, message search over a conversation**: "Rechercher Ron" (LDZtFO, only used by the message search bar,
+  with the conversation's or server's name) said "Circà Ron", read as searching for the person; it now says "Circà in
+  Ron", as Corsu's "Circà in a pagina". Searching for people keeps "Circà", "Circà amichi". Provenance in
+  `lexicon/review-discord-2026-10.tsv` (Corsu usage and an AI proposal, not read by a speaker).
+- **Discord, system messages as the current client draws them**: the pin notice is "{name} a épinglé [un message]
+  dans ce salon. Voir tous les [messages épinglés]." (yIDvPL, two links), not the shape 0.28.0 assumed, and a
+  renamed group adds a "Modifier le groupe" link (geP3rU): these fragments stayed in French in the message list and
+  are now looked up there (rows already in the lexicon). System phrases are now only looked up in message-list rows.
+  Group notices ("a ajouté … au groupe.") arriving after load were already translated by 0.28.1 in the simulated
+  page built from the client's structure; a Discord started before 0.28.1 was installed keeps the older plugin.
+- **Discord, a nickname that reads like a notice**: with someone named "a ajouté", the notice's own fragment "a
+  ajouté" beside the name elements stayed in French (the record holds that name). Only a name element, or a lone
+  text equal to a recorded name, is kept now; a fragment beside the name elements is the notice's text.
+- **Discord, a system message in a preview line**: Discord draws it as one plain string in the same `messageContent`
+  span as people's messages. It is read only when the React record's message type is a system type (not default,
+  reply or command): "Work hà aghjuntu Error à u gruppu.", while a person's message with the same words stays.
+- **Tests**: `tests/e2e/check_discord_regressions.py`, written independently from the client's structures (composer
+  at load, after a draft and after navigation, message search opened/closed/reopened, notices inserted after load,
+  look-alike nicknames, real messages with the same words, no double translation), runs in CI: 14 of its checks
+  fail on 0.28.1, all pass now. Inventory of Discord's French strings and the removal/leaving labels:
+  `docs/discord-inventory-0.28.2.md` (`tools/discord_inventory.py` regenerates the table).
+- **CI**: update, update with VLC and migration from the published 0.28.1.
+- **Discord, review of frequent actions (first batches, AI review, not read by a speaker)**: "Exclure {user}" is
+  Discord's timeout and said "Scaccià {user}", the same as the kick "Expulser {user}": now "Esclude {user} per un
+  tempu" (kick: "Espulsà {user}", Corsu's convention). Verb forms fixed: "Piantà d'esclude {user}" (was "escludà"),
+  "Esclude membri per un tempu" (was "Escludisce temporaneamente"), "Circà canali o roli" and "Circhendu un gruppu"
+  (Italian "Cerca"), "Reinizializà" for Réinitialiser where it said "Reinizià" (restart) or "Rinizializà"; "clip"
+  and "etichetta" as in Corsu's other rows. "Retirer du groupe" stays "Caccià da u gruppu" (reasons in the review
+  file). About 785 of the 22,430 Discord rows examined; the batches left and the questions for INFCOR are in
+  `lexicon/review-discord-progress.md`.
+
 ## 0.28.1 (2026-10-27)
 
 From 0.28.0 (`1bb7622`, tag `v0.28.0`).
