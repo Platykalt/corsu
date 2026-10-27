@@ -17,7 +17,7 @@
 <body>
 <!-- One icon set: 24px grid, 1.75 stroke, round caps, currentColor. Each use is decorative or the control is named. -->
 <svg class="sprite" aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg">
-  <symbol id="i-programs" viewBox="0 0 24 24"><rect x="3.5" y="3.5" width="7" height="7" rx="1.8"/><rect x="13.5" y="3.5" width="7" height="7" rx="1.8"/><rect x="3.5" y="13.5" width="7" height="7" rx="1.8"/><rect x="13.5" y="13.5" width="7" height="7" rx="1.8"/></symbol>
+  <symbol id="i-home" viewBox="0 0 24 24"><path d="M4 10.5 12 4l8 6.5"/><path d="M6 9v10.5h12V9"/><path d="M10 19.5v-5h4v5"/></symbol>
   <symbol id="i-add" viewBox="0 0 24 24"><circle cx="12" cy="12" r="8.5"/><path d="M12 8v8M8 12h8"/></symbol>
   <symbol id="i-review" viewBox="0 0 24 24"><path d="M4 6h10M4 11h7M4 16h5"/><path d="M13 20l3-.6 5.6-5.6a1.8 1.8 0 0 0-2.5-2.5l-5.6 5.6z"/></symbol>
   <symbol id="i-help" viewBox="0 0 24 24"><circle cx="12" cy="12" r="8.5"/><path d="M9.6 9.6a2.5 2.5 0 0 1 4.9.7c0 1.7-2.5 2.1-2.5 3.7"/><path d="M12 17h.01"/></symbol>
@@ -60,7 +60,7 @@
   <aside class="sidebar">
     <div class="brand"><img src="corsu.svg" alt="" width="28" height="28"><b>Corsu</b><small id="version"></small></div>
     <nav aria-label="Corsu">
-      <button type="button" data-page="programs"><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-programs"/></svg><span class="nav-label" data-t="nav_programs"></span></button>
+      <button type="button" data-page="programs"><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-home"/></svg><span class="nav-label" data-t="nav_programs"></span></button>
       <button type="button" data-page="add"><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-add"/></svg><span class="nav-label" data-t="nav_add"></span></button>
       <button type="button" data-page="review"><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-review"/></svg><span class="nav-label" data-t="nav_review"></span></button>
       <button type="button" data-page="report"><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-flag"/></svg><span class="nav-label" data-t="nav_report"></span></button>
@@ -109,7 +109,8 @@
           </span>
         </div>
       </section>
-      <ul class="group list" id="switches"></ul>
+      <h2 id="switches-heading" data-t="programs_heading"></h2>
+      <ul class="group list" id="switches" aria-labelledby="switches-heading"></ul>
 
       <div id="terminal-block" hidden>
         <h2 data-t="terminal"></h2>

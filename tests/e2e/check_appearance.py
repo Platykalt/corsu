@@ -432,6 +432,9 @@ def main(arguments):
                   and page.run('document.getElementById("ap-dim").dataset.probe') == 'kept'
                   and page.run('document.getElementById("ap-dim").value') == '40',
                   'two refreshes later: focus, slider node and its value unchanged')
+            check(page.run('!document.getElementById("appearance").hidden && document.getElementById("programs").hidden'
+                           ' && document.querySelector(\'[data-page="appearance"]\').getAttribute("aria-current") === "page"'),
+                  'two refreshes later: still on Appearance, not sent back to Home')
             page.run('document.getElementById("ap-dim").blur()')
 
             # Reduced motion: no transition or animation anywhere, the framing marker included.

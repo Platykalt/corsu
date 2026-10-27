@@ -33,6 +33,13 @@ web client (build `web.ad0b95d8568e0f6b`, 2026-10-27) and checked in simulated p
   fail on 0.28.1, all pass now. Inventory of Discord's French strings and the removal/leaving labels:
   `docs/discord-inventory-0.28.2.md` (`tools/discord_inventory.py` regenerates the table).
 - **CI**: update, update with VLC and migration from the published 0.28.1.
+- **Window, Home page**: the Programs page is now Home ("Accolta" / "Accueil", house icon): the summary (what is in
+  Corsican, what needs you, update) first, then the list under "Programs managed by Corsu". Each row says its state
+  in words (in Corsican, partly in Corsican, original language, restart needed); a part switched off while its
+  program is still open reads "Restart needed" and is named in the summary. "Accolta" is Corsu's existing usage
+  (`lexicon/lexicon-mozilla.tsv`, from Mozilla's Corsican Firefox; not an independent validation); the new lead and
+  heading are an AI proposal built from Corsu's own phrases, not read by a speaker. Internal page id and text key
+  unchanged (`programs`).
 - **Discord, review of frequent actions (first batches, AI review, not read by a speaker)**: "Exclure {user}" is
   Discord's timeout and said "Scaccià {user}", the same as the kick "Expulser {user}": now "Esclude {user} per un
   tempu" (kick: "Espulsà {user}", Corsu's convention). Verb forms fixed: "Piantà d'esclude {user}" (was "escludà"),

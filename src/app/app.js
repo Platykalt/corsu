@@ -92,7 +92,9 @@ function show(name) {
 // Activation (is Corsican switched on?) and coverage (how much of the program is translated) are separate:
 // a program fully switched on with a partial catalogue is "active", not a partial failure.
 // Older saved states only carry `on`; the state is read from it then.
+// A part switched off whose program is still open (item.restart, set only without a detailed record) needs a restart.
 function activationOf(item) {
+  if (item.restart) return "restart_required";
   if (item.activation) return item.activation;
   if (item.on) return "active";
   return item.installed && item.switchable ? "inactive" : null;
@@ -132,9 +134,9 @@ const troubled = activation => activation === "blocked" || activation === "faile
 const noted = instance => Boolean(instance.reason || instance.action);
 const ordinaryState = activation => activation === "active" || activation === "inactive" || activation === null;
 
-// What a row says about its program. The chip (state as icon + word) only when something is unusual; coverage, tests and
-// each installation sit in a disclosure, opened by default when something needs the person's attention.
-// Nothing for the fixed parts (Firefox, Discord…) and old saved states: the switch already says it all.
+// What a row says about its program. The chip (state as icon + word) here only when something is unusual (switchRow adds
+// the ordinary one); coverage, tests and each installation sit in a disclosure, opened by default when something needs
+// the person's attention. No disclosure when it would be empty.
 function statusBlock(item) {
   const activation = activationOf(item);
   const instances = Array.isArray(item.instances) ? item.instances : [];
@@ -151,6 +153,7 @@ function statusBlock(item) {
   }
   // Opened by default when something needs the person's attention; then it stays as they leave it.
   const open = openDetails.has(item.name) ? openDetails.get(item.name) : attention;
+  if (!instances.length && !coverage && !tested && !item.updated) return { chip: badge, nodes: [], kind };
   const details = make("details", { class: "more", open, ontoggle: event => {
     // The first event only echoes the default; from then on the person's choice is kept.
     if (event.target.open !== open || openDetails.has(item.name)) openDetails.set(item.name, event.target.open);
@@ -222,6 +225,10 @@ function switchRow(item, busy) {
   const [name, detail] = item.text[language];
   const id = "switch-" + item.name;
   const block = statusBlock(item);
+  // Every row says its state in words: in Corsican, partly, original language, restart needed (statusBlock's own chip
+  // when something is unusual).
+  const activation = activationOf(item);
+  const badge = block.chip || (activation ? chip(activation, { id: "status-" + item.name }) : null);
   // A restart cannot show a change that did not happen.
   // The server marks a part switched off whose open programs still show the old language until they restart
   // (item.restart). That hint is durable: it survives "switch everything off" and reopening the window, unlike the
@@ -235,7 +242,7 @@ function switchRow(item, busy) {
   return make("li", { class: [...classes].join(" ") || null, id: "row-" + item.name },
     appIcon(item.name),
     make("span", { class: "label" },
-      headline(id, name, block),
+      headline(id, name, { chip: badge }),
       make("span", { class: "detail", id: "desc-" + item.name, text: detail }),
       ...block.nodes,
       hint ? make("span", { class: "hint", text: hint }) : null,
@@ -246,7 +253,7 @@ function switchRow(item, busy) {
     make("span", { class: "switch" },
       // Always the server's word: after a failed or deferred change, the next refresh puts it back.
       make("input", { type: "checkbox", role: "switch", id, checked: item.on, disabled: busy,
-        "aria-describedby": [block.chip ? "status-" + item.name : null, "desc-" + item.name].filter(Boolean).join(" "), onchange: event => {
+        "aria-describedby": [badge ? "status-" + item.name : null, "desc-" + item.name].filter(Boolean).join(" "), onchange: event => {
         restartHints.set(item.name, item.name === "desktop" ? t("restart_desktop") : t("restart", { name }));
         call("/api/switch", { components: [item.name], on: event.target.checked }).catch(() => null).then(refresh);
       } }),
@@ -267,7 +274,7 @@ const setText = (node, value) => { if (node.textContent !== String(value)) node.
 function replaceKeepingFocus(list, rows) {
   const focused = list.contains(document.activeElement) ? document.activeElement.id : null;
   list.replaceChildren(...rows);
-  if (focused && $(focused)) $(focused).focus();
+  if (focused && $(focused)) $(focused).focus({ preventScroll: true });
 }
 
 // Problems first, then what needs attention, then the rest in their usual order.
@@ -522,7 +529,8 @@ function updateStatus() {
 
 // The parts an update could not switch yet (a program open, a new Minecraft folder), with the installer's advice.
 function waitingParts() {
-  return state.items.filter(item => item.installed && (["blocked", "restart_required", "partial"].includes(activationOf(item)) || item.waiting))
+  // A part switched off while open (item.restart) is not waiting for the update.
+  return state.items.filter(item => item.installed && !item.restart && (["blocked", "restart_required", "partial"].includes(activationOf(item)) || item.waiting))
     .map(item => {
       const [name] = item.text[language];
       const instance = (item.instances || []).find(instance => instance.activation !== "active" && (instance.action || instance.reason));
@@ -585,7 +593,7 @@ function renderUpdate() {
 
   // The banner on every page: a release to install, an automatic update under way, or a restart to do.
   const autoRunning = job.title === "update" && job.running && info.auto_started;
-  // On Programs the summary carries it (when there is one); About has its own section.
+  // On Home the summary carries it (when there is one); About has its own section.
   const show = !restarting && page !== "about" && !(page === "programs" && !$("summary").hidden) && (restart.available || autoRunning || (info.status === "available" && !(job.title === "update" && job.running)));
   $("update-banner").hidden = !show;
   if (show) setText($("update-text"), restart.available ? t("update_restart_text", { version: restart.version })
