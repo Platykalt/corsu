@@ -202,6 +202,23 @@ class DiscordWordsTests(unittest.TestCase):
         for key, value in expected.items():
             self.assertEqual(self.words[engine.normalize(key)], value, key)
 
+    def test_moderation_actions_stay_distinct(self):
+        # Discord's French "Exclure {user}" (OhsOy0) is the TIMEOUT item (EN "Timeout {user}"); it said "Scaccià
+        # {user}", the same words as the kick "Expulser {user}" (9l/iTS). Remove from a group DM, kick, timeout and
+        # leaving must stay four different actions (review of 2026-10-27, lexicon/review-discord-2026-10.tsv).
+        expected = {
+            'Exclure \u00001\u0000': 'Esclude \u00001\u0000 per un tempu',
+            'Expulser \u00001\u0000': 'Espulsà \u00001\u0000',
+            'Retirer du groupe': 'Caccià da u gruppu',
+            'Quitter le groupe': 'Lascià u gruppu',
+            'Exclure temporairement des membres': 'Esclude membri per un tempu',
+            'Arrêter d’exclure \u00001\u0000': 'Piantà d’esclude \u00001\u0000',
+        }
+        for key, value in expected.items():
+            self.assertEqual(self.words[engine.normalize(key)], value, key)
+        actions = [self.words[engine.normalize(key)] for key in ('Exclure \u00001\u0000', 'Expulser \u00001\u0000', 'Retirer du groupe')]
+        self.assertEqual(len(set(actions)), 3)
+
     def test_templates_keep_their_placeholders(self):
         key = engine.normalize('Effacer après \u00001\u0000 heures')
         self.assertEqual(self.words[key], 'Squassà dopu \u00001\u0000 ore')

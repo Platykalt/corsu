@@ -21,6 +21,14 @@ web client (build `web.ad0b95d8568e0f6b`, 2026-10-27) and checked in simulated p
   are now looked up there (rows already in the lexicon). System phrases are now only looked up in message-list rows.
   Group notices ("a ajouté … au groupe.") arriving after load were already translated by 0.28.1 in the simulated
   page built from the client's structure; a Discord started before 0.28.1 was installed keeps the older plugin.
+- **Discord, review of frequent actions (first batches, AI review, not read by a speaker)**: "Exclure {user}" is
+  Discord's timeout and said "Scaccià {user}", the same as the kick "Expulser {user}": now "Esclude {user} per un
+  tempu" (kick: "Espulsà {user}", Corsu's convention). Verb forms fixed: "Piantà d'esclude {user}" (was "escludà"),
+  "Esclude membri per un tempu" (was "Escludisce temporaneamente"), "Circà canali o roli" and "Circhendu un gruppu"
+  (Italian "Cerca"), "Reinizializà" for Réinitialiser where it said "Reinizià" (restart) or "Rinizializà"; "clip"
+  and "etichetta" as in Corsu's other rows. "Retirer du groupe" stays "Caccià da u gruppu" (reasons in the review
+  file). About 785 of the 22,430 Discord rows examined; the batches left and the questions for INFCOR are in
+  `lexicon/review-discord-progress.md`.
 
 ## 0.28.1 (2026-10-27)
 
