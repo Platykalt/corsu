@@ -7,6 +7,7 @@ pack, a broken omni.ja, labels the lexicon no longer covers and .properties argu
 """
 import contextlib
 import json
+import os
 import pathlib
 import socket
 import subprocess
@@ -92,6 +93,8 @@ def marionette(executable, arguments=('--headless',), environment=None):
             f'user_pref("marionette.port", {port});\nuser_pref("browser.shell.checkDefaultBrowser", false);\n'
             'user_pref("datareporting.policy.dataSubmissionEnabled", false);\n', encoding='utf-8')
         log = (profile / 'log').open('w', encoding='utf-8')
+        # Firefox 159 wants this variable, besides --remote-allow-system-access, before Marionette enters chrome.
+        environment = {**(os.environ if environment is None else environment), 'MOZ_REMOTE_ALLOW_SYSTEM_ACCESS': '1'}
         process = subprocess.Popen([executable, *arguments, '--no-remote', '--profile', directory, '--marionette',
                                     '--remote-allow-system-access', 'about:blank'], stdout=log, stderr=log,
                                    env=environment)
