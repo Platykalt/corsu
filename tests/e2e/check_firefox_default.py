@@ -77,6 +77,7 @@ def main(launcher):
                                             'user_pref("browser.shell.checkDefaultBrowser", false);\n', encoding='utf-8')
         environment = {name: value for name, value in os.environ.items() if not name.startswith('MOZ_')}
         environment['XDG_CURRENT_DESKTOP'] = 'GNOME'
+        environment['MOZ_REMOTE_ALLOW_SYSTEM_ACCESS'] = '1'  # Firefox 159 needs it for the chrome context
         process = subprocess.Popen([launcher, '--headless', '--marionette', '--remote-allow-system-access',
                                     '--profile', profile], env=environment,
                                    stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)

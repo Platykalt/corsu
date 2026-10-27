@@ -87,14 +87,15 @@ class Element {
   constructor(tag) { this.tagName = tag.toUpperCase(); this.attributes = {}; this.children = []; this.listeners = {};
     this.style = { setProperty(name, value) { this[name] = value; }, removeProperty(name) { delete this[name]; }, getPropertyValue(name) { return this[name] || ""; } };
     this.dataset = {}; this.hidden = false; this.disabled = false; this.classList = { toggle() {}, add() {}, remove() {}, contains: () => false }; }
-  setAttribute(name, value) { this.attributes[name] = String(value); if (name === "id") this.id = String(value); if (name === "open") this.open = true; }
+  // A node made with an id is the one getElementById finds, as in the real document (the last one drawn).
+  setAttribute(name, value) { this.attributes[name] = String(value); if (name === "id") { this.id = String(value); ids.set(this.id, this); } if (name === "open") this.open = true; }
   getAttribute(name) { return name in this.attributes ? this.attributes[name] : null; }
   removeAttribute(name) { delete this.attributes[name]; }
   addEventListener(name, listener) { (this.listeners[name] = this.listeners[name] || []).push(listener); }
   append(...children) { for (const child of children) this.children.push(typeof child === "string" ? { text: child } : child); }
   replaceChildren(...children) { this.children = []; this.append(...children); }
-  contains() { return false; }
-  focus() {}
+  contains(node) { return node === this || this.find(child => child === node).length > 0; }
+  focus() { document.activeElement = this; }
   showModal() {} close() {}
   set textContent(value) { this.children = [{ text: String(value) }]; }
   get textContent() { return this.children.map(child => child instanceof Element ? child.textContent : child.text).join(""); }
@@ -198,11 +199,46 @@ const out = vm.runInContext(`
   state = JSON.parse(JSON.stringify(fixture));
   Object.assign(state.items.find(item => item.name === "vlc"), { on: false, activation: "failed" });
   Object.assign(state.items.find(item => item.name === "firefox"), { on: false, restart: true });
+  // A part simply switched off, from an old saved state (only "on").
+  Object.assign(state.items.find(item => item.name === "old"), { on: false });
   render();
   result.after = rowsOf("switches");
+  result.afterJumps = $("summary-attention-list").children.map(node => clean(node.textContent));
+  result.afterSummary = { on: clean($("summary-on-value").textContent), sub: clean($("summary-on-sub").textContent) };
+  // Nothing installed: no summary, and no lead promising one.
+  state = JSON.parse(JSON.stringify(fixture));
+  for (const item of state.items) item.installed = false;
+  render();
+  result.empty = { summaryHidden: Boolean($("summary").hidden), leadHidden: Boolean($("programs-lead").hidden),
+    rows: $("switches").children.map(node => clean(node.textContent)) };
+  state = JSON.parse(JSON.stringify(fixture));
+  render();
+  result.leadShown = !$("programs-lead").hidden;
   JSON.stringify(result);
 `, context);
-process.stdout.write(out);
+// The periodic refresh as the page runs it (refresh() with the server's answer): the focused switch keeps the focus on
+// its redrawn row, and a page the person opened stays open.
+const refreshed = vm.runInContext(`(async () => {
+  const answer = JSON.parse(JSON.stringify(fixture));
+  call = async () => JSON.parse(JSON.stringify(answer));
+  state = null; page = null; language = "en";
+  const found = {};
+  await refresh();
+  found.first = page;
+  const before = $("switch-firefox");
+  before.focus();
+  await refresh();
+  found.focus = document.activeElement && document.activeElement.id;
+  found.redrawn = document.activeElement !== before;
+  show("about");
+  await refresh(); await refresh();
+  found.page = page;
+  answer.installed = false;
+  await refresh();
+  found.pageNothingInstalled = page;
+  return JSON.stringify(found);
+})()`, context);
+refreshed.then(found => process.stdout.write(JSON.stringify({ ...JSON.parse(out), refresh: JSON.parse(found) })));
 '''
 
 ROOT = 'C:\\Users\\Someone\\AppData\\Local\\Programs\\' + 'VeryLongFolder\\' * 6
@@ -283,15 +319,16 @@ class RenderTests(unittest.TestCase):
 
     def test_active_with_partial_coverage_is_not_a_problem(self):
         vlc = self.row('vlc')
-        # Nothing unusual: no chip, coverage and tests on demand, closed.
-        self.assertIsNone(vlc['status'])
+        # Nothing unusual: the plain state chip (fully switched on, the coverage is apart), coverage and tests on
+        # demand, closed.
+        self.assertEqual(vlc['status'], 'In Corsican')
         self.assertNotIn('problem', vlc['class'] or '')
         self.assertNotIn('attention', vlc['class'] or '')
         self.assertFalse(vlc['details']['open'])
         self.assertEqual(vlc['details']['summary'], 'Installation details')
         self.assertIn('Translated: 4,443 / 6,203 (72%)', vlc['details']['text'])
         self.assertTrue(vlc['checked'])
-        self.assertEqual(vlc['describedby'], 'desc-vlc')
+        self.assertEqual(vlc['describedby'], 'status-vlc desc-vlc')
         self.assertEqual(vlc['hints'], ['restart vlc'])
         self.assertIn('real app (Windows)', vlc['tested'])
 
@@ -324,9 +361,10 @@ class RenderTests(unittest.TestCase):
         self.assertIn('Consultez le journal.', winmerge['details']['text'])
 
     def test_fixed_parts_and_old_states_look_as_before(self):
+        # Only the state in words beside the name: nothing to open, nothing flagged.
         for name in ('firefox', 'old'):
             row = self.row(name)
-            self.assertIsNone(row['status'], name)
+            self.assertEqual(row['status'], 'In Corsican', name)
             self.assertIsNone(row['details'], name)
             self.assertIsNone(row['class'], name)
             self.assertTrue(row['checked'], name)
@@ -337,8 +375,9 @@ class RenderTests(unittest.TestCase):
     def test_summary_counts_and_names_what_needs_the_person(self):
         summary = self.result['summary']
         self.assertFalse(summary['hidden'])
-        self.assertEqual(summary['on'], '5 of 6 in Corsican')
-        self.assertEqual(summary['off'], '1 in the original language')
+        # 7-Zip is partly on: counted apart, as its chip says, not within "in Corsican".
+        self.assertEqual(summary['on'], '4 of 6 in Corsican')
+        self.assertEqual(summary['off'], '1 partly in Corsican · 1 in the original language')
         self.assertEqual(summary['attention'], '3 programs need attention')
         self.assertIn('tone-danger', summary['attentionClass'])
         self.assertEqual(summary['jumps'][0], 'WinMerge Failed')
@@ -376,6 +415,51 @@ class RenderTests(unittest.TestCase):
         # Details the person closed stay closed.
         zip_ = next(row for row in self.result['after'] if row['name'] == '7zip')
         self.assertFalse(zip_['details']['open'])
+
+    def test_on_partly_off_and_restart_read_differently(self):
+        # Fully on, partly on, off and restart needed: each row says its own state in words, beside the switch.
+        after = {row['name']: row for row in self.result['after']}
+        self.assertEqual(self.row('vlc')['status'], 'In Corsican')
+        self.assertEqual(self.row('7zip')['status'], 'Partly in Corsican')
+        self.assertEqual(after['old']['status'], 'Original language')
+        self.assertFalse(after['old']['checked'])
+        self.assertIsNone(after['old']['class'])
+        self.assertEqual(after['firefox']['status'], 'Restart needed')
+        self.assertEqual(after['firefox']['describedby'], 'status-firefox desc-firefox')
+        # A restart is something to do: flagged, and named in the summary, with no empty disclosure.
+        self.assertIn('attention', after['firefox']['class'])
+        self.assertIsNone(after['firefox']['details'])
+        self.assertIn('Firefox Restart needed', self.result['afterJumps'])
+
+    def test_summary_counts_match_the_row_chips(self):
+        # Mixed state: one fully on, one partly on, one to restart (switched off while open), one off, two failed.
+        chips = [row['status'] for row in self.result['after']]
+        self.assertEqual(sorted(chips), sorted(['In Corsican', 'Partly in Corsican', 'Restart needed', 'Original language',
+                                                'Failed', 'Failed']))
+        # Failed parts did not switch: they show the original language, their chip says why.
+        self.assertEqual(self.result['afterSummary']['on'], f"{chips.count('In Corsican')} of {len(chips)} in Corsican")
+        self.assertEqual(self.result['afterSummary']['sub'],
+                         f"{chips.count('Partly in Corsican')} partly in Corsican · {chips.count('Restart needed')} to restart"
+                         f" · {chips.count('Original language') + chips.count('Failed')} in the original language")
+
+    def test_nothing_installed_reads_plainly(self):
+        empty = self.result['empty']
+        self.assertTrue(empty['summaryHidden'])
+        self.assertTrue(empty['leadHidden'])
+        self.assertEqual(len(empty['rows']), 1)
+        self.assertIn('Nothing is installed yet.', empty['rows'][0])
+        self.assertIn('Add programs', empty['rows'][0])
+        self.assertTrue(self.result['leadShown'])
+
+    def test_refresh_keeps_the_focus_and_the_page(self):
+        refresh = self.result['refresh']
+        # Home first when something is installed; the redrawn switch keeps the keyboard focus.
+        self.assertEqual(refresh['first'], 'programs')
+        self.assertEqual(refresh['focus'], 'switch-firefox')
+        self.assertTrue(refresh['redrawn'])
+        # Another page stays open across refreshes, even if the server's answer changes.
+        self.assertEqual(refresh['page'], 'about')
+        self.assertEqual(refresh['pageNothingInstalled'], 'about')
 
     def test_a_part_switched_off_by_the_server_shows_the_restart_hint(self):
         # No click on this switch: the hint comes from item.restart, so "switch everything off" and reopening the

@@ -16,7 +16,7 @@
 | Bureau KDE Plasma et programmes KDE | Non pris en charge | Non pris en charge | Utilisé tous les jours |
 | Minecraft: Java Edition 1.6.1 → 26.3, 87 versions (pack de ressources) | Vérifié sans lancer le jeu | Vérifié sans lancer le jeu | Vérifié sans lancer le jeu |
 | Programmes GTK et commandes du terminal | | | Prévu |
-| Session Hyprland et Noctalia, facultatif ([détails](hyprland.md)) | | | Branche de développement, pas dans 0.28.1 |
+| Session Hyprland et Noctalia, facultatif ([détails](hyprland.md)) | | | Branche de développement, pas dans 0.28.2 |
 
 Les logiciels qui ont déjà leur propre traduction corse (VLC, Audacity, Poedit, 7-Zip…) et les systèmes de chacun
 sont dans [État des traductions](etat-des-traductions.md).

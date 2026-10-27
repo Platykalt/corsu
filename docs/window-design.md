@@ -13,7 +13,7 @@ This note fixes what the people working on the window share, so the parts writte
 - Spacing on a 4px grid, tokens `--space-1` … `--space-8`.
 - Icons: one inline SVG sprite (`<svg><symbol id="i-…">`), 20px, 1.75 stroke, `currentColor`, rounded caps.
   Every icon is decorative (`aria-hidden="true"`) next to visible text, or the control has an accessible name.
-- Programs page: a compact summary first ("6 in Corsican · 1 needs attention · update available"), then one
+- Home page (Accueil; internal id `programs`): a compact summary first ("6 in Corsican · 1 needs attention · update available"), then one
   dense list. A row is one line (icon, name, state chip, switch) with its description beneath; details (coverage,
   tests, installations, paths) open on demand. No big cards per program. Attention and errors are sorted first
   and marked by an icon and a word, never by colour alone.

@@ -107,7 +107,7 @@ The Review page shows the translations written for Corsu, one at a time. Your co
 `lexicon-user.tsv`, in Corsu's data folder, and read before every other translation; they are also copied into the
 Discord plugin's settings. They stay on the computer unless you choose to send them to the project as a GitHub issue.
 
-The Original text on hover option, under Programs, adds a tooltip with the replaced text to what Corsu translates in
+The Original text on hover option, on Home, adds a tooltip with the replaced text to what Corsu translates in
 Discord and on Google.
 
 ## Firefox downloaded by Corsu

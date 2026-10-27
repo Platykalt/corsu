@@ -114,7 +114,7 @@ La page Relire montre les traductions écrites pour Corsu, une par une. Vos corr
 aussi copiées dans les réglages du plugin Discord. Elles restent sur l'ordinateur, sauf si vous choisissez de les
 envoyer au projet par un ticket GitHub.
 
-L'option Texte d'origine au survol, dans Logiciels, ajoute une infobulle avec le texte remplacé sur ce que Corsu
+L'option Texte d'origine au survol, dans Accueil, ajoute une infobulle avec le texte remplacé sur ce que Corsu
 traduit dans Discord et sur Google.
 
 ## Firefox téléchargé par Corsu
