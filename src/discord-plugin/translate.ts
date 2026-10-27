@@ -19,7 +19,7 @@ export function setCorrections(value: Record<string, string> | undefined) {
 // with this file's way of reading the page; the fingerprint is computed from the dictionary itself (its entry count
 // and two sums of FNV-1a hashes over each key and value's UTF-16 code units, which do not depend on the order of the
 // entries), so it can be compared with the dictionary.json of any build.
-export const translatorRevision = "2026-10-composer-1";
+export const translatorRevision = "2026-10-composer-2";
 let fingerprint: string | undefined;
 
 export function dictionaryFingerprint(): string {
@@ -57,9 +57,26 @@ const isField = (element: Element) => element.matches(fieldSelector) && !element
 // the editor, outside any content area: Discord's text too (0.28.0 and 0.28.1 took it for typed content).
 const slatePlaceholder = "[data-slate-placeholder]";
 
+// Message types whose text people write (Discord's MessageTypes: default, reply, slash and context-menu commands);
+// every other type is a system message whose whole text Discord writes.
+const writtenTypes = new Set([0, 19, 20, 23]);
+
+// A preview line (a conversation's last message) draws a system message as one plain string in the same
+// messageContent span that holds people's messages: only the message record, read from the React props, tells them
+// apart. A text node directly in the span, under a record of a system type, is Discord's text.
+const systemPreviewSpan = '[class*="messageContent"]';
+
+function systemPreview(element: Element): boolean {
+    for (let fiber = fiberOf(element), depth = 0; fiber && depth < 12; depth++, fiber = fiber.return) {
+        const message = fiber.memoizedProps?.message;
+        if (message && typeof message === "object" && typeof message.type === "number") return !writtenTypes.has(message.type);
+    }
+    return false;
+}
+
 function inContent(element: Element): boolean {
     const placeholder = element.closest(slatePlaceholder);
-    if (!placeholder) return Boolean(element.closest(contentArea));
+    if (!placeholder) return Boolean(element.closest(contentArea)) && !(element.matches(systemPreviewSpan) && systemPreview(element));
     const editor = placeholder.parentElement?.closest(contentArea);
     return Boolean(editor) && !isField(editor!);
 }
@@ -550,13 +567,18 @@ const messageRow = '[id^="chat-messages"]';
 // If Discord instead draws the author's name inside the sentence's own text node, the exact phrase above no longer
 // matches; the fallback below then applies a template ("{name} a épinglé un message dans ce salon…" in the
 // dictionary), which keeps the name as a protected value and translates only the fixed parts.
-function nameLabel(value: string, presence = false, names: Set<string> = new Set(), system = false): string {
+// `system`: false outside a message row; else where the text sits in it: "name" (inside a name element), "lone" (the
+// only content of its element) or "fragment" (a text node beside other elements).
+function nameLabel(value: string, presence = false, names: Set<string> = new Set(), system: false | "name" | "lone" | "fragment" = false): string {
     const match = value.match(/^(\s*)(.*?)(\s*)$/s);
     if (!match || !match[2]) return value;
     let result: string | undefined;
-    // A name its records hold is never a system label, even one written "a ajouté".
+    // A name is never a system label, even one written "a ajouté": the text of a name element, or a lone text equal
+    // to a name its records hold. A fragment between the name elements (a bare text node beside them) is the
+    // notice's own text, even when someone's name reads the same.
     const label = normalize(match[2]).toLowerCase();
-    if (system && !presence && systemLabels.has(label) && ![...names].some(name => normalize(name.trim()).toLowerCase() === label)) {
+    const named = system === "name" || (system === "lone" && [...names].some(name => normalize(name.trim()).toLowerCase() === label));
+    if (system && !named && !presence && systemLabels.has(label)) {
         result = resolve(match[2], false);
     }
     if (result === undefined) {
@@ -622,7 +644,12 @@ export function translateLabel(value: string, names: Set<string> = new Set(), pr
 // rule nor in an activity or presence area, whose own rules stay).
 function label(value: string, element: Element, node: Node, placeholder = false): string {
     const where = place(element, node);
-    if (where.name) return nameLabel(value, where.presence, where.names, Boolean(element.closest(messageRow)));
+    if (where.name) {
+        const row = element.closest(messageRow);
+        const system = !row ? false : element.closest(nameHolder) && row.contains(element.closest(nameHolder)) ? "name"
+            : node.parentNode && Array.from(node.parentNode.childNodes).some(other => other !== node && other.nodeType === 1) ? "fragment" : "lone";
+        return nameLabel(value, where.presence, where.names, system);
+    }
     if (!where.presence) {
         const verb = dialogVerb(value, element, where.names);
         if (verb !== undefined) return verb;
@@ -711,6 +738,10 @@ export function createTranslator(doc: Document, options: { showOriginal?: () => 
     // draws in an empty field are read there.
     function shielded(element: Element) {
         if (isField(element)) attributes(element);
+        const previews = element.matches(systemPreviewSpan) ? [element] : Array.from(element.querySelectorAll(systemPreviewSpan));
+        for (const span of previews) {
+            for (const child of Array.from(span.childNodes)) if (child.nodeType === Node.TEXT_NODE) text(child as Text);
+        }
         const spans = element.matches(slatePlaceholder) ? [element] : Array.from(element.querySelectorAll(slatePlaceholder));
         for (const span of spans) {
             if (inContent(span)) continue;
