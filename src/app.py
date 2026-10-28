@@ -797,7 +797,7 @@ def shortcut_command():
                 ['powershell', '-NoProfile', '-NonInteractive', '-Command',
                  f"$s = (New-Object -ComObject WScript.Shell).CreateShortcut('{path}'); "
                  "[Console]::OutputEncoding = [Text.Encoding]::UTF8; $s.TargetPath; $s.Arguments"],
-                capture_output=True, text=True, encoding='utf-8', errors='replace', timeout=20).stdout.splitlines()
+                **corsu.hidden(capture_output=True, text=True, encoding='utf-8', errors='replace', timeout=20)).stdout.splitlines()
             if len(output) >= 2:
                 return [output[0].strip(), output[1].strip().strip('"')]
             return None

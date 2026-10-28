@@ -1,5 +1,17 @@
 # Changelog
 
+## 0.28.3 (in preparation, not published)
+
+- **Windows: no more console windows flashing while Corsu's window is open.** The window runs under pythonw.exe,
+  without a console, and every console program it started got a window of its own: PowerShell reading the process
+  list (for each program checked, and every few seconds while a part was switched off), PowerShell looking for
+  Minecraft's Java processes and reading the Start menu shortcut, tasklist, and python.exe for an update's installer.
+  These technical commands now start without a console (`corsu.hidden()`, CREATE_NO_WINDOW), output, exit codes and
+  errors unchanged; the process list is read at most every 2 seconds and shared by every check. UAC prompts and the
+  terminals Corsu opens on purpose are not affected. Checked on the Windows CI runner by
+  `tests/e2e/check_windows_consoles.py` (every process started under the window traced, every window shown caught),
+  not yet on a person's PC.
+
 ## 0.28.2 (2026-10-27)
 
 From 0.28.1 (`ae8890b`, tag `v0.28.1`). Translator revision `2026-10-composer-2`. Structures read in Discord's public

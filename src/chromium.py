@@ -164,7 +164,8 @@ def elevated_copy(pairs):
                                   for source, target in pairs), encoding='utf-8-sig')
         command = (f"Start-Process powershell -Verb RunAs -Wait -WindowStyle Hidden -ArgumentList "
                    f"'-NoProfile','-ExecutionPolicy','Bypass','-File','\"{script}\"'")
-        subprocess.run(['powershell', '-NoProfile', '-NonInteractive', '-Command', command], check=True)
+        # No console for this PowerShell; the UAC prompt it asks for is Windows' own and still shows.
+        subprocess.run(['powershell', '-NoProfile', '-NonInteractive', '-Command', command], **corsu.hidden(check=True))
     else:
         loop = 'set -e; while [ "$#" -gt 1 ]; do cp -f -- "$1" "$2"; shift 2; done'
         subprocess.run(['pkexec', 'sh', '-c', loop, 'corsu', *[str(path) for pair in pairs for path in pair]], check=True)

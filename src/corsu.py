@@ -1023,7 +1023,33 @@ def repair_default_browser():
         entry.unlink()
 
 
-def running_executables():
+# Corsu's window runs under pythonw.exe, without a console: a console program it starts (powershell, tasklist…) gets a
+# console window of its own, shown as long as it runs. Technical commands are started without one (hidden()).
+CREATE_NO_WINDOW = 0x08000000
+
+
+def hidden(**options):
+    """Options for subprocess.run/Popen of a technical command: on Windows, no console window (output, exit code and
+    errors as usual). Not for what the person must see: UAC prompts, terminals Corsu opens on purpose."""
+    if PLATFORM == 'windows':
+        options['creationflags'] = options.get('creationflags', 0) | CREATE_NO_WINDOW
+    return options
+
+
+RUNNING = {'time': None, 'paths': None}
+
+
+def running_executables(max_age=2.0):
+    """The executables running now (paths; names on macOS), None when they cannot be told. Read at most every `max_age`
+    seconds: one window refresh asks for it once per program it checks, and on Windows each reading starts
+    PowerShell."""
+    now = time.monotonic()
+    if RUNNING['time'] is None or not 0 <= now - RUNNING['time'] < max_age:
+        RUNNING['paths'], RUNNING['time'] = read_running_executables(), now
+    return None if RUNNING['paths'] is None else set(RUNNING['paths'])
+
+
+def read_running_executables():
     paths = set()
     if PLATFORM == 'linux':
         if not Path('/proc').is_dir():
@@ -1036,7 +1062,7 @@ def running_executables():
         return paths
     command = (['powershell', '-NoProfile', '-Command', '(Get-Process).Path'] if PLATFORM == 'windows'
                else ['ps', '-axo', 'comm='])
-    result = subprocess.run(command, capture_output=True, text=True)
+    result = subprocess.run(command, **hidden(capture_output=True, text=True))
     if result.returncode != 0:
         return None
     return {line.strip() for line in result.stdout.splitlines() if line.strip()}
@@ -1158,9 +1184,9 @@ def windows_link(installer, path, target, arguments, icon=None, toggle=False):
         script = ('$s = (New-Object -ComObject WScript.Shell).CreateShortcut($env:CORSU_LINK); '
                   '$s.TargetPath = $env:CORSU_TARGET; $s.Arguments = $env:CORSU_ARGUMENTS; '
                   '$s.WorkingDirectory = $env:CORSU_DIR; if ($env:CORSU_ICON) { $s.IconLocation = $env:CORSU_ICON }; $s.Save()')
-        subprocess.run(['powershell', '-NoProfile', '-NonInteractive', '-Command', script], check=True, env={
+        subprocess.run(['powershell', '-NoProfile', '-NonInteractive', '-Command', script], **hidden(check=True, env={
             **os.environ, 'CORSU_LINK': str(temporary), 'CORSU_TARGET': str(target), 'CORSU_ARGUMENTS': arguments,
-            'CORSU_DIR': str(ROOT), 'CORSU_ICON': icon or ''})
+            'CORSU_DIR': str(ROOT), 'CORSU_ICON': icon or ''}))
         installer.write(path, temporary.read_bytes(), toggle=toggle)
 
 
