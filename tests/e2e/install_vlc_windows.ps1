@@ -59,3 +59,5 @@ if (-not (Test-Path $vlc)) {
 }
 if (-not (Test-Path $vlc)) { throw 'VLC could not be installed (Chocolatey and VideoLAN)' }
 Write-Host "VLC installed: $vlc, version $((Get-Item $vlc).VersionInfo.ProductVersion)"
+# Chocolatey's failed tries must not become this script's exit code once VLC is there.
+exit 0
