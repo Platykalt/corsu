@@ -6,8 +6,10 @@ window of its own: windows flashed the whole time the window was open. The real 
 tests/e2e/check_windows_consoles.py on the Windows runner; these run anywhere, with the commands replaced.
 """
 import ast
+import os
 from pathlib import Path
 import subprocess
+import sys
 import tempfile
 import unittest
 from unittest.mock import MagicMock, patch
@@ -102,6 +104,28 @@ class EveryTechnicalCommand(unittest.TestCase):
                     if ("'powershell'" in segment or "'tasklist'" in segment) and 'hidden(' not in segment:
                         missing.append(f'{path.relative_to(SRC)}:{node.lineno}')
         self.assertEqual(missing, [])
+
+
+class FailuresStayVisible(unittest.TestCase):
+    """Without a console, a failing command still says why: its exit code and error text reach Corsu. Real commands,
+    on this system (on the Windows unit-test runner, with CREATE_NO_WINDOW for real)."""
+
+    def test_exit_code_and_stderr_are_kept(self):
+        result = subprocess.run([sys.executable, '-c', 'import sys; print("out"); sys.stderr.write("boom\\n"); sys.exit(3)'],
+                                **corsu.hidden(capture_output=True, text=True, timeout=60))
+        self.assertEqual((result.returncode, result.stdout.strip(), result.stderr.strip()), (3, 'out', 'boom'))
+
+    def test_a_failing_installer_command_reaches_the_window_log(self):
+        # The installer, started by the window as a job, runs a technical command that fails: its output and exit
+        # code reach the job's lines (what the window shows under "Show details") and the job is marked failed.
+        script = ('import sys; sys.path.insert(0, sys.argv[1]); import installer; '
+                  'installer.run([sys.executable, "-c", "import sys; print(\'child says no\', flush=True); sys.exit(5)"])')
+        job = app.Job()
+        job.run([sys.executable, '-c', script, str(SRC)], {**os.environ, 'PYTHONIOENCODING': 'utf-8'})
+        text = '\n'.join(job.lines)
+        self.assertFalse(job.ok)
+        self.assertIn('child says no', text)
+        self.assertIn('exit status 5', text)
 
 
 class ProcessListCache(unittest.TestCase):

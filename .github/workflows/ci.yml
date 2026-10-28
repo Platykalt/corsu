@@ -162,6 +162,35 @@ jobs:
           path: ${{ runner.temp }}/bedrock/
           if-no-files-found: error
 
+  vlc-fallback:
+    name: VLC fallback forced (temporary check of install_vlc_windows.ps1)
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.13'
+      - name: VLC is not on the runner before (else the fallback cannot be shown)
+        run: if (Test-Path 'C:\Program Files\VideoLAN\VLC\vlc.exe') { throw 'VLC already installed on this runner' } else { Write-Host 'no VLC on the runner' }
+      - name: Chocolatey fails (bogus source), the download is tampered with — refused with "checksum mismatch"
+        run: |
+          try { ./tests/e2e/install_vlc_windows.ps1 -ChocoSource 'https://invalid.example/' -ChocoTries 1 -Tamper; throw 'UNEXPECTED: tampered installer accepted' }
+          catch { Write-Host "REFUSED: $($_.Exception.Message)"; if ($_.Exception.Message -notmatch 'checksum mismatch') { throw } }
+          if (Test-Path 'C:\Program Files\VideoLAN\VLC\vlc.exe') { throw 'VLC installed from a tampered file' }
+          Write-Host 'OK: tampered download refused, nothing installed'
+      - name: Chocolatey fails, VideoLAN unreachable — fails explicitly
+        run: |
+          try { ./tests/e2e/install_vlc_windows.ps1 -ChocoSource 'https://invalid.example/' -ChocoTries 1 -Base 'https://invalid.example/vlc/'; throw 'UNEXPECTED: no failure' }
+          catch { Write-Host "FAILED AS EXPECTED: $($_.Exception.Message)"; if ($_.Exception.Message -notmatch 'cannot be reached') { throw } }
+      - name: Chocolatey fails, VLC from VideoLAN (checksum checked, version printed)
+        run: ./tests/e2e/install_vlc_windows.ps1 -ChocoSource 'https://invalid.example/' -ChocoTries 1
+      - name: Notepad++ from Chocolatey, then the real Windows programs check
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+        run: |
+          choco install notepadplusplus -y --no-progress
+          python tests/e2e/check_windows_apps.py
+
   e2e:
     name: End-to-end (${{ matrix.os }})
     needs: package
@@ -205,10 +234,10 @@ jobs:
           esac
           test -x "extracted/corsu/$python" || test -f "extracted/corsu/$python"
           echo "CORSU_PYTHON=$GITHUB_WORKSPACE/dist/extracted/corsu/$python" >> "$GITHUB_ENV"
-      - name: Corsu's window on Windows opens no console window (process creation traced, every shown window caught)
+      - name: Corsu's window on Windows opens no console window (from its shortcut, idle and through its page's calls; 0.28.2 published shows the bug)
         if: runner.os == 'Windows'
-        timeout-minutes: 10
-        run: python tests/e2e/check_windows_consoles.py --root "${{ env.CORSU_RELEASE }}" --python "${{ env.CORSU_PYTHON }}"
+        timeout-minutes: 20
+        run: python tests/e2e/check_windows_consoles.py --root "${{ env.CORSU_RELEASE }}" --python "${{ env.CORSU_PYTHON }}" --published 0.28.2
       - name: Install Firefox (Linux)
         if: runner.os == 'Linux'
         run: |
@@ -291,21 +320,8 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ github.token }}
         run: |
-          # Chocolatey's feed sometimes answers 503 for one package: try again, then take VLC from VideoLAN (checksum checked).
-          foreach ($try in 1..3) {
-            choco install vlc notepadplusplus -y --no-progress
-            if ((Test-Path 'C:\Program Files\VideoLAN\VLC\vlc.exe') -and (Test-Path 'C:\Program Files\Notepad++\notepad++.exe')) { break }
-            Start-Sleep -Seconds 30
-          }
-          if (-not (Test-Path 'C:\Program Files\VideoLAN\VLC\vlc.exe')) {
-            $base = 'https://download.videolan.org/pub/videolan/vlc/last/win64/'
-            $name = ((Invoke-WebRequest "$base" -UseBasicParsing).Links.href | Where-Object { $_ -match '^vlc-[0-9.]+-win64\.exe$' } | Select-Object -First 1)
-            Invoke-WebRequest "$base$name" -OutFile "$env:RUNNER_TEMP\$name"
-            $expected = ((Invoke-WebRequest "$base$name.sha256" -UseBasicParsing).Content -split '\s+')[0]
-            if ((Get-FileHash "$env:RUNNER_TEMP\$name" -Algorithm SHA256).Hash -ne $expected) { throw "VLC download: checksum mismatch" }
-            Start-Process "$env:RUNNER_TEMP\$name" -ArgumentList '/S' -Wait
-          }
-          if (-not (Test-Path 'C:\Program Files\VideoLAN\VLC\vlc.exe')) { throw 'VLC could not be installed (Chocolatey and VideoLAN)' }
+          # Chocolatey, three tries; then VLC from VideoLAN, checksum checked (tests/e2e/install_vlc_windows.ps1).
+          ./tests/e2e/install_vlc_windows.ps1
           python tests/e2e/check_windows_apps.py
       - name: Corsu's own window on Windows — icon loading, 0.27.0's crash reproduced, real window from the archive's Python
         if: runner.os == 'Windows'
