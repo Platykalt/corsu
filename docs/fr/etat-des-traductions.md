@@ -2,7 +2,7 @@
 
 [English](../en/translation-status.md)
 
-Ce qui est traduit, ce qui est en cours et ce qui est seulement prévu. Mis à jour le 19 octobre 2026 ; version publiée : Corsu 0.28.2.
+Ce qui est traduit, ce qui est en cours et ce qui est seulement prévu. Mis à jour le 19 octobre 2026 ; version publiée : Corsu 0.28.3.
 Les systèmes pris en charge par chaque logiciel sont dans [Ce qui marche, et où](compatibilite.md).
 
 Trois choses différentes sont suivies, et l'une n'entraîne pas l'autre :
@@ -10,7 +10,7 @@ Trois choses différentes sont suivies, et l'une n'entraîne pas l'autre :
 logiciel les charge) et **relu par un locuteur** (le sens et la langue ont été contrôlés par une personne qui parle
 corse).
 
-Statuts : **disponible** (dans la version publiée 0.28.2), **expérimental** (disponible, peu vérifié sur ce système),
+Statuts : **disponible** (dans la version publiée 0.28.3), **expérimental** (disponible, peu vérifié sur ce système),
 **candidat** (dans la prochaine version, pas encore publiée), **prototype** ou **prévu** (pas disponible).
 
 ## Logiciels traduits par Corsu

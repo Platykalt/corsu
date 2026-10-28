@@ -3,8 +3,27 @@
 Document de reprise, tenu à jour à chaque étape. Il renvoie aux documents détaillés plutôt que de les répéter.
 Les sections datées après « État actuel » sont l'historique : ce qui y est dit ouvert a pu être corrigé depuis.
 
-## État actuel (27 octobre 2026)
+## État actuel (28 octobre 2026)
 
+- **0.28.3** : branche `fix-0.28.3`, partie de `main` `a8a9f69` (0.28.2 + continuité), publication autorisée par le
+  mainteneur le 28 octobre 2026. Trois défauts signalés par des utilisateurs :
+  - Windows (`5157b3b`, `0317de7`, agent « Windows ») : consoles PowerShell répétées sous la fenêtre (pythonw.exe).
+    Responsables : `corsu.running_executables()` (`powershell (Get-Process).Path`, depuis `app.still_open()` environ
+    toutes les 3 s et `apps.programs.running()` toutes les 20 s), `minecraft.running_folders()`
+    (`Get-CimInstance Win32_Process`, toutes les 20 s quand un dossier de jeu attend), `app.shortcut_command()` (lecture
+    de `Corsu.lnk`), et dans les travaux lancés par la fenêtre `windows_link`, `tasklist`, l'installeur d'une mise à
+    jour, VencordInstallerCli. `corsu.hidden()` : `CREATE_NO_WINDOW` seulement quand Corsu n'a pas de console, sorties
+    du parent transmises (journal du travail, terminal). Liste des processus lue au plus toutes les 2 s. UAC inchangé.
+    Preuve sur runner Windows Server seulement (`tests/e2e/check_windows_consoles.py`, raccourci installé, Minecraft,
+    rafraîchissements, appels de la page) : la 0.28.2 publiée ouvre 8 `powershell.exe` avec console en 76 s (CI
+    40611719448) ; aucun PC d'utilisateur observé.
+  - Discord (`2299915`, `e58dc15`, `1ed849a`, révision `2026-10-notice-1`) : message d'épinglage (et ajout/retrait de
+    groupe) dans l'enveloppe `message-content` que la règle de contenu protégeait ; « Aller à {guildName} » (UdYYP3,
+    AEfs1D, serveur déjà rejoint) sans ligne. « Aller sur un serveur », tel que signalé, n'existe dans aucun texte du
+    client : paraphrase. Pages simulées d'après le client web public, pas l'application Discord.
+  - CI : VLC installé depuis VideoLAN (SHA-256 vérifié) quand Chocolatey échoue (`214407c`,
+    `tests/e2e/install_vlc_windows.ps1`) ; la CI de `main` 40603473995 avait échoué deux fois sur ce seul point (503 de
+    Chocolatey), sans lien avec Corsu.
 - **0.28.2 publiée** (27 octobre 2026, 23 h 34 UTC) : tag annoté `v0.28.2` sur `a3a00c8` (= `main` à la publication),
   release https://github.com/Platykalt/corsu/releases/tag/v0.28.2, dernière version, 16 fichiers, sommes SHA-256
   vérifiées après téléchargement. CI de la candidate 40590847509 verte (`a3a00c8`) ; CI du tag 40597336799 verte,
