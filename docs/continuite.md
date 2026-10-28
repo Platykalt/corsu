@@ -5,8 +5,15 @@ Les sections datées après « État actuel » sont l'historique : ce qui y est 
 
 ## État actuel (28 octobre 2026)
 
-- **0.28.3** : branche `fix-0.28.3`, partie de `main` `a8a9f69` (0.28.2 + continuité), publication autorisée par le
-  mainteneur le 28 octobre 2026. Trois défauts signalés par des utilisateurs :
+- **0.28.3 publiée** (28 octobre 2026, 4 h 50 UTC) : tag annoté `v0.28.3` sur `ff3fd3b` (= `main` à la publication),
+  release https://github.com/Platykalt/corsu/releases/tag/v0.28.3, dernière version, 16 fichiers, sommes vérifiées après
+  téléchargement ; plugin `2026-10-notice-1` et `corsu.hidden()` dans les trois archives. CI de la candidate
+  40623426260 verte (`e66ce0a`) ; CI du tag 40629220895 verte (publication et installation en une ligne comprises ;
+  Windows : 0.28.2 publiée 20 consoles, cette archive 0, sorties gardées dans le journal et le terminal). La CI de
+  `main` sur `ff3fd3b` (40629219603) a été annulée : même commit que le tag. Essai isolé après publication : la 0.28.2
+  publiée voit la 0.28.3 (`status: available`) et se met à jour ; partie désactivée, apparence, `auto_update` gardées.
+  Installation du mainteneur : 0.28.3 de `hyprland` `5453f1e` (archives de la CI 40629230384 ; `dfda99c` n'ajoute que
+  la date du CHANGELOG). Branche `fix-0.28.3`, partie de `main` `a8a9f69`. Trois défauts signalés par des utilisateurs :
   - Windows (`5157b3b`, `0317de7`, agent « Windows ») : consoles PowerShell répétées sous la fenêtre (pythonw.exe).
     Responsables : `corsu.running_executables()` (`powershell (Get-Process).Path`, depuis `app.still_open()` environ
     toutes les 3 s et `apps.programs.running()` toutes les 20 s), `minecraft.running_folders()`
