@@ -200,6 +200,32 @@ const lune = { id: ID(4), username: "lune", globalName: "Lune und Sol" };
 const server = { id: ID(2), type: 0, name: "general", guild_id: ID(1) };
 '''
 
+# 0.28.3, report A ("Aller sur un serveur", a paraphrase): every "Go to server" label of the current web client
+# (web.33a8a649a2fda558 and its lazy chunks). Each opens a server the person ALREADY belongs to (the action is
+# 345942.u, routing to the guild's last channel, or 449054.Z2 with joinedAt set, or 976860.uh, or closing the modal
+# and transitioning): RGgqm1 menu item "goto-server" of the now-playing-menu (activity feed), IRoQXr the guild
+# profile's CTA when IS_MEMBER, DymAQt the Hub "add guild" confirmation, cqWE2Z the directory card's button when
+# joined (else VJlc0S "Rejoindre"), KLOhbO the boost settings card, M35zFB / UdYYP3 ("Aller à {guildName}", the name
+# when it has at most 30 characters) the app-authorization success modal, AEfs1D ("Aller à {guildName}") the
+# aria-label of a game profile's community card when joined. 3IpLLa is in the catalogue but used by no chunk.
+GOTO = r'''
+const luneGuild = { id: ID(1), name: "Lune und Sol", joinedAt: "2026-01-01" };
+function button(text, ...chain) {
+  const b = element(`<button type="button" class="button__201d5 lookFilled__201d5 sizeSmall__201d5"><div class="contents__201d5"><span class="lineClamp1__4bd52">${text}</span></div></button>`);
+  const span = b.querySelector("span");
+  fiber(span.firstChild, ...chain);
+  fiber(span, { children: text }, ...chain);
+  return { root: b, node: span.firstChild };
+}
+function menuItem(navId, id, text, ...chain) {
+  const m = element(`<div class="menu_c1e9c4" role="menu" aria-label="Options"><div class="scroller_c1e9c4"><div role="group"><div class="item_c1e9c4 labelContainer_c1e9c4 colorDefault_c1e9c4" role="menuitem" id="${navId}-${id}" tabindex="-1"><div class="label_c1e9c4">${text}</div></div></div></div></div>`);
+  const label = m.querySelector(".label_c1e9c4");
+  fiber(label.firstChild, { className: "label_c1e9c4", children: text }, { id, label: text, action() {} }, ...chain);
+  return { root: m, node: label.firstChild };
+}
+const layer = () => { const l = element('<div class="layerContainer_da8173"><div class="layer_da8173"></div></div>'); document.body.append(l); return l.firstChild; };
+'''
+
 # name -> (JS run BEFORE the translator starts, JS run after; both may use the helpers above).
 SCENARIOS = {}
 
@@ -514,6 +540,63 @@ check("D5 pin notice in a preview line", "yIDvPL as one plain string, author 'Lu
 watch("D5 preview", () => row.textContent);
 ''')
 
+# --- 0.28.3: report A, the "Go to server" labels (see GOTO). ---
+SCENARIOS['E1 Go to server labels inserted after load'] = ('', r'''
+const go = "Andà nant'à u servore";
+const L = layer();
+const party = { currentActivities: [{ activity: { name: "Ghjocu", type: 0 }, application: { name: "Ghjocu" } }], voiceChannels: [] };
+const menu = menuItem("now-playing-menu", "goto-server", "Aller sur le serveur", { navId: "now-playing-menu" }, { party, close() {}, onSelect() {} });
+const profile = button("Aller sur le serveur", { text: "Aller sur le serveur", variant: "active", size: "sm" }, { guildId: luneGuild.id, ctaType: 0 }, { guild: luneGuild });
+const hub = button("Aller sur le serveur", { text: "Aller sur le serveur", variant: "primary" }, { actions: [] }, { directoryGuildName: "Lune und Sol", guildToAdd: luneGuild, isExistingGuildFlow: false });
+const card = element('<div class="card__0c0bf"><div class="guildInfo__0c0bf"><div class="title__0c0bf"><span class="guildName__0c0bf">Lune und Sol</span></div><div class="joinButton__0c0bf"></div></div></div>');
+const directory = button("Aller sur le serveur", { text: "Aller sur le serveur", variant: "secondary", fullWidth: true }, { entry: { guildId: luneGuild.id, name: "Lune und Sol", description: "" } });
+card.querySelector(".joinButton__0c0bf").append(directory.root);
+const boost = element('<div class="card__1bfce"><div class="cardHeader__1bfce"><div class="guildInfo__1bfce">Lune und Sol</div></div></div>');
+const boostButton = button("Aller sur le serveur", { text: "Aller sur le serveur", variant: "secondary", size: "sm" }, { guildId: luneGuild.id, slots: [] });
+boost.firstChild.append(boostButton.root);
+const oauthLong = button("Aller sur le serveur", { text: "Aller sur le serveur", variant: "primary" }, { actions: [] }, { guild: { id: ID(2), name: "Un nome di servore assai longu per esse cortu" } });
+const oauth = button("Aller à Lune und Sol", { text: "Aller à Lune und Sol", variant: "primary" }, { actions: [] }, { guild: luneGuild, application: { id: ID(3), name: "Bot" } });
+const community = element('<div class="clickable_f9f2ca card_b1bfc6" role="button" tabindex="0" aria-label="Aller à Lune und Sol"><div class="guildName_b1bfc6">Lune und Sol</div></div>');
+fiber(community, { className: "card_b1bfc6", "aria-label": "Aller à Lune und Sol", onClick() {} }, { guild: luneGuild, presenceCount: 3, memberCount: 9, ariaLabel: "Aller à Lune und Sol" }, { guild: luneGuild, layout: 0 });
+L.append(menu.root, profile.root, hub.root, card, boost, oauthLong.root, oauth.root, community);
+await settle();
+check("E1 RGgqm1 now-playing menu item", "menu item label, activity feed menu", read(menu.node), go);
+check("E1 IRoQXr guild profile button (member)", "Button text", read(profile.node), go);
+check("E1 DymAQt Hub confirmation button", "Button text", read(hub.node), go);
+check("E1 cqWE2Z directory card button (joined)", "Button text in card__0c0bf", read(directory.node), go);
+check("E1 KLOhbO boost settings card button", "Button text", read(boostButton.node), go);
+check("E1 M35zFB app authorization (long name)", "Button text", read(oauthLong.node), go);
+check("E1 UdYYP3 app authorization 'Aller à {guildName}'", "Button text, guild name kept", read(oauth.node), "Andà à Lune und Sol");
+check("E1 AEfs1D community card aria-label", "aria-label, guild name kept", community.getAttribute("aria-label"), "Andà à Lune und Sol");
+check("E1 guild names kept", "names", card.querySelector(".guildName__0c0bf").textContent + "|" + community.textContent, "Lune und Sol|Lune und Sol");
+watch("E1 menu", () => read(menu.node)); watch("E1 UdYYP3", () => read(oauth.node)); watch("E1 AEfs1D", () => community.getAttribute("aria-label"));
+// The modal shown again for another server (React rewrites the same nodes).
+oauth.node.data = "Aller à Lune und Sol"; community.setAttribute("aria-label", "Aller à Lune und Sol");
+await settle();
+check("E1 UdYYP3 rewritten by React", "same text node", read(oauth.node), "Andà à Lune und Sol");
+check("E1 AEfs1D rewritten by React", "attribute set again", community.getAttribute("aria-label"), "Andà à Lune und Sol");
+''')
+
+SCENARIOS['E2 Go to server labels present when the translator starts'] = (r'''
+window.early = button("Aller à Lune und Sol", { text: "Aller à Lune und Sol" }, { guild: luneGuild });
+window.earlyPlain = button("Aller sur le serveur", { text: "Aller sur le serveur" }, { guild: luneGuild });
+document.body.append(early.root, earlyPlain.root);
+''', r'''
+check("E2 UdYYP3 at load", "Button text", read(early.node), "Andà à Lune und Sol");
+check("E2 IRoQXr/M35zFB at load", "Button text", read(earlyPlain.node), "Andà nant'à u servore");
+watch("E2 template", () => read(early.node));
+''')
+
+SCENARIOS['E3 a person writing "Aller à Lune und Sol" keeps it'] = (r'''
+window.list = element('<ol class="scrollerInner__36d07" data-list-id="chat-messages"></ol>');
+document.body.append(list);
+''', r'''
+const said = listNotice(server, lune, 0, ["Aller à Lune und Sol"]);
+list.append(said.li);
+await settle();
+check("E3 person's message stays French", "type 0 in message-content", read(said.nodes[0]), "Aller à Lune und Sol");
+''')
+
 RUN = r'''
 (async () => {
 const translator = CorsuBuilt.createTranslator(document);
@@ -570,7 +653,7 @@ def main(chrome, vencord):
                     time.sleep(0.2)
                 else:
                     raise SystemExit('FAIL: the built translator did not load')
-                helpers = HELPERS + COMPOSER + SEARCH + SYSTEM + NOTICE
+                helpers = HELPERS + COMPOSER + SEARCH + SYSTEM + NOTICE + GOTO
                 evaluate(devtools, session, helpers + before)
                 for case in json.loads(evaluate(devtools, session, RUN.replace('%s', after))):
                     tag = 'PASS' if case['ok'] else 'FAIL'

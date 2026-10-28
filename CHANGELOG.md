@@ -14,6 +14,12 @@ web client (build `web.33a8a649a2fda558`, 2026-10-28) and checked in simulated p
   links and the time stay as they are, only the notice's own phrases change (Corsu usage, unchanged rows). A person's
   message with the same words stays as written. Renamed group or channel notices (types 4, 5) stay protected: their
   new name is a bare text.
+- **Discord, "Go to {server}" still in French** (reported as « Aller sur un serveur », a text that is in no Discord
+  string): every "Go to server" label of the current client opens a server the person already belongs to. The plain
+  « Aller sur le serveur » ones were already Corsican; « Aller à {guildName} » (UdYYP3, the app-authorization success
+  button, and AEfs1D, the aria-label of a joined community card on a game profile) had no row. New row
+  `Aller à {guildName}` → « Andà à {guildName} », the server name kept as written (Corsu usage « Aller à … » → « Andà à
+  … », not an independent validation; `lexicon/review-discord-2026-10.tsv`).
 
 ## 0.28.2 (2026-10-27)
 
