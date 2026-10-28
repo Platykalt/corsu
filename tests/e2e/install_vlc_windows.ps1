@@ -17,9 +17,10 @@ $PSNativeCommandUseErrorActionPreference = $false
 $vlc = 'C:\Program Files\VideoLAN\VLC\vlc.exe'
 $notepad = 'C:\Program Files\Notepad++\notepad++.exe'
 
+$source = @()
+if ($ChocoSource) { $source = @("--source=$ChocoSource") }
 foreach ($try in 1..$ChocoTries) {
-    $source = if ($ChocoSource) { @("--source=$ChocoSource") } else { @() }
-    choco install vlc notepadplusplus -y --no-progress @source
+    choco install vlc notepadplusplus -y --no-progress $source
     Write-Host "Chocolatey try ${try}: exit code $LASTEXITCODE"
     if ((Test-Path $vlc) -and (Test-Path $notepad)) { break }
     if ($try -lt $ChocoTries) { Start-Sleep -Seconds 30 }
