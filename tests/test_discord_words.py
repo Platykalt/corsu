@@ -202,6 +202,12 @@ class DiscordWordsTests(unittest.TestCase):
         for key, value in expected.items():
             self.assertEqual(self.words[engine.normalize(key)], value, key)
 
+    def test_go_to_a_joined_server_by_name(self):
+        # UdYYP3 (app authorization success) and AEfs1D (community card aria-label) "Aller à {guildName}" open a server
+        # the person already belongs to, like "Aller sur le serveur": the name is a placeholder, kept as written.
+        self.assertEqual(self.words["Aller sur le serveur"], "Andà nant'à u servore")
+        self.assertEqual(self.words[engine.normalize('Aller à \u00001\u0000')], 'Andà à \u00001\u0000')
+
     def test_moderation_actions_stay_distinct(self):
         # Discord's French "Exclure {user}" (OhsOy0) is the TIMEOUT item (EN "Timeout {user}"); it said "Scaccià
         # {user}", the same words as the kick "Expulser {user}" (9l/iTS). Remove from a group DM, kick, timeout and
