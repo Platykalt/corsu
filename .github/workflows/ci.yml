@@ -205,6 +205,10 @@ jobs:
           esac
           test -x "extracted/corsu/$python" || test -f "extracted/corsu/$python"
           echo "CORSU_PYTHON=$GITHUB_WORKSPACE/dist/extracted/corsu/$python" >> "$GITHUB_ENV"
+      - name: Corsu's window on Windows opens no console window (process creation traced, every shown window caught)
+        if: runner.os == 'Windows'
+        timeout-minutes: 10
+        run: python tests/e2e/check_windows_consoles.py --root "${{ env.CORSU_RELEASE }}" --python "${{ env.CORSU_PYTHON }}"
       - name: Install Firefox (Linux)
         if: runner.os == 'Linux'
         run: |
