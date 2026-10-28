@@ -1028,11 +1028,40 @@ def repair_default_browser():
 CREATE_NO_WINDOW = 0x08000000
 
 
+def console_window():
+    """This process's console window (Windows), 0 when it has none: pythonw.exe, or a program started without one."""
+    import ctypes
+    windll = getattr(ctypes, 'windll', None)  # absent elsewhere (tests simulating Windows)
+    return (windll.kernel32.GetConsoleWindow() or 0) if windll else 0
+
+
+def own_stream(stream, fallback):
+    """This process's stream for a child to write to (flushed first, so lines keep their order), or DEVNULL."""
+    for candidate in (stream, fallback):
+        try:
+            candidate.flush()
+            candidate.fileno()
+            return candidate
+        except (AttributeError, OSError, ValueError):
+            continue
+    return subprocess.DEVNULL
+
+
 def hidden(**options):
     """Options for subprocess.run/Popen of a technical command: on Windows, no console window (output, exit code and
-    errors as usual). Not for what the person must see: UAC prompts, terminals Corsu opens on purpose."""
-    if PLATFORM == 'windows':
+    errors as usual). Not for what the person must see: UAC prompts, terminals Corsu opens on purpose.
+    In a process with a console window (a terminal), children share that console and open no window: no flag. Without
+    one, they get CREATE_NO_WINDOW. Either way, a child's stdout and stderr not given by the caller are this process's
+    own, passed explicitly: otherwise a child of a process whose output is a pipe (the installer the window starts)
+    writes into a console of its own, and its lines never reach the window's job."""
+    if PLATFORM != 'windows':
+        return options
+    if not console_window():
         options['creationflags'] = options.get('creationflags', 0) | CREATE_NO_WINDOW
+    if not options.get('capture_output'):
+        for name in ('stdout', 'stderr'):
+            if options.get(name) is None:
+                options[name] = own_stream(getattr(sys, name), getattr(sys, '__' + name + '__'))
     return options
 
 

@@ -10,7 +10,10 @@ Usage: check_windows_consoles.py --root EXTRACTED_RELEASE [--python ARCHIVE_PYTH
 For the archive given (expected: no console window), and with --published for that published release, downloaded
 and checked against its .sha256 (expected: console windows, so the check is shown to see the bug):
 1. A throwaway user folder with a Minecraft (Prism Launcher) instance; Corsu installs Minecraft and 7-Zip from the
-   archive with the archive's Python. Then a second game folder appears (the window looks for new ones) and a
+   archive with the archive's Python, twice: as the window's update does (pythonw.exe, update.run_installer piping
+   the installer, whose installer.run starts the installed copy's installer: watched for console windows, and its
+   lines must reach the pipe), then in a terminal (a console of its own, hidden, read back: the installed copy's
+   lines must show there). Then a second game folder appears (the window looks for new ones) and a
    WinMerge folder with its Corsican file (a program the window finds and checks for running).
 2. Corsu is started from the Start menu shortcut the installer wrote (Corsu.lnk, opened through the shell as a click
    does): its page polls /api/state every 1.5 s. Watched while idle (--seconds, at least 10 refreshes), then while
@@ -235,14 +238,92 @@ def published(version, folder):
     return folder / 'extracted/corsu'
 
 
-def prepare(root, python, home, environment):
-    step(f'A throwaway user folder; Corsu installs Minecraft and 7-Zip from {root}')
+# The window's update route: pythonw.exe (no console) runs update.run_installer, which pipes the new installer's
+# output; that installer starts the installed copy's installer through installer.run (as it starts VencordInstallerCli).
+FROM_WINDOW = ('import sys; sys.path.insert(0, "src"); import update; '
+               'code, last = update.run_installer(sys.argv[1:]); print("@@exit", code, flush=True)')
+# A terminal: the installer in a console of its own (window hidden), kept open once done so it can be read back.
+IN_CONSOLE = ('import subprocess, sys, time; code = subprocess.call(sys.argv[1:]); '
+              'print("@@exit", code, flush=True); time.sleep(900)')
+# Reads another process's console back (attached to it): what a person would see in that terminal.
+READ_CONSOLE = r'''
+import ctypes, sys
+from ctypes import wintypes
+k = ctypes.WinDLL('kernel32', use_last_error=True)
+class COORD(ctypes.Structure): _fields_ = [('X', ctypes.c_short), ('Y', ctypes.c_short)]
+class RECT(ctypes.Structure): _fields_ = [(n, ctypes.c_short) for n in ('Left', 'Top', 'Right', 'Bottom')]
+class INFO(ctypes.Structure): _fields_ = [('size', COORD), ('cursor', COORD), ('attributes', wintypes.WORD), ('window', RECT), ('largest', COORD)]
+k.CreateFileW.restype = wintypes.HANDLE
+k.CreateFileW.argtypes = [wintypes.LPCWSTR, wintypes.DWORD, wintypes.DWORD, ctypes.c_void_p, wintypes.DWORD, wintypes.DWORD, wintypes.HANDLE]
+k.GetConsoleScreenBufferInfo.argtypes = [wintypes.HANDLE, ctypes.POINTER(INFO)]
+k.ReadConsoleOutputCharacterW.argtypes = [wintypes.HANDLE, wintypes.LPWSTR, wintypes.DWORD, COORD, ctypes.POINTER(wintypes.DWORD)]
+k.FreeConsole()
+if not k.AttachConsole(int(sys.argv[1])):
+    sys.exit(f'AttachConsole failed: {ctypes.get_last_error()}')
+handle = k.CreateFileW('CONOUT$', 0xC0000000, 3, None, 3, 0, None)
+info = INFO()
+if not k.GetConsoleScreenBufferInfo(handle, ctypes.byref(info)):
+    sys.exit(f'GetConsoleScreenBufferInfo failed: {ctypes.get_last_error()}')
+width, rows = info.size.X, info.cursor.Y + 1
+buffer, read = ctypes.create_unicode_buffer(width * rows + 1), wintypes.DWORD()
+k.ReadConsoleOutputCharacterW(handle, buffer, width * rows, COORD(0, 0), ctypes.byref(read))
+text = buffer[:read.value]
+sys.stdout.write('\n'.join(text[i:i + width].rstrip() for i in range(0, len(text), width)))
+'''
+
+
+def install_from_window(root, python, environment, label):
+    """The installation as the window's update runs it, watched: its output (with the installed copy's, two levels
+    down) must reach the window's job, and no console window may show."""
+    step(f'{label}: Corsu installs Minecraft and 7-Zip as the window\'s update does (pythonw.exe, piped)')
+    output = Path(tempfile.mkdtemp(prefix='corsu-route-')) / 'out.txt'
+    command = [str(python.with_name('pythonw.exe')), '-c', FROM_WINDOW, str(python), 'src/installer.py',
+               '--components', 'minecraft', '7zip', '--yes']
+    with Monitor() as monitor, output.open('w', encoding='utf-8') as sink:
+        process = subprocess.Popen(command, cwd=root, env={**environment, 'PYTHONIOENCODING': 'utf-8'}, stdout=sink,
+                                   stderr=subprocess.STDOUT)
+        monitor.root = process.pid
+        code = process.wait(timeout=600)
+    text = output.read_text(encoding='utf-8', errors='replace')
+    print(text[-3000:])
+    flashes = report(monitor, f'{label}, installation from the window', require_console=False)
+    assert code == 0 and '@@exit 0' in text, f'{label}: installation failed ({code})'
+    # Printed by the installed copy's installer, started by installer.run two levels below the window.
+    seen = 'Minecraft in Corsican' in text and 'Installed: 7-Zip, Minecraft Java Edition' in text
+    print(f'{label}: the installed copy\'s lines reached the window\'s job: {seen}')
+    return flashes, seen
+
+
+def install_in_console(root, python, environment, label):
+    """The installation in a terminal: what the installed copy's installer prints must show in that terminal."""
+    step(f'{label}: the same installation in a terminal (its own console, read back)')
+    startup = subprocess.STARTUPINFO()
+    startup.dwFlags, startup.wShowWindow = subprocess.STARTF_USESHOWWINDOW, 0  # SW_HIDE
+    holder = subprocess.Popen([str(python), '-c', IN_CONSOLE, str(python), 'src/installer.py', '--components',
+                               'minecraft', '7zip', '--yes'], cwd=root, env=environment,
+                              creationflags=subprocess.CREATE_NEW_CONSOLE, startupinfo=startup)
+    text, deadline = '', time.monotonic() + 600
+    try:
+        while time.monotonic() < deadline and '@@exit' not in text:
+            time.sleep(2)
+            reading = subprocess.run([sys.executable, '-c', READ_CONSOLE, str(holder.pid)], capture_output=True,
+                                     text=True, encoding='utf-8', errors='replace', timeout=60)
+            text = reading.stdout if reading.returncode == 0 else text
+            if reading.returncode:
+                print(f'reading the console: {reading.stderr.strip()}')
+    finally:
+        subprocess.run(['taskkill', '/PID', str(holder.pid), '/T', '/F'], capture_output=True, timeout=60)
+    print(text[-3000:])
+    seen = '@@exit 0' in text and 'Minecraft in Corsican' in text and 'Installed: 7-Zip, Minecraft Java Edition' in text
+    print(f'{label}: the installed copy\'s lines shown in the terminal: {seen}')
+    return seen
+
+
+def prepare(root, python, home, environment, label):
     version = (root / 'minecraft/java/VERSION').read_text(encoding='utf-8').strip()
     fake_prism_instance(home, version)
-    command = [str(python), 'src/installer.py', '--components', 'minecraft', '7zip', '--yes']
-    print('+ ' + ' '.join(command), flush=True)
-    result = subprocess.run(command, cwd=root, env=environment, text=True, encoding='utf-8', errors='replace')
-    assert result.returncode == 0, f'installation failed ({result.returncode})'
+    flashes, piped = install_from_window(root, python, environment, label)
+    console = install_in_console(root, python, environment, label)
     # A game folder created since: the window looks for new ones (and whether Minecraft runs there).
     added = home / 'AppData/Roaming/PrismLauncher/instances' / version
     shutil.move(str(added), str(added.with_name(version + ' (2)')))
@@ -254,7 +335,7 @@ def prepare(root, python, home, environment):
     (winmerge / 'Languages/Corsican.po').write_text('msgid ""\nmsgstr ""\n', encoding='utf-8')
     link = Path(environment['APPDATA']) / 'Microsoft/Windows/Start Menu/Programs/Corsu.lnk'
     assert link.is_file(), f'the installer wrote no Start menu shortcut at {link}'
-    return link
+    return link, flashes, piped, console
 
 
 def api(session, path, body=None, timeout=10):
@@ -362,7 +443,7 @@ def shorten(command):
     return command if len(command) <= 240 else command[:237] + '…'
 
 
-def report(monitor, label):
+def report(monitor, label, require_console=True):
     step(f'{label}: programs started under Corsu')
     children = monitor.children()
     counts = {}
@@ -394,19 +475,20 @@ def report(monitor, label):
           f'{hosts} conhost.exe; {len(flashes)} console windows shown')
     for when, name, title, chain in flashes:
         print(f'FLASH at {when:.1f} s: {name} {title!r} of {" < ".join(chain)}')
-    assert consoles, f'{label}: Corsu started no console program while watched: this check would prove nothing'
+    assert consoles or not require_console, \
+        f'{label}: Corsu started no console program while watched: this check would prove nothing'
     return flashes
 
 
 def scenario(root, python, label, seconds):
     home = Path(tempfile.mkdtemp(prefix='corsu-consoles-'))
     environment = {**isolated_environment(home), 'PYTHONUTF8': '1'}
-    link = prepare(root, python, home, environment)
-    flashes = report(observe(link, environment, seconds), label)
+    link, install_flashes, piped, console = prepare(root, python, home, environment, label)
+    flashes = install_flashes + report(observe(link, environment, seconds), label)
     # Leave the runner's registry as it was (7-Zip's language).
     subprocess.run([str(python), str(sorted((Path(environment['LOCALAPPDATA']) / 'corsu/releases').glob('*/src/installer.py'))[-1]),
                     '--uninstall', '--yes'], env=environment, capture_output=True, text=True, timeout=300)
-    return flashes
+    return flashes, piped, console
 
 
 def main():
@@ -417,23 +499,34 @@ def main():
     parser.add_argument('--published', help='Also a published release (e.g. 0.28.2), expected to show console windows')
     args = parser.parse_args()
     assert sys.platform == 'win32', 'Windows only'
+    # What corsu.hidden() asks itself in a program started without a console window (the installer the window runs).
+    probe = subprocess.run([sys.executable, '-c', 'import ctypes; print(ctypes.windll.kernel32.GetConsoleWindow())'],
+                           capture_output=True, text=True, creationflags=0x08000000, timeout=60)
+    print(f'GetConsoleWindow() here {ctypes.windll.kernel32.GetConsoleWindow()}, '
+          f'in a child started with CREATE_NO_WINDOW {probe.stdout.strip()}')
     failures = []
     if args.published:
         old = published(args.published, Path(tempfile.mkdtemp(prefix='corsu-published-')))
-        flashes = scenario(old, archive_python(old, None), f'published {args.published}', args.seconds)
+        flashes, piped, console = scenario(old, archive_python(old, None), f'published {args.published}', args.seconds)
+        print(f'published {args.published}: output of the installed copy in the window\'s job {piped}, '
+              f'in a terminal {console}')
         if flashes:
             print(f'\nAS EXPECTED: published {args.published} shows {len(flashes)} console windows')
         else:
             failures.append(f'published {args.published} showed no console window: the check does not see the bug')
     root = args.root.resolve()
-    flashes = scenario(root, archive_python(root, args.python), 'this archive', args.seconds)
+    flashes, piped, console = scenario(root, archive_python(root, args.python), 'this archive', args.seconds)
     if flashes:
         failures.append(f'this archive: {len(flashes)} console windows shown while Corsu\'s window was open')
+    if not piped:
+        failures.append('this archive: the installed copy\'s output did not reach the window\'s job')
+    if not console:
+        failures.append('this archive: the installed copy\'s output did not show in the terminal')
     print()
     for failure in failures:
         print('FAIL ' + failure)
     assert not failures, failures
-    print('No console window shown by this archive.')
+    print('No console window shown by this archive; child output reached the window\'s job and the terminal.')
 
 
 if __name__ == '__main__':

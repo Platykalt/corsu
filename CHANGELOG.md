@@ -7,7 +7,8 @@
   list (for each program checked, and every few seconds while a part was switched off), PowerShell looking for
   Minecraft's Java processes and reading the Start menu shortcut, tasklist, and python.exe for an update's installer.
   These technical commands now start without a console (`corsu.hidden()`, CREATE_NO_WINDOW), output, exit codes and
-  errors unchanged; the process list is read at most every 2 seconds and shared by every check. UAC prompts and the
+  errors unchanged: what their own commands print (VencordInstallerCli, pnpm…) still reaches the window's job log
+  during an update, and the terminal when the installer runs in one. The process list is read at most every 2 seconds and shared by every check. UAC prompts and the
   terminals Corsu opens on purpose are not affected. Checked on the Windows CI runner by
   `tests/e2e/check_windows_consoles.py` (every process started under the window traced, every window shown caught),
   not yet on a person's PC.

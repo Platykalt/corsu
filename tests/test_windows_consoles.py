@@ -30,12 +30,52 @@ def answer(stdout=''):
 
 
 class Hidden(unittest.TestCase):
+    def setUp(self):
+        patch.object(corsu, 'PLATFORM', 'windows').start()
+        self.window = patch.object(corsu, 'console_window', return_value=0).start()
+        self.addCleanup(patch.stopall)
+
     def test_windows_gets_no_console_and_keeps_the_rest(self):
-        with patch.object(corsu, 'PLATFORM', 'windows'):
-            options = corsu.hidden(capture_output=True, text=True, creationflags=0x200)
+        options = corsu.hidden(capture_output=True, text=True, creationflags=0x200)
         self.assertEqual(options, {'capture_output': True, 'text': True, 'creationflags': 0x200 | NO_WINDOW})
 
+    def test_output_not_given_goes_to_this_process_streams(self):
+        # The installer the window starts writes into a pipe: its children must write there too, not into a console
+        # of their own that nobody sees.
+        out, err = MagicMock(), MagicMock()
+        with patch.object(sys, 'stdout', out), patch.object(sys, 'stderr', err):
+            options = corsu.hidden(check=True)
+        self.assertEqual(options, {'check': True, 'creationflags': NO_WINDOW, 'stdout': out, 'stderr': err})
+        out.flush.assert_called_once_with()
+
+    def test_output_given_by_the_caller_is_kept(self):
+        with patch.object(sys, 'stderr', MagicMock()) as err:
+            options = corsu.hidden(stdout=subprocess.PIPE)
+        self.assertEqual((options['stdout'], options['stderr']), (subprocess.PIPE, err))
+
+    def test_no_stream_at_all_is_devnull(self):
+        # pythonw.exe: sys.stdout and sys.__stdout__ are None.
+        with patch.multiple(sys, stdout=None, stderr=None, __stdout__=None, __stderr__=None):
+            options = corsu.hidden(check=True)
+        self.assertEqual((options['stdout'], options['stderr']), (subprocess.DEVNULL, subprocess.DEVNULL))
+
+    def test_a_stream_without_file_falls_back(self):
+        broken = MagicMock()
+        broken.fileno.side_effect = OSError('no file')
+        real = MagicMock()
+        with patch.multiple(sys, stdout=broken, __stdout__=real):
+            self.assertIs(corsu.hidden()['stdout'], real)
+
+    def test_in_a_terminal_children_share_its_console(self):
+        # A console window already open: a child opens none, and prints into that terminal.
+        self.window.return_value = 0x1234
+        out, err = MagicMock(), MagicMock()
+        with patch.object(sys, 'stdout', out), patch.object(sys, 'stderr', err):
+            options = corsu.hidden(check=True)
+        self.assertEqual(options, {'check': True, 'stdout': out, 'stderr': err})
+
     def test_other_systems_unchanged(self):
+        self.window.side_effect = AssertionError('not asked elsewhere')
         for platform in ('linux', 'macos'):
             with patch.object(corsu, 'PLATFORM', platform):
                 self.assertEqual(corsu.hidden(check=True), {'check': True})
@@ -43,6 +83,11 @@ class Hidden(unittest.TestCase):
 
 class EveryTechnicalCommand(unittest.TestCase):
     """Each command the window (or the installer it starts) runs on Windows is started without a console."""
+
+    def setUp(self):
+        # As under pythonw.exe (the window): no console window of its own.
+        patch.object(corsu, 'console_window', return_value=0).start()
+        self.addCleanup(patch.stopall)
 
     def flags(self, mock):
         self.assertTrue(mock.call_args_list, 'nothing was started')
