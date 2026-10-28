@@ -1,6 +1,6 @@
 # Changelog
 
-## 0.28.3 (in preparation, not published)
+## 0.28.3 (2026-10-28)
 
 From 0.28.2 (`a8a9f69`, tag `v0.28.2`). Translator revision `2026-10-notice-1`. Structures read in Discord's public
 web client (build `web.33a8a649a2fda558`, 2026-10-28) and checked in simulated pages with the built plugin
