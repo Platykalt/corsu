@@ -1,8 +1,8 @@
 **Français** · [English](#english)
 
-**Discord : le champ « Envoyer un message », la recherche dans une conversation et les messages système
-redeviennent corses. La fenêtre de Corsu s'ouvre sur une page « Accueil ».** Mise à jour depuis la fenêtre de Corsu
-(bouton « Rechercher ») ou par l'installation en une ligne ; vos choix sont gardés.
+**Windows : plus de fenêtres PowerShell qui s'ouvrent et se ferment pendant que Corsu est ouvert. Discord : le
+message d'épinglage et « Aller à {serveur} » sont traduits.** Mise à jour depuis la fenêtre de Corsu (bouton
+« Rechercher les mises à jour ») ou par l'installation en une ligne ; vos choix sont gardés.
 
 ### Téléchargements par usage
 
@@ -24,7 +24,32 @@ Chaque fichier a sa somme de contrôle `.sha256`. Les archives contiennent leur 
 installée, utilisée après suppression du dossier extrait, mise à jour et désinstallée sur son système avant la
 publication (tests automatiques ; personne n'a regardé les écrans).
 
-### Nouveautés de la 0.28.2
+### Nouveautés de la 0.28.3
+
+- **Windows, fenêtres PowerShell** : tant que la fenêtre de Corsu restait ouverte, des consoles PowerShell
+  apparaissaient et disparaissaient sans cesse. Corsu y lisait la liste des programmes ouverts, cherchait Minecraft
+  ou lisait son raccourci. Ces commandes techniques tournent maintenant sans console, et la liste des programmes est
+  lue au plus toutes les 2 secondes. Leurs sorties, codes d'erreur et journaux restent visibles dans Corsu (et dans
+  le terminal si vous lancez l'installation depuis un terminal). Les demandes d'autorisation de Windows (UAC)
+  s'affichent toujours. Vérifié automatiquement sur un Windows Server de GitHub : lancement par le raccourci installé,
+  avec Minecraft, plusieurs rafraîchissements et des actions depuis la fenêtre, chaque processus lancé et chaque
+  fenêtre affichée surveillés ; la 0.28.2 y ouvrait 8 consoles PowerShell en 76 secondes, la 0.28.3 aucune. **Pas
+  encore observé sur le PC d'un utilisateur.**
+- **Discord, message d'épinglage** : « … a épinglé un message dans ce salon. Voir tous les messages épinglés. »
+  restait en français dans la conversation : Discord l'affiche dans le même bloc que les messages des personnes, que
+  Corsu protège. Il devient « … hà spirlatu un messaghju in stu canale. Vede tutti i messaghji spirlati. » ; le pseudo,
+  les liens et l'heure restent tels quels, et un message écrit par une personne avec les mêmes mots n'est pas touché.
+  Même correction pour « a ajouté … au groupe » et « a retiré … du groupe ».
+- **Discord, « Aller à {serveur} »** (bouton ou libellé qui ouvre un serveur déjà rejoint) restait en français ; il
+  devient « Andà à {serveur} », le nom du serveur tel quel. « Aller sur le serveur » était déjà traduit.
+- **Ce qui a été vérifié pour Discord** : pages simulées d'après la structure du client web public de Discord
+  (28 octobre 2026), avec le plugin construit, dans Chromium sans affichage : affichage initial, nouveau message,
+  retour après navigation. Les essais échouent avec le plugin de la 0.28.2 et passent avec celui de la 0.28.3. Pas
+  dans l'application Discord elle-même. Traductions reprises de l'usage de Corsu, **non relues par un locuteur**.
+- Un Discord ouvert avant la mise à jour garde l'ancien plugin jusqu'à son redémarrage.
+- La mise à jour et la migration depuis la 0.28.2 publiée sont vérifiées automatiquement.
+
+### Rappel : nouveautés de la 0.28.2
 
 - **Fenêtre : page « Accueil »** (« Accolta » en corse), à la place de « Logiciels ». En haut, l'état général : ce qui
   est en corse, ce qui attend votre intervention, la mise à jour éventuelle. Ensuite « Logiciels gérés par Corsu »,
@@ -131,8 +156,8 @@ publication (tests automatiques ; personne n'a regardé les écrans).
 
 ## English
 
-**Discord: the "Envoyer un message" field, search in a conversation and system messages are Corsican again.
-Corsu's window opens on a "Home" page.** Update from Corsu's window ("Rechercher" button) or with the one-line
+**Windows: no more PowerShell windows opening and closing while Corsu is open. Discord: the pin notice and "Aller à
+{server}" are translated.** Update from Corsu's window ("Rechercher les mises à jour" button) or with the one-line
 install; your choices are kept.
 
 ### Downloads by use
@@ -155,7 +180,30 @@ Each file has a `.sha256` checksum. The archives carry their own Python. Every a
 deleting the extracted folder, updated and uninstalled on its own system before publication (automated checks; no one
 looked at the screens).
 
-### New in 0.28.2
+### New in 0.28.3
+
+- **Windows, PowerShell windows**: while Corsu's window was open, PowerShell consoles kept appearing and
+  disappearing. Corsu used them to read the list of running programs, look for Minecraft or read its shortcut. These
+  technical commands now run without a console, and the program list is read at most every 2 seconds. Their output,
+  error codes and logs still reach Corsu (and the terminal when you install from one). Windows' own permission
+  prompts (UAC) still show. Checked automatically on a GitHub Windows Server: started from the installed shortcut,
+  with Minecraft, several refreshes and actions from the window, every process started and every window shown
+  watched; 0.28.2 opened 8 PowerShell consoles in 76 seconds there, 0.28.3 none. **Not yet observed on a user's PC.**
+- **Discord, pin notice**: "… a épinglé un message dans ce salon. Voir tous les messages épinglés." stayed in French
+  in the conversation: Discord draws it in the same block as people's messages, which Corsu protects. It now reads
+  "… hà spirlatu un messaghju in stu canale. Vede tutti i messaghji spirlati."; the nickname, the links and the time
+  stay as they are, and a person's message with the same words is not touched. Same fix for "a ajouté … au groupe"
+  and "a retiré … du groupe".
+- **Discord, "Aller à {server}"** (button or label that opens a server you already joined) stayed in French; it now
+  reads "Andà à {server}", the server name as written. "Aller sur le serveur" was already translated.
+- **What was checked for Discord**: simulated pages built from the structure of Discord's public web client
+  (28 October 2026), with the built plugin, in headless Chromium: first display, new message, return after
+  navigation. The checks fail with 0.28.2's plugin and pass with 0.28.3's. Not in the Discord app itself.
+  Translations taken from Corsu's own usage, **not read by a speaker**.
+- A Discord opened before the update keeps the older plugin until it is restarted.
+- The update and the migration from the published 0.28.2 are checked automatically.
+
+### Earlier: new in 0.28.2
 
 - **Window: "Home" page** ("Accolta" in Corsican) in place of "Programs". At the top, the overall state: what is in
   Corsican, what needs you, a possible update. Then "Programs managed by Corsu", where each row says its state: in

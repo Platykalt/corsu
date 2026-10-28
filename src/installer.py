@@ -104,7 +104,7 @@ def run(command, **kwargs):
     print('+ ' + ' '.join(command), flush=True)
     # Windows only runs `.cmd` shims such as pnpm.cmd when given their full path.
     command[0] = shutil.which(command[0]) or command[0]
-    subprocess.run(command, check=True, **kwargs)
+    subprocess.run(command, **corsu.hidden(check=True, **kwargs))
 
 
 def stale_build(source):
@@ -453,7 +453,8 @@ def clients_running():
                     continue
             return False
         if corsu.PLATFORM == 'windows':
-            output = subprocess.run(['tasklist', '/FO', 'CSV', '/NH'], capture_output=True, text=True, check=False).stdout
+            output = subprocess.run(['tasklist', '/FO', 'CSV', '/NH'],
+                                    **corsu.hidden(capture_output=True, text=True, check=False)).stdout
             return any(f'"{name}.exe"'.lower() in output.lower() for name in CLIENTS)
         return any(subprocess.run(['pgrep', '-x', name], capture_output=True, check=False).returncode == 0
                    for name in CLIENTS)

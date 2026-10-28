@@ -22,6 +22,42 @@
   Noctalia loads Corsu's catalogue through `NOCTALIA_ASSETS_DIR` (a folder in Corsu's data) and two `00-corsu-*.toml`
   layers that its Settings window overrides; session values come from `src/hyprland_system.py` (branch `hypr-a`). Tried on simulated folders only; the window texts in Corsican are AI proposals.
 
+## 0.28.3 (in preparation, not published)
+
+From 0.28.2 (`a8a9f69`, tag `v0.28.2`). Translator revision `2026-10-notice-1`. Structures read in Discord's public
+web client (build `web.33a8a649a2fda558`, 2026-10-28) and checked in simulated pages with the built plugin
+(`check_discord_regressions.py`, scenarios D0-D5 and E1-E3), not in the real Discord app.
+
+- **Windows: no more console windows flashing while Corsu's window is open.** The window runs under pythonw.exe,
+  without a console, and every console program it started got a window of its own: PowerShell reading the process
+  list (for each program checked, and every few seconds while a part was switched off), PowerShell looking for
+  Minecraft's Java processes and reading the Start menu shortcut, tasklist, and python.exe for an update's installer.
+  These technical commands now start without a console (`corsu.hidden()`, CREATE_NO_WINDOW), output, exit codes and
+  errors unchanged: what their own commands print (VencordInstallerCli, pnpm…) still reaches the window's job log
+  during an update, and the terminal when the installer runs in one. The process list is read at most every 2 seconds and shared by every check. UAC prompts and the
+  terminals Corsu opens on purpose are not affected. Checked on the Windows CI runner by
+  `tests/e2e/check_windows_consoles.py` (every process started under the window traced, every window shown caught),
+  not yet on a person's PC.
+- **Discord, pin notice still in French** ("… a épinglé un message dans ce salon. Voir tous les messages épinglés."):
+  in the message list, Discord draws every system message inside the same `<div id="message-content-…">` as a
+  person's message (SystemMessage renders the notice as MessageContent's children). That wrapper is a content rule,
+  so 0.28.2 never read the notice; its tests modelled the notice without the wrapper. A wrapper whose message record
+  is a pin (type 6) or a group member added or removed (types 1, 2) is now read like the rest of the list: names,
+  links and the time stay as they are, only the notice's own phrases change (Corsu usage, unchanged rows). A person's
+  message with the same words stays as written. Renamed group or channel notices (types 4, 5) stay protected: their
+  new name is a bare text.
+- **Discord, "Go to {server}" still in French** (reported as « Aller sur un serveur », a text that is in no Discord
+  string): every "Go to server" label of the current client opens a server the person already belongs to. The plain
+  « Aller sur le serveur » ones were already Corsican; « Aller à {guildName} » (UdYYP3, the app-authorization success
+  button, and AEfs1D, the aria-label of a joined community card on a game profile) had no row. New row
+  `Aller à {guildName}` → « Andà à {guildName} », the server name kept as written (Corsu usage « Aller à … » → « Andà à
+  … », not an independent validation; `lexicon/review-discord-2026-10.tsv`).
+
+- **CI**: the Windows programs check installs VLC even when Chocolatey's feed fails (it answered 503 for VLC 3.0.24
+  on main's CI 40603473995): three tries, then VLC from VideoLAN with its SHA-256 checked
+  (`tests/e2e/install_vlc_windows.ps1`); the real VLC check then runs as before. Update and migration from the
+  published 0.28.2.
+
 ## 0.28.2 (2026-10-27)
 
 From 0.28.1 (`ae8890b`, tag `v0.28.1`). Translator revision `2026-10-composer-2`. Structures read in Discord's public

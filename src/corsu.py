@@ -1031,7 +1031,62 @@ def repair_default_browser():
         entry.unlink()
 
 
-def running_executables():
+# Corsu's window runs under pythonw.exe, without a console: a console program it starts (powershell, tasklist…) gets a
+# console window of its own, shown as long as it runs. Technical commands are started without one (hidden()).
+CREATE_NO_WINDOW = 0x08000000
+
+
+def console_window():
+    """This process's console window (Windows), 0 when it has none: pythonw.exe, or a program started without one."""
+    import ctypes
+    windll = getattr(ctypes, 'windll', None)  # absent elsewhere (tests simulating Windows)
+    return (windll.kernel32.GetConsoleWindow() or 0) if windll else 0
+
+
+def own_stream(stream, fallback):
+    """This process's stream for a child to write to (flushed first, so lines keep their order), or DEVNULL."""
+    for candidate in (stream, fallback):
+        try:
+            candidate.flush()
+            candidate.fileno()
+            return candidate
+        except (AttributeError, OSError, ValueError):
+            continue
+    return subprocess.DEVNULL
+
+
+def hidden(**options):
+    """Options for subprocess.run/Popen of a technical command: on Windows, no console window (output, exit code and
+    errors as usual). Not for what the person must see: UAC prompts, terminals Corsu opens on purpose.
+    In a process with a console window (a terminal), children share that console and open no window: no flag. Without
+    one, they get CREATE_NO_WINDOW. Either way, a child's stdout and stderr not given by the caller are this process's
+    own, passed explicitly: otherwise a child of a process whose output is a pipe (the installer the window starts)
+    writes into a console of its own, and its lines never reach the window's job."""
+    if PLATFORM != 'windows':
+        return options
+    if not console_window():
+        options['creationflags'] = options.get('creationflags', 0) | CREATE_NO_WINDOW
+    if not options.get('capture_output'):
+        for name in ('stdout', 'stderr'):
+            if options.get(name) is None:
+                options[name] = own_stream(getattr(sys, name), getattr(sys, '__' + name + '__'))
+    return options
+
+
+RUNNING = {'time': None, 'paths': None}
+
+
+def running_executables(max_age=2.0):
+    """The executables running now (paths; names on macOS), None when they cannot be told. Read at most every `max_age`
+    seconds: one window refresh asks for it once per program it checks, and on Windows each reading starts
+    PowerShell."""
+    now = time.monotonic()
+    if RUNNING['time'] is None or not 0 <= now - RUNNING['time'] < max_age:
+        RUNNING['paths'], RUNNING['time'] = read_running_executables(), now
+    return None if RUNNING['paths'] is None else set(RUNNING['paths'])
+
+
+def read_running_executables():
     paths = set()
     if PLATFORM == 'linux':
         if not Path('/proc').is_dir():
@@ -1044,7 +1099,7 @@ def running_executables():
         return paths
     command = (['powershell', '-NoProfile', '-Command', '(Get-Process).Path'] if PLATFORM == 'windows'
                else ['ps', '-axo', 'comm='])
-    result = subprocess.run(command, capture_output=True, text=True)
+    result = subprocess.run(command, **hidden(capture_output=True, text=True))
     if result.returncode != 0:
         return None
     return {line.strip() for line in result.stdout.splitlines() if line.strip()}
@@ -1172,9 +1227,9 @@ def windows_link(installer, path, target, arguments, icon=None, toggle=False):
         script = ('$s = (New-Object -ComObject WScript.Shell).CreateShortcut($env:CORSU_LINK); '
                   '$s.TargetPath = $env:CORSU_TARGET; $s.Arguments = $env:CORSU_ARGUMENTS; '
                   '$s.WorkingDirectory = $env:CORSU_DIR; if ($env:CORSU_ICON) { $s.IconLocation = $env:CORSU_ICON }; $s.Save()')
-        subprocess.run(['powershell', '-NoProfile', '-NonInteractive', '-Command', script], check=True, env={
+        subprocess.run(['powershell', '-NoProfile', '-NonInteractive', '-Command', script], **hidden(check=True, env={
             **os.environ, 'CORSU_LINK': str(temporary), 'CORSU_TARGET': str(target), 'CORSU_ARGUMENTS': arguments,
-            'CORSU_DIR': str(ROOT), 'CORSU_ICON': icon or ''})
+            'CORSU_DIR': str(ROOT), 'CORSU_ICON': icon or ''}))
         installer.write(path, temporary.read_bytes(), toggle=toggle)
 
 

@@ -452,8 +452,10 @@ def python_for(extracted):
 
 def run_installer(command):
     """Run the new installer, passing its progress on (scaled to 50–98 %) and its output. Returns (code, last line)."""
-    process = subprocess.Popen(command, stdout=subprocess.PIPE, stderr=subprocess.STDOUT, text=True, encoding='utf-8',
-                               errors='replace', env={**os.environ, 'PYTHONUNBUFFERED': '1', 'PYTHONIOENCODING': 'utf-8'})
+    # The new installer runs on python.exe (a console program): no console window over Corsu's window.
+    process = subprocess.Popen(command, **corsu.hidden(
+        stdout=subprocess.PIPE, stderr=subprocess.STDOUT, text=True, encoding='utf-8', errors='replace',
+        env={**os.environ, 'PYTHONUNBUFFERED': '1', 'PYTHONIOENCODING': 'utf-8'}))
     last = ''
     for line in process.stdout:
         line = line.rstrip('\n')

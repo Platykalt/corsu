@@ -413,7 +413,7 @@ def running_folders():
                     "Get-CimInstance Win32_Process -Filter \"Name like 'java%'\" | ForEach-Object { $_.CommandLine }"]
                    if corsu.PLATFORM == 'windows' else ['ps', '-axww', '-o', 'command='])
         try:
-            output = subprocess.run(command, capture_output=True, text=True, timeout=20).stdout
+            output = subprocess.run(command, **corsu.hidden(capture_output=True, text=True, timeout=20)).stdout
         except (OSError, subprocess.SubprocessError):
             return set()
         # Command lines are flat text here: a path with spaces cannot be cut out reliably, so a running game counts
