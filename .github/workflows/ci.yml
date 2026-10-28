@@ -162,37 +162,6 @@ jobs:
           path: ${{ runner.temp }}/bedrock/
           if-no-files-found: error
 
-  vlc-fallback:
-    name: VLC fallback forced (temporary check of install_vlc_windows.ps1)
-    runs-on: windows-latest
-    steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-python@v5
-        with:
-          python-version: '3.13'
-      - name: VLC is not on the runner before (else the fallback cannot be shown)
-        run: if (Test-Path 'C:\Program Files\VideoLAN\VLC\vlc.exe') { throw 'VLC already installed on this runner' } else { Write-Host 'no VLC on the runner' }
-      - name: Chocolatey fails (bogus source), the download is tampered with — refused with "checksum mismatch"
-        run: |
-          try { ./tests/e2e/install_vlc_windows.ps1 -ChocoSource 'https://invalid.example/' -ChocoTries 1 -Tamper; throw 'UNEXPECTED: tampered installer accepted' }
-          catch { Write-Host "REFUSED: $($_.Exception.Message)"; if ($_.Exception.Message -notmatch 'checksum mismatch') { throw } }
-          if (Test-Path 'C:\Program Files\VideoLAN\VLC\vlc.exe') { throw 'VLC installed from a tampered file' }
-          Write-Host 'OK: tampered download refused, nothing installed'
-          exit 0  # Chocolatey's failed try is not this step's result
-      - name: Chocolatey fails, VideoLAN unreachable — fails explicitly
-        run: |
-          try { ./tests/e2e/install_vlc_windows.ps1 -ChocoSource 'https://invalid.example/' -ChocoTries 1 -Base 'https://invalid.example/vlc/'; throw 'UNEXPECTED: no failure' }
-          catch { Write-Host "FAILED AS EXPECTED: $($_.Exception.Message)"; if ($_.Exception.Message -notmatch 'cannot be reached') { throw } }
-          exit 0  # Chocolatey's failed try is not this step's result
-      - name: Chocolatey fails, VLC from VideoLAN (checksum checked, version printed)
-        run: ./tests/e2e/install_vlc_windows.ps1 -ChocoSource 'https://invalid.example/' -ChocoTries 1
-      - name: Notepad++ from Chocolatey, then the real Windows programs check
-        env:
-          GITHUB_TOKEN: ${{ github.token }}
-        run: |
-          choco install notepadplusplus -y --no-progress
-          python tests/e2e/check_windows_apps.py
-
   e2e:
     name: End-to-end (${{ matrix.os }})
     needs: package

@@ -1,6 +1,6 @@
 # VLC and Notepad++ for the Windows programs check (CI runner). Chocolatey's feed sometimes answers 503 for one
 # package: try it three times, then take VLC from VideoLAN with its SHA-256 checked. Stops with an explicit message
-# when VLC is still missing. The parameters are for testing this fallback (ci.yml, job vlc-fallback):
+# when VLC is still missing. The parameters are for testing this fallback (checked once on CI 40616837401):
 #   -ChocoSource  a Chocolatey source to use instead of the default one (a bogus one makes Chocolatey fail)
 #   -ChocoTries   how many times Chocolatey is tried (default 3)
 #   -Base         where VideoLAN's Windows installers are listed (default: the latest release)
