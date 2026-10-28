@@ -22,7 +22,7 @@
   Noctalia loads Corsu's catalogue through `NOCTALIA_ASSETS_DIR` (a folder in Corsu's data) and two `00-corsu-*.toml`
   layers that its Settings window overrides; session values come from `src/hyprland_system.py` (branch `hypr-a`). Tried on simulated folders only; the window texts in Corsican are AI proposals.
 
-## 0.28.3 (in preparation, not published)
+## 0.28.3 (2026-10-28)
 
 From 0.28.2 (`a8a9f69`, tag `v0.28.2`). Translator revision `2026-10-notice-1`. Structures read in Discord's public
 web client (build `web.33a8a649a2fda558`, 2026-10-28) and checked in simulated pages with the built plugin
