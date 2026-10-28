@@ -19,7 +19,7 @@ export function setCorrections(value: Record<string, string> | undefined) {
 // with this file's way of reading the page; the fingerprint is computed from the dictionary itself (its entry count
 // and two sums of FNV-1a hashes over each key and value's UTF-16 code units, which do not depend on the order of the
 // entries), so it can be compared with the dictionary.json of any build.
-export const translatorRevision = "2026-10-composer-2";
+export const translatorRevision = "2026-10-notice-1";
 let fingerprint: string | undefined;
 
 export function dictionaryFingerprint(): string {
@@ -66,17 +66,39 @@ const writtenTypes = new Set([0, 19, 20, 23]);
 // apart. A text node directly in the span, under a record of a system type, is Discord's text.
 const systemPreviewSpan = '[class*="messageContent"]';
 
-function systemPreview(element: Element): boolean {
+// The type of the message record the components above `element` hold, if any.
+function messageType(element: Element): number | undefined {
     for (let fiber = fiberOf(element), depth = 0; fiber && depth < 12; depth++, fiber = fiber.return) {
         const message = fiber.memoizedProps?.message;
-        if (message && typeof message === "object" && typeof message.type === "number") return !writtenTypes.has(message.type);
+        if (message && typeof message === "object" && typeof message.type === "number") return message.type;
     }
-    return false;
+    return undefined;
+}
+
+function systemPreview(element: Element): boolean {
+    const type = messageType(element);
+    return type !== undefined && !writtenTypes.has(type);
+}
+
+// The message list draws a system message inside the same <div id="message-content-…"> as a person's message
+// (Discord's SystemMessage renders the notice as MessageContent's children, web client of October 2026), so the
+// content rule hid the whole pin notice. For the notices whose only free values are names drawn as their own elements
+// (a pin, a person added to or removed from a group: MessageTypes 6, 1, 2), the wrapper is Discord's text: the rules
+// of the message list apply inside (names kept, only the notice's own phrases looked up, see systemLabels). Other
+// system types (a renamed group or channel, whose new name is a bare text) stay protected.
+const noticeTypes = new Set([1, 2, 6]);
+const messageWrapper = '[id^="message-content"]';
+const systemNotice = (wrapper: Element) => wrapper.matches(messageWrapper) && noticeTypes.has(messageType(wrapper) ?? -1);
+
+// What people write, except a system notice's own wrapper (the nearest content rule above the element being it).
+function protectedArea(element: Element): boolean {
+    const area = element.closest(contentArea);
+    return Boolean(area) && !systemNotice(area!);
 }
 
 function inContent(element: Element): boolean {
     const placeholder = element.closest(slatePlaceholder);
-    if (!placeholder) return Boolean(element.closest(contentArea)) && !(element.matches(systemPreviewSpan) && systemPreview(element));
+    if (!placeholder) return protectedArea(element) && !(element.matches(systemPreviewSpan) && systemPreview(element));
     const editor = placeholder.parentElement?.closest(contentArea);
     return Boolean(editor) && !isField(editor!);
 }
@@ -720,7 +742,7 @@ export function createTranslator(doc: Document, options: { showOriginal?: () => 
 
     function attributes(element: Element) {
         const field = isField(element);
-        if (!field && element.closest(contentArea)) return;
+        if (!field && protectedArea(element)) return;
         for (const name of ["aria-label", "title", "placeholder"]) {
             const value = element.getAttribute(name);
             if (!value) continue;
@@ -738,6 +760,21 @@ export function createTranslator(doc: Document, options: { showOriginal?: () => 
     // draws in an empty field are read there.
     function shielded(element: Element) {
         if (isField(element)) attributes(element);
+        // A system notice of the message list (see systemNotice): read like the rest of the list.
+        const wrapper = element.closest(messageWrapper);
+        const notices = wrapper ? [wrapper] : Array.from(element.querySelectorAll(messageWrapper));
+        for (const notice of notices) {
+            if (!systemNotice(notice)) continue;
+            const root = wrapper ? element : notice;
+            const walker = doc.createTreeWalker(root, NodeFilter.SHOW_ELEMENT | NodeFilter.SHOW_TEXT, {
+                acceptNode: node => node instanceof Element && node !== notice && node.matches(contentArea)
+                    ? NodeFilter.FILTER_REJECT : NodeFilter.FILTER_ACCEPT
+            });
+            for (let node: Node | null = root; node; node = walker.nextNode()) {
+                if (node.nodeType === Node.TEXT_NODE) text(node as Text);
+                else attributes(node as Element);
+            }
+        }
         const previews = element.matches(systemPreviewSpan) ? [element] : Array.from(element.querySelectorAll(systemPreviewSpan));
         for (const span of previews) {
             for (const child of Array.from(span.childNodes)) if (child.nodeType === Node.TEXT_NODE) text(child as Text);

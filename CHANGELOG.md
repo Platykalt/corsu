@@ -1,5 +1,20 @@
 # Changelog
 
+## 0.28.3 (unreleased)
+
+From 0.28.2 (`a8a9f69`, tag `v0.28.2`). Translator revision `2026-10-notice-1`. Structures read in Discord's public
+web client (build `web.33a8a649a2fda558`, 2026-10-28) and checked in simulated pages with the built plugin
+(`check_discord_regressions.py`, scenarios D1-D5), not in the real Discord app.
+
+- **Discord, pin notice still in French** ("… a épinglé un message dans ce salon. Voir tous les messages épinglés."):
+  in the message list, Discord draws every system message inside the same `<div id="message-content-…">` as a
+  person's message (SystemMessage renders the notice as MessageContent's children). That wrapper is a content rule,
+  so 0.28.2 never read the notice; its tests modelled the notice without the wrapper. A wrapper whose message record
+  is a pin (type 6) or a group member added or removed (types 1, 2) is now read like the rest of the list: names,
+  links and the time stay as they are, only the notice's own phrases change (Corsu usage, unchanged rows). A person's
+  message with the same words stays as written. Renamed group or channel notices (types 4, 5) stay protected: their
+  new name is a bare text.
+
 ## 0.28.2 (2026-10-27)
 
 From 0.28.1 (`ae8890b`, tag `v0.28.1`). Translator revision `2026-10-composer-2`. Structures read in Discord's public

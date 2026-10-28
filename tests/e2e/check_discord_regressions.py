@@ -149,6 +149,57 @@ function systemRow(channel, author, parts, upper) {
 const read = node => node.nodeType === Node.TEXT_NODE ? node.data : node.textContent;
 '''
 
+# 0.28.3, report B. Discord's message list draws every system message inside the SAME wrapper as a person's message:
+# SystemMessage (lazy chunk c9979a719b7a8406.js, module 64369, `ls`) renders the type's component (the pin notice `iP`:
+# yIDvPL / lD5tup / R7vZGZ / vfkjqx) as the children of MessageContent (module 438729, `O`), a
+# <div id="message-content-{id}" class="markup__75297 messageContent_c19a55"> whose component holds the message record
+# (with its numeric `type`). Inside: SystemMessage's container (module 888675: div.container__235ca > div.iconContainer +
+# div.content__235ca > div > [the formatted text, the timestamp span]). The username hook (module 447215) draws an
+# Anchor > span.container__703b9 > span.nameContainer__703b9 > span.name__703b9; each $link an Anchor. The C1-C3 rows
+# above leave that wrapper out, which is why 0.28.2 passed them and still showed the notice in French.
+NOTICE = r'''
+let noticeCounter = 0;
+function listNotice(channel, author, type, parts, { compact = true, time = "01:31", messageId } = {}) {
+  const message = { id: messageId || ID(5).slice(0, 15) + String(++noticeCounter).padStart(3, "0"), type, channel_id: channel.id, author, mentions: [], content: "" };
+  const li = element(`<li id="chat-messages-${channel.id}-${message.id}" class="messageListItem__5126c"><div class="message__5126c ${compact ? "compact__5126c" : "cozyMessage__5126c"} systemMessage__5126c" role="article"><div id="message-content-${message.id}" class="markup__75297 messageContent_c19a55"><div class="container__235ca ${compact ? "compact__235ca" : "cozy__235ca"}"><div class="iconContainer__235ca"><svg class="icon__235ca"></svg></div><div class="content__235ca"><div></div></div></div></div></div></li>`);
+  const wrapper = li.querySelector('[id^="message-content"]');
+  const row = [{ message, channel, compact }];
+  const content = { message, content: "", compact, children: null };
+  fiber(wrapper, content, ...row);
+  const line = li.querySelector(".content__235ca > div");
+  const chain = [{ children: parts }, { className: "content__235ca" }, { className: "container__235ca" },
+    { timestamp: "2026-10-28T00:31:00Z", compact, children: parts }, { message, usernameHook() {}, onClickPins() {} },
+    { message, channel, compact }, { id: wrapper.id, className: wrapper.className }, content, ...row];
+  const nodes = [];
+  for (const part of parts) {
+    if (typeof part === "string") {
+      const node = document.createTextNode(part);
+      fiber(node, ...chain);
+      line.append(node);
+      nodes.push(node);
+    } else if (part.user) {
+      const a = element(`<span class="anchor__14d82 anchorUnderlineOnHover__14d82" role="button" tabindex="0"><span class="container__703b9"><span class="nameContainer__703b9"><span class="name__703b9 username__703b9">${part.name}</span></span></span></span>`);
+      const name = a.querySelector(".name__703b9");
+      fiber(name, { className: "name__703b9 username__703b9", children: part.name }, { roleStyle: "username", name: part.name },
+        { name: part.name, colorString: null }, { user: part.user, channelId: channel.id, messageId: message.id }, ...chain);
+      line.append(a);
+      nodes.push(name);
+    } else {
+      const a = element(`<a class="anchor__14d82 anchorUnderlineOnHover__14d82" role="button" tabindex="0" href="${part.href || ""}">${part.link}</a>`);
+      fiber(a, { onClick() {}, children: part.link }, ...chain);
+      line.append(a);
+      nodes.push(a);
+    }
+  }
+  const stamp = element(`<span class="timestamp_c19a55 timestampInline_c19a55"><time aria-label="mardi 28 octobre 2026 à ${time}" id="message-timestamp-${message.id}" datetime="2026-10-28T00:31:00.000Z">${time}</time></span>`);
+  line.append(stamp);
+  return { li, nodes, message, stamp: stamp.querySelector("time"), wrapper };
+}
+// A nickname of several words that a server member chose (fictional).
+const lune = { id: ID(4), username: "lune", globalName: "Lune und Sol" };
+const server = { id: ID(2), type: 0, name: "general", guild_id: ID(1) };
+'''
+
 # name -> (JS run BEFORE the translator starts, JS run after; both may use the helpers above).
 SCENARIOS = {}
 
@@ -354,6 +405,99 @@ check("C5 real message in a preview line stays French", "a message's own content
 watch("C5 preview", () => row.textContent); watch("C5 real", () => real.textContent);
 ''')
 
+# --- 0.28.3: report B, the pin notice inside the message-content wrapper (see NOTICE). ---
+PIN = '[{ user: lune, name: "Lune und Sol" }, " a épinglé ", { link: "un message" }, " dans ce salon. Voir tous les ", { link: "messages épinglés" }, "."]'
+
+SCENARIOS['D1 pin notice in the message list, inside message-content, inserted after load'] = (r'''
+window.list = element('<ol class="scrollerInner__36d07" data-list-id="chat-messages"></ol>');
+document.body.append(list);
+''', r'''
+const pin = listNotice(server, lune, 6, ''' + PIN + r''');
+const anchors = Array.from(pin.li.querySelectorAll("a"));
+list.append(pin.li);
+await settle();
+const [nick, verb, link, middle, pins, end] = pin.nodes;
+check("D1 pin: verb", "yIDvPL ' a épinglé ' in message-content", read(verb), " hà spirlatu ");
+check("D1 pin: link 'un message'", "yIDvPL $link messageOnClick", read(link), "un messaghju");
+check("D1 pin: middle", "yIDvPL ' dans ce salon. Voir tous les '", read(middle), " in stu canale. Vede tutti i ");
+check("D1 pin: link 'messages épinglés'", "yIDvPL $link pinsActionOnClick", read(pins), "messaghji spirlati");
+check("D1 pin: final full stop", "yIDvPL '.'", read(end), ".");
+check("D1 pin: nickname of several words kept", "username hook, 'Lune und Sol'", read(nick), "Lune und Sol");
+check("D1 pin: time kept", "timestamp LT", pin.stamp.textContent, "01:31");
+check("D1 pin: same link elements, same targets", "Anchors untouched", anchors.every(a => pin.li.contains(a)) && anchors.map(a => a.getAttribute("href")).join() === ",", true);
+check("D1 pin: whole line", "visible text", pin.li.querySelector(".content__235ca").textContent,
+  "Lune und Sol hà spirlatu un messaghju in stu canale. Vede tutti i messaghji spirlati.01:31");
+watch("D1 verb", () => read(verb)); watch("D1 middle", () => read(middle)); watch("D1 nickname", () => read(nick));
+''')
+
+SCENARIOS['D2 pin notice re-rendered after channel navigation'] = (r'''
+window.list = element('<ol class="scrollerInner__36d07" data-list-id="chat-messages"></ol>');
+document.body.append(list);
+''', r'''
+const first = listNotice(server, lune, 6, ''' + PIN + r''');
+list.append(first.li);
+await settle();
+// Another channel: the list is emptied and new rows are inserted (as Discord does on navigation).
+list.replaceChildren();
+const other = { id: ID(3), type: 0, name: "annonces", guild_id: ID(1) };
+const second = listNotice(other, lune, 6, ''' + PIN + r''', { time: "23:59" });
+await settle();
+list.append(second.li);
+await settle();
+check("D2 after navigation: verb", "new row", read(second.nodes[1]), " hà spirlatu ");
+check("D2 after navigation: middle", "new row", read(second.nodes[3]), " in stu canale. Vede tutti i ");
+check("D2 after navigation: time kept", "timestamp", second.stamp.textContent, "23:59");
+// Back to the first channel: React reuses the row and writes its French again into the same text nodes.
+list.replaceChildren(first.li);
+first.nodes[1].data = " a épinglé "; first.nodes[3].data = " dans ce salon. Voir tous les ";
+await settle();
+check("D2 back, text nodes rewritten by React: verb", "reused node", read(first.nodes[1]), " hà spirlatu ");
+check("D2 back, text nodes rewritten by React: middle", "reused node", read(first.nodes[3]), " in stu canale. Vede tutti i ");
+check("D2 back: nickname kept", "username hook", read(first.nodes[0]), "Lune und Sol");
+watch("D2 verb", () => read(first.nodes[1])); watch("D2 second", () => read(second.nodes[3]));
+''')
+
+SCENARIOS['D3 a person writing the pin sentence keeps it'] = (r'''
+window.list = element('<ol class="scrollerInner__36d07" data-list-id="chat-messages"></ol>');
+document.body.append(list);
+''', r'''
+// A person's message (type 0) in the same wrapper, with the notice's words, whole and split in nodes.
+const said = listNotice(server, lune, 0, ["a épinglé un message dans ce salon. Voir tous les messages épinglés."]);
+const split = listNotice(server, lune, 0, [" a épinglé ", { link: "un message" }, " dans ce salon. Voir tous les "]);
+list.append(said.li, split.li);
+await settle();
+check("D3 person's sentence stays French", "type 0 in message-content", read(said.nodes[0]), "a épinglé un message dans ce salon. Voir tous les messages épinglés.");
+check("D3 person's fragment stays French", "type 0, bare text node", read(split.nodes[0]), " a épinglé ");
+check("D3 person's link text stays French", "type 0, link", read(split.nodes[1]), "un message");
+watch("D3 said", () => read(said.nodes[0])); watch("D3 split", () => read(split.nodes[0]));
+''')
+
+SCENARIOS['D4 group notices inside message-content'] = (r'''
+window.list = element('<ol class="scrollerInner__36d07" data-list-id="chat-messages"></ol>');
+document.body.append(list);
+''', r'''
+const g = group(work, error);
+const added = listNotice(g, work, 1, [{ user: work, name: "Work" }, " a ajouté ", { user: error, name: "Error" }, " au groupe."]);
+const removed = listNotice(g, error, 2, [{ user: error, name: "Error" }, " a retiré ", { user: work, name: "Work" }, " du groupe."]);
+list.append(added.li, removed.li);
+await settle();
+check("D4 group add: verb", "MMN2Jq in message-content", read(added.nodes[1]), " hà aghjuntu ");
+check("D4 group add: end", "MMN2Jq", read(added.nodes[3]), " à u gruppu.");
+check("D4 group remove: verb", "L2FyVq in message-content", read(removed.nodes[1]), " hà cacciatu ");
+check("D4 names Work and Error kept", "username hooks", [added.nodes[0], added.nodes[2], removed.nodes[0]].map(read).join(), "Work,Error,Error");
+watch("D4 add", () => read(added.nodes[1]));
+''')
+
+SCENARIOS['D5 pin notice in a message preview line'] = ('', r'''
+const message = { id: ID(7), channel_id: server.id, type: 6, author: lune, mentions: [], content: "" };
+const row = element(`<div class="messagePreviewLine__7c4a2"><span class="messageContent__7c4a2">Lune und Sol a épinglé un message dans ce salon. Voir tous les messages épinglés.</span></div>`);
+fiber(row.firstChild, { className: "messageContent__7c4a2", children: [null, row.firstChild.textContent] }, { channel: server, message });
+document.body.append(row);
+await settle();
+check("D5 pin notice in a preview line", "yIDvPL as one plain string, author 'Lune und Sol'", row.textContent, "Lune und Sol hà spirlatu un messaghju in stu canale. Vede tutti i messaghji spirlati.");
+watch("D5 preview", () => row.textContent);
+''')
+
 RUN = r'''
 (async () => {
 const translator = CorsuBuilt.createTranslator(document);
@@ -410,7 +554,7 @@ def main(chrome, vencord):
                     time.sleep(0.2)
                 else:
                     raise SystemExit('FAIL: the built translator did not load')
-                helpers = HELPERS + COMPOSER + SEARCH + SYSTEM
+                helpers = HELPERS + COMPOSER + SEARCH + SYSTEM + NOTICE
                 evaluate(devtools, session, helpers + before)
                 for case in json.loads(evaluate(devtools, session, RUN.replace('%s', after))):
                     tag = 'PASS' if case['ok'] else 'FAIL'
