@@ -408,12 +408,27 @@ watch("C5 preview", () => row.textContent); watch("C5 real", () => real.textCont
 # --- 0.28.3: report B, the pin notice inside the message-content wrapper (see NOTICE). ---
 PIN = '[{ user: lune, name: "Lune und Sol" }, " a épinglé ", { link: "un message" }, " dans ce salon. Voir tous les ", { link: "messages épinglés" }, "."]'
 
+SCENARIOS['D0 pin notice already on the page when the translator starts'] = (r'''
+window.list = element('<ol class="scrollerInner__36d07" data-list-id="chat-messages"></ol>');
+document.body.append(list);
+window.early = listNotice(server, lune, 6, ''' + PIN + r''');
+list.append(early.li);
+''', r'''
+const [nick, verb, link, middle, pins] = early.nodes;
+check("D0 initial render: verb", "yIDvPL in message-content, present at start", read(verb), " hà spirlatu ");
+check("D0 initial render: middle", "yIDvPL", read(middle), " in stu canale. Vede tutti i ");
+check("D0 initial render: links", "$link x2", read(link) + "|" + read(pins), "un messaghju|messaghji spirlati");
+check("D0 initial render: nickname and time kept", "username hook, timestamp", read(nick) + "|" + early.stamp.textContent, "Lune und Sol|01:31");
+watch("D0 verb", () => read(verb));
+''')
+
 SCENARIOS['D1 pin notice in the message list, inside message-content, inserted after load'] = (r'''
 window.list = element('<ol class="scrollerInner__36d07" data-list-id="chat-messages"></ol>');
 document.body.append(list);
 ''', r'''
 const pin = listNotice(server, lune, 6, ''' + PIN + r''');
 const anchors = Array.from(pin.li.querySelectorAll("a"));
+const handlers = anchors.map(a => a.__reactProps$test.onClick);
 list.append(pin.li);
 await settle();
 const [nick, verb, link, middle, pins, end] = pin.nodes;
@@ -424,7 +439,8 @@ check("D1 pin: link 'messages épinglés'", "yIDvPL $link pinsActionOnClick", re
 check("D1 pin: final full stop", "yIDvPL '.'", read(end), ".");
 check("D1 pin: nickname of several words kept", "username hook, 'Lune und Sol'", read(nick), "Lune und Sol");
 check("D1 pin: time kept", "timestamp LT", pin.stamp.textContent, "01:31");
-check("D1 pin: same link elements, same targets", "Anchors untouched", anchors.every(a => pin.li.contains(a)) && anchors.map(a => a.getAttribute("href")).join() === ",", true);
+check("D1 pin: same link elements, same targets", "Anchors untouched (node, href, onClick)", anchors.every(a => pin.li.contains(a))
+  && anchors.map(a => a.getAttribute("href")).join() === "," && anchors.every((a, i) => a.__reactProps$test.onClick === handlers[i]), true);
 check("D1 pin: whole line", "visible text", pin.li.querySelector(".content__235ca").textContent,
   "Lune und Sol hà spirlatu un messaghju in stu canale. Vede tutti i messaghji spirlati.01:31");
 watch("D1 verb", () => read(verb)); watch("D1 middle", () => read(middle)); watch("D1 nickname", () => read(nick));
