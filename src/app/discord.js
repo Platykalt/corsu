@@ -10,14 +10,18 @@ const renderDiscord = (() => {
   const PROBLEM_ACTIONS = ["check", "rescue", "retry", "later"];
   // The buttons each state offers, in focus order. "rescue" is Corsu's rescue mode (rescue.json), not a watch state.
   const ACTIONS = { "vencord-error": PROBLEM_ACTIONS, "start-error": PROBLEM_ACTIONS, slow: PROBLEM_ACTIONS,
-    network: ["retry", "later"], offscreen: ["later"], closed: ["retry"], rescue: ["reactivate", "check"] };
-  const BUTTONS = ["check", "install", "rescue", "reactivate", "retry", "later"];
+    network: ["retry", "later"], offscreen: ["later"], closed: ["retry"], rescue: ["reactivate", "check"],
+    // Rescue mode's phases (rescue.json): the translation back but not yet proved by a start; a failed
+    // reactivation waiting for Discord to close before its original archive goes back ("finish" = rescue again).
+    "rescue-verifying": ["retry", "rescue"], "rescue-pending": ["finish"] };
+  const BUTTONS = ["check", "install", "finish", "rescue", "reactivate", "retry", "later"];
   // The rescue API's buttons need src/discord_watch.py; without it they are not offered.
-  const NEEDS_WATCH = ["rescue", "reactivate", "retry"];
+  const NEEDS_WATCH = ["finish", "rescue", "reactivate", "retry"];
   const ROWS = { active: ["active", "dc_chip_active"], restart: ["restart_required", "activation_restart_required"],
     rescue: ["blocked", "dc_chip_rescue", "warn"], problem: ["failed", "dc_chip_problem"] };
 
-  const key = discord => discord.rescue ? "rescue" : discord.state || "none";
+  const PHASES = { verifying: "rescue-verifying", "restore-pending": "rescue-pending" };
+  const key = discord => discord.rescue ? PHASES[discord.rescue.phase] || "rescue" : discord.state || "none";
   const when = seconds => {
     const language = corsu().language();
     return new Date(seconds * 1000).toLocaleString(language === "co" ? "fr" : language, { dateStyle: "medium", timeStyle: "short" });
@@ -53,6 +57,7 @@ const renderDiscord = (() => {
     if (result.ok) return t("dc_done_" + action.name);
     if (result.reason === "running") return t("dc_reason_running");
     if (result.reason === "unavailable") return t("dc_reason_unavailable");
+    if (["unconfirmed", "rescue", "restore-pending"].includes(result.reason)) return t("dc_reason_" + result.reason.replace(/-/g, "_"));
     return t("dc_reason_other", { reason: result.error || result.reason || "?" });
   }
 
@@ -68,10 +73,10 @@ const renderDiscord = (() => {
       const button = $("dr-" + name);
       button.hidden = name === "install" ? !(offered.includes("check") && updateAvailable) : !offered.includes(name);
       // Never over an open Discord: rescue and a new start wait until it is closed (the server checks again).
-      button.disabled = busy || (["rescue", "reactivate", "retry"].includes(name) && discord.running)
+      button.disabled = busy || (NEEDS_WATCH.includes(name) && discord.running)
         || (name === "check" && Boolean((state.update || {}).checking));
     }
-    $("dr-running").hidden = !(discord.running && offered.some(name => ["rescue", "reactivate", "retry"].includes(name)));
+    $("dr-running").hidden = !(discord.running && offered.some(name => NEEDS_WATCH.includes(name)));
     $("dr-update").hidden = !offered.includes("check");
     if (offered.includes("check")) setText($("dr-update"), updateLine(state, discord));
     setText($("dr-result"), resultLine(discord.action));
@@ -106,7 +111,7 @@ const renderDiscord = (() => {
       await corsu().call("/api/discord/dismiss", { incident }).catch(() => null);
       show("programs");
       $("main").focus();
-    } else await corsu().call("/api/discord/" + name, { incident }).catch(() => null);
+    } else await corsu().call("/api/discord/" + (name === "finish" ? "rescue" : name), { incident }).catch(() => null);
     refresh();
   }
 

@@ -297,7 +297,7 @@ class RouteTests(Data):
 SCRIPT = HARNESS[:HARNESS.index('const out = vm.runInContext(`')] + r'''
 const out = vm.runInContext(`
   const clean = value => value == null ? value : value.replace(/[\\u00a0\\u202f]/g, " ");
-  const visible = () => ["check", "install", "rescue", "reactivate", "retry", "later"].filter(name => !$("dr-" + name).hidden);
+  const visible = () => ["check", "install", "finish", "rescue", "reactivate", "retry", "later"].filter(name => !$("dr-" + name).hidden);
   const results = {};
   language = "fr";
   for (const [name, discord, extra] of fixture.cases) {
@@ -344,6 +344,16 @@ CASES = [
     case('offscreen', state='offscreen'),
     case('ok', row='active', state='ok-corsu', problem=False),
     case('rescue', row='rescue', state='vencord-error', rescue={'location': '/x', 'since': 1.79e9, 'from_revision': 'r'}),
+    case('verifying', row='rescue', state='closed', problem=False,
+         rescue={'location': '/x', 'since': 1.79e9, 'from_revision': 'r', 'phase': 'verifying'},
+         action={'name': 'reactivate', 'running': False, 'result': {'ok': False, 'reason': 'unconfirmed', 'state': 'closed'}}),
+    case('pending', row='rescue', state='slow', running=True,
+         rescue={'location': '/x', 'since': 1.79e9, 'from_revision': 'r', 'phase': 'restore-pending', 'reason': 'running'},
+         action={'name': 'reactivate', 'running': False, 'result': {'ok': False, 'reason': 'restore-pending', 'state': 'slow'}}),
+    case('pending-closed', row='rescue', state='slow',
+         rescue={'location': '/x', 'since': 1.79e9, 'from_revision': 'r', 'phase': 'restore-pending', 'reason': 'running'}),
+    case('reactivated', row='active', state='ok-corsu', problem=False,
+         action={'name': 'reactivate', 'running': False, 'result': {'ok': True, 'reason': None, 'state': 'ok-corsu'}}),
     case('restart', row='restart', state='ok-corsu', problem=False, old_corsu=True, running=True),
     case('running', running=True),
     case('no-watch-module', watch_available=False),
@@ -416,6 +426,20 @@ class PageTests(unittest.TestCase):
         self.assertIn('Quittez-le complètement', self.result['refused']['result'])
         self.assertIn('backup-mismatch', self.result['failed']['result'])
         self.assertEqual(self.result['done']['result'], 'Discord démarre ; Corsu surveille ce démarrage.')
+
+    def test_reactivation_is_confirmed_only_with_proof(self):
+        verifying = self.result['verifying']
+        self.assertIn('pas encore confirmée', verifying['message'])
+        self.assertIn('Non confirmé', verifying['result'])
+        self.assertEqual(verifying['buttons'], ['rescue', 'retry'])
+        self.assertIn('plugin Corsu a été vu', self.result['reactivated']['result'])
+
+    def test_failed_reactivation_with_discord_open_asks_to_close_it_then_finish(self):
+        pending = self.result['pending']
+        self.assertIn('Quittez-le complètement', pending['message'])
+        self.assertEqual((pending['buttons'], pending['disabled'], pending['running']), (['finish'], ['finish'], True))
+        self.assertIn('terminez la restauration', pending['result'])
+        self.assertEqual(self.result['pending-closed']['disabled'], [])
 
     def test_update_states(self):
         self.assertIn('Corsu est à jour', self.result['vencord-error']['update'])

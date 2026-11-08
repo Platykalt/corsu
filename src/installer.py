@@ -601,9 +601,9 @@ def vencord_launcher(archive):
     return len(archive) < 65536 and b'patcher.js' in archive
 
 
-def install_discord(location):
+def install_discord(location, reactivating=False):
     import discord_watch
-    if discord_watch.in_rescue():
+    if discord_watch.in_rescue() and not reactivating:
         # The person chose to start Discord without the translation; only reactivating it puts the translation back.
         print(t(f'Discord left as it is: it is in rescue mode (started without the translation). Reactivate the '
                 f'translation from the Corsu app.',

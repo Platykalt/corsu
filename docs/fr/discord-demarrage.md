@@ -19,6 +19,7 @@ classe le dernier démarrage :
 | Rien de décisif après quelques minutes, Discord toujours ouvert | démarrage lent, cause inconnue |
 | Échec de connexion ou de mise à jour de Discord | réseau ou serveurs de Discord ; la traduction n'est probablement pas en cause |
 | La fenêtre ouverte hors de l'écran (Linux Hyprland seulement) | fenêtre hors écran |
+| Discord fermé avant son affichage, sans erreur notée | pas d'alerte : une fermeture volontaire et un plantage sans trace donnent le même journal, Corsu ne peut pas les distinguer |
 
 Corsu ne dit jamais qu'une cause est certaine : un journal montre ce qui s'est passé, pas toujours pourquoi.
 
@@ -50,8 +51,14 @@ Elle s'ouvre depuis le bouton de la notification ou depuis la ligne Discord de l
   (gardée lors de l'installation et vérifiée) ; Discord démarre alors en français ou en anglais. Discord doit être
   fermé : Corsu ne ferme jamais Discord à votre place. Tant que le mode de secours est actif, les mises à jour et
   réparations de Corsu ne remettent pas la traduction d'elles-mêmes.
-- **Remettre la traduction** (en mode de secours) : réinstalle la traduction puis surveille le démarrage suivant ;
-  s'il échoue encore, Discord revient en mode de secours.
+- **Remettre la traduction** (en mode de secours) : réinstalle la traduction puis démarre Discord sous surveillance.
+  - La réactivation n'est annoncée réussie que si ce démarrage montre le plugin Corsu en train de démarrer. Une
+    fermeture, un démarrage sans signal décisif ou un Discord affiché sans le plugin restent « non confirmés » : le
+    mode de secours reste actif (Corsu ne touche pas à Discord) jusqu'à un démarrage qui le prouve (bouton
+    **Réessayer**, ou le prochain démarrage surveillé), ou jusqu'à **Démarrer sans la traduction**.
+  - Si le démarrage échoue, Corsu remet l'archive d'origine. Si Discord est resté ouvert et bloqué, rien n'est
+    remplacé sous lui : la page demande de le quitter complètement, puis **Terminer la restauration** remet
+    l'archive d'origine. Entre-temps, aucune mise à jour ni réparation ne remet la traduction.
 - **Réessayer** : relance Discord sous surveillance (seulement si Discord est fermé).
 - **Voir le diagnostic** : l'état observé, les versions de Discord, de Corsu et de Vencord, et les lignes du journal
   qui ont décidé (les données personnelles en sont retirées).
@@ -61,7 +68,13 @@ Elle s'ouvre depuis le bouton de la notification ou depuis la ligne Discord de l
 
 - La surveillance lit un journal : si Discord change ses messages, un démarrage peut être classé « lent » au lieu
   d'« erreur ».
-- Sans connexion à un compte, le démarrage réussi correspond à la page de connexion de Discord.
+- Sans connexion à un compte, le démarrage réussi correspond à la page de connexion de Discord, où le plugin Corsu
+  ne démarre pas encore : une réactivation y reste « non confirmée ».
+- **Windows et macOS** : pas d'alerte au moment du démarrage. Il faut ouvrir la fenêtre Corsu pour constater un
+  problème : sur ces systèmes, la fonction est partielle.
+- Sans service de notification (ou avec « Ne pas déranger »), aucune aide immédiate : il faut ouvrir la fenêtre Corsu.
+- Les notifications sont en français ou en anglais, pas encore en corse. Sous Windows, elles s'affichent sous le nom
+  « Windows PowerShell » et n'ont pas de bouton.
 - Le mode de secours ne s'applique qu'à l'installation de Discord que Corsu a lui-même modifiée, avec une copie
   d'origine vérifiée. Sinon, le bouton explique pourquoi et la procédure manuelle ci-dessous reste possible.
 

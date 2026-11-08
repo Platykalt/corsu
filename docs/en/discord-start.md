@@ -19,6 +19,7 @@ start:
 | Nothing decisive after a few minutes, Discord still open | slow start, cause unknown |
 | Discord's connection or update failing | network or Discord's servers; the translation is probably not the cause |
 | The window opened outside the screen (Linux Hyprland only) | window off screen |
+| Discord closed before showing up, with no error noted | no alert: a deliberate quit and a crash without a trace leave the same log, Corsu cannot tell them apart |
 
 Corsu never states a cause as certain: a log shows what happened, not always why.
 
@@ -48,8 +49,14 @@ It opens from the notification's button or from the Discord row on the home page
 - **Start without the translation**: puts Discord in *rescue mode*. Corsu puts back Discord's original archive (kept
   at installation and checked); Discord then starts in French or English. Discord must be closed: Corsu never closes
   Discord for you. While rescue mode is on, Corsu's updates and repairs do not put the translation back by themselves.
-- **Put the translation back** (in rescue mode): reinstalls the translation, then watches the next start; if it fails
-  again, Discord returns to rescue mode.
+- **Put the translation back** (in rescue mode): reinstalls the translation, then starts Discord, watched.
+  - The reactivation is reported as done only when that start shows the Corsu plugin starting. A close, a start with
+    no decisive signal or Discord showing up without the plugin stay "not confirmed": rescue mode stays on (Corsu
+    leaves Discord alone) until a start proves it (**Try again**, or the next watched start), or until **Start without
+    the translation**.
+  - If the start fails, Corsu puts the original archive back. If Discord stayed open and stuck, nothing is replaced
+    under it: the page asks you to quit it completely, then **Finish the restore** puts the original archive back.
+    Meanwhile no update or repair puts the translation back.
 - **Try again**: starts Discord again, watched (only when Discord is closed).
 - **Show the diagnostic**: the observed state, the Discord, Corsu and Vencord versions, and the log lines that
   decided (personal data removed).
@@ -58,7 +65,13 @@ It opens from the notification's button or from the Discord row on the home page
 ## Limits
 
 - The watch reads a log: if Discord changes its messages, a start can be classified "slow" instead of "error".
-- Without signing in to an account, a successful start is Discord's sign-in page.
+- Without signing in to an account, a successful start is Discord's sign-in page, where the Corsu plugin does not
+  start yet: a reactivation stays "not confirmed" there.
+- **Windows and macOS**: no alert when Discord starts. Open Corsu's window to see a problem: on these systems the
+  feature is partial.
+- Without a notification service (or with "Do not disturb"), no immediate help: open Corsu's window.
+- Notifications are in French or English, not in Corsican yet. On Windows they show under the name "Windows
+  PowerShell", without a button.
 - Rescue mode only applies to the Discord installation Corsu changed itself, with a checked original copy. Otherwise
   the button says why, and the manual procedure below still works.
 

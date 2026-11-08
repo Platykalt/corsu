@@ -941,7 +941,8 @@ def discord_status(state, items):
             'app_version': watch.get('app_version'), 'client': watch.get('client'),
             'vencord': {key: vencord.get(key) for key in ('injected', 'revision', 'corsu_version')},
             'evidence': evidence, 'dismissed': bool(watch.get('dismissed')),
-            'rescue': {key: rescue.get(key) for key in ('location', 'since', 'from_revision')} if rescue else None,
+            'rescue': {**{key: rescue.get(key) for key in ('location', 'since', 'from_revision', 'reason')},
+                       'phase': rescue.get('phase', 'rescue')} if rescue else None,
             'old_corsu': old_corsu_in_discord(state, watch), 'running': still_open('discord'),
             'watch_available': discord_watch() is not None, 'action': DISCORD['action']}
 

@@ -24,8 +24,14 @@ From the 0.28.4 candidate (`dfffa58`, not yet published). Contract: `docs/dev/di
 - **Rescue mode.** "Start without the translation" only acts when Discord is closed (never kills it), on the Discord
   folder Corsu recorded, with a backup whose hash matches and that is not a Vencord launcher; it puts the original
   `app.asar` back, records `discord-watch/rescue.json`, and install, repair and update leave Discord alone until
-  "Put the translation back" reinstalls it and watches the next start. Uninstall removes the wrappers and
-  `discord-watch/`.
+  "Put the translation back" reinstalls it and a watched start proves it: only the Corsu plugin seen starting counts
+  as reactivated. A close or a start without that proof stays "not confirmed" with rescue mode kept; a failed start
+  goes back to the original archive, or, when Discord stays open and stuck, keeps rescue mode until it is closed and
+  "Finish the restore" is clicked. A closed start is never presented as a deliberate quit (a crash without a log line
+  looks the same). Uninstall removes the wrappers and `discord-watch/`.
+- **Tested on Linux with a real Discord 1.0.168 copy, isolated** (headless weston, private D-Bus):
+  `tests/e2e/check_discord_recovery_real.py` runs injection, failing start, notification and its button, the window's
+  API, rescue, a reactivation failing while Discord stays open, and one that cannot be confirmed without an account.
 - Checked with the real Discord 1.0.168 for Linux, copied and isolated (headless compositor), before login: Vencord
   1.15.9 → `vencord-error`, 0.28.4's build → `ok`, offline → `network`. Notifications on Linux were checked against a
   private test bus, not a desktop notification server; Windows and macOS only by unit tests and CI.

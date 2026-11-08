@@ -65,7 +65,16 @@ Actions per state:
   launched (state.client) == recorded discord_location, backup hash == record backup and not a launcher; restores
   original app.asar (keeps _app.asar), writes `discord-watch/rescue.json` {location, since, from_revision}; Corsu's
   repair/update/install_discord skip Discord while rescue.json exists (no silent reinjection).
-- `reactivate()` → reinstall via installer.install_discord, then a watched launch; on failure → back to rescue.
+- `rescue.json` has a `phase`: `rescue` (original archive back), `verifying` (translation reinstalled, no start has
+  proved it yet), `restore-pending` (a reactivated start failed while Discord stayed open; `reason` says why the
+  restore waited). In every phase `in_rescue()` is true: install_discord skips Discord (no silent reinjection).
+- `reactivate()` → phase `verifying` first, then `installer.install_discord(location, reactivating=True)`, then a
+  watched launch. Every watched launch calls `settle_reactivation(record)`: `ok-corsu` (the Corsu plugin seen
+  starting) removes rescue.json, the only confirmed outcome; a problem state (not `offscreen`) runs `rescue()`, or
+  sets `restore-pending` when Discord is still open; anything else (closed, ok without the plugin, updating,
+  unwatched) stays `verifying` and is returned as `{"ok": false, "reason": "unconfirmed"}`. In `restore-pending`,
+  "Finish the restore" in the window is `rescue()` again once Discord is closed. A reinstall that fails before
+  replacing anything goes back to phase `rescue`.
 - Uninstall removes desktop overrides, discord-watch/ dir, rescue.json.
 
 ## File ownership

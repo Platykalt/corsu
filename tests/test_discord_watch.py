@@ -6,6 +6,7 @@ import os
 from pathlib import Path
 import sys
 import types
+import time
 import unittest
 from contextlib import redirect_stdout
 from unittest.mock import patch
@@ -309,31 +310,89 @@ class RescueTests(Isolated):
         self.assertIn('rescue', output.getvalue())
         self.assertEqual(self.app.read_bytes(), self.original)
 
-        def reinstall(location):
-            self.assertFalse(watch.in_rescue())
+        def reinstall(location, reactivating=False):
+            # Rescue mode stays during the reinstall: a crash there must not leave Discord open to reinjection.
+            self.assertTrue(watch.in_rescue())
+            self.assertTrue(reactivating)
             self.app.write_bytes(self.launcher)
         with patch.object(installer, 'install_discord', side_effect=reinstall), \
-             patch.object(watch, 'launch', return_value={'state': 'ok-corsu', 'incident': None}):
+             patch.object(watch, 'launch', side_effect=self.start('ok-corsu')):
             self.assertEqual(watch.reactivate(), {'ok': True, 'reason': None, 'state': 'ok-corsu'})
         self.assertFalse(watch.in_rescue())
+
+    def start(self, state, incident=None):
+        """A stand-in for launch(): a watched start that ends in `state`, settling the reactivation as launch() does."""
+        def launch(window=None):
+            if state is None:
+                return None
+            record = {'state': state, 'incident': incident, 'started_at': time.time()}
+            watch.settle_reactivation(record)
+            return record
+        return launch
+
+    def reinstall(self, location, reactivating=False):
+        self.app.write_bytes(self.launcher)
+        state = corsu.load_state()
+        state['files'][str(self.app)]['installed_sha256'] = corsu.digest(self.launcher)
+        corsu.save_state(state)
 
     def test_failed_reactivation_goes_back_to_rescue(self):
         self.assertTrue(watch.rescue()['ok'])
         record = corsu.load_state()['files'][str(self.app)]
-
-        def reinstall(location):
-            self.app.write_bytes(self.launcher)
-            state = corsu.load_state()
-            state['files'][str(self.app)]['installed_sha256'] = corsu.digest(self.launcher)
-            corsu.save_state(state)
-        with patch.object(installer, 'install_discord', side_effect=reinstall), \
-             patch.object(watch, 'launch', return_value={'state': 'vencord-error', 'incident': 'i2'}):
+        with patch.object(installer, 'install_discord', side_effect=self.reinstall), \
+             patch.object(watch, 'launch', side_effect=self.start('vencord-error', 'i2')):
             result = watch.reactivate()
-        self.assertFalse(result['ok'])
-        self.assertTrue(result['rescue']['ok'], result)
+        self.assertEqual(result, {'ok': False, 'reason': 'rescue', 'state': 'vencord-error'})
         self.assertTrue(watch.in_rescue())
+        self.assertEqual(watch.rescue_info()['phase'], 'rescue')
         self.assertEqual(self.app.read_bytes(), self.original)
         self.assertEqual(record['backup'], corsu.load_state()['files'][str(self.app)]['backup'])
+
+    def test_reactivation_without_proof_stays_unconfirmed(self):
+        # A close, an unwatched start or Discord's UI without the Corsu plugin seen: not a confirmed reactivation.
+        for state in ('closed', None, 'ok', 'updating', 'offscreen'):
+            with self.subTest(state=state):
+                self.assertTrue(watch.rescue()['ok'])
+                with patch.object(installer, 'install_discord', side_effect=self.reinstall), \
+                     patch.object(watch, 'launch', side_effect=self.start(state)):
+                    result = watch.reactivate()
+                self.assertEqual(result, {'ok': False, 'reason': 'unconfirmed', 'state': state})
+                self.assertEqual(watch.rescue_info()['phase'], 'verifying')
+                # Still protected: repair and update leave Discord alone until a start proves the translation.
+                with patch.object(installer, 'vencord_installer') as official, redirect_stdout(io.StringIO()):
+                    installer.install_discord(self.location)
+                official.assert_not_called()
+                # A later watched start (the shortcut, "Retry") that shows the Corsu plugin ends rescue mode.
+                self.assertEqual(watch.settle_reactivation({'state': 'ok-corsu', 'started_at': time.time()}), '')
+                self.assertFalse(watch.in_rescue())
+
+    def test_failed_reactivation_with_discord_still_open_waits_to_restore(self):
+        self.assertTrue(watch.rescue()['ok'])
+        running = patch.object(watch, 'discord_running', return_value=False)
+        with patch.object(installer, 'install_discord', side_effect=self.reinstall), running as alive:
+            def stuck(window=None):
+                alive.return_value = True  # Discord stays open on its splash screen
+                return self.start('slow', 'i3')()
+            with patch.object(watch, 'launch', side_effect=stuck):
+                result = watch.reactivate()
+        self.assertEqual(result, {'ok': False, 'reason': 'restore-pending', 'state': 'slow'})
+        info = watch.rescue_info()
+        self.assertEqual((info['phase'], info['reason']), ('restore-pending', 'running'))
+        self.assertEqual(self.app.read_bytes(), self.launcher)  # nothing replaced under an open Discord
+        with patch.object(installer, 'vencord_installer') as official, redirect_stdout(io.StringIO()):
+            installer.install_discord(self.location)
+        official.assert_not_called()
+        # Once Discord is closed, "finish the restore" is rescue() again.
+        self.assertTrue(watch.rescue()['ok'])
+        self.assertEqual(watch.rescue_info()['phase'], 'rescue')
+        self.assertEqual(self.app.read_bytes(), self.original)
+
+    def test_failed_reinstall_stays_in_rescue(self):
+        self.assertTrue(watch.rescue()['ok'])
+        with patch.object(installer, 'install_discord', side_effect=OSError('disk full')):
+            result = watch.reactivate()
+        self.assertEqual((result['reason'], result['rescue']['ok']), ('install-failed', True))
+        self.assertEqual(watch.rescue_info()['phase'], 'rescue')
 
     def test_rescue_never_closes_discord(self):
         with patch.object(watch, 'discord_running', return_value=True):

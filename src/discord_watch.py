@@ -502,7 +502,9 @@ def launch(command=None, kind=None, window=WINDOW):
             record = watch(LogFollower(log, offset), lambda: process.poll() is None or discord_running(), started,
                            launch_kind(command, kind), client, window)
             logbook.write(f'discord-watch: {record["state"]}')
-            return alert(record)
+            record = alert(record)
+            settle_reactivation(record)
+            return record
         finally:
             release_lock()
     except Exception as error:  # Discord is started: the watcher's own failure must never matter to it.
@@ -546,7 +548,42 @@ def scan_last_start(user_data=None, now=None, alive=None, write=True):
 # ---------------------------------------------------------------- rescue
 
 def in_rescue():
+    """While rescue.json exists, Corsu's repair, update and install leave Discord as it is (no silent reinjection)."""
     return (folder() / 'rescue.json').exists()
+
+
+def rescue_info():
+    """rescue.json, or {} outside rescue mode. Its phase: "rescue" (Discord's original archive is back),
+    "verifying" (the translation is back but no start has proved it loads yet), "restore-pending" (a reactivated
+    Discord failed and was still open: the original archive goes back once Discord is closed)."""
+    try:
+        info = json.loads((folder() / 'rescue.json').read_text(encoding='utf-8'))
+    except (OSError, ValueError):
+        return {'phase': 'rescue'} if in_rescue() else {}
+    return {**info, 'phase': info.get('phase', 'rescue')} if isinstance(info, dict) else {'phase': 'rescue'}
+
+
+def set_phase(phase, **extra):
+    write_json(folder() / 'rescue.json', {**rescue_info(), **extra, 'phase': phase})
+
+
+def settle_reactivation(record):
+    """After a watched start, while a reactivation waits for proof: the Corsu plugin seen starting ends rescue mode;
+    a failed start goes back to Discord's original archive (or waits for Discord to close). Anything else (closed,
+    no decisive signal, not watched) leaves the reactivation unconfirmed. Returns the phase now ("" when ended)."""
+    info = rescue_info()
+    if info.get('phase') != 'verifying' or not record or record.get('started_at', 0) < info.get('reactivated_at', 0):
+        return info.get('phase', '')
+    if record['state'] == 'ok-corsu':
+        (folder() / 'rescue.json').unlink(missing_ok=True)
+        return ''
+    if record['state'] in PROBLEMS and record['state'] != 'offscreen':
+        result = rescue(record.get('incident'))
+        if not result['ok']:
+            set_phase('restore-pending', reason=result['reason'], incident=record.get('incident'))
+            return 'restore-pending'
+        return 'rescue'
+    return 'verifying'
 
 
 def rescue_check():
@@ -604,36 +641,60 @@ def rescue(incident=None):
     record['rescue'] = True
     corsu.save_state(state)
     watched = read_state()
-    write_json(folder() / 'rescue.json', {'location': check['location'], 'since': time.time(),
+    write_json(folder() / 'rescue.json', {'phase': 'rescue', 'location': check['location'], 'since': time.time(),
                                           'from_revision': (watched.get('vencord') or {}).get('revision'),
                                           'incident': incident or watched.get('incident')})
     write_state({**watched, 'version': 1, 'state': 'rescue', 'decided_at': time.time()})
     return {**check, 'ok': True}
 
 
+def original_in_place():
+    """Whether every Discord archive Corsu manages is still the original that rescue() put back."""
+    import corsu
+    import installer
+    records = [(Path(name), record) for name, record in corsu.load_state()['files'].items() if record.get('discord_location')]
+    for app, record in records:
+        current = app.read_bytes() if app.is_file() else b''
+        if installer.vencord_launcher(current) or corsu.digest(current) != record.get('installed_sha256'):
+            return False
+    return bool(records)
+
+
 def reactivate(window=WINDOW):
-    """Put the translation back (the installer's install_discord), then watch a launch; back to rescue if it fails."""
+    """Put the translation back (the installer's install_discord), then watch a launch. Rescue mode (rescue.json)
+    stays, in phase "verifying", until a start shows the Corsu plugin starting: only that is reported as confirmed.
+    A failed start goes back to the original archive, or to "restore-pending" while Discord stays open."""
     import corsu
     import installer
     if discord_running():
         return {'ok': False, 'reason': 'running'}
-    try:
-        info = json.loads((folder() / 'rescue.json').read_text(encoding='utf-8'))
-    except (OSError, ValueError):
+    info = rescue_info()
+    if not info.get('location'):
         return {'ok': False, 'reason': 'not-in-rescue'}
-    (folder() / 'rescue.json').unlink()
+    set_phase('verifying', reactivated_at=time.time())
     try:
         state = corsu.load_state()
         for record in state['files'].values():
             record.pop('rescue', None)
         corsu.save_state(state)
-        installer.install_discord(Path(info['location']))
+        installer.install_discord(Path(info['location']), reactivating=True)
     except Exception as error:
-        return {'ok': False, 'reason': 'install-failed', 'error': str(error), 'rescue': rescue(info.get('incident'))}
-    record = launch(window=window)
-    if record is None or record['state'] not in PROBLEMS:
-        return {'ok': True, 'reason': None, 'state': record and record['state']}
-    return {'ok': False, 'reason': record['state'], 'rescue': rescue(record['incident'])}
+        if original_in_place():  # the reinstall failed before replacing anything
+            set_phase('rescue')
+            back = {'ok': True, 'reason': None}
+        else:
+            back = rescue(info.get('incident'))
+            if not back['ok']:
+                set_phase('restore-pending', reason=back['reason'])
+        return {'ok': False, 'reason': 'install-failed', 'error': str(error), 'rescue': back}
+    record = launch(window=window)  # a watched launch settles the reactivation (settle_reactivation)
+    phase = rescue_info().get('phase', '')
+    state = record and record['state']
+    if phase == '':
+        return {'ok': True, 'reason': None, 'state': state}
+    if phase == 'verifying':
+        return {'ok': False, 'reason': 'unconfirmed', 'state': state}
+    return {'ok': False, 'reason': phase, 'state': state}
 
 
 # ---------------------------------------------------------------- Linux desktop entries
