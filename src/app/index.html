@@ -109,6 +109,11 @@
           </span>
         </div>
       </section>
+      <div class="group panel discord-status" id="discord-status" hidden>
+        <span class="app-icon" aria-hidden="true"><svg class="icon" focusable="false"><use href="#i-chat"/></svg></span>
+        <span class="label"><b>Discord</b> <span id="discord-status-chip"></span> <span class="detail" id="discord-status-text"></span></span>
+        <button type="button" class="button small" id="discord-status-open" data-t="dc_open" aria-describedby="discord-status-text"></button>
+      </div>
       <h2 id="switches-heading" data-t="programs_heading"></h2>
       <ul class="group list" id="switches" aria-labelledby="switches-heading"></ul>
 
@@ -205,6 +210,35 @@
       </header>
     </section>
 
+    <section id="discord-recovery" data-page-panel hidden aria-labelledby="dr-heading">
+      <header class="page-head">
+        <h1 id="dr-heading" tabindex="-1">Discord</h1>
+        <p class="lead" data-t="dc_lead"></p>
+      </header>
+      <div class="group panel">
+        <p id="dr-message"></p>
+        <p class="muted" id="dr-started"></p>
+        <p class="muted" id="dr-running" hidden data-t="dc_running_hint"></p>
+        <div class="buttons" id="dr-actions">
+          <button type="button" class="button default" id="dr-check" data-t="dc_check"></button>
+          <button type="button" class="button default" id="dr-install" data-t="update_install" hidden></button>
+          <button type="button" class="button" id="dr-rescue" data-t="dc_rescue"></button>
+          <button type="button" class="button" id="dr-reactivate" data-t="dc_reactivate"></button>
+          <button type="button" class="button" id="dr-retry" data-t="dc_retry"></button>
+          <button type="button" class="button" id="dr-later" data-t="dc_later"></button>
+        </div>
+        <p class="update-status" id="dr-update" role="status" aria-live="polite"></p>
+        <p id="dr-result" role="status" aria-live="polite"></p>
+        <details id="dr-diagnostic">
+          <summary data-t="dc_diagnostic"></summary>
+          <dl class="facts" id="dr-facts"></dl>
+          <h3 data-t="dc_diag_evidence"></h3>
+          <ol id="dr-evidence"></ol>
+        </details>
+        <p><a id="dr-help" target="_blank" rel="noopener" data-t="dc_help_link"></a></p>
+      </div>
+    </section>
+
     <section id="help" data-page-panel hidden>
       <header class="page-head">
         <h1 data-t="nav_help"></h1>
@@ -291,6 +325,8 @@
 <script src="phone.js"></script>
 <script src="texts-report.js"></script>
 <script src="report.js"></script>
+<script src="texts-discord.js"></script>
+<script src="discord.js"></script>
 <script src="app.js"></script>
 </body>
 </html>

@@ -455,3 +455,13 @@ dl.facts.inner dt, dl.facts.inner dd { padding: var(--space-2) var(--space-4) va
   .meter span { background: Highlight; }
   :focus-visible, .switch input:focus-visible + i { outline-color: Highlight; }
 }
+
+/* Discord's status row (home page) and the discord-recovery page (discord.js). */
+.group.panel.discord-status { display: flex; align-items: center; gap: var(--space-3); flex-wrap: wrap; margin-bottom: var(--space-5); }
+.discord-status .label { flex: 1 1 16rem; }
+.discord-status .detail { display: block; }
+#dr-evidence { margin: 0; padding-left: 1.5em; font-size: .875rem; }
+#dr-evidence code { overflow-wrap: anywhere; white-space: pre-wrap; }
+#dr-diagnostic summary { cursor: pointer; margin: var(--space-3) 0; }
+#dr-diagnostic h3 { font-size: 1rem; margin: var(--space-4) 0 var(--space-2); }
+#dr-update, #dr-result { margin-top: var(--space-3); }
