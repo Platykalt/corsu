@@ -120,6 +120,8 @@ def main():
     parser.add_argument('--settings', type=Path)
     parser.add_argument('--work', type=Path)
     parser.add_argument('--timeout', type=float, default=90)
+    # CI runners have no setuid chrome-sandbox; never needed on a person's machine.
+    parser.add_argument('--no-sandbox', action='store_true')
     args = parser.parse_args()
     if not args.client or not (args.client / 'Discord').is_file():
         print('SKIP: no real Discord client folder given')
@@ -154,7 +156,7 @@ def main():
     port = free_port()
     stderr = open(work / 'stderr.log', 'wb')
     discord = subprocess.Popen([str(copy / 'Discord'), '--ozone-platform=wayland', f'--remote-debugging-port={port}',
-                                f'--user-data-dir={home / ".config/discord"}', '--enable-logging=stderr'],
+                                f'--user-data-dir={home / ".config/discord"}', '--enable-logging=stderr', *(['--no-sandbox'] if args.no_sandbox else [])],
                                cwd=work, env=environment, start_new_session=True, stdout=stderr, stderr=subprocess.STDOUT)
     console = open(work / 'console.jsonl', 'w', encoding='utf-8')
     result = {'client': str(args.client), 'vencord': str(args.vencord) if args.vencord else None,

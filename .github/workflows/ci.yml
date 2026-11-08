@@ -64,6 +64,24 @@ jobs:
         run: python tests/e2e/check_discord_regressions.py "$(command -v google-chrome || command -v chromium)" Vencord
       - name: Discord plugin — tray menu and taskbar preview texts sent to the desktop app are translated (patched NativeUtils)
         run: python tests/e2e/check_discord_native.py Vencord
+      # 0.28.4: Vencord 1.15.9 hung real Discord on "Starting" (`i.A is not a constructor`, exports passed as wreq.d's
+      # third argument by Discord's new Rspack). Only the real client with today's discord.com web code shows that.
+      - name: Real Discord desktop client (official Linux tar.gz) gets past "Starting" with the built Vencord and Corsu enabled
+        run: |
+          sudo apt-get install -y -qq weston
+          curl -fsSL -o "$RUNNER_TEMP/discord.tar.gz" "https://discord.com/api/download?platform=linux&format=tar.gz"
+          tar -xzf "$RUNNER_TEMP/discord.tar.gz" -C "$RUNNER_TEMP"
+          echo '{"plugins": {"Corsu": {"enabled": true}}}' > "$RUNNER_TEMP/vencord-settings.json"
+          python tests/e2e/check_discord_real_start.py "$RUNNER_TEMP/Discord" --vencord Vencord/dist \
+            --settings "$RUNNER_TEMP/vencord-settings.json" --work "$RUNNER_TEMP/discord-start" --no-sandbox
+      - if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: discord-real-start
+          path: |
+            ${{ runner.temp }}/discord-start/*.log
+            ${{ runner.temp }}/discord-start/*.json*
+          if-no-files-found: ignore
       - name: Window appearance in a real browser page — themes, picture import and refusal, persistence, per-launch key
         run: python tests/e2e/check_appearance.py "$(command -v google-chrome || command -v chromium)" "$RUNNER_TEMP/appearance"
       - name: Bundle the French Firefox language pack (offline fallback)
@@ -232,7 +250,7 @@ jobs:
           CORSU_ARCHIVES="$GITHUB_WORKSPACE/dist" python tests/e2e/e2e.py archive --root "${{ env.CORSU_RELEASE }}"
       - name: Update — from published 0.21.0 to 0.28.2 to these archives, repair, refusal, recovery, lock, uninstall
         shell: bash
-        run: python tests/e2e/check_update.py --archives "$GITHUB_WORKSPACE/dist" --from 0.21.0 0.22.0 0.23.0 0.24.0 0.25.1 0.26.0 0.27.0 0.28.0 0.28.1 0.28.2
+        run: python tests/e2e/check_update.py --archives "$GITHUB_WORKSPACE/dist" --from 0.21.0 0.22.0 0.23.0 0.24.0 0.25.1 0.26.0 0.27.0 0.28.0 0.28.1 0.28.2 0.28.3
       - name: One-line install script with these archives (CORSU_DOWNLOAD_BASE), checksum checked
         shell: bash
         run: |
@@ -276,6 +294,7 @@ jobs:
           python tests/e2e/check_update_apps.py --archives "$GITHUB_WORKSPACE/dist" --from 0.27.0
           python tests/e2e/check_update_apps.py --archives "$GITHUB_WORKSPACE/dist" --from 0.28.1
           python tests/e2e/check_update_apps.py --archives "$GITHUB_WORKSPACE/dist" --from 0.28.2
+          python tests/e2e/check_update_apps.py --archives "$GITHUB_WORKSPACE/dist" --from 0.28.3
       - name: Migration from 0.24.0, 0.27.0, 0.28.1 and 0.28.2 (Linux) — choices, appearance, plugin, launchers after the archive is deleted, personal files
         if: runner.os == 'Linux'
         run: |
@@ -283,6 +302,7 @@ jobs:
           python tests/e2e/check_migration.py --archives "$GITHUB_WORKSPACE/dist" --from 0.27.0
           python tests/e2e/check_migration.py --archives "$GITHUB_WORKSPACE/dist" --from 0.28.1
           python tests/e2e/check_migration.py --archives "$GITHUB_WORKSPACE/dist" --from 0.28.2
+          python tests/e2e/check_migration.py --archives "$GITHUB_WORKSPACE/dist" --from 0.28.3
       - name: VLC complement declared unavailable (Windows, macOS)
         if: runner.os != 'Linux'
         shell: bash

@@ -1,5 +1,29 @@
 # Changelog
 
+## 0.28.4 (not yet published)
+
+From 0.28.3 (`6979ddf`, tag `v0.28.3`). Vencord 1.15.9 (`7f0c10cc`) → 1.15.16 (`383409e6`).
+
+- **Discord stuck on "Starting" with Corsu.** Discord's web client (build 667580, `web.72656029554c0370.js`,
+  2026-11-08) now defines some module exports as plain values passed in a third argument of webpack's `d` function
+  (new Rspack). Vencord 1.15.9 replaced that function with a two-argument one, so those exports were never defined:
+  Discord's Logger module failed (`TypeError: i.A is not a constructor`) and the main window never left the splash.
+  Vencord fixed it upstream (`ba8453eb`, then `a764679e`, `025676bc`, `cc5b5a61`); Corsu now pins 1.15.16. Seen in the
+  real Discord 1.0.168 for Linux, copied and isolated, before login: 0.28.3's build stays on "Starting", the new one
+  reaches the login page with Vencord and the Corsu plugin's patches applied
+  (`tests/e2e/check_discord_real_start.py`, also run in CI on the official Linux tar.gz). No change to the plugin.
+- **Building Vencord follows the pinned revision.** An existing Vencord checkout used to keep its old revision and
+  dependencies (only a missing `node_modules/esbuild` triggered an install, and freshness compared file dates). The
+  checkout is now moved to the pinned revision (refused, with its changes kept, when it has local changes),
+  dependencies are reinstalled when `pnpm-lock.yaml` changes (with the pnpm version Vencord names), and
+  `Vencord/dist/corsu-build.json` records the revision built, the Corsu version and the hashes of the plugin and
+  lexicon files. A build is reused only when they all match; the release packager checks that record.
+- **Reinstalling Discord after putting the original back by hand.** `install_discord` refused when `app.asar` no
+  longer matched what Corsu recorded, even when it was Discord's own archive again. A restored original (identical to
+  `_app.asar`, or to Corsu's backup) is now accepted; any other change is still refused. A Vencord launcher is never
+  kept as the "original" (no double injection), and the record is rewritten at each install so the launcher points
+  to the new release.
+
 ## 0.28.3 (2026-10-28)
 
 From 0.28.2 (`a8a9f69`, tag `v0.28.2`). Translator revision `2026-10-notice-1`. Structures read in Discord's public
