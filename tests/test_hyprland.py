@@ -36,6 +36,15 @@ def runner(answers):
 
 
 REAL_WHICH = shutil.which
+
+
+def gnu_date():
+    """GNU date, which reads glibc locales from LOCPATH. Ubuntu 26.04's default date (rust-coreutils) ignores them."""
+    for name in ('gnudate', 'date'):
+        path = REAL_WHICH(name)
+        if path and 'GNU' in subprocess.run([path, '--version'], capture_output=True, text=True).stdout:
+            return path
+    return None
 # Hyprland runs on Linux only: the writing paths are checked there (other systems only check it stays hidden).
 LINUX = sys.platform.startswith('linux')
 
@@ -391,14 +400,14 @@ class Language(Home):
         self.assertIn("    export LOCPATH='/a b/locale' LC_TIME=co_FR.UTF-8 2>/dev/null\nfi\n", lines)
         self.assertNotIn('LOCPATH', hyprland.language_lines())
 
-    @unittest.skipUnless(REAL_WHICH('localedef') and REAL_WHICH('date') and (hyprland.LOCALE_SOURCES / 'fr_FR').is_file()
+    @unittest.skipUnless(REAL_WHICH('localedef') and gnu_date() and (hyprland.LOCALE_SOURCES / 'fr_FR').is_file()
                          and (hyprland.LOCALE_SOURCES / 'en_US').is_file(), 'glibc locale sources are not installed')
     def test_built_locales_give_corsican_dates_in_the_session(self):
         with patch.object(hyprland.shutil, 'which', REAL_WHICH), \
                 patch.object(hyprland, 'session_locales', lambda: ['en_US.UTF-8', 'xx_XX.UTF-8']):
             folder = hyprland.build_locales()
         self.assertEqual(sorted(path.name for path in folder.iterdir()), ['co_FR.UTF-8', 'en_US.UTF-8'])
-        script = hyprland.language_lines(locales=folder) + 'date -d 2026-10-27 "+%A %e %B, %a %b"; echo "$LOCPATH"\n'
+        script = hyprland.language_lines(locales=folder) + f'{gnu_date()} -d 2026-10-27 "+%A %e %B, %a %b"; echo "$LOCPATH"\n'
         environment = {'PATH': os.environ['PATH'], 'LANG': 'en_US.UTF-8', 'LC_ALL': ''}
         result = subprocess.run(['sh', '-c', script], env=environment, capture_output=True, text=True, check=True)
         self.assertEqual(result.stdout, f'marti 27 ottobre, mar. ott.\n{folder}\n')
