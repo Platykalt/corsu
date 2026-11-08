@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """Run Corsu's Keyman packages in the real Keyman for Android web engine, headless, and check what a user sees.
 
-Usage: check_keyboard.py [--keyman 18.0.254] [--chrome CHROME] [--log LOG.txt] PACKAGE.kmp [PACKAGE.kmp ...]
+Usage: check_keyboard.py [--keyman 18.0.255] [--chrome CHROME] [--log LOG.txt] PACKAGE.kmp [PACKAGE.kmp ...]
        check_keyboard.py --cases CASES.tsv ...  # data cases (default: tests/e2e/keyboard_data_cases.tsv)
        check_keyboard.py --observe PACKAGE.kmp   # only print the log (for an old package: no checks)
 
@@ -261,7 +261,7 @@ def step(results, scenario, model, index):
     return result['steps'][index]
 
 
-def checks(results, models, keyman='18.0.254'):
+def checks(results, models, keyman='18.0.255'):
     """What the fixed packages must do; each check names the defect it guards."""
     failures, warnings = [], []
 
@@ -412,7 +412,7 @@ def checks(results, models, keyman='18.0.254'):
 def main():
     parser = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
     parser.add_argument('packages', nargs='+', type=Path)
-    parser.add_argument('--keyman', default='18.0.254', help='Keyman for Android version (default: 18.0.254, stable)')
+    parser.add_argument('--keyman', default='18.0.255', help='Keyman for Android version (default: 18.0.255, stable)')
     parser.add_argument('--chrome')
     parser.add_argument('--scenarios', type=Path, default=HERE / 'keyman/scenarios.json')
     parser.add_argument('--log', type=Path, help='also write the readable log here')
