@@ -658,7 +658,8 @@ class DiscordReinstallTests(Isolated):
         self.app.write_bytes(old)
         corsu.Installer().external_file(self.app, self.ORIGINAL)  # record matches the old launcher
         self.install()
-        self.assertIn(str(self.root / 'Vencord').encode(), self.app.read_bytes())
+        # The launcher holds the path as a JSON string: Windows backslashes are doubled.
+        self.assertIn(json.dumps(str(self.root / 'Vencord'))[1:-1].encode(), self.app.read_bytes())
         self.assertNotIn(b'544be1ce1abbf856', self.app.read_bytes())
         self.assertEqual(self.saved.read_bytes(), self.ORIGINAL)
         self.assertEqual(self.record()['installed_sha256'], corsu.digest(self.app.read_bytes()))
