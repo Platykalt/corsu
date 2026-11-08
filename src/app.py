@@ -39,6 +39,7 @@ STATIC = {'corsu.svg': 'image/svg+xml', 'style.css': 'text/css; charset=utf-8',
           'phone.css': 'text/css; charset=utf-8', 'phone.js': 'text/javascript; charset=utf-8',
           'texts-phone.js': 'text/javascript; charset=utf-8', 'report.css': 'text/css; charset=utf-8',
           'report.js': 'text/javascript; charset=utf-8', 'texts-report.js': 'text/javascript; charset=utf-8',
+          'texts-discord.js': 'text/javascript; charset=utf-8', 'discord.js': 'text/javascript; charset=utf-8',
           **{f'qr/{name}.svg': 'image/svg+xml' for name in ('android-fr', 'android-en', 'iphone-fr', 'iphone-en')}}
 # The page asks for news every few seconds; without any for this long, the window was closed.
 IDLE_SECONDS = 600
@@ -288,6 +289,7 @@ def snapshot(job=None):
                    'checking': UPDATE['checking'], 'auto_started': UPDATE['auto_started'],
                    'restart': restart_info(state, job or Job())},
         'preferences': preferences(),
+        'discord': discord_status(state, items),
         'problem': problem,
     }
 
@@ -600,6 +602,16 @@ def make_handler(job, activity, port, handover=None):
                 except OSError as error:
                     return self.send(500, {'error': str(error)})
                 return self.send(200, {'preferences': preferences()})
+            if self.path in ('/api/discord/rescue', '/api/discord/reactivate', '/api/discord/retry', '/api/discord/dismiss'):
+                incident = request.get('incident')
+                incident = incident if isinstance(incident, str) and INCIDENT.fullmatch(incident) else None
+                if self.path == '/api/discord/dismiss':
+                    try:
+                        return self.send(200, {'dismissed': bool(incident) and dismiss_incident(incident)})
+                    except OSError as error:
+                        return self.send(500, {'error': str(error)})
+                started = start_discord_action(self.path.rsplit('/', 1)[1], incident)
+                return self.send(200 if started else 409, {'started': started})
             if self.path == '/api/vlc-complement':
                 DETECTED['time'] = 0.0
                 try:
@@ -864,6 +876,140 @@ def restart_info(state, job):
             'version': version, 'error': UPDATE['restart_error']}
 
 
+# The Discord start watch (docs/dev/discord-watch.md): src/discord_watch.py writes these files; the window reads them
+# and calls its rescue API. The window works the same while that module is missing or fails to load.
+WATCH_FOLDER = 'discord-watch'
+WATCH_PROBLEMS = ('vencord-error', 'start-error', 'slow', 'network', 'offscreen')
+WATCH_STATES = (*WATCH_PROBLEMS, 'ok', 'ok-corsu', 'closed', 'updating', 'already-running', 'rescue')
+INCIDENT = re.compile(r'[\w-]{1,64}')
+DISCORD = {'action': None}
+DISCORD_LOCK = threading.Lock()
+
+
+def discord_watch():
+    """src/discord_watch.py, or None while it is absent or cannot be loaded."""
+    try:
+        import discord_watch as module
+    except Exception:  # Another part of the work; whatever breaks there must not keep the window from opening.
+        return None
+    return module
+
+
+def read_record(name):
+    try:
+        found = json.loads((corsu.DATA / WATCH_FOLDER / name).read_text(encoding='utf-8'))
+    except (OSError, ValueError):
+        return {}
+    return found if isinstance(found, dict) else {}
+
+
+def old_corsu_in_discord(state, watch):
+    """Discord still runs a Corsu build from another copy than the installed one (an update while it was open)."""
+    dist = (watch.get('vencord') or {}).get('dist') if isinstance(watch.get('vencord'), dict) else None
+    folder = release_record(state).get('folder')
+    if not dist or not folder:
+        return False
+    inside = str(Path(dist)).replace('\\', '/').startswith(str(Path(folder)).replace('\\', '/') + '/')
+    return not inside and still_open('discord')
+
+
+def discord_status(state, items):
+    """What the Discord row and the discord-recovery page show: the watch's last start (state.json), rescue mode
+    (rescue.json) and the installation record. None when Discord is not managed and nothing was recorded."""
+    watch, rescue = read_record('state.json'), read_record('rescue.json')
+    watch = watch if watch.get('version') == 1 and watch.get('state') in WATCH_STATES else {}
+    item = next((item for item in items if item['name'] == 'discord' and item['installed']), None)
+    if not (item or watch or rescue):
+        return None
+    current = watch.get('state')
+    problem = current in WATCH_PROBLEMS and not watch.get('dismissed')
+    if rescue:
+        row = 'rescue'
+    elif problem:
+        row = 'problem'
+    elif item and (item.get('restart') or item.get('activation') == 'restart_required' or old_corsu_in_discord(state, watch)):
+        row = 'restart'
+    elif item and item.get('on'):
+        row = 'active'
+    else:
+        row = 'inactive'
+    evidence = [{'t': entry.get('t'), 'kind': str(entry.get('kind', ''))[:40], 'line': str(entry.get('line', ''))[:300]}
+                for entry in (watch.get('evidence') or [])[-20:] if isinstance(entry, dict)]
+    vencord = watch.get('vencord') if isinstance(watch.get('vencord'), dict) else {}
+    return {'row': row, 'state': current, 'problem': problem, 'incident': watch.get('incident'),
+            'started_at': watch.get('started_at'), 'decided_at': watch.get('decided_at'), 'launch': watch.get('launch'),
+            'app_version': watch.get('app_version'), 'client': watch.get('client'),
+            'vencord': {key: vencord.get(key) for key in ('injected', 'revision', 'corsu_version')},
+            'evidence': evidence, 'dismissed': bool(watch.get('dismissed')),
+            'rescue': {key: rescue.get(key) for key in ('location', 'since', 'from_revision')} if rescue else None,
+            'old_corsu': old_corsu_in_discord(state, watch), 'running': still_open('discord'),
+            'watch_available': discord_watch() is not None, 'action': DISCORD['action']}
+
+
+def with_incident(function, incident):
+    """The contract writes both rescue() and rescue(incident): pass the incident only where it is taken."""
+    import inspect
+    try:
+        takes = bool(inspect.signature(function).parameters)
+    except (TypeError, ValueError):
+        takes = False
+    return function(incident) if takes else function()
+
+
+def run_discord_action(name, incident):
+    watch = discord_watch()
+    try:
+        if watch is None:
+            result = {'ok': False, 'reason': 'unavailable'}
+        elif name == 'rescue':
+            check = watch.rescue_check()
+            result = with_incident(watch.rescue, incident) if check.get('ok') else {'ok': False, 'reason': check.get('reason')}
+        elif name == 'reactivate':
+            result = watch.reactivate()
+        else:  # retry: a watched launch, as Discord's Corsu shortcut starts it; never over an open Discord.
+            RUNNING['time'] = 0.0
+            if still_open('discord'):
+                result = {'ok': False, 'reason': 'running'}
+            else:
+                subprocess.Popen([sys.executable, str(Path(watch.__file__).resolve()), 'launch', '--'],
+                                 **corsu.hidden(stdin=subprocess.DEVNULL, stdout=subprocess.DEVNULL,
+                                                stderr=subprocess.DEVNULL, start_new_session=True))
+                result = {'ok': True}
+    except Exception as error:  # Reported on the page; the details are in the log.
+        print(f'Discord {name}: {error!r}', file=sys.stderr, flush=True)
+        result = {'ok': False, 'reason': 'error', 'error': str(error) or error.__class__.__name__}
+    if not isinstance(result, dict):
+        result = {'ok': bool(result)}
+    DISCORD['action'] = {'name': name, 'incident': incident, 'running': False, 'result': result, 'time': time.time()}
+
+
+def start_discord_action(name, incident):
+    """rescue, reactivate or retry in the background (reinstalling can take a while); the page follows
+    discord.action through /api/state. False while another one runs."""
+    with DISCORD_LOCK:
+        if DISCORD['action'] and DISCORD['action'].get('running'):
+            return False
+        DISCORD['action'] = {'name': name, 'incident': incident, 'running': True, 'result': None, 'time': time.time()}
+    threading.Thread(target=run_discord_action, args=(name, incident), daemon=True).start()
+    return True
+
+
+def dismiss_incident(incident):
+    """"Later": the incident stays recorded but no longer asks for attention."""
+    watch = discord_watch()
+    if watch is not None and hasattr(watch, 'dismiss'):
+        return bool(with_incident(watch.dismiss, incident))
+    path = corsu.DATA / WATCH_FOLDER / 'state.json'
+    record = read_record('state.json')
+    if not record or record.get('incident') != incident:
+        return False
+    record['dismissed'] = True
+    temporary = path.with_name(path.name + '.corsu-tmp')
+    temporary.write_text(json.dumps(record, ensure_ascii=False), encoding='utf-8')
+    os.replace(temporary, path)
+    return True
+
+
 MINECRAFT = {'time': 0.0, 'waiting': []}
 
 
@@ -1059,16 +1205,18 @@ def listen(job, activity, handover=None):
                          f'Les ports {PORTS.start} à {PORTS.stop - 1} sont tous utilisés ; fermez le programme qui les occupe.'))
 
 
-def serve(mode='window', replace=None):
+def serve(mode='window', replace=None, query=''):
     """Run Corsu at its address. `mode`: 'window' (its own window, the browser when none is possible), 'browser'
     or 'none' (only the address). `replace`: the port of the Corsu window this copy takes over after an update;
-    that window keeps showing the page, which reloads from here."""
+    that window keeps showing the page, which reloads from here. `query`: '?page=…' for the page to open (a
+    notification's button opens discord-recovery)."""
     if replace is None:
         existing = running_session()
         if existing:
             if mode != 'none':
                 import window
-                window.show(existing.replace('localhost', '127.0.0.1'), mode)
+                address, _, ticket = existing.replace('localhost', '127.0.0.1').partition('#')
+                window.show(address + query + ('#' + ticket if ticket else ''), mode)
             return
     job = Job()
     activity = [time.monotonic()]
@@ -1099,7 +1247,7 @@ def serve(mode='window', replace=None):
     except OSError:
         pass
     # The address to open: with a ticket after '#', which only the page sees (see Access).
-    opening = url.replace('localhost', '127.0.0.1') + '#t=' + ACCESS.ticket()
+    opening = url.replace('localhost', '127.0.0.1') + query + '#t=' + ACCESS.ticket()
     shown = opening if mode == 'none' and replace is None else url
     print(t(f'Corsu is open at {shown} until you close it.', f'Corsu est ouvert à l\'adresse {shown} jusqu\'à sa fermeture.'),
           flush=True)
@@ -1167,6 +1315,21 @@ def run_text():
             print(apply(wanted))
 
 
+PAGES = {'discord-recovery'}
+
+
+def page_query(arguments):
+    """'?page=…&incident=…' from --page and --incident (what a notification's button starts), '' otherwise."""
+    def value(name):
+        position = arguments.index(name) if name in arguments else -1
+        return arguments[position + 1] if 0 <= position < len(arguments) - 1 else None
+    page, incident = value('--page'), value('--incident')
+    if page not in PAGES:
+        return ''
+    found = {'page': page, **({'incident': incident} if incident and INCIDENT.fullmatch(incident) else {})}
+    return '?' + urllib.parse.urlencode(found)
+
+
 def main():
     for name in ('stdout', 'stderr'):
         # pythonw.exe, used by the Windows shortcut, has no console at all.
@@ -1187,7 +1350,8 @@ def main():
             replace = int(value) if value.isdigit() and int(value) in PORTS else None
             del sys.argv[position:position + 2]
         ARGUMENTS[:] = [argument for argument in sys.argv[1:] if argument in ('--browser', '--no-browser')]
-        serve('none' if '--no-browser' in sys.argv else 'browser' if '--browser' in sys.argv else 'window', replace)
+        serve('none' if '--no-browser' in sys.argv else 'browser' if '--browser' in sys.argv else 'window', replace,
+              page_query(sys.argv))
     except Exception as error:
         print(logbook.failure(error), file=sys.stderr)
         raise SystemExit(1)

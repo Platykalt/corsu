@@ -11,6 +11,8 @@ let restarting = null, savingPreference = false, failureShown = null;
 const restartHints = new Map(), openDetails = new Map();
 
 const $ = id => document.getElementById(id);
+const OPENING_PAGES = ["discord-recovery"];
+const asked = new URLSearchParams(location.search || "").get("page");
 // Browsers have no Corsican number and time formats; the French ones match Corsican usage.
 const numbers = () => language === "co" ? "fr" : language;
 // The page's own texts, then those of the Appearance, phone and report pages (texts-appearance.js, texts-phone.js,
@@ -19,7 +21,8 @@ function lookup(name) {
   const lang = language || "fr";
   if (name in text[lang]) return text[lang][name];
   for (const extra of [typeof textsAppearance === "undefined" ? null : textsAppearance,
-    typeof textsPhone === "undefined" ? null : textsPhone, typeof textsReport === "undefined" ? null : textsReport]) {
+    typeof textsPhone === "undefined" ? null : textsPhone, typeof textsReport === "undefined" ? null : textsReport,
+    typeof textsDiscord === "undefined" ? null : textsDiscord]) {
     if (extra && extra[lang] && name in extra[lang]) return extra[lang][name];
   }
   return undefined;
@@ -657,7 +660,7 @@ function render() {
   // Shown as the server wrote it (French or English): it names the damaged file and what was kept.
   setText($("problem-text"), state.problem || "");
   $("problem").hidden = !state.problem;
-  renderPrograms(); renderSummary(); renderAdd(); renderHelp(); renderAbout(); renderActivity(); renderExtras();
+  renderPrograms(); renderSummary(); renderAdd(); renderHelp(); renderAbout(); renderActivity(); renderExtras(); renderDiscord();
   if (typeof CustomEvent === "function" && document.dispatchEvent) document.dispatchEvent(new CustomEvent("corsu:render", { detail: language }));
 }
 
@@ -685,7 +688,8 @@ async function refresh() {
     }
     if (state && state.job.running && !next.job.running) picks = null;
     state = next;
-    if (page === null) show(state.installed ? "programs" : "add");
+    // A notification's button opens the window on its page (?page=discord-recovery&incident=…).
+    if (page === null) show(OPENING_PAGES.includes(asked) ? asked : state.installed ? "programs" : "add");
     render();
   } catch (error) {
     console.error(error);

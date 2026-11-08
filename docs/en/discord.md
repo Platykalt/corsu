@@ -20,6 +20,8 @@ Vesktop, a Discord app that already includes Vencord, works the same way: tick V
 
 ## Troubleshooting
 
+- **Discord stuck on "Starting" or no longer starting.** See [Discord start: alerts and rescue mode](discord-start.md)
+  ("Start without the translation" button, manual procedure).
 - **Still in another language.** Discord's language setting wins: set it to Français or English. The Corsu plugin
   shows a reminder when Discord is in any other language.
 - **No Vencord section in the settings.** Discord updated itself and removed the patch. Open the Corsu app again, or

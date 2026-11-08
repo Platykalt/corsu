@@ -22,6 +22,8 @@ l'installeur.
 
 ## Dépannage
 
+- **Discord bloqué sur « Starting » ou qui ne démarre plus.** Voir [Démarrage de Discord : alertes et mode de secours](discord-demarrage.md)
+  (bouton « Démarrer sans la traduction », procédure manuelle).
 - **Toujours dans une autre langue.** C'est la langue de Discord qui décide : choisissez Français ou English. Le
   plugin Corsu affiche un rappel quand Discord est réglé sur une autre langue.
 - **Pas de section Vencord dans les paramètres.** Discord s'est mis à jour et a retiré la modification. Rouvrez

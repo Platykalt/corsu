@@ -37,10 +37,10 @@ def texts(name='texts.js', variable='text'):
 
 def all_texts():
     """The page's texts and, once they exist, the Appearance, phone and report pages' (texts-appearance.js,
-    texts-phone.js, texts-report.js): t() reads them all."""
+    texts-phone.js, texts-report.js, texts-discord.js): t() reads them all."""
     found = texts()
     for name, variable in (('texts-appearance.js', 'textsAppearance'), ('texts-phone.js', 'textsPhone'),
-                           ('texts-report.js', 'textsReport')):
+                           ('texts-report.js', 'textsReport'), ('texts-discord.js', 'textsDiscord')):
         if (PAGE.parent / name).exists():
             for language, values in texts(name, variable).items():
                 found[language] = {**values, **found[language]}

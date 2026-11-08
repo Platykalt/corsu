@@ -27,6 +27,8 @@ and checked against its .sha256 (expected: console windows, so the check is show
    (which belongs to WindowsTerminal.exe where Terminal hosts new consoles, as on the Windows Server 2025 runner)
    shown within 2 s of a console program Corsu started. Also fails when Corsu started no console program at all
    (the check would then prove nothing). Prints each program started under Corsu: command line, parent, how often.
+5. Archives with src/notify.py: a notification sent from pythonw.exe (as the Discord start watch sends it, a toast
+   through Windows PowerShell) is watched the same way.
 """
 import argparse
 import ctypes
@@ -480,11 +482,32 @@ def report(monitor, label, require_console=True):
     return flashes
 
 
+def notification(root, python, environment, label):
+    """Corsu's notification (src/notify.py: a toast from Windows PowerShell) sent by a windowless Python, as the
+    Discord start watch sends it: watched for console windows. Archives before 0.29 have no notify.py."""
+    if not (root / 'src/notify.py').is_file():
+        return []
+    step(f'{label}: a notification from pythonw.exe (src/notify.py)')
+    pythonw = python.with_name('pythonw.exe')
+    code = ('import sys; sys.path.insert(0, sys.argv[1]); import notify; '
+            'print(notify.notify("Corsu", "Test de notification", "discord-recovery", "e2e-consoles"))')
+    with Monitor() as monitor:
+        process = subprocess.Popen([str(pythonw), '-c', code, str(root / 'src')], env=environment,
+                                   stdout=subprocess.PIPE, stderr=subprocess.PIPE, text=True)
+        monitor.root = process.pid
+        monitor.mark('notify started')
+        output, errors = process.communicate(timeout=120)
+        time.sleep(2)
+        monitor.mark(f'notify returned {output.strip()!r}, exit {process.returncode}' + (f', stderr {errors[-500:]!r}' if errors else ''))
+    assert process.returncode == 0, errors
+    return report(monitor, f'{label}, notification')
+
+
 def scenario(root, python, label, seconds):
     home = Path(tempfile.mkdtemp(prefix='corsu-consoles-'))
     environment = {**isolated_environment(home), 'PYTHONUTF8': '1'}
     link, install_flashes, piped, console = prepare(root, python, home, environment, label)
-    flashes = install_flashes + report(observe(link, environment, seconds), label)
+    flashes = install_flashes + report(observe(link, environment, seconds), label) + notification(root, python, environment, label)
     # Leave the runner's registry as it was (7-Zip's language).
     subprocess.run([str(python), str(sorted((Path(environment['LOCALAPPDATA']) / 'corsu/releases').glob('*/src/installer.py'))[-1]),
                     '--uninstall', '--yes'], env=environment, capture_output=True, text=True, timeout=300)
