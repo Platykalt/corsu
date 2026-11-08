@@ -1,0 +1,19 @@
+[2026-11-03 21:20:13.159] [info]  splashScreenPreload: signalReady
+[2026-11-03 21:20:13.164] [info]  splashScreenPreload: onStateUpdate: {"status":"update-failure","seconds":2}
+[2026-11-03 21:20:13.164] [info]  splashScreenPreload: onStateUpdate: {"status":"update-failure","seconds":2}
+[2026-11-03 21:20:15.403] [info]  splashScreenPreload: onStateUpdate: {"status":"checking-for-updates"}
+[2026-11-03 21:20:15.413] [info]  splashScreenPreload: onStateUpdate: {"status":"update-failure","seconds":3}
+[2026-11-03 21:20:18.741] [info]  splashScreenPreload: onStateUpdate: {"status":"checking-for-updates"}
+[2026-11-03 21:20:18.758] [info]  splashScreenPreload: onStateUpdate: {"status":"update-failure","seconds":3}
+[2026-11-03 21:20:21.681] [info]  splashScreenPreload: onStateUpdate: {"status":"checking-for-updates"}
+[2026-11-03 21:20:21.690] [info]  splashScreenPreload: onStateUpdate: {"status":"update-failure","seconds":4}
+[2026-11-03 21:20:25.681] [info]  splashScreenPreload: onStateUpdate: {"status":"checking-for-updates"}
+[2026-11-03 21:20:25.690] [info]  splashScreenPreload: onStateUpdate: {"status":"update-failure","seconds":5}
+[2026-11-03 21:20:30.792] [info]  splashScreenPreload: onStateUpdate: {"status":"checking-for-updates"}
+[2026-11-03 21:20:30.808] [info]  splashScreenPreload: onStateUpdate: {"status":"update-failure","seconds":8}
+[2026-11-03 21:20:38.827] [info]  splashScreenPreload: onStateUpdate: {"status":"checking-for-updates"}
+[2026-11-03 21:20:38.835] [info]  splashScreenPreload: onStateUpdate: {"status":"update-failure","seconds":9}
+[2026-11-03 21:20:47.634] [info]  splashScreenPreload: onStateUpdate: {"status":"checking-for-updates"}
+[2026-11-03 21:20:47.643] [info]  splashScreenPreload: onStateUpdate: {"status":"update-failure","seconds":12}
+[2026-11-03 21:20:59.849] [info]  splashScreenPreload: onStateUpdate: {"status":"checking-for-updates"}
+[2026-11-03 21:20:59.866] [info]  splashScreenPreload: onStateUpdate: {"status":"update-failure","seconds":13}

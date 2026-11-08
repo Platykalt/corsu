@@ -1,0 +1,13 @@
+[2026-11-08 16:40:42.467] [info]  splashScreenPreload: signalReady
+[2026-11-08 16:40:42.469] [info]  splashScreenPreload: onStateUpdate: {"status":"checking-for-updates"}
+[2026-11-08 16:40:42.616] [info]  splashScreenPreload: onStateUpdate: {"status":"launching"}
+[2026-11-08 16:40:43.034] [info]   Vencord %c %c PluginManager  background: #a6d189; color: black; font-weight: bold; border-radius: 5px;  background: #a6d189; color: black; font-weight: bold; border-radius: 5px; Starting plugins (stage Init)
+[2026-11-08 16:40:43.035] [info]   Vencord %c %c PluginManager  background: #a6d189; color: black; font-weight: bold; border-radius: 5px;  background: #a6d189; color: black; font-weight: bold; border-radius: 5px; Starting plugin NoTrack
+[2026-11-08 16:40:44.206] [info]   Vencord %c %c NoTrack  background: #a6d189; color: black; font-weight: bold; border-radius: 5px;  background: #8caaee; color: black; font-weight: bold; border-radius: 5px; Disabling Sentry by erroring its WebpackInstance
+[2026-11-08 16:40:44.207] [error] Uncaught Error: Sentry successfully disabled
+[2026-11-08 16:40:44.216] [info]   Vencord %c %c WebpackPatcher  background: #a6d189; color: black; font-weight: bold; border-radius: 5px;  background: #8caaee; color: black; font-weight: bold; border-radius: 5px; Main WebpackInstance found in web.72656029554c0370.js, initializing internal references to WebpackRequire
+[2026-11-08 16:40:44.216] [info]   Vencord %c %c WebpackPatcher  background: #a6d189; color: black; font-weight: bold; border-radius: 5px;  background: #8caaee; color: black; font-weight: bold; border-radius: 5px; Found Webpack module factories in web.72656029554c0370.js
+[2026-11-08 16:40:44.222] [error]  Vencord %c %c WebpackPatcher  background: #e78284; color: black; font-weight: bold; border-radius: 5px;  background: #8caaee; color: black; font-weight: bold; border-radius: 5px; Hardcoded build number module id is invalid
+[2026-11-08 16:40:44.236] [error] Uncaught TypeError: i.A is not a constructor
+[2026-11-08 16:40:44.237] [info]   Vencord %c %c PluginManager  background: #a6d189; color: black; font-weight: bold; border-radius: 5px;  background: #a6d189; color: black; font-weight: bold; border-radius: 5px; Starting plugins (stage DOMContentLoaded)
+[2026-11-08 16:40:44.237] [info]   Vencord %c %c PluginManager  background: #a6d189; color: black; font-weight: bold; border-radius: 5px;  background: #a6d189; color: black; font-weight: bold; border-radius: 5px; Starting plugin FixDiscordCss

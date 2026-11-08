@@ -602,6 +602,14 @@ def vencord_launcher(archive):
 
 
 def install_discord(location):
+    import discord_watch
+    if discord_watch.in_rescue():
+        # The person chose to start Discord without the translation; only reactivating it puts the translation back.
+        print(t(f'Discord left as it is: it is in rescue mode (started without the translation). Reactivate the '
+                f'translation from the Corsu app.',
+                f'Discord laissé tel quel : il est en mode secours (démarré sans la traduction). Réactivez la '
+                f'traduction depuis l\'application Corsu.'), flush=True)
+        return
     binary = vencord_installer()
     app = discord_archive(location)
     backup = app.with_name('_app.asar')
@@ -987,6 +995,9 @@ def apply(args, requested, components, location):
     # Launchers left as they were (Firefox switched off, earlier versions) may name a Python that is not the one
     # chosen now, such as /usr/bin/python3 directly: they get the same one as the others.
     python = corsu.launcher_python(shortcuts)
+    if 'discord' in components:
+        import discord_watch
+        discord_watch.update_wrappers(shortcuts, python)
     corsu.refresh_launchers(shortcuts, python=python)
     forget_python_wrapper(shortcuts, python)
     if ROOT.is_relative_to((corsu.DATA / 'releases').resolve()):

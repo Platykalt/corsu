@@ -1299,7 +1299,7 @@ def refresh_launchers(installer, root=None, python=None):
     # `exec <python> <copy>/src/corsu.py` and `Exec=<python> <copy>/src/app.py`, as desktop() and setup_shortcut()
     # write them, the paths quoted by shlex.
     interpreter = re.compile(r"(^Exec=|\bexec )('[^']*'|[^\s']+)(?=\s+'?(?:" + '|'.join(map(re.escape, prefixes))
-                             + r")/[0-9a-f]{16}/src/(?:app|corsu)\.py)", re.M)
+                             + r")/[0-9a-f]{16}/src/(?:app|corsu|discord_watch)\.py)", re.M)
     for name, record in list(installer.state['files'].items()):
         path = Path(name)
         # Vencord's installer owns app.asar; trees and system files are rebuilt by their own steps.
@@ -1952,6 +1952,8 @@ def uninstall():
             # The official installer moved the original aside; it is restored in place now.
             leftover.unlink()
     save_state({'files': remaining})
+    # The Discord start watch's record, lock and rescue mode (its desktop entries were in the record above).
+    shutil.rmtree(DATA / 'discord-watch', ignore_errors=True)
     repair_default_browser()
     disabled_marker().unlink(missing_ok=True)
     (DATA / TERMINAL_OFF).unlink(missing_ok=True)

@@ -1,0 +1,23 @@
+[2026-11-08 16:42:00.515] [info]  splashScreenPreload: signalReady
+[2026-11-08 16:42:00.518] [info]  splashScreenPreload: onStateUpdate: {"status":"checking-for-updates"}
+[2026-11-08 16:42:00.640] [info]  splashScreenPreload: onStateUpdate: {"status":"launching"}
+[2026-11-08 16:42:01.042] [info]   Vencord %c %c PluginManager  background: #a6d189; color: black; font-weight: bold; border-radius: 5px;  background: #a6d189; color: black; font-weight: bold; border-radius: 5px; Starting plugins (stage Init)
+[2026-11-08 16:42:01.042] [info]   Vencord %c %c PluginManager  background: #a6d189; color: black; font-weight: bold; border-radius: 5px;  background: #a6d189; color: black; font-weight: bold; border-radius: 5px; Starting plugin NoTrack
+[2026-11-08 16:42:01.904] [info]   Vencord %c %c NoTrack  background: #a6d189; color: black; font-weight: bold; border-radius: 5px;  background: #8caaee; color: black; font-weight: bold; border-radius: 5px; Disabling Sentry by erroring its WebpackInstance
+[2026-11-08 16:42:01.904] [error] Uncaught Error: Sentry successfully disabled
+[2026-11-08 16:42:01.943] [info]   Vencord %c %c WebpackPatcher  background: #a6d189; color: black; font-weight: bold; border-radius: 5px;  background: #8caaee; color: black; font-weight: bold; border-radius: 5px; Main WebpackInstance found in web.72656029554c0370.js, initializing internal references to WebpackRequire
+[2026-11-08 16:42:01.943] [info]   Vencord %c %c WebpackPatcher  background: #a6d189; color: black; font-weight: bold; border-radius: 5px;  background: #8caaee; color: black; font-weight: bold; border-radius: 5px; Found Webpack module factories in web.72656029554c0370.js
+[2026-11-08 16:42:01.949] [error]  Vencord %c %c WebpackPatcher  background: #e78284; color: black; font-weight: bold; border-radius: 5px;  background: #8caaee; color: black; font-weight: bold; border-radius: 5px; Hardcoded build number module id is invalid
+[2026-11-08 16:42:01.964] [info]   Vencord %c %c PluginManager  background: #a6d189; color: black; font-weight: bold; border-radius: 5px;  background: #a6d189; color: black; font-weight: bold; border-radius: 5px; Starting plugins (stage DOMContentLoaded)
+[2026-11-08 16:42:01.964] [info]   Vencord %c %c PluginManager  background: #a6d189; color: black; font-weight: bold; border-radius: 5px;  background: #a6d189; color: black; font-weight: bold; border-radius: 5px; Starting plugin FixDiscordCss
+[2026-11-08 16:42:02.157] [info]  [libdiscore] [experiment_manager] Loaded experiments from cache
+[2026-11-08 16:42:02.442] [info]  [default] [BUILD INFO] Release Channel: stable, Build Number: 667580, Version Hash: <token>
+[2026-11-08 16:42:02.529] [warn]  [CloudSyncUtils] CloudSync is not supported on this platform
+[2026-11-08 16:42:02.656] [info]  [default] [NATIVE INFO] host 1.0.168, modules: discord_spellcheck: 1, discord_utils: 1, discord_voice: 1, discord_zstd: 1, discord_desktop_core: 1, discord_game_utils: 1, discord_erlpack: 1, discord_rpc: 1, discord_krisp: 1, build: 97685
+[2026-11-08 16:42:02.661] [info]  [libdiscore] The answer for life the universe and everything is: 42
+[2026-11-08 16:42:03.042] [error] Uncaught Error: listen EADDRINUSE: address already in use 127.0.0.1:6463
+[2026-11-08 16:42:03.043] [info]  [RPCServer:IPC] Starting on /tmp/cdr-de9m1mi0/discord-ipc-0
+[2026-11-08 16:42:04.001] [info]  [MediaEngineStore] OpenH264 download status [object Object]
+[2026-11-08 16:42:04.099] [info]  [MediaEngineStore] OpenH264 is ready [object Object]
+[2026-11-08 16:42:04.101] [info]  [MediaEngineStore] OpenH264 cleanup [object Object]
+[2026-11-08 16:42:09.294] [info]  [useAuthWebsocket] [0ms] connecting to wss://remote-auth-gateway.discord.gg/?v=2

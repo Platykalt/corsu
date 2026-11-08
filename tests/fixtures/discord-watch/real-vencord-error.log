@@ -1,0 +1,15 @@
+[2026-11-08 16:15:27.278] [info]  splashScreenPreload: signalReady
+[2026-11-08 16:15:27.280] [info]  splashScreenPreload: onStateUpdate: {"status":"checking-for-updates"}
+[2026-11-08 16:15:27.990] [info]  splashScreenPreload: onStateUpdate: {"status":"launching"}
+[2026-11-08 16:15:28.336] [info]   Vencord %c %c PluginManager  background: #a6d189; color: black; font-weight: bold; border-radius: 5px;  background: #a6d189; color: black; font-weight: bold; border-radius: 5px; Starting plugins (stage Init)
+[2026-11-08 16:15:28.337] [info]   Vencord %c %c PluginManager  background: #a6d189; color: black; font-weight: bold; border-radius: 5px;  background: #a6d189; color: black; font-weight: bold; border-radius: 5px; Starting plugin NoTrack
+[2026-11-08 16:15:28.443] [info]  [FAST CONNECT] wss://gateway.discord.gg/?encoding=etf&v=9&compress=zstd-stream, encoding: etf, version: 9
+[2026-11-08 16:15:28.554] [info]   Vencord %c %c NoTrack  background: #a6d189; color: black; font-weight: bold; border-radius: 5px;  background: #8caaee; color: black; font-weight: bold; border-radius: 5px; Disabling Sentry by erroring its WebpackInstance
+[2026-11-08 16:15:28.554] [error] Uncaught Error: Sentry successfully disabled
+[2026-11-08 16:15:28.646] [info]   Vencord %c %c WebpackPatcher  background: #a6d189; color: black; font-weight: bold; border-radius: 5px;  background: #8caaee; color: black; font-weight: bold; border-radius: 5px; Main WebpackInstance found in web.72656029554c0370.js, initializing internal references to WebpackRequire
+[2026-11-08 16:15:28.647] [info]   Vencord %c %c WebpackPatcher  background: #a6d189; color: black; font-weight: bold; border-radius: 5px;  background: #8caaee; color: black; font-weight: bold; border-radius: 5px; Found Webpack module factories in web.72656029554c0370.js
+[2026-11-08 16:15:28.651] [error]  Vencord %c %c WebpackPatcher  background: #e78284; color: black; font-weight: bold; border-radius: 5px;  background: #8caaee; color: black; font-weight: bold; border-radius: 5px; Hardcoded build number module id is invalid
+[2026-11-08 16:15:28.661] [error] Uncaught TypeError: i.A is not a constructor
+[2026-11-08 16:15:28.662] [info]   Vencord %c %c PluginManager  background: #a6d189; color: black; font-weight: bold; border-radius: 5px;  background: #a6d189; color: black; font-weight: bold; border-radius: 5px; Starting plugins (stage DOMContentLoaded)
+[2026-11-08 16:15:28.662] [info]   Vencord %c %c PluginManager  background: #a6d189; color: black; font-weight: bold; border-radius: 5px;  background: #a6d189; color: black; font-weight: bold; border-radius: 5px; Starting plugin FixDiscordCss
+[2026-11-08 16:15:28.868] [info]  [FAST CONNECT] sending identify

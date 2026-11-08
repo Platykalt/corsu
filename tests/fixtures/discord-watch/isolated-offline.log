@@ -1,0 +1,11 @@
+[2026-11-08 18:22:36.603] [info]  splashScreenPreload: signalReady
+[2026-11-08 18:22:36.607] [info]  splashScreenPreload: onStateUpdate: {"status":"checking-for-updates"}
+[2026-11-08 18:22:36.782] [info]  splashScreenPreload: onStateUpdate: {"status":"launching"}
+[2026-11-08 18:22:36.986] [error] Uncaught SecurityError: Failed to read the 'localStorage' property from 'Window': Access is denied for this document.
+[2026-11-08 18:22:37.073] [error] Uncaught (in promise) Error: Script failed to execute, this normally means an error was thrown. Check the renderer console for the error.
+[2026-11-08 18:22:38.560] [error] Uncaught SecurityError: Failed to read the 'localStorage' property from 'Window': Access is denied for this document.
+[2026-11-08 18:22:38.618] [error] Uncaught (in promise) Error: Script failed to execute, this normally means an error was thrown. Check the renderer console for the error.
+[2026-11-08 18:22:43.047] [error] Uncaught SecurityError: Failed to read the 'localStorage' property from 'Window': Access is denied for this document.
+[2026-11-08 18:22:43.125] [error] Uncaught (in promise) Error: Script failed to execute, this normally means an error was thrown. Check the renderer console for the error.
+[2026-11-08 18:22:52.767] [error] Uncaught SecurityError: Failed to read the 'localStorage' property from 'Window': Access is denied for this document.
+[2026-11-08 18:22:52.834] [error] Uncaught (in promise) Error: Script failed to execute, this normally means an error was thrown. Check the renderer console for the error.
