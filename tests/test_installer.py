@@ -567,3 +567,114 @@ class VencordBuildTests(Isolated):
             (self.root / 'src/discord-plugin/index.ts').write_text('changed', encoding='utf-8')
             installer.prepare_build()
             self.assertEqual(commands, [['node', 'scripts/build/build.mjs', '--dev']])  # rebuilt, not reinstalled
+
+
+class DiscordReinstallTests(Isolated):
+    """install_discord against fake files and a stand-in for the official installer that behaves like its Go source
+    (patcher.go: unpatch first when _app.asar exists, then move app.asar aside and write the launcher)."""
+
+    ORIGINAL = b'original Discord archive ' + b'x' * 70000
+
+    def setUp(self):
+        super().setUp()
+        self.location = self.home / 'discord/app-1.0.168'
+        self.app = self.location / 'resources/app.asar'
+        self.app.parent.mkdir(parents=True)
+        self.saved = self.app.with_name('_app.asar')
+        self.root = self.release('0.28.4')
+        for name, value in (('vencord_installer', lambda: Path('VencordInstallerCli')),
+                            ('discord_archive', lambda location: Path(location) / 'resources/app.asar'),
+                            ('ROOT', self.root)):
+            patcher = patch.object(installer, name, value)
+            patcher.start()
+            self.addCleanup(patcher.stop)
+
+    @staticmethod
+    def launcher(root):
+        return b'{"files":{}}require(' + json.dumps(str(root / 'Vencord/dist/patcher.js')).encode() + b')'
+
+    def official(self, command, env):
+        if self.saved.exists():
+            self.saved.replace(self.app)
+        self.app.replace(self.saved)
+        self.app.write_bytes(self.launcher(Path(env['VENCORD_USER_DATA_DIR']).parent))
+
+    def install(self):
+        with patch.object(installer, 'run', side_effect=self.official) as run, redirect_stdout(io.StringIO()):
+            installer.install_discord(self.location)
+        return run
+
+    def record(self):
+        return corsu.load_state()['files'][str(self.app)]
+
+    def test_hand_restored_discord_is_reinstalled_once(self):
+        self.app.write_bytes(self.ORIGINAL)
+        self.install()
+        shim = self.app.read_bytes()
+        self.app.write_bytes(self.saved.read_bytes())  # the person put the original back by hand, _app.asar kept
+        self.install()
+        self.assertEqual(self.saved.read_bytes(), self.ORIGINAL)  # not the launcher: no double injection
+        self.assertEqual(self.app.read_bytes(), shim)
+        self.assertEqual(Path(self.record()['backup']).read_bytes(), self.ORIGINAL)
+        self.install()  # a second install over a patched Discord keeps the original too
+        self.assertEqual(self.saved.read_bytes(), self.ORIGINAL)
+        with redirect_stdout(io.StringIO()):
+            corsu.uninstall()
+        self.assertEqual(self.app.read_bytes(), self.ORIGINAL)
+        self.assertFalse(self.saved.exists())
+
+    def test_restored_original_without_aside_copy_matches_the_recorded_backup(self):
+        self.app.write_bytes(self.ORIGINAL)
+        self.install()
+        self.saved.replace(self.app)  # what the official uninstaller does
+        self.install()
+        self.assertEqual(self.saved.read_bytes(), self.ORIGINAL)
+
+    def test_unknown_change_is_still_refused(self):
+        self.app.write_bytes(self.ORIGINAL)
+        self.install()
+        for edit in ('aside kept', 'no aside copy'):
+            self.app.write_bytes(b'somebody else\'s archive ' + b'y' * 70000)
+            if edit == 'no aside copy':
+                self.saved.unlink()
+            with self.subTest(edit), self.assertRaisesRegex(RuntimeError, 'Discord changed since installation'):
+                self.install().assert_not_called()
+
+    def test_launcher_is_never_kept_as_the_original(self):
+        stale = self.launcher(self.data / 'releases/544be1ce1abbf856')
+        for layout in ('launcher alone', 'launcher aside'):
+            with self.subTest(layout):
+                self.saved.unlink(missing_ok=True)
+                self.app.write_bytes(stale)
+                if layout == 'launcher aside':
+                    self.saved.write_bytes(stale)
+                with self.assertRaisesRegex(RuntimeError, 'Vencord launcher'):
+                    self.install()
+                self.assertNotIn(str(self.app), corsu.load_state()['files'] if corsu.STATE.exists() else {})
+
+    def test_reinstall_repoints_a_launcher_to_the_new_release(self):
+        self.saved.write_bytes(self.ORIGINAL)
+        old = self.launcher(self.data / 'releases/544be1ce1abbf856')
+        self.app.write_bytes(old)
+        corsu.Installer().external_file(self.app, self.ORIGINAL)  # record matches the old launcher
+        self.install()
+        self.assertIn(str(self.root / 'Vencord').encode(), self.app.read_bytes())
+        self.assertNotIn(b'544be1ce1abbf856', self.app.read_bytes())
+        self.assertEqual(self.saved.read_bytes(), self.ORIGINAL)
+        self.assertEqual(self.record()['installed_sha256'], corsu.digest(self.app.read_bytes()))
+
+    def test_stale_record_of_a_removed_version_is_forgotten(self):
+        # The real case on 2026-11-08: a record for app-1.0.166 (deleted by Discord's update), app-1.0.168 restored.
+        installer_ = corsu.Installer()
+        gone = self.home / 'discord/app-1.0.166/resources/app.asar'
+        installer_.state['files'][str(gone)] = {'backup': None, 'mode': 0o644, 'installed_sha256': 'c9',
+                                                'discord_location': str(gone.parent.parent)}
+        corsu.save_state(installer_.state)
+        self.app.write_bytes(self.ORIGINAL)
+        self.saved.write_bytes(self.ORIGINAL)
+        with redirect_stdout(io.StringIO()):
+            installer.forget_removed_discord()
+        self.install()
+        self.assertNotIn(str(gone), corsu.load_state()['files'])
+        self.assertIn(str(self.app), corsu.load_state()['files'])
+        self.assertEqual(self.saved.read_bytes(), self.ORIGINAL)
