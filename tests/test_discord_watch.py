@@ -367,6 +367,7 @@ class RescueTests(Isolated):
         self.assertFalse((corsu.DATA / 'discord-watch').exists())
 
 
+@unittest.skipUnless(sys.platform.startswith("linux"), "the wrappers are desktop entries, Linux only")
 class WrapperTests(Isolated):
     ENTRY = ('[Desktop Entry]\nName=Discord\nStartupWMClass=discord\nExec=/usr/bin/discord --url -- %u\nIcon=discord\n'
              'Type=Application\nMimeType=x-scheme-handler/discord;\n')
