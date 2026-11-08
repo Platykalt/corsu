@@ -1,7 +1,7 @@
 {
-  "version": "0.28.3",
+  "version": "0.28.4",
   "license": "GPL-3.0-or-later",
-  "vencord_revision": "7f0c10cc29fd789f2f4828ae3dc947623e837920",
+  "vencord_revision": "383409e6a6ec9008ee8a7496500f1e75f17824d1",
   "installer_revision": "fe6e041a550b01d1853db6c8ea157d42c7480510",
   "installer_source": "vendor/vencord-installer-source.tar.gz",
   "installer_source_sha256": "587f0ee6c60846bfda954223d1944ef66b88ee8682a1ee32e201f4dbd1b0f1de",

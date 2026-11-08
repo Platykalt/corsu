@@ -1,7 +1,6 @@
 **Français** · [English](#english)
 
-**Windows : plus de fenêtres PowerShell qui s'ouvrent et se ferment pendant que Corsu est ouvert. Discord : le
-message d'épinglage et « Aller à {serveur} » sont traduits.** Mise à jour depuis la fenêtre de Corsu (bouton
+**Discord ne reste plus bloqué sur « Starting » avec Corsu.** Mise à jour depuis la fenêtre de Corsu (bouton
 « Rechercher les mises à jour ») ou par l'installation en une ligne ; vos choix sont gardés.
 
 ### Téléchargements par usage
@@ -24,7 +23,22 @@ Chaque fichier a sa somme de contrôle `.sha256`. Les archives contiennent leur 
 installée, utilisée après suppression du dossier extrait, mise à jour et désinstallée sur son système avant la
 publication (tests automatiques ; personne n'a regardé les écrans).
 
-### Nouveautés de la 0.28.3
+### Nouveautés de la 0.28.4
+
+- **Discord bloqué sur « Starting »** : depuis une mise à jour du code web de Discord (novembre 2026), Discord ne
+  dépassait plus l'écran de chargement quand Corsu était installé. La cause est dans Vencord 1.15.9, embarqué par
+  Corsu : il ne reconnaissait plus une nouvelle façon dont Discord déclare ses modules
+  (`TypeError: i.A is not a constructor`). Corsu embarque maintenant Vencord 1.15.16, qui corrige ce point. Le plugin
+  corse et ses traductions ne changent pas. Vérifié sur le vrai Discord 1.0.168 pour Linux, copié et isolé, jusqu'à
+  la page de connexion : la 0.28.3 reste bloquée, la 0.28.4 l'atteint avec Vencord et le plugin Corsu chargés. La CI
+  refait ce test avec le Discord Linux officiel. **Pas encore vérifié une fois connecté, ni sous Windows et macOS.**
+- **Réinstallation après une restauration manuelle** : si vous aviez remis le Discord d'origine à la main pour le
+  débloquer, l'installateur peut de nouveau installer Corsu. Un fichier Discord modifié d'origine inconnue reste
+  protégé.
+- La construction de Vencord suit maintenant exactement la révision prévue et note ce qui a été construit.
+- La mise à jour et la migration depuis la 0.28.3 publiée sont vérifiées automatiquement.
+
+### Rappel : nouveautés de la 0.28.3
 
 - **Windows, fenêtres PowerShell** : tant que la fenêtre de Corsu restait ouverte, des consoles PowerShell
   apparaissaient et disparaissaient sans cesse. Corsu y lisait la liste des programmes ouverts, cherchait Minecraft
@@ -156,8 +170,7 @@ publication (tests automatiques ; personne n'a regardé les écrans).
 
 ## English
 
-**Windows: no more PowerShell windows opening and closing while Corsu is open. Discord: the pin notice and "Aller à
-{server}" are translated.** Update from Corsu's window ("Rechercher les mises à jour" button) or with the one-line
+**Discord no longer hangs on "Starting" with Corsu.** Update from Corsu's window ("Rechercher les mises à jour" button) or with the one-line
 install; your choices are kept.
 
 ### Downloads by use
@@ -180,7 +193,21 @@ Each file has a `.sha256` checksum. The archives carry their own Python. Every a
 deleting the extracted folder, updated and uninstalled on its own system before publication (automated checks; no one
 looked at the screens).
 
-### New in 0.28.3
+### New in 0.28.4
+
+- **Discord stuck on "Starting"**: since an update of Discord's web code (November 2026), Discord no longer got past
+  its loading screen when Corsu was installed. The cause is in Vencord 1.15.9, bundled by Corsu: it no longer handled
+  a new way Discord declares its modules (`TypeError: i.A is not a constructor`). Corsu now bundles Vencord 1.15.16,
+  which fixes it. The Corsican plugin and its translations are unchanged. Checked on the real Discord 1.0.168 for
+  Linux, copied and isolated, up to the login page: 0.28.3 stays stuck, 0.28.4 reaches it with Vencord and the Corsu
+  plugin loaded. CI repeats this with the official Linux Discord. **Not yet checked once logged in, nor on Windows
+  and macOS.**
+- **Reinstalling after a manual restore**: if you put the original Discord back by hand to unblock it, the installer
+  can install Corsu again. A Discord file changed in an unknown way stays protected.
+- Building Vencord now follows the pinned revision exactly and records what was built.
+- The update and the migration from the published 0.28.3 are checked automatically.
+
+### Earlier: new in 0.28.3
 
 - **Windows, PowerShell windows**: while Corsu's window was open, PowerShell consoles kept appearing and
   disappearing. Corsu used them to read the list of running programs, look for Minecraft or read its shortcut. These

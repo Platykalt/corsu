@@ -107,42 +107,105 @@ def run(command, **kwargs):
     subprocess.run(command, **corsu.hidden(check=True, **kwargs))
 
 
-def stale_build(source):
-    """The dictionary is compiled into the bundle, so lexicon changes need a rebuild."""
-    builds = list((source / 'dist').glob('*.js'))
-    if not builds:
-        return True
-    built = min(path.stat().st_mtime for path in builds)
-    return any((ROOT / name).stat().st_mtime > built
-               for name in ('lexicon/lexicon.tsv', 'lexicon/lexicon-fixes.tsv', 'lexicon/lexicon-mozilla.tsv', 'lexicon/lexicon-upstream.tsv',
-                            'src/discord-plugin/index.ts', 'src/discord-plugin/translate.ts'))
+# What the Corsu plugin is compiled from: the dictionary is compiled into the bundle, so lexicon changes need a rebuild.
+BUILD_INPUTS = ('lexicon/lexicon.tsv', 'lexicon/lexicon-fixes.tsv', 'lexicon/lexicon-mozilla.tsv', 'lexicon/lexicon-upstream.tsv',
+                'src/discord-plugin/index.ts', 'src/discord-plugin/translate.ts')
+BUILD_RECORD = 'dist/corsu-build.json'
+
+
+def sha256(path):
+    return hashlib.sha256(Path(path).read_bytes()).hexdigest()
+
+
+def git_output(source, *arguments):
+    return subprocess.run(['git', *arguments], **corsu.hidden(cwd=source, check=True, capture_output=True, text=True)).stdout.strip()
+
+
+def build_record(source):
+    """What a Vencord build in `source` was made from, as written next to it by prepare_build."""
+    try:
+        return json.loads((source / BUILD_RECORD).read_text(encoding='utf-8'))
+    except (OSError, ValueError):
+        return {}
+
+
+def stale_build(source, revision):
+    """A build is reused only when it was made from the pinned Vencord revision and the current plugin and lexicon."""
+    record = build_record(source)
+    return not (source / 'dist/patcher.js').exists() or record.get('vencord_revision') != revision \
+        or record.get('inputs') != {name: sha256(ROOT / name) for name in BUILD_INPUTS}
+
+
+def checkout_revision(source, revision):
+    """Put the Vencord checkout on the pinned revision, never discarding someone's changes to it."""
+    if not (source / '.git').exists() or git_output(source, 'rev-parse', 'HEAD') == revision:
+        return
+    if git_output(source, 'status', '--porcelain', '--untracked-files=no'):
+        raise RuntimeError(f'{source} has local changes and is not on the pinned Vencord revision {revision}. '
+                           'Commit, stash or remove them, then retry.')
+    if subprocess.run(['git', 'cat-file', '-e', revision + '^{commit}'], **corsu.hidden(cwd=source, capture_output=True)).returncode:
+        run(['git', 'fetch', 'origin', revision], cwd=source)
+    run(['git', 'checkout', '--detach', revision], cwd=source)
+
+
+def node_ready(source):
+    """Node.js is there and as recent as Vencord's package.json asks (engines.node, such as ">=22")."""
+    if not shutil.which('node'):
+        return False
+    wanted = re.search(r'\d+', json.loads((source / 'package.json').read_text(encoding='utf-8'))['engines']['node'])
+    version = subprocess.run([shutil.which('node'), '--version'], **corsu.hidden(capture_output=True, text=True)).stdout
+    return int(re.search(r'\d+', version).group()) >= int(wanted.group())
+
+
+def pnpm_command(source):
+    """The pnpm Vencord's package.json names (packageManager), from PATH or else fetched by npx; None without either."""
+    wanted = json.loads((source / 'package.json').read_text(encoding='utf-8'))['packageManager'].split('+')[0].removeprefix('pnpm@')
+    if shutil.which('pnpm') and subprocess.run([shutil.which('pnpm'), '--version'],
+                                               **corsu.hidden(capture_output=True, text=True)).stdout.strip() == wanted:
+        return ['pnpm']
+    return ['npx', '--yes', f'pnpm@{wanted}'] if shutil.which('npx') else None
 
 
 def prepare_build():
     source = ROOT / 'Vencord'
     manifest = json.loads((ROOT / 'src/release.json').read_text(encoding='utf-8'))
+    revision = manifest['vencord_revision']
     if not source.exists():
         run(['git', 'clone', 'https://github.com/Vendicated/Vencord.git', source])
-        run(['git', 'checkout', '--detach', manifest['vencord_revision']], cwd=source)
+    checkout_revision(source, revision)
     corsu.generate()
-    if not stale_build(source):
+    if not stale_build(source, revision):
         return
-    if not shutil.which('node'):
+    note = t('Note: the Discord plugin was built before the latest translations; Discord keeps the older ones.',
+             'Note : le plugin Discord a été construit avant les dernières traductions ; Discord garde les anciennes.')
+    if not node_ready(source):
         if not (source / 'dist/patcher.js').exists():
             raise RuntimeError('Building requires Node.js >=22. Use a release archive to install without building.')
-        print('Note: the Discord plugin was built before the latest translations; Discord keeps the older ones.', flush=True)
+        print(note, flush=True)
         return
-    if not (source / 'node_modules/esbuild').exists():
-        if not shutil.which('pnpm'):
+    # Dependencies are reinstalled whenever the lockfile changes, such as with a new Vencord revision.
+    lockfile = sha256(source / 'pnpm-lock.yaml')
+    stamp = source / 'node_modules/.corsu-lockfile'
+    if not stamp.is_file() or stamp.read_text(encoding='utf-8') != lockfile:
+        pnpm = pnpm_command(source)
+        if not pnpm:
             if (source / 'dist/patcher.js').exists():
                 # An installed copy has the built plugin but not the build tools: use what is there.
-                print(t('Note: the Discord plugin was built before the latest translations; Discord keeps the older ones.',
-                        'Note : le plugin Discord a été construit avant les dernières traductions ; Discord garde les anciennes.'), flush=True)
+                print(note, flush=True)
                 return
             raise RuntimeError('Installing Vencord dependencies requires pnpm. Use a release archive instead.')
-        run(['pnpm', 'install', '--frozen-lockfile'], cwd=source)
+        run([*pnpm, 'install', '--frozen-lockfile'], cwd=source)
+        stamp.write_text(lockfile, encoding='utf-8')
+    # Release archives carry Vencord's files without its .git: their packager checked the revision (package_release).
+    built = git_output(source, 'rev-parse', 'HEAD') if (source / '.git').exists() else revision
     run(['node', 'scripts/build/build.mjs', '--dev', '--disable-updater'], cwd=source,
-        env={**os.environ, 'VENCORD_HASH': manifest['vencord_revision'][:7]})
+        env={**os.environ, 'VENCORD_HASH': built[:7]})
+    plugin = source / 'src/userplugins/corsu'
+    (source / BUILD_RECORD).write_text(json.dumps({
+        'corsu_version': manifest['version'], 'vencord_revision': built,
+        'inputs': {name: sha256(ROOT / name) for name in BUILD_INPUTS},
+        'plugin': {path.name: sha256(path) for path in sorted(plugin.iterdir()) if path.is_file()},
+    }, indent=2) + '\n', encoding='utf-8')
 
 
 DEPLOYED_FILES = ('LICENSE', 'README.md', 'CONTRIBUTING.md')
@@ -533,16 +596,32 @@ def forget_removed_discord():
         corsu.save_state(state)
 
 
+def vencord_launcher(archive):
+    """Whether an asar is the official installer's few-hundred-byte stub that only requires a patcher.js, not Discord."""
+    return len(archive) < 65536 and b'patcher.js' in archive
+
+
 def install_discord(location):
     binary = vencord_installer()
     app = discord_archive(location)
     backup = app.with_name('_app.asar')
     installer = corsu.Installer()
     record = installer.state['files'].get(str(app))
-    if record and corsu.digest(app.read_bytes()) != record['installed_sha256']:
-        raise RuntimeError(f'Discord changed since installation. Preserving it: {app}. Uninstall/review before reinstalling.')
-    # The official installer keeps the unmodified archive in _app.asar.
-    original = backup.read_bytes() if backup.exists() else app.read_bytes()
+    current = app.read_bytes()
+    # The official installer keeps the unmodified archive in _app.asar and unpatches before patching again.
+    original = backup.read_bytes() if backup.exists() else current
+    if record and corsu.digest(current) != record['installed_sha256']:
+        saved = Path(record['backup']) if record.get('backup') else None
+        # A Discord put back by hand (app.asar is the original again) is safe to patch; any other change is kept.
+        restored = (backup.exists() and current == original) or \
+            bool(saved and saved.is_file() and corsu.digest(saved.read_bytes()) == corsu.digest(current))
+        if not restored:
+            raise RuntimeError(f'Discord changed since installation. Preserving it: {app}. Uninstall/review before reinstalling.')
+    if vencord_launcher(original):
+        raise RuntimeError(f'No original Discord archive next to {app}: {backup.name if backup.exists() else app.name} is a '
+                           'Vencord launcher. Reinstall Discord, then rerun the installer.')
+    # The backup must be this Discord's original, even when an earlier record kept another one.
+    installer.state['files'].pop(str(app), None)
     command = [str(binary), '-install', '-location', str(location)]
     environment = {**os.environ, 'VENCORD_USER_DATA_DIR': str(ROOT / 'Vencord'), 'VENCORD_DEV_INSTALL': '1'}
     if not os.access(app.parent, os.W_OK):

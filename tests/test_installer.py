@@ -482,3 +482,199 @@ class DeployedCopyTests(unittest.TestCase):
                     self.assertEqual((copy / name).read_text(encoding='utf-8'), name)
                 (root / 'minecraft/java/VERSION').write_text('26.4', encoding='utf-8')
                 self.assertNotEqual(installer.deploy_release(), copy)  # a new pack version is a new copy
+
+
+class VencordBuildTests(Isolated):
+    """A changed vencord_revision or lockfile never silently reuses an old checkout, dependencies or build."""
+
+    def setUp(self):
+        super().setUp()
+        self.root = self.home / 'corsu'
+        for name in installer.BUILD_INPUTS:
+            (self.root / name).parent.mkdir(parents=True, exist_ok=True)
+            (self.root / name).write_text(name, encoding='utf-8')
+        self.source = self.root / 'Vencord'
+        (self.source / 'dist').mkdir(parents=True)
+        (self.source / 'package.json').write_text(json.dumps({'packageManager': 'pnpm@12.15.0', 'engines': {'node': '>=22'}}))
+        (self.source / 'pnpm-lock.yaml').write_text('lock 1', encoding='utf-8')
+        patcher = patch.object(installer, 'ROOT', self.root)
+        patcher.start()
+        self.addCleanup(patcher.stop)
+
+    def git(self, *arguments):
+        return subprocess.run(['git', '-c', 'user.name=t', '-c', 'user.email=t@t', *arguments], cwd=self.source,
+                              check=True, capture_output=True, text=True).stdout.strip()
+
+    def commits(self):
+        self.git('init', '-q')
+        self.git('add', 'package.json', 'pnpm-lock.yaml')
+        self.git('commit', '-qm', 'old')
+        old = self.git('rev-parse', 'HEAD')
+        (self.source / 'pnpm-lock.yaml').write_text('lock 2', encoding='utf-8')
+        self.git('commit', '-qam', 'new')
+        new = self.git('rev-parse', 'HEAD')
+        self.git('checkout', '-q', '--detach', old)
+        return old, new
+
+    def built(self, revision):
+        (self.source / 'dist/patcher.js').write_text('')
+        (self.source / installer.BUILD_RECORD).write_text(json.dumps({
+            'vencord_revision': revision, 'inputs': {name: installer.sha256(self.root / name) for name in installer.BUILD_INPUTS}}))
+
+    def test_build_is_stale_when_revision_plugin_or_lexicon_changes(self):
+        self.assertTrue(installer.stale_build(self.source, 'a' * 40))  # never built
+        self.built('a' * 40)
+        self.assertFalse(installer.stale_build(self.source, 'a' * 40))
+        self.assertTrue(installer.stale_build(self.source, 'b' * 40))
+        (self.root / 'lexicon/lexicon.tsv').write_text('changed', encoding='utf-8')
+        self.assertTrue(installer.stale_build(self.source, 'a' * 40))
+
+    def test_changed_revision_checks_out_the_pinned_one(self):
+        old, new = self.commits()
+        with redirect_stdout(io.StringIO()):
+            installer.checkout_revision(self.source, new)
+        self.assertEqual(self.git('rev-parse', 'HEAD'), new)
+
+    def test_local_changes_are_refused_not_discarded(self):
+        old, new = self.commits()
+        (self.source / 'package.json').write_text('mine', encoding='utf-8')
+        with self.assertRaisesRegex(RuntimeError, 'local changes'):
+            installer.checkout_revision(self.source, new)
+        self.assertEqual(self.git('rev-parse', 'HEAD'), old)
+        self.assertEqual((self.source / 'package.json').read_text(encoding='utf-8'), 'mine')
+        installer.checkout_revision(self.source, old)  # on the pinned revision, a developer's changes are kept
+
+    def test_dependencies_are_reinstalled_when_the_lockfile_changes(self):
+        (self.source / 'node_modules').mkdir()
+        (self.source / 'node_modules/.corsu-lockfile').write_text('old lockfile hash', encoding='utf-8')
+        commands = []
+        with patch.object(corsu, 'generate', lambda: (self.source / 'src/userplugins/corsu').mkdir(parents=True, exist_ok=True)), \
+             patch.object(installer, 'node_ready', return_value=True), \
+             patch.object(installer, 'pnpm_command', return_value=['pnpm']), \
+             patch.object(installer, 'run', side_effect=lambda command, **_: commands.append(command[:3])):
+            (self.root / 'src/release.json').write_text(json.dumps({'version': '9.9', 'vencord_revision': 'c' * 40}))
+            installer.prepare_build()
+            self.assertEqual(commands, [['pnpm', 'install', '--frozen-lockfile'],
+                                        ['node', 'scripts/build/build.mjs', '--dev']])
+            self.assertEqual((self.source / 'node_modules/.corsu-lockfile').read_text(encoding='utf-8'),
+                             installer.sha256(self.source / 'pnpm-lock.yaml'))
+            record = installer.build_record(self.source)
+            self.assertEqual((record['corsu_version'], record['vencord_revision']), ('9.9', 'c' * 40))
+            commands.clear()
+            (self.source / 'dist/patcher.js').write_text('')
+            installer.prepare_build()
+            self.assertEqual(commands, [])  # same revision, lockfile and inputs: nothing to do
+            (self.root / 'src/discord-plugin/index.ts').write_text('changed', encoding='utf-8')
+            installer.prepare_build()
+            self.assertEqual(commands, [['node', 'scripts/build/build.mjs', '--dev']])  # rebuilt, not reinstalled
+
+
+class DiscordReinstallTests(Isolated):
+    """install_discord against fake files and a stand-in for the official installer that behaves like its Go source
+    (patcher.go: unpatch first when _app.asar exists, then move app.asar aside and write the launcher)."""
+
+    ORIGINAL = b'original Discord archive ' + b'x' * 70000
+
+    def setUp(self):
+        super().setUp()
+        self.location = self.home / 'discord/app-1.0.168'
+        self.app = self.location / 'resources/app.asar'
+        self.app.parent.mkdir(parents=True)
+        self.saved = self.app.with_name('_app.asar')
+        self.root = self.release('0.28.4')
+        for name, value in (('vencord_installer', lambda: Path('VencordInstallerCli')),
+                            ('discord_archive', lambda location: Path(location) / 'resources/app.asar'),
+                            ('ROOT', self.root)):
+            patcher = patch.object(installer, name, value)
+            patcher.start()
+            self.addCleanup(patcher.stop)
+
+    @staticmethod
+    def launcher(root):
+        return b'{"files":{}}require(' + json.dumps(str(root / 'Vencord/dist/patcher.js')).encode() + b')'
+
+    def official(self, command, env):
+        if self.saved.exists():
+            self.saved.replace(self.app)
+        self.app.replace(self.saved)
+        self.app.write_bytes(self.launcher(Path(env['VENCORD_USER_DATA_DIR']).parent))
+
+    def install(self):
+        with patch.object(installer, 'run', side_effect=self.official) as run, redirect_stdout(io.StringIO()):
+            installer.install_discord(self.location)
+        return run
+
+    def record(self):
+        return corsu.load_state()['files'][str(self.app)]
+
+    def test_hand_restored_discord_is_reinstalled_once(self):
+        self.app.write_bytes(self.ORIGINAL)
+        self.install()
+        shim = self.app.read_bytes()
+        self.app.write_bytes(self.saved.read_bytes())  # the person put the original back by hand, _app.asar kept
+        self.install()
+        self.assertEqual(self.saved.read_bytes(), self.ORIGINAL)  # not the launcher: no double injection
+        self.assertEqual(self.app.read_bytes(), shim)
+        self.assertEqual(Path(self.record()['backup']).read_bytes(), self.ORIGINAL)
+        self.install()  # a second install over a patched Discord keeps the original too
+        self.assertEqual(self.saved.read_bytes(), self.ORIGINAL)
+        with redirect_stdout(io.StringIO()):
+            corsu.uninstall()
+        self.assertEqual(self.app.read_bytes(), self.ORIGINAL)
+        self.assertFalse(self.saved.exists())
+
+    def test_restored_original_without_aside_copy_matches_the_recorded_backup(self):
+        self.app.write_bytes(self.ORIGINAL)
+        self.install()
+        self.saved.replace(self.app)  # what the official uninstaller does
+        self.install()
+        self.assertEqual(self.saved.read_bytes(), self.ORIGINAL)
+
+    def test_unknown_change_is_still_refused(self):
+        self.app.write_bytes(self.ORIGINAL)
+        self.install()
+        for edit in ('aside kept', 'no aside copy'):
+            self.app.write_bytes(b'somebody else\'s archive ' + b'y' * 70000)
+            if edit == 'no aside copy':
+                self.saved.unlink()
+            with self.subTest(edit), self.assertRaisesRegex(RuntimeError, 'Discord changed since installation'):
+                self.install().assert_not_called()
+
+    def test_launcher_is_never_kept_as_the_original(self):
+        stale = self.launcher(self.data / 'releases/544be1ce1abbf856')
+        for layout in ('launcher alone', 'launcher aside'):
+            with self.subTest(layout):
+                self.saved.unlink(missing_ok=True)
+                self.app.write_bytes(stale)
+                if layout == 'launcher aside':
+                    self.saved.write_bytes(stale)
+                with self.assertRaisesRegex(RuntimeError, 'Vencord launcher'):
+                    self.install()
+                self.assertNotIn(str(self.app), corsu.load_state()['files'] if corsu.STATE.exists() else {})
+
+    def test_reinstall_repoints_a_launcher_to_the_new_release(self):
+        self.saved.write_bytes(self.ORIGINAL)
+        old = self.launcher(self.data / 'releases/544be1ce1abbf856')
+        self.app.write_bytes(old)
+        corsu.Installer().external_file(self.app, self.ORIGINAL)  # record matches the old launcher
+        self.install()
+        self.assertIn(str(self.root / 'Vencord').encode(), self.app.read_bytes())
+        self.assertNotIn(b'544be1ce1abbf856', self.app.read_bytes())
+        self.assertEqual(self.saved.read_bytes(), self.ORIGINAL)
+        self.assertEqual(self.record()['installed_sha256'], corsu.digest(self.app.read_bytes()))
+
+    def test_stale_record_of_a_removed_version_is_forgotten(self):
+        # The real case on 2026-11-08: a record for app-1.0.166 (deleted by Discord's update), app-1.0.168 restored.
+        installer_ = corsu.Installer()
+        gone = self.home / 'discord/app-1.0.166/resources/app.asar'
+        installer_.state['files'][str(gone)] = {'backup': None, 'mode': 0o644, 'installed_sha256': 'c9',
+                                                'discord_location': str(gone.parent.parent)}
+        corsu.save_state(installer_.state)
+        self.app.write_bytes(self.ORIGINAL)
+        self.saved.write_bytes(self.ORIGINAL)
+        with redirect_stdout(io.StringIO()):
+            installer.forget_removed_discord()
+        self.install()
+        self.assertNotIn(str(gone), corsu.load_state()['files'])
+        self.assertIn(str(self.app), corsu.load_state()['files'])
+        self.assertEqual(self.saved.read_bytes(), self.ORIGINAL)
