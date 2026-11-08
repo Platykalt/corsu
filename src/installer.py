@@ -533,16 +533,32 @@ def forget_removed_discord():
         corsu.save_state(state)
 
 
+def vencord_launcher(archive):
+    """Whether an asar is the official installer's few-hundred-byte stub that only requires a patcher.js, not Discord."""
+    return len(archive) < 65536 and b'patcher.js' in archive
+
+
 def install_discord(location):
     binary = vencord_installer()
     app = discord_archive(location)
     backup = app.with_name('_app.asar')
     installer = corsu.Installer()
     record = installer.state['files'].get(str(app))
-    if record and corsu.digest(app.read_bytes()) != record['installed_sha256']:
-        raise RuntimeError(f'Discord changed since installation. Preserving it: {app}. Uninstall/review before reinstalling.')
-    # The official installer keeps the unmodified archive in _app.asar.
-    original = backup.read_bytes() if backup.exists() else app.read_bytes()
+    current = app.read_bytes()
+    # The official installer keeps the unmodified archive in _app.asar and unpatches before patching again.
+    original = backup.read_bytes() if backup.exists() else current
+    if record and corsu.digest(current) != record['installed_sha256']:
+        saved = Path(record['backup']) if record.get('backup') else None
+        # A Discord put back by hand (app.asar is the original again) is safe to patch; any other change is kept.
+        restored = (backup.exists() and current == original) or \
+            bool(saved and saved.is_file() and corsu.digest(saved.read_bytes()) == corsu.digest(current))
+        if not restored:
+            raise RuntimeError(f'Discord changed since installation. Preserving it: {app}. Uninstall/review before reinstalling.')
+    if vencord_launcher(original):
+        raise RuntimeError(f'No original Discord archive next to {app}: {backup.name if backup.exists() else app.name} is a '
+                           'Vencord launcher. Reinstall Discord, then rerun the installer.')
+    # The backup must be this Discord's original, even when an earlier record kept another one.
+    installer.state['files'].pop(str(app), None)
     command = [str(binary), '-install', '-location', str(location)]
     environment = {**os.environ, 'VENCORD_USER_DATA_DIR': str(ROOT / 'Vencord'), 'VENCORD_DEV_INSTALL': '1'}
     if not os.access(app.parent, os.W_OK):
