@@ -106,13 +106,12 @@ def collect(manifest):
         raise RuntimeError('Vencord checkout does not match the pinned release revision.')
     if not (ROOT / 'Vencord/dist/patcher.js').exists():
         raise RuntimeError('Build the custom Vencord plugin first.')
-    # The dictionary is compiled into the bundle, so a stale build ships old Discord labels.
-    build = min(path.stat().st_mtime for path in (ROOT / 'Vencord/dist').glob('*.js'))
-    stale = [name for name in ('lexicon/lexicon.tsv', 'lexicon/lexicon-fixes.tsv', 'lexicon/lexicon-mozilla.tsv', 'lexicon/lexicon-upstream.tsv',
-                               'src/discord-plugin/index.ts', 'src/discord-plugin/translate.ts')
-             if (ROOT / name).stat().st_mtime > build]
-    if stale:
-        raise RuntimeError('Vencord build predates ' + ', '.join(stale) + '. Rebuild it before packaging.')
+    # The dictionary is compiled into the bundle, so a stale build ships old Discord labels; dist/corsu-build.json
+    # says what the build was made from and ships with it.
+    sys.path.insert(0, str(ROOT / 'src'))
+    import installer
+    if installer.stale_build(ROOT / 'Vencord', revision):
+        raise RuntimeError('Vencord build does not match the pinned revision, plugin or lexicon. Rebuild it before packaging.')
     files = [ROOT / name for name in SOURCES if (ROOT / name).exists()]
     for directory in SOURCE_DIRECTORIES:
         files.extend(path for path in sorted((ROOT / directory).rglob('*'))

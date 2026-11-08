@@ -482,3 +482,88 @@ class DeployedCopyTests(unittest.TestCase):
                     self.assertEqual((copy / name).read_text(encoding='utf-8'), name)
                 (root / 'minecraft/java/VERSION').write_text('26.4', encoding='utf-8')
                 self.assertNotEqual(installer.deploy_release(), copy)  # a new pack version is a new copy
+
+
+class VencordBuildTests(Isolated):
+    """A changed vencord_revision or lockfile never silently reuses an old checkout, dependencies or build."""
+
+    def setUp(self):
+        super().setUp()
+        self.root = self.home / 'corsu'
+        for name in installer.BUILD_INPUTS:
+            (self.root / name).parent.mkdir(parents=True, exist_ok=True)
+            (self.root / name).write_text(name, encoding='utf-8')
+        self.source = self.root / 'Vencord'
+        (self.source / 'dist').mkdir(parents=True)
+        (self.source / 'package.json').write_text(json.dumps({'packageManager': 'pnpm@12.15.0', 'engines': {'node': '>=22'}}))
+        (self.source / 'pnpm-lock.yaml').write_text('lock 1', encoding='utf-8')
+        patcher = patch.object(installer, 'ROOT', self.root)
+        patcher.start()
+        self.addCleanup(patcher.stop)
+
+    def git(self, *arguments):
+        return subprocess.run(['git', '-c', 'user.name=t', '-c', 'user.email=t@t', *arguments], cwd=self.source,
+                              check=True, capture_output=True, text=True).stdout.strip()
+
+    def commits(self):
+        self.git('init', '-q')
+        self.git('add', 'package.json', 'pnpm-lock.yaml')
+        self.git('commit', '-qm', 'old')
+        old = self.git('rev-parse', 'HEAD')
+        (self.source / 'pnpm-lock.yaml').write_text('lock 2', encoding='utf-8')
+        self.git('commit', '-qam', 'new')
+        new = self.git('rev-parse', 'HEAD')
+        self.git('checkout', '-q', '--detach', old)
+        return old, new
+
+    def built(self, revision):
+        (self.source / 'dist/patcher.js').write_text('')
+        (self.source / installer.BUILD_RECORD).write_text(json.dumps({
+            'vencord_revision': revision, 'inputs': {name: installer.sha256(self.root / name) for name in installer.BUILD_INPUTS}}))
+
+    def test_build_is_stale_when_revision_plugin_or_lexicon_changes(self):
+        self.assertTrue(installer.stale_build(self.source, 'a' * 40))  # never built
+        self.built('a' * 40)
+        self.assertFalse(installer.stale_build(self.source, 'a' * 40))
+        self.assertTrue(installer.stale_build(self.source, 'b' * 40))
+        (self.root / 'lexicon/lexicon.tsv').write_text('changed', encoding='utf-8')
+        self.assertTrue(installer.stale_build(self.source, 'a' * 40))
+
+    def test_changed_revision_checks_out_the_pinned_one(self):
+        old, new = self.commits()
+        with redirect_stdout(io.StringIO()):
+            installer.checkout_revision(self.source, new)
+        self.assertEqual(self.git('rev-parse', 'HEAD'), new)
+
+    def test_local_changes_are_refused_not_discarded(self):
+        old, new = self.commits()
+        (self.source / 'package.json').write_text('mine', encoding='utf-8')
+        with self.assertRaisesRegex(RuntimeError, 'local changes'):
+            installer.checkout_revision(self.source, new)
+        self.assertEqual(self.git('rev-parse', 'HEAD'), old)
+        self.assertEqual((self.source / 'package.json').read_text(encoding='utf-8'), 'mine')
+        installer.checkout_revision(self.source, old)  # on the pinned revision, a developer's changes are kept
+
+    def test_dependencies_are_reinstalled_when_the_lockfile_changes(self):
+        (self.source / 'node_modules').mkdir()
+        (self.source / 'node_modules/.corsu-lockfile').write_text('old lockfile hash', encoding='utf-8')
+        commands = []
+        with patch.object(corsu, 'generate', lambda: (self.source / 'src/userplugins/corsu').mkdir(parents=True, exist_ok=True)), \
+             patch.object(installer, 'node_ready', return_value=True), \
+             patch.object(installer, 'pnpm_command', return_value=['pnpm']), \
+             patch.object(installer, 'run', side_effect=lambda command, **_: commands.append(command[:3])):
+            (self.root / 'src/release.json').write_text(json.dumps({'version': '9.9', 'vencord_revision': 'c' * 40}))
+            installer.prepare_build()
+            self.assertEqual(commands, [['pnpm', 'install', '--frozen-lockfile'],
+                                        ['node', 'scripts/build/build.mjs', '--dev']])
+            self.assertEqual((self.source / 'node_modules/.corsu-lockfile').read_text(encoding='utf-8'),
+                             installer.sha256(self.source / 'pnpm-lock.yaml'))
+            record = installer.build_record(self.source)
+            self.assertEqual((record['corsu_version'], record['vencord_revision']), ('9.9', 'c' * 40))
+            commands.clear()
+            (self.source / 'dist/patcher.js').write_text('')
+            installer.prepare_build()
+            self.assertEqual(commands, [])  # same revision, lockfile and inputs: nothing to do
+            (self.root / 'src/discord-plugin/index.ts').write_text('changed', encoding='utf-8')
+            installer.prepare_build()
+            self.assertEqual(commands, [['node', 'scripts/build/build.mjs', '--dev']])  # rebuilt, not reinstalled
