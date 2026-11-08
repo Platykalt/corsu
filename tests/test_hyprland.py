@@ -410,7 +410,9 @@ class Language(Home):
         script = hyprland.language_lines(locales=folder) + f'{gnu_date()} -d 2026-10-27 "+%A %e %B, %a %b"; echo "$LOCPATH"\n'
         environment = {'PATH': os.environ['PATH'], 'LANG': 'en_US.UTF-8', 'LC_ALL': ''}
         result = subprocess.run(['sh', '-c', script], env=environment, capture_output=True, text=True, check=True)
-        self.assertEqual(result.stdout, f'marti 27 ottobre, mar. ott.\n{folder}\n')
+        guard = subprocess.run(['sh', '-c', f"LOCPATH='{folder}' LC_TIME=co_FR.UTF-8 locale"], env=environment,
+                               capture_output=True, text=True)
+        self.assertEqual(result.stdout, f'marti 27 ottobre, mar. ott.\n{folder}\n', f'locale said: {guard.stderr!r}')
         self.assertEqual(result.stderr, '')
         # A locale the folder lacks: nothing exported, dates as before.
         environment['LC_NUMERIC'] = 'xx_XX.UTF-8'
