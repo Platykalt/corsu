@@ -645,8 +645,8 @@ class UpdateTests(Isolated):
             self.assertEqual(update.check()['status'], 'unknown')  # not asked again right away
 
     def test_preferences(self):
-        self.assertEqual(update.preferences(), {'auto_update': False, 'vlc_complement': False})
-        self.assertEqual(update.set_preference('auto_update', True), {'auto_update': True, 'vlc_complement': False})
+        self.assertEqual(update.preferences(), {'auto_update': False, 'vlc_complement': False, 'discord_watch': True})
+        self.assertEqual(update.set_preference('auto_update', True), {'auto_update': True, 'vlc_complement': False, 'discord_watch': True})
         self.assertTrue(json.loads((self.data / 'preferences.json').read_text())['auto_update'])
         with self.assertRaises(ValueError):
             update.set_preference('auto_update', 'yes')

@@ -476,12 +476,17 @@ def launch_kind(command, given):
 def launch(command=None, kind=None, window=WINDOW):
     """Start Discord, then watch its start. Returns the recorded state (None when not watched)."""
     command = list(command or default_command())
-    user_data = user_data_dir(command)
-    log = user_data / 'logs/renderer_js.log'
-    running = discord_running()
-    offset = size(log)
+    # Read before starting (the open instance and the log's end), but never at the cost of starting Discord.
+    try:
+        user_data = user_data_dir(command)
+        log = user_data / 'logs/renderer_js.log'
+        running, offset = discord_running(), size(log)
+    except Exception:
+        user_data = log = running = offset = None
     started = time.time()
     process = start(command)
+    if log is None:
+        return None
     try:
         import logbook
         if running or not acquire_lock():
@@ -687,9 +692,10 @@ def remove_wrappers(installer):
 
 
 def update_wrappers(installer, python):
-    """Wrappers on Linux while the watch is wanted (installation.json "discord_watch", on by default), else none."""
+    """Wrappers on Linux while the watch is wanted (preference "discord_watch", on by default), else none."""
     import corsu
-    if corsu.PLATFORM == 'linux' and installer.state.get('discord_watch', True):
+    import update
+    if corsu.PLATFORM == 'linux' and update.preferences()['discord_watch']:
         install_wrappers(installer, python)
     else:
         remove_wrappers(installer)

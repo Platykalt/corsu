@@ -1,5 +1,35 @@
 # Changelog
 
+## 0.29.0 (not yet published)
+
+From the 0.28.4 candidate (`dfffa58`, not yet published). Contract: `docs/dev/discord-watch.md`; user docs
+`docs/fr/discord-demarrage.md`, `docs/en/discord-start.md`.
+
+- **Discord start watch.** On Linux, Discord's menu entry and its login autostart entry are replaced by Corsu's own
+  copies that start Discord first (same arguments, `discord://` links kept) and then read Discord's
+  `logs/renderer_js.log` for at most 3 minutes (once more while Discord updates itself). No debugging port, nothing
+  inside Discord, so it works even when Vencord fails before the Corsu plugin loads. One watcher at a time; an open
+  Discord just receives the arguments. Any failure of the watcher after Discord started is only logged. The last start
+  is classified as: started (`ok`, `ok-corsu` once the plugin is seen), error naming or following Vencord before the
+  UI (`vencord-error`, worded as *probable*), other error (`start-error`), slow with unknown cause, closed, updating,
+  network (including the localStorage `SecurityError` of Chromium's offline error page, seen in a real offline run),
+  window off-screen (Hyprland). Windows and macOS, and Discord restarted by its own updater, are covered after the
+  fact when Corsu's window opens. `installer.py --discord-watch off|on` (a kept preference, on by default).
+- **Notification and recovery page.** One native notification per incident (Linux: freedesktop notification with an
+  "Open" button; Windows: toast without a console, shown as Windows PowerShell; macOS: osascript), else nothing pops
+  and the home page's Discord row shows it. The "Discord" page offers, according to the state: look for an update
+  (the existing check, with its real answer: available, up to date, impossible to check, installed but Discord still
+  on the old copy, development build; never presented as the fix), start without the translation, retry, diagnostic
+  (bounded, redacted log lines and versions), later. Corsican window texts are AI proposals.
+- **Rescue mode.** "Start without the translation" only acts when Discord is closed (never kills it), on the Discord
+  folder Corsu recorded, with a backup whose hash matches and that is not a Vencord launcher; it puts the original
+  `app.asar` back, records `discord-watch/rescue.json`, and install, repair and update leave Discord alone until
+  "Put the translation back" reinstalls it and watches the next start. Uninstall removes the wrappers and
+  `discord-watch/`.
+- Checked with the real Discord 1.0.168 for Linux, copied and isolated (headless compositor), before login: Vencord
+  1.15.9 → `vencord-error`, 0.28.4's build → `ok`, offline → `network`. Notifications on Linux were checked against a
+  private test bus, not a desktop notification server; Windows and macOS only by unit tests and CI.
+
 ## 0.28.4 (not yet published)
 
 From 0.28.3 (`6979ddf`, tag `v0.28.3`). Vencord 1.15.9 (`7f0c10cc`) → 1.15.16 (`383409e6`).

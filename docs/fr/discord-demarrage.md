@@ -32,6 +32,9 @@ Corsu ne dit jamais qu'une cause est certaine : un journal montre ce qui s'est p
 - **Non couverts** : Discord relancé par son propre outil de mise à jour (le démarrage suivant est surveillé),
   Discord lancé depuis un terminal ou un autre lanceur.
 
+Pour arrêter la surveillance sous Linux (Discord retrouve alors son entrée de menu d'origine) :
+`installer.py --discord-watch off` ; `--discord-watch on` la remet. Le choix est gardé lors des mises à jour.
+
 Sans service de notification, rien ne s'affiche : l'incident reste noté et la fenêtre Corsu le montre (ligne
 Discord de l'accueil). Une seule notification par incident.
 

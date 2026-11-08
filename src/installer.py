@@ -844,6 +844,9 @@ def main(argv=None):
     parser.add_argument('--vlc-complement', choices=['on', 'off'],
                         help='VLC on Linux: also use Corsu\'s experimental Corsican complement (AI translations of the '
                              'messages VLC\'s catalogue leaves in English, not reviewed by a speaker), or stop using it')
+    parser.add_argument('--discord-watch', choices=['on', 'off'],
+                        help='Linux: watch Discord\'s start when it is opened from its menu entry or at login, and offer '
+                             'help if it gets stuck (on by default), or stop watching')
     parser.add_argument('--hours', type=float, help='With --disable terminal: switch the terminal back on after this many hours')
     args = parser.parse_args(argv)
     if args.disable is not None and args.enable is not None:
@@ -941,6 +944,11 @@ def main(argv=None):
             print(t(f'VLC\'s experimental Corsican complement: {args.vlc_complement}. It is applied with VLC.',
                     f'Complément corse expérimental de VLC : {"activé" if args.vlc_complement == "on" else "désactivé"}. '
                     'Il s\'applique avec VLC.'))
+        if args.discord_watch:
+            import update
+            update.set_preference('discord_watch', args.discord_watch == 'on')
+            print(t(f'Watching Discord\'s start: {args.discord_watch}.',
+                    f'Surveillance du démarrage de Discord : {"activée" if args.discord_watch == "on" else "désactivée"}.'))
         return apply(args, requested, components, location)
 
 

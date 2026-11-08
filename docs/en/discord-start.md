@@ -32,6 +32,9 @@ Corsu never states a cause as certain: a log shows what happened, not always why
 - **Not covered**: Discord restarted by its own updater (the next start is watched), Discord started from a terminal
   or another launcher.
 
+To stop the watch on Linux (Discord gets its own menu entry back): `installer.py --discord-watch off`;
+`--discord-watch on` turns it back on. The choice is kept across updates.
+
 Without a notification service nothing pops up: the incident stays recorded and Corsu's window shows it (Discord row
 on the home page). One notification per incident.
 

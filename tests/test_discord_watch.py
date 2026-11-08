@@ -209,6 +209,15 @@ class LaunchTests(Watching):
         self.assertIsNone(result)
         self.assertEqual(self.notified, [])
 
+    def test_a_failing_check_before_the_start_still_starts_discord(self):
+        started = []
+        with patch.object(watch, 'start', side_effect=lambda command: started.append(command)), \
+             patch.object(watch, 'discord_running', side_effect=OSError('no process list')), \
+             patch.object(watch, 'watch') as watcher:
+            self.assertIsNone(watch.launch(['/usr/bin/discord', 'discord://-/channels/1/2'], 'shortcut'))
+        self.assertEqual(started, [['/usr/bin/discord', 'discord://-/channels/1/2']])
+        watcher.assert_not_called()
+
     def test_already_running_discord_is_not_watched(self):
         started, watcher, result = self.launch(running=True)
         self.assertEqual(len(started), 1)
@@ -397,7 +406,8 @@ class WrapperTests(Isolated):
         state = corsu.Installer()
         watch.update_wrappers(state, self.python)
         self.assertTrue(self.menu.exists())
-        state.state['discord_watch'] = False
+        import update
+        update.set_preference('discord_watch', False)  # what `installer.py --discord-watch off` saves
         watch.update_wrappers(state, self.python)
         self.assertFalse(self.menu.exists())
         self.assertNotIn('discord_watch.py', self.autostart.read_text())

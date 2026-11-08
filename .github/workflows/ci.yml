@@ -74,6 +74,12 @@ jobs:
           echo '{"plugins": {"Corsu": {"enabled": true}}}' > "$RUNNER_TEMP/vencord-settings.json"
           python tests/e2e/check_discord_real_start.py "$RUNNER_TEMP/Discord" --vencord Vencord/dist \
             --settings "$RUNNER_TEMP/vencord-settings.json" --work "$RUNNER_TEMP/discord-start" --no-sandbox
+      - name: Discord start watch on the real client — built Vencord decides "ok", offline decides "network" (never a Vencord error)
+        run: |
+          HOME=$(mktemp -d) python tests/e2e/check_discord_watch_real.py "$RUNNER_TEMP/Discord" --vencord Vencord/dist \
+            --settings "$RUNNER_TEMP/vencord-settings.json" --expect ok,ok-corsu --work "$RUNNER_TEMP/watch-ok" --no-sandbox
+          HOME=$(mktemp -d) python tests/e2e/check_discord_watch_real.py "$RUNNER_TEMP/Discord" --offline --window 90 \
+            --expect network,slow --work "$RUNNER_TEMP/watch-offline" --no-sandbox
       - if: always()
         uses: actions/upload-artifact@v4
         with:

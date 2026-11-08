@@ -147,9 +147,8 @@ class StatusTests(Data):
 
     def status(self, items=None, state=None, watch=None):
         items = items if items is not None else [{'name': 'discord', 'installed': True, 'on': True, 'activation': 'active'}]
-        with patch.dict(sys.modules, {'discord_watch': watch} if watch else {}):
-            if not watch:
-                sys.modules.pop('discord_watch', None)
+        # None in sys.modules makes `import discord_watch` fail: the window without the watch module.
+        with patch.dict(sys.modules, {'discord_watch': watch}):
             return app.discord_status(state or {'release': {'folder': '/data/releases/new'}}, items)
 
     def test_rows(self):

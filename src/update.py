@@ -39,7 +39,7 @@ ARCHIVES = {'linux': 'corsu-linux.tar.gz', 'macos': 'corsu-macos.tar.gz', 'windo
 CACHE = 'update.json'
 PREFERENCES = 'preferences.json'
 # vlc_complement: VLC's experimental Corsican complement (apps/vlc_complement.py), only when asked for.
-DEFAULTS = {'auto_update': False, 'vlc_complement': False}
+DEFAULTS = {'auto_update': False, 'vlc_complement': False, 'discord_watch': True}
 # How long GitHub's answer is used again without asking. Until 0.25.1 it was 6 hours, so a window opened hours after a
 # release could still say "up to date" (docs/update-diagnosis.md).
 CHECK_EVERY = 3600
