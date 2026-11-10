@@ -222,6 +222,9 @@ def run(command, environment, cwd, **options):
 
 
 def main():
+    # The runner's console is cp1252: output of the programs checked (U+FFFD for undecodable bytes) must not stop this.
+    sys.stdout.reconfigure(errors='replace')
+    sys.stderr.reconfigure(errors='replace')
     parser = argparse.ArgumentParser(description=__doc__.split('\n')[0])
     parser.add_argument('--root', type=Path, required=True, help='This release, extracted (for its version)')
     parser.add_argument('--archive', type=Path, required=True, help='This release\'s corsu-windows.zip')
