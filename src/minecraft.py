@@ -410,10 +410,11 @@ def running_folders():
     else:
         import subprocess
         command = (['powershell', '-NoProfile', '-Command',
-                    "Get-CimInstance Win32_Process -Filter \"Name like 'java%'\" | ForEach-Object { $_.CommandLine }"]
+                    "[Console]::OutputEncoding = [Text.Encoding]::UTF8; Get-CimInstance Win32_Process -Filter \"Name like 'java%'\" | ForEach-Object { $_.CommandLine }"]
                    if corsu.PLATFORM == 'windows' else ['ps', '-axww', '-o', 'command='])
         try:
-            output = subprocess.run(command, **corsu.hidden(capture_output=True, text=True, timeout=20)).stdout
+            output = subprocess.run(command, **corsu.hidden(capture_output=True, text=True, encoding='utf-8', errors='replace',
+                                                            timeout=20)).stdout
         except (OSError, subprocess.SubprocessError):
             return set()
         # Command lines are flat text here: a path with spaces cannot be cut out reliably, so a running game counts

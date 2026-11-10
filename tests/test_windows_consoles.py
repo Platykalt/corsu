@@ -37,7 +37,26 @@ class Hidden(unittest.TestCase):
 
     def test_windows_gets_no_console_and_keeps_the_rest(self):
         options = corsu.hidden(capture_output=True, text=True, creationflags=0x200)
-        self.assertEqual(options, {'capture_output': True, 'text': True, 'creationflags': 0x200 | NO_WINDOW})
+        self.assertEqual(options, {'capture_output': True, 'text': True, 'errors': 'replace',
+                                   'creationflags': 0x200 | NO_WINDOW})
+
+    def test_output_in_the_console_code_page_never_stops_corsu(self):
+        # 0.28.3, user folder with an accent ("Pàulu"): PowerShell wrote the path in code page 850, the installer
+        # read it as UTF-8 (the .cmd's UTF-8 mode), the reading thread failed, stdout was None and Corsu stopped
+        # on `.splitlines()`. Run for real here, without the Windows-only creation flag.
+        options = corsu.hidden(capture_output=True, text=True, encoding='utf-8')
+        options.pop('creationflags', None)
+        child = 'import sys; sys.stdout.buffer.write("C:\\\\Users\\\\Pàulu\\\\a.exe\\n".encode("cp850"))'
+        result = subprocess.run([sys.executable, '-c', child], **options)
+        self.assertIsNotNone(result.stdout)
+        self.assertEqual(len(result.stdout.splitlines()), 1)
+
+    def test_powershell_readers_ask_for_utf8(self):
+        with patch('subprocess.run', return_value=answer('C:\\Users\\Pàulu\\a.exe\n')) as run:
+            self.assertEqual(corsu.read_running_executables(), {'C:\\Users\\Pàulu\\a.exe'})
+        call = run.call_args
+        self.assertIn('OutputEncoding', call.args[0][-1])
+        self.assertEqual((call.kwargs['encoding'], call.kwargs['errors']), ('utf-8', 'replace'))
 
     def test_output_not_given_goes_to_this_process_streams(self):
         # The installer the window starts writes into a pipe: its children must write there too, not into a console

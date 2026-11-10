@@ -160,8 +160,9 @@ class NotepadPlusPlus(SettingApp):
         import subprocess
         try:
             output = subprocess.run(['powershell', '-NoProfile', '-Command',
-                                     f"(Get-Item -LiteralPath '{executable}').VersionInfo.ProductVersion"],
-                                    **corsu.hidden(capture_output=True, text=True, timeout=30)).stdout.strip()
+                                     f"[Console]::OutputEncoding = [Text.Encoding]::UTF8; (Get-Item -LiteralPath '{executable}').VersionInfo.ProductVersion"],
+                                    **corsu.hidden(capture_output=True, text=True, encoding='utf-8', errors='replace',
+                                                   timeout=30)).stdout.strip()
         except (OSError, subprocess.SubprocessError):
             return None
         return output.split()[0] if output else None

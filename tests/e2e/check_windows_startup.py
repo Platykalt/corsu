@@ -239,7 +239,17 @@ def main():
         old = published(args.published, Path(tempfile.mkdtemp(prefix='corsu-published-')))
         old_python = old / 'runtime/x86_64/python/python.exe'
         fake_prism_instance(home, (old / 'minecraft/java/VERSION').read_text(encoding='utf-8').strip())
-        code, _ = run([str(old_python), 'src/installer.py', '--components', 'minecraft', '7zip', '--yes'], environment, old)
+        install = [str(old_python), 'src/installer.py', '--components', 'minecraft', '7zip', '--yes']
+        # The user report behind 0.28.4: with an accent in the user folder, the published installer run the way its
+        # .cmd runs it (UTF-8 mode) stops on PowerShell's process list, written in the console's code page.
+        code, text = run(install, environment, old)
+        print(f'Published {args.published} through its .cmd in an accented user folder: code {code}')
+        if code == 0 or 'splitlines' not in text:
+            failures.append(f'published {args.published} installed in an accented folder: this check no longer shows '
+                            'the decoding bug')
+        # Installed the way its window installs (no UTF-8 mode, where those bytes happen to decode), to repair it below.
+        plain = {name: value for name, value in environment.items() if name != 'PYTHONUTF8'}
+        code, _ = run(install, plain, old)
         assert code == 0, f'installing {args.published} failed ({code})'
         assert run([str(old_python), 'src/installer.py', '--disable', '7zip'], environment, old)[0] == 0
         target, arguments, folder = shortcut(link)

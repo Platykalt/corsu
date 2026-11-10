@@ -1056,6 +1056,11 @@ def hidden(**options):
     writes into a console of its own, and its lines never reach the window's job."""
     if PLATFORM != 'windows':
         return options
+    # Windows programs write in the console's code page, not UTF-8: undecodable bytes in a path with an accent
+    # ("C:\Users\Hélène") made the reading thread fail, `stdout` stayed None and Corsu stopped (0.28.3, user folder
+    # with an accent). Callers that can, ask for UTF-8 (PowerShell's OutputEncoding); the rest never crash.
+    if options.get('text') or options.get('encoding') or options.get('universal_newlines'):
+        options.setdefault('errors', 'replace')
     if not console_window():
         options['creationflags'] = options.get('creationflags', 0) | CREATE_NO_WINDOW
     if not options.get('capture_output'):
@@ -1089,9 +1094,9 @@ def read_running_executables():
             except OSError:
                 continue
         return paths
-    command = (['powershell', '-NoProfile', '-Command', '(Get-Process).Path'] if PLATFORM == 'windows'
+    command = (['powershell', '-NoProfile', '-Command', '[Console]::OutputEncoding = [Text.Encoding]::UTF8; (Get-Process).Path'] if PLATFORM == 'windows'
                else ['ps', '-axo', 'comm='])
-    result = subprocess.run(command, **hidden(capture_output=True, text=True))
+    result = subprocess.run(command, **hidden(capture_output=True, text=True, encoding='utf-8', errors='replace'))
     if result.returncode != 0:
         return None
     return {line.strip() for line in result.stdout.splitlines() if line.strip()}
