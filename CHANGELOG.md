@@ -12,6 +12,23 @@ From 0.28.3 (`6979ddf`, tag `v0.28.3`). Vencord 1.15.9 (`7f0c10cc`) → 1.15.16 
   real Discord 1.0.168 for Linux, copied and isolated, before login: 0.28.3's build stays on "Starting", the new one
   reaches the login page with Vencord and the Corsu plugin's patches applied
   (`tests/e2e/check_discord_real_start.py`, also run in CI on the official Linux tar.gz). No change to the plugin.
+  That CI step printed SKIP at first (CI 42498281866): since late October the tar.gz holds only Discord's
+  bootstrapper. CI now runs it the way Discord's own `discord` script does and fails when no client folder results.
+- **Windows: an accent in the user folder stopped the installer.** PowerShell writes the process list
+  (`(Get-Process).Path`) in the console's code page; run in UTF-8 mode (as `Install for Windows.cmd` and the one-line
+  install do), the reading thread failed on the first accented byte, `stdout` stayed None and the installer ended on
+  `'NoneType' object has no attribute 'splitlines'`. A repair from the archive failed the same way. Reproduced with
+  the published 0.28.3 on the Windows runner (`tests/e2e/check_windows_startup.py`, user folder "Pàulu Còrsu").
+  PowerShell readers ask for UTF-8 output; `corsu.hidden()` makes every text-mode command replace undecodable bytes.
+- **Windows: the window no longer takes Corsu down with it.** The native window runs in a child process; when it dies
+  or its page is not loaded after 60 s, Corsu opens in the browser with a fresh ticket. Uncaught .NET exceptions and
+  faulthandler dumps go to the log. A start failure under pythonw shows a message box (log path, how to repair)
+  instead of nothing. `Install for Windows.cmd` without options falls back to the text installer (repair or update,
+  choices kept) when the window cannot start. Preventive: the user report behind this release was not reproduced as
+  such.
+- **Update check button during an automatic check.** It was dropped and the page could keep a saved "up to date"; it
+  now asks GitHub after the running check. `get.ps1`: TLS 1.2 on Windows PowerShell 5.1, `.sha256` downloaded as a
+  file. CI recovers a published 0.28.3 whose window is unusable with the one-line install.
 - **Building Vencord follows the pinned revision.** An existing Vencord checkout used to keep its old revision and
   dependencies (only a missing `node_modules/esbuild` triggered an install, and freshness compared file dates). The
   checkout is now moved to the pinned revision (refused, with its changes kept, when it has local changes),

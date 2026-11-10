@@ -1,7 +1,15 @@
 **Français** · [English](#english)
 
-**Discord ne reste plus bloqué sur « Starting » avec Corsu.** Mise à jour depuis la fenêtre de Corsu (bouton
-« Rechercher les mises à jour ») ou par l'installation en une ligne ; vos choix sont gardés.
+**Discord ne reste plus bloqué sur « Starting » avec Corsu, et Corsu ne s'arrête plus en silence sous Windows.**
+Mise à jour depuis la fenêtre de Corsu (bouton « Rechercher les mises à jour ») ou par l'installation en une ligne ;
+vos choix sont gardés.
+
+**Corsu ne s'ouvre plus sous Windows ?** Inutile de désinstaller : fermez Discord et vos navigateurs, téléchargez
+[corsu-windows.zip](https://github.com/Platykalt/corsu/releases/latest/download/corsu-windows.zip), faites un clic
+droit › Extraire tout, puis double-cliquez sur `corsu\Install for Windows.cmd`. L'installation existante est réparée
+ou mise à jour en gardant vos choix, vos parties désactivées, l'apparence et les sauvegardes ; si la fenêtre ne
+s'ouvre pas, l'installation continue en texte dans la même fenêtre noire. Le dossier extrait peut ensuite être
+supprimé. Détails : [Windows](https://github.com/Platykalt/corsu/blob/main/docs/fr/ordinateur/windows.md).
 
 ### Téléchargements par usage
 
@@ -25,13 +33,27 @@ publication (tests automatiques ; personne n'a regardé les écrans).
 
 ### Nouveautés de la 0.28.4
 
+- **Windows, dossier utilisateur avec un accent** (« C:\Users\Hélène ») : l'installateur lancé depuis l'archive ou
+  par la commande en une ligne s'arrêtait (« 'NoneType' object has no attribute 'splitlines' ») en lisant la liste
+  des programmes ouverts, que PowerShell écrit dans l'encodage de la console. Une réparation depuis l'archive
+  échouait donc elle aussi. Reproduit avec la 0.28.3 publiée sur un Windows de CI ; corrigé et vérifié au même
+  endroit.
+- **La fenêtre de Corsu ne disparaît plus en silence (Windows)** : elle tourne dans un processus à part ; si elle
+  plante ou reste vide 60 secondes, Corsu s'ouvre dans le navigateur. Si Corsu ne peut pas démarrer du tout, un
+  message dit comment le réparer et où se trouve le journal (`%LOCALAPPDATA%\corsu\logs\corsu.log`, sans mot de
+  passe ni message). `Install for Windows.cmd` répare sans la fenêtre si elle ne s'ouvre pas. Correctifs
+  préventifs : la panne signalée par un utilisateur n'a pas pu être reproduite telle quelle.
+- **Bouton « Rechercher les mises à jour »** : pressé pendant une vérification automatique, il était ignoré et la
+  page pouvait afficher une ancienne réponse « à jour ». Il interroge maintenant GitHub. Une vérification impossible
+  (réseau, limite de GitHub, réponse invalide) n'est jamais affichée comme « à jour ».
+- **Installation en une ligne sous Windows PowerShell 5.1** : TLS 1.2 autorisé et somme `.sha256` lue comme fichier.
 - **Discord bloqué sur « Starting »** : depuis une mise à jour du code web de Discord (novembre 2026), Discord ne
   dépassait plus l'écran de chargement quand Corsu était installé. La cause est dans Vencord 1.15.9, embarqué par
   Corsu : il ne reconnaissait plus une nouvelle façon dont Discord déclare ses modules
   (`TypeError: i.A is not a constructor`). Corsu embarque maintenant Vencord 1.15.16, qui corrige ce point. Le plugin
   corse et ses traductions ne changent pas. Vérifié sur le vrai Discord 1.0.168 pour Linux, copié et isolé, jusqu'à
   la page de connexion : la 0.28.3 reste bloquée, la 0.28.4 l'atteint avec Vencord et le plugin Corsu chargés. La CI
-  refait ce test avec le Discord Linux officiel. **Pas encore vérifié une fois connecté, ni sous Windows et macOS.**
+  refait ce test avec le Discord Linux officiel (téléchargé par son programme d'amorçage). **Pas encore vérifié une fois connecté, ni sous Windows et macOS.**
 - **Réinstallation après une restauration manuelle** : si vous aviez remis le Discord d'origine à la main pour le
   débloquer, l'installateur peut de nouveau installer Corsu. Un fichier Discord modifié d'origine inconnue reste
   protégé.
@@ -170,8 +192,15 @@ publication (tests automatiques ; personne n'a regardé les écrans).
 
 ## English
 
-**Discord no longer hangs on "Starting" with Corsu.** Update from Corsu's window ("Rechercher les mises à jour" button) or with the one-line
-install; your choices are kept.
+**Discord no longer hangs on "Starting" with Corsu, and Corsu no longer stops silently on Windows.** Update from
+Corsu's window ("Rechercher les mises à jour" button) or with the one-line install; your choices are kept.
+
+**Corsu no longer opens on Windows?** No need to uninstall: close Discord and your browsers, download
+[corsu-windows.zip](https://github.com/Platykalt/corsu/releases/latest/download/corsu-windows.zip), right-click ›
+Extract All, then double-click `corsu\Install for Windows.cmd`. The existing installation is repaired or updated,
+keeping your choices, switched-off parts, appearance and backups; if the window does not open, the install goes on as
+text in the same black window. The extracted folder can be deleted afterwards. Details:
+[Windows](https://github.com/Platykalt/corsu/blob/main/docs/en/computer/windows.md).
 
 ### Downloads by use
 
@@ -195,12 +224,25 @@ looked at the screens).
 
 ### New in 0.28.4
 
+- **Windows, user folder with an accent** ("C:\Users\Hélène"): the installer run from the archive or the one-line
+  install stopped ("'NoneType' object has no attribute 'splitlines'") while reading the list of running programs,
+  which PowerShell writes in the console's code page. A repair from the archive failed as well. Reproduced with the
+  published 0.28.3 on a CI Windows; fixed and checked in the same place.
+- **Corsu's window no longer disappears silently (Windows)**: it runs in a process of its own; if it crashes or stays
+  blank for 60 seconds, Corsu opens in the browser. If Corsu cannot start at all, a message says how to repair it and
+  where the log is (`%LOCALAPPDATA%\corsu\logs\corsu.log`, no passwords or messages). `Install for
+  Windows.cmd` repairs without the window when it does not open. Preventive fixes: the failure a user reported could
+  not be reproduced as such.
+- **"Rechercher les mises à jour" button**: pressed during an automatic check, it was ignored and the page could show
+  an old "up to date" answer. It now asks GitHub. A check that could not be made (network, GitHub limit, invalid
+  answer) is never shown as "up to date".
+- **One-line install on Windows PowerShell 5.1**: TLS 1.2 allowed and the `.sha256` read as a file.
 - **Discord stuck on "Starting"**: since an update of Discord's web code (November 2026), Discord no longer got past
   its loading screen when Corsu was installed. The cause is in Vencord 1.15.9, bundled by Corsu: it no longer handled
   a new way Discord declares its modules (`TypeError: i.A is not a constructor`). Corsu now bundles Vencord 1.15.16,
   which fixes it. The Corsican plugin and its translations are unchanged. Checked on the real Discord 1.0.168 for
   Linux, copied and isolated, up to the login page: 0.28.3 stays stuck, 0.28.4 reaches it with Vencord and the Corsu
-  plugin loaded. CI repeats this with the official Linux Discord. **Not yet checked once logged in, nor on Windows
+  plugin loaded. CI repeats this with the official Linux Discord (fetched by its bootstrapper). **Not yet checked once logged in, nor on Windows
   and macOS.**
 - **Reinstalling after a manual restore**: if you put the original Discord back by hand to unblock it, the installer
   can install Corsu again. A Discord file changed in an unknown way stays protected.
