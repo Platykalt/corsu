@@ -327,6 +327,19 @@ jobs:
           name: windows-native-window
           path: e2e-artifacts/windows-corsu-window.png
           if-no-files-found: warn
+      # 0.28.4: "Corsu no longer opens" on Windows. The window now runs in a process of its own; published 0.28.3 shows
+      # what this guards against (a dead window takes Corsu with it, a failed start says nothing).
+      - name: Corsu starts on Windows whatever its window does — lasting window, crash to the browser, start failure message, repair of published 0.28.3 by this archive's .cmd without its window
+        if: runner.os == 'Windows'
+        timeout-minutes: 30
+        run: python tests/e2e/check_windows_startup.py --root "${{ env.CORSU_RELEASE }}" --archive dist/corsu-windows.zip --published 0.28.3
+      - name: Keep the screenshot of the Windows window after the repair
+        if: always() && runner.os == 'Windows'
+        uses: actions/upload-artifact@v4
+        with:
+          name: windows-startup-window
+          path: e2e-artifacts/windows-startup-window.png
+          if-no-files-found: warn
       - name: Chromium — translate Chrome for Testing, read it in Corsican, switch off/on, restore
         if: runner.os != 'macOS'
         shell: bash
