@@ -1,6 +1,6 @@
 # Changelog
 
-## 0.28.4 (not yet published)
+## 0.28.4 (2026-11-10)
 
 From 0.28.3 (`6979ddf`, tag `v0.28.3`). Vencord 1.15.9 (`7f0c10cc`) → 1.15.16 (`383409e6`).
 

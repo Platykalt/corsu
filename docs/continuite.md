@@ -3,7 +3,32 @@
 Document de reprise, tenu à jour à chaque étape. Il renvoie aux documents détaillés plutôt que de les répéter.
 Les sections datées après « État actuel » sont l'historique : ce qui y est dit ouvert a pu être corrigé depuis.
 
-## État actuel (28 octobre 2026)
+## État actuel (10 novembre 2026)
+
+- **0.28.4 publiée** (10 novembre 2026, 21 h 13 UTC) : tag annoté `v0.28.4` sur `69c5e06` (= `main` à la
+  publication), release https://github.com/Platykalt/corsu/releases/tag/v0.28.4, dernière version, 16 fichiers, sommes
+  vérifiées après téléchargement. Vencord 1.15.16 (`383409e6`). CI de la candidate 42882180988 verte ; CI du tag
+  42892645179 verte (publication et installation en une ligne Linux et Windows comprises). Essai isolé après
+  publication (Linux) : le code de la 0.28.3 publiée voit la 0.28.4 (`newer: True`) ; `check_update.py --from 0.28.3
+  --recover-from 0.28.3` avec les archives publiques : 70 PASS, partie désactivée, préférences, apparence gardées.
+  Installation du mainteneur (`hyprland`) non touchée. Signalement d'un utilisateur Windows : « Corsu ne s'ouvre plus,
+  pas de mise à jour proposée, réglé en retirant Corsu ».
+  - Pas de mise à jour proposée : normal, 0.28.3 était la dernière version publiée.
+  - Cause établie sur runner Windows (pas sur le PC de l'utilisateur) : avec un dossier utilisateur accentué,
+    `Install for Windows.cmd` (PYTHONUTF8=1) lisait la sortie de PowerShell (page de code OEM) en UTF-8, le fil de
+    lecture échouait, `stdout` restait None et l'installeur s'arrêtait (`splitlines`) ; réparation impossible aussi.
+    Corrigé dans `corsu.hidden()` (`errors='replace'`) et PowerShell écrit en UTF-8 (`40f48a7`). Non confirmé comme
+    cause du signalement : réponses de l'utilisateur attendues.
+  - Préventif : fenêtre dans un processus enfant avec repli navigateur (60 s), boîte de message sous pythonw avec le
+    chemin du journal, repli texte du `.cmd`, bouton « Vérifier » qui revérifie vraiment, `get.ps1` en TLS 1.2,
+    procédure de reprise dans `docs/*/ordinateur/windows.md` et les notes de version.
+  - Discord bloqué sur « Starting » : corrigé par Vencord 1.15.16, prouvé en CI sur le vrai client Linux (amorçage par
+    `updater_bootstrap`).
+  - Limites : messages de secours sans corse ; dossier de version manquant toujours sans message ; aucun PC
+    d'utilisateur observé.
+- **Surveillance de Discord (0.29.0)** : branche `discord-watch`, non fusionnée, CI non verte ; à rebaser sur 0.28.4.
+
+## 28 octobre 2026 : 0.28.3
 
 - **0.28.3 publiée** (28 octobre 2026, 4 h 50 UTC) : tag annoté `v0.28.3` sur `ff3fd3b` (= `main` à la publication),
   release https://github.com/Platykalt/corsu/releases/tag/v0.28.3, dernière version, 16 fichiers, sommes vérifiées après
