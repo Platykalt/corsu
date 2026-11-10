@@ -3,6 +3,8 @@
 #   irm https://raw.githubusercontent.com/Platykalt/corsu/main/install/get.ps1 | iex
 $ErrorActionPreference = 'Stop'
 $ProgressPreference = 'SilentlyContinue'
+# Windows PowerShell 5.1 may still offer only TLS 1.0, which GitHub refuses: allow TLS 1.2 as well.
+[Net.ServicePointManager]::SecurityProtocol = [Net.ServicePointManager]::SecurityProtocol -bor [Net.SecurityProtocolType]::Tls12
 # CORSU_DOWNLOAD_BASE: a development override pointing at another folder of the same archives and .sha256 files
 # (a test build, file:// works). SHA-256 only proves the download matches the .sha256 fetched from the SAME base,
 # i.e. the transfer was not corrupted; it does not prove where the files come from. The authenticity of the
@@ -22,7 +24,10 @@ if ($base.StartsWith('file:')) {
     $sum = Get-Content (Join-Path $folder 'corsu-windows.zip.sha256') -Raw
 } else {
     Invoke-WebRequest "$base/corsu-windows.zip" -OutFile $zip -UseBasicParsing
-    $sum = [string](Invoke-RestMethod "$base/corsu-windows.zip.sha256" -UseBasicParsing)
+    # A file, not Invoke-RestMethod: the .sha256 comes as application/octet-stream, which PowerShell versions read
+    # differently (text or bytes).
+    Invoke-WebRequest "$base/corsu-windows.zip.sha256" -OutFile "$zip.sha256" -UseBasicParsing
+    $sum = Get-Content "$zip.sha256" -Raw
 }
 $expected = $sum.Trim().Split(' ')[0].ToLower()
 $actual = (Get-FileHash $zip -Algorithm SHA256).Hash.ToLower()

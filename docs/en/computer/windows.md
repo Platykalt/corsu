@@ -80,6 +80,33 @@ Do not change the Start menu's Corsu shortcut itself: Corsu rewrites it at every
 shortcut changed by hand, which would make the update fail. Once Corsu is updated to 0.28.0, delete the
 "Corsu (browser)" Desktop shortcut: it points to the previous version.
 
+## Corsu's window no longer opens: run the official installer again
+
+Installing the latest release again over the existing installation puts it back in order. Your choices are kept:
+translated programs, parts switched off (they stay off), preferences, the window's appearance and the backups of the
+original settings. If the latest release is already installed, it is repaired.
+
+1. Close Firefox, your browsers and Discord.
+2. Download [corsu-windows.zip](https://github.com/Platykalt/corsu/releases/latest/download/corsu-windows.zip)
+   (no GitHub account needed).
+3. Right-click the file, choose Extract All, open the `corsu` folder and double-click `Install for Windows.cmd`.
+
+Or, in PowerShell (Start menu, type PowerShell):
+
+```powershell
+irm https://raw.githubusercontent.com/Platykalt/corsu/main/install/get.ps1 | iex
+```
+
+If the window does not open during the installation either, the same command with `--text` does everything in
+PowerShell:
+
+```powershell
+& ([scriptblock]::Create((irm https://raw.githubusercontent.com/Platykalt/corsu/main/install/get.ps1))) --text
+```
+
+The command also checks the download's SHA-256. Either way, Corsu is installed in `%LOCALAPPDATA%\corsu` and the
+Start menu shortcuts point there; the extracted or downloaded folder can be deleted afterwards.
+
 ## Changing your mind
 
 Open the Corsu app from the Start menu to add a program, switch a part off for a while, or remove Corsu. Removing it

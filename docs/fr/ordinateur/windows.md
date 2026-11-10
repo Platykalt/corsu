@@ -80,6 +80,35 @@ Ne modifiez pas le raccourci Corsu du menu Démarrer lui-même : Corsu le rééc
 toucher à un raccourci changé à la main, ce qui ferait échouer la mise à jour. Une fois Corsu mis à jour vers la
 0.28.0, supprimez le raccourci « Corsu (navigateur) » du Bureau : il désigne la version précédente.
 
+## La fenêtre de Corsu ne s'ouvre plus : reprendre l'installation officielle
+
+Réinstaller la dernière version publiée par-dessus l'installation existante la remet en état. Vos choix sont gardés :
+logiciels traduits, parties désactivées (elles restent désactivées), préférences, apparence de la fenêtre et
+sauvegardes des réglages d'origine. Si la dernière version est déjà installée, elle est réparée.
+
+1. Fermez Firefox, vos navigateurs et Discord.
+2. Téléchargez [corsu-windows.zip](https://github.com/Platykalt/corsu/releases/latest/download/corsu-windows.zip)
+   (aucun compte GitHub nécessaire).
+3. Faites un clic droit sur le fichier, choisissez Extraire tout, ouvrez le dossier `corsu` et double-cliquez sur
+   `Install for Windows.cmd`.
+
+Ou, dans PowerShell (menu Démarrer, tapez PowerShell) :
+
+```powershell
+irm https://raw.githubusercontent.com/Platykalt/corsu/main/install/get.ps1 | iex
+```
+
+Si la fenêtre ne s'ouvre pas non plus pendant l'installation, la même commande avec `--text` fait tout dans
+PowerShell :
+
+```powershell
+& ([scriptblock]::Create((irm https://raw.githubusercontent.com/Platykalt/corsu/main/install/get.ps1))) --text
+```
+
+La commande vérifie aussi la somme SHA-256 du téléchargement. Dans les deux cas, Corsu s'installe dans
+`%LOCALAPPDATA%\corsu` et les raccourcis du menu Démarrer y renvoient ; le dossier extrait ou téléchargé peut ensuite
+être supprimé.
+
 ## Changer d'avis
 
 Ouvrez l'application Corsu dans le menu Démarrer pour ajouter un logiciel, mettre une partie en pause ou retirer Corsu. Le

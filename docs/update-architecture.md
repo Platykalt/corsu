@@ -45,7 +45,7 @@ window maps it to "busy".
   unless `force`. Only stable releases (not drafts, not pre-releases, not tags without a release) are considered.
 - The window (`src/app.py`) checks when it opens (an answer older than 10 minutes is asked again), when a second
   launch shows it, every hour while it stays open (that one never starts an automatic update), and on the button
-  (`force`). A newer copy never shows the window
+  (`force`; pressed while another check runs, it is followed by one that asks GitHub). A newer copy never shows the window
   of an older copy still open: it opens its own. See [update-diagnosis.md](update-diagnosis.md).
 - `python update.py --install [--version X.Y.Z]`: downloads the archive of that exact tag
   (`releases/download/vX.Y.Z/…`, never `latest`), checks its `.sha256` and that its `src/release.json` names the same
