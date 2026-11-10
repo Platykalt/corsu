@@ -71,8 +71,15 @@ jobs:
           sudo apt-get install -y -qq weston
           curl -fsSL -o "$RUNNER_TEMP/discord.tar.gz" "https://discord.com/api/download?platform=linux&format=tar.gz"
           tar -xzf "$RUNNER_TEMP/discord.tar.gz" -C "$RUNNER_TEMP"
+          # Since late October 2026 the tar.gz holds only Discord's bootstrapper: it downloads the app folder the way
+          # Discord's own `discord` script does (same arguments). Without that folder the check below only printed SKIP (CI 42498281866).
+          # The bootstrapper needs its folder to exist ("unable to open database file").
+          mkdir -p "$RUNNER_TEMP/discord-root"
+          app=$("$RUNNER_TEMP/Discord/updater_bootstrap" --no-zenity "$RUNNER_TEMP/discord-root" stable https://updates.discord.com/)
+          client="$RUNNER_TEMP/discord-root/$app"
+          test -x "$client/Discord" && test -f "$client/resources/app.asar"
           echo '{"plugins": {"Corsu": {"enabled": true}}}' > "$RUNNER_TEMP/vencord-settings.json"
-          python tests/e2e/check_discord_real_start.py "$RUNNER_TEMP/Discord" --vencord Vencord/dist \
+          python tests/e2e/check_discord_real_start.py "$client" --vencord Vencord/dist \
             --settings "$RUNNER_TEMP/vencord-settings.json" --work "$RUNNER_TEMP/discord-start" --no-sandbox
       - if: always()
         uses: actions/upload-artifact@v4
