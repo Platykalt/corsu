@@ -264,6 +264,55 @@ class LaunchTests(Watching):
             watch.main(['launch', '--'])
         launch.assert_called_once_with(None, None)
 
+    def test_another_channel_open_does_not_stop_the_watch(self):
+        # Discord stable open, Discord PTB started from its entry: PTB's start is watched, and only PTB counts.
+        asked = []
+
+        def running(names=watch.PROCESS_NAMES):
+            asked.append(tuple(names))
+            return 'Discord' in names
+
+        class Process:
+            def poll(self):
+                return None
+        with patch.object(watch, 'start', return_value=Process()), patch.object(watch, 'discord_running', side_effect=running), \
+             patch.object(watch, 'client_folder', return_value=None), \
+             patch.object(watch, 'watch', return_value={'state': 'ok', 'incident': None, 'notified': False}) as watcher:
+            watch.launch(['/usr/bin/discord-ptb'], 'shortcut')
+        watcher.assert_called_once()
+        self.assertEqual(asked[0], ('DiscordPTB',))
+        alive = watcher.call_args.args[1]
+        Process.poll = lambda self: 0  # PTB's own process gone: stable being open must not keep it "alive"
+        self.assertFalse(alive())
+
+    def test_client_of_a_channel_is_never_another_channels_discord(self):
+        stable = self.config / 'discord/app-1.0.168'
+        record = corsu.Installer()
+        record.state['files']['x'] = {'discord_location': str(stable)}
+        corsu.save_state(record.state)
+        with patch.object(installer, 'discord_location', return_value=stable):
+            self.assertIsNone(watch.client_folder(self.config / 'discordptb'))
+            self.assertEqual(watch.client_folder(self.config / 'discord'), stable)
+        # The link Discord's updater keeps names the version a launch runs, for each channel.
+        canary = self.config / 'discordcanary/app-0.0.700'
+        canary.mkdir(parents=True)
+        (canary / 'DiscordCanary').write_text('')
+        (self.config / 'discordcanary/DiscordCanary').symlink_to(canary / 'DiscordCanary')
+        self.assertEqual(watch.client_folder(self.config / 'discordcanary'), canary.resolve())
+
+    def test_start_command_follows_the_installation(self):
+        ptb = self.config / 'discordptb/app-0.0.99'
+        ptb.mkdir(parents=True)
+        (self.config / 'discordptb/DiscordPTB').write_text('')
+        with patch.object(watch.sys, 'platform', 'linux'):
+            self.assertEqual(watch.default_command(ptb), [str(self.config.resolve() / 'discordptb/DiscordPTB')])
+            self.assertEqual(watch.default_command('/opt/discord-canary'), ['/opt/discord-canary/DiscordCanary'])
+        with patch.object(watch.sys, 'platform', 'win32'):
+            self.assertEqual(watch.default_command(self.home / 'DiscordPTB'),
+                             [str(self.home / 'DiscordPTB/Update.exe'), '--processStart', 'DiscordPTB.exe'])
+        with patch.object(watch.sys, 'platform', 'darwin'):
+            self.assertEqual(watch.default_command('/Applications/Discord PTB.app'), ['open', '/Applications/Discord PTB.app'])
+
     def test_user_data_folder_follows_the_channel(self):
         self.assertEqual(watch.user_data_dir(['/usr/bin/discord-ptb']).name, 'discordptb')
         self.assertEqual(watch.user_data_dir(['x', '--user-data-dir=/tmp/u']), Path('/tmp/u'))
@@ -280,6 +329,7 @@ class RescueTests(Isolated):
         (resources / '_app.asar').write_bytes(self.original)
         (resources / 'app.asar').write_bytes(self.launcher)
         self.app = resources / 'app.asar'
+        self.launched = []
         record = corsu.Installer()
         record.external_file(self.app, self.original)
         record.state['files'][str(self.app)]['discord_location'] = str(self.location)
@@ -322,10 +372,11 @@ class RescueTests(Isolated):
 
     def start(self, state, incident=None):
         """A stand-in for launch(): a watched start that ends in `state`, settling the reactivation as launch() does."""
-        def launch(window=None):
+        def launch(command=None, kind=None, window=None):
+            self.launched.append(command)
             if state is None:
                 return None
-            record = {'state': state, 'incident': incident, 'started_at': time.time()}
+            record = {'state': state, 'incident': incident, 'started_at': time.time(), 'client': str(self.location)}
             watch.settle_reactivation(record)
             return record
         return launch
@@ -363,16 +414,17 @@ class RescueTests(Isolated):
                     installer.install_discord(self.location)
                 official.assert_not_called()
                 # A later watched start (the shortcut, "Retry") that shows the Corsu plugin ends rescue mode.
-                self.assertEqual(watch.settle_reactivation({'state': 'ok-corsu', 'started_at': time.time()}), '')
+                self.assertEqual(watch.settle_reactivation({'state': 'ok-corsu', 'started_at': time.time(),
+                                                            'client': str(self.location)}), '')
                 self.assertFalse(watch.in_rescue())
 
     def test_failed_reactivation_with_discord_still_open_waits_to_restore(self):
         self.assertTrue(watch.rescue()['ok'])
         running = patch.object(watch, 'discord_running', return_value=False)
         with patch.object(installer, 'install_discord', side_effect=self.reinstall), running as alive:
-            def stuck(window=None):
+            def stuck(command=None, kind=None, window=None):
                 alive.return_value = True  # Discord stays open on its splash screen
-                return self.start('slow', 'i3')()
+                return self.start('slow', 'i3')(command)
             with patch.object(watch, 'launch', side_effect=stuck):
                 result = watch.reactivate()
         self.assertEqual(result, {'ok': False, 'reason': 'restore-pending', 'state': 'slow'})
@@ -415,6 +467,79 @@ class RescueTests(Isolated):
     def test_other_discord_than_the_recorded_one_is_refused(self):
         watch.write_state({'state': 'vencord-error', 'client': str(self.config / 'discord/app-1.0.169')})
         self.assertEqual(watch.rescue()['reason'], 'unknown-app')
+
+    def add_discord(self, location, archive=None):
+        """Another Discord archive managed by Corsu (another version or channel), loading Corsu's build."""
+        resources = location / 'resources'
+        resources.mkdir(parents=True)
+        (resources / '_app.asar').write_bytes(self.original)
+        app = resources / 'app.asar'
+        app.write_bytes(archive or self.launcher)
+        record = corsu.Installer()
+        record.external_file(app, self.original)
+        record.state['files'][str(app)]['discord_location'] = str(location)
+        corsu.save_state(record.state)
+        return app
+
+    def test_another_channel_keeps_its_translation_and_its_protection(self):
+        ptb = self.add_discord(self.config / 'discordptb/app-0.0.99')
+        self.assertTrue(watch.rescue('i1')['ok'])
+        self.assertEqual(self.app.read_bytes(), self.original)
+        self.assertEqual(ptb.read_bytes(), self.launcher)  # PTB untouched
+        # The reactivation reinstalls and starts Discord stable, the one in rescue mode, not the default Discord.
+        with patch.object(installer, 'install_discord', side_effect=self.reinstall) as reinstall, \
+             patch.object(watch, 'launch', side_effect=self.start('closed')):
+            self.assertEqual(watch.reactivate()['reason'], 'unconfirmed')
+        self.assertEqual([call.args[0] for call in reinstall.call_args_list], [self.location])
+        self.assertEqual(self.launched, [watch.default_command(self.location)])
+        # PTB starting with the Corsu plugin proves nothing about Discord stable: its rescue mode stays.
+        proof = {'state': 'ok-corsu', 'started_at': time.time(), 'client': str(ptb.parent.parent)}
+        self.assertEqual(watch.settle_reactivation(proof), 'verifying')
+        self.assertTrue(watch.in_rescue())
+        # Nor does a start whose Discord is unknown.
+        self.assertEqual(watch.settle_reactivation({**proof, 'client': None}), 'verifying')
+        self.assertEqual(watch.settle_reactivation({**proof, 'client': str(self.location)}), '')
+
+    def test_rescue_puts_back_every_version_of_that_discord(self):
+        # Linux keeps app-<version> folders side by side and may start any of them: none keeps loading the build.
+        older = self.add_discord(self.config / 'discord/app-1.0.167')
+        replaced = self.add_discord(self.config / 'discord/app-1.0.166', archive=b'Discord replaced it' * 10)
+        self.assertTrue(watch.rescue('i1')['ok'])
+        self.assertEqual((self.app.read_bytes(), older.read_bytes()), (self.original, self.original))
+        self.assertEqual(replaced.read_bytes(), b'Discord replaced it' * 10)  # no longer Corsu's: left as it is
+
+    def test_reactivation_follows_discord_to_its_new_version(self):
+        self.assertTrue(watch.rescue('i1')['ok'])
+        newer = self.config / 'discord/app-1.0.169'
+        (newer / 'resources').mkdir(parents=True)
+        (newer / 'resources/app.asar').write_bytes(self.original)  # Discord updated itself meanwhile
+        with patch.object(installer, 'install_discord', side_effect=self.reinstall) as reinstall, \
+             patch.object(watch, 'launch', side_effect=self.start('closed')):
+            watch.reactivate()
+        self.assertEqual([call.args[0] for call in reinstall.call_args_list][0], newer)
+        self.assertEqual(watch.rescue_info()['location'], str(newer))
+
+    def test_a_page_drawn_for_an_older_start_does_not_rescue_another_discord(self):
+        watch.write_state({'version': 1, 'state': 'ok', 'incident': None, 'client': str(self.location)})
+        self.assertEqual(watch.rescue('i1')['reason'], 'other-incident')
+        self.assertEqual(self.app.read_bytes(), self.launcher)
+
+    def test_windows_rescue_uses_the_current_version(self):
+        # Windows: one location (%LOCALAPPDATA%\Discord), one record per app-<version> Corsu patched; an older
+        # version Discord deleted must not make the current one look changed.
+        location = self.home / 'AppData/Local/Discord'
+        gone = self.add_discord(location / 'app-1.0.9001')
+        current = self.add_discord(location / 'app-1.0.9002')
+        state = corsu.load_state()
+        for app in (gone, current):
+            state['files'][str(app)]['discord_location'] = str(location)
+        corsu.save_state(state)
+        gone.unlink()
+        watch.write_state({'version': 1, 'state': 'vencord-error', 'incident': 'i1', 'client': str(location)})
+        with patch.object(installer, 'discord_archive', return_value=current):
+            self.assertTrue(watch.rescue('i1')['ok'])
+        self.assertEqual(current.read_bytes(), self.original)
+        self.assertEqual(self.app.read_bytes(), self.launcher)  # the Linux one of this test: another installation
 
     def test_uninstall_in_rescue_restores_discord_and_forgets_the_watch(self):
         self.assertTrue(watch.rescue()['ok'])

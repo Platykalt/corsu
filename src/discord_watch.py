@@ -29,6 +29,8 @@ EVIDENCE = 20
 PROBLEMS = ('vencord-error', 'start-error', 'slow', 'network', 'offscreen')
 GOOD = ('ok', 'ok-corsu')
 PROCESS_NAMES = ('Discord', 'DiscordPTB', 'DiscordCanary')
+# Discord's channels, each a separate program: its process (and Linux link, Windows folder) name, its user-data folder.
+CHANNELS = {'stable': ('Discord', 'discord'), 'ptb': ('DiscordPTB', 'discordptb'), 'canary': ('DiscordCanary', 'discordcanary')}
 SYSTEM_APPLICATIONS = Path('/usr/share/applications')
 DESKTOP_IDS = ('discord.desktop', 'discord-ptb.desktop', 'discord-canary.desktop')
 
@@ -73,30 +75,46 @@ def folder():
     return corsu.DATA / 'discord-watch'
 
 
+def channel(text):
+    """stable, ptb or canary: from a command, a user-data folder or an install folder (Linux: <install>/app-<version>)."""
+    if isinstance(text, (str, Path)):
+        path = Path(text)
+        text = path.parent.name if path.name.startswith('app-') else path.name
+    else:
+        text = ' '.join(text)
+    text = text.lower()
+    return 'canary' if 'canary' in text else 'ptb' if 'ptb' in text else 'stable'
+
+
+def install_of(location):
+    """The Discord installation an app folder belongs to: Linux keeps each version in <install>/app-<version>; on
+    Windows and macOS the location is the installation itself."""
+    path = Path(location).resolve()
+    return path.parent if path.name.startswith('app-') else path
+
+
 def user_data_dir(command=()):
     """Discord's user-data folder for a command: --user-data-dir, else by channel (stable, PTB, Canary)."""
     for argument in command:
         if argument.startswith('--user-data-dir='):
             return Path(argument.split('=', 1)[1])
-    text = ' '.join(command).lower()
-    name = 'discordcanary' if 'canary' in text else 'discordptb' if 'ptb' in text else 'discord'
-    return config_folder() / name
+    return config_folder() / CHANNELS[channel(command)][1]
 
 
-def discord_running():
-    """Whether a Discord process (stable, PTB or Canary) is open. Unknown counts as open: nothing is then changed."""
+def discord_running(names=PROCESS_NAMES):
+    """Whether a Discord process (by default any channel) is open. Unknown counts as open: nothing is then changed."""
     try:
         if sys.platform == 'win32':
             import corsu  # Windows has no wrapper: Corsu's window calls this, corsu is already loaded there
             output = subprocess.run(['tasklist', '/FO', 'CSV', '/NH'],
                                     **corsu.hidden(capture_output=True, text=True, check=False)).stdout.lower()
-            return any(f'"{name.lower()}.exe"' in output for name in PROCESS_NAMES)
+            return any(f'"{name.lower()}.exe"' in output for name in names)
         if sys.platform == 'darwin':
             return any(subprocess.run(['pgrep', '-x', name], capture_output=True, check=False).returncode == 0
-                       for name in PROCESS_NAMES)
+                       for name in names)
         for comm in Path('/proc').glob('[0-9]*/comm'):
             try:
-                if comm.read_text().strip() in PROCESS_NAMES:
+                if comm.read_text().strip() in names:
                     return True
             except OSError:
                 continue
@@ -105,7 +123,18 @@ def discord_running():
         return True
 
 
-def default_command():
+def default_command(location=None):
+    """How Discord is started: the platform's way, or with `location` the Discord installed there (its channel)."""
+    if location:
+        location = Path(location)
+        name = CHANNELS[channel(location)][0]
+        if sys.platform == 'win32':
+            return [str(location / 'Update.exe'), '--processStart', f'{name}.exe']
+        if sys.platform == 'darwin':
+            return ['open', str(location)]
+        # Linux: the link Discord's updater keeps next to its versions, else the program in that folder.
+        link = install_of(location) / name
+        return [str(link if link.is_file() else location / name)]
     if sys.platform == 'win32':
         update = Path(os.environ.get('LOCALAPPDATA', '')) / 'Discord/Update.exe'
         return [str(update), '--processStart', 'Discord.exe']
@@ -259,12 +288,18 @@ def write_state(document):
 
 
 def client_folder(user_data):
-    """The Discord app folder a launch runs: Linux's `Discord` link names it; else the one the installer finds."""
-    link = Path(user_data) / 'Discord'
-    if sys.platform.startswith('linux') and link.exists():
+    """The Discord app folder a launch runs: Linux's `Discord` (`DiscordPTB`…) link names it; else a Discord of the
+    same channel that Corsu installed into, or that the installer finds. None when there is none of that channel."""
+    wanted = channel(Path(user_data))
+    link = Path(user_data) / CHANNELS[wanted][0]
+    if sys.platform.startswith('linux') and link.is_file():
         return link.resolve().parent
+    import corsu
     import installer
-    return installer.discord_location()
+    recorded = [Path(record['discord_location']) for record in corsu.load_state()['files'].values()
+                if record.get('discord_location')]
+    return next((location for location in [*recorded, installer.discord_location()]
+                 if location and channel(location) == wanted), None)
 
 
 def vencord_info(location):
@@ -290,20 +325,37 @@ def make_state(state, started, launch, client, entries, decided=None, incident=N
             'vencord': vencord_info(client), 'evidence': evidence(entries), 'notified': False, 'dismissed': False}
 
 
+# Notification texts: English, French, Corsican. The Corsican ones are AI proposals (Claude, 2026-11-10), not reviewed
+# by a speaker, assembled from wording Corsu's window already uses (src/app/texts-discord.js: "ùn hà micca finitu di
+# parte", "forse", "lancià ... senza a traduzzione", "circà un aghjurnamentu", "Vede u diagnosticu", "s'hè aperta fora
+# di u screnu"; a Corsu usage, not an independent validation), "per via di" (lexicon.tsv, Corsu usage) and "Verificate
+# a vostra cunnessione internet" (lexicon-upstream.tsv and lexicon-mozilla.tsv, published translations).
 MESSAGES = {
     'vencord-error': ("Discord did not finish starting, probably because of the translation (Vencord). Open Corsu to start "
                       "it without the translation or look for an update.",
                       "Discord n'a pas fini de démarrer, probablement à cause de la traduction (Vencord). Ouvrez Corsu pour "
-                      "le démarrer sans la traduction ou chercher une mise à jour."),
-    'start-error': ("Discord stopped with an error while starting. Open Corsu to see what happened.",
-                    "Discord s'est arrêté sur une erreur au démarrage. Ouvrez Corsu pour voir ce qui s'est passé."),
+                      "le démarrer sans la traduction ou chercher une mise à jour.",
+                      "Discord ùn hà micca finitu di parte, forse per via di a traduzzione (Vencord). Aprite Corsu per "
+                      "lancià lu senza a traduzzione o circà un aghjurnamentu."),
+    'start-error': ("Discord stopped with an error while starting. Open Corsu to see the diagnostic.",
+                    "Discord s'est arrêté sur une erreur au démarrage. Ouvrez Corsu pour voir le diagnostic.",
+                    "Discord s'hè piantatu à u lanciu cù un sbagliu. Aprite Corsu per vede u diagnosticu."),
     'slow': ("Discord has not finished starting after 3 minutes. The cause is unknown.",
-             "Discord n'a pas fini de démarrer après 3 minutes. La cause est inconnue."),
-    'network': ("Discord is still starting: it could not reach its servers. Check the connection.",
-                "Discord démarre encore : il n'a pas pu joindre ses serveurs. Vérifiez la connexion."),
-    'offscreen': ("Discord started, but its window is outside the screens.",
-                  "Discord a démarré, mais sa fenêtre est hors des écrans."),
+             "Discord n'a pas fini de démarrer après 3 minutes. La cause est inconnue.",
+             "Discord ùn hà micca finitu di parte dopu 3 minuti. Ùn si sà perchè."),
+    'network': ("Discord could not reach its servers. Check your internet connection.",
+                "Discord n'a pas pu joindre ses serveurs. Vérifiez votre connexion Internet.",
+                "Discord ùn s'hè micca pussutu cunnette à i so servitori. Verificate a vostra cunnessione internet."),
+    'offscreen': ("Discord started, but its window opened outside the screen.",
+                  "Discord a démarré, mais sa fenêtre s'est ouverte en dehors de l'écran.",
+                  "Discord hè partutu, ma a so finestra s'hè aperta fora di u screnu."),
 }
+
+
+def message(state):
+    import corsu
+    english, french, corsican = MESSAGES[state]
+    return corsican if corsu.corsican() else corsu.t(english, french)
 
 
 def alert(record):
@@ -315,12 +367,10 @@ def alert(record):
         import notify
     except ImportError:
         return record
-    import corsu
     if hasattr(notify, 'notify_incident'):
         sent = notify.notify_incident(record)
     else:
-        sent = notify.notify(corsu.t('Discord', 'Discord'), corsu.t(*MESSAGES[record['state']]),
-                             action='discord-recovery', incident=record['incident'])
+        sent = notify.notify('Discord', message(record['state']), action='discord-recovery', incident=record['incident'])
     record['notified'] = bool(sent)
     write_state(record)
     return record
@@ -374,6 +424,15 @@ def acquire_lock():
             handle.write(str(os.getpid()))
         return True
     return False
+
+
+def watcher_active():
+    """Whether a live supervisor holds the lock (it decides the start it follows)."""
+    try:
+        pid = int((folder() / 'lock').read_text() or 0)
+    except (OSError, ValueError):
+        return False
+    return bool(pid) and pid != os.getpid() and pid_alive(pid)
 
 
 def release_lock():
@@ -480,7 +539,9 @@ def launch(command=None, kind=None, window=WINDOW):
     try:
         user_data = user_data_dir(command)
         log = user_data / 'logs/renderer_js.log'
-        running, offset = discord_running(), size(log)
+        # Only this channel: an open Discord Canary does not take over a Discord stable start.
+        names = (CHANNELS[channel(user_data)][0],)
+        running, offset = discord_running(names), size(log)
     except Exception:
         user_data = log = running = offset = None
     started = time.time()
@@ -499,7 +560,7 @@ def launch(command=None, kind=None, window=WINDOW):
             return None
         try:
             client = client_folder(user_data)
-            record = watch(LogFollower(log, offset), lambda: process.poll() is None or discord_running(), started,
+            record = watch(LogFollower(log, offset), lambda: process.poll() is None or discord_running(names), started,
                            launch_kind(command, kind), client, window)
             logbook.write(f'discord-watch: {record["state"]}')
             record = alert(record)
@@ -519,7 +580,11 @@ def launch(command=None, kind=None, window=WINDOW):
 def scan_last_start(user_data=None, now=None, alive=None, write=True):
     """Classify the last start in Discord's log after the fact (Corsu's window, Windows and macOS, updater restarts).
     Returns its state record (the one already recorded for that start when there is one), or None when undecided."""
-    user_data = Path(user_data) if user_data else user_data_dir()
+    if watcher_active():
+        return None  # the supervisor decides this start, and alerts once
+    target = target_location()
+    wanted = channel(Path(target)) if target else 'stable'
+    user_data = Path(user_data) if user_data else config_folder() / CHANNELS[wanted][1]
     log = user_data / 'logs/renderer_js.log'
     try:
         with open(log, 'rb') as handle:
@@ -531,7 +596,7 @@ def scan_last_start(user_data=None, now=None, alive=None, write=True):
     if not groups:
         return None
     last = groups[-1]
-    alive = discord_running() if alive is None else alive
+    alive = discord_running((CHANNELS[wanted][0],)) if alive is None else alive
     now = time.time() if now is None else now
     state = classify(last, alive, now, last[0]['t'])
     if state is None:
@@ -567,12 +632,26 @@ def set_phase(phase, **extra):
     write_json(folder() / 'rescue.json', {**rescue_info(), **extra, 'phase': phase})
 
 
+def target_location():
+    """The Discord the recovery page acts on: the one in rescue mode, else the one of the last recorded start."""
+    return rescue_info().get('location') or read_state().get('client')
+
+
+def same_install(one, other):
+    try:
+        return bool(one and other) and install_of(one) == install_of(other)
+    except (OSError, ValueError):
+        return False
+
+
 def settle_reactivation(record):
     """After a watched start, while a reactivation waits for proof: the Corsu plugin seen starting ends rescue mode;
     a failed start goes back to Discord's original archive (or waits for Discord to close). Anything else (closed,
-    no decisive signal, not watched) leaves the reactivation unconfirmed. Returns the phase now ("" when ended)."""
+    no decisive signal, not watched, another Discord channel or installation) leaves the reactivation unconfirmed.
+    Returns the phase now ("" when ended)."""
     info = rescue_info()
-    if info.get('phase') != 'verifying' or not record or record.get('started_at', 0) < info.get('reactivated_at', 0):
+    if info.get('phase') != 'verifying' or not record or record.get('started_at', 0) < info.get('reactivated_at', 0) \
+            or not same_install(record.get('client'), info.get('location')):
         return info.get('phase', '')
     if record['state'] == 'ok-corsu':
         (folder() / 'rescue.json').unlink(missing_ok=True)
@@ -586,59 +665,85 @@ def settle_reactivation(record):
     return 'verifying'
 
 
-def rescue_check():
-    """Whether Discord can be put back to its original archive (no translation), and why not."""
+def archive_problem(app, record):
+    """Why this archive cannot be put back to its recorded original, or None."""
     import corsu
     import installer
-    if discord_running():
-        return {'ok': False, 'reason': 'running', 'location': None}
-    launched = read_state().get('client')
-    records = {name: record for name, record in corsu.load_state()['files'].items() if record.get('discord_location')}
-    location = launched or (str(installer.discord_location()) if installer.discord_location() else None)
-    found = next(((name, record) for name, record in records.items()
-                  if Path(record['discord_location']).resolve() == Path(location).resolve()), None) if location else None
-    if not records:
-        return {'ok': False, 'reason': 'no-record', 'location': location}
-    if not found:
-        return {'ok': False, 'reason': 'unknown-app', 'location': location}
-    name, record = found
     backup = Path(record['backup']) if record.get('backup') else None
     if not backup or not backup.is_file():
-        return {'ok': False, 'reason': 'backup-missing', 'location': location}
+        return 'backup-missing'
     original = backup.read_bytes()
     if installer.vencord_launcher(original):
-        return {'ok': False, 'reason': 'launcher-backup', 'location': location}
-    app = Path(name)
+        return 'launcher-backup'
     moved = app.with_name('_app.asar')
     current = app.read_bytes() if app.is_file() else b''
     # Discord must be as Corsu left it: app.asar the recorded launcher, _app.asar (when kept) the same original.
     if corsu.digest(current) != record.get('installed_sha256') or not installer.vencord_launcher(current) \
             or (moved.is_file() and corsu.digest(moved.read_bytes()) != corsu.digest(original)):
-        return {'ok': False, 'reason': 'backup-mismatch', 'location': location}
+        return 'backup-mismatch'
     if not os.access(app.parent, os.W_OK):
-        return {'ok': False, 'reason': 'read-only', 'location': location}
-    return {'ok': True, 'reason': None, 'location': location, 'app': name}
+        return 'read-only'
+    return None
+
+
+def rescue_check(incident=None):
+    """Whether Discord can be put back to its original archive (no translation), and why not. The Discord concerned
+    is the one launched (or already in rescue mode); every version of that same installation that still loads
+    Corsu's build goes back with it (Linux keeps several app-<version> folders and may start any of them). Other
+    channels and installations are left as they are."""
+    import corsu
+    import installer
+    if discord_running():
+        return {'ok': False, 'reason': 'running', 'location': None}
+    info, current = rescue_info(), read_state()
+    if incident and not info and current.get('incident') != incident:
+        # Another start was recorded since the page was drawn: it may be another Discord.
+        return {'ok': False, 'reason': 'other-incident', 'location': None}
+    location = target_location() or (str(installer.discord_location()) if installer.discord_location() else None)
+    records = {name: record for name, record in corsu.load_state()['files'].items() if record.get('discord_location')}
+    if not records:
+        return {'ok': False, 'reason': 'no-record', 'location': location}
+    launched = [name for name, record in records.items()
+                if location and Path(record['discord_location']).resolve() == Path(location).resolve()
+                and Path(name) == installer.discord_archive(record['discord_location'])]
+    if not launched:
+        return {'ok': False, 'reason': 'unknown-app', 'location': location}
+    reason = archive_problem(Path(launched[0]), records[launched[0]])
+    if reason:
+        return {'ok': False, 'reason': reason, 'location': location}
+    apps = [launched[0]]
+    for name, record in records.items():
+        app = Path(name)
+        # Versions of the same installation still running Corsu's build; a version Discord replaced is not Corsu's.
+        if name not in apps and same_install(record['discord_location'], location) and app.is_file() \
+                and corsu.digest(app.read_bytes()) == record.get('installed_sha256') \
+                and installer.vencord_launcher(app.read_bytes()):
+            reason = archive_problem(app, record)
+            if reason:
+                return {'ok': False, 'reason': reason, 'location': location}
+            apps.append(name)
+    return {'ok': True, 'reason': None, 'location': location, 'app': launched[0], 'apps': apps}
 
 
 def rescue(incident=None):
     """Start Discord without the translation from now on: restore its original archive (Vencord's _app.asar copy is
     kept), until reactivate(). Never closes Discord. Profiles and settings are not touched."""
     import corsu
-    check = rescue_check()
+    check = rescue_check(incident)
     if not check['ok']:
         return check
-    app = Path(check['app'])
     state = corsu.load_state()
-    record = state['files'][check['app']]
-    original = Path(record['backup']).read_bytes()
-    temp = app.with_name(app.name + '.corsu-tmp')
-    temp.write_bytes(original)
-    if record.get('mode') is not None:
-        temp.chmod(record['mode'])
-    os.replace(temp, app)
-    # Uninstalling or reinstalling sees the original as what Corsu left there, not as a change made by someone else.
-    record['installed_sha256'] = corsu.digest(original)
-    record['rescue'] = True
+    for name in check['apps']:
+        app, record = Path(name), state['files'][name]
+        original = Path(record['backup']).read_bytes()
+        temp = app.with_name(app.name + '.corsu-tmp')
+        temp.write_bytes(original)
+        if record.get('mode') is not None:
+            temp.chmod(record['mode'])
+        os.replace(temp, app)
+        # Uninstalling or reinstalling sees the original as what Corsu left there, not as a change made by someone else.
+        record['installed_sha256'] = corsu.digest(original)
+        record['rescue'] = True
     corsu.save_state(state)
     watched = read_state()
     write_json(folder() / 'rescue.json', {'phase': 'rescue', 'location': check['location'], 'since': time.time(),
@@ -648,11 +753,12 @@ def rescue(incident=None):
     return {**check, 'ok': True}
 
 
-def original_in_place():
-    """Whether every Discord archive Corsu manages is still the original that rescue() put back."""
+def original_in_place(location):
+    """Whether every archive Corsu manages in that Discord installation is still the original rescue() put back."""
     import corsu
     import installer
-    records = [(Path(name), record) for name, record in corsu.load_state()['files'].items() if record.get('discord_location')]
+    records = [(Path(name), record) for name, record in corsu.load_state()['files'].items()
+               if record.get('discord_location') and same_install(record['discord_location'], location)]
     for app, record in records:
         current = app.read_bytes() if app.is_file() else b''
         if installer.vencord_launcher(current) or corsu.digest(current) != record.get('installed_sha256'):
@@ -660,10 +766,23 @@ def original_in_place():
     return bool(records)
 
 
+def newest_version(location):
+    """Linux: the newest app-<version> of the installation (Discord may have updated during rescue mode)."""
+    import installer
+    location = Path(location)
+    if not location.name.startswith('app-'):
+        return location
+    versions = sorted((path for path in location.parent.glob('app-*') if (path / 'resources/app.asar').is_file()),
+                      key=lambda path: installer.version_key(path.name[4:]))
+    return versions[-1] if versions else location
+
+
 def reactivate(window=WINDOW):
-    """Put the translation back (the installer's install_discord), then watch a launch. Rescue mode (rescue.json)
-    stays, in phase "verifying", until a start shows the Corsu plugin starting: only that is reported as confirmed.
-    A failed start goes back to the original archive, or to "restore-pending" while Discord stays open."""
+    """Put the translation back (the installer's install_discord) into the Discord in rescue mode (its newest
+    version, and the other versions next to it, as an installation does), then watch a launch of that Discord.
+    Rescue mode (rescue.json) stays, in phase "verifying", until a start of that Discord shows the Corsu plugin
+    starting: only that is reported as confirmed. A failed start goes back to the original archive, or to
+    "restore-pending" while Discord stays open."""
     import corsu
     import installer
     if discord_running():
@@ -671,15 +790,18 @@ def reactivate(window=WINDOW):
     info = rescue_info()
     if not info.get('location'):
         return {'ok': False, 'reason': 'not-in-rescue'}
-    set_phase('verifying', reactivated_at=time.time())
+    target = newest_version(info['location'])
+    set_phase('verifying', reactivated_at=time.time(), location=str(target))
     try:
         state = corsu.load_state()
         for record in state['files'].values():
-            record.pop('rescue', None)
+            if record.get('discord_location') and same_install(record['discord_location'], target):
+                record.pop('rescue', None)
         corsu.save_state(state)
-        installer.install_discord(Path(info['location']), reactivating=True)
+        for location in (target, *installer.sibling_versions(target)):
+            installer.install_discord(location, reactivating=True)
     except Exception as error:
-        if original_in_place():  # the reinstall failed before replacing anything
+        if original_in_place(target):  # the reinstall failed before replacing anything
             set_phase('rescue')
             back = {'ok': True, 'reason': None}
         else:
@@ -687,7 +809,7 @@ def reactivate(window=WINDOW):
             if not back['ok']:
                 set_phase('restore-pending', reason=back['reason'])
         return {'ok': False, 'reason': 'install-failed', 'error': str(error), 'rescue': back}
-    record = launch(window=window)  # a watched launch settles the reactivation (settle_reactivation)
+    record = launch(default_command(target), window=window)  # a watched launch settles the reactivation
     phase = rescue_info().get('phase', '')
     state = record and record['state']
     if phase == '':

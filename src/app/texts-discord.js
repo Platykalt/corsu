@@ -3,6 +3,8 @@
 // The Corsican texts are AI proposals, not reviewed by a speaker yet; they reuse words Corsu's window already uses
 // (aghjurnamentu, lancià, rilancià, traduzzione, sbagliu, dettagli). Causes are never stated as certain: a Vencord
 // error is a "probable" incompatibility, and an update is never said to fix the problem.
+// dc_done_rescue (co, 2026-11-10, AI proposal, Claude): "Modu di succorsu attivatu" (the previous dc_done_rescue) and
+// "Discord parte senza a traduzzione" (dc_row_rescue); Corsu usage, not an independent validation.
 const textsDiscord = {
   co: {
     dc_row_active: "Traduzzione attiva.", dc_row_restart: "Da rilancià : chjudite Discord di tuttu, po riapritelu.",
@@ -32,7 +34,8 @@ const textsDiscord = {
     dc_check: "Circà un aghjurnamentu", dc_rescue: "Lancià senza a traduzzione", dc_reactivate: "Rimette a traduzzione",
     dc_retry: "Pruvà torna", dc_later: "Più tardi", dc_diagnostic: "Vede u diagnosticu",
     dc_busy_rescue: "Passagiu in modu di succorsu…", dc_busy_reactivate: "Rimessa di a traduzzione…", dc_busy_retry: "Lanciu di Discord…",
-    dc_done_rescue: "Modu di succorsu attivatu. Aprite Discord : parte senza a traduzzione.",
+    dc_done_rescue: "Modu di succorsu attivatu : Discord parte senza a traduzzione.",
+    dc_done_rescue_open: "Modu di succorsu attivatu. Aprite Discord : parte senza a traduzzione.",
     dc_done_reactivate: "A traduzzione hè rimessa : Discord hè partutu cun ella, u modulu Corsu s'hè vistu lancià.",
     dc_done_retry: "Discord parte ; Corsu surveglia stu lanciu.",
     dc_reason_running: "Discord hè apertu. Chjudetelu di tuttu (ancu da a zona di nutificazione), po ripruvate.",
@@ -74,7 +77,8 @@ const textsDiscord = {
     dc_check: "Rechercher une mise à jour", dc_rescue: "Démarrer sans la traduction", dc_reactivate: "Remettre la traduction",
     dc_retry: "Réessayer", dc_later: "Plus tard", dc_diagnostic: "Voir le diagnostic",
     dc_busy_rescue: "Passage en mode de secours…", dc_busy_reactivate: "Remise de la traduction…", dc_busy_retry: "Démarrage de Discord…",
-    dc_done_rescue: "Mode de secours activé. Ouvrez Discord : il démarre sans la traduction.",
+    dc_done_rescue: "Mode de secours activé : Discord démarre sans la traduction.",
+    dc_done_rescue_open: "Mode de secours activé. Ouvrez Discord : il démarre sans la traduction.",
     dc_done_reactivate: "La traduction est remise : Discord a démarré avec, et le plugin Corsu a été vu au démarrage.",
     dc_done_retry: "Discord démarre ; Corsu surveille ce démarrage.",
     dc_reason_running: "Discord est ouvert. Quittez-le complètement (aussi depuis la zone de notification), puis recommencez.",
@@ -116,7 +120,8 @@ const textsDiscord = {
     dc_check: "Look for an update", dc_rescue: "Start without the translation", dc_reactivate: "Put the translation back",
     dc_retry: "Try again", dc_later: "Later", dc_diagnostic: "Show the diagnostic",
     dc_busy_rescue: "Switching to rescue mode…", dc_busy_reactivate: "Putting the translation back…", dc_busy_retry: "Starting Discord…",
-    dc_done_rescue: "Rescue mode on. Open Discord: it starts without the translation.",
+    dc_done_rescue: "Rescue mode on: Discord is starting without the translation.",
+    dc_done_rescue_open: "Rescue mode on. Open Discord: it starts without the translation.",
     dc_done_reactivate: "The translation is back: Discord started with it, and the Corsu plugin was seen starting.",
     dc_done_retry: "Discord is starting; Corsu watches this start.",
     dc_reason_running: "Discord is open. Quit it completely (also from the notification area), then try again.",

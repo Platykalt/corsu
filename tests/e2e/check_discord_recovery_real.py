@@ -202,8 +202,8 @@ def run(args, work, home, notifications):
                *(['--no-sandbox'] if args.no_sandbox else [])]
     log = user_data / 'logs/renderer_js.log'
     # The watcher and the window, pointed at the copy: its command, its processes. Everything else is the real code.
-    discord_watch.default_command = lambda: list(command)
-    discord_watch.discord_running = lambda: bool(copy_pids())
+    discord_watch.default_command = lambda *where: list(command)
+    discord_watch.discord_running = lambda *names: bool(copy_pids())
     app.still_open = lambda name: bool(copy_pids()) if name == 'discord' else False
     clicked = work / 'clicked.json'
     real_window = notify.window_command
@@ -272,18 +272,35 @@ def run(args, work, home, notifications):
     check('the window shows the problem, with the evidence',
           shown['row'] == 'problem' and shown['state'] == 'vencord-error' and shown['evidence'], shown['row'])
 
+    def started_without_vencord(since, seconds=150):
+        """The button's own start (a watcher process of its own): the copy's next session reaches Discord's UI with no
+        Vencord line. Read from Discord's log, since that process may count the person's own Discord as open."""
+        deadline = time.time() + seconds
+        while time.time() < deadline:
+            text = log.read_bytes()[since:].decode('utf-8', errors='replace') if log.exists() else ''
+            groups = discord_watch.sessions(discord_watch.parse(text))
+            kinds = {entry['kind'] for entry in groups[-1]} if groups else set()
+            if 'ui' in kinds:
+                return copy_pids() and not kinds & {'vencord', 'corsu'}
+            time.sleep(1)
+        return False
+
     print('4. "Start without the translation"', flush=True)
     result = act('rescue')
     check('refused while Discord is open, Discord left open', result.get('reason') == 'running' and copy_pids(), result)
     check('Discord quit (in the test, by its normal SIGTERM)', stop_copy(None))
+    offset = log.stat().st_size if log.exists() else 0
+    settings = home / '.config/Vencord/settings/settings.json'
+    kept = settings.read_bytes() if settings.is_file() else None
     result = act('rescue')
     shown = discord()
     check('rescue mode, the original archive back', result.get('ok') and (shown['rescue'] or {}).get('phase') == 'rescue'
           and app_asar.read_bytes() == original, result)
-    record = discord_watch.launch(command, 'shortcut')
-    lines = log.read_text(errors='replace')[-200000:]
-    check('Discord starts without Vencord', record and record['state'] == 'ok'
-          and 'Vencord' not in lines.rsplit('signalReady', 1)[-1], record and record['state'])
+    check('the button started Discord, and it started without Vencord (as its label says)',
+          result.get('started') and started_without_vencord(offset), result)
+    check('nothing else changed: Vencord\'s copy of the original and its settings kept',
+          (copy / 'resources/_app.asar').read_bytes() == original
+          and (settings.read_bytes() if settings.is_file() else None) == kept)
     installer.ROOT = good
     installer.install_discord(copy)
     check('a repair or update leaves Discord alone in rescue mode', app_asar.read_bytes() == original)
@@ -303,9 +320,12 @@ def run(args, work, home, notifications):
     installer.install_discord(copy)
     check('no reinjection while the restore waits', str(bad) in app_asar.read_text(errors='replace'))
     stop_copy(None)
+    offset = log.stat().st_size
     result = act('rescue')
     check('finish the restore: back to rescue, original archive', result.get('ok')
           and (discord()['rescue'] or {}).get('phase') == 'rescue' and app_asar.read_bytes() == original, result)
+    check('and Discord started again without the translation', result.get('started') and started_without_vencord(offset))
+    stop_copy(None)
 
     print('6. A reactivation with the current build: Discord starts, the translation is not proved', flush=True)
     result = act('reactivate')
@@ -316,7 +336,7 @@ def run(args, work, home, notifications):
     check('the current build is injected', str(good) in app_asar.read_text(errors='replace'))
     stop_copy(None)
     # A start that proves it (the Corsu plugin seen starting) needs a signed-in Discord: settled from its log line.
-    proof = {'state': 'ok-corsu', 'started_at': time.time()}
+    proof = {'state': 'ok-corsu', 'started_at': time.time(), 'client': str(copy)}
     check('a start that shows the Corsu plugin ends rescue mode', discord_watch.settle_reactivation(proof) == ''
           and not discord_watch.in_rescue())
     print(f'Work folder: {work}')

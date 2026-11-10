@@ -882,8 +882,11 @@ WATCH_FOLDER = 'discord-watch'
 WATCH_PROBLEMS = ('vencord-error', 'start-error', 'slow', 'network', 'offscreen')
 WATCH_STATES = (*WATCH_PROBLEMS, 'ok', 'ok-corsu', 'closed', 'updating', 'already-running', 'rescue')
 INCIDENT = re.compile(r'[\w-]{1,64}')
-DISCORD = {'action': None}
+DISCORD = {'action': None, 'scanned': 0.0}
 DISCORD_LOCK = threading.Lock()
+# How often the window reads Discord's log for a start nobody watched (Windows, macOS, Linux launches without the
+# watcher): the only coverage there is, after the fact.
+SCAN_SECONDS = 30
 
 
 def discord_watch():
@@ -916,9 +919,16 @@ def old_corsu_in_discord(state, watch):
 def discord_status(state, items):
     """What the Discord row and the discord-recovery page show: the watch's last start (state.json), rescue mode
     (rescue.json) and the installation record. None when Discord is not managed and nothing was recorded."""
+    item = next((item for item in items if item['name'] == 'discord' and item['installed']), None)
+    module = discord_watch() if item and time.monotonic() - DISCORD['scanned'] >= SCAN_SECONDS else None
+    if module is not None and hasattr(module, 'scan_last_start'):
+        DISCORD['scanned'] = time.monotonic()
+        try:
+            module.scan_last_start()
+        except Exception as error:  # the row still shows what was recorded
+            print(f'Discord scan: {error!r}', file=sys.stderr, flush=True)
     watch, rescue = read_record('state.json'), read_record('rescue.json')
     watch = watch if watch.get('version') == 1 and watch.get('state') in WATCH_STATES else {}
-    item = next((item for item in items if item['name'] == 'discord' and item['installed']), None)
     if not (item or watch or rescue):
         return None
     current = watch.get('state')
@@ -957,6 +967,15 @@ def with_incident(function, incident):
     return function(incident) if takes else function()
 
 
+def start_discord(watch, location):
+    """A watched start of Discord in a process of its own (it outlives the window): the Discord at `location` (its
+    channel and installation) when the watch module can say how, else Discord the platform's way."""
+    command = watch.default_command(location) if location and hasattr(watch, 'default_command') else []
+    subprocess.Popen([sys.executable, str(Path(watch.__file__).resolve()), 'launch', '--', *command],
+                     **corsu.hidden(stdin=subprocess.DEVNULL, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL,
+                                    start_new_session=True))
+
+
 def run_discord_action(name, incident):
     watch = discord_watch()
     try:
@@ -965,6 +984,17 @@ def run_discord_action(name, incident):
         elif name == 'rescue':
             check = watch.rescue_check()
             result = with_incident(watch.rescue, incident) if check.get('ok') else {'ok': False, 'reason': check.get('reason')}
+            result = result if isinstance(result, dict) else {'ok': bool(result)}
+            if result.get('ok'):
+                # "Start without the translation" (and "Finish the restore") start Discord, as the button says.
+                RUNNING['time'] = 0.0
+                result['started'] = False
+                if not still_open('discord'):
+                    try:
+                        start_discord(watch, result.get('location'))
+                        result['started'] = True
+                    except OSError as error:
+                        print(f'Discord start after rescue: {error!r}', file=sys.stderr, flush=True)
         elif name == 'reactivate':
             result = watch.reactivate()
         else:  # retry: a watched launch, as Discord's Corsu shortcut starts it; never over an open Discord.
@@ -972,9 +1002,7 @@ def run_discord_action(name, incident):
             if still_open('discord'):
                 result = {'ok': False, 'reason': 'running'}
             else:
-                subprocess.Popen([sys.executable, str(Path(watch.__file__).resolve()), 'launch', '--'],
-                                 **corsu.hidden(stdin=subprocess.DEVNULL, stdout=subprocess.DEVNULL,
-                                                stderr=subprocess.DEVNULL, start_new_session=True))
+                start_discord(watch, watch.target_location() if hasattr(watch, 'target_location') else None)
                 result = {'ok': True}
     except Exception as error:  # Reported on the page; the details are in the log.
         print(f'Discord {name}: {error!r}', file=sys.stderr, flush=True)

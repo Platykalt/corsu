@@ -54,7 +54,8 @@ const renderDiscord = (() => {
     if (!action) return "";
     if (action.running) return t("dc_busy_" + action.name);
     const result = action.result || {};
-    if (result.ok) return t("dc_done_" + action.name);
+    // Rescue starts Discord, as its label says; when that start could not be made, the person opens it.
+    if (result.ok) return t("dc_done_" + action.name + (action.name === "rescue" && result.started === false ? "_open" : ""));
     if (result.reason === "running") return t("dc_reason_running");
     if (result.reason === "unavailable") return t("dc_reason_unavailable");
     if (["unconfirmed", "rescue", "restore-pending"].includes(result.reason)) return t("dc_reason_" + result.reason.replace(/-/g, "_"));

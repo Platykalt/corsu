@@ -60,7 +60,11 @@ class NotifyTests(Data):
         self.assertIn('org.freedesktop.Notifications.Notify', command)
         self.assertIn("'Discord n\\'a pas démarré'", command)  # GVariant quoting
         self.assertTrue(any("'default'" in part and "'open'" in part for part in command))
+        # Normal urgency: do-not-disturb applies (critical would bypass it on most servers).
         self.assertTrue(any("'urgency': <byte 1>" in part for part in command))
+        # Corsu's name and icon, not a generic warning sign.
+        self.assertEqual(command[command.index('--') + 1:command.index('--') + 4],
+                         ['Corsu', '0', "'" + str(corsu.SRC / 'app/corsu.svg') + "'"])
         helper = popen.call_args[0][0]
         self.assertEqual(helper[2:4], ['wait', '42'])
         self.assertEqual(helper[-4:], ['--page', 'discord-recovery', '--incident', INCIDENT])
@@ -80,7 +84,8 @@ class NotifyTests(Data):
         with patch.object(corsu, 'PLATFORM', 'linux'), patch.object(shutil, 'which', found.get), \
                 patch.object(subprocess, 'run', return_value=self.run_result()) as run:
             self.assertTrue(notify.notify('T', 'B', 'discord-recovery', INCIDENT))
-        self.assertEqual(run.call_args[0][0], ['/usr/bin/notify-send', '--app-name=Corsu', '--urgency=normal', 'T', 'B'])
+        self.assertEqual(run.call_args[0][0], ['/usr/bin/notify-send', '--app-name=Corsu', '--urgency=normal',
+                                               f'--icon={corsu.SRC / "app/corsu.svg"}', 'T', 'B'])
         with patch.object(corsu, 'PLATFORM', 'linux'), patch.object(shutil, 'which', lambda name: None):
             self.assertFalse(notify.notify('T', 'B', 'discord-recovery', 'other-incident'))
         # Not shown, so not remembered: a later try may show it.
@@ -91,8 +96,34 @@ class NotifyTests(Data):
                 patch.object(subprocess, 'run', return_value=self.run_result(1)):
             self.assertFalse(notify.notify('T', 'B', 'discord-recovery', INCIDENT))
 
+    def fake_winreg(self, fail=False):
+        """A stand-in for winreg recording what Corsu writes under HKEY_CURRENT_USER."""
+        keys, deleted = {}, []
+
+        class Key:
+            def __init__(self, name):
+                self.name = name
+
+            def __enter__(self):
+                return self
+
+            def __exit__(self, *args):
+                return False
+
+        def create(root, name):
+            if fail:
+                raise PermissionError('denied')
+            keys.setdefault(name, {})
+            return Key(name)
+        module = types.SimpleNamespace(HKEY_CURRENT_USER='HKCU', REG_SZ=1, CreateKey=create,
+                                       SetValueEx=lambda key, name, _, kind, value: keys[key.name].update({name: value}),
+                                       DeleteKey=lambda root, name: deleted.append(name))
+        return module, keys, deleted
+
     def test_windows_toast_without_console_and_escaped(self):
+        winreg, keys, _ = self.fake_winreg()
         with patch.object(corsu, 'PLATFORM', 'windows'), patch.object(corsu, 'console_window', return_value=0), \
+                patch.dict(sys.modules, {'winreg': winreg}), \
                 patch.object(subprocess, 'run', return_value=self.run_result()) as run:
             self.assertTrue(notify.notify('A <b> & "c"', 'B', 'discord-recovery', INCIDENT))
         command, options = run.call_args[0][0], run.call_args[1]
@@ -100,11 +131,54 @@ class NotifyTests(Data):
         self.assertEqual(options['creationflags'] & corsu.CREATE_NO_WINDOW, corsu.CREATE_NO_WINDOW)
         self.assertIn('<text>A &lt;b&gt; &amp; "c"</text>', options['env']['CORSU_TOAST'])
         self.assertNotIn('A <b>', ' '.join(command))  # the text travels in the environment, never in the command
+        # Shown as Corsu: its window's AppUserModelID, registered with Corsu's name and icon (not Windows PowerShell's).
+        self.assertEqual(options['env']['CORSU_TOAST_APP'], 'Platykalt.Corsu')
+        registered = keys['Software\\Classes\\AppUserModelId\\Platykalt.Corsu']
+        self.assertEqual(registered['DisplayName'], 'Corsu')
+        self.assertTrue(Path(registered['IconUri']).is_file())
+        # A click opens Corsu's window on the recovery page, whatever the rest of the link says.
+        self.assertIn('activationType="protocol" launch="corsu-recovery:discord-recovery"', options['env']['CORSU_TOAST'])
+        self.assertEqual(keys['Software\\Classes\\corsu-recovery']['URL Protocol'], '')
+        opened = keys['Software\\Classes\\corsu-recovery\\shell\\open\\command']['']
+        self.assertTrue(opened.endswith('app.py --page discord-recovery'), opened)
+        self.assertNotIn('%1', opened)
+        import window
+        self.assertEqual(notify.APP_ID, window.APP_USER_MODEL_ID)
+
+    def test_windows_never_falls_back_to_another_programs_name(self):
+        winreg, _, deleted = self.fake_winreg(fail=True)
+        with patch.object(corsu, 'PLATFORM', 'windows'), patch.dict(sys.modules, {'winreg': winreg}), \
+                patch.object(subprocess, 'run') as run:
+            self.assertFalse(notify.notify('T', 'B', 'discord-recovery', INCIDENT))
+        run.assert_not_called()
+        with patch.dict(sys.modules, {'winreg': winreg}):
+            notify.windows_unregister()
+        self.assertEqual(set(deleted), {'Software\\Classes\\AppUserModelId\\Platykalt.Corsu',
+                                        'Software\\Classes\\corsu-recovery\\shell\\open\\command',
+                                        'Software\\Classes\\corsu-recovery\\shell\\open',
+                                        'Software\\Classes\\corsu-recovery\\shell', 'Software\\Classes\\corsu-recovery'})
+        self.assertLess(deleted.index('Software\\Classes\\corsu-recovery\\shell'),
+                        deleted.index('Software\\Classes\\corsu-recovery'))
+
+    def test_click_helper_stops_at_its_deadline_on_a_silent_bus(self):
+        # A notification nobody clicks or closes: the bus stays silent, the helper must still end at its deadline.
+        silent = subprocess.Popen([sys.executable, '-c', 'import time; time.sleep(60)'], stdout=subprocess.PIPE,
+                                  text=True)
+        self.addCleanup(silent.kill)
+        with patch.object(subprocess, 'Popen', side_effect=[silent]):
+            helper = threading.Thread(target=notify.wait_for_click, args=('42', ['python'], 0.5), daemon=True)
+            started = time.monotonic()
+            helper.start()
+            helper.join(10)
+        self.assertFalse(helper.is_alive(), 'the helper outlived its deadline')
+        self.assertLess(time.monotonic() - started, 10)
+        self.assertIsNotNone(silent.poll())
 
     def test_macos_passes_texts_as_arguments(self):
         with patch.object(corsu, 'PLATFORM', 'macos'), patch.object(subprocess, 'run', return_value=self.run_result()) as run:
             self.assertTrue(notify.notify('Titre "x"', 'Corps', None, None))
         self.assertEqual(run.call_args[0][0][-2:], ['Titre "x"', 'Corps'])
+        self.assertIn('with title "Corsu" subtitle (item 1 of argv)', ' '.join(run.call_args[0][0]))
 
     def test_unknown_pages_and_odd_incidents_are_not_passed_on(self):
         self.assertEqual(notify.window_command('../../evil', 'x')[2:], [])
@@ -144,6 +218,7 @@ class StatusTests(Data):
         self.still_open = patcher.start()
         self.addCleanup(patcher.stop)
         app.DISCORD['action'] = None
+        app.DISCORD['scanned'] = 0.0
 
     def status(self, items=None, state=None, watch=None):
         items = items if items is not None else [{'name': 'discord', 'installed': True, 'on': True, 'activation': 'active'}]
@@ -168,6 +243,21 @@ class StatusTests(Data):
                                                                          'from_revision': 'abc'}))
         self.assertEqual(self.status()['row'], 'rescue')
         self.assertEqual(self.status()['rescue']['since'], 1.79e9)
+
+    def test_the_window_reads_the_last_start_nobody_watched(self):
+        # Windows, macOS and Linux launches without the watcher: the window classifies Discord's last start after the
+        # fact, at most every SCAN_SECONDS, and only while Discord is managed.
+        scans = []
+        watch = stub_watch(scan_last_start=lambda: scans.append(1) or self.watch_state('vencord-error'))
+        self.assertIsNone(self.status(items=[], watch=watch))
+        self.assertEqual(scans, [])
+        found = self.status(watch=watch)
+        self.assertEqual((scans, found['row'], found['state']), ([1], 'problem', 'vencord-error'))
+        self.status(watch=watch)
+        self.assertEqual(scans, [1])
+        broken = stub_watch(scan_last_start=lambda: 1 / 0)
+        app.DISCORD['scanned'] = 0.0
+        self.assertEqual(self.status(watch=broken)['row'], 'problem')  # what was recorded is still shown
 
     def test_discord_still_on_the_old_copy_needs_a_restart(self):
         self.watch_state('ok-corsu', vencord={'injected': True, 'revision': 'r', 'corsu_version': '0.28.3',
@@ -198,14 +288,33 @@ class StatusTests(Data):
 
     def test_rescue_checks_first_and_passes_the_incident(self):
         watch = stub_watch()
-        self.assertEqual(self.act('rescue', watch), {'ok': True})
-        self.assertEqual(watch.calls, [('rescue', INCIDENT)])
-        refused = stub_watch(rescue_check=lambda: {'ok': False, 'reason': 'backup-mismatch'})
-        self.assertEqual(self.act('rescue', refused), {'ok': False, 'reason': 'backup-mismatch'})
-        self.assertEqual(refused.calls, [])
-        # rescue() without a parameter, as the contract's API list writes it.
-        plain = stub_watch(rescue=lambda: True)
-        self.assertEqual(self.act('rescue', plain), {'ok': True})
+        with patch.object(subprocess, 'Popen') as popen:
+            self.assertEqual(self.act('rescue', watch), {'ok': True, 'started': True})
+            self.assertEqual(watch.calls, [('rescue', INCIDENT)])
+            refused = stub_watch(rescue_check=lambda: {'ok': False, 'reason': 'backup-mismatch'})
+            self.assertEqual(self.act('rescue', refused), {'ok': False, 'reason': 'backup-mismatch'})
+            self.assertEqual(refused.calls, [])
+            # rescue() without a parameter, as the contract's API list writes it.
+            plain = stub_watch(rescue=lambda: True)
+            self.assertEqual(self.act('rescue', plain), {'ok': True, 'started': True})
+        self.assertEqual(popen.call_count, 2)
+
+    def test_start_without_the_translation_starts_that_discord(self):
+        # The button's label is "Start without the translation": after the archive goes back, Discord is started,
+        # watched, and it is the Discord that was put back (its channel and installation), not the default one.
+        location = '/home/x/.config/discordptb/app-0.0.99'
+        watch = stub_watch(rescue=lambda incident: {'ok': True, 'location': location},
+                           default_command=lambda where: ['/home/x/.config/discordptb/DiscordPTB'] if where == location else ['wrong'])
+        with patch.object(subprocess, 'Popen') as popen:
+            result = self.act('rescue', watch)
+        self.assertEqual((result['ok'], result['started']), (True, True))
+        self.assertEqual(popen.call_args[0][0][-3:], ['launch', '--', '/home/x/.config/discordptb/DiscordPTB'])
+        # Discord already open again (started by hand meanwhile): nothing started over it, said so on the page.
+        self.still_open.return_value = True
+        with patch.object(subprocess, 'Popen') as popen:
+            result = self.act('rescue', watch)
+        popen.assert_not_called()
+        self.assertEqual((result['ok'], result['started']), (True, False))
 
     def test_failures_are_reported_not_raised(self):
         def broken():
@@ -279,7 +388,9 @@ class RouteTests(Data):
 
     def test_routes_need_the_key_and_run_the_rescue(self):
         watch = stub_watch()
-        with patch.dict(sys.modules, {'discord_watch': watch}), \
+        # Never a real Discord: the start that follows the rescue is replaced.
+        with patch.dict(sys.modules, {'discord_watch': watch}), patch.object(app, 'start_discord') as start, \
+                patch.object(app, 'still_open', return_value=False), \
                 patch.object(app, 'peer_uid', return_value=os.getuid() if hasattr(os, 'getuid') else 0):
             self.assertEqual(self.post('/api/discord/rescue', {'incident': INCIDENT}, key=False)[0], 403)
             self.assertEqual(self.post('/api/discord/rescue', {'incident': INCIDENT}), (200, {'started': True}))
@@ -288,6 +399,7 @@ class RouteTests(Data):
                     break
                 time.sleep(0.02)
             self.assertEqual(watch.calls, [('rescue', INCIDENT)])
+            start.assert_called_once()
             self.watch_state('slow')
             self.assertEqual(self.post('/api/discord/dismiss', {'incident': INCIDENT})[1], {'dismissed': True})
             self.assertEqual(self.post('/api/discord/dismiss', {'incident': '../x'})[1], {'dismissed': False})

@@ -37,12 +37,20 @@ else:
 STATE = DATA / 'installation.json'
 
 
+def language_choice():
+    import locale
+    return (os.environ.get('CORSU_LANG') or os.environ.get('LANGUAGE') or os.environ.get('LC_ALL')
+            or os.environ.get('LC_MESSAGES') or os.environ.get('LANG') or (locale.getlocale()[0] or '')).lower()
+
+
 def french():
     """Speak French when the computer does; CORSU_LANG=en or fr overrides."""
-    import locale
-    choice = os.environ.get('CORSU_LANG') or os.environ.get('LANGUAGE') or os.environ.get('LC_ALL') \
-        or os.environ.get('LC_MESSAGES') or os.environ.get('LANG') or (locale.getlocale()[0] or '')
-    return choice.lower().startswith(('fr', 'co', 'french'))
+    return language_choice().startswith(('fr', 'co', 'french'))
+
+
+def corsican():
+    """The computer speaks Corsican (or CORSU_LANG=co): for the few texts shown outside the window, like notifications."""
+    return language_choice().startswith('co')
 
 
 def t(english, francais):
@@ -1954,6 +1962,9 @@ def uninstall():
     save_state({'files': remaining})
     # The Discord start watch's record, lock and rescue mode (its desktop entries were in the record above).
     shutil.rmtree(DATA / 'discord-watch', ignore_errors=True)
+    if PLATFORM == 'windows':
+        import notify
+        notify.windows_unregister()  # Corsu's name and click link for its notifications
     repair_default_browser()
     disabled_marker().unlink(missing_ok=True)
     (DATA / TERMINAL_OFF).unlink(missing_ok=True)
