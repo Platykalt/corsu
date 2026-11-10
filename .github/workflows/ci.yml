@@ -68,6 +68,8 @@ jobs:
       # third argument by Discord's new Rspack). Only the real client with today's discord.com web code shows that.
       - name: Real Discord desktop client (official Linux tar.gz) gets past "Starting" with the built Vencord and Corsu enabled
         run: |
+          # The runner image's package index can be stale (404 on freerdp3, CI 42868034209).
+          sudo apt-get update -qq
           sudo apt-get install -y -qq weston
           curl -fsSL -o "$RUNNER_TEMP/discord.tar.gz" "https://discord.com/api/download?platform=linux&format=tar.gz"
           tar -xzf "$RUNNER_TEMP/discord.tar.gz" -C "$RUNNER_TEMP"
