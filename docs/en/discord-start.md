@@ -28,8 +28,9 @@ Corsu never states a cause as certain: a log shows what happened, not always why
 - **Linux**: when Discord is opened from its menu entry or started with the session, Corsu starts it and then watches
   it for a few minutes; a notification appears if there is a problem (unless Do Not Disturb is on: the system
   decides).
-- **Windows and macOS**: Discord rewrites its own shortcuts at each update, so Corsu does not replace them. The
-  problem is found afterwards, when Corsu's window opens.
+- **Windows and macOS**: Discord rewrites its own shortcuts at each update, so Corsu does not replace them. No start
+  is watched as it happens and no notification is sent: the problem is only found afterwards, by Corsu's window while
+  it is open (it reads Discord's log every 30 seconds). Not a complete watch.
 - **Not covered**: Discord restarted by its own updater (the next start is watched), Discord started from a terminal
   or another launcher.
 
@@ -46,9 +47,12 @@ It opens from the notification's button or from the Discord row on the home page
 - **Look for an update**: the same check as the About page. The page says what is true: update available, Corsu up
   to date, check impossible, update installed but Discord still open with the old version, or development copy. An
   update is never presented as the fix: its release notes say what it fixes.
-- **Start without the translation**: puts Discord in *rescue mode*. Corsu puts back Discord's original archive (kept
-  at installation and checked); Discord then starts in French or English. Discord must be closed: Corsu never closes
-  Discord for you. While rescue mode is on, Corsu's updates and repairs do not put the translation back by themselves.
+- **Start without the translation**: puts Discord in *rescue mode*, then starts it. Corsu puts back Discord's
+  original archive (kept at installation and checked) in every version of that Discord installation that loads the
+  translation, then starts that same Discord (stable, PTB or Canary), which opens in French or English. Nothing else
+  changes: Vencord's copy of the original, Vencord's settings and the other Discord channels stay as they are.
+  Discord must be closed: Corsu never closes Discord for you. One Discord installation at a time can be in rescue
+  mode. While rescue mode is on, Corsu's updates and repairs do not put the translation back by themselves.
 - **Put the translation back** (in rescue mode): reinstalls the translation, then starts Discord, watched.
   - The reactivation is reported as done only when that start shows the Corsu plugin starting. A close, a start with
     no decisive signal or Discord showing up without the plugin stay "not confirmed": rescue mode stays on (Corsu
@@ -70,8 +74,11 @@ It opens from the notification's button or from the Discord row on the home page
 - **Windows and macOS**: no alert when Discord starts. Open Corsu's window to see a problem: on these systems the
   feature is partial.
 - Without a notification service (or with "Do not disturb"), no immediate help: open Corsu's window.
-- Notifications are in French or English, not in Corsican yet. On Windows they show under the name "Windows
-  PowerShell", without a button.
+- Notifications follow the computer's language (Corsican, French or English), not the language chosen in Corsu's
+  window. They show under Corsu's name: on Windows through Corsu's own registered identity (a click opens the
+  "Discord" page); on Linux with an "Open" button that works for 30 minutes; on macOS without a button, and with
+  Script Editor's icon.
+- If Corsu's window does not open at all, see [If Discord no longer starts and Corsu cannot help](discord.md#if-discord-no-longer-starts-and-corsu-cannot-help).
 - Rescue mode only applies to the Discord installation Corsu changed itself, with a checked original copy. Otherwise
   the button says why, and the manual procedure below still works.
 

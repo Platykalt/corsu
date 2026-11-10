@@ -16,7 +16,7 @@ From the 0.28.4 candidate (`dfffa58`, not yet published). Contract: `docs/dev/di
   window off-screen (Hyprland). Windows and macOS, and Discord restarted by its own updater, are covered after the
   fact when Corsu's window opens. `installer.py --discord-watch off|on` (a kept preference, on by default).
 - **Notification and recovery page.** One native notification per incident (Linux: freedesktop notification with an
-  "Open" button; Windows: toast without a console, shown as Windows PowerShell; macOS: osascript), else nothing pops
+  "Open" button; Windows: toast without a console under Corsu's own registered AppUserModelID; macOS: osascript), else nothing pops
   and the home page's Discord row shows it. The "Discord" page offers, according to the state: look for an update
   (the existing check, with its real answer: available, up to date, impossible to check, installed but Discord still
   on the old copy, development build; never presented as the fix), start without the translation, retry, diagnostic
@@ -29,6 +29,26 @@ From the 0.28.4 candidate (`dfffa58`, not yet published). Contract: `docs/dev/di
   goes back to the original archive, or, when Discord stays open and stuck, keeps rescue mode until it is closed and
   "Finish the restore" is clicked. A closed start is never presented as a deliberate quit (a crash without a log line
   looks the same). Uninstall removes the wrappers and `discord-watch/`.
+- **Right Discord, right channel (2026-11-10).** Stable, PTB and Canary are told apart everywhere: an open Discord of
+  another channel no longer stops a start from being watched or keeps it "alive"; the launched Discord is never
+  taken for another channel's; "Start without the translation" puts back every version of the launched Discord
+  installation that still loads Corsu's build (Linux keeps several `app-<version>` folders), uses the current
+  `app-<version>` on Windows, refuses a page drawn for an older incident, and leaves other channels alone;
+  reactivation reinstalls into that Discord's newest version and starts that Discord; only a start of that same
+  Discord can confirm it. One installation at a time in rescue mode.
+- **"Start without the translation" starts Discord (2026-11-10)**, watched, as its label says (also "Finish the
+  restore"); before, it only switched the archive and asked the person to open Discord.
+- **Notifications (2026-11-10).** Shown as Corsu everywhere: Linux with Corsu's icon, Windows under the window's
+  AppUserModelID `Platykalt.Corsu` registered in HKCU with Corsu's name and icon and a `corsu-recovery:` link that
+  opens the recovery page on click (removed at uninstall; never falls back to PowerShell's identity), macOS titled
+  Corsu. Corsican texts (AI proposals from Corsu usage) when the system speaks Corsican. The Linux click helper now
+  ends at its deadline even when the bus stays silent (it could wait forever). Do Not Disturb is never bypassed.
+- **Coverage (2026-11-10).** The window now really runs the after-the-fact scan (at most every 30 s while open): it
+  was documented but never called, so Windows and macOS had no coverage at all. Docs state it precisely and give a
+  recovery path that needs neither the window nor Corsu (`docs/en/discord.md`, `docs/fr/discord.md`).
+- **CI (2026-11-10).** Discord's Linux tar.gz now holds only a bootstrapper: the "real client" CI steps had printed
+  SKIP since; CI now bootstraps the real app folder and fails if it is missing. New Windows check: a real toast kept by
+  Windows under Corsu's AppUserModelID (`tests/e2e/check_windows_toast.py`).
 - **Tested on Linux with a real Discord 1.0.168 copy, isolated** (headless weston, private D-Bus):
   `tests/e2e/check_discord_recovery_real.py` runs injection, failing start, notification and its button, the window's
   API, rescue, a reactivation failing while Discord stays open, and one that cannot be confirmed without an account.

@@ -83,3 +83,22 @@ Actions per state:
 - Agent B: corsu.notify (src/notify.py), src/app.py routes + src/app/ page/strings, window Discord status row,
   update-status mapping, docs/fr + docs/en, tests for UI/notify/update states, Windows console check extension.
 - Integrator: contract, review, merge, CI, real runs.
+
+## Targets, notifications, coverage (2026-11-10)
+- Channels are separate programs (`CHANNELS`: Discord/DiscordPTB/DiscordCanary, discord/discordptb/discordcanary).
+  An installation is `install_of(location)`: the parent of a Linux `app-<version>` folder, else the location itself
+  (Windows `%LOCALAPPDATA%\Discord*`, macOS `*.app`). `launch()` counts only its own channel as already running and
+  as alive; `client_folder()` never returns another channel's Discord (None instead).
+- `rescue_check(incident)` acts on the Discord in rescue mode, else the last start's client; a page drawn for an older
+  incident gets `other-incident`. The launched archive must be Corsu's (`discord_archive(location)`: the newest
+  `app-<version>` on Windows); every other version of the same installation still loading Corsu's build goes back
+  too. Other installations and channels are never touched. One installation in rescue mode at a time.
+- `reactivate()` reinstalls into the newest version of that installation (and its siblings) and starts that Discord
+  (`default_command(location)`); `settle_reactivation()` only accepts a start of the same installation.
+- The window: "Start without the translation" (and "Finish the restore") start that Discord after the rescue,
+  watched (`app.start_discord`); "Try again" starts `target_location()`'s Discord. While open, the window runs
+  `scan_last_start()` at most every 30 s (not while a supervisor holds the lock): the only coverage on Windows/macOS.
+- Notifications: Linux app name Corsu with Corsu's icon, urgency normal, click helper ends at WAIT_SECONDS even on a
+  silent bus; Windows toast under the window's AppUserModelID `Platykalt.Corsu`, registered in HKCU (DisplayName,
+  IconUri) with a `corsu-recovery:` link that opens the recovery page (address ignored), removed at uninstall; never
+  shown under PowerShell's id; macOS titled Corsu. Texts en/fr/co by the system language (`corsu.corsican()`).

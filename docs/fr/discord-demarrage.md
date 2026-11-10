@@ -29,7 +29,9 @@ Corsu ne dit jamais qu'une cause est certaine : un journal montre ce qui s'est p
   surveille quelques minutes ; une notification apparaît en cas de problème (sauf si « Ne pas déranger » est actif :
   c'est le système qui décide).
 - **Windows et macOS** : Discord réécrit ses propres raccourcis à chaque mise à jour, Corsu ne les remplace donc pas.
-  Le problème est constaté après coup, à l'ouverture de la fenêtre Corsu.
+  Aucun démarrage n'est surveillé sur le moment et aucune notification n'est envoyée : le problème n'est constaté
+  qu'après coup, par la fenêtre Corsu tant qu'elle est ouverte (elle lit le journal de Discord toutes les
+  30 secondes). Ce n'est pas une surveillance complète.
 - **Non couverts** : Discord relancé par son propre outil de mise à jour (le démarrage suivant est surveillé),
   Discord lancé depuis un terminal ou un autre lanceur.
 
@@ -47,9 +49,12 @@ Elle s'ouvre depuis le bouton de la notification ou depuis la ligne Discord de l
   mise à jour disponible, Corsu à jour, vérification impossible, mise à jour installée mais Discord encore ouvert avec
   l'ancienne version, ou copie de développement. Une mise à jour n'est jamais présentée comme la solution : ses notes
   de version disent ce qu'elle corrige.
-- **Démarrer sans la traduction** : met Discord en *mode de secours*. Corsu remet l'archive d'origine de Discord
-  (gardée lors de l'installation et vérifiée) ; Discord démarre alors en français ou en anglais. Discord doit être
-  fermé : Corsu ne ferme jamais Discord à votre place. Tant que le mode de secours est actif, les mises à jour et
+- **Démarrer sans la traduction** : met Discord en *mode de secours*, puis le démarre. Corsu remet l'archive
+  d'origine de Discord (gardée lors de l'installation et vérifiée) dans chaque version de cette installation de
+  Discord qui charge la traduction, puis démarre ce même Discord (stable, PTB ou Canary), qui s'ouvre en français ou
+  en anglais. Rien d'autre ne change : la copie de l'original gardée par Vencord, les réglages de Vencord et les autres
+  canaux de Discord restent tels quels. Discord doit être fermé : Corsu ne ferme jamais Discord à votre place. Une
+  seule installation de Discord à la fois peut être en mode de secours. Tant que le mode de secours est actif, les mises à jour et
   réparations de Corsu ne remettent pas la traduction d'elles-mêmes.
 - **Remettre la traduction** (en mode de secours) : réinstalle la traduction puis démarre Discord sous surveillance.
   - La réactivation n'est annoncée réussie que si ce démarrage montre le plugin Corsu en train de démarrer. Une
@@ -73,8 +78,11 @@ Elle s'ouvre depuis le bouton de la notification ou depuis la ligne Discord de l
 - **Windows et macOS** : pas d'alerte au moment du démarrage. Il faut ouvrir la fenêtre Corsu pour constater un
   problème : sur ces systèmes, la fonction est partielle.
 - Sans service de notification (ou avec « Ne pas déranger »), aucune aide immédiate : il faut ouvrir la fenêtre Corsu.
-- Les notifications sont en français ou en anglais, pas encore en corse. Sous Windows, elles s'affichent sous le nom
-  « Windows PowerShell » et n'ont pas de bouton.
+- Les notifications suivent la langue de l'ordinateur (corse, français ou anglais), pas celle choisie dans la fenêtre
+  Corsu. Elles s'affichent sous le nom de Corsu : sous Windows grâce à l'identité propre de Corsu, enregistrée pour
+  elles (un clic ouvre la page « Discord ») ; sous Linux avec un bouton « Ouvrir » valable 30 minutes ; sous macOS
+  sans bouton, et avec l'icône de l'Éditeur de script.
+- Si la fenêtre Corsu ne s'ouvre pas du tout, voir [Si Discord ne démarre plus et que Corsu ne peut pas aider](discord.md#si-discord-ne-démarre-plus-et-que-corsu-ne-peut-pas-aider).
 - Le mode de secours ne s'applique qu'à l'installation de Discord que Corsu a lui-même modifiée, avec une copie
   d'origine vérifiée. Sinon, le bouton explique pourquoi et la procédure manuelle ci-dessous reste possible.
 

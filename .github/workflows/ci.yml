@@ -71,14 +71,20 @@ jobs:
           sudo apt-get install -y -qq weston
           curl -fsSL -o "$RUNNER_TEMP/discord.tar.gz" "https://discord.com/api/download?platform=linux&format=tar.gz"
           tar -xzf "$RUNNER_TEMP/discord.tar.gz" -C "$RUNNER_TEMP"
+          # Since late October 2026 the tar.gz holds only Discord's bootstrapper: it downloads the app folder the way
+          # Discord's own `discord` script does. Without that folder the checks below would only print SKIP.
+          app=$("$RUNNER_TEMP/Discord/updater_bootstrap" --no-zenity "$RUNNER_TEMP/discord-root" stable)
+          client="$RUNNER_TEMP/discord-root/$app"
+          test -x "$client/Discord" && test -f "$client/resources/app.asar"
+          echo "DISCORD_CLIENT=$client" >> "$GITHUB_ENV"
           echo '{"plugins": {"Corsu": {"enabled": true}}}' > "$RUNNER_TEMP/vencord-settings.json"
-          python tests/e2e/check_discord_real_start.py "$RUNNER_TEMP/Discord" --vencord Vencord/dist \
+          python tests/e2e/check_discord_real_start.py "$client" --vencord Vencord/dist \
             --settings "$RUNNER_TEMP/vencord-settings.json" --work "$RUNNER_TEMP/discord-start" --no-sandbox
       - name: Discord start watch on the real client — built Vencord decides "ok", offline decides "network" (never a Vencord error)
         run: |
-          HOME=$(mktemp -d) python tests/e2e/check_discord_watch_real.py "$RUNNER_TEMP/Discord" --vencord Vencord/dist \
+          HOME=$(mktemp -d) python tests/e2e/check_discord_watch_real.py "$DISCORD_CLIENT" --vencord Vencord/dist \
             --settings "$RUNNER_TEMP/vencord-settings.json" --expect ok,ok-corsu --work "$RUNNER_TEMP/watch-ok" --no-sandbox
-          HOME=$(mktemp -d) python tests/e2e/check_discord_watch_real.py "$RUNNER_TEMP/Discord" --offline --window 90 \
+          HOME=$(mktemp -d) python tests/e2e/check_discord_watch_real.py "$DISCORD_CLIENT" --offline --window 90 \
             --expect network,slow --work "$RUNNER_TEMP/watch-offline" --no-sandbox
       - if: always()
         uses: actions/upload-artifact@v4
@@ -322,6 +328,10 @@ jobs:
           # Chocolatey, three tries; then VLC from VideoLAN, checksum checked (tests/e2e/install_vlc_windows.ps1).
           ./tests/e2e/install_vlc_windows.ps1
           python tests/e2e/check_windows_apps.py
+      - name: Discord notification on Windows — a toast under Corsu's own name and icon (not Windows PowerShell), click link registered, removed at uninstall
+        if: runner.os == 'Windows'
+        timeout-minutes: 5
+        run: python tests/e2e/check_windows_toast.py
       - name: Corsu's own window on Windows — icon loading, 0.27.0's crash reproduced, real window from the archive's Python
         if: runner.os == 'Windows'
         timeout-minutes: 12
