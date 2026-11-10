@@ -65,6 +65,18 @@ Les sections datées après « État actuel » sont l'historique : ce qui y est 
   `check_migration.py` relit l'état de la fenêtre avant de demander le redémarrage (course vue dans la CI 40591065196 :
   `/api/state` calcule `restart` avant de lire le travail terminé).
 
+## Branche `discord-watch` (candidate 0.29.0, 10 novembre 2026)
+
+Non publiée ; sera rebasée sur la 0.28.4 publiée. `db2c326`, `b13da67`, `46b5c01` et le correctif CI qui suit :
+Discord visé par canal (stable, PTB, Canary) et par installation (`app-<version>`), « Démarrer sans la traduction »
+démarre Discord, notifications au nom de Corsu (Windows : AppUserModelID `Platykalt.Corsu` enregistré, lien
+`corsu-recovery:`), aide au clic Linux bornée dans le temps, lecture après coup réellement lancée par la fenêtre,
+procédure de retour sans Corsu (`docs/fr/discord.md`). Preuves : tests unitaires (Linux local ; CI 42853648320 verte
+sur Linux, Windows, macOS, Python 3.10 et 3.13) ; `tests/e2e/check_discord_recovery_real.py` 24/24 en local (Linux,
+copie isolée de Discord 1.0.168). La CI « vrai client » imprimait SKIP depuis que l'archive tar.gz de Discord ne
+contient plus qu'un amorceur ; le correctif (amorceur lancé dans la CI) a échoué une fois (dossier à créer), corrigé
+sans nouvelle CI : ni le vrai client en CI, ni `check_windows_toast.py`, ni le bout en bout n'ont tourné.
+
 ## Historique : publication 0.28.1 (27 octobre 2026)
 
 - Branche `fix-0.28.1`, partie de `v0.28.0`. Discord : messages de groupe « a ajouté … au groupe »,
