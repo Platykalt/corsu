@@ -64,7 +64,7 @@ class NotifyTests(Data):
         self.assertTrue(any("'urgency': <byte 1>" in part for part in command))
         # Corsu's name and icon, not a generic warning sign.
         self.assertEqual(command[command.index('--') + 1:command.index('--') + 4],
-                         ['Corsu', '0', "'" + str(corsu.SRC / 'app/corsu.svg') + "'"])
+                         ['Corsu', '0', notify.gvariant(corsu.SRC / 'app/corsu.svg')])
         helper = popen.call_args[0][0]
         self.assertEqual(helper[2:4], ['wait', '42'])
         self.assertEqual(helper[-4:], ['--page', 'discord-recovery', '--incident', INCIDENT])
@@ -172,7 +172,7 @@ class NotifyTests(Data):
             helper.join(10)
         self.assertFalse(helper.is_alive(), 'the helper outlived its deadline')
         self.assertLess(time.monotonic() - started, 10)
-        self.assertIsNotNone(silent.poll())
+        self.assertIsNotNone(silent.wait(5))  # the monitor was ended, not left behind
 
     def test_macos_passes_texts_as_arguments(self):
         with patch.object(corsu, 'PLATFORM', 'macos'), patch.object(subprocess, 'run', return_value=self.run_result()) as run:

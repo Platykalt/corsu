@@ -293,12 +293,15 @@ class LaunchTests(Watching):
         with patch.object(installer, 'discord_location', return_value=stable):
             self.assertIsNone(watch.client_folder(self.config / 'discordptb'))
             self.assertEqual(watch.client_folder(self.config / 'discord'), stable)
-        # The link Discord's updater keeps names the version a launch runs, for each channel.
+        if sys.platform == 'win32':
+            return  # the link below is Linux's (and symbolic links need a privilege on Windows)
+        # Linux: the link Discord's updater keeps names the version a launch runs, for each channel.
         canary = self.config / 'discordcanary/app-0.0.700'
         canary.mkdir(parents=True)
         (canary / 'DiscordCanary').write_text('')
         (self.config / 'discordcanary/DiscordCanary').symlink_to(canary / 'DiscordCanary')
-        self.assertEqual(watch.client_folder(self.config / 'discordcanary'), canary.resolve())
+        with patch.object(watch.sys, 'platform', 'linux'):
+            self.assertEqual(watch.client_folder(self.config / 'discordcanary'), canary.resolve())
 
     def test_start_command_follows_the_installation(self):
         ptb = self.config / 'discordptb/app-0.0.99'
@@ -306,12 +309,13 @@ class LaunchTests(Watching):
         (self.config / 'discordptb/DiscordPTB').write_text('')
         with patch.object(watch.sys, 'platform', 'linux'):
             self.assertEqual(watch.default_command(ptb), [str(self.config.resolve() / 'discordptb/DiscordPTB')])
-            self.assertEqual(watch.default_command('/opt/discord-canary'), ['/opt/discord-canary/DiscordCanary'])
+            self.assertEqual(watch.default_command('/opt/discord-canary'), [str(Path('/opt/discord-canary/DiscordCanary'))])
         with patch.object(watch.sys, 'platform', 'win32'):
             self.assertEqual(watch.default_command(self.home / 'DiscordPTB'),
                              [str(self.home / 'DiscordPTB/Update.exe'), '--processStart', 'DiscordPTB.exe'])
         with patch.object(watch.sys, 'platform', 'darwin'):
-            self.assertEqual(watch.default_command('/Applications/Discord PTB.app'), ['open', '/Applications/Discord PTB.app'])
+            self.assertEqual(watch.default_command('/Applications/Discord PTB.app'),
+                             ['open', str(Path('/Applications/Discord PTB.app'))])
 
     def test_user_data_folder_follows_the_channel(self):
         self.assertEqual(watch.user_data_dir(['/usr/bin/discord-ptb']).name, 'discordptb')
