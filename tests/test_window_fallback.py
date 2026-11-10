@@ -145,7 +145,8 @@ class CorsuSurvivesItsWindowTests(unittest.TestCase):
             deadline = time.monotonic() + 60
             while time.monotonic() < deadline and process.poll() is None and not record.exists():
                 time.sleep(0.2)
-            log = Path(engine.environment['HOME']) / '.local/share/corsu/logs/corsu.log'
+            data = 'Library/Application Support/corsu' if sys.platform == 'darwin' else '.local/share/corsu'
+            log = Path(engine.environment['HOME']) / data / 'logs/corsu.log'
             details = log.read_text(encoding='utf-8') if log.exists() else '(no log)'
             self.assertIsNone(process.poll(), f'Corsu ended with its window (code {process.returncode}):\n{details}')
             self.assertTrue(record.exists(), f'the browser was not opened:\n{details}')

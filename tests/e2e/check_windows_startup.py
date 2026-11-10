@@ -23,7 +23,7 @@ In a throwaway user folder whose path has a space and accents (as many Windows u
      75 s later, past window.LOAD_SECONDS (the page in the window redeemed its ticket, or the window would have been
      replaced), a screenshot that is not a blank window; closed with WM_CLOSE, Corsu ends by itself with code 0;
    - the window's process killed (as a crash of WebView2 or .NET would end it): Corsu keeps running, says so in its
-     log, and opens its page in the browser with a ticket of its own;
+     log, and opens its page in the browser (BROWSER, recorded) with a ticket of its own, which gets Corsu's key;
    - every port taken: a message box titled "Corsu" says why, where the log is and how to repair; once closed, Corsu
      ends with code 1.
 Every wait is bounded; Corsu's log is printed at the end.
@@ -32,6 +32,7 @@ import argparse
 import contextlib
 import ctypes
 from ctypes import wintypes
+import http.client
 import json
 import os
 from pathlib import Path
@@ -45,7 +46,7 @@ import zipfile
 
 HERE = Path(__file__).resolve().parent
 sys.path.insert(0, str(HERE))
-from check_windows_consoles import Monitor, processes, published  # noqa: E402
+from check_windows_consoles import processes, published  # noqa: E402
 from check_windows_window import kill, screenshot, step, user32, window_of_family, windows_of  # noqa: E402
 from e2e import fake_prism_instance, isolated_environment  # noqa: E402
 
@@ -62,7 +63,10 @@ COLORS = ('Add-Type -AssemblyName System.Drawing; $b = [System.Drawing.Bitmap]::
           '$c = @{}; for ($x = 0; $x -lt $b.Width; $x += 6) { for ($y = 0; $y -lt $b.Height; $y += 6) '
           '{ $c[$b.GetPixel($x, $y).ToArgb()] = 1 } }; $c.Count')
 
-user32.EnumChildWindows.argtypes = [wintypes.HWND, ctypes.c_void_p, wintypes.LPARAM]
+# Stands in for the browser (webbrowser reads BROWSER): writes the address Corsu opens, so the check can use it.
+RECORD = 'import sys; open(sys.argv[1], "w", encoding="utf-8").write(sys.argv[2])'
+CHILD_CALLBACK = ctypes.WINFUNCTYPE(wintypes.BOOL, wintypes.HWND, wintypes.LPARAM)
+user32.EnumChildWindows.argtypes = [wintypes.HWND, CHILD_CALLBACK, wintypes.LPARAM]
 user32.GetClassNameW.argtypes = [wintypes.HWND, wintypes.LPWSTR, ctypes.c_int]
 
 
@@ -74,14 +78,13 @@ def class_name(hwnd):
 
 def dialog_text(hwnd):
     texts = []
-    callback_type = ctypes.WINFUNCTYPE(wintypes.BOOL, wintypes.HWND, wintypes.LPARAM)
 
     def collect(child, _):
         buffer = ctypes.create_unicode_buffer(4096)
         user32.GetWindowTextW(child, buffer, 4096)
         texts.append(buffer.value)
         return True
-    user32.EnumChildWindows(hwnd, callback_type(collect), 0)
+    user32.EnumChildWindows(hwnd, CHILD_CALLBACK(collect), 0)
     return '\n'.join(texts)
 
 
@@ -92,8 +95,14 @@ def ports_taken():
     try:
         for port in PORTS:
             holder = socket.socket()
-            holder.setsockopt(socket.SOL_SOCKET, socket.SO_EXCLUSIVEADDRUSE, 1)
-            holder.bind(('127.0.0.1', port))
+            # SO_REUSEADDR binds even while connections of a Corsu that just ended linger (TIME_WAIT); Corsu, which
+            # asks for the port alone (SO_EXCLUSIVEADDRUSE), is still refused it.
+            holder.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
+            try:
+                holder.bind(('127.0.0.1', port))
+            except OSError:
+                holder.close()
+                continue  # Held by another program already: Corsu cannot have it either.
             holder.listen()
             held.append(holder)
         yield
@@ -133,28 +142,42 @@ def corsu_window(process, timeout=120):
 
 
 def window_crash(link, environment, data, label):
-    """Kill the window's process as a crash would end it. Returns (Corsu survived, browser command line or None)."""
+    """Kill the window's process as a crash would end it. Returns (Corsu survived, address it opened in the browser,
+    whether that page gets Corsu's key, Corsu's log since)."""
     step(f'{label}: the window\'s process killed, as a crash of its engine ends it')
     before = len(log_text(data))
-    with Monitor() as monitor:
-        process = start(link, environment)
-        try:
-            hwnd, owner = corsu_window(process)
-            assert hwnd, f'{label}: no Corsu window within 120 s (code {process.poll()})'
-            print(f'window {hwnd:#x} of process {owner} (Corsu {process.pid}); killing {owner}')
-            port = json.loads((data / 'setup-session.json').read_text(encoding='utf-8'))['url'].rstrip('/').rsplit(':', 1)[1]
-            subprocess.run(['taskkill', '/PID', str(owner), '/T', '/F'], capture_output=True, timeout=60)
-            time.sleep(15)
-            survived = process.poll() is None
-            with monitor.lock:
-                opened = [entry[3] for entry in monitor.known.values() if f'127.0.0.1:{port}/#t=' in entry[3]]
-            print(f'{label}: Corsu still running 15 s later: {survived} (code {process.returncode}); '
-                  f'browser opened at its address: {opened[:1] or "no"}')
-        finally:
-            kill(process)
+    folder = Path(tempfile.mkdtemp(prefix='corsu-browser-'))
+    record = folder / 'opened.txt'
+    (folder / 'record.py').write_text(RECORD, encoding='utf-8')
+    # webbrowser splits BROWSER as a POSIX command line: forward slashes, no spaces in these paths.
+    browser = ' '.join(str(path).replace('\\', '/') for path in (sys.executable, folder / 'record.py', record))
+    process = start(link, {**environment, 'BROWSER': browser + ' %s'})
+    redeemed = False
+    try:
+        hwnd, owner = corsu_window(process)
+        assert hwnd, f'{label}: no Corsu window within 120 s (code {process.poll()})'
+        print(f'window {hwnd:#x} of process {owner} (Corsu {process.pid}); killing {owner}')
+        subprocess.run(['taskkill', '/PID', str(owner), '/T', '/F'], capture_output=True, timeout=60)
+        time.sleep(15)
+        survived = process.poll() is None
+        opened = record.read_text(encoding='utf-8') if record.is_file() else None
+        if survived and opened and '#t=' in opened:
+            # What the page in the browser does first: exchange its ticket for the key.
+            port = int(opened.split('#')[0].rstrip('/').rsplit(':', 1)[1])
+            connection = http.client.HTTPConnection('127.0.0.1', port, timeout=10)
+            connection.request('POST', '/api/key', body=json.dumps({'ticket': opened.split('#t=')[1]}),
+                               headers={'Host': f'127.0.0.1:{port}', 'X-Corsu': '1', 'Content-Type': 'application/json',
+                                        'Origin': f'http://127.0.0.1:{port}'})
+            response = connection.getresponse()
+            redeemed = response.status == 200 and bool(json.loads(response.read()).get('key'))
+            connection.close()
+        print(f'{label}: Corsu still running 15 s later: {survived} (code {process.returncode}); opened in the '
+              f'browser: {opened or "nothing"}; that page gets the key: {redeemed}')
+    finally:
+        kill(process)
     tail = log_text(data)[before:]
     print(f'-- {label}, Corsu\'s log since start:\n{tail[-2500:]}')
-    return survived, (opened[0] if opened else None), tail
+    return survived, opened, redeemed, tail
 
 
 def start_failure(link, environment, label):
@@ -225,11 +248,15 @@ def main():
         print(f'kept before the repair: {json.dumps(before, ensure_ascii=False)}')
         assert before['disabled'] == ['7zip'], before
 
-        survived, opened, _ = window_crash(link, environment, data, f'Published {args.published}')
+        survived, opened, _, _ = window_crash(link, environment, data, f'Published {args.published}')
         print(f'Published {args.published}: Corsu ended with its window, nothing opened instead: '
               f'{not survived and not opened} (the bug this check guards against)')
+        if survived or opened:
+            failures.append(f'published {args.published} survived its window: this check no longer shows the bug')
         code, text = start_failure(link, environment, f'Published {args.published}')
         print(f'Published {args.published}: ended without a word on screen: {text is None} (code {code})')
+        if text is not None:
+            failures.append(f'published {args.published} showed a message: this check no longer shows the bug')
 
         step(f'Repair: this archive ({version}) extracted, its "Install for Windows.cmd" run without options while '
              'Corsu\'s window cannot start')
@@ -292,8 +319,8 @@ def main():
         finally:
             kill(process)
 
-        survived, opened, tail = window_crash(link, environment, data, version)
-        if not (survived and opened and "Corsu's window stopped" in tail):
+        survived, opened, redeemed, tail = window_crash(link, environment, data, version)
+        if not (survived and redeemed and "Corsu's window stopped" in tail):
             failures.append('a crashed window did not leave Corsu running with its page in the browser')
 
         code, text = start_failure(link, environment, version)
