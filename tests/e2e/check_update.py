@@ -453,7 +453,7 @@ def main():
         for version in args.versions:
             scenario(version, archives, work)
         for version in args.recover_from:
-            scenario(version, archives, work, recovery=True)
+            scenario(version, archives, work / 'recovery', recovery=True)  # its own folders: the names repeat
     finally:
         if args.keep:
             print(f'Kept: {work}')
