@@ -5,6 +5,7 @@ import email.message
 import http.client
 import io
 import json
+import threading
 import time
 import unittest
 import urllib.error
@@ -256,6 +257,26 @@ class WindowTests(Checking):
         self.wait()
         self.assertEqual((app.UPDATE['info']['status'], app.UPDATE['info']['latest']), ('available', '0.25.1'))
         self.assertTrue(app.UPDATE['info']['fresh'])
+
+    def test_the_button_pressed_during_an_automatic_check_asks_github(self):
+        # The button while a check that may use the saved answer runs: until 0.28.4 the button was dropped and the
+        # page showed that saved "up to date".
+        update.check(force=True)                  # 10:49:40, latest 0.24.0 saved
+        self.clock[0] = at('10:55:00')
+        self.github.answer = AFTER                # a release out since: only GitHub knows
+        gate, real = threading.Event(), app.update_check
+
+        def slow(force=False, max_age=None):
+            if not force:
+                gate.wait(5)
+            return real(force) if max_age is None else real(force, max_age)
+        with patch.object(app, 'update_check', slow):
+            self.assertTrue(app.start_check(None, max_age=app.OPEN_MAX_AGE))
+            self.assertTrue(app.start_check(None, force=True, automatic=False))
+            gate.set()
+            self.wait()
+        info = app.UPDATE['info']
+        self.assertEqual((info['status'], info['latest'], info['fresh']), ('available', '0.25.1', True))
 
     def test_a_second_launch_showing_this_window_checks_like_an_opening(self):
         self.open_window()

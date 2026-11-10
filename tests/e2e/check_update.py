@@ -21,10 +21,19 @@ downloaded from GitHub's release page and checked against its published .sha256,
  7. two installers at once: one runs, the other says Corsu is busy;
  8. uninstalling puts the original settings back.
 
+With --recover-from VERSION (a person whose Corsu window no longer opens): VERSION is installed, a part switched
+off, preferences and appearance chosen, then its window is broken; the one-line install script (on Windows with
+Windows PowerShell 5.1, `powershell`, as `irm ... | iex` runs it) downloads the archives of DIR over HTTP
+(CORSU_DOWNLOAD_BASE), checks them and installs them over it. Checked: preferences, appearance, recorded originals and
+the switched-off part kept, launchers in the data folder (%LOCALAPPDATA%/corsu on Windows) on the new copy, and the
+installation still works once the script's temporary folder is deleted.
+
 Firefox must be installed (on Linux CI, CORSU_FIREFOX names the folder of a downloaded Firefox).
 """
 import argparse
+import functools
 import hashlib
+import http.server
 import json
 import os
 from pathlib import Path
@@ -34,6 +43,7 @@ import signal
 import subprocess
 import sys
 import tempfile
+import threading
 import time
 import urllib.request
 
@@ -169,11 +179,12 @@ def bumped(root, version, folder):
     return folder
 
 
-def get_script(new_root, environment, archives):
+def get_script(new_root, environment, archives, base=None, shell='pwsh'):
     """Re-run the one-line install, as a person updating by hand does, with the archives being checked."""
-    environment = {**environment, 'CORSU_DOWNLOAD_BASE': archives.as_uri(), 'CI': '1'}
+    environment = {**environment, 'CORSU_DOWNLOAD_BASE': base or archives.as_uri(), 'CI': '1'}
     if PLATFORM == 'windows':
-        command = ['pwsh', '-NoProfile', '-File', str(new_root / 'install/get.ps1'), '--text', '--yes']
+        command = [shell, '-NoProfile', '-ExecutionPolicy', 'Bypass', '-File', str(new_root / 'install/get.ps1'),
+                   '--text', '--yes']
     else:
         command = ['sh', str(new_root / 'install/get.sh'), '--text', '--yes']
     print('+ ' + ' '.join(command), flush=True)
@@ -181,6 +192,71 @@ def get_script(new_root, environment, archives):
                             stdout=subprocess.PIPE, stderr=subprocess.STDOUT, stdin=subprocess.DEVNULL)
     print(result.stdout[-6000:], flush=True)
     check(result.returncode == 0, 'the one-line install script updated the installation')
+
+
+def serve(folder):
+    """The archives over HTTP, as GitHub serves them (the .sha256 as application/octet-stream): the script's download
+    path, not its file:// shortcut."""
+    handler = functools.partial(http.server.SimpleHTTPRequestHandler, directory=str(folder))
+    server = http.server.ThreadingHTTPServer(('127.0.0.1', 0), handler)
+    threading.Thread(target=server.serve_forever, daemon=True).start()
+    return server, f'http://127.0.0.1:{server.server_address[1]}'
+
+
+def recover(old_version, old_copy, new_root, home, environment, archives, off, components):
+    """The window of `old_version` no longer opens; the person runs the one-line install script."""
+    step(f'R1. {old_version}: preferences and appearance chosen, then its window broken')
+    data = data_directory(home)
+    subprocess.run([sys.executable, '-c', 'import sys; sys.path.insert(0, sys.argv[1]); import update; '
+                    'update.set_preference("auto_update", True)', str(old_copy / 'src')], env=environment, check=True)
+    look = None
+    if (old_copy / 'src/appearance.py').is_file():
+        subprocess.run([sys.executable, '-c', 'import sys, json; sys.path.insert(0, sys.argv[1]); import appearance; '
+                        'appearance.save(json.loads(sys.argv[2]))', str(old_copy / 'src'),
+                        json.dumps({'format': 1, 'theme': 'dark', 'palette': 'mare', 'accent': '#336699',
+                                    'density': 'compact', 'background': 'none', 'image': None})],
+                       env=environment, check=True)
+        look = (data / 'appearance/settings.json').read_bytes()
+    preferences = (data / 'preferences.json').read_bytes()
+    (old_copy / 'src/app.py').write_text('raise SystemExit("this window no longer opens")\n', encoding='utf-8')
+    run(old_copy, environment, 'src/app.py', expect=1, python=sys.executable)
+    before = originals(home)
+
+    step('R2. The one-line install script over HTTP (Windows PowerShell 5.1 on Windows)')
+    temporary = home / 'tmp'
+    environment = {**environment, 'TEMP': str(temporary), 'TMP': str(temporary)}
+    server, base = serve(archives)
+    try:
+        get_script(new_root, environment, archives, base, 'powershell')
+    finally:
+        server.shutdown()
+    after = state(home)
+    new_version = update.installer.release_version(new_root)
+    check(after.get('release', {}).get('version') == new_version, f'installation.json records {new_version}')
+    current = releases(home) / recorded(home)
+    check(current != old_copy and 'no longer opens' not in (current / 'src/app.py').read_text(encoding='utf-8'),
+          f'the installed copy {current.name} has a whole window')
+    check(off in after.get('disabled', []), f'{off} is still switched off')
+    check(set(after.get('components', [])) == set(components), f'the same parts are recorded: {after.get("components")}')
+    check((data / 'preferences.json').read_bytes() == preferences, 'preferences kept (auto_update on)')
+    if look is not None:
+        check((data / 'appearance/settings.json').read_bytes() == look, 'appearance settings kept')
+    check(all(originals(home).get(name) == value for name, value in before.items()), 'recorded originals kept')
+    check_launchers_complete(home, current.name)
+    forms = {str(current), str(current.resolve())}
+    forms |= {form.lower() for form in forms}
+    for launcher in launchers(home) if PLATFORM == 'windows' else []:
+        if launcher.exists():
+            check(any(e2e.mentions(launcher, form) for form in forms), f'{launcher.name} opens the copy in {data}')
+
+    step('R3. The script\'s temporary folder deleted: the installation still works')
+    shutil.rmtree(temporary)
+    temporary.mkdir()
+    python = Path(after['release'].get('python', ''))
+    check(python.is_file() and not python.resolve().is_relative_to(temporary.resolve()),
+          f'the recorded Python is outside the temporary folder: {python}')
+    run(current, environment, 'src/installer.py', '--dry-run', '--yes', python=str(python))
+    print(f'\nPASS: recovery of {old_version} by the one-line install of {new_version}', flush=True)
 
 
 def kill_tree(process):
@@ -191,8 +267,8 @@ def kill_tree(process):
     process.wait()
 
 
-def scenario(old_version, archives, work):
-    home = work / f'home-{old_version}'
+def scenario(old_version, archives, work, recovery=False):
+    home = work / f'home-{old_version}{"-recovery" if recovery else ""}'
     home.mkdir(parents=True)
     (home / 'tmp').mkdir()
     environment = {**isolated_environment(home), 'CORSU_LANG': 'en', 'TMPDIR': str(home / 'tmp')}
@@ -227,6 +303,8 @@ def scenario(old_version, archives, work):
         options = instance / 'options.txt'
         check('lang:en_us' in options.read_text(encoding='utf-8'), 'switching Minecraft off gave its language back')
         options.write_text(options.read_text(encoding='utf-8') + 'guiScale:3\n', encoding='utf-8')
+    if recovery:
+        return recover(old_version, old_copy, new_root, home, environment, archives, off, components)
     before = originals(home)
     files_before = set(state(home)['files'])
 
@@ -363,6 +441,8 @@ def main():
     parser = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
     parser.add_argument('--archives', type=Path, required=True)
     parser.add_argument('--from', dest='versions', nargs='+', default=['0.21.0', '0.22.0'])
+    parser.add_argument('--recover-from', nargs='*', default=[],
+                        help='Published versions whose window is broken, recovered by the one-line install script')
     parser.add_argument('--keep', action='store_true', help='Keep the temporary folder (to look at a failure)')
     args = parser.parse_args()
     archives = args.archives.resolve()
@@ -372,6 +452,8 @@ def main():
     try:
         for version in args.versions:
             scenario(version, archives, work)
+        for version in args.recover_from:
+            scenario(version, archives, work, recovery=True)
     finally:
         if args.keep:
             print(f'Kept: {work}')

@@ -248,9 +248,9 @@ jobs:
           echo "Source commit: $GITHUB_SHA"
           (cd dist && (sha256sum corsu-*.tar.gz corsu-*.zip 2>/dev/null || shasum -a 256 corsu-*.tar.gz corsu-*.zip))
           CORSU_ARCHIVES="$GITHUB_WORKSPACE/dist" python tests/e2e/e2e.py archive --root "${{ env.CORSU_RELEASE }}"
-      - name: Update — from published 0.21.0 to 0.28.2 to these archives, repair, refusal, recovery, lock, uninstall
+      - name: Update — from published 0.21.0 to 0.28.3 to these archives, repair, refusal, recovery, lock, uninstall; 0.28.3 with a broken window recovered by the one-line install
         shell: bash
-        run: python tests/e2e/check_update.py --archives "$GITHUB_WORKSPACE/dist" --from 0.21.0 0.22.0 0.23.0 0.24.0 0.25.1 0.26.0 0.27.0 0.28.0 0.28.1 0.28.2 0.28.3
+        run: python tests/e2e/check_update.py --archives "$GITHUB_WORKSPACE/dist" --from 0.21.0 0.22.0 0.23.0 0.24.0 0.25.1 0.26.0 0.27.0 0.28.0 0.28.1 0.28.2 0.28.3 --recover-from 0.28.3
       - name: One-line install script with these archives (CORSU_DOWNLOAD_BASE), checksum checked
         shell: bash
         run: |

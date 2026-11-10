@@ -745,11 +745,17 @@ def check_update(job=None, force=False, automatic=True, max_age=None):
     """Look for a newer release (when the window opens, every REFRESH_EVERY while it stays open, and on request); the
     caller claimed the check (claim_check). With automatic updates on and a stable release out, start installing it,
     once per window session and never over another job."""
-    UPDATE['attempted'] = time.time()
-    try:
-        UPDATE['info'] = update_check(force) if max_age is None else update_check(force, max_age)
-    finally:
-        UPDATE['checking'] = False
+    again = True
+    while again:
+        UPDATE['attempted'] = time.time()
+        try:
+            UPDATE['info'] = update_check(force) if max_age is None else update_check(force, max_age)
+        finally:
+            with UPDATE_LOCK:
+                # The button was pressed during a check that may have used the saved answer: ask GitHub now.
+                again = UPDATE.pop('force_again', False) and not force
+                UPDATE['checking'] = again
+        force, max_age = True, None
     info = UPDATE['info']
     if (automatic and job is not None and info.get('status') == 'available' and UPDATE['auto_started'] is None
             and not job.running and preferences()['auto_update']):
@@ -758,9 +764,13 @@ def check_update(job=None, force=False, automatic=True, max_age=None):
 
 
 def start_check(job, force=False, automatic=True, max_age=None):
-    """A check in the background; the page follows it through /api/state. False when one already runs."""
-    if not claim_check():
-        return False
+    """A check in the background; the page follows it through /api/state. False when one already runs, unless
+    `force` (the button): then that check is followed by one that asks GitHub."""
+    with UPDATE_LOCK:
+        if UPDATE['checking']:
+            UPDATE['force_again'] = UPDATE.get('force_again') or force
+            return force
+        UPDATE['checking'] = True
     threading.Thread(target=check_update, args=(job, force, automatic, max_age), daemon=True).start()
     return True
 
