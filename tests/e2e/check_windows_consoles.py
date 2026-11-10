@@ -389,7 +389,10 @@ def observe(link, environment, seconds):
             for pid in candidates:
                 found = windows_of(pid, 'Corsu')
                 if found:
-                    monitor.root = pid
+                    # Since 0.28.4 the window is shown by a child of Corsu's process (window.py): Corsu's own work
+                    # starts under that parent.
+                    parent = monitor.known[pid][0]
+                    monitor.root = parent if parent in candidates else pid
                     break
             time.sleep(0.5)
         assert found, 'no Corsu window from the shortcut within 120 s'

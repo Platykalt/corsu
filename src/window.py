@@ -3,16 +3,25 @@
 The first that works is used: pywebview (bundled with the standalone Corsu programs, using the web engine of the
 system: WebView2 on Windows, WebKit on macOS), WebKitGTK on Linux, a Chromium-based browser's app window (Edge,
 Chrome, Chromium, Brave), then an ordinary browser tab. `show` returns True when it waited for the window to close.
+
+The window runs in a process of its own (this file, run as a program): an engine that crashes (a .NET exception in
+pywebview's WinForms thread ends the whole process, Corsu 0.27.0) or never shows the page then takes only the window
+with it, and Corsu, still serving its page, opens it in the browser instead.
 """
+import faulthandler
 import os
 from pathlib import Path
 import shutil
 import subprocess
+import sys
 import webbrowser
 
 import corsu
 
 TITLE = 'Corsu'
+# How long the page has to load in the window (the page then redeems its ticket) before the browser is used instead:
+# a WebView2 that fails to start leaves a blank window, its process alive.
+LOAD_SECONDS = 60
 SIZE = (1040, 780)
 APP = Path(__file__).resolve().parent / 'app'
 ICON = APP / 'corsu.svg'
@@ -134,6 +143,10 @@ def with_pywebview(url):
         print(f'{identity.__name__}: {error}', flush=True)
     window = webview.create_window(TITLE, url, width=SIZE[0], height=SIZE[1], min_size=(640, 480))
     if corsu.PLATFORM == 'windows':
+        try:
+            log_dotnet_crashes()
+        except Exception as error:
+            print(f'log_dotnet_crashes: {error}', flush=True)
         def shown():
             try:
                 windows_window_icon()
@@ -145,6 +158,21 @@ def with_pywebview(url):
     # windows_window_icon() above. GTK and Qt (Linux) put the PNG on the window, Cocoa (macOS) on the Dock, as before.
     webview.start(**({'icon': str(ICONS[-1])} if corsu.PLATFORM != 'windows' and ICONS else {}))
     return True
+
+
+def log_dotnet_crashes():
+    """A .NET exception nobody catches in pywebview's WinForms thread ends the process without a Python traceback: put
+    it in the log first. pythonnet is loaded as pywebview's WinForms backend loads it (webview/platforms/winforms.py)."""
+    try:
+        import clr  # noqa: F401
+    except Exception:
+        os.environ['PYTHONNET_RUNTIME'] = 'coreclr'
+        import clr  # noqa: F401
+    from System import AppDomain, UnhandledExceptionEventHandler
+
+    def report(sender, details):
+        print(f'.NET exception ending the window: {details.ExceptionObject}', flush=True)
+    AppDomain.CurrentDomain.UnhandledException += UnhandledExceptionEventHandler(report)
 
 
 def with_webkitgtk(url):
@@ -228,15 +256,73 @@ def with_app_window(url):
     return False
 
 
-def show(url, mode='window'):
-    """Show Corsu at `url`. Returns True when this waited until the window was closed."""
+def native(url):
+    """The window itself, in the process `show` starts: the first engine that works. 0 once it was closed."""
+    for attempt in (with_pywebview, with_webkitgtk, with_app_window):
+        try:
+            if attempt(url):
+                return 0
+        except Exception as error:
+            # A broken engine must not keep Corsu from opening; the next way is tried.
+            print(f'{attempt.__name__}: {error}', flush=True)
+    return 1
+
+
+def crash_file():
+    import logbook
+    return logbook.path().with_name('window-crash.log')
+
+
+def run_window(url, loaded=None):
+    """Run the window in a process of its own until it is closed. None when it worked, else why it did not: it ended
+    abnormally, or `loaded()` was still false LOAD_SECONDS after it started (it is then ended)."""
+    # The address carries the page's ticket: passed in the environment, which other accounts cannot read, unlike a
+    # command line.
+    process = subprocess.Popen([sys.executable, str(Path(__file__).resolve())],
+                               **corsu.hidden(env={**os.environ, 'CORSU_WINDOW_URL': url}))
+    try:
+        process.wait(timeout=LOAD_SECONDS if loaded else None)
+    except subprocess.TimeoutExpired:
+        if not loaded():
+            process.kill()
+            process.wait()
+            return corsu.t(f'The page did not load in Corsu\'s window within {LOAD_SECONDS} s.',
+                           f'La page ne s\'est pas chargée dans la fenêtre de Corsu en {LOAD_SECONDS} s.')
+        process.wait()
+    if process.returncode == 0:
+        return None
+    try:
+        # What faulthandler wrote if the window process crashed (native code, no Python traceback otherwise).
+        dump = crash_file().read_text(encoding='utf-8', errors='replace').strip()
+    except OSError:
+        dump = ''
+    if dump:
+        print(dump, flush=True)
+    # Windows gives crash codes as NTSTATUS values, read in hexadecimal (0xc0000005, 0xe0434352 for .NET).
+    code = f'{process.returncode:#x}' if process.returncode > 255 else str(process.returncode)
+    return corsu.t(f'Corsu\'s window stopped (code {code}).', f'La fenêtre de Corsu s\'est arrêtée (code {code}).')
+
+
+def show(url, mode='window', loaded=None, again=None):
+    """Show Corsu at `url`. Returns True when this waited until the window was closed. When the window fails (see
+    run_window), the browser opens instead, at `again()` when given: the failed window may have used `url`'s ticket."""
     if mode == 'window':
-        for attempt in (with_pywebview, with_webkitgtk, with_app_window):
-            try:
-                if attempt(url):
-                    return True
-            except Exception as error:
-                # A broken engine must not keep Corsu from opening; the next way is tried.
-                print(f'{attempt.__name__}: {error}', flush=True)
+        failure = run_window(url, loaded)
+        if failure is None:
+            return True
+        print(failure + ' ' + corsu.t('Corsu opens in the browser instead.', 'Corsu s\'ouvre dans le navigateur à la place.'),
+              flush=True)
+        url = again() if again else url
     webbrowser.open(url)
     return False
+
+
+if __name__ == '__main__':
+    import logbook
+    logbook.start('window')
+    try:
+        crash = crash_file().open('w', encoding='utf-8')
+        faulthandler.enable(crash, all_threads=True)
+    except OSError:
+        pass
+    raise SystemExit(native(os.environ.pop('CORSU_WINDOW_URL', '')))

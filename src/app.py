@@ -24,6 +24,31 @@ import struct
 import urllib.parse
 from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
 
+# How to get Corsu working again when it cannot start: the archive's installer repairs or updates the installation in
+# place (installer.version_policy), whatever state the installed copy is in.
+REPAIR = ('To repair Corsu, keeping your choices, appearance and switched-off parts: download corsu-windows.zip from '
+          'https://github.com/Platykalt/corsu/releases/latest, extract it, then double-click "Install for Windows.cmd" '
+          'in it. Nothing needs to be uninstalled first.',
+          'Pour réparer Corsu en gardant vos choix, l\'apparence et les parties désactivées : téléchargez corsu-windows.zip '
+          'sur https://github.com/Platykalt/corsu/releases/latest, extrayez-le, puis double-cliquez sur « Install for '
+          'Windows.cmd » qu\'il contient. Inutile de désinstaller d\'abord.')
+
+
+def alert(message):
+    """Show `message` in a box when nothing printed can be seen: Corsu under pythonw.exe, as its Windows shortcut
+    starts it (no console, no standard streams)."""
+    if sys.platform == 'win32' and sys.__stderr__ is None:
+        import ctypes
+        ctypes.windll.user32.MessageBoxW(None, message, 'Corsu', 0x10 | 0x10000)  # MB_ICONERROR | MB_SETFOREGROUND
+
+
+if __name__ == '__main__':
+    # Set before Corsu's own modules are loaded: a damaged installation that cannot load them would end without a word.
+    def unexpected(kind, error, trace):
+        sys.__excepthook__(kind, error, trace)
+        alert(f'Corsu could not start / Corsu n\'a pas pu démarrer : {error}\n\n{REPAIR[0]}\n\n{REPAIR[1]}')
+    sys.excepthook = unexpected
+
 import appearance
 import corsu
 import installer
@@ -1068,7 +1093,9 @@ def serve(mode='window', replace=None):
         if existing:
             if mode != 'none':
                 import window
-                window.show(existing.replace('localhost', '127.0.0.1'), mode)
+                # When this window fails, the browser gets a ticket of its own from the Corsu already open.
+                window.show(existing.replace('localhost', '127.0.0.1'), mode,
+                            again=lambda: (running_session() or existing).replace('localhost', '127.0.0.1'))
             return
     job = Job()
     activity = [time.monotonic()]
@@ -1099,7 +1126,8 @@ def serve(mode='window', replace=None):
     except OSError:
         pass
     # The address to open: with a ticket after '#', which only the page sees (see Access).
-    opening = url.replace('localhost', '127.0.0.1') + '#t=' + ACCESS.ticket()
+    ticket = ACCESS.ticket()
+    opening = url.replace('localhost', '127.0.0.1') + '#t=' + ticket
     shown = opening if mode == 'none' and replace is None else url
     print(t(f'Corsu is open at {shown} until you close it.', f'Corsu est ouvert à l\'adresse {shown} jusqu\'à sa fermeture.'),
           flush=True)
@@ -1107,7 +1135,10 @@ def serve(mode='window', replace=None):
     if mode != 'none':
         import window
         # The window blocks until it is closed; a browser tab returns at once and the idle timer decides.
-        if window.show(opening, mode):
+        # The page in the window redeems its ticket once loaded. A window that fails sends the page to the browser,
+        # with a new ticket: the failed window may have used the first, and a ticket shown twice locks pages out.
+        if window.show(opening, mode, loaded=lambda: ticket in ACCESS.used,
+                       again=lambda: url.replace('localhost', '127.0.0.1') + '#t=' + ACCESS.ticket()):
             idle = CLOSED_IDLE_SECONDS
             activity[0] = time.monotonic()
     try:
@@ -1189,7 +1220,9 @@ def main():
         ARGUMENTS[:] = [argument for argument in sys.argv[1:] if argument in ('--browser', '--no-browser')]
         serve('none' if '--no-browser' in sys.argv else 'browser' if '--browser' in sys.argv else 'window', replace)
     except Exception as error:
-        print(logbook.failure(error), file=sys.stderr)
+        message = logbook.failure(error)
+        print(message, file=sys.stderr)
+        alert(message + '\n\n' + t(*REPAIR))
         raise SystemExit(1)
 
 

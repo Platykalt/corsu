@@ -250,7 +250,7 @@ class WindowKeyTests(unittest.TestCase):
                 shown = []
                 fresh = app.Access()
                 window = type(sys)('window')
-                window.show = lambda url, mode: shown.append((url, mode)) or False
+                window.show = lambda url, mode, **options: shown.append((url, mode)) or False
                 with patch.object(app, 'ACCESS', fresh), patch.object(app, 'start_check'), patch.object(app, 'IDLE_SECONDS', 0), \
                         patch.dict(sys.modules, {'window': window}):
                     app.serve('window', replace=port)

@@ -12,7 +12,7 @@ Usage: check_windows_window.py --root EXTRACTED_RELEASE [--python ARCHIVE_PYTHON
 3. The 0.27.0 call itself, pywebview's start(icon=PNG), with the archive's pywebview: the program ends without
    keeping a window.
 4. Corsu as its shortcut starts it (pythonw.exe src/app.py, no --browser), with a throwaway user folder: a visible
-   top-level window titled "Corsu" of that process appears, the process is still alive seconds later, the local
+   top-level window titled "Corsu" of that process (or of its window process, since 0.28.4) appears, the process is still alive seconds later, the local
    server answers, the window carries an icon; a screenshot is saved in CORSU_E2E_ARTIFACTS; the window is closed
    with WM_CLOSE and the program ends by itself.
 Every wait is bounded; on failure Corsu's log is printed.
@@ -136,6 +136,14 @@ def windows_of(pid, title=None):
     return found
 
 
+def window_of_family(pid, title='Corsu'):
+    """[(hwnd, title, owner pid)] of `pid`'s windows and its children's: since 0.28.4 Corsu shows its window from a
+    child process (window.py), so that a crashing window does not take Corsu with it."""
+    import check_windows_consoles
+    family = [pid] + [child for child, (parent, _) in check_windows_consoles.processes().items() if parent == pid]
+    return [(hwnd, text, owner) for owner in family for hwnd, text in windows_of(owner, title)]
+
+
 def kill(process):
     if process.poll() is None:
         subprocess.run(['taskkill', '/PID', str(process.pid), '/T', '/F'], capture_output=True, timeout=60)
@@ -197,12 +205,12 @@ def check_native_window(root, python):
     try:
         deadline, found = time.monotonic() + 120, []
         while time.monotonic() < deadline and process.poll() is None and not found:
-            found = windows_of(process.pid, 'Corsu')
+            found = window_of_family(process.pid)
             time.sleep(0.5)
         assert process.poll() is None, f'Corsu ended before showing its window (exit code {process.returncode})'
         assert found, 'no visible top-level window titled "Corsu" of the process within 120 s'
         hwnd = found[0][0]
-        print(f'window {hwnd:#x} titled {found[0][1]!r} of process {process.pid}, '
+        print(f'window {hwnd:#x} titled {found[0][1]!r} of process {found[0][2]} (Corsu {process.pid}), '
               f'{time.monotonic() - deadline + 120:.1f} s after start')
         # Time for the page to load and draw, and for a late crash to show.
         time.sleep(8)
